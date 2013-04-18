@@ -23,7 +23,8 @@ namespace Silanis.ESL.SDK
 
 			using (Stream responseStream = response.GetResponseStream()) {
 				var memoryStream = new MemoryStream ();
-				responseStream.CopyTo (memoryStream);
+                CopyTo(responseStream, memoryStream);
+                
 				return memoryStream.ToArray ();
 			}
 		}
@@ -44,7 +45,8 @@ namespace Silanis.ESL.SDK
 
 			using (Stream responseStream = response.GetResponseStream()) {
 				var memoryStream = new MemoryStream ();
-				responseStream.CopyTo (memoryStream);
+                CopyTo(responseStream, memoryStream);
+
 				return memoryStream.ToArray ();
 			}
 		}
@@ -59,7 +61,7 @@ namespace Silanis.ESL.SDK
 
 			using (Stream responseStream = response.GetResponseStream()) {
 				var memoryStream = new MemoryStream ();
-				responseStream.CopyTo (memoryStream);
+                CopyTo(responseStream, memoryStream);
 				return memoryStream.ToArray ();
 			}
 		}
@@ -74,7 +76,7 @@ namespace Silanis.ESL.SDK
 
 			using (Stream responseStream = response.GetResponseStream()) {
 				var memoryStream = new MemoryStream ();
-				responseStream.CopyTo (memoryStream);
+                CopyTo(responseStream, memoryStream);
 				return memoryStream.ToArray ();
 			}
 		}
@@ -95,10 +97,22 @@ namespace Silanis.ESL.SDK
 
 			using (Stream responseStream = response.GetResponseStream()) {
 				var memoryStream = new MemoryStream ();
-				responseStream.CopyTo (memoryStream);
+                CopyTo(responseStream, memoryStream);
+
 				return memoryStream.ToArray ();
 			}
 		}
+
+        private static void CopyTo(Stream input, Stream output)
+        {
+            byte[] buffer = new byte[16 * 1024]; // Fairly arbitrary size
+            int bytesRead;
+
+            while ((bytesRead = input.Read(buffer, 0, buffer.Length)) > 0)
+            {
+                output.Write(buffer, 0, bytesRead);
+            }
+        }
 
 	}
 }

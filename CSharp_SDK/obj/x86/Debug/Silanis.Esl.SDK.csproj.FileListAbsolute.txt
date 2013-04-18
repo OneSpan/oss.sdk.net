@@ -1,0 +1,8 @@
+C:\dev\esl.sdk.net\CSharp_SDK\bin\Debug\Silanis.ESL.SDK.exe.config
+C:\dev\esl.sdk.net\CSharp_SDK\bin\Debug\Silanis.ESL.SDK.exe
+C:\dev\esl.sdk.net\CSharp_SDK\bin\Debug\Silanis.ESL.SDK.pdb
+C:\dev\esl.sdk.net\CSharp_SDK\bin\Debug\Newtonsoft.Json.dll
+C:\dev\esl.sdk.net\CSharp_SDK\bin\Debug\Newtonsoft.Json.pdb
+C:\dev\esl.sdk.net\CSharp_SDK\bin\Debug\Newtonsoft.Json.xml
+C:\dev\esl.sdk.net\CSharp_SDK\obj\x86\Debug\Silanis.ESL.SDK.exe
+C:\dev\esl.sdk.net\CSharp_SDK\obj\x86\Debug\Silanis.ESL.SDK.pdb
