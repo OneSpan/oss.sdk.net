@@ -1,0 +1,18 @@
+﻿<Properties>
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug|x86" PreferredExecutionTarget="MonoDevelop.Default" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="CSharp_SDK/com.silanis.esl.sdk/PackageService.cs">
+    <Files>
+      <File FileName="CSharp_SDK/com.silanis.esl.sdk/PackageService.cs" Line="116" Column="4" />
+      <File FileName="CSharp_SDK/com.silanis.esl.sdk/internal/HttpMethods.cs" Line="55" Column="18" />
+      <File FileName="CSharp_SDK/com.silanis.esl.sdk/examples/CreatePackageExample.cs" Line="25" Column="4" />
+      <File FileName="../../../workspace/esl/esl.code-sample/E-SignLive_Csharp/E-Signlive_Csharp/ApiClient.cs" Line="1" Column="1" />
+      <File FileName="CSharp_SDK/com.silanis.esl.sdk/SessionService.cs" Line="1" Column="1" />
+      <File FileName="CSharp_SDK/com.silanis.esl.sdk/SessionToken.cs" Line="1" Column="1" />
+      <File FileName="CSharp_SDK/com.silanis.esl.sdk/PackageId.cs" Line="1" Column="1" />
+    </Files>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+</Properties>

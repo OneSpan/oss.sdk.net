@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
+    <ProductVersion>10.0.0</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{157905B3-15BC-478E-A42E-6072D895D6D6}</ProjectGuid>
+    <OutputType>Exe</OutputType>
+    <RootNamespace>CSharp_SDK</RootNamespace>
+    <AssemblyName>CSharp_SDK</AssemblyName>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug</OutputPath>
+    <DefineConstants>DEBUG;</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <PlatformTarget>x86</PlatformTarget>
+    <ConsolePause>false</ConsolePause>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+    <DebugType>none</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release</OutputPath>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <PlatformTarget>x86</PlatformTarget>
+    <ConsolePause>false</ConsolePause>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <ItemGroup>
+    <Folder Include="com.silanis.esl.sdk\" />
+    <Folder Include="com.silanis.esl.sdk\examples\" />
+    <Folder Include="com.silanis.esl.sdk\models\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="com.silanis.esl.sdk\examples\CreatePackageExample.cs" />
+    <Compile Include="com.silanis.esl.sdk\EslClient.cs" />
+    <Compile Include="com.silanis.esl.sdk\FieldSummaryService.cs" />
+    <Compile Include="com.silanis.esl.sdk\PackageService.cs" />
+    <Compile Include="com.silanis.esl.sdk\SessionService.cs" />
+    <Compile Include="com.silanis.esl.sdk\internal\HttpMethods.cs" />
+    <Compile Include="com.silanis.esl.sdk\internal\Converter.cs" />
+    <Compile Include="com.silanis.esl.sdk\internal\UrlTemplate.cs" />
+    <Compile Include="com.silanis.esl.sdk\PackageId.cs" />
+    <Compile Include="com.silanis.esl.sdk\SessionToken.cs" />
+    <Compile Include="com.silanis.esl.sdk\RoleList.cs" />
+    <Compile Include="com.silanis.esl.sdk\FieldSummary.cs" />
+    <Compile Include="com.silanis.esl.sdk\Audit.cs" />
+    <Compile Include="com.silanis.esl.sdk\AuditService.cs" />
+    <Compile Include="com.silanis.esl.sdk\examples\FileHelper.cs" />
+    <Compile Include="com.silanis.esl.sdk\models\Account.cs" />
+    <Compile Include="com.silanis.esl.sdk\models\AccountProviders.cs" />
+    <Compile Include="com.silanis.esl.sdk\models\Address.cs" />
+    <Compile Include="com.silanis.esl.sdk\models\Approval.cs" />
+    <Compile Include="com.silanis.esl.sdk\models\Auth.cs" />
+    <Compile Include="com.silanis.esl.sdk\models\AuthChallenge.cs" />
+    <Compile Include="com.silanis.esl.sdk\models\AuthScheme.cs" />
+    <Compile Include="com.silanis.esl.sdk\models\BaseMessage.cs" />
+    <Compile Include="com.silanis.esl.sdk\models\BasePackage.cs" />
+    <Compile Include="com.silanis.esl.sdk\models\BasePackageType.cs" />
+    <Compile Include="com.silanis.esl.sdk\models\BaseTemplate.cs" />
+    <Compile Include="com.silanis.esl.sdk\models\Bill.cs" />
+    <Compile Include="com.silanis.esl.sdk\models\Box.cs" />
+    <Compile Include="com.silanis.esl.sdk\models\BrandingBarOptions.cs" />
+    <Compile Include="com.silanis.esl.sdk\models\CcExpiration.cs" />
+    <Compile Include="com.silanis.esl.sdk\models\CeremonyEventComplete.cs" />
+    <Compile Include="com.silanis.esl.sdk\models\CeremonyEvents.cs" />
+    <Compile Include="com.silanis.esl.sdk\models\CeremonySettings.cs" />
+    <Compile Include="com.silanis.esl.sdk\models\Company.cs" />
+    <Compile Include="com.silanis.esl.sdk\models\CompletionReport.cs" />
+    <Compile Include="com.silanis.esl.sdk\models\Credentials.cs" />
+    <Compile Include="com.silanis.esl.sdk\models\CreditCard.cs" />
+    <Compile Include="com.silanis.esl.sdk\models\Currency.cs" />
+    <Compile Include="com.silanis.esl.sdk\models\Cycle.cs" />
+    <Compile Include="com.silanis.esl.sdk\models\CycleCount.cs" />
+    <Compile Include="com.silanis.esl.sdk\models\Delivery.cs" />
+    <Compile Include="com.silanis.esl.sdk\models\Document.cs" />
+    <Compile Include="com.silanis.esl.sdk\models\DocumentsCompletionReport.cs" />
+    <Compile Include="com.silanis.esl.sdk\models\DocumentToolbarOptions.cs" />
+    <Compile Include="com.silanis.esl.sdk\models\Entity.cs" />
+    <Compile Include="com.silanis.esl.sdk\models\Error.cs" />
+    <Compile Include="com.silanis.esl.sdk\models\External.cs" />
+    <Compile Include="com.silanis.esl.sdk\models\Field.cs" />
+    <Compile Include="com.silanis.esl.sdk\models\FieldSubtype.cs" />
+    <Compile Include="com.silanis.esl.sdk\models\FieldType.cs" />
+    <Compile Include="com.silanis.esl.sdk\models\FieldValidation.cs" />
+    <Compile Include="com.silanis.esl.sdk\models\FooterOptions.cs" />
+    <Compile Include="com.silanis.esl.sdk\models\GlobalActionsOptions.cs" />
+    <Compile Include="com.silanis.esl.sdk\models\GuestAuth.cs" />
+    <Compile Include="com.silanis.esl.sdk\models\HeaderOptions.cs" />
+    <Compile Include="com.silanis.esl.sdk\models\Image.cs" />
+    <Compile Include="com.silanis.esl.sdk\models\Layout.cs" />
+    <Compile Include="com.silanis.esl.sdk\models\LayoutOptions.cs" />
+    <Compile Include="com.silanis.esl.sdk\models\LayoutStyle.cs" />
+    <Compile Include="com.silanis.esl.sdk\models\License.cs" />
+    <Compile Include="com.silanis.esl.sdk\models\LicenseStatus.cs" />
+    <Compile Include="com.silanis.esl.sdk\models\Link.cs" />
+    <Compile Include="com.silanis.esl.sdk\models\Message.cs" />
+    <Compile Include="com.silanis.esl.sdk\models\MessageStatus.cs" />
+    <Compile Include="com.silanis.esl.sdk\models\Package.cs" />
+    <Compile Include="com.silanis.esl.sdk\models\PackageArtifactsLimits.cs" />
+    <Compile Include="com.silanis.esl.sdk\models\PackageCompletionReport.cs" />
+    <Compile Include="com.silanis.esl.sdk\models\PackageSettings.cs" />
+    <Compile Include="com.silanis.esl.sdk\models\PackageStatus.cs" />
+    <Compile Include="com.silanis.esl.sdk\models\Page.cs" />
+    <Compile Include="com.silanis.esl.sdk\models\Plan.cs" />
+    <Compile Include="com.silanis.esl.sdk\models\Price.cs" />
+    <Compile Include="com.silanis.esl.sdk\models\Provider.cs" />
+    <Compile Include="com.silanis.esl.sdk\models\Quota.cs" />
+    <Compile Include="com.silanis.esl.sdk\models\Report.cs" />
+    <Compile Include="com.silanis.esl.sdk\models\Result.cs" />
+    <Compile Include="com.silanis.esl.sdk\models\Role.cs" />
+    <Compile Include="com.silanis.esl.sdk\models\RoleType.cs" />
+    <Compile Include="com.silanis.esl.sdk\models\Scope.cs" />
+    <Compile Include="com.silanis.esl.sdk\models\Sender.cs" />
+    <Compile Include="com.silanis.esl.sdk\models\SenderCompletionReport.cs" />
+    <Compile Include="com.silanis.esl.sdk\models\SenderStatus.cs" />
+    <Compile Include="com.silanis.esl.sdk\models\SenderType.cs" />
+    <Compile Include="com.silanis.esl.sdk\models\SenderUsageReport.cs" />
+    <Compile Include="com.silanis.esl.sdk\models\Session.cs" />
+    <Compile Include="com.silanis.esl.sdk\models\Settings.cs" />
+    <Compile Include="com.silanis.esl.sdk\models\SignatureStyle.cs" />
+    <Compile Include="com.silanis.esl.sdk\models\SignedDocumentDelivery.cs" />
+    <Compile Include="com.silanis.esl.sdk\models\Signer.cs" />
+    <Compile Include="com.silanis.esl.sdk\models\SignersCompletionReport.cs" />
+    <Compile Include="com.silanis.esl.sdk\models\Signup.cs" />
+    <Compile Include="com.silanis.esl.sdk\models\Style.cs" />
+    <Compile Include="com.silanis.esl.sdk\models\Target.cs" />
+    <Compile Include="com.silanis.esl.sdk\models\Template.cs" />
+    <Compile Include="com.silanis.esl.sdk\models\TextualSignatureStyle.cs" />
+    <Compile Include="com.silanis.esl.sdk\models\TitleBarOptions.cs" />
+    <Compile Include="com.silanis.esl.sdk\models\Transaction.cs" />
+    <Compile Include="com.silanis.esl.sdk\models\UsageReport.cs" />
+    <Compile Include="com.silanis.esl.sdk\models\User.cs" />
+    <Compile Include="com.silanis.esl.sdk\models\ViewSettings.cs" />
+    <Compile Include="com.silanis.esl.sdk\models\Visibility.cs" />
+    <Compile Include="com.silanis.esl.sdk\EslException.cs" />
+    <Compile Include="com.silanis.esl.sdk\internal\MimeTypeUtil.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="System.Net" />
+    <Reference Include="System" />
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\..\..\..\Downloads\Json50r2\Bin\Net35\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+</Project>
