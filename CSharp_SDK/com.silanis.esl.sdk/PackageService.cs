@@ -5,7 +5,7 @@ using System.Text;
 using Newtonsoft.Json;
 using System.Collections.Generic;
 
-namespace CSharp_SDK
+namespace Silanis.ESL.SDK
 {
 	public class PackageService
 	{

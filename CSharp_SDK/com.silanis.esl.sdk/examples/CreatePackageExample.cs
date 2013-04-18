@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using Newtonsoft.Json;
 
 
-namespace CSharp_SDK
+namespace Silanis.ESL.SDK
 {
 	public class CreatePackageExample
 	{

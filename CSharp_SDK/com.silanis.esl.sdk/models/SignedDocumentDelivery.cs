@@ -2,15 +2,19 @@
 using System;
 using System.Collections.Generic;
 using Newtonsoft.Json;
-public class SignedDocumentDelivery
+namespace Silanis.ESL.SDK
 {
-    
-    // Fields
-    private IList<External> _destinations = new List<External>();
-    private IList<Document> _excludedDocuments = new List<Document>();
-    
-    // Accessors
-        
+	
+	
+	public class SignedDocumentDelivery
+	{
+		
+		// Fields
+		private IList<External> _destinations = new List<External>();
+		private IList<Document> _excludedDocuments = new List<Document>();
+		
+		// Accessors
+		    
     [JsonProperty("destinations")]
     public IList<External> Destinations
     {
@@ -30,7 +34,7 @@ public class SignedDocumentDelivery
         return this;
     }
     
-        
+		    
     [JsonProperty("excludedDocuments")]
     public IList<Document> ExcludedDocuments
     {
@@ -50,19 +54,21 @@ public class SignedDocumentDelivery
         return this;
     }
     
-        
+		    
     [JsonProperty("filePrefix")]
     public String FilePrefix
     {
                 get; set;
         }
     
-        
+		    
     [JsonProperty("fileSuffix")]
     public String FileSuffix
     {
                 get; set;
         }
     
-    
+		
+	
+	}
 }

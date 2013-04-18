@@ -2,25 +2,31 @@
 using System;
 using System.Collections.Generic;
 using Newtonsoft.Json;
-public class ViewSettings
+namespace Silanis.ESL.SDK
 {
-    
-    // Fields
-    
-    // Accessors
-        
+	
+	
+	public class ViewSettings
+	{
+		
+		// Fields
+		
+		// Accessors
+		    
     [JsonProperty("layout")]
     public LayoutOptions Layout
     {
                 get; set;
         }
     
-        
+		    
     [JsonProperty("style")]
     public LayoutStyle Style
     {
                 get; set;
         }
     
-    
+		
+	
+	}
 }

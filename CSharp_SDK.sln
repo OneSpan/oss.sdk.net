@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CSharp_SDK", "CSharp_SDK\CSharp_SDK.csproj", "{157905B3-15BC-478E-A42E-6072D895D6D6}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Silanis.Esl.SDK", "CSharp_SDK\Silanis.Esl.SDK.csproj", "{157905B3-15BC-478E-A42E-6072D895D6D6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +15,6 @@ Global
 		{157905B3-15BC-478E-A42E-6072D895D6D6}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(MonoDevelopProperties) = preSolution
-		StartupItem = CSharp_SDK\CSharp_SDK.csproj
+		StartupItem = CSharp_SDK\Silanis.Esl.SDK.csproj
 	EndGlobalSection
 EndGlobal

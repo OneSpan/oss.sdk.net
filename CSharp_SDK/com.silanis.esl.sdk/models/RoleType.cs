@@ -1,5 +1,8 @@
 //
-public enum RoleType
+namespace Silanis.ESL.SDK
 {
-    SIGNER,SENDER
+	public enum RoleType
+	{
+		SIGNER,SENDER
+	}
 }

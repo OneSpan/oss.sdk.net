@@ -1,5 +1,8 @@
 //
-public enum BasePackageType
+namespace Silanis.ESL.SDK
 {
-    PACKAGE,TEMPLATE,LAYOUT
+	public enum BasePackageType
+	{
+		PACKAGE,TEMPLATE,LAYOUT
+	}
 }

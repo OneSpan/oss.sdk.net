@@ -2,42 +2,46 @@
 using System;
 using System.Collections.Generic;
 using Newtonsoft.Json;
-public class License
+namespace Silanis.ESL.SDK
 {
-    
-    // Fields
-    private IList<Transaction> _transactions = new List<Transaction>();
-    
-    // Accessors
-        
+	
+	
+	public class License
+	{
+		
+		// Fields
+		private IList<Transaction> _transactions = new List<Transaction>();
+		
+		// Accessors
+		    
     [JsonProperty("created")]
     public Nullable<DateTime> Created
     {
                 get; set;
         }
     
-        
+		    
     [JsonProperty("paidUntil")]
     public Nullable<DateTime> PaidUntil
     {
                 get; set;
         }
     
-        
+		    
     [JsonProperty("plan")]
     public Plan Plan
     {
                 get; set;
         }
     
-        
+		    
     [JsonProperty("status")]
     public LicenseStatus Status
     {
                 get; set;
         }
     
-        
+		    
     [JsonProperty("transactions")]
     public IList<Transaction> Transactions
     {
@@ -57,5 +61,7 @@ public class License
         return this;
     }
     
-    
+		
+	
+	}
 }

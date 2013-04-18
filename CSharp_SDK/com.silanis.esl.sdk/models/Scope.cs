@@ -1,5 +1,8 @@
 //
-public enum Scope
+namespace Silanis.ESL.SDK
 {
-    SENDER,DOCUMENT,PACKAGE,ACCOUNT
+	public enum Scope
+	{
+		SENDER,DOCUMENT,PACKAGE,ACCOUNT
+	}
 }

@@ -1,6 +1,6 @@
 using System;
 
-namespace CSharp_SDK
+namespace Silanis.ESL.SDK
 {
 	public class EslClient
 	{

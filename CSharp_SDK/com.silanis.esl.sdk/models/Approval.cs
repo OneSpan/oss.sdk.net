@@ -2,28 +2,32 @@
 using System;
 using System.Collections.Generic;
 using Newtonsoft.Json;
-public class Approval
+namespace Silanis.ESL.SDK
 {
-    
-    // Fields
-    private IList<Field> _fields = new List<Field>();
-    
-    // Accessors
-        
+	
+	
+	public class Approval
+	{
+		
+		// Fields
+		private IList<Field> _fields = new List<Field>();
+		
+		// Accessors
+		    
     [JsonProperty("accepted")]
     public Nullable<DateTime> Accepted
     {
                 get; set;
         }
     
-        
+		    
     [JsonProperty("data")]
     public IDictionary<string, object> Data
     {
                 get; set;
         }
     
-        
+		    
     [JsonProperty("fields")]
     public IList<Field> Fields
     {
@@ -43,33 +47,35 @@ public class Approval
         return this;
     }
     
-        
+		    
     [JsonProperty("id")]
     public String Id
     {
                 get; set;
         }
     
-        
+		    
     [JsonProperty("name")]
     public String Name
     {
                 get; set;
         }
     
-        
+		    
     [JsonProperty("role")]
     public String Role
     {
                 get; set;
         }
     
-        
+		    
     [JsonProperty("signed")]
     public Nullable<DateTime> Signed
     {
                 get; set;
         }
     
-    
+		
+	
+	}
 }

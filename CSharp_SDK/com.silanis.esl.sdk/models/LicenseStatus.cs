@@ -1,5 +1,8 @@
 //
-public enum LicenseStatus
+namespace Silanis.ESL.SDK
 {
-    ACTIVE,PENDING,GRACE
+	public enum LicenseStatus
+	{
+		ACTIVE,PENDING,GRACE
+	}
 }

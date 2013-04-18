@@ -2,14 +2,18 @@
 using System;
 using System.Collections.Generic;
 using Newtonsoft.Json;
-public class Auth
+namespace Silanis.ESL.SDK
 {
-    
-    // Fields
-    private IList<AuthChallenge> _challenges = new List<AuthChallenge>();
-    
-    // Accessors
-        
+	
+	
+	public class Auth
+	{
+		
+		// Fields
+		private IList<AuthChallenge> _challenges = new List<AuthChallenge>();
+		
+		// Accessors
+		    
     [JsonProperty("challenges")]
     public IList<AuthChallenge> Challenges
     {
@@ -29,12 +33,14 @@ public class Auth
         return this;
     }
     
-        
+		    
     [JsonProperty("scheme")]
     public AuthScheme Scheme
     {
                 get; set;
         }
     
-    
+		
+	
+	}
 }

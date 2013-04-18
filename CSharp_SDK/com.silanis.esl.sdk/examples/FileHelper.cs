@@ -1,7 +1,7 @@
 using System;
 using System.IO;
 
-namespace CSharp_SDK
+namespace Silanis.ESL.SDK
 {
 	public class FileHelper
 	{

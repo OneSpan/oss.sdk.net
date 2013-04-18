@@ -2,32 +2,38 @@
 using System;
 using System.Collections.Generic;
 using Newtonsoft.Json;
-public class Transaction
+namespace Silanis.ESL.SDK
 {
-    
-    // Fields
-    
-    // Accessors
-        
+	
+	
+	public class Transaction
+	{
+		
+		// Fields
+		
+		// Accessors
+		    
     [JsonProperty("created")]
     public Nullable<DateTime> Created
     {
                 get; set;
         }
     
-        
+		    
     [JsonProperty("creditCard")]
     public CreditCard CreditCard
     {
                 get; set;
         }
     
-        
+		    
     [JsonProperty("price")]
     public Price Price
     {
                 get; set;
         }
     
-    
+		
+	
+	}
 }

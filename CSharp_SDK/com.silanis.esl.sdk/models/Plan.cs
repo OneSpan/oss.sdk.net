@@ -2,91 +2,95 @@
 using System;
 using System.Collections.Generic;
 using Newtonsoft.Json;
-public class Plan
+namespace Silanis.ESL.SDK
 {
-    
-    // Fields
-    private IList<Quota> _quotas = new List<Quota>();
-    
-    // Accessors
-        
+	
+	
+	public class Plan
+	{
+		
+		// Fields
+		private IList<Quota> _quotas = new List<Quota>();
+		
+		// Accessors
+		    
     [JsonProperty("contract")]
     public Cycle Contract
     {
                 get; set;
         }
     
-        
+		    
     [JsonProperty("cycle")]
     public Cycle Cycle
     {
                 get; set;
         }
     
-        
+		    
     [JsonProperty("data")]
     public IDictionary<string, object> Data
     {
                 get; set;
         }
     
-        
+		    
     [JsonProperty("description")]
     public String Description
     {
                 get; set;
         }
     
-        
+		    
     [JsonProperty("features")]
     public IDictionary<string, object> Features
     {
                 get; set;
         }
     
-        
+		    
     [JsonProperty("freeCycles")]
     public CycleCount FreeCycles
     {
                 get; set;
         }
     
-        
+		    
     [JsonProperty("group")]
     public String Group
     {
                 get; set;
         }
     
-        
+		    
     [JsonProperty("id")]
     public String Id
     {
                 get; set;
         }
     
-        
+		    
     [JsonProperty("name")]
     public String Name
     {
                 get; set;
         }
     
-        
+		    
     [JsonProperty("original")]
     public String Original
     {
                 get; set;
         }
     
-        
+		    
     [JsonProperty("price")]
     public Price Price
     {
                 get; set;
         }
     
-        
+		    
     [JsonProperty("quotas")]
     public IList<Quota> Quotas
     {
@@ -106,5 +110,7 @@ public class Plan
         return this;
     }
     
-    
+		
+	
+	}
 }

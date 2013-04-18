@@ -2,14 +2,18 @@
 using System;
 using System.Collections.Generic;
 using Newtonsoft.Json;
-public class GuestAuth
+namespace Silanis.ESL.SDK
 {
-    
-    // Fields
-    private IList<AuthChallenge> _challenges = new List<AuthChallenge>();
-    
-    // Accessors
-        
+	
+	
+	public class GuestAuth
+	{
+		
+		// Fields
+		private IList<AuthChallenge> _challenges = new List<AuthChallenge>();
+		
+		// Accessors
+		    
     [JsonProperty("challenges")]
     public IList<AuthChallenge> Challenges
     {
@@ -29,33 +33,35 @@ public class GuestAuth
         return this;
     }
     
-        
+		    
     [JsonProperty("loginToken")]
     public String LoginToken
     {
                 get; set;
         }
     
-        
+		    
     [JsonProperty("package")]
     public Package Package
     {
                 get; set;
         }
     
-        
+		    
     [JsonProperty("scheme")]
     public AuthScheme Scheme
     {
                 get; set;
         }
     
-        
+		    
     [JsonProperty("user")]
     public User User
     {
                 get; set;
         }
     
-    
+		
+	
+	}
 }

@@ -1,5 +1,8 @@
 //
-public enum AuthScheme
+namespace Silanis.ESL.SDK
 {
-    NONE,PROVIDER,CHALLENGE,SMS
+	public enum AuthScheme
+	{
+		NONE,PROVIDER,CHALLENGE,SMS
+	}
 }

@@ -2,21 +2,25 @@
 using System;
 using System.Collections.Generic;
 using Newtonsoft.Json;
-public class Session
+namespace Silanis.ESL.SDK
 {
-    
-    // Fields
-    private IList<String> _packages = new List<String>();
-    
-    // Accessors
-        
+	
+	
+	public class Session
+	{
+		
+		// Fields
+		private IList<String> _packages = new List<String>();
+		
+		// Accessors
+		    
     [JsonProperty("account")]
     public Account Account
     {
                 get; set;
         }
     
-        
+		    
     [JsonProperty("packages")]
     public IList<String> Packages
     {
@@ -36,12 +40,14 @@ public class Session
         return this;
     }
     
-        
+		    
     [JsonProperty("user")]
     public User User
     {
                 get; set;
         }
     
-    
+		
+	
+	}
 }

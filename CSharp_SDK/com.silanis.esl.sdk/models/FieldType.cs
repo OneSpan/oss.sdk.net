@@ -1,5 +1,8 @@
 //
-public enum FieldType
+namespace Silanis.ESL.SDK
 {
-    SIGNATURE,INPUT,IMAGE
+	public enum FieldType
+	{
+		SIGNATURE,INPUT,IMAGE
+	}
 }

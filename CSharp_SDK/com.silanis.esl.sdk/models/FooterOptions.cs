@@ -2,11 +2,17 @@
 using System;
 using System.Collections.Generic;
 using Newtonsoft.Json;
-public class FooterOptions
+namespace Silanis.ESL.SDK
 {
-    
-    // Fields
-    
-    // Accessors
-    
+	
+	
+	public class FooterOptions
+	{
+		
+		// Fields
+		
+		// Accessors
+		
+	
+	}
 }

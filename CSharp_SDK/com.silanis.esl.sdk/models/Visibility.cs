@@ -1,5 +1,8 @@
 //
-public enum Visibility
+namespace Silanis.ESL.SDK
 {
-    ACCOUNT,SENDER
+	public enum Visibility
+	{
+		ACCOUNT,SENDER
+	}
 }

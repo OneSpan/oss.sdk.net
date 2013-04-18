@@ -1,5 +1,8 @@
 //
-public enum MessageStatus
+namespace Silanis.ESL.SDK
 {
-    NEW,READ,TRASHED
+	public enum MessageStatus
+	{
+		NEW,READ,TRASHED
+	}
 }

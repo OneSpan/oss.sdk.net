@@ -2,15 +2,19 @@
 using System;
 using System.Collections.Generic;
 using Newtonsoft.Json;
-public class AccountProviders
+namespace Silanis.ESL.SDK
 {
-    
-    // Fields
-    private IList<Provider> _documents = new List<Provider>();
-    private IList<Provider> _users = new List<Provider>();
-    
-    // Accessors
-        
+	
+	
+	public class AccountProviders
+	{
+		
+		// Fields
+		private IList<Provider> _documents = new List<Provider>();
+		private IList<Provider> _users = new List<Provider>();
+		
+		// Accessors
+		    
     [JsonProperty("documents")]
     public IList<Provider> Documents
     {
@@ -30,7 +34,7 @@ public class AccountProviders
         return this;
     }
     
-        
+		    
     [JsonProperty("users")]
     public IList<Provider> Users
     {
@@ -50,5 +54,7 @@ public class AccountProviders
         return this;
     }
     
-    
+		
+	
+	}
 }

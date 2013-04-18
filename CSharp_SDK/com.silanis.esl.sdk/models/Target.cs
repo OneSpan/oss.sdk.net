@@ -1,5 +1,8 @@
 //
-public enum Target
+namespace Silanis.ESL.SDK
 {
-    SIGNER,SENDER,DOCUMENT,PACKAGE,STORAGE
+	public enum Target
+	{
+		SIGNER,SENDER,DOCUMENT,PACKAGE,STORAGE
+	}
 }

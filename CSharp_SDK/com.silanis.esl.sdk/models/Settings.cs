@@ -2,11 +2,17 @@
 using System;
 using System.Collections.Generic;
 using Newtonsoft.Json;
-public class Settings
+namespace Silanis.ESL.SDK
 {
-    
-    // Fields
-    
-    // Accessors
-    
+	
+	
+	public class Settings
+	{
+		
+		// Fields
+		
+		// Accessors
+		
+	
+	}
 }

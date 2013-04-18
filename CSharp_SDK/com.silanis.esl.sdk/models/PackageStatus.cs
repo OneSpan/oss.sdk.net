@@ -1,5 +1,8 @@
 //
-public enum PackageStatus
+namespace Silanis.ESL.SDK
 {
-    DRAFT,SENT,COMPLETED,ARCHIVED,DECLINED,OPTED_OUT,EXPIRED
+	public enum PackageStatus
+	{
+		DRAFT,SENT,COMPLETED,ARCHIVED,DECLINED,OPTED_OUT,EXPIRED
+	}
 }

@@ -2,63 +2,67 @@
 using System;
 using System.Collections.Generic;
 using Newtonsoft.Json;
-public class Role
+namespace Silanis.ESL.SDK
 {
-    
-    // Fields
-    private IList<Signer> _signers = new List<Signer>();
-    
-    // Accessors
-        
+	
+	
+	public class Role
+	{
+		
+		// Fields
+		private IList<Signer> _signers = new List<Signer>();
+		
+		// Accessors
+		    
     [JsonProperty("data")]
     public IDictionary<string, object> Data
     {
                 get; set;
         }
     
-        
+		    
     [JsonProperty("emailMessage")]
     public BaseMessage EmailMessage
     {
                 get; set;
         }
     
-        
+		    
     [JsonProperty("id")]
     public String Id
     {
                 get; set;
         }
     
-        
+		    
     [JsonProperty("index")]
     public Int32 Index
     {
                 get; set;
         }
     
-        
+		    
     [JsonProperty("locked")]
     public Boolean Locked
     {
                 get; set;
         }
     
-        
+		    
     [JsonProperty("name")]
     public String Name
     {
                 get; set;
         }
     
-        
+		    
     [JsonProperty("reassign")]
     public Boolean Reassign
     {
                 get; set;
         }
     
-        
+		    
     [JsonProperty("signers")]
     public IList<Signer> Signers
     {
@@ -78,12 +82,14 @@ public class Role
         return this;
     }
     
-        
+		    
     [JsonProperty("type")]
     public RoleType Type
     {
                 get; set;
         }
     
-    
+		
+	
+	}
 }

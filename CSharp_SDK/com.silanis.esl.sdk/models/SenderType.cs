@@ -1,5 +1,8 @@
 //
-public enum SenderType
+namespace Silanis.ESL.SDK
 {
-    REGULAR,MANAGER
+	public enum SenderType
+	{
+		REGULAR,MANAGER
+	}
 }

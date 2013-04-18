@@ -2,14 +2,18 @@
 using System;
 using System.Collections.Generic;
 using Newtonsoft.Json;
-public class FieldValidation
+namespace Silanis.ESL.SDK
 {
-    
-    // Fields
-    private IList<String> _enum = null;
-    
-    // Accessors
-        
+	
+	
+	public class FieldValidation
+	{
+		
+		// Fields
+		private IList<String> _enum = null;
+		
+		// Accessors
+		    
     [JsonProperty("enum")]
     public IList<String> Enum
     {
@@ -29,47 +33,49 @@ public class FieldValidation
         return this;
     }
     
-        
+		    
     [JsonProperty("errorCode")]
     public Int32 ErrorCode
     {
                 get; set;
         }
     
-        
+		    
     [JsonProperty("errorMessage")]
     public String ErrorMessage
     {
                 get; set;
         }
     
-        
+		    
     [JsonProperty("maxLength")]
     public Int32 MaxLength
     {
                 get; set;
         }
     
-        
+		    
     [JsonProperty("minLength")]
     public Int32 MinLength
     {
                 get; set;
         }
     
-        
+		    
     [JsonProperty("pattern")]
     public String Pattern
     {
                 get; set;
         }
     
-        
+		    
     [JsonProperty("required")]
     public Boolean Required
     {
                 get; set;
         }
     
-    
+		
+	
+	}
 }

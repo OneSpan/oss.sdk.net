@@ -2,21 +2,25 @@
 using System;
 using System.Collections.Generic;
 using Newtonsoft.Json;
-public class Result<T>
+namespace Silanis.ESL.SDK
 {
-    
-    // Fields
-    private IList<T> _results = new List<T>();
-    
-    // Accessors
-        
+	
+	
+	public class Result<T>
+	{
+		
+		// Fields
+		private IList<T> _results = new List<T>();
+		
+		// Accessors
+		    
     [JsonProperty("count")]
     public Int32 Count
     {
                 get; set;
         }
     
-        
+		    
     [JsonProperty("results")]
     public IList<T> Results
     {
@@ -36,5 +40,7 @@ public class Result<T>
         return this;
     }
     
-    
+		
+	
+	}
 }

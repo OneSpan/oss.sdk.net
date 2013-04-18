@@ -1,5 +1,8 @@
 //
-public enum Cycle
+namespace Silanis.ESL.SDK
 {
-    DAY,MONTH,YEAR
+	public enum Cycle
+	{
+		DAY,MONTH,YEAR
+	}
 }

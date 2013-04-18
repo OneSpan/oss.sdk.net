@@ -2,14 +2,18 @@
 using System;
 using System.Collections.Generic;
 using Newtonsoft.Json;
-public class SenderCompletionReport
+namespace Silanis.ESL.SDK
 {
-    
-    // Fields
-    private IList<PackageCompletionReport> _packages = new List<PackageCompletionReport>();
-    
-    // Accessors
-        
+	
+	
+	public class SenderCompletionReport
+	{
+		
+		// Fields
+		private IList<PackageCompletionReport> _packages = new List<PackageCompletionReport>();
+		
+		// Accessors
+		    
     [JsonProperty("packages")]
     public IList<PackageCompletionReport> Packages
     {
@@ -29,12 +33,14 @@ public class SenderCompletionReport
         return this;
     }
     
-        
+		    
     [JsonProperty("sender")]
     public Sender Sender
     {
                 get; set;
         }
     
-    
+		
+	
+	}
 }

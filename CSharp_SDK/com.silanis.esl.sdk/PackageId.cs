@@ -1,7 +1,7 @@
 using System;
 using Newtonsoft.Json;
 
-namespace CSharp_SDK
+namespace Silanis.ESL.SDK
 {
 	public class PackageId
 	{
