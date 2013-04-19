@@ -6,11 +6,12 @@
     <ProductVersion>10.0.0</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{157905B3-15BC-478E-A42E-6072D895D6D6}</ProjectGuid>
-    <OutputType>Exe</OutputType>
+    <OutputType>Library</OutputType>
     <RootNamespace>Silanis.ESL.SDK</RootNamespace>
     <AssemblyName>Silanis.ESL.SDK</AssemblyName>
     <TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
     <TargetFrameworkProfile />
+    <IsWebBootstrapper>false</IsWebBootstrapper>
     <PublishUrl>publish\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Disk</InstallFrom>
@@ -23,7 +24,6 @@
     <MapFileExtensions>true</MapFileExtensions>
     <ApplicationRevision>0</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
-    <IsWebBootstrapper>false</IsWebBootstrapper>
     <UseApplicationTrust>false</UseApplicationTrust>
     <BootstrapperEnabled>true</BootstrapperEnabled>
   </PropertyGroup>
@@ -50,6 +50,9 @@
     <PlatformTarget>x86</PlatformTarget>
     <ConsolePause>false</ConsolePause>
   </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject />
+  </PropertyGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
     <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
@@ -64,8 +67,11 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="com.silanis.esl.sdk\examples\CreatePackageExample.cs" />
     <Compile Include="com.silanis.esl.sdk\EslClient.cs" />
+    <Compile Include="com.silanis.esl.sdk\examples\PackageUtil.cs" />
+    <Compile Include="com.silanis.esl.sdk\examples\CreatePackageExample.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="com.silanis.esl.sdk\FieldSummaryService.cs" />
     <Compile Include="com.silanis.esl.sdk\PackageService.cs" />
     <Compile Include="com.silanis.esl.sdk\SessionService.cs" />
@@ -78,7 +84,6 @@
     <Compile Include="com.silanis.esl.sdk\FieldSummary.cs" />
     <Compile Include="com.silanis.esl.sdk\Audit.cs" />
     <Compile Include="com.silanis.esl.sdk\AuditService.cs" />
-    <Compile Include="com.silanis.esl.sdk\examples\FileHelper.cs" />
     <Compile Include="com.silanis.esl.sdk\EslException.cs" />
     <Compile Include="com.silanis.esl.sdk\internal\MimeTypeUtil.cs" />
     <Compile Include="com.silanis.esl.sdk\models\Account.cs" />
@@ -171,12 +176,15 @@
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Newtonsoft.Json">
-      <HintPath>..\..\..\Users\ehardy\Downloads\Json50r3\Bin\Net20\Newtonsoft.Json.dll</HintPath>
+      <HintPath>..\..\json.net\Bin\Net20\Newtonsoft.Json.dll</HintPath>
     </Reference>
-    <Reference Include="System.Net" />
     <Reference Include="System" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
   </ItemGroup>
+  <PropertyGroup>
+    <PostBuildEvent>
+    </PostBuildEvent>
+  </PropertyGroup>
 </Project>
