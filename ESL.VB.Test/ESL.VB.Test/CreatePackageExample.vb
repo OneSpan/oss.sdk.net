@@ -34,8 +34,7 @@ Module CreatePackageExample
         ' After the package is complete, download the documents
 
         ' Download the zip file of all the documents
-        Dim packageId2 As PackageId = New PackageId("0UHTBYK1yZ3y6p9F3fiZFDV9lDc3")
-        Dim downloadedDoc As Byte() = packageService.DownloadDocument(packageId2, PackageUtil.NewDocument())
+        Dim downloadedDoc As Byte() = packageService.DownloadDocument(packageId, PackageUtil.NewDocument())
         WriteToFile("C://path/to/save/file/document.pdf", downloadedDoc)
 
     End Sub
