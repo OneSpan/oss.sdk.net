@@ -34,7 +34,7 @@ namespace Silanis.ESL.SDK
 				
 				return JsonConvert.DeserializeObject<PackageId> (response);
 			} catch (Exception e) {
-				throw new EslException ("Could not create a new package.");
+				throw new EslException ("Could not create a new package." + " Exception: " + e.Message);
 			}
 
 		}
@@ -51,7 +51,7 @@ namespace Silanis.ESL.SDK
 
 				HttpMethods.PutHttp (apiToken, path, content);
 			} catch (Exception e) {
-				throw new EslException ("Could not update the package.");
+				throw new EslException ("Could not update the package." + " Exception: " + e.Message);
 			}
 		}
 
@@ -66,7 +66,7 @@ namespace Silanis.ESL.SDK
 
 				return JsonConvert.DeserializeObject<Package> (response, settings);
 			} catch (Exception e) {
-				throw new EslException ("Could not get package.");
+				throw new EslException ("Could not get package." + " Exception: " + e.Message);
 			}
 		}
 
@@ -80,7 +80,7 @@ namespace Silanis.ESL.SDK
 			try {
 				HttpMethods.DeleteHttp (apiToken, path);
 			} catch (Exception e) {
-				throw new EslException ("Could not delete document from package.");
+				throw new EslException ("Could not delete document from package." + " Exception: " + e.Message);
 			}
 		}
 
@@ -95,7 +95,7 @@ namespace Silanis.ESL.SDK
 
 				HttpMethods.PostHttp (apiToken, path, content);
 			} catch (Exception e) {
-				throw new EslException ("Could not send the package.");
+				throw new EslException ("Could not send the package." + " Exception: " + e.Message);
 			}
 		}
 
@@ -111,7 +111,7 @@ namespace Silanis.ESL.SDK
 
 				return roleList.Roles;
 			} catch (Exception e) {
-				throw new EslException ("Could not get roles.");
+				throw new EslException ("Could not get roles." + " Exception: " + e.Message);
 			}
 		}
 
@@ -128,7 +128,7 @@ namespace Silanis.ESL.SDK
 
 				return JsonConvert.DeserializeObject<Role> (response, settings);
 			} catch (Exception e) {
-				throw new EslException ("Could not add role.");
+				throw new EslException ("Could not add role." + " Exception: " + e.Message);
 			}
 		}
 
@@ -142,7 +142,7 @@ namespace Silanis.ESL.SDK
 			try {
 				HttpMethods.DeleteHttp (apiToken, path);
 			} catch (Exception e) {
-				throw new EslException ("Could not delete role.");
+				throw new EslException ("Could not delete role." + " Exception: " + e.Message);
 			}
 		}
 
@@ -156,7 +156,7 @@ namespace Silanis.ESL.SDK
 			try {
 				return HttpMethods.GetHttp (apiToken, path);
 			} catch (Exception e) {
-				throw new EslException ("Could not download the pdf document.");
+				throw new EslException ("Could not download the pdf document." + " Exception: " + e.Message);
 			}
 		}
 
@@ -169,7 +169,7 @@ namespace Silanis.ESL.SDK
 			try {
 				return HttpMethods.GetHttp (apiToken, path);
 			} catch (Exception e) {
-				throw new EslException ("Could not download the documents to a zip file.");
+				throw new EslException ("Could not download the documents to a zip file." + " Exception: " + e.Message);
 			}
 		}
 
@@ -182,7 +182,7 @@ namespace Silanis.ESL.SDK
 			try {
 				return HttpMethods.GetHttp (apiToken, path);
 			} catch (Exception e) {
-				throw new EslException ("Could not download the evidence summary.");
+				throw new EslException ("Could not download the evidence summary." + " Exception: " + e.Message);
 			}
 		}
 
@@ -201,7 +201,7 @@ namespace Silanis.ESL.SDK
 
 				Converter.ToString (HttpMethods.MultipartPostHttp (apiToken, path, content, boundary));
 			} catch (Exception e) {
-				throw new EslException ("Could not upload document to package.");
+				throw new EslException ("Could not upload document to package." + " Exception: " + e.Message);
 			}
 		}
 

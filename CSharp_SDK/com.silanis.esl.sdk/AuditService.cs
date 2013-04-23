@@ -29,7 +29,7 @@ namespace Silanis.ESL.SDK
 				}
 				return null;
 			} catch (Exception e) {
-				throw new EslException ("Could not get audit.");
+				throw new EslException ("Could not get audit." + " Exception: " + e.Message);
 			}
 		}
 

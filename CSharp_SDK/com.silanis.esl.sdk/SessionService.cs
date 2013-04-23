@@ -25,7 +25,7 @@ namespace Silanis.ESL.SDK
 				string response = Converter.ToString (HttpMethods.PostHttp (apiToken, path, new byte[0]));
 				return JsonConvert.DeserializeObject<SessionToken> (response);
 			} catch (Exception e) {
-				throw new EslException ("Could not create a session token for signer.");
+				throw new EslException ("Could not create a session token for signer." + " Exception: " + e.Message);
 			}
 		}
 	}

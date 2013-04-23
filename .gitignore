@@ -8,5 +8,8 @@ Debug/
 *.usertasks
 *.user
 
+#zip file
+*.zip
+
 #Mac
 .DS_Store
