@@ -1,0 +1,95 @@
+//
+using System;
+using System.Collections.Generic;
+using Newtonsoft.Json;
+namespace Silanis.ESL.SDK
+{
+	
+	
+	public class PackageCompletionReport
+	{
+		
+		// Fields
+		private IList<DocumentsCompletionReport> _documents = new List<DocumentsCompletionReport>();
+		private IList<SignersCompletionReport> _signers = new List<SignersCompletionReport>();
+		
+		// Accessors
+		    
+    [JsonProperty("documents")]
+    public IList<DocumentsCompletionReport> Documents
+    {
+                get
+        {
+            return _documents;
+        }
+        }
+        public PackageCompletionReport AddDocument(DocumentsCompletionReport value)
+    {
+        if (value == null)
+        {
+            throw new ArgumentNullException("Argument cannot be null");
+        }
+        
+        _documents.Add(value);
+        return this;
+    }
+    
+		    
+    [JsonProperty("id")]
+    public String Id
+    {
+                get; set;
+        }
+    
+		    
+    [JsonProperty("name")]
+    public String Name
+    {
+                get; set;
+        }
+    
+		    
+    [JsonProperty("signers")]
+    public IList<SignersCompletionReport> Signers
+    {
+                get
+        {
+            return _signers;
+        }
+        }
+        public PackageCompletionReport AddSigner(SignersCompletionReport value)
+    {
+        if (value == null)
+        {
+            throw new ArgumentNullException("Argument cannot be null");
+        }
+        
+        _signers.Add(value);
+        return this;
+    }
+    
+		    
+    [JsonProperty("status")]
+    public PackageStatus Status
+    {
+                get; set;
+        }
+    
+		    
+    [JsonProperty("trashed")]
+    public Boolean Trashed
+    {
+                get; set;
+        }
+    
+		    
+    [JsonProperty("updated")]
+    public Nullable<DateTime> Updated
+    {
+                get; set;
+        }
+    
+		
+	
+	}
+}

@@ -3,7 +3,7 @@
     <property name="ESL-version" value="9.4" />
     <property name="ESL-SDK" value="Silanis.ESL.SDK" />
     <property name="build.dir" value="bin" />
-    <property name="source.dir" value="com.silanis.esl.sdk" />
+    <property name="source.dir" value="Silanis.ESL.SDK" />
     <property name="reference.dir" value="References" />
     <property name="parent.dir" value="${directory::get-parent-directory(project::get-base-directory())}" />
     <property name="zip.file" value="${parent.dir}/${ESL-SDK}-${ESL-version}.zip" />

@@ -8,6 +8,10 @@ Debug/
 *.usertasks
 *.user
 
+#project files
+.sln
+.csproj
+
 #zip file
 *.zip
 
