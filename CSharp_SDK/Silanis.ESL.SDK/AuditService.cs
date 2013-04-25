@@ -4,17 +4,30 @@ using System.Collections.Generic;
 
 namespace Silanis.ESL.SDK
 {
+	/// <summary>
+	/// The AuditService class provides a method to get the audit trail for a package.
+	/// </summary>
 	public class AuditService
 	{
 		private string apiToken;
 		private UrlTemplate template;
 
+		/// <summary>
+		/// Initializes a new instance of the <see cref="Silanis.ESL.SDK.AuditService"/> class.
+		/// </summary>
+		/// <param name="apiToken">API token.</param>
+		/// <param name="baseUrl">Base URL.</param>
 		public AuditService (string apiToken, string baseUrl)
 		{
 			this.apiToken = apiToken;
 			template = new UrlTemplate (baseUrl);
 		}
 
+		/// <summary>
+		/// Gets the audit trail for a package and returns a list of audits.
+		/// </summary>
+		/// <returns>A list of audits.</returns>
+		/// <param name="packageId">The package id.</param>
 		public List<Audit> GetAudit (PackageId packageId)
 		{
 			string path = template.UrlFor (UrlTemplate.AUDIT_PATH)

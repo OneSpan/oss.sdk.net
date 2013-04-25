@@ -19,7 +19,7 @@
 
     <target name="build" description="Compiles the source code">
        <mkdir dir="${build.dir}/" />
-       <csc target="library" output="${build.dir}/${ESL-SDK}-${ESL-version}.dll">
+       <csc target="library" output="${build.dir}/${ESL-SDK}-${ESL-version}.dll" doc="${build.dir}/${ESL-SDK}-${ESL-version}.xml">
             <sources>
                 <include name="${source.dir}/**/*.cs" />
             </sources>
@@ -27,6 +27,9 @@
                 <include name="System.dll" />
                 <include name="Newtonsoft.Json.dll" />
             </references>
+            <nowarn>
+                <warning number="1591"></warning>
+            </nowarn>
         </csc>
     </target>
 
@@ -44,4 +47,5 @@
             </fileset>
         </zip>
     </target>
+
 </project>

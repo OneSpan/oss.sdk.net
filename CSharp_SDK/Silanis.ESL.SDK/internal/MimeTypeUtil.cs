@@ -4,6 +4,9 @@ using System.IO;
 
 namespace Silanis.ESL.SDK
 {
+	/// <summary>
+	/// For internal use.
+	/// </summary>
 	public class MimeTypeUtil
 	{
 

@@ -4,6 +4,9 @@ using System.IO;
 
 namespace Silanis.ESL.SDK
 {
+	/// <summary>
+	/// For internal use.
+	/// </summary>
 	public class HttpMethods
 	{
 
@@ -23,7 +26,7 @@ namespace Silanis.ESL.SDK
 
 			using (Stream responseStream = response.GetResponseStream()) {
 				var memoryStream = new MemoryStream ();
-                CopyTo(responseStream, memoryStream);
+				CopyTo (responseStream, memoryStream);
                 
 				return memoryStream.ToArray ();
 			}
@@ -45,7 +48,7 @@ namespace Silanis.ESL.SDK
 
 			using (Stream responseStream = response.GetResponseStream()) {
 				var memoryStream = new MemoryStream ();
-                CopyTo(responseStream, memoryStream);
+				CopyTo (responseStream, memoryStream);
 
 				return memoryStream.ToArray ();
 			}
@@ -61,7 +64,7 @@ namespace Silanis.ESL.SDK
 
 			using (Stream responseStream = response.GetResponseStream()) {
 				var memoryStream = new MemoryStream ();
-                CopyTo(responseStream, memoryStream);
+				CopyTo (responseStream, memoryStream);
 				return memoryStream.ToArray ();
 			}
 		}
@@ -76,7 +79,7 @@ namespace Silanis.ESL.SDK
 
 			using (Stream responseStream = response.GetResponseStream()) {
 				var memoryStream = new MemoryStream ();
-                CopyTo(responseStream, memoryStream);
+				CopyTo (responseStream, memoryStream);
 				return memoryStream.ToArray ();
 			}
 		}
@@ -97,22 +100,21 @@ namespace Silanis.ESL.SDK
 
 			using (Stream responseStream = response.GetResponseStream()) {
 				var memoryStream = new MemoryStream ();
-                CopyTo(responseStream, memoryStream);
+				CopyTo (responseStream, memoryStream);
 
 				return memoryStream.ToArray ();
 			}
 		}
 
-        private static void CopyTo(Stream input, Stream output)
-        {
-            byte[] buffer = new byte[16 * 1024]; // Fairly arbitrary size
-            int bytesRead;
+		private static void CopyTo (Stream input, Stream output)
+		{
+			byte[] buffer = new byte[16 * 1024]; // Fairly arbitrary size
+			int bytesRead;
 
-            while ((bytesRead = input.Read(buffer, 0, buffer.Length)) > 0)
-            {
-                output.Write(buffer, 0, bytesRead);
-            }
-        }
+			while ((bytesRead = input.Read(buffer, 0, buffer.Length)) > 0) {
+				output.Write (buffer, 0, bytesRead);
+			}
+		}
 
 	}
 }

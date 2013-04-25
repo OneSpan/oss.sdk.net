@@ -2,6 +2,9 @@ using System;
 
 namespace Silanis.ESL.SDK
 {
+	/// <summary>
+	/// For internal use.
+	/// </summary>
 	public class UrlTemplate
 	{
 		private String baseUrl;

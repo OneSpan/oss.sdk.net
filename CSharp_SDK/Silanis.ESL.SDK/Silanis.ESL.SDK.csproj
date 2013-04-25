@@ -9,6 +9,8 @@
     <AssemblyName>ClassLibrary</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <ProductVersion>12.0.0</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -141,9 +143,9 @@
     <Compile Include="Models\Visibility.cs" />
     <Compile Include="PackageId.cs" />
     <Compile Include="PackageService.cs" />
-    <Compile Include="RoleList.cs" />
     <Compile Include="SessionService.cs" />
     <Compile Include="SessionToken.cs" />
+    <Compile Include="Internal\RoleList.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSHARP.Targets" />
   <ProjectExtensions>

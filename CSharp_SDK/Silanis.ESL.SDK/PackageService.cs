@@ -7,12 +7,21 @@ using System.Collections.Generic;
 
 namespace Silanis.ESL.SDK
 {
+	/// <summary>
+	/// The PackageService class provides methods to help create packages and download documents after 
+	/// the package is complete.
+	/// </summary>
 	public class PackageService
 	{
 		private	string apiToken;
 		private UrlTemplate template;
 		private JsonSerializerSettings settings;
 
+		/// <summary>
+		/// Initializes a new instance of the <see cref="Silanis.ESL.SDK.PackageService"/> class.
+		/// </summary>
+		/// <param name="apiToken">API token.</param>
+		/// <param name="baseUrl">Base URL.</param>
 		public PackageService (string apiToken, string baseUrl)
 		{
 			this.apiToken = apiToken;
@@ -22,6 +31,11 @@ namespace Silanis.ESL.SDK
 			settings.NullValueHandling = NullValueHandling.Ignore;
 		}
 
+		/// <summary>
+		/// Creates a package based on the settings of the pacakge parameter.
+		/// </summary>
+		/// <returns>The package id.</returns>
+		/// <param name="package">The package to create.</param>
 		public PackageId CreatePackage (Package package)
 		{
 			string path = template.UrlFor (UrlTemplate.PACKAGE_PATH)
@@ -39,6 +53,11 @@ namespace Silanis.ESL.SDK
 
 		}
 
+		/// <summary>
+		/// Updates the package's fields and roles.
+		/// </summary>
+		/// <param name="packageId">The package id.</param>
+		/// <param name="package">The updated package.</param>
 		public void UpdatePackage (PackageId packageId, Package package)
 		{
 			string path = template.UrlFor (UrlTemplate.PACKAGE_ID_PATH)
@@ -55,6 +74,11 @@ namespace Silanis.ESL.SDK
 			}
 		}
 
+		/// <summary>
+		/// Gets the package.
+		/// </summary>
+		/// <returns>The package.</returns>
+		/// <param name="packageId">The package id.</param>
 		public Package GetPackage (PackageId packageId)
 		{
 			string path = template.UrlFor (UrlTemplate.PACKAGE_ID_PATH)
@@ -70,6 +94,11 @@ namespace Silanis.ESL.SDK
 			}
 		}
 
+		/// <summary>
+		/// Deletes the document from the package.
+		/// </summary>
+		/// <param name="packageId">The package id.</param>
+		/// <param name="document">The document to delete.</param>
 		public void DeleteDocument (PackageId packageId, Document document)
 		{
 			string path = template.UrlFor (UrlTemplate.DOCUMENT_ID_PATH)
@@ -84,6 +113,10 @@ namespace Silanis.ESL.SDK
 			}
 		}
 
+		/// <summary>
+		/// Sends the package.
+		/// </summary>
+		/// <param name="packageId">The package id.</param>
 		public void SendPackage (PackageId packageId)
 		{
 			string path = template.UrlFor (UrlTemplate.PACKAGE_ID_PATH)
@@ -99,6 +132,11 @@ namespace Silanis.ESL.SDK
 			}
 		}
 
+		/// <summary>
+		/// Gets the roles for a package.
+		/// </summary>
+		/// <returns>A list of the roles in the package.</returns>
+		/// <param name="packageId">The package id.</param>
 		public List<Role> GetRoles (PackageId packageId)
 		{
 			string path = template.UrlFor (UrlTemplate.ROLE_PATH)
@@ -115,6 +153,12 @@ namespace Silanis.ESL.SDK
 			}
 		}
 
+		/// <summary>
+		/// Adds a role to the package.
+		/// </summary>
+		/// <returns>The role added to the package.</returns>
+		/// <param name="packageId">The package id.</param>
+		/// <param name="role">The role to add.</param>
 		public Role AddRole (PackageId packageId, Role role)
 		{
 			string path = template.UrlFor (UrlTemplate.ROLE_PATH)
@@ -132,6 +176,11 @@ namespace Silanis.ESL.SDK
 			}
 		}
 
+		/// <summary>
+		/// Deletes a role from the package.
+		/// </summary>
+		/// <param name="packageId">The package id.</param>
+		/// <param name="role">The role to delete.</param>
 		public void DeleteRole (PackageId packageId, Role role)
 		{
 			string path = template.UrlFor (UrlTemplate.ROLE_ID_PATH)
@@ -146,6 +195,12 @@ namespace Silanis.ESL.SDK
 			}
 		}
 
+		/// <summary>
+		/// Downloads a document from the package and returns it in a byte array.
+		/// </summary>
+		/// <returns>The document to download.</returns>
+		/// <param name="packageId">The package id.</param>
+		/// <param name="document">The document to download.</param>
 		public byte[] DownloadDocument (PackageId packageId, Document document)
 		{
 			string path = template.UrlFor (UrlTemplate.PDF_PATH)
@@ -160,6 +215,11 @@ namespace Silanis.ESL.SDK
 			}
 		}
 
+		/// <summary>
+		/// Downloads the documents from the package in a zip file and returns it in a byte array.
+		/// </summary>
+		/// <returns>The zipped documents in byte array.</returns>
+		/// <param name="packageId">.</param>
 		public byte[] DownloadZippedDocuments (PackageId packageId)
 		{
 			string path = template.UrlFor (UrlTemplate.ZIP_PATH)
@@ -173,6 +233,11 @@ namespace Silanis.ESL.SDK
 			}
 		}
 
+		/// <summary>
+		/// Downloads the evidence summary from the package and returns it in a byte array.
+		/// </summary>
+		/// <returns>The evidence summary in byte array.</returns>
+		/// <param name="packageId">The package id.</param>
 		public byte[] DownloadEvidenceSummary (PackageId packageId)
 		{
 			string path = template.UrlFor (UrlTemplate.EVIDENCE_SUMMARY_PATH)
@@ -186,6 +251,13 @@ namespace Silanis.ESL.SDK
 			}
 		}
 
+		/// <summary>
+		/// Uploads the Document and file in byte[] to the package.
+		/// </summary>
+		/// <param name="packageId">The package id.</param>
+		/// <param name="fileName">The name of the document.</param>
+		/// <param name="fileBytes">The file to upload in bytes.</param>
+		/// <param name="document">The document object that has field settings.</param>
 		public void UploadDocument (PackageId packageId, string fileName, byte[] fileBytes, Document document)
 		{
 			string path = template.UrlFor (UrlTemplate.DOCUMENT_PATH)

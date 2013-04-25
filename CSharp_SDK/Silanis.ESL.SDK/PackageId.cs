@@ -3,6 +3,9 @@ using Newtonsoft.Json;
 
 namespace Silanis.ESL.SDK
 {
+	/// <summary>
+	/// The package id.
+	/// </summary>
 	public class PackageId
 	{
 		[JsonProperty("id")]
