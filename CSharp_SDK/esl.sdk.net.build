@@ -49,21 +49,4 @@
         </zip>
     </target>
 
-    <target name="doc" decription="html files">
-        <ndoc>
-            <assemblies basedir="${build.dir}">
-                <include name="/*.dll" />
-            </assemblies>
-            <summaries basedir="${build.dir}">
-                <include name="$/{source.dir}/**/*.cs" />
-            </summaries>
-            <documenters>
-                <documenter name="MSDN">
-                    <property name="OutputDirectory" value="doc" />
-                    <property name="HtmlHelpName" value="NAnt" />
-                    <property name="Title" value="An NDoc Documented Class Library" />
-                 </documenter>
-            </documenters>
-        </ndoc>
-    </target>
 </project>
