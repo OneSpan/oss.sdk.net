@@ -17,7 +17,7 @@
         </delete>
     </target>
 
-    <target name="build" description="Compiles the source code">
+    <target name="build" description="Compiles the source code and create dll and xml file in bin folder">
        <mkdir dir="${build.dir}/" />
        <csc target="library" output="${build.dir}/${ESL-SDK}-${ESL-version}.dll" doc="${build.dir}/${ESL-SDK}-${ESL-version}.xml">
             <sources>
@@ -41,6 +41,7 @@
             </fileset>
             <fileset basedir="${build.dir}">
                 <include name="/*.dll" />
+                <include name="/*.xml" />
             </fileset>
             <fileset>
                 <include name="${reference.dir}/*" />
@@ -48,4 +49,21 @@
         </zip>
     </target>
 
+    <target name="doc" decription="html files">
+        <ndoc>
+            <assemblies basedir="${build.dir}">
+                <include name="/*.dll" />
+            </assemblies>
+            <summaries basedir="${build.dir}">
+                <include name="$/{source.dir}/**/*.cs" />
+            </summaries>
+            <documenters>
+                <documenter name="MSDN">
+                    <property name="OutputDirectory" value="doc" />
+                    <property name="HtmlHelpName" value="NAnt" />
+                    <property name="Title" value="An NDoc Documented Class Library" />
+                 </documenter>
+            </documenters>
+        </ndoc>
+    </target>
 </project>
