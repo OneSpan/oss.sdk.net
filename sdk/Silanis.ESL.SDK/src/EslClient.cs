@@ -1,4 +1,5 @@
 using System;
+using Silanis.ESL.SDK.Internal;
 
 namespace Silanis.ESL.SDK
 {
@@ -20,16 +21,33 @@ namespace Silanis.ESL.SDK
         /// EslClient constructor.
         /// Initiates service classes that can be used by the client.
         /// </summary>
-        /// <param name="apiToken">The client's api token.</param>
+        /// <param name="apiKey">The client's api key.</param>
         /// <param name="baseUrl">The staging or production url.</param>
-		public EslClient (string apiToken, string baseUrl)
+		public EslClient (string apiKey, string baseUrl)
 		{
-			this.apiToken = apiToken;
-			this.baseUrl = baseUrl;
-			packageService = new PackageService (apiToken, baseUrl);
-			sessionService = new SessionService (apiToken, baseUrl);
-			fieldSummaryService = new FieldSummaryService (apiToken, baseUrl);
-			auditService = new AuditService (apiToken, baseUrl);
+			Asserts.NotEmptyOrNull (apiKey, "apiKey");
+			Asserts.NotEmptyOrNull (baseUrl, "baseUrl");
+			this.apiToken = apiKey;
+			this.baseUrl = AppendServicePath (baseUrl);
+			packageService = new PackageService (apiKey, this.baseUrl);
+			sessionService = new SessionService (apiKey, this.baseUrl);
+			fieldSummaryService = new FieldSummaryService (apiKey, this.baseUrl);
+			auditService = new AuditService (apiKey, this.baseUrl);
+		}
+
+		private String AppendServicePath(string baseUrl)
+		{
+			if (baseUrl.EndsWith ("/")) 
+			{
+				baseUrl = baseUrl.Remove (baseUrl.Length - 1);
+			}
+
+			if (!baseUrl.EndsWith ("/aws/rest/services")) 
+			{
+				baseUrl += "/aws/rest/services";
+			}
+
+			return baseUrl;
 		}
         
         /// <summary>

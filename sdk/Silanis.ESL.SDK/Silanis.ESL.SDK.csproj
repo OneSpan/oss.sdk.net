@@ -146,6 +146,7 @@
     <Compile Include="src\Internal\MimeTypeUtil.cs" />
     <Compile Include="src\Internal\UrlTemplate.cs" />
     <Compile Include="src\Internal\RoleList.cs" />
+    <Compile Include="src\Internal\Asserts.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSHARP.Targets" />
   <ProjectExtensions>

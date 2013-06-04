@@ -7,7 +7,7 @@ namespace SDK.Examples
 	class CreatePackageOldStyle
 	{
 		public static string apiToken = "NzRtVWtJT3dkUVhGOnNlY3JldA==";
-		public static string baseUrl = "http://localhost:8080/aws/rest/services";
+		public static string baseUrl = "http://localhost:8080";
 
 		public static void Main (string[] args)
 		{
