@@ -1,0 +1,157 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{0A9B8521-9624-460B-813E-079056B24B65}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <NoStandardLibraries>false</NoStandardLibraries>
+    <AssemblyName>ClassLibrary</AssemblyName>
+    <TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <ProductVersion>12.0.0</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <RootNamespace>Silanis.ESL.SDK</RootNamespace>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\References\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Xml.Linq" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="src\Audit.cs" />
+    <Compile Include="src\FieldSummary.cs" />
+    <Compile Include="src\AuditService.cs" />
+    <Compile Include="src\EslClient.cs" />
+    <Compile Include="src\EslException.cs" />
+    <Compile Include="src\FieldSummaryService.cs" />
+    <Compile Include="src\PackageId.cs" />
+    <Compile Include="src\PackageService.cs" />
+    <Compile Include="src\SessionService.cs" />
+    <Compile Include="src\SessionToken.cs" />
+    <Compile Include="src\Models\Account.cs" />
+    <Compile Include="src\Models\AccountProviders.cs" />
+    <Compile Include="src\Models\Address.cs" />
+    <Compile Include="src\Models\Approval.cs" />
+    <Compile Include="src\Models\Auth.cs" />
+    <Compile Include="src\Models\AuthChallenge.cs" />
+    <Compile Include="src\Models\AuthScheme.cs" />
+    <Compile Include="src\Models\BaseMessage.cs" />
+    <Compile Include="src\Models\BasePackage.cs" />
+    <Compile Include="src\Models\BasePackageType.cs" />
+    <Compile Include="src\Models\BaseTemplate.cs" />
+    <Compile Include="src\Models\Bill.cs" />
+    <Compile Include="src\Models\Box.cs" />
+    <Compile Include="src\Models\BrandingBarOptions.cs" />
+    <Compile Include="src\Models\CcExpiration.cs" />
+    <Compile Include="src\Models\CeremonyEventComplete.cs" />
+    <Compile Include="src\Models\CeremonyEvents.cs" />
+    <Compile Include="src\Models\CeremonySettings.cs" />
+    <Compile Include="src\Models\Company.cs" />
+    <Compile Include="src\Models\CompletionReport.cs" />
+    <Compile Include="src\Models\Credentials.cs" />
+    <Compile Include="src\Models\CreditCard.cs" />
+    <Compile Include="src\Models\Currency.cs" />
+    <Compile Include="src\Models\Cycle.cs" />
+    <Compile Include="src\Models\CycleCount.cs" />
+    <Compile Include="src\Models\Delivery.cs" />
+    <Compile Include="src\Models\Document.cs" />
+    <Compile Include="src\Models\DocumentsCompletionReport.cs" />
+    <Compile Include="src\Models\DocumentToolbarOptions.cs" />
+    <Compile Include="src\Models\Entity.cs" />
+    <Compile Include="src\Models\Error.cs" />
+    <Compile Include="src\Models\External.cs" />
+    <Compile Include="src\Models\Field.cs" />
+    <Compile Include="src\Models\FieldSubtype.cs" />
+    <Compile Include="src\Models\FieldType.cs" />
+    <Compile Include="src\Models\FieldValidation.cs" />
+    <Compile Include="src\Models\FooterOptions.cs" />
+    <Compile Include="src\Models\GlobalActionsOptions.cs" />
+    <Compile Include="src\Models\GuestAuth.cs" />
+    <Compile Include="src\Models\HeaderOptions.cs" />
+    <Compile Include="src\Models\Image.cs" />
+    <Compile Include="src\Models\Layout.cs" />
+    <Compile Include="src\Models\LayoutOptions.cs" />
+    <Compile Include="src\Models\LayoutStyle.cs" />
+    <Compile Include="src\Models\License.cs" />
+    <Compile Include="src\Models\LicenseStatus.cs" />
+    <Compile Include="src\Models\Link.cs" />
+    <Compile Include="src\Models\Message.cs" />
+    <Compile Include="src\Models\MessageStatus.cs" />
+    <Compile Include="src\Models\Package.cs" />
+    <Compile Include="src\Models\PackageArtifactsLimits.cs" />
+    <Compile Include="src\Models\PackageCompletionReport.cs" />
+    <Compile Include="src\Models\PackageSettings.cs" />
+    <Compile Include="src\Models\PackageStatus.cs" />
+    <Compile Include="src\Models\Page.cs" />
+    <Compile Include="src\Models\Plan.cs" />
+    <Compile Include="src\Models\Price.cs" />
+    <Compile Include="src\Models\Provider.cs" />
+    <Compile Include="src\Models\Quota.cs" />
+    <Compile Include="src\Models\Report.cs" />
+    <Compile Include="src\Models\Result.cs" />
+    <Compile Include="src\Models\Role.cs" />
+    <Compile Include="src\Models\RoleType.cs" />
+    <Compile Include="src\Models\Scope.cs" />
+    <Compile Include="src\Models\Sender.cs" />
+    <Compile Include="src\Models\SenderCompletionReport.cs" />
+    <Compile Include="src\Models\SenderStatus.cs" />
+    <Compile Include="src\Models\SenderType.cs" />
+    <Compile Include="src\Models\SenderUsageReport.cs" />
+    <Compile Include="src\Models\Session.cs" />
+    <Compile Include="src\Models\Settings.cs" />
+    <Compile Include="src\Models\SignatureStyle.cs" />
+    <Compile Include="src\Models\SignedDocumentDelivery.cs" />
+    <Compile Include="src\Models\Signer.cs" />
+    <Compile Include="src\Models\SignersCompletionReport.cs" />
+    <Compile Include="src\Models\Signup.cs" />
+    <Compile Include="src\Models\Style.cs" />
+    <Compile Include="src\Models\Target.cs" />
+    <Compile Include="src\Models\Template.cs" />
+    <Compile Include="src\Models\TextualSignatureStyle.cs" />
+    <Compile Include="src\Models\TitleBarOptions.cs" />
+    <Compile Include="src\Models\Transaction.cs" />
+    <Compile Include="src\Models\UsageReport.cs" />
+    <Compile Include="src\Models\User.cs" />
+    <Compile Include="src\Models\ViewSettings.cs" />
+    <Compile Include="src\Models\Visibility.cs" />
+    <Compile Include="src\Internal\Converter.cs" />
+    <Compile Include="src\Internal\HttpMethods.cs" />
+    <Compile Include="src\Internal\MimeTypeUtil.cs" />
+    <Compile Include="src\Internal\UrlTemplate.cs" />
+    <Compile Include="src\Internal\RoleList.cs" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSHARP.Targets" />
+  <ProjectExtensions>
+    <VisualStudio AllowExistingFolder="true" />
+  </ProjectExtensions>
+  <ItemGroup>
+    <Folder Include="src\" />
+  </ItemGroup>
+</Project>
