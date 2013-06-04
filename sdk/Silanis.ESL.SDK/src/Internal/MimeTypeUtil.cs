@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 
-namespace Silanis.ESL.SDK
+namespace Silanis.ESL.SDK.Internal
 {
 	/// <summary>
 	/// For internal use.

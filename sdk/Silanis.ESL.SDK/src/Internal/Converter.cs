@@ -1,6 +1,6 @@
 using System;
 
-namespace Silanis.ESL.SDK
+namespace Silanis.ESL.SDK.Internal
 {
 	/// <summary>
 	/// A helper class to convert from string to byte array and vice verse.

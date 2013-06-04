@@ -1,6 +1,6 @@
 using System;
 
-namespace Silanis.ESL.SDK
+namespace Silanis.ESL.SDK.Internal
 {
 	/// <summary>
 	/// For internal use.
