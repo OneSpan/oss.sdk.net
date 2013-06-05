@@ -49,16 +49,15 @@ namespace Silanis.ESL.SDK
 
 			return baseUrl;
 		}
-        
-        /// <summary>
-        /// ApiToken property
-        /// </summary>
-		public string ApiToken {
-			get {
-				return this.apiToken;
-			}
-		}
 
+		public PackageId CreatePackage (DocumentPackage package)
+		{
+			Package packageToCreate = package.ToAPIPackage ();
+			PackageId id = packageService.CreatePackage (packageToCreate);
+
+			return id;
+		}
+        
         /// <summary>
         /// BaseUrl property
         /// </summary>

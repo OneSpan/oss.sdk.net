@@ -147,6 +147,8 @@
     <Compile Include="src\Internal\UrlTemplate.cs" />
     <Compile Include="src\Internal\RoleList.cs" />
     <Compile Include="src\Internal\Asserts.cs" />
+    <Compile Include="src\DocumentPackage.cs" />
+    <Compile Include="src\Builder\PackageBuilder.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSHARP.Targets" />
   <ProjectExtensions>
@@ -154,5 +156,6 @@
   </ProjectExtensions>
   <ItemGroup>
     <Folder Include="src\" />
+    <Folder Include="src\Builder\" />
   </ItemGroup>
 </Project>
