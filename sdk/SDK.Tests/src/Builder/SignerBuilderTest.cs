@@ -55,5 +55,56 @@ namespace SDK.Tests
 			Assert.AreEqual ("Managing Director", signer.Title);
 			Assert.AreEqual ("Acme Inc", signer.Company);
 		}
+
+		[Test]
+		public void AuthenticationDefaultsToEmail()
+		{
+			Signer signer = SignerBuilder.NewSignerWithEmail ("billy@bob.com")
+				.WithFirstName ("Billy")
+				.WithLastName ("Bob")
+				.Build ();
+
+			Assert.AreEqual (AuthenticationMethod.EMAIL, signer.AuthenticationMethod);
+		}
+
+		[Test]
+		public void ProvidingQuestionsAndAnswersSetsAuthenticationMethodToChallenge()
+		{
+			Signer signer = SignerBuilder.NewSignerWithEmail ("billy@bob.com")
+				.WithFirstName ("Billy")
+				.WithLastName ("Bob")
+				.ChallengedWithQuestions (ChallengeBuilder.FirstQuestion("What's your favorite sport?")
+					                          .Answer("golf"))
+				.Build ();
+
+			Assert.AreEqual (AuthenticationMethod.CHALLENGE, signer.AuthenticationMethod);
+		}
+
+		[Test]
+		public void SavesProvidesQuestionsAndAnswers()
+		{
+			Signer signer = SignerBuilder.NewSignerWithEmail ("billy@bob.com")
+				.WithFirstName ("Billy")
+					.WithLastName ("Bob")
+					.ChallengedWithQuestions (ChallengeBuilder.FirstQuestion("What's your favorite sport?")
+					                          .Answer("golf")
+					                          .SecondQuestion("Do you have a pet?")
+					                          .Answer("yes"))
+					.Build ();
+
+			Assert.AreEqual (signer.ChallengeQuestion[0], new Challenge("What's your favorite sport?", "golf"));
+			Assert.AreEqual (signer.ChallengeQuestion[1], new Challenge("Do you have a pet?", "yes"));
+		}
+
+		[Test]
+		[ExpectedException(typeof(EslException))]
+		public void CannotProvideQuestionWithoutAnswer()
+		{
+			Signer signer = SignerBuilder.NewSignerWithEmail ("billy@bob.com")
+				.WithFirstName ("Billy")
+					.WithLastName ("Bob")
+					.ChallengedWithQuestions (ChallengeBuilder.FirstQuestion("What's your favorite sport?"))
+					.Build ();
+		}
 	}
-}
+} 	

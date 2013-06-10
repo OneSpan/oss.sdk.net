@@ -24,7 +24,8 @@ namespace SDK.Examples
 					            .WithFirstName("John")
 					            .WithLastName("Smith")
 					            .WithTitle ("Super Duper")
-					            .WithCompany ("Acme Inc"))
+					            .WithCompany ("Acme Inc")
+					            .ChallengedWithQuestions(ChallengeBuilder.FirstQuestion ("What's your favorite sport?").Answer ("golf")))
 					.Build ();
 
 			PackageId id = client.CreatePackage (package);

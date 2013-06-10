@@ -10,6 +10,7 @@ namespace Silanis.ESL.SDK.Builder
 		private string lastName;
 		private string title;
 		private string company;
+		private AuthenticationBuilder authenticationBuilder = new AuthenticationBuilder();
 
 		private SignerBuilder(string signerEmail)
 		{
@@ -46,12 +47,19 @@ namespace Silanis.ESL.SDK.Builder
 			return this;
 		}
 
+		public SignerBuilder ChallengedWithQuestions (ChallengeBuilder challengeBuilder)
+		{
+			this.authenticationBuilder = challengeBuilder;
+			return this;
+		}
+
 		public Signer Build ()
 		{
 			Asserts.NotEmptyOrNull (firstName, "firstName");
 			Asserts.NotEmptyOrNull (lastName, "lastName");
 
-			Signer signer = new Signer (signerEmail, firstName, lastName);
+			Authentication authentication = authenticationBuilder.Build ();
+			Signer signer = new Signer (signerEmail, firstName, lastName, authentication);
 
 			signer.Title = title;
 			signer.Company = company;

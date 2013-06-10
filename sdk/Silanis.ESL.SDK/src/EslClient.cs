@@ -10,8 +10,6 @@ namespace Silanis.ESL.SDK
     /// </summary>
 	public class EslClient
 	{
-
-		private string apiToken;
 		private string baseUrl;
 		private PackageService packageService;
 		private SessionService sessionService;
@@ -28,7 +26,6 @@ namespace Silanis.ESL.SDK
 		{
 			Asserts.NotEmptyOrNull (apiKey, "apiKey");
 			Asserts.NotEmptyOrNull (baseUrl, "baseUrl");
-			this.apiToken = apiKey;
 			this.baseUrl = AppendServicePath (baseUrl);
 			packageService = new PackageService (apiKey, this.baseUrl);
 			sessionService = new SessionService (apiKey, this.baseUrl);

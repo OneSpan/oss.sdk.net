@@ -151,6 +151,11 @@
     <Compile Include="src\Models\ViewSettings.cs" />
     <Compile Include="src\Models\Visibility.cs" />
     <Compile Include="src\Signer.cs" />
+    <Compile Include="src\AuthenticationMethod.cs" />
+    <Compile Include="src\Authentication.cs" />
+    <Compile Include="src\Builder\AuthenticationBuilder.cs" />
+    <Compile Include="src\Builder\ChallengeBuilder.cs" />
+    <Compile Include="src\Challenge.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSHARP.Targets" />
   <ProjectExtensions>

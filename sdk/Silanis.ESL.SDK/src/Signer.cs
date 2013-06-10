@@ -1,14 +1,18 @@
 using System;
+using System.Collections.Generic;
 
 namespace Silanis.ESL.SDK
 {
 	public class Signer
 	{
-		public Signer (string signerEmail, string firstName, string lastName)
+		private readonly Authentication authentication;
+
+		public Signer (string signerEmail, string firstName, string lastName, Authentication authentication)
 		{
 			Email = signerEmail;
 			FirstName = firstName;
 			LastName = lastName;
+			this.authentication = authentication;
 		}
 
 		public string Email {
@@ -36,6 +40,20 @@ namespace Silanis.ESL.SDK
 			set;
 		}
 
+		public AuthenticationMethod AuthenticationMethod {
+			get
+			{
+				return authentication.Method;
+			}
+		}
+
+		public IList<Challenge> ChallengeQuestion {
+			get
+			{
+				return authentication.Challenges;
+			}
+		}
+
 		internal Silanis.ESL.API.Signer ToAPISigner ()
 		{
 			Silanis.ESL.API.Signer signer = new Silanis.ESL.API.Signer ();
@@ -45,6 +63,7 @@ namespace Silanis.ESL.SDK
 			signer.LastName = LastName;
 			signer.Title = Title;
 			signer.Company = Company;
+			signer.Auth = authentication.ToAPIAuthentication ();
 			return signer;
 		}
 	}
