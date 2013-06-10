@@ -1,4 +1,5 @@
 using System;
+using System.IO;
 using System.Collections.Generic;
 using Silanis.ESL.SDK.Builder.Internal;
 
@@ -24,6 +25,13 @@ namespace Silanis.ESL.SDK.Builder
 		{
 			this.fileName = fileName;
 			documentSource = new FileDocumentSource (fileName);
+			return this;
+		}
+
+		public DocumentBuilder FromStream (Stream contentStream, DocumentType type)
+		{
+			documentSource = new StreamDocumentSource (contentStream);
+			fileName = type.NormalizeName (name);
 			return this;
 		}
 

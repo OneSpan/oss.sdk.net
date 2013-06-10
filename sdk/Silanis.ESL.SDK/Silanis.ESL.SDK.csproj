@@ -161,6 +161,10 @@
     <Compile Include="src\Document.cs" />
     <Compile Include="src\Builder\Internal\FileDocumentSource.cs" />
     <Compile Include="src\Builder\DocumentSource.cs" />
+    <Compile Include="src\DocumentType.cs" />
+    <Compile Include="src\Builder\Internal\StreamDocumentSource.cs" />
+    <Compile Include="src\Internal\Streams.cs" />
+    <Compile Include="src\DocumentTypeUtility.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSHARP.Targets" />
   <ProjectExtensions>
