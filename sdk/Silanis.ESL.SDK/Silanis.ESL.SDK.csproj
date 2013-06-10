@@ -157,6 +157,10 @@
     <Compile Include="src\Builder\ChallengeBuilder.cs" />
     <Compile Include="src\Challenge.cs" />
     <Compile Include="src\Builder\SMSAuthenticationBuilder.cs" />
+    <Compile Include="src\Builder\DocumentBuilder.cs" />
+    <Compile Include="src\Document.cs" />
+    <Compile Include="src\Builder\Internal\FileDocumentSource.cs" />
+    <Compile Include="src\Builder\DocumentSource.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSHARP.Targets" />
   <ProjectExtensions>
@@ -166,5 +170,6 @@
     <Folder Include="src\" />
     <Folder Include="src\Builder\" />
     <Folder Include="src\Models\" />
+    <Folder Include="src\Builder\Internal\" />
   </ItemGroup>
 </Project>

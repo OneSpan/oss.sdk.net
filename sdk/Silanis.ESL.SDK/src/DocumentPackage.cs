@@ -7,11 +7,12 @@ namespace Silanis.ESL.SDK
 	public class DocumentPackage
 	{
 
-		public DocumentPackage (string packageName, bool autocomplete, IDictionary<string, Signer> signers)
+		public DocumentPackage (string packageName, bool autocomplete, IDictionary<string, Signer> signers, IDictionary<string, Document> documents)
 		{
 			Name = packageName;
 			Autocomplete = autocomplete;
 			Signers = signers;
+			Documents = documents;
 		}
 
 		public string Name {
@@ -25,6 +26,11 @@ namespace Silanis.ESL.SDK
 		}
 
 		public IDictionary<string, Signer> Signers {
+			get;
+			private set;
+		}
+
+		public IDictionary<string, Document> Documents {
 			get;
 			private set;
 		}

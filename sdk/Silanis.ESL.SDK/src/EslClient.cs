@@ -53,6 +53,11 @@ namespace Silanis.ESL.SDK
 			Package packageToCreate = package.ToAPIPackage ();
 			PackageId id = packageService.CreatePackage (packageToCreate);
 
+			foreach (Document document in package.Documents.Values)
+			{
+				packageService.UploadDocument (id, document.FileName, document.Content, document.ToAPIDocument (packageToCreate));
+			}
+
 			return id;
 		}
         

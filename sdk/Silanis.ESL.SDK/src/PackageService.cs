@@ -203,7 +203,7 @@ namespace Silanis.ESL.SDK
 		/// <returns>The document to download.</returns>
 		/// <param name="packageId">The package id.</param>
 		/// <param name="document">The document to download.</param>
-		public byte[] DownloadDocument (PackageId packageId, Document document)
+		public byte[] DownloadDocument (PackageId packageId, Silanis.ESL.API.Document document)
 		{
 			string path = template.UrlFor (UrlTemplate.PDF_PATH)
                 .Replace ("{packageId}", packageId.Id)
@@ -260,7 +260,7 @@ namespace Silanis.ESL.SDK
 		/// <param name="fileName">The name of the document.</param>
 		/// <param name="fileBytes">The file to upload in bytes.</param>
 		/// <param name="document">The document object that has field settings.</param>
-		public void UploadDocument (PackageId packageId, string fileName, byte[] fileBytes, Document document)
+		public void UploadDocument (PackageId packageId, string fileName, byte[] fileBytes, Silanis.ESL.API.Document document)
 		{
 			string path = template.UrlFor (UrlTemplate.DOCUMENT_PATH)
 				.Replace ("{packageId}", packageId.Id)

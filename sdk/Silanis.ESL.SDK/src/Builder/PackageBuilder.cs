@@ -12,6 +12,7 @@ namespace Silanis.ESL.SDK.Builder
 		private string emailMessage = String.Empty;
 		private bool inPerson;
 		private IDictionary<string, Signer> signers = new Dictionary<string, Signer> ();
+		private IDictionary<string, Document> documents = new Dictionary<string, Document>();
 
 		private PackageBuilder(string packageName)
 		{
@@ -58,9 +59,20 @@ namespace Silanis.ESL.SDK.Builder
 			return this;
 		}
 
+		public PackageBuilder WithDocument (DocumentBuilder builder)
+		{
+			return WithDocument (builder.Build());
+		}
+
+		public PackageBuilder WithDocument (Document document)
+		{
+			documents [document.Name] = document;
+			return this;
+		}
+
 		public DocumentPackage Build ()
 		{
-			DocumentPackage package = new DocumentPackage (packageName, autocomplete, signers);
+			DocumentPackage package = new DocumentPackage (packageName, autocomplete, signers, documents);
 
 			package.Description = description;
 			package.ExpiryDate = expiryDate;

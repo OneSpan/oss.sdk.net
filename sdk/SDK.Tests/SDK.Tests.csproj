@@ -36,16 +36,24 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="src\EslClientTest.cs" />
     <Compile Include="src\Builder\SignerBuilderTest.cs" />
+    <Compile Include="src\Builder\DocumentBuilderTest.cs" />
+    <Compile Include="src\Builder\Internal\FileDocumentSourceTest.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
     <Folder Include="src\" />
     <Folder Include="src\Builder\" />
+    <Folder Include="src\Builder\Internal\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Silanis.ESL.SDK\Silanis.ESL.SDK.csproj">
       <Project>{0A9B8521-9624-460B-813E-079056B24B65}</Project>
       <Name>Silanis.ESL.SDK</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="src\document.pdf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
 </Project>

@@ -52,7 +52,7 @@ namespace SDK.Examples
 			approval.AddField (signature);
 			approval.Role = "signer1";
 
-			Document document = new Document ();
+			Silanis.ESL.API.Document document = new Silanis.ESL.API.Document ();
 			document.AddApproval(approval);
 			document.Name = "Document to sign";
 
