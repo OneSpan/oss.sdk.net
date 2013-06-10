@@ -19,6 +19,11 @@ namespace Silanis.ESL.SDK
 			this.challenges.AddRange (challenges);
 		}
 
+		public Authentication(string phoneNumber) : this(AuthenticationMethod.SMS)
+		{
+			PhoneNumber = phoneNumber;
+		}
+
 		public AuthenticationMethod Method
 		{
 			get
@@ -35,6 +40,11 @@ namespace Silanis.ESL.SDK
 			}
 		}
 
+		public string PhoneNumber {
+			get;
+			private set;
+		}
+
 		internal Silanis.ESL.API.Auth ToAPIAuthentication ()
 		{
 			Auth auth = new Auth ();
@@ -48,6 +58,14 @@ namespace Silanis.ESL.SDK
 				authChallenge.Question = challenge.Question;
 				authChallenge.Answer = challenge.Answer;
 				auth.AddChallenge (authChallenge);
+			}
+
+			if (!String.IsNullOrEmpty (PhoneNumber))
+			{
+				AuthChallenge challenge = new AuthChallenge ();
+
+				challenge.Question = PhoneNumber;
+				auth.AddChallenge (challenge);
 			}
 
 			return auth;

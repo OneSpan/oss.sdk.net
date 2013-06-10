@@ -100,11 +100,47 @@ namespace SDK.Tests
 		[ExpectedException(typeof(EslException))]
 		public void CannotProvideQuestionWithoutAnswer()
 		{
+			SignerBuilder.NewSignerWithEmail ("billy@bob.com")
+				.WithFirstName ("Billy")
+				.WithLastName ("Bob")
+				.ChallengedWithQuestions (ChallengeBuilder.FirstQuestion("What's your favorite sport?"))
+				.Build ();
+		}
+
+		[Test]
+		public void ProvidingSignerCellPhoneNumberSetsUpSMSAuthentication() 
+		{
+			Signer signer = SignerBuilder.NewSignerWithEmail ("billy@bob.com")
+				.WithFirstName ("Billy")
+				.WithLastName ("Bob")
+				.WithSMSSentTo ("1112223333")
+				.Build ();
+
+			Assert.AreEqual (AuthenticationMethod.SMS, signer.AuthenticationMethod);
+			Assert.AreEqual ("1112223333", signer.PhoneNumber);
+		}
+
+		[Test]
+		[ExpectedException(typeof(EslException))]
+		public void EmptyPhoneNumberNotAllowed()
+		{
+			SignerBuilder.NewSignerWithEmail ("billy@bob.com")
+				.WithFirstName ("Billy")
+					.WithLastName ("Bob")
+					.WithSMSSentTo (" ")
+					.Build ();
+		}
+
+		[Test]
+		public void CanConfigureSignedDocumentDelivery()
+		{
 			Signer signer = SignerBuilder.NewSignerWithEmail ("billy@bob.com")
 				.WithFirstName ("Billy")
 					.WithLastName ("Bob")
-					.ChallengedWithQuestions (ChallengeBuilder.FirstQuestion("What's your favorite sport?"))
+					.DeliverSignedDocumentsByEmail()
 					.Build ();
+
+			Assert.IsTrue (signer.DeliverSignedDocumentsByEmail);
 		}
 	}
 } 	

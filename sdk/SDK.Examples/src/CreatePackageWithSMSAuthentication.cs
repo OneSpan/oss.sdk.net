@@ -4,7 +4,7 @@ using Silanis.ESL.SDK.Builder;
 
 namespace SDK.Examples
 {
-	public class CreatePackageWithBuilder
+	public class CreatePackageWithSMSAuthentication
 	{
 		public static string apiToken = "Q2xubnp5Y2dIQ3lROnNlY3JldA==";
 		public static string baseUrl = "http://localhost:8080";
@@ -17,14 +17,15 @@ namespace SDK.Examples
 			//Signer firstname, lastname, email, title, company
 			DocumentPackage package = PackageBuilder.NewPackageNamed ("C# Package " + DateTime.Now)
 					.DescribedAs ("This is a new package")
+					.ExpiresOn(DateTime.Now.AddDays(5))
+					.WithEmailMessage("This message should appear in email invitation to signers")
+					.InPerson(true)
 					.WithSigner(SignerBuilder.NewSignerWithEmail("etienne_hardy@silanis.com")
 					            .WithFirstName("John")
 					            .WithLastName("Smith")
-					            .ChallengedWithQuestions(ChallengeBuilder
-					                         .FirstQuestion ("What's your favorite sport?")
-					                         .Answer ("golf")
-					                         .SecondQuestion ("What's your dog's name")
-					                         .Answer ("Rex")))
+					            .WithTitle ("Super Duper")
+					            .WithCompany ("Acme Inc")
+					            .WithSMSSentTo("3334445555"))
 					.Build ();
 
 			PackageId id = client.CreatePackage (package);

@@ -156,6 +156,7 @@
     <Compile Include="src\Builder\AuthenticationBuilder.cs" />
     <Compile Include="src\Builder\ChallengeBuilder.cs" />
     <Compile Include="src\Challenge.cs" />
+    <Compile Include="src\Builder\SMSAuthenticationBuilder.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSHARP.Targets" />
   <ProjectExtensions>

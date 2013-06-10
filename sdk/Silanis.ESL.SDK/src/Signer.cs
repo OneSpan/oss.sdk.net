@@ -54,6 +54,18 @@ namespace Silanis.ESL.SDK
 			}
 		}
 
+		public string PhoneNumber {
+			get
+			{
+				return authentication.PhoneNumber;
+			}
+		}
+
+		public bool DeliverSignedDocumentsByEmail {
+			get;
+			set;
+		}
+
 		internal Silanis.ESL.API.Signer ToAPISigner ()
 		{
 			Silanis.ESL.API.Signer signer = new Silanis.ESL.API.Signer ();
