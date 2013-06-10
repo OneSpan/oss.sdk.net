@@ -2,10 +2,9 @@
 using System;
 using System.Collections.Generic;
 using Newtonsoft.Json;
-namespace Silanis.ESL.SDK
+namespace Silanis.ESL.API
 {
-	
-	
+		
 	public class Signer
 	{
 		

@@ -29,7 +29,7 @@ namespace Silanis.ESL.SDK
 		/// <returns>The session token for signer.</returns>
 		/// <param name="packageId">The package id.</param>
 		/// <param name="signer">The signer to create a session token for.</param>
-		public SessionToken CreateSessionToken (PackageId packageId, Signer signer)
+		public SessionToken CreateSessionToken (PackageId packageId, Silanis.ESL.API.Signer signer)
 		{
 			string path = template.UrlFor (UrlTemplate.SESSION_PATH)
                 .Replace ("{packageId}", packageId.Id)

@@ -1,5 +1,5 @@
 //
-namespace Silanis.ESL.SDK
+namespace Silanis.ESL.API
 {
 	public enum PackageStatus
 	{

@@ -55,6 +55,15 @@
     <Compile Include="src\PackageService.cs" />
     <Compile Include="src\SessionService.cs" />
     <Compile Include="src\SessionToken.cs" />
+    <Compile Include="src\Internal\Converter.cs" />
+    <Compile Include="src\Internal\HttpMethods.cs" />
+    <Compile Include="src\Internal\MimeTypeUtil.cs" />
+    <Compile Include="src\Internal\UrlTemplate.cs" />
+    <Compile Include="src\Internal\RoleList.cs" />
+    <Compile Include="src\Internal\Asserts.cs" />
+    <Compile Include="src\DocumentPackage.cs" />
+    <Compile Include="src\Builder\PackageBuilder.cs" />
+    <Compile Include="src\Builder\SignerBuilder.cs" />
     <Compile Include="src\Models\Account.cs" />
     <Compile Include="src\Models\AccountProviders.cs" />
     <Compile Include="src\Models\Address.cs" />
@@ -141,14 +150,7 @@
     <Compile Include="src\Models\User.cs" />
     <Compile Include="src\Models\ViewSettings.cs" />
     <Compile Include="src\Models\Visibility.cs" />
-    <Compile Include="src\Internal\Converter.cs" />
-    <Compile Include="src\Internal\HttpMethods.cs" />
-    <Compile Include="src\Internal\MimeTypeUtil.cs" />
-    <Compile Include="src\Internal\UrlTemplate.cs" />
-    <Compile Include="src\Internal\RoleList.cs" />
-    <Compile Include="src\Internal\Asserts.cs" />
-    <Compile Include="src\DocumentPackage.cs" />
-    <Compile Include="src\Builder\PackageBuilder.cs" />
+    <Compile Include="src\Signer.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSHARP.Targets" />
   <ProjectExtensions>
@@ -157,5 +159,6 @@
   <ItemGroup>
     <Folder Include="src\" />
     <Folder Include="src\Builder\" />
+    <Folder Include="src\Models\" />
   </ItemGroup>
 </Project>

@@ -5,6 +5,7 @@ using System.Text;
 using Newtonsoft.Json;
 using System.Collections.Generic;
 using Silanis.ESL.SDK.Internal;
+using Silanis.ESL.API;
 
 namespace Silanis.ESL.SDK
 {

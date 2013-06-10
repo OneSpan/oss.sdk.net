@@ -35,10 +35,12 @@
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="src\EslClientTest.cs" />
+    <Compile Include="src\Builder\SignerBuilderTest.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
     <Folder Include="src\" />
+    <Folder Include="src\Builder\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Silanis.ESL.SDK\Silanis.ESL.SDK.csproj">

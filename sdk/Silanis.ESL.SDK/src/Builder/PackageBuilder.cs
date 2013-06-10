@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 
 namespace Silanis.ESL.SDK.Builder
 {
@@ -10,6 +11,7 @@ namespace Silanis.ESL.SDK.Builder
 		private Nullable<DateTime> expiryDate;
 		private string emailMessage = String.Empty;
 		private bool inPerson;
+		private IDictionary<string, Signer> signers = new Dictionary<string, Signer> ();
 
 		private PackageBuilder(string packageName)
 		{
@@ -45,9 +47,20 @@ namespace Silanis.ESL.SDK.Builder
 			return this;
 		}
 
+		public PackageBuilder WithSigner (SignerBuilder builder)
+		{
+			return WithSigner (builder.Build());
+		}
+
+		public PackageBuilder WithSigner(Signer signer)
+		{
+			signers [signer.Email] = signer;
+			return this;
+		}
+
 		public DocumentPackage Build ()
 		{
-			DocumentPackage package = new DocumentPackage (packageName, autocomplete);
+			DocumentPackage package = new DocumentPackage (packageName, autocomplete, signers);
 
 			package.Description = description;
 			package.ExpiryDate = expiryDate;

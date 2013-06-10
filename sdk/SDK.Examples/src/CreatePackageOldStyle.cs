@@ -1,6 +1,7 @@
 using System;
 using System.IO;
 using Silanis.ESL.SDK;
+using Silanis.ESL.API;
 
 namespace SDK.Examples
 {
@@ -21,7 +22,7 @@ namespace SDK.Examples
 			package.Name = "Testing package from C#";
 			package.Autocomplete = true;
 
-			Signer signer = new Signer ();
+			Silanis.ESL.API.Signer signer = new Silanis.ESL.API.Signer ();
 
 			signer.Email = "etienne_hardy@silanis.com";
 			signer.FirstName = "Etienne";
