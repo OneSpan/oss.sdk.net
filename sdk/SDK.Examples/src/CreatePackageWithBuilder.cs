@@ -22,12 +22,23 @@ namespace SDK.Examples
 					            .WithFirstName("John")
 					            .WithLastName("Smith"))
 					.WithDocument(DocumentBuilder.NewDocumentNamed("My Document")
-					              .FromFile(file.FullName))
+					              .FromFile(file.FullName)
+					              .WithSignature(SignatureBuilder.SignatureFor("etienne_hardy@silanis.com")
+					              		.OnPage(0)
+					               		.AtPosition(500, 100))
+					              .WithSignature (SignatureBuilder.InitialsFor("etienne_hardy@silanis.com")
+					                	.OnPage (0)
+					                	.AtPosition (500, 200))
+					              .WithSignature(SignatureBuilder.CaptureFor ("etienne_hardy@silanis.com")
+					               		.OnPage (0)
+					               		.AtPosition (500, 300)))
 					.Build ();
 
 			PackageId id = client.CreatePackage (package);
 
-			Console.WriteLine ("Package {0} was created", id.Id);
+			client.SendPackage(id);
+
+			Console.WriteLine ("Package {0} was sent", id.Id);
 		}
 	}
 }

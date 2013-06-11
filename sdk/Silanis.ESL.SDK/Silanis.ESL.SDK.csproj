@@ -165,6 +165,10 @@
     <Compile Include="src\Builder\Internal\StreamDocumentSource.cs" />
     <Compile Include="src\Internal\Streams.cs" />
     <Compile Include="src\DocumentTypeUtility.cs" />
+    <Compile Include="src\Builder\SignatureBuilder.cs" />
+    <Compile Include="src\Signature.cs" />
+    <Compile Include="src\SignatureStyle.cs" />
+    <Compile Include="src\Internal\Conversion\SignatureConverter.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSHARP.Targets" />
   <ProjectExtensions>
@@ -175,5 +179,6 @@
     <Folder Include="src\Builder\" />
     <Folder Include="src\Models\" />
     <Folder Include="src\Builder\Internal\" />
+    <Folder Include="src\Internal\Conversion\" />
   </ItemGroup>
 </Project>

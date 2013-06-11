@@ -10,6 +10,7 @@ namespace Silanis.ESL.SDK.Builder
 		private readonly string name;
 		private string fileName;
 		private DocumentSource documentSource;
+		private IList<Signature> signatures = new List<Signature>();
 
 		private DocumentBuilder(string name)
 		{
@@ -35,6 +36,17 @@ namespace Silanis.ESL.SDK.Builder
 			return this;
 		}
 
+		public DocumentBuilder WithSignature (SignatureBuilder builder)
+		{
+			return WithSignature (builder.Build ());
+		}
+
+		public DocumentBuilder WithSignature (Signature signature)
+		{
+			signatures.Add (signature);
+			return this;
+		}
+
 		public Document Build ()
 		{
 			Validate ();
@@ -44,6 +56,7 @@ namespace Silanis.ESL.SDK.Builder
 			doc.Name = name;
 			doc.FileName = fileName;
 			doc.Content = documentSource.Content ();
+			doc.AddSignatures (signatures);
 			return doc;
 		}
 

@@ -60,6 +60,11 @@ namespace Silanis.ESL.SDK
 
 			return id;
 		}
+
+		public void SendPackage (PackageId id)
+		{
+			packageService.SendPackage (id);
+		}
         
         /// <summary>
         /// BaseUrl property
