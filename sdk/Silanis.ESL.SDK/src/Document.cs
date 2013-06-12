@@ -23,6 +23,11 @@ namespace Silanis.ESL.SDK
 			set;
 		}
 
+		public int Index {
+			get;
+			set;
+		}
+
 		public void AddSignatures (IList<Signature> signatures)
 		{
 			this.signatures.AddRange (signatures);
@@ -33,6 +38,7 @@ namespace Silanis.ESL.SDK
 			Silanis.ESL.API.Document doc = new Silanis.ESL.API.Document ();
 
 			doc.Name = Name;
+			doc.Index = Index;
 
 			SignatureConverter converter = new SignatureConverter ();
 			foreach (Signature signature in signatures)
