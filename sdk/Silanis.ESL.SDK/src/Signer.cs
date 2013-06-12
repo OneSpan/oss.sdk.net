@@ -71,6 +71,11 @@ namespace Silanis.ESL.SDK
 			set;
 		}
 
+		public string Message {
+			get;
+			set;
+		}
+
 		internal Silanis.ESL.API.Signer ToAPISigner ()
 		{
 			Silanis.ESL.API.Signer signer = new Silanis.ESL.API.Signer ();
@@ -81,6 +86,7 @@ namespace Silanis.ESL.SDK
 			signer.Title = Title;
 			signer.Company = Company;
 			signer.Auth = authentication.ToAPIAuthentication ();
+
 			return signer;
 		}
 	}

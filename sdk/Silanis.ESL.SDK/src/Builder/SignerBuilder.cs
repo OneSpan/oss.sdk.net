@@ -13,6 +13,7 @@ namespace Silanis.ESL.SDK.Builder
 		private AuthenticationBuilder authenticationBuilder = new AuthenticationBuilder();
 		private bool deliverSignedDocumentsByEmail;
 		private int signingOrder;
+		private string message;
 
 		private SignerBuilder(string signerEmail)
 		{
@@ -73,6 +74,12 @@ namespace Silanis.ESL.SDK.Builder
 			return this;
 		}
 
+		public SignerBuilder WithEmailMessage (string message)
+		{
+			this.message = message;
+			return this;
+		}
+
 		public Signer Build ()
 		{
 			Asserts.NotEmptyOrNull (firstName, "firstName");
@@ -85,6 +92,7 @@ namespace Silanis.ESL.SDK.Builder
 			signer.Company = company;
 			signer.DeliverSignedDocumentsByEmail = deliverSignedDocumentsByEmail;
 			signer.SigningOrder = signingOrder;
+			signer.Message = message;
 			return signer;
 		}
 	}

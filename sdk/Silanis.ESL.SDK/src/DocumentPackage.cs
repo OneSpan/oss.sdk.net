@@ -85,6 +85,14 @@ namespace Silanis.ESL.SDK
 				role.AddSigner (signer.ToAPISigner());
 				role.Index = signer.SigningOrder;
 
+				if (!String.IsNullOrEmpty(signer.Message))
+				{
+					BaseMessage message = new BaseMessage ();
+
+					message.Content = signer.Message;
+					role.EmailMessage = message;
+				}
+
 				package.AddRole (role);
 				signerCount++;
 			}
