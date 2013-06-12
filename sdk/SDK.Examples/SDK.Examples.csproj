@@ -9,7 +9,7 @@
     <OutputType>Exe</OutputType>
     <RootNamespace>SDK.Examples</RootNamespace>
     <AssemblyName>SDK.Examples</AssemblyName>
-    <StartupObject>SDK.Examples.DocumentWorkflowExample</StartupObject>
+    <StartupObject>SDK.Examples.SignerOrderingExample</StartupObject>
     <TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -38,6 +38,7 @@
     <Compile Include="src\CreatePackageWithSMSAuthentication.cs" />
     <Compile Include="src\CreatePackageFromStream.cs" />
     <Compile Include="src\DocumentWorkflowExample.cs" />
+    <Compile Include="src\SignerOrderingExample.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

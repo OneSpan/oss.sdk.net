@@ -66,6 +66,11 @@ namespace Silanis.ESL.SDK
 			set;
 		}
 
+		public int SigningOrder {
+			get;
+			set;
+		}
+
 		internal Silanis.ESL.API.Signer ToAPISigner ()
 		{
 			Silanis.ESL.API.Signer signer = new Silanis.ESL.API.Signer ();

@@ -14,11 +14,13 @@ namespace SDK.Tests
 			Signer signer = SignerBuilder.NewSignerWithEmail("joe@email.com")
 				.WithFirstName ("Joe")
 				.WithLastName("Smith")
+				.SigningOrder (2)
 				.Build();
 
 			Assert.AreEqual ("joe@email.com", signer.Email);
 			Assert.AreEqual ("Joe", signer.FirstName);
 			Assert.AreEqual ("Smith", signer.LastName);
+			Assert.AreEqual (2, signer.SigningOrder);
 		}
 
 		[Test]

@@ -83,6 +83,7 @@ namespace Silanis.ESL.SDK
 				role.Id = "role" + signerCount;
 				role.Name = "signer" + signerCount;
 				role.AddSigner (signer.ToAPISigner());
+				role.Index = signer.SigningOrder;
 
 				package.AddRole (role);
 				signerCount++;
