@@ -9,7 +9,7 @@
     <OutputType>Exe</OutputType>
     <RootNamespace>SDK.Examples</RootNamespace>
     <AssemblyName>SDK.Examples</AssemblyName>
-    <StartupObject>SDK.Examples.SignerSpecificEmailMessageExample</StartupObject>
+    <StartupObject>SDK.Examples.GenericFieldsExample</StartupObject>
     <TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -40,6 +40,7 @@
     <Compile Include="src\DocumentWorkflowExample.cs" />
     <Compile Include="src\SignerOrderingExample.cs" />
     <Compile Include="src\SignerSpecificEmailMessageExample.cs" />
+    <Compile Include="src\GenericFieldsExample.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

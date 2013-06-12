@@ -39,6 +39,7 @@
     <Compile Include="src\Builder\DocumentBuilderTest.cs" />
     <Compile Include="src\Builder\Internal\FileDocumentSourceTest.cs" />
     <Compile Include="src\Builder\SignatureBuilderTest.cs" />
+    <Compile Include="src\Builder\FieldBuilderTest.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

@@ -38,7 +38,7 @@ namespace SDK.Examples
 
 			Console.WriteLine ("Package {0} was created", packageId.Id);
 
-			Field signature = new Field ();
+			Silanis.ESL.API.Field signature = new Silanis.ESL.API.Field ();
 
 			signature.Type = FieldType.SIGNATURE;
 			signature.Subtype = FieldSubtype.FULLNAME;

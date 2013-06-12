@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 
 namespace Silanis.ESL.SDK.Builder
 {
@@ -15,6 +16,7 @@ namespace Silanis.ESL.SDK.Builder
 		private int page;
 		private double x;
 		private double y;
+		private IList<Field> fields = new List<Field>();
 
 		private SignatureBuilder (string signerEmail)
 		{
@@ -62,6 +64,17 @@ namespace Silanis.ESL.SDK.Builder
 			return this;
 		}
 
+		public SignatureBuilder WithField (FieldBuilder builder)
+		{
+			return WithField (builder.Build());
+		}
+
+		public SignatureBuilder WithField (Field field)
+		{
+			fields.Add (field);
+			return this;
+		}
+
 		public Signature Build()
 		{
 			Signature signature = new Signature (signerEmail, page, x, y);
@@ -69,6 +82,7 @@ namespace Silanis.ESL.SDK.Builder
 			signature.Height = height;
 			signature.Width = width;
 			signature.Style = style;
+			signature.AddFields (fields);
 			return signature;
 		}
 	}

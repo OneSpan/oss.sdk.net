@@ -1,9 +1,12 @@
 using System;
+using System.Collections.Generic;
 
 namespace Silanis.ESL.SDK
 {
 	public class Signature
 	{
+		private List<Field> fields = new List<Field>();
+
 		public Signature (string signerEmail, int page, double x, double y)
 		{
 			SignerEmail = signerEmail;
@@ -49,6 +52,19 @@ namespace Silanis.ESL.SDK
 		public SignatureStyle Style {
 			get;
 			set;
+		}
+
+		public void AddFields (IList<Field> fields)
+		{
+			this.fields.AddRange (fields);
+		}
+
+		public List<Field> Fields
+		{
+			get
+			{
+				return fields;
+			}
 		}
 	}
 }
