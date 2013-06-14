@@ -42,5 +42,10 @@ namespace Silanis.ESL.SDK
 				return Style.Binding ();
 			}
 		}
+
+		public FieldValidator Validator {
+			get;
+			set;
+		}
 	}
 }

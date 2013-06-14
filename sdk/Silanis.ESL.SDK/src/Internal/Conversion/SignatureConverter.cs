@@ -33,11 +33,36 @@ namespace Silanis.ESL.SDK.Internal.Conversion
 			result.Subtype = GetFieldSubtype(field);
 			result.Binding = field.Binding;
 
-//			if ( field.getFieldValidator() != null ) {
-//				result.setValidation( new FieldValidatorConverter( field.getFieldValidator() ).getESLFieldValidation() );
-//			}
+			if ( field.Validator != null ) {
+				result.Validation = ConvertValidator (field.Validator);
+			}
 
 			return result;
+		}
+
+		private Silanis.ESL.API.FieldValidation ConvertValidator (FieldValidator validator)
+		{
+			Silanis.ESL.API.FieldValidation validation = new Silanis.ESL.API.FieldValidation();
+
+			validation.MaxLength = validator.MaxLength;
+			validation.MinLength = validator.MinLength;
+			validation.Required = validator.Required;
+//
+//			for ( String option : fieldValidator.getOptions() ) {
+//				fieldValidation.getEnum().add( option );
+//			}
+//
+//			fieldValidation.setRequired( fieldValidator.isRequired() );
+//			if ( fieldValidator.getErrorMessage() != null ) {
+//				fieldValidation.setErrorMessage( fieldValidator.getErrorMessage() );
+//			}
+			validation.ErrorMessage = validator.Message;
+
+			if (!String.IsNullOrEmpty(validator.Regex)) {
+				validation.Pattern = validator.Regex;
+			}
+
+			return validation;
 		}
 
 		private Silanis.ESL.API.FieldSubtype GetFieldSubtype (Field field)

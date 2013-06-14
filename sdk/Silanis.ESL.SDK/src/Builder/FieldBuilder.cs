@@ -15,6 +15,7 @@ namespace Silanis.ESL.SDK.Builder
 		private double width = DEFAULT_WIDTH;
 		private double height = DEFAULT_HEIGHT;
 		private FieldStyle style = DEFAULT_STYLE;
+		private FieldValidator validator;
 
 		private FieldBuilder ()
 		{
@@ -81,6 +82,17 @@ namespace Silanis.ESL.SDK.Builder
 			return this;
 		}
 
+		public FieldBuilder WithValidation (FieldValidatorBuilder builder)
+		{
+			return WithValidation(builder.Build ());
+		}
+
+		public FieldBuilder WithValidation (FieldValidator validator)
+		{
+			this.validator = validator;
+			return this;
+		}
+
 		public Field Build ()
 		{
 			Asserts.NonZero (x, "x");
@@ -94,6 +106,7 @@ namespace Silanis.ESL.SDK.Builder
 			field.Page = page;
 			field.X = x;
 			field.Y = y;
+			field.Validator = validator;
 			return field;
 		}
 	}
