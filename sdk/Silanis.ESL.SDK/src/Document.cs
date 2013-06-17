@@ -13,6 +13,11 @@ namespace Silanis.ESL.SDK
 			set;
 		}
 
+		public string Id {
+			get;
+			set;
+		}
+
 		public string FileName {
 			get;
 			set;
@@ -43,6 +48,7 @@ namespace Silanis.ESL.SDK
 			Silanis.ESL.API.Document doc = new Silanis.ESL.API.Document ();
 
 			doc.Name = Name;
+			doc.Id = Id;
 			doc.Index = Index;
 			doc.Extract = Extract;
 

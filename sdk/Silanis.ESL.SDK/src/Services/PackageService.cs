@@ -205,10 +205,21 @@ namespace Silanis.ESL.SDK.Services
 		/// <param name="document">The document to download.</param>
 		public byte[] DownloadDocument (PackageId packageId, Silanis.ESL.API.Document document)
 		{
+			return DownloadDocument (packageId, document.Id);
+		}
+
+		/// <summary>
+		/// Downloads a document from the package and returns it in a byte array.
+		/// </summary>
+		/// <returns>The document to download.</returns>
+		/// <param name="packageId">The package id.</param>
+		/// <param name="document">The document to download.</param>
+		public byte[] DownloadDocument (PackageId packageId, String documentId)
+		{
 			string path = template.UrlFor (UrlTemplate.PDF_PATH)
-                .Replace ("{packageId}", packageId.Id)
-                .Replace ("{documentId}", document.Id)
-                .Build ();
+				.Replace ("{packageId}", packageId.Id)
+					.Replace ("{documentId}", documentId)
+					.Build ();
 
 			try {
 				return HttpMethods.GetHttp (apiToken, path);

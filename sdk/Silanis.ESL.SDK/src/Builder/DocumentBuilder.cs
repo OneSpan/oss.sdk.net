@@ -8,6 +8,7 @@ namespace Silanis.ESL.SDK.Builder
 	public class DocumentBuilder
 	{
 		private readonly string name;
+		private string id;
 		private string fileName;
 		private DocumentSource documentSource;
 		private IList<Signature> signatures = new List<Signature>();
@@ -22,6 +23,12 @@ namespace Silanis.ESL.SDK.Builder
 		public static DocumentBuilder NewDocumentNamed (string name)
 		{
 			return new DocumentBuilder (name);
+		}
+
+		public DocumentBuilder WithId (string id)
+		{
+			this.id = id;
+			return this;
 		}
 
 		public DocumentBuilder FromFile (string fileName)
@@ -68,6 +75,7 @@ namespace Silanis.ESL.SDK.Builder
 			Document doc = new Document ();
 
 			doc.Name = name;
+			doc.Id = id;
 			doc.FileName = fileName;
 			doc.Content = documentSource.Content ();
 			doc.AddSignatures (signatures);

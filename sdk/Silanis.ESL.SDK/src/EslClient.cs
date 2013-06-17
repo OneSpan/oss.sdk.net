@@ -66,6 +66,21 @@ namespace Silanis.ESL.SDK
 		{
 			packageService.SendPackage (id);
 		}
+
+		public byte[] DownloadDocument (PackageId packageId, string documentId)
+		{
+			return packageService.DownloadDocument (packageId, documentId);
+		}
+
+		public byte[] DownloadEvidenceSummary (PackageId packageId)
+		{
+			return packageService.DownloadEvidenceSummary (packageId);
+		}
+
+		public byte[] DownloadZippedDocuments (PackageId packageId)
+		{
+			return packageService.DownloadZippedDocuments (packageId);
+		}
         
         /// <summary>
         /// BaseUrl property
