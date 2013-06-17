@@ -40,13 +40,9 @@
   <ItemGroup>
     <Compile Include="src\Audit.cs" />
     <Compile Include="src\FieldSummary.cs" />
-    <Compile Include="src\AuditService.cs" />
     <Compile Include="src\EslClient.cs" />
     <Compile Include="src\EslException.cs" />
-    <Compile Include="src\FieldSummaryService.cs" />
     <Compile Include="src\PackageId.cs" />
-    <Compile Include="src\PackageService.cs" />
-    <Compile Include="src\SessionService.cs" />
     <Compile Include="src\SessionToken.cs" />
     <Compile Include="src\Internal\Converter.cs" />
     <Compile Include="src\Internal\HttpMethods.cs" />
@@ -168,6 +164,10 @@
     <Compile Include="src\FieldStyleUtility.cs" />
     <Compile Include="src\Builder\FieldValidatorBuilder.cs" />
     <Compile Include="src\FieldValidator.cs" />
+    <Compile Include="src\Services\AuditService.cs" />
+    <Compile Include="src\Services\FieldSummaryService.cs" />
+    <Compile Include="src\Services\PackageService.cs" />
+    <Compile Include="src\Services\SessionService.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSHARP.Targets" />
   <ProjectExtensions>
@@ -179,5 +179,6 @@
     <Folder Include="src\Models\" />
     <Folder Include="src\Builder\Internal\" />
     <Folder Include="src\Internal\Conversion\" />
+    <Folder Include="src\Services\" />
   </ItemGroup>
 </Project>

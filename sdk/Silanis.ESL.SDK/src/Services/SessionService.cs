@@ -2,7 +2,7 @@ using System;
 using Newtonsoft.Json;
 using Silanis.ESL.SDK.Internal;
 
-namespace Silanis.ESL.SDK
+namespace Silanis.ESL.SDK.Services
 {
 	/// <summary>
 	/// The SessionService class provides a method to create a session token for a signer.

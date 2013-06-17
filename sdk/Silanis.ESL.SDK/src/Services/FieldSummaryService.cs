@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Newtonsoft.Json;
 using Silanis.ESL.SDK.Internal;
 
-namespace Silanis.ESL.SDK
+namespace Silanis.ESL.SDK.Services
 {
 	/// <summary>
 	/// The FieldSummaryService class provides a method to get the field summary for a package.

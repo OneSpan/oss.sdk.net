@@ -3,7 +3,7 @@ using Newtonsoft.Json;
 using System.Collections.Generic;
 using Silanis.ESL.SDK.Internal;
 
-namespace Silanis.ESL.SDK
+namespace Silanis.ESL.SDK.Services
 {
 	/// <summary>
 	/// The AuditService class provides a method to get the audit trail for a package.

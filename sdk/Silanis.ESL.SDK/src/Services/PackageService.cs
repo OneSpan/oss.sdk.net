@@ -7,7 +7,7 @@ using System.Collections.Generic;
 using Silanis.ESL.SDK.Internal;
 using Silanis.ESL.API;
 
-namespace Silanis.ESL.SDK
+namespace Silanis.ESL.SDK.Services
 {
 	/// <summary>
 	/// The PackageService class provides methods to help create packages and download documents after 
