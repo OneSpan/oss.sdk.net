@@ -16,6 +16,8 @@ namespace Silanis.ESL.SDK.Builder
 		private double height = DEFAULT_HEIGHT;
 		private FieldStyle style = DEFAULT_STYLE;
 		private FieldValidator validator;
+		private bool extract;
+		private string name;
 
 		private FieldBuilder ()
 		{
@@ -54,6 +56,18 @@ namespace Silanis.ESL.SDK.Builder
 		public static FieldBuilder CheckBox ()
 		{
 			return new FieldBuilder ().WithStyle (FieldStyle.UNBOUND_CHECK_BOX);
+		}
+
+		public FieldBuilder WithName (string name)
+		{
+			this.name = name;
+			return this;
+		}
+
+		public FieldBuilder WithExtraction ()
+		{
+			extract = true;
+			return this;
 		}
 
 		public FieldBuilder OnPage (int page)
@@ -95,8 +109,11 @@ namespace Silanis.ESL.SDK.Builder
 
 		public Field Build ()
 		{
-			Asserts.NonZero (x, "x");
-			Asserts.NonZero (y, "y");
+			if (!extract)
+			{
+				Asserts.NonZero (x, "x");
+				Asserts.NonZero (y, "y");
+			}
 
 			Field field = new Field ();
 
@@ -107,6 +124,8 @@ namespace Silanis.ESL.SDK.Builder
 			field.X = x;
 			field.Y = y;
 			field.Validator = validator;
+			field.Name = name;
+			field.Extract = extract;
 			return field;
 		}
 	}

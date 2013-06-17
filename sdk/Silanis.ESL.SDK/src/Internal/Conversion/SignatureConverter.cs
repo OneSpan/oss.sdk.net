@@ -22,11 +22,17 @@ namespace Silanis.ESL.SDK.Internal.Conversion
 		private Silanis.ESL.API.Field ToAPIField(Field field) {
 			Silanis.ESL.API.Field result = new Silanis.ESL.API.Field();
 
+			result.Name = field.Name;
+			result.Extract = field.Extract;
 			result.Page = field.Page;
-			result.Left = field.X;
-			result.Top = field.Y;
-			result.Width = field.Width;
-			result.Height = field.Height;
+
+			if (!field.Extract)
+			{
+				result.Left = field.X;
+				result.Top = field.Y;
+				result.Width = field.Width;
+				result.Height = field.Height;
+			}
 
 //			result.Value = field.Value;
 			result.Type = Silanis.ESL.API.FieldType.INPUT;
@@ -47,15 +53,6 @@ namespace Silanis.ESL.SDK.Internal.Conversion
 			validation.MaxLength = validator.MaxLength;
 			validation.MinLength = validator.MinLength;
 			validation.Required = validator.Required;
-//
-//			for ( String option : fieldValidator.getOptions() ) {
-//				fieldValidation.getEnum().add( option );
-//			}
-//
-//			fieldValidation.setRequired( fieldValidator.isRequired() );
-//			if ( fieldValidator.getErrorMessage() != null ) {
-//				fieldValidation.setErrorMessage( fieldValidator.getErrorMessage() );
-//			}
 			validation.ErrorMessage = validator.Message;
 
 			if (!String.IsNullOrEmpty(validator.Regex)) {
@@ -87,10 +84,17 @@ namespace Silanis.ESL.SDK.Internal.Conversion
 			Silanis.ESL.API.Field result = new Silanis.ESL.API.Field();
 
 			result.Page = signature.Page;
-			result.Top = signature.Y;
-			result.Left = signature.X;
-			result.Width = signature.Width;
-			result.Height = signature.Height;
+			result.Name = signature.Name;
+			result.Extract = signature.Extract;
+
+			if (!signature.Extract)
+			{
+				result.Top = signature.Y;
+				result.Left = signature.X;
+				result.Width = signature.Width;
+				result.Height = signature.Height;
+			}
+
 			result.Type = Silanis.ESL.API.FieldType.SIGNATURE;
 			result.Subtype = GetSignatureSubtype (signature);
 

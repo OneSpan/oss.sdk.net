@@ -16,8 +16,6 @@ namespace SDK.Examples
 			EslClient client = new EslClient (apiToken, baseUrl);
 			FileInfo file = new FileInfo (Directory.GetCurrentDirectory() + "/src/document.pdf");
 
-			//IP address
-			//regex
 			DocumentPackage package = PackageBuilder.NewPackageNamed ("Fields example " + DateTime.Now)
 					.DescribedAs ("This is a new package")
 					.WithSigner(SignerBuilder.NewSignerWithEmail("etienne_hardy@silanis.com")

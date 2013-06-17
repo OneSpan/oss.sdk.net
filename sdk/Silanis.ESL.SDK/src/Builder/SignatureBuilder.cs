@@ -17,6 +17,8 @@ namespace Silanis.ESL.SDK.Builder
 		private double x;
 		private double y;
 		private IList<Field> fields = new List<Field>();
+		private bool extract;
+		private string name;
 
 		private SignatureBuilder (string signerEmail)
 		{
@@ -36,6 +38,18 @@ namespace Silanis.ESL.SDK.Builder
 		public static SignatureBuilder CaptureFor (string signerEmail)
 		{
 			return new SignatureBuilder (signerEmail).WithStyle (SignatureStyle.HAND_DRAWN);
+		}
+
+		public SignatureBuilder WithName (string name)
+		{
+			this.name = name;
+			return this;
+		}
+
+		public SignatureBuilder EnableExtraction()
+		{
+			extract = true;
+			return this;
 		}
 
 		public SignatureBuilder OnPage (int page)
@@ -83,6 +97,8 @@ namespace Silanis.ESL.SDK.Builder
 			signature.Width = width;
 			signature.Style = style;
 			signature.AddFields (fields);
+			signature.Name = name;
+			signature.Extract = extract;
 			return signature;
 		}
 	}

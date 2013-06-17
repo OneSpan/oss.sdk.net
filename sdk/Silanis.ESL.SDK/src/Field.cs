@@ -47,5 +47,15 @@ namespace Silanis.ESL.SDK
 			get;
 			set;
 		}
+
+		public string Name {
+			get;
+			set;
+		}
+
+		public bool Extract {
+			get;
+			set;
+		}
 	}
 }

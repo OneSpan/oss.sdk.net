@@ -12,6 +12,7 @@ namespace Silanis.ESL.SDK.Builder
 		private DocumentSource documentSource;
 		private IList<Signature> signatures = new List<Signature>();
 		private int index;
+		private bool extract;
 
 		private DocumentBuilder(string name)
 		{
@@ -54,6 +55,12 @@ namespace Silanis.ESL.SDK.Builder
 			return this;
 		}
 
+		public DocumentBuilder EnableExtraction ()
+		{
+			extract = true;
+			return this;
+		}
+
 		public Document Build ()
 		{
 			Validate ();
@@ -65,6 +72,7 @@ namespace Silanis.ESL.SDK.Builder
 			doc.Content = documentSource.Content ();
 			doc.AddSignatures (signatures);
 			doc.Index = index;
+			doc.Extract = extract;
 			return doc;
 		}
 

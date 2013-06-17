@@ -28,6 +28,11 @@ namespace Silanis.ESL.SDK
 			set;
 		}
 
+		public bool Extract {
+			get;
+			set;
+		}
+
 		public void AddSignatures (IList<Signature> signatures)
 		{
 			this.signatures.AddRange (signatures);
@@ -39,6 +44,7 @@ namespace Silanis.ESL.SDK
 
 			doc.Name = Name;
 			doc.Index = Index;
+			doc.Extract = Extract;
 
 			SignatureConverter converter = new SignatureConverter ();
 			foreach (Signature signature in signatures)
