@@ -3,7 +3,7 @@ using Silanis.ESL.SDK;
 
 namespace Silanis.ESL.SDK.Internal.Conversion
 {
-	internal class SignatureConverter
+	internal class Converter
 	{
 
 		public Silanis.ESL.API.Approval ConvertToApproval (Signature signature)
@@ -19,7 +19,7 @@ namespace Silanis.ESL.SDK.Internal.Conversion
 			return result;
 		}
 
-		private Silanis.ESL.API.Field ToAPIField(Field field) {
+		public Silanis.ESL.API.Field ToAPIField(Field field) {
 			Silanis.ESL.API.Field result = new Silanis.ESL.API.Field();
 
 			result.Name = field.Name;
@@ -34,7 +34,7 @@ namespace Silanis.ESL.SDK.Internal.Conversion
 				result.Height = field.Height;
 			}
 
-//			result.Value = field.Value;
+			result.Value = field.Value;
 			result.Type = Silanis.ESL.API.FieldType.INPUT;
 			result.Subtype = GetFieldSubtype(field);
 			result.Binding = field.Binding;
@@ -72,6 +72,7 @@ namespace Silanis.ESL.SDK.Internal.Conversion
 			case FieldStyle.BOUND_NAME:
 			case FieldStyle.BOUND_TITLE:
 			case FieldStyle.BOUND_COMPANY:
+			case FieldStyle.LABEL:
 				return Silanis.ESL.API.FieldSubtype.LABEL;
 			case FieldStyle.UNBOUND_CHECK_BOX:
 				return Silanis.ESL.API.FieldSubtype.CHECKBOX;

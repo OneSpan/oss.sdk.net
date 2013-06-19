@@ -18,6 +18,7 @@ namespace Silanis.ESL.SDK
 				return "{signer.company}";
 			case FieldStyle.UNBOUND_TEXT_FIELD:
 			case FieldStyle.UNBOUND_CHECK_BOX:
+			case FieldStyle.LABEL:
 				return null;
 			default:
 				throw new EslException(String.Format ("Unknown FieldStyle value {0}", style));

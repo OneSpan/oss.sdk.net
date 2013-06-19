@@ -157,7 +157,6 @@
     <Compile Include="src\Builder\SignatureBuilder.cs" />
     <Compile Include="src\Signature.cs" />
     <Compile Include="src\SignatureStyle.cs" />
-    <Compile Include="src\Internal\Conversion\SignatureConverter.cs" />
     <Compile Include="src\Builder\FieldBuilder.cs" />
     <Compile Include="src\Field.cs" />
     <Compile Include="src\FieldStyle.cs" />
@@ -168,6 +167,7 @@
     <Compile Include="src\Services\FieldSummaryService.cs" />
     <Compile Include="src\Services\PackageService.cs" />
     <Compile Include="src\Services\SessionService.cs" />
+    <Compile Include="src\Internal\Conversion\Converter.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSHARP.Targets" />
   <ProjectExtensions>

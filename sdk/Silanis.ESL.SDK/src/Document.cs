@@ -7,6 +7,7 @@ namespace Silanis.ESL.SDK
 	public class Document
 	{
 		private List<Signature> signatures = new List<Signature>();
+		private List<Field> fields = new List<Field> ();
 
 		public string Name {
 			get;
@@ -43,6 +44,11 @@ namespace Silanis.ESL.SDK
 			this.signatures.AddRange (signatures);
 		}
 
+		public void AddFields (IList<Field> fields)
+		{
+			this.fields.AddRange (fields);
+		}
+
 		internal Silanis.ESL.API.Document ToAPIDocument (Silanis.ESL.API.Package createdPackage)
 		{
 			Silanis.ESL.API.Document doc = new Silanis.ESL.API.Document ();
@@ -52,13 +58,18 @@ namespace Silanis.ESL.SDK
 			doc.Index = Index;
 			doc.Extract = Extract;
 
-			SignatureConverter converter = new SignatureConverter ();
+			Converter converter = new Converter ();
 			foreach (Signature signature in signatures)
 			{
 				Silanis.ESL.API.Approval approval = converter.ConvertToApproval (signature);
 
 				approval.Role = FindRoleIdForSignature (signature.SignerEmail, createdPackage);
 				doc.AddApproval (approval);
+			}
+
+			foreach (Field field in fields)
+			{
+				doc.AddField (converter.ToAPIField(field));
 			}
 
 			return doc;

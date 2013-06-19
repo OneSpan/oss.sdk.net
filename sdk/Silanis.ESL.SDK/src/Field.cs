@@ -57,5 +57,10 @@ namespace Silanis.ESL.SDK
 			get;
 			set;
 		}
+
+		public string Value {
+			get;
+			set;
+		}
 	}
 }

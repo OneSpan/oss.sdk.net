@@ -18,6 +18,7 @@ namespace Silanis.ESL.SDK.Builder
 		private FieldValidator validator;
 		private bool extract;
 		private string name;
+		private string value;
 
 		private FieldBuilder ()
 		{
@@ -51,6 +52,11 @@ namespace Silanis.ESL.SDK.Builder
 		public static FieldBuilder TextField ()
 		{
 			return new FieldBuilder ().WithStyle (FieldStyle.UNBOUND_TEXT_FIELD);
+		}
+
+		public static FieldBuilder Label ()
+		{
+			return new FieldBuilder ().WithStyle (FieldStyle.LABEL);
 		}
 
 		public static FieldBuilder CheckBox ()
@@ -107,9 +113,15 @@ namespace Silanis.ESL.SDK.Builder
 			return this;
 		}
 
+		public FieldBuilder WithValue (string value)
+		{
+			this.value = value;
+			return this;
+		}
+
 		public Field Build ()
 		{
-			if (!extract)
+			if (!extract && style != FieldStyle.LABEL)
 			{
 				Asserts.NonZero (x, "x");
 				Asserts.NonZero (y, "y");
@@ -126,6 +138,7 @@ namespace Silanis.ESL.SDK.Builder
 			field.Validator = validator;
 			field.Name = name;
 			field.Extract = extract;
+			field.Value = value;
 			return field;
 		}
 	}

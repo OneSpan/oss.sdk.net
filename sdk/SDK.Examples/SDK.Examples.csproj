@@ -9,7 +9,7 @@
     <OutputType>Exe</OutputType>
     <RootNamespace>SDK.Examples</RootNamespace>
     <AssemblyName>SDK.Examples</AssemblyName>
-    <StartupObject>SDK.Examples.DownloadDocumentsExample</StartupObject>
+    <StartupObject>SDK.Examples.StampFieldValueExample</StartupObject>
     <TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -45,6 +45,7 @@
     <Compile Include="src\FieldValidationExample.cs" />
     <Compile Include="src\FieldExtractionExample.cs" />
     <Compile Include="src\DownloadDocumentsExample.cs" />
+    <Compile Include="src\StampFieldValueExample.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

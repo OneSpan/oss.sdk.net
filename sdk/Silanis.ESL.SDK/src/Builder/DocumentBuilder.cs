@@ -14,6 +14,7 @@ namespace Silanis.ESL.SDK.Builder
 		private IList<Signature> signatures = new List<Signature>();
 		private int index;
 		private bool extract;
+		private IList<Field> fields = new List<Field> ();
 
 		private DocumentBuilder(string name)
 		{
@@ -81,6 +82,7 @@ namespace Silanis.ESL.SDK.Builder
 			doc.AddSignatures (signatures);
 			doc.Index = index;
 			doc.Extract = extract;
+			doc.AddFields (fields);
 			return doc;
 		}
 
@@ -90,6 +92,17 @@ namespace Silanis.ESL.SDK.Builder
 			{
 				throw new EslException ("Document fileName must be set");
 			}
+		}
+
+		public DocumentBuilder WithField (FieldBuilder builder)
+		{
+			return WithField (builder.Build());
+		}
+
+		public DocumentBuilder WithField (Field field)
+		{
+			fields.Add (field);
+			return this;
 		}
 	}
 }
