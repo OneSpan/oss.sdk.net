@@ -2,26 +2,26 @@ using System;
 
 namespace Silanis.ESL.SDK
 {
-	internal static class DocumentTypeUtility
+	internal class DocumentTypeUtility
 	{
-		public static string NormalizeName(this DocumentType type, string name)
+		public static string NormalizeName(DocumentType type, string name)
 		{
 			string normalized = name.Replace (' ', '_');
 
-			if (!normalized.EndsWith (type.Extension()))
+			if (!normalized.EndsWith (Extension(type)))
 			{
 				if (normalized.EndsWith("."))
 				{
 					normalized = normalized.Substring (0, normalized.Length - 1);
 				}
 
-				normalized += "." + type.Extension();
+				normalized += "." + Extension(type);
 			}
 
 			return normalized;
 		}
 
-		public static string Extension(this DocumentType type)
+		public static string Extension(DocumentType type)
 		{
 			switch (type)
 			{

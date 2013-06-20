@@ -2,9 +2,9 @@ using System;
 
 namespace Silanis.ESL.SDK
 {
-	internal static class FieldStyleUtility
+	internal class FieldStyleUtility
 	{
-		public static string Binding(this FieldStyle style)
+		public static string Binding(FieldStyle style)
 		{
 			switch (style)
 			{

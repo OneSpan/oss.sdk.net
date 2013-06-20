@@ -42,7 +42,7 @@ namespace Silanis.ESL.SDK.Builder
 		public DocumentBuilder FromStream (Stream contentStream, DocumentType type)
 		{
 			documentSource = new StreamDocumentSource (contentStream);
-			fileName = type.NormalizeName (name);
+			fileName = DocumentTypeUtility.NormalizeName (type, name);
 			return this;
 		}
 

@@ -39,7 +39,7 @@ namespace Silanis.ESL.SDK
 		{
 			get
 			{
-				return Style.Binding ();
+				return FieldStyleUtility.Binding (Style);
 			}
 		}
 
