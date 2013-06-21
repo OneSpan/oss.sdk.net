@@ -2,6 +2,7 @@ using System;
 using Silanis.ESL.SDK.Internal;
 using Silanis.ESL.SDK.Services;
 using Silanis.ESL.API;
+using Silanis.ESL.SDK.Builder;
 
 namespace Silanis.ESL.SDK
 {
@@ -80,6 +81,13 @@ namespace Silanis.ESL.SDK
 		public byte[] DownloadZippedDocuments (PackageId packageId)
 		{
 			return packageService.DownloadZippedDocuments (packageId);
+		}
+
+		public DocumentPackage GetPackage (PackageId id)
+		{
+			Silanis.ESL.API.Package package = packageService.GetPackage (id);
+
+			return new PackageBuilder (package).Build ();
 		}
         
         /// <summary>

@@ -7,8 +7,6 @@ namespace SDK.Tests
 {
 	public class FieldBuilderTest
 	{
-		private static double DEFAULT_DOUBLE_TOLERANCE = 0.01f;
-
 		[Test]
 		public void BuildsFieldWithDefaultValues() 
 		{

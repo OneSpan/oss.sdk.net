@@ -40,6 +40,61 @@ namespace Silanis.ESL.SDK.Builder
 			return new SignatureBuilder (signerEmail).WithStyle (SignatureStyle.HAND_DRAWN);
 		}
 
+		internal static SignatureBuilder NewSignatureFromAPIApproval (Silanis.ESL.API.Approval apiApproval, Silanis.ESL.API.Package package)
+		{
+			Silanis.ESL.API.Signer apiSigner = null;
+			foreach ( Silanis.ESL.API.Role role in package.Roles ) {
+				if ( role.Id.Equals( apiApproval.Role ) ) {
+					apiSigner = role.Signers [0];
+				}
+			}
+
+			if ( apiSigner == null ) {
+				return null;
+			}
+
+			SignatureBuilder signatureBuilder = new SignatureBuilder( apiSigner.Email ).WithName( apiApproval.Name );
+
+			Silanis.ESL.API.Field apiSignatureField = null;
+			foreach ( Silanis.ESL.API.Field apiField in apiApproval.Fields ) {
+				if ( apiField.Type == Silanis.ESL.API.FieldType.SIGNATURE ) {
+					apiSignatureField = apiField;
+				} else {
+					FieldBuilder fieldBuilder = FieldBuilder.NewFieldFromAPIField( apiField );
+					signatureBuilder.WithField( fieldBuilder );
+				}
+
+			}
+			if ( apiSignatureField == null ) {
+				return null;
+			}
+
+			signatureBuilder.WithStyle( FromAPIFieldSubType(apiSignatureField.Subtype) )
+				.OnPage( apiSignatureField.Page )
+				.AtPosition( apiSignatureField.Left, apiSignatureField.Top )
+				.WithSize( apiSignatureField.Width, apiSignatureField.Height );
+
+			if ( apiSignatureField.Extract ) {
+				signatureBuilder.EnableExtraction ();
+			}
+
+			return signatureBuilder;
+		}
+
+		private static SignatureStyle FromAPIFieldSubType( Silanis.ESL.API.FieldSubtype subtype ) {
+			switch( subtype ) 
+			{
+			case Silanis.ESL.API.FieldSubtype.INITIALS:
+				return SignatureStyle.INITIALS;
+			case Silanis.ESL.API.FieldSubtype.CAPTURE:
+				return SignatureStyle.HAND_DRAWN;
+			case Silanis.ESL.API.FieldSubtype.FULLNAME:
+				return SignatureStyle.FULL_NAME;
+			default:
+				throw new EslException ("FieldSubtype unknown: " + subtype);
+			}
+		}
+
 		public SignatureBuilder WithName (string name)
 		{
 			this.name = name;

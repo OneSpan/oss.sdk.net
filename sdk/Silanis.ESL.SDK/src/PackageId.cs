@@ -20,6 +20,9 @@ namespace Silanis.ESL.SDK
 			this.Id = Id;
 		}
 
+		public override string ToString ()
+		{
+			return Id;
+		}
 	}
 }
-

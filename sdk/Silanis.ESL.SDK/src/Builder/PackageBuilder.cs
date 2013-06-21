@@ -13,10 +13,40 @@ namespace Silanis.ESL.SDK.Builder
 		private bool inPerson;
 		private IDictionary<string, Signer> signers = new Dictionary<string, Signer> ();
 		private IDictionary<string, Document> documents = new Dictionary<string, Document>();
+		private PackageId id;
+		private Silanis.ESL.API.PackageStatus status;
 
 		private PackageBuilder(string packageName)
 		{
 			this.packageName = packageName;
+		}
+
+		internal PackageBuilder (Silanis.ESL.API.Package package)
+		{
+			this.id = new PackageId( package.Id );
+			this.packageName = package.Name;
+			this.autocomplete = package.Autocomplete;
+			this.description = package.Description;
+			this.expiryDate = package.Due;
+			this.status = package.Status;
+			this.inPerson = package.Settings.Ceremony.InPerson;
+			this.emailMessage = package.EmailMessage;
+
+			foreach ( Silanis.ESL.API.Role role in package.Roles ) {
+				if ( role.Signers.Count == 0 ) {
+					continue;
+				}
+
+				Signer signer = SignerBuilder.NewSignerFromAPISigner( role ).Build();
+
+				WithSigner( signer );
+			}
+
+			foreach ( Silanis.ESL.API.Document apiDocument in package.Documents ) {
+				Document document = DocumentBuilder.NewDocumentFromAPIDocument( apiDocument, package ).Build();
+
+				WithDocument( document );
+			}
 		}
 
 		public static PackageBuilder NewPackageNamed (string name)
@@ -72,12 +102,13 @@ namespace Silanis.ESL.SDK.Builder
 
 		public DocumentPackage Build ()
 		{
-			DocumentPackage package = new DocumentPackage (packageName, autocomplete, signers, documents);
+			DocumentPackage package = new DocumentPackage (id, packageName, autocomplete, signers, documents);
 
 			package.Description = description;
 			package.ExpiryDate = expiryDate;
 			package.EmailMessage = emailMessage;
 			package.InPerson = inPerson;
+			package.Status = status;
 			return package;
 		}
 	}

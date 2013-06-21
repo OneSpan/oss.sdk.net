@@ -26,6 +26,27 @@ namespace Silanis.ESL.SDK.Builder
 			return new DocumentBuilder (name);
 		}
 
+		internal static DocumentBuilder NewDocumentFromAPIDocument (Silanis.ESL.API.Document apiDocument, Silanis.ESL.API.Package package)
+		{
+			DocumentBuilder documentBuilder = DocumentBuilder.NewDocumentNamed( apiDocument.Name )
+				.WithId( apiDocument.Id )
+				.AtIndex( apiDocument.Index );
+
+			foreach ( Silanis.ESL.API.Approval apiApproval in apiDocument.Approvals ) {
+				Signature signature = SignatureBuilder.NewSignatureFromAPIApproval( apiApproval, package ).Build ();
+
+				documentBuilder.WithSignature( signature );
+			}
+
+			foreach ( Silanis.ESL.API.Field apiField in apiDocument.Fields ) {
+				FieldBuilder fieldBuilder = FieldBuilder.NewFieldFromAPIField( apiField );
+
+				documentBuilder.WithField( fieldBuilder );
+			}
+
+			return documentBuilder;
+		}
+
 		public DocumentBuilder WithId (string id)
 		{
 			this.id = id;
@@ -78,7 +99,7 @@ namespace Silanis.ESL.SDK.Builder
 			doc.Name = name;
 			doc.Id = id;
 			doc.FileName = fileName;
-			doc.Content = documentSource.Content ();
+			doc.Content = documentSource != null ? documentSource.Content () : null;
 			doc.AddSignatures (signatures);
 			doc.Index = index;
 			doc.Extract = extract;
@@ -88,7 +109,7 @@ namespace Silanis.ESL.SDK.Builder
 
 		private void Validate ()
 		{
-			if (String.IsNullOrEmpty (fileName))
+			if (String.IsNullOrEmpty(id) && String.IsNullOrEmpty (fileName))
 			{
 				throw new EslException ("Document fileName must be set");
 			}

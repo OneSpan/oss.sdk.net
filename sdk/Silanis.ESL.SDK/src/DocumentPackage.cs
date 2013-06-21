@@ -7,12 +7,23 @@ namespace Silanis.ESL.SDK
 	public class DocumentPackage
 	{
 
-		public DocumentPackage (string packageName, bool autocomplete, IDictionary<string, Signer> signers, IDictionary<string, Document> documents)
+		public DocumentPackage (PackageId id, string packageName, bool autocomplete, IDictionary<string, Signer> signers, IDictionary<string, Document> documents)
 		{
+			Id = id;
 			Name = packageName;
 			Autocomplete = autocomplete;
 			Signers = signers;
 			Documents = documents;
+		}
+
+		public PackageId Id {
+			get;
+			private set;
+		}
+
+		public Silanis.ESL.API.PackageStatus Status {
+			get;
+			set;
 		}
 
 		public string Name {
@@ -84,6 +95,7 @@ namespace Silanis.ESL.SDK
 				role.Name = "signer" + signerCount;
 				role.AddSigner (signer.ToAPISigner());
 				role.Index = signer.SigningOrder;
+				role.Reassign = signer.CanChangeSigner;
 
 				if (!String.IsNullOrEmpty(signer.Message))
 				{

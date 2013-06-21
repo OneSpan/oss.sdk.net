@@ -15,6 +15,11 @@ namespace Silanis.ESL.SDK
 			this.authentication = authentication;
 		}
 
+		public string Id {
+			get;
+			set;
+		}
+
 		public string Email {
 			get;
 			private set;
@@ -36,6 +41,11 @@ namespace Silanis.ESL.SDK
 		}
 
 		public string Company {
+			get;
+			set;
+		}
+
+		public bool CanChangeSigner {
 			get;
 			set;
 		}
@@ -72,6 +82,11 @@ namespace Silanis.ESL.SDK
 		}
 
 		public string Message {
+			get;
+			set;
+		}
+
+		public bool Locked {
 			get;
 			set;
 		}

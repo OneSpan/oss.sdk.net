@@ -4,6 +4,10 @@ namespace Silanis.ESL.SDK
 {
 	public class Field
 	{
+		public string Id {
+			get;
+			set;
+		}
 
 		public double Width {
 			get;

@@ -14,16 +14,58 @@ namespace Silanis.ESL.SDK.Builder
 		private bool deliverSignedDocumentsByEmail;
 		private int signingOrder;
 		private string message;
+		private string id;
+		private bool canChangeSigner;
+		private bool locked;
 
 		private SignerBuilder(string signerEmail)
 		{
 			this.signerEmail = signerEmail;
 		}
 
+		internal static SignerBuilder NewSignerFromAPISigner (Silanis.ESL.API.Role role)
+		{
+			Silanis.ESL.API.Signer eslSigner = role.Signers [0];
+
+			SignerBuilder builder = SignerBuilder.NewSignerWithEmail( eslSigner.Email )
+					.WithId ( eslSigner.Id )					
+					.WithFirstName( eslSigner.FirstName )
+					.WithLastName( eslSigner.LastName )
+					.WithCompany( eslSigner.Company )
+					.WithTitle( eslSigner.Title )
+					.SigningOrder( role.Index );
+
+			if ( role.Reassign ) {
+				builder.CanChangeSigner ();
+			}
+
+			if ( role.EmailMessage != null ) {
+				builder.WithEmailMessage( role.EmailMessage.Content );
+			}
+
+			if ( role.Locked ) {
+				builder.Lock();
+			}
+
+			return builder;
+		}
+
 		public static SignerBuilder NewSignerWithEmail (string signerEmail)
 		{
 			Asserts.NotEmptyOrNull (signerEmail, "signerEmail");
 			return new SignerBuilder (signerEmail);
+		}
+
+		public SignerBuilder Lock ()
+		{
+			locked = true;
+			return this;
+		}
+
+		public SignerBuilder WithId (string id)
+		{
+			this.id = id;
+			return this;
 		}
 
 		public SignerBuilder WithFirstName (string firstName)
@@ -80,6 +122,12 @@ namespace Silanis.ESL.SDK.Builder
 			return this;
 		}
 
+		public SignerBuilder CanChangeSigner ()
+		{
+			canChangeSigner = true;
+			return this;
+		}
+
 		public Signer Build ()
 		{
 			Asserts.NotEmptyOrNull (firstName, "firstName");
@@ -93,6 +141,9 @@ namespace Silanis.ESL.SDK.Builder
 			signer.DeliverSignedDocumentsByEmail = deliverSignedDocumentsByEmail;
 			signer.SigningOrder = signingOrder;
 			signer.Message = message;
+			signer.CanChangeSigner = canChangeSigner;
+			signer.Id = id;
+			signer.Locked = locked;
 			return signer;
 		}
 	}
