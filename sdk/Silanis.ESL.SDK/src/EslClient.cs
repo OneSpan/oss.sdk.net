@@ -89,6 +89,11 @@ namespace Silanis.ESL.SDK
 
 			return new PackageBuilder (package).Build ();
 		}
+
+		public SigningStatus GetSigningStatus (PackageId packageId, string signerId, string documentId)
+		{
+			return packageService.GetSigningStatus (packageId, signerId, documentId);
+		}
         
         /// <summary>
         /// BaseUrl property

@@ -20,6 +20,7 @@ namespace Silanis.ESL.SDK.Internal
 		public static readonly string PDF_PATH = "/packages/{packageId}/documents/{documentId}/pdf";
 		public static readonly string ZIP_PATH = "/packages/{packageId}/documents/zip";
 		public static readonly string EVIDENCE_SUMMARY_PATH = "/packages/{packageId}/evidence/summary";
+		public static readonly string SIGNING_STATUS_PATH = "/packages/{packageId}/signingStatus?signer={signerId}&document={documentId}";
 
 		// Audit Service
 		public static readonly string AUDIT_PATH = "/packages/{packageId}/audit";

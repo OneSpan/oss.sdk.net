@@ -320,6 +320,29 @@ namespace Silanis.ESL.SDK.Services
 			return formData;
 		}
 
+		public SigningStatus GetSigningStatus (PackageId packageId, string signerId, string documentId)
+		{
+			String path = template.UrlFor( UrlTemplate.SIGNING_STATUS_PATH )
+				.Replace( "{packageId}", packageId.Id )
+				.Replace( "{signerId}", !String.IsNullOrEmpty(signerId) ? signerId : "" )
+				.Replace( "{documentId}", !String.IsNullOrEmpty(documentId) ? documentId : "" )
+				.Build();
+
+			try {
+				string response = Converter.ToString (HttpMethods.GetHttp (apiToken, path));
+				JsonTextReader reader = new JsonTextReader(new StringReader(response));
+
+				//Loop 'till we get to the status value
+				while (reader.Read () && reader.TokenType != JsonToken.String)
+				{
+				}
+
+				return SigningStatusUtility.FromString(reader.Value.ToString ());
+			} catch (Exception e) {
+				throw new EslException ("Could not get signing status. Exception: " + e.Message);
+			}
+		}
+
 		private string GenerateBoundary ()
 		{
 			var chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";

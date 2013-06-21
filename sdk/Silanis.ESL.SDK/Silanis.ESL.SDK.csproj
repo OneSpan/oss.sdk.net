@@ -168,6 +168,8 @@
     <Compile Include="src\Services\PackageService.cs" />
     <Compile Include="src\Services\SessionService.cs" />
     <Compile Include="src\Internal\Conversion\Converter.cs" />
+    <Compile Include="src\SigningStatus.cs" />
+    <Compile Include="src\SigningStatusUtility.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSHARP.Targets" />
   <ProjectExtensions>
