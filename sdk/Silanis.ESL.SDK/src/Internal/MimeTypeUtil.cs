@@ -10,55 +10,57 @@ namespace Silanis.ESL.SDK.Internal
 	public class MimeTypeUtil
 	{
 
-		private static readonly Dictionary<string, string> FileExtensionMap = new Dictionary<string, string>
-		{
-			// PDF
-			{"pdf", "application/pdf"},
+		private static readonly Dictionary<string, string> FileExtensionMap = new Dictionary<string, string>();
+		
+        static MimeTypeUtil()
+        {            
+            // PDF
+			FileExtensionMap["pdf"] = "application/pdf";
 
 			// MS Office
-			{"doc", "application/msword"},
-			{"dot", "application/msword"},
-			{"docx", "application/vnd.openxmlformats-officedocument.wordprocessingml.document"},
-			{"dotx", "application/vnd.openxmlformats-officedocument.wordprocessingml.template"},
-			{"docm", "application/vnd.ms-word.document.macroEnabled.12"},
-			{"dotm", "application/vnd.ms-word.template.macroEnabled.12"},
-			{"xls", "application/vnd.ms-excel"},
-			{"xlt", "application/vnd.ms-excel"},
-			{"xla", "application/vnd.ms-excel"},
-			{"xlsx", "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"},
-			{"xltx", "application/vnd.openxmlformats-officedocument.spreadsheetml.template"},
-			{"xlsm", "application/vnd.ms-excel.sheet.macroEnabled.12"},
-			{"xltm", "application/vnd.ms-excel.template.macroEnabled.12"},
-			{"xlam", "application/vnd.ms-excel.addin.macroEnabled.12"},
-			{"xlsb", "application/vnd.ms-excel.sheet.binary.macroEnabled.12"},
-			{"ppt", "application/vnd.ms-powerpoint"},
-			{"pot", "application/vnd.ms-powerpoint"},
-			{"pps", "application/vnd.ms-powerpoint"},
-			{"ppa", "application/vnd.ms-powerpoint"},
-			{"pptx", "application/vnd.openxmlformats-officedocument.presentationml.presentation"},
-			{"potx", "application/vnd.openxmlformats-officedocument.presentationml.template"},
-			{"ppsx", "application/vnd.openxmlformats-officedocument.presentationml.slideshow"},
-			{"ppam", "application/vnd.ms-powerpoint.addin.macroEnabled.12"},
-			{"pptm", "application/vnd.ms-powerpoint.presentation.macroEnabled.12"},
-			{"potm", "application/vnd.ms-powerpoint.presentation.macroEnabled.12"},
-			{"ppsm", "application/vnd.ms-powerpoint.slideshow.macroEnabled.12"},
+			FileExtensionMap["doc"] = "application/msword";
+			FileExtensionMap["dot"] = "application/msword";
+			FileExtensionMap["docx"] = "application/vnd.openxmlformats-officedocument.wordprocessingml.document";
+			FileExtensionMap["dotx"] = "application/vnd.openxmlformats-officedocument.wordprocessingml.template";
+			FileExtensionMap["docm"] = "application/vnd.ms-word.document.macroEnabled.12";
+			FileExtensionMap["dotm"] = "application/vnd.ms-word.template.macroEnabled.12";
+			FileExtensionMap["xls"] = "application/vnd.ms-excel";
+			FileExtensionMap["xlt"] = "application/vnd.ms-excel";
+			FileExtensionMap["xla"] = "application/vnd.ms-excel";
+			FileExtensionMap["xlsx"] = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
+			FileExtensionMap["xltx"] = "application/vnd.openxmlformats-officedocument.spreadsheetml.template";
+			FileExtensionMap["xlsm"] = "application/vnd.ms-excel.sheet.macroEnabled.12";
+			FileExtensionMap["xltm"] = "application/vnd.ms-excel.template.macroEnabled.12";
+			FileExtensionMap["xlam"] = "application/vnd.ms-excel.addin.macroEnabled.12";
+			FileExtensionMap["xlsb"] = "application/vnd.ms-excel.sheet.binary.macroEnabled.12";
+			FileExtensionMap["ppt"] = "application/vnd.ms-powerpoint";
+			FileExtensionMap["pot"] = "application/vnd.ms-powerpoint";
+			FileExtensionMap["pps"] = "application/vnd.ms-powerpoint";
+			FileExtensionMap["ppa"] = "application/vnd.ms-powerpoint";
+			FileExtensionMap["pptx"] = "application/vnd.openxmlformats-officedocument.presentationml.presentation";
+			FileExtensionMap["potx"] = "application/vnd.openxmlformats-officedocument.presentationml.template";
+			FileExtensionMap["ppsx"] = "application/vnd.openxmlformats-officedocument.presentationml.slideshow";
+			FileExtensionMap["ppam"] = "application/vnd.ms-powerpoint.addin.macroEnabled.12";
+			FileExtensionMap["pptm"] = "application/vnd.ms-powerpoint.presentation.macroEnabled.12";
+			FileExtensionMap["potm"] = "application/vnd.ms-powerpoint.presentation.macroEnabled.12";
+			FileExtensionMap["ppsm"] = "application/vnd.ms-powerpoint.slideshow.macroEnabled.12";
 			// Open Office
-			{"odt", "application/vnd.oasis.opendocument.text"},
-			{"ott", "application/vnd.oasis.opendocument.text-template"},
-			{"oth", "application/vnd.oasis.opendocument.text-web"},
-			{"odm", "application/vnd.oasis.opendocument.text-master"},
-			{"odg", "application/vnd.oasis.opendocument.graphics"},
-			{"otg", "application/vnd.oasis.opendocument.graphics-template"},
-			{"odp", "application/vnd.oasis.opendocument.presentation"},
-			{"otp", "application/vnd.oasis.opendocument.presentation-template"},
-			{"ods", "application/vnd.oasis.opendocument.spreadsheet"},
-			{"ots", "application/vnd.oasis.opendocument.spreadsheet-template"},
-			{"odc", "application/vnd.oasis.opendocument.chart"},
-			{"odf", "application/vnd.oasis.opendocument.formula"},
-			{"odb", "application/vnd.oasis.opendocument.database"},
-			{"odi", "application/vnd.oasis.opendocument.image"},
-			{"oxt", "application/vnd.openofficeorg.extension"},
-		};
+			FileExtensionMap["odt"] = "application/vnd.oasis.opendocument.text";
+			FileExtensionMap["ott"] = "application/vnd.oasis.opendocument.text-template";
+			FileExtensionMap["oth"] = "application/vnd.oasis.opendocument.text-web";
+			FileExtensionMap["odm"] = "application/vnd.oasis.opendocument.text-master";
+			FileExtensionMap["odg"] = "application/vnd.oasis.opendocument.graphics";
+			FileExtensionMap["otg"] = "application/vnd.oasis.opendocument.graphics-template";
+			FileExtensionMap["odp"] = "application/vnd.oasis.opendocument.presentation";
+			FileExtensionMap["otp"] = "application/vnd.oasis.opendocument.presentation-template";
+			FileExtensionMap["ods"] = "application/vnd.oasis.opendocument.spreadsheet";
+			FileExtensionMap["ots"] = "application/vnd.oasis.opendocument.spreadsheet-template";
+			FileExtensionMap["odc"] = "application/vnd.oasis.opendocument.chart";
+			FileExtensionMap["odf"] = "application/vnd.oasis.opendocument.formula";
+			FileExtensionMap["odb"] = "application/vnd.oasis.opendocument.database";
+			FileExtensionMap["odi"] = "application/vnd.oasis.opendocument.image";
+			FileExtensionMap["oxt"] = "application/vnd.openofficeorg.extension";
+        }
 
 		public static string GetMIMEType (string fileName)
 		{
@@ -69,4 +71,3 @@ namespace Silanis.ESL.SDK.Internal
 		}
 	}
 }
-
