@@ -1,0 +1,16 @@
+#Build results
+bin/
+obj/
+Debug/
+
+#user-specific files
+*.userprefs
+*.usertasks
+*.user
+*.suo
+
+#zip file
+*.zip
+
+#Mac
+.DS_Store

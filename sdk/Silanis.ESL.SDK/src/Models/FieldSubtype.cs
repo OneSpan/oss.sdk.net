@@ -1,0 +1,8 @@
+//
+namespace Silanis.ESL.API
+{
+	public enum FieldSubtype
+	{
+		FULLNAME,INITIALS,CAPTURE,LABEL,TEXTFIELD,TEXTAREA,CHECKBOX,DATE,RADIO,LIST,QRCODE
+	}
+}

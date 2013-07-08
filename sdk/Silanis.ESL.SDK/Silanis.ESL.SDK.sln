@@ -1,0 +1,35 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Silanis.ESL.SDK", "Silanis.ESL.SDK.csproj", "{0A9B8521-9624-460B-813E-079056B24B65}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SDK.Examples", "..\SDK.Examples\SDK.Examples.csproj", "{8D6C84A6-459F-42E0-8673-F8890B6A57DC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SDK.Tests", "..\SDK.Tests\SDK.Tests.csproj", "{203B5F7F-1678-44CC-B291-37022751DBCF}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{0A9B8521-9624-460B-813E-079056B24B65}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0A9B8521-9624-460B-813E-079056B24B65}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0A9B8521-9624-460B-813E-079056B24B65}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0A9B8521-9624-460B-813E-079056B24B65}.Release|Any CPU.Build.0 = Release|Any CPU
+		{203B5F7F-1678-44CC-B291-37022751DBCF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{203B5F7F-1678-44CC-B291-37022751DBCF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{203B5F7F-1678-44CC-B291-37022751DBCF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{203B5F7F-1678-44CC-B291-37022751DBCF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8D6C84A6-459F-42E0-8673-F8890B6A57DC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8D6C84A6-459F-42E0-8673-F8890B6A57DC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8D6C84A6-459F-42E0-8673-F8890B6A57DC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8D6C84A6-459F-42E0-8673-F8890B6A57DC}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(MonoDevelopProperties) = preSolution
+		StartupItem = ..\SDK.Examples\SDK.Examples.csproj
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
