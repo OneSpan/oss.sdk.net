@@ -62,6 +62,13 @@ namespace Silanis.ESL.API
     }
     
 		    
+    [JsonProperty("logoUrl")]
+    public String LogoUrl
+    {
+                get; set;
+        }
+    
+		    
     [JsonProperty("name")]
     public String Name
     {

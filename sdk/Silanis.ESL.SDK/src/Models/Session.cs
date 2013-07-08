@@ -21,6 +21,13 @@ namespace Silanis.ESL.API
         }
     
 		    
+    [JsonProperty("inPerson")]
+    public Boolean InPerson
+    {
+                get; set;
+        }
+    
+		    
     [JsonProperty("packages")]
     public IList<String> Packages
     {

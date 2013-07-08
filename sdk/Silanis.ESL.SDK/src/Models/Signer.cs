@@ -4,7 +4,8 @@ using System.Collections.Generic;
 using Newtonsoft.Json;
 namespace Silanis.ESL.API
 {
-		
+	
+	
 	public class Signer
 	{
 		
@@ -77,6 +78,13 @@ namespace Silanis.ESL.API
 		    
     [JsonProperty("id")]
     public String Id
+    {
+                get; set;
+        }
+    
+		    
+    [JsonProperty("language")]
+    public String Language
     {
                 get; set;
         }

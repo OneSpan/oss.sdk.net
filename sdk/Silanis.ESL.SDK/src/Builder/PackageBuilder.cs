@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 
 namespace Silanis.ESL.SDK.Builder
 {
@@ -15,6 +16,7 @@ namespace Silanis.ESL.SDK.Builder
 		private IDictionary<string, Document> documents = new Dictionary<string, Document>();
 		private PackageId id;
 		private Silanis.ESL.API.PackageStatus status;
+		private CultureInfo language;
 
 		private PackageBuilder(string packageName)
 		{
@@ -66,6 +68,12 @@ namespace Silanis.ESL.SDK.Builder
 			return this;
 		}
 
+		public PackageBuilder WithLanguage (CultureInfo language)
+		{
+			this.language = language;
+			return this;
+		}
+
 		public PackageBuilder WithEmailMessage (string emailMessage)
 		{
 			this.emailMessage = emailMessage;
@@ -109,6 +117,7 @@ namespace Silanis.ESL.SDK.Builder
 			package.EmailMessage = emailMessage;
 			package.InPerson = inPerson;
 			package.Status = status;
+			package.Language = language;
 			return package;
 		}
 	}

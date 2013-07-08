@@ -1,6 +1,7 @@
 using System;
 using Silanis.ESL.API;
 using System.Collections.Generic;
+using System.Globalization;
 
 namespace Silanis.ESL.SDK
 {
@@ -51,6 +52,11 @@ namespace Silanis.ESL.SDK
 			set;
 		}
 
+		public CultureInfo Language {
+			get;
+			set;
+		}
+
 		public Nullable<DateTime> ExpiryDate {
 			get;
 			set;
@@ -75,6 +81,11 @@ namespace Silanis.ESL.SDK
 			package.Autocomplete = Autocomplete;
 			package.Due = ExpiryDate;
 			package.EmailMessage = EmailMessage;
+
+			if (Language != null)
+			{
+				package.Language = Language.TwoLetterISOLanguageName;
+			}
 
 			if (InPerson)
 			{

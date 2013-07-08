@@ -92,6 +92,13 @@ namespace Silanis.ESL.API
         }
     
 		    
+    [JsonProperty("language")]
+    public String Language
+    {
+                get; set;
+        }
+    
+		    
     [JsonProperty("limits")]
     public PackageArtifactsLimits Limits
     {
