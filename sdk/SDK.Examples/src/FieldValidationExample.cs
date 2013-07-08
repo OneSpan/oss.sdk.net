@@ -7,8 +7,8 @@ namespace SDK.Examples
 {
 	public class FieldValidationExample
 	{
-		public static string apiToken = "Q2xubnp5Y2dIQ3lROnNlY3JldA==";
-		public static string baseUrl = "http://localhost:8080";
+		public static string apiToken = "YOUR TOKEN HERE";
+		public static string baseUrl = "ENVIRONMENT URL HERE";
 
 		public static void Main (string[] args)
 		{
@@ -18,12 +18,12 @@ namespace SDK.Examples
 
 			DocumentPackage package = PackageBuilder.NewPackageNamed ("Fields example " + DateTime.Now)
 					.DescribedAs ("This is a new package")
-					.WithSigner(SignerBuilder.NewSignerWithEmail("etienne_hardy@silanis.com")
+					.WithSigner(SignerBuilder.NewSignerWithEmail("john.smith@email.com")
 					            .WithFirstName("John")
 					            .WithLastName("Smith"))
 					.WithDocument(DocumentBuilder.NewDocumentNamed("My Document")
 					              .FromFile(file.FullName)
-					              .WithSignature(SignatureBuilder.SignatureFor("etienne_hardy@silanis.com")
+					              .WithSignature(SignatureBuilder.SignatureFor("john.smith@email.com")
 					              		.OnPage(0)
 					               		.AtPosition(500, 100)
 					               		.WithField(FieldBuilder.TextField()

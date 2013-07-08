@@ -7,8 +7,8 @@ namespace SDK.Examples
 {
 	public class SignerOrderingExample
 	{
-		public static string apiToken = "Q2xubnp5Y2dIQ3lROnNlY3JldA==";
-		public static string baseUrl = "http://localhost:8080";
+		public static string apiToken = "YOUR TOKEN HERE";
+		public static string baseUrl = "ENVIRONMENT URL HERE";
 
 		public static void Main (string[] args)
 		{
@@ -18,28 +18,28 @@ namespace SDK.Examples
 
 			DocumentPackage package = PackageBuilder.NewPackageNamed ("Signing Order " + DateTime.Now)
 					.DescribedAs ("This is a signer workflow example")
-					.WithSigner(SignerBuilder.NewSignerWithEmail("etienne_hardy@silanis.com")
+					.WithSigner(SignerBuilder.NewSignerWithEmail("john.smith@email.com")
 					            .WithFirstName("John")
 					            .WithLastName("Smith")
 					            .SigningOrder(1))
-					.WithSigner(SignerBuilder.NewSignerWithEmail("etienne.hardy@gmail.com")
+					.WithSigner(SignerBuilder.NewSignerWithEmail("coco.beware@email.com")
 					            .WithFirstName("Coco")
 					            .WithLastName("Beware")
 					            .SigningOrder(2))
 					.WithDocument(DocumentBuilder.NewDocumentNamed("Second Document")
 					              .FromFile(file.FullName)
-					              .WithSignature(SignatureBuilder.SignatureFor("etienne_hardy@silanis.com")
+					              .WithSignature(SignatureBuilder.SignatureFor("john.smith@email.com")
 					              		.OnPage(0)
 					               		.AtPosition(500, 100))
-					              .WithSignature (SignatureBuilder.InitialsFor("etienne_hardy@silanis.com")
+					              .WithSignature (SignatureBuilder.InitialsFor("john.smith@email.com")
 					                	.OnPage (0)
 					                	.AtPosition (500, 200))
-					              .WithSignature(SignatureBuilder.CaptureFor ("etienne_hardy@silanis.com")
+					              .WithSignature(SignatureBuilder.CaptureFor ("coco.beware@email.com")
 					               		.OnPage (0)
 					               		.AtPosition (500, 300)))
 					.WithDocument (DocumentBuilder.NewDocumentNamed("First Document")
 					               .FromFile (file.FullName)
-					               .WithSignature(SignatureBuilder.SignatureFor("etienne_hardy@silanis.com")
+					               .WithSignature(SignatureBuilder.SignatureFor("john.smith@email.com")
 					               		.OnPage (0)
 					               		.AtPosition (500, 100)))
 					.Build ();

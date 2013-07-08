@@ -6,8 +6,8 @@ namespace SDK.Examples
 {
 	public class CreatePackageWithSMSAuthentication
 	{
-		public static string apiToken = "Q2xubnp5Y2dIQ3lROnNlY3JldA==";
-		public static string baseUrl = "http://localhost:8080";
+		public static string apiToken = "YOUR TOKEN HERE";
+		public static string baseUrl = "ENVIRONMENT URL HERE";
 
 		public static void Main (string[] args)
 		{
@@ -20,7 +20,7 @@ namespace SDK.Examples
 					.ExpiresOn(DateTime.Now.AddDays(5))
 					.WithEmailMessage("This message should appear in email invitation to signers")
 					.InPerson(true)
-					.WithSigner(SignerBuilder.NewSignerWithEmail("etienne_hardy@silanis.com")
+					.WithSigner(SignerBuilder.NewSignerWithEmail("john.smith@email.com")
 					            .WithFirstName("John")
 					            .WithLastName("Smith")
 					            .WithTitle ("Super Duper")

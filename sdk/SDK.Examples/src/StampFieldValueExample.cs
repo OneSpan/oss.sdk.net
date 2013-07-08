@@ -7,8 +7,8 @@ namespace SDK.Examples
 {
 	public class StampFieldValueExample
 	{
-		public static string apiToken = "Q2xubnp5Y2dIQ3lROnNlY3JldA==";
-		public static string baseUrl = "http://localhost:8080";
+		public static string apiToken = "YOUR TOKEN HERE";
+		public static string baseUrl = "ENVIRONMENT URL HERE";
 
 		public static void Main (string[] args)
 		{
@@ -18,13 +18,13 @@ namespace SDK.Examples
 
 			DocumentPackage package = PackageBuilder.NewPackageNamed ("Field extraction example")
 				.DescribedAs ("This is a new package")
-					.WithSigner(SignerBuilder.NewSignerWithEmail("etienne_hardy@silanis.com")
+					.WithSigner(SignerBuilder.NewSignerWithEmail("john.smith@email.com")
 					            .WithFirstName("John")
 					            .WithLastName("Smith"))
 					.WithDocument(DocumentBuilder.NewDocumentNamed("My Document")
 					              	.FromFile(file.FullName)
 					              	.EnableExtraction()
-					              	.WithSignature(SignatureBuilder.SignatureFor("etienne_hardy@silanis.com")
+					              	.WithSignature(SignatureBuilder.SignatureFor("john.smith@email.com")
 					            		.WithName("AGENT_SIG_1")
 					               		.EnableExtraction())
 					              	.WithField(FieldBuilder.Label()

@@ -8,8 +8,8 @@ namespace SDK.Examples
 {
 	public class PackageLanguageExample
 	{
-		public static string apiToken = "UEhLYzR5N0JieWpFOnNlY3JldA==";
-		public static string baseUrl = "http://localhost:8080";
+		public static string apiToken = "YOUR TOKEN HERE";
+		public static string baseUrl = "ENVIRONMENT URL HERE";
 
 		public static void Main (string[] args)
 		{
@@ -20,12 +20,12 @@ namespace SDK.Examples
 			DocumentPackage package = PackageBuilder.NewPackageNamed ("C# Package " + DateTime.Now)
 					.DescribedAs ("This is a new package")
 					.WithLanguage(new CultureInfo("fr"))
-					.WithSigner(SignerBuilder.NewSignerWithEmail("etienne.hardy@gmail.com")
+					.WithSigner(SignerBuilder.NewSignerWithEmail("signer@email.com")
 					            .WithFirstName("John")
 					            .WithLastName("Smith"))
 					.WithDocument(DocumentBuilder.NewDocumentNamed("My Document")
 					              .FromFile(file.FullName)
-					              .WithSignature(SignatureBuilder.SignatureFor("etienne.hardy@gmail.com")
+					              .WithSignature(SignatureBuilder.SignatureFor("signer@email.com")
 					              		.OnPage(0)
 					               		.AtPosition(500, 100)))
 					.Build ();
