@@ -7,8 +7,8 @@ namespace SDK.Examples
 {
 	public class GetPackageExample
 	{
-		public static string apiToken = "YOUR TOKEN HERE";
-		public static string baseUrl = "ENVIRONMENT URL HERE";
+		public static string apiToken = "UGF3anRiZHJxVUNNOnNlY3JldA==";
+		public static string baseUrl = "http://localhost:8080";
 
 		public static void Main (string[] args)
 		{

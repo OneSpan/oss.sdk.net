@@ -65,17 +65,21 @@ namespace Silanis.ESL.SDK.Builder
 				}
 
 			}
+
 			if ( apiSignatureField == null ) {
-				return null;
+				signatureBuilder.WithStyle( SignatureStyle.ACCEPTANCE );
+				signatureBuilder.WithSize( 0, 0 );
 			}
+			else
+			{
+				signatureBuilder.WithStyle( FromAPIFieldSubType(apiSignatureField.Subtype) )
+					.OnPage( apiSignatureField.Page )
+						.AtPosition( apiSignatureField.Left, apiSignatureField.Top )
+						.WithSize( apiSignatureField.Width, apiSignatureField.Height );
 
-			signatureBuilder.WithStyle( FromAPIFieldSubType(apiSignatureField.Subtype) )
-				.OnPage( apiSignatureField.Page )
-				.AtPosition( apiSignatureField.Left, apiSignatureField.Top )
-				.WithSize( apiSignatureField.Width, apiSignatureField.Height );
-
-			if ( apiSignatureField.Extract ) {
-				signatureBuilder.EnableExtraction ();
+				if ( apiSignatureField.Extract ) {
+					signatureBuilder.EnableExtraction ();
+				}					
 			}
 
 			return signatureBuilder;
