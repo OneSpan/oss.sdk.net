@@ -268,23 +268,13 @@ namespace Silanis.ESL.SDK.Services
 			}
 		}
 
-		public void TrashPackage(PackageId id)
+		public void DeletePackage(PackageId id)
 		{
 			string path = template.UrlFor (UrlTemplate.PACKAGE_ID_PATH).Replace ("{packageId}", id.Id).Build ();
-			StringWriter sw = new StringWriter ();
-
-			using (JsonWriter writer = new JsonTextWriter(sw))
-			{
-				writer.Formatting = Formatting.Indented;
-				writer.WriteStartObject ();
-				writer.WritePropertyName("trashed");
-				writer.WriteValue (true);
-				writer.WriteEndObject ();
-			}
 
 			try
 			{
-				HttpMethods.PostHttp(apiToken, path, Converter.ToBytes(sw.ToString ()));
+				HttpMethods.DeleteHttp(apiToken, path);
 			}
 			catch (Exception e)
 			{
