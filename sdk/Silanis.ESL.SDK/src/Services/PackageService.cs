@@ -207,7 +207,7 @@ namespace Silanis.ESL.SDK.Services
 				byte[] payloadBytes = Converter.ToBytes (json);
 
 				string boundary = GenerateBoundary ();
-				byte[] content = createMultipartContent (fileName, fileBytes, payloadBytes, boundary);
+				byte[] content = CreateMultipartContent (fileName, fileBytes, payloadBytes, boundary);
 
 				Converter.ToString (HttpMethods.MultipartPostHttp (apiToken, path, content, boundary));
 			} catch (Exception e) {
@@ -215,7 +215,7 @@ namespace Silanis.ESL.SDK.Services
 			}
 		}
 
-		private byte[] createMultipartContent (string fileName, byte[] fileBytes, byte[] payloadBytes, string boundary)
+		private byte[] CreateMultipartContent (string fileName, byte[] fileBytes, byte[] payloadBytes, string boundary)
 		{
 
 			Encoding encoding = Encoding.UTF8;
@@ -268,6 +268,30 @@ namespace Silanis.ESL.SDK.Services
 			}
 		}
 
+		public void TrashPackage(PackageId id)
+		{
+			string path = template.UrlFor (UrlTemplate.PACKAGE_ID_PATH).Replace ("{packageId}", id.Id).Build ();
+			StringWriter sw = new StringWriter ();
+
+			using (JsonWriter writer = new JsonTextWriter(sw))
+			{
+				writer.Formatting = Formatting.Indented;
+				writer.WriteStartObject ();
+				writer.WritePropertyName("trashed");
+				writer.WriteValue (true);
+				writer.WriteEndObject ();
+			}
+
+			try
+			{
+				HttpMethods.PostHttp(apiToken, path, Converter.ToBytes(sw.ToString ()));
+			}
+			catch (Exception e)
+			{
+				throw new EslException ("Could not delete package. Exception: " + e.Message);	
+			}
+		}
+
 		private string GenerateBoundary ()
 		{
 			var chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
@@ -283,4 +307,3 @@ namespace Silanis.ESL.SDK.Services
 
 	}
 }
-
