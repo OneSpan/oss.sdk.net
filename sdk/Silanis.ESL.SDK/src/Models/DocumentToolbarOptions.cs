@@ -6,7 +6,7 @@ namespace Silanis.ESL.API
 {
 	
 	
-	public class DocumentToolbarOptions
+	internal class DocumentToolbarOptions
 	{
 		
 		// Fields

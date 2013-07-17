@@ -6,7 +6,7 @@ namespace Silanis.ESL.API
 {
 	
 	
-	public class BaseMessage
+	internal class BaseMessage
 	{
 		
 		// Fields

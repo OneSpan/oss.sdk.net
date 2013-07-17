@@ -6,7 +6,7 @@ namespace Silanis.ESL.API
 {
 	
 	
-	public class Credentials
+	internal class Credentials
 	{
 		
 		// Fields

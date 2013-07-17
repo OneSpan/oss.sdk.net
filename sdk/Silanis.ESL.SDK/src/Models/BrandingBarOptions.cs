@@ -6,7 +6,7 @@ namespace Silanis.ESL.API
 {
 	
 	
-	public class BrandingBarOptions
+	internal class BrandingBarOptions
 	{
 		
 		// Fields

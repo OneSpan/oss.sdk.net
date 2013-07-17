@@ -6,7 +6,7 @@ namespace Silanis.ESL.API
 {
 	
 	
-	public class Callback
+	internal class Callback
 	{
 		
 		// Fields

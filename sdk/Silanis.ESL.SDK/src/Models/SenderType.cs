@@ -1,7 +1,7 @@
 //
 namespace Silanis.ESL.API
 {
-	public enum SenderType
+	internal enum SenderType
 	{
 		REGULAR,MANAGER
 	}

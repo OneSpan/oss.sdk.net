@@ -6,7 +6,7 @@ namespace Silanis.ESL.API
 {
 	
 	
-	public class Bill
+	internal class Bill
 	{
 		
 		// Fields

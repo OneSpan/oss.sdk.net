@@ -6,7 +6,7 @@ namespace Silanis.ESL.API
 {
 	
 	
-	public class Signup
+	internal class Signup
 	{
 		
 		// Fields

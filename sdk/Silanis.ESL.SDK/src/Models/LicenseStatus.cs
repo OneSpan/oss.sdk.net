@@ -1,7 +1,7 @@
 //
 namespace Silanis.ESL.API
 {
-	public enum LicenseStatus
+	internal enum LicenseStatus
 	{
 		ACTIVE,PENDING,GRACE
 	}

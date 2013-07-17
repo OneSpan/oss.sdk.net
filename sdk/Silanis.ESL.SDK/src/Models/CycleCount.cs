@@ -6,7 +6,7 @@ namespace Silanis.ESL.API
 {
 	
 	
-	public class CycleCount
+	internal class CycleCount
 	{
 		
 		// Fields

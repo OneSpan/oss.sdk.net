@@ -6,7 +6,7 @@ namespace Silanis.ESL.API
 {
 	
 	
-	public class GuestAuth
+	internal class GuestAuth
 	{
 		
 		// Fields

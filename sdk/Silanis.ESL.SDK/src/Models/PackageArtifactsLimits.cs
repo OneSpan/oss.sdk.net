@@ -6,7 +6,7 @@ namespace Silanis.ESL.API
 {
 	
 	
-	public class PackageArtifactsLimits
+	internal class PackageArtifactsLimits
 	{
 		
 		// Fields

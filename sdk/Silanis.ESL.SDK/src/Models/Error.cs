@@ -6,7 +6,7 @@ namespace Silanis.ESL.API
 {
 	
 	
-	public class Error
+	internal class Error
 	{
 		
 		// Fields

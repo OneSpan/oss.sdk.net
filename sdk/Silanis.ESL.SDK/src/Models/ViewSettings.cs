@@ -6,7 +6,7 @@ namespace Silanis.ESL.API
 {
 	
 	
-	public class ViewSettings
+	internal class ViewSettings
 	{
 		
 		// Fields

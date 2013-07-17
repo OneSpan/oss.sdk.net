@@ -6,7 +6,7 @@ namespace Silanis.ESL.API
 {
 	
 	
-	public class AccountProviders
+	internal class AccountProviders
 	{
 		
 		// Fields

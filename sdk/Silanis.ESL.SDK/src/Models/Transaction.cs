@@ -6,7 +6,7 @@ namespace Silanis.ESL.API
 {
 	
 	
-	public class Transaction
+	internal class Transaction
 	{
 		
 		// Fields

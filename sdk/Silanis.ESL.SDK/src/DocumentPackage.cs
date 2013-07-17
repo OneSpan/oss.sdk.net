@@ -1,5 +1,4 @@
 using System;
-using Silanis.ESL.API;
 using System.Collections.Generic;
 using System.Globalization;
 
@@ -22,7 +21,7 @@ namespace Silanis.ESL.SDK
 			private set;
 		}
 
-		public Silanis.ESL.API.PackageStatus Status {
+		public DocumentPackageStatus Status {
 			get;
 			set;
 		}
@@ -72,9 +71,9 @@ namespace Silanis.ESL.SDK
 			set;
 		}
 
-		internal Package ToAPIPackage ()
+		internal Silanis.ESL.API.Package ToAPIPackage ()
 		{
-			Package package = new Package ();
+			Silanis.ESL.API.Package package = new Silanis.ESL.API.Package ();
 
 			package.Name = Name;
 			package.Description = Description;
@@ -89,8 +88,8 @@ namespace Silanis.ESL.SDK
 
 			if (InPerson)
 			{
-				PackageSettings settings = new PackageSettings ();
-				CeremonySettings ceremonySettings = new CeremonySettings ();
+				Silanis.ESL.API.PackageSettings settings = new Silanis.ESL.API.PackageSettings ();
+				Silanis.ESL.API.CeremonySettings ceremonySettings = new Silanis.ESL.API.CeremonySettings ();
 
 				ceremonySettings.InPerson = InPerson;
 				settings.Ceremony = ceremonySettings;
@@ -100,7 +99,7 @@ namespace Silanis.ESL.SDK
 			int signerCount = 1;
 			foreach (Signer signer in Signers.Values)
 			{
-				Role role = new Role ();
+				Silanis.ESL.API.Role role = new Silanis.ESL.API.Role ();
 
 				role.Id = "role" + signerCount;
 				role.Name = "signer" + signerCount;
@@ -110,7 +109,7 @@ namespace Silanis.ESL.SDK
 
 				if (!String.IsNullOrEmpty(signer.Message))
 				{
-					BaseMessage message = new BaseMessage ();
+					Silanis.ESL.API.BaseMessage message = new Silanis.ESL.API.BaseMessage ();
 
 					message.Content = signer.Message;
 					role.EmailMessage = message;

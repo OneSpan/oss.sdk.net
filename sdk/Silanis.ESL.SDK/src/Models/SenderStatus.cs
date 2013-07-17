@@ -1,7 +1,7 @@
 //
 namespace Silanis.ESL.API
 {
-	public enum SenderStatus
+	internal enum SenderStatus
 	{
 		INVITED,ACTIVE,LOCKED
 	}

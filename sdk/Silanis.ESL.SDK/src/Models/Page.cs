@@ -6,7 +6,7 @@ namespace Silanis.ESL.API
 {
 	
 	
-	public class Page
+	internal class Page
 	{
 		
 		// Fields

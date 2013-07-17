@@ -6,7 +6,7 @@ namespace Silanis.ESL.API
 {
 	
 	
-	public class Image
+	internal class Image
 	{
 		
 		// Fields

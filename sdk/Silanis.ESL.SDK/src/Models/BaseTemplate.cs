@@ -6,7 +6,7 @@ namespace Silanis.ESL.API
 {
 	
 	
-	public class BaseTemplate
+	internal class BaseTemplate
 	{
 		
 		// Fields

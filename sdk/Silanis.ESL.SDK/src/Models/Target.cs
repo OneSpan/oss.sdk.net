@@ -1,7 +1,7 @@
 //
 namespace Silanis.ESL.API
 {
-	public enum Target
+	internal enum Target
 	{
 		SIGNER,SENDER,DOCUMENT,PACKAGE,STORAGE
 	}

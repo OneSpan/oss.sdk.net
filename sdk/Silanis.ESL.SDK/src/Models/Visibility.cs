@@ -1,7 +1,7 @@
 //
 namespace Silanis.ESL.API
 {
-	public enum Visibility
+	internal enum Visibility
 	{
 		ACCOUNT,SENDER
 	}

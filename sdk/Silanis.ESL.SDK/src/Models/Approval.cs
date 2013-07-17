@@ -6,7 +6,7 @@ namespace Silanis.ESL.API
 {
 	
 	
-	public class Approval
+	internal class Approval
 	{
 		
 		// Fields

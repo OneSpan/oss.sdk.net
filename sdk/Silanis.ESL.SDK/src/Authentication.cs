@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using Silanis.ESL.API;
 
 namespace Silanis.ESL.SDK
 {
@@ -47,13 +46,13 @@ namespace Silanis.ESL.SDK
 
 		internal Silanis.ESL.API.Auth ToAPIAuthentication ()
 		{
-			Auth auth = new Auth ();
+			Silanis.ESL.API.Auth auth = new Silanis.ESL.API.Auth ();
 
 			auth.Scheme = Scheme ();
 
 			foreach (Challenge challenge in challenges)
 			{
-				AuthChallenge authChallenge = new AuthChallenge();
+				Silanis.ESL.API.AuthChallenge authChallenge = new Silanis.ESL.API.AuthChallenge();
 
 				authChallenge.Question = challenge.Question;
 				authChallenge.Answer = challenge.Answer;
@@ -62,7 +61,7 @@ namespace Silanis.ESL.SDK
 
 			if (!String.IsNullOrEmpty (PhoneNumber))
 			{
-				AuthChallenge challenge = new AuthChallenge ();
+				Silanis.ESL.API.AuthChallenge challenge = new Silanis.ESL.API.AuthChallenge ();
 
 				challenge.Question = PhoneNumber;
 				auth.AddChallenge (challenge);
@@ -71,16 +70,16 @@ namespace Silanis.ESL.SDK
 			return auth;
 		}
 
-		private AuthScheme Scheme ()
+		private Silanis.ESL.API.AuthScheme Scheme ()
 		{
 			switch (method)
 			{
 			case AuthenticationMethod.EMAIL:
-				return AuthScheme.NONE;
+				return Silanis.ESL.API.AuthScheme.NONE;
 			case AuthenticationMethod.CHALLENGE:
-				return AuthScheme.CHALLENGE;
+				return Silanis.ESL.API.AuthScheme.CHALLENGE;
 			case AuthenticationMethod.SMS:
-				return AuthScheme.SMS;
+				return Silanis.ESL.API.AuthScheme.SMS;
 			default:
 				throw new EslException ("Unknown AuthenticationMethod");
 			}

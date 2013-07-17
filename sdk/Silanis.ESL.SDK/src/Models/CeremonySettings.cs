@@ -6,7 +6,7 @@ namespace Silanis.ESL.API
 {
 	
 	
-	public class CeremonySettings
+	internal class CeremonySettings
 	{
 		
 		// Fields

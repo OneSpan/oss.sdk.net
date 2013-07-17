@@ -5,7 +5,6 @@ using System.Text;
 using Newtonsoft.Json;
 using System.Collections.Generic;
 using Silanis.ESL.SDK.Internal;
-using Silanis.ESL.API;
 
 namespace Silanis.ESL.SDK.Services
 {
@@ -38,7 +37,7 @@ namespace Silanis.ESL.SDK.Services
 		/// </summary>
 		/// <returns>The package id.</returns>
 		/// <param name="package">The package to create.</param>
-		public PackageId CreatePackage (Package package)
+		internal PackageId CreatePackage (Silanis.ESL.API.Package package)
 		{
 			string path = template.UrlFor (UrlTemplate.PACKAGE_PATH)
 				.Build ();
@@ -60,7 +59,7 @@ namespace Silanis.ESL.SDK.Services
 		/// </summary>
 		/// <param name="packageId">The package id.</param>
 		/// <param name="package">The updated package.</param>
-		public void UpdatePackage (PackageId packageId, Package package)
+		internal void UpdatePackage (PackageId packageId, Silanis.ESL.API.Package package)
 		{
 			string path = template.UrlFor (UrlTemplate.PACKAGE_ID_PATH)
 				.Replace ("{packageId}", packageId.Id)
@@ -81,7 +80,7 @@ namespace Silanis.ESL.SDK.Services
 		/// </summary>
 		/// <returns>The package.</returns>
 		/// <param name="packageId">The package id.</param>
-		public Package GetPackage (PackageId packageId)
+		internal Silanis.ESL.API.Package GetPackage (PackageId packageId)
 		{
 			string path = template.UrlFor (UrlTemplate.PACKAGE_ID_PATH)
 				.Replace ("{packageId}", packageId.Id)
@@ -90,7 +89,7 @@ namespace Silanis.ESL.SDK.Services
 			try {
 				string response = Converter.ToString (HttpMethods.GetHttp (apiToken, path));
 
-				return JsonConvert.DeserializeObject<Package> (response, settings);
+				return JsonConvert.DeserializeObject<Silanis.ESL.API.Package> (response, settings);
 			} catch (Exception e) {
 				throw new EslException ("Could not get package." + " Exception: " + e.Message);
 			}
@@ -132,88 +131,14 @@ namespace Silanis.ESL.SDK.Services
 			} catch (Exception e) {
 				throw new EslException ("Could not send the package." + " Exception: " + e.Message);
 			}
-		}
-
-		/// <summary>
-		/// Gets the roles for a package.
-		/// </summary>
-		/// <returns>A list of the roles in the package.</returns>
-		/// <param name="packageId">The package id.</param>
-		public List<Role> GetRoles (PackageId packageId)
-		{
-			string path = template.UrlFor (UrlTemplate.ROLE_PATH)
-                .Replace ("{packageId}", packageId.Id)
-                .Build ();
-
-			try {
-				string response = Converter.ToString (HttpMethods.GetHttp (apiToken, path));
-				RoleList roleList = JsonConvert.DeserializeObject<RoleList> (response);
-
-				return roleList.Roles;
-			} catch (Exception e) {
-				throw new EslException ("Could not get roles." + " Exception: " + e.Message);
-			}
-		}
-
-		/// <summary>
-		/// Adds a role to the package.
-		/// </summary>
-		/// <returns>The role added to the package.</returns>
-		/// <param name="packageId">The package id.</param>
-		/// <param name="role">The role to add.</param>
-		public Role AddRole (PackageId packageId, Role role)
-		{
-			string path = template.UrlFor (UrlTemplate.ROLE_PATH)
-                .Replace ("{packageId}", packageId.Id)
-                .Build ();
-
-			try {
-				string json = JsonConvert.SerializeObject (role, settings);
-				byte[] content = Converter.ToBytes (json);
-				string response = Converter.ToString (HttpMethods.PostHttp (apiToken, path, content));
-
-				return JsonConvert.DeserializeObject<Role> (response, settings);
-			} catch (Exception e) {
-				throw new EslException ("Could not add role." + " Exception: " + e.Message);
-			}
-		}
-
-		/// <summary>
-		/// Deletes a role from the package.
-		/// </summary>
-		/// <param name="packageId">The package id.</param>
-		/// <param name="role">The role to delete.</param>
-		public void DeleteRole (PackageId packageId, Role role)
-		{
-			string path = template.UrlFor (UrlTemplate.ROLE_ID_PATH)
-                .Replace ("{packageId}", packageId.Id)
-                .Replace ("{roleId}", role.Id)
-                .Build ();
-
-			try {
-				HttpMethods.DeleteHttp (apiToken, path);
-			} catch (Exception e) {
-				throw new EslException ("Could not delete role." + " Exception: " + e.Message);
-			}
-		}
+		}	
 
 		/// <summary>
 		/// Downloads a document from the package and returns it in a byte array.
 		/// </summary>
 		/// <returns>The document to download.</returns>
 		/// <param name="packageId">The package id.</param>
-		/// <param name="document">The document to download.</param>
-		public byte[] DownloadDocument (PackageId packageId, Silanis.ESL.API.Document document)
-		{
-			return DownloadDocument (packageId, document.Id);
-		}
-
-		/// <summary>
-		/// Downloads a document from the package and returns it in a byte array.
-		/// </summary>
-		/// <returns>The document to download.</returns>
-		/// <param name="packageId">The package id.</param>
-		/// <param name="document">The document to download.</param>
+		/// <param name="documentId">The id of the document to download.</param>
 		public byte[] DownloadDocument (PackageId packageId, String documentId)
 		{
 			string path = template.UrlFor (UrlTemplate.PDF_PATH)
@@ -271,7 +196,7 @@ namespace Silanis.ESL.SDK.Services
 		/// <param name="fileName">The name of the document.</param>
 		/// <param name="fileBytes">The file to upload in bytes.</param>
 		/// <param name="document">The document object that has field settings.</param>
-		public void UploadDocument (PackageId packageId, string fileName, byte[] fileBytes, Silanis.ESL.API.Document document)
+		internal void UploadDocument (PackageId packageId, string fileName, byte[] fileBytes, Silanis.ESL.API.Document document)
 		{
 			string path = template.UrlFor (UrlTemplate.DOCUMENT_PATH)
 				.Replace ("{packageId}", packageId.Id)

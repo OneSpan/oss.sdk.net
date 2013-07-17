@@ -6,7 +6,7 @@ namespace Silanis.ESL.API
 {
 	
 	
-	public class LayoutOptions
+	internal class LayoutOptions
 	{
 		
 		// Fields

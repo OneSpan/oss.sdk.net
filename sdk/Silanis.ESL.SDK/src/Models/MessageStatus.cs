@@ -1,7 +1,7 @@
 //
 namespace Silanis.ESL.API
 {
-	public enum MessageStatus
+	internal enum MessageStatus
 	{
 		NEW,READ,TRASHED
 	}

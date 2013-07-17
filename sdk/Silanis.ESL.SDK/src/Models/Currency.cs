@@ -6,7 +6,7 @@ namespace Silanis.ESL.API
 {
 	
 	
-	public class Currency
+	internal class Currency
 	{
 		
 		// Fields

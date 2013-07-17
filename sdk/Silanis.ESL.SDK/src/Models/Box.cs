@@ -6,7 +6,7 @@ namespace Silanis.ESL.API
 {
 	
 	
-	public class Box
+	internal class Box
 	{
 		
 		// Fields

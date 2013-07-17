@@ -1,7 +1,7 @@
 //
 namespace Silanis.ESL.API
 {
-	public enum FieldType
+	internal enum FieldType
 	{
 		SIGNATURE,INPUT,IMAGE
 	}

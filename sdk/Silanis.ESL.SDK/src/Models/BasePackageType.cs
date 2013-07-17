@@ -1,7 +1,7 @@
 //
 namespace Silanis.ESL.API
 {
-	public enum BasePackageType
+	internal enum BasePackageType
 	{
 		PACKAGE,TEMPLATE,LAYOUT
 	}

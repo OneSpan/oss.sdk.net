@@ -6,7 +6,7 @@ namespace Silanis.ESL.API
 {
 	
 	
-	public class Sender
+	internal class Sender
 	{
 		
 		// Fields

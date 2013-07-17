@@ -1,7 +1,7 @@
 //
 namespace Silanis.ESL.API
 {
-	public enum Scope
+	internal enum Scope
 	{
 		SENDER,DOCUMENT,PACKAGE,ACCOUNT
 	}

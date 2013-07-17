@@ -6,7 +6,7 @@ namespace Silanis.ESL.API
 {
 	
 	
-	public class FooterOptions
+	internal class FooterOptions
 	{
 		
 		// Fields

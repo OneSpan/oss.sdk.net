@@ -1,7 +1,7 @@
 //
 namespace Silanis.ESL.API
 {
-	public enum RoleType
+	internal enum RoleType
 	{
 		SIGNER,SENDER
 	}

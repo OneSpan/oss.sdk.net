@@ -6,7 +6,7 @@ namespace Silanis.ESL.API
 {
 	
 	
-	public class Price
+	internal class Price
 	{
 		
 		// Fields

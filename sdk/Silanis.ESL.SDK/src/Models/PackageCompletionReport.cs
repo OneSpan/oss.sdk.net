@@ -6,7 +6,7 @@ namespace Silanis.ESL.API
 {
 	
 	
-	public class PackageCompletionReport
+	internal class PackageCompletionReport
 	{
 		
 		// Fields

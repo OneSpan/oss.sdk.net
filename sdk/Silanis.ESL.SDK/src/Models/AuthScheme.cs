@@ -1,7 +1,7 @@
 //
 namespace Silanis.ESL.API
 {
-	public enum AuthScheme
+	internal enum AuthScheme
 	{
 		NONE,PROVIDER,CHALLENGE,SMS
 	}

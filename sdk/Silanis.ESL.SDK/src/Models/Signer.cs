@@ -6,7 +6,7 @@ namespace Silanis.ESL.API
 {
 	
 	
-	public class Signer
+	internal class Signer
 	{
 		
 		// Fields

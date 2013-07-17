@@ -6,7 +6,7 @@ namespace Silanis.ESL.API
 {
 	
 	
-	public class Plan
+	internal class Plan
 	{
 		
 		// Fields

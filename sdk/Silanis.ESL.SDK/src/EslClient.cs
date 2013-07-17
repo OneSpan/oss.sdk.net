@@ -1,7 +1,6 @@
 using System;
 using Silanis.ESL.SDK.Internal;
 using Silanis.ESL.SDK.Services;
-using Silanis.ESL.API;
 using Silanis.ESL.SDK.Builder;
 
 namespace Silanis.ESL.SDK
@@ -52,7 +51,7 @@ namespace Silanis.ESL.SDK
 
 		public PackageId CreatePackage (DocumentPackage package)
 		{
-			Package packageToCreate = package.ToAPIPackage ();
+			Silanis.ESL.API.Package packageToCreate = package.ToAPIPackage ();
 			PackageId id = packageService.CreatePackage (packageToCreate);
 
 			foreach (Document document in package.Documents.Values)
@@ -66,6 +65,11 @@ namespace Silanis.ESL.SDK
 		public void SendPackage (PackageId id)
 		{
 			packageService.SendPackage (id);
+		}
+
+		public SessionToken CreateSessionToken(PackageId packageId, string signerId)
+		{
+			return sessionService.CreateSessionToken (packageId, signerId);
 		}
 
 		public byte[] DownloadDocument (PackageId packageId, string documentId)

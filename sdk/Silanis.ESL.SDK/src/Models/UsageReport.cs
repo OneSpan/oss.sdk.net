@@ -6,7 +6,7 @@ namespace Silanis.ESL.API
 {
 	
 	
-	public class UsageReport
+	internal class UsageReport
 	{
 		
 		// Fields

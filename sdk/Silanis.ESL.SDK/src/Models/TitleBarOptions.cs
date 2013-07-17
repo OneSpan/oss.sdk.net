@@ -6,7 +6,7 @@ namespace Silanis.ESL.API
 {
 	
 	
-	public class TitleBarOptions
+	internal class TitleBarOptions
 	{
 		
 		// Fields

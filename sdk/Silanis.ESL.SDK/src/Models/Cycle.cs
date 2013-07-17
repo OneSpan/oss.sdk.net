@@ -1,7 +1,7 @@
 //
 namespace Silanis.ESL.API
 {
-	public enum Cycle
+	internal enum Cycle
 	{
 		DAY,MONTH,YEAR
 	}

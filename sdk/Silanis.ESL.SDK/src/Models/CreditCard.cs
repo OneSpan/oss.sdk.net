@@ -6,7 +6,7 @@ namespace Silanis.ESL.API
 {
 	
 	
-	public class CreditCard
+	internal class CreditCard
 	{
 		
 		// Fields

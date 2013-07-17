@@ -6,7 +6,7 @@ namespace Silanis.ESL.API
 {
 	
 	
-	public class Quota
+	internal class Quota
 	{
 		
 		// Fields

@@ -15,7 +15,7 @@ namespace Silanis.ESL.SDK.Builder
 		private IDictionary<string, Signer> signers = new Dictionary<string, Signer> ();
 		private IDictionary<string, Document> documents = new Dictionary<string, Document>();
 		private PackageId id;
-		private Silanis.ESL.API.PackageStatus status;
+		private DocumentPackageStatus status;
 		private CultureInfo language;
 
 		private PackageBuilder(string packageName)
@@ -30,7 +30,7 @@ namespace Silanis.ESL.SDK.Builder
 			this.autocomplete = package.Autocomplete;
 			this.description = package.Description;
 			this.expiryDate = package.Due;
-			this.status = package.Status;
+			this.status = ConvertPackageStatus(package.Status);
 			this.inPerson = package.Settings.Ceremony.InPerson;
 			this.emailMessage = package.EmailMessage;
 
@@ -48,6 +48,29 @@ namespace Silanis.ESL.SDK.Builder
 				Document document = DocumentBuilder.NewDocumentFromAPIDocument( apiDocument, package ).Build();
 
 				WithDocument( document );
+			}
+		}
+
+		private DocumentPackageStatus ConvertPackageStatus (Silanis.ESL.API.PackageStatus status)
+		{
+			switch (status)
+			{
+			case Silanis.ESL.API.PackageStatus.DRAFT:
+				return DocumentPackageStatus.DRAFT;
+			case Silanis.ESL.API.PackageStatus.SENT:
+				return DocumentPackageStatus.SENT;
+			case Silanis.ESL.API.PackageStatus.COMPLETED:
+				return DocumentPackageStatus.COMPLETED;
+			case Silanis.ESL.API.PackageStatus.ARCHIVED:
+				return DocumentPackageStatus.ARCHIVED;
+			case Silanis.ESL.API.PackageStatus.DECLINED:
+				return DocumentPackageStatus.DECLINED;
+			case Silanis.ESL.API.PackageStatus.OPTED_OUT:
+				return DocumentPackageStatus.OPTED_OUT;
+			case Silanis.ESL.API.PackageStatus.EXPIRED:
+				return DocumentPackageStatus.EXPIRED;
+			default:
+				throw new EslException("Unknown Silanis.ESL.API.PackageStatus value: " + status);
 			}
 		}
 

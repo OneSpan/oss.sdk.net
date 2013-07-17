@@ -6,7 +6,7 @@ namespace Silanis.ESL.API
 {
 	
 	
-	public class GlobalActionsOptions
+	internal class GlobalActionsOptions
 	{
 		
 		// Fields

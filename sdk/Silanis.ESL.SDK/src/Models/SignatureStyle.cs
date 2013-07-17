@@ -6,7 +6,7 @@ namespace Silanis.ESL.API
 {
 	
 	
-	public class SignatureStyle
+	internal class SignatureStyle
 	{
 		
 		// Fields

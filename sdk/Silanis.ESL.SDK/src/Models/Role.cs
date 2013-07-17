@@ -6,7 +6,7 @@ namespace Silanis.ESL.API
 {
 	
 	
-	public class Role
+	internal class Role
 	{
 		
 		// Fields

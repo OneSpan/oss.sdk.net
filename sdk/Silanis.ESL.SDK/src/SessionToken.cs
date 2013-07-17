@@ -10,13 +10,5 @@ namespace Silanis.ESL.SDK
 	{
 		[JsonProperty("sessionToken")]
 		public string Token { get; private set; }
-
-		/// <summary>
-		/// Initializes a new instance of the <see cref="Silanis.ESL.SDK.SessionToken"/> class.
-		/// </summary>
-		public SessionToken ()
-		{
-		}
 	}
 }
-

@@ -6,7 +6,7 @@ namespace Silanis.ESL.API
 {
 	
 	
-	public class SignedDocumentDelivery
+	internal class SignedDocumentDelivery
 	{
 		
 		// Fields

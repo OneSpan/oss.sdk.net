@@ -6,7 +6,7 @@ namespace Silanis.ESL.API
 {
 	
 	
-	public class Result<T>
+	internal class Result<T>
 	{
 		
 		// Fields

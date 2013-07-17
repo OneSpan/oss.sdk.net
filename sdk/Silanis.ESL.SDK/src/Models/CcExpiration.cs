@@ -6,7 +6,7 @@ namespace Silanis.ESL.API
 {
 	
 	
-	public class CcExpiration
+	internal class CcExpiration
 	{
 		
 		// Fields
