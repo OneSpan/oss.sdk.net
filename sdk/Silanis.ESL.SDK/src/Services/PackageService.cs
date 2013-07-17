@@ -282,6 +282,32 @@ namespace Silanis.ESL.SDK.Services
 			}
 		}
 
+		public void NotifySigner (PackageId packageId, string signerEmail, string message)
+		{
+			string path = template.UrlFor (UrlTemplate.NOTIFICATIONS_PATH).Replace ("{packageId}", packageId.Id).Build ();
+			StringWriter sw = new StringWriter ();
+
+			using (JsonWriter json = new JsonTextWriter(sw))
+			{
+				json.Formatting = Formatting.Indented;
+				json.WriteStartObject ();
+				json.WritePropertyName ("email");
+				json.WriteValue (signerEmail);
+				json.WritePropertyName ("message");
+				json.WriteValue (message);
+				json.WriteEndObject ();
+			}
+
+			try
+			{
+				HttpMethods.PostHttp(apiToken, path, Converter.ToBytes (sw.ToString ()));
+			}
+			catch (Exception e)
+			{
+				throw new EslException ("Could not send email notification to signer. Exception: " + e.Message);	
+			}
+		}
+
 		private string GenerateBoundary ()
 		{
 			var chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
