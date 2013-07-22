@@ -172,6 +172,8 @@
     <Compile Include="src\Models\User.cs" />
     <Compile Include="src\Models\ViewSettings.cs" />
     <Compile Include="src\Models\Visibility.cs" />
+    <Compile Include="src\Page.cs" />
+    <Compile Include="src\PageRequest.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSHARP.Targets" />
   <ProjectExtensions>

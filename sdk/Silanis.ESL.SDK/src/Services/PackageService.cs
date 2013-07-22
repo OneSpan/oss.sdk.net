@@ -5,6 +5,7 @@ using System.Text;
 using Newtonsoft.Json;
 using System.Collections.Generic;
 using Silanis.ESL.SDK.Internal;
+using Silanis.ESL.SDK.Builder;
 
 namespace Silanis.ESL.SDK.Services
 {
@@ -306,6 +307,42 @@ namespace Silanis.ESL.SDK.Services
 			{
 				throw new EslException ("Could not send email notification to signer. Exception: " + e.Message);	
 			}
+		}
+
+		public Page<DocumentPackage> GetPackages (DocumentPackageStatus status, PageRequest request)
+		{
+			string path = template.UrlFor (UrlTemplate.PACKAGE_LIST_PATH)
+				.Replace ("{status}", status.ToString ())
+				.Replace ("{from}", request.From.ToString ())
+				.Replace ("{to}", request.To.ToString())
+				.Build();
+
+			try
+			{
+				string response = Converter.ToString (HttpMethods.GetHttp (apiToken, path));
+				Silanis.ESL.API.Result<Silanis.ESL.API.Package> results = JsonConvert.DeserializeObject<Silanis.ESL.API.Result<Silanis.ESL.API.Package>> (response, settings);
+
+				return ConvertToPage(results, request);
+			}
+			catch (Exception e)
+			{
+				Console.WriteLine (e.StackTrace);
+				throw new EslException ("Could not get package list. Exception: " + e.Message);	
+			}
+		}
+
+		private Page<DocumentPackage> ConvertToPage (Silanis.ESL.API.Result<Silanis.ESL.API.Package> results, PageRequest request)
+		{
+			IList<DocumentPackage> converted = new List<DocumentPackage> ();
+
+			foreach (Silanis.ESL.API.Package package in results.Results)
+			{
+				DocumentPackage dp = new PackageBuilder (package).Build ();
+
+				converted.Add (dp);
+			}
+
+			return new Page<DocumentPackage> (converted, results.Count, request);
 		}
 
 		private string GenerateBoundary ()
