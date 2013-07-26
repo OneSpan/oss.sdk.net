@@ -102,6 +102,11 @@ namespace Silanis.ESL.SDK
 			signer.Company = Company;
 			signer.Auth = authentication.ToAPIAuthentication ();
 
+			if (!String.IsNullOrEmpty(Id))
+			{
+				signer.Id = Id;
+			}
+
 			return signer;
 		}
 	}
