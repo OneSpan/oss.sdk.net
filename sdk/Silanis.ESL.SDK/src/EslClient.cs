@@ -62,6 +62,13 @@ namespace Silanis.ESL.SDK
 			return id;
 		}
 
+		public PackageId CreateAndSendPackage( DocumentPackage package ) 
+		{
+			PackageId packageId = CreatePackage (package);
+			SendPackage (packageId);
+			return packageId;
+		}
+
 		public void SendPackage (PackageId id)
 		{
 			packageService.SendPackage (id);
