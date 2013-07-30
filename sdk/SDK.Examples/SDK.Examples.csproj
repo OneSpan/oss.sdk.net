@@ -49,6 +49,7 @@
     <Compile Include="src\GetSigningStatusExample.cs" />
     <Compile Include="src\PackageLanguageExample.cs" />
     <Compile Include="src\GetPackageListExample.cs" />
+    <Compile Include="src\CreatePackageWithVariableNumberOfSignersAndDocuments.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
