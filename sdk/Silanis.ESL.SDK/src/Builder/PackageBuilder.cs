@@ -17,6 +17,7 @@ namespace Silanis.ESL.SDK.Builder
 		private PackageId id;
 		private DocumentPackageStatus status;
 		private CultureInfo language;
+        private DocumentPackageSettings settings;
 
 		private PackageBuilder(string packageName)
 		{
@@ -131,6 +132,17 @@ namespace Silanis.ESL.SDK.Builder
 			return this;
 		}
 
+        public PackageBuilder WithSettings (DocumentPackageSettings settings)
+        {
+            this.settings = settings;
+            return this;
+        }
+
+        public PackageBuilder WithSettings (DocumentPackageSettingsBuilder builder)
+        {
+            return WithSettings(builder.build());
+        }
+    
 		public DocumentPackage Build ()
 		{
 			DocumentPackage package = new DocumentPackage (id, packageName, autocomplete, signers, documents);
@@ -141,6 +153,7 @@ namespace Silanis.ESL.SDK.Builder
 			package.InPerson = inPerson;
 			package.Status = status;
 			package.Language = language;
+            package.Settings = settings;
 			return package;
 		}
 	}

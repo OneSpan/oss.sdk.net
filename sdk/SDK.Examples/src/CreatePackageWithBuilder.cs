@@ -10,6 +10,7 @@ namespace SDK.Examples
 		public static string apiToken = "YOUR TOKEN HERE";
 		public static string baseUrl = "ENVIRONMENT URL HERE";
 
+
 		public static void Main (string[] args)
 		{
 			// Create new esl client with api token and base url
