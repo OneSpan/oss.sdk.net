@@ -9,7 +9,7 @@
     <OutputType>Exe</OutputType>
     <RootNamespace>SDK.Examples</RootNamespace>
     <AssemblyName>SDK.Examples</AssemblyName>
-    <StartupObject>SDK.Examples.PackageSettingsExample</StartupObject>
+    <StartupObject>SDK.Examples.GettingStartedExample</StartupObject>
     <TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -51,6 +51,7 @@
     <Compile Include="src\GetPackageListExample.cs" />
     <Compile Include="src\CreatePackageWithVariableNumberOfSignersAndDocuments.cs" />
     <Compile Include="src\PackageSettingsExample.cs" />
+    <Compile Include="src\GettingStartedExample.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

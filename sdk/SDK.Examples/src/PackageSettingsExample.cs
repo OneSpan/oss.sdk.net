@@ -7,10 +7,9 @@ namespace SDK.Examples
 {
     public class PackageSettingsExample
     {
-        public static string apiToken = "Y2QyOTg1YzUtY2E4MC00M2YyLThhNTMtYjQxZmY5MTQzNmVhOkJzYnAyeXNJQURnSA==";
-        //"YOUR TOKEN HERE";
-        public static string baseUrl = "http://localhost:8080";
-        //"ENVIRONMENT URL HERE";
+        public static string apiToken = "YOUR TOKEN HERE";
+        public static string baseUrl = "ENVIRONMENT URL HERE";
+
         public static void Main (string[] args)
         {
             FileInfo file = new FileInfo (Directory.GetCurrentDirectory() + "/src/document.pdf");
