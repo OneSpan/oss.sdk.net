@@ -27,7 +27,7 @@ namespace SDK.Examples
 					              	.WithSignature(SignatureBuilder.SignatureFor("john.smith@email.com")
 					            		.WithName("AGENT_SIG_1")
 					               		.EnableExtraction())
-					              	.WithField(FieldBuilder.Label()
+					              	.WithInjectedField(FieldBuilder.Label()
 					           			.WithName ("AGENT_SIG_2")
 					           			.WithValue("Value to be stamped")))
 					.Build ();

@@ -14,7 +14,7 @@ namespace Silanis.ESL.SDK.Builder
 		private IList<Signature> signatures = new List<Signature>();
 		private int index;
 		private bool extract;
-		private IList<Field> fields = new List<Field> ();
+		private IList<Field> injectedFields = new List<Field> ();
 
 		private DocumentBuilder(string name)
 		{
@@ -41,7 +41,7 @@ namespace Silanis.ESL.SDK.Builder
 			foreach ( Silanis.ESL.API.Field apiField in apiDocument.Fields ) {
 				FieldBuilder fieldBuilder = FieldBuilder.NewFieldFromAPIField( apiField );
 
-				documentBuilder.WithField( fieldBuilder );
+				documentBuilder.WithInjectedField( fieldBuilder );
 			}
 
 			return documentBuilder;
@@ -103,7 +103,7 @@ namespace Silanis.ESL.SDK.Builder
 			doc.AddSignatures (signatures);
 			doc.Index = index;
 			doc.Extract = extract;
-			doc.AddFields (fields);
+			doc.AddFields (injectedFields);
 			return doc;
 		}
 
@@ -115,14 +115,14 @@ namespace Silanis.ESL.SDK.Builder
 			}
 		}
 
-		public DocumentBuilder WithField (FieldBuilder builder)
+		public DocumentBuilder WithInjectedField (FieldBuilder builder)
 		{
-			return WithField (builder.Build());
+			return WithInjectedField (builder.Build());
 		}
 
-		public DocumentBuilder WithField (Field field)
+		public DocumentBuilder WithInjectedField (Field field)
 		{
-			fields.Add (field);
+			injectedFields.Add (field);
 			return this;
 		}
 	}
