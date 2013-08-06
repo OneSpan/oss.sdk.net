@@ -25,18 +25,11 @@ namespace SDK.Examples
 				              .WithHandOverLinkHref("http://www.google.ca")
 				              .WithHandOverLinkText("click here")
 				              .WithHandOverLinkTooltip("link tooltip")
-
 				              .WithCeremonyLayoutSettings(CeremonyLayoutSettingsBuilder.NewCeremonyLayoutSettings()
 				                            .WithoutProgressBar()
 				                            .WithoutSessionBar()
-				                            .WithoutTitle()
-				                            .WithoutNavigator()
 				                            .WithoutGlobalNavigation()
-				                            .WithoutBreadCrumbs()
-				                            .WithLogoImageLink("sps")
-				                            .WithLogoImageSource("sps") 
-            )
-            )
+				                            .WithoutBreadCrumbs() ) )
 					.WithSigner(SignerBuilder.NewSignerWithEmail("john.smith@email.com")
 					            .WithFirstName("John")
 					            .WithLastName("Smith"))
@@ -47,13 +40,7 @@ namespace SDK.Examples
 					               .AtPosition(100, 100)))
 					.Build();
 
-            PackageId packageId = eslClient.CreatePackage(superDuperPackage);
-            eslClient.SendPackage(packageId);
-            DocumentPackage aPackage = eslClient.GetPackage(packageId);
-
-            DocumentPackageSettings documentPackageSettings = aPackage.Settings;
-
-            Console.Out.WriteLine("AHA");
+            eslClient.CreatePackage(superDuperPackage);
         }
     }
 }

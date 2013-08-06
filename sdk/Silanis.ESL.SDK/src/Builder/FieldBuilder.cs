@@ -79,7 +79,7 @@ namespace Silanis.ESL.SDK.Builder
 			}
 
 			if ( apiField.Extract ) {
-				fieldBuilder.WithExtraction();
+				fieldBuilder.WithPositionExtraction();
 			}
 
 			fieldBuilder.WithValue( apiField.Value );
@@ -125,7 +125,7 @@ namespace Silanis.ESL.SDK.Builder
 			return this;
 		}
 
-		public FieldBuilder WithExtraction ()
+		public FieldBuilder WithPositionExtraction ()
 		{
 			extract = true;
 			return this;
