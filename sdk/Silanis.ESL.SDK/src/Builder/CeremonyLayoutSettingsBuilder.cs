@@ -21,11 +21,29 @@ namespace Silanis.ESL.SDK
 			return this;
 		}
 
+        public CeremonyLayoutSettingsBuilder WithoutIFrame()
+        {
+            iFrame = false;
+            return this;
+        }
+
+        public CeremonyLayoutSettingsBuilder WithBreadCrumbs()
+        {
+            breadCrumbs = true;
+            return this;
+        }
+
 		public CeremonyLayoutSettingsBuilder WithoutBreadCrumbs()
 		{
 			breadCrumbs = false;
 			return this;
 		}
+
+        public CeremonyLayoutSettingsBuilder WithSessionBar()
+        {
+            sessionBar = true;
+            return this;
+        }
 
 		public CeremonyLayoutSettingsBuilder WithoutSessionBar()
 		{
@@ -33,11 +51,23 @@ namespace Silanis.ESL.SDK
 			return this;
 		}
 
+        public CeremonyLayoutSettingsBuilder WithGlobalNavigation()
+        {
+            globalNavigation = true;
+            return this;
+        }
+
 		public CeremonyLayoutSettingsBuilder WithoutGlobalNavigation()
 		{
 			globalNavigation = false;
 			return this;
 		}
+
+        public CeremonyLayoutSettingsBuilder WithProgressBar()
+        {
+            progressBar = true;
+            return this;
+        }
 
 		public CeremonyLayoutSettingsBuilder WithoutProgressBar()
 		{
@@ -45,11 +75,23 @@ namespace Silanis.ESL.SDK
 			return this;
 		}
 
+        public CeremonyLayoutSettingsBuilder WithTitle()
+        {
+            showTitle = true;
+            return this;
+        }
+
 		public CeremonyLayoutSettingsBuilder WithoutTitle()
 		{
 			showTitle = false;
 			return this;
 		}
+
+        public CeremonyLayoutSettingsBuilder WithNavigator()
+        {
+            navigator = true;
+            return this;
+        }
 
 		public CeremonyLayoutSettingsBuilder WithoutNavigator()
 		{

@@ -25,6 +25,12 @@ namespace Silanis.ESL.SDK
 		{
 		}
 
+        public DocumentPackageSettingsBuilder WithDialogOnComplete()
+        {
+            showDialogOnComplete = true;
+            return this;
+        }
+
 		public DocumentPackageSettingsBuilder WithoutDialogOnComplete()
 		{
 			showDialogOnComplete = false;
@@ -66,10 +72,20 @@ namespace Silanis.ESL.SDK
 			return this;
 		}
 
+        public DocumentPackageSettingsBuilder WithWatermark() {
+            hideWatermark = false;
+            return this;
+        }
+
 		public DocumentPackageSettingsBuilder WithoutWatermark() {
 			hideWatermark = true;
 			return this;
 		}
+
+        public DocumentPackageSettingsBuilder WithCaptureText() {
+            hideCaptureText = false;
+            return this;
+        }
 
 		public DocumentPackageSettingsBuilder WithoutCaptureText() {
 			hideCaptureText = true;
