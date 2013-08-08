@@ -41,11 +41,6 @@ namespace Silanis.ESL.SDK
 				baseUrl = baseUrl.Remove (baseUrl.Length - 1);
 			}
 
-			if (!baseUrl.EndsWith ("/aws/rest/services")) 
-			{
-				baseUrl += "/aws/rest/services";
-			}
-
 			return baseUrl;
 		}
 

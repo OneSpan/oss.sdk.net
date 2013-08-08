@@ -29,7 +29,7 @@ namespace SDK.Examples
 					               		.EnableExtraction()                                    
 					               		.WithField(FieldBuilder.SignatureDate()
 					           				.WithName("AGENT_SIG_2")
-					           				.WithPositionExtraction())))
+					           				.WithPositionExtracted())))
 					.Build ();
 
 			PackageId id = client.CreatePackage (package);
