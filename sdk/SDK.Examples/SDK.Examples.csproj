@@ -9,7 +9,7 @@
     <OutputType>Exe</OutputType>
     <RootNamespace>SDK.Examples</RootNamespace>
     <AssemblyName>SDK.Examples</AssemblyName>
-    <StartupObject>SDK.Examples.FieldInjectionExample</StartupObject>
+    <StartupObject>SDK.Examples.ConsentExample</StartupObject>
     <TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -53,6 +53,7 @@
     <Compile Include="src\PackageSettingsExample.cs" />
     <Compile Include="src\GettingStartedExample.cs" />
     <Compile Include="src\FieldInjectionExample.cs" />
+    <Compile Include="src\ConsentExample.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

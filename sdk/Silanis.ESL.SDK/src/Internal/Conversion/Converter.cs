@@ -105,14 +105,16 @@ namespace Silanis.ESL.SDK.Internal.Conversion
 		private Silanis.ESL.API.FieldSubtype GetSignatureSubtype(Signature signature) {
 			switch (signature.Style) 
 			{
-			case SignatureStyle.FULL_NAME:
-				return Silanis.ESL.API.FieldSubtype.FULLNAME;
-			case SignatureStyle.HAND_DRAWN:
-				return Silanis.ESL.API.FieldSubtype.CAPTURE;
-			case SignatureStyle.INITIALS:
-				return Silanis.ESL.API.FieldSubtype.INITIALS;
-			default:
-				throw new EslException("Unknown SignatureStyle value: " + signature.Style );
+    			case SignatureStyle.FULL_NAME:
+    				return Silanis.ESL.API.FieldSubtype.FULLNAME;
+    			case SignatureStyle.HAND_DRAWN:
+    				return Silanis.ESL.API.FieldSubtype.CAPTURE;
+    			case SignatureStyle.INITIALS:
+    				return Silanis.ESL.API.FieldSubtype.INITIALS;
+                case SignatureStyle.ACCEPTANCE:
+                    return Silanis.ESL.API.FieldSubtype.FULLNAME;
+    			default:
+    				throw new EslException("Unknown SignatureStyle value: " + signature.Style );
 			}
 		}
 	}

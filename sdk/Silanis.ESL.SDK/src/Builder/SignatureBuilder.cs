@@ -25,6 +25,15 @@ namespace Silanis.ESL.SDK.Builder
 			this.signerEmail = signerEmail;
 		}
 
+        public static SignatureBuilder AcceptanceFor (string signerEmail)
+        {
+            return new SignatureBuilder(signerEmail)
+                .WithStyle(SignatureStyle.ACCEPTANCE)
+                    .WithSize(0,0)
+                    .AtPosition(0,0)
+                    .OnPage(0);
+        }
+
 		public static SignatureBuilder SignatureFor (string signerEmail)
 		{
 			return new SignatureBuilder (signerEmail);
