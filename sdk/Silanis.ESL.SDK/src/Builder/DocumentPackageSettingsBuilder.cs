@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using Silanis.ESL.SDK.Internal;
 
 namespace Silanis.ESL.SDK
 {
@@ -94,7 +95,16 @@ namespace Silanis.ESL.SDK
 
 		public DocumentPackageSettingsBuilder WithHandOverLinkHref( String href )
 		{
+            Asserts.NotEmptyOrNull(href, "href");
+
 			linkHref = href;
+
+            //If no protocol was specified, we assume https
+            if (!linkHref.StartsWith("http://") && !linkHref.StartsWith("https://"))
+            {
+                linkHref = "https://" + linkHref;
+            }
+
 			return this;
 		}
 
