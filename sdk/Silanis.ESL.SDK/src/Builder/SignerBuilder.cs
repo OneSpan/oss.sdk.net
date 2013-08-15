@@ -17,6 +17,7 @@ namespace Silanis.ESL.SDK.Builder
 		private string id;
 		private bool canChangeSigner;
 		private bool locked;
+        private string roleId;
 
 		private SignerBuilder(string signerEmail)
 		{
@@ -29,6 +30,7 @@ namespace Silanis.ESL.SDK.Builder
 
 			SignerBuilder builder = SignerBuilder.NewSignerWithEmail( eslSigner.Email )
 					.WithId ( eslSigner.Id )					
+                    .WithRoleId( role.Id )
 					.WithFirstName( eslSigner.FirstName )
 					.WithLastName( eslSigner.LastName )
 					.WithCompany( eslSigner.Company )
@@ -92,6 +94,12 @@ namespace Silanis.ESL.SDK.Builder
 			return this;
 		}
 
+        public SignerBuilder WithRoleId ( string roleId )
+        {
+            this.roleId = roleId;
+            return this;
+        }
+
 		public SignerBuilder ChallengedWithQuestions (ChallengeBuilder challengeBuilder)
 		{
 			this.authenticationBuilder = challengeBuilder;
@@ -144,6 +152,7 @@ namespace Silanis.ESL.SDK.Builder
 			signer.CanChangeSigner = canChangeSigner;
 			signer.Id = id;
 			signer.Locked = locked;
+            signer.RoleId = roleId;
 			return signer;
 		}
 	}

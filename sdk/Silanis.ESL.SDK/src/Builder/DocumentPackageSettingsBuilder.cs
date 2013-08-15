@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using Silanis.ESL.SDK.Internal;
+using Silanis.ESL.API;
 
 namespace Silanis.ESL.SDK
 {
@@ -164,6 +165,40 @@ namespace Silanis.ESL.SDK
         {
             return new DocumentPackageSettingsBuilder();
         }
+
+        internal DocumentPackageSettingsBuilder( PackageSettings apiPackageSettings )
+        {
+            enableInPerson = apiPackageSettings.Ceremony.InPerson;
+            enableOptOut = apiPackageSettings.Ceremony.OptOutButton;
+            enableDecline = apiPackageSettings.Ceremony.DeclineButton;
+            hideWatermark = apiPackageSettings.Ceremony.HideWatermark;
+            hideCaptureText = apiPackageSettings.Ceremony.HideCaptureText;
+
+            foreach (string reason in apiPackageSettings.Ceremony.OptOutReasons)
+            {
+                optOutReasons.Add(reason);
+            }
+
+            maxAuthAttempts = apiPackageSettings.Ceremony.MaxAuthFailsAllowed;
+
+            if (apiPackageSettings.Ceremony.DocumentToolbarOptions != null)
+            {
+                showDownloadButton = apiPackageSettings.Ceremony.DocumentToolbarOptions.DownloadButton;
+            }
+
+            if (apiPackageSettings.Ceremony.Events != null && apiPackageSettings.Ceremony.Events.Complete != null)
+            {
+                showDialogOnComplete = apiPackageSettings.Ceremony.Events.Complete.Dialog;
+            }
+
+            if (apiPackageSettings.Ceremony.HandOver != null)
+            {
+                linkHref = apiPackageSettings.Ceremony.HandOver.Href;
+                linkText = apiPackageSettings.Ceremony.HandOver.Text;
+                linkTooltip = apiPackageSettings.Ceremony.HandOver.Title;
+            }
+        }
+
 	}
 }
 

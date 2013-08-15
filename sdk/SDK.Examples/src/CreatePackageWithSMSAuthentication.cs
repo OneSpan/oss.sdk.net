@@ -19,7 +19,6 @@ namespace SDK.Examples
 					.DescribedAs ("This is a new package")
 					.ExpiresOn(DateTime.Now.AddDays(5))
 					.WithEmailMessage("This message should appear in email invitation to signers")
-					.InPerson(true)
 					.WithSigner(SignerBuilder.NewSignerWithEmail("john.smith@email.com")
 					            .WithFirstName("John")
 					            .WithLastName("Smith")

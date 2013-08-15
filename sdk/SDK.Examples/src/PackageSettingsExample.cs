@@ -30,17 +30,18 @@ namespace SDK.Examples
 				                            .WithoutSessionBar()
 				                            .WithoutGlobalNavigation()
 				                            .WithoutBreadCrumbs() ) )
-					.WithSigner(SignerBuilder.NewSignerWithEmail("john.smith@email.com")
+                    .WithSigner(SignerBuilder.NewSignerWithEmail("john.smith@email.com")
 					            .WithFirstName("John")
 					            .WithLastName("Smith"))
 					.WithDocument(DocumentBuilder.NewDocumentNamed("First Document")
 					              .FromFile(file.FullName)
-					              .WithSignature(SignatureBuilder.SignatureFor("john.smith@email.com")
+                                   .WithSignature(SignatureBuilder.SignatureFor("john.smith@email.com")
 					               .OnPage(0)
 					               .AtPosition(100, 100)))
 					.Build();
 
-            eslClient.CreatePackage(superDuperPackage);
+            PackageId packageId = eslClient.CreatePackage(superDuperPackage);
+            DocumentPackage customPackage = eslClient.GetPackage(packageId);
         }
     }
 }

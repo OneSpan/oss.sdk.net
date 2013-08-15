@@ -11,7 +11,6 @@ namespace Silanis.ESL.SDK.Builder
 		private bool autocomplete = true;
 		private Nullable<DateTime> expiryDate;
 		private string emailMessage = String.Empty;
-		private bool inPerson;
 		private IDictionary<string, Signer> signers = new Dictionary<string, Signer> ();
 		private IDictionary<string, Document> documents = new Dictionary<string, Document>();
 		private PackageId id;
@@ -32,8 +31,8 @@ namespace Silanis.ESL.SDK.Builder
 			this.description = package.Description;
 			this.expiryDate = package.Due;
 			this.status = ConvertPackageStatus(package.Status);
-			this.inPerson = package.Settings.Ceremony.InPerson;
 			this.emailMessage = package.EmailMessage;
+            this.settings = new DocumentPackageSettingsBuilder(package.Settings).build();
 
 			foreach ( Silanis.ESL.API.Role role in package.Roles ) {
 				if ( role.Signers.Count == 0 ) {
@@ -104,12 +103,6 @@ namespace Silanis.ESL.SDK.Builder
 			return this;
 		}
 
-		public PackageBuilder InPerson (bool inPerson)
-		{
-			this.inPerson = inPerson;
-			return this;
-		}
-
 		public PackageBuilder WithSigner (SignerBuilder builder)
 		{
 			return WithSigner (builder.Build());
@@ -150,7 +143,6 @@ namespace Silanis.ESL.SDK.Builder
 			package.Description = description;
 			package.ExpiryDate = expiryDate;
 			package.EmailMessage = emailMessage;
-			package.InPerson = inPerson;
 			package.Status = status;
 			package.Language = language;
             package.Settings = settings;

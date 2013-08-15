@@ -76,12 +76,6 @@ namespace Silanis.ESL.SDK
             set;
         }
 
-        public bool InPerson
-        {
-            get;
-            set;
-        }
-
         public DocumentPackageSettings Settings
         {
             get;
@@ -103,14 +97,9 @@ namespace Silanis.ESL.SDK
                 package.Language = Language.TwoLetterISOLanguageName;
             }
 
-            if (InPerson)
+            if (Settings != null)
             {
-                Silanis.ESL.API.PackageSettings settings = new Silanis.ESL.API.PackageSettings();
-                Silanis.ESL.API.CeremonySettings ceremonySettings = new Silanis.ESL.API.CeremonySettings();
-
-                ceremonySettings.InPerson = InPerson;
-                settings.Ceremony = ceremonySettings;
-                package.Settings = settings;
+                package.Settings = Settings.toAPIPackageSettings();
             }
 
             int signerCount = 1;
@@ -118,11 +107,19 @@ namespace Silanis.ESL.SDK
             {
                 Silanis.ESL.API.Role role = new Silanis.ESL.API.Role();
 
-                role.Id = "role" + signerCount;
                 role.Name = "signer" + signerCount;
                 role.AddSigner(signer.ToAPISigner());
                 role.Index = signer.SigningOrder;
                 role.Reassign = signer.CanChangeSigner;
+
+                if (String.IsNullOrEmpty(signer.RoleId))
+                {
+                    role.Id = "role" + signerCount;
+                }
+                else
+                {
+                    role.Id = signer.RoleId;
+                }
 
                 if (!String.IsNullOrEmpty(signer.Message))
                 {

@@ -160,12 +160,19 @@ namespace Silanis.ESL.SDK
 				ceremonySettings.OptOutButton = enableOptOut.Value;	
 
 			if ( enableDecline != null )
-			ceremonySettings.DeclineButton = enableDecline.Value;
-			ceremonySettings.HideWatermark = hideWatermark.Value;
-			ceremonySettings.HideCaptureText = hideCaptureText.Value;
+			    ceremonySettings.DeclineButton = enableDecline.Value;
+
+            if ( hideWatermark != null )
+			    ceremonySettings.HideWatermark = hideWatermark.Value;
+
+            if ( hideCaptureText != null )
+			    ceremonySettings.HideCaptureText = hideCaptureText.Value;
+
 			foreach ( string reason in optOutReasons )
 				ceremonySettings.OptOutReasons.Add( reason );
-			ceremonySettings.MaxAuthFailsAllowed = maxAuthAttempts.Value;
+
+            if ( maxAuthAttempts != null )
+			    ceremonySettings.MaxAuthFailsAllowed = maxAuthAttempts.Value;
 
 			if ( linkHref != null ) {
 				Link link = new Link();
