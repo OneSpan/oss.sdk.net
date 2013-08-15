@@ -1,50 +1,33 @@
 <?xml version="1.0"?>
-<project name="Silanis.ESL.SDK.Net" default="build" basedir=".">
-    <property name="ESL-version" value="9.4" />
-    <property name="ESL-SDK" value="Silanis.ESL.SDK" />
-    <property name="build.dir" value="bin" />
+<project name="Silanis.ESL.SDK.Net" default="package" basedir=".">    
+    <property name="ESL-SDK" value="Silanis.ESL.SDK" />    
     <property name="source.dir" value="Silanis.ESL.SDK" />
-    <property name="reference.dir" value="References" />
+	<property name="output.dir" value="${source.dir}/bin/Release" />    
     <property name="parent.dir" value="${directory::get-parent-directory(project::get-base-directory())}" />
-    <property name="zip.file" value="${parent.dir}/${ESL-SDK}-${ESL-version}.zip" />
+    <property name="zip.file" value="${parent.dir}/${ESL-SDK}.zip" />
 
     <target name="clean" decription="Delete bin folder and zip file">
         <delete>
-            <fileset basedir="${parent.dir}">
-                <include name="**/bin/**" />
+            <fileset basedir="${parent.dir}">                
                 <include name="${zip.file}" />
             </fileset>
         </delete>
     </target>
-
-    <target name="build" description="Compiles the source code and create dll and xml file in bin folder">
-       <mkdir dir="${build.dir}/" />
-       <csc target="library" output="${build.dir}/${ESL-SDK}-${ESL-version}.dll" doc="${build.dir}/${ESL-SDK}-${ESL-version}.xml">
-            <sources>
-                <include name="${source.dir}/**/*.cs" />
-            </sources>
-            <references basedir="References">
-                <include name="System.dll" />
-                <include name="Newtonsoft.Json.dll" />
-            </references>
-            <nowarn>
-                <warning number="1591"></warning>
-            </nowarn>
-        </csc>
+	
+	<target name="build" description="Compiles the source code and create dll and xml file in bin folder">       
+       
+	   <msbuild project="${source.dir}/Silanis.ESL.SDK.csproj" target="Clean;Rebuild">
+			<property name="Configuration" value="Release"/>
+			<property name="TargetFrameworkVersion" value="v2.0"/>
+	   </msbuild>
+				
     </target>
 
     <target name="package" decription="Package dll, references and examples to a zip file" depends="build">
         <zip zipfile="${zip.file}">
-            <fileset basedir="${parent.dir}">
-                <include name="VB_example/*" />
-                <include name="C#_example/*" />
-            </fileset>
-            <fileset basedir="${build.dir}">
+            <fileset basedir="${output.dir}">
                 <include name="/*.dll" />
                 <include name="/*.xml" />
-            </fileset>
-            <fileset>
-                <include name="${reference.dir}/*" />
             </fileset>
         </zip>
     </target>
