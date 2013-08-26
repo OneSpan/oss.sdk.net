@@ -189,6 +189,7 @@ namespace Silanis.ESL.SDK
 					ceremonyEventComplete.Dialog = showDialogOnComplete.Value;
 
 				ceremonyEvents.Complete = ceremonyEventComplete;
+                ceremonySettings.Events = ceremonyEvents;
 			}
 
 			if ( showDownloadButton != null ) {

@@ -25,6 +25,7 @@ namespace SDK.Examples
 				              .WithHandOverLinkHref("http://www.google.ca")
 				              .WithHandOverLinkText("click here")
 				              .WithHandOverLinkTooltip("link tooltip")
+                              .WithDialogOnComplete()
 				              .WithCeremonyLayoutSettings(CeremonyLayoutSettingsBuilder.NewCeremonyLayoutSettings()
 				                            .WithoutProgressBar()
 				                            .WithoutSessionBar()
@@ -40,8 +41,7 @@ namespace SDK.Examples
 					               .AtPosition(100, 100)))
 					.Build();
 
-            PackageId packageId = eslClient.CreatePackage(superDuperPackage);
-            DocumentPackage customPackage = eslClient.GetPackage(packageId);
+            eslClient.CreateAndSendPackage(superDuperPackage);
         }
     }
 }
