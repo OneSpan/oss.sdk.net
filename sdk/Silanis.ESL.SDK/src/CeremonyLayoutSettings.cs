@@ -49,6 +49,48 @@ namespace Silanis.ESL.SDK
 			}
 		}
 
+        private Nullable<bool> showGlobalSaveAsLayoutButton;
+
+        public Nullable<bool> ShowGlobalSaveAsLayoutButton
+        {
+            get
+            {
+                return showGlobalSaveAsLayoutButton;
+            }
+            set
+            {
+                showGlobalSaveAsLayoutButton = value;
+            }
+        }
+
+        private Nullable<bool> showGlobalDownloadButton;
+
+        public Nullable<bool> ShowGlobalDownloadButton
+        {
+            get
+            {
+                return showGlobalDownloadButton;
+            }
+            set
+            {
+                showGlobalDownloadButton = value;
+            }
+        }
+
+        private Nullable<bool> showGlobalConfirmButton;
+
+        public Nullable<bool> ShowGlobalConfirmButton
+        {
+            get
+            {
+                return showGlobalConfirmButton;
+            }
+            set
+            {
+                showGlobalConfirmButton = value;
+            }
+        }
+
 		private Nullable<bool> progressBar;
 
 		public Nullable<bool> ProgressBar {
@@ -131,6 +173,21 @@ namespace Silanis.ESL.SDK
 			if (titleBarOptions != null) {
 				headerOptions.TitleBar = titleBarOptions;
 			}
+            GlobalActionsOptions globalActionsOptions = new GlobalActionsOptions();
+
+            if (showGlobalConfirmButton != null)
+            {
+                globalActionsOptions.Confirm = showGlobalConfirmButton.Value;
+            }
+            if (showGlobalDownloadButton != null)
+            {
+                globalActionsOptions.Download = showGlobalDownloadButton.Value;
+            }
+            if (ShowGlobalSaveAsLayoutButton != null)
+            {
+                globalActionsOptions.SaveAsLayout = showGlobalSaveAsLayoutButton.Value;
+            }
+            headerOptions.GlobalActions = globalActionsOptions;
 
 			BrandingBarOptions brandingBarOptions = null;
 			if ( logoImageLink != null || logoImageSource != null ) {

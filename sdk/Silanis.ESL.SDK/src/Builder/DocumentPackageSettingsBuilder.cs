@@ -14,7 +14,7 @@ namespace Silanis.ESL.SDK
 		private Nullable<bool> hideCaptureText = null;
 		private List<string> optOutReasons = new List<string>();
 		private Nullable<int> maxAuthAttempts = null;
-		private Nullable<bool> showDownloadButton = true;
+		private Nullable<bool> showDocumentToolbarDownloadButton = true;
 		private Nullable<bool> showDialogOnComplete = null;
 
 		private string linkText = null;
@@ -26,6 +26,18 @@ namespace Silanis.ESL.SDK
 		private DocumentPackageSettingsBuilder ()
 		{
 		}
+
+        public DocumentPackageSettingsBuilder WithoutDocumentToolbarDownloadButton()
+        {
+            showDocumentToolbarDownloadButton = false;
+            return this;
+        }
+
+        public DocumentPackageSettingsBuilder WithDocumentToolbarDownloadButton()
+        {
+            showDocumentToolbarDownloadButton = true;
+            return this;
+        }
 
         public DocumentPackageSettingsBuilder WithDialogOnComplete()
         {
@@ -150,7 +162,7 @@ namespace Silanis.ESL.SDK
 			foreach ( string reason in optOutReasons )
 				result.OptOutReasons.Add( reason );
 			result.MaxAuthAttempts = maxAuthAttempts;
-			result.ShowDownloadButton = showDownloadButton;
+			result.ShowDownloadButton = showDocumentToolbarDownloadButton;
 			result.ShowDialogOnComplete = showDialogOnComplete;
 			result.LinkHref = linkHref;
 			result.LinkText = linkText;
@@ -183,7 +195,7 @@ namespace Silanis.ESL.SDK
 
             if (apiPackageSettings.Ceremony.DocumentToolbarOptions != null)
             {
-                showDownloadButton = apiPackageSettings.Ceremony.DocumentToolbarOptions.DownloadButton;
+                showDocumentToolbarDownloadButton = apiPackageSettings.Ceremony.DocumentToolbarOptions.DownloadButton;
             }
 
             if (apiPackageSettings.Ceremony.Events != null && apiPackageSettings.Ceremony.Events.Complete != null)
