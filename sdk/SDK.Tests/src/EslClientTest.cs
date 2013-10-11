@@ -8,13 +8,6 @@ namespace SDK.Tests
 	public class EslClientTest
 	{
 		[Test]
-		public void AppendsServicePathToURL()
-		{
-			Assert.AreEqual ("http://localhost/aws/rest/services", new EslClient ("API KEY", "http://localhost").BaseUrl);
-			Assert.AreEqual ("http://localhost/aws/rest/services", new EslClient ("API KEY", "http://localhost/").BaseUrl);
-		}
-
-		[Test]
 		[ExpectedException(typeof(EslException))]
 		public void CannotCreateClientWithNullAPIKey()
 		{

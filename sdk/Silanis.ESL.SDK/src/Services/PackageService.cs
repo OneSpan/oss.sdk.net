@@ -52,7 +52,6 @@ namespace Silanis.ESL.SDK.Services
 			} catch (Exception e) {
 				throw new EslException ("Could not create a new package." + " Exception: " + e.Message);
 			}
-
 		}
 
 		/// <summary>
