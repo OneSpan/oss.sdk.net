@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using Silanis.ESL.API;
 
 namespace Silanis.ESL.SDK
 {
@@ -107,6 +108,9 @@ namespace Silanis.ESL.SDK
 			signer.Title = Title;
 			signer.Company = Company;
 			signer.Auth = authentication.ToAPIAuthentication ();
+
+            signer.Delivery = new Delivery();
+            signer.Delivery.Email = DeliverSignedDocumentsByEmail;
 
 			if (!String.IsNullOrEmpty(Id))
 			{

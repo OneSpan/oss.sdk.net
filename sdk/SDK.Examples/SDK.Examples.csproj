@@ -9,7 +9,7 @@
     <OutputType>Exe</OutputType>
     <RootNamespace>SDK.Examples</RootNamespace>
     <AssemblyName>SDK.Examples</AssemblyName>
-    <StartupObject>SDK.Examples.PackageSettingsExample</StartupObject>
+    <StartupObject>SDK.Examples.DocumentDeliveryByEmailExample</StartupObject>
     <TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -55,6 +55,7 @@
     <Compile Include="src\FieldInjectionExample.cs" />
     <Compile Include="src\ConsentExample.cs" />
     <Compile Include="src\DocumentRetrievalExample.cs" />
+    <Compile Include="src\DocumentDeliveryByEmailExample.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

@@ -49,6 +49,10 @@ namespace Silanis.ESL.SDK.Builder
 				builder.Lock();
 			}
 
+            if (eslSigner.Delivery != null && eslSigner.Delivery.Email) {
+                builder.DeliverSignedDocumentsByEmail();
+            }
+
 			return builder;
 		}
 
