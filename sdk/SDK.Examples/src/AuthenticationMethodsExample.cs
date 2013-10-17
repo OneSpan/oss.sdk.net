@@ -17,7 +17,6 @@ namespace SDK.Examples
         private string email3;
         private string sms3;
         private Stream fileStream1;
-        private Stream fileStream2;
 
         public AuthenticationMethodsExample( Props props ) 
             : this(props.Get("api.url"), 

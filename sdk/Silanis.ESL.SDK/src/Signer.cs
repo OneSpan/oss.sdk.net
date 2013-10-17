@@ -107,6 +107,11 @@ namespace Silanis.ESL.SDK
 			signer.Title = Title;
 			signer.Company = Company;
 			signer.Auth = authentication.ToAPIAuthentication ();
+            if (DeliverSignedDocumentsByEmail)
+            {
+                signer.Delivery = new Silanis.ESL.API.Delivery();
+                signer.Delivery.Email = DeliverSignedDocumentsByEmail;
+            }
 
 			if (!String.IsNullOrEmpty(Id))
 			{

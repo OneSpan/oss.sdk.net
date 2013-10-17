@@ -102,7 +102,7 @@ namespace Silanis.ESL.SDK.Services
                 .Build ();
 
 			try {
-                restClient.delete(path);
+                restClient.Delete(path);
 			} catch (Exception e) {
 				throw new EslException ("Could not delete document from package." + " Exception: " + e.Message);
 			}
@@ -140,7 +140,7 @@ namespace Silanis.ESL.SDK.Services
 					.Build ();
 
 			try {
-                return restClient.Get(path);
+                return restClient.GetBytes(path);
 			} catch (Exception e) {
 				throw new EslException ("Could not download the pdf document." + " Exception: " + e.Message);
 			}
@@ -203,7 +203,7 @@ namespace Silanis.ESL.SDK.Services
 				byte[] content = CreateMultipartContent (fileName, fileBytes, payloadBytes, boundary);
 
                 restClient.PostMultipartFile(path, content, boundary);
-				Converter.ToString (HttpMethods.MultipartPostHttp (apiToken, path, content, boundary));
+//				Converter.ToString (HttpMethods.MultipartPostHttp (apiToken, path, content, boundary));
 			} catch (Exception e) {
 				throw new EslException ("Could not upload document to package." + " Exception: " + e.Message);
 			}
@@ -248,7 +248,7 @@ namespace Silanis.ESL.SDK.Services
 				.Build();
 
 			try {
-				string response = Converter.ToString (HttpMethods.GetHttp (apiToken, path));
+                string response = restClient.Get(path);
 				JsonTextReader reader = new JsonTextReader(new StringReader(response));
 
 				//Loop 'till we get to the status value
@@ -268,7 +268,7 @@ namespace Silanis.ESL.SDK.Services
 
 			try
 			{
-				HttpMethods.DeleteHttp(apiToken, path);
+                restClient.Delete(path);
 			}
 			catch (Exception e)
 			{
@@ -294,7 +294,7 @@ namespace Silanis.ESL.SDK.Services
 
 			try
 			{
-				HttpMethods.PostHttp(apiToken, path, Converter.ToBytes (sw.ToString ()));
+                restClient.Post(path, sw.ToString());
 			}
 			catch (Exception e)
 			{
@@ -312,7 +312,7 @@ namespace Silanis.ESL.SDK.Services
 
 			try
 			{
-				string response = Converter.ToString (HttpMethods.GetHttp (apiToken, path));
+                string response = restClient.Get(path);
 				Silanis.ESL.API.Result<Silanis.ESL.API.Package> results = JsonConvert.DeserializeObject<Silanis.ESL.API.Result<Silanis.ESL.API.Package>> (response, settings);
 
 				return ConvertToPage(results, request);

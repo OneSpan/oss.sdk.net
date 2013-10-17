@@ -27,13 +27,13 @@ namespace SDK.Examples
             string documentId = "myDocumentId";
             DocumentPackage package = PackageBuilder.NewPackageNamed ("DocumentRetrievalExample " + DateTime.Now)
                 .DescribedAs ("This is a new package")
-                    .WithSigner(SignerBuilder.NewSignerWithEmail("email1")
+                    .WithSigner(SignerBuilder.NewSignerWithEmail(email1)
                                 .WithFirstName("John")
                                 .WithLastName("Smith"))
                     .WithDocument(DocumentBuilder.NewDocumentNamed("My Document")
                                   .FromStream(fileStream1, DocumentType.PDF)
                                   .WithId(documentId)
-                                  .WithSignature(SignatureBuilder.SignatureFor("email1")
+                                  .WithSignature(SignatureBuilder.SignatureFor(email1)
                                    .OnPage(0)
                                    .AtPosition (100, 100)))
                     .Build ();

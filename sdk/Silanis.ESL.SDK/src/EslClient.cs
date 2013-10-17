@@ -35,7 +35,7 @@ namespace Silanis.ESL.SDK
 			sessionService = new SessionService (apiKey, this.baseUrl);
 			fieldSummaryService = new FieldSummaryService (apiKey, this.baseUrl);
 			auditService = new AuditService (apiKey, this.baseUrl);
-            eventNotificationService = new EventNotificationService(apiKey, this.baseUrl);
+            eventNotificationService = new EventNotificationService(restClient, this.baseUrl);
 		}
 
 		private String AppendServicePath(string baseUrl)

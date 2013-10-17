@@ -25,7 +25,8 @@ namespace Silanis.ESL.SDK
         }
 
         public string PostMultipartFile(string path, byte[] fileBytes, string boundary) {
-            HttpMethods.MultipartPostHttp(apiToken, path, fileBytes, boundary);
+            byte[] responseBytes = HttpMethods.MultipartPostHttp(apiToken, path, fileBytes, boundary);
+            return Converter.ToString(responseBytes);
         }
 
 //        private static <T> T Execute() {
@@ -40,7 +41,7 @@ namespace Silanis.ESL.SDK
             return HttpMethods.GetHttp(apiToken, path);
         }
 
-        public string delete(string path) {
+        public string Delete(string path) {
             byte[] responseBytes = HttpMethods.DeleteHttp(apiToken, path);
             return Converter.ToString(responseBytes);
         }

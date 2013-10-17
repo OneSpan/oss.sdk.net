@@ -32,6 +32,10 @@ namespace Silanis.ESL.SDK.Internal
 		public static readonly string EVIDENCE_SUMMARY_PATH = "/packages/{packageId}/evidence/summary";
 		public static readonly string SIGNING_STATUS_PATH = "/packages/{packageId}/signingStatus?signer={signerId}&document={documentId}";
 
+
+        // Event Notification Service
+        public static readonly string CALLBACK_PATH = "/callback";
+
 		// Audit Service
 		public static readonly string AUDIT_PATH = "/packages/{packageId}/audit";
 

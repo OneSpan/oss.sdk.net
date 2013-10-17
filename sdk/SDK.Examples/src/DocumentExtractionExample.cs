@@ -28,7 +28,7 @@ namespace SDK.Examples
             DocumentPackage package = PackageBuilder.NewPackageNamed("C# DocumentExtractionExample " + DateTime.Now)
                 .DescribedAs("This is a new package")
                     .WithSigner(SignerBuilder.NewSignerWithEmail(email1)
-                                .WithRoleId("Signer1")
+                                .WithCustomId("Signer1")
                                 .WithCustomId("Signer1")
                                 .WithFirstName("John")
                                 .WithLastName("Smith"))
