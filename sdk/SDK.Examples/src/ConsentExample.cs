@@ -9,8 +9,6 @@ namespace SDK.Examples
     {
         public static void Main (string[] args)
         {
-            Console.Out.WriteLine("WTF");
-            Props props = Props.GetInstance();
             new ConsentExample(Props.GetInstance()).Run();
         }
 
@@ -42,7 +40,7 @@ namespace SDK.Examples
                     .WithDocument(DocumentBuilder.NewDocumentNamed( "Custom Consent Document" )
                                   .FromStream(fileStream1, DocumentType.PDF)
                                   .WithSignature(SignatureBuilder.AcceptanceFor( email1 ) ) )
-                    .WithDocument(DocumentBuilder.NewDocumentNamed("My Document")
+                    .WithDocument(DocumentBuilder.NewDocumentNamed( "Regular Document" )
                                   .FromStream(fileStream2, DocumentType.PDF)
                                   .WithSignature(SignatureBuilder.SignatureFor(email1)
                                    .OnPage(0)
@@ -52,7 +50,7 @@ namespace SDK.Examples
             PackageId id = eslClient.CreatePackage (package);
             eslClient.SendPackage(id);
 
-            package = eslClient.GetPackage(id);
+            DocumentPackage retrievedPackage = eslClient.GetPackage(id);
         }
     }
 }

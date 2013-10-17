@@ -25,7 +25,7 @@ namespace Silanis.ESL.SDK
             return this;
         }
 
-        public CeremonyLayoutSettingsBuilder WithoutGlobalDownloadBUtton()
+        public CeremonyLayoutSettingsBuilder WithoutGlobalDownloadButton()
         {
             showGlobalDownloadButton = false;
             return this;

@@ -5,49 +5,52 @@ using Silanis.ESL.SDK.Builder;
 
 namespace SDK.Examples
 {
-    public class DocumentRetrievalExample
+    public class DocumentRetrievalExample : SDKSample
     {
-        public static string apiToken = "YOUR TOKEN HERE";
-        public static string baseUrl = "ENVIRONMENT URL HERE";
-
-        private static EslClient eslClient;
-        private static PackageId packageId;
-        private static string documentId = "myDocumentId";
-
-
         public static void Main (string[] args)
         {
-            // Create new esl client with api token and base url
-            eslClient = new EslClient (apiToken, baseUrl);
-            FileInfo file = new FileInfo (Directory.GetCurrentDirectory() + "/src/document.pdf");
+            new DocumentRetrievalExample(Props.GetInstance()).Run();
+        }
 
+        private string email1;
+        private Stream fileStream1;
 
-            DocumentPackage package = PackageBuilder.NewPackageNamed ("C# Package " + DateTime.Now)
+        public DocumentRetrievalExample( Props props ) : this(props.Get("api.url"), props.Get("api.key"), props.Get("1.email") ) {
+        }
+
+        public DocumentRetrievalExample( String apiKey, String apiUrl, String email1 ) : base( apiKey, apiUrl ) {
+            this.email1 = email1;
+            this.fileStream1 = File.OpenRead(new FileInfo(Directory.GetCurrentDirectory() + "/src/document.pdf").FullName);
+        }
+
+        override public void Execute() {
+            string documentId = "myDocumentId";
+            DocumentPackage package = PackageBuilder.NewPackageNamed ("DocumentRetrievalExample " + DateTime.Now)
                 .DescribedAs ("This is a new package")
-                    .WithSigner(SignerBuilder.NewSignerWithEmail("john.smith@email.com")
+                    .WithSigner(SignerBuilder.NewSignerWithEmail("email1")
                                 .WithFirstName("John")
                                 .WithLastName("Smith"))
                     .WithDocument(DocumentBuilder.NewDocumentNamed("My Document")
-                                  .FromFile(file.FullName)
+                                  .FromStream(fileStream1, DocumentType.PDF)
                                   .WithId(documentId)
-                                  .WithSignature(SignatureBuilder.SignatureFor("john.smith@email.com")
+                                  .WithSignature(SignatureBuilder.SignatureFor("email1")
                                    .OnPage(0)
-                                   .AtPosition (500, 300)))
+                                   .AtPosition (100, 100)))
                     .Build ();
 
-            packageId = eslClient.CreatePackage (package);
+            PackageId packageId = eslClient.CreatePackage (package);
 
             eslClient.SendPackage(packageId);
 
-            downloadDocumentById();
+            downloadDocumentById(packageId, documentId);
         }
 
-        public static void downloadDocumentById() {
+        private void downloadDocumentById( PackageId packageId, string documentId ) {
             byte[] documentBinary = eslClient.DownloadDocument( packageId, documentId );
             System.IO.File.WriteAllBytes("myDocument.pdf", documentBinary);
         }
 
-        public static void downloadDocumentsAsZip() {
+        private void downloadDocumentsAsZip( PackageId packageId ) {
             byte[] documentsZipBinary = eslClient.DownloadZippedDocuments( packageId );
             System.IO.File.WriteAllBytes("myDocumentArchive.zip", documentsZipBinary);
         }

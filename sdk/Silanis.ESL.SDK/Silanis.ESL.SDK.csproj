@@ -183,6 +183,12 @@
     <Compile Include="src\Builder\CeremonyLayoutSettingsBuilder.cs" />
     <Compile Include="src\DocumentPackageSettings.cs" />
     <Compile Include="src\Builder\DocumentPackageSettingsBuilder.cs" />
+    <Compile Include="src\Services\EventNotificationService.cs" />
+    <Compile Include="src\EventNotificationConfig.cs" />
+    <Compile Include="src\NotificationEvent.cs" />
+    <Compile Include="src\Builder\EventNotificationConfigBuilder.cs" />
+    <Compile Include="src\RestClient.cs" />
+    <Compile Include="src\Internal\Support.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSHARP.Targets" />
   <ProjectExtensions>

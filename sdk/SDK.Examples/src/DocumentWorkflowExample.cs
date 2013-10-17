@@ -5,47 +5,48 @@ using Silanis.ESL.SDK.Builder;
 
 namespace SDK.Examples
 {
-	public class DocumentWorkflowExample
+	public class DocumentWorkflowExample : SDKSample
 	{
-		public static string apiToken = "YOUR TOKEN HERE";
-		public static string baseUrl = "ENVIRONMENT URL HERE";
+        public static void Main (string[] args)
+        {
+            new DocumentWorkflowExample(Props.GetInstance()).Run();
+        }
 
-		public static void Main (string[] args)
-		{
-			// Create new esl client with api token and base url
-			EslClient client = new EslClient (apiToken, baseUrl);
-			FileInfo file = new FileInfo (Directory.GetCurrentDirectory() + "/src/document.pdf");
+        private string email1;
+        private Stream fileStream1;
+        private Stream fileStream2;
 
-			DocumentPackage package = PackageBuilder.NewPackageNamed ("Document Workflow " + DateTime.Now)
+        public DocumentWorkflowExample( Props props ) : this(props.Get("api.url"), props.Get("api.key"), props.Get("1.email")) {
+        }
+
+        public DocumentWorkflowExample( String apiKey, String apiUrl, String email1 ) : base( apiKey, apiUrl ) {
+            this.email1 = email1;
+            this.fileStream1 = File.OpenRead(new FileInfo(Directory.GetCurrentDirectory() + "/src/document.pdf").FullName);
+            this.fileStream2 = File.OpenRead(new FileInfo(Directory.GetCurrentDirectory() + "/src/document.pdf").FullName);
+        }
+
+        override public void Execute() {
+            DocumentPackage package = PackageBuilder.NewPackageNamed ("DocumentWorkflowExample " + DateTime.Now)
 					.DescribedAs ("This is a document workflow example")
-					.WithSigner(SignerBuilder.NewSignerWithEmail("john.smith@email.com")
+					.WithSigner(SignerBuilder.NewSignerWithEmail(email1)
 					            .WithFirstName("John")
 					            .WithLastName("Smith"))
 					.WithDocument(DocumentBuilder.NewDocumentNamed("Second Document")
-					              .FromFile(file.FullName)
+                                  .FromStream(fileStream1, DocumentType.PDF)
 					              .AtIndex(2)
-					              .WithSignature(SignatureBuilder.SignatureFor("john.smith@email.com")
+					              .WithSignature(SignatureBuilder.SignatureFor(email1)
 					              		.OnPage(0)
-					               		.AtPosition(500, 100))
-					              .WithSignature (SignatureBuilder.InitialsFor("john.smith@email.com")
-					                	.OnPage (0)
-					                	.AtPosition (500, 200))
-					              .WithSignature(SignatureBuilder.CaptureFor ("john.smith@email.com")
-					               		.OnPage (0)
-					               		.AtPosition (500, 300)))
+					               		.AtPosition(100, 100)))
 					.WithDocument (DocumentBuilder.NewDocumentNamed("First Document")
-					               .FromFile (file.FullName)
+                                   .FromStream(fileStream2, DocumentType.PDF)
 					               .AtIndex (1)
-					               .WithSignature(SignatureBuilder.SignatureFor("john.smith@email.com")
+					               .WithSignature(SignatureBuilder.SignatureFor(email1)
 					               		.OnPage (0)
-					               		.AtPosition (500, 100)))
+					               		.AtPosition (100, 100)))
 					.Build ();
 
-			PackageId id = client.CreatePackage (package);
-
-			client.SendPackage(id);
-
-			Console.WriteLine ("Package {0} was sent", id.Id);
+			PackageId id = eslClient.CreatePackage (package);
+			eslClient.SendPackage(id);
 		}
 	}
 }

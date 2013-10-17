@@ -14,23 +14,31 @@ namespace SDK.Examples
 
         private Props properties = Props.GetInstance();
 
-        public void runAllSamples(List<Exception> exceptionsThrown) {
-        }
-
         private SDKSample instantiateSample( Type sampleType ) {
             ConstructorInfo constructorInfo = sampleType.GetConstructor(new[] { typeof(Props) } );
             return (SDKSample)constructorInfo.Invoke(new object[] { properties });
         }
 
-        public void runAllSamples() {
+        public void runAllSamples(List<Exception> exceptionsThrown) {
             List<Type> sampleTypes = getSampleTypes();
             foreach (Type t in sampleTypes) {
+                try {
+                    Console.Out.WriteLine("\nInsantiating " + t.Name);
+                    SDKSample sample = instantiateSample(t);
+                    Console.Out.WriteLine("Running " + t.Name);
+                    sample.Run();
+                    Console.Out.WriteLine("Exiting " + t.Name);
+                } catch( Exception e ) {
+                    Console.Error.WriteLine("Unable to instantiate " + t.Name);
+                    exceptionsThrown.Add(e);
+                    Console.Error.Write(e.StackTrace);
+                }
             }
         }
 
         private List<Type> getSampleTypes() {
             List<Type> result = new List<Type>();
-            Assembly a = Assembly.GetExecutingAssembly();
+            Assembly a = Assembly.GetAssembly(typeof(SDKSample));
             {
                 foreach (Type t in a.GetTypes())
                 {

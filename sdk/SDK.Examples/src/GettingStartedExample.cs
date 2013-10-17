@@ -27,7 +27,7 @@ namespace SDK.Examples
                     .WithSigner(SignerBuilder.NewSignerWithEmail("john.smith@email.com")
                                 .WithFirstName("John")
                                 .WithLastName("Smith")
-                                .WithId("SIGNER1"))
+                                .WithCustomId("SIGNER1"))
                     .WithDocument(DocumentBuilder.NewDocumentNamed("My Document")
                                   .FromFile(file.FullName)
                                   .WithSignature(SignatureBuilder.SignatureFor("john.smith@email.com")

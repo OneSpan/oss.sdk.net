@@ -16,6 +16,7 @@ namespace Silanis.ESL.SDK
 		private SessionService sessionService;
 		private FieldSummaryService fieldSummaryService;
 		private AuditService auditService;
+        private EventNotificationService eventNotificationService;
 
         /// <summary>
         /// EslClient constructor.
@@ -28,10 +29,13 @@ namespace Silanis.ESL.SDK
 			Asserts.NotEmptyOrNull (apiKey, "apiKey");
 			Asserts.NotEmptyOrNull (baseUrl, "baseUrl");
 			this.baseUrl = AppendServicePath (baseUrl);
-			packageService = new PackageService (apiKey, this.baseUrl);
+
+            RestClient restClient = new RestClient(apiKey);
+			packageService = new PackageService (restClient, this.baseUrl);
 			sessionService = new SessionService (apiKey, this.baseUrl);
 			fieldSummaryService = new FieldSummaryService (apiKey, this.baseUrl);
 			auditService = new AuditService (apiKey, this.baseUrl);
+            eventNotificationService = new EventNotificationService(apiKey, this.baseUrl);
 		}
 
 		private String AppendServicePath(string baseUrl)
@@ -145,5 +149,13 @@ namespace Silanis.ESL.SDK
 				return this.auditService;
 			}
 		}
+
+        public EventNotificationService EventNotificationService
+        {
+            get
+            {
+                return eventNotificationService;
+            }
+        }
 	}
 }	
