@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SDK.Examples", "..\SDK.Exam
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SDK.Tests", "..\SDK.Tests\SDK.Tests.csproj", "{203B5F7F-1678-44CC-B291-37022751DBCF}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SDK.Examples.Tester", "SDK.Examples.Tester\SDK.Examples.Tester.csproj", "{4D026F97-3726-4B98-BCF9-7A391A85F9C9}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{203B5F7F-1678-44CC-B291-37022751DBCF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{203B5F7F-1678-44CC-B291-37022751DBCF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{203B5F7F-1678-44CC-B291-37022751DBCF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4D026F97-3726-4B98-BCF9-7A391A85F9C9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4D026F97-3726-4B98-BCF9-7A391A85F9C9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4D026F97-3726-4B98-BCF9-7A391A85F9C9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4D026F97-3726-4B98-BCF9-7A391A85F9C9}.Release|Any CPU.Build.0 = Release|Any CPU
 		{8D6C84A6-459F-42E0-8673-F8890B6A57DC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{8D6C84A6-459F-42E0-8673-F8890B6A57DC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8D6C84A6-459F-42E0-8673-F8890B6A57DC}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -55,6 +61,10 @@ Global
 		$2.BeforeDelegateDeclarationParentheses = False
 		$2.NewParentheses = False
 		$2.SpacesBeforeBrackets = False
+		$2.AlignToFirstMethodCallArgument = False
+		$2.AlignToFirstMethodDeclarationParameter = False
+		$2.AlignToFirstIndexerDeclarationParameter = False
+		$2.AlignToFirstIndexerArgument = False
 		$2.inheritsSet = Mono
 		$2.inheritsScope = text/x-csharp
 		$2.scope = text/x-csharp

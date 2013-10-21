@@ -9,7 +9,7 @@
     <OutputType>Exe</OutputType>
     <RootNamespace>SDK.Examples</RootNamespace>
     <AssemblyName>SDK.Examples</AssemblyName>
-    <StartupObject>SDK.Examples.DocumentDeliveryByEmailExample</StartupObject>
+    <StartupObject>SDK.Examples.TextAnchorExtractionExample</StartupObject>
     <TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -30,32 +30,46 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
+    <Reference Include="nunit.framework, Version=2.4.8.0, Culture=neutral, PublicKeyToken=96d09a1eb7f44a77">
+      <Private>False</Private>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="src\CreatePackageWithBuilder.cs" />
-    <Compile Include="src\CreatePackageWithSMSAuthentication.cs" />
-    <Compile Include="src\CreatePackageFromStream.cs" />
     <Compile Include="src\DocumentWorkflowExample.cs" />
     <Compile Include="src\SignerOrderingExample.cs" />
     <Compile Include="src\SignerSpecificEmailMessageExample.cs" />
     <Compile Include="src\GenericFieldsExample.cs" />
     <Compile Include="src\SignerBoundFieldsExample.cs" />
     <Compile Include="src\FieldValidationExample.cs" />
-    <Compile Include="src\FieldExtractionExample.cs" />
     <Compile Include="src\DownloadDocumentsExample.cs" />
     <Compile Include="src\StampFieldValueExample.cs" />
     <Compile Include="src\GetPackageExample.cs" />
     <Compile Include="src\GetSigningStatusExample.cs" />
-    <Compile Include="src\PackageLanguageExample.cs" />
     <Compile Include="src\GetPackageListExample.cs" />
-    <Compile Include="src\CreatePackageWithVariableNumberOfSignersAndDocuments.cs" />
-    <Compile Include="src\PackageSettingsExample.cs" />
-    <Compile Include="src\GettingStartedExample.cs" />
     <Compile Include="src\FieldInjectionExample.cs" />
     <Compile Include="src\ConsentExample.cs" />
     <Compile Include="src\DocumentRetrievalExample.cs" />
-    <Compile Include="src\DocumentDeliveryByEmailExample.cs" />
+    <Compile Include="src\SDKSample.cs" />
+    <Compile Include="src\Props.cs" />
+    <Compile Include="src\CreatePackageFromStreamExample.cs" />
+    <Compile Include="src\BasicPackageCreationExample.cs" />
+    <Compile Include="src\AuthenticationMethodsExample.cs" />
+    <Compile Include="src\BrandingBarConfigurationExample.cs" />
+    <Compile Include="src\ChangeSignerExample.cs" />
+    <Compile Include="src\DeletePackageExample.cs" />
+    <Compile Include="src\DeliverSignedDocumentsByEmailExample.cs" />
+    <Compile Include="src\DocumentExtractionExample.cs" />
+    <Compile Include="src\DocumentPackageSettingsExample.cs" />
+    <Compile Include="src\FieldPositionExtractionExample.cs" />
+    <Compile Include="src\EventNotificationRegistrationExample.cs" />
+    <Compile Include="src\InPersonExample.cs" />
+    <Compile Include="src\ListTemplatesExample.cs" />
+    <Compile Include="src\NotifySignerExample.cs" />
+    <Compile Include="src\PackageLanguageConfigurationExample.cs" />
+    <Compile Include="src\SessionCreationExample.cs" />
+    <Compile Include="src\SignatureStylesExample.cs" />
+    <Compile Include="src\TextAnchorExtractionExample.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
@@ -74,5 +88,14 @@
     <Content Include="src\document-with-fields.pdf">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="signers.properties">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="src\app.config" />
+    <None Include="src\document-for-anchor-extraction.pdf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
 </Project>

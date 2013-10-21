@@ -5,25 +5,34 @@ using Silanis.ESL.SDK.Builder;
 
 namespace SDK.Examples
 {
-	public class FieldValidationExample
+	public class FieldValidationExample : SDKSample
 	{
-		public static string apiToken = "YOUR TOKEN HERE";
-		public static string baseUrl = "ENVIRONMENT URL HERE";
+        public static void Main (string[] args)
+        {
+            new FieldValidationExample(Props.GetInstance()).Run();
+        }
 
-		public static void Main (string[] args)
-		{
-			// Create new esl client with api token and base url
-			EslClient client = new EslClient (apiToken, baseUrl);
-			FileInfo file = new FileInfo (Directory.GetCurrentDirectory() + "/src/document.pdf");
+        private string email1;
+        private Stream fileStream1;
 
-			DocumentPackage package = PackageBuilder.NewPackageNamed ("Fields example " + DateTime.Now)
+        public FieldValidationExample( Props props ) : this(props.Get("api.url"), props.Get("api.key"), props.Get("1.email")) {
+        }
+
+        public FieldValidationExample( String apiKey, String apiUrl, String email1 ) : base( apiKey, apiUrl ) {
+            this.email1 = email1;
+            this.fileStream1 = File.OpenRead(new FileInfo(Directory.GetCurrentDirectory() + "/src/document.pdf").FullName);
+        }
+
+        override public void Execute()
+        {
+            DocumentPackage package = PackageBuilder.NewPackageNamed ("FieldValidationExample example " + DateTime.Now)
 					.DescribedAs ("This is a new package")
-					.WithSigner(SignerBuilder.NewSignerWithEmail("john.smith@email.com")
+					.WithSigner(SignerBuilder.NewSignerWithEmail(email1)
 					            .WithFirstName("John")
 					            .WithLastName("Smith"))
 					.WithDocument(DocumentBuilder.NewDocumentNamed("My Document")
-					              .FromFile(file.FullName)
-					              .WithSignature(SignatureBuilder.SignatureFor("john.smith@email.com")
+                                  .FromStream(fileStream1, DocumentType.PDF)
+					              .WithSignature(SignatureBuilder.SignatureFor(email1)
 					              		.OnPage(0)
 					               		.AtPosition(500, 100)
 					               		.WithField(FieldBuilder.TextField()
@@ -61,11 +70,9 @@ namespace SDK.Examples
 					                			.WithErrorMessage("The value in this field does not match the expression")))))
 					.Build ();
 
-			PackageId id = client.CreatePackage (package);
+			PackageId id = eslClient.CreatePackage (package);
 
-			client.SendPackage(id);
-
-			Console.WriteLine ("Package {0} was sent", id.Id);
+			eslClient.SendPackage(id);
 		}
 	}
 }

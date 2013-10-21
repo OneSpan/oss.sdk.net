@@ -5,27 +5,36 @@ using Silanis.ESL.SDK.Builder;
 
 namespace SDK.Examples
 {
-	public class SignerBoundFieldsExample
+	public class SignerBoundFieldsExample : SDKSample
 	{
-		public static string apiToken = "YOUR TOKEN HERE";
-		public static string baseUrl = "ENVIRONMENT URL HERE";
+        public static void Main (string[] args)
+        {
+            new SignerBoundFieldsExample(Props.GetInstance()).Run();
+        }
 
-		public static void Main (string[] args)
-		{
-			// Create new esl client with api token and base url
-			EslClient client = new EslClient (apiToken, baseUrl);
-			FileInfo file = new FileInfo (Directory.GetCurrentDirectory() + "/src/document.pdf");
+        private string email1;
+        private Stream fileStream1;
 
-			DocumentPackage package = PackageBuilder.NewPackageNamed ("Fields example " + DateTime.Now)
+        public SignerBoundFieldsExample( Props props ) : this(props.Get("api.url"), props.Get("api.key"), props.Get("1.email")) {
+        }
+
+        public SignerBoundFieldsExample( string apiKey, string apiUrl, string email1 ) : base( apiKey, apiUrl ) {
+            this.email1 = email1;
+            this.fileStream1 = File.OpenRead(new FileInfo(Directory.GetCurrentDirectory() + "/src/document.pdf").FullName);
+        }
+
+        override public void Execute()
+        {
+            DocumentPackage package = PackageBuilder.NewPackageNamed ("SignerBoundFieldsExample " + DateTime.Now)
 					.DescribedAs ("This is a new package")
-					.WithSigner(SignerBuilder.NewSignerWithEmail("john.smith@email.com")
+					.WithSigner(SignerBuilder.NewSignerWithEmail(email1)
 					            .WithFirstName("John")
 					            .WithLastName("Smith")
 					            .WithCompany ("Acme Inc")
 					            .WithTitle ("Managing Director"))
 					.WithDocument(DocumentBuilder.NewDocumentNamed("My Document")
-					              .FromFile(file.FullName)
-					              .WithSignature(SignatureBuilder.SignatureFor("john.smith@email.com")
+                                  .FromStream(fileStream1, DocumentType.PDF)
+					              .WithSignature(SignatureBuilder.SignatureFor(email1)
 					              		.OnPage(0)
 					               		.AtPosition(500, 100)
 					               		.WithField(FieldBuilder.SignatureDate()
@@ -42,11 +51,8 @@ namespace SDK.Examples
 					            			.AtPosition (500, 500))))
 					.Build ();
 
-			PackageId id = client.CreatePackage (package);
-
-			client.SendPackage(id);
-
-			Console.WriteLine ("Package {0} was sent", id.Id);
+			PackageId id = eslClient.CreatePackage (package);
+			eslClient.SendPackage(id);
 		}
 	}
 }

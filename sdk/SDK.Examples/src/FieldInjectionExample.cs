@@ -1,24 +1,36 @@
 using System;
 using Silanis.ESL.SDK;
 using Silanis.ESL.SDK.Builder;
+using System.IO;
 
 namespace SDK.Examples
 {
-    public class FieldInjectionExample {
-        public static string apiToken = "YOUR TOKEN HERE";
-        public static string baseUrl = "ENVIRONMENT URL HERE";
-
+    public class FieldInjectionExample : SDKSample {
         public static void Main (string[] args)
         {
-            EslClient eslClient = new EslClient( apiToken, baseUrl );
+            new CreatePackageFromStreamExample(Props.GetInstance()).Run();
+        }
 
-            DocumentPackage superDuperPackage = PackageBuilder.NewPackageNamed( "Sample Insurance policy" )
-                .WithSigner( SignerBuilder.NewSignerWithEmail( "dlawson@silanis.com" )
+        private string email1;
+        private Stream fileStream1;
+
+        public FieldInjectionExample( Props props ) : this(props.Get("api.url"), props.Get("api.key"), props.Get("1.email")) {
+        }
+
+        public FieldInjectionExample( String apiKey, String apiUrl, String email1 ) : base( apiKey, apiUrl ) {
+            this.email1 = email1;
+            this.fileStream1 = File.OpenRead(new FileInfo(Directory.GetCurrentDirectory() + "/src/document-with-fields.pdf").FullName);
+        }
+
+        override public void Execute()
+        {
+            DocumentPackage superDuperPackage = PackageBuilder.NewPackageNamed( "FieldInjectionExample " + DateTime.Now )
+                .WithSigner( SignerBuilder.NewSignerWithEmail( email1 )
                             .WithFirstName( "John" )
                             .WithLastName( "Smith" ) )
                     .WithDocument( DocumentBuilder.NewDocumentNamed( "First Document" )
-                                  .FromFile( "src/document-with-fields.pdf" )
-                                  .WithSignature( SignatureBuilder.SignatureFor( "dlawson@silanis.com" )
+                                  .FromStream(fileStream1, DocumentType.PDF)
+                                  .WithSignature( SignatureBuilder.SignatureFor( email1 )
                                    .OnPage( 0 )
                                    .AtPosition( 100, 100 ) )
                                   .WithInjectedField( FieldBuilder.TextField()

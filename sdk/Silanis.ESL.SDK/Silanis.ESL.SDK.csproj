@@ -39,6 +39,9 @@
       <HintPath>..\References\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="log4net">
+      <HintPath>..\References\log4net.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -183,6 +186,15 @@
     <Compile Include="src\Builder\CeremonyLayoutSettingsBuilder.cs" />
     <Compile Include="src\DocumentPackageSettings.cs" />
     <Compile Include="src\Builder\DocumentPackageSettingsBuilder.cs" />
+    <Compile Include="src\Services\EventNotificationService.cs" />
+    <Compile Include="src\EventNotificationConfig.cs" />
+    <Compile Include="src\NotificationEvent.cs" />
+    <Compile Include="src\Builder\EventNotificationConfigBuilder.cs" />
+    <Compile Include="src\RestClient.cs" />
+    <Compile Include="src\Internal\Support.cs" />
+    <Compile Include="src\Builder\TextAnchorBuilder.cs" />
+    <Compile Include="src\TextAnchorPosition.cs" />
+    <Compile Include="src\TextAnchor.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSHARP.Targets" />
   <ProjectExtensions>

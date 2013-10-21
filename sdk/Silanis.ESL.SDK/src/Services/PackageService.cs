@@ -15,18 +15,18 @@ namespace Silanis.ESL.SDK.Services
 	/// </summary>
 	public class PackageService
 	{
-		private	string apiToken;
 		private UrlTemplate template;
 		private JsonSerializerSettings settings;
+        private RestClient restClient;
 
 		/// <summary>
 		/// Initializes a new instance of the <see cref="Silanis.ESL.SDK.PackageService"/> class.
 		/// </summary>
 		/// <param name="apiToken">API token.</param>
 		/// <param name="baseUrl">Base URL.</param>
-		public PackageService (string apiToken, string baseUrl)
+		public PackageService (RestClient restClient, string baseUrl)
 		{
-			this.apiToken = apiToken;
+            this.restClient = restClient;
 			template = new UrlTemplate (baseUrl);
 
 			settings = new JsonSerializerSettings ();
@@ -44,15 +44,11 @@ namespace Silanis.ESL.SDK.Services
 				.Build ();
 			try {
 				string json = JsonConvert.SerializeObject (package, settings);
-				byte[] content = Converter.ToBytes (json);
-				
-				string response = Converter.ToString (HttpMethods.PostHttp (apiToken, path, content));
-				
+                string response = restClient.Post(path, json);				
 				return JsonConvert.DeserializeObject<PackageId> (response);
 			} catch (Exception e) {
 				throw new EslException ("Could not create a new package." + " Exception: " + e.Message);
 			}
-
 		}
 
 		/// <summary>
@@ -68,9 +64,7 @@ namespace Silanis.ESL.SDK.Services
 
 			try {
 				string json = JsonConvert.SerializeObject (package, settings);
-				byte[] content = Converter.ToBytes (json);
-
-				HttpMethods.PutHttp (apiToken, path, content);
+                string response = restClient.Put(path, json);
 			} catch (Exception e) {
 				throw new EslException ("Could not update the package." + " Exception: " + e.Message);
 			}
@@ -88,8 +82,7 @@ namespace Silanis.ESL.SDK.Services
 				.Build ();
 
 			try {
-				string response = Converter.ToString (HttpMethods.GetHttp (apiToken, path));
-
+                string response = restClient.Get(path);
 				return JsonConvert.DeserializeObject<Silanis.ESL.API.Package> (response, settings);
 			} catch (Exception e) {
 				throw new EslException ("Could not get package." + " Exception: " + e.Message);
@@ -109,7 +102,7 @@ namespace Silanis.ESL.SDK.Services
                 .Build ();
 
 			try {
-				HttpMethods.DeleteHttp (apiToken, path);
+                restClient.Delete(path);
 			} catch (Exception e) {
 				throw new EslException ("Could not delete document from package." + " Exception: " + e.Message);
 			}
@@ -127,8 +120,7 @@ namespace Silanis.ESL.SDK.Services
 
 			try {
 				byte[] content = Converter.ToBytes ("{\"status\":\"SENT\"}");
-
-				HttpMethods.PostHttp (apiToken, path, content);
+                restClient.Post(path, "{\"status\":\"SENT\"}");
 			} catch (Exception e) {
 				throw new EslException ("Could not send the package." + " Exception: " + e.Message);
 			}
@@ -148,7 +140,7 @@ namespace Silanis.ESL.SDK.Services
 					.Build ();
 
 			try {
-				return HttpMethods.GetHttp (apiToken, path);
+                return restClient.GetBytes(path);
 			} catch (Exception e) {
 				throw new EslException ("Could not download the pdf document." + " Exception: " + e.Message);
 			}
@@ -166,7 +158,7 @@ namespace Silanis.ESL.SDK.Services
             .Build ();
 
 			try {
-				return HttpMethods.GetHttp (apiToken, path);
+                return restClient.GetBytes(path);
 			} catch (Exception e) {
 				throw new EslException ("Could not download the documents to a zip file." + " Exception: " + e.Message);
 			}
@@ -184,7 +176,7 @@ namespace Silanis.ESL.SDK.Services
                 .Build ();
 
 			try {
-				return HttpMethods.GetHttp (apiToken, path);
+                return restClient.GetBytes(path);
 			} catch (Exception e) {
 				throw new EslException ("Could not download the evidence summary." + " Exception: " + e.Message);
 			}
@@ -210,7 +202,8 @@ namespace Silanis.ESL.SDK.Services
 				string boundary = GenerateBoundary ();
 				byte[] content = CreateMultipartContent (fileName, fileBytes, payloadBytes, boundary);
 
-				Converter.ToString (HttpMethods.MultipartPostHttp (apiToken, path, content, boundary));
+                restClient.PostMultipartFile(path, content, boundary);
+//				Converter.ToString (HttpMethods.MultipartPostHttp (apiToken, path, content, boundary));
 			} catch (Exception e) {
 				throw new EslException ("Could not upload document to package." + " Exception: " + e.Message);
 			}
@@ -255,7 +248,7 @@ namespace Silanis.ESL.SDK.Services
 				.Build();
 
 			try {
-				string response = Converter.ToString (HttpMethods.GetHttp (apiToken, path));
+                string response = restClient.Get(path);
 				JsonTextReader reader = new JsonTextReader(new StringReader(response));
 
 				//Loop 'till we get to the status value
@@ -275,7 +268,7 @@ namespace Silanis.ESL.SDK.Services
 
 			try
 			{
-				HttpMethods.DeleteHttp(apiToken, path);
+                restClient.Delete(path);
 			}
 			catch (Exception e)
 			{
@@ -301,7 +294,7 @@ namespace Silanis.ESL.SDK.Services
 
 			try
 			{
-				HttpMethods.PostHttp(apiToken, path, Converter.ToBytes (sw.ToString ()));
+                restClient.Post(path, sw.ToString());
 			}
 			catch (Exception e)
 			{
@@ -319,7 +312,7 @@ namespace Silanis.ESL.SDK.Services
 
 			try
 			{
-				string response = Converter.ToString (HttpMethods.GetHttp (apiToken, path));
+                string response = restClient.Get(path);
 				Silanis.ESL.API.Result<Silanis.ESL.API.Package> results = JsonConvert.DeserializeObject<Silanis.ESL.API.Result<Silanis.ESL.API.Package>> (response, settings);
 
 				return ConvertToPage(results, request);
@@ -330,6 +323,26 @@ namespace Silanis.ESL.SDK.Services
 				throw new EslException ("Could not get package list. Exception: " + e.Message);	
 			}
 		}
+
+        public Page<DocumentPackage> GetTemplates(PageRequest request) {
+            string path = template.UrlFor (UrlTemplate.PACKAGE_LIST_PATH)
+                    .Replace ("{from}", request.From.ToString ())
+                    .Replace ("{to}", request.To.ToString())
+                    .Build();
+
+            try 
+            {
+                string response = restClient.Get(path);
+                Silanis.ESL.API.Result<Silanis.ESL.API.Package> results = JsonConvert.DeserializeObject<Silanis.ESL.API.Result<Silanis.ESL.API.Package>> (response, settings);
+
+                return ConvertToPage(results, request);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine (e.StackTrace);
+                throw new EslException ("Could not get template list. Exception: " + e.Message); 
+            }
+        }
 
 		private Page<DocumentPackage> ConvertToPage (Silanis.ESL.API.Result<Silanis.ESL.API.Package> results, PageRequest request)
 		{

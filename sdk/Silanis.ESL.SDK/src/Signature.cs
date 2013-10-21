@@ -76,5 +76,11 @@ namespace Silanis.ESL.SDK
 			get;
 			set;
 		}
+
+        public TextAnchor TextAnchor
+        {
+            get;
+            set;
+        }
 	}
 }

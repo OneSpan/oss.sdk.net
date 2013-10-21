@@ -2,6 +2,7 @@
 bin/
 obj/
 Debug/
+test-results/
 
 #user-specific files
 *.userprefs
