@@ -40,7 +40,7 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="log4net">
-      <HintPath>..\..\..\..\Downloads\log4net-1.2.12\bin\mono\2.0\release\log4net.dll</HintPath>
+      <HintPath>..\References\log4net.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
