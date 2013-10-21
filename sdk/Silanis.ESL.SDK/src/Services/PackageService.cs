@@ -324,6 +324,26 @@ namespace Silanis.ESL.SDK.Services
 			}
 		}
 
+        public Page<DocumentPackage> GetTemplates(PageRequest request) {
+            string path = template.UrlFor (UrlTemplate.PACKAGE_LIST_PATH)
+                    .Replace ("{from}", request.From.ToString ())
+                    .Replace ("{to}", request.To.ToString())
+                    .Build();
+
+            try 
+            {
+                string response = restClient.Get(path);
+                Silanis.ESL.API.Result<Silanis.ESL.API.Package> results = JsonConvert.DeserializeObject<Silanis.ESL.API.Result<Silanis.ESL.API.Package>> (response, settings);
+
+                return ConvertToPage(results, request);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine (e.StackTrace);
+                throw new EslException ("Could not get template list. Exception: " + e.Message); 
+            }
+        }
+
 		private Page<DocumentPackage> ConvertToPage (Silanis.ESL.API.Result<Silanis.ESL.API.Package> results, PageRequest request)
 		{
 			IList<DocumentPackage> converted = new List<DocumentPackage> ();

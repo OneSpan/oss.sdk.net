@@ -108,6 +108,7 @@ namespace Silanis.ESL.SDK.Builder
 			doc.Index = index;
 			doc.Extract = extract;
 			doc.AddFields (injectedFields);
+            doc.Description = description;
 			return doc;
 		}
 

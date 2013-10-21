@@ -6,35 +6,27 @@ using System.Collections.Generic;
 
 namespace SDK.Examples
 {
-	public class GetPackageListExample
+	public class GetPackageListExample : SDKSample
 	{
-		public static string apiToken = "YOUR TOKEN HERE";
-		public static string baseUrl = "ENVIRONMENT URL HERE";
+        public static void Main (string[] args)
+        {
+            new GetPackageExample(Props.GetInstance()).Run();
+        }
 
-		public static void Main (string[] args)
-		{
-			// Create new esl client with api token and base url
-			EslClient client = new EslClient (apiToken, baseUrl);
+        public GetPackageListExample( Props props ) : this(props.Get("api.url"), props.Get("api.key")) {
+        }
 
+        public GetPackageListExample( String apiKey, String apiUrl ) : base( apiKey, apiUrl ) {
+        }
+
+        override public void Execute()
+        {
 			//Get the packages that have status COMPLETED, starting from the most recent package and getting 20 packages per page
-			Page<DocumentPackage> packages = client.PackageService.GetPackages (DocumentPackageStatus.COMPLETED, new PageRequest(1, 20));
-
-			PrintPage (packages);
+			Page<DocumentPackage> packages = eslClient.PackageService.GetPackages (DocumentPackageStatus.COMPLETED, new PageRequest(1, 20));
 
 			while (packages.HasNextPage())
 			{
-				packages = client.PackageService.GetPackages (DocumentPackageStatus.COMPLETED, packages.NextRequest);
-				PrintPage (packages);
-			}
-		}
-
-		private static void PrintPage(Page<DocumentPackage> page)
-		{
-			Console.WriteLine ("Got {0} packages, total = {1}", page.NumberOfElements, page.TotalElements);
-
-			foreach (DocumentPackage package in page)
-			{
-				Console.WriteLine ("Package {0} has status {1}", package.Name, package.Status);
+				packages = eslClient.PackageService.GetPackages (DocumentPackageStatus.COMPLETED, packages.NextRequest);
 			}
 		}
 	}

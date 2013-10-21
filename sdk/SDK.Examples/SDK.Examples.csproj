@@ -9,7 +9,7 @@
     <OutputType>Exe</OutputType>
     <RootNamespace>SDK.Examples</RootNamespace>
     <AssemblyName>SDK.Examples</AssemblyName>
-    <StartupObject>SDK.Examples.DocumentRetrievalExample</StartupObject>
+    <StartupObject>SDK.Examples.TextAnchorExtractionExample</StartupObject>
     <TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -46,9 +46,7 @@
     <Compile Include="src\StampFieldValueExample.cs" />
     <Compile Include="src\GetPackageExample.cs" />
     <Compile Include="src\GetSigningStatusExample.cs" />
-    <Compile Include="src\PackageLanguageExample.cs" />
     <Compile Include="src\GetPackageListExample.cs" />
-    <Compile Include="src\GettingStartedExample.cs" />
     <Compile Include="src\FieldInjectionExample.cs" />
     <Compile Include="src\ConsentExample.cs" />
     <Compile Include="src\DocumentRetrievalExample.cs" />
@@ -65,6 +63,13 @@
     <Compile Include="src\DocumentPackageSettingsExample.cs" />
     <Compile Include="src\FieldPositionExtractionExample.cs" />
     <Compile Include="src\EventNotificationRegistrationExample.cs" />
+    <Compile Include="src\InPersonExample.cs" />
+    <Compile Include="src\ListTemplatesExample.cs" />
+    <Compile Include="src\NotifySignerExample.cs" />
+    <Compile Include="src\PackageLanguageConfigurationExample.cs" />
+    <Compile Include="src\SessionCreationExample.cs" />
+    <Compile Include="src\SignatureStylesExample.cs" />
+    <Compile Include="src\TextAnchorExtractionExample.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
@@ -86,6 +91,10 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="signers.properties">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="src\app.config" />
+    <None Include="src\document-for-anchor-extraction.pdf">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
   </ItemGroup>

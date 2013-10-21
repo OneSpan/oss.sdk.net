@@ -20,6 +20,7 @@ namespace Silanis.ESL.SDK.Builder
 		private string name;
 		private string value;
 		private string id;
+        private TextAnchor textAnchor;
 
 		private FieldBuilder ()
 		{
@@ -174,14 +175,17 @@ namespace Silanis.ESL.SDK.Builder
 			return this;
 		}
 
+        public FieldBuilder WithPositionAnchor( TextAnchorBuilder builder ) {
+            return WithPositionAnchor( builder.Build() );
+        }
+
+        public FieldBuilder WithPositionAnchor( TextAnchor textAnchor ) {
+            this.textAnchor = textAnchor;
+            return this;
+        }
+
 		public Field Build ()
 		{
-			if (!extract && style != FieldStyle.LABEL)
-			{
-				Asserts.NonZero (x, "x");
-				Asserts.NonZero (y, "y");
-			}
-
 			Field field = new Field ();
 
 			field.Width = width;
@@ -195,6 +199,7 @@ namespace Silanis.ESL.SDK.Builder
 			field.Extract = extract;
 			field.Value = value;
 			field.Id = id;
+            field.TextAnchor = textAnchor;
 			return field;
 		}
 	}

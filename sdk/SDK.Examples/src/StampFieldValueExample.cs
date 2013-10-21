@@ -5,26 +5,35 @@ using Silanis.ESL.SDK.Builder;
 
 namespace SDK.Examples
 {
-	public class StampFieldValueExample
+	public class StampFieldValueExample : SDKSample
 	{
-		public static string apiToken = "YOUR TOKEN HERE";
-		public static string baseUrl = "ENVIRONMENT URL HERE";
+        public static void Main (string[] args)
+        {
+            new StampFieldValueExample(Props.GetInstance()).Run();
+        }
 
-		public static void Main (string[] args)
-		{
-			// Create new esl client with api token and base url
-			EslClient client = new EslClient (apiToken, baseUrl);
-			FileInfo file = new FileInfo (Directory.GetCurrentDirectory() + "/src/document-with-fields.pdf");
+        private string email1;
+        private Stream fileStream1;
 
-			DocumentPackage package = PackageBuilder.NewPackageNamed ("Field extraction example")
+        public StampFieldValueExample( Props props ) : this(props.Get("api.url"), props.Get("api.key"), props.Get("1.email")) {
+        }
+
+        public StampFieldValueExample( string apiKey, string apiUrl, string email1 ) : base( apiKey, apiUrl ) {
+            this.email1 = email1;
+            this.fileStream1 = File.OpenRead(new FileInfo(Directory.GetCurrentDirectory() + "/src/document-with-fields.pdf").FullName);
+        }
+
+        override public void Execute()
+        {
+            DocumentPackage package = PackageBuilder.NewPackageNamed ("StampFieldValueExample " + DateTime.Now)
 				.DescribedAs ("This is a new package")
-					.WithSigner(SignerBuilder.NewSignerWithEmail("john.smith@email.com")
+					.WithSigner(SignerBuilder.NewSignerWithEmail(email1)
 					            .WithFirstName("John")
 					            .WithLastName("Smith"))
 					.WithDocument(DocumentBuilder.NewDocumentNamed("My Document")
-					              	.FromFile(file.FullName)
+                                    .FromStream(fileStream1, DocumentType.PDF)
 					              	.EnableExtraction()
-					              	.WithSignature(SignatureBuilder.SignatureFor("john.smith@email.com")
+					              	.WithSignature(SignatureBuilder.SignatureFor(email1)
 					            		.WithName("AGENT_SIG_1")
 					               		.EnableExtraction())
 					              	.WithInjectedField(FieldBuilder.Label()
@@ -32,11 +41,8 @@ namespace SDK.Examples
 					           			.WithValue("Value to be stamped")))
 					.Build ();
 
-			PackageId id = client.CreatePackage (package);
-
-			client.SendPackage(id);
-
-			Console.WriteLine ("Package {0} was sent", id.Id);
+			PackageId id = eslClient.CreatePackage (package);
+			eslClient.SendPackage(id);
 		}
 	}
 }

@@ -1,19 +1,28 @@
 using System;
+using log4net;
+using Silanis.ESL.API;
 
 namespace Silanis.ESL.SDK
 {
     public class Support
     {
-        public void LogRequest(string httpVerb, string path, string jsonPayload) {
+        private static ILog log = LogManager.GetLogger(typeof(Support));
+
+        internal void LogRequest(string httpVerb, string path, string jsonPayload) {
+            log.Debug(httpVerb + " on " + path);
+            log.Debug("payload: " + jsonPayload);
         }
 
-        public void LogRequest(string httpVerb, string path) {
+        internal void LogRequest(string httpVerb, string path) {
+            log.Debug(httpVerb + " on " + path);
         }
 
-        public void LogResponse(string response) {
+        internal void LogResponse(string response) {
+            log.Debug("response: " + response);
         }
 
-        public void LogError() {
+        internal void LogError(Error error) {
+            log.Error("message: " + error.Message + ", http code: " + error.Code);
         }
     }
 }

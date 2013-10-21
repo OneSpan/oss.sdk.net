@@ -9,6 +9,7 @@ namespace Silanis.ESL.SDK.Builder
 		public static double DEFAULT_WIDTH = 200d;
 		public static SignatureStyle DEFAULT_STYLE = SignatureStyle.FULL_NAME;
 
+        private string name;
 		private string signerEmail;
 		private double width = DEFAULT_WIDTH;
 		private double height = DEFAULT_HEIGHT;
@@ -18,7 +19,7 @@ namespace Silanis.ESL.SDK.Builder
 		private double y;
 		private IList<Field> fields = new List<Field>();
 		private bool extract;
-		private string name;
+        private TextAnchor textAnchor;
 
 		private SignatureBuilder (string signerEmail)
 		{
@@ -157,6 +158,15 @@ namespace Silanis.ESL.SDK.Builder
 			return this;
 		}
 
+        public SignatureBuilder WithPositionAnchor( TextAnchorBuilder builder ) {
+            return WithPositionAnchor(builder.Build());
+        }
+
+        public SignatureBuilder WithPositionAnchor( TextAnchor textAnchor ) {
+            this.textAnchor = textAnchor;
+            return this;
+        }
+
 		public Signature Build()
 		{
 			Signature signature = new Signature (signerEmail, page, x, y);
@@ -167,6 +177,7 @@ namespace Silanis.ESL.SDK.Builder
 			signature.AddFields (fields);
 			signature.Name = name;
 			signature.Extract = extract;
+            signature.TextAnchor = textAnchor;
 			return signature;
 		}
 	}

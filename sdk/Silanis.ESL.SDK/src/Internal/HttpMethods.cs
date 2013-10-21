@@ -12,6 +12,7 @@ namespace Silanis.ESL.SDK.Internal
 
 		public static byte[] PostHttp (string apiToken, string path, byte[] content)
 		{
+            try {
 			WebRequest request = WebRequest.Create (path);
 			request.Method = "POST";
 			request.ContentType = "application/json";
@@ -30,6 +31,13 @@ namespace Silanis.ESL.SDK.Internal
                 
 				return memoryStream.ToArray ();
 			}
+            }
+            catch (Exception e) {
+                Console.Error.WriteLine(e.Message);
+                Console.Error.WriteLine(e.StackTrace);
+            }
+
+            return null;
 		}
 
 		public static byte[] PutHttp (string apiToken, string path, byte[] content)

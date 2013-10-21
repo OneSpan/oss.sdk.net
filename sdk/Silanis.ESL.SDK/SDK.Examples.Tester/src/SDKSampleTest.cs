@@ -23,7 +23,7 @@ namespace SDK.Examples
             List<Type> sampleTypes = getSampleTypes();
             foreach (Type t in sampleTypes) {
                 try {
-                    Console.Out.WriteLine("\nInsantiating " + t.Name);
+                    Console.Out.WriteLine("\nInstantiating " + t.Name);
                     SDKSample sample = instantiateSample(t);
                     Console.Out.WriteLine("Running " + t.Name);
                     sample.Run();
@@ -60,7 +60,7 @@ namespace SDK.Examples
             } catch (Exception e) {
                 Assert.Fail("Unable to inspect packages and classes." + e);
             }
-            Assert.AreEqual(exceptionsThrown.Count,0);
+            Assert.AreEqual(exceptionsThrown.Count,0,"At least one test failed");
         }
     }
 }
