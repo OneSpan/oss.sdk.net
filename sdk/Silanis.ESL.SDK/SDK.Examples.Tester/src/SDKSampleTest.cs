@@ -8,9 +8,9 @@ namespace SDK.Examples
     [TestFixture]
     public class SDKSampleTest
     {
-        public static void Main(string[] args) {
-            new SDKSampleTest().test();
-        }
+//        public static void Main(string[] args) {
+//            new SDKSampleTest().test();
+//        }
 
         private Props properties = Props.GetInstance();
 
