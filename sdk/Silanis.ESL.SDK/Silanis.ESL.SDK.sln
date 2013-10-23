@@ -1,6 +1,6 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2012
+Microsoft Visual Studio Solution File, Format Version 10.00
+# Visual Studio 2010
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Silanis.ESL.SDK", "Silanis.ESL.SDK.csproj", "{0A9B8521-9624-460B-813E-079056B24B65}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SDK.Examples", "..\SDK.Examples\SDK.Examples.csproj", "{8D6C84A6-459F-42E0-8673-F8890B6A57DC}"
