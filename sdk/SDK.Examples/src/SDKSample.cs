@@ -9,7 +9,9 @@ namespace SDK.Examples
 
         public SDKSample( string apiUrl, string apiKey )
         {
+            Console.Out.WriteLine("apiUrl: " + apiUrl, "apiKey: " + apiKey);
             eslClient = new EslClient(apiKey, apiUrl);
+            Console.Out.WriteLine("eslClient: " + eslClient);
         }
 
         public abstract void Execute();
