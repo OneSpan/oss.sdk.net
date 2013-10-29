@@ -3,6 +3,7 @@ bin/
 obj/
 Debug/
 test-results/
+TestResult.xml
 
 #user-specific files
 *.userprefs

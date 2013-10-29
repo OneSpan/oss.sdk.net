@@ -82,6 +82,12 @@ namespace Silanis.ESL.SDK
             set;
         }
 
+        public SenderInfo SenderInfo
+        {
+            get;
+            set;
+        }
+
         internal Silanis.ESL.API.Package ToAPIPackage()
         {
             Silanis.ESL.API.Package package = new Silanis.ESL.API.Package();
@@ -100,6 +106,11 @@ namespace Silanis.ESL.SDK
             if (Settings != null)
             {
                 package.Settings = Settings.toAPIPackageSettings();
+            }
+
+            if (SenderInfo != null)
+            {
+                package.Sender = SenderInfo.ToAPISender();
             }
 
             int signerCount = 1;
