@@ -36,12 +36,6 @@ namespace SDK.Tests
 		}
 
 		[Test]
-		[ExpectedException(typeof(EslException))]
-		public void CannotCreateFieldWithoutPosition() {
-			FieldBuilder.SignatureDate().Build();
-		}
-
-		[Test]
 		public void CreatingNewSignatureDateFieldSetsStyle() {
 			Field field = FieldBuilder.SignatureDate().AtPosition(100, 100).Build();
 
