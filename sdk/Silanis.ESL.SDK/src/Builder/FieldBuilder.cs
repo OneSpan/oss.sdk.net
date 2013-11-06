@@ -169,6 +169,15 @@ namespace Silanis.ESL.SDK.Builder
 			return this;
 		}
 
+        public FieldBuilder WithValue (string value)
+        {
+            if (this.style == FieldStyle.UNBOUND_CHECK_BOX)
+            {
+                this.value = value ? "X" : "";
+            }
+            return this;
+        }
+
 		public FieldBuilder WithValue (string value)
 		{
 			this.value = value;

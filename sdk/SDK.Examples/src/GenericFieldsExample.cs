@@ -39,6 +39,7 @@ namespace SDK.Examples
 					           				.OnPage(0)
 					           				.AtPosition(500, 200))
 					               		.WithField(FieldBuilder.CheckBox()
+                                            .WithValue(true)
 					           				.OnPage(0)
 					           				.AtPosition(500, 300))))
 					.Build ();
