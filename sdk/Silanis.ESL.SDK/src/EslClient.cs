@@ -104,7 +104,13 @@ namespace Silanis.ESL.SDK
 		{
 			return packageService.GetSigningStatus (packageId, signerId, documentId);
 		}
-        
+
+        public void UploadDocument(String fileName, byte[] fileContent, Document document, DocumentPackage documentPackage)
+        {
+            Silanis.ESL.API.Package packageToCreate = documentPackage.ToAPIPackage();
+            packageService.UploadDocument(documentPackage.Id, fileName, fileContent, document.ToAPIDocument(packageToCreate));
+        }
+
         /// <summary>
         /// BaseUrl property
         /// </summary>

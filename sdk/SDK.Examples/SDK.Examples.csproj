@@ -74,6 +74,7 @@
     <Compile Include="src\TextAnchorExtractionExample.cs" />
     <Compile Include="src\CustomSenderInfoExample.cs" />
     <Compile Include="src\DocumentPackageAttributesExample.cs" />
+    <Compile Include="src\DocumentUploadExample.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
