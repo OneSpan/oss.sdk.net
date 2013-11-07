@@ -18,6 +18,7 @@ namespace Silanis.ESL.SDK.Builder
 		private CultureInfo language;
         private DocumentPackageSettings settings;
         private SenderInfo senderInfo;
+        private DocumentPackageAttributes attributes;
 
 		private PackageBuilder(string packageName)
 		{
@@ -35,6 +36,7 @@ namespace Silanis.ESL.SDK.Builder
 			this.emailMessage = package.EmailMessage;
             this.settings = new DocumentPackageSettingsBuilder(package.Settings).build();
             this.senderInfo = new SenderInfoBuilder(package.Sender).Build();
+            this.attributes = new DocumentPackageAttributes(package.Data);
 
 			foreach ( Silanis.ESL.API.Role role in package.Roles ) {
 				if ( role.Signers.Count == 0 ) {
@@ -146,7 +148,12 @@ namespace Silanis.ESL.SDK.Builder
             this.senderInfo = senderInfo;
             return this;
         }
-            
+
+        public PackageBuilder withAttributes( DocumentPackageAttributes attributes) {
+            this.attributes = attributes;
+            return this;
+        } 
+
 		public DocumentPackage Build ()
 		{
 			DocumentPackage package = new DocumentPackage (id, packageName, autocomplete, signers, documents);
@@ -158,6 +165,7 @@ namespace Silanis.ESL.SDK.Builder
 			package.Language = language;
             package.Settings = settings;
             package.SenderInfo = senderInfo;
+            package.Attributes = attributes;
 
 			return package;
 		}

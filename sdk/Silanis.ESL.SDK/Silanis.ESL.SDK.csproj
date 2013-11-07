@@ -11,7 +11,6 @@
     <FileAlignment>512</FileAlignment>
     <ProductVersion>10.0.0</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -30,6 +29,7 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <Prefer32Bit>false</Prefer32Bit>
+    <DebugType>none</DebugType>
   </PropertyGroup>
   <PropertyGroup>
     <RootNamespace>Silanis.ESL.SDK</RootNamespace>
@@ -197,6 +197,8 @@
     <Compile Include="src\TextAnchor.cs" />
     <Compile Include="src\SenderInfo.cs" />
     <Compile Include="src\Builder\SenderInfoBuilder.cs" />
+    <Compile Include="src\DocumentPackageAttributes.cs" />
+    <Compile Include="src\Builder\DocumentPackageAttributesBuilder.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSHARP.Targets" />
   <ProjectExtensions>

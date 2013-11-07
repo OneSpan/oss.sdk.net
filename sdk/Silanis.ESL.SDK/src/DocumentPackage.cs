@@ -88,6 +88,12 @@ namespace Silanis.ESL.SDK
             set;
         }
 
+        public DocumentPackageAttributes Attributes
+        {
+            get;
+            set;
+        }
+
         internal Silanis.ESL.API.Package ToAPIPackage()
         {
             Silanis.ESL.API.Package package = new Silanis.ESL.API.Package();
@@ -111,6 +117,10 @@ namespace Silanis.ESL.SDK
             if (SenderInfo != null)
             {
                 package.Sender = SenderInfo.ToAPISender();
+            }
+
+            if ( Attributes != null ) {
+                package.Data = Attributes.Contents;
             }
 
             int signerCount = 1;
