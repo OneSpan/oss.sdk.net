@@ -19,7 +19,7 @@ namespace Silanis.ESL.SDK
         public PackageId Id
         {
             get;
-            private set;
+            set;
         }
 
         public DocumentPackageStatus Status

@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -9,7 +9,7 @@
     <OutputType>Exe</OutputType>
     <RootNamespace>SDK.Examples</RootNamespace>
     <AssemblyName>SDK.Examples</AssemblyName>
-    <StartupObject>SDK.Examples.PackageSettingsExample</StartupObject>
+    <StartupObject>SDK.Examples.src.UploadDocumentExample</StartupObject>
     <TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -55,11 +55,10 @@
     <Compile Include="src\FieldInjectionExample.cs" />
     <Compile Include="src\ConsentExample.cs" />
     <Compile Include="src\DocumentRetrievalExample.cs" />
+    <Compile Include="src\UploadDocumentExample.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
-  <ItemGroup>
-    <Folder Include="src\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <ProjectReference Include="..\Silanis.ESL.SDK\Silanis.ESL.SDK.csproj">
       <Project>{0A9B8521-9624-460B-813E-079056B24B65}</Project>
