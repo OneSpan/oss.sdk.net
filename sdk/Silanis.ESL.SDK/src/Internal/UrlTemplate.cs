@@ -45,6 +45,10 @@ namespace Silanis.ESL.SDK.Internal
 		// Session Service
 		public static readonly string SESSION_PATH = "/sessions?package={packageId}&signer={signerId}";
 
+        // Custom Field Service
+        public static readonly string ACCOUNT_CUSTOMFIELD_PATH = "/account/customfields";
+        public static readonly string USER_CUSTOMFIELD_PATH = "/user/customfields";
+
 		public UrlTemplate (string baseUrl)
 		{
 			this.baseUrl = baseUrl;

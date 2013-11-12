@@ -199,6 +199,16 @@
     <Compile Include="src\Builder\SenderInfoBuilder.cs" />
     <Compile Include="src\DocumentPackageAttributes.cs" />
     <Compile Include="src\Builder\DocumentPackageAttributesBuilder.cs" />
+    <Compile Include="src\Models\CustomField.cs" />
+    <Compile Include="src\Models\Translation.cs" />
+    <Compile Include="src\CustomField.cs" />
+    <Compile Include="src\Translation.cs" />
+    <Compile Include="src\Builder\CustomFieldBuilder.cs" />
+    <Compile Include="src\Builder\TranslationBuilder.cs" />
+    <Compile Include="src\Services\CustomFieldService.cs" />
+    <Compile Include="src\CustomFieldValue.cs" />
+    <Compile Include="src\Models\UserCustomField.cs" />
+    <Compile Include="src\Builder\CustomFieldValueBuilder.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSHARP.Targets" />
   <ProjectExtensions>

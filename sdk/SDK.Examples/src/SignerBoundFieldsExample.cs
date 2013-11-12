@@ -9,7 +9,7 @@ namespace SDK.Examples
 	{
         public static void Main (string[] args)
         {
-            new SignerBoundFieldsExample(Props.GetInstance()).Run();
+//            new SignerBoundFieldsExample(Props.GetInstance()).Run();
         }
 
         private string email1;

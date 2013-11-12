@@ -1,0 +1,30 @@
+using System;
+using Silanis.ESL.SDK.API;
+
+namespace Silanis.ESL.SDK
+{
+    public class CustomFieldValue
+    {
+        public CustomFieldValue()
+        {
+        }
+        public string Id { 
+                get;
+                set;
+        }
+
+        public string Value {
+                get;
+                set;
+        }
+        
+        public UserCustomField toAPIUserCustomField() {
+            UserCustomField result = new UserCustomField();
+            result.Id = Id;
+            result.Value = Value;
+            return result;
+        }
+        
+    }
+}
+

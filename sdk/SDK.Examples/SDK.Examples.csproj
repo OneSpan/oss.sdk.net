@@ -75,6 +75,8 @@
     <Compile Include="src\CustomSenderInfoExample.cs" />
     <Compile Include="src\DocumentPackageAttributesExample.cs" />
     <Compile Include="src\DocumentUploadExample.cs" />
+    <Compile Include="src\CustomFieldExample.cs" />
+    <Compile Include="src\SDKSample1.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

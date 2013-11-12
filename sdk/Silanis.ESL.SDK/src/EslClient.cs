@@ -17,6 +17,7 @@ namespace Silanis.ESL.SDK
 		private FieldSummaryService fieldSummaryService;
 		private AuditService auditService;
         private EventNotificationService eventNotificationService;
+        private CustomFieldService customFieldService;
 
         /// <summary>
         /// EslClient constructor.
@@ -36,6 +37,8 @@ namespace Silanis.ESL.SDK
 			fieldSummaryService = new FieldSummaryService (apiKey, this.baseUrl);
 			auditService = new AuditService (apiKey, this.baseUrl);
             eventNotificationService = new EventNotificationService(restClient, this.baseUrl);
+            customFieldService = new CustomFieldService( restClient, this.baseUrl );
+
 		}
 
 		private String AppendServicePath(string baseUrl)
@@ -47,6 +50,15 @@ namespace Silanis.ESL.SDK
 
 			return baseUrl;
 		}
+
+        /**
+         * Facilitates access to the service that could be used to add custom field
+         *
+         * @return  the custom field service
+         */
+        public CustomFieldService GetCustomFieldService() {
+            return customFieldService;
+        }
 
 		public PackageId CreatePackage (DocumentPackage package)
 		{
