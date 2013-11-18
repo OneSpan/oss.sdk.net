@@ -8,7 +8,7 @@ namespace SDK.Examples
     public class FieldInjectionExample : SDKSample {
         public static void Main (string[] args)
         {
-            new CreatePackageFromStreamExample(Props.GetInstance()).Run();
+            new FieldInjectionExample(Props.GetInstance()).Run();
         }
 
         private string email1;
