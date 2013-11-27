@@ -43,9 +43,14 @@ namespace Silanis.ESL.SDK.Builder
 					continue;
 				}
 
-				Signer signer = SignerBuilder.NewSignerFromAPISigner( role ).Build();
-
-				WithSigner( signer );
+				if (role.Signers[0].Group != null)
+				{
+					WithSigner(SignerBuilder.NewSignerFromGroup(new GroupId(role.Signers[0].Group.Id)));
+				}
+				else
+				{
+					WithSigner(SignerBuilder.NewSignerFromAPISigner(role).Build());
+				}
 			}
 
 			foreach ( Silanis.ESL.API.Document apiDocument in package.Documents ) {
@@ -114,7 +119,14 @@ namespace Silanis.ESL.SDK.Builder
 
 		public PackageBuilder WithSigner(Signer signer)
 		{
-			signers [signer.Email] = signer;
+			if (signer.IsGroupSigner())
+			{
+				signers[signer.GroupId.Id] = signer;
+			}
+			else
+			{
+				signers [signer.Email] = signer;
+			}
 			return this;
 		}
 

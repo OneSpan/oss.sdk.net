@@ -60,9 +60,13 @@ namespace Silanis.ESL.SDK
 			Silanis.ESL.API.Document doc = new Silanis.ESL.API.Document ();
 
 			doc.Name = Name;
-			doc.Id = Id;
 			doc.Index = Index;
 			doc.Extract = Extract;
+
+			if ( Id != null )
+			{
+				doc.Id = Id;
+			}
 
             if (Description != null)
             {
@@ -74,7 +78,14 @@ namespace Silanis.ESL.SDK
 			{
 				Silanis.ESL.API.Approval approval = converter.ConvertToApproval (signature);
 
-				approval.Role = FindRoleIdForSignature (signature.SignerEmail, createdPackage);
+				if (signature.IsGroupSignature() )
+				{
+					approval.Role = FindRoleIdForGroup (signature.GroupId, createdPackage);
+				}
+				else
+				{
+					approval.Role = FindRoleIdForSigner (signature.SignerEmail, createdPackage);
+				}
 				doc.AddApproval (approval);
 			}
 
@@ -86,13 +97,32 @@ namespace Silanis.ESL.SDK
 			return doc;
 		}
 
-		private string FindRoleIdForSignature (string signerEmail, Silanis.ESL.API.Package createdPackage)
+		private string FindRoleIdForGroup (GroupId groupId, Silanis.ESL.API.Package createdPackage )
 		{
 			foreach (Silanis.ESL.API.Role role in createdPackage.Roles)
 			{
-				if (signerEmail.Equals (role.Signers[0].Email))
+				if (role.Signers.Count > 0 && role.Signers[0].Group != null)
 				{
-					return role.Id;
+					if (groupId.Id.Equals(role.Signers[0].Group.Id))
+					{
+						return role.Id;
+					}
+				}
+			}
+
+			throw new EslException(String.Format ("No Role found for group with id {0}", groupId.Id));
+		}
+
+		private string FindRoleIdForSigner (string signerEmail, Silanis.ESL.API.Package createdPackage)
+		{
+			foreach (Silanis.ESL.API.Role role in createdPackage.Roles)
+			{
+				if (role.Signers.Count > 0 && role.Signers[0].Email != null)
+				{
+					if (signerEmail.Equals(role.Signers[0].Email))
+					{
+						return role.Id;
+					}
 				}
 			}
 

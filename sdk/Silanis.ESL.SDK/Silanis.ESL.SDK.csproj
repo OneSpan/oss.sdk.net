@@ -38,14 +38,13 @@
     <Reference Include="Newtonsoft.Json">
       <HintPath>..\References\Newtonsoft.Json.dll</HintPath>
     </Reference>
-    <Reference Include="System" />
     <Reference Include="log4net">
       <HintPath>..\References\log4net.dll</HintPath>
     </Reference>
+    <Reference Include="System" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="src\Audit.cs" />
     <Compile Include="src\FieldSummary.cs" />
     <Compile Include="src\EslClient.cs" />
     <Compile Include="src\EslException.cs" />
@@ -76,7 +75,6 @@
     <Compile Include="src\DocumentTypeUtility.cs" />
     <Compile Include="src\Builder\SignatureBuilder.cs" />
     <Compile Include="src\Signature.cs" />
-    <Compile Include="src\SignatureStyle.cs" />
     <Compile Include="src\Builder\FieldBuilder.cs" />
     <Compile Include="src\Field.cs" />
     <Compile Include="src\FieldStyle.cs" />
@@ -91,10 +89,42 @@
     <Compile Include="src\SigningStatus.cs" />
     <Compile Include="src\SigningStatusUtility.cs" />
     <Compile Include="src\DocumentPackageStatus.cs" />
+    <Compile Include="src\Page.cs" />
+    <Compile Include="src\PageRequest.cs" />
+    <Compile Include="src\Builder\LinkBuilder.cs" />
+    <Compile Include="src\CeremonyLayoutSettings.cs" />
+    <Compile Include="src\Builder\CeremonyLayoutSettingsBuilder.cs" />
+    <Compile Include="src\DocumentPackageSettings.cs" />
+    <Compile Include="src\Builder\DocumentPackageSettingsBuilder.cs" />
+    <Compile Include="src\Services\EventNotificationService.cs" />
+    <Compile Include="src\EventNotificationConfig.cs" />
+    <Compile Include="src\NotificationEvent.cs" />
+    <Compile Include="src\Builder\EventNotificationConfigBuilder.cs" />
+    <Compile Include="src\RestClient.cs" />
+    <Compile Include="src\Internal\Support.cs" />
+    <Compile Include="src\Builder\TextAnchorBuilder.cs" />
+    <Compile Include="src\TextAnchorPosition.cs" />
+    <Compile Include="src\TextAnchor.cs" />
+    <Compile Include="src\SenderInfo.cs" />
+    <Compile Include="src\Builder\SenderInfoBuilder.cs" />
+    <Compile Include="src\DocumentPackageAttributes.cs" />
+    <Compile Include="src\Builder\DocumentPackageAttributesBuilder.cs" />
+    <Compile Include="src\CustomField.cs" />
+    <Compile Include="src\Translation.cs" />
+    <Compile Include="src\Builder\CustomFieldBuilder.cs" />
+    <Compile Include="src\Builder\TranslationBuilder.cs" />
+    <Compile Include="src\Services\CustomFieldService.cs" />
+    <Compile Include="src\CustomFieldValue.cs" />
+    <Compile Include="src\Builder\CustomFieldValueBuilder.cs" />
+    <Compile Include="src\Group.cs" />
+    <Compile Include="src\GroupId.cs" />
+    <Compile Include="src\GroupMember.cs" />
+    <Compile Include="src\Internal\Conversion\GroupConverter.cs" />
     <Compile Include="src\Models\Account.cs" />
     <Compile Include="src\Models\AccountProviders.cs" />
     <Compile Include="src\Models\Address.cs" />
     <Compile Include="src\Models\Approval.cs" />
+    <Compile Include="src\Models\AttachmentRequirement.cs" />
     <Compile Include="src\Models\Auth.cs" />
     <Compile Include="src\Models\AuthChallenge.cs" />
     <Compile Include="src\Models\AuthScheme.cs" />
@@ -116,6 +146,7 @@
     <Compile Include="src\Models\Credentials.cs" />
     <Compile Include="src\Models\CreditCard.cs" />
     <Compile Include="src\Models\Currency.cs" />
+    <Compile Include="src\Models\CustomField.cs" />
     <Compile Include="src\Models\Cycle.cs" />
     <Compile Include="src\Models\CycleCount.cs" />
     <Compile Include="src\Models\Delivery.cs" />
@@ -125,12 +156,17 @@
     <Compile Include="src\Models\Entity.cs" />
     <Compile Include="src\Models\Error.cs" />
     <Compile Include="src\Models\External.cs" />
+    <Compile Include="src\Models\ExtractAnchor.cs" />
+    <Compile Include="src\Models\Features.cs" />
     <Compile Include="src\Models\Field.cs" />
     <Compile Include="src\Models\FieldSubtype.cs" />
     <Compile Include="src\Models\FieldType.cs" />
     <Compile Include="src\Models\FieldValidation.cs" />
     <Compile Include="src\Models\FooterOptions.cs" />
     <Compile Include="src\Models\GlobalActionsOptions.cs" />
+    <Compile Include="src\Models\Group.cs" />
+    <Compile Include="src\Models\GroupMember.cs" />
+    <Compile Include="src\Models\GroupMembership.cs" />
     <Compile Include="src\Models\GuestAuth.cs" />
     <Compile Include="src\Models\HeaderOptions.cs" />
     <Compile Include="src\Models\Image.cs" />
@@ -140,6 +176,7 @@
     <Compile Include="src\Models\License.cs" />
     <Compile Include="src\Models\LicenseStatus.cs" />
     <Compile Include="src\Models\Link.cs" />
+    <Compile Include="src\Models\MemberType.cs" />
     <Compile Include="src\Models\Message.cs" />
     <Compile Include="src\Models\MessageStatus.cs" />
     <Compile Include="src\Models\Package.cs" />
@@ -153,9 +190,11 @@
     <Compile Include="src\Models\Provider.cs" />
     <Compile Include="src\Models\Quota.cs" />
     <Compile Include="src\Models\Report.cs" />
+    <Compile Include="src\Models\RequirementStatus.cs" />
     <Compile Include="src\Models\Result.cs" />
     <Compile Include="src\Models\Role.cs" />
     <Compile Include="src\Models\RoleType.cs" />
+    <Compile Include="src\Models\SamlMetadata.cs" />
     <Compile Include="src\Models\Scope.cs" />
     <Compile Include="src\Models\Sender.cs" />
     <Compile Include="src\Models\SenderCompletionReport.cs" />
@@ -175,44 +214,34 @@
     <Compile Include="src\Models\TextualSignatureStyle.cs" />
     <Compile Include="src\Models\TitleBarOptions.cs" />
     <Compile Include="src\Models\Transaction.cs" />
+    <Compile Include="src\Models\Translation.cs" />
     <Compile Include="src\Models\UsageReport.cs" />
     <Compile Include="src\Models\User.cs" />
+    <Compile Include="src\Models\UserCustomField.cs" />
     <Compile Include="src\Models\ViewSettings.cs" />
     <Compile Include="src\Models\Visibility.cs" />
-    <Compile Include="src\Page.cs" />
-    <Compile Include="src\PageRequest.cs" />
-    <Compile Include="src\Builder\LinkBuilder.cs" />
-    <Compile Include="src\CeremonyLayoutSettings.cs" />
-    <Compile Include="src\Builder\CeremonyLayoutSettingsBuilder.cs" />
-    <Compile Include="src\DocumentPackageSettings.cs" />
-    <Compile Include="src\Builder\DocumentPackageSettingsBuilder.cs" />
-    <Compile Include="src\Services\EventNotificationService.cs" />
-    <Compile Include="src\EventNotificationConfig.cs" />
-    <Compile Include="src\NotificationEvent.cs" />
-    <Compile Include="src\Builder\EventNotificationConfigBuilder.cs" />
-    <Compile Include="src\RestClient.cs" />
-    <Compile Include="src\Internal\Support.cs" />
-    <Compile Include="src\Builder\TextAnchorBuilder.cs" />
-    <Compile Include="src\TextAnchorPosition.cs" />
-    <Compile Include="src\TextAnchor.cs" />
-    <Compile Include="src\SenderInfo.cs" />
-    <Compile Include="src\Builder\SenderInfoBuilder.cs" />
-    <Compile Include="src\DocumentPackageAttributes.cs" />
-    <Compile Include="src\Builder\DocumentPackageAttributesBuilder.cs" />
-    <Compile Include="src\Models\CustomField.cs" />
-    <Compile Include="src\Models\Translation.cs" />
-    <Compile Include="src\CustomField.cs" />
-    <Compile Include="src\Translation.cs" />
-    <Compile Include="src\Builder\CustomFieldBuilder.cs" />
-    <Compile Include="src\Builder\TranslationBuilder.cs" />
-    <Compile Include="src\Services\CustomFieldService.cs" />
-    <Compile Include="src\CustomFieldValue.cs" />
-    <Compile Include="src\Models\UserCustomField.cs" />
-    <Compile Include="src\Builder\CustomFieldValueBuilder.cs" />
+    <Compile Include="src\Models\GroupMemberType.cs" />
+    <Compile Include="src\Internal\Conversion\GroupMemberTypeConverter.cs" />
+    <Compile Include="src\Services\GroupService.cs" />
+    <Compile Include="src\Internal\Conversion\GroupMemberConverter.cs" />
+    <Compile Include="src\Builder\GroupBuilder.cs" />
+    <Compile Include="src\Builder\GroupMemberBuilder.cs" />
+    <Compile Include="src\Services\AccountService.cs" />
+    <Compile Include="src\AccountMember.cs" />
+    <Compile Include="src\Builder\AccountMemberBuilder.cs" />
+    <Compile Include="src\Address.cs" />
+    <Compile Include="src\Builder\AddressBuilder.cs" />
+    <Compile Include="src\Internal\Conversion\AccountMemberConverter.cs" />
+    <Compile Include="src\Internal\Conversion\AddressConverter.cs" />
+    <Compile Include="src\SignatureStyle.cs" />
+    <Compile Include="src\Audit.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSHARP.Targets" />
   <ProjectExtensions>
     <VisualStudio AllowExistingFolder="true" />
   </ProjectExtensions>
   <ItemGroup />
+  <ItemGroup>
+    <Folder Include="src\Models\" />
+  </ItemGroup>
 </Project>

@@ -10,6 +10,8 @@ namespace Silanis.ESL.API
 	{
 		
 		// Fields
+		private IList<GroupMembership> _memberships = new List<GroupMembership>();
+		private IList<UserCustomField> _userCustomFields = new List<UserCustomField>();
 		
 		// Accessors
 		    
@@ -104,6 +106,26 @@ namespace Silanis.ESL.API
         }
     
 		    
+    [JsonProperty("memberships")]
+    public IList<GroupMembership> Memberships
+    {
+                get
+        {
+            return _memberships;
+        }
+        }
+        public Sender AddMembership(GroupMembership value)
+    {
+        if (value == null)
+        {
+            throw new ArgumentNullException("Argument cannot be null");
+        }
+        
+        _memberships.Add(value);
+        return this;
+    }
+    
+		    
     [JsonProperty("name")]
     public String Name
     {
@@ -151,6 +173,26 @@ namespace Silanis.ESL.API
     {
                 get; set;
         }
+    
+		    
+    [JsonProperty("userCustomFields")]
+    public IList<UserCustomField> UserCustomFields
+    {
+                get
+        {
+            return _userCustomFields;
+        }
+        }
+        public Sender AddUserCustomField(UserCustomField value)
+    {
+        if (value == null)
+        {
+            throw new ArgumentNullException("Argument cannot be null");
+        }
+        
+        _userCustomFields.Add(value);
+        return this;
+    }
     
 		
 	

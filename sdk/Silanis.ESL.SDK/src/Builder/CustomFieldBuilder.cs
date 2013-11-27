@@ -25,12 +25,12 @@ namespace Silanis.ESL.SDK.Builder
             return new CustomFieldBuilder().WithId( id );
         }
     
-        public static CustomFieldBuilder CustomField( Silanis.ESL.API.CustomField apiCustomField ) {
+        internal static CustomFieldBuilder CustomField( Silanis.ESL.API.CustomField apiCustomField ) {
             CustomFieldBuilder result = new CustomFieldBuilder();
             result.WithId( apiCustomField.Id )
                     .WithDefaultValue( apiCustomField.Value );
                    
-            foreach ( Silanis.ESL.API.Translation tran in apiCustomField.Transalations ) {
+            foreach ( Silanis.ESL.API.Translation tran in apiCustomField.Translations ) {
                 result.WithTranslation( TranslationBuilder.NewTranslation( tran ) );
             }
             return result;

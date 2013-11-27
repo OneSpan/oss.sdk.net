@@ -2,7 +2,7 @@ using System;
 using Silanis.ESL.SDK.Internal;
 using Silanis.ESL.SDK.Builder;
 using Newtonsoft.Json;
-using Silanis.ESL.SDK.API;
+using Silanis.ESL.API;
 
 namespace Silanis.ESL.SDK.Services
 {

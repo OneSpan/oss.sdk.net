@@ -10,6 +10,7 @@ namespace Silanis.ESL.API
 	{
 		
 		// Fields
+		private IList<CustomField> _customFields = new List<CustomField>();
 		private IList<License> _licenses = new List<License>();
 		
 		// Accessors
@@ -26,6 +27,26 @@ namespace Silanis.ESL.API
     {
                 get; set;
         }
+    
+		    
+    [JsonProperty("customFields")]
+    public IList<CustomField> CustomFields
+    {
+                get
+        {
+            return _customFields;
+        }
+        }
+        public Account AddCustomField(CustomField value)
+    {
+        if (value == null)
+        {
+            throw new ArgumentNullException("Argument cannot be null");
+        }
+        
+        _customFields.Add(value);
+        return this;
+    }
     
 		    
     [JsonProperty("data")]

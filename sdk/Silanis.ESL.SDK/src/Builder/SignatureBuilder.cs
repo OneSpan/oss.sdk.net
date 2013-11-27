@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using Silanis.ESL.API;
 
 namespace Silanis.ESL.SDK.Builder
 {
@@ -20,11 +21,19 @@ namespace Silanis.ESL.SDK.Builder
 		private IList<Field> fields = new List<Field>();
 		private bool extract;
         private TextAnchor textAnchor;
+        private GroupId groupId;
 
 		private SignatureBuilder (string signerEmail)
 		{
 			this.signerEmail = signerEmail;
+            this.groupId = null;
 		}
+
+        private SignatureBuilder (GroupId groupId )
+        {
+            this.signerEmail = null;
+            this.groupId = groupId;
+        }
 
         public static SignatureBuilder AcceptanceFor (string signerEmail)
         {
@@ -33,6 +42,11 @@ namespace Silanis.ESL.SDK.Builder
                     .WithSize(0,0)
                     .AtPosition(0,0)
                     .OnPage(0);
+        }
+
+        public static SignatureBuilder SignatureFor( GroupId groupId )
+        {
+            return new SignatureBuilder(groupId);
         }
 
 		public static SignatureBuilder SignatureFor (string signerEmail)
@@ -52,20 +66,33 @@ namespace Silanis.ESL.SDK.Builder
 
 		internal static SignatureBuilder NewSignatureFromAPIApproval (Silanis.ESL.API.Approval apiApproval, Silanis.ESL.API.Package package)
 		{
+            SignatureBuilder signatureBuilder = null;
 			Silanis.ESL.API.Signer apiSigner = null;
 			foreach ( Silanis.ESL.API.Role role in package.Roles ) {
 				if ( role.Id.Equals( apiApproval.Role ) ) {
-					apiSigner = role.Signers [0];
+                    if ( !isPlaceHolder( role ) ) {
+					    apiSigner = role.Signers [0];
+                    }
 				}
 			}
+            if (apiSigner != null)
+            {
+                if (apiSigner.Group == null)
+                {
+                    signatureBuilder = new SignatureBuilder(apiSigner.Email);
+                }
+                else
+                {
+                    signatureBuilder = new SignatureBuilder(new GroupId(apiSigner.Group.Id));
+                }
+            }
+            else
+            {
+                signatureBuilder = new SignatureBuilder("");
+            }
+            signatureBuilder.WithName(apiApproval.Name);
 
-			if ( apiSigner == null ) {
-				return null;
-			}
-
-			SignatureBuilder signatureBuilder = new SignatureBuilder( apiSigner.Email ).WithName( apiApproval.Name );
-
-			Silanis.ESL.API.Field apiSignatureField = null;
+            Silanis.ESL.API.Field apiSignatureField = null;
 			foreach ( Silanis.ESL.API.Field apiField in apiApproval.Fields ) {
 				if ( apiField.Type == Silanis.ESL.API.FieldType.SIGNATURE ) {
 					apiSignatureField = apiField;
@@ -169,7 +196,15 @@ namespace Silanis.ESL.SDK.Builder
 
 		public Signature Build()
 		{
-			Signature signature = new Signature (signerEmail, page, x, y);
+            Signature signature;
+            if (signerEmail != null)
+            {
+                signature = new Signature(signerEmail, page, x, y);
+            }
+            else
+            {
+                signature = new Signature(groupId, page, x, y);
+            }
 
 			signature.Height = height;
 			signature.Width = width;
@@ -180,5 +215,9 @@ namespace Silanis.ESL.SDK.Builder
             signature.TextAnchor = textAnchor;
 			return signature;
 		}
+
+        private static bool isPlaceHolder( Role role ) {
+            return role.Signers.Count == 0;
+        }
 	}
 }

@@ -1,55 +1,46 @@
+//
 using System;
-using Newtonsoft.Json;
 using System.Collections.Generic;
-
-namespace Silanis.ESL.SDK.API
+using Newtonsoft.Json;
+namespace Silanis.ESL.API
 {
-    public class UserCustomField
+	
+	
+	internal class UserCustomField
+	{
+		
+		// Fields
+		
+		// Accessors
+		    
+    [JsonProperty("data")]
+    public IDictionary<string, object> Data
     {
+                get; set;
+        }
     
-        private string _name=""; // for the purpose of the SchemaSanitizer, so that the backend doesn't throw an exception on null name.
-
-        public UserCustomField()
-        {
+		    
+    [JsonProperty("id")]
+    public String Id
+    {
+                get; set;
         }
-
-        [JsonProperty("data")]
-        public IDictionary<string, object> Data
-        {
-            get;
-            set;
+    
+		    
+    [JsonProperty("name")]
+    public String Name
+    {
+                get; set;
         }
-            
-        [JsonProperty("id")]
-        public String Id
-        {
-            get;
-            set;
+    
+		    
+    [JsonProperty("value")]
+    public String Value
+    {
+                get; set;
         }
-        
-        [JsonProperty("name")]
-        public String Name
-        {
-            get
-            {
-                return _name;
-            }
-            set
-            {
-                if (Value != null)
-                {
-                    _name = Value;
-                }
-            }
-        }
-        
-        [JsonProperty("value")]
-        public String Value
-        {
-            get;
-            set;
-        }
-        
-    }
+    
+		
+	
+	}
 }
-

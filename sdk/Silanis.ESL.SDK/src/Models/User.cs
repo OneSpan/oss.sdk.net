@@ -10,6 +10,7 @@ namespace Silanis.ESL.API
 	{
 		
 		// Fields
+		private IList<UserCustomField> _userCustomFields = new List<UserCustomField>();
 		
 		// Accessors
 		    
@@ -116,6 +117,26 @@ namespace Silanis.ESL.API
     {
                 get; set;
         }
+    
+		    
+    [JsonProperty("userCustomFields")]
+    public IList<UserCustomField> UserCustomFields
+    {
+                get
+        {
+            return _userCustomFields;
+        }
+        }
+        public User AddUserCustomField(UserCustomField value)
+    {
+        if (value == null)
+        {
+            throw new ArgumentNullException("Argument cannot be null");
+        }
+        
+        _userCustomFields.Add(value);
+        return this;
+    }
     
 		
 	

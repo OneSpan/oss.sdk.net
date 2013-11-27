@@ -17,11 +17,19 @@ namespace Silanis.ESL.SDK.Builder
 		private string id;
 		private bool canChangeSigner;
 		private bool locked;
+        private GroupId groupId;
 
 		private SignerBuilder(string signerEmail)
 		{
 			this.signerEmail = signerEmail;
+            this.groupId = null;
 		}
+
+        private SignerBuilder(GroupId groupId)
+        {
+            this.signerEmail = null;
+            this.groupId = groupId;
+        }
 
 		internal static SignerBuilder NewSignerFromAPISigner (Silanis.ESL.API.Role role)
 		{
@@ -59,6 +67,11 @@ namespace Silanis.ESL.SDK.Builder
 			Asserts.NotEmptyOrNull (signerEmail, "signerEmail");
 			return new SignerBuilder (signerEmail);
 		}
+
+		public static SignerBuilder NewSignerFromGroup(GroupId groupId)
+        {
+			return new SignerBuilder(groupId);
+        }
 
 		public SignerBuilder Lock ()
 		{
@@ -140,22 +153,35 @@ namespace Silanis.ESL.SDK.Builder
 
 		public Signer Build ()
 		{
-			Asserts.NotEmptyOrNull (firstName, "firstName");
-			Asserts.NotEmptyOrNull (lastName, "lastName");
 
-			Authentication authentication = authenticationBuilder.Build ();
-			Signer signer = new Signer (signerEmail, firstName, lastName, authentication);
 
-			signer.Title = title;
-			signer.Company = company;
-			signer.DeliverSignedDocumentsByEmail = deliverSignedDocumentsByEmail;
+            Signer signer;
+            if (isGroupSigner())
+            {
+                signer = new Signer(groupId);
+            }
+            else
+            {
+                Asserts.NotEmptyOrNull (firstName, "firstName");
+                Asserts.NotEmptyOrNull (lastName, "lastName");
+                Authentication authentication = authenticationBuilder.Build();
+                signer = new Signer (signerEmail, firstName, lastName, authentication);
+                signer.Title = title;
+                signer.Company = company;
+                signer.DeliverSignedDocumentsByEmail = deliverSignedDocumentsByEmail;
+            }
+
+
 			signer.SigningOrder = signingOrder;
+            signer.CanChangeSigner = canChangeSigner;
 			signer.Message = message;
-			signer.CanChangeSigner = canChangeSigner;
 			signer.Id = id;
 			signer.Locked = locked;
-            signer.RoleId = id;
 			return signer;
 		}
+
+        private bool isGroupSigner() {
+            return groupId != null;
+        }
 	}
 }

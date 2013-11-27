@@ -39,7 +39,7 @@ namespace Silanis.ESL.SDK
     
             foreach (Translation translation in translations) 
             {
-                    result.AddTransalation (translation.toAPITranslation());
+                    result.AddTranslation (translation.toAPITranslation());
             }
     
             return result;

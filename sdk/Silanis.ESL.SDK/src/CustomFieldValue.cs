@@ -1,5 +1,5 @@
 using System;
-using Silanis.ESL.SDK.API;
+using Silanis.ESL.API;
 
 namespace Silanis.ESL.SDK
 {
@@ -18,7 +18,7 @@ namespace Silanis.ESL.SDK
                 set;
         }
         
-        public UserCustomField toAPIUserCustomField() {
+		internal UserCustomField toAPIUserCustomField() {
             UserCustomField result = new UserCustomField();
             result.Id = Id;
             result.Value = Value;

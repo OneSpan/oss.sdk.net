@@ -1,57 +1,74 @@
+//
 using System;
 using System.Collections.Generic;
 using Newtonsoft.Json;
-
 namespace Silanis.ESL.API
 {
-    public class CustomField
+	
+	
+	internal class CustomField
+	{
+		
+		// Fields
+		private IList<Translation> _translations = new List<Translation>();
+		
+		// Accessors
+		    
+    [JsonProperty("data")]
+    public IDictionary<string, object> Data
     {
-    
-        // Fields
-        private IList<Translation> translations = new List<Translation>();
-
-        public CustomField()
-        {
-        }
-
-        [JsonProperty("id")]
-        public String Id
-        {
                 get; set;
         }
-
-        [JsonProperty("required")]
-        public Boolean Required
-        {
-                    get; set;
+    
+		    
+    [JsonProperty("id")]
+    public String Id
+    {
+                get; set;
         }
-
-        [JsonProperty("value")]
-        public String Value
-        {
-                get; set; 
+    
+		    
+    [JsonProperty("name")]
+    public String Name
+    {
+                get; set;
         }
-
-        [JsonProperty("translations")]
-        public IList<Translation> Transalations
-        {
-            get
-            {
-                return translations;
-            }
+    
+		    
+    [JsonProperty("required")]
+    public Boolean Required
+    {
+                get; set;
         }
-
-        public CustomField AddTransalation(Translation value) 
+    
+		    
+    [JsonProperty("translations")]
+    public IList<Translation> Translations
+    {
+                get
         {
-            if (value == null)
-            {
-                throw new ArgumentNullException("Argument cannot be null");
-            }
-            
-            translations.Add(value);
-            return this;
+            return _translations;
         }
-
+        }
+        public CustomField AddTranslation(Translation value)
+    {
+        if (value == null)
+        {
+            throw new ArgumentNullException("Argument cannot be null");
+        }
+        
+        _translations.Add(value);
+        return this;
     }
+    
+		    
+    [JsonProperty("value")]
+    public String Value
+    {
+                get; set;
+        }
+    
+		
+	
+	}
 }
-

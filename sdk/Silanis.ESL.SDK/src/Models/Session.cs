@@ -21,6 +21,13 @@ namespace Silanis.ESL.API
         }
     
 		    
+    [JsonProperty("features")]
+    public Features Features
+    {
+                get; set;
+        }
+    
+		    
     [JsonProperty("inPerson")]
     public Boolean InPerson
     {

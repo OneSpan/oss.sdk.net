@@ -10,10 +10,26 @@ namespace Silanis.ESL.SDK
 		public Signature (string signerEmail, int page, double x, double y)
 		{
 			SignerEmail = signerEmail;
+            GroupId = null;
 			Page = page;
 			X = x;
 			Y = y;
 		}
+
+        public Signature( GroupId groupId, int page, double x, double y)
+        {
+            SignerEmail = null;
+            GroupId = groupId;
+            Page = page;
+            X = x;
+            Y = y;
+        }
+
+        public GroupId GroupId
+        {
+            get;
+            private set;
+        }
 
 		public string SignerEmail 
 		{
@@ -82,5 +98,10 @@ namespace Silanis.ESL.SDK
             get;
             set;
         }
+
+		public bool IsGroupSignature()
+		{
+			return GroupId != null;
+		}
 	}
 }

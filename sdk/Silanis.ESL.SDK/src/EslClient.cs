@@ -18,6 +18,8 @@ namespace Silanis.ESL.SDK
 		private AuditService auditService;
         private EventNotificationService eventNotificationService;
         private CustomFieldService customFieldService;
+        private GroupService groupService;
+		private AccountService accountService;
 
         /// <summary>
         /// EslClient constructor.
@@ -38,6 +40,8 @@ namespace Silanis.ESL.SDK
 			auditService = new AuditService (apiKey, this.baseUrl);
             eventNotificationService = new EventNotificationService(restClient, this.baseUrl);
             customFieldService = new CustomFieldService( restClient, this.baseUrl );
+            groupService = new GroupService(restClient, this.baseUrl);
+			accountService = new AccountService(restClient, this.baseUrl);
 
 		}
 
@@ -175,5 +179,21 @@ namespace Silanis.ESL.SDK
                 return eventNotificationService;
             }
         }
+
+        public GroupService GroupService
+        {
+            get
+            {
+                return groupService;
+            }
+        }
+
+		public AccountService AccountService
+		{
+			get
+			{
+				return accountService;
+			}
+		}
 	}
 }	

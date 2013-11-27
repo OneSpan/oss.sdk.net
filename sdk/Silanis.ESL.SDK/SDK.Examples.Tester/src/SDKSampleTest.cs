@@ -8,9 +8,11 @@ namespace SDK.Examples
     [TestFixture]
     public class SDKSampleTest
     {
-//        public static void Main(string[] args) {
+        public static void Main(string[] args) {
+			GroupManagementExample example = new GroupManagementExample(Props.GetInstance());
+			example.Run();
 //            new SDKSampleTest().test();
-//        }
+        }
 
         private Props properties = Props.GetInstance();
 

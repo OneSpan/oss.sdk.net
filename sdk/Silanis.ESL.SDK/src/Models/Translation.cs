@@ -1,32 +1,53 @@
+//
 using System;
+using System.Collections.Generic;
 using Newtonsoft.Json;
-
 namespace Silanis.ESL.API
 {
-    public class Translation
+	
+	
+	internal class Translation
+	{
+		
+		// Fields
+		
+		// Accessors
+		    
+    [JsonProperty("data")]
+    public IDictionary<string, object> Data
     {
-        public Translation()
-        {
+                get; set;
         }
-
-        [JsonProperty("name")]
-        public string Name {
-                get;
-                set;
+    
+		    
+    [JsonProperty("description")]
+    public String Description
+    {
+                get; set;
         }
-
-        [JsonProperty("description")]
-        public String Description
-        {
-            get; set;
+    
+		    
+    [JsonProperty("id")]
+    public String Id
+    {
+                get; set;
         }
-
-        [JsonProperty("language")]
-        public String Language
-        {
-            get; set;
+    
+		    
+    [JsonProperty("language")]
+    public String Language
+    {
+                get; set;
         }
-
-    }
+    
+		    
+    [JsonProperty("name")]
+    public String Name
+    {
+                get; set;
+        }
+    
+		
+	
+	}
 }
-

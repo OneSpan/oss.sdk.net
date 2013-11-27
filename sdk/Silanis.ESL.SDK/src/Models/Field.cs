@@ -34,6 +34,13 @@ namespace Silanis.ESL.API
         }
     
 		    
+    [JsonProperty("extractAnchor")]
+    public ExtractAnchor ExtractAnchor
+    {
+                get; set;
+        }
+    
+		    
     [JsonProperty("height")]
     public Double Height
     {

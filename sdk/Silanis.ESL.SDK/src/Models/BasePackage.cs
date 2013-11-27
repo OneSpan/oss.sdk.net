@@ -85,6 +85,13 @@ namespace Silanis.ESL.API
         }
     
 		    
+    [JsonProperty("language")]
+    public String Language
+    {
+                get; set;
+        }
+    
+		    
     [JsonProperty("limits")]
     public PackageArtifactsLimits Limits
     {
@@ -146,8 +153,22 @@ namespace Silanis.ESL.API
         }
     
 		    
+    [JsonProperty("settings")]
+    public PackageSettings Settings
+    {
+                get; set;
+        }
+    
+		    
     [JsonProperty("signedDocumentDelivery")]
     public SignedDocumentDelivery SignedDocumentDelivery
+    {
+                get; set;
+        }
+    
+		    
+    [JsonProperty("status")]
+    public PackageStatus Status
     {
                 get; set;
         }

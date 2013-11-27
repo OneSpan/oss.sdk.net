@@ -10,9 +10,30 @@ namespace Silanis.ESL.API
 	{
 		
 		// Fields
+		private IList<AttachmentRequirement> _attachmentRequirements = new List<AttachmentRequirement>();
 		private IList<Signer> _signers = new List<Signer>();
 		
 		// Accessors
+		    
+    [JsonProperty("attachmentRequirements")]
+    public IList<AttachmentRequirement> AttachmentRequirements
+    {
+                get
+        {
+            return _attachmentRequirements;
+        }
+        }
+        public Role AddAttachmentRequirement(AttachmentRequirement value)
+    {
+        if (value == null)
+        {
+            throw new ArgumentNullException("Argument cannot be null");
+        }
+        
+        _attachmentRequirements.Add(value);
+        return this;
+    }
+    
 		    
     [JsonProperty("data")]
     public IDictionary<string, object> Data

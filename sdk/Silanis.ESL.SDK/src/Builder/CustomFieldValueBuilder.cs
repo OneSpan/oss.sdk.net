@@ -1,5 +1,5 @@
 using System;
-using Silanis.ESL.SDK.API;
+using Silanis.ESL.API;
 
 namespace Silanis.ESL.SDK.Builder
 {
@@ -19,7 +19,7 @@ namespace Silanis.ESL.SDK.Builder
             return new CustomFieldValueBuilder().WithId(id);
         }
 
-        public static CustomFieldValueBuilder CustomFieldValue(UserCustomField userCustomField)
+        internal static CustomFieldValueBuilder CustomFieldValue(UserCustomField userCustomField)
         {
             return new CustomFieldValueBuilder().
                 WithId(userCustomField.Id).

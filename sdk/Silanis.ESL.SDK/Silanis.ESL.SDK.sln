@@ -33,7 +33,7 @@ Global
 		{8D6C84A6-459F-42E0-8673-F8890B6A57DC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(MonoDevelopProperties) = preSolution
-		StartupItem = SDK.Examples.Tester\SDK.Examples.Tester.csproj
+		StartupItem = Silanis.ESL.SDK.csproj
 		Policies = $0
 		$0.TextStylePolicy = $1
 		$1.inheritsSet = VisualStudio
@@ -61,10 +61,8 @@ Global
 		$2.BeforeDelegateDeclarationParentheses = False
 		$2.NewParentheses = False
 		$2.SpacesBeforeBrackets = False
-		$2.AlignToFirstMethodCallArgument = False
 		$2.AlignToFirstMethodDeclarationParameter = False
 		$2.AlignToFirstIndexerDeclarationParameter = False
-		$2.AlignToFirstIndexerArgument = False
 		$2.inheritsSet = Mono
 		$2.inheritsScope = text/x-csharp
 		$2.scope = text/x-csharp

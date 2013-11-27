@@ -14,11 +14,27 @@ namespace Silanis.ESL.SDK
 			FirstName = firstName;
 			LastName = lastName;
 			this.authentication = authentication;
+			this.GroupId = null;
+		}
+
+		public Signer( GroupId groupId )
+		{
+			GroupId = groupId;
+			Email = null;
+			FirstName = null;
+			LastName = null;
+			authentication = new Authentication(AuthenticationMethod.EMAIL);
 		}
 
 		public string Id {
 			get;
 			set;
+		}
+
+		public GroupId GroupId
+		{
+			get;
+			private set;
 		}
 
 		public string Email {
@@ -98,29 +114,40 @@ namespace Silanis.ESL.SDK
             set;
         }
 
+		public bool IsGroupSigner()
+		{
+			return GroupId != null;
+		}
+
 		internal Silanis.ESL.API.Signer ToAPISigner ()
 		{
 			Silanis.ESL.API.Signer signer = new Silanis.ESL.API.Signer ();
 
-			signer.Email = Email;
-			signer.FirstName = FirstName;
-			signer.LastName = LastName;
-			signer.Title = Title;
-			signer.Company = Company;
-			signer.Auth = authentication.ToAPIAuthentication ();
-            if (DeliverSignedDocumentsByEmail)
-            {
-                signer.Delivery = new Silanis.ESL.API.Delivery();
-                signer.Delivery.Email = DeliverSignedDocumentsByEmail;
-            }
-
-            signer.Delivery = new Delivery();
-            signer.Delivery.Email = DeliverSignedDocumentsByEmail;
+			if (!IsGroupSigner())
+			{
+				signer.Email = Email;
+				signer.FirstName = FirstName;
+				signer.LastName = LastName;
+				signer.Title = Title;
+				signer.Company = Company;
+				if (DeliverSignedDocumentsByEmail)
+				{
+					signer.Delivery = new Silanis.ESL.API.Delivery();
+					signer.Delivery.Email = DeliverSignedDocumentsByEmail;
+				}
+			}
+			else
+			{
+				signer.Group = new Silanis.ESL.API.Group();
+				signer.Group.Id = GroupId.Id;
+			}
 
 			if (!String.IsNullOrEmpty(Id))
 			{
 				signer.Id = Id;
 			}
+
+			signer.Auth = authentication.ToAPIAuthentication ();
 
 			return signer;
 		}

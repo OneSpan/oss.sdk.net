@@ -49,6 +49,14 @@ namespace Silanis.ESL.SDK.Internal
         public static readonly string ACCOUNT_CUSTOMFIELD_PATH = "/account/customfields";
         public static readonly string USER_CUSTOMFIELD_PATH = "/user/customfields";
 
+        // Groups Service
+        public static readonly string GROUPS_PATH = "/groups";
+        public static readonly string GROUPS_ID_PATH = "/groups/{groupId}";
+        public static readonly string GROUPS_MEMBER_PATH = "/groups/{groupId}/members";
+
+        // Account Service
+        public static readonly string ACCOUNT_INVITE_MEMBER_PATH = "/account/senders";
+
 		public UrlTemplate (string baseUrl)
 		{
 			this.baseUrl = baseUrl;

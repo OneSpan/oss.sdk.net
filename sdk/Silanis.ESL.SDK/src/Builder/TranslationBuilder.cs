@@ -21,7 +21,7 @@ namespace Silanis.ESL.SDK.Builder
             return new TranslationBuilder( language );
         }
     
-        public static TranslationBuilder NewTranslation( Silanis.ESL.API.Translation apiTranslation ) {
+        internal static TranslationBuilder NewTranslation( Silanis.ESL.API.Translation apiTranslation ) {
             TranslationBuilder builder = new TranslationBuilder( apiTranslation.Language );
             builder.WithName( apiTranslation.Name )
                     .WithDescription( apiTranslation.Description );
