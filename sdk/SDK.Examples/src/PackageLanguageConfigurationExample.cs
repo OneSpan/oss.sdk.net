@@ -28,6 +28,7 @@ namespace SDK.Examples
         {
             DocumentPackage superDuperPackage = PackageBuilder.NewPackageNamed( "PackageLanguageConfigurationExample: " + DateTime.Now )
                 .DescribedAs( "This is a package created using the e-SignLive SDK" )
+				.WithLanguage(new CultureInfo("fr"))
                     .ExpiresOn( DateTime.Now.AddMonths(1) )
                     .WithEmailMessage( "This message should be delivered to all signers" )
                     .WithSigner( SignerBuilder.NewSignerWithEmail( email1 )

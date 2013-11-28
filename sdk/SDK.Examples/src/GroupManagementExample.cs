@@ -37,6 +37,7 @@ namespace SDK.Examples
 
         override public void Execute()
         {
+			// The group members need to be account members, if they aren't already you may need to invite them to your account.
 //			eslClient.AccountService.InviteUser(AccountMemberBuilder.NewAccountMember(email1)
 //				.WithFirstName("first1")
 //				.WithLastName("last1")
@@ -70,16 +71,31 @@ namespace SDK.Examples
 //				.WithPhoneNumber("phoneNumber4")
 //				.Build());
 
+			Group emptyGroup = GroupBuilder.NewGroup(Guid.NewGuid().ToString())
+				.WithId(new GroupId(Guid.NewGuid().ToString()))
+				.WithEmail("emptyGroup@email.com")
+				.WithoutIndividualMemberEmailing()
+				.Build();
+			Group createdEmptyGroup = eslClient.GroupService.CreateGroup(emptyGroup);
+			List<GroupMember> retrievedEmptyGroup = eslClient.GroupService.GetGroupMembers(createdEmptyGroup.Id);
+			eslClient.GroupService.InviteMember(createdEmptyGroup.Id,
+				GroupMemberBuilder.NewGroupMember(email1)
+				.AsMemberType(GroupMemberType.MANAGER)
+				.Build());
+			eslClient.GroupService.InviteMember(createdEmptyGroup.Id,
+				GroupMemberBuilder.NewGroupMember(email3)
+				.AsMemberType(GroupMemberType.MANAGER)
+				.Build());
+			Console.Out.WriteLine("GroupId: " + createdEmptyGroup.Id.Id);
+			retrievedEmptyGroup = eslClient.GroupService.GetGroupMembers(createdEmptyGroup.Id);
+
+			/*
 			Group group1 = GroupBuilder.NewGroup(Guid.NewGuid().ToString())
                     .WithId(new GroupId(Guid.NewGuid().ToString()))
 					.WithMember(GroupMemberBuilder.NewGroupMember(email1)
-						.AsMemberType(GroupMemberType.MANAGER)
-						.WithFirstName("first1")
-						.WithLastName("last1"))
-				.WithMember(GroupMemberBuilder.NewGroupMember(email3)
-						.AsMemberType(GroupMemberType.MANAGER)
-					.WithFirstName("first3")
-					.WithLastName("last3"))
+						.AsMemberType(GroupMemberType.MANAGER))
+					.WithMember(GroupMemberBuilder.NewGroupMember(email3)
+						.AsMemberType(GroupMemberType.MANAGER))
                     .WithEmail("bob@aol.com")
                     .WithIndividualMemberEmailing()
                     .Build();
@@ -130,6 +146,7 @@ namespace SDK.Examples
 			eslClient.SendPackage(packageId);
 
 			DocumentPackage result = eslClient.GetPackage(packageId);
+			*/
         }
     }
 }

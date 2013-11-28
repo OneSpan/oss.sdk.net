@@ -34,12 +34,12 @@ namespace Silanis.ESL.SDK
             return this;
         }
 
-        public GroupMemberBuilder WithFirstName( string firstName ) {
+		internal GroupMemberBuilder WithFirstName( string firstName ) {
             this.firstName = firstName;
             return this;
         }
 
-        public GroupMemberBuilder WithLastName( string lastName ) {
+		internal GroupMemberBuilder WithLastName( string lastName ) {
             this.lastName = lastName;
             return this;
         }
