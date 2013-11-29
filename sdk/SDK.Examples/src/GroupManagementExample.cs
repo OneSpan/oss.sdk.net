@@ -35,8 +35,20 @@ namespace SDK.Examples
             this.fileStream1 = File.OpenRead(new FileInfo(Directory.GetCurrentDirectory() + "/src/document.pdf").FullName);
         }
 
-        override public void Execute()
-        {
+		private void displayAccountGroupsAndMembers() {
+			{
+				List<Group> allGroups = eslClient.GroupService.GetMyGroups();
+				foreach ( Group group in allGroups ) {
+					Console.Out.WriteLine( group.Name + " with email " + group.Email + " and id " + group.Id );
+					List<GroupMember> allMembers = eslClient.GroupService.GetGroupMembers( group.Id );
+					foreach ( GroupMember member in allMembers ) {
+						Console.Out.WriteLine( member.GroupMemberType.ToString() + " " + member.FirstName + " " + member.LastName + " with email " + member.Email);
+					}
+				}
+			}
+		}
+
+		private void inviteUsersToMyAccount() {
 			// The group members need to be account members, if they aren't already you may need to invite them to your account.
 //			eslClient.AccountService.InviteUser(AccountMemberBuilder.NewAccountMember(email1)
 //				.WithFirstName("first1")
@@ -70,7 +82,11 @@ namespace SDK.Examples
 //				.WithLanguage("language4")
 //				.WithPhoneNumber("phoneNumber4")
 //				.Build());
+		}
 
+        override public void Execute()
+        {
+			displayAccountGroupsAndMembers();
 			Group emptyGroup = GroupBuilder.NewGroup(Guid.NewGuid().ToString())
 				.WithId(new GroupId(Guid.NewGuid().ToString()))
 				.WithEmail("emptyGroup@email.com")
@@ -89,7 +105,6 @@ namespace SDK.Examples
 			Console.Out.WriteLine("GroupId: " + createdEmptyGroup.Id.Id);
 			retrievedEmptyGroup = eslClient.GroupService.GetGroupMembers(createdEmptyGroup.Id);
 
-			/*
 			Group group1 = GroupBuilder.NewGroup(Guid.NewGuid().ToString())
                     .WithId(new GroupId(Guid.NewGuid().ToString()))
 					.WithMember(GroupMemberBuilder.NewGroupMember(email1)
@@ -105,23 +120,17 @@ namespace SDK.Examples
 			eslClient.GroupService.InviteMember( createdGroup1.Id,
                                                 GroupMemberBuilder.NewGroupMember( email3 )
                                                 .AsMemberType( GroupMemberType.MANAGER )
-                                                .WithFirstName( "first3" )
-                                                .WithLastName( "last3" )
                                                 .Build() );
 
             eslClient.GroupService.InviteMember(createdGroup1.Id,
                 GroupMemberBuilder.NewGroupMember(email4)
                                                 .AsMemberType(GroupMemberType.REGULAR)
-                                                .WithFirstName("first4")
-                                                .WithLastName("last4")
                                                 .Build());
 
             Group retrievedGroup1 = eslClient.GroupService.GetGroup(createdGroup1.Id);
             Group group2 = GroupBuilder.NewGroup(Guid.NewGuid().ToString())
                 .WithMember(GroupMemberBuilder.NewGroupMember(email2)
-                            .AsMemberType(GroupMemberType.MANAGER)
-                            .WithFirstName("first2")
-                            .WithLastName("last2"))
+					.AsMemberType(GroupMemberType.MANAGER) )
                     .WithEmail("bob@aol.com")
                     .WithIndividualMemberEmailing()
                     .Build();
@@ -131,22 +140,21 @@ namespace SDK.Examples
             
 			List<Group> allGroupsBeforeDelete = eslClient.GroupService.GetMyGroups();
 
-            DocumentPackage superDuperPackage = PackageBuilder.NewPackageNamed("GroupManagementExmaple " + DateTime.Now.ToString())
-                .WithSigner(SignerBuilder.NewSignerFromGroup(createdGroup1.Id)
-                            .CanChangeSigner()
-                            .DeliverSignedDocumentsByEmail())
-                    .WithDocument(DocumentBuilder.NewDocumentNamed("First Document")
-                                  .FromStream(fileStream1, DocumentType.PDF)
-                                  .WithSignature(SignatureBuilder.SignatureFor(createdGroup1.Id)
-                                   .OnPage(0)
-                                   .AtPosition(100, 100)))
-                    .Build();
+			DocumentPackage superDuperPackage = PackageBuilder.NewPackageNamed("GroupManagementExmaple " + DateTime.Now.ToString())
+			    .WithSigner(SignerBuilder.NewSignerFromGroup(createdGroup1.Id)
+			                .CanChangeSigner()
+			                .DeliverSignedDocumentsByEmail())
+			        .WithDocument(DocumentBuilder.NewDocumentNamed("First Document")
+			                      .FromStream(fileStream1, DocumentType.PDF)
+			                      .WithSignature(SignatureBuilder.SignatureFor(createdGroup1.Id)
+			                       .OnPage(0)
+			                       .AtPosition(100, 100)))
+			        .Build();
 
 			PackageId packageId = eslClient.CreatePackage(superDuperPackage);
 			eslClient.SendPackage(packageId);
 
 			DocumentPackage result = eslClient.GetPackage(packageId);
-			*/
         }
     }
 }
