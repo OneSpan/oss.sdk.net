@@ -126,7 +126,7 @@ namespace Silanis.ESL.SDK
             Silanis.ESL.API.Package packageToCreate = documentPackage.ToAPIPackage();
             packageService.UploadDocument(documentPackage.Id, fileName, fileContent, document.ToAPIDocument(packageToCreate));
         }
-
+        
         /// <summary>
         /// BaseUrl property
         /// </summary>

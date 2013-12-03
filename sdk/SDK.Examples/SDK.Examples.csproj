@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -78,11 +78,10 @@
     <Compile Include="src\CustomFieldExample.cs" />
     <Compile Include="src\SDKSample1.cs" />
     <Compile Include="src\GroupManagementExample.cs" />
+    <Compile Include="src\UploadDocumentExample.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
-  <ItemGroup>
-    <Folder Include="src\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Content Include="src\document.pdf">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
