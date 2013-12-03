@@ -10,6 +10,50 @@ namespace SDK.Tests
 		private static double TOLERANCE = 0.01d;
 
 		[Test]
+		public void BuildCaptureForGroup()
+		{
+			GroupId groupId = new GroupId("myGroupId");
+			Signature signature = SignatureBuilder.CaptureFor(groupId).Build();
+
+			Assert.AreEqual(groupId, signature.GroupId);
+			Assert.IsNull(signature.SignerEmail);
+			Assert.AreEqual(SignatureStyle.HAND_DRAWN, signature.Style);
+		}
+
+		[Test]
+		public void BuildSignatureForGroup()
+		{
+			GroupId groupId = new GroupId("myGroupId");
+			Signature signature = SignatureBuilder.SignatureFor(groupId).Build();
+
+			Assert.AreEqual(groupId, signature.GroupId);
+			Assert.IsNull(signature.SignerEmail);
+			Assert.AreEqual(SignatureStyle.FULL_NAME, signature.Style);
+		}
+
+		[Test]
+		public void BuildAcceptanceForGroup()
+		{
+			GroupId groupId = new GroupId("myGroupId");
+			Signature signature = SignatureBuilder.AcceptanceFor(groupId).Build();
+
+			Assert.AreEqual(groupId, signature.GroupId);
+			Assert.IsNull(signature.SignerEmail);
+			Assert.AreEqual(SignatureStyle.ACCEPTANCE, signature.Style);
+		}
+
+		[Test]
+		public void BuildInitialsForGroup()
+		{
+			GroupId groupId = new GroupId("myGroupId");
+			Signature signature = SignatureBuilder.InitialsFor(groupId).Build();
+
+			Assert.AreEqual(groupId, signature.GroupId);
+			Assert.IsNull(signature.SignerEmail);
+			Assert.AreEqual(SignatureStyle.INITIALS, signature.Style);
+		}
+
+		[Test]
 		public void BuildsWithDefaultValues()
 		{
 			Signature signature = SignatureBuilder.SignatureFor ("some@dude.com").Build ();

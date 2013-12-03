@@ -44,6 +44,15 @@ namespace Silanis.ESL.SDK.Builder
                     .OnPage(0);
         }
 
+		public static SignatureBuilder AcceptanceFor (GroupId groupId )
+		{
+			return new SignatureBuilder(groupId)
+					.WithStyle(SignatureStyle.ACCEPTANCE)
+					.WithSize(0,0)
+					.AtPosition(0,0)
+					.OnPage(0);
+		}
+
         public static SignatureBuilder SignatureFor( GroupId groupId )
         {
             return new SignatureBuilder(groupId);
@@ -59,9 +68,19 @@ namespace Silanis.ESL.SDK.Builder
 			return new SignatureBuilder (signerEmail).WithStyle (SignatureStyle.INITIALS);
 		}
 
+		public static SignatureBuilder InitialsFor ( GroupId groupId )
+		{
+			return  new SignatureBuilder(groupId).WithStyle(SignatureStyle.INITIALS);
+		}
+
 		public static SignatureBuilder CaptureFor (string signerEmail)
 		{
 			return new SignatureBuilder (signerEmail).WithStyle (SignatureStyle.HAND_DRAWN);
+		}
+
+		public static SignatureBuilder CaptureFor (GroupId groupId)
+		{
+			return new SignatureBuilder(groupId).WithStyle(SignatureStyle.HAND_DRAWN);
 		}
 
 		internal static SignatureBuilder NewSignatureFromAPIApproval (Silanis.ESL.API.Approval apiApproval, Silanis.ESL.API.Package package)
