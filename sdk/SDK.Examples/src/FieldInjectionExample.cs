@@ -35,7 +35,6 @@ namespace SDK.Examples
                                    .AtPosition( 100, 100 ) )
                                   .WithInjectedField( FieldBuilder.TextField()
                                        .WithId( "AGENT_SIG_1" )
-                                       .WithPositionExtracted()
                                        .WithName( "AGENT_SIG_1" )
                                        .WithValue( "Test Value" ) ) )
                     .Build();
