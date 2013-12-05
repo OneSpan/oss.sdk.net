@@ -86,6 +86,8 @@ namespace SDK.Examples
 
         override public void Execute()
         {
+			eslClient.PackageService.NotifySigner( new PackageId( "d97d29e5-b00b-4b75-bdd4-d52de54813d7"), new GroupId("f21b5204-61db-4e2b-aee5-80cc2da45e04") );
+			/*
 			displayAccountGroupsAndMembers();
 			Group emptyGroup = GroupBuilder.NewGroup(Guid.NewGuid().ToString())
 				.WithId(new GroupId(Guid.NewGuid().ToString()))
@@ -154,7 +156,10 @@ namespace SDK.Examples
 			PackageId packageId = eslClient.CreatePackage(superDuperPackage);
 			eslClient.SendPackage(packageId);
 
+			eslClient.PackageService.NotifySigner(packageId, createdGroup1.Id);
+
 			DocumentPackage result = eslClient.GetPackage(packageId);
+			*/
         }
     }
 }

@@ -6,6 +6,7 @@ using Newtonsoft.Json;
 using System.Collections.Generic;
 using Silanis.ESL.SDK.Internal;
 using Silanis.ESL.SDK.Builder;
+using Silanis.ESL.API;
 
 namespace Silanis.ESL.SDK.Services
 {
@@ -262,6 +263,22 @@ namespace Silanis.ESL.SDK.Services
 			}
 		}
 
+		internal IList<Role> GetRoles( PackageId packageId ) {
+			String path = template.UrlFor( UrlTemplate.ROLE_PATH )
+				.Replace( "{packageId}", packageId.Id )
+				.Build();
+
+			Result<Role> response = null;
+			try
+			{
+				string stringResponse = restClient.Get(path);
+				response = JsonConvert.DeserializeObject<Result<Role>> (stringResponse, settings);
+			} catch( Exception e ) {
+				throw new EslException("Unable to retrieve role list for package with id " + packageId.Id + ".  " + e.Message);
+			}
+			return response.Results;
+		}
+
 		public void DeletePackage(PackageId id)
 		{
 			string path = template.UrlFor (UrlTemplate.PACKAGE_ID_PATH).Replace ("{packageId}", id.Id).Build ();
@@ -273,6 +290,48 @@ namespace Silanis.ESL.SDK.Services
 			catch (Exception e)
 			{
 				throw new EslException ("Could not delete package. Exception: " + e.Message);	
+			}
+		}
+
+		private Role FindRoleForGroup( PackageId packageId, string groupId )
+		{
+			IList<Role> roles = GetRoles(packageId);
+
+			foreach (Role role in roles)
+			{
+				if (role.Signers.Count > 0)
+				{
+					Silanis.ESL.API.Signer signer = role.Signers[0];
+					if (signer.Group != null && signer.Group.Id.Equals(groupId))
+					{
+						return role;
+					}
+				}
+			}
+			return null;
+		}
+
+		public void NotifySigner( PackageId packageId, GroupId groupId )
+		{
+			Role role = FindRoleForGroup(packageId, groupId.Id);
+			NotifySigner(packageId, role.Id);
+		}
+
+		public void NotifySigner (PackageId packageId, string roleId )
+		{
+
+			string path = template.UrlFor(UrlTemplate.NOTIFY_ROLE_PATH)
+				.Replace("{packageId}", packageId.Id)
+				.Replace("{roleId}", roleId)
+				.Build();
+
+			try
+			{
+				restClient.Post(path, "");
+			}
+			catch (Exception e)
+			{
+				throw new EslException("Unable to send email notification.  " + e.Message);
 			}
 		}
 

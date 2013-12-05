@@ -16,7 +16,16 @@ namespace Silanis.ESL.SDK
 
         public string Post(string path, string jsonPayload) {
 //            support.LogRequest("POST", path, jsonPayload);
-            byte[] responseBytes = HttpMethods.PostHttp(apiToken, path, Converter.ToBytes(jsonPayload));
+			byte[] payloadBytes = null;
+			if (jsonPayload != null)
+			{
+				payloadBytes = Converter.ToBytes(jsonPayload);
+			}
+			else
+			{
+				payloadBytes = new byte[0];
+			}
+			byte[] responseBytes = HttpMethods.PostHttp(apiToken, path, payloadBytes);
             return Converter.ToString(responseBytes);
         }
 
