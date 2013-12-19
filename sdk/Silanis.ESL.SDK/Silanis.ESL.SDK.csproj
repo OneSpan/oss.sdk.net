@@ -48,6 +48,8 @@
     <Compile Include="src\FieldSummary.cs" />
     <Compile Include="src\EslClient.cs" />
     <Compile Include="src\EslException.cs" />
+    <Compile Include="src\Internal\Conversion\TextAnchorConverter.cs" />
+    <Compile Include="src\Internal\Conversion\TextAnchorPositionConverter.cs" />
     <Compile Include="src\PackageId.cs" />
     <Compile Include="src\SessionToken.cs" />
     <Compile Include="src\Internal\Converter.cs" />
@@ -241,7 +243,5 @@
     <VisualStudio AllowExistingFolder="true" />
   </ProjectExtensions>
   <ItemGroup />
-  <ItemGroup>
-    <Folder Include="src\Models\" />
-  </ItemGroup>
+  <ItemGroup />
 </Project>

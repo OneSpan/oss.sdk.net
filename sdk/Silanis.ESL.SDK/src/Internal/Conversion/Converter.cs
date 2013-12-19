@@ -1,5 +1,6 @@
 using System;
 using Silanis.ESL.SDK;
+using Silanis.ESL.SDK.src.Internal.Conversion;
 
 namespace Silanis.ESL.SDK.Internal.Conversion
 {
@@ -34,7 +35,12 @@ namespace Silanis.ESL.SDK.Internal.Conversion
 				result.Height = field.Height;
 			}
 
-			result.Value = field.Value;
+            if (field.TextAnchor != null)
+            {
+                result.ExtractAnchor = new TextAnchorConverter(field.TextAnchor).ToAPIExtractAnchor();
+            }
+            
+            result.Value = field.Value;
 			result.Type = Silanis.ESL.API.FieldType.INPUT;
 			result.Subtype = GetFieldSubtype(field);
 			result.Binding = field.Binding;
@@ -95,6 +101,12 @@ namespace Silanis.ESL.SDK.Internal.Conversion
 				result.Width = signature.Width;
 				result.Height = signature.Height;
 			}
+
+            if (signature.TextAnchor != null)
+            {
+                result.ExtractAnchor = new TextAnchorConverter(signature.TextAnchor).ToAPIExtractAnchor();
+            }
+
 
 			result.Type = Silanis.ESL.API.FieldType.SIGNATURE;
 			result.Subtype = GetSignatureSubtype (signature);
