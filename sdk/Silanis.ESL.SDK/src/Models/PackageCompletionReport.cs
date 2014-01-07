@@ -15,6 +15,20 @@ namespace Silanis.ESL.API
 		
 		// Accessors
 		    
+    [JsonProperty("created")]
+    public Nullable<DateTime> Created
+    {
+                get; set;
+        }
+    
+		    
+    [JsonProperty("data")]
+    public IDictionary<string, object> Data
+    {
+                get; set;
+        }
+    
+		    
     [JsonProperty("documents")]
     public IList<DocumentsCompletionReport> Documents
     {

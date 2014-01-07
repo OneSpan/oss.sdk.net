@@ -21,6 +21,8 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <Prefer32Bit>false</Prefer32Bit>
+    <SignAssembly>true</SignAssembly>
+    <AssemblyOriginatorKeyFile>sdk.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <Optimize>true</Optimize>
@@ -38,10 +40,10 @@
     <Reference Include="Newtonsoft.Json">
       <HintPath>..\References\Newtonsoft.Json.dll</HintPath>
     </Reference>
+    <Reference Include="System" />
     <Reference Include="log4net">
       <HintPath>..\References\log4net.dll</HintPath>
     </Reference>
-    <Reference Include="System" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -122,6 +124,20 @@
     <Compile Include="src\GroupId.cs" />
     <Compile Include="src\GroupMember.cs" />
     <Compile Include="src\Internal\Conversion\GroupConverter.cs" />
+    <Compile Include="src\Internal\Conversion\GroupMemberTypeConverter.cs" />
+    <Compile Include="src\Services\GroupService.cs" />
+    <Compile Include="src\Internal\Conversion\GroupMemberConverter.cs" />
+    <Compile Include="src\Builder\GroupBuilder.cs" />
+    <Compile Include="src\Builder\GroupMemberBuilder.cs" />
+    <Compile Include="src\Services\AccountService.cs" />
+    <Compile Include="src\AccountMember.cs" />
+    <Compile Include="src\Builder\AccountMemberBuilder.cs" />
+    <Compile Include="src\Address.cs" />
+    <Compile Include="src\Builder\AddressBuilder.cs" />
+    <Compile Include="src\Internal\Conversion\AccountMemberConverter.cs" />
+    <Compile Include="src\Internal\Conversion\AddressConverter.cs" />
+    <Compile Include="src\SignatureStyle.cs" />
+    <Compile Include="src\Audit.cs" />
     <Compile Include="src\Models\Account.cs" />
     <Compile Include="src\Models\AccountProviders.cs" />
     <Compile Include="src\Models\Address.cs" />
@@ -169,6 +185,7 @@
     <Compile Include="src\Models\Group.cs" />
     <Compile Include="src\Models\GroupMember.cs" />
     <Compile Include="src\Models\GroupMembership.cs" />
+    <Compile Include="src\Models\GroupMemberType.cs" />
     <Compile Include="src\Models\GuestAuth.cs" />
     <Compile Include="src\Models\HeaderOptions.cs" />
     <Compile Include="src\Models\Image.cs" />
@@ -184,6 +201,8 @@
     <Compile Include="src\Models\Package.cs" />
     <Compile Include="src\Models\PackageArtifactsLimits.cs" />
     <Compile Include="src\Models\PackageCompletionReport.cs" />
+    <Compile Include="src\Models\PackageReminder.cs" />
+    <Compile Include="src\Models\PackageReminderSchedule.cs" />
     <Compile Include="src\Models\PackageSettings.cs" />
     <Compile Include="src\Models\PackageStatus.cs" />
     <Compile Include="src\Models\Page.cs" />
@@ -222,21 +241,12 @@
     <Compile Include="src\Models\UserCustomField.cs" />
     <Compile Include="src\Models\ViewSettings.cs" />
     <Compile Include="src\Models\Visibility.cs" />
-    <Compile Include="src\Models\GroupMemberType.cs" />
-    <Compile Include="src\Internal\Conversion\GroupMemberTypeConverter.cs" />
-    <Compile Include="src\Services\GroupService.cs" />
-    <Compile Include="src\Internal\Conversion\GroupMemberConverter.cs" />
-    <Compile Include="src\Builder\GroupBuilder.cs" />
-    <Compile Include="src\Builder\GroupMemberBuilder.cs" />
-    <Compile Include="src\Services\AccountService.cs" />
-    <Compile Include="src\AccountMember.cs" />
-    <Compile Include="src\Builder\AccountMemberBuilder.cs" />
-    <Compile Include="src\Address.cs" />
-    <Compile Include="src\Builder\AddressBuilder.cs" />
-    <Compile Include="src\Internal\Conversion\AccountMemberConverter.cs" />
-    <Compile Include="src\Internal\Conversion\AddressConverter.cs" />
-    <Compile Include="src\SignatureStyle.cs" />
-    <Compile Include="src\Audit.cs" />
+    <Compile Include="src\Reminder.cs" />
+    <Compile Include="src\Internal\Conversion\ReminderConverter.cs" />
+    <Compile Include="src\ReminderSchedule.cs" />
+    <Compile Include="src\Internal\Conversion\ReminderScheduleConverter.cs" />
+    <Compile Include="src\Builder\ReminderScheduleBuilder.cs" />
+    <Compile Include="src\Services\ReminderService.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSHARP.Targets" />
   <ProjectExtensions>

@@ -5,7 +5,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Silanis.ESL.SDK", "Silanis.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SDK.Examples", "..\SDK.Examples\SDK.Examples.csproj", "{8D6C84A6-459F-42E0-8673-F8890B6A57DC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SDK.Tests", "..\SDK.Tests\SDK.Tests.csproj", "{203B5F7F-1678-44CC-B291-37022751DBCF}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Silanis.ESL.SDK.Test", "..\SDK.Tests\Silanis.ESL.SDK.Test.csproj", "{203B5F7F-1678-44CC-B291-37022751DBCF}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SDK.Examples.Tester", "SDK.Examples.Tester\SDK.Examples.Tester.csproj", "{4D026F97-3726-4B98-BCF9-7A391A85F9C9}"
 EndProject

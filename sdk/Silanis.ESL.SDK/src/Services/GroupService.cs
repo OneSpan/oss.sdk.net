@@ -3,7 +3,7 @@ using Silanis.ESL.SDK.Internal;
 using Newtonsoft.Json;
 using System.Collections.Generic;
 
-namespace Silanis.ESL.SDK
+namespace Silanis.ESL.SDK.Services
 {
     public class GroupService
     {

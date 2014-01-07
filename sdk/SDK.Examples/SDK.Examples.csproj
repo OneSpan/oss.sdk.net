@@ -10,6 +10,7 @@
     <RootNamespace>SDK.Examples</RootNamespace>
     <AssemblyName>SDK.Examples</AssemblyName>
     <TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
+    <StartupObject>SDK.Examples.BasicPackageCreationExample</StartupObject>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -30,7 +31,7 @@
     <DebugType>none</DebugType>
   </PropertyGroup>
   <PropertyGroup>
-    <StartupObject>SDK.Examples.CustomFieldExample</StartupObject>
+    <StartupObject>SDK.Examples.ReminderExample</StartupObject>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -78,6 +79,7 @@
     <Compile Include="src\SDKSample1.cs" />
     <Compile Include="src\GroupManagementExample.cs" />
     <Compile Include="src\UploadDocumentExample.cs" />
+    <Compile Include="src\ReminderExample.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup />

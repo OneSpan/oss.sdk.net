@@ -3,7 +3,7 @@ using Silanis.ESL.SDK.Internal;
 using Newtonsoft.Json;
 using Silanis.ESL.API;
 
-namespace Silanis.ESL.SDK
+namespace Silanis.ESL.SDK.Services
 {
     public class AccountService
     {

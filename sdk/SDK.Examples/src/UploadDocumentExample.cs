@@ -5,7 +5,7 @@ using System.IO;
 using Silanis.ESL.SDK;
 using Silanis.ESL.SDK.Builder;
 
-namespace SDK.Examples.src
+namespace SDK.Examples
 {
     class UploadDocumentExample
     {

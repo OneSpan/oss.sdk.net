@@ -13,24 +13,24 @@ namespace Silanis.ESL.SDK.Internal
 		public static byte[] PostHttp (string apiToken, string path, byte[] content)
 		{
             try {
-			WebRequest request = WebRequest.Create (path);
-			request.Method = "POST";
-			request.ContentType = "application/json";
-			request.ContentLength = content.Length;
-			request.Headers.Add ("Authorization", "Basic " + apiToken);
+				WebRequest request = WebRequest.Create (path);
+				request.Method = "POST";
+				request.ContentType = "application/json";
+				request.ContentLength = content.Length;
+				request.Headers.Add ("Authorization", "Basic " + apiToken);
 
-			using (Stream dataStream = request.GetRequestStream ()) {
-				dataStream.Write (content, 0, content.Length);
-			}
+				using (Stream dataStream = request.GetRequestStream ()) {
+					dataStream.Write (content, 0, content.Length);
+				}
 
-			WebResponse response = request.GetResponse ();
+				WebResponse response = request.GetResponse ();
 
-			using (Stream responseStream = response.GetResponseStream()) {
-				var memoryStream = new MemoryStream ();
-				CopyTo (responseStream, memoryStream);
-                
-				return memoryStream.ToArray ();
-			}
+				using (Stream responseStream = response.GetResponseStream()) {
+					var memoryStream = new MemoryStream ();
+					CopyTo (responseStream, memoryStream);
+	                
+					return memoryStream.ToArray ();
+				}
             }
             catch (Exception e) {
                 Console.Error.WriteLine(e.Message);

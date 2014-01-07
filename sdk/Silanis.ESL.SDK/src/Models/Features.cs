@@ -20,8 +20,36 @@ namespace Silanis.ESL.API
         }
     
 		    
-    [JsonProperty("fasttrack")]
-    public Boolean Fasttrack
+    [JsonProperty("customFields")]
+    public Boolean CustomFields
+    {
+                get; set;
+        }
+    
+		    
+    [JsonProperty("encryptDocuments")]
+    public Boolean EncryptDocuments
+    {
+                get; set;
+        }
+    
+		    
+    [JsonProperty("evidenceSummary")]
+    public Boolean EvidenceSummary
+    {
+                get; set;
+        }
+    
+		    
+    [JsonProperty("fastTrack")]
+    public Boolean FastTrack
+    {
+                get; set;
+        }
+    
+		    
+    [JsonProperty("forceLogin")]
+    public Boolean ForceLogin
     {
                 get; set;
         }
@@ -29,6 +57,13 @@ namespace Silanis.ESL.API
 		    
     [JsonProperty("groups")]
     public Boolean Groups
+    {
+                get; set;
+        }
+    
+		    
+    [JsonProperty("tamperSealEvidence")]
+    public Boolean TamperSealEvidence
     {
                 get; set;
         }

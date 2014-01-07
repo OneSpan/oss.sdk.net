@@ -20,6 +20,7 @@ namespace Silanis.ESL.SDK
         private CustomFieldService customFieldService;
         private GroupService groupService;
 		private AccountService accountService;
+		private Services.ReminderService reminderService;
 
         /// <summary>
         /// EslClient constructor.
@@ -42,6 +43,7 @@ namespace Silanis.ESL.SDK
             customFieldService = new CustomFieldService( restClient, this.baseUrl );
             groupService = new GroupService(restClient, this.baseUrl);
 			accountService = new AccountService(restClient, this.baseUrl);
+			reminderService = new ReminderService(restClient, this.baseUrl);
 
 		}
 
@@ -193,6 +195,14 @@ namespace Silanis.ESL.SDK
 			get
 			{
 				return accountService;
+			}
+		}
+
+		public ReminderService ReminderService
+		{
+			get
+			{
+				return reminderService;
 			}
 		}
 	}

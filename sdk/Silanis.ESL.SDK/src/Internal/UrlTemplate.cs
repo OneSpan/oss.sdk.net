@@ -58,6 +58,9 @@ namespace Silanis.ESL.SDK.Internal
         // Account Service
         public static readonly string ACCOUNT_INVITE_MEMBER_PATH = "/account/senders";
 
+		// Reminder Service
+		public static readonly string REMINDER_PATH = "/packages/{packageId}/reminders";
+
 		public UrlTemplate (string baseUrl)
 		{
 			this.baseUrl = baseUrl;
