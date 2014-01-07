@@ -30,7 +30,7 @@
     <DebugType>none</DebugType>
   </PropertyGroup>
   <PropertyGroup>
-    <StartupObject>SDK.Examples.TextAnchorExtractionExample</StartupObject>
+    <StartupObject>SDK.Examples.CustomFieldExample</StartupObject>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />

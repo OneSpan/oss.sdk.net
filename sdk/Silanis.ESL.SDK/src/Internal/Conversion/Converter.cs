@@ -82,6 +82,8 @@ namespace Silanis.ESL.SDK.Internal.Conversion
 				return Silanis.ESL.API.FieldSubtype.LABEL;
 			case FieldStyle.UNBOUND_CHECK_BOX:
 				return Silanis.ESL.API.FieldSubtype.CHECKBOX;
+			case FieldStyle.UNBOUND_CUSTOM_FIELD:
+				return Silanis.ESL.API.FieldSubtype.CUSTOMFIELD;
 			default:
 				throw new EslException(String.Format ("Unable to decode the field subtype from style {0}", field.Style) );
 			}

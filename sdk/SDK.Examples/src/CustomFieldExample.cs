@@ -35,16 +35,16 @@ namespace SDK.Examples
                 .CreateCustomField(CustomFieldBuilder.CustomFieldWithId(customFieldId)
                         .WithDefaultValue("#12345")
                         .WithTranslation(TranslationBuilder.NewTranslation("en").
-                                WithName("The Bay").
-                                WithDescription("The Bay store") )
+						WithName("Player Number").
+						WithDescription("The number on your team jersey") )
                         .WithTranslation(TranslationBuilder.NewTranslation("fr").
-                                WithName("La Baie").
-                                WithDescription("Le magasin La Baie") )
+						WithName("Numéro du Joueur").
+						WithDescription("Le numéro dans le dos de votre chandail d'équipe") )
                         .Build() );
 
             CustomFieldValue customFieldValue = eslClient.GetCustomFieldService()
                 .SubmitCustomFieldValue(CustomFieldValueBuilder.CustomFieldValueWithId(customField.Id)
-                        .WithValue(customField.Value)
+					.WithValue("99")
                         .build() );
 
             DocumentPackage superDuperPackage = PackageBuilder.NewPackageNamed("Sample Insurance policy")
@@ -56,12 +56,10 @@ namespace SDK.Examples
                         .WithSignature(SignatureBuilder.SignatureFor(email1)
                                 .OnPage(0)
                                 .AtPosition(100, 100)
-                                .WithField(FieldBuilder.NewField()
+							.WithField(FieldBuilder.CustomField(customFieldValue.Id)
                                         .OnPage(0)
-                                        .AtPosition(400, 200)
-                                        .WithName(customFieldValue.Id) ) ) )
+                                        .AtPosition(400, 200) ) ) )
                 .Build();
-
             PackageId packageId = eslClient.CreatePackage(superDuperPackage);
             eslClient.SendPackage(packageId);
         }

@@ -20,6 +20,7 @@ namespace Silanis.ESL.SDK
         
 		internal UserCustomField toAPIUserCustomField() {
             UserCustomField result = new UserCustomField();
+			result.Name = "";
             result.Id = Id;
             result.Value = Value;
             return result;

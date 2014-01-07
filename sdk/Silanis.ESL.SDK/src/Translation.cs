@@ -26,7 +26,7 @@ namespace Silanis.ESL.SDK
         internal Silanis.ESL.API.Translation toAPITranslation() 
         {
             Silanis.ESL.API.Translation result = new Silanis.ESL.API.Translation();
-            
+			result.Id = "";
             result.Name = Name;
             result.Language = Language;
             result.Description = Description;

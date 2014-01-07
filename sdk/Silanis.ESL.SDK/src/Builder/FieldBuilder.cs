@@ -66,6 +66,11 @@ namespace Silanis.ESL.SDK.Builder
 			return new FieldBuilder ().WithStyle (FieldStyle.UNBOUND_CHECK_BOX);
 		}
 
+		public static FieldBuilder CustomField( String name )
+		{
+			return new FieldBuilder().WithStyle(FieldStyle.UNBOUND_CUSTOM_FIELD).WithName(name);
+		}
+
 		internal static FieldBuilder NewFieldFromAPIField (Silanis.ESL.API.Field apiField)
 		{
 			FieldBuilder fieldBuilder = new FieldBuilder()

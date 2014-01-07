@@ -36,6 +36,7 @@ namespace Silanis.ESL.SDK
     
             result.Id = Id;
             result.Value = Value;
+			result.Name = "";
     
             foreach (Translation translation in translations) 
             {

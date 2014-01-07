@@ -33,7 +33,7 @@ Global
 		{8D6C84A6-459F-42E0-8673-F8890B6A57DC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(MonoDevelopProperties) = preSolution
-		StartupItem = SDK.Examples.Tester\SDK.Examples.Tester.csproj
+		StartupItem = ..\SDK.Examples\SDK.Examples.csproj
 		Policies = $0
 		$0.TextStylePolicy = $1
 		$1.inheritsSet = VisualStudio
