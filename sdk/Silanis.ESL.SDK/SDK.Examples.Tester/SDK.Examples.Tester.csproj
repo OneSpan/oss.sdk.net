@@ -36,7 +36,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="src\SDKSampleTest.cs" />
+    <Compile Include="src\CustomFieldExampleTest.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
