@@ -246,6 +246,7 @@
     <Compile Include="src\Internal\Conversion\ReminderScheduleConverter.cs" />
     <Compile Include="src\Builder\ReminderScheduleBuilder.cs" />
     <Compile Include="src\Services\ReminderService.cs" />
+    <Compile Include="src\Internal\Conversion\SenderInfoConverter.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSHARP.Targets" />
   <ProjectExtensions>

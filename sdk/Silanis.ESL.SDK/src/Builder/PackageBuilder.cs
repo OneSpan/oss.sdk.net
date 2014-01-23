@@ -35,7 +35,7 @@ namespace Silanis.ESL.SDK.Builder
 			this.status = ConvertPackageStatus(package.Status);
 			this.emailMessage = package.EmailMessage;
             this.settings = new DocumentPackageSettingsBuilder(package.Settings).build();
-            this.senderInfo = new SenderInfoBuilder(package.Sender).Build();
+			this.senderInfo = new SenderInfoConverter(package.Sender).ToSDKSenderInfo();
             this.attributes = new DocumentPackageAttributes(package.Data);
 
 			foreach ( Silanis.ESL.API.Role role in package.Roles ) {
@@ -50,6 +50,15 @@ namespace Silanis.ESL.SDK.Builder
 				else
 				{
 					WithSigner(SignerBuilder.NewSignerFromAPISigner(role).Build());
+					if (role.Type == Silanis.ESL.API.RoleType.SENDER)
+					{
+						Silanis.ESL.API.Signer senderSigner = role.Signers[0];
+						SenderInfo senderInfo = SenderInfoBuilder.NewSenderInfo(senderSigner.Email)
+							.WithName(senderSigner.FirstName, senderSigner.LastName)
+							.WithCompany(senderSigner.Company)
+							.WithTitle(senderSigner.Title)
+							.Build();
+					}
 				}
 			}
 

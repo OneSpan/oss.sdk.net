@@ -37,6 +37,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="src\CustomFieldExampleTest.cs" />
+    <Compile Include="src\CustomSenderInfoExampleTest.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
@@ -46,6 +47,10 @@
     <ProjectReference Include="..\..\SDK.Examples\SDK.Examples.csproj">
       <Project>{8D6C84A6-459F-42E0-8673-F8890B6A57DC}</Project>
       <Name>SDK.Examples</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Silanis.ESL.SDK.csproj">
+      <Project>{0A9B8521-9624-460B-813E-079056B24B65}</Project>
+      <Name>Silanis.ESL.SDK</Name>
     </ProjectReference>
   </ItemGroup>
 </Project>

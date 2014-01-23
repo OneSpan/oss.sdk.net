@@ -7,13 +7,21 @@ namespace SDK.Examples
 {
     public class CustomFieldExample: SDKSample
     {
+		private PackageId packageId;
+		public PackageId PackageId
+		{
+			get
+			{
+				return packageId;
+			}
+		}
+
         private string email1;
         private Stream documentInputStream1;
 
         public static void Main(string[] args)
         {
             new CustomFieldExample(Props.GetInstance()).Run();
-            
         }
     
         public CustomFieldExample(Props props) : this(props.Get("api.url"), props.Get("api.key"), props.Get("1.email"))

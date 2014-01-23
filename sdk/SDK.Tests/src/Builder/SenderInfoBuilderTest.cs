@@ -10,7 +10,7 @@ namespace SDK.Tests
         [Test()]
         public void DefaultBuildCase()
         {
-            SenderInfo senderInfo = SenderInfoBuilder.NewSenderInfo()
+			SenderInfo senderInfo = SenderInfoBuilder.NewSenderInfo("bob@email.com")
                 .WithName("firstName", "lastName")
                 .WithCompany("company")
                 .WithTitle("title")

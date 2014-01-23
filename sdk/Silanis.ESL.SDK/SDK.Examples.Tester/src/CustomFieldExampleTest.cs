@@ -1,5 +1,6 @@
 using System;
 using NUnit.Framework;
+using Silanis.ESL.SDK;
 
 namespace SDK.Examples
 {

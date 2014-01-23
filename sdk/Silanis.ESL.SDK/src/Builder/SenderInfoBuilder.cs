@@ -4,24 +4,19 @@ namespace Silanis.ESL.SDK
 {
     public sealed class SenderInfoBuilder
     {
+		private string email;
         private string firstName;
         private string lastName;
         private string company;
         private string title;
 
-        private SenderInfoBuilder() {
+		private SenderInfoBuilder(string email) {
+			this.email = email;
         }
 
-        public static SenderInfoBuilder NewSenderInfo() {
-            SenderInfoBuilder result = new SenderInfoBuilder();
+		public static SenderInfoBuilder NewSenderInfo(string email) {
+			SenderInfoBuilder result = new SenderInfoBuilder(email);
             return result;
-        }
-
-        internal SenderInfoBuilder( Silanis.ESL.API.Sender sender ) {
-            firstName = sender.FirstName;
-            lastName = sender.LastName;
-            company = sender.Company;
-            title = sender.Title;
         }
 
         public SenderInfoBuilder WithName( string firstName, string lastName ) {
@@ -42,7 +37,7 @@ namespace Silanis.ESL.SDK
 
         public SenderInfo Build() {
             SenderInfo result = new SenderInfo();
-
+			result.Email = email;
             result.FirstName = firstName;
             result.LastName = lastName;
             result.Company = company;

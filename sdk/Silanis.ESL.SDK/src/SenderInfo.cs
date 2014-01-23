@@ -4,6 +4,7 @@ namespace Silanis.ESL.SDK
 {
     public class SenderInfo
     {
+		private string email;
         private string firstName;
         private string lastName;
         private string company;
@@ -12,6 +13,18 @@ namespace Silanis.ESL.SDK
         public SenderInfo()
         {
         }
+
+		public string Email
+		{
+			get
+			{
+				return email;
+			}
+			set
+			{
+				email = value;
+			}
+		}
 
         public string FirstName
         {
