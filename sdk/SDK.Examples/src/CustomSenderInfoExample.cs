@@ -7,9 +7,19 @@ namespace SDK.Examples
 {
     public class CustomSenderInfoExample : SDKSample
     {
+		public const string SENDER_FIRST_NAME = "Rob";
+		public const string SENDER_SECOND_NAME = "Mason";
+		public const string SENDER_TITLE = "Chief Vizier";
+		public const string SENDER_COMPANY = "The Masons";
+
         public static void Main(string[] args)
         {
-            new CustomSenderInfoExample(Props.GetInstance()).Run();
+			CustomSenderInfoExample example = new CustomSenderInfoExample(Props.GetInstance());
+			example.Run();
+
+			DocumentPackage documentPackage = example.eslClient.GetPackage(example.PackageId);
+			Console.Out.WriteLine("AHAH!");
+		
         }
 
 		private string senderEmail;
@@ -57,12 +67,12 @@ namespace SDK.Examples
 			);
 
 			SenderInfo senderInfo = SenderInfoBuilder.NewSenderInfo(senderEmail)
-				.WithName("Rob", "Mason")
-				.WithTitle("Chief Vizier")
-				.WithCompany("The Masons")
+				.WithName(SENDER_FIRST_NAME, SENDER_SECOND_NAME)
+				.WithTitle(SENDER_TITLE)
+				.WithCompany(SENDER_COMPANY)
 				.Build();
 
-			DocumentPackage package = PackageBuilder.NewPackageNamed( "CustomSenderInfoExample " + DateTime.Now )
+			package = PackageBuilder.NewPackageNamed( "CustomSenderInfoExample " + DateTime.Now )
 				.WithSenderInfo( senderInfo )
                 .DescribedAs( "This is a package created using the e-SignLive SDK" )
                 .ExpiresOn( DateTime.Now.AddMonths(1) )

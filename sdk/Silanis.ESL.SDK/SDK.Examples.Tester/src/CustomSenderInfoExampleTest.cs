@@ -16,10 +16,10 @@ namespace SDK.Examples
 			DocumentPackage package = example.EslClient.GetPackage(example.PackageId);
 
 			Assert.IsNotNull(package.SenderInfo);
-			Assert.AreEqual(example.Package.SenderInfo.FirstName, package.SenderInfo.FirstName);
-			Assert.AreEqual(example.Package.SenderInfo.LastName, package.SenderInfo.LastName);
-			Assert.AreEqual(example.Package.SenderInfo.Company, package.SenderInfo.Company);
-			Assert.AreEqual(example.Package.SenderInfo.Title, package.SenderInfo.Title);
+			Assert.AreEqual(CustomSenderInfoExample.SENDER_FIRST_NAME, package.SenderInfo.FirstName);
+			Assert.AreEqual(CustomSenderInfoExample.SENDER_SECOND_NAME, package.SenderInfo.LastName);
+			Assert.AreEqual(CustomSenderInfoExample.SENDER_COMPANY, package.SenderInfo.Company);
+			Assert.AreEqual(CustomSenderInfoExample.SENDER_TITLE, package.SenderInfo.Title);
         }
     }
 }

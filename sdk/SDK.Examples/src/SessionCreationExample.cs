@@ -15,6 +15,26 @@ namespace SDK.Examples
         private string email1;
         private Stream fileStream1;
 
+		private SessionToken signerSessionToken = null;
+
+		public SessionToken SignerSessionToken
+		{
+			get
+			{
+				return signerSessionToken;
+			}
+		}
+
+		private SessionToken senderSessionToken = null;
+
+		public SessionToken SenderSessionToken
+		{
+			get
+			{
+				return senderSessionToken;
+			}
+		}
+
         public SessionCreationExample( Props props ) : this(props.Get("api.url"), props.Get("api.key"), props.Get("1.email")) {
         }
 
@@ -41,7 +61,8 @@ namespace SDK.Examples
 
             PackageId packageId = eslClient.CreatePackage( superDuperPackage );
             eslClient.SendPackage( packageId );
-            SessionToken signerSessionToken = eslClient.CreateSessionToken( packageId, signerId );
+			signerSessionToken = eslClient.CreateSignerSessionToken( packageId, signerId );
+			senderSessionToken = eslClient.CreateSenderSessionToken();
         }
     }
 }

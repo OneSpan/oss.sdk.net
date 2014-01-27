@@ -53,7 +53,7 @@
     <Compile Include="src\Internal\Conversion\ReminderConverterTest.cs" />
     <Compile Include="src\Internal\Conversion\ReminderScheduleConverterTest.cs" />
     <Compile Include="src\Builder\ReminderScheduleBuilderTest.cs" />
-    <Compile Include="src\Internal\Conversion\SenderInfoConverterTest.cs" />
+    <Compile Include="src\Internal\Conversion\SenderConverterTest.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

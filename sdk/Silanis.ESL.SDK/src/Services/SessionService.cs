@@ -23,13 +23,32 @@ namespace Silanis.ESL.SDK.Services
 			template = new UrlTemplate (baseUrl);
 		}
 
+		public SessionToken CreateSessionToken (PackageId packageId, string signerId)
+		{
+			return CreateSignerSessionToken(packageId, signerId);
+		}
+
+		public SessionToken CreateSenderSessionToken()
+		{
+			string path = template.UrlFor(UrlTemplate.SENDER_SESSION_PATH)
+				.Build();
+
+			try {
+				string response = Converter.ToString( HttpMethods.PostHttp( apiToken, path, new byte[0]));
+				return JsonConvert.DeserializeObject<SessionToken> (response);
+			}
+			catch (Exception e) {
+				throw new EslException ("Could not create a session token for sender." + " Exception: " + e.Message);
+			}
+		}
+
 		/// <summary>
 		/// Creates a session token for a signer and returns the session token.
 		/// </summary>
 		/// <returns>The session token for signer.</returns>
 		/// <param name="packageId">The package id.</param>
 		/// <param name="signer">The signer to create a session token for.</param>
-		public SessionToken CreateSessionToken (PackageId packageId, string signerId)
+		public SessionToken CreateSignerSessionToken (PackageId packageId, string signerId)
 		{
 			string path = template.UrlFor (UrlTemplate.SESSION_PATH)
                 .Replace ("{packageId}", packageId.Id)

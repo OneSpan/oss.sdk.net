@@ -116,7 +116,7 @@ namespace Silanis.ESL.SDK
 
             if (SenderInfo != null)
             {
-                package.Sender = SenderInfo.ToAPISender();
+				package.Sender = new SenderConverter(SenderInfo).ToAPISender();
             }
 
             if ( Attributes != null ) {

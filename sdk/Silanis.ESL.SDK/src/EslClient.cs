@@ -91,9 +91,20 @@ namespace Silanis.ESL.SDK
 			packageService.SendPackage (id);
 		}
 
+		public SessionToken CreateSenderSessionToken()
+		{
+			return sessionService.CreateSenderSessionToken();
+		}
+
+		[Obsolete]
 		public SessionToken CreateSessionToken(PackageId packageId, string signerId)
 		{
-			return sessionService.CreateSessionToken (packageId, signerId);
+			return CreateSignerSessionToken(packageId, signerId); 
+		}
+
+		public SessionToken CreateSignerSessionToken(PackageId packageId, string signerId)
+		{
+			return sessionService.CreateSignerSessionToken (packageId, signerId);
 		}
 
 		public byte[] DownloadDocument (PackageId packageId, string documentId)

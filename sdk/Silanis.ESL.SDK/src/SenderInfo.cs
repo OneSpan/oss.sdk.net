@@ -73,22 +73,6 @@ namespace Silanis.ESL.SDK
                 title = value;
             }
         }
-
-        internal Silanis.ESL.API.Sender ToAPISender()
-        {
-            Silanis.ESL.API.Sender result = new Silanis.ESL.API.Sender();
-
-            if (firstName != null)
-                result.FirstName = firstName;
-            if (lastName != null)
-                result.LastName = lastName;
-            if (company != null)
-                result.Company = company;
-            if (title != null)
-                result.Title = title;
-
-            return result;
-        }
     }
 }
 

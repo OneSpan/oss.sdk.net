@@ -31,7 +31,7 @@
     <DebugType>none</DebugType>
   </PropertyGroup>
   <PropertyGroup>
-    <StartupObject>SDK.Examples.ReminderExample</StartupObject>
+    <StartupObject>SDK.Examples.BasicPackageCreationExample</StartupObject>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />

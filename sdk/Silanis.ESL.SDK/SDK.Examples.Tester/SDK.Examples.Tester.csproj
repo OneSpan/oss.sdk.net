@@ -38,6 +38,7 @@
   <ItemGroup>
     <Compile Include="src\CustomFieldExampleTest.cs" />
     <Compile Include="src\CustomSenderInfoExampleTest.cs" />
+    <Compile Include="src\SessionCreationExampleTest.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
