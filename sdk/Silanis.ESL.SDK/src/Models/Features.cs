@@ -20,6 +20,13 @@ namespace Silanis.ESL.API
         }
     
 		    
+    [JsonProperty("authenticatedInbox")]
+    public Boolean AuthenticatedInbox
+    {
+                get; set;
+        }
+    
+		    
     [JsonProperty("customFields")]
     public Boolean CustomFields
     {
@@ -57,6 +64,20 @@ namespace Silanis.ESL.API
 		    
     [JsonProperty("groups")]
     public Boolean Groups
+    {
+                get; set;
+        }
+    
+		    
+    [JsonProperty("inboxFiltering")]
+    public Boolean InboxFiltering
+    {
+                get; set;
+        }
+    
+		    
+    [JsonProperty("notarize")]
+    public Boolean Notarize
     {
                 get; set;
         }

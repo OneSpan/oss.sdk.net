@@ -147,6 +147,13 @@ namespace Silanis.ESL.API
         }
     
 		    
+    [JsonProperty("signerType")]
+    public String SignerType
+    {
+                get; set;
+        }
+    
+		    
     [JsonProperty("status")]
     public SenderStatus Status
     {
