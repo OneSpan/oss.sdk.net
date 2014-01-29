@@ -50,14 +50,13 @@ namespace Silanis.ESL.SDK.Builder
 				else
 				{
 					WithSigner(SignerBuilder.NewSignerFromAPISigner(role).Build());
-					if (role.Type == Silanis.ESL.API.RoleType.SENDER && this.senderInfo == null)
+					if (role.Type == Silanis.ESL.API.RoleType.SENDER)
 					{
 						Silanis.ESL.API.Signer senderSigner = role.Signers[0];
-						this.senderInfo = SenderInfoBuilder.NewSenderInfo(senderSigner.Email)
+						WithSenderInfo( SenderInfoBuilder.NewSenderInfo(senderSigner.Email)
 							.WithName(senderSigner.FirstName, senderSigner.LastName)
 							.WithCompany(senderSigner.Company)
-							.WithTitle(senderSigner.Title)
-							.Build();
+							.WithTitle(senderSigner.Title));
 					}
 				}
 			}
