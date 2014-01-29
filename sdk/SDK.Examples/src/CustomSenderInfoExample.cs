@@ -18,8 +18,6 @@ namespace SDK.Examples
 			example.Run();
 
 			DocumentPackage documentPackage = example.eslClient.GetPackage(example.PackageId);
-			Console.Out.WriteLine("AHAH!");
-		
         }
 
 		private string senderEmail;
@@ -43,18 +41,19 @@ namespace SDK.Examples
 			}
 		}
 
-        public CustomSenderInfoExample(Props props) : this(props.Get("api.url"), props.Get("api.key"), props.Get("1.email"))
+        public CustomSenderInfoExample(Props props) : this(props.Get("api.url"), props.Get("api.key"))
         {
         }
 
-		public CustomSenderInfoExample(string apiKey, string apiUrl, string senderEmail) : base( apiKey, apiUrl )
+		public CustomSenderInfoExample(string apiKey, string apiUrl) : base( apiKey, apiUrl )
         {
-			this.senderEmail = senderEmail;
             this.fileStream1 = File.OpenRead(new FileInfo(Directory.GetCurrentDirectory() + "/src/document.pdf").FullName);
         }
 
         override public void Execute()
         {
+            senderEmail = System.Guid.NewGuid().ToString() + "@e-signlive.com";
+            senderEmail = senderEmail.Replace("-", "");
 			eslClient.AccountService.InviteUser(
 				AccountMemberBuilder.NewAccountMember(senderEmail)
 				.WithFirstName("firstName")
