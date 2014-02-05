@@ -31,7 +31,7 @@
     <DebugType>none</DebugType>
   </PropertyGroup>
   <PropertyGroup>
-    <StartupObject>SDK.Examples.BasicPackageCreationExample</StartupObject>
+    <StartupObject>SDK.Examples.NullArray</StartupObject>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -80,6 +80,7 @@
     <Compile Include="src\GroupManagementExample.cs" />
     <Compile Include="src\UploadDocumentExample.cs" />
     <Compile Include="src\ReminderExample.cs" />
+    <Compile Include="src\santander\NullValue.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup />
@@ -105,5 +106,8 @@
       <Project>{0A9B8521-9624-460B-813E-079056B24B65}</Project>
       <Name>Silanis.ESL.SDK</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="src\santander\" />
   </ItemGroup>
 </Project>

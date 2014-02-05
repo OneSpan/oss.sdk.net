@@ -29,7 +29,6 @@ namespace Silanis.ESL.SDK.Services
 		{
             this.restClient = restClient;
 			template = new UrlTemplate (baseUrl);
-
 			settings = new JsonSerializerSettings ();
 			settings.NullValueHandling = NullValueHandling.Ignore;
 		}
@@ -44,9 +43,14 @@ namespace Silanis.ESL.SDK.Services
 			string path = template.UrlFor (UrlTemplate.PACKAGE_PATH)
 				.Build ();
 			try {
+				Support.LogDebug( "Serializing package." );
 				string json = JsonConvert.SerializeObject (package, settings);
+
                 string response = restClient.Post(path, json);				
-				return JsonConvert.DeserializeObject<PackageId> (response);
+				Support.LogDebug( "Received response of '" + response + "'" );
+				PackageId result = JsonConvert.DeserializeObject<PackageId> (response);
+				Support.LogDebug( "Deserialized PackageId of " + result.Id );
+				return result;
 			} catch (Exception e) {
 				throw new EslException ("Could not create a new package." + " Exception: " + e.Message);
 			}

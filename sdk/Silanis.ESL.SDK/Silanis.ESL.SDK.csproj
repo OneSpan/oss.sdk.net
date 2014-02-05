@@ -254,4 +254,7 @@
   </ProjectExtensions>
   <ItemGroup />
   <ItemGroup />
+  <ItemGroup>
+    <None Include="Log4Net.config" />
+  </ItemGroup>
 </Project>

@@ -6,7 +6,7 @@ namespace Silanis.ESL.SDK
 {
     public class Support
     {
-        private static ILog log = LogManager.GetLogger(typeof(Support));
+		private static ILog log = LogManager.GetLogger("myLog");
 
         internal void LogRequest(string httpVerb, string path, string jsonPayload) {
             log.Debug(httpVerb + " on " + path);
@@ -24,6 +24,14 @@ namespace Silanis.ESL.SDK
         internal void LogError(Error error) {
             log.Error("message: " + error.Message + ", http code: " + error.Code);
         }
+
+		internal static void LogError( string message ) {
+			log.Error(message);
+		}
+
+		internal static void LogDebug(string message) {
+			log.Debug(message);
+		}
     }
 }
 

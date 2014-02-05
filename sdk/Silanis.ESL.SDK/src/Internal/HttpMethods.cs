@@ -12,6 +12,7 @@ namespace Silanis.ESL.SDK.Internal
 
 		public static byte[] PostHttp (string apiToken, string path, byte[] content)
 		{
+			Support.LogDebug("POSTING with apiToken: " + apiToken + " on: " + path + " " + content.Length + " bytes.");
             try {
 				WebRequest request = WebRequest.Create (path);
 				request.Method = "POST";
@@ -23,7 +24,9 @@ namespace Silanis.ESL.SDK.Internal
 					dataStream.Write (content, 0, content.Length);
 				}
 
+				Support.LogDebug( "Awaiting response from server." );
 				WebResponse response = request.GetResponse ();
+				Support.LogDebug( "Response received from server. " + response.ToString() + "," + response.Headers.ToString() + "," + response.ContentType + "," + response.ContentLength + " bytes." );
 
 				using (Stream responseStream = response.GetResponseStream()) {
 					var memoryStream = new MemoryStream ();
@@ -33,7 +36,9 @@ namespace Silanis.ESL.SDK.Internal
 				}
             }
             catch (Exception e) {
-                Console.Error.WriteLine(e.Message);
+				Support.LogError(e.Message);
+				Console.Error.WriteLine(e.Message);
+				Support.LogError(e.StackTrace);
                 Console.Error.WriteLine(e.StackTrace);
             }
 
