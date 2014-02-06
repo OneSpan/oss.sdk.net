@@ -6,7 +6,7 @@ namespace Silanis.ESL.SDK
 {
     public class Support
     {
-		private static ILog log = LogManager.GetLogger("myLog");
+		private static ILog log = LogManager.GetLogger(typeof(Support));
 
         internal void LogRequest(string httpVerb, string path, string jsonPayload) {
             log.Debug(httpVerb + " on " + path);
