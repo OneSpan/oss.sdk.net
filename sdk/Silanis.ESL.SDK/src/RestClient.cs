@@ -13,7 +13,7 @@ namespace Silanis.ESL.SDK
         }
 
         public string Post(string path, string jsonPayload) {
-			Support.LogDebug("POST on " + path + " with payload: '" + jsonPayload + "'" );
+			Support.LogMethodEntry(path, jsonPayload);
 			byte[] payloadBytes = null;
 			if (jsonPayload != null)
 			{
@@ -25,7 +25,9 @@ namespace Silanis.ESL.SDK
 			}
 			byte[] responseBytes = HttpMethods.PostHttp(apiToken, path, payloadBytes);
             
-			return Converter.ToString(responseBytes);
+			String result = Converter.ToString(responseBytes);
+			Support.LogMethodExit(result);
+			return result;
         }
 
         public string Put(string path, string jsonPayload) {

@@ -178,6 +178,7 @@ namespace Silanis.ESL.SDK
 
 		public CeremonyLayoutSettings Build()
 		{
+			Support.LogMethodEntry();
 			CeremonyLayoutSettings result = new CeremonyLayoutSettings ();
 			result.IFrame = iFrame;
 			result.BreadCrumbs = breadCrumbs;
@@ -192,6 +193,7 @@ namespace Silanis.ESL.SDK
 			result.LogoImageSource = logoImageSource;
 			result.LogoImageLink = logoImageLink;
 
+			Support.LogMethodExit(result);
 			return result;
 		}
 	}

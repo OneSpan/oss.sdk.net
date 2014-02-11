@@ -14,8 +14,11 @@ namespace Silanis.ESL.SDK.Builder
 
 		public override Authentication Build()
 		{
+			Support.LogMethodEntry();
 			Asserts.NotEmptyOrNull (phoneNumber, "phoneNumber");
-			return new Authentication(phoneNumber);
+			Authentication result = new Authentication(phoneNumber);
+			Support.LogMethodExit(result);
+			return result;
 		}
 	}
 }

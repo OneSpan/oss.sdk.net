@@ -153,7 +153,7 @@ namespace Silanis.ESL.SDK.Builder
 
 		public Signer Build ()
 		{
-
+			Support.LogMethodEntry();
 
             Signer signer;
             if (isGroupSigner())
@@ -177,6 +177,8 @@ namespace Silanis.ESL.SDK.Builder
 			signer.Message = message;
 			signer.Id = id;
 			signer.Locked = locked;
+
+			Support.LogMethodExit(signer);
 			return signer;
 		}
 

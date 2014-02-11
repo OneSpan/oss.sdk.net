@@ -79,6 +79,7 @@ namespace Silanis.ESL.SDK.Builder
 
 		public FieldValidator Build ()
 		{
+			Support.LogMethodEntry();
 			FieldValidator validator = new FieldValidator ();
 
 			validator.Regex = regex;
@@ -86,6 +87,7 @@ namespace Silanis.ESL.SDK.Builder
 			validator.MinLength = minLength;
 			validator.Required = required;
 			validator.Message = message;
+			Support.LogMethodExit(validator);
 			return validator;
 		}
 	}

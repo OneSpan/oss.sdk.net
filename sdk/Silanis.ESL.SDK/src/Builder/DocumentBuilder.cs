@@ -94,24 +94,6 @@ namespace Silanis.ESL.SDK.Builder
 			return this;
 		}
 
-		public Document Build ()
-		{
-			Validate ();
-
-			Document doc = new Document ();
-
-			doc.Name = name;
-			doc.Id = id;
-			doc.FileName = fileName;
-			doc.Content = documentSource != null ? documentSource.Content () : null;
-			doc.AddSignatures (signatures);
-			doc.Index = index;
-			doc.Extract = extract;
-			doc.AddFields (injectedFields);
-            doc.Description = description;
-			return doc;
-		}
-
 		private void Validate ()
 		{
 			if (String.IsNullOrEmpty(id) && String.IsNullOrEmpty (fileName))
@@ -135,5 +117,25 @@ namespace Silanis.ESL.SDK.Builder
             this.description = description;
             return this;
         }
+
+		public Document Build ()
+		{
+			Support.LogMethodEntry();
+			Validate ();
+
+			Document doc = new Document ();
+
+			doc.Name = name;
+			doc.Id = id;
+			doc.FileName = fileName;
+			doc.Content = documentSource != null ? documentSource.Content () : null;
+			doc.AddSignatures (signatures);
+			doc.Index = index;
+			doc.Extract = extract;
+			doc.AddFields (injectedFields);
+			doc.Description = description;
+			Support.LogMethodExit(doc);
+			return doc;
+		}
 	}
 }

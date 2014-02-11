@@ -40,16 +40,14 @@ namespace Silanis.ESL.SDK.Services
 		/// <param name="package">The package to create.</param>
 		internal PackageId CreatePackage (Silanis.ESL.API.Package package)
 		{
+			Support.LogMethodEntry(package);
 			string path = template.UrlFor (UrlTemplate.PACKAGE_PATH)
 				.Build ();
 			try {
-				Support.LogDebug( "Serializing package." );
 				string json = JsonConvert.SerializeObject (package, settings);
-
                 string response = restClient.Post(path, json);				
-				Support.LogDebug( "Received response of '" + response + "'" );
 				PackageId result = JsonConvert.DeserializeObject<PackageId> (response);
-				Support.LogDebug( "Deserialized PackageId of " + result.Id );
+				Support.LogMethodExit(result);
 				return result;
 			} catch (Exception e) {
 				throw new EslException ("Could not create a new package." + " Exception: " + e.Message);
