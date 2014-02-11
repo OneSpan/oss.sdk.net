@@ -36,7 +36,7 @@ namespace Silanis.ESL.SDK
 
 		internal static void LogDebug(string message) {
 			// TODO: Hack for Santander!
-			File.AppendAllText("c:\\tmp\\sdk.log.txt", message + "\n");
+			File.AppendAllText("c:\\temp\\sdk.log.txt", message + "\n");
 			log.Debug(message);
 		}
 

@@ -20,7 +20,6 @@ namespace SDK.Examples
 
 		public void createPackageWithSettings() {
 			EslClient eslClient = createSantanderEnvironmentEslClient();
-//			EslClient eslClient = createProductionEnvironmentEslClient();
 			DocumentPackage builtPackage = PackageBuilder.NewPackageNamed("Package Name")
 				.WithSettings(DocumentPackageSettingsBuilder.NewDocumentPackageSettings()
 					.WithDecline()
@@ -35,10 +34,6 @@ namespace SDK.Examples
 					)
 				).Build();
 			eslClient.CreatePackage(builtPackage);
-		}
-
-		private EslClient createProductionEnvironmentEslClient() {
-			return new EslClient("SGREQ0RpNUxZb1FZOm5FWDJvUEl3NEFjWA==", "https://apps.e-signlive.com/api");
 		}
 
 		private EslClient createSantanderEnvironmentEslClient() {
