@@ -255,6 +255,8 @@
   <ItemGroup />
   <ItemGroup />
   <ItemGroup>
-    <None Include="Log4Net.config" />
+    <None Include="Log4Net.config">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
 </Project>

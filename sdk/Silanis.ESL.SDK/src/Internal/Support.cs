@@ -36,7 +36,7 @@ namespace Silanis.ESL.SDK
 
 		internal static void LogDebug(string message) {
 			// TODO: Hack for Santander!
-			File.AppendAllText("c:\\temp\\sdk.log.txt", message + "\n");
+//			File.AppendAllText("c:\\temp\\sdk.log.txt", message + "\n");
 			log.Debug(message);
 		}
 
@@ -45,20 +45,31 @@ namespace Silanis.ESL.SDK
 		{
 			MethodBase methodBase = GetCallingMethod();
 			Support.LogDebug("--->" + methodBase.DeclaringType.Name + ": " + methodBase.ToString());
-			for (int paramCtr = 0; paramCtr < values.Length; paramCtr++)
+			if (values != null)
 			{
-				ParameterInfo paramInfo = methodBase.GetParameters()[paramCtr];
-				object param = values[paramCtr];
-				string json = JsonConvert.SerializeObject (param);
-				Support.LogDebug("\t" + paramInfo.ParameterType.ToString() + " " + paramInfo.Name + ": " + json);
+				for (int paramCtr = 0; paramCtr < values.Length; paramCtr++)
+				{
+					ParameterInfo paramInfo = methodBase.GetParameters()[paramCtr];
+					object param = values[paramCtr];
+					string json = JsonConvert.SerializeObject(param);
+					Support.LogDebug("\t" + paramInfo.ParameterType.ToString() + " " + paramInfo.Name + ": " + json);
+				}
 			}
 		}
 
 		[MethodImpl(MethodImplOptions.NoInlining)]
 		public static void LogMethodExit(params object[] values)
 		{
-			foreach ( object value in values ) {
-				Support.LogDebug("Returning: " + JsonConvert.SerializeObject(value));
+			if (values != null)
+			{
+				foreach (object value in values)
+				{
+					Support.LogDebug("Returning: " + JsonConvert.SerializeObject(value));
+				}
+			}
+			else
+			{
+				Support.LogDebug("Returning: null");
 			}
 			MethodBase methodBase = GetCallingMethod();
 			Support.LogDebug("<---" + methodBase.DeclaringType.Name + ": " + methodBase.Name);
