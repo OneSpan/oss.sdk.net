@@ -12,6 +12,8 @@ namespace Silanis.ESL.SDK.Internal
 
 		public static byte[] PostHttp (string apiToken, string path, byte[] content)
 		{
+			Support.LogMethodEntry(apiToken, path, content);
+//			Support.LogDebug("POSTING with apiToken: " + apiToken + " on: " + path + " " + content.Length + " bytes.");
             try {
 				WebRequest request = WebRequest.Create (path);
 				request.Method = "POST";
@@ -23,25 +25,33 @@ namespace Silanis.ESL.SDK.Internal
 					dataStream.Write (content, 0, content.Length);
 				}
 
+				Support.LogDebug( "Awaiting response from server." );
 				WebResponse response = request.GetResponse ();
+				Support.LogDebug( "Response received from server. " + response.ToString() + "," + response.Headers.ToString() + "," + response.ContentType + "," + response.ContentLength + " bytes." );
 
 				using (Stream responseStream = response.GetResponseStream()) {
 					var memoryStream = new MemoryStream ();
 					CopyTo (responseStream, memoryStream);
-	                
-					return memoryStream.ToArray ();
+	          
+					byte[] result = memoryStream.ToArray();
+					Support.LogMethodExit( result );      
+					return result;
 				}
             }
             catch (Exception e) {
-                Console.Error.WriteLine(e.Message);
+				Support.LogError(e.Message);
+				Console.Error.WriteLine(e.Message);
+				Support.LogError(e.StackTrace);
                 Console.Error.WriteLine(e.StackTrace);
             }
 
+			Support.LogMethodExit(null);
             return null;
 		}
 
 		public static byte[] PutHttp (string apiToken, string path, byte[] content)
 		{
+			Support.LogMethodEntry(apiToken, path, content);
 			WebRequest request = WebRequest.Create (path);
 			request.Method = "PUT";
 			request.ContentType = "application/json";
@@ -52,48 +62,63 @@ namespace Silanis.ESL.SDK.Internal
 				dataStream.Write (content, 0, content.Length);
 			}
 
+			Support.LogDebug( "Awaiting response from server." );
 			WebResponse response = request.GetResponse ();
+			Support.LogDebug( "Response received from server. " + response.ToString() + "," + response.Headers.ToString() + "," + response.ContentType + "," + response.ContentLength + " bytes." );
 
 			using (Stream responseStream = response.GetResponseStream()) {
 				var memoryStream = new MemoryStream ();
 				CopyTo (responseStream, memoryStream);
 
-				return memoryStream.ToArray ();
+				byte[] result = memoryStream.ToArray();
+				Support.LogMethodExit(result);
+				return result;
 			}
 		}
 
 		public static byte[] GetHttp (string apiToken, string path)
 		{
+			Support.LogMethodEntry(apiToken, path);
 			WebRequest request = WebRequest.Create (path);
 			request.Method = "GET";
 			request.Headers.Add ("Authorization", "Basic " + apiToken);
 
+			Support.LogDebug( "Awaiting response from server." );
 			WebResponse response = request.GetResponse ();
+			Support.LogDebug( "Response received from server. " + response.ToString() + "," + response.Headers.ToString() + "," + response.ContentType + "," + response.ContentLength + " bytes." );
 
 			using (Stream responseStream = response.GetResponseStream()) {
 				var memoryStream = new MemoryStream ();
 				CopyTo (responseStream, memoryStream);
-				return memoryStream.ToArray ();
+				byte[] result = memoryStream.ToArray();
+				Support.LogMethodExit(result);
+				return result;
 			}
 		}
 
 		public static byte[] DeleteHttp (string apiToken, string path)
 		{
+			Support.LogMethodEntry(apiToken, path);
 			WebRequest request = WebRequest.Create (path);
 			request.Method = "DELETE";
 			request.Headers.Add ("Authorization", "Basic " + apiToken);
 
+			Support.LogDebug( "Awaiting response from server." );
 			WebResponse response = request.GetResponse ();
+			Support.LogDebug( "Response received from server. " + response.ToString() + "," + response.Headers.ToString() + "," + response.ContentType + "," + response.ContentLength + " bytes." );
 
 			using (Stream responseStream = response.GetResponseStream()) {
 				var memoryStream = new MemoryStream ();
 				CopyTo (responseStream, memoryStream);
-				return memoryStream.ToArray ();
+				byte[] result = memoryStream.ToArray();
+				Support.LogMethodExit(result);
+				return result;
 			}
 		}
 
 		public static byte[] MultipartPostHttp (string apiToken, string path, byte[] content, string boundary)
 		{
+			Support.LogMethodEntry(apiToken, path, content, boundary);
 			WebRequest request = WebRequest.Create (path);
 			request.Method = "POST";
 			request.ContentType = string.Format ("multipart/form-data; boundary={0}", boundary);
@@ -104,13 +129,16 @@ namespace Silanis.ESL.SDK.Internal
 				dataStream.Write (content, 0, content.Length);
 			}
 
+			Support.LogDebug( "Awaiting response from server." );
 			WebResponse response = request.GetResponse ();
+			Support.LogDebug( "Response received from server. " + response.ToString() + "," + response.Headers.ToString() + "," + response.ContentType + "," + response.ContentLength + " bytes." );
 
 			using (Stream responseStream = response.GetResponseStream()) {
 				var memoryStream = new MemoryStream ();
 				CopyTo (responseStream, memoryStream);
-
-				return memoryStream.ToArray ();
+				byte[] result = memoryStream.ToArray();
+				Support.LogMethodExit(result);
+				return result;
 			}
 		}
 

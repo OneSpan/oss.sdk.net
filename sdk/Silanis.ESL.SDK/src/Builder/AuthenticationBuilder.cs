@@ -8,7 +8,10 @@ namespace Silanis.ESL.SDK.Builder
 
 		public virtual Authentication Build()
 		{
-			return new Authentication(AuthenticationMethod.EMAIL);
+			Support.LogMethodEntry();
+			Authentication result = new Authentication(AuthenticationMethod.EMAIL);
+			Support.LogMethodExit(result);
+			return result;
 		}
 	}
 }

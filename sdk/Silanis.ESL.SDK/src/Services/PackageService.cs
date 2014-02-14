@@ -29,7 +29,6 @@ namespace Silanis.ESL.SDK.Services
 		{
             this.restClient = restClient;
 			template = new UrlTemplate (baseUrl);
-
 			settings = new JsonSerializerSettings ();
 			settings.NullValueHandling = NullValueHandling.Ignore;
 		}
@@ -41,12 +40,15 @@ namespace Silanis.ESL.SDK.Services
 		/// <param name="package">The package to create.</param>
 		internal PackageId CreatePackage (Silanis.ESL.API.Package package)
 		{
+			Support.LogMethodEntry(package);
 			string path = template.UrlFor (UrlTemplate.PACKAGE_PATH)
 				.Build ();
 			try {
 				string json = JsonConvert.SerializeObject (package, settings);
                 string response = restClient.Post(path, json);				
-				return JsonConvert.DeserializeObject<PackageId> (response);
+				PackageId result = JsonConvert.DeserializeObject<PackageId> (response);
+				Support.LogMethodExit(result);
+				return result;
 			} catch (Exception e) {
 				throw new EslException ("Could not create a new package." + " Exception: " + e.Message);
 			}
@@ -192,18 +194,21 @@ namespace Silanis.ESL.SDK.Services
 		/// <param name="document">The document object that has field settings.</param>
 		internal void UploadDocument (PackageId packageId, string fileName, byte[] fileBytes, Silanis.ESL.API.Document document)
 		{
+            Support.LogMethodEntry(packageId, fileName, document);
 			string path = template.UrlFor (UrlTemplate.DOCUMENT_PATH)
 				.Replace ("{packageId}", packageId.Id)
 					.Build ();
 
 			try {
 				string json = JsonConvert.SerializeObject (document, settings);
+                Support.LogDebug("document json = " + json);
 				byte[] payloadBytes = Converter.ToBytes (json);
 
 				string boundary = GenerateBoundary ();
 				byte[] content = CreateMultipartContent (fileName, fileBytes, payloadBytes, boundary);
 
                 restClient.PostMultipartFile(path, content, boundary);
+                Support.LogMethodExit("Document uploaded without issue");
 //				Converter.ToString (HttpMethods.MultipartPostHttp (apiToken, path, content, boundary));
 			} catch (Exception e) {
 				throw new EslException ("Could not upload document to package." + " Exception: " + e.Message);

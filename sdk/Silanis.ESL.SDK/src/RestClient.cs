@@ -6,16 +6,14 @@ namespace Silanis.ESL.SDK
     public class RestClient
     {
         private string apiToken;
-//        private Support support;
 
         public RestClient(string apiToken)
         {
             this.apiToken = apiToken;
-//            support = new Support();
         }
 
         public string Post(string path, string jsonPayload) {
-//            support.LogRequest("POST", path, jsonPayload);
+			Support.LogMethodEntry(path, jsonPayload);
 			byte[] payloadBytes = null;
 			if (jsonPayload != null)
 			{
@@ -26,7 +24,10 @@ namespace Silanis.ESL.SDK
 				payloadBytes = new byte[0];
 			}
 			byte[] responseBytes = HttpMethods.PostHttp(apiToken, path, payloadBytes);
-            return Converter.ToString(responseBytes);
+            
+			String result = Converter.ToString(responseBytes);
+			Support.LogMethodExit(result);
+			return result;
         }
 
         public string Put(string path, string jsonPayload) {

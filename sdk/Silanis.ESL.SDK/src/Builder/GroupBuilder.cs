@@ -63,6 +63,7 @@ namespace Silanis.ESL.SDK
         }
 
         public Group Build() {
+			Support.LogMethodEntry();
             Group result = new Group();
             result.Id = id;
             result.Email = email;
@@ -74,6 +75,7 @@ namespace Silanis.ESL.SDK
             foreach( GroupMember groupMember in members ) {
                 result.Members.Add( groupMember );
             }
+			Support.LogMethodExit(result);
             return result;
         }
     }

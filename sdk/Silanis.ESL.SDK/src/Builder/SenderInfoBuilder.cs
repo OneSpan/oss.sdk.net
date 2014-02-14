@@ -36,13 +36,14 @@ namespace Silanis.ESL.SDK
         }
 
         public SenderInfo Build() {
+			Support.LogMethodEntry();
             SenderInfo result = new SenderInfo();
 			result.Email = email;
             result.FirstName = firstName;
             result.LastName = lastName;
             result.Company = company;
             result.Title = title;
-
+			Support.LogMethodExit(result);
             return result;
         }
     }

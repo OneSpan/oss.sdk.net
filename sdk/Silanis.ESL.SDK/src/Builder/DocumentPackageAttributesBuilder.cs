@@ -12,6 +12,8 @@ namespace Silanis.ESL.SDK.Builder
         }
 
         public DocumentPackageAttributes build() {
+			Support.LogMethodEntry();
+			Support.LogMethodExit(attributes);
             return attributes;
         }
     }

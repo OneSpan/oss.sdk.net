@@ -25,8 +25,16 @@ namespace Silanis.ESL.SDK.Internal
 		/// <param name="bytes">Byte array.</param>
 		public static string ToString (byte[] bytes)
 		{
-			System.Text.UTF8Encoding enc = new System.Text.UTF8Encoding ();
-			return enc.GetString (bytes);
+			Support.LogDebug("Converting " + bytes.Length + " bytes to string.");
+			if (bytes != null && bytes.Length > 0)
+			{
+				System.Text.UTF8Encoding enc = new System.Text.UTF8Encoding();
+				string result = enc.GetString(bytes);
+				Support.LogDebug("Converted '" + result + "'");
+				return result;
+			}
+			else
+				return "";
 		}
 	}
 }
