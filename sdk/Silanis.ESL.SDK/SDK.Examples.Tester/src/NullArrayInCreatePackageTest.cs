@@ -88,7 +88,7 @@ namespace SDK.Examples
 
 //			foreach (Document document in documents)
 			{
-				DocumentBuilder documentBuilder = DocumentBuilder.NewDocumentNamed("documentName").FromFile("/tmsdfap/document.pdf");
+				DocumentBuilder documentBuilder = DocumentBuilder.NewDocumentNamed("documentName").FromFile("/tmp/document.pdf");
 
 				// Note that we are currently using the same signer for each signature block.
 //				foreach (SignatureTemplate template in document.SignatureTemplates)
