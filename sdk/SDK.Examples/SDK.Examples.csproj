@@ -46,7 +46,7 @@
     <DebugType>none</DebugType>
   </PropertyGroup>
   <PropertyGroup>
-    <StartupObject>SDK.Examples.SantanderIssue</StartupObject>
+    <StartupObject>SDK.Examples.BasicPackageCreationExample</StartupObject>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -95,7 +95,6 @@
     <Compile Include="src\GroupManagementExample.cs" />
     <Compile Include="src\UploadDocumentExample.cs" />
     <Compile Include="src\ReminderExample.cs" />
-    <Compile Include="src\santander\NullValue.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

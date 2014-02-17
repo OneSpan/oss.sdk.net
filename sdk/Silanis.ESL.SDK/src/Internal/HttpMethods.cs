@@ -9,11 +9,9 @@ namespace Silanis.ESL.SDK.Internal
 	/// </summary>
 	public class HttpMethods
 	{
-
 		public static byte[] PostHttp (string apiToken, string path, byte[] content)
 		{
 			Support.LogMethodEntry(apiToken, path, content);
-//			Support.LogDebug("POSTING with apiToken: " + apiToken + " on: " + path + " " + content.Length + " bytes.");
             try {
 				WebRequest request = WebRequest.Create (path);
 				request.Method = "POST";
@@ -40,79 +38,96 @@ namespace Silanis.ESL.SDK.Internal
             }
             catch (Exception e) {
 				Support.LogError(e.Message);
-				Console.Error.WriteLine(e.Message);
 				Support.LogError(e.StackTrace);
-                Console.Error.WriteLine(e.StackTrace);
+				throw new EslException("Error communicating with esl server. " + e.Message);
             }
-
-			Support.LogMethodExit(null);
-            return null;
 		}
 
 		public static byte[] PutHttp (string apiToken, string path, byte[] content)
 		{
 			Support.LogMethodEntry(apiToken, path, content);
-			WebRequest request = WebRequest.Create (path);
-			request.Method = "PUT";
-			request.ContentType = "application/json";
-			request.ContentLength = content.Length;
-			request.Headers.Add ("Authorization", "Basic " + apiToken);
+			try {
+				WebRequest request = WebRequest.Create (path);
+				request.Method = "PUT";
+				request.ContentType = "application/json";
+				request.ContentLength = content.Length;
+				request.Headers.Add ("Authorization", "Basic " + apiToken);
 
-			using (Stream dataStream = request.GetRequestStream ()) {
-				dataStream.Write (content, 0, content.Length);
+				using (Stream dataStream = request.GetRequestStream ()) {
+					dataStream.Write (content, 0, content.Length);
+				}
+
+				Support.LogDebug( "Awaiting response from server." );
+				WebResponse response = request.GetResponse ();
+				Support.LogDebug( "Response received from server. " + response.ToString() + "," + response.Headers.ToString() + "," + response.ContentType + "," + response.ContentLength + " bytes." );
+
+				using (Stream responseStream = response.GetResponseStream()) {
+					var memoryStream = new MemoryStream ();
+					CopyTo (responseStream, memoryStream);
+
+					byte[] result = memoryStream.ToArray();
+					Support.LogMethodExit(result);
+					return result;
+				}
 			}
-
-			Support.LogDebug( "Awaiting response from server." );
-			WebResponse response = request.GetResponse ();
-			Support.LogDebug( "Response received from server. " + response.ToString() + "," + response.Headers.ToString() + "," + response.ContentType + "," + response.ContentLength + " bytes." );
-
-			using (Stream responseStream = response.GetResponseStream()) {
-				var memoryStream = new MemoryStream ();
-				CopyTo (responseStream, memoryStream);
-
-				byte[] result = memoryStream.ToArray();
-				Support.LogMethodExit(result);
-				return result;
+			catch (Exception e) {
+				Support.LogError(e.Message);
+				Support.LogError(e.StackTrace);
+				throw new EslException("Error communicating with esl server. " + e.Message);
 			}
 		}
 
 		public static byte[] GetHttp (string apiToken, string path)
 		{
 			Support.LogMethodEntry(apiToken, path);
-			WebRequest request = WebRequest.Create (path);
-			request.Method = "GET";
-			request.Headers.Add ("Authorization", "Basic " + apiToken);
+			try {
+				WebRequest request = WebRequest.Create (path);
+				request.Method = "GET";
+				request.Headers.Add ("Authorization", "Basic " + apiToken);
 
-			Support.LogDebug( "Awaiting response from server." );
-			WebResponse response = request.GetResponse ();
-			Support.LogDebug( "Response received from server. " + response.ToString() + "," + response.Headers.ToString() + "," + response.ContentType + "," + response.ContentLength + " bytes." );
+				Support.LogDebug( "Awaiting response from server." );
+				WebResponse response = request.GetResponse ();
+				Support.LogDebug( "Response received from server. " + response.ToString() + "," + response.Headers.ToString() + "," + response.ContentType + "," + response.ContentLength + " bytes." );
 
-			using (Stream responseStream = response.GetResponseStream()) {
-				var memoryStream = new MemoryStream ();
-				CopyTo (responseStream, memoryStream);
-				byte[] result = memoryStream.ToArray();
-				Support.LogMethodExit(result);
-				return result;
+				using (Stream responseStream = response.GetResponseStream()) {
+					var memoryStream = new MemoryStream ();
+					CopyTo (responseStream, memoryStream);
+					byte[] result = memoryStream.ToArray();
+					Support.LogMethodExit(result);
+					return result;
+				}
+			}
+			catch (Exception e) {
+				Support.LogError(e.Message);
+				Support.LogError(e.StackTrace);
+				throw new EslException("Error communicating with esl server. " + e.Message);
 			}
 		}
 
 		public static byte[] DeleteHttp (string apiToken, string path)
 		{
 			Support.LogMethodEntry(apiToken, path);
-			WebRequest request = WebRequest.Create (path);
-			request.Method = "DELETE";
-			request.Headers.Add ("Authorization", "Basic " + apiToken);
+			try {
+				WebRequest request = WebRequest.Create (path);
+				request.Method = "DELETE";
+				request.Headers.Add ("Authorization", "Basic " + apiToken);
 
-			Support.LogDebug( "Awaiting response from server." );
-			WebResponse response = request.GetResponse ();
-			Support.LogDebug( "Response received from server. " + response.ToString() + "," + response.Headers.ToString() + "," + response.ContentType + "," + response.ContentLength + " bytes." );
+				Support.LogDebug( "Awaiting response from server." );
+				WebResponse response = request.GetResponse ();
+				Support.LogDebug( "Response received from server. " + response.ToString() + "," + response.Headers.ToString() + "," + response.ContentType + "," + response.ContentLength + " bytes." );
 
-			using (Stream responseStream = response.GetResponseStream()) {
-				var memoryStream = new MemoryStream ();
-				CopyTo (responseStream, memoryStream);
-				byte[] result = memoryStream.ToArray();
-				Support.LogMethodExit(result);
-				return result;
+				using (Stream responseStream = response.GetResponseStream()) {
+					var memoryStream = new MemoryStream ();
+					CopyTo (responseStream, memoryStream);
+					byte[] result = memoryStream.ToArray();
+					Support.LogMethodExit(result);
+					return result;
+				}
+			}
+			catch (Exception e) {
+				Support.LogError(e.Message);
+				Support.LogError(e.StackTrace);
+				throw new EslException("Error communicating with esl server. " + e.Message);
 			}
 		}
 
@@ -120,25 +135,32 @@ namespace Silanis.ESL.SDK.Internal
 		{
 			Support.LogMethodEntry(apiToken, path, content, boundary);
 			WebRequest request = WebRequest.Create (path);
-			request.Method = "POST";
-			request.ContentType = string.Format ("multipart/form-data; boundary={0}", boundary);
-			request.ContentLength = content.Length;
-			request.Headers.Add ("Authorization", "Basic " + apiToken);
+			try {
+				request.Method = "POST";
+				request.ContentType = string.Format ("multipart/form-data; boundary={0}", boundary);
+				request.ContentLength = content.Length;
+				request.Headers.Add ("Authorization", "Basic " + apiToken);
 
-			using (Stream dataStream = request.GetRequestStream ()) {
-				dataStream.Write (content, 0, content.Length);
+				using (Stream dataStream = request.GetRequestStream ()) {
+					dataStream.Write (content, 0, content.Length);
+				}
+
+				Support.LogDebug( "Awaiting response from server." );
+				WebResponse response = request.GetResponse ();
+				Support.LogDebug( "Response received from server. " + response.ToString() + "," + response.Headers.ToString() + "," + response.ContentType + "," + response.ContentLength + " bytes." );
+
+				using (Stream responseStream = response.GetResponseStream()) {
+					var memoryStream = new MemoryStream ();
+					CopyTo (responseStream, memoryStream);
+					byte[] result = memoryStream.ToArray();
+					Support.LogMethodExit(result);
+					return result;
+				}
 			}
-
-			Support.LogDebug( "Awaiting response from server." );
-			WebResponse response = request.GetResponse ();
-			Support.LogDebug( "Response received from server. " + response.ToString() + "," + response.Headers.ToString() + "," + response.ContentType + "," + response.ContentLength + " bytes." );
-
-			using (Stream responseStream = response.GetResponseStream()) {
-				var memoryStream = new MemoryStream ();
-				CopyTo (responseStream, memoryStream);
-				byte[] result = memoryStream.ToArray();
-				Support.LogMethodExit(result);
-				return result;
+			catch (Exception e) {
+				Support.LogError(e.Message);
+				Support.LogError(e.StackTrace);
+				throw new EslException("Error communicating with esl server. " + e.Message);
 			}
 		}
 
