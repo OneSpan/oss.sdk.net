@@ -115,6 +115,12 @@ namespace Silanis.ESL.SDK.Builder
             return WithCustomId(roleId);
         }
 
+		[Obsolete("Please use WithCustomId() instead")]
+		public SignerBuilder WithId ( string id )
+		{
+			return WithCustomId(id);
+		}
+
 		public SignerBuilder ChallengedWithQuestions (ChallengeBuilder challengeBuilder)
 		{
 			this.authenticationBuilder = challengeBuilder;
