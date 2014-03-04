@@ -46,7 +46,7 @@
     <DebugType>none</DebugType>
   </PropertyGroup>
   <PropertyGroup>
-    <StartupObject>SDK.Examples.BasicPackageCreationExample</StartupObject>
+    <StartupObject>SDK.Examples.CustomSenderInfoExample</StartupObject>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />

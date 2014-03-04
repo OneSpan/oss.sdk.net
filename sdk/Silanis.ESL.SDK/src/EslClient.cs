@@ -70,10 +70,11 @@ namespace Silanis.ESL.SDK
 		{
 			Silanis.ESL.API.Package packageToCreate = package.ToAPIPackage ();
 			PackageId id = packageService.CreatePackage (packageToCreate);
+            DocumentPackage retrievedPackage = GetPackage(id);
 
 			foreach (Document document in package.Documents.Values)
 			{
-				packageService.UploadDocument (id, document.FileName, document.Content, document.ToAPIDocument (packageToCreate));
+                UploadDocument(document, retrievedPackage);
 			}
 
 			return id;
@@ -134,11 +135,21 @@ namespace Silanis.ESL.SDK
 			return packageService.GetSigningStatus (packageId, signerId, documentId);
 		}
 
+		public void UploadDocument(Document document, DocumentPackage documentPackage ) {
+			UploadDocument( document.FileName, document.Content, document, documentPackage );
+		}
+
         public void UploadDocument(String fileName, byte[] fileContent, Document document, DocumentPackage documentPackage)
         {
             Silanis.ESL.API.Package packageToCreate = documentPackage.ToAPIPackage();
             packageService.UploadDocument(documentPackage.Id, fileName, fileContent, document.ToAPIDocument(packageToCreate));
         }
+
+		public void UploadDocument( Document document, PackageId packageId ) {
+			DocumentPackage documentPackage = GetPackage(packageId);
+			UploadDocument(document, documentPackage);
+
+		}
         
         /// <summary>
         /// BaseUrl property

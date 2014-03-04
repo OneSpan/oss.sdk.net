@@ -25,7 +25,7 @@ namespace SDK.Examples
         {
             this.email1 = email1;
             this.email2 = email2;
-            this.fileStream1 = File.OpenRead(new FileInfo(Directory.GetCurrentDirectory() + "/src/document.pdf").FullName);
+			this.fileStream1 = File.OpenRead(new FileInfo(Directory.GetCurrentDirectory() + "/src/myXML.xml").FullName);
             this.fileStream2 = File.OpenRead(new FileInfo(Directory.GetCurrentDirectory() + "/src/document.pdf").FullName);
         }
 
@@ -53,13 +53,13 @@ namespace SDK.Examples
                                .AtPosition( 400, 200 )
                                .WithValue( "x" ) )
                                    .AtPosition( 100, 100 ) ) )
-                    .WithDocument( DocumentBuilder.NewDocumentNamed( "Second Document" )
-                                  .FromStream( fileStream2, DocumentType.PDF )
-                                  .WithSignature( SignatureBuilder.SignatureFor( email2 )
-                                   .OnPage( 0 )
-                                   .AtPosition( 100, 200 )
-                                   )
-                                  )
+//                    .WithDocument( DocumentBuilder.NewDocumentNamed( "Second Document" )
+//                                  .FromStream( fileStream2, DocumentType.PDF )
+//                                  .WithSignature( SignatureBuilder.SignatureFor( email2 )
+//                                   .OnPage( 0 )
+//                                   .AtPosition( 100, 200 )
+//                                   )
+//                                  )
                     .Build();
 
             PackageId packageId = eslClient.CreatePackage( superDuperPackage );

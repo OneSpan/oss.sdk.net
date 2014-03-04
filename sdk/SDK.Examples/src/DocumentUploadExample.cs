@@ -54,7 +54,7 @@ namespace SDK.Examples
                     .Build();
 
             // 3. Attach the document to the created package by uploading the document.
-            eslClient.UploadDocument(document.FileName, document.Content, document, superDuperPackage);
+            eslClient.UploadDocument(document, superDuperPackage);
 
             eslClient.SendPackage(superDuperPackage.Id);
 

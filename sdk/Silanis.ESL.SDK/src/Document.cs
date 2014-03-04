@@ -55,7 +55,7 @@ namespace Silanis.ESL.SDK
 			this.fields.AddRange (fields);
 		}
 
-		internal Silanis.ESL.API.Document ToAPIDocument (Silanis.ESL.API.Package createdPackage)
+		internal Silanis.ESL.API.Document ToAPIDocument (Silanis.ESL.API.Package apiPackage)
 		{
 			Silanis.ESL.API.Document doc = new Silanis.ESL.API.Document ();
 
@@ -80,11 +80,11 @@ namespace Silanis.ESL.SDK
 
 				if (signature.IsGroupSignature() )
 				{
-					approval.Role = FindRoleIdForGroup (signature.GroupId, createdPackage);
+					approval.Role = FindRoleIdForGroup (signature.GroupId, apiPackage);
 				}
 				else
 				{
-					approval.Role = FindRoleIdForSigner (signature.SignerEmail, createdPackage);
+					approval.Role = FindRoleIdForSigner (signature.SignerEmail, apiPackage);
 				}
 				doc.AddApproval (approval);
 			}

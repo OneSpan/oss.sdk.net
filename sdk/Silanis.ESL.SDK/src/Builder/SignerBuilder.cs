@@ -15,6 +15,7 @@ namespace Silanis.ESL.SDK.Builder
 		private int signingOrder;
 		private string message;
 		private string id;
+		private string roleId;
 		private bool canChangeSigner;
 		private bool locked;
         private GroupId groupId;
@@ -42,6 +43,10 @@ namespace Silanis.ESL.SDK.Builder
 					.WithCompany( eslSigner.Company )
 					.WithTitle( eslSigner.Title )
 					.SigningOrder( role.Index );
+
+			if (role.Id != null) {
+				builder.WithRoleId(role.Id);
+			}
 
 			if ( role.Reassign ) {
 				builder.CanChangeSigner ();
@@ -109,10 +114,10 @@ namespace Silanis.ESL.SDK.Builder
 			return this;
 		}
 
-        [Obsolete("Please use WithCustomId() instead")]
         public SignerBuilder WithRoleId ( string roleId )
         {
-            return WithCustomId(roleId);
+			this.roleId = roleId;
+			return this;
         }
 
 		[Obsolete("Please use WithCustomId() instead")]
@@ -183,6 +188,7 @@ namespace Silanis.ESL.SDK.Builder
 			signer.Message = message;
 			signer.Id = id;
 			signer.Locked = locked;
+			signer.RoleId = roleId;
 
 			Support.LogMethodExit(signer);
 			return signer;

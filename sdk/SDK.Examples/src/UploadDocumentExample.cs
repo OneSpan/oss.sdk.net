@@ -37,7 +37,7 @@ namespace SDK.Examples
                                 .Build();
 
             // 3. Attach the document to the created package by uploading the document.
-            client.UploadDocument(document.FileName, document.Content, document, superDuperPackage);
+            client.UploadDocument(document, superDuperPackage);
 
             Console.WriteLine("Document was uploaded");
         }
