@@ -45,6 +45,14 @@ namespace Silanis.ESL.SDK
             set;
         }
 
+        public List<Signature> Signatures
+        {
+            get
+            {
+                return signatures;
+            }
+        }       
+         
 		public void AddSignatures (IList<Signature> signatures)
 		{
 			this.signatures.AddRange (signatures);
