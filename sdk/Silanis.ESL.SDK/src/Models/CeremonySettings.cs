@@ -21,6 +21,13 @@ namespace Silanis.ESL.API
         }
     
 		    
+    [JsonProperty("disableInPersonAffidavit")]
+    public Boolean DisableInPersonAffidavit
+    {
+                get; set;
+        }
+    
+		    
     [JsonProperty("documentToolbarOptions")]
     public DocumentToolbarOptions DocumentToolbarOptions
     {

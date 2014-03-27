@@ -2,6 +2,7 @@ using System;
 using Silanis.ESL.SDK.Internal;
 using Silanis.ESL.SDK.Services;
 using Silanis.ESL.SDK.Builder;
+using Silanis.ESL.API;
 
 namespace Silanis.ESL.SDK
 {
@@ -21,6 +22,7 @@ namespace Silanis.ESL.SDK
         private GroupService groupService;
 		private AccountService accountService;
 		private Services.ReminderService reminderService;
+        private TemplateService templateService;
 
         /// <summary>
         /// EslClient constructor.
@@ -44,7 +46,7 @@ namespace Silanis.ESL.SDK
             groupService = new GroupService(restClient, this.baseUrl);
 			accountService = new AccountService(restClient, this.baseUrl);
 			reminderService = new ReminderService(restClient, this.baseUrl);
-
+            templateService = new TemplateService(restClient, this.baseUrl);
 		}
 
 		private String AppendServicePath(string baseUrl)
@@ -91,6 +93,17 @@ namespace Silanis.ESL.SDK
 		{
 			packageService.SendPackage (id);
 		}
+
+        public PackageId CreateTemplateFromPackage(PackageId originalPackageId, DocumentPackage delta)
+        {
+            return templateService.CreateTemplateFromPackage( originalPackageId, delta.ToAPIPackage() );
+        }
+
+        public PackageId CreateTemplateFromPackage(PackageId originalPackageId, string templateName)
+        {
+            DocumentPackage sdkPackage = PackageBuilder.NewPackageNamed( templateName ).Build();
+            return CreateTemplateFromPackage( originalPackageId, sdkPackage );
+        }
 
 		public SessionToken CreateSenderSessionToken()
 		{

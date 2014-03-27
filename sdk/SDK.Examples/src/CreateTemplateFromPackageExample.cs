@@ -5,11 +5,11 @@ using Silanis.ESL.SDK.Builder;
 
 namespace SDK.Examples
 {
-    public class BasicPackageCreationExample : SDKSample
+    public class CreateTemplateFromPackageExample : SDKSample
     {
         public static void Main(string[] args)
         {
-            new BasicPackageCreationExample(Props.GetInstance()).Run();
+            new CreateTemplateFromPackageExample(Props.GetInstance()).Run();
         }
 
         private string email1;
@@ -17,22 +17,23 @@ namespace SDK.Examples
         private Stream fileStream1;
         private Stream fileStream2;
 
-        public BasicPackageCreationExample(Props props) : this(props.Get("api.url"), props.Get("api.key"), props.Get("1.email"), props.Get("2.email"))
+        public CreateTemplateFromPackageExample(Props props) : this(props.Get("api.url"), props.Get("api.key"), props.Get("1.email"), props.Get("2.email"))
         {
         }
 
-        public BasicPackageCreationExample(string apiKey, string apiUrl, string email1, string email2) : base( apiKey, apiUrl )
+        public CreateTemplateFromPackageExample(string apiKey, string apiUrl, string email1, string email2) : base( apiKey, apiUrl )
         {
             this.email1 = email1;
             this.email2 = email2;
-			this.fileStream1 = File.OpenRead(new FileInfo(Directory.GetCurrentDirectory() + "/src/document.pdf").FullName);
+            this.fileStream1 = File.OpenRead(new FileInfo(Directory.GetCurrentDirectory() + "/src/document.pdf").FullName);
             this.fileStream2 = File.OpenRead(new FileInfo(Directory.GetCurrentDirectory() + "/src/document.pdf").FullName);
         }
+
 
         override public void Execute()
         {
             DocumentPackage superDuperPackage =
-                PackageBuilder.NewPackageNamed("BasicPackageCreationExample: " + DateTime.Now)
+                PackageBuilder.NewPackageNamed("CreateTemplateFromPackageExample: " + DateTime.Now)
                 .DescribedAs("This is a package created using the e-SignLive SDK")
                 .ExpiresOn(DateTime.Now.AddMonths(1))
                 .WithEmailMessage("This message should be delivered to all signers")
@@ -68,10 +69,14 @@ namespace SDK.Examples
                              )
                 .Build();
 
-            PackageId packageId = eslClient.CreatePackage(superDuperPackage);
-            eslClient.SendPackage(packageId);
-
-            SessionToken sessionToken = eslClient.CreateSessionToken(packageId, "Client1");
+            PackageId originalPackageId = eslClient.CreatePackage(superDuperPackage);
+            PackageId templateId = eslClient.CreateTemplateFromPackage(
+                                           originalPackageId,
+                                           "El Bobo" );
+                                           
+            DocumentPackage retrievedTemplate = eslClient.GetPackage(templateId);
+            Console.Out.WriteLine("BLAH");          
         }
     }
 }
+

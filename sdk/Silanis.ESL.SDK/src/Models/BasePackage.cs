@@ -187,6 +187,13 @@ namespace Silanis.ESL.API
                 get; set;
         }
     
+		    
+    [JsonProperty("visibility")]
+    public Visibility Visibility
+    {
+                get; set;
+        }
+    
 		
 	
 	}

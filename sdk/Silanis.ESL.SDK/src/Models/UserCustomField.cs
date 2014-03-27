@@ -10,6 +10,7 @@ namespace Silanis.ESL.API
 	{
 		
 		// Fields
+		private IList<Translation> _translations = null;
 		
 		// Accessors
 		    
@@ -32,6 +33,26 @@ namespace Silanis.ESL.API
     {
                 get; set;
         }
+    
+		    
+    [JsonProperty("translations")]
+    public IList<Translation> Translations
+    {
+                get
+        {
+            return _translations;
+        }
+        }
+        public UserCustomField AddTranslation(Translation value)
+    {
+        if (value == null)
+        {
+            throw new ArgumentNullException("Argument cannot be null");
+        }
+        
+        _translations.Add(value);
+        return this;
+    }
     
 		    
     [JsonProperty("value")]

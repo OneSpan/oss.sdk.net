@@ -83,6 +83,13 @@ namespace Silanis.ESL.API
         }
     
 		    
+    [JsonProperty("showDocumentsPreview")]
+    public Boolean ShowDocumentsPreview
+    {
+                get; set;
+        }
+    
+		    
     [JsonProperty("tamperSealEvidence")]
     public Boolean TamperSealEvidence
     {
