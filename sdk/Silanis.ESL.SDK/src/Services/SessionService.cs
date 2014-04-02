@@ -11,6 +11,7 @@ namespace Silanis.ESL.SDK.Services
 	{
 		private string apiToken;
 		private UrlTemplate template;
+		private AuthenticationService authenticationService;
 
 		/// <summary>
 		/// Initializes a new instance of the <see cref="Silanis.ESL.SDK.SessionService"/> class.
@@ -21,6 +22,7 @@ namespace Silanis.ESL.SDK.Services
 		{
 			this.apiToken = apiToken;
 			template = new UrlTemplate (baseUrl);
+			authenticationService = new AuthenticationService(new RestClient(apiToken), baseUrl);
 		}
 
 		public SessionToken CreateSessionToken (PackageId packageId, string signerId)
@@ -28,18 +30,12 @@ namespace Silanis.ESL.SDK.Services
 			return CreateSignerSessionToken(packageId, signerId);
 		}
 
+		[Obsolete]
 		public SessionToken CreateSenderSessionToken()
 		{
-			string path = template.UrlFor(UrlTemplate.SENDER_SESSION_PATH)
-				.Build();
+			AuthenticationToken token = authenticationService.CreateAuthenticationToken();
 
-			try {
-				string response = Converter.ToString( HttpMethods.PostHttp( apiToken, path, new byte[0]));
-				return JsonConvert.DeserializeObject<SessionToken> (response);
-			}
-			catch (Exception e) {
-				throw new EslException ("Could not create a session token for sender." + " Exception: " + e.Message);
-			}
+			return new SessionToken(token.Token);
 		}
 
 		/// <summary>

@@ -63,6 +63,8 @@ namespace Silanis.ESL.SDK.Internal
 		// Reminder Service
 		public static readonly string REMINDER_PATH = "/packages/{packageId}/reminders";
 
+		public static readonly string AUTHENTICATION_TOKEN_PATH = "/authenticationTokens";
+
 		public UrlTemplate (string baseUrl)
 		{
 			this.baseUrl = baseUrl;

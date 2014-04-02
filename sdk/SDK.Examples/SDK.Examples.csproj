@@ -46,7 +46,7 @@
     <DebugType>none</DebugType>
   </PropertyGroup>
   <PropertyGroup>
-    <StartupObject>SDK.Examples.CustomSenderInfoExample</StartupObject>
+    <StartupObject>SDK.Examples.SessionCreationExample</StartupObject>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -96,6 +96,7 @@
     <Compile Include="src\UploadDocumentExample.cs" />
     <Compile Include="src\ReminderExample.cs" />
     <Compile Include="src\CreateTemplateFromPackageExample.cs" />
+    <Compile Include="src\DesignerSessionCreationExample.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

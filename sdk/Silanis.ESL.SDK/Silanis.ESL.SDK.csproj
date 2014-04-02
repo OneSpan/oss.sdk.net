@@ -248,6 +248,8 @@
     <Compile Include="src\Services\ReminderService.cs" />
     <Compile Include="src\Internal\Conversion\SenderConverter.cs" />
     <Compile Include="src\Services\TemplateService.cs" />
+    <Compile Include="src\AuthenticationToken.cs" />
+    <Compile Include="src\Services\AuthenticationService.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSHARP.Targets" />
   <ProjectExtensions>
