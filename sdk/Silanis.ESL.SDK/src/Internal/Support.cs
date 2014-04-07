@@ -41,36 +41,50 @@ namespace Silanis.ESL.SDK
 		[MethodImpl(MethodImplOptions.NoInlining)]
 		public static void LogMethodEntry(params object[] values)
 		{
-			MethodBase methodBase = GetCallingMethod();
-			Support.LogDebug("--->" + methodBase.DeclaringType.Name + ": " + methodBase.ToString());
-			if (values != null)
-			{
-				for (int paramCtr = 0; paramCtr < values.Length; paramCtr++)
-				{
-					ParameterInfo paramInfo = methodBase.GetParameters()[paramCtr];
-					object param = values[paramCtr];
-					string json = JsonConvert.SerializeObject(param);
-					Support.LogDebug("\t" + paramInfo.ParameterType.ToString() + " " + paramInfo.Name + ": " + json);
-				}
-			}
+            try
+            {
+    			MethodBase methodBase = GetCallingMethod();
+    			Support.LogDebug("--->" + methodBase.DeclaringType.Name + ": " + methodBase.ToString());
+    			if (values != null)
+    			{
+    				for (int paramCtr = 0; paramCtr < values.Length; paramCtr++)
+    				{
+    					ParameterInfo paramInfo = methodBase.GetParameters()[paramCtr];
+    					object param = values[paramCtr];
+    					string json = JsonConvert.SerializeObject(param);
+    					Support.LogDebug("\t" + paramInfo.ParameterType.ToString() + " " + paramInfo.Name + ": " + json);
+    				}
+    			}
+            }
+            catch (Exception e)
+            {
+                Support.LogDebug("!!!! Exception occurred in logging: " + e.Message);
+            }
 		}
 
 		[MethodImpl(MethodImplOptions.NoInlining)]
-		public static void LogMethodExit(params object[] values)
-		{
-			if (values != null)
-			{
-				foreach (object value in values)
-				{
-					Support.LogDebug("Returning: " + JsonConvert.SerializeObject(value));
-				}
-			}
-			else
-			{
-				Support.LogDebug("Returning: null");
-			}
-			MethodBase methodBase = GetCallingMethod();
-			Support.LogDebug("<---" + methodBase.DeclaringType.Name + ": " + methodBase.Name);
+        public static void LogMethodExit(params object[] values)
+        {
+            try
+            {
+                if (values != null)
+                {
+                    foreach (object value in values)
+                    {
+                        Support.LogDebug("Returning: " + JsonConvert.SerializeObject(value));
+                    }
+                }
+                else
+                {
+                    Support.LogDebug("Returning: null");
+                }
+                MethodBase methodBase = GetCallingMethod();
+                Support.LogDebug("<---" + methodBase.DeclaringType.Name + ": " + methodBase.Name);
+            }
+            catch (Exception e)
+            {
+                Support.LogDebug("!!!! Exception occurred in logging: " + e.Message);
+            }
 		}
 
 		[MethodImpl(MethodImplOptions.NoInlining)]

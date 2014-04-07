@@ -11,6 +11,7 @@ namespace Silanis.ESL.SDK
 		{
 			SignerEmail = signerEmail;
             GroupId = null;
+            RoleId = null;
 			Page = page;
 			X = x;
 			Y = y;
@@ -20,6 +21,17 @@ namespace Silanis.ESL.SDK
         {
             SignerEmail = null;
             GroupId = groupId;
+            RoleId = null;
+            Page = page;
+            X = x;
+            Y = y;
+        }
+        
+        public Signature(RoleId roleId, int page, double x, double y)
+        {
+            SignerEmail = null;
+            GroupId = null;
+            RoleId = roleId;
             Page = page;
             X = x;
             Y = y;
@@ -36,6 +48,12 @@ namespace Silanis.ESL.SDK
 			get;
 			private set;
 		}
+
+        public RoleId RoleId
+        {
+            get;
+            private set;
+        }
 
 		public int Page 
 		{
@@ -103,5 +121,10 @@ namespace Silanis.ESL.SDK
 		{
 			return GroupId != null;
 		}
+        
+        public bool IsPlaceholderSignature()
+        {
+            return RoleId != null;
+        }
 	}
 }

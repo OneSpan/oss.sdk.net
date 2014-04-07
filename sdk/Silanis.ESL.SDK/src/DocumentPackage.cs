@@ -7,13 +7,14 @@ namespace Silanis.ESL.SDK
     public class DocumentPackage
     {
 
-        public DocumentPackage(PackageId id, string packageName, bool autocomplete, IDictionary<string, Signer> signers, IDictionary<string, Document> documents)
+        public DocumentPackage(PackageId id, string packageName, bool autocomplete, IDictionary<string, Signer> signers, IDictionary<string, Signer> placeholders, IDictionary<string, Document> documents)
         {
             Id = id;
             Name = packageName;
             Autocomplete = autocomplete;
             Signers = signers;
             Documents = documents;
+            Placeholders = placeholders;
         }
 
         public PackageId Id
@@ -41,6 +42,12 @@ namespace Silanis.ESL.SDK
         }
 
         public IDictionary<string, Signer> Signers
+        {
+            get;
+            private set;
+        }
+
+        public IDictionary<string, Signer> Placeholders
         {
             get;
             private set;
@@ -116,45 +123,60 @@ namespace Silanis.ESL.SDK
 
             if (SenderInfo != null)
             {
-				package.Sender = new SenderConverter(SenderInfo).ToAPISender();
+                package.Sender = new SenderConverter(SenderInfo).ToAPISender();
             }
 
-            if ( Attributes != null ) {
+            if (Attributes != null)
+            {
                 package.Data = Attributes.Contents;
             }
 
             int signerCount = 1;
             foreach (Signer signer in Signers.Values)
             {
-                Silanis.ESL.API.Role role = new Silanis.ESL.API.Role();
-
-                role.Name = "signer" + signerCount;
-                role.AddSigner(signer.ToAPISigner());
-                role.Index = signer.SigningOrder;
-                role.Reassign = signer.CanChangeSigner;
-
-                if (String.IsNullOrEmpty(signer.RoleId))
-                {
-                    role.Id = "role" + signerCount;
-                }
-                else
-                {
-                    role.Id = signer.RoleId;
-                }
-
-                if (!String.IsNullOrEmpty(signer.Message))
-                {
-                    Silanis.ESL.API.BaseMessage message = new Silanis.ESL.API.BaseMessage();
-
-                    message.Content = signer.Message;
-                    role.EmailMessage = message;
-                }
-
+                Silanis.ESL.API.Role role = ToAPIRole(signer, signerCount);
+                package.AddRole(role);
+                signerCount++;
+            }
+            foreach (Signer signer in Placeholders.Values)
+            {
+                Silanis.ESL.API.Role role = ToAPIRole(signer, signerCount);
                 package.AddRole(role);
                 signerCount++;
             }
 
             return package;
+        }
+        
+        internal Silanis.ESL.API.Role ToAPIRole(Signer signer, int index)
+        {
+            Silanis.ESL.API.Role role = new Silanis.ESL.API.Role();
+
+            if ( !signer.IsPlaceholderSigner() ) {
+                role.AddSigner(signer.ToAPISigner());
+            }
+            role.Index = signer.SigningOrder;
+            role.Reassign = signer.CanChangeSigner;
+
+            if (String.IsNullOrEmpty(signer.RoleId))
+            {
+                role.Id = role.Name = "signer" + index;
+            }
+            else
+            {
+                role.Id = signer.RoleId;
+                role.Name = signer.RoleId;
+            }
+
+            if (!String.IsNullOrEmpty(signer.Message))
+            {
+                Silanis.ESL.API.BaseMessage message = new Silanis.ESL.API.BaseMessage();
+
+                message.Content = signer.Message;
+                role.EmailMessage = message;
+            }
+            
+            return role;
         }
     }
 }

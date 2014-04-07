@@ -41,7 +41,8 @@
     <Compile Include="src\SessionCreationExampleTest.cs" />
     <Compile Include="src\BasicPackageCreationExampleTest.cs" />
     <Compile Include="src\TextAnchorExtractionExampleTest.cs" />
-    <Compile Include="src\CreateTemplateFromPackageExampleTest.cs" />
+    <Compile Include="src\TemplateExampleTest.cs" />
+    <Compile Include="src\PackageDataContainsSDKVersionTest.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

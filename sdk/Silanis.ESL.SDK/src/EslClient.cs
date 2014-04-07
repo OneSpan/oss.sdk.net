@@ -12,6 +12,7 @@ namespace Silanis.ESL.SDK
     /// </summary>
 	public class EslClient
 	{
+
 		private string baseUrl;
 		private PackageService packageService;
 		private SessionService sessionService;
@@ -106,6 +107,30 @@ namespace Silanis.ESL.SDK
             DocumentPackage sdkPackage = PackageBuilder.NewPackageNamed( templateName ).Build();
             return CreateTemplateFromPackage( originalPackageId, sdkPackage );
         }
+        
+        public PackageId CreatePackageFromTemplate(PackageId templateId, string packageName)
+        {
+            DocumentPackage sdkPackage = PackageBuilder.NewPackageNamed( packageName ).Build();
+            return CreatePackageFromTemplate( templateId, sdkPackage );
+        }
+        
+        public PackageId CreatePackageFromTemplate(PackageId templateId, DocumentPackage delta)
+        {
+            return templateService.CreatePackageFromTemplate( templateId, delta.ToAPIPackage() );
+        }
+
+		public PackageId CreateTemplate(DocumentPackage template)
+		{
+			PackageId templateId = templateService.CreateTemplate(template.ToAPIPackage());
+			DocumentPackage createdTemplate = GetPackage(templateId);
+
+			foreach (Document document in template.Documents.Values)
+			{
+				UploadDocument(document, createdTemplate);
+			}
+
+			return templateId;
+		}
 
 		[Obsolete]
 		public SessionToken CreateSenderSessionToken()

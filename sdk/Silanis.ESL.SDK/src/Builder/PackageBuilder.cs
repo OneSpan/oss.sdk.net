@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Globalization;
+using System.Reflection;
 
 namespace Silanis.ESL.SDK.Builder
 {
@@ -12,6 +13,7 @@ namespace Silanis.ESL.SDK.Builder
 		private Nullable<DateTime> expiryDate;
 		private string emailMessage = String.Empty;
 		private IDictionary<string, Signer> signers = new Dictionary<string, Signer> ();
+        private IDictionary<string, Signer> placeholders = new Dictionary<string, Signer> ();
 		private IDictionary<string, Document> documents = new Dictionary<string, Document>();
 		private PackageId id;
 		private DocumentPackageStatus status;
@@ -40,16 +42,15 @@ namespace Silanis.ESL.SDK.Builder
 
 			foreach ( Silanis.ESL.API.Role role in package.Roles ) {
 				if ( role.Signers.Count == 0 ) {
-					continue;
+					WithSigner(SignerBuilder.NewSignerPlaceholderWithRoleId(new RoleId(role.Id)));   
 				}
-
-				if (role.Signers[0].Group != null)
+				else if (role.Signers[0].Group != null)
 				{
 					WithSigner(SignerBuilder.NewSignerFromGroup(new GroupId(role.Signers[0].Group.Id)));
 				}
 				else
 				{
-					WithSigner(SignerBuilder.NewSignerFromAPISigner(role).Build());
+					WithSigner(SignerBuilder.NewSignerFromAPIRole(role).Build());
 					if (role.Type == Silanis.ESL.API.RoleType.SENDER)
 					{
 						Silanis.ESL.API.Signer senderSigner = role.Signers[0];
@@ -126,14 +127,18 @@ namespace Silanis.ESL.SDK.Builder
 		}
 
 		public PackageBuilder WithSigner(Signer signer)
-		{
-			if (signer.IsGroupSigner())
+        {
+            if (signer.IsPlaceholderSigner())
+            {
+                placeholders[signer.RoleId] = signer;
+            }
+			else if (signer.IsGroupSigner())
 			{
 				signers[signer.GroupId.Id] = signer;
 			}
 			else
 			{
-				signers [signer.Email] = signer;
+				signers[signer.Email] = signer;
 			}
 			return this;
 		}
@@ -174,22 +179,36 @@ namespace Silanis.ESL.SDK.Builder
             return this;
         } 
 
-		public DocumentPackage Build ()
-		{
-			Support.LogMethodEntry();
-			DocumentPackage package = new DocumentPackage (id, packageName, autocomplete, signers, documents);
+		public DocumentPackage Build()
+        {
+            Support.LogMethodEntry();
+            DocumentPackage package = new DocumentPackage(id, packageName, autocomplete, signers, placeholders, documents);
 
-			package.Description = description;
-			package.ExpiryDate = expiryDate;
-			package.EmailMessage = emailMessage;
-			package.Status = status;
-			package.Language = language;
+            package.Description = description;
+            package.ExpiryDate = expiryDate;
+            package.EmailMessage = emailMessage;
+            package.Status = status;
+            package.Language = language;
             package.Settings = settings;
             package.SenderInfo = senderInfo;
+            if (attributes == null)
+            {
+                attributes = new DocumentPackageAttributes();
+            }
+            attributes.Append( "sdk", ".NET v" + CurrentVersion );
             package.Attributes = attributes;
 
 			Support.LogMethodExit(package);
 			return package;
 		}
-	}
+        
+        public Version CurrentVersion
+        {
+            get
+            {
+                return Assembly.GetExecutingAssembly().GetName().Version;
+            }
+        }  	
+    }
+    
 }

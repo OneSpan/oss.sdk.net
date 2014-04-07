@@ -21,6 +21,7 @@ namespace Silanis.ESL.SDK.Internal
 		// Package Service
 		public static readonly string PACKAGE_PATH = "/packages";
 		public static readonly string PACKAGE_LIST_PATH = "/packages?query={status}&from={from}&to={to}";
+        public static readonly string TEMPLATE_LIST_PATH = "/packages?type=TEMPLATE&from={from}&to={to}";
 		public static readonly string PACKAGE_ID_PATH = "/packages/{packageId}";
 		public static readonly string DOCUMENT_PATH = "/packages/{packageId}/documents";
 		public static readonly string DOCUMENT_ID_PATH = "/packages/{packageId}/documents/{documentId}";

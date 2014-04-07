@@ -7,7 +7,7 @@ namespace Silanis.ESL.SDK.Builder
         private DocumentPackageAttributes attributes = new DocumentPackageAttributes();
 
         public DocumentPackageAttributesBuilder withAttribute( string name, Object value ) {
-            this.attributes.append(name, value);
+            this.attributes.Append(name, value);
             return this;
         }
 

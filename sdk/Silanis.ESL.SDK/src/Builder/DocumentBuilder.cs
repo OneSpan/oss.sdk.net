@@ -29,16 +29,13 @@ namespace Silanis.ESL.SDK.Builder
 
 		internal static DocumentBuilder NewDocumentFromAPIDocument (Silanis.ESL.API.Document apiDocument, Silanis.ESL.API.Package package)
 		{
-        DocumentBuilder documentBuilder = DocumentBuilder.NewDocumentNamed(apiDocument.Name)
-				.WithId(apiDocument.Id)
-				.AtIndex(apiDocument.Index)
-                .WithDescription(apiDocument.Description);
-
-
+            DocumentBuilder documentBuilder = DocumentBuilder.NewDocumentNamed(apiDocument.Name)
+    				.WithId(apiDocument.Id)
+    				.AtIndex(apiDocument.Index)
+                    .WithDescription(apiDocument.Description);
 
 			foreach ( Silanis.ESL.API.Approval apiApproval in apiDocument.Approvals ) {
-				Signature signature = SignatureBuilder.NewSignatureFromAPIApproval( apiApproval, package ).Build ();
-
+                Signature signature = new SignatureConverter( apiApproval, package ).ToSDKSignature();
 				documentBuilder.WithSignature( signature );
 			}
 

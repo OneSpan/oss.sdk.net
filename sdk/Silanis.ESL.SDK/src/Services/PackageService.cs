@@ -389,7 +389,7 @@ namespace Silanis.ESL.SDK.Services
 		}
 
         public Page<DocumentPackage> GetTemplates(PageRequest request) {
-            string path = template.UrlFor (UrlTemplate.PACKAGE_LIST_PATH)
+            string path = template.UrlFor (UrlTemplate.TEMPLATE_LIST_PATH)
                     .Replace ("{from}", request.From.ToString ())
                     .Replace ("{to}", request.To.ToString())
                     .Build();

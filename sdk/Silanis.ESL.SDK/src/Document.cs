@@ -86,7 +86,11 @@ namespace Silanis.ESL.SDK
 			{
 				Silanis.ESL.API.Approval approval = converter.ConvertToApproval (signature);
 
-				if (signature.IsGroupSignature() )
+                if (signature.IsPlaceholderSignature())
+                {
+                    approval.Role = signature.RoleId.Id;
+                }
+				else if (signature.IsGroupSignature() )
 				{
 					approval.Role = FindRoleIdForGroup (signature.GroupId, apiPackage);
 				}

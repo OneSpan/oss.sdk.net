@@ -16,7 +16,15 @@ namespace SDK.Examples
         private string email2;
         private Stream fileStream1;
         private Stream fileStream2;
+        private PackageId packageId;
 
+        public PackageId PackageId
+        {
+            get
+            {
+                return packageId;
+            }
+        }
         public BasicPackageCreationExample(Props props) : this(props.Get("api.url"), props.Get("api.key"), props.Get("1.email"), props.Get("2.email"))
         {
         }
@@ -68,7 +76,7 @@ namespace SDK.Examples
                              )
                 .Build();
 
-            PackageId packageId = eslClient.CreatePackage(superDuperPackage);
+            packageId = eslClient.CreatePackage(superDuperPackage);
             eslClient.SendPackage(packageId);
 
             SessionToken sessionToken = eslClient.CreateSessionToken(packageId, "Client1");

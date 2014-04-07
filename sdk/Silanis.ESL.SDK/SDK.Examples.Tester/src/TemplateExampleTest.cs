@@ -4,12 +4,12 @@ using NUnit.Framework;
 namespace SDK.Examples
 {
     [TestFixture()]
-    public class CreateTemplateFromPackageExampleTest
+    public class TemplateExampleTest
     {
         [Test()]
         public void VerifyResult()
         {
-            CreateTemplateFromPackageExample example = new CreateTemplateFromPackageExample( Props.GetInstance() );
+            TemplateExample example = new TemplateExample( Props.GetInstance() );
             example.Run();
         }
     }
