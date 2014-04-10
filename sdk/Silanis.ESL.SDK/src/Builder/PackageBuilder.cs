@@ -97,6 +97,18 @@ namespace Silanis.ESL.SDK.Builder
 			return new PackageBuilder (name);
 		}
 
+        public PackageBuilder WithAutomaticCompletion()
+        {
+            this.autocomplete = true;
+            return this;
+        }
+        
+        public PackageBuilder WithoutAutomaticCompletion()
+        {
+            this.autocomplete = false;
+            return this;
+        }
+
 		public PackageBuilder DescribedAs(string description)
 		{
 			this.description = description;

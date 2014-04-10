@@ -176,6 +176,11 @@ namespace Silanis.ESL.SDK
 			return new PackageBuilder (package).Build ();
 		}
 
+        public void UpdatePackage(Silanis.ESL.SDK.PackageId packageId, DocumentPackage sentSettings)
+        {
+            packageService.UpdatePackage( packageId, sentSettings.ToAPIPackage() );
+        }
+        
 		public SigningStatus GetSigningStatus (PackageId packageId, string signerId, string documentId)
 		{
 			return packageService.GetSigningStatus (packageId, signerId, documentId);

@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using Silanis.ESL.SDK.Internal;
 using Silanis.ESL.SDK.Builder;
 using Silanis.ESL.API;
+using System.Globalization;
 
 namespace Silanis.ESL.SDK.Services
 {
@@ -29,9 +30,20 @@ namespace Silanis.ESL.SDK.Services
 		{
             this.restClient = restClient;
 			template = new UrlTemplate (baseUrl);
-			settings = new JsonSerializerSettings ();
-			settings.NullValueHandling = NullValueHandling.Ignore;
-		}
+            configureJsonSerializationSettings();
+        }
+        
+        private void configureJsonSerializationSettings()
+        {
+            settings = new JsonSerializerSettings ();
+            settings.NullValueHandling = NullValueHandling.Ignore;
+            settings.DateTimeZoneHandling = DateTimeZoneHandling.Local;
+            settings.Converters.Add( new CultureInfoJsonCreationConverter() );
+            
+//            settings.Converters.
+//            ServiceStack.Text.JsConfig<CultureInfo>.SerializeFn = r => r.TwoLetterISOLanguageName;
+//            ServiceStack.Text.JsConfig<CultureInfo>.DeSerializeFn = r => new CultureInfo(r);     
+        }
 
 		/// <summary>
 		/// Creates a package based on the settings of the pacakge parameter.
@@ -59,19 +71,19 @@ namespace Silanis.ESL.SDK.Services
 		/// </summary>
 		/// <param name="packageId">The package id.</param>
 		/// <param name="package">The updated package.</param>
-		internal void UpdatePackage (PackageId packageId, Silanis.ESL.API.Package package)
-		{
-			string path = template.UrlFor (UrlTemplate.PACKAGE_ID_PATH)
-				.Replace ("{packageId}", packageId.Id)
-				.Build ();
-
-			try {
-				string json = JsonConvert.SerializeObject (package, settings);
-                string response = restClient.Put(path, json);
-			} catch (Exception e) {
-				throw new EslException ("Could not update the package." + " Exception: " + e.Message);
-			}
-		}
+//		internal void UpdatePackage (PackageId packageId, Silanis.ESL.API.Package package)
+//		{
+//			string path = template.UrlFor (UrlTemplate.PACKAGE_ID_PATH)
+//				.Replace ("{packageId}", packageId.Id)
+//				.Build ();
+//
+//			try {
+//				string json = JsonConvert.SerializeObject (package, settings);
+//                string response = restClient.Put(path, json);
+//			} catch (Exception e) {
+//				throw new EslException ("Could not update the package." + " Exception: " + e.Message);
+//			}
+//		}
 
 		/// <summary>
 		/// Gets the package.
@@ -185,6 +197,20 @@ namespace Silanis.ESL.SDK.Services
 			}
 		}
 
+        internal void UpdatePackage(PackageId packageId, Package package)
+        {
+            string path = template.UrlFor (UrlTemplate.PACKAGE_ID_PATH)
+                .Replace ("{packageId}", packageId.Id)
+                .Build();
+                
+            try {
+                restClient.Post(path, JsonConvert.SerializeObject (package, settings));
+                restClient.GetBytes(path);
+            } catch (Exception e) {
+                throw new EslException ("Unable to update package settings." + " Exception: " + e.Message);
+            }
+        }
+
 		/// <summary>
 		/// Uploads the Document and file in byte[] to the package.
 		/// </summary>
@@ -209,7 +235,6 @@ namespace Silanis.ESL.SDK.Services
 
                 restClient.PostMultipartFile(path, content, boundary);
                 Support.LogMethodExit("Document uploaded without issue");
-//				Converter.ToString (HttpMethods.MultipartPostHttp (apiToken, path, content, boundary));
 			} catch (Exception e) {
 				throw new EslException ("Could not upload document to package." + " Exception: " + e.Message);
 			}
@@ -433,7 +458,8 @@ namespace Silanis.ESL.SDK.Services
 			}
 
 			return new String (stringChars);
-		}
+		}        
+        
 
 	}
 }

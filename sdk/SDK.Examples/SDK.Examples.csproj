@@ -99,6 +99,7 @@
     <Compile Include="src\DesignerSessionCreationExample.cs" />
     <Compile Include="src\TemplateExample.cs" />
     <Compile Include="src\CreateTemplateExample.cs" />
+    <Compile Include="src\UpdatePackageExample.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

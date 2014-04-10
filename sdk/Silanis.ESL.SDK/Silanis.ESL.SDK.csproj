@@ -253,6 +253,8 @@
     <Compile Include="src\RoleId.cs" />
     <Compile Include="src\Internal\Conversion\SignatureConverter.cs" />
     <Compile Include="src\Internal\Conversion\SignatureStyleConverter.cs" />
+    <Compile Include="src\Services\JsonCreationConverter.cs" />
+    <Compile Include="src\Services\CultureInfoJsonCreationConverter.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSHARP.Targets" />
   <ProjectExtensions>

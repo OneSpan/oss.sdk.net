@@ -34,6 +34,9 @@
     <Reference Include="nunit.framework">
       <HintPath>..\..\References\nunit.framework.dll</HintPath>
     </Reference>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\..\References\Newtonsoft.Json.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="src\CustomFieldExampleTest.cs" />
@@ -43,6 +46,7 @@
     <Compile Include="src\TextAnchorExtractionExampleTest.cs" />
     <Compile Include="src\TemplateExampleTest.cs" />
     <Compile Include="src\PackageDataContainsSDKVersionTest.cs" />
+    <Compile Include="src\UpdatePackageExampleTester.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
