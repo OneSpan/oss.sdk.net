@@ -47,6 +47,7 @@
   </PropertyGroup>
   <PropertyGroup>
     <StartupObject>SDK.Examples.SessionCreationExample</StartupObject>
+    <StartupObject>SDK.Examples.CreateTemplateExample</StartupObject>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
