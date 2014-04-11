@@ -37,7 +37,7 @@ namespace Silanis.ESL.SDK.Services
         {
             settings = new JsonSerializerSettings ();
             settings.NullValueHandling = NullValueHandling.Ignore;
-            settings.DateTimeZoneHandling = DateTimeZoneHandling.Local;
+            settings.DateTimeZoneHandling = DateTimeZoneHandling.Utc;
             settings.Converters.Add( new CultureInfoJsonCreationConverter() );
             
 //            settings.Converters.
