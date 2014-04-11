@@ -58,20 +58,20 @@ namespace SDK.Examples
 //            Assert.AreEqual( example.UpdatedLayoutSettings.ShowTitle, example.RetrievedLayoutSettings.ShowTitle );
         }
         
-        [Test]
-        public void verifyCultureInfoDeserialisation()
-        {
-            JsonSerializerSettings settings = new JsonSerializerSettings ();
-            settings.NullValueHandling = NullValueHandling.Ignore;
-            settings.DateTimeZoneHandling = DateTimeZoneHandling.Local;
-            settings.Converters.Add( new CultureInfoJsonCreationConverter() );
-
-            string json = "{ \"cultureInfo\":\"en\" }";
-            
-            Bob bob = JsonConvert.DeserializeObject<Bob> (json, settings);
-            
-            Console.Out.WriteLine( "Blah" );
-        }
+//        [Test]
+//        public void verifyCultureInfoDeserialisation()
+//        {
+//            JsonSerializerSettings settings = new JsonSerializerSettings ();
+//            settings.NullValueHandling = NullValueHandling.Ignore;
+//            settings.DateTimeZoneHandling = DateTimeZoneHandling.Local;
+//            settings.Converters.Add( new CultureInfoJsonCreationConverter() );
+//
+//            string json = "{ \"cultureInfo\":\"en\" }";
+//            
+//            Bob bob = JsonConvert.DeserializeObject<Bob> (json, settings);
+//            
+//            Console.Out.WriteLine( "Blah" );
+//        }
     }
     
     public class Bob
