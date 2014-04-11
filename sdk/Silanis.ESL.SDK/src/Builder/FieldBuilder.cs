@@ -96,6 +96,8 @@ namespace Silanis.ESL.SDK.Builder
 
 			if ( field.Binding == null ) {
 				switch ( field.Subtype ) {
+                case Silanis.ESL.API.FieldSubtype.CUSTOMFIELD:
+                    return FieldStyle.UNBOUND_CUSTOM_FIELD;
 				case Silanis.ESL.API.FieldSubtype.TEXTFIELD:
 					return FieldStyle.UNBOUND_TEXT_FIELD;
 				case Silanis.ESL.API.FieldSubtype.CHECKBOX:
