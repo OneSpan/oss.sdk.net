@@ -186,20 +186,22 @@ namespace Silanis.ESL.SDK
 			return packageService.GetSigningStatus (packageId, signerId, documentId);
 		}
 
-		public void UploadDocument(Document document, DocumentPackage documentPackage ) {
-			UploadDocument( document.FileName, document.Content, document, documentPackage );
+		public Document UploadDocument(Document document, DocumentPackage documentPackage ) {
+			return UploadDocument( document.FileName, document.Content, document, documentPackage );
 		}
 
-        public void UploadDocument(String fileName, byte[] fileContent, Document document, DocumentPackage documentPackage)
+		public Document UploadDocument(String fileName, byte[] fileContent, Document document, DocumentPackage documentPackage)
         {
-            Silanis.ESL.API.Package packageToCreate = documentPackage.ToAPIPackage();
-            packageService.UploadDocument(documentPackage.Id, fileName, fileContent, document.ToAPIDocument(packageToCreate));
+			Document uploaded = packageService.UploadDocument(documentPackage, fileName, fileContent, document);
+
+			documentPackage.Documents[uploaded.Name] = uploaded;
+			return uploaded;
         }
 
-		public void UploadDocument( Document document, PackageId packageId ) {
+		public Document UploadDocument( Document document, PackageId packageId ) {
 			DocumentPackage documentPackage = GetPackage(packageId);
-			UploadDocument(document, documentPackage);
 
+			return UploadDocument(document, documentPackage);
 		}
         
         /// <summary>

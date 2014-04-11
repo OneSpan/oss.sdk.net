@@ -47,7 +47,7 @@
   </PropertyGroup>
   <PropertyGroup>
     <StartupObject>SDK.Examples.SessionCreationExample</StartupObject>
-    <StartupObject>SDK.Examples.CreateTemplateExample</StartupObject>
+    <StartupObject>SDK.Examples.DocumentOperationsExample</StartupObject>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -94,12 +94,12 @@
     <Compile Include="src\CustomFieldExample.cs" />
     <Compile Include="src\SDKSample1.cs" />
     <Compile Include="src\GroupManagementExample.cs" />
-    <Compile Include="src\UploadDocumentExample.cs" />
     <Compile Include="src\ReminderExample.cs" />
     <Compile Include="src\DesignerSessionCreationExample.cs" />
     <Compile Include="src\TemplateExample.cs" />
     <Compile Include="src\CreateTemplateExample.cs" />
     <Compile Include="src\UpdatePackageExample.cs" />
+    <Compile Include="src\DocumentOperationsExample.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

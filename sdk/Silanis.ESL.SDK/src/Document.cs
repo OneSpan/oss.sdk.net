@@ -65,23 +65,9 @@ namespace Silanis.ESL.SDK
 
 		internal Silanis.ESL.API.Document ToAPIDocument (Silanis.ESL.API.Package apiPackage)
 		{
-			Silanis.ESL.API.Document doc = new Silanis.ESL.API.Document ();
-
-			doc.Name = Name;
-			doc.Index = Index;
-			doc.Extract = Extract;
-
-			if ( Id != null )
-			{
-				doc.Id = Id;
-			}
-
-            if (Description != null)
-            {
-                doc.Description = Description;
-            }
-
+			Silanis.ESL.API.Document doc = ToAPIDocument();
 			Converter converter = new Converter ();
+
 			foreach (Signature signature in signatures)
 			{
 				Silanis.ESL.API.Approval approval = converter.ConvertToApproval (signature);
@@ -104,6 +90,32 @@ namespace Silanis.ESL.SDK
 			foreach (Field field in fields)
 			{
 				doc.AddField (converter.ToAPIField(field));
+			}
+
+			return doc;
+		}
+
+		internal Silanis.ESL.API.Document ToAPIDocument()
+		{
+
+			Silanis.ESL.API.Document doc = new Silanis.ESL.API.Document();
+
+			doc.Name = Name;
+			doc.Index = Index;
+			doc.Extract = Extract;
+
+			
+
+			if (Id != null)
+			{
+				doc.Id = Id;
+			}
+
+			
+
+			if (Description != null)
+			{
+				doc.Description = Description;
 			}
 
 			return doc;

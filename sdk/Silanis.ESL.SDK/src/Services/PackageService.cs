@@ -111,15 +111,46 @@ namespace Silanis.ESL.SDK.Services
 		/// <param name="document">The document to delete.</param>
 		public void DeleteDocument (PackageId packageId, Document document)
 		{
-			string path = template.UrlFor (UrlTemplate.DOCUMENT_ID_PATH)
-                .Replace ("{packageId}", packageId.Id)
-                .Replace ("{documentId}", "document.Id")
-                .Build ();
+			DeleteDocument(packageId, document.Id);
+		}
 
-			try {
-                restClient.Delete(path);
-			} catch (Exception e) {
-				throw new EslException ("Could not delete document from package." + " Exception: " + e.Message);
+		public void DeleteDocument (PackageId packageId, string documentId)
+		{
+			string path = template.UrlFor(UrlTemplate.DOCUMENT_ID_PATH)
+							.Replace("{packageId}", packageId.Id)
+							.Replace("{documentId}", documentId)
+							.Build();
+
+			try
+			{
+				restClient.Delete(path);
+			}
+			catch (Exception e)
+			{
+				throw new EslException("Could not delete document from package." + " Exception: " + e.Message);
+			}
+		}
+
+		public void UpdateDocumentMetadata(DocumentPackage package, Document document)
+		{
+			string path = template.UrlFor (UrlTemplate.DOCUMENT_ID_PATH)
+				.Replace ("{packageId}", package.Id.Id)
+				.Replace ("{documentId}", document.Id)
+				.Build ();
+
+			Silanis.ESL.API.Document internalDoc = document.ToAPIDocument();
+
+			try 
+			{
+				string json = JsonConvert.SerializeObject (internalDoc, settings);
+				Support.LogDebug("document json = " + json);
+
+				restClient.Post(path, json);
+				Support.LogMethodExit("Document updated without issue");
+			} 
+			catch (Exception e) 
+			{
+				throw new EslException ("Could not upload document to package." + " Exception: " + e.Message);
 			}
 		}
 
@@ -218,24 +249,33 @@ namespace Silanis.ESL.SDK.Services
 		/// <param name="fileName">The name of the document.</param>
 		/// <param name="fileBytes">The file to upload in bytes.</param>
 		/// <param name="document">The document object that has field settings.</param>
-		internal void UploadDocument (PackageId packageId, string fileName, byte[] fileBytes, Silanis.ESL.API.Document document)
+		internal Document UploadDocument (DocumentPackage package, string fileName, byte[] fileBytes, Document document)
 		{
-            Support.LogMethodEntry(packageId, fileName, document);
+			Support.LogMethodEntry(package.Id, fileName, document);
 			string path = template.UrlFor (UrlTemplate.DOCUMENT_PATH)
-				.Replace ("{packageId}", packageId.Id)
+				.Replace ("{packageId}", package.Id.Id)
 					.Build ();
 
-			try {
-				string json = JsonConvert.SerializeObject (document, settings);
+			Silanis.ESL.API.Package internalPackage = package.ToAPIPackage();
+			Silanis.ESL.API.Document internalDoc = document.ToAPIDocument(internalPackage);
+
+			try 
+			{
+				string json = JsonConvert.SerializeObject (internalDoc, settings);
                 Support.LogDebug("document json = " + json);
 				byte[] payloadBytes = Converter.ToBytes (json);
 
 				string boundary = GenerateBoundary ();
 				byte[] content = CreateMultipartContent (fileName, fileBytes, payloadBytes, boundary);
 
-                restClient.PostMultipartFile(path, content, boundary);
+				string response = restClient.PostMultipartFile(path, content, boundary);
                 Support.LogMethodExit("Document uploaded without issue");
-			} catch (Exception e) {
+
+				Silanis.ESL.API.Document uploadedDoc = JsonConvert.DeserializeObject<Silanis.ESL.API.Document>(response);
+				return DocumentBuilder.NewDocumentFromAPIDocument(uploadedDoc, internalPackage).Build();
+			} 
+			catch (Exception e) 
+			{
 				throw new EslException ("Could not upload document to package." + " Exception: " + e.Message);
 			}
 		}
