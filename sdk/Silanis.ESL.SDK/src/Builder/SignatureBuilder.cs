@@ -22,7 +22,7 @@ namespace Silanis.ESL.SDK.Builder
 		private bool extract;
         private TextAnchor textAnchor;
         private GroupId groupId;
-        private RoleId roleId;
+        private Placeholder roleId;
 
 		private SignatureBuilder (string signerEmail)
 		{
@@ -38,7 +38,7 @@ namespace Silanis.ESL.SDK.Builder
             this.roleId = null;
         }
         
-        private SignatureBuilder(RoleId roleId)
+        private SignatureBuilder(Placeholder roleId)
         {
             this.signerEmail = null;
             this.groupId = null;
@@ -63,7 +63,7 @@ namespace Silanis.ESL.SDK.Builder
 					.OnPage(0);
 		}
         
-        public static SignatureBuilder AcceptanceFor(RoleId roleId)
+        public static SignatureBuilder AcceptanceFor(Placeholder roleId)
         {
             return new SignatureBuilder(roleId)
                     .WithStyle(SignatureStyle.ACCEPTANCE)
@@ -77,7 +77,7 @@ namespace Silanis.ESL.SDK.Builder
             return new SignatureBuilder(groupId);
         }
         
-        public static SignatureBuilder SignatureFor(RoleId roleId)
+        public static SignatureBuilder SignatureFor(Placeholder roleId)
         {
             return new SignatureBuilder(roleId);
         }
@@ -97,7 +97,7 @@ namespace Silanis.ESL.SDK.Builder
 			return  new SignatureBuilder(groupId).WithStyle(SignatureStyle.INITIALS);
 		}
         
-        public static SignatureBuilder InitialsFor(RoleId roleId)
+        public static SignatureBuilder InitialsFor(Placeholder roleId)
         {
             return new SignatureBuilder(roleId).WithStyle(SignatureStyle.INITIALS);
         }
@@ -112,7 +112,7 @@ namespace Silanis.ESL.SDK.Builder
 			return new SignatureBuilder(groupId).WithStyle(SignatureStyle.HAND_DRAWN);
 		}
         
-        public static SignatureBuilder CaptureFor(RoleId roleId)
+        public static SignatureBuilder CaptureFor(Placeholder roleId)
         {
             return new SignatureBuilder(roleId).WithStyle(SignatureStyle.HAND_DRAWN);
         }

@@ -30,7 +30,7 @@ namespace Silanis.ESL.SDK
                 if ( role.Id.Equals( apiApproval.Role ) ) {
                     if ( isPlaceHolder( role ) )
                     {
-                        signatureBuilder = SignatureBuilder.SignatureFor(new RoleId(role.Id));
+                        signatureBuilder = SignatureBuilder.SignatureFor(new Placeholder(role.Id));
                     }
                     else if ( isGroupRole( role ) )
                     {

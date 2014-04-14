@@ -47,7 +47,7 @@
   </PropertyGroup>
   <PropertyGroup>
     <StartupObject>SDK.Examples.SessionCreationExample</StartupObject>
-    <StartupObject>SDK.Examples.DocumentOperationsExample</StartupObject>
+    <StartupObject>SDK.Examples.TemplateExample</StartupObject>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />

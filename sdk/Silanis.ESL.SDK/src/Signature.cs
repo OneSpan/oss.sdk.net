@@ -27,7 +27,7 @@ namespace Silanis.ESL.SDK
             Y = y;
         }
         
-        public Signature(RoleId roleId, int page, double x, double y)
+        public Signature(Placeholder roleId, int page, double x, double y)
         {
             SignerEmail = null;
             GroupId = null;
@@ -49,7 +49,7 @@ namespace Silanis.ESL.SDK
 			private set;
 		}
 
-        public RoleId RoleId
+        public Placeholder RoleId
         {
             get;
             private set;

@@ -42,7 +42,7 @@ namespace Silanis.ESL.SDK.Builder
 
 			foreach ( Silanis.ESL.API.Role role in package.Roles ) {
 				if ( role.Signers.Count == 0 ) {
-					WithSigner(SignerBuilder.NewSignerPlaceholderWithRoleId(new RoleId(role.Id)));   
+					WithSigner(SignerBuilder.NewSignerPlaceholder(new Placeholder(role.Id)));   
 				}
 				else if (role.Signers[0].Group != null)
 				{

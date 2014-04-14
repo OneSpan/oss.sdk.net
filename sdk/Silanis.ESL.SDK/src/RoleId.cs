@@ -2,7 +2,7 @@ using System;
 
 namespace Silanis.ESL.SDK
 {
-    public class RoleId
+    public class Placeholder
     {
         private string id;
 
@@ -14,7 +14,7 @@ namespace Silanis.ESL.SDK
             }
         }
 
-        public RoleId( string id )
+        public Placeholder( string id )
         {
             this.id = id;
         }

@@ -34,7 +34,7 @@ namespace Silanis.ESL.SDK.Builder
             this.roleId = null;
         }
         
-        private SignerBuilder(RoleId roleId)
+        private SignerBuilder(Placeholder roleId)
         {
             this.signerEmail = null;
             this.groupId = null;
@@ -45,7 +45,7 @@ namespace Silanis.ESL.SDK.Builder
         {
             Asserts.NotEmptyOrNull(role.Id, "role.id");
             
-            SignerBuilder builder = SignerBuilder.NewSignerPlaceholderWithRoleId(new RoleId(role.Id))
+            SignerBuilder builder = SignerBuilder.NewSignerPlaceholder(new Placeholder(role.Id))
                 .SigningOrder(role.Index);
             if ( role.Reassign ) {
                 builder.CanChangeSigner ();
@@ -110,7 +110,7 @@ namespace Silanis.ESL.SDK.Builder
         
 		}
 
-        public static SignerBuilder NewSignerPlaceholderWithRoleId(RoleId roleId)
+        public static SignerBuilder NewSignerPlaceholder(Placeholder roleId)
         {
             return new SignerBuilder(roleId);
         }
@@ -164,10 +164,10 @@ namespace Silanis.ESL.SDK.Builder
 
         public SignerBuilder WithRoleId(string roleId)
         {
-            return WithRoleId(new RoleId(roleId));
+            return WithRoleId(new Placeholder(roleId));
         }
 
-        public SignerBuilder WithRoleId ( RoleId roleId )
+        public SignerBuilder WithRoleId ( Placeholder roleId )
         {
 			this.roleId = roleId.Id;
 			return this;
