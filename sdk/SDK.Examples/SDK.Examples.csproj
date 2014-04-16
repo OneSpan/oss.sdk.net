@@ -47,7 +47,7 @@
   </PropertyGroup>
   <PropertyGroup>
     <StartupObject>SDK.Examples.SessionCreationExample</StartupObject>
-    <StartupObject>SDK.Examples.TemplateExample</StartupObject>
+    <StartupObject>SDK.Examples.PackageArchiveExample</StartupObject>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -100,6 +100,8 @@
     <Compile Include="src\CreateTemplateExample.cs" />
     <Compile Include="src\UpdatePackageExample.cs" />
     <Compile Include="src\DocumentOperationsExample.cs" />
+    <Compile Include="src\PackageTrashExample.cs" />
+    <Compile Include="src\PackageArchiveExample.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

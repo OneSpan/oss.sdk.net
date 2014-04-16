@@ -363,6 +363,52 @@ namespace Silanis.ESL.SDK.Services
 			}
 		}
 
+		public void Trash(PackageId id)
+		{
+			if (id == null)
+			{
+				throw new ArgumentNullException("id");
+			}
+
+			string path = template.UrlFor(UrlTemplate.PACKAGE_ID_PATH).Replace("{packageId}", id.Id).Build ();
+			Silanis.ESL.API.Package package = new Silanis.ESL.API.Package();
+
+			package.Id = id.Id;
+			package.Trashed = true;
+
+			try 
+			{
+				restClient.Post(path, JsonConvert.SerializeObject (package, settings));
+			} 
+			catch (Exception e) 
+			{
+				throw new EslException ("Unable to trash package." + " Exception: " + e.Message);
+			}
+		}
+
+		public void Archive(PackageId id)
+		{
+			if (id == null)
+			{
+				throw new ArgumentNullException("id");
+			}
+
+			string path = template.UrlFor(UrlTemplate.PACKAGE_ID_PATH).Replace("{packageId}", id.Id).Build ();
+			Silanis.ESL.API.Package package = new Silanis.ESL.API.Package();
+
+			package.Id = id.Id;
+			package.Status = PackageStatus.ARCHIVED;
+
+			try 
+			{
+				restClient.Post(path, JsonConvert.SerializeObject (package, settings));
+			} 
+			catch (Exception e) 
+			{
+				throw new EslException ("Unable to archive package settings." + " Exception: " + e.Message);
+			}
+		}
+
 		private Role FindRoleForGroup( PackageId packageId, string groupId )
 		{
 			IList<Role> roles = GetRoles(packageId);
