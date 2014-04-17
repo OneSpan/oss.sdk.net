@@ -28,15 +28,37 @@ namespace SDK.Examples
 
         override public void Execute()
         {
+			Stream file = File.OpenRead(new FileInfo(Directory.GetCurrentDirectory() + "/src/document.pdf").FullName);
+			Document document = DocumentBuilder.NewDocumentNamed("First Document")
+				.WithId("doc1")
+				.FromStream(file, DocumentType.PDF)
+				.Build();
+
             DocumentPackage superDuperPackage =
                 PackageBuilder.NewPackageNamed("CreateTemplateFromPackageExample: " + DateTime.Now)
                 .DescribedAs("This is a package created using the e-SignLive SDK")
                 .WithEmailMessage("This message should be delivered to all signers")
                 .WithSigner(SignerBuilder.NewSignerPlaceholder(new Placeholder("PlaceholderId1")))
                 .WithSigner(SignerBuilder.NewSignerPlaceholder(new Placeholder("PlaceholderId2")))
+				.WithDocument(document)
                 .Build();
 
 			PackageId templateId = eslClient.CreateTemplate(superDuperPackage);
+
+			superDuperPackage.Id = templateId;
+
+			superDuperPackage.Description = "Modified description";
+			superDuperPackage.Name = "Modified name";
+			superDuperPackage.Autocomplete = false;
+
+			eslClient.TemplateService.Update(superDuperPackage);
+
+			document.Description = "Updated description";
+			eslClient.TemplateService.UpdateDocumentMetadata(superDuperPackage, document);
+
+			eslClient.TemplateService.DeleteDocument(templateId, "doc1");
+
+			Console.WriteLine("Template {0} updated", templateId);
 
             PackageId instantiatedTemplate = eslClient.CreatePackageFromTemplate(templateId,
                                              PackageBuilder.NewPackageNamed("Package From Template")

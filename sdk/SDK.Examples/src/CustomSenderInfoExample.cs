@@ -52,7 +52,7 @@ namespace SDK.Examples
 
         override public void Execute()
         {
-            senderEmail = System.Guid.NewGuid().ToString().Replace("-","") + "@e-signlive.com";
+			senderEmail = "etienne.silanis+s2@gmail.com"; //System.Guid.NewGuid().ToString().Replace("-","") + "@e-signlive.com";
             eslClient.AccountService.InviteUser(
                 AccountMemberBuilder.NewAccountMember(senderEmail)
                 .WithFirstName("firstName")
@@ -76,11 +76,15 @@ namespace SDK.Examples
                       .ExpiresOn( DateTime.Now.AddMonths(1) )
                       .WithEmailMessage( "This message should be delivered to all signers" )
                       .WithDocument(DocumentBuilder.NewDocumentNamed("First Document")
-                                    .FromStream(fileStream1, DocumentType.PDF))
+                                    .FromStream(fileStream1, DocumentType.PDF)
+									.WithId("doc1"))
                       .Build();
 
             packageId = eslClient.CreatePackage( package );
+
+			byte[] content = eslClient.DownloadDocument(packageId, "doc1");
+
+			Console.WriteLine("Downloaded document");
         }
     }
 }
-

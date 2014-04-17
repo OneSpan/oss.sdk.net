@@ -32,13 +32,13 @@ namespace Silanis.ESL.SDK
         public string Name
         {
             get;
-            private set;
+            set;
         }
 
         public bool Autocomplete
         {
             get;
-            private set;
+            set;
         }
 
         public IDictionary<string, Signer> Signers

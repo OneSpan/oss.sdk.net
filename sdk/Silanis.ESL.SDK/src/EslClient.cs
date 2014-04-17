@@ -48,7 +48,7 @@ namespace Silanis.ESL.SDK
             groupService = new GroupService(restClient, this.baseUrl);
 			accountService = new AccountService(restClient, this.baseUrl);
 			reminderService = new ReminderService(restClient, this.baseUrl);
-            templateService = new TemplateService(restClient, this.baseUrl);
+			templateService = new TemplateService(restClient, this.baseUrl, packageService);
 			authenticationService = new AuthenticationService(restClient, this.baseUrl);
 		}
 
@@ -219,6 +219,14 @@ namespace Silanis.ESL.SDK
 		public PackageService PackageService {
 			get {
 				return this.packageService;
+			}
+		}
+
+		public TemplateService TemplateService
+		{
+			get
+			{
+				return templateService;
 			}
 		}
 
