@@ -56,9 +56,23 @@ namespace Silanis.ESL.SDK
             }
         }
                 
-        public void UpdateSigner( PackageId packageId, string signerId, Signer signer )
+        public void UpdateSigner( PackageId packageId, Signer signer )
         {
-            Support.LogMethodEntry(packageId,signerId,signer);
+            Support.LogMethodEntry(packageId,signer);
+            
+            Role apiPayload = new SignerConverter( signer ).ToAPIRole( System.Guid.NewGuid().ToString());
+            
+            string path = template.UrlFor (UrlTemplate.UPDATE_SIGNER_PATH)
+                    .Replace( "{packageId}", packageId.Id )
+                    .Replace( "{roleId}", signer.RoleId )
+                    .Build ();
+            try {
+                string json = JsonConvert.SerializeObject (apiPayload, settings);
+                string response = restClient.Put(path, json);              
+                Support.LogMethodExit();
+            } catch (Exception e) {
+                throw new EslException ("Could not update signer." + " Exception: " + e.Message);
+            }
         }
         
         public void RemoveSigner( PackageId packageId, string signerId )

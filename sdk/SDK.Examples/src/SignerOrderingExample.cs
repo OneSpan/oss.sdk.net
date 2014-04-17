@@ -16,6 +16,8 @@ namespace SDK.Examples
         private string email2;
         private Stream fileStream1;
         private Stream fileStream2;
+        
+        public PackageId packageId;
 
         public SignerOrderingExample( Props props ) : this(props.Get("api.url"), props.Get("api.key"), props.Get("1.email"), props.Get("2.email")) {
         }
@@ -31,14 +33,14 @@ namespace SDK.Examples
 		{
 			DocumentPackage package = PackageBuilder.NewPackageNamed ("Signing Order " + DateTime.Now)
 					.DescribedAs ("This is a signer workflow example")
-					.WithSigner(SignerBuilder.NewSignerWithEmail(email1)
-					            .WithFirstName("John")
-					            .WithLastName("Smith")
-					            .SigningOrder(1))
 					.WithSigner(SignerBuilder.NewSignerWithEmail(email2)
 					            .WithFirstName("Coco")
 					            .WithLastName("Beware")
-					            .SigningOrder(2))
+					            .SigningOrder(3))
+                    .WithSigner(SignerBuilder.NewSignerWithEmail(email1)
+                                .WithFirstName("John")
+                                .WithLastName("Smith")
+                                .SigningOrder(1))
 					.WithDocument(DocumentBuilder.NewDocumentNamed("Second Document")
                                   .FromStream(fileStream1, DocumentType.PDF)
 					              .WithSignature(SignatureBuilder.SignatureFor(email1)
@@ -57,8 +59,17 @@ namespace SDK.Examples
 					               		.AtPosition (500, 100)))
 					.Build ();
 
-			PackageId id = eslClient.CreatePackage (package);
-			eslClient.SendPackage(id);
+			packageId = eslClient.CreatePackage (package);
+            DocumentPackage retrievedPackage = EslClient.GetPackage(packageId);
+            Signer updatedSigner = SignerBuilder.NewSignerWithEmail(email2)
+                .WithRoleId( retrievedPackage.Signers[email2].RoleId )
+                .WithFirstName("updatedFirstName")
+                .WithLastName("udpatedLastName")
+                .SigningOrder(2)
+                .Build();
+            eslClient.SignerService.UpdateSigner( packageId, updatedSigner );
+            
+			eslClient.SendPackage(packageId);
 		}
 	}
 }

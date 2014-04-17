@@ -48,6 +48,8 @@
     <Compile Include="src\PackageDataContainsSDKVersionTest.cs" />
     <Compile Include="src\UpdatePackageExampleTester.cs" />
     <Compile Include="src\SignerManipulationExampleTest.cs" />
+    <Compile Include="src\SignerOrderingExampleTest.cs" />
+    <Compile Include="src\DocumentWorkflowExampleTest.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
