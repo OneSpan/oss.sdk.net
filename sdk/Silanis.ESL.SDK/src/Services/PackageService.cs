@@ -26,25 +26,13 @@ namespace Silanis.ESL.SDK.Services
 		/// </summary>
 		/// <param name="apiToken">API token.</param>
 		/// <param name="baseUrl">Base URL.</param>
-		public PackageService (RestClient restClient, string baseUrl)
+		public PackageService (RestClient restClient, string baseUrl, JsonSerializerSettings settings)
 		{
             this.restClient = restClient;
 			template = new UrlTemplate (baseUrl);
-            configureJsonSerializationSettings();
+            this.settings = settings;
         }
         
-        private void configureJsonSerializationSettings()
-        {
-            settings = new JsonSerializerSettings ();
-            settings.NullValueHandling = NullValueHandling.Ignore;
-            settings.DateTimeZoneHandling = DateTimeZoneHandling.Utc;
-            settings.Converters.Add( new CultureInfoJsonCreationConverter() );
-            
-//            settings.Converters.
-//            ServiceStack.Text.JsConfig<CultureInfo>.SerializeFn = r => r.TwoLetterISOLanguageName;
-//            ServiceStack.Text.JsConfig<CultureInfo>.DeSerializeFn = r => new CultureInfo(r);     
-        }
-
 		/// <summary>
 		/// Creates a package based on the settings of the pacakge parameter.
 		/// </summary>

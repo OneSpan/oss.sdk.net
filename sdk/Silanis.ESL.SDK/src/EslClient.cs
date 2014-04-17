@@ -3,6 +3,7 @@ using Silanis.ESL.SDK.Internal;
 using Silanis.ESL.SDK.Services;
 using Silanis.ESL.SDK.Builder;
 using Silanis.ESL.API;
+using Newtonsoft.Json;
 
 namespace Silanis.ESL.SDK
 {
@@ -25,6 +26,9 @@ namespace Silanis.ESL.SDK
 		private Services.ReminderService reminderService;
         private TemplateService templateService;
 		private AuthenticationService authenticationService;
+        private SignerService signerService;
+        
+        private JsonSerializerSettings jsonSerializerSettings;
 
         /// <summary>
         /// EslClient constructor.
@@ -38,8 +42,10 @@ namespace Silanis.ESL.SDK
 			Asserts.NotEmptyOrNull (baseUrl, "baseUrl");
 			this.baseUrl = AppendServicePath (baseUrl);
 
+            configureJsonSerializationSettings();
+
             RestClient restClient = new RestClient(apiKey);
-			packageService = new PackageService (restClient, this.baseUrl);
+			packageService = new PackageService (restClient, this.baseUrl, jsonSerializerSettings);
 			sessionService = new SessionService (apiKey, this.baseUrl);
 			fieldSummaryService = new FieldSummaryService (apiKey, this.baseUrl);
 			auditService = new AuditService (apiKey, this.baseUrl);
@@ -50,7 +56,18 @@ namespace Silanis.ESL.SDK
 			reminderService = new ReminderService(restClient, this.baseUrl);
 			templateService = new TemplateService(restClient, this.baseUrl, packageService);
 			authenticationService = new AuthenticationService(restClient, this.baseUrl);
+            signerService = new SignerService(restClient, this.baseUrl, jsonSerializerSettings);
 		}
+        
+        private void configureJsonSerializationSettings()
+        {
+            jsonSerializerSettings = new JsonSerializerSettings ();
+            jsonSerializerSettings.NullValueHandling = NullValueHandling.Ignore;
+            jsonSerializerSettings.DateTimeZoneHandling = DateTimeZoneHandling.Utc;
+            jsonSerializerSettings.Converters.Add( new CultureInfoJsonCreationConverter() );
+        }
+
+        
 
 		private String AppendServicePath(string baseUrl)
 		{
@@ -222,7 +239,13 @@ namespace Silanis.ESL.SDK
 			}
 		}
 
-		public TemplateService TemplateService
+        public SignerService SignerService {
+            get {
+                return this.signerService;
+            }
+        }
+
+        		public TemplateService TemplateService
 		{
 			get
 			{

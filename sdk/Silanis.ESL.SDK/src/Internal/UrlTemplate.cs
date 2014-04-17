@@ -35,6 +35,11 @@ namespace Silanis.ESL.SDK.Internal
 		public static readonly string NOTIFY_ROLE_PATH = "/packages/{packageId}/roles/{roleId}/notifications";
         public static readonly string CLONE_PACKAGE_PATH = "/packages/{packageId}/clone";
 
+        // Signer Service
+        public static readonly string GET_SIGNER_PATH = "/packages/{packageId}/roles/{roleId}";
+        public static readonly string ADD_SIGNER_PATH = "/packages/{packageId}/roles";
+        public static readonly string UPDATE_SIGNER_PATH = "/packages/{packageId}/roles/{roleId}";
+        public static readonly string REMOVE_SIGNER_PATH = "/packages/{packageId}/roles/{roleId}";
 
         // Event Notification Service
         public static readonly string CALLBACK_PATH = "/callback";

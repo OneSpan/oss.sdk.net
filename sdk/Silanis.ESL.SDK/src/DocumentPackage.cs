@@ -134,49 +134,18 @@ namespace Silanis.ESL.SDK
             int signerCount = 1;
             foreach (Signer signer in Signers.Values)
             {
-                Silanis.ESL.API.Role role = ToAPIRole(signer, signerCount);
+                Silanis.ESL.API.Role role = new SignerConverter(signer).ToAPIRole("role"+signerCount);
                 package.AddRole(role);
                 signerCount++;
             }
             foreach (Signer signer in Placeholders.Values)
             {
-                Silanis.ESL.API.Role role = ToAPIRole(signer, signerCount);
+                Silanis.ESL.API.Role role = new SignerConverter(signer).ToAPIRole("role"+signerCount);
                 package.AddRole(role);
                 signerCount++;
             }
 
             return package;
-        }
-        
-        internal Silanis.ESL.API.Role ToAPIRole(Signer signer, int index)
-        {
-            Silanis.ESL.API.Role role = new Silanis.ESL.API.Role();
-
-            if ( !signer.IsPlaceholderSigner() ) {
-                role.AddSigner(signer.ToAPISigner());
-            }
-            role.Index = signer.SigningOrder;
-            role.Reassign = signer.CanChangeSigner;
-
-            if (String.IsNullOrEmpty(signer.RoleId))
-            {
-                role.Id = role.Name = "signer" + index;
-            }
-            else
-            {
-                role.Id = signer.RoleId;
-                role.Name = signer.RoleId;
-            }
-
-            if (!String.IsNullOrEmpty(signer.Message))
-            {
-                Silanis.ESL.API.BaseMessage message = new Silanis.ESL.API.BaseMessage();
-
-                message.Content = signer.Message;
-                role.EmailMessage = message;
-            }
-            
-            return role;
         }
     }
 }
