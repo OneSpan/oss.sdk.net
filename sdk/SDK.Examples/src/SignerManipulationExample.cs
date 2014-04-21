@@ -65,7 +65,7 @@ namespace SDK.Examples
 //                                                                    .WithLastName("lastName1b")
 //                                                                    .WithTitle("title1b") );
 
-            string addedSignerId = eslClient.SignerService.AddSigner(packageId, 
+			string addedSignerId = eslClient.PackageService.AddSigner(packageId, 
                                                                       SignerBuilder.NewSignerWithEmail(email3)
                                                                               .WithFirstName("firstName3")
                                                                               .WithLastName("lastName3")
@@ -73,27 +73,27 @@ namespace SDK.Examples
                                                                               .Build()
             );
                                                                               
-            string placeHolderId = eslClient.SignerService.AddSigner(packageId,
+			string placeHolderId = eslClient.PackageService.AddSigner(packageId,
                                                                       SignerBuilder.NewSignerPlaceholder(new Placeholder("placeHolderRoleId"))
                                                                                 .Build()
             );                                                                                    
 
             Group avengers = eslClient.GroupService.CreateGroup( GroupBuilder.NewGroup(  Guid.NewGuid().ToString() ).WithEmail("bob@aol.com").Build() );                                                                                
-            string addedGroupSignerId = eslClient.SignerService.AddSigner( packageId,
+			string addedGroupSignerId = eslClient.PackageService.AddSigner( packageId,
                                                                            SignerBuilder.NewSignerFromGroup( avengers.Id )
                                                                                 .Build() );
                                                                                                                                                                 
-            eslClient.SignerService.RemoveSigner( packageId, placeHolderId );                                                                                
-            eslClient.SignerService.RemoveSigner( packageId, signerId );
+			eslClient.PackageService.RemoveSigner( packageId, placeHolderId );                                                                                
+			eslClient.PackageService.RemoveSigner( packageId, signerId );
             
-            eslClient.SignerService.UpdateSigner( packageId, SignerBuilder.NewSignerWithEmail("timbob@aol.com")
+			eslClient.PackageService.UpdateSigner( packageId, SignerBuilder.NewSignerWithEmail("timbob@aol.com")
                             .WithRoleId( signer2Id )
                             .WithFirstName("updateFirstName1")
                             .WithLastName("updateLastName1")
                             .WithTitle("UpdatedTitle1")
                             .Build() );
 
-            Signer retrievedSigner = eslClient.SignerService.GetSigner(packageId, addedSignerId);
+			Signer retrievedSigner = eslClient.PackageService.GetSigner(packageId, addedSignerId);
         }
     }
 }

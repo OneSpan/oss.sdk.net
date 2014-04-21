@@ -25,8 +25,7 @@ namespace Silanis.ESL.SDK
 		private AccountService accountService;
 		private Services.ReminderService reminderService;
         private TemplateService templateService;
-		private AuthenticationService authenticationService;
-        private SignerService signerService;
+		private AuthenticationService authenticationService;        
         
         private JsonSerializerSettings jsonSerializerSettings;
 
@@ -55,8 +54,7 @@ namespace Silanis.ESL.SDK
 			accountService = new AccountService(restClient, this.baseUrl);
 			reminderService = new ReminderService(restClient, this.baseUrl);
 			templateService = new TemplateService(restClient, this.baseUrl, packageService);
-			authenticationService = new AuthenticationService(restClient, this.baseUrl);
-            signerService = new SignerService(restClient, this.baseUrl, jsonSerializerSettings);
+			authenticationService = new AuthenticationService(restClient, this.baseUrl);            
 		}
         
         private void configureJsonSerializationSettings()
@@ -238,14 +236,8 @@ namespace Silanis.ESL.SDK
 				return this.packageService;
 			}
 		}
-
-        public SignerService SignerService {
-            get {
-                return this.signerService;
-            }
-        }
-
-        		public TemplateService TemplateService
+		        
+        public TemplateService TemplateService
 		{
 			get
 			{

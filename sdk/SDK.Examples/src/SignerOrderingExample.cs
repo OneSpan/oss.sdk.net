@@ -48,7 +48,7 @@ namespace SDK.Examples
 			savedPackage.Signers[email2].SigningOrder = 1;
 			savedPackage.Signers[email1].SigningOrder = 2;
 
-			eslClient.SignerService.OrderSigners(savedPackage);
+			eslClient.PackageService.OrderSigners(savedPackage);
 
 			Console.WriteLine("Signer order changed");
 		}

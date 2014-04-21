@@ -255,7 +255,6 @@
     <Compile Include="src\Internal\Conversion\SignatureStyleConverter.cs" />
     <Compile Include="src\Services\JsonCreationConverter.cs" />
     <Compile Include="src\Services\CultureInfoJsonCreationConverter.cs" />
-    <Compile Include="src\Services\SignerService.cs" />
     <Compile Include="src\Internal\Conversion\SignerConverter.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSHARP.Targets" />
