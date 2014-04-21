@@ -48,7 +48,17 @@ namespace SDK.Examples
 					.Build ();
 
 			packageId = eslClient.CreatePackage (package);
-			eslClient.SendPackage(packageId);
+
+			Console.WriteLine("Package create, id = " + packageId);
+
+			DocumentPackage savedPackage = eslClient.GetPackage(packageId);
+
+			savedPackage.Documents["First Document"].Index = 2;
+			savedPackage.Documents["Second Document"].Index = 1;
+
+			eslClient.PackageService.OrderDocuments(savedPackage);
+
+			Console.WriteLine("Document order saved");
 		}
 	}
 }

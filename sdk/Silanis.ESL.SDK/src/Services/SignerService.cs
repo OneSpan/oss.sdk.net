@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using Silanis.ESL.SDK.Internal;
 using Newtonsoft.Json;
 using Silanis.ESL.SDK.Builder;
@@ -68,7 +69,7 @@ namespace Silanis.ESL.SDK
                     .Build ();
             try {
                 string json = JsonConvert.SerializeObject (apiPayload, settings);
-                string response = restClient.Put(path, json);              
+                restClient.Put(path, json);              
                 Support.LogMethodExit();
             } catch (Exception e) {
                 throw new EslException ("Could not update signer." + " Exception: " + e.Message);
@@ -91,6 +92,32 @@ namespace Silanis.ESL.SDK
                 throw new EslException ("Could not delete signer." + " Exception: " + e.Message);
             }
         }
+
+		public void OrderSigners(DocumentPackage package)
+		{
+			string path = template.UrlFor (UrlTemplate.ROLE_PATH)
+				.Replace ("{packageId}", package.Id.Id)
+				.Build ();
+
+			List<Silanis.ESL.API.Role> roles = new List<Silanis.ESL.API.Role>();
+			foreach (Signer signer in package.Signers.Values)
+			{
+				roles.Add(new SignerConverter(signer).ToAPIRole(signer.RoleId));
+			}
+
+			try 
+			{
+				string json = JsonConvert.SerializeObject (roles, settings);
+				Support.LogDebug("role json = " + json);
+
+				restClient.Put(path, json);
+				Support.LogMethodExit("Signer order updated without issue");
+			} 
+			catch (Exception e) 
+			{
+				throw new EslException ("Could not order signers." + " Exception: " + e.Message);
+			}
+		}
     }
 }
 

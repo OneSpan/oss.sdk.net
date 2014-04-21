@@ -14,8 +14,6 @@ namespace SDK.Examples
 
         private string email1;
         private string email2;
-        private Stream fileStream1;
-        private Stream fileStream2;
         
         public PackageId packageId;
 
@@ -24,9 +22,7 @@ namespace SDK.Examples
 
         public SignerOrderingExample( string apiKey, string apiUrl, string email1, string email2 ) : base( apiKey, apiUrl ) {
             this.email1 = email1;
-            this.email2 = email2;
-            this.fileStream1 = File.OpenRead(new FileInfo(Directory.GetCurrentDirectory() + "/src/document.pdf").FullName);
-            this.fileStream2 = File.OpenRead(new FileInfo(Directory.GetCurrentDirectory() + "/src/document.pdf").FullName);
+            this.email2 = email2;            
         }
 
         override public void Execute()
@@ -36,40 +32,25 @@ namespace SDK.Examples
 					.WithSigner(SignerBuilder.NewSignerWithEmail(email2)
 					            .WithFirstName("Coco")
 					            .WithLastName("Beware")
-					            .SigningOrder(3))
+								.SigningOrder(2))
                     .WithSigner(SignerBuilder.NewSignerWithEmail(email1)
                                 .WithFirstName("John")
                                 .WithLastName("Smith")
-                                .SigningOrder(1))
-					.WithDocument(DocumentBuilder.NewDocumentNamed("Second Document")
-                                  .FromStream(fileStream1, DocumentType.PDF)
-					              .WithSignature(SignatureBuilder.SignatureFor(email1)
-					              		.OnPage(0)
-					               		.AtPosition(500, 100))
-					              .WithSignature (SignatureBuilder.InitialsFor(email1)
-					                	.OnPage (0)
-					                	.AtPosition (500, 200))
-					              .WithSignature(SignatureBuilder.CaptureFor (email2)
-					               		.OnPage (0)
-					               		.AtPosition (500, 300)))
-					.WithDocument (DocumentBuilder.NewDocumentNamed("First Document")
-                                   .FromStream(fileStream2, DocumentType.PDF)
-					               .WithSignature(SignatureBuilder.SignatureFor(email1)
-					               		.OnPage (0)
-					               		.AtPosition (500, 100)))
+                                .SigningOrder(1))			
 					.Build ();
 
 			packageId = eslClient.CreatePackage (package);
-            DocumentPackage retrievedPackage = EslClient.GetPackage(packageId);
-            Signer updatedSigner = SignerBuilder.NewSignerWithEmail(email2)
-                .WithRoleId( retrievedPackage.Signers[email2].RoleId )
-                .WithFirstName("updatedFirstName")
-                .WithLastName("udpatedLastName")
-                .SigningOrder(2)
-                .Build();
-            eslClient.SignerService.UpdateSigner( packageId, updatedSigner );
             
-			eslClient.SendPackage(packageId);
+			Console.WriteLine("Package created, id = " + packageId);
+
+			DocumentPackage savedPackage = EslClient.GetPackage(packageId);
+            
+			savedPackage.Signers[email2].SigningOrder = 1;
+			savedPackage.Signers[email1].SigningOrder = 2;
+
+			eslClient.SignerService.OrderSigners(savedPackage);
+
+			Console.WriteLine("Signer order changed");
 		}
 	}
 }

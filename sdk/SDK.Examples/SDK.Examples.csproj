@@ -46,7 +46,6 @@
     <DebugType>none</DebugType>
   </PropertyGroup>
   <PropertyGroup>
-    <StartupObject>SDK.Examples.SessionCreationExample</StartupObject>
     <StartupObject>SDK.Examples.PackageEditExample</StartupObject>
   </PropertyGroup>
   <ItemGroup>

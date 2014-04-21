@@ -142,6 +142,32 @@ namespace Silanis.ESL.SDK.Services
 			}
 		}
 
+		public void OrderDocuments(DocumentPackage package)
+		{
+			string path = template.UrlFor (UrlTemplate.DOCUMENT_PATH)
+				.Replace ("{packageId}", package.Id.Id)
+				.Build ();
+
+			List<Silanis.ESL.API.Document> documents = new List<Silanis.ESL.API.Document>();
+			foreach (Document doc in package.Documents.Values)
+			{
+				documents.Add(doc.ToAPIDocument());
+			}
+
+			try 
+			{
+				string json = JsonConvert.SerializeObject (documents, settings);
+				Support.LogDebug("document json = " + json);
+
+				restClient.Put(path, json);
+				Support.LogMethodExit("Document order updated without issue");
+			} 
+			catch (Exception e) 
+			{
+				throw new EslException ("Could not order documents." + " Exception: " + e.Message);
+			}
+		}
+
 		/// <summary>
 		/// Sends the package.
 		/// </summary>
