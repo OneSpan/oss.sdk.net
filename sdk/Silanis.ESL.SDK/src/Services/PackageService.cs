@@ -397,6 +397,30 @@ namespace Silanis.ESL.SDK.Services
 			}
 		}
 
+		public void Edit(PackageId id)
+		{
+			if (id == null)
+			{
+				throw new ArgumentNullException("id");
+			}
+
+			Silanis.ESL.API.Package package = new Silanis.ESL.API.Package();
+
+			package.Id = id.Id;
+			package.Status = PackageStatus.DRAFT;
+
+			string path = template.UrlFor(UrlTemplate.PACKAGE_ID_PATH).Replace("{packageId}", id.Id).Build ();
+
+			try 
+			{
+				restClient.Put(path, JsonConvert.SerializeObject (package, settings));
+			} 
+			catch (Exception e) 
+			{
+				throw new EslException ("Unable to edit package." + " Exception: " + e.Message);
+			}
+		}
+
 		private Role FindRoleForGroup( PackageId packageId, string groupId )
 		{
 			IList<Role> roles = GetRoles(packageId);
