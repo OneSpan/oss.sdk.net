@@ -34,7 +34,7 @@ namespace Silanis.ESL.SDK
 			{
 				return SigningStatus.SIGNING_PENDING;
 			} 
-			else if ("SIGNING_COMPLETE".Equals (status))
+			else if ("SIGNING_COMPLETED".Equals (status))
 			{
 				return SigningStatus.SIGNING_COMPLETE;
 			} 
