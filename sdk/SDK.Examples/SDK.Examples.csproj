@@ -103,6 +103,9 @@
     <Compile Include="src\PackageTrashExample.cs" />
     <Compile Include="src\PackageArchiveExample.cs" />
     <Compile Include="src\PackageEditExample.cs" />
+    <Compile Include="src\UserAuthenticationTokenExample.cs" />
+    <Compile Include="src\SenderAuthenticationTokenExample.cs" />
+    <Compile Include="src\SignerAuthenticationTokenExample.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

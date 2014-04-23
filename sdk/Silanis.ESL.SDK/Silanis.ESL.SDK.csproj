@@ -256,6 +256,9 @@
     <Compile Include="src\Services\JsonCreationConverter.cs" />
     <Compile Include="src\Services\CultureInfoJsonCreationConverter.cs" />
     <Compile Include="src\Internal\Conversion\SignerConverter.cs" />
+    <Compile Include="src\Models\AuthenticationToken.cs" />
+    <Compile Include="src\Models\SenderAuthenticationToken.cs" />
+    <Compile Include="src\Models\SignerAuthenticationToken.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSHARP.Targets" />
   <ProjectExtensions>

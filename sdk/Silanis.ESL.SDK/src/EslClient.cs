@@ -164,10 +164,24 @@ namespace Silanis.ESL.SDK
 			return sessionService.CreateSignerSessionToken (packageId, signerId);
 		}
 
+        //use createUserAuthenticationToken which returns a string for the token
+        [Obsolete]
 		public AuthenticationToken CreateAuthenticationToken()
 		{
 			return authenticationService.CreateAuthenticationToken();
 		}
+
+        public string CreateUserAuthenticationToken() {
+            return authenticationService.CreateUserAuthenticationToken();
+        }
+
+        public string CreateSenderAuthenticationToken(PackageId packageId) {
+            return authenticationService.CreateSenderAuthenticationToken(packageId);
+        }
+
+        public string CreateSignerAuthenticationToken(PackageId packageId, string signerId) {
+            return authenticationService.CreateSignerAuthenticationToken(packageId, signerId);
+        }
 
 		public byte[] DownloadDocument (PackageId packageId, string documentId)
 		{

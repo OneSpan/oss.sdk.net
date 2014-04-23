@@ -3,13 +3,14 @@ using Newtonsoft.Json;
 
 namespace Silanis.ESL.SDK
 {
-	/// <summary>
-	/// An authentication token for a user.
-	/// </summary>
     public class AuthenticationToken
     {
-		[JsonProperty("value")]
 		public string Token { get; private set; }
+
+        public AuthenticationToken(string token)
+        {
+            this.Token = token;
+        }
 
 		public override string ToString ()
 		{

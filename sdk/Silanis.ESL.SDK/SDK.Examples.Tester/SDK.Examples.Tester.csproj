@@ -50,6 +50,9 @@
     <Compile Include="src\SignerManipulationExampleTest.cs" />
     <Compile Include="src\SignerOrderingExampleTest.cs" />
     <Compile Include="src\DocumentWorkflowExampleTest.cs" />
+    <Compile Include="src\UserAuthenticationTokenExampleTest.cs" />
+    <Compile Include="src\SenderAuthenticationTokenExampleTest.cs" />
+    <Compile Include="src\SignerAuthenticationTokenExampleTest.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
