@@ -185,10 +185,21 @@ namespace Silanis.ESL.SDK.Builder
             this.senderInfo = senderInfo;
             return this;
         }
-
-        public PackageBuilder withAttributes( DocumentPackageAttributes attributes) {
+        
+        public PackageBuilder WithAttributes(DocumentPackageAttributes attributes)
+        {
             this.attributes = attributes;
             return this;
+        }
+
+        public PackageBuilder WithAttributes(DocumentPackageAttributesBuilder attributesBuilder)
+        {
+            return WithAttributes( attributesBuilder.Build() );
+        }
+
+        [Obsolete]
+        public PackageBuilder withAttributes( DocumentPackageAttributes attributes) {
+            return WithAttributes( attributes );
         } 
 
 		public DocumentPackage Build()

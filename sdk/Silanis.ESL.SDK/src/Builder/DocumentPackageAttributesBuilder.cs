@@ -6,12 +6,25 @@ namespace Silanis.ESL.SDK.Builder
     {
         private DocumentPackageAttributes attributes = new DocumentPackageAttributes();
 
-        public DocumentPackageAttributesBuilder withAttribute( string name, Object value ) {
+        
+        public DocumentPackageAttributesBuilder WithAttribute(string name, Object value)
+        {
             this.attributes.Append(name, value);
             return this;
         }
+        
+        [Obsolete]
+        public DocumentPackageAttributesBuilder withAttribute( string name, Object value ) {
+            return WithAttribute( name, value );
+        }
 
-        public DocumentPackageAttributes build() {
+        [Obsolete]
+        public DocumentPackageAttributes build()
+        {
+            return Build();
+        }
+
+        public DocumentPackageAttributes Build() {
 			Support.LogMethodEntry();
 			Support.LogMethodExit(attributes);
             return attributes;
