@@ -1,4 +1,5 @@
 using System;
+using System.Web;
 using Newtonsoft.Json;
 using Silanis.ESL.SDK.Internal;
 
@@ -23,6 +24,7 @@ namespace Silanis.ESL.SDK.Services
 			this.apiToken = apiToken;
 			template = new UrlTemplate (baseUrl);
 			authenticationService = new AuthenticationTokenService(new RestClient(apiToken), baseUrl);
+
 		}
 
 		public SessionToken CreateSessionToken (PackageId packageId, string signerId)
@@ -46,9 +48,10 @@ namespace Silanis.ESL.SDK.Services
 		/// <param name="signer">The signer to create a session token for.</param>
 		public SessionToken CreateSignerSessionToken (PackageId packageId, string signerId)
 		{
+
 			string path = template.UrlFor (UrlTemplate.SESSION_PATH)
                 .Replace ("{packageId}", packageId.Id)
-                .Replace ("{signerId}", signerId)
+                .Replace ("{signerId}", HttpUtility.UrlEncode(signerId))
                 .Build ();
 
 			try {
