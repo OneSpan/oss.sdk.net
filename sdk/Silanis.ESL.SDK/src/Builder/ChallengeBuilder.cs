@@ -20,7 +20,12 @@ namespace Silanis.ESL.SDK.Builder
 
 		public ChallengeBuilder Answer(string answer)
 		{
-			challenges.Add (new Challenge(question, answer));
+			return Answer(answer, Challenge.MaskOptions.None);
+		}
+
+		public ChallengeBuilder Answer(string answer, Challenge.MaskOptions maskOption)
+		{
+			challenges.Add (new Challenge(question, answer, maskOption));
 			return this;
 		}
 
