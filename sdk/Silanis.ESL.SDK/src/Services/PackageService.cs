@@ -408,14 +408,10 @@ namespace Silanis.ESL.SDK.Services
 			}
 
 			string path = template.UrlFor(UrlTemplate.PACKAGE_ID_PATH).Replace("{packageId}", id.Id).Build ();
-			Silanis.ESL.API.Package package = new Silanis.ESL.API.Package();
-
-			package.Id = id.Id;
-			package.Status = PackageStatus.ARCHIVED;
 
 			try 
 			{
-				restClient.Post(path, JsonConvert.SerializeObject (package, settings));
+				restClient.Put(path, "{\"status\":\"ARCHIVED\"}");
 			} 
 			catch (Exception e) 
 			{
@@ -430,16 +426,11 @@ namespace Silanis.ESL.SDK.Services
 				throw new ArgumentNullException("id");
 			}
 
-			Silanis.ESL.API.Package package = new Silanis.ESL.API.Package();
-
-			package.Id = id.Id;
-			package.Status = PackageStatus.DRAFT;
-
 			string path = template.UrlFor(UrlTemplate.PACKAGE_ID_PATH).Replace("{packageId}", id.Id).Build ();
 
 			try 
 			{
-				restClient.Put(path, JsonConvert.SerializeObject (package, settings));
+				restClient.Put(path, "{\"status\":\"DRAFT\"}");
 			} 
 			catch (Exception e) 
 			{
