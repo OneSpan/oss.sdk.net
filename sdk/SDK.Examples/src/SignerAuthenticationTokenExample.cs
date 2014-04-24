@@ -7,6 +7,9 @@ namespace SDK.Examples
 {
     public class SignerAuthenticationTokenExample : SDKSample
     {
+        /** 
+        Will not be supported until later release.
+        **/
         public static void Main (string[] args)
         {
             new SignerAuthenticationTokenExample(Props.GetInstance()).Run();

@@ -6,6 +6,10 @@ namespace SDK.Examples
     [TestFixture()]
     public class SignerAuthenticationTokenExampleTest
     {
+        /** 
+        Will not be supported until later release.
+        **/
+
         [Test()]
 		public void VerifyResult()
         {

@@ -7,6 +7,10 @@ namespace SDK.Examples
 {
     public class SigningRedirectForSignerExample: SDKSample
     {
+        /** 
+        Will not be supported until later release.
+        **/
+
         public static void Main (string[] args)
         {
             new SigningRedirectForSignerExample(Props.GetInstance()).Run();
