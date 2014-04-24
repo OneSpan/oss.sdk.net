@@ -77,6 +77,36 @@ namespace Silanis.ESL.SDK.Internal
 			}
 		}
 
+        /// <summary>
+        /// Can only be called for unauthenticated path such as /auth
+        /// Gets the http.
+        /// </summary>
+        public static byte[] GetHttp (string path)
+        {
+            Support.LogMethodEntry(path);
+            try {
+                WebRequest request = WebRequest.Create (path);
+                request.Method = "GET";
+
+                Support.LogDebug( "Awaiting response from server." );
+                WebResponse response = request.GetResponse ();
+                Support.LogDebug( "Response received from server. " + response.ToString() + "," + response.Headers.ToString() + "," + response.ContentType + "," + response.ContentLength + " bytes." );
+
+                using (Stream responseStream = response.GetResponseStream()) {
+                    var memoryStream = new MemoryStream ();
+                    CopyTo (responseStream, memoryStream);
+                    byte[] result = memoryStream.ToArray();
+                    Support.LogMethodExit(result);
+                    return result;
+                }
+            }
+            catch (Exception e) {
+                Support.LogError(e.Message);
+                Support.LogError(e.StackTrace);
+                throw new EslException("Error communicating with esl server. " + e.Message);
+            }
+        }
+
 		public static byte[] GetHttp (string apiToken, string path)
 		{
 			Support.LogMethodEntry(apiToken, path);

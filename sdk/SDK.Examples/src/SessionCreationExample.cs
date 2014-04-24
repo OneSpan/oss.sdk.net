@@ -62,6 +62,8 @@ namespace SDK.Examples
             PackageId packageId = eslClient.CreatePackage( superDuperPackage );
             eslClient.SendPackage( packageId );
 			signerSessionToken = eslClient.CreateSignerSessionToken( packageId, email1 );
+
+
 			senderSessionToken = eslClient.CreateSenderSessionToken();
         }
     }

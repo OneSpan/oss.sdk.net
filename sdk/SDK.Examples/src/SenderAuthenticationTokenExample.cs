@@ -12,15 +12,19 @@ namespace SDK.Examples
             new SenderAuthenticationTokenExample(Props.GetInstance()).Run();
         }
 
+        public string SenderSessionId { get; private set; }
+        
+        private AuthenticationClient AuthenticationClient;
         private Stream fileStream;
-        public string SenderAuthenticationToken { get; private set; }
 
-        public SenderAuthenticationTokenExample( Props props ) : this(props.Get("api.url"), props.Get("api.key"))
+
+        public SenderAuthenticationTokenExample( Props props ) : this(props.Get("api.url"), props.Get("api.key"), props.Get("webpage.url"))
         {
         }
 
-        public SenderAuthenticationTokenExample( string apiKey, string apiUrl) : base( apiKey, apiUrl )
+        public SenderAuthenticationTokenExample( string apiKey, string apiUrl, string webpageUrl) : base( apiKey, apiUrl )
         {
+            this.AuthenticationClient = new AuthenticationClient(webpageUrl);
             this.fileStream = File.OpenRead(new FileInfo(Directory.GetCurrentDirectory() + "/src/document.pdf").FullName);
         }
 
@@ -38,9 +42,9 @@ namespace SDK.Examples
 
             PackageId packageId = eslClient.CreatePackage(superDuperPackage);
 
-            SenderAuthenticationToken = eslClient.CreateSenderAuthenticationToken(packageId);
+            string senderAuthenticationToken = eslClient.GetAuthenticationTokenService().CreateSenderAuthenticationToken(packageId);
 
-            Console.WriteLine("Sender Authentication Token = " + SenderAuthenticationToken);
+            SenderSessionId = AuthenticationClient.GetSessionIdForSenderAuthenticationToken(senderAuthenticationToken);
         }
 
     }

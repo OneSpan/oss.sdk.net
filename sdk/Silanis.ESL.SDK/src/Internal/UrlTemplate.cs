@@ -70,6 +70,7 @@ namespace Silanis.ESL.SDK.Internal
 		public static readonly string REMINDER_PATH = "/packages/{packageId}/reminders";
 
         //Authentication Token Services
+        public static readonly string ESL_AUTHENTICATION_PATH = "/auth";
         public static readonly string USER_AUTHENTICATION_TOKEN_PATH = "/authenticationTokens";
         public static readonly string AUTHENTICATION_PATH_FOR_USER_AUTHENTICATION_TOKEN = "?authenticationToken={authenticationToken}";
         public static readonly string AUTHENTICATION_PATH_FOR_USER_AUTHENTICATION_TOKEN_WITH_REDIRECT = "?authenticationToken={authenticationToken}&target={redirectUrl}";
@@ -79,6 +80,10 @@ namespace Silanis.ESL.SDK.Internal
         public static readonly string SIGNER_AUTHENTICATION_TOKEN_PATH = "/signerAuthenticationTokens";
         public static readonly string AUTHENTICATION_PATH_FOR_SIGNER_AUTHENTICATION_TOKEN = "?signerAuthenticationToken={signerAuthenticationToken}";
         public static readonly string AUTHENTICATION_PATH_FOR_SIGNER_AUTHENTICATION_TOKEN_WITH_REDIRECT = "?signerAuthenticationToken={signerAuthenticationToken}&target={redirectUrl}";
+
+        // Webpage redirect urls
+        public static readonly string DESIGNER_REDIRECT_PATH = "/designer/{packageId}";
+        public static readonly string SIGNING_REDIRECT_PATH = "/packages/{packageId}/sign";    
 
 		public UrlTemplate (string baseUrl)
 		{

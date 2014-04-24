@@ -94,7 +94,6 @@
     <Compile Include="src\SDKSample1.cs" />
     <Compile Include="src\GroupManagementExample.cs" />
     <Compile Include="src\ReminderExample.cs" />
-    <Compile Include="src\DesignerSessionCreationExample.cs" />
     <Compile Include="src\TemplateExample.cs" />
     <Compile Include="src\CreateTemplateExample.cs" />
     <Compile Include="src\UpdatePackageExample.cs" />
@@ -106,6 +105,9 @@
     <Compile Include="src\UserAuthenticationTokenExample.cs" />
     <Compile Include="src\SenderAuthenticationTokenExample.cs" />
     <Compile Include="src\SignerAuthenticationTokenExample.cs" />
+    <Compile Include="src\DesignerRedirectForApiKeyExample.cs" />
+    <Compile Include="src\DesignerRedirectForPackageSenderExample.cs" />
+    <Compile Include="src\SigningRedirectForSignerExample.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

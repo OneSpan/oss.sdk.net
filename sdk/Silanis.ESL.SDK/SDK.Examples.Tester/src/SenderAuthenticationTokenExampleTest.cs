@@ -12,7 +12,7 @@ namespace SDK.Examples
 			SenderAuthenticationTokenExample example = new SenderAuthenticationTokenExample(Props.GetInstance());
 			example.Run();
 
-			Assert.IsNotNull(example.SenderAuthenticationToken);
+			Assert.IsNotNull(example.SenderSessionId);
         }
     }
 }

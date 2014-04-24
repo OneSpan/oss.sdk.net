@@ -1,4 +1,5 @@
 using System;
+using Silanis.ESL.SDK;
 
 namespace SDK.Examples
 {
@@ -9,21 +10,23 @@ namespace SDK.Examples
             new UserAuthenticationTokenExample(Props.GetInstance()).Run();
         }
 
-        public string UserAuthenticationToken{ get; private set; }
+        public string UserSessionId{ get; private set; }
 
-        public UserAuthenticationTokenExample( Props props ) : this(props.Get("api.url"), props.Get("api.key")) {
+        private AuthenticationClient AuthenticationClient;
+
+        public UserAuthenticationTokenExample( Props props ) : this(props.Get("api.url"), props.Get("api.key"), props.Get("webpage.url")) {
         }
 
-        public UserAuthenticationTokenExample( string apiKey, string apiUrl) : base( apiKey, apiUrl ) {
+        public UserAuthenticationTokenExample( string apiKey, string apiUrl, string webpageUrl) : base( apiKey, apiUrl ) {
+            this.AuthenticationClient = new AuthenticationClient(webpageUrl);
         }
 
         override public void Execute()
         {            
-            UserAuthenticationToken = eslClient.CreateUserAuthenticationToken();
-            Console.WriteLine("User Authentication Token = " + UserAuthenticationToken);
+            string userAuthenticationToken = eslClient.GetAuthenticationTokenService().CreateUserAuthenticationToken();
+
+            UserSessionId = AuthenticationClient.GetSessionIdForUserAuthenticationToken(userAuthenticationToken);
         }
-
-
     }
 }
 
