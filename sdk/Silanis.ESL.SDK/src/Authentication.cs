@@ -56,6 +56,7 @@ namespace Silanis.ESL.SDK
 
 				authChallenge.Question = challenge.Question;
 				authChallenge.Answer = challenge.Answer;
+				authChallenge.MaskInput = challenge.MaskOption == Challenge.MaskOptions.MaskInput;
 				auth.AddChallenge (authChallenge);
 			}
 

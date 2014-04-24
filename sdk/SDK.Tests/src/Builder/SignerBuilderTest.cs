@@ -94,8 +94,8 @@ namespace SDK.Tests
 					                          .Answer("yes"))
 					.Build ();
 
-			Assert.AreEqual (signer.ChallengeQuestion[0], new Challenge("What's your favorite sport?", "golf"));
-			Assert.AreEqual (signer.ChallengeQuestion[1], new Challenge("Do you have a pet?", "yes"));
+			Assert.AreEqual (signer.ChallengeQuestion[0], new Challenge("What's your favorite sport?", "golf", Challenge.MaskOptions.None));
+			Assert.AreEqual (signer.ChallengeQuestion[1], new Challenge("Do you have a pet?", "yes", Challenge.MaskOptions.None));
 		}
 
 		[Test]

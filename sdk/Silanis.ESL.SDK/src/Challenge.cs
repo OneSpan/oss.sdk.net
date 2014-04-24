@@ -4,13 +4,25 @@ namespace Silanis.ESL.SDK
 {
 	public class Challenge
 	{
+		public enum MaskOptions
+		{
+			MaskInput, None
+		}
+
 		private readonly string question;
 		private readonly string answer;
+		private readonly MaskOptions maskOption;
 
-		public Challenge (string question, string answer)
+
+		public Challenge (string question, string answer) : this(question, answer, MaskOptions.None)
+		{
+		}
+
+		public Challenge (string question, string answer, MaskOptions maskOption)
 		{
 			this.question = question;
 			this.answer = answer;
+			this.maskOption = maskOption;
 		}
 
 		public string Question
@@ -26,6 +38,14 @@ namespace Silanis.ESL.SDK
 			get
 			{
 				return answer;
+			}
+		}
+
+		public MaskOptions MaskOption
+		{
+			get
+			{
+				return maskOption;
 			}
 		}
 
