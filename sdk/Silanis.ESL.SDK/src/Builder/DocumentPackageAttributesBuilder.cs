@@ -13,12 +13,12 @@ namespace Silanis.ESL.SDK.Builder
             return this;
         }
         
-        [Obsolete]
+        [Obsolete("Use WithAttribute() instead.  Notice the uppercase W.")]
         public DocumentPackageAttributesBuilder withAttribute( string name, Object value ) {
             return WithAttribute( name, value );
         }
 
-        [Obsolete]
+        [Obsolete("Use Build() instead, Notice the uppercase B.")]
         public DocumentPackageAttributes build()
         {
             return Build();

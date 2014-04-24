@@ -16,8 +16,8 @@ namespace SDK.Tests
         {
 
             DocumentPackageAttributesBuilder documentPackageAttributesBuilder = new DocumentPackageAttributesBuilder()
-                                        .withAttribute("First Name", "Adam")
-                                        .withAttribute("Last Name", "Smith");
+                                        .WithAttribute("First Name", "Adam")
+                                        .WithAttribute("Last Name", "Smith");
             DocumentPackageAttributes documentPackageAttributes = documentPackageAttributesBuilder.build();
 
             Assert.AreEqual("Adam", documentPackageAttributes.Contents["First Name"]);

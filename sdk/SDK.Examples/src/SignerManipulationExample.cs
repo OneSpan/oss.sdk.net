@@ -87,7 +87,7 @@ namespace SDK.Examples
 			eslClient.PackageService.RemoveSigner( packageId, signerId );
             
 			eslClient.PackageService.UpdateSigner( packageId, SignerBuilder.NewSignerWithEmail("timbob@aol.com")
-                            .WithRoleId( signer2Id )
+                            .WithCustomId( signer2Id )
                             .WithFirstName("updateFirstName1")
                             .WithLastName("updateLastName1")
                             .WithTitle("UpdatedTitle1")

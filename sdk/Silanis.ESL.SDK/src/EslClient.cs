@@ -147,13 +147,13 @@ namespace Silanis.ESL.SDK
 			return templateId;
 		}
 
-		[Obsolete]
+		[Obsolete("Call AuthenticationTokenService.CreateSenderAuthenticationToken() instead.")]
 		public SessionToken CreateSenderSessionToken()
 		{
 			return sessionService.CreateSenderSessionToken();
 		}
 
-		[Obsolete]
+		[Obsolete("Call AuthenticationTokenService.CreateSignerAuthenticationToken() instead.")]
 		public SessionToken CreateSessionToken(PackageId packageId, string signerId)
 		{
 			return CreateSignerSessionToken(packageId, signerId); 
@@ -165,7 +165,7 @@ namespace Silanis.ESL.SDK
 		}
 
         //use createUserAuthenticationToken which returns a string for the token
-        [Obsolete]
+        [Obsolete("Call AuthenticationTokenService.CreateUserAuthenticationToken() instead.")]
 		public AuthenticationToken CreateAuthenticationToken()
 		{
 			return authenticationService.CreateAuthenticationToken();

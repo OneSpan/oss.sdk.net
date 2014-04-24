@@ -197,7 +197,7 @@ namespace Silanis.ESL.SDK.Builder
             return WithAttributes( attributesBuilder.Build() );
         }
 
-        [Obsolete]
+        [Obsolete("Use WithAttributes() instead.  Notice the uppercase W.")]
         public PackageBuilder withAttributes( DocumentPackageAttributes attributes) {
             return WithAttributes( attributes );
         } 

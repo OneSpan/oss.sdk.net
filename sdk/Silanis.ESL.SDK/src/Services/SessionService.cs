@@ -32,7 +32,7 @@ namespace Silanis.ESL.SDK.Services
 			return CreateSignerSessionToken(packageId, signerId);
 		}
 
-		[Obsolete]
+		[Obsolete("Call AuthenticationTokenService.CreateSenderAuthenticationToken() instead.")]
 		public SessionToken CreateSenderSessionToken()
 		{
 			AuthenticationToken token = authenticationService.CreateAuthenticationToken();

@@ -16,8 +16,7 @@ namespace Silanis.ESL.SDK
 			template = new UrlTemplate (baseUrl);
 		}
 
-        //call CreateUserAuthenticationToken instead
-        [Obsolete]
+        [Obsolete("call CreateUserAuthenticationToken instead")]
         public Silanis.ESL.SDK.AuthenticationToken CreateAuthenticationToken ()
         {
             string userAuthenticationToken = CreateUserAuthenticationToken();

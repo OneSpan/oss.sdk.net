@@ -72,7 +72,7 @@ namespace Silanis.ESL.SDK.Builder
                     .SigningOrder( role.Index );
 
             if (role.Id != null) {
-                builder.WithRoleId(role.Id);
+                builder.WithCustomId(role.Id);
             }
 
             if ( role.Reassign ) {
