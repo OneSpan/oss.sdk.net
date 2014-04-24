@@ -41,6 +41,7 @@ namespace SDK.Examples
             eslClient.SendPackage(id);
 
             DocumentPackage sentPackage = eslClient.GetPackage(id);
+            Console.WriteLine("Document sent = " + sentPackage.Id);
         }
     }
 }

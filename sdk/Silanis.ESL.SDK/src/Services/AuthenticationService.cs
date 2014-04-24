@@ -1,69 +1,117 @@
 using System;
+using System.Web;
 using Silanis.ESL.SDK.Internal;
-using Silanis.ESL.API;
 using Newtonsoft.Json;
 
 namespace Silanis.ESL.SDK
 {
     public class AuthenticationService
     {
-		private RestClient restClient;
-		private UrlTemplate template;
+        private UnauthenticatedRestClient client;
+        private UrlTemplate webpageTemplate;
+        private UrlTemplate authenticationTemplate;
 
-		public AuthenticationService (RestClient restClient, string baseUrl)
-		{
-			this.restClient = restClient;
-			template = new UrlTemplate (baseUrl);
-		}
-
-        //call CreateUserAuthenticationToken instead
-        [Obsolete]
-        public Silanis.ESL.SDK.AuthenticationToken CreateAuthenticationToken ()
+        public AuthenticationService(string webpageUrl)
         {
-            string userAuthenticationToken = CreateUserAuthenticationToken();
-            Silanis.ESL.SDK.AuthenticationToken authenticationToken = new Silanis.ESL.SDK.AuthenticationToken(userAuthenticationToken);
-            return authenticationToken;
+            client = new UnauthenticatedRestClient();
+            authenticationTemplate = new UrlTemplate(webpageUrl + UrlTemplate.ESL_AUTHENTICATION_PATH);
+            webpageTemplate = new UrlTemplate(webpageUrl);
         }
 
-        public string CreateUserAuthenticationToken ()
+        public string GetSessionIdForUserAuthenticationToken(string userAuthenticationToken)
         {
-            string path = template.UrlFor (UrlTemplate.USER_AUTHENTICATION_TOKEN_PATH).Build ();
-
+            string path = authenticationTemplate.UrlFor(UrlTemplate.AUTHENTICATION_PATH_FOR_USER_AUTHENTICATION_TOKEN)
+                                                .Replace("{authenticationToken}", userAuthenticationToken)
+                                                .Build();
             try {
-                string response = restClient.Post(path, null);              
-                return JsonConvert.DeserializeObject<Silanis.ESL.API.AuthenticationToken> (response).Value;
+                string stringResponse = client.GetUnauthenticated(path);
+                SessionToken userSessionIdToken = JsonConvert.DeserializeObject<SessionToken> (stringResponse);
+                return userSessionIdToken.Token;
             } catch (Exception e) {
-                throw new EslException ("Could not create an authentication token for a user." + " Exception: " + e.Message);
+                throw new EslException("Could not authenticate using an authentication token."+ " Exception: " + e.Message);
             }
-        }
+        }        
 
-        public string CreateSenderAuthenticationToken (PackageId packageId)
+        public string BuildRedirectToDesignerForUserAuthenticationToken(string userAuthenticationToken, PackageId packageId)
         {
             try {
-                string path = template.UrlFor (UrlTemplate.SENDER_AUTHENTICATION_TOKEN_PATH).Build ();
-                SenderAuthenticationToken senderAuthenticationToken = new SenderAuthenticationToken();
-                senderAuthenticationToken.PackageId = packageId.Id;
-                string serializedObject = JsonConvert.SerializeObject(senderAuthenticationToken);
-                string response = restClient.Post(path, serializedObject);              
-                return JsonConvert.DeserializeObject<SenderAuthenticationToken> (response).Value;
+                string redirectPath = webpageTemplate.UrlFor(UrlTemplate.DESIGNER_REDIRECT_PATH)
+                        .Replace("{packageId}", packageId.Id)
+                        .Build();
+                string encodedRedirectPath = HttpUtility.UrlEncode(redirectPath);
+                string path = authenticationTemplate.UrlFor(UrlTemplate.AUTHENTICATION_PATH_FOR_USER_AUTHENTICATION_TOKEN_WITH_REDIRECT)
+                        .Replace("{authenticationToken}", userAuthenticationToken)
+                        .Replace("{redirectUrl}", encodedRedirectPath)
+                        .Build();
+                return path;
             } catch (Exception e) {
-                throw new EslException ("Could not create an authentication token for a sender." + " Exception: " + e.Message);
+                throw new EslException("Could not authenticate using a user authentication token."+ " Exception: " + e.Message);
             }
-        }
+        }        
 
-        public string CreateSignerAuthenticationToken (PackageId packageId, string signerId)
+        public string GetSessionIdForSenderAuthenticationToken(string senderAuthenticationToken)
+        {
+            string path = authenticationTemplate.UrlFor(UrlTemplate.AUTHENTICATION_PATH_FOR_SENDER_AUTHENTICATION_TOKEN)
+                                                .Replace("{senderAuthenticationToken}", senderAuthenticationToken)
+                                                .Build();
+            try {
+                string stringResponse = client.GetUnauthenticated(path);
+                SessionToken userSessionIdToken = JsonConvert.DeserializeObject<SessionToken> (stringResponse);
+                return userSessionIdToken.Token;
+            } catch (Exception e) {
+                throw new EslException("Could not authenticate using a sender authentication token."+ " Exception: " + e.Message);
+            }
+        }        
+
+        public string BuildRedirectToDesignerForSender(string senderAuthenticationToken, PackageId packageId)
         {
             try {
-                string path = template.UrlFor (UrlTemplate.SIGNER_AUTHENTICATION_TOKEN_PATH).Build ();
-                SignerAuthenticationToken signerAuthenticationToken = new SignerAuthenticationToken();
-                signerAuthenticationToken.PackageId = packageId.Id;
-                signerAuthenticationToken.SignerId = signerId;
-                string serializedObject = JsonConvert.SerializeObject(signerAuthenticationToken);
-                string response = restClient.Post(path, serializedObject);              
-                return JsonConvert.DeserializeObject<SignerAuthenticationToken> (response).Value;
+                string redirectPath = webpageTemplate.UrlFor(UrlTemplate.DESIGNER_REDIRECT_PATH)
+                        .Replace("{packageId}", packageId.Id)
+                        .Build();
+                string encodedRedirectPath = HttpUtility.UrlEncode(redirectPath);
+                string path = authenticationTemplate.UrlFor(UrlTemplate.AUTHENTICATION_PATH_FOR_SENDER_AUTHENTICATION_TOKEN_WITH_REDIRECT)
+                        .Replace("{senderAuthenticationToken}", senderAuthenticationToken)
+                        .Replace("{redirectUrl}", encodedRedirectPath)
+                        .Build();
+
+                return path;
             } catch (Exception e) {
-                throw new EslException ("Could not create an authentication token for a signer." + " Exception: " + e.Message);
+                throw new EslException("Could not authenticate using a user authentication token."+ " Exception: " + e.Message);
+            }
+        }        
+
+        public string GetSessionIdForSignerAuthenticationToken(string signerAuthenticationToken)
+        {
+            string path = authenticationTemplate.UrlFor(UrlTemplate.AUTHENTICATION_PATH_FOR_SIGNER_AUTHENTICATION_TOKEN)
+                                                .Replace("{signerAuthenticationToken}", signerAuthenticationToken)
+                                                .Build();
+            try {
+                string stringResponse = client.GetUnauthenticated(path);
+                SessionToken userSessionIdToken = JsonConvert.DeserializeObject<SessionToken> (stringResponse);
+                return userSessionIdToken.Token;
+            } catch (Exception e) {
+                throw new EslException("Could not authenticate using a signer authentication token."+ " Exception: " + e.Message);
+            }
+        }        
+
+        public string BuildRedirectToSigningForSigner(string signerAuthenticationToken, PackageId packageId)
+        {
+            try {
+                string redirectPath = webpageTemplate.UrlFor(UrlTemplate.SIGNING_REDIRECT_PATH)
+                        .Replace("{packageId}", packageId.Id)
+                        .Build();
+                string encodedRedirectPath = HttpUtility.UrlEncode(redirectPath);
+                string path = authenticationTemplate.UrlFor(UrlTemplate.AUTHENTICATION_PATH_FOR_SIGNER_AUTHENTICATION_TOKEN_WITH_REDIRECT)
+                        .Replace("{signerAuthenticationToken}", signerAuthenticationToken)
+                        .Replace("{redirectUrl}", encodedRedirectPath)
+                        .Build();
+
+                return path;
+            } catch (Exception e) {
+                throw new EslException("Could not authenticate using a user authentication token."+ " Exception: " + e.Message);
             }
         }
     }
 }
+

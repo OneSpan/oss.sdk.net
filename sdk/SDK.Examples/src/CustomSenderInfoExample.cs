@@ -18,6 +18,7 @@ namespace SDK.Examples
             example.Run();
 
             DocumentPackage documentPackage = example.eslClient.GetPackage(example.PackageId);
+            Console.WriteLine("Document packages = " + documentPackage.Id);
         }
 
         private string senderEmail;
@@ -82,7 +83,7 @@ namespace SDK.Examples
 
             packageId = eslClient.CreatePackage( package );
 
-			byte[] content = eslClient.DownloadDocument(packageId, "doc1");
+			eslClient.DownloadDocument(packageId, "doc1");
 
 			Console.WriteLine("Downloaded document");
         }

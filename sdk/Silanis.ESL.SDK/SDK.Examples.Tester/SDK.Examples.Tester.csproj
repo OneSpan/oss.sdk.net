@@ -53,6 +53,9 @@
     <Compile Include="src\UserAuthenticationTokenExampleTest.cs" />
     <Compile Include="src\SenderAuthenticationTokenExampleTest.cs" />
     <Compile Include="src\SignerAuthenticationTokenExampleTest.cs" />
+    <Compile Include="src\DesignerRedirectForApiKeyExampleTest.cs" />
+    <Compile Include="src\DesignerRedirectForPackageSenderExampleTest.cs" />
+    <Compile Include="src\SigningRedirectForSignerExampleTest.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

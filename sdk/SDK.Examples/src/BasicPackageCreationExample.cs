@@ -78,8 +78,6 @@ namespace SDK.Examples
 
             packageId = eslClient.CreatePackage(superDuperPackage);
             eslClient.SendPackage(packageId);
-
-            SessionToken sessionToken = eslClient.CreateSessionToken(packageId, "Client1");
         }
     }
 }

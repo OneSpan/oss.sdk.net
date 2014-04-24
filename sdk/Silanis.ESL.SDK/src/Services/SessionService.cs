@@ -11,7 +11,7 @@ namespace Silanis.ESL.SDK.Services
 	{
 		private string apiToken;
 		private UrlTemplate template;
-		private AuthenticationService authenticationService;
+		private AuthenticationTokenService authenticationService;
 
 		/// <summary>
 		/// Initializes a new instance of the <see cref="Silanis.ESL.SDK.SessionService"/> class.
@@ -22,7 +22,7 @@ namespace Silanis.ESL.SDK.Services
 		{
 			this.apiToken = apiToken;
 			template = new UrlTemplate (baseUrl);
-			authenticationService = new AuthenticationService(new RestClient(apiToken), baseUrl);
+			authenticationService = new AuthenticationTokenService(new RestClient(apiToken), baseUrl);
 		}
 
 		public SessionToken CreateSessionToken (PackageId packageId, string signerId)

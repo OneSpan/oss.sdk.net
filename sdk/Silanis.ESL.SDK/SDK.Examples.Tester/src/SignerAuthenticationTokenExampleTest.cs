@@ -12,7 +12,7 @@ namespace SDK.Examples
 			SignerAuthenticationTokenExample example = new SignerAuthenticationTokenExample(Props.GetInstance());
 			example.Run();
 
-			Assert.IsNotNull(example.SignerAuthenticationToken);
+			Assert.IsNotNull(example.SignerSessionId);
         }
     }
 }

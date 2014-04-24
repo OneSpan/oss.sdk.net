@@ -12,7 +12,7 @@ namespace SDK.Examples
 			UserAuthenticationTokenExample example = new UserAuthenticationTokenExample(Props.GetInstance());
 			example.Run();
 
-			Assert.IsNotNull(example.UserAuthenticationToken);
+			Assert.IsNotNull(example.UserSessionId);
         }
     }
 }
