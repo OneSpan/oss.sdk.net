@@ -15,7 +15,6 @@ namespace Silanis.ESL.SDK.Builder
 		private int signingOrder;
 		private string message;
 		private string id;
-		private string roleId;
 		private bool canChangeSigner;
 		private bool locked;
         private GroupId groupId;
@@ -24,21 +23,19 @@ namespace Silanis.ESL.SDK.Builder
 		{
 			this.signerEmail = signerEmail;
             this.groupId = null;
-            this.roleId = null;
 		}
 
         private SignerBuilder(GroupId groupId)
         {
             this.signerEmail = null;
             this.groupId = groupId;
-            this.roleId = null;
         }
         
         private SignerBuilder(Placeholder roleId)
         {
             this.signerEmail = null;
             this.groupId = null;
-            this.roleId = roleId.Id;
+            this.id = roleId.Id;
         }
 
         private static SignerBuilder NewSignerPlaceholderFromAPIRole(Silanis.ESL.API.Role role)
@@ -162,15 +159,22 @@ namespace Silanis.ESL.SDK.Builder
 			return this;
 		}
 
+        [Obsolete("Please use Replacing() instead")]
         public SignerBuilder WithRoleId(string roleId)
         {
-            return WithRoleId(new Placeholder(roleId));
+            return Replacing(new Placeholder(roleId));
         }
 
-        public SignerBuilder WithRoleId ( Placeholder roleId )
+        public SignerBuilder Replacing(Placeholder placeholder)
         {
-			this.roleId = roleId.Id;
-			return this;
+            this.id = placeholder.Id;
+            return this;
+        }
+
+        [Obsolete("Please use Replacing() instead")]
+        public SignerBuilder WithRoleId ( Placeholder placeholder )
+        {
+            return Replacing( placeholder );
         }
 
 		[Obsolete("Please use WithCustomId() instead")]
@@ -225,7 +229,6 @@ namespace Silanis.ESL.SDK.Builder
             result.Message = message;
             result.Id = id;
             result.Locked = locked;
-            result.RoleId = roleId;
             
             Support.LogMethodExit(result);
 
@@ -236,13 +239,12 @@ namespace Silanis.ESL.SDK.Builder
         {
             Support.LogMethodEntry();
     
-            Asserts.NotEmptyOrNull( roleId, "roleId" );
+            Asserts.NotEmptyOrNull( id, "No placeholder set for this signer!" );
                     
-            Signer result = new Signer(roleId);
+            Signer result = new Signer(id);
             result.SigningOrder = signingOrder;
             result.CanChangeSigner = canChangeSigner;
             result.Message = message;
-            result.Id = id;
             result.Locked = locked;
             
             Support.LogMethodExit(result);
@@ -268,7 +270,6 @@ namespace Silanis.ESL.SDK.Builder
             result.Message = message;
             result.Id = id;
             result.Locked = locked;
-            result.RoleId = roleId;
 
             Support.LogMethodExit(result);
             

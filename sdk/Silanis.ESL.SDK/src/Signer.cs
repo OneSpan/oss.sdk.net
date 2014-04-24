@@ -26,14 +26,14 @@ namespace Silanis.ESL.SDK
 			authentication = new Authentication(AuthenticationMethod.EMAIL);
 		}
         
-        public Signer(string roleId)
+        public Signer(string id)
         {
             GroupId = null;
             FirstName = null;
             LastName = null;
             Email = null;
             authentication = null;
-            RoleId = roleId;
+            this.Id = id;
             authentication = new Authentication(Silanis.ESL.SDK.AuthenticationMethod.EMAIL);
         }
 
@@ -119,12 +119,6 @@ namespace Silanis.ESL.SDK
 			set;
 		}
 
-        public string RoleId
-        {
-            get;
-            set;
-        }
-        
         public bool IsPlaceholderSigner()
         {
             return GroupId == null && Email == null;

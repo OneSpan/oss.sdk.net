@@ -21,14 +21,14 @@ namespace Silanis.ESL.SDK
             role.Index = sdkSigner.SigningOrder;
             role.Reassign = sdkSigner.CanChangeSigner;
 
-            if (String.IsNullOrEmpty(sdkSigner.RoleId))
+            if (String.IsNullOrEmpty(sdkSigner.Id))
             {
                 role.Id = role.Name = roleIdName;
             }
             else
             {
-                role.Id = sdkSigner.RoleId;
-                role.Name = sdkSigner.RoleId;
+                role.Id = sdkSigner.Id;
+                role.Name = sdkSigner.Id;
             }
 
             if (!String.IsNullOrEmpty(sdkSigner.Message))

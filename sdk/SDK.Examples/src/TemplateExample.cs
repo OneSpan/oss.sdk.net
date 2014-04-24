@@ -63,19 +63,17 @@ namespace SDK.Examples
             PackageId instantiatedTemplate = eslClient.CreatePackageFromTemplate(templateId,
                                              PackageBuilder.NewPackageNamed("Package From Template")
                                              .WithSigner( SignerBuilder.NewSignerWithEmail( email1 )
-                                                                        .WithCustomId("Client1")
                                                                         .WithFirstName("John1")
                                                                         .WithLastName("Smith1")
                                                                         .WithTitle("Managing Director1")
                                                                         .WithCompany("Acme Inc.1")
-                                                                        .WithRoleId( new Placeholder( "PlaceholderId1" ) ) )
+                                                                        .Replacing( new Placeholder( "PlaceholderId1" ) ) )
                                              .WithSigner( SignerBuilder.NewSignerWithEmail( email2 )
-                                                                        .WithCustomId("Client2")
                                                                         .WithFirstName("John2")
                                                                         .WithLastName("Smith2")
                                                                         .WithTitle("Managing Director2")
                                                                         .WithCompany("Acme Inc.2")
-                                                                        .WithRoleId( new Placeholder( "PlaceholderId2" ) ) )
+                                                                        .Replacing( new Placeholder( "PlaceholderId2" ) ) )
                                              .Build() );
                                              
 			Console.Out.WriteLine("Package from template = " + instantiatedTemplate.Id);

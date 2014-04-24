@@ -629,7 +629,7 @@ namespace Silanis.ESL.SDK.Services
 
 			string path = template.UrlFor (UrlTemplate.UPDATE_SIGNER_PATH)
 				.Replace( "{packageId}", packageId.Id )
-				.Replace( "{roleId}", signer.RoleId )
+				.Replace( "{roleId}", signer.Id )
 				.Build ();
 			try {
 				string json = JsonConvert.SerializeObject (apiPayload, settings);
@@ -666,7 +666,7 @@ namespace Silanis.ESL.SDK.Services
 			List<Silanis.ESL.API.Role> roles = new List<Silanis.ESL.API.Role>();
 			foreach (Signer signer in package.Signers.Values)
 			{
-				roles.Add(new SignerConverter(signer).ToAPIRole(signer.RoleId));
+				roles.Add(new SignerConverter(signer).ToAPIRole(signer.Id));
 			}
 
 			try 

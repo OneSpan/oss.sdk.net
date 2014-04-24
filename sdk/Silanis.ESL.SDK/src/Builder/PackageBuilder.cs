@@ -142,7 +142,7 @@ namespace Silanis.ESL.SDK.Builder
         {
             if (signer.IsPlaceholderSigner())
             {
-                placeholders[signer.RoleId] = signer;
+                placeholders[signer.Id] = signer;
             }
 			else if (signer.IsGroupSigner())
 			{
