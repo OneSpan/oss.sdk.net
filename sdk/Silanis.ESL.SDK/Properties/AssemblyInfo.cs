@@ -17,7 +17,7 @@ using System.Runtime.CompilerServices;
 // The form "{Major}.{Minor}.*" will automatically update the build and revision,
 // and "{Major}.{Minor}.{Build}.*" will update just the revision.
 
-[assembly: AssemblyVersion("10.1.0.*")]
+[assembly: AssemblyVersion("10.3.0.*")]
 [assembly: AssemblyKeyFileAttribute("sdk.snk")]
 
 // The following attributes are used to specify the signing key for the assembly, 
