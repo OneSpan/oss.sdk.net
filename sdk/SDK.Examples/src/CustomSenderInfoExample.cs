@@ -53,7 +53,7 @@ namespace SDK.Examples
 
         override public void Execute()
         {
-			senderEmail = "etienne.silanis+s2@gmail.com"; //System.Guid.NewGuid().ToString().Replace("-","") + "@e-signlive.com";
+			senderEmail = System.Guid.NewGuid().ToString().Replace("-","") + "@e-signlive.com";
             eslClient.AccountService.InviteUser(
                 AccountMemberBuilder.NewAccountMember(senderEmail)
                 .WithFirstName("firstName")
