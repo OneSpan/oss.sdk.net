@@ -127,6 +127,11 @@ namespace Silanis.ESL.SDK.Services
 				.Build ();
 
 			Silanis.ESL.API.Document internalDoc = document.ToAPIDocument();
+            
+            // Wipe out the members not related to the metadata
+            internalDoc.Approvals = null;
+            internalDoc.Fields = null;
+            internalDoc.Pages = null;
 
 			try 
 			{

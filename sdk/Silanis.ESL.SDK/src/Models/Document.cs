@@ -17,12 +17,16 @@ namespace Silanis.ESL.API
 		// Accessors
 		    
     [JsonProperty("approvals")]
-    public IList<Approval> Approvals
-    {
-                get
+        public IList<Approval> Approvals
         {
-            return _approvals;
-        }
+            get
+            {
+                return _approvals;
+            }
+            set
+            {
+                _approvals = value;
+            }
         }
         public Document AddApproval(Approval value)
     {
@@ -71,6 +75,10 @@ namespace Silanis.ESL.API
         {
             return _fields;
         }
+            set
+            {
+                _fields = value;
+            }
         }
         public Document AddField(Field value)
     {
@@ -112,6 +120,10 @@ namespace Silanis.ESL.API
         {
             return _pages;
         }
+            set
+            {
+                _pages = value;
+            }
         }
         public Document AddPage(Page value)
     {
