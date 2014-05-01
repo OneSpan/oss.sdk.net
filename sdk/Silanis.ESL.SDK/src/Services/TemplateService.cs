@@ -31,9 +31,10 @@ namespace Silanis.ESL.SDK.Services
             try {
                 string deltaJson = JsonConvert.SerializeObject (delta, settings);
                 string response = restClient.Post(path, deltaJson);              
-                PackageId result = JsonConvert.DeserializeObject<PackageId> (response);
-                Support.LogMethodExit(result);
-                return result;
+                Package apiResult = JsonConvert.DeserializeObject<Package> (response);
+                PackageId sdkResult = new PackageId(apiResult.Id);
+                Support.LogMethodExit(sdkResult);
+                return sdkResult;
             } catch (Exception e) {
                 throw new EslException ("Could not create a template." + " Exception: " + e.Message);
             }
@@ -47,9 +48,10 @@ namespace Silanis.ESL.SDK.Services
             try {
                 string deltaJson = JsonConvert.SerializeObject (delta, settings);
                 string response = restClient.Post(path, deltaJson);              
-                PackageId result = JsonConvert.DeserializeObject<PackageId> (response);
-                Support.LogMethodExit(result);
-                return result;
+                Package apiResult = JsonConvert.DeserializeObject<Package> (response);
+                PackageId sdkResult = new PackageId(apiResult.Id);
+                Support.LogMethodExit(sdkResult);
+                return sdkResult;
             } catch (Exception e) {
                 throw new EslException ("Could not create a package from template." + " Exception: " + e.Message);
             }
