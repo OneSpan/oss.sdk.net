@@ -16,9 +16,9 @@ namespace SDK.Examples
         public DocumentPackage RetrievedPackageWithDeletedDocument{ get; set; }
         
         public const string OriginalDocumentName = "Original Document Name";
-        public const string UpdatedDocumentName = "Original Document Description";
+        public const string UpdatedDocumentName = "Updated Document Name";
         
-        public const string OriginalDocumentDescription = "Updated Document Name";
+        public const string OriginalDocumentDescription = "Original Document Description";
         public const string UpdatedDocumentDescription = "Updated Document Description";
     
 		public DocumentOperationsExample(Props props) : base(props.Get("api.url"), props.Get("api.key"))
