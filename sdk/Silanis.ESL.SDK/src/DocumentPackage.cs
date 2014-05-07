@@ -106,10 +106,17 @@ namespace Silanis.ESL.SDK
             Silanis.ESL.API.Package package = new Silanis.ESL.API.Package();
 
             package.Name = Name;
-            package.Description = Description;
+            if (Description != null)
+            {
+                package.Description = Description;
+            }
+            
             package.Autocomplete = Autocomplete;
             package.Due = ExpiryDate;
-            package.EmailMessage = EmailMessage;
+            if (EmailMessage != null)
+            {
+                package.EmailMessage = EmailMessage;
+            }
 
             if (Language != null)
             {

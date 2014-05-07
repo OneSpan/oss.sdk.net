@@ -20,14 +20,13 @@ namespace SDK.Examples
 
         public DesignerRedirectForPackageSenderExample( Props props ) : this(props.Get("api.url"),
                 props.Get("api.key"),
-                props.Get("webpage.url"),
-                props.Get("1.email"))
+                props.Get("webpage.url"))
         {
         }
 
-        public DesignerRedirectForPackageSenderExample( string apiKey, string apiUrl, string webpageUrl, string packageSenderEmail) : base( apiKey, apiUrl )
+        public DesignerRedirectForPackageSenderExample( string apiKey, string apiUrl, string webpageUrl) : base( apiKey, apiUrl )
         {
-            this.packageSenderEmail = packageSenderEmail;
+            this.packageSenderEmail = GetRandomEmail();
             this.authenticationClient = new AuthenticationClient(webpageUrl);
             this.fileStream = File.OpenRead(new FileInfo(Directory.GetCurrentDirectory() + "/src/document.pdf").FullName);
         }

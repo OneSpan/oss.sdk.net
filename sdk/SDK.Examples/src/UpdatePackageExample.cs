@@ -160,7 +160,6 @@ namespace SDK.Examples
                     .Build();
 
             updatedPackage = PackageBuilder.NewPackageNamed( "New Package Name" )
-                               .DescribedAs( "New Description" )
                                .WithEmailMessage( "New Email Message" )
                                .ExpiresOn(DateTime.Now.AddMonths(2))
                                .WithLanguage( CultureInfo.GetCultureInfo("fr"))
