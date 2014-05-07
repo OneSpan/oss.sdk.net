@@ -43,12 +43,7 @@ namespace SDK.Examples
 					.Build();
 
 			PackageId packageId = eslClient.CreateAndSendPackage(superDuperPackage);
-
-			Console.WriteLine("Package sent, id = " + packageId);
-
 			eslClient.PackageService.Edit(packageId);
-
-			Console.WriteLine("Package {0} back in DRAFT state", packageId);
         }
 	}
 }
