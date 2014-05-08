@@ -25,7 +25,7 @@ namespace Silanis.ESL.SDK
 		private AccountService accountService;
 		private Services.ReminderService reminderService;
         private TemplateService templateService;
-		private AuthenticationTokenService authenticationService;        
+		private AuthenticationTokenService authenticationTokenService;        
         
         private JsonSerializerSettings jsonSerializerSettings;
 
@@ -54,7 +54,7 @@ namespace Silanis.ESL.SDK
 			accountService = new AccountService(restClient, this.baseUrl);
 			reminderService = new ReminderService(restClient, this.baseUrl);
 			templateService = new TemplateService(restClient, this.baseUrl, packageService);
-			authenticationService = new AuthenticationTokenService(restClient, this.baseUrl);            
+			authenticationTokenService = new AuthenticationTokenService(restClient, this.baseUrl);            
 		}
         
         private void configureJsonSerializationSettings()
@@ -168,13 +168,8 @@ namespace Silanis.ESL.SDK
         [Obsolete("Call AuthenticationTokenService.CreateUserAuthenticationToken() instead.")]
 		public AuthenticationToken CreateAuthenticationToken()
 		{
-			return authenticationService.CreateAuthenticationToken();
+			return authenticationTokenService.CreateAuthenticationToken();
 		}
-
-        public AuthenticationTokenService GetAuthenticationTokenService()
-        {
-            return authenticationService;
-        }
 
 		public byte[] DownloadDocument (PackageId packageId, string documentId)
 		{
@@ -310,5 +305,13 @@ namespace Silanis.ESL.SDK
 				return reminderService;
 			}
 		}
+        
+        public AuthenticationTokenService AuthenticationTokenService
+        {
+            get
+            {
+                return authenticationTokenService;
+            }
+        }
 	}
 }	
