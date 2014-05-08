@@ -214,24 +214,12 @@ namespace Silanis.ESL.SDK.Builder
             package.Language = language;
             package.Settings = settings;
             package.SenderInfo = senderInfo;
-            if (attributes == null)
-            {
-                attributes = new DocumentPackageAttributes();
-            }
-            attributes.Append( "sdk", ".NET v" + CurrentVersion );
             package.Attributes = attributes;
 
 			Support.LogMethodExit(package);
 			return package;
 		}
         
-        public Version CurrentVersion
-        {
-            get
-            {
-                return Assembly.GetExecutingAssembly().GetName().Version;
-            }
-        }  	
     }
     
 }

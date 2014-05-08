@@ -4,6 +4,7 @@ using Silanis.ESL.SDK.Services;
 using Silanis.ESL.SDK.Builder;
 using Silanis.ESL.API;
 using Newtonsoft.Json;
+using System.Reflection;
 
 namespace Silanis.ESL.SDK
 {
@@ -86,8 +87,31 @@ namespace Silanis.ESL.SDK
             return customFieldService;
         }
 
-		public PackageId CreatePackage (DocumentPackage package)
-		{
+        internal bool IsSdkVersionSetInPackageData(DocumentPackage package)
+        {
+            if (package.Attributes != null && package.Attributes.Contents.ContainsKey("sdk"))
+            {
+                return true;
+            }            
+            return false;
+        }
+
+        internal void SetSdkVersionInPackageData(DocumentPackage package)
+        {
+            if (package.Attributes == null)
+            {
+                package.Attributes = new DocumentPackageAttributes();
+            }
+            package.Attributes.Append( "sdk", ".NET v" + CurrentVersion );
+        }
+
+		public PackageId CreatePackage(DocumentPackage package)
+        {
+            if (!IsSdkVersionSetInPackageData(package))
+            {
+                SetSdkVersionInPackageData(package);
+            }
+        
 			Silanis.ESL.API.Package packageToCreate = package.ToAPIPackage ();
 			PackageId id = packageService.CreatePackage (packageToCreate);
             DocumentPackage retrievedPackage = GetPackage(id);
@@ -313,5 +337,13 @@ namespace Silanis.ESL.SDK
                 return authenticationTokenService;
             }
         }
+        
+        public Version CurrentVersion
+        {
+            get
+            {
+                return Assembly.GetExecutingAssembly().GetName().Version;
+            }
+        }   
 	}
 }	
