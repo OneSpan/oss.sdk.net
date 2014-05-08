@@ -42,7 +42,7 @@ namespace SDK.Examples
 
             PackageId packageId = eslClient.CreatePackage(superDuperPackage);
 
-            string senderAuthenticationToken = eslClient.GetAuthenticationTokenService().CreateSenderAuthenticationToken(packageId);
+            string senderAuthenticationToken = eslClient.AuthenticationTokenService.CreateSenderAuthenticationToken(packageId);
 
             SenderSessionId = AuthenticationClient.GetSessionIdForSenderAuthenticationToken(senderAuthenticationToken);
         }

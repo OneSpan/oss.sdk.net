@@ -34,7 +34,7 @@ namespace SDK.Examples
 
             PackageId packageId = eslClient.CreatePackage (package);
 
-            string userAuthenticationToken = eslClient.GetAuthenticationTokenService().CreateUserAuthenticationToken();
+            string userAuthenticationToken = eslClient.AuthenticationTokenService.CreateUserAuthenticationToken();
 
 
             GeneratedLinkToDesignerForApiKey = authenticationClient.BuildRedirectToDesignerForUserAuthenticationToken(userAuthenticationToken, packageId);

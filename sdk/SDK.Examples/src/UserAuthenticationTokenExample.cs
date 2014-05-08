@@ -23,7 +23,7 @@ namespace SDK.Examples
 
         override public void Execute()
         {            
-            string userAuthenticationToken = eslClient.GetAuthenticationTokenService().CreateUserAuthenticationToken();
+            string userAuthenticationToken = eslClient.AuthenticationTokenService.CreateUserAuthenticationToken();
 
             UserSessionId = AuthenticationClient.GetSessionIdForUserAuthenticationToken(userAuthenticationToken);
         }

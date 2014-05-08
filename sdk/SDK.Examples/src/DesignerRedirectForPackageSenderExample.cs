@@ -48,7 +48,7 @@ namespace SDK.Examples
             PackageId customSenderPackageId = CreatePackageWithCustomSender(packageSenderEmail);
 
 
-            string senderAuthenticationToken = eslClient.GetAuthenticationTokenService().CreateSenderAuthenticationToken(customSenderPackageId);
+            string senderAuthenticationToken = eslClient.AuthenticationTokenService.CreateSenderAuthenticationToken(customSenderPackageId);
 
 
             GeneratedLinkToDesignerForSender = authenticationClient.BuildRedirectToDesignerForSender(senderAuthenticationToken, customSenderPackageId);

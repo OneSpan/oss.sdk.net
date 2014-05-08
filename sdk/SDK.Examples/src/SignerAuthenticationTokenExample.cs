@@ -53,7 +53,7 @@ namespace SDK.Examples
             eslClient.SendPackage(packageId);
 
 
-            string signerAuthenticationToken = eslClient.GetAuthenticationTokenService().CreateSignerAuthenticationToken(packageId, signerId);
+            string signerAuthenticationToken = eslClient.AuthenticationTokenService.CreateSignerAuthenticationToken(packageId, signerId);
 
 
             //This session id can be set in a cookie header

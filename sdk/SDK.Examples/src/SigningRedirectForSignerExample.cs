@@ -58,7 +58,7 @@ namespace SDK.Examples
             eslClient.SendPackage(packageId);
 
 
-            string signerAuthenticationToken = eslClient.GetAuthenticationTokenService().CreateSignerAuthenticationToken(packageId, signerId);
+            string signerAuthenticationToken = eslClient.AuthenticationTokenService.CreateSignerAuthenticationToken(packageId, signerId);
 
 
             GeneratedLinkToSigningForSigner = authenticationClient.BuildRedirectToSigningForSigner(signerAuthenticationToken, packageId);
