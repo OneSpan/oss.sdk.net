@@ -126,7 +126,7 @@ namespace Silanis.ESL.SDK.Services
 				.Replace ("{documentId}", document.Id)
 				.Build ();
 
-			Silanis.ESL.API.Document internalDoc = document.ToAPIDocument();
+			Silanis.ESL.API.Document internalDoc = new DocumentConverter(document).ToAPIDocument();
             
             // Wipe out the members not related to the metadata
             internalDoc.Approvals = null;
@@ -156,7 +156,7 @@ namespace Silanis.ESL.SDK.Services
 			List<Silanis.ESL.API.Document> documents = new List<Silanis.ESL.API.Document>();
 			foreach (Document doc in package.Documents.Values)
 			{
-				documents.Add(doc.ToAPIDocument());
+				documents.Add(new DocumentConverter(doc).ToAPIDocument());
 			}
 
 			try 
@@ -276,7 +276,7 @@ namespace Silanis.ESL.SDK.Services
 					.Build ();
 
 			Silanis.ESL.API.Package internalPackage = package.ToAPIPackage();
-			Silanis.ESL.API.Document internalDoc = document.ToAPIDocument(internalPackage);
+			Silanis.ESL.API.Document internalDoc = new DocumentConverter(document).ToAPIDocument(internalPackage);
 
 			try 
 			{
@@ -291,7 +291,7 @@ namespace Silanis.ESL.SDK.Services
                 Support.LogMethodExit("Document uploaded without issue");
 
 				Silanis.ESL.API.Document uploadedDoc = JsonConvert.DeserializeObject<Silanis.ESL.API.Document>(response);
-				return DocumentBuilder.NewDocumentFromAPIDocument(uploadedDoc, internalPackage).Build();
+				return new DocumentConverter(uploadedDoc, internalPackage).ToSDKDocument();
 			} 
 			catch (Exception e) 
 			{

@@ -48,8 +48,8 @@ namespace Silanis.ESL.SDK
                 if ( apiField.Type == Silanis.ESL.API.FieldType.SIGNATURE ) {
                     apiSignatureField = apiField;
                 } else {
-                    FieldBuilder fieldBuilder = FieldBuilder.NewFieldFromAPIField( apiField );
-                    signatureBuilder.WithField( fieldBuilder );
+                    Field field = new FieldConverter( apiField ).ToSDKField();
+                    signatureBuilder.WithField( field );
                 }
 
             }

@@ -71,56 +71,6 @@ namespace Silanis.ESL.SDK.Builder
 			return new FieldBuilder().WithStyle(FieldStyle.UNBOUND_CUSTOM_FIELD).WithName(name);
 		}
 
-		internal static FieldBuilder NewFieldFromAPIField (Silanis.ESL.API.Field apiField)
-		{
-			FieldBuilder fieldBuilder = new FieldBuilder()
-				.OnPage( apiField.Page )
-				.AtPosition( apiField.Left, apiField.Top )
-				.WithSize( apiField.Width, apiField.Height )
-				.WithStyle( GetFieldStyleFromAPIField( apiField ) )
-				.WithName( apiField.Name );
-
-			if ( apiField.Id != null ) {
-				fieldBuilder.WithId( apiField.Id );
-			}
-
-			if ( apiField.Extract ) {
-				fieldBuilder.WithPositionExtracted();
-			}
-
-			fieldBuilder.WithValue( apiField.Value );
-			return fieldBuilder;
-		}
-
-		private static FieldStyle GetFieldStyleFromAPIField( Silanis.ESL.API.Field field ) {
-
-			if ( field.Binding == null ) {
-				switch ( field.Subtype ) {
-                case Silanis.ESL.API.FieldSubtype.CUSTOMFIELD:
-                    return FieldStyle.UNBOUND_CUSTOM_FIELD;
-				case Silanis.ESL.API.FieldSubtype.TEXTFIELD:
-					return FieldStyle.UNBOUND_TEXT_FIELD;
-				case Silanis.ESL.API.FieldSubtype.CHECKBOX:
-					return FieldStyle.UNBOUND_CHECK_BOX;
-				default: 
-					throw new EslException( "Unrecognized field style." );				
-				}
-			} else {
-				String binding = field.Binding;
-				if ( binding.Equals( FieldStyleUtility.BINDING_DATE ) ) {
-					return FieldStyle.BOUND_DATE;
-				} else if ( binding.Equals( FieldStyleUtility.BINDING_TITLE ) ) {
-					return FieldStyle.BOUND_TITLE;
-				} else if ( binding.Equals( FieldStyleUtility.BINDING_NAME ) ) {
-					return FieldStyle.BOUND_NAME;
-				} else if ( binding.Equals( FieldStyleUtility.BINDING_COMPANY ) ) {
-					return FieldStyle.BOUND_COMPANY;
-				} else {
-					throw new EslException( "Invalid field binding." );
-				}
-			}
-		}
-
 		public FieldBuilder WithId (string id)
 		{
 			this.id = id;

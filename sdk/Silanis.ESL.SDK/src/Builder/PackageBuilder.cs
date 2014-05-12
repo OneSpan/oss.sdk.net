@@ -63,7 +63,7 @@ namespace Silanis.ESL.SDK.Builder
 			}
 
 			foreach ( Silanis.ESL.API.Document apiDocument in package.Documents ) {
-				Document document = DocumentBuilder.NewDocumentFromAPIDocument( apiDocument, package ).Build();
+				Document document = new DocumentConverter( apiDocument, package ).ToSDKDocument();
 
 				WithDocument( document );
 			}

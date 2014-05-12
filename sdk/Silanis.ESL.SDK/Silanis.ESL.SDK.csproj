@@ -263,6 +263,10 @@
     <Compile Include="src\Services\AuthenticationTokenService.cs" />
     <Compile Include="src\Services\AuthenticationService.cs" />
     <Compile Include="src\UnauthenticatedRestClient.cs" />
+    <Compile Include="src\Internal\Conversion\DocumentConverter.cs" />
+    <Compile Include="src\Internal\Conversion\FieldStyleAndSubTypeConverter.cs" />
+    <Compile Include="src\Internal\Conversion\FieldValidatorConverter.cs" />
+    <Compile Include="src\Internal\Conversion\FieldConverter.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSHARP.Targets" />
   <ProjectExtensions>

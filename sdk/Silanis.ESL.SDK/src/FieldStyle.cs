@@ -4,7 +4,7 @@ namespace Silanis.ESL.SDK
 {
 	public enum FieldStyle
 	{
-	 	BOUND_DATE,
+        BOUND_DATE,
 		BOUND_NAME,
 		BOUND_TITLE,
 		BOUND_COMPANY,

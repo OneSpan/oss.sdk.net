@@ -27,28 +27,7 @@ namespace Silanis.ESL.SDK.Builder
 			return new DocumentBuilder (name);
 		}
 
-		internal static DocumentBuilder NewDocumentFromAPIDocument (Silanis.ESL.API.Document apiDocument, Silanis.ESL.API.Package package)
-		{
-            DocumentBuilder documentBuilder = DocumentBuilder.NewDocumentNamed(apiDocument.Name)
-    				.WithId(apiDocument.Id)
-    				.AtIndex(apiDocument.Index)
-                    .WithDescription(apiDocument.Description);
-
-			foreach ( Silanis.ESL.API.Approval apiApproval in apiDocument.Approvals ) {
-                Signature signature = new SignatureConverter( apiApproval, package ).ToSDKSignature();
-				documentBuilder.WithSignature( signature );
-			}
-
-			foreach ( Silanis.ESL.API.Field apiField in apiDocument.Fields ) {
-				FieldBuilder fieldBuilder = FieldBuilder.NewFieldFromAPIField( apiField );
-
-				documentBuilder.WithInjectedField( fieldBuilder );
-			}
-
-			return documentBuilder;
-		}
-
-		public DocumentBuilder WithId (string id)
+        public DocumentBuilder WithId (string id)
 		{
 			this.id = id;
 			return this;
