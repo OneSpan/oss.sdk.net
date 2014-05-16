@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 
 namespace Silanis.ESL.SDK.Builder
 {
@@ -17,6 +18,7 @@ namespace Silanis.ESL.SDK.Builder
 		private int minLength = 0;
 		private string message;
 		private bool required;
+        private IList<string> options = new List<string>();
 
 		private FieldValidatorBuilder (String regex)
 		{
@@ -77,6 +79,12 @@ namespace Silanis.ESL.SDK.Builder
 			return this;
 		}
 
+        public FieldValidatorBuilder WithOption( string option )
+        {
+            options.Add(option);
+            return this;
+        }
+
 		public FieldValidator Build ()
 		{
 			Support.LogMethodEntry();
@@ -87,6 +95,7 @@ namespace Silanis.ESL.SDK.Builder
 			validator.MinLength = minLength;
 			validator.Required = required;
 			validator.Message = message;
+            validator.AddOptions(options);
 			Support.LogMethodExit(validator);
 			return validator;
 		}

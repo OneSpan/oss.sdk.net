@@ -76,6 +76,7 @@ namespace SDK.Tests
             Assert.AreEqual(sdkFieldValidator1.MaxLength, apiFieldValidation1.MaxLength);
             Assert.AreEqual(sdkFieldValidator1.MinLength, apiFieldValidation1.MinLength);
             Assert.AreEqual(sdkFieldValidator1.Required, apiFieldValidation1.Required);
+            Assert.AreEqual(sdkFieldValidator1.Options, apiFieldValidation1.Enum);
         }
 
         [Test()]
@@ -90,6 +91,7 @@ namespace SDK.Tests
             Assert.AreEqual(apiFieldValidation1.MinLength, sdkFieldValidator1.MinLength);
             Assert.AreEqual(apiFieldValidation1.Required, sdkFieldValidator1.Required);
             Assert.AreEqual(apiFieldValidation1.Pattern, sdkFieldValidator1.Regex);
+            Assert.AreEqual(apiFieldValidation1.Enum, sdkFieldValidator1.Options);
         }
 
         private FieldValidation CreateTypicalAPIFieldValidation()

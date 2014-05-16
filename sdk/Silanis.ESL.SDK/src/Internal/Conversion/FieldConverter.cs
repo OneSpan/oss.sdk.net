@@ -82,6 +82,10 @@ namespace Silanis.ESL.SDK
                 fieldBuilder.WithPositionExtracted();
             }
 
+            if ( apiField.Validation != null ) {
+                fieldBuilder.WithValidation(new FieldValidatorConverter(apiField.Validation).ToSDKFieldValidator());
+            }
+
             fieldBuilder.WithValue( apiField.Value );
             return fieldBuilder.Build();
 

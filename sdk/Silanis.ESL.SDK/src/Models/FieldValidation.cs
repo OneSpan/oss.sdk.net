@@ -10,7 +10,7 @@ namespace Silanis.ESL.API
 	{
 		
 		// Fields
-		private IList<String> _enum = null;
+		private IList<String> _enum = new List<String>();
 		
 		// Accessors
 		    

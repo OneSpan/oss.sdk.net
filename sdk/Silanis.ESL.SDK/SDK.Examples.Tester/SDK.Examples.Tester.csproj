@@ -58,6 +58,7 @@
     <Compile Include="src\SigningRedirectForSignerExampleTest.cs" />
     <Compile Include="src\FieldInjectionExampleTest.cs" />
     <Compile Include="src\DocumentOperationsExampleTest.cs" />
+    <Compile Include="src\GenericFieldsExampleTest.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
