@@ -59,6 +59,9 @@
     <Compile Include="src\Internal\Conversion\FieldStyleAndSubTypeConverterTest.cs" />
     <Compile Include="src\Internal\Conversion\FieldValidatorConverterTest.cs" />
     <Compile Include="src\Internal\Conversion\FieldConverterTest.cs" />
+    <Compile Include="src\Builder\AttachmentRequirementBuilderTest.cs" />
+    <Compile Include="src\Internal\Conversion\SignerConverterTest.cs" />
+    <Compile Include="src\Internal\Conversion\AttachmentRequirementConverterTest.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

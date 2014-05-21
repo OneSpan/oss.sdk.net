@@ -108,6 +108,7 @@
     <Compile Include="src\DesignerRedirectForApiKeyExample.cs" />
     <Compile Include="src\DesignerRedirectForPackageSenderExample.cs" />
     <Compile Include="src\SigningRedirectForSignerExample.cs" />
+    <Compile Include="src\AttachmentRequirementExample.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

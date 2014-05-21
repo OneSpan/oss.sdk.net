@@ -119,6 +119,12 @@ namespace Silanis.ESL.SDK
 			set;
 		}
 
+		public IDictionary<string, AttachmentRequirement> Attachments
+		{
+			get;
+			set;
+		}
+
         public bool IsPlaceholderSigner()
         {
             return GroupId == null && Email == null;

@@ -1,5 +1,6 @@
 using System;
 using Silanis.ESL.SDK.Internal;
+using System.Collections.Generic;
 
 namespace Silanis.ESL.SDK.Builder
 {
@@ -18,6 +19,7 @@ namespace Silanis.ESL.SDK.Builder
 		private bool canChangeSigner;
 		private bool locked;
         private GroupId groupId;
+		private IDictionary<string, AttachmentRequirement> attachments = new Dictionary<string, AttachmentRequirement>();
 
 		private SignerBuilder(string signerEmail)
 		{
@@ -63,13 +65,18 @@ namespace Silanis.ESL.SDK.Builder
         {
             Silanis.ESL.API.Signer eslSigner = role.Signers[0];
 
-            SignerBuilder builder = SignerBuilder.NewSignerWithEmail( eslSigner.Email )
-                    .WithCustomId ( eslSigner.Id )                  
-                    .WithFirstName( eslSigner.FirstName )
-                    .WithLastName( eslSigner.LastName )
-                    .WithCompany( eslSigner.Company )
-                    .WithTitle( eslSigner.Title )
-                    .SigningOrder( role.Index );
+			SignerBuilder builder = SignerBuilder.NewSignerWithEmail(eslSigner.Email)
+                    .WithCustomId(eslSigner.Id)   
+                    .WithFirstName(eslSigner.FirstName)
+                    .WithLastName(eslSigner.LastName)
+                    .WithCompany(eslSigner.Company)
+                    .WithTitle(eslSigner.Title)
+					.SigningOrder(role.Index);
+
+			foreach (Silanis.ESL.API.AttachmentRequirement attachmentRequirement in role.AttachmentRequirements)
+			{
+				builder.AddAttachmentRequirement(new AttachmentRequirementConverter(attachmentRequirement).ToSDKAttachmentRequirement());
+			}
 
             if (role.Id != null) {
                 builder.WithCustomId(role.Id);
@@ -219,6 +226,22 @@ namespace Silanis.ESL.SDK.Builder
 			return this;
 		}
 
+		public SignerBuilder WithAttachmentRequirement (AttachmentRequirementBuilder builder)
+		{
+			return WithAttachmentRequirement(builder.Build());
+		}
+
+		public SignerBuilder WithAttachmentRequirement (AttachmentRequirement attachmentRequirement)
+		{
+			AddAttachmentRequirement(attachmentRequirement);
+			return this;
+		}
+
+		private void AddAttachmentRequirement (AttachmentRequirement attachmentRequirement)
+		{
+			attachments.Add(attachmentRequirement.Name, attachmentRequirement);
+		}
+
         private Signer BuildGroupSigner()
         {
             Support.LogMethodEntry();
@@ -229,6 +252,7 @@ namespace Silanis.ESL.SDK.Builder
             result.Message = message;
             result.Id = id;
             result.Locked = locked;
+			result.Attachments = attachments;
             
             Support.LogMethodExit(result);
 
@@ -246,7 +270,8 @@ namespace Silanis.ESL.SDK.Builder
             result.CanChangeSigner = canChangeSigner;
             result.Message = message;
             result.Locked = locked;
-            
+			result.Attachments = attachments;
+
             Support.LogMethodExit(result);
             
             return result;
@@ -270,6 +295,7 @@ namespace Silanis.ESL.SDK.Builder
             result.Message = message;
             result.Id = id;
             result.Locked = locked;
+			result.Attachments = attachments;
 
             Support.LogMethodExit(result);
             

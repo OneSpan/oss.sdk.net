@@ -4,7 +4,7 @@ using Newtonsoft.Json.Converters;
 namespace Silanis.ESL.API
 {
     [JsonConverter(typeof(StringEnumConverter))]
-	internal enum RequirementStatus
+	public enum RequirementStatus
 	{
 		INCOMPLETE,REJECTED,COMPLETE
 	}

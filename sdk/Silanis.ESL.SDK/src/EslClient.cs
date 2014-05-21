@@ -26,7 +26,8 @@ namespace Silanis.ESL.SDK
 		private AccountService accountService;
 		private Services.ReminderService reminderService;
         private TemplateService templateService;
-		private AuthenticationTokenService authenticationTokenService;        
+		private AuthenticationTokenService authenticationTokenService;    
+		private AttachmentRequirementService attachmentRequirementService;
         
         private JsonSerializerSettings jsonSerializerSettings;
 
@@ -55,7 +56,8 @@ namespace Silanis.ESL.SDK
 			accountService = new AccountService(restClient, this.baseUrl);
 			reminderService = new ReminderService(restClient, this.baseUrl);
 			templateService = new TemplateService(restClient, this.baseUrl, packageService);
-			authenticationTokenService = new AuthenticationTokenService(restClient, this.baseUrl);            
+			authenticationTokenService = new AuthenticationTokenService(restClient, this.baseUrl); 
+			attachmentRequirementService = new AttachmentRequirementService(restClient, this.baseUrl, jsonSerializerSettings);
 		}
         
         private void configureJsonSerializationSettings()
@@ -345,5 +347,13 @@ namespace Silanis.ESL.SDK
                 return Assembly.GetExecutingAssembly().GetName().Version;
             }
         }   
+
+		public AttachmentRequirementService AttachmentRequirementService
+		{
+			get
+			{
+				return attachmentRequirementService;
+			}
+		}
 	}
 }	
