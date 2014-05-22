@@ -93,7 +93,7 @@ namespace SDK.Examples
 			try {
 				client.PostMultipartFile(path, content, boundary, sessionId);
 			} catch (Exception e) {
-				throw new EslException ("Could not upload attachment for signer." + " Exception: " + e.Message);
+				throw new EslException ("Could not upload attachment for signer." + " Exception: " + e.Message, e);
 			}
 		}
 
