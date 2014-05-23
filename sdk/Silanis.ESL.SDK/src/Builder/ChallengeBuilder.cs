@@ -40,7 +40,7 @@ namespace Silanis.ESL.SDK.Builder
 			Support.LogMethodEntry();
 			if (QuestionProvided () && challenges.Count == 0)
 			{
-				throw new EslException ("Question challenge was provided with no answer");
+				throw new EslException ("Question challenge was provided with no answer",null);
 			}
 			Authentication result = new Authentication(challenges);
 			Support.LogMethodExit(result);

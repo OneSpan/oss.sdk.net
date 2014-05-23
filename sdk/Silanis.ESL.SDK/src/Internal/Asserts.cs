@@ -10,13 +10,13 @@ namespace Silanis.ESL.SDK.Internal
 		{
 			if (assertedValue == null || assertedValue.Trim ().Length == 0) 
 			{
-				throw new EslException (String.Format ("{0} cannot be null or an empty string", argumentName));
+				throw new EslException (String.Format ("{0} cannot be null or an empty string", argumentName),null);
 			}
 		}
 
 		public static void NonZero(double assertedValue, String fieldName) {
 			if (assertedValue == 0) {
-				throw new EslException(String.Format("{0} cannot be 0", fieldName));
+				throw new EslException(String.Format("{0} cannot be 0", fieldName),null);
 			}
 		}
 	}

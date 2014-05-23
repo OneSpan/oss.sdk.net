@@ -30,7 +30,7 @@ namespace Silanis.ESL.SDK
 			case DocumentType.WORD:
 				return "docx";
 			default:
-				throw new EslException("Unknown DocumentType: " + type);
+				throw new EslException("Unknown DocumentType: " + type, null);
 			}
 		}
 	}

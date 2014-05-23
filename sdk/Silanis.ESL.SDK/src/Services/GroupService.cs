@@ -11,13 +11,11 @@ namespace Silanis.ESL.SDK.Services
         private JsonSerializerSettings settings;
         private RestClient restClient;
 
-        public GroupService(RestClient restClient, string baseUrl)
+        public GroupService(RestClient restClient, string baseUrl, JsonSerializerSettings settings)
         {
             this.restClient = restClient;
             template = new UrlTemplate (baseUrl);
-
-            settings = new JsonSerializerSettings ();
-            settings.NullValueHandling = NullValueHandling.Ignore;
+            this.settings = settings;
         }
 
         public List<Group> GetMyGroups() {
@@ -34,7 +32,7 @@ namespace Silanis.ESL.SDK.Services
                 }
                 return result;
             } catch (Exception e) {
-                throw new EslException ("Failed to retrieve group list." + " Exception: " + e.Message);
+                throw new EslException ("Failed to retrieve group list." + " Exception: " + e.Message, e);
             }
         }
 
@@ -49,7 +47,7 @@ namespace Silanis.ESL.SDK.Services
                 Group sdkGroup = new GroupConverter( apiGroup ).ToSDKGroup();
                 return sdkGroup;
             } catch (Exception e) {
-                throw new EslException ("Failed to retrieve group." + " Exception: " + e.Message);
+                throw new EslException ("Failed to retrieve group." + " Exception: " + e.Message, e);
             }
         }
 
@@ -66,7 +64,7 @@ namespace Silanis.ESL.SDK.Services
 				}
                 return sdkGroup;
             } catch (Exception e) {
-                throw new EslException ("Failed to create new group." + " Exception: " + e.Message);
+                throw new EslException ("Failed to create new group." + " Exception: " + e.Message, e);
             }
         }
 
@@ -81,7 +79,7 @@ namespace Silanis.ESL.SDK.Services
 				Silanis.ESL.API.GroupMember apiResponse = JsonConvert.DeserializeObject<Silanis.ESL.API.GroupMember> (response);
 				return new GroupMemberConverter( apiResponse ).ToSDKGroupMember();
             } catch (Exception e) {
-                throw new EslException ("Could not create a new package." + " Exception: " + e.Message);
+                throw new EslException ("Could not create a new package." + " Exception: " + e.Message, e);
             }
         }
 
@@ -93,7 +91,7 @@ namespace Silanis.ESL.SDK.Services
             try {
                 restClient.Delete(path);
             } catch (Exception e) {
-                throw new EslException ("Failed to delete group." + " Exception: " + e.Message);
+                throw new EslException ("Failed to delete group." + " Exception: " + e.Message, e);
             }
         }
 

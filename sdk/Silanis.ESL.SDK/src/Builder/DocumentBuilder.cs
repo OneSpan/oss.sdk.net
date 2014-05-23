@@ -74,7 +74,7 @@ namespace Silanis.ESL.SDK.Builder
 		{
 			if (String.IsNullOrEmpty(id) && String.IsNullOrEmpty (fileName))
 			{
-				throw new EslException ("Document fileName must be set");
+				throw new EslException ("Document fileName must be set",null);
 			}
 		}
 

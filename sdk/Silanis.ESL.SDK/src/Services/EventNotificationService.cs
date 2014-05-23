@@ -11,11 +11,11 @@ namespace Silanis.ESL.SDK.Services
         private UrlTemplate template;
         private JsonSerializerSettings settings;
 
-        public EventNotificationService( RestClient restClient, string apiUrl )
+        public EventNotificationService( RestClient restClient, string apiUrl, JsonSerializerSettings settings )
         {
             this.restClient = restClient;
             template = new UrlTemplate(apiUrl);
-            settings = new JsonSerializerSettings ();
+            this.settings = settings;
         }
 
         public void Register( EventNotificationConfig config ) {

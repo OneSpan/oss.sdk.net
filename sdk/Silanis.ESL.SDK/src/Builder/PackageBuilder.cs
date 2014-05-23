@@ -88,7 +88,7 @@ namespace Silanis.ESL.SDK.Builder
 			case Silanis.ESL.API.PackageStatus.EXPIRED:
 				return DocumentPackageStatus.EXPIRED;
 			default:
-				throw new EslException("Unknown Silanis.ESL.API.PackageStatus value: " + status);
+				throw new EslException("Unknown Silanis.ESL.API.PackageStatus value: " + status,null);
 			}
 		}
 

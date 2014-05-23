@@ -29,7 +29,7 @@ namespace Silanis.ESL.SDK
             case Silanis.ESL.API.FieldSubtype.FULLNAME:
                 return SignatureStyle.FULL_NAME;
             default:
-                throw new EslException ("FieldSubtype unknown: " + apiSubtype);
+                throw new EslException ("FieldSubtype unknown: " + apiSubtype, null);
             }
         }
     }

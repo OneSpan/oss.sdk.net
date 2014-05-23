@@ -32,7 +32,7 @@ namespace Silanis.ESL.SDK
                 string response = restClient.Post(path, null);              
                 return JsonConvert.DeserializeObject<Silanis.ESL.API.AuthenticationToken> (response).Value;
             } catch (Exception e) {
-                throw new EslException ("Could not create an authentication token for a user." + " Exception: " + e.Message);
+                throw new EslException ("Could not create an authentication token for a user." + " Exception: " + e.Message, e);
             }
         }
 
@@ -46,7 +46,7 @@ namespace Silanis.ESL.SDK
                 string response = restClient.Post(path, serializedObject);              
                 return JsonConvert.DeserializeObject<SenderAuthenticationToken> (response).Value;
             } catch (Exception e) {
-                throw new EslException ("Could not create an authentication token for a sender." + " Exception: " + e.Message);
+                throw new EslException ("Could not create an authentication token for a sender." + " Exception: " + e.Message, e);
             }
         }
 
@@ -61,7 +61,7 @@ namespace Silanis.ESL.SDK
                 string response = restClient.Post(path, serializedObject);              
                 return JsonConvert.DeserializeObject<SignerAuthenticationToken> (response).Value;
             } catch (Exception e) {
-                throw new EslException ("Could not create an authentication token for a signer." + " Exception: " + e.Message);
+                throw new EslException ("Could not create an authentication token for a signer." + " Exception: " + e.Message, e);
             }
         }
     }

@@ -49,12 +49,12 @@ namespace Silanis.ESL.SDK
 			sessionService = new SessionService (apiKey, this.baseUrl);
 			fieldSummaryService = new FieldSummaryService (apiKey, this.baseUrl);
 			auditService = new AuditService (apiKey, this.baseUrl);
-            eventNotificationService = new EventNotificationService(restClient, this.baseUrl);
-            customFieldService = new CustomFieldService( restClient, this.baseUrl );
-            groupService = new GroupService(restClient, this.baseUrl);
-			accountService = new AccountService(restClient, this.baseUrl);
-			reminderService = new ReminderService(restClient, this.baseUrl);
-			templateService = new TemplateService(restClient, this.baseUrl, packageService);
+            eventNotificationService = new EventNotificationService(restClient, this.baseUrl, jsonSerializerSettings);
+            customFieldService = new CustomFieldService( restClient, this.baseUrl, jsonSerializerSettings );
+            groupService = new GroupService(restClient, this.baseUrl, jsonSerializerSettings);
+			accountService = new AccountService(restClient, this.baseUrl, jsonSerializerSettings);
+			reminderService = new ReminderService(restClient, this.baseUrl, jsonSerializerSettings);
+			templateService = new TemplateService(restClient, this.baseUrl, packageService, jsonSerializerSettings);
 			authenticationTokenService = new AuthenticationTokenService(restClient, this.baseUrl);            
 		}
         

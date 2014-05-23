@@ -59,7 +59,7 @@ namespace Silanis.ESL.SDK.Internal.Conversion
                 case SignatureStyle.ACCEPTANCE:
                     return Silanis.ESL.API.FieldSubtype.FULLNAME;
     			default:
-    				throw new EslException("Unknown SignatureStyle value: " + signature.Style );
+    				throw new EslException("Unknown SignatureStyle value: " + signature.Style, null );
 			}
 		}
 	}

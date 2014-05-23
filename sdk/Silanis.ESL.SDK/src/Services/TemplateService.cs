@@ -12,14 +12,12 @@ namespace Silanis.ESL.SDK.Services
         private RestClient restClient;
 		private PackageService packageService;
         
-		public TemplateService(RestClient restClient, string baseUrl, PackageService packageService)
+		public TemplateService(RestClient restClient, string baseUrl, PackageService packageService, JsonSerializerSettings settings)
         {
             this.restClient = restClient;
 			urls = new UrlTemplate (baseUrl);
 			this.packageService = packageService;
-
-            settings = new JsonSerializerSettings ();
-            settings.NullValueHandling = NullValueHandling.Ignore;
+            this.settings = settings;
         }
         
         internal PackageId CreateTemplateFromPackage(PackageId originalPackageId, Package delta)
@@ -36,7 +34,7 @@ namespace Silanis.ESL.SDK.Services
                 Support.LogMethodExit(sdkResult);
                 return sdkResult;
             } catch (Exception e) {
-                throw new EslException ("Could not create a template." + " Exception: " + e.Message);
+                throw new EslException ("Could not create a template." + " Exception: " + e.Message, e);
             }
         }
         
@@ -53,7 +51,7 @@ namespace Silanis.ESL.SDK.Services
                 Support.LogMethodExit(sdkResult);
                 return sdkResult;
             } catch (Exception e) {
-                throw new EslException ("Could not create a package from template." + " Exception: " + e.Message);
+                throw new EslException ("Could not create a package from template." + " Exception: " + e.Message, e);
             }
         }
 
@@ -71,7 +69,7 @@ namespace Silanis.ESL.SDK.Services
 			}
 			catch (Exception e)
 			{
-				throw new EslException ("Could not create template." + " Exception: " + e.Message);
+				throw new EslException ("Could not create template." + " Exception: " + e.Message, e);
 			}
 		}
 
@@ -97,7 +95,7 @@ namespace Silanis.ESL.SDK.Services
 			}
 			catch (Exception e)
 			{
-				throw new EslException ("Could not update template." + " Exception: " + e.Message);
+				throw new EslException ("Could not update template." + " Exception: " + e.Message, e);
 			}
 		}
 

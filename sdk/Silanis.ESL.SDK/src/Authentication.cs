@@ -82,7 +82,7 @@ namespace Silanis.ESL.SDK
 			case AuthenticationMethod.SMS:
 				return Silanis.ESL.API.AuthScheme.SMS;
 			default:
-				throw new EslException ("Unknown AuthenticationMethod");
+				throw new EslException ("Unknown AuthenticationMethod",null);
 			}
 		}
 	}

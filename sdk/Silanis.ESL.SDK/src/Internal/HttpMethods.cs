@@ -39,7 +39,7 @@ namespace Silanis.ESL.SDK.Internal
             catch (Exception e) {
 				Support.LogError(e.Message);
 				Support.LogError(e.StackTrace);
-				throw new EslException("Error communicating with esl server. " + e.Message);
+                throw new EslException("Error communicating with esl server. " + e.Message, e);
             }
 		}
 
@@ -73,7 +73,7 @@ namespace Silanis.ESL.SDK.Internal
 			catch (Exception e) {
 				Support.LogError(e.Message);
 				Support.LogError(e.StackTrace);
-				throw new EslException("Error communicating with esl server. " + e.Message);
+				throw new EslException("Error communicating with esl server. " + e.Message,e);
 			}
 		}
 
@@ -103,7 +103,7 @@ namespace Silanis.ESL.SDK.Internal
             catch (Exception e) {
                 Support.LogError(e.Message);
                 Support.LogError(e.StackTrace);
-                throw new EslException("Error communicating with esl server. " + e.Message);
+                throw new EslException("Error communicating with esl server. " + e.Message,e);
             }
         }
 
@@ -130,7 +130,7 @@ namespace Silanis.ESL.SDK.Internal
 			catch (Exception e) {
 				Support.LogError(e.Message);
 				Support.LogError(e.StackTrace);
-				throw new EslException("Error communicating with esl server. " + e.Message);
+				throw new EslException("Error communicating with esl server. " + e.Message,e);
 			}
 		}
 
@@ -157,7 +157,7 @@ namespace Silanis.ESL.SDK.Internal
 			catch (Exception e) {
 				Support.LogError(e.Message);
 				Support.LogError(e.StackTrace);
-				throw new EslException("Error communicating with esl server. " + e.Message);
+				throw new EslException("Error communicating with esl server. " + e.Message,e);
 			}
 		}
 
@@ -190,7 +190,7 @@ namespace Silanis.ESL.SDK.Internal
 			catch (Exception e) {
 				Support.LogError(e.Message);
 				Support.LogError(e.StackTrace);
-				throw new EslException("Error communicating with esl server. " + e.Message);
+				throw new EslException("Error communicating with esl server. " + e.Message,e);
 			}
 		}
 

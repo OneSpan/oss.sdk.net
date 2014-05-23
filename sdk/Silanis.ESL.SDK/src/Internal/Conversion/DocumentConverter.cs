@@ -129,7 +129,7 @@ namespace Silanis.ESL.SDK
                 }
             }
 
-            throw new EslException(String.Format ("No Role found for group with id {0}", groupId.Id));
+            throw new EslException(String.Format ("No Role found for group with id {0}", groupId.Id),null);
         }
 
         private string FindRoleIdForSigner (string signerEmail, Silanis.ESL.API.Package createdPackage)
@@ -145,7 +145,7 @@ namespace Silanis.ESL.SDK
                 }
             }
 
-            throw new EslException(String.Format ("No Role found for signer email {0}", signerEmail));
+            throw new EslException(String.Format ("No Role found for signer email {0}", signerEmail),null);
         }
     }
 }

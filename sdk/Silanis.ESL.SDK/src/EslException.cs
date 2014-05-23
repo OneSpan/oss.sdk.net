@@ -7,7 +7,7 @@ namespace Silanis.ESL.SDK
 	/// </summary>
 	public class EslException : Exception
 	{
-		public EslException (string message) : base(message)
+		public EslException (string message, Exception cause) : base(message, cause)
 		{
 		}
 	}

@@ -42,7 +42,7 @@ namespace SDK.Examples
             DocumentPackage superDuperPackage =
                 PackageBuilder.NewPackageNamed("BasicPackageCreationExample: " + DateTime.Now)
                 .DescribedAs("This is a package created using the e-SignLive SDK")
-                .ExpiresOn(DateTime.Now.AddMonths(1))
+                .ExpiresOn(DateTime.Now.AddMonths(100))
                 .WithEmailMessage("This message should be delivered to all signers")
                 .WithSigner(SignerBuilder.NewSignerWithEmail(email1)
                             .WithCustomId("Client1")

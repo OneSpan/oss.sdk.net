@@ -50,7 +50,7 @@ namespace Silanis.ESL.SDK
                 case FieldStyle.UNBOUND_CUSTOM_FIELD:
                     return Silanis.ESL.API.FieldSubtype.CUSTOMFIELD;
                 default:
-                    throw new EslException(String.Format ("Unable to decode the field subtype from style {0}", sdkFieldStyle) );
+                    throw new EslException(String.Format ("Unable to decode the field subtype from style {0}", sdkFieldStyle),null );
             }
         }
 
@@ -72,7 +72,7 @@ namespace Silanis.ESL.SDK
                     case FieldSubtype.CHECKBOX:
                         return FieldStyle.UNBOUND_CHECK_BOX;
                     default:
-                        throw new EslException(String.Format("Unable to decode the style from field subtype {0}", apiFieldSubType));
+                        throw new EslException(String.Format("Unable to decode the style from field subtype {0}", apiFieldSubType),null);
                 }
             }
             else
@@ -95,7 +95,7 @@ namespace Silanis.ESL.SDK
                 }
                 else
                 {
-                    throw new EslException(String.Format("Unable to decode the style from field binding {0}", apiFieldBinding));
+                    throw new EslException(String.Format("Unable to decode the style from field binding {0}", apiFieldBinding),null);
                 }
             }
         }

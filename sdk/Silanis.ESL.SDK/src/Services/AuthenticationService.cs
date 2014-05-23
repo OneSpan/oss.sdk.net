@@ -28,7 +28,7 @@ namespace Silanis.ESL.SDK
                 SessionToken userSessionIdToken = JsonConvert.DeserializeObject<SessionToken> (stringResponse);
                 return userSessionIdToken.Token;
             } catch (Exception e) {
-                throw new EslException("Could not authenticate using an authentication token."+ " Exception: " + e.Message);
+                throw new EslException("Could not authenticate using an authentication token."+ " Exception: " + e.Message, e);
             }
         }        
 
@@ -45,7 +45,7 @@ namespace Silanis.ESL.SDK
                         .Build();
                 return path;
             } catch (Exception e) {
-                throw new EslException("Could not authenticate using a user authentication token."+ " Exception: " + e.Message);
+                throw new EslException("Could not authenticate using a user authentication token."+ " Exception: " + e.Message, e);
             }
         }        
 
@@ -59,7 +59,7 @@ namespace Silanis.ESL.SDK
                 SessionToken userSessionIdToken = JsonConvert.DeserializeObject<SessionToken> (stringResponse);
                 return userSessionIdToken.Token;
             } catch (Exception e) {
-                throw new EslException("Could not authenticate using a sender authentication token."+ " Exception: " + e.Message);
+                throw new EslException("Could not authenticate using a sender authentication token."+ " Exception: " + e.Message, e);
             }
         }        
 
@@ -77,7 +77,7 @@ namespace Silanis.ESL.SDK
 
                 return path;
             } catch (Exception e) {
-                throw new EslException("Could not authenticate using a user authentication token."+ " Exception: " + e.Message);
+                throw new EslException("Could not authenticate using a user authentication token."+ " Exception: " + e.Message, e);
             }
         }        
 
@@ -91,7 +91,7 @@ namespace Silanis.ESL.SDK
                 SessionToken userSessionIdToken = JsonConvert.DeserializeObject<SessionToken> (stringResponse);
                 return userSessionIdToken.Token;
             } catch (Exception e) {
-                throw new EslException("Could not authenticate using a signer authentication token."+ " Exception: " + e.Message);
+                throw new EslException("Could not authenticate using a signer authentication token."+ " Exception: " + e.Message, e);
             }
         }        
 
@@ -109,7 +109,7 @@ namespace Silanis.ESL.SDK
 
                 return path;
             } catch (Exception e) {
-                throw new EslException("Could not authenticate using a user authentication token."+ " Exception: " + e.Message);
+                throw new EslException("Could not authenticate using a user authentication token."+ " Exception: " + e.Message, e);
             }
         }
     }
