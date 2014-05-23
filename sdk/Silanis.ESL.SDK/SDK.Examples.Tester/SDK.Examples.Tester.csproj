@@ -60,10 +60,14 @@
     <Compile Include="src\DocumentOperationsExampleTest.cs" />
     <Compile Include="src\CustomSenderInfoInCreateNewTemplateExampleTest.cs" />
     <Compile Include="src\CustomSenderInfoInCreatePackageFromTemplateExampleTest.cs" />
+    <Compile Include="src\GenericFieldsExampleTest.cs" />
+    <Compile Include="src\AttachmentRequirementExampleTest.cs" />
+    <Compile Include="src\internal\DocumentTypeUtility.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
     <Folder Include="src\" />
+    <Folder Include="src\internal\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\SDK.Examples\SDK.Examples.csproj">

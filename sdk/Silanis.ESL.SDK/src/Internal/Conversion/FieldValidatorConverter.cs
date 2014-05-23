@@ -1,5 +1,6 @@
 using System;
 using Silanis.ESL.API;
+using Silanis.ESL.SDK.Builder;
 
 namespace Silanis.ESL.SDK
 {
@@ -37,6 +38,14 @@ namespace Silanis.ESL.SDK
                 fieldValidation.Pattern = fieldValidator.Regex;
             }
 
+            if (fieldValidator.Options != null && fieldValidator.Options.Count != 0)
+            {
+                foreach (String option in fieldValidator.Options)
+                {
+                    fieldValidation.AddEnum(option);
+                }
+            }
+
             return fieldValidation;
         }
 
@@ -53,6 +62,13 @@ namespace Silanis.ESL.SDK
             fieldValidator.MinLength = fieldValidation.MinLength;
             fieldValidator.Regex = fieldValidation.Pattern;
             fieldValidator.Required = fieldValidation.Required;
+            if (fieldValidation.Enum != null)
+            {
+                foreach (string option in fieldValidation.Enum)
+                {
+                    fieldValidator.AddOption(option);
+                }
+            }
 
             return fieldValidator;
         }

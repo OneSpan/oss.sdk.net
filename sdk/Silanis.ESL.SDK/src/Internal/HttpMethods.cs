@@ -1,6 +1,7 @@
 using System;
 using System.Net;
 using System.IO;
+using System.Collections.Generic;
 
 namespace Silanis.ESL.SDK.Internal
 {
@@ -161,7 +162,12 @@ namespace Silanis.ESL.SDK.Internal
 			}
 		}
 
-		public static byte[] MultipartPostHttp (string apiToken, string path, byte[] content, string boundary)
+		public static void AddAuthorizationHeader(WebRequest request, AuthHeaderGenerator authHeaderGen)
+		{
+			request.Headers.Add(authHeaderGen.Name, authHeaderGen.Value);
+		}
+
+		public static byte[] MultipartPostHttp (string apiToken, string path, byte[] content, string boundary, AuthHeaderGenerator authHeaderGen)
 		{
 			Support.LogMethodEntry(apiToken, path, content, boundary);
 			WebRequest request = WebRequest.Create (path);
@@ -169,7 +175,7 @@ namespace Silanis.ESL.SDK.Internal
 				request.Method = "POST";
 				request.ContentType = string.Format ("multipart/form-data; boundary={0}", boundary);
 				request.ContentLength = content.Length;
-				request.Headers.Add ("Authorization", "Basic " + apiToken);
+				AddAuthorizationHeader(request, authHeaderGen);
 
 				using (Stream dataStream = request.GetRequestStream ()) {
 					dataStream.Write (content, 0, content.Length);

@@ -47,6 +47,8 @@ namespace Silanis.ESL.SDK
                     return Silanis.ESL.API.FieldSubtype.LABEL;
                 case FieldStyle.UNBOUND_CHECK_BOX:
                     return Silanis.ESL.API.FieldSubtype.CHECKBOX;
+                case FieldStyle.UNBOUND_RADIO_BUTTON:
+                    return Silanis.ESL.API.FieldSubtype.RADIO;
                 case FieldStyle.UNBOUND_CUSTOM_FIELD:
                     return Silanis.ESL.API.FieldSubtype.CUSTOMFIELD;
                 default:
@@ -71,6 +73,8 @@ namespace Silanis.ESL.SDK
                         return FieldStyle.UNBOUND_CUSTOM_FIELD;
                     case FieldSubtype.CHECKBOX:
                         return FieldStyle.UNBOUND_CHECK_BOX;
+                    case FieldSubtype.RADIO:
+                        return FieldStyle.UNBOUND_RADIO_BUTTON;
                     default:
                         throw new EslException(String.Format("Unable to decode the style from field subtype {0}", apiFieldSubType),null);
                 }

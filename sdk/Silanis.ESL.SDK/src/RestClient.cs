@@ -3,9 +3,10 @@ using Silanis.ESL.SDK.Internal;
 
 namespace Silanis.ESL.SDK
 {
-    public class RestClient
+	public class RestClient
     {
         private string apiToken;
+		private AuthHeaderGenerator headerGen;
 
         public RestClient(string apiToken)
         {
@@ -37,9 +38,18 @@ namespace Silanis.ESL.SDK
         }
 
         public string PostMultipartFile(string path, byte[] fileBytes, string boundary) {
-            byte[] responseBytes = HttpMethods.MultipartPostHttp(apiToken, path, fileBytes, boundary);
+			headerGen = new ApiTokenAuthHeaderGenerator(apiToken);
+
+			byte[] responseBytes = HttpMethods.MultipartPostHttp(apiToken, path, fileBytes, boundary, headerGen);
             return Converter.ToString(responseBytes);
         }
+
+		public string PostMultipartFile(string path, byte[] fileBytes, string boundary, string sessionId) {
+			headerGen = new SessionIdAuthHeaderGenerator(sessionId);
+
+			byte[] responseBytes = HttpMethods.MultipartPostHttp(apiToken, path, fileBytes, boundary, headerGen);
+			return Converter.ToString(responseBytes);
+		}
 
         public string Get(string path) {
 //            support.LogRequest("GET", path);

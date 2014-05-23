@@ -5,6 +5,10 @@ namespace Silanis.ESL.SDK.Builder
 {
 	public class FieldBuilder
 	{
+        public static string SELECTED_VALUE = "X";
+        public static string CHECKBOX_CHECKED = SELECTED_VALUE;
+        public static string RADIO_SELECTED = SELECTED_VALUE;
+
 		public static double DEFAULT_WIDTH = 200;
 		public static double DEFAULT_HEIGHT = 50;
 		public static FieldStyle DEFAULT_STYLE = FieldStyle.UNBOUND_TEXT_FIELD;
@@ -65,6 +69,12 @@ namespace Silanis.ESL.SDK.Builder
 		{
 			return new FieldBuilder ().WithStyle (FieldStyle.UNBOUND_CHECK_BOX);
 		}
+
+        public static FieldBuilder RadioButton ( string group )
+        {
+            return new FieldBuilder ().WithStyle(FieldStyle.UNBOUND_RADIO_BUTTON)
+                .WithValidation(FieldValidatorBuilder.Alphanumeric().WithOption(group));
+        }
 
 		public static FieldBuilder CustomField( String name )
 		{
@@ -128,9 +138,9 @@ namespace Silanis.ESL.SDK.Builder
 
         public FieldBuilder WithValue (bool value)
         {
-            if (this.style == FieldStyle.UNBOUND_CHECK_BOX)
+            if (this.style == FieldStyle.UNBOUND_CHECK_BOX || this.style == FieldStyle.UNBOUND_RADIO_BUTTON)
             {
-                this.value = value ? "X" : "";
+                this.value = value ? SELECTED_VALUE : "";
             }
             return this;
         }

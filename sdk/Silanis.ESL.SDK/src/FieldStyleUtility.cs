@@ -24,6 +24,7 @@ namespace Silanis.ESL.SDK
 			case FieldStyle.UNBOUND_CUSTOM_FIELD:
 			case FieldStyle.UNBOUND_TEXT_FIELD:
 			case FieldStyle.UNBOUND_CHECK_BOX:
+                case FieldStyle.UNBOUND_RADIO_BUTTON:
 			case FieldStyle.LABEL:
 				return null;
 			default:

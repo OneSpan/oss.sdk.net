@@ -62,6 +62,10 @@ namespace SDK.Tests
             fieldStyle = new FieldStyleAndSubTypeConverter(fieldSubtype, binding).ToSDKFieldStyle();
             Assert.AreEqual(fieldStyle, FieldStyle.UNBOUND_CHECK_BOX);
 
+            fieldSubtype = FieldSubtype.RADIO;
+            binding = null;
+            fieldStyle = new FieldStyleAndSubTypeConverter(fieldSubtype, binding).ToSDKFieldStyle();
+            Assert.AreEqual(fieldStyle, FieldStyle.UNBOUND_RADIO_BUTTON);
 
             // Where the conversion is based on binding.
             fieldSubtype = new FieldSubtype();
@@ -103,6 +107,10 @@ namespace SDK.Tests
             fieldStyle = FieldStyle.UNBOUND_CHECK_BOX;
             fieldSubtype = new FieldStyleAndSubTypeConverter(fieldStyle).ToAPIFieldSubtype();
             Assert.AreEqual(fieldSubtype, FieldSubtype.CHECKBOX);
+
+            fieldStyle = FieldStyle.UNBOUND_RADIO_BUTTON;
+            fieldSubtype = new FieldStyleAndSubTypeConverter(fieldStyle).ToAPIFieldSubtype();
+            Assert.AreEqual(fieldSubtype, FieldSubtype.RADIO);
 
             fieldStyle = FieldStyle.BOUND_DATE;
             fieldSubtype = new FieldStyleAndSubTypeConverter(fieldStyle).ToAPIFieldSubtype();

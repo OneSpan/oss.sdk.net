@@ -49,7 +49,7 @@ namespace SDK.Examples
                                 .WithField( FieldBuilder.CheckBox()
                                 .OnPage( 0 )
                                 .AtPosition( 400, 200 )
-                                .WithValue( "x" ) )
+                                .WithValue( FieldBuilder.CHECKBOX_CHECKED ) )
                                 .AtPosition( 100, 100 ) )
                     .Build();
 

@@ -110,6 +110,7 @@
     <Compile Include="src\SigningRedirectForSignerExample.cs" />
     <Compile Include="src\CustomSenderInfoInCreateNewTemplateExample.cs" />
     <Compile Include="src\CustomSenderInfoInCreatePackageFromTemplateExample.cs" />
+    <Compile Include="src\AttachmentRequirementExample.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

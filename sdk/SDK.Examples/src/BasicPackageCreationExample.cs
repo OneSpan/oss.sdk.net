@@ -12,8 +12,8 @@ namespace SDK.Examples
             new BasicPackageCreationExample(Props.GetInstance()).Run();
         }
 
-        private string email1;
-        private string email2;
+        public string email1;
+        public string email2;
         private Stream fileStream1;
         private Stream fileStream2;
         private PackageId packageId;
@@ -62,7 +62,7 @@ namespace SDK.Examples
                                              .WithField(FieldBuilder.CheckBox()
                                                      .OnPage(0)
                                                      .AtPosition(400, 200)
-                                                     .WithValue("x")
+                                                     .WithValue(FieldBuilder.CHECKBOX_CHECKED)
                                                        )
                                              .AtPosition(100, 100)
                                             )
@@ -72,6 +72,21 @@ namespace SDK.Examples
                               .WithSignature(SignatureBuilder.SignatureFor(email2)
                                              .OnPage(0)
                                              .AtPosition(100, 200)
+                                       .WithField(FieldBuilder.RadioButton("group")
+                                       .WithValue(false)
+                                       .WithSize(20, 20)  
+                                       .OnPage(0)
+                                       .AtPosition(400, 200))
+                                       .WithField(FieldBuilder.RadioButton("group")
+                                       .WithValue(true)
+                                       .WithSize(20, 20) 
+                                       .OnPage(0)
+                                       .AtPosition(400, 250))
+                                       .WithField(FieldBuilder.RadioButton("group")
+                                       .WithValue(false)
+                                       .WithSize(20, 20) 
+                                       .OnPage(0)
+                                       .AtPosition(400, 300))
                                             )
                              )
                 .Build();

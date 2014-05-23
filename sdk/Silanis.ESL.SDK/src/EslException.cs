@@ -10,6 +10,11 @@ namespace Silanis.ESL.SDK
 		public EslException (string message, Exception cause) : base(message, cause)
 		{
 		}
+
+		public EslException (string message, Exception e) : base(message, e)
+		{
+
+		}
 	}
 
 }

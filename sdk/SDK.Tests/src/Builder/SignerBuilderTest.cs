@@ -2,6 +2,7 @@ using System;
 using NUnit.Framework;
 using Silanis.ESL.SDK;
 using Silanis.ESL.SDK.Builder;
+using Silanis.ESL.API;
 
 namespace SDK.Tests
 {
@@ -11,7 +12,7 @@ namespace SDK.Tests
 		[Test]
 		public void BuildsSignerWithBasicInformation()
 		{
-			Signer signer = SignerBuilder.NewSignerWithEmail("joe@email.com")
+			Silanis.ESL.SDK.Signer signer = SignerBuilder.NewSignerWithEmail("joe@email.com")
 				.WithFirstName ("Joe")
 				.WithLastName("Smith")
 				.SigningOrder (2)
@@ -47,7 +48,7 @@ namespace SDK.Tests
 		[Test]
 		public void CanSpecifyTitleAndCompany()
 		{
-			Signer signer = SignerBuilder.NewSignerWithEmail ("billy@bob.com")
+			Silanis.ESL.SDK.Signer signer = SignerBuilder.NewSignerWithEmail ("billy@bob.com")
 				.WithFirstName ("Billy")
 				.WithLastName ("Bob")
 				.WithTitle ("Managing Director")
@@ -61,7 +62,7 @@ namespace SDK.Tests
 		[Test]
 		public void AuthenticationDefaultsToEmail()
 		{
-			Signer signer = SignerBuilder.NewSignerWithEmail ("billy@bob.com")
+			Silanis.ESL.SDK.Signer signer = SignerBuilder.NewSignerWithEmail ("billy@bob.com")
 				.WithFirstName ("Billy")
 				.WithLastName ("Bob")
 				.Build ();
@@ -72,7 +73,7 @@ namespace SDK.Tests
 		[Test]
 		public void ProvidingQuestionsAndAnswersSetsAuthenticationMethodToChallenge()
 		{
-			Signer signer = SignerBuilder.NewSignerWithEmail ("billy@bob.com")
+			Silanis.ESL.SDK.Signer signer = SignerBuilder.NewSignerWithEmail ("billy@bob.com")
 				.WithFirstName ("Billy")
 				.WithLastName ("Bob")
 				.ChallengedWithQuestions (ChallengeBuilder.FirstQuestion("What's your favorite sport?")
@@ -85,7 +86,7 @@ namespace SDK.Tests
 		[Test]
 		public void SavesProvidesQuestionsAndAnswers()
 		{
-			Signer signer = SignerBuilder.NewSignerWithEmail ("billy@bob.com")
+			Silanis.ESL.SDK.Signer signer = SignerBuilder.NewSignerWithEmail ("billy@bob.com")
 				.WithFirstName ("Billy")
 					.WithLastName ("Bob")
 					.ChallengedWithQuestions (ChallengeBuilder.FirstQuestion("What's your favorite sport?")
@@ -112,7 +113,7 @@ namespace SDK.Tests
 		[Test]
 		public void ProvidingSignerCellPhoneNumberSetsUpSMSAuthentication() 
 		{
-			Signer signer = SignerBuilder.NewSignerWithEmail ("billy@bob.com")
+			Silanis.ESL.SDK.Signer signer = SignerBuilder.NewSignerWithEmail ("billy@bob.com")
 				.WithFirstName ("Billy")
 				.WithLastName ("Bob")
 				.WithSMSSentTo ("1112223333")
@@ -136,13 +137,102 @@ namespace SDK.Tests
 		[Test]
 		public void CanConfigureSignedDocumentDelivery()
 		{
-			Signer signer = SignerBuilder.NewSignerWithEmail ("billy@bob.com")
+			Silanis.ESL.SDK.Signer signer = SignerBuilder.NewSignerWithEmail ("billy@bob.com")
 				.WithFirstName ("Billy")
 					.WithLastName ("Bob")
 					.DeliverSignedDocumentsByEmail()
 					.Build ();
 
 			Assert.IsTrue (signer.DeliverSignedDocumentsByEmail);
+		}
+
+		[Test]
+		public void CanSetAndGetAttachmentRequirements()
+		{
+			Silanis.ESL.SDK.AttachmentRequirement attachmentRequirement = AttachmentRequirementBuilder.NewAttachmentRequirementWithName("Driver's license")
+				.WithDescription("Please upload scanned driver's license.")
+				.IsRequiredAttachment()
+				.Build();
+
+			Silanis.ESL.SDK.Signer signer = SignerBuilder.NewSignerWithEmail("billy@bob.com")
+				.WithFirstName("Billy")
+				.WithLastName("Bob")
+				.WithAttachmentRequirement(attachmentRequirement)
+				.Build();
+
+			Assert.AreEqual(signer.Attachments.Count, 1);
+			Assert.AreEqual(signer.Attachments["Driver's license"].Name, attachmentRequirement.Name);
+			Assert.AreEqual(signer.Attachments["Driver's license"].Description, attachmentRequirement.Description);
+			Assert.AreEqual(signer.Attachments["Driver's license"].Required, attachmentRequirement.Required);
+			Assert.AreEqual(signer.Attachments["Driver's license"].Status, attachmentRequirement.Status);
+		}
+
+		[Test]
+		public void CanAddTwoAttachmentRequirement()
+		{
+			Silanis.ESL.SDK.AttachmentRequirement attachmentRequirement1 = AttachmentRequirementBuilder.NewAttachmentRequirementWithName("Driver's license")
+				.WithDescription("Please upload scanned driver's license.")
+				.IsRequiredAttachment()
+				.Build();
+			Silanis.ESL.SDK.AttachmentRequirement attachmentRequirement2 = AttachmentRequirementBuilder.NewAttachmentRequirementWithName("Medicare card")
+				.WithDescription("Please upload scanned medicare card.")
+				.IsRequiredAttachment()
+				.Build();
+
+			Silanis.ESL.SDK.Signer signer = SignerBuilder.NewSignerWithEmail("billy@bob.com")
+				.WithFirstName("Billy")
+				.WithLastName("Bob")
+				.WithAttachmentRequirement(attachmentRequirement1)
+				.WithAttachmentRequirement(attachmentRequirement2)
+				.Build();
+
+			Assert.AreEqual(signer.Attachments.Count, 2);
+			Assert.AreEqual(signer.Attachments["Driver's license"].Name, attachmentRequirement1.Name);
+			Assert.AreEqual(signer.Attachments["Driver's license"].Description, attachmentRequirement1.Description);
+			Assert.AreEqual(signer.Attachments["Driver's license"].Required, attachmentRequirement1.Required);
+			Assert.AreEqual(signer.Attachments["Driver's license"].Status, attachmentRequirement1.Status);
+			Assert.AreEqual(signer.Attachments["Medicare card"].Name, attachmentRequirement2.Name);
+			Assert.AreEqual(signer.Attachments["Medicare card"].Description, attachmentRequirement2.Description);
+			Assert.AreEqual(signer.Attachments["Medicare card"].Required, attachmentRequirement2.Required);
+			Assert.AreEqual(signer.Attachments["Medicare card"].Status, attachmentRequirement2.Status);
+		}
+
+		[Test]
+		public void ConvertAPIRoleToSDKSigner()
+		{
+			Role role = new Role();
+			role.Name = "roleName";
+			role.Id = "roleId";
+			role.Type = RoleType.SIGNER;
+
+			Silanis.ESL.API.Signer apiSigner = new Silanis.ESL.API.Signer();
+			apiSigner.FirstName = "Billy";
+			apiSigner.LastName = "Bob";
+			apiSigner.Email = "billy@bob.com";
+
+			role.AddSigner(apiSigner);
+
+			Silanis.ESL.API.AttachmentRequirement attachmentRequirement = new Silanis.ESL.API.AttachmentRequirement();
+			attachmentRequirement.Name = "attachmentName";
+			attachmentRequirement.Description = "attachment description";
+			attachmentRequirement.Id = "attachmentId";
+			attachmentRequirement.Required = true;
+			attachmentRequirement.Comment = "sender's comments";
+			attachmentRequirement.Status = RequirementStatus.REJECTED;
+
+			role.AddAttachmentRequirement(new AttachmentRequirementConverter(attachmentRequirement).ToAPIAttachmentRequirement());
+
+			Silanis.ESL.SDK.Signer sdkSigner = SignerBuilder.NewSignerFromAPIRole(role).Build();
+
+			Assert.AreEqual(sdkSigner.FirstName, role.Signers[0].FirstName);
+			Assert.AreEqual(sdkSigner.LastName, role.Signers[0].LastName);
+			Assert.AreEqual(sdkSigner.Email, role.Signers[0].Email);
+			Assert.AreEqual(sdkSigner.Attachments["attachmentName"].Name, role.AttachmentRequirements[0].Name);
+			Assert.AreEqual(sdkSigner.Attachments["attachmentName"].Description, role.AttachmentRequirements[0].Description);
+			Assert.AreEqual(sdkSigner.Attachments["attachmentName"].Id, role.AttachmentRequirements[0].Id);
+			Assert.AreEqual(sdkSigner.Attachments["attachmentName"].Required, role.AttachmentRequirements[0].Required);
+			Assert.AreEqual(sdkSigner.Attachments["attachmentName"].SenderComment, role.AttachmentRequirements[0].Comment);
+			Assert.AreEqual(sdkSigner.Attachments["attachmentName"].Status, role.AttachmentRequirements[0].Status);
 		}
 	}
 } 	

@@ -21,6 +21,11 @@ namespace Silanis.ESL.SDK
             role.Index = sdkSigner.SigningOrder;
             role.Reassign = sdkSigner.CanChangeSigner;
 
+			foreach (AttachmentRequirement attachmentRequirement in sdkSigner.Attachments.Values)
+			{
+				role.AddAttachmentRequirement(new AttachmentRequirementConverter(attachmentRequirement).ToAPIAttachmentRequirement());
+			}
+
             if (String.IsNullOrEmpty(sdkSigner.Id))
             {
                 role.Id = role.Name = roleIdName;

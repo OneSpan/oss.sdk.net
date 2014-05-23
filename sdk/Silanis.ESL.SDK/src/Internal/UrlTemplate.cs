@@ -83,7 +83,10 @@ namespace Silanis.ESL.SDK.Internal
 
         // Webpage redirect urls
         public static readonly string DESIGNER_REDIRECT_PATH = "/designer/{packageId}";
-        public static readonly string SIGNING_REDIRECT_PATH = "/packages/{packageId}/sign";    
+        public static readonly string SIGNING_REDIRECT_PATH = "/packages/{packageId}/sign";  
+
+		// AttachmentRequirement Service
+		public static readonly string ATTACHMENT_REQUIREMENT_PATH = "/packages/{packageId}/attachment/{attachmentId}";
 
 		public UrlTemplate (string baseUrl)
 		{

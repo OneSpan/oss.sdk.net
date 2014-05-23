@@ -26,7 +26,8 @@ namespace Silanis.ESL.SDK
 		private AccountService accountService;
 		private Services.ReminderService reminderService;
         private TemplateService templateService;
-		private AuthenticationTokenService authenticationTokenService;        
+		private AuthenticationTokenService authenticationTokenService;    
+		private AttachmentRequirementService attachmentRequirementService;
         
         private JsonSerializerSettings jsonSerializerSettings;
 
@@ -49,6 +50,7 @@ namespace Silanis.ESL.SDK
 			sessionService = new SessionService (apiKey, this.baseUrl);
 			fieldSummaryService = new FieldSummaryService (apiKey, this.baseUrl);
 			auditService = new AuditService (apiKey, this.baseUrl);
+<<<<<<< HEAD
             eventNotificationService = new EventNotificationService(restClient, this.baseUrl, jsonSerializerSettings);
             customFieldService = new CustomFieldService( restClient, this.baseUrl, jsonSerializerSettings );
             groupService = new GroupService(restClient, this.baseUrl, jsonSerializerSettings);
@@ -56,6 +58,16 @@ namespace Silanis.ESL.SDK
 			reminderService = new ReminderService(restClient, this.baseUrl, jsonSerializerSettings);
 			templateService = new TemplateService(restClient, this.baseUrl, packageService, jsonSerializerSettings);
 			authenticationTokenService = new AuthenticationTokenService(restClient, this.baseUrl);            
+=======
+            eventNotificationService = new EventNotificationService(restClient, this.baseUrl);
+            customFieldService = new CustomFieldService( restClient, this.baseUrl );
+            groupService = new GroupService(restClient, this.baseUrl);
+			accountService = new AccountService(restClient, this.baseUrl);
+			reminderService = new ReminderService(restClient, this.baseUrl);
+			templateService = new TemplateService(restClient, this.baseUrl, packageService);
+			authenticationTokenService = new AuthenticationTokenService(restClient, this.baseUrl); 
+			attachmentRequirementService = new AttachmentRequirementService(restClient, this.baseUrl, jsonSerializerSettings);
+>>>>>>> 005b1ad5790e33da8e57769f5faff08ac5d6a3d9
 		}
         
         private void configureJsonSerializationSettings()
@@ -345,5 +357,13 @@ namespace Silanis.ESL.SDK
                 return Assembly.GetExecutingAssembly().GetName().Version;
             }
         }   
+
+		public AttachmentRequirementService AttachmentRequirementService
+		{
+			get
+			{
+				return attachmentRequirementService;
+			}
+		}
 	}
 }	
