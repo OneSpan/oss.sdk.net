@@ -73,10 +73,5 @@ namespace SDK.Examples
 //            Console.Out.WriteLine( "Blah" );
 //        }
     }
-    
-    public class Bob
-    {
-        public CultureInfo cultureInfo;
-    }
 }
 
