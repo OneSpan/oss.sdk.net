@@ -11,13 +11,11 @@ namespace Silanis.ESL.SDK.Services
         private JsonSerializerSettings settings;
         private RestClient restClient;
 
-        public AccountService(RestClient restClient, string baseUrl)
+        public AccountService(RestClient restClient, string baseUrl, JsonSerializerSettings settings)
         {
             this.restClient = restClient;
             template = new UrlTemplate (baseUrl);
-
-            settings = new JsonSerializerSettings ();
-            settings.NullValueHandling = NullValueHandling.Ignore;
+            this.settings = settings;
         }
 
         public void InviteUser( AccountMember accountMember ) {
@@ -28,7 +26,7 @@ namespace Silanis.ESL.SDK.Services
                 string json = JsonConvert.SerializeObject (user, settings);
                 restClient.Post(path, json);              
             } catch (Exception e) {
-                throw new EslException ("Failed to invite new account member." + " Exception: " + e.Message);
+                throw new EslException ("Failed to invite new account member.\t" + " Exception: " + e.Message, e);
             }
         }
     }

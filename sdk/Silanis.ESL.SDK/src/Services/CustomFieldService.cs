@@ -12,10 +12,10 @@ namespace Silanis.ESL.SDK.Services
         private RestClient client;
         private JsonSerializerSettings settings;
     
-        public CustomFieldService(RestClient client, string baseUrl) {
+        public CustomFieldService(RestClient client, string baseUrl, JsonSerializerSettings settings) {
             template = new UrlTemplate( baseUrl );
             this.client = client;
-            settings = new JsonSerializerSettings ();
+            this.settings = settings;
         }
     
         ///
@@ -46,7 +46,7 @@ namespace Silanis.ESL.SDK.Services
                 sdkResponse = CustomFieldBuilder.CustomField( apiResponse ).Build();
                 return sdkResponse;
             } catch ( Exception e ) {
-                throw new EslException( "Could not add/update the custom field to account." + e.Message );
+                throw new EslException( "Could not add/update the custom field to account." + e.Message, e );
             }
         }
     
@@ -70,7 +70,7 @@ namespace Silanis.ESL.SDK.Services
             } catch ( EslException e ) {
                 return false;
             } catch ( Exception e ) {
-                throw new EslException( "Could not get the custom field from account." + e.Message );
+                throw new EslException( "Could not get the custom field from account." + e.Message, e );
             }
         }
     
@@ -99,7 +99,7 @@ namespace Silanis.ESL.SDK.Services
     
                 return CustomFieldValueBuilder.CustomFieldValue( result ).build();
             } catch ( Exception e ) {
-                throw new EslException( "Could not add/update the custom field to account." + e.Message );
+                throw new EslException( "Could not add/update the custom field to account." + e.Message, e );
             }
         }
     
@@ -123,7 +123,7 @@ namespace Silanis.ESL.SDK.Services
             } catch ( EslException e ) {
                 return false;
             } catch ( Exception e ) {
-                throw new EslException( "Could not get the custom field from user." + e.Message );
+                throw new EslException( "Could not get the custom field from user." + e.Message, e );
             }
         }
 

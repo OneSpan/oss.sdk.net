@@ -25,16 +25,6 @@ namespace SDK.Examples
 			}
 		}
 
-		private SessionToken senderSessionToken = null;
-
-		public SessionToken SenderSessionToken
-		{
-			get
-			{
-				return senderSessionToken;
-			}
-		}
-
         public SessionCreationExample( Props props ) : this(props.Get("api.url"), props.Get("api.key"), props.Get("1.email")) {
         }
 
@@ -61,8 +51,8 @@ namespace SDK.Examples
 
             PackageId packageId = eslClient.CreatePackage( superDuperPackage );
             eslClient.SendPackage( packageId );
-			signerSessionToken = eslClient.CreateSignerSessionToken( packageId, signerId );
-			senderSessionToken = eslClient.CreateSenderSessionToken();
+			signerSessionToken = eslClient.CreateSignerSessionToken( packageId, email1 );
+           
         }
     }
 }

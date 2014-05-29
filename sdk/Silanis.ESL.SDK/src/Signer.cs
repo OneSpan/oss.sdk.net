@@ -25,6 +25,17 @@ namespace Silanis.ESL.SDK
 			LastName = null;
 			authentication = new Authentication(AuthenticationMethod.EMAIL);
 		}
+        
+        public Signer(string id)
+        {
+            GroupId = null;
+            FirstName = null;
+            LastName = null;
+            Email = null;
+            authentication = null;
+            this.Id = id;
+            authentication = new Authentication(Silanis.ESL.SDK.AuthenticationMethod.EMAIL);
+        }
 
 		public string Id {
 			get;
@@ -108,10 +119,15 @@ namespace Silanis.ESL.SDK
 			set;
 		}
 
-        public string RoleId
+		public IDictionary<string, AttachmentRequirement> Attachments
+		{
+			get;
+			set;
+		}
+
+        public bool IsPlaceholderSigner()
         {
-            get;
-            set;
+            return GroupId == null && Email == null;
         }
 
 		public bool IsGroupSigner()
@@ -119,8 +135,13 @@ namespace Silanis.ESL.SDK
 			return GroupId != null;
 		}
 
-		internal Silanis.ESL.API.Signer ToAPISigner ()
-		{
+		internal Silanis.ESL.API.Signer ToAPISigner()
+        {
+            if (IsPlaceholderSigner())
+            {
+                return null;
+            }
+        
 			Silanis.ESL.API.Signer signer = new Silanis.ESL.API.Signer ();
 
 			if (!IsGroupSigner())

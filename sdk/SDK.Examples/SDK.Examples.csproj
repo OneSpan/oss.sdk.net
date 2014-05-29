@@ -46,7 +46,7 @@
     <DebugType>none</DebugType>
   </PropertyGroup>
   <PropertyGroup>
-    <StartupObject>SDK.Examples.BasicPackageCreationExample</StartupObject>
+    <StartupObject>SDK.Examples.PackageEditExample</StartupObject>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -93,8 +93,24 @@
     <Compile Include="src\CustomFieldExample.cs" />
     <Compile Include="src\SDKSample1.cs" />
     <Compile Include="src\GroupManagementExample.cs" />
-    <Compile Include="src\UploadDocumentExample.cs" />
     <Compile Include="src\ReminderExample.cs" />
+    <Compile Include="src\TemplateExample.cs" />
+    <Compile Include="src\CreateTemplateExample.cs" />
+    <Compile Include="src\UpdatePackageExample.cs" />
+    <Compile Include="src\DocumentOperationsExample.cs" />
+    <Compile Include="src\SignerManipulationExample.cs" />
+    <Compile Include="src\PackageTrashExample.cs" />
+    <Compile Include="src\PackageArchiveExample.cs" />
+    <Compile Include="src\PackageEditExample.cs" />
+    <Compile Include="src\UserAuthenticationTokenExample.cs" />
+    <Compile Include="src\SenderAuthenticationTokenExample.cs" />
+    <Compile Include="src\SignerAuthenticationTokenExample.cs" />
+    <Compile Include="src\DesignerRedirectForApiKeyExample.cs" />
+    <Compile Include="src\DesignerRedirectForPackageSenderExample.cs" />
+    <Compile Include="src\SigningRedirectForSignerExample.cs" />
+    <Compile Include="src\CustomSenderInfoInCreateNewTemplateExample.cs" />
+    <Compile Include="src\CustomSenderInfoInCreatePackageFromTemplateExample.cs" />
+    <Compile Include="src\AttachmentRequirementExample.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

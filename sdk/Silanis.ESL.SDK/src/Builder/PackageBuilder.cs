@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Globalization;
+using System.Reflection;
 
 namespace Silanis.ESL.SDK.Builder
 {
@@ -12,6 +13,7 @@ namespace Silanis.ESL.SDK.Builder
 		private Nullable<DateTime> expiryDate;
 		private string emailMessage = String.Empty;
 		private IDictionary<string, Signer> signers = new Dictionary<string, Signer> ();
+        private IDictionary<string, Signer> placeholders = new Dictionary<string, Signer> ();
 		private IDictionary<string, Document> documents = new Dictionary<string, Document>();
 		private PackageId id;
 		private DocumentPackageStatus status;
@@ -40,16 +42,15 @@ namespace Silanis.ESL.SDK.Builder
 
 			foreach ( Silanis.ESL.API.Role role in package.Roles ) {
 				if ( role.Signers.Count == 0 ) {
-					continue;
+					WithSigner(SignerBuilder.NewSignerPlaceholder(new Placeholder(role.Id)));   
 				}
-
-				if (role.Signers[0].Group != null)
+				else if (role.Signers[0].Group != null)
 				{
 					WithSigner(SignerBuilder.NewSignerFromGroup(new GroupId(role.Signers[0].Group.Id)));
 				}
 				else
 				{
-					WithSigner(SignerBuilder.NewSignerFromAPISigner(role).Build());
+					WithSigner(SignerBuilder.NewSignerFromAPIRole(role).Build());
 					if (role.Type == Silanis.ESL.API.RoleType.SENDER)
 					{
 						Silanis.ESL.API.Signer senderSigner = role.Signers[0];
@@ -62,7 +63,7 @@ namespace Silanis.ESL.SDK.Builder
 			}
 
 			foreach ( Silanis.ESL.API.Document apiDocument in package.Documents ) {
-				Document document = DocumentBuilder.NewDocumentFromAPIDocument( apiDocument, package ).Build();
+				Document document = new DocumentConverter( apiDocument, package ).ToSDKDocument();
 
 				WithDocument( document );
 			}
@@ -87,7 +88,7 @@ namespace Silanis.ESL.SDK.Builder
 			case Silanis.ESL.API.PackageStatus.EXPIRED:
 				return DocumentPackageStatus.EXPIRED;
 			default:
-				throw new EslException("Unknown Silanis.ESL.API.PackageStatus value: " + status);
+				throw new EslException("Unknown Silanis.ESL.API.PackageStatus value: " + status,null);
 			}
 		}
 
@@ -95,6 +96,18 @@ namespace Silanis.ESL.SDK.Builder
 		{
 			return new PackageBuilder (name);
 		}
+
+        public PackageBuilder WithAutomaticCompletion()
+        {
+            this.autocomplete = true;
+            return this;
+        }
+        
+        public PackageBuilder WithoutAutomaticCompletion()
+        {
+            this.autocomplete = false;
+            return this;
+        }
 
 		public PackageBuilder DescribedAs(string description)
 		{
@@ -126,14 +139,18 @@ namespace Silanis.ESL.SDK.Builder
 		}
 
 		public PackageBuilder WithSigner(Signer signer)
-		{
-			if (signer.IsGroupSigner())
+        {
+            if (signer.IsPlaceholderSigner())
+            {
+                placeholders[signer.Id] = signer;
+            }
+			else if (signer.IsGroupSigner())
 			{
 				signers[signer.GroupId.Id] = signer;
 			}
 			else
 			{
-				signers [signer.Email] = signer;
+				signers[signer.Email] = signer;
 			}
 			return this;
 		}
@@ -168,22 +185,33 @@ namespace Silanis.ESL.SDK.Builder
             this.senderInfo = senderInfo;
             return this;
         }
-
-        public PackageBuilder withAttributes( DocumentPackageAttributes attributes) {
+        
+        public PackageBuilder WithAttributes(DocumentPackageAttributes attributes)
+        {
             this.attributes = attributes;
             return this;
+        }
+
+        public PackageBuilder WithAttributes(DocumentPackageAttributesBuilder attributesBuilder)
+        {
+            return WithAttributes( attributesBuilder.Build() );
+        }
+
+        [Obsolete("Use WithAttributes() instead.  Notice the uppercase W.")]
+        public PackageBuilder withAttributes( DocumentPackageAttributes attributes) {
+            return WithAttributes( attributes );
         } 
 
-		public DocumentPackage Build ()
-		{
-			Support.LogMethodEntry();
-			DocumentPackage package = new DocumentPackage (id, packageName, autocomplete, signers, documents);
+		public DocumentPackage Build()
+        {
+            Support.LogMethodEntry();
+            DocumentPackage package = new DocumentPackage(id, packageName, autocomplete, signers, placeholders, documents);
 
-			package.Description = description;
-			package.ExpiryDate = expiryDate;
-			package.EmailMessage = emailMessage;
-			package.Status = status;
-			package.Language = language;
+            package.Description = description;
+            package.ExpiryDate = expiryDate;
+            package.EmailMessage = emailMessage;
+            package.Status = status;
+            package.Language = language;
             package.Settings = settings;
             package.SenderInfo = senderInfo;
             package.Attributes = attributes;
@@ -191,5 +219,7 @@ namespace Silanis.ESL.SDK.Builder
 			Support.LogMethodExit(package);
 			return package;
 		}
-	}
+        
+    }
+    
 }

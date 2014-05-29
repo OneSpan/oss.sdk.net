@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using Silanis.ESL.SDK.Internal;
 using Silanis.ESL.SDK.Builder;
 using Silanis.ESL.API;
+using System.Globalization;
 
 namespace Silanis.ESL.SDK.Services
 {
@@ -25,14 +26,13 @@ namespace Silanis.ESL.SDK.Services
 		/// </summary>
 		/// <param name="apiToken">API token.</param>
 		/// <param name="baseUrl">Base URL.</param>
-		public PackageService (RestClient restClient, string baseUrl)
+		public PackageService (RestClient restClient, string baseUrl, JsonSerializerSettings settings)
 		{
             this.restClient = restClient;
 			template = new UrlTemplate (baseUrl);
-			settings = new JsonSerializerSettings ();
-			settings.NullValueHandling = NullValueHandling.Ignore;
-		}
-
+            this.settings = settings;
+        }
+        
 		/// <summary>
 		/// Creates a package based on the settings of the pacakge parameter.
 		/// </summary>
@@ -50,7 +50,7 @@ namespace Silanis.ESL.SDK.Services
 				Support.LogMethodExit(result);
 				return result;
 			} catch (Exception e) {
-				throw new EslException ("Could not create a new package." + " Exception: " + e.Message);
+				throw new EslException ("Could not create a new package." + " Exception: " + e.Message,e);
 			}
 		}
 
@@ -59,19 +59,19 @@ namespace Silanis.ESL.SDK.Services
 		/// </summary>
 		/// <param name="packageId">The package id.</param>
 		/// <param name="package">The updated package.</param>
-		internal void UpdatePackage (PackageId packageId, Silanis.ESL.API.Package package)
-		{
-			string path = template.UrlFor (UrlTemplate.PACKAGE_ID_PATH)
-				.Replace ("{packageId}", packageId.Id)
-				.Build ();
-
-			try {
-				string json = JsonConvert.SerializeObject (package, settings);
-                string response = restClient.Put(path, json);
-			} catch (Exception e) {
-				throw new EslException ("Could not update the package." + " Exception: " + e.Message);
-			}
-		}
+//		internal void UpdatePackage (PackageId packageId, Silanis.ESL.API.Package package)
+//		{
+//			string path = template.UrlFor (UrlTemplate.PACKAGE_ID_PATH)
+//				.Replace ("{packageId}", packageId.Id)
+//				.Build ();
+//
+//			try {
+//				string json = JsonConvert.SerializeObject (package, settings);
+//                string response = restClient.Put(path, json);
+//			} catch (Exception e) {
+//				throw new EslException ("Could not update the package." + " Exception: " + e.Message);
+//			}
+//		}
 
 		/// <summary>
 		/// Gets the package.
@@ -88,7 +88,7 @@ namespace Silanis.ESL.SDK.Services
                 string response = restClient.Get(path);
 				return JsonConvert.DeserializeObject<Silanis.ESL.API.Package> (response, settings);
 			} catch (Exception e) {
-				throw new EslException ("Could not get package." + " Exception: " + e.Message);
+				throw new EslException ("Could not get package." + " Exception: " + e.Message,e);
 			}
 		}
 
@@ -99,15 +99,77 @@ namespace Silanis.ESL.SDK.Services
 		/// <param name="document">The document to delete.</param>
 		public void DeleteDocument (PackageId packageId, Document document)
 		{
-			string path = template.UrlFor (UrlTemplate.DOCUMENT_ID_PATH)
-                .Replace ("{packageId}", packageId.Id)
-                .Replace ("{documentId}", "document.Id")
-                .Build ();
+			DeleteDocument(packageId, document.Id);
+		}
 
-			try {
-                restClient.Delete(path);
-			} catch (Exception e) {
-				throw new EslException ("Could not delete document from package." + " Exception: " + e.Message);
+		public void DeleteDocument (PackageId packageId, string documentId)
+		{
+			string path = template.UrlFor(UrlTemplate.DOCUMENT_ID_PATH)
+							.Replace("{packageId}", packageId.Id)
+							.Replace("{documentId}", documentId)
+							.Build();
+
+			try
+			{
+				restClient.Delete(path);
+			}
+			catch (Exception e)
+			{
+				throw new EslException("Could not delete document from package." + " Exception: " + e.Message,e);
+			}
+		}
+
+		public void UpdateDocumentMetadata(DocumentPackage package, Document document)
+		{
+			string path = template.UrlFor (UrlTemplate.DOCUMENT_ID_PATH)
+				.Replace ("{packageId}", package.Id.Id)
+				.Replace ("{documentId}", document.Id)
+				.Build ();
+
+			Silanis.ESL.API.Document internalDoc = new DocumentConverter(document).ToAPIDocument();
+            
+            // Wipe out the members not related to the metadata
+            internalDoc.Approvals = null;
+            internalDoc.Fields = null;
+            internalDoc.Pages = null;
+
+			try 
+			{
+				string json = JsonConvert.SerializeObject (internalDoc, settings);
+				Support.LogDebug("document json = " + json);
+
+				restClient.Post(path, json);
+				Support.LogMethodExit("Document updated without issue");
+			} 
+			catch (Exception e) 
+			{
+				throw new EslException ("Could not upload document to package." + " Exception: " + e.Message,e);
+			}
+		}
+
+		public void OrderDocuments(DocumentPackage package)
+		{
+			string path = template.UrlFor (UrlTemplate.DOCUMENT_PATH)
+				.Replace ("{packageId}", package.Id.Id)
+				.Build ();
+
+			List<Silanis.ESL.API.Document> documents = new List<Silanis.ESL.API.Document>();
+			foreach (Document doc in package.Documents.Values)
+			{
+				documents.Add(new DocumentConverter(doc).ToAPIDocument());
+			}
+
+			try 
+			{
+				string json = JsonConvert.SerializeObject (documents, settings);
+				Support.LogDebug("document json = " + json);
+
+				restClient.Put(path, json);
+				Support.LogMethodExit("Document order updated without issue");
+			} 
+			catch (Exception e) 
+			{
+				throw new EslException ("Could not order documents." + " Exception: " + e.Message,e);
 			}
 		}
 
@@ -121,11 +183,11 @@ namespace Silanis.ESL.SDK.Services
                 .Replace ("{packageId}", packageId.Id)
                 .Build ();
 
-			try {
-				byte[] content = Converter.ToBytes ("{\"status\":\"SENT\"}");
+			try 
+			{			
                 restClient.Post(path, "{\"status\":\"SENT\"}");
 			} catch (Exception e) {
-				throw new EslException ("Could not send the package." + " Exception: " + e.Message);
+				throw new EslException ("Could not send the package." + " Exception: " + e.Message,e);
 			}
 		}	
 
@@ -145,7 +207,7 @@ namespace Silanis.ESL.SDK.Services
 			try {
                 return restClient.GetBytes(path);
 			} catch (Exception e) {
-				throw new EslException ("Could not download the pdf document." + " Exception: " + e.Message);
+				throw new EslException ("Could not download the pdf document." + " Exception: " + e.Message, e);
 			}
 		}
 
@@ -163,7 +225,7 @@ namespace Silanis.ESL.SDK.Services
 			try {
                 return restClient.GetBytes(path);
 			} catch (Exception e) {
-				throw new EslException ("Could not download the documents to a zip file." + " Exception: " + e.Message);
+				throw new EslException ("Could not download the documents to a zip file." + " Exception: " + e.Message, e);
 			}
 		}
 
@@ -181,9 +243,23 @@ namespace Silanis.ESL.SDK.Services
 			try {
                 return restClient.GetBytes(path);
 			} catch (Exception e) {
-				throw new EslException ("Could not download the evidence summary." + " Exception: " + e.Message);
+				throw new EslException ("Could not download the evidence summary." + " Exception: " + e.Message, e);
 			}
 		}
+
+        internal void UpdatePackage(PackageId packageId, Package package)
+        {
+            string path = template.UrlFor (UrlTemplate.PACKAGE_ID_PATH)
+                .Replace ("{packageId}", packageId.Id)
+                .Build();
+                
+            try {
+                restClient.Post(path, JsonConvert.SerializeObject (package, settings));
+                restClient.GetBytes(path);
+            } catch (Exception e) {
+                throw new EslException ("Unable to update package settings." + " Exception: " + e.Message, e);
+            }
+        }
 
 		/// <summary>
 		/// Uploads the Document and file in byte[] to the package.
@@ -192,26 +268,34 @@ namespace Silanis.ESL.SDK.Services
 		/// <param name="fileName">The name of the document.</param>
 		/// <param name="fileBytes">The file to upload in bytes.</param>
 		/// <param name="document">The document object that has field settings.</param>
-		internal void UploadDocument (PackageId packageId, string fileName, byte[] fileBytes, Silanis.ESL.API.Document document)
+		internal Document UploadDocument (DocumentPackage package, string fileName, byte[] fileBytes, Document document)
 		{
-            Support.LogMethodEntry(packageId, fileName, document);
+			Support.LogMethodEntry(package.Id, fileName, document);
 			string path = template.UrlFor (UrlTemplate.DOCUMENT_PATH)
-				.Replace ("{packageId}", packageId.Id)
+				.Replace ("{packageId}", package.Id.Id)
 					.Build ();
 
-			try {
-				string json = JsonConvert.SerializeObject (document, settings);
+			Silanis.ESL.API.Package internalPackage = package.ToAPIPackage();
+			Silanis.ESL.API.Document internalDoc = new DocumentConverter(document).ToAPIDocument(internalPackage);
+
+			try 
+			{
+				string json = JsonConvert.SerializeObject (internalDoc, settings);
                 Support.LogDebug("document json = " + json);
 				byte[] payloadBytes = Converter.ToBytes (json);
 
 				string boundary = GenerateBoundary ();
 				byte[] content = CreateMultipartContent (fileName, fileBytes, payloadBytes, boundary);
 
-                restClient.PostMultipartFile(path, content, boundary);
+				string response = restClient.PostMultipartFile(path, content, boundary);
                 Support.LogMethodExit("Document uploaded without issue");
-//				Converter.ToString (HttpMethods.MultipartPostHttp (apiToken, path, content, boundary));
-			} catch (Exception e) {
-				throw new EslException ("Could not upload document to package." + " Exception: " + e.Message);
+
+				Silanis.ESL.API.Document uploadedDoc = JsonConvert.DeserializeObject<Silanis.ESL.API.Document>(response);
+				return new DocumentConverter(uploadedDoc, internalPackage).ToSDKDocument();
+			} 
+			catch (Exception e) 
+			{
+				throw new EslException ("Could not upload document to package." + " Exception: " + e.Message, e);
 			}
 		}
 
@@ -264,7 +348,7 @@ namespace Silanis.ESL.SDK.Services
 
 				return SigningStatusUtility.FromString(reader.Value.ToString ());
 			} catch (Exception e) {
-				throw new EslException ("Could not get signing status. Exception: " + e.Message);
+				throw new EslException ("Could not get signing status. Exception: " + e.Message, e);
 			}
 		}
 
@@ -279,7 +363,7 @@ namespace Silanis.ESL.SDK.Services
 				string stringResponse = restClient.Get(path);
 				response = JsonConvert.DeserializeObject<Result<Role>> (stringResponse, settings);
 			} catch( Exception e ) {
-				throw new EslException("Unable to retrieve role list for package with id " + packageId.Id + ".  " + e.Message);
+				throw new EslException("Unable to retrieve role list for package with id " + packageId.Id + ".  " + e.Message, e);
 			}
 			return response.Results;
 		}
@@ -294,7 +378,68 @@ namespace Silanis.ESL.SDK.Services
 			}
 			catch (Exception e)
 			{
-				throw new EslException ("Could not delete package. Exception: " + e.Message);	
+				throw new EslException ("Could not delete package. Exception: " + e.Message, e);	
+			}
+		}
+
+		public void Trash(PackageId id)
+		{
+			if (id == null)
+			{
+				throw new ArgumentNullException("id");
+			}
+
+			string path = template.UrlFor(UrlTemplate.PACKAGE_ID_PATH).Replace("{packageId}", id.Id).Build ();
+			Silanis.ESL.API.Package package = new Silanis.ESL.API.Package();
+
+			package.Id = id.Id;
+			package.Trashed = true;
+
+			try 
+			{
+				restClient.Post(path, JsonConvert.SerializeObject (package, settings));
+			} 
+			catch (Exception e) 
+			{
+				throw new EslException ("Unable to trash package." + " Exception: " + e.Message, e);
+			}
+		}
+
+		public void Archive(PackageId id)
+		{
+			if (id == null)
+			{
+				throw new ArgumentNullException("id");
+			}
+
+			string path = template.UrlFor(UrlTemplate.PACKAGE_ID_PATH).Replace("{packageId}", id.Id).Build ();
+
+			try 
+			{
+				restClient.Put(path, "{\"status\":\"ARCHIVED\"}");
+			} 
+			catch (Exception e) 
+			{
+				throw new EslException ("Unable to archive package settings." + " Exception: " + e.Message, e);
+			}
+		}
+
+		public void Edit(PackageId id)
+		{
+			if (id == null)
+			{
+				throw new ArgumentNullException("id");
+			}
+
+			string path = template.UrlFor(UrlTemplate.PACKAGE_ID_PATH).Replace("{packageId}", id.Id).Build ();
+
+			try 
+			{
+				restClient.Put(path, "{\"status\":\"DRAFT\"}");
+			} 
+			catch (Exception e) 
+			{
+				throw new EslException ("Unable to edit package." + " Exception: " + e.Message, e);
 			}
 		}
 
@@ -336,7 +481,7 @@ namespace Silanis.ESL.SDK.Services
 			}
 			catch (Exception e)
 			{
-				throw new EslException("Unable to send email notification.  " + e.Message);
+				throw new EslException("Unable to send email notification.  " + e.Message, e);
 			}
 		}
 
@@ -362,7 +507,7 @@ namespace Silanis.ESL.SDK.Services
 			}
 			catch (Exception e)
 			{
-				throw new EslException ("Could not send email notification to signer. Exception: " + e.Message);	
+				throw new EslException ("Could not send email notification to signer. Exception: " + e.Message, e);	
 			}
 		}
 
@@ -384,12 +529,12 @@ namespace Silanis.ESL.SDK.Services
 			catch (Exception e)
 			{
 				Console.WriteLine (e.StackTrace);
-				throw new EslException ("Could not get package list. Exception: " + e.Message);	
+				throw new EslException ("Could not get package list. Exception: " + e.Message, e);	
 			}
 		}
 
         public Page<DocumentPackage> GetTemplates(PageRequest request) {
-            string path = template.UrlFor (UrlTemplate.PACKAGE_LIST_PATH)
+            string path = template.UrlFor (UrlTemplate.TEMPLATE_LIST_PATH)
                     .Replace ("{from}", request.From.ToString ())
                     .Replace ("{to}", request.To.ToString())
                     .Build();
@@ -404,7 +549,7 @@ namespace Silanis.ESL.SDK.Services
             catch (Exception e)
             {
                 Console.WriteLine (e.StackTrace);
-                throw new EslException ("Could not get template list. Exception: " + e.Message); 
+                throw new EslException ("Could not get template list. Exception: " + e.Message, e); 
             }
         }
 
@@ -433,7 +578,105 @@ namespace Silanis.ESL.SDK.Services
 			}
 
 			return new String (stringChars);
+		}        
+        
+		public string AddSigner( PackageId packageId, Signer signer )
+		{
+			Support.LogMethodEntry(packageId,signer);
+
+			Role apiPayload = new SignerConverter( signer ).ToAPIRole( System.Guid.NewGuid().ToString());
+
+			string path = template.UrlFor (UrlTemplate.ADD_SIGNER_PATH)
+				.Replace( "{packageId}", packageId.Id )
+				.Build ();
+			try {
+				string json = JsonConvert.SerializeObject (apiPayload, settings);
+				string response = restClient.Post(path, json);              
+				Role apiRole = JsonConvert.DeserializeObject<Role> (response);
+				Support.LogMethodExit(apiRole.Id);
+				return apiRole.Id;
+			} catch (Exception e) {
+				throw new EslException ("Could not add signer." + " Exception: " + e.Message, e);
+			}
 		}
 
+		public Signer GetSigner(PackageId packageId, string signerId)
+		{
+			Support.LogMethodEntry(packageId,signerId);
+			string path = template.UrlFor (UrlTemplate.GET_SIGNER_PATH)
+				.Replace ("{packageId}", packageId.Id)
+				.Replace ("{roleId}", signerId)
+				.Build ();
+
+			try {
+				string response = restClient.Get(path);
+				Silanis.ESL.API.Role apiRole = JsonConvert.DeserializeObject<Silanis.ESL.API.Role> (response, settings);
+				return SignerBuilder.NewSignerFromAPIRole(apiRole).Build();
+			} catch (Exception e) {
+				throw new EslException ("Could not retrieve signer." + " Exception: " + e.Message, e);
+			}
+		}
+
+		public void UpdateSigner( PackageId packageId, Signer signer )
+		{
+			Support.LogMethodEntry(packageId,signer);
+
+			Role apiPayload = new SignerConverter( signer ).ToAPIRole( System.Guid.NewGuid().ToString());
+
+			string path = template.UrlFor (UrlTemplate.UPDATE_SIGNER_PATH)
+				.Replace( "{packageId}", packageId.Id )
+				.Replace( "{roleId}", signer.Id )
+				.Build ();
+			try {
+				string json = JsonConvert.SerializeObject (apiPayload, settings);
+				restClient.Put(path, json);              
+				Support.LogMethodExit();
+			} catch (Exception e) {
+				throw new EslException ("Could not update signer." + " Exception: " + e.Message, e);
+			}
+		}
+
+		public void RemoveSigner( PackageId packageId, string signerId )
+		{
+			Support.LogMethodEntry(packageId,signerId);
+
+			string path = template.UrlFor (UrlTemplate.REMOVE_SIGNER_PATH)
+				.Replace ("{packageId}", packageId.Id)
+				.Replace ("{roleId}", signerId)
+				.Build ();
+
+			try {
+				restClient.Delete(path);
+				return;
+			} catch (Exception e) {
+				throw new EslException ("Could not delete signer." + " Exception: " + e.Message, e);
+			}
+		}
+
+		public void OrderSigners(DocumentPackage package)
+		{
+			string path = template.UrlFor (UrlTemplate.ROLE_PATH)
+				.Replace ("{packageId}", package.Id.Id)
+				.Build ();
+
+			List<Silanis.ESL.API.Role> roles = new List<Silanis.ESL.API.Role>();
+			foreach (Signer signer in package.Signers.Values)
+			{
+				roles.Add(new SignerConverter(signer).ToAPIRole(signer.Id));
+			}
+
+			try 
+			{
+				string json = JsonConvert.SerializeObject (roles, settings);
+				Support.LogDebug("role json = " + json);
+
+				restClient.Put(path, json);
+				Support.LogMethodExit("Signer order updated without issue");
+			} 
+			catch (Exception e) 
+			{
+				throw new EslException ("Could not order signers." + " Exception: " + e.Message, e);
+			}
+		}
 	}
 }

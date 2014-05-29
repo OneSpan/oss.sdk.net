@@ -54,6 +54,14 @@
     <Compile Include="src\Internal\Conversion\ReminderScheduleConverterTest.cs" />
     <Compile Include="src\Builder\ReminderScheduleBuilderTest.cs" />
     <Compile Include="src\Internal\Conversion\SenderConverterTest.cs" />
+    <Compile Include="src\Internal\Conversion\SignatureStyleConverterTest.cs" />
+    <Compile Include="src\Internal\Conversion\DocumentConverterTest.cs" />
+    <Compile Include="src\Internal\Conversion\FieldStyleAndSubTypeConverterTest.cs" />
+    <Compile Include="src\Internal\Conversion\FieldValidatorConverterTest.cs" />
+    <Compile Include="src\Internal\Conversion\FieldConverterTest.cs" />
+    <Compile Include="src\Builder\AttachmentRequirementBuilderTest.cs" />
+    <Compile Include="src\Internal\Conversion\SignerConverterTest.cs" />
+    <Compile Include="src\Internal\Conversion\AttachmentRequirementConverterTest.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

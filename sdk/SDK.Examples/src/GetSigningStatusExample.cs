@@ -44,6 +44,7 @@ namespace SDK.Examples
 			eslClient.SendPackage(id);
 
 			status = eslClient.GetSigningStatus( id, null, null );
+            Console.WriteLine("Signing status = " + status);
 		}
 	}
 }

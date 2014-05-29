@@ -24,10 +24,10 @@ namespace Silanis.ESL.SDK
 
         public DocumentPackageAttributes(IDictionary<string, object> contents)
         {
-            this.Contents = contents;
+			this.Contents = contents != null ? contents : new Dictionary<string, object>();
         }
 
-        public virtual void append(string name, object value)
+        public virtual void Append(string name, object value)
         {
             this.Contents[name] = value;
         }

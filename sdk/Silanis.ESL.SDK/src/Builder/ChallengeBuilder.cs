@@ -20,7 +20,12 @@ namespace Silanis.ESL.SDK.Builder
 
 		public ChallengeBuilder Answer(string answer)
 		{
-			challenges.Add (new Challenge(question, answer));
+			return Answer(answer, Challenge.MaskOptions.None);
+		}
+
+		public ChallengeBuilder Answer(string answer, Challenge.MaskOptions maskOption)
+		{
+			challenges.Add (new Challenge(question, answer, maskOption));
 			return this;
 		}
 
@@ -35,7 +40,7 @@ namespace Silanis.ESL.SDK.Builder
 			Support.LogMethodEntry();
 			if (QuestionProvided () && challenges.Count == 0)
 			{
-				throw new EslException ("Question challenge was provided with no answer");
+				throw new EslException ("Question challenge was provided with no answer",null);
 			}
 			Authentication result = new Authentication(challenges);
 			Support.LogMethodExit(result);

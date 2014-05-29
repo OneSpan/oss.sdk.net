@@ -36,6 +36,7 @@ Global
 		StartupItem = ..\SDK.Examples\SDK.Examples.csproj
 		Policies = $0
 		$0.TextStylePolicy = $1
+		$1.FileWidth = 120
 		$1.inheritsSet = VisualStudio
 		$1.inheritsScope = text/plain
 		$1.scope = text/x-csharp
@@ -61,8 +62,6 @@ Global
 		$2.BeforeDelegateDeclarationParentheses = False
 		$2.NewParentheses = False
 		$2.SpacesBeforeBrackets = False
-		$2.AlignToFirstMethodDeclarationParameter = False
-		$2.AlignToFirstIndexerDeclarationParameter = False
 		$2.inheritsSet = Mono
 		$2.inheritsScope = text/x-csharp
 		$2.scope = text/x-csharp

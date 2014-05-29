@@ -1,0 +1,27 @@
+using NUnit.Framework;
+using System;
+using Silanis.ESL.SDK;
+
+namespace SDK.Examples
+{
+    [TestFixture()]
+    public class CustomSenderInfoInCreatePackageFromTemplateExampleTest
+    {
+        [Test()]
+        public void VerifyResult()
+        {
+            CustomSenderInfoInCreatePackageFromTemplateExample example = new CustomSenderInfoInCreatePackageFromTemplateExample(Props.GetInstance());
+            example.Run();
+            
+            DocumentPackage template = example.EslClient.GetPackage( example.TemplateId );
+            DocumentPackage package = example.EslClient.GetPackage( example.PackageId );
+            
+            Assert.IsNotNull(template.SenderInfo);
+            Assert.AreEqual(CustomSenderInfoInCreatePackageFromTemplateExample.SENDER_FIRST_NAME, package.SenderInfo.FirstName);
+            Assert.AreEqual(CustomSenderInfoInCreatePackageFromTemplateExample.SENDER_SECOND_NAME, package.SenderInfo.LastName);
+            Assert.AreEqual(CustomSenderInfoInCreatePackageFromTemplateExample.SENDER_COMPANY, package.SenderInfo.Company);
+            Assert.AreEqual(CustomSenderInfoInCreatePackageFromTemplateExample.SENDER_TITLE, package.SenderInfo.Title);
+        }
+    }
+}
+

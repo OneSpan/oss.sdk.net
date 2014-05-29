@@ -1,0 +1,98 @@
+using System;
+using System.Collections.Generic;
+
+namespace Silanis.ESL.SDK
+{
+    public class AttachmentRequirementConverter
+    {
+		private Silanis.ESL.SDK.AttachmentRequirement sdkAttachmentRequirement = null;
+		private Silanis.ESL.API.AttachmentRequirement apiAttachmentRequirement = null;
+
+		/// <summary>
+		/// Construct with API AttachmentRequirement object involved in conversion.
+		/// </summary>
+		/// <param name="apiAttachmentRequirement">API attachment requirement.</param>
+		internal AttachmentRequirementConverter(Silanis.ESL.API.AttachmentRequirement apiAttachmentRequirement)
+        {
+			this.apiAttachmentRequirement = apiAttachmentRequirement;
+        }
+
+		/// <summary>
+		/// Construct with SDK AttachmentRequirement object involved in conversion.
+		/// </summary>
+		/// <param name="sdkAttachmentRequirement">Sdk attachment requirement.</param>
+		public AttachmentRequirementConverter(Silanis.ESL.SDK.AttachmentRequirement sdkAttachmentRequirement)
+		{
+			this.sdkAttachmentRequirement = sdkAttachmentRequirement;
+		}
+
+		/// <summary>
+		/// Convert from SDK AttachmentRequirement to API AttachmentRequirement.
+		/// </summary>
+		/// <returns>The API attachment requirement.</returns>
+		internal Silanis.ESL.API.AttachmentRequirement ToAPIAttachmentRequirement()
+		{
+			if (sdkAttachmentRequirement == null)
+			{
+				return apiAttachmentRequirement;
+			}
+
+			Silanis.ESL.API.AttachmentRequirement result = new Silanis.ESL.API.AttachmentRequirement();
+
+			if (String.IsNullOrEmpty(sdkAttachmentRequirement.Id))
+			{
+				result.Id = sdkAttachmentRequirement.Name;
+				result.Name = sdkAttachmentRequirement.Name;
+			}
+			else
+			{
+				result.Id = sdkAttachmentRequirement.Id;
+				result.Name = sdkAttachmentRequirement.Name;
+			}
+
+			result.Comment = sdkAttachmentRequirement.SenderComment;
+//			result.Data = sdkAttachmentRequirement.Data;
+			result.Description = sdkAttachmentRequirement.Description;
+			result.Required = sdkAttachmentRequirement.Required;
+
+			if (sdkAttachmentRequirement.Status.Equals(null))
+			{
+				result.Status = Silanis.ESL.API.RequirementStatus.INCOMPLETE;
+			}
+			else
+			{
+				result.Status = sdkAttachmentRequirement.Status;
+			}
+
+			return result;
+		}
+
+		/// <summary>
+		/// Convert from API AttachmentRequirement to SDK AttachmentRequirement.
+		/// </summary>
+		/// <returns>The SDK attachment requirement.</returns>
+		public Silanis.ESL.SDK.AttachmentRequirement ToSDKAttachmentRequirement()
+		{
+			if (apiAttachmentRequirement == null)
+			{
+				return sdkAttachmentRequirement;
+			}
+
+			if (apiAttachmentRequirement.Name != null)
+			{
+				Silanis.ESL.SDK.AttachmentRequirement result = new Silanis.ESL.SDK.AttachmentRequirement(apiAttachmentRequirement.Name);
+				result.SenderComment = apiAttachmentRequirement.Comment;
+//				result.Data = apiAttachmentRequirement.Data;
+				result.Description = apiAttachmentRequirement.Description;
+				result.Id = apiAttachmentRequirement.Id;
+				result.Required = apiAttachmentRequirement.Required;
+				result.Status = apiAttachmentRequirement.Status;
+
+				return result;
+			}
+
+			return sdkAttachmentRequirement;
+		}
+    }
+}
+

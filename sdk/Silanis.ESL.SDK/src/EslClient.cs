@@ -2,6 +2,9 @@ using System;
 using Silanis.ESL.SDK.Internal;
 using Silanis.ESL.SDK.Services;
 using Silanis.ESL.SDK.Builder;
+using Silanis.ESL.API;
+using Newtonsoft.Json;
+using System.Reflection;
 
 namespace Silanis.ESL.SDK
 {
@@ -11,6 +14,7 @@ namespace Silanis.ESL.SDK
     /// </summary>
 	public class EslClient
 	{
+
 		private string baseUrl;
 		private PackageService packageService;
 		private SessionService sessionService;
@@ -21,6 +25,11 @@ namespace Silanis.ESL.SDK
         private GroupService groupService;
 		private AccountService accountService;
 		private Services.ReminderService reminderService;
+        private TemplateService templateService;
+		private AuthenticationTokenService authenticationTokenService;    
+		private AttachmentRequirementService attachmentRequirementService;
+        
+        private JsonSerializerSettings jsonSerializerSettings;
 
         /// <summary>
         /// EslClient constructor.
@@ -34,18 +43,33 @@ namespace Silanis.ESL.SDK
 			Asserts.NotEmptyOrNull (baseUrl, "baseUrl");
 			this.baseUrl = AppendServicePath (baseUrl);
 
+            configureJsonSerializationSettings();
+
             RestClient restClient = new RestClient(apiKey);
-			packageService = new PackageService (restClient, this.baseUrl);
+			packageService = new PackageService (restClient, this.baseUrl, jsonSerializerSettings);
 			sessionService = new SessionService (apiKey, this.baseUrl);
 			fieldSummaryService = new FieldSummaryService (apiKey, this.baseUrl);
 			auditService = new AuditService (apiKey, this.baseUrl);
-            eventNotificationService = new EventNotificationService(restClient, this.baseUrl);
-            customFieldService = new CustomFieldService( restClient, this.baseUrl );
-            groupService = new GroupService(restClient, this.baseUrl);
-			accountService = new AccountService(restClient, this.baseUrl);
-			reminderService = new ReminderService(restClient, this.baseUrl);
 
+            eventNotificationService = new EventNotificationService(restClient, this.baseUrl, jsonSerializerSettings);
+            customFieldService = new CustomFieldService( restClient, this.baseUrl, jsonSerializerSettings );
+            groupService = new GroupService(restClient, this.baseUrl, jsonSerializerSettings);
+			accountService = new AccountService(restClient, this.baseUrl, jsonSerializerSettings);
+			reminderService = new ReminderService(restClient, this.baseUrl, jsonSerializerSettings);
+			templateService = new TemplateService(restClient, this.baseUrl, packageService, jsonSerializerSettings);
+			authenticationTokenService = new AuthenticationTokenService(restClient, this.baseUrl); 
+			attachmentRequirementService = new AttachmentRequirementService(restClient, this.baseUrl, jsonSerializerSettings);
 		}
+        
+        private void configureJsonSerializationSettings()
+        {
+            jsonSerializerSettings = new JsonSerializerSettings ();
+            jsonSerializerSettings.NullValueHandling = NullValueHandling.Ignore;
+            jsonSerializerSettings.DateTimeZoneHandling = DateTimeZoneHandling.Utc;
+            jsonSerializerSettings.Converters.Add( new CultureInfoJsonCreationConverter() );
+        }
+
+        
 
 		private String AppendServicePath(string baseUrl)
 		{
@@ -66,14 +90,38 @@ namespace Silanis.ESL.SDK
             return customFieldService;
         }
 
-		public PackageId CreatePackage (DocumentPackage package)
-		{
+        internal bool IsSdkVersionSetInPackageData(DocumentPackage package)
+        {
+            if (package.Attributes != null && package.Attributes.Contents.ContainsKey("sdk"))
+            {
+                return true;
+            }            
+            return false;
+        }
+
+        internal void SetSdkVersionInPackageData(DocumentPackage package)
+        {
+            if (package.Attributes == null)
+            {
+                package.Attributes = new DocumentPackageAttributes();
+            }
+            package.Attributes.Append( "sdk", ".NET v" + CurrentVersion );
+        }
+
+		public PackageId CreatePackage(DocumentPackage package)
+        {
+            if (!IsSdkVersionSetInPackageData(package))
+            {
+                SetSdkVersionInPackageData(package);
+            }
+        
 			Silanis.ESL.API.Package packageToCreate = package.ToAPIPackage ();
 			PackageId id = packageService.CreatePackage (packageToCreate);
+            DocumentPackage retrievedPackage = GetPackage(id);
 
 			foreach (Document document in package.Documents.Values)
 			{
-				packageService.UploadDocument (id, document.FileName, document.Content, document.ToAPIDocument (packageToCreate));
+                UploadDocument(document, retrievedPackage);
 			}
 
 			return id;
@@ -91,12 +139,48 @@ namespace Silanis.ESL.SDK
 			packageService.SendPackage (id);
 		}
 
+        public PackageId CreateTemplateFromPackage(PackageId originalPackageId, DocumentPackage delta)
+        {
+            return templateService.CreateTemplateFromPackage( originalPackageId, delta.ToAPIPackage() );
+        }
+
+        public PackageId CreateTemplateFromPackage(PackageId originalPackageId, string templateName)
+        {
+            DocumentPackage sdkPackage = PackageBuilder.NewPackageNamed( templateName ).Build();
+            return CreateTemplateFromPackage( originalPackageId, sdkPackage );
+        }
+        
+        public PackageId CreatePackageFromTemplate(PackageId templateId, string packageName)
+        {
+            DocumentPackage sdkPackage = PackageBuilder.NewPackageNamed( packageName ).Build();
+            return CreatePackageFromTemplate( templateId, sdkPackage );
+        }
+        
+        public PackageId CreatePackageFromTemplate(PackageId templateId, DocumentPackage delta)
+        {
+            return templateService.CreatePackageFromTemplate( templateId, delta.ToAPIPackage() );
+        }
+
+		public PackageId CreateTemplate(DocumentPackage template)
+		{
+			PackageId templateId = templateService.CreateTemplate(template.ToAPIPackage());
+			DocumentPackage createdTemplate = GetPackage(templateId);
+
+			foreach (Document document in template.Documents.Values)
+			{
+				UploadDocument(document, createdTemplate);
+			}
+
+			return templateId;
+		}
+
+		[Obsolete("Call AuthenticationTokenService.CreateSenderAuthenticationToken() instead.")]
 		public SessionToken CreateSenderSessionToken()
 		{
 			return sessionService.CreateSenderSessionToken();
 		}
 
-		[Obsolete]
+		[Obsolete("Call AuthenticationTokenService.CreateSignerAuthenticationToken() instead.")]
 		public SessionToken CreateSessionToken(PackageId packageId, string signerId)
 		{
 			return CreateSignerSessionToken(packageId, signerId); 
@@ -105,6 +189,13 @@ namespace Silanis.ESL.SDK
 		public SessionToken CreateSignerSessionToken(PackageId packageId, string signerId)
 		{
 			return sessionService.CreateSignerSessionToken (packageId, signerId);
+		}
+
+        //use createUserAuthenticationToken which returns a string for the token
+        [Obsolete("Call AuthenticationTokenService.CreateUserAuthenticationToken() instead.")]
+		public AuthenticationToken CreateAuthenticationToken()
+		{
+			return authenticationTokenService.CreateAuthenticationToken();
 		}
 
 		public byte[] DownloadDocument (PackageId packageId, string documentId)
@@ -129,16 +220,33 @@ namespace Silanis.ESL.SDK
 			return new PackageBuilder (package).Build ();
 		}
 
+        public void UpdatePackage(Silanis.ESL.SDK.PackageId packageId, DocumentPackage sentSettings)
+        {
+            packageService.UpdatePackage( packageId, sentSettings.ToAPIPackage() );
+        }
+        
 		public SigningStatus GetSigningStatus (PackageId packageId, string signerId, string documentId)
 		{
 			return packageService.GetSigningStatus (packageId, signerId, documentId);
 		}
 
-        public void UploadDocument(String fileName, byte[] fileContent, Document document, DocumentPackage documentPackage)
+		public Document UploadDocument(Document document, DocumentPackage documentPackage ) {
+			return UploadDocument( document.FileName, document.Content, document, documentPackage );
+		}
+
+		public Document UploadDocument(String fileName, byte[] fileContent, Document document, DocumentPackage documentPackage)
         {
-            Silanis.ESL.API.Package packageToCreate = documentPackage.ToAPIPackage();
-            packageService.UploadDocument(documentPackage.Id, fileName, fileContent, document.ToAPIDocument(packageToCreate));
+			Document uploaded = packageService.UploadDocument(documentPackage, fileName, fileContent, document);
+
+			documentPackage.Documents[uploaded.Name] = uploaded;
+			return uploaded;
         }
+
+		public Document UploadDocument( Document document, PackageId packageId ) {
+			DocumentPackage documentPackage = GetPackage(packageId);
+
+			return UploadDocument(document, documentPackage);
+		}
         
         /// <summary>
         /// BaseUrl property
@@ -155,6 +263,14 @@ namespace Silanis.ESL.SDK
 		public PackageService PackageService {
 			get {
 				return this.packageService;
+			}
+		}
+		        
+        public TemplateService TemplateService
+		{
+			get
+			{
+				return templateService;
 			}
 		}
 
@@ -214,6 +330,30 @@ namespace Silanis.ESL.SDK
 			get
 			{
 				return reminderService;
+			}
+		}
+        
+        public AuthenticationTokenService AuthenticationTokenService
+        {
+            get
+            {
+                return authenticationTokenService;
+            }
+        }
+        
+        public Version CurrentVersion
+        {
+            get
+            {
+                return Assembly.GetExecutingAssembly().GetName().Version;
+            }
+        }   
+
+		public AttachmentRequirementService AttachmentRequirementService
+		{
+			get
+			{
+				return attachmentRequirementService;
 			}
 		}
 	}

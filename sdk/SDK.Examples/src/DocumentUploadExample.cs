@@ -49,16 +49,14 @@ namespace SDK.Examples
                                 .WithField( FieldBuilder.CheckBox()
                                 .OnPage( 0 )
                                 .AtPosition( 400, 200 )
-                                .WithValue( "x" ) )
+                                .WithValue( FieldBuilder.CHECKBOX_CHECKED ) )
                                 .AtPosition( 100, 100 ) )
                     .Build();
 
             // 3. Attach the document to the created package by uploading the document.
-            eslClient.UploadDocument(document.FileName, document.Content, document, superDuperPackage);
+            eslClient.UploadDocument(document, superDuperPackage);
 
             eslClient.SendPackage(superDuperPackage.Id);
-
-            SessionToken sessionToken = eslClient.CreateSessionToken( superDuperPackage.Id, "Client1" );
 
         }
     }

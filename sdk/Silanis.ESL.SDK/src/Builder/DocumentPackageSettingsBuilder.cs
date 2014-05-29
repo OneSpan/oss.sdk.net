@@ -150,7 +150,12 @@ namespace Silanis.ESL.SDK
 			return this;
 		}
 
-		public DocumentPackageSettings build()
+        public DocumentPackageSettings build()
+        {
+            return Build();
+        }
+
+		public DocumentPackageSettings Build()
 		{
 			Support.LogMethodEntry();
 			DocumentPackageSettings result = new DocumentPackageSettings ();

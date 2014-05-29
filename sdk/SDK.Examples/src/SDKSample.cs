@@ -27,6 +27,10 @@ namespace SDK.Examples
         public void Run() {
             Execute();
         }
+        
+        protected string GetRandomEmail() {
+            return System.Guid.NewGuid().ToString().Replace("-","") + "@e-signlive.com";
+        }
     }
 }
 

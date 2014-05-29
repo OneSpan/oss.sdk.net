@@ -22,13 +22,9 @@ namespace Silanis.ESL.API
             return _events;
         }
         }
-        public Callback AddEvent(CallbackEvent value)
+    
+	public Callback AddEvent(CallbackEvent value)
     {
-        if (value == null)
-        {
-            throw new ArgumentNullException("Argument cannot be null");
-        }
-        
         _events.Add(value);
         return this;
     }

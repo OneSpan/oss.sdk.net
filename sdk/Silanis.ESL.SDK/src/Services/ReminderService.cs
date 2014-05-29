@@ -11,13 +11,12 @@ namespace Silanis.ESL.SDK.Services
 		private JsonSerializerSettings settings;
 		private RestClient restClient;
 
-		public ReminderService(RestClient restClient, string baseUrl)
+		public ReminderService(RestClient restClient, string baseUrl, JsonSerializerSettings settings)
 		{
 			this.restClient = restClient;
 			template = new UrlTemplate (baseUrl);
 
-			settings = new JsonSerializerSettings ();
-			settings.NullValueHandling = NullValueHandling.Ignore;
+            this.settings = settings;
 		}
 
 		private string Path( PackageId packageId )
@@ -38,7 +37,7 @@ namespace Silanis.ESL.SDK.Services
 				return new ReminderScheduleConverter( apiResponse ).ToSDKReminderSchedule();
 			} 
 			catch (Exception e) {
-				throw new EslException ("Failed to retrieve reminder schedule for package with id: " + packageId.Id + ". Exception: " + e.Message);
+				throw new EslException ("Failed to retrieve reminder schedule for package with id: " + packageId.Id + ". Exception: " + e.Message, e);
 			}
 		}
 
@@ -51,7 +50,7 @@ namespace Silanis.ESL.SDK.Services
 				PackageReminderSchedule apiResponse = JsonConvert.DeserializeObject<PackageReminderSchedule> (response, settings );
 				return new ReminderScheduleConverter( apiResponse ).ToSDKReminderSchedule();
 			} catch (Exception e) {
-				throw new EslException ("Failed to set reminder schedule for package with id: " + reminderSchedule.PackageId.Id + ". Exception: " + e.Message);
+				throw new EslException ("Failed to set reminder schedule for package with id: " + reminderSchedule.PackageId.Id + ". Exception: " + e.Message, e);
 			}
 		}
 
@@ -60,7 +59,7 @@ namespace Silanis.ESL.SDK.Services
 			try {
 				restClient.Delete(Path(packageId));
 			} catch (Exception e) {
-				throw new EslException ("Failed to remove reminder schedule for package with id: " + packageId.Id + ". Exception: " + e.Message);
+				throw new EslException ("Failed to remove reminder schedule for package with id: " + packageId.Id + ". Exception: " + e.Message, e);
 			}
 		}
     }

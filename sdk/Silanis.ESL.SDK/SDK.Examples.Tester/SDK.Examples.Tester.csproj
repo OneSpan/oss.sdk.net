@@ -34,15 +34,40 @@
     <Reference Include="nunit.framework">
       <HintPath>..\..\References\nunit.framework.dll</HintPath>
     </Reference>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\..\References\Newtonsoft.Json.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="src\CustomFieldExampleTest.cs" />
     <Compile Include="src\CustomSenderInfoExampleTest.cs" />
     <Compile Include="src\SessionCreationExampleTest.cs" />
+    <Compile Include="src\BasicPackageCreationExampleTest.cs" />
+    <Compile Include="src\TextAnchorExtractionExampleTest.cs" />
+    <Compile Include="src\TemplateExampleTest.cs" />
+    <Compile Include="src\PackageDataContainsSDKVersionTest.cs" />
+    <Compile Include="src\UpdatePackageExampleTester.cs" />
+    <Compile Include="src\SignerManipulationExampleTest.cs" />
+    <Compile Include="src\SignerOrderingExampleTest.cs" />
+    <Compile Include="src\DocumentWorkflowExampleTest.cs" />
+    <Compile Include="src\UserAuthenticationTokenExampleTest.cs" />
+    <Compile Include="src\SenderAuthenticationTokenExampleTest.cs" />
+    <Compile Include="src\SignerAuthenticationTokenExampleTest.cs" />
+    <Compile Include="src\DesignerRedirectForApiKeyExampleTest.cs" />
+    <Compile Include="src\DesignerRedirectForPackageSenderExampleTest.cs" />
+    <Compile Include="src\SigningRedirectForSignerExampleTest.cs" />
+    <Compile Include="src\FieldInjectionExampleTest.cs" />
+    <Compile Include="src\DocumentOperationsExampleTest.cs" />
+    <Compile Include="src\CustomSenderInfoInCreateNewTemplateExampleTest.cs" />
+    <Compile Include="src\CustomSenderInfoInCreatePackageFromTemplateExampleTest.cs" />
+    <Compile Include="src\GenericFieldsExampleTest.cs" />
+    <Compile Include="src\AttachmentRequirementExampleTest.cs" />
+    <Compile Include="src\internal\DocumentTypeUtility.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
     <Folder Include="src\" />
+    <Folder Include="src\internal\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\SDK.Examples\SDK.Examples.csproj">

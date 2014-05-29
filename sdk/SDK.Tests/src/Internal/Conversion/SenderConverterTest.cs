@@ -60,7 +60,7 @@ namespace SDK.Tests
 		public void FromSDKNull()
 		{
 			Silanis.ESL.SDK.SenderInfo senderInfo = null;
-			SenderConverter converter = new SenderConverter(senderInfo);
+			new SenderConverter(senderInfo);
 		}
 
 		[Test()]
@@ -68,7 +68,7 @@ namespace SDK.Tests
 		public void FromAPINull()
 		{
 			Silanis.ESL.API.Sender sender = null;
-			SenderConverter converter = new SenderConverter(sender);
+			new SenderConverter(sender);
 		}
     }
 }

@@ -1,5 +1,6 @@
 using System;
 using Silanis.ESL.SDK.Internal;
+using System.Collections.Generic;
 
 namespace Silanis.ESL.SDK.Builder
 {
@@ -18,6 +19,7 @@ namespace Silanis.ESL.SDK.Builder
 		private bool canChangeSigner;
 		private bool locked;
         private GroupId groupId;
+		private IDictionary<string, AttachmentRequirement> attachments = new Dictionary<string, AttachmentRequirement>();
 
 		private SignerBuilder(string signerEmail)
 		{
@@ -30,37 +32,92 @@ namespace Silanis.ESL.SDK.Builder
             this.signerEmail = null;
             this.groupId = groupId;
         }
+        
+        private SignerBuilder(Placeholder roleId)
+        {
+            this.signerEmail = null;
+            this.groupId = null;
+            this.id = roleId.Id;
+        }
 
-		internal static SignerBuilder NewSignerFromAPISigner (Silanis.ESL.API.Role role)
-		{
-			Silanis.ESL.API.Signer eslSigner = role.Signers [0];
+        private static SignerBuilder NewSignerPlaceholderFromAPIRole(Silanis.ESL.API.Role role)
+        {
+            Asserts.NotEmptyOrNull(role.Id, "role.id");
+            
+            SignerBuilder builder = SignerBuilder.NewSignerPlaceholder(new Placeholder(role.Id))
+                .SigningOrder(role.Index);
+            if ( role.Reassign ) {
+                builder.CanChangeSigner ();
+            }
 
-			SignerBuilder builder = SignerBuilder.NewSignerWithEmail( eslSigner.Email )
-					.WithCustomId ( eslSigner.Id )					
-					.WithFirstName( eslSigner.FirstName )
-					.WithLastName( eslSigner.LastName )
-					.WithCompany( eslSigner.Company )
-					.WithTitle( eslSigner.Title )
-					.SigningOrder( role.Index );
+            if ( role.EmailMessage != null ) {
+                builder.WithEmailMessage( role.EmailMessage.Content );
+            }
 
-			if ( role.Reassign ) {
-				builder.CanChangeSigner ();
+            if ( role.Locked ) {
+                builder.Lock();
+            }
+            
+            return builder;
+        }
+        
+        private static SignerBuilder NewRegularSignerFromAPIRole(Silanis.ESL.API.Role role)
+        {
+            Silanis.ESL.API.Signer eslSigner = role.Signers[0];
+
+			SignerBuilder builder = SignerBuilder.NewSignerWithEmail(eslSigner.Email)
+                    .WithCustomId(eslSigner.Id)   
+                    .WithFirstName(eslSigner.FirstName)
+                    .WithLastName(eslSigner.LastName)
+                    .WithCompany(eslSigner.Company)
+                    .WithTitle(eslSigner.Title)
+					.SigningOrder(role.Index);
+
+			foreach (Silanis.ESL.API.AttachmentRequirement attachmentRequirement in role.AttachmentRequirements)
+			{
+				builder.AddAttachmentRequirement(new AttachmentRequirementConverter(attachmentRequirement).ToSDKAttachmentRequirement());
 			}
 
-			if ( role.EmailMessage != null ) {
-				builder.WithEmailMessage( role.EmailMessage.Content );
-			}
+            if (role.Id != null) {
+                builder.WithCustomId(role.Id);
+            }
 
-			if ( role.Locked ) {
-				builder.Lock();
-			}
+            if ( role.Reassign ) {
+                builder.CanChangeSigner ();
+            }
+
+            if ( role.EmailMessage != null ) {
+                builder.WithEmailMessage( role.EmailMessage.Content );
+            }
+
+            if ( role.Locked ) {
+                builder.Lock();
+            }
 
             if (eslSigner.Delivery != null && eslSigner.Delivery.Email) {
                 builder.DeliverSignedDocumentsByEmail();
             }
 
-			return builder;
+            return builder;
+        }
+
+		internal static SignerBuilder NewSignerFromAPIRole(Silanis.ESL.API.Role role)
+        {
+            if (role.Signers == null || role.Signers.Count == 0)
+            {
+                return NewSignerPlaceholderFromAPIRole(role);
+            }
+            else
+            {
+                return NewRegularSignerFromAPIRole(role);
+            }
+        
 		}
+
+        public static SignerBuilder NewSignerPlaceholder(Placeholder roleId)
+        {
+            return new SignerBuilder(roleId);
+        }
 
 		public static SignerBuilder NewSignerWithEmail (string signerEmail)
 		{
@@ -109,10 +166,22 @@ namespace Silanis.ESL.SDK.Builder
 			return this;
 		}
 
-        [Obsolete("Please use WithCustomId() instead")]
-        public SignerBuilder WithRoleId ( string roleId )
+        [Obsolete("Please use Replacing() instead")]
+        public SignerBuilder WithRoleId(string roleId)
         {
-            return WithCustomId(roleId);
+            return Replacing(new Placeholder(roleId));
+        }
+
+        public SignerBuilder Replacing(Placeholder placeholder)
+        {
+            this.id = placeholder.Id;
+            return this;
+        }
+
+        [Obsolete("Please use Replacing() instead")]
+        public SignerBuilder WithRoleId ( Placeholder placeholder )
+        {
+            return Replacing( placeholder );
         }
 
 		[Obsolete("Please use WithCustomId() instead")]
@@ -157,39 +226,109 @@ namespace Silanis.ESL.SDK.Builder
 			return this;
 		}
 
-		public Signer Build ()
+		public SignerBuilder WithAttachmentRequirement (AttachmentRequirementBuilder builder)
 		{
-			Support.LogMethodEntry();
+			return WithAttachmentRequirement(builder.Build());
+		}
 
-            Signer signer;
+		public SignerBuilder WithAttachmentRequirement (AttachmentRequirement attachmentRequirement)
+		{
+			AddAttachmentRequirement(attachmentRequirement);
+			return this;
+		}
+
+		private void AddAttachmentRequirement (AttachmentRequirement attachmentRequirement)
+		{
+			attachments.Add(attachmentRequirement.Name, attachmentRequirement);
+		}
+
+        private Signer BuildGroupSigner()
+        {
+            Support.LogMethodEntry();
+            
+            Signer result = new Signer(groupId);
+            result.SigningOrder = signingOrder;
+            result.CanChangeSigner = canChangeSigner;
+            result.Message = message;
+            result.Id = id;
+            result.Locked = locked;
+			result.Attachments = attachments;
+            
+            Support.LogMethodExit(result);
+
+            return result;
+        }
+        
+        private Signer BuildPlaceholderSigner()
+        {
+            Support.LogMethodEntry();
+    
+            Asserts.NotEmptyOrNull( id, "No placeholder set for this signer!" );
+                    
+            Signer result = new Signer(id);
+            result.SigningOrder = signingOrder;
+            result.CanChangeSigner = canChangeSigner;
+            result.Message = message;
+            result.Locked = locked;
+			result.Attachments = attachments;
+
+            Support.LogMethodExit(result);
+            
+            return result;
+        }
+        
+        private Signer BuildRegularSigner()
+        {
+            Support.LogMethodEntry();
+            
+            Asserts.NotEmptyOrNull (firstName, "firstName");
+            Asserts.NotEmptyOrNull (lastName, "lastName");
+                        
+            Authentication authentication = authenticationBuilder.Build();
+            Signer result = new Signer (signerEmail, firstName, lastName, authentication);
+            result.Title = title;
+            result.Company = company;
+            result.DeliverSignedDocumentsByEmail = deliverSignedDocumentsByEmail;
+
+            result.SigningOrder = signingOrder;
+            result.CanChangeSigner = canChangeSigner;
+            result.Message = message;
+            result.Id = id;
+            result.Locked = locked;
+			result.Attachments = attachments;
+
+            Support.LogMethodExit(result);
+            
+            return result;
+        }
+
+		public Signer Build()
+        {
+            Support.LogMethodEntry();
+            Signer result = null;
             if (isGroupSigner())
             {
-                signer = new Signer(groupId);
+                result = BuildGroupSigner();
+            }
+            else if (isPlaceholder())
+            {
+                result = BuildPlaceholderSigner();
             }
             else
             {
-                Asserts.NotEmptyOrNull (firstName, "firstName");
-                Asserts.NotEmptyOrNull (lastName, "lastName");
-                Authentication authentication = authenticationBuilder.Build();
-                signer = new Signer (signerEmail, firstName, lastName, authentication);
-                signer.Title = title;
-                signer.Company = company;
-                signer.DeliverSignedDocumentsByEmail = deliverSignedDocumentsByEmail;
+                result = BuildRegularSigner();
             }
-
-
-			signer.SigningOrder = signingOrder;
-            signer.CanChangeSigner = canChangeSigner;
-			signer.Message = message;
-			signer.Id = id;
-			signer.Locked = locked;
-
-			Support.LogMethodExit(signer);
-			return signer;
+            Support.LogMethodExit(result);
+            return result;
 		}
 
         private bool isGroupSigner() {
             return groupId != null;
+        }
+        
+        private bool isPlaceholder()
+        {
+            return groupId == null && signerEmail == null;
         }
 	}
 }

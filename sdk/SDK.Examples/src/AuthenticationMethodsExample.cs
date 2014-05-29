@@ -41,20 +41,21 @@ namespace SDK.Examples
                     .WithSigner(SignerBuilder.NewSignerWithEmail(email1)
                                 .WithFirstName("John1")
                                 .WithLastName("Smith1"))
-                    .WithSigner(SignerBuilder.NewSignerWithEmail(email2)
+				.WithSigner(SignerBuilder.NewSignerWithEmail(email2)
+								.WithCustomId("signer2")
                                 .WithFirstName("John2")
                                 .WithLastName("Smith2")
                                 .ChallengedWithQuestions( ChallengeBuilder.FirstQuestion( "What's 1+1?" )
-                                             .Answer( "2" )
-                                             .SecondQuestion( "What color's the sky?" )
-                                             .Answer( "blue" ) ) )
+											.Answer("2", Challenge.MaskOptions.None)
+                                            .SecondQuestion( "What color's the sky?" )
+											.Answer( "blue", Challenge.MaskOptions.MaskInput ) ) )
                     .WithSigner(SignerBuilder.NewSignerWithEmail(email3)
                                 .WithFirstName("John3")
                                 .WithLastName("Smith3")
                                 .WithSMSSentTo(sms3))
                     .WithDocument(DocumentBuilder.NewDocumentNamed( "Custom Consent Document" )
                                   .FromStream(fileStream1, DocumentType.PDF)
-                                  .WithSignature(SignatureBuilder.AcceptanceFor( email1 )
+					.WithSignature(SignatureBuilder.SignatureFor(email2)
                                   .OnPage(0)
                                   .AtPosition(100,100)))
                     .Build();
@@ -63,6 +64,8 @@ namespace SDK.Examples
             eslClient.SendPackage(id);
 
             DocumentPackage retrievedPackage = eslClient.GetPackage(id);
+
+            Console.WriteLine("Document retrieved = " + retrievedPackage.Id);
         }
     }
 }

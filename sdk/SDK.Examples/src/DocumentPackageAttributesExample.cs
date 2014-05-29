@@ -44,19 +44,17 @@ namespace SDK.Examples
                                    .WithField( FieldBuilder.CheckBox()
                                .OnPage( 0 )
                                .AtPosition( 400, 200 )
-                               .WithValue( "x" ) )
+                               .WithValue( FieldBuilder.CHECKBOX_CHECKED ) )
                                    .AtPosition( 100, 100 ) ) )
-                    .withAttributes(new DocumentPackageAttributesBuilder()
-                                .withAttribute("First Name", "Bill")
-                                .withAttribute("Last Name", "Johnson")
-                                .withAttribute("Signing Order", "1")
-                                .build())
+                    .WithAttributes(new DocumentPackageAttributesBuilder()
+                                .WithAttribute("First Name", "Bill")
+                                .WithAttribute("Last Name", "Johnson")
+                                .WithAttribute("Signing Order", "1")
+                                .Build())
                     .Build();
 
             PackageId packageId = eslClient.CreatePackage( superDuperPackage );
             eslClient.SendPackage( packageId );
-
-            SessionToken sessionToken = eslClient.CreateSessionToken( packageId, "Client1" );
         }
     }
 }

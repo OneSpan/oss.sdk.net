@@ -22,7 +22,7 @@ namespace Silanis.ESL.SDK.src.Internal.Conversion
 
         public TextAnchor ToSDKTextAnchor()
         {
-            if (sdkTextAnchor != null)
+            if (apiExtractAnchor == null)
             {
                 return sdkTextAnchor;
             }
@@ -45,7 +45,7 @@ namespace Silanis.ESL.SDK.src.Internal.Conversion
 
         public ExtractAnchor ToAPIExtractAnchor()
         {
-            if (apiExtractAnchor != null)
+            if (sdkTextAnchor == null)
             {
                 return apiExtractAnchor;
             }

@@ -43,6 +43,7 @@
     <Reference Include="log4net, Version=1.2.10.0, Culture=neutral, PublicKeyToken=1b44e1d426115821">
       <HintPath>..\References\log4net.dll</HintPath>
     </Reference>
+    <Reference Include="System.Web" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -247,6 +248,32 @@
     <Compile Include="src\Builder\ReminderScheduleBuilder.cs" />
     <Compile Include="src\Services\ReminderService.cs" />
     <Compile Include="src\Internal\Conversion\SenderConverter.cs" />
+    <Compile Include="src\Services\TemplateService.cs" />
+    <Compile Include="src\AuthenticationToken.cs" />
+    <Compile Include="src\RoleId.cs" />
+    <Compile Include="src\Internal\Conversion\SignatureConverter.cs" />
+    <Compile Include="src\Internal\Conversion\SignatureStyleConverter.cs" />
+    <Compile Include="src\Services\JsonCreationConverter.cs" />
+    <Compile Include="src\Services\CultureInfoJsonCreationConverter.cs" />
+    <Compile Include="src\Internal\Conversion\SignerConverter.cs" />
+    <Compile Include="src\Models\AuthenticationToken.cs" />
+    <Compile Include="src\Models\SenderAuthenticationToken.cs" />
+    <Compile Include="src\Models\SignerAuthenticationToken.cs" />
+    <Compile Include="src\AuthenticationClient.cs" />
+    <Compile Include="src\Services\AuthenticationTokenService.cs" />
+    <Compile Include="src\Services\AuthenticationService.cs" />
+    <Compile Include="src\UnauthenticatedRestClient.cs" />
+    <Compile Include="src\Internal\Conversion\DocumentConverter.cs" />
+    <Compile Include="src\Internal\Conversion\FieldStyleAndSubTypeConverter.cs" />
+    <Compile Include="src\Internal\Conversion\FieldValidatorConverter.cs" />
+    <Compile Include="src\Internal\Conversion\FieldConverter.cs" />
+    <Compile Include="src\Services\AttachmentRequirementService.cs" />
+    <Compile Include="src\AttachmentRequirement.cs" />
+    <Compile Include="src\Builder\AttachmentRequirementBuilder.cs" />
+    <Compile Include="src\Internal\Conversion\AttachmentRequirementConverter.cs" />
+    <Compile Include="src\Internal\AuthHeaderGenerator.cs" />
+    <Compile Include="src\Internal\ApiTokenAuthHeaderGenerator.cs" />
+    <Compile Include="src\Internal\SessionIdAuthHeaderGenerator.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSHARP.Targets" />
   <ProjectExtensions>

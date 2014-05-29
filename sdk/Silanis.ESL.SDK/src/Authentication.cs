@@ -56,6 +56,7 @@ namespace Silanis.ESL.SDK
 
 				authChallenge.Question = challenge.Question;
 				authChallenge.Answer = challenge.Answer;
+				authChallenge.MaskInput = challenge.MaskOption == Challenge.MaskOptions.MaskInput;
 				auth.AddChallenge (authChallenge);
 			}
 
@@ -81,7 +82,7 @@ namespace Silanis.ESL.SDK
 			case AuthenticationMethod.SMS:
 				return Silanis.ESL.API.AuthScheme.SMS;
 			default:
-				throw new EslException ("Unknown AuthenticationMethod");
+				throw new EslException ("Unknown AuthenticationMethod",null);
 			}
 		}
 	}

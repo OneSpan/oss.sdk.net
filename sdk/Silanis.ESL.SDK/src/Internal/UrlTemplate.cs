@@ -21,6 +21,7 @@ namespace Silanis.ESL.SDK.Internal
 		// Package Service
 		public static readonly string PACKAGE_PATH = "/packages";
 		public static readonly string PACKAGE_LIST_PATH = "/packages?query={status}&from={from}&to={to}";
+        public static readonly string TEMPLATE_LIST_PATH = "/packages?type=TEMPLATE&from={from}&to={to}";
 		public static readonly string PACKAGE_ID_PATH = "/packages/{packageId}";
 		public static readonly string DOCUMENT_PATH = "/packages/{packageId}/documents";
 		public static readonly string DOCUMENT_ID_PATH = "/packages/{packageId}/documents/{documentId}";
@@ -32,7 +33,13 @@ namespace Silanis.ESL.SDK.Internal
 		public static readonly string EVIDENCE_SUMMARY_PATH = "/packages/{packageId}/evidence/summary";
 		public static readonly string SIGNING_STATUS_PATH = "/packages/{packageId}/signingStatus?signer={signerId}&document={documentId}";
 		public static readonly string NOTIFY_ROLE_PATH = "/packages/{packageId}/roles/{roleId}/notifications";
+        public static readonly string CLONE_PACKAGE_PATH = "/packages/{packageId}/clone";
 
+        // Signer Service
+        public static readonly string GET_SIGNER_PATH = "/packages/{packageId}/roles/{roleId}";
+        public static readonly string ADD_SIGNER_PATH = "/packages/{packageId}/roles";
+        public static readonly string UPDATE_SIGNER_PATH = "/packages/{packageId}/roles/{roleId}";
+        public static readonly string REMOVE_SIGNER_PATH = "/packages/{packageId}/roles/{roleId}";
 
         // Event Notification Service
         public static readonly string CALLBACK_PATH = "/callback";
@@ -61,6 +68,25 @@ namespace Silanis.ESL.SDK.Internal
 
 		// Reminder Service
 		public static readonly string REMINDER_PATH = "/packages/{packageId}/reminders";
+
+        //Authentication Token Services
+        public static readonly string ESL_AUTHENTICATION_PATH = "/auth";
+        public static readonly string USER_AUTHENTICATION_TOKEN_PATH = "/authenticationTokens";
+        public static readonly string AUTHENTICATION_PATH_FOR_USER_AUTHENTICATION_TOKEN = "?authenticationToken={authenticationToken}";
+        public static readonly string AUTHENTICATION_PATH_FOR_USER_AUTHENTICATION_TOKEN_WITH_REDIRECT = "?authenticationToken={authenticationToken}&target={redirectUrl}";
+        public static readonly string SENDER_AUTHENTICATION_TOKEN_PATH = "/senderAuthenticationTokens";
+        public static readonly string AUTHENTICATION_PATH_FOR_SENDER_AUTHENTICATION_TOKEN = "?senderAuthenticationToken={senderAuthenticationToken}";
+        public static readonly string AUTHENTICATION_PATH_FOR_SENDER_AUTHENTICATION_TOKEN_WITH_REDIRECT = "?senderAuthenticationToken={senderAuthenticationToken}&target={redirectUrl}";
+        public static readonly string SIGNER_AUTHENTICATION_TOKEN_PATH = "/signerAuthenticationTokens";
+        public static readonly string AUTHENTICATION_PATH_FOR_SIGNER_AUTHENTICATION_TOKEN = "?signerAuthenticationToken={signerAuthenticationToken}";
+        public static readonly string AUTHENTICATION_PATH_FOR_SIGNER_AUTHENTICATION_TOKEN_WITH_REDIRECT = "?signerAuthenticationToken={signerAuthenticationToken}&target={redirectUrl}";
+
+        // Webpage redirect urls
+        public static readonly string DESIGNER_REDIRECT_PATH = "/designer/{packageId}";
+        public static readonly string SIGNING_REDIRECT_PATH = "/packages/{packageId}/sign";  
+
+		// AttachmentRequirement Service
+		public static readonly string ATTACHMENT_REQUIREMENT_PATH = "/packages/{packageId}/attachment/{attachmentId}";
 
 		public UrlTemplate (string baseUrl)
 		{

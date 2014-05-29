@@ -76,5 +76,12 @@ namespace SDK.Tests
 
 			Assert.AreEqual (FieldStyle.UNBOUND_CHECK_BOX, field.Style);
 		}
+
+        [Test]
+        public void creatingRadioButtonFieldSetsStyle(){
+            Field field = FieldBuilder.RadioButton("group").AtPosition(100, 100).Build();
+
+            Assert.AreEqual (FieldStyle.UNBOUND_RADIO_BUTTON, field.Style);
+        }
 	}
 }

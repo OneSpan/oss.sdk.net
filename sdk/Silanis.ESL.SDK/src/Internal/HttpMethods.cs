@@ -1,6 +1,7 @@
 using System;
 using System.Net;
 using System.IO;
+using System.Collections.Generic;
 
 namespace Silanis.ESL.SDK.Internal
 {
@@ -39,7 +40,7 @@ namespace Silanis.ESL.SDK.Internal
             catch (Exception e) {
 				Support.LogError(e.Message);
 				Support.LogError(e.StackTrace);
-				throw new EslException("Error communicating with esl server. " + e.Message);
+                throw new EslException("Error communicating with esl server. " + e.Message, e);
             }
 		}
 
@@ -73,9 +74,39 @@ namespace Silanis.ESL.SDK.Internal
 			catch (Exception e) {
 				Support.LogError(e.Message);
 				Support.LogError(e.StackTrace);
-				throw new EslException("Error communicating with esl server. " + e.Message);
+				throw new EslException("Error communicating with esl server. " + e.Message,e);
 			}
 		}
+
+        /// <summary>
+        /// Can only be called for unauthenticated path such as /auth
+        /// Gets the http.
+        /// </summary>
+        public static byte[] GetHttp (string path)
+        {
+            Support.LogMethodEntry(path);
+            try {
+                WebRequest request = WebRequest.Create (path);
+                request.Method = "GET";
+
+                Support.LogDebug( "Awaiting response from server." );
+                WebResponse response = request.GetResponse ();
+                Support.LogDebug( "Response received from server. " + response.ToString() + "," + response.Headers.ToString() + "," + response.ContentType + "," + response.ContentLength + " bytes." );
+
+                using (Stream responseStream = response.GetResponseStream()) {
+                    var memoryStream = new MemoryStream ();
+                    CopyTo (responseStream, memoryStream);
+                    byte[] result = memoryStream.ToArray();
+                    Support.LogMethodExit(result);
+                    return result;
+                }
+            }
+            catch (Exception e) {
+                Support.LogError(e.Message);
+                Support.LogError(e.StackTrace);
+                throw new EslException("Error communicating with esl server. " + e.Message,e);
+            }
+        }
 
 		public static byte[] GetHttp (string apiToken, string path)
 		{
@@ -100,7 +131,7 @@ namespace Silanis.ESL.SDK.Internal
 			catch (Exception e) {
 				Support.LogError(e.Message);
 				Support.LogError(e.StackTrace);
-				throw new EslException("Error communicating with esl server. " + e.Message);
+				throw new EslException("Error communicating with esl server. " + e.Message,e);
 			}
 		}
 
@@ -127,11 +158,16 @@ namespace Silanis.ESL.SDK.Internal
 			catch (Exception e) {
 				Support.LogError(e.Message);
 				Support.LogError(e.StackTrace);
-				throw new EslException("Error communicating with esl server. " + e.Message);
+				throw new EslException("Error communicating with esl server. " + e.Message,e);
 			}
 		}
 
-		public static byte[] MultipartPostHttp (string apiToken, string path, byte[] content, string boundary)
+		public static void AddAuthorizationHeader(WebRequest request, AuthHeaderGenerator authHeaderGen)
+		{
+			request.Headers.Add(authHeaderGen.Name, authHeaderGen.Value);
+		}
+
+		public static byte[] MultipartPostHttp (string apiToken, string path, byte[] content, string boundary, AuthHeaderGenerator authHeaderGen)
 		{
 			Support.LogMethodEntry(apiToken, path, content, boundary);
 			WebRequest request = WebRequest.Create (path);
@@ -139,7 +175,7 @@ namespace Silanis.ESL.SDK.Internal
 				request.Method = "POST";
 				request.ContentType = string.Format ("multipart/form-data; boundary={0}", boundary);
 				request.ContentLength = content.Length;
-				request.Headers.Add ("Authorization", "Basic " + apiToken);
+				AddAuthorizationHeader(request, authHeaderGen);
 
 				using (Stream dataStream = request.GetRequestStream ()) {
 					dataStream.Write (content, 0, content.Length);
@@ -160,7 +196,7 @@ namespace Silanis.ESL.SDK.Internal
 			catch (Exception e) {
 				Support.LogError(e.Message);
 				Support.LogError(e.StackTrace);
-				throw new EslException("Error communicating with esl server. " + e.Message);
+				throw new EslException("Error communicating with esl server. " + e.Message,e);
 			}
 		}
 

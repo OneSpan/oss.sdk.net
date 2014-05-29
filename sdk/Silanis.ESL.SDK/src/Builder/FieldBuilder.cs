@@ -5,6 +5,10 @@ namespace Silanis.ESL.SDK.Builder
 {
 	public class FieldBuilder
 	{
+        public static string SELECTED_VALUE = "X";
+        public static string CHECKBOX_CHECKED = SELECTED_VALUE;
+        public static string RADIO_SELECTED = SELECTED_VALUE;
+
 		public static double DEFAULT_WIDTH = 200;
 		public static double DEFAULT_HEIGHT = 50;
 		public static FieldStyle DEFAULT_STYLE = FieldStyle.UNBOUND_TEXT_FIELD;
@@ -66,57 +70,15 @@ namespace Silanis.ESL.SDK.Builder
 			return new FieldBuilder ().WithStyle (FieldStyle.UNBOUND_CHECK_BOX);
 		}
 
+        public static FieldBuilder RadioButton ( string group )
+        {
+            return new FieldBuilder ().WithStyle(FieldStyle.UNBOUND_RADIO_BUTTON)
+                .WithValidation(FieldValidatorBuilder.Alphanumeric().WithOption(group));
+        }
+
 		public static FieldBuilder CustomField( String name )
 		{
 			return new FieldBuilder().WithStyle(FieldStyle.UNBOUND_CUSTOM_FIELD).WithName(name);
-		}
-
-		internal static FieldBuilder NewFieldFromAPIField (Silanis.ESL.API.Field apiField)
-		{
-			FieldBuilder fieldBuilder = new FieldBuilder()
-				.OnPage( apiField.Page )
-				.AtPosition( apiField.Left, apiField.Top )
-				.WithSize( apiField.Width, apiField.Height )
-				.WithStyle( GetFieldStyleFromAPIField( apiField ) )
-				.WithName( apiField.Name );
-
-			if ( apiField.Id != null ) {
-				fieldBuilder.WithId( apiField.Id );
-			}
-
-			if ( apiField.Extract ) {
-				fieldBuilder.WithPositionExtracted();
-			}
-
-			fieldBuilder.WithValue( apiField.Value );
-			return fieldBuilder;
-		}
-
-		private static FieldStyle GetFieldStyleFromAPIField( Silanis.ESL.API.Field field ) {
-
-			if ( field.Binding == null ) {
-				switch ( field.Subtype ) {
-				case Silanis.ESL.API.FieldSubtype.TEXTFIELD:
-					return FieldStyle.UNBOUND_TEXT_FIELD;
-				case Silanis.ESL.API.FieldSubtype.CHECKBOX:
-					return FieldStyle.UNBOUND_CHECK_BOX;
-				default: 
-					throw new EslException( "Unrecognized field style." );				
-				}
-			} else {
-				String binding = field.Binding;
-				if ( binding.Equals( FieldStyleUtility.BINDING_DATE ) ) {
-					return FieldStyle.BOUND_DATE;
-				} else if ( binding.Equals( FieldStyleUtility.BINDING_TITLE ) ) {
-					return FieldStyle.BOUND_TITLE;
-				} else if ( binding.Equals( FieldStyleUtility.BINDING_NAME ) ) {
-					return FieldStyle.BOUND_NAME;
-				} else if ( binding.Equals( FieldStyleUtility.BINDING_COMPANY ) ) {
-					return FieldStyle.BOUND_COMPANY;
-				} else {
-					throw new EslException( "Invalid field binding." );
-				}
-			}
 		}
 
 		public FieldBuilder WithId (string id)
@@ -176,9 +138,9 @@ namespace Silanis.ESL.SDK.Builder
 
         public FieldBuilder WithValue (bool value)
         {
-            if (this.style == FieldStyle.UNBOUND_CHECK_BOX)
+            if (this.style == FieldStyle.UNBOUND_CHECK_BOX || this.style == FieldStyle.UNBOUND_RADIO_BUTTON)
             {
-                this.value = value ? "X" : "";
+                this.value = value ? SELECTED_VALUE : "";
             }
             return this;
         }

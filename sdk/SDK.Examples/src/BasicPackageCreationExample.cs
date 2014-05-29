@@ -12,11 +12,19 @@ namespace SDK.Examples
             new BasicPackageCreationExample(Props.GetInstance()).Run();
         }
 
-        private string email1;
-        private string email2;
+        public string email1;
+        public string email2;
         private Stream fileStream1;
         private Stream fileStream2;
+        private PackageId packageId;
 
+        public PackageId PackageId
+        {
+            get
+            {
+                return packageId;
+            }
+        }
         public BasicPackageCreationExample(Props props) : this(props.Get("api.url"), props.Get("api.key"), props.Get("1.email"), props.Get("2.email"))
         {
         }
@@ -25,47 +33,66 @@ namespace SDK.Examples
         {
             this.email1 = email1;
             this.email2 = email2;
-            this.fileStream1 = File.OpenRead(new FileInfo(Directory.GetCurrentDirectory() + "/src/document.pdf").FullName);
+			this.fileStream1 = File.OpenRead(new FileInfo(Directory.GetCurrentDirectory() + "/src/document.pdf").FullName);
             this.fileStream2 = File.OpenRead(new FileInfo(Directory.GetCurrentDirectory() + "/src/document.pdf").FullName);
         }
 
         override public void Execute()
         {
-            DocumentPackage superDuperPackage = PackageBuilder.NewPackageNamed( "Policy " + DateTime.Now )
-                .DescribedAs( "This is a package created using the e-SignLive SDK" )
-                    .ExpiresOn( DateTime.Now.AddMonths(1) )
-                    .WithEmailMessage( "This message should be delivered to all signers" )
-                    .WithSigner( SignerBuilder.NewSignerWithEmail( email1 )
-                                .WithCustomId( "Client1" )
-                                .WithFirstName( "John" )
-                                .WithLastName( "Smith" )
-                                .WithTitle( "Managing Director" )
-                                .WithCompany( "Acme Inc." ) )
-                    .WithSigner( SignerBuilder.NewSignerWithEmail( email2 )
-                                .WithFirstName( "Patty" )
-                                .WithLastName( "Galant" ) )
-                    .WithDocument( DocumentBuilder.NewDocumentNamed( "First Document" )
-                                  .FromStream( fileStream1, DocumentType.PDF )
-                                  .WithSignature( SignatureBuilder.SignatureFor( email1 )
-                                   .OnPage( 0 )
-                                   .WithField( FieldBuilder.CheckBox()
-                               .OnPage( 0 )
-                               .AtPosition( 400, 200 )
-                               .WithValue( "x" ) )
-                                   .AtPosition( 100, 100 ) ) )
-                    .WithDocument( DocumentBuilder.NewDocumentNamed( "Second Document" )
-                                  .FromStream( fileStream2, DocumentType.PDF )
-                                  .WithSignature( SignatureBuilder.SignatureFor( email2 )
-                                   .OnPage( 0 )
-                                   .AtPosition( 100, 200 )
-                                   )
-                                  )
-                    .Build();
+            DocumentPackage superDuperPackage =
+                PackageBuilder.NewPackageNamed("BasicPackageCreationExample: " + DateTime.Now)
+                .DescribedAs("This is a package created using the e-SignLive SDK")
+                .ExpiresOn(DateTime.Now.AddMonths(100))
+                .WithEmailMessage("This message should be delivered to all signers")
+                .WithSigner(SignerBuilder.NewSignerWithEmail(email1)
+                            .WithCustomId("Client1")
+                            .WithFirstName("John")
+                            .WithLastName("Smith")
+                            .WithTitle("Managing Director")
+                            .WithCompany("Acme Inc.")
+                           )
+                .WithSigner(SignerBuilder.NewSignerWithEmail(email2)
+                            .WithFirstName("Patty")
+                            .WithLastName("Galant")
+                           )
+                .WithDocument(DocumentBuilder.NewDocumentNamed("First Document")
+                              .FromStream(fileStream1, DocumentType.PDF)
+                              .WithSignature(SignatureBuilder.SignatureFor(email1)
+                                             .OnPage(0)
+                                             .WithField(FieldBuilder.CheckBox()
+                                                     .OnPage(0)
+                                                     .AtPosition(400, 200)
+                                                     .WithValue(FieldBuilder.CHECKBOX_CHECKED)
+                                                       )
+                                             .AtPosition(100, 100)
+                                            )
+                             )
+                .WithDocument(DocumentBuilder.NewDocumentNamed("Second Document")
+                              .FromStream(fileStream2, DocumentType.PDF)
+                              .WithSignature(SignatureBuilder.SignatureFor(email2)
+                                             .OnPage(0)
+                                             .AtPosition(100, 200)
+                                       .WithField(FieldBuilder.RadioButton("group")
+                                       .WithValue(false)
+                                       .WithSize(20, 20)  
+                                       .OnPage(0)
+                                       .AtPosition(400, 200))
+                                       .WithField(FieldBuilder.RadioButton("group")
+                                       .WithValue(true)
+                                       .WithSize(20, 20) 
+                                       .OnPage(0)
+                                       .AtPosition(400, 250))
+                                       .WithField(FieldBuilder.RadioButton("group")
+                                       .WithValue(false)
+                                       .WithSize(20, 20) 
+                                       .OnPage(0)
+                                       .AtPosition(400, 300))
+                                            )
+                             )
+                .Build();
 
-            PackageId packageId = eslClient.CreatePackage( superDuperPackage );
-            eslClient.SendPackage( packageId );
-
-            SessionToken sessionToken = eslClient.CreateSessionToken( packageId, "Client1" );
+            packageId = eslClient.CreatePackage(superDuperPackage);
+            eslClient.SendPackage(packageId);
         }
     }
 }

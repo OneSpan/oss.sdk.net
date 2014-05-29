@@ -15,6 +15,8 @@ namespace SDK.Examples
         private string email1;
         private Stream fileStream1;
         private Stream fileStream2;
+        
+        public PackageId packageId;
 
         public DocumentWorkflowExample( Props props ) : this(props.Get("api.url"), props.Get("api.key"), props.Get("1.email")) {
         }
@@ -45,8 +47,18 @@ namespace SDK.Examples
 					               		.AtPosition (100, 100)))
 					.Build ();
 
-			PackageId id = eslClient.CreatePackage (package);
-			eslClient.SendPackage(id);
+			packageId = eslClient.CreatePackage (package);
+
+			Console.WriteLine("Package create, id = " + packageId);
+
+			DocumentPackage savedPackage = eslClient.GetPackage(packageId);
+
+			savedPackage.Documents["First Document"].Index = 2;
+			savedPackage.Documents["Second Document"].Index = 1;
+
+			eslClient.PackageService.OrderDocuments(savedPackage);
+
+			Console.WriteLine("Document order saved");
 		}
 	}
 }

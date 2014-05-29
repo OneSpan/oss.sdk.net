@@ -1,9 +1,11 @@
 using System;
+using System.Collections.Generic;
 
 namespace Silanis.ESL.SDK
 {
 	public class FieldValidator
 	{
+        private List<String> options = new List<String>();
 
 		public string Regex {
 			get;
@@ -29,5 +31,28 @@ namespace Silanis.ESL.SDK
 			get;
 			set;
 		}
+
+        public List<string> Options
+        {
+            get{
+                return options;
+            }
+        }
+
+        public void AddOption(string value)
+        {
+            if (value == null)
+            {
+                throw new ArgumentNullException("Argument cannot be null");
+            }
+
+            options.Add(value);
+
+        }
+
+        public void AddOptions (IList<string> options)
+        {
+            this.options.AddRange (options);
+        }
 	}
 }

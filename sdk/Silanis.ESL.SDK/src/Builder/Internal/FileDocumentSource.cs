@@ -20,7 +20,7 @@ namespace Silanis.ESL.SDK.Builder.Internal
 
 			if (!file.Exists)
 			{
-				throw new EslException (String.Format ("file {0} does not exists", file.FullName));
+				throw new EslException (String.Format ("file {0} does not exists", file.FullName),null);
 			}
 
 			this.file = file;
