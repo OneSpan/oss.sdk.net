@@ -1,4 +1,5 @@
 using System;
+using System.Text;
 
 namespace Silanis.ESL.SDK.Internal
 {
@@ -35,6 +36,13 @@ namespace Silanis.ESL.SDK.Internal
 			}
 			else
 				return "";
+		}
+
+		public static string apiKeyToUID (string apiKey)
+		{
+			string decodedString = Encoding.UTF8.GetString(Convert.FromBase64String(apiKey));
+			char[] deliminator = { ':' };
+			return decodedString.Split(deliminator)[0];
 		}
 	}
 }

@@ -31,6 +31,7 @@ namespace Silanis.ESL.SDK.Internal
 		public static readonly string PDF_PATH = "/packages/{packageId}/documents/{documentId}/pdf";
 		public static readonly string ZIP_PATH = "/packages/{packageId}/documents/zip";
 		public static readonly string EVIDENCE_SUMMARY_PATH = "/packages/{packageId}/evidence/summary";
+		public static readonly string COMPLETION_REPORT_PATH = "/reports/completion?senderId={senderId}&status={status}&from={from}&to={to}";
 		public static readonly string SIGNING_STATUS_PATH = "/packages/{packageId}/signingStatus?signer={signerId}&document={documentId}";
 		public static readonly string NOTIFY_ROLE_PATH = "/packages/{packageId}/roles/{roleId}/notifications";
         public static readonly string CLONE_PACKAGE_PATH = "/packages/{packageId}/clone";

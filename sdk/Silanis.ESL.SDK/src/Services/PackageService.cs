@@ -678,5 +678,29 @@ namespace Silanis.ESL.SDK.Services
 				throw new EslException ("Could not order signers." + " Exception: " + e.Message, e);
 			}
 		}
+
+		public Silanis.ESL.SDK.CompletionReport DownloadCompletionReport(Silanis.ESL.SDK.PackageStatus packageStatus, String senderId, DateTime from, DateTime to)
+		{
+			string toDate = DateHelper.dateToIsoUtcFormat(to);
+			string fromDate = DateHelper.dateToIsoUtcFormat(from);
+
+			string path = template.UrlFor(UrlTemplate.COMPLETION_REPORT_PATH)
+				.Replace("{from}", fromDate)
+				.Replace("{to}", toDate)
+				.Replace("{status}", packageStatus.ToString())
+				.Replace("{senderId}", senderId)
+				.Build();
+
+			try
+			{
+				string response = restClient.Get(path);
+				Silanis.ESL.API.CompletionReport apiCompletionReport = JsonConvert.DeserializeObject<Silanis.ESL.API.CompletionReport> (response, settings);
+				return new CompletionReportConverter(apiCompletionReport).ToSDKCompletionReport();
+			}
+			catch (Exception e)
+			{
+				throw new EslException("Could not download the completion report." + " Exception: " + e.Message, e);
+			}
+		}
 	}
 }

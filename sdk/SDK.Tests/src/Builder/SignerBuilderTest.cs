@@ -194,7 +194,7 @@ namespace SDK.Tests
 			Assert.AreEqual(signer.Attachments["Medicare card"].Name, attachmentRequirement2.Name);
 			Assert.AreEqual(signer.Attachments["Medicare card"].Description, attachmentRequirement2.Description);
 			Assert.AreEqual(signer.Attachments["Medicare card"].Required, attachmentRequirement2.Required);
-			Assert.AreEqual(signer.Attachments["Medicare card"].Status, attachmentRequirement2.Status);
+			Assert.AreEqual(signer.Attachments["Medicare card"].Status.ToString(), attachmentRequirement2.Status.ToString());
 		}
 
 		[Test]
@@ -218,7 +218,7 @@ namespace SDK.Tests
 			attachmentRequirement.Id = "attachmentId";
 			attachmentRequirement.Required = true;
 			attachmentRequirement.Comment = "sender's comments";
-			attachmentRequirement.Status = RequirementStatus.REJECTED;
+			attachmentRequirement.Status = Silanis.ESL.API.RequirementStatus.REJECTED;
 
 			role.AddAttachmentRequirement(new AttachmentRequirementConverter(attachmentRequirement).ToAPIAttachmentRequirement());
 
@@ -232,7 +232,7 @@ namespace SDK.Tests
 			Assert.AreEqual(sdkSigner.Attachments["attachmentName"].Id, role.AttachmentRequirements[0].Id);
 			Assert.AreEqual(sdkSigner.Attachments["attachmentName"].Required, role.AttachmentRequirements[0].Required);
 			Assert.AreEqual(sdkSigner.Attachments["attachmentName"].SenderComment, role.AttachmentRequirements[0].Comment);
-			Assert.AreEqual(sdkSigner.Attachments["attachmentName"].Status, role.AttachmentRequirements[0].Status);
+			Assert.AreEqual(sdkSigner.Attachments["attachmentName"].Status.ToString(), role.AttachmentRequirements[0].Status.ToString());
 		}
 	}
 } 	

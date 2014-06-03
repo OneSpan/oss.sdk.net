@@ -37,7 +37,7 @@ namespace Silanis.ESL.SDK
 				.Build();
 
 			signer.Attachments[attachmentId].SenderComment = "";
-			signer.Attachments[attachmentId].Status = Silanis.ESL.API.RequirementStatus.COMPLETE;
+			signer.Attachments[attachmentId].Status = Silanis.ESL.SDK.RequirementStatus.COMPLETE;
 
 			Role apiPayload = new SignerConverter(signer).ToAPIRole(System.Guid.NewGuid().ToString());
 

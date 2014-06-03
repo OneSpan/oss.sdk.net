@@ -34,7 +34,7 @@ namespace SDK.Examples
 			Assert.AreEqual(signer1Att1.Name, example.name1);
 			Assert.AreEqual(signer1Att1.Description, example.description1);
 			Assert.AreEqual(signer1Att1.Required, true);
-			Assert.AreEqual(signer1Att1.Status, RequirementStatus.INCOMPLETE);
+			Assert.AreEqual(signer1Att1.Status.ToString(), Silanis.ESL.API.RequirementStatus.INCOMPLETE.ToString());
 
 			Assert.AreEqual(signer2Attachments.Count, 2);
 			AttachmentRequirement signer2Att1 = signer2Attachments[example.name2];
@@ -42,11 +42,11 @@ namespace SDK.Examples
 			Assert.AreEqual(signer2Att1.Name, example.name2);
 			Assert.AreEqual(signer2Att1.Description, example.description2);
 			Assert.AreEqual(signer2Att1.Required, false);
-			Assert.AreEqual(signer2Att1.Status, RequirementStatus.INCOMPLETE);
+			Assert.AreEqual(signer2Att1.Status.ToString(), Silanis.ESL.API.RequirementStatus.INCOMPLETE.ToString());
 			Assert.AreEqual(signer2Att2.Name, example.name3);
 			Assert.AreEqual(signer2Att2.Description, example.description3);
 			Assert.AreEqual(signer2Att2.Required, true);
-			Assert.AreEqual(signer2Att2.Status, RequirementStatus.INCOMPLETE);
+			Assert.AreEqual(signer2Att2.Status.ToString(), Silanis.ESL.API.RequirementStatus.INCOMPLETE.ToString());
 
 			// Upload attachment for signer1
 			string signerAuthenticationToken = example.EslClient.AuthenticationTokenService.CreateSignerAuthenticationToken(example.PackageId, example.signer1Id);
@@ -62,12 +62,12 @@ namespace SDK.Examples
 			// Reject signer1's attachment
 			example.RejectAttachment();
 			signer1Att1 = retrievedPackage.Signers[example.Email1].Attachments[example.name1];
-			Assert.AreEqual(signer1Att1.Status, RequirementStatus.REJECTED);
+			Assert.AreEqual(signer1Att1.Status.ToString(), Silanis.ESL.API.RequirementStatus.REJECTED.ToString());
 			Assert.AreEqual(signer1Att1.SenderComment, example.rejectionComment);
 
 			// Accept signer1's attachment
 			example.AcceptAttachment();
-			Assert.AreEqual(signer1Att1.Status, RequirementStatus.COMPLETE);
+			Assert.AreEqual(signer1Att1.Status.ToString(), Silanis.ESL.API.RequirementStatus.COMPLETE.ToString());
 			Assert.AreEqual(signer1Att1.SenderComment, "");
 
 			// Download signer1's attachment

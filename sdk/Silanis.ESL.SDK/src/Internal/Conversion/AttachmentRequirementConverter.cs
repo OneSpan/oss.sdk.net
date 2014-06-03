@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace Silanis.ESL.SDK
 {
-    public class AttachmentRequirementConverter
+	internal class AttachmentRequirementConverter
     {
 		private Silanis.ESL.SDK.AttachmentRequirement sdkAttachmentRequirement = null;
 		private Silanis.ESL.API.AttachmentRequirement apiAttachmentRequirement = null;
@@ -12,7 +12,7 @@ namespace Silanis.ESL.SDK
 		/// Construct with API AttachmentRequirement object involved in conversion.
 		/// </summary>
 		/// <param name="apiAttachmentRequirement">API attachment requirement.</param>
-		internal AttachmentRequirementConverter(Silanis.ESL.API.AttachmentRequirement apiAttachmentRequirement)
+		public AttachmentRequirementConverter(Silanis.ESL.API.AttachmentRequirement apiAttachmentRequirement)
         {
 			this.apiAttachmentRequirement = apiAttachmentRequirement;
         }
@@ -20,7 +20,7 @@ namespace Silanis.ESL.SDK
 		/// <summary>
 		/// Construct with SDK AttachmentRequirement object involved in conversion.
 		/// </summary>
-		/// <param name="sdkAttachmentRequirement">Sdk attachment requirement.</param>
+		/// <param name="sdkAttachmentRequirement">SDK attachment requirement.</param>
 		public AttachmentRequirementConverter(Silanis.ESL.SDK.AttachmentRequirement sdkAttachmentRequirement)
 		{
 			this.sdkAttachmentRequirement = sdkAttachmentRequirement;
@@ -30,7 +30,7 @@ namespace Silanis.ESL.SDK
 		/// Convert from SDK AttachmentRequirement to API AttachmentRequirement.
 		/// </summary>
 		/// <returns>The API attachment requirement.</returns>
-		internal Silanis.ESL.API.AttachmentRequirement ToAPIAttachmentRequirement()
+		public Silanis.ESL.API.AttachmentRequirement ToAPIAttachmentRequirement()
 		{
 			if (sdkAttachmentRequirement == null)
 			{
@@ -51,9 +51,9 @@ namespace Silanis.ESL.SDK
 			}
 
 			result.Comment = sdkAttachmentRequirement.SenderComment;
-//			result.Data = sdkAttachmentRequirement.Data;
 			result.Description = sdkAttachmentRequirement.Description;
 			result.Required = sdkAttachmentRequirement.Required;
+			result.Data = sdkAttachmentRequirement.Data;
 
 			if (sdkAttachmentRequirement.Status.Equals(null))
 			{
@@ -61,7 +61,7 @@ namespace Silanis.ESL.SDK
 			}
 			else
 			{
-				result.Status = sdkAttachmentRequirement.Status;
+				result.Status = new RequirementStatusConverter(sdkAttachmentRequirement.Status).ToAPIRequirementStatus();
 			}
 
 			return result;
@@ -82,11 +82,11 @@ namespace Silanis.ESL.SDK
 			{
 				Silanis.ESL.SDK.AttachmentRequirement result = new Silanis.ESL.SDK.AttachmentRequirement(apiAttachmentRequirement.Name);
 				result.SenderComment = apiAttachmentRequirement.Comment;
-//				result.Data = apiAttachmentRequirement.Data;
 				result.Description = apiAttachmentRequirement.Description;
 				result.Id = apiAttachmentRequirement.Id;
 				result.Required = apiAttachmentRequirement.Required;
-				result.Status = apiAttachmentRequirement.Status;
+				result.Data = apiAttachmentRequirement.Data;
+				result.Status = new RequirementStatusConverter(apiAttachmentRequirement.Status).ToSDKRequirementStatus();
 
 				return result;
 			}

@@ -111,6 +111,7 @@
     <Compile Include="src\CustomSenderInfoInCreateNewTemplateExample.cs" />
     <Compile Include="src\CustomSenderInfoInCreatePackageFromTemplateExample.cs" />
     <Compile Include="src\AttachmentRequirementExample.cs" />
+    <Compile Include="src\DownloadCompletionReportExample.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

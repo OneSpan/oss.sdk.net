@@ -62,6 +62,13 @@
     <Compile Include="src\Builder\AttachmentRequirementBuilderTest.cs" />
     <Compile Include="src\Internal\Conversion\SignerConverterTest.cs" />
     <Compile Include="src\Internal\Conversion\AttachmentRequirementConverterTest.cs" />
+    <Compile Include="src\Internal\Conversion\SenderStatusConverterTest.cs" />
+    <Compile Include="src\Internal\Conversion\SenderTypeConverterTest.cs" />
+    <Compile Include="src\Internal\Conversion\PackageStatusConverterTest.cs" />
+    <Compile Include="src\Internal\Conversion\CompletionReportConverterTest.cs" />
+    <Compile Include="src\Internal\DateHelperTest.cs" />
+    <Compile Include="src\Internal\Conversion\RequirementStatusConverterTest.cs" />
+    <Compile Include="src\Internal\ConverterTest.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

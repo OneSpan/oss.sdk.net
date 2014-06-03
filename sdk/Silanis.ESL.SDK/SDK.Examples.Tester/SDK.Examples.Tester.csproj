@@ -63,6 +63,7 @@
     <Compile Include="src\GenericFieldsExampleTest.cs" />
     <Compile Include="src\AttachmentRequirementExampleTest.cs" />
     <Compile Include="src\internal\DocumentTypeUtility.cs" />
+    <Compile Include="src\DownloadCompletionReportExampleTest.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
