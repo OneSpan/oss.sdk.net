@@ -12,6 +12,7 @@ namespace SDK.Examples
 		private string senderUID;
 		private Silanis.ESL.SDK.CompletionReport sdkCompletionReport;
 		private Stream fileStream1;
+		private PackageId packageId;
 
 		public static void Main(string[] args)
 		{
