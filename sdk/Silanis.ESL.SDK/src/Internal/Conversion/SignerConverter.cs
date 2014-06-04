@@ -26,14 +26,18 @@ namespace Silanis.ESL.SDK
 				role.AddAttachmentRequirement(new AttachmentRequirementConverter(attachmentRequirement).ToAPIAttachmentRequirement());
 			}
 
-            if (String.IsNullOrEmpty(sdkSigner.Id))
-            {
-                role.Id = role.Name = roleIdName;
-            }
-            else
+            if (!String.IsNullOrEmpty(sdkSigner.Id))
             {
                 role.Id = sdkSigner.Id;
                 role.Name = sdkSigner.Id;
+            }
+            else if (sdkSigner.IsGroupSigner())
+            {
+                role.Id = role.Name = sdkSigner.GroupId.Id;
+            }
+            else
+            {
+                role.Id = role.Name = roleIdName;
             }
 
             if (!String.IsNullOrEmpty(sdkSigner.Message))
