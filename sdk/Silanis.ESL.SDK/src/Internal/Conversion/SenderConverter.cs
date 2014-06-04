@@ -6,6 +6,7 @@ namespace Silanis.ESL.SDK
     {
 		private Silanis.ESL.API.Sender apiSender;
 		private Silanis.ESL.SDK.SenderInfo sdkSenderInfo;
+		private Silanis.ESL.SDK.Sender sdkSender;
 
 		public SenderConverter(Silanis.ESL.API.Sender sender)
 		{
@@ -60,6 +61,31 @@ namespace Silanis.ESL.SDK
 
 				return result;
 			}
+		}
+
+		public Sender ToSDKSender() {
+			if (apiSender == null)
+			{
+				return sdkSender;
+			}
+
+			Sender result = new Sender();
+			result.Email = apiSender.Email;
+			result.Id = apiSender.Id;
+			result.FirstName = apiSender.FirstName;
+			result.LastName = apiSender.LastName;
+			result.Company = apiSender.Company;
+			result.Created = apiSender.Created;
+			result.Language = apiSender.Language;
+			result.Name = apiSender.Name;
+			result.Phone = apiSender.Phone;
+			result.SignerType = apiSender.SignerType;
+			result.Status = new SenderStatusConverter(apiSender.Status).ToSDKSenderStatus();
+			result.Type = new SenderTypeConverter(apiSender.Type).ToSDKSenderType();
+			result.Title = apiSender.Title;
+			result.Updated = apiSender.Updated;
+			
+			return result;
 		}
     }
 }

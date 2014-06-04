@@ -54,7 +54,7 @@ namespace Silanis.ESL.SDK
 			AttachmentRequirement attachmentRequirement = new AttachmentRequirement(name);
 			attachmentRequirement.Description = desciption;
 			attachmentRequirement.Required = isRequired;
-			attachmentRequirement.Status = Silanis.ESL.API.RequirementStatus.INCOMPLETE;
+			attachmentRequirement.Status = Silanis.ESL.SDK.RequirementStatus.INCOMPLETE;
 
 			return attachmentRequirement;
 		}

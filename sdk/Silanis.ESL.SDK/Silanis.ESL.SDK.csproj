@@ -274,6 +274,22 @@
     <Compile Include="src\Internal\AuthHeaderGenerator.cs" />
     <Compile Include="src\Internal\ApiTokenAuthHeaderGenerator.cs" />
     <Compile Include="src\Internal\SessionIdAuthHeaderGenerator.cs" />
+    <Compile Include="src\SenderType.cs" />
+    <Compile Include="src\SenderStatus.cs" />
+    <Compile Include="src\Internal\Conversion\SenderTypeConverter.cs" />
+    <Compile Include="src\Internal\Conversion\SenderStatusConverter.cs" />
+    <Compile Include="src\Sender.cs" />
+    <Compile Include="src\CompletionReport.cs" />
+    <Compile Include="src\DocumentsCompletionReport.cs" />
+    <Compile Include="src\PackageCompletionReport.cs" />
+    <Compile Include="src\SenderCompletionReport.cs" />
+    <Compile Include="src\SignersCompletionReport.cs" />
+    <Compile Include="src\PackageStatus.cs" />
+    <Compile Include="src\Internal\Conversion\PackageStatusConverter.cs" />
+    <Compile Include="src\Internal\Conversion\CompletionReportConverter.cs" />
+    <Compile Include="src\Internal\DateHelper.cs" />
+    <Compile Include="src\RequirementStatus.cs" />
+    <Compile Include="src\Internal\Conversion\RequirementStatusConverter.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSHARP.Targets" />
   <ProjectExtensions>

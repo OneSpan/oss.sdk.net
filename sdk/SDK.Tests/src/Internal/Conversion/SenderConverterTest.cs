@@ -18,12 +18,7 @@ namespace SDK.Tests
 		public void ToSDKFromAPISender()
 		{
 
-			Silanis.ESL.API.Sender sender = new Silanis.ESL.API.Sender();
-			sender.Email = EMAIL;
-			sender.FirstName = FIRST_NAME;
-			sender.LastName = LAST_NAME;
-			sender.Company = COMPANY;
-			sender.Title = TITLE;
+			Silanis.ESL.API.Sender sender = CreateTypicalAPISender();
 
 			SenderInfo senderInfo = new SenderConverter(sender).ToSDKSenderInfo();
 
@@ -69,6 +64,40 @@ namespace SDK.Tests
 		{
 			Silanis.ESL.API.Sender sender = null;
 			new SenderConverter(sender);
+		}
+
+		[Test()]
+		public void ToSDKSenderFromAPISender()
+		{
+			Silanis.ESL.API.Sender apiSender = CreateTypicalAPISender();
+			Silanis.ESL.SDK.Sender sdkSender = new SenderConverter(apiSender).ToSDKSender();
+
+			Assert.AreEqual(sdkSender.Status.ToString(), apiSender.Status.ToString());
+			Assert.AreEqual(sdkSender.LastName, apiSender.LastName);
+			Assert.AreEqual(sdkSender.FirstName, apiSender.FirstName);
+			Assert.AreEqual(sdkSender.Company, apiSender.Company);
+			Assert.AreEqual(sdkSender.Created, apiSender.Created);
+			Assert.AreEqual(sdkSender.Email, apiSender.Email);
+			Assert.AreEqual(sdkSender.Language, apiSender.Language);
+			Assert.AreEqual(sdkSender.Phone, apiSender.Phone);
+			Assert.AreEqual(sdkSender.Name, apiSender.Name);
+			Assert.AreEqual(sdkSender.Title, apiSender.Title);
+			Assert.AreEqual(sdkSender.Type.ToString(), apiSender.Type.ToString());
+			Assert.AreEqual(sdkSender.Updated, apiSender.Updated);
+			Assert.AreEqual(sdkSender.SignerType, apiSender.SignerType);
+			Assert.AreEqual(sdkSender.Id, apiSender.Id);
+		}
+
+		private Silanis.ESL.API.Sender CreateTypicalAPISender()
+		{
+			Silanis.ESL.API.Sender sender = new Silanis.ESL.API.Sender();
+			sender.Email = EMAIL;
+			sender.FirstName = FIRST_NAME;
+			sender.LastName = LAST_NAME;
+			sender.Company = COMPANY;
+			sender.Title = TITLE;
+
+			return sender;
 		}
     }
 }
