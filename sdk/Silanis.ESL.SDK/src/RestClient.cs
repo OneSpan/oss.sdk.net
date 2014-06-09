@@ -53,7 +53,13 @@ namespace Silanis.ESL.SDK
 
         public string Get(string path) {
 //            support.LogRequest("GET", path);
-			byte[] responseBytes = HttpMethods.GetHttpJson(apiToken, path);
+			byte[] responseBytes = HttpMethods.GetHttpJson(apiToken, path, "application/json");
+            return Converter.ToString(responseBytes);
+        }
+        
+        public string Get(string path, string acceptType)
+        {
+            byte[] responseBytes = HttpMethods.GetHttpJson(apiToken, path, acceptType);
             return Converter.ToString(responseBytes);
         }
 
