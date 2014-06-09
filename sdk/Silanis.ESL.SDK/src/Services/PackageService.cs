@@ -679,20 +679,38 @@ namespace Silanis.ESL.SDK.Services
 			}
 		}
 
+        private string BuildCompletionReportUrl(Silanis.ESL.SDK.PackageStatus packageStatus, String senderId, DateTime from, DateTime to)
+        {
+            string toDate = DateHelper.dateToIsoUtcFormat(to);
+            string fromDate = DateHelper.dateToIsoUtcFormat(from);
+
+            return template.UrlFor(UrlTemplate.COMPLETION_REPORT_PATH)
+                .Replace("{from}", fromDate)
+                .Replace("{to}", toDate)
+                .Replace("{status}", packageStatus.ToString())
+                .Replace("{senderId}", senderId)
+                .Build();
+        }
+
+        public string DownloadCompletionReportAsCSV(Silanis.ESL.SDK.PackageStatus packageStatus, String senderId, DateTime from, DateTime to)
+        {
+            try
+            {
+                string path = BuildCompletionReportUrl(packageStatus,senderId, from, to);
+                string response = restClient.Get(path, "text/csv");
+                return response;
+            }
+            catch (Exception e)
+            {
+                throw new EslException("Could not download the completion report." + " Exception: " + e.Message, e);
+            }
+        }
+
 		public Silanis.ESL.SDK.CompletionReport DownloadCompletionReport(Silanis.ESL.SDK.PackageStatus packageStatus, String senderId, DateTime from, DateTime to)
 		{
-			string toDate = DateHelper.dateToIsoUtcFormat(to);
-			string fromDate = DateHelper.dateToIsoUtcFormat(from);
-
-			string path = template.UrlFor(UrlTemplate.COMPLETION_REPORT_PATH)
-				.Replace("{from}", fromDate)
-				.Replace("{to}", toDate)
-				.Replace("{status}", packageStatus.ToString())
-				.Replace("{senderId}", senderId)
-				.Build();
-
 			try
 			{
+                string path = BuildCompletionReportUrl(packageStatus,senderId, from, to);
 				string response = restClient.Get(path);
 				Silanis.ESL.API.CompletionReport apiCompletionReport = JsonConvert.DeserializeObject<Silanis.ESL.API.CompletionReport> (response, settings);
 				return new CompletionReportConverter(apiCompletionReport).ToSDKCompletionReport();
