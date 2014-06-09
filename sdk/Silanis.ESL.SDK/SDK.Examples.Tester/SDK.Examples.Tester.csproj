@@ -81,4 +81,7 @@
       <Name>Silanis.ESL.SDK</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup>
+    <None Include="signers.properties" />
+  </ItemGroup>
 </Project>
