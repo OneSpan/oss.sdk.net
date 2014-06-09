@@ -81,6 +81,8 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <None Include="signers.properties" />
+    <None Include="signers.properties">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
 </Project>
