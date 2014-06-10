@@ -50,44 +50,43 @@ namespace SDK.Examples
 
 		private void inviteUsersToMyAccount() {
 			// The group members need to be account members, if they aren't already you may need to invite them to your account.
-//			eslClient.AccountService.InviteUser(AccountMemberBuilder.NewAccountMember(email1)
-//				.WithFirstName("first1")
-//				.WithLastName("last1")
-//				.WithCompany("company1")
-//				.WithTitle("title1")
-//				.WithLanguage("language1")
-//				.WithPhoneNumber("phoneNumber1")
-//				.Build());
-//			eslClient.AccountService.InviteUser(AccountMemberBuilder.NewAccountMember(email2)
-//				.WithFirstName("first2")
-//				.WithLastName("last2")
-//				.WithCompany("company2")
-//				.WithTitle("title2")
-//				.WithLanguage("language2")
-//				.WithPhoneNumber("phoneNumber2")
-//				.Build());
-//			eslClient.AccountService.InviteUser(AccountMemberBuilder.NewAccountMember(email3)
-//				.WithFirstName("first3")
-//				.WithLastName("last3")
-//				.WithCompany("company3")
-//				.WithTitle("title3")
-//				.WithLanguage("language3")
-//				.WithPhoneNumber("phoneNumber3")
-//				.Build());
-//			eslClient.AccountService.InviteUser(AccountMemberBuilder.NewAccountMember(email4)
-//				.WithFirstName("first4")
-//				.WithLastName("last4")
-//				.WithCompany("company4")
-//				.WithTitle("title4")
-//				.WithLanguage("language4")
-//				.WithPhoneNumber("phoneNumber4")
-//				.Build());
+			eslClient.AccountService.InviteUser(AccountMemberBuilder.NewAccountMember(email1)
+				.WithFirstName("first1")
+				.WithLastName("last1")
+				.WithCompany("company1")
+				.WithTitle("title1")
+				.WithLanguage("language1")
+				.WithPhoneNumber("phoneNumber1")
+				.Build());
+			eslClient.AccountService.InviteUser(AccountMemberBuilder.NewAccountMember(email2)
+				.WithFirstName("first2")
+				.WithLastName("last2")
+				.WithCompany("company2")
+				.WithTitle("title2")
+				.WithLanguage("language2")
+				.WithPhoneNumber("phoneNumber2")
+				.Build());
+			eslClient.AccountService.InviteUser(AccountMemberBuilder.NewAccountMember(email3)
+				.WithFirstName("first3")
+				.WithLastName("last3")
+				.WithCompany("company3")
+				.WithTitle("title3")
+				.WithLanguage("language3")
+				.WithPhoneNumber("phoneNumber3")
+				.Build());
+			eslClient.AccountService.InviteUser(AccountMemberBuilder.NewAccountMember(email4)
+				.WithFirstName("first4")
+				.WithLastName("last4")
+				.WithCompany("company4")
+				.WithTitle("title4")
+				.WithLanguage("language4")
+				.WithPhoneNumber("phoneNumber4")
+				.Build());
 		}
 
         override public void Execute()
         {
-			eslClient.PackageService.NotifySigner( new PackageId( "d97d29e5-b00b-4b75-bdd4-d52de54813d7"), new GroupId("f21b5204-61db-4e2b-aee5-80cc2da45e04") );
-			/*
+			inviteUsersToMyAccount();
 			displayAccountGroupsAndMembers();
 			Group emptyGroup = GroupBuilder.NewGroup(Guid.NewGuid().ToString())
 				.WithId(new GroupId(Guid.NewGuid().ToString()))
@@ -159,7 +158,7 @@ namespace SDK.Examples
 			eslClient.PackageService.NotifySigner(packageId, createdGroup1.Id);
 
 			DocumentPackage result = eslClient.GetPackage(packageId);
-			*/
+			
         }
     }
 }

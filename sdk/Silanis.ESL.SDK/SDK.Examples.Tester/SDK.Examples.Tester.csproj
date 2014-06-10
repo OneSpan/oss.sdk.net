@@ -64,6 +64,7 @@
     <Compile Include="src\AttachmentRequirementExampleTest.cs" />
     <Compile Include="src\internal\DocumentTypeUtility.cs" />
     <Compile Include="src\DownloadCompletionReportExampleTest.cs" />
+    <Compile Include="src\GroupManagementExampleTest.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
@@ -82,7 +83,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="signers.properties">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
   </ItemGroup>
 </Project>
