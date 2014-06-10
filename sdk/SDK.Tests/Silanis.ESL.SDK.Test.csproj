@@ -69,6 +69,7 @@
     <Compile Include="src\Internal\DateHelperTest.cs" />
     <Compile Include="src\Internal\Conversion\RequirementStatusConverterTest.cs" />
     <Compile Include="src\Internal\ConverterTest.cs" />
+    <Compile Include="src\Builder\DocumentPackageSettingsBuilderTest.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
