@@ -33,7 +33,7 @@ namespace SDK.Examples
         {
             this.email1 = email1;
             this.email2 = email2;
-			this.fileStream1 = File.OpenRead(new FileInfo(Directory.GetCurrentDirectory() + "/src/document.pdf").FullName);
+            this.fileStream1 = File.OpenRead(new FileInfo(Directory.GetCurrentDirectory() + "/src/document.pdf").FullName);
             this.fileStream2 = File.OpenRead(new FileInfo(Directory.GetCurrentDirectory() + "/src/document.pdf").FullName);
         }
 
@@ -72,21 +72,21 @@ namespace SDK.Examples
                               .WithSignature(SignatureBuilder.SignatureFor(email2)
                                              .OnPage(0)
                                              .AtPosition(100, 200)
-                                       .WithField(FieldBuilder.RadioButton("group")
-                                       .WithValue(false)
-                                       .WithSize(20, 20)  
-                                       .OnPage(0)
-                                       .AtPosition(400, 200))
-                                       .WithField(FieldBuilder.RadioButton("group")
-                                       .WithValue(true)
-                                       .WithSize(20, 20) 
-                                       .OnPage(0)
-                                       .AtPosition(400, 250))
-                                       .WithField(FieldBuilder.RadioButton("group")
-                                       .WithValue(false)
-                                       .WithSize(20, 20) 
-                                       .OnPage(0)
-                                       .AtPosition(400, 300))
+                                             .WithField(FieldBuilder.RadioButton("group")
+                                                     .WithValue(false)
+                                                     .WithSize(20, 20)
+                                                     .OnPage(0)
+                                                     .AtPosition(400, 200))
+                                             .WithField(FieldBuilder.RadioButton("group")
+                                                     .WithValue(true)
+                                                     .WithSize(20, 20)
+                                                     .OnPage(0)
+                                                     .AtPosition(400, 250))
+                                             .WithField(FieldBuilder.RadioButton("group")
+                                                     .WithValue(false)
+                                                     .WithSize(20, 20)
+                                                     .OnPage(0)
+                                                     .AtPosition(400, 300))
                                             )
                              )
                 .Build();

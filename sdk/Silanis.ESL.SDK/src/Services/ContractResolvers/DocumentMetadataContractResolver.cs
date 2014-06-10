@@ -7,7 +7,7 @@ namespace Silanis.ESL.SDK
 {
     public class DocumentMetadataContractResolver : DefaultContractResolver
     {
-        public new static readonly DocumentMetadataContractResolver Instance = new DocumentMetadataContractResolver();
+        public static readonly DocumentMetadataContractResolver Instance = new DocumentMetadataContractResolver();
 
         protected override JsonProperty CreateProperty(MemberInfo member, MemberSerialization memberSerialization)
         {

@@ -23,6 +23,10 @@ namespace Silanis.ESL.API
             {
                 return _approvals;
             }
+            set
+            {
+                _approvals = value;
+            }
         }
         public Document AddApproval(Approval value)
         {
@@ -75,6 +79,10 @@ namespace Silanis.ESL.API
             {
                 return _fields;
             }
+            set
+            {
+                _fields = value;
+            }
         }
         public Document AddField(Field value)
         {
@@ -118,6 +126,10 @@ namespace Silanis.ESL.API
             get
             {
                 return _pages;
+            }
+            set
+            {
+                _pages = value;
             }
         }
         public Document AddPage(Page value)
