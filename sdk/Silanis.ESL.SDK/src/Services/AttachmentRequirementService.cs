@@ -44,7 +44,11 @@ namespace Silanis.ESL.SDK
 			try {
 				string json = JsonConvert.SerializeObject(apiPayload, settings);
 				restClient.Put(path, json);
-			} catch (Exception e) {
+			} 
+            catch (EslServerException e) {
+                throw new EslServerException("Could not accept attachment for signer." + " Exception: " + e.Message, e.ServerError, e);
+            }
+            catch (Exception e) {
 				throw new EslException("Could not accept attachment for signer." + " Exception: " + e.Message,e);
 			}
 		}
@@ -73,7 +77,11 @@ namespace Silanis.ESL.SDK
 			try {
 				string json = JsonConvert.SerializeObject(apiPayload, settings);
 				restClient.Put(path, json);              
-			} catch (Exception e) {
+			} 
+            catch (EslServerException e) {
+                throw new EslServerException("Could not reject attachment for signer." + " Exception: " + e.Message, e.ServerError, e);
+            }
+            catch (Exception e) {
 				throw new EslException("Could not reject attachment for signer." + " Exception: " + e.Message,e);
 			}
 		}
@@ -95,7 +103,11 @@ namespace Silanis.ESL.SDK
 
 			try {
 				return restClient.GetBytes(path);
-			} catch (Exception e) {
+			}
+            catch (EslServerException e) {
+                throw new EslServerException("Could not download the pdf attachment." + " Exception: " + e.Message, e.ServerError, e);
+            }
+            catch (Exception e) {
 				throw new EslException("Could not download the pdf attachment." + " Exception: " + e.Message,e);
 			}
 		}

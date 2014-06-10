@@ -45,7 +45,11 @@ namespace Silanis.ESL.SDK.Services
                 apiResponse = JsonConvert.DeserializeObject<Silanis.ESL.API.CustomField>(stringResponse);
                 sdkResponse = CustomFieldBuilder.CustomField( apiResponse ).Build();
                 return sdkResponse;
-            } catch ( Exception e ) {
+            } 
+            catch ( EslServerException e ) {
+                throw new EslServerException( "Could not add/update the custom field to account." + e.Message, e.ServerError, e );
+            }
+            catch ( Exception e ) {
                 throw new EslException( "Could not add/update the custom field to account." + e.Message, e );
             }
         }
@@ -67,7 +71,11 @@ namespace Silanis.ESL.SDK.Services
                 }
                 JsonConvert.DeserializeObject<CustomFieldValue>(stringResponse);
                 return true;
-            } catch ( EslException e ) {
+            } 
+            catch ( EslServerException e ) {
+                return false;
+            } 
+            catch ( EslException e ) {
                 return false;
             } catch ( Exception e ) {
                 throw new EslException( "Could not get the custom field from account." + e.Message, e );
@@ -98,7 +106,11 @@ namespace Silanis.ESL.SDK.Services
                 UserCustomField result = JsonConvert.DeserializeObject<UserCustomField>(response);
     
                 return CustomFieldValueBuilder.CustomFieldValue( result ).build();
-            } catch ( Exception e ) {
+            }
+            catch ( EslServerException e ) {
+                throw new EslServerException( "Could not add/update the custom field to account." + e.Message, e.ServerError, e );
+            }
+            catch ( Exception e ) {
                 throw new EslException( "Could not add/update the custom field to account." + e.Message, e );
             }
         }
@@ -120,7 +132,11 @@ namespace Silanis.ESL.SDK.Services
                 }
                 JsonConvert.DeserializeObject<UserCustomField>(stringResponse);
                 return true;
-            } catch ( EslException e ) {
+            }
+            catch ( EslServerException e ) {
+                return false;
+            }
+            catch ( EslException e ) {
                 return false;
             } catch ( Exception e ) {
                 throw new EslException( "Could not get the custom field from user." + e.Message, e );

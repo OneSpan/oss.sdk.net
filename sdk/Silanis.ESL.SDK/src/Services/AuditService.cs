@@ -42,7 +42,11 @@ namespace Silanis.ESL.SDK.Services
 					return JsonConvert.DeserializeObject<List<Audit>> (eventList ["audit-events"].ToString ());
 				}
 				return null;
-			} catch (Exception e) {
+			}
+            catch (EslServerException e) {
+                throw new EslServerException ("Could not get audit." + " Exception: " + e.Message,e.ServerError,e);
+            }
+            catch (Exception e) {
 				throw new EslException ("Could not get audit." + " Exception: " + e.Message,e);
 			}
 		}

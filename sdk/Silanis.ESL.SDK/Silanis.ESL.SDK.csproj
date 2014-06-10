@@ -277,6 +277,9 @@
     <Compile Include="src\SenderType.cs" />
     <Compile Include="src\SenderStatus.cs" />
     <Compile Include="src\Internal\Conversion\SenderTypeConverter.cs" />
+    <Compile Include="EslServerException.cs" />
+    <Compile Include="src\ServerError.cs" />
+    <Compile Include="src\Internal\Conversion\ErrorConverter.cs" />
     <Compile Include="src\Internal\Conversion\SenderStatusConverter.cs" />
     <Compile Include="src\Sender.cs" />
     <Compile Include="src\CompletionReport.cs" />

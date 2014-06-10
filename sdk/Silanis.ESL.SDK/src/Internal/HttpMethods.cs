@@ -37,6 +37,19 @@ namespace Silanis.ESL.SDK.Internal
 					return result;
 				}
             }
+            catch (WebException e){
+                Support.LogError(e.Message);
+                Support.LogError(e.StackTrace);
+                using (var stream = e.Response.GetResponseStream())
+                using (var reader = new StreamReader(stream))
+                {
+                    string errorDetails = reader.ReadToEnd();
+                    Support.LogError(errorDetails);
+                    throw new EslServerException(String.Format("{0} HTTP {1} on URI {2}. Optional details: {3}", e.Message, 
+                                                               ((HttpWebResponse)e.Response).Method, e.Response.ResponseUri, errorDetails),
+                                                                errorDetails, e);
+                }
+            }
             catch (Exception e) {
 				Support.LogError(e.Message);
 				Support.LogError(e.StackTrace);
@@ -71,6 +84,19 @@ namespace Silanis.ESL.SDK.Internal
 					return result;
 				}
 			}
+            catch (WebException e){
+                Support.LogError(e.Message);
+                Support.LogError(e.StackTrace);
+                using (var stream = e.Response.GetResponseStream())
+                using (var reader = new StreamReader(stream))
+                {
+                    string errorDetails = reader.ReadToEnd();
+                    Support.LogError(errorDetails);
+                    throw new EslServerException(String.Format("{0} HTTP {1} on URI {2}. Optional details: {3}", e.Message, 
+                                                               ((HttpWebResponse)e.Response).Method, e.Response.ResponseUri, errorDetails),
+                                                                errorDetails, e);
+                }
+            }
 			catch (Exception e) {
 				Support.LogError(e.Message);
 				Support.LogError(e.StackTrace);
@@ -101,6 +127,19 @@ namespace Silanis.ESL.SDK.Internal
                     return result;
                 }
             }
+            catch (WebException e){
+                Support.LogError(e.Message);
+                Support.LogError(e.StackTrace);
+                using (var stream = e.Response.GetResponseStream())
+                using (var reader = new StreamReader(stream))
+                {
+                    string errorDetails = reader.ReadToEnd();
+                    Support.LogError(errorDetails);
+                    throw new EslServerException(String.Format("{0} HTTP {1} on URI {2}. Optional details: {3}", e.Message, 
+                                                               ((HttpWebResponse)e.Response).Method, e.Response.ResponseUri, errorDetails),
+                                                                errorDetails, e);
+                }
+            }
             catch (Exception e) {
                 Support.LogError(e.Message);
                 Support.LogError(e.StackTrace);
@@ -129,6 +168,19 @@ namespace Silanis.ESL.SDK.Internal
 					return result;
 				}
 			}
+            catch (WebException e){
+                Support.LogError(e.Message);
+                Support.LogError(e.StackTrace);
+                using (var stream = e.Response.GetResponseStream())
+                using (var reader = new StreamReader(stream))
+                {
+                    string errorDetails = reader.ReadToEnd();
+                    Support.LogError(errorDetails);
+                    throw new EslServerException(String.Format("{0} HTTP {1} on URI {2}. Optional details: {3}", e.Message, 
+                                                               ((HttpWebResponse)e.Response).Method, e.Response.ResponseUri, errorDetails),
+                                                                errorDetails, e);
+                }
+            }
 			catch (Exception e) {
 				Support.LogError(e.Message);
 				Support.LogError(e.StackTrace);
@@ -156,6 +208,19 @@ namespace Silanis.ESL.SDK.Internal
 					return result;
 				}
 			}
+            catch (WebException e){
+                Support.LogError(e.Message);
+                Support.LogError(e.StackTrace);
+                using (var stream = e.Response.GetResponseStream())
+                using (var reader = new StreamReader(stream))
+                {
+                    string errorDetails = reader.ReadToEnd();
+                    Support.LogError(errorDetails);
+                    throw new EslServerException(String.Format("{0} HTTP {1} on URI {2}. Optional details: {3}", e.Message, 
+                                                               ((HttpWebResponse)e.Response).Method, e.Response.ResponseUri, errorDetails),
+                                                                errorDetails, e);
+                }
+            }
 			catch (Exception e) {
 				Support.LogError(e.Message);
 				Support.LogError(e.StackTrace);
@@ -183,6 +248,19 @@ namespace Silanis.ESL.SDK.Internal
 					return result;
 				}
 			}
+            catch (WebException e){
+                Support.LogError(e.Message);
+                Support.LogError(e.StackTrace);
+                using (var stream = e.Response.GetResponseStream())
+                using (var reader = new StreamReader(stream))
+                {
+                    string errorDetails = reader.ReadToEnd();
+                    Support.LogError(errorDetails);
+                    throw new EslServerException(String.Format("{0} HTTP {1} on URI {2}. Optional details: {3}", e.Message, 
+                                                               ((HttpWebResponse)e.Response).Method, e.Response.ResponseUri, errorDetails),
+                                                                errorDetails, e);
+                }
+            }
 			catch (Exception e) {
 				Support.LogError(e.Message);
 				Support.LogError(e.StackTrace);
@@ -221,6 +299,19 @@ namespace Silanis.ESL.SDK.Internal
 					return result;
 				}
 			}
+            catch (WebException e){
+                Support.LogError(e.Message);
+                Support.LogError(e.StackTrace);
+                using (var stream = e.Response.GetResponseStream())
+                using (var reader = new StreamReader(stream))
+                {
+                    string errorDetails = reader.ReadToEnd();
+                    Support.LogError(errorDetails);
+                    throw new EslServerException(String.Format("{0} HTTP {1} on URI {2}. Optional details: {3}", e.Message, 
+                                                               ((HttpWebResponse)e.Response).Method, e.Response.ResponseUri, errorDetails),
+                                                                errorDetails, e);
+                }
+            }
 			catch (Exception e) {
 				Support.LogError(e.Message);
 				Support.LogError(e.StackTrace);
