@@ -55,6 +55,13 @@ namespace Silanis.ESL.API
     }
     
 		    
+    [JsonProperty("support")]
+    public SupportConfiguration Support
+    {
+                get; set;
+        }
+    
+		    
     [JsonProperty("user")]
     public User User
     {

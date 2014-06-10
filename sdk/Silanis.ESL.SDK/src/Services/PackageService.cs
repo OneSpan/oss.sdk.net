@@ -8,6 +8,7 @@ using Silanis.ESL.SDK.Internal;
 using Silanis.ESL.SDK.Builder;
 using Silanis.ESL.API;
 using System.Globalization;
+using Newtonsoft.Json.Serialization;
 
 namespace Silanis.ESL.SDK.Services
 {
@@ -120,31 +121,33 @@ namespace Silanis.ESL.SDK.Services
 		}
 
 		public void UpdateDocumentMetadata(DocumentPackage package, Document document)
-		{
-			string path = template.UrlFor (UrlTemplate.DOCUMENT_ID_PATH)
-				.Replace ("{packageId}", package.Id.Id)
-				.Replace ("{documentId}", document.Id)
-				.Build ();
+        {
+            string path = template.UrlFor(UrlTemplate.DOCUMENT_ID_PATH)
+				.Replace("{packageId}", package.Id.Id)
+				.Replace("{documentId}", document.Id)
+				.Build();
 
-			Silanis.ESL.API.Document internalDoc = new DocumentConverter(document).ToAPIDocument();
+            Silanis.ESL.API.Document internalDoc = new DocumentConverter(document).ToAPIDocument();
             
-            // Wipe out the members not related to the metadata
-            internalDoc.Approvals = null;
-            internalDoc.Fields = null;
-            internalDoc.Pages = null;
+            IContractResolver prevContractResolver = settings.ContractResolver;
+            settings.ContractResolver = DocumentMetadataContractResolver.Instance;            
+            
+            try
+            {
+                string json = JsonConvert.SerializeObject(internalDoc, settings);
+                Support.LogDebug("document json = " + json);
 
-			try 
-			{
-				string json = JsonConvert.SerializeObject (internalDoc, settings);
-				Support.LogDebug("document json = " + json);
-
-				restClient.Post(path, json);
-				Support.LogMethodExit("Document updated without issue");
-			} 
-			catch (Exception e) 
-			{
-				throw new EslException ("Could not upload document to package." + " Exception: " + e.Message,e);
-			}
+                restClient.Post(path, json);
+                Support.LogMethodExit("Document updated without issue");
+            }
+            catch (Exception e)
+            {
+                throw new EslException("Could not upload document to package." + " Exception: " + e.Message, e);
+            }
+            finally
+            {
+                settings.ContractResolver = prevContractResolver;
+            }
 		}
 
 		public void OrderDocuments(DocumentPackage package)

@@ -84,7 +84,7 @@ namespace SDK.Tests
 			Assert.AreEqual(sdkSender.Title, apiSender.Title);
 			Assert.AreEqual(sdkSender.Type.ToString(), apiSender.Type.ToString());
 			Assert.AreEqual(sdkSender.Updated, apiSender.Updated);
-			Assert.AreEqual(sdkSender.SignerType, apiSender.SignerType);
+//			Assert.AreEqual(sdkSender.SignerType, apiSender.SignerType);
 			Assert.AreEqual(sdkSender.Id, apiSender.Id);
 		}
 

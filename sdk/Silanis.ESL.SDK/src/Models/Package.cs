@@ -133,6 +133,13 @@ namespace Silanis.ESL.API
         }
     
 		    
+    [JsonProperty("notarized")]
+    public Boolean Notarized
+    {
+                get; set;
+        }
+    
+		    
     [JsonProperty("roles")]
     public IList<Role> Roles
     {

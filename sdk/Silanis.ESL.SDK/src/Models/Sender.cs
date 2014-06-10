@@ -11,6 +11,7 @@ namespace Silanis.ESL.API
 		
 		// Fields
 		private IList<GroupMembership> _memberships = new List<GroupMembership>();
+		private IList<ProfessionalIdentityField> _professionalIdentityFields = new List<ProfessionalIdentityField>();
 		private IList<UserCustomField> _userCustomFields = new List<UserCustomField>();
 		
 		// Accessors
@@ -140,15 +141,28 @@ namespace Silanis.ESL.API
         }
     
 		    
-    [JsonProperty("signature")]
-    public SignatureStyle Signature
+    [JsonProperty("professionalIdentityFields")]
+    public IList<ProfessionalIdentityField> ProfessionalIdentityFields
     {
-                get; set;
+                get
+        {
+            return _professionalIdentityFields;
         }
+        }
+        public Sender AddProfessionalIdentityField(ProfessionalIdentityField value)
+    {
+        if (value == null)
+        {
+            throw new ArgumentNullException("Argument cannot be null");
+        }
+        
+        _professionalIdentityFields.Add(value);
+        return this;
+    }
     
 		    
-    [JsonProperty("signerType")]
-    public String SignerType
+    [JsonProperty("signature")]
+    public SignatureStyle Signature
     {
                 get; set;
         }
