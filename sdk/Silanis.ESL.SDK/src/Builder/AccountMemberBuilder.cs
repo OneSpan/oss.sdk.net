@@ -12,6 +12,7 @@ namespace Silanis.ESL.SDK
         private string language;
         private string phoneNumber;
         private string title;
+        private SenderStatus? status = SenderStatus.INVITED;
 
         private AccountMemberBuilder( string email )
         {
@@ -60,6 +61,12 @@ namespace Silanis.ESL.SDK
             this.address = address;
             return this;
         }
+        
+        public AccountMemberBuilder WithStatus(SenderStatus status)
+        {
+            this.status = status;
+            return this;
+        }
 
         public AccountMember Build() {
 			Support.LogMethodEntry();
@@ -73,6 +80,7 @@ namespace Silanis.ESL.SDK
             result.Language = language;
             result.PhoneNumber = phoneNumber;
             result.Title = title;
+            if ( status.HasValue ) result.Status = status.Value;
 
 			Support.LogMethodExit(result);
             return result;

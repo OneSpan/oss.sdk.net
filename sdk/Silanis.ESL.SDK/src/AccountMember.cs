@@ -4,6 +4,12 @@ namespace Silanis.ESL.SDK
 {
     public class AccountMember
     {
+        public SenderStatus Status
+        {
+            get;
+            set;
+        }
+
         public string Title
         {
             get;
