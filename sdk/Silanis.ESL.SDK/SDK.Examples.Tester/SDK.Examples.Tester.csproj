@@ -65,6 +65,7 @@
     <Compile Include="src\internal\DocumentTypeUtility.cs" />
     <Compile Include="src\DownloadCompletionReportExampleTest.cs" />
     <Compile Include="src\GroupManagementExampleTest.cs" />
+    <Compile Include="src\SenderManipulationExampleTest.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
