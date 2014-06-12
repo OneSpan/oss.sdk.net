@@ -62,7 +62,6 @@ namespace Silanis.ESL.SDK
         }
 
         public AccountMember Build() {
-			Support.LogMethodEntry();
             AccountMember result = new AccountMember();
 
             result.Address = address;
@@ -74,7 +73,6 @@ namespace Silanis.ESL.SDK
             result.PhoneNumber = phoneNumber;
             result.Title = title;
 
-			Support.LogMethodExit(result);
             return result;
         }
     }

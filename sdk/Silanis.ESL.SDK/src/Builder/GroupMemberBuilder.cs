@@ -15,15 +15,12 @@ namespace Silanis.ESL.SDK
         }
 
         public GroupMember Build() {
-			Support.LogMethodEntry();
-
             GroupMember result = new GroupMember();
-
             result.Email = email;
             result.FirstName = firstName;
             result.LastName = lastName;
             result.GroupMemberType = groupMemberType;
-			Support.LogMethodExit(result);
+
             return result;
         }
 

@@ -51,13 +51,12 @@ namespace Silanis.ESL.SDK
 
 		public ReminderSchedule Build()
 		{
-			Support.LogMethodEntry();
 			ReminderSchedule result = new ReminderSchedule();
 			result.PackageId = packageId;
 			result.DaysBetweenReminders = daysBetweenReminders;
 			result.DaysUntilFirstReminder = daysUntilFirstReminder;
 			result.NumberOfRepetitions = numberOfRepetitions;
-			Support.LogMethodExit(result);
+
 			return result;
 		}
     }

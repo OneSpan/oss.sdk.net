@@ -177,7 +177,6 @@ namespace Silanis.ESL.SDK.Builder
 
 		public Signature Build()
         {
-            Support.LogMethodEntry();
             Signature signature;
             if (isForRegularSigner())
             {
@@ -199,7 +198,7 @@ namespace Silanis.ESL.SDK.Builder
 			signature.Name = name;
 			signature.Extract = extract;
             signature.TextAnchor = textAnchor;
-			Support.LogMethodExit(signature);
+
 			return signature;
 		}
         

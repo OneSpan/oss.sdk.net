@@ -91,7 +91,7 @@ namespace SDK.Examples
 			byte[] content = CreateMultipartContent(fileName, fileBytes, bytes, boundary);
 
 			try {
-				client.PostMultipartFile(path, content, boundary, sessionId);
+				client.PostMultipartFile(path, content, boundary, sessionId, Converter.ToString(bytes));
 			} catch (Exception e) {
 				throw new EslException ("Could not upload attachment for signer." + " Exception: " + e.Message, e);
 			}

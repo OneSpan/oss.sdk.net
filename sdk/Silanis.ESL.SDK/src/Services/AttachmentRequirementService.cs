@@ -29,8 +29,6 @@ namespace Silanis.ESL.SDK
 		/// <param name="attachmentId">Attachment identifier.</param>
 		public void AcceptAttachment(PackageId packageId, Signer signer, String attachmentId)
 		{
-			Support.LogMethodEntry(packageId,signer,attachmentId);
-
 			string path = template.UrlFor(UrlTemplate.UPDATE_SIGNER_PATH)
 				.Replace("{packageId}", packageId.Id)
 				.Replace("{roleId}", signer.Id)
@@ -58,8 +56,6 @@ namespace Silanis.ESL.SDK
 		/// <param name="senderComment">Sender comment.</param>
 		public void RejectAttachment(PackageId packageId, Signer signer, String attachmentId, String senderComment)
 		{
-			Support.LogMethodEntry(packageId,signer,attachmentId);
-
 			string path = template.UrlFor(UrlTemplate.UPDATE_SIGNER_PATH)
 				.Replace("{packageId}", packageId.Id)
 				.Replace("{roleId}", signer.Id)
@@ -86,8 +82,6 @@ namespace Silanis.ESL.SDK
 		/// <param name="attachmentId">Attachment identifier.</param>
 		public byte[] DownloadAttachment(PackageId packageId, String attachmentId)
 		{
-			Support.LogMethodEntry(packageId,attachmentId);
-
 			string path = template.UrlFor(UrlTemplate.ATTACHMENT_REQUIREMENT_PATH)
 				.Replace("{packageId}", packageId.Id)
 				.Replace("{attachmentId}", attachmentId)

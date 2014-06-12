@@ -204,9 +204,7 @@ namespace Silanis.ESL.SDK.Builder
 
 		public DocumentPackage Build()
         {
-            Support.LogMethodEntry();
             DocumentPackage package = new DocumentPackage(id, packageName, autocomplete, signers, placeholders, documents);
-
             package.Description = description;
             package.ExpiryDate = expiryDate;
             package.EmailMessage = emailMessage;
@@ -216,7 +214,6 @@ namespace Silanis.ESL.SDK.Builder
             package.SenderInfo = senderInfo;
             package.Attributes = attributes;
 
-			Support.LogMethodExit(package);
 			return package;
 		}
         

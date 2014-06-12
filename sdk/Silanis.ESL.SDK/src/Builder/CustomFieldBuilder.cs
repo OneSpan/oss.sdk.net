@@ -94,14 +94,13 @@ namespace Silanis.ESL.SDK.Builder
          * @return the custom field
          */
         public CustomField Build() {
-			Support.LogMethodEntry();
             CustomField customField = new CustomField();
             
             customField.Id = id;
             customField.Value = value;
             customField.Required = required;
             customField.AddTranslations(translations);
-			Support.LogMethodExit(customField);
+
             return customField;
         }
                 

@@ -96,11 +96,9 @@ namespace Silanis.ESL.SDK.Builder
 
 		public Document Build ()
 		{
-			Support.LogMethodEntry();
 			Validate ();
 
 			Document doc = new Document ();
-
 			doc.Name = name;
 			doc.Id = id;
 			doc.FileName = fileName;
@@ -110,7 +108,7 @@ namespace Silanis.ESL.SDK.Builder
 			doc.Extract = extract;
 			doc.AddFields (injectedFields);
 			doc.Description = description;
-			Support.LogMethodExit(doc);
+
 			return doc;
 		}
 	}

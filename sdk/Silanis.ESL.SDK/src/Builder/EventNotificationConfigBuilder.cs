@@ -24,13 +24,12 @@ namespace Silanis.ESL.SDK
         }
 
         public EventNotificationConfig build() {
-			Support.LogMethodEntry();
             EventNotificationConfig result = new EventNotificationConfig(url);
             foreach (NotificationEvent notificationEvent in events)
             {
                 result.NotificationEvents.Add(notificationEvent);
             }
-			Support.LogMethodExit(result);
+
             return result;
         }
     }

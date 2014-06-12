@@ -157,7 +157,6 @@ namespace Silanis.ESL.SDK
 
 		public DocumentPackageSettings Build()
 		{
-			Support.LogMethodEntry();
 			DocumentPackageSettings result = new DocumentPackageSettings ();
 
 			result.EnableInPerson = enableInPerson;
@@ -175,7 +174,7 @@ namespace Silanis.ESL.SDK
 			result.LinkTooltip = linkTooltip;
 
 			result.CeremonyLayoutSettings = ceremonyLayoutSettings;
-			Support.LogMethodExit(result);
+
 			return result;
 		}
 

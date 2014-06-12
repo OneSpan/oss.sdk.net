@@ -40,14 +40,13 @@ namespace Silanis.ESL.SDK.Services
 		/// <param name="package">The package to create.</param>
 		internal PackageId CreatePackage (Silanis.ESL.API.Package package)
 		{
-			Support.LogMethodEntry(package);
 			string path = template.UrlFor (UrlTemplate.PACKAGE_PATH)
 				.Build ();
 			try {
 				string json = JsonConvert.SerializeObject (package, settings);
                 string response = restClient.Post(path, json);				
 				PackageId result = JsonConvert.DeserializeObject<PackageId> (response);
-				Support.LogMethodExit(result);
+
 				return result;
 			} catch (Exception e) {
 				throw new EslException ("Could not create a new package." + " Exception: " + e.Message,e);
@@ -136,10 +135,7 @@ namespace Silanis.ESL.SDK.Services
 			try 
 			{
 				string json = JsonConvert.SerializeObject (internalDoc, settings);
-				Support.LogDebug("document json = " + json);
-
 				restClient.Post(path, json);
-				Support.LogMethodExit("Document updated without issue");
 			} 
 			catch (Exception e) 
 			{
@@ -162,10 +158,7 @@ namespace Silanis.ESL.SDK.Services
 			try 
 			{
 				string json = JsonConvert.SerializeObject (documents, settings);
-				Support.LogDebug("document json = " + json);
-
 				restClient.Put(path, json);
-				Support.LogMethodExit("Document order updated without issue");
 			} 
 			catch (Exception e) 
 			{
@@ -270,7 +263,6 @@ namespace Silanis.ESL.SDK.Services
 		/// <param name="document">The document object that has field settings.</param>
 		internal Document UploadDocument (DocumentPackage package, string fileName, byte[] fileBytes, Document document)
 		{
-			Support.LogMethodEntry(package.Id, fileName, document);
 			string path = template.UrlFor (UrlTemplate.DOCUMENT_PATH)
 				.Replace ("{packageId}", package.Id.Id)
 					.Build ();
@@ -281,14 +273,12 @@ namespace Silanis.ESL.SDK.Services
 			try 
 			{
 				string json = JsonConvert.SerializeObject (internalDoc, settings);
-                Support.LogDebug("document json = " + json);
 				byte[] payloadBytes = Converter.ToBytes (json);
 
 				string boundary = GenerateBoundary ();
 				byte[] content = CreateMultipartContent (fileName, fileBytes, payloadBytes, boundary);
 
-				string response = restClient.PostMultipartFile(path, content, boundary);
-                Support.LogMethodExit("Document uploaded without issue");
+				string response = restClient.PostMultipartFile(path, content, boundary, json);
 
 				Silanis.ESL.API.Document uploadedDoc = JsonConvert.DeserializeObject<Silanis.ESL.API.Document>(response);
 				return new DocumentConverter(uploadedDoc, internalPackage).ToSDKDocument();
@@ -582,8 +572,6 @@ namespace Silanis.ESL.SDK.Services
         
 		public string AddSigner( PackageId packageId, Signer signer )
 		{
-			Support.LogMethodEntry(packageId,signer);
-
 			Role apiPayload = new SignerConverter( signer ).ToAPIRole( System.Guid.NewGuid().ToString());
 
 			string path = template.UrlFor (UrlTemplate.ADD_SIGNER_PATH)
@@ -593,7 +581,7 @@ namespace Silanis.ESL.SDK.Services
 				string json = JsonConvert.SerializeObject (apiPayload, settings);
 				string response = restClient.Post(path, json);              
 				Role apiRole = JsonConvert.DeserializeObject<Role> (response);
-				Support.LogMethodExit(apiRole.Id);
+
 				return apiRole.Id;
 			} catch (Exception e) {
 				throw new EslException ("Could not add signer." + " Exception: " + e.Message, e);
@@ -602,7 +590,6 @@ namespace Silanis.ESL.SDK.Services
 
 		public Signer GetSigner(PackageId packageId, string signerId)
 		{
-			Support.LogMethodEntry(packageId,signerId);
 			string path = template.UrlFor (UrlTemplate.GET_SIGNER_PATH)
 				.Replace ("{packageId}", packageId.Id)
 				.Replace ("{roleId}", signerId)
@@ -619,8 +606,6 @@ namespace Silanis.ESL.SDK.Services
 
 		public void UpdateSigner( PackageId packageId, Signer signer )
 		{
-			Support.LogMethodEntry(packageId,signer);
-
 			Role apiPayload = new SignerConverter( signer ).ToAPIRole( System.Guid.NewGuid().ToString());
 
 			string path = template.UrlFor (UrlTemplate.UPDATE_SIGNER_PATH)
@@ -630,7 +615,6 @@ namespace Silanis.ESL.SDK.Services
 			try {
 				string json = JsonConvert.SerializeObject (apiPayload, settings);
 				restClient.Put(path, json);              
-				Support.LogMethodExit();
 			} catch (Exception e) {
 				throw new EslException ("Could not update signer." + " Exception: " + e.Message, e);
 			}
@@ -638,8 +622,6 @@ namespace Silanis.ESL.SDK.Services
 
 		public void RemoveSigner( PackageId packageId, string signerId )
 		{
-			Support.LogMethodEntry(packageId,signerId);
-
 			string path = template.UrlFor (UrlTemplate.REMOVE_SIGNER_PATH)
 				.Replace ("{packageId}", packageId.Id)
 				.Replace ("{roleId}", signerId)
@@ -668,10 +650,7 @@ namespace Silanis.ESL.SDK.Services
 			try 
 			{
 				string json = JsonConvert.SerializeObject (roles, settings);
-				Support.LogDebug("role json = " + json);
-
 				restClient.Put(path, json);
-				Support.LogMethodExit("Signer order updated without issue");
 			} 
 			catch (Exception e) 
 			{

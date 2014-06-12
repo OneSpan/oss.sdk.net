@@ -48,7 +48,6 @@ namespace Silanis.ESL.SDK
         }
 
         public Address Build() {
-			Support.LogMethodEntry();
             Address result = new Address();
             result.Address1 = address1;
             result.Address2 = address2;
@@ -56,7 +55,7 @@ namespace Silanis.ESL.SDK
             result.Country = country;
             result.State = state;
             result.ZipCode = zipCode;
-			Support.LogMethodExit(result);
+
             return result;
         }
     }

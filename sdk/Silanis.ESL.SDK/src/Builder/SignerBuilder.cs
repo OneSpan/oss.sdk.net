@@ -243,9 +243,7 @@ namespace Silanis.ESL.SDK.Builder
 		}
 
         private Signer BuildGroupSigner()
-        {
-            Support.LogMethodEntry();
-            
+        {            
             Signer result = new Signer(groupId);
             result.SigningOrder = signingOrder;
             result.CanChangeSigner = canChangeSigner;
@@ -254,15 +252,11 @@ namespace Silanis.ESL.SDK.Builder
             result.Locked = locked;
 			result.Attachments = attachments;
             
-            Support.LogMethodExit(result);
-
             return result;
         }
         
         private Signer BuildPlaceholderSigner()
-        {
-            Support.LogMethodEntry();
-    
+        {    
             Asserts.NotEmptyOrNull( id, "No placeholder set for this signer!" );
                     
             Signer result = new Signer(id);
@@ -271,16 +265,12 @@ namespace Silanis.ESL.SDK.Builder
             result.Message = message;
             result.Locked = locked;
 			result.Attachments = attachments;
-
-            Support.LogMethodExit(result);
-            
+			            
             return result;
         }
         
         private Signer BuildRegularSigner()
-        {
-            Support.LogMethodEntry();
-            
+        {            
             Asserts.NotEmptyOrNull (firstName, "firstName");
             Asserts.NotEmptyOrNull (lastName, "lastName");
                         
@@ -296,15 +286,12 @@ namespace Silanis.ESL.SDK.Builder
             result.Id = id;
             result.Locked = locked;
 			result.Attachments = attachments;
-
-            Support.LogMethodExit(result);
-            
+			            
             return result;
         }
 
 		public Signer Build()
         {
-            Support.LogMethodEntry();
             Signer result = null;
             if (isGroupSigner())
             {
@@ -318,7 +305,7 @@ namespace Silanis.ESL.SDK.Builder
             {
                 result = BuildRegularSigner();
             }
-            Support.LogMethodExit(result);
+
             return result;
 		}
 

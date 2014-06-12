@@ -40,10 +40,10 @@
       <HintPath>..\References\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="System" />
-    <Reference Include="log4net, Version=1.2.10.0, Culture=neutral, PublicKeyToken=1b44e1d426115821">
-      <HintPath>..\References\log4net.dll</HintPath>
-    </Reference>
     <Reference Include="System.Web" />
+    <Reference Include="log4net">
+      <HintPath>..\..\..\..\Test_net\Test_net\bin\Debug\log4net.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -298,7 +298,10 @@
   <ItemGroup />
   <ItemGroup />
   <ItemGroup>
-    <None Include="Log4Net.config">
+    <None Include="Properties\app.config">
+      <DependentUpon>AssemblyInfo.cs</DependentUpon>
+    </None>
+    <None Include="app.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>

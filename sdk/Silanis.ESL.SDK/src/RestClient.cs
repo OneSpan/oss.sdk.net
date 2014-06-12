@@ -7,6 +7,7 @@ namespace Silanis.ESL.SDK
     {
         private string apiToken;
 		private AuthHeaderGenerator headerGen;
+        private Support support = new Support();
 
         public RestClient(string apiToken)
         {
@@ -14,7 +15,8 @@ namespace Silanis.ESL.SDK
         }
 
         public string Post(string path, string jsonPayload) {
-			Support.LogMethodEntry(path, jsonPayload);
+            support.LogRequest("POST", path, jsonPayload);
+
 			byte[] payloadBytes = null;
 			if (jsonPayload != null)
 			{
@@ -26,46 +28,67 @@ namespace Silanis.ESL.SDK
 			}
 			byte[] responseBytes = HttpMethods.PostHttp(apiToken, path, payloadBytes);
             
-			String result = Converter.ToString(responseBytes);
-			Support.LogMethodExit(result);
-			return result;
+            String response = Converter.ToString(responseBytes);
+            support.LogResponse(response);
+
+            return response;
         }
 
         public string Put(string path, string jsonPayload) {
-//            support.LogRequest("PUT", path, jsonPayload);
+            support.LogRequest("PUT", path, jsonPayload);
             byte[] responseBytes = HttpMethods.PutHttp(apiToken, path, Converter.ToBytes(jsonPayload));
-            return Converter.ToString(responseBytes);
+            string response = Converter.ToString(responseBytes);
+            support.LogResponse(response);
+            return response;
         }
 
-        public string PostMultipartFile(string path, byte[] fileBytes, string boundary) {
-			headerGen = new ApiTokenAuthHeaderGenerator(apiToken);
+        public string PostMultipartFile(string path, byte[] fileBytes, string boundary, string json) {
+            support.LogRequest("POST1", path, json);
+
+            headerGen = new ApiTokenAuthHeaderGenerator(apiToken);
 
 			byte[] responseBytes = HttpMethods.MultipartPostHttp(apiToken, path, fileBytes, boundary, headerGen);
-            return Converter.ToString(responseBytes);
+            string response = Converter.ToString(responseBytes);
+            support.LogResponse(response);
+
+            return response;
         }
 
-		public string PostMultipartFile(string path, byte[] fileBytes, string boundary, string sessionId) {
-			headerGen = new SessionIdAuthHeaderGenerator(sessionId);
+        public string PostMultipartFile(string path, byte[] fileBytes, string boundary, string sessionId, string json) {
+            support.LogRequest("POST2", path, json);
+
+            headerGen = new SessionIdAuthHeaderGenerator(sessionId);
 
 			byte[] responseBytes = HttpMethods.MultipartPostHttp(apiToken, path, fileBytes, boundary, headerGen);
-			return Converter.ToString(responseBytes);
+            string response = Converter.ToString(responseBytes);
+            support.LogResponse(response);
+
+            return response;
 		}
 
         public string Get(string path) {
-//            support.LogRequest("GET", path);
+            support.LogRequest("GET", path);
+
 			byte[] responseBytes = HttpMethods.GetHttpJson(apiToken, path);
-            return Converter.ToString(responseBytes);
+            string response = Converter.ToString(responseBytes);
+            support.LogResponse(response);
+
+            return response;
         }
 
         public byte[] GetBytes(string path) {
-//            support.LogRequest("GET", path);
+            support.LogRequest("GET", path);
             return HttpMethods.GetHttp(apiToken, path);
         }
 
         public string Delete(string path) {
-//            support.LogRequest("DELETE", path);
+            support.LogRequest("DELETE", path);
+
             byte[] responseBytes = HttpMethods.DeleteHttp(apiToken, path);
-            return Converter.ToString(responseBytes);
+            string response = Converter.ToString(responseBytes);
+            support.LogResponse(response);
+
+            return response;
         }
 
     }

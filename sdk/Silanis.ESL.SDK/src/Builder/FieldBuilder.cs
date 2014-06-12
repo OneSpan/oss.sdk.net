@@ -162,9 +162,7 @@ namespace Silanis.ESL.SDK.Builder
 
 		public Field Build ()
 		{
-			Support.LogMethodEntry();
 			Field field = new Field ();
-
 			field.Width = width;
 			field.Height = height;
 			field.Style = style;
@@ -177,7 +175,7 @@ namespace Silanis.ESL.SDK.Builder
 			field.Value = value;
 			field.Id = id;
             field.TextAnchor = textAnchor;
-			Support.LogMethodExit(field);
+
 			return field;
 		}
 	}

@@ -57,11 +57,10 @@ namespace Silanis.ESL.SDK.Builder
         ///
         public CustomFieldValue build()
         {
-			Support.LogMethodEntry();
             CustomFieldValue result = new CustomFieldValue();
             result.Id = id;
             result.Value = value;
-			Support.LogMethodExit(result);
+
             return result;
         }
 

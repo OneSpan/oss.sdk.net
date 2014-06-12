@@ -48,12 +48,11 @@ namespace Silanis.ESL.SDK.Builder
          * @return the list of translation
          */
         public Translation Build() {
-			Support.LogMethodEntry();
             Translation result = new Translation();
             result.Name = name;
             result.Description = description;
             result.Language = language;
-			Support.LogMethodExit(result);
+
             return result;
         }
         

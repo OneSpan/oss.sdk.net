@@ -47,7 +47,6 @@ namespace Silanis.ESL.SDK
         }
 
         public TextAnchor Build() {
-			Support.LogMethodEntry();
             TextAnchor result = new TextAnchor();
             result.AnchorText = anchorText;
             result.Occurrence = occurrence;
@@ -57,7 +56,7 @@ namespace Silanis.ESL.SDK
             result.YOffset = yOffset;
             result.Width = width;
             result.Height = height;
-			Support.LogMethodExit(result);
+
             return result;
         }
     }

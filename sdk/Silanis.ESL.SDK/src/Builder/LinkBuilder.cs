@@ -36,12 +36,11 @@ namespace Silanis.ESL.SDK
 
 		internal Link build()
 		{
-			Support.LogMethodEntry();
 			Link link = new Link ();
 			link.Href = href;
 			link.Text = (text == null ? href : text );
 			link.Title = (tooltip == null ? href : tooltip);
-			Support.LogMethodExit(link);
+
 			return link;
 		}
 

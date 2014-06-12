@@ -22,7 +22,6 @@ namespace Silanis.ESL.SDK.Services
         
         internal PackageId CreateTemplateFromPackage(PackageId originalPackageId, Package delta)
         {
-            Support.LogMethodEntry(originalPackageId, delta);
             delta.Type = BasePackageType.TEMPLATE;
 			string path = urls.UrlFor (UrlTemplate.CLONE_PACKAGE_PATH).Replace("{packageId}", originalPackageId.Id)
                 .Build ();
@@ -31,7 +30,7 @@ namespace Silanis.ESL.SDK.Services
                 string response = restClient.Post(path, deltaJson);              
                 Package apiResult = JsonConvert.DeserializeObject<Package> (response);
                 PackageId sdkResult = new PackageId(apiResult.Id);
-                Support.LogMethodExit(sdkResult);
+
                 return sdkResult;
             } catch (Exception e) {
                 throw new EslException ("Could not create a template." + " Exception: " + e.Message, e);
@@ -40,7 +39,6 @@ namespace Silanis.ESL.SDK.Services
         
         internal PackageId CreatePackageFromTemplate(PackageId templateId, Package delta)
         {
-            Support.LogMethodEntry(templateId, delta);
 			string path = urls.UrlFor (UrlTemplate.CLONE_PACKAGE_PATH).Replace("{packageId}", templateId.Id)
                 .Build ();
             try {
@@ -48,7 +46,7 @@ namespace Silanis.ESL.SDK.Services
                 string response = restClient.Post(path, deltaJson);              
                 Package apiResult = JsonConvert.DeserializeObject<Package> (response);
                 PackageId sdkResult = new PackageId(apiResult.Id);
-                Support.LogMethodExit(sdkResult);
+
                 return sdkResult;
             } catch (Exception e) {
                 throw new EslException ("Could not create a package from template." + " Exception: " + e.Message, e);
