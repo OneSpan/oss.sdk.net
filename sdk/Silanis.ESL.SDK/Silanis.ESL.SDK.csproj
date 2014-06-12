@@ -42,7 +42,7 @@
     <Reference Include="System" />
     <Reference Include="System.Web" />
     <Reference Include="log4net">
-      <HintPath>..\..\..\..\Test_net\Test_net\bin\Debug\log4net.dll</HintPath>
+      <HintPath>..\References\log4net.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -306,9 +306,7 @@
     <None Include="Properties\app.config">
       <DependentUpon>AssemblyInfo.cs</DependentUpon>
     </None>
-    <None Include="app.config">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
+    <None Include="app.config" />
     <Folder Include="src\Models\" />
     <Folder Include="src\Services\ContractResolvers\" />
   </ItemGroup>
