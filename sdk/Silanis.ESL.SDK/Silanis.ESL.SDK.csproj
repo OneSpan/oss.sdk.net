@@ -303,9 +303,6 @@
   <ItemGroup />
   <ItemGroup />
   <ItemGroup>
-    <None Include="Properties\app.config">
-      <DependentUpon>AssemblyInfo.cs</DependentUpon>
-    </None>
     <None Include="app.config" />
     <Folder Include="src\Models\" />
     <Folder Include="src\Services\ContractResolvers\" />
