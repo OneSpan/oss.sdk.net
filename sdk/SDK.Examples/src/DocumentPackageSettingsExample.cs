@@ -14,7 +14,15 @@ namespace SDK.Examples
 
         private string email1;
         private Stream fileStream1;
+        private PackageId packageId;
 
+        public PackageId PackageId
+        {
+            get
+            {
+                return packageId;
+            }
+        }
         public DocumentPackageSettingsExample( Props props ) : this(props.Get("api.url"), props.Get("api.key"), props.Get("1.email")) {
         }
 
@@ -27,6 +35,10 @@ namespace SDK.Examples
             DocumentPackage superDuperPackage = PackageBuilder.NewPackageNamed("DocumentPackageSettingsExample " + DateTime.Now)
 				.WithSettings(DocumentPackageSettingsBuilder.NewDocumentPackageSettings()
 				              .WithInPerson()
+                              .WithoutLanguageDropDown()
+                              .DisableFirstAffidavit()
+                              .DisableSecondAffidavit()
+                              .HideOwnerInPersonDropDown()
 				              .WithoutDecline()
 							  .WithOptOut()
 				              .WithOptOutReason("Reason One")
@@ -49,7 +61,7 @@ namespace SDK.Examples
 					               .AtPosition(100, 100)))
 					.Build();
 
-            eslClient.CreateAndSendPackage(superDuperPackage);
+            packageId = eslClient.CreateAndSendPackage(superDuperPackage);
         }
     }
 }

@@ -67,6 +67,8 @@
     <Compile Include="src\AttachmentRequirementExampleTest.cs" />
     <Compile Include="src\internal\DocumentTypeUtility.cs" />
     <Compile Include="src\DownloadCompletionReportExampleTest.cs" />
+    <Compile Include="src\GroupManagementExampleTest.cs" />
+    <Compile Include="src\DocumentPackageSettingsExampleTest.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
@@ -82,5 +84,10 @@
       <Project>{0A9B8521-9624-460B-813E-079056B24B65}</Project>
       <Name>Silanis.ESL.SDK</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="signers.properties">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
 </Project>

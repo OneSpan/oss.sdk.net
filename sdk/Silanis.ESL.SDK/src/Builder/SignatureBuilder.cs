@@ -123,6 +123,7 @@ namespace Silanis.ESL.SDK.Builder
 			return this;
 		}
 
+        [Obsolete("Use WithPositionExtracted() instead")]
 		public SignatureBuilder EnableExtraction()
 		{
 			extract = true;
@@ -165,6 +166,12 @@ namespace Silanis.ESL.SDK.Builder
 			fields.Add (field);
 			return this;
 		}
+
+        public SignatureBuilder WithPositionExtracted()
+        {
+            extract = true;
+            return this;
+        }
 
         public SignatureBuilder WithPositionAnchor( TextAnchorBuilder builder ) {
             return WithPositionAnchor(builder.Build());

@@ -13,7 +13,7 @@ namespace Silanis.ESL.SDK
 		private string lastName;
 		private string language;
 		private string phone;
-		private string signerType;
+//		private string signerType;
 		private string title;
 		private Nullable<DateTime> updated;
 		private string id;
@@ -131,17 +131,17 @@ namespace Silanis.ESL.SDK
 			}
 		}
 
-		public string SignerType
-		{
-			get
-			{
-				return signerType;
-			}
-			set
-			{
-				signerType = value;
-			}
-		}
+//		public string SignerType
+//		{
+//			get
+//			{
+//				return signerType;
+//			}
+//			set
+//			{
+//				signerType = value;
+//			}
+//		}
 
 		public string Title
 		{

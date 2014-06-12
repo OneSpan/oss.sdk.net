@@ -103,7 +103,7 @@ namespace SDK.Tests
         [ExpectedException( typeof( EslException ) )]
         public void ToSDKFromNotarize()
         {
-            Silanis.ESL.API.FieldSubtype api = Silanis.ESL.API.FieldSubtype.NOTARIZE;
+            Silanis.ESL.API.FieldSubtype api = Silanis.ESL.API.FieldSubtype.SEAL;
             SignatureStyleConverter converter = new SignatureStyleConverter(api);
             SignatureStyle sdk = converter.ToSDKSignatureStyle();
 

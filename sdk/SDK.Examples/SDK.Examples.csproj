@@ -135,13 +135,11 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <None Include="signers.properties">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
     <None Include="src\document-for-anchor-extraction.pdf">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="jenkins.properties" />
+    <None Include="signers.properties" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Silanis.ESL.SDK\Silanis.ESL.SDK.csproj">

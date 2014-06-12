@@ -6,6 +6,34 @@ namespace Silanis.ESL.SDK
 {
 	public class DocumentPackageSettings
 	{
+        private Nullable<bool> showLanguageDropDown = null;
+        public Nullable<bool> ShowLanguageDropDown
+        {
+            get { return showLanguageDropDown; }
+            set { showLanguageDropDown = value; }
+        }
+        
+        private Nullable<bool> enableFirstAffidavit = null;
+        public Nullable<bool> EnableFirstAffidavit
+        {
+            get { return enableFirstAffidavit; }
+            set { enableFirstAffidavit = value; }
+        }
+        
+        private Nullable<bool> enableSecondAffidavit = null;
+        public Nullable<bool> EnableSecondAffidavit
+        {
+            get { return enableSecondAffidavit; }
+            set { enableSecondAffidavit = value; }
+        }
+        
+        private Nullable<bool> showOwnerInPersonDropDown = null;
+        public Nullable<bool> ShowOwnerInPersonDropDown
+        {
+            get { return showOwnerInPersonDropDown; }
+            set { showOwnerInPersonDropDown = value; }
+        }
+        
 		private Nullable<bool> enableInPerson = null;
 
 		public Nullable<bool> EnableInPerson {
@@ -167,6 +195,18 @@ namespace Silanis.ESL.SDK
 
             if ( hideCaptureText != null )
 			    ceremonySettings.HideCaptureText = hideCaptureText.Value;
+
+            if ( enableFirstAffidavit != null )
+                ceremonySettings.DisableFirstInPersonAffidavit = !enableFirstAffidavit.Value;
+                
+            if ( enableSecondAffidavit != null )
+                ceremonySettings.DisableSecondInPersonAffidavit = !enableSecondAffidavit.Value;
+                
+            if ( showOwnerInPersonDropDown != null )
+                ceremonySettings.HidePackageOwnerInPerson = !showOwnerInPersonDropDown.Value;
+                
+            if ( showLanguageDropDown != null )
+                ceremonySettings.HideLanguageDropdown = !showLanguageDropDown.Value;
 
 			foreach ( string reason in optOutReasons )
 				ceremonySettings.OptOutReasons.Add( reason );

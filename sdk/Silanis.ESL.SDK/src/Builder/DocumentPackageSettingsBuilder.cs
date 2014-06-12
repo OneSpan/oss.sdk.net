@@ -16,6 +16,10 @@ namespace Silanis.ESL.SDK
 		private Nullable<int> maxAuthAttempts = null;
 		private Nullable<bool> showDocumentToolbarDownloadButton = true;
 		private Nullable<bool> showDialogOnComplete = null;
+        private Nullable<bool> showLanguageDropDown = null;
+        private Nullable<bool> enableFirstAffidavit = null;
+        private Nullable<bool> enableSecondAffidavit = null;
+        private Nullable<bool> showOwnerInPersonDropDown = null;
 
 		private string linkText = null;
 		private string linkTooltip = null;
@@ -26,6 +30,54 @@ namespace Silanis.ESL.SDK
 		private DocumentPackageSettingsBuilder ()
 		{
 		}
+
+        public DocumentPackageSettingsBuilder ShowOwnerInPersonDropDown()
+        {
+            showOwnerInPersonDropDown = true;
+            return this;
+        }
+        
+        public DocumentPackageSettingsBuilder HideOwnerInPersonDropDown()
+        {
+            showOwnerInPersonDropDown = false;
+            return this;
+        }
+        
+        public DocumentPackageSettingsBuilder EnableFirstAffidavit()
+        {
+            enableFirstAffidavit = true;
+            return this;
+        }
+        
+        public DocumentPackageSettingsBuilder DisableFirstAffidavit()
+        {
+            enableFirstAffidavit = false;
+            return this;
+        }
+
+        public DocumentPackageSettingsBuilder EnableSecondAffidavit()
+        {
+            enableSecondAffidavit = true;
+            return this;
+        }
+        
+        public DocumentPackageSettingsBuilder DisableSecondAffidavit()
+        {
+            enableSecondAffidavit = false;
+            return this;
+        }
+
+        public DocumentPackageSettingsBuilder WithLanguageDropDown()
+        {
+            showLanguageDropDown = true;
+            return this;
+        }
+
+        public DocumentPackageSettingsBuilder WithoutLanguageDropDown()
+        {
+            showLanguageDropDown = false;
+            return this;
+        }
 
         public DocumentPackageSettingsBuilder WithoutDocumentToolbarDownloadButton()
         {
@@ -150,6 +202,12 @@ namespace Silanis.ESL.SDK
 			return this;
 		}
 
+        public DocumentPackageSettingsBuilder WithMaxAuthAttempts(int maxAuthAttempts)
+        {
+            this.maxAuthAttempts = maxAuthAttempts;
+            return this;
+        }
+
         public DocumentPackageSettings build()
         {
             return Build();
@@ -169,6 +227,10 @@ namespace Silanis.ESL.SDK
 			result.MaxAuthAttempts = maxAuthAttempts;
 			result.ShowDownloadButton = showDocumentToolbarDownloadButton;
 			result.ShowDialogOnComplete = showDialogOnComplete;
+            result.ShowLanguageDropDown = showLanguageDropDown;
+            result.EnableFirstAffidavit = enableFirstAffidavit;
+            result.EnableSecondAffidavit = enableSecondAffidavit;
+            result.ShowOwnerInPersonDropDown = showOwnerInPersonDropDown;
 			result.LinkHref = linkHref;
 			result.LinkText = linkText;
 			result.LinkTooltip = linkTooltip;
@@ -190,6 +252,10 @@ namespace Silanis.ESL.SDK
             enableDecline = apiPackageSettings.Ceremony.DeclineButton;
             hideWatermark = apiPackageSettings.Ceremony.HideWatermark;
             hideCaptureText = apiPackageSettings.Ceremony.HideCaptureText;
+            enableFirstAffidavit = !apiPackageSettings.Ceremony.DisableFirstInPersonAffidavit;
+            enableSecondAffidavit = !apiPackageSettings.Ceremony.DisableSecondInPersonAffidavit;
+            showOwnerInPersonDropDown = !apiPackageSettings.Ceremony.HidePackageOwnerInPerson;
+            showLanguageDropDown = !apiPackageSettings.Ceremony.HideLanguageDropdown;
 
             foreach (string reason in apiPackageSettings.Ceremony.OptOutReasons)
             {

@@ -79,7 +79,7 @@ namespace Silanis.ESL.SDK
 			result.Language = apiSender.Language;
 			result.Name = apiSender.Name;
 			result.Phone = apiSender.Phone;
-			result.SignerType = apiSender.SignerType;
+//			result.SignerType = apiSender.SignerType;
 			result.Status = new SenderStatusConverter(apiSender.Status).ToSDKSenderStatus();
 			result.Type = new SenderTypeConverter(apiSender.Type).ToSDKSenderType();
 			result.Title = apiSender.Title;

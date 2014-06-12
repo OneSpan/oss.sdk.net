@@ -17,13 +17,10 @@ namespace Silanis.ESL.SDK
             this.sdkAccountMember = sdkAccountMember;
         }
 
-        public User ToAPIUser() {
-            if (apiUser != null)
-            {
-                return apiUser;
-            }
-            else if (sdkAccountMember != null ) {
-                User result = new User();
+        public Silanis.ESL.API.Sender ToAPISender() {
+            if (sdkAccountMember != null ) {
+                Silanis.ESL.API.Sender result = new Silanis.ESL.API.Sender();
+                
                 result.Address = new AddressConverter(sdkAccountMember.Address).ToAPIAddress();
                 result.FirstName = sdkAccountMember.FirstName;
                 result.LastName = sdkAccountMember.LastName;
@@ -32,13 +29,15 @@ namespace Silanis.ESL.SDK
                 result.Email = sdkAccountMember.Email;
                 result.Phone = sdkAccountMember.PhoneNumber;
                 result.Language = sdkAccountMember.Language;
+                Silanis.ESL.API.SenderStatus? convertedStatus = new SenderStatusConverter(sdkAccountMember.Status).ToAPISenderStatus();
+                if ( convertedStatus.HasValue ) result.Status = convertedStatus.Value;
                 return result;
             }
             else {
                 return null;
             }
         }
-
+        
         public AccountMember ToSDKAccountMember() {
             if (sdkAccountMember != null)
             {
@@ -53,7 +52,7 @@ namespace Silanis.ESL.SDK
                         .WithLastName(apiUser.LastName)
                         .WithTitle(apiUser.Title)
                         .WithLanguage(apiUser.Language)
-                        .WithPhoneNumber(apiUser.Phone);
+                        .WithPhoneNumber(apiUser.Phone);                        
 
                 return builder.Build();
             }

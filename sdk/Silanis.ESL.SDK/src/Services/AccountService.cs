@@ -22,8 +22,8 @@ namespace Silanis.ESL.SDK.Services
             string path = template.UrlFor (UrlTemplate.ACCOUNT_INVITE_MEMBER_PATH)
                 .Build ();
             try {
-                User user = new AccountMemberConverter( accountMember ).ToAPIUser();
-                string json = JsonConvert.SerializeObject (user, settings);
+                Silanis.ESL.API.Sender sender = new AccountMemberConverter( accountMember ).ToAPISender();
+                string json = JsonConvert.SerializeObject (sender, settings);
                 restClient.Post(path, json);              
             } catch (Exception e) {
                 throw new EslException ("Failed to invite new account member.\t" + " Exception: " + e.Message, e);

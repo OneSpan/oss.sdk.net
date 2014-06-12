@@ -21,8 +21,22 @@ namespace Silanis.ESL.API
         }
     
 		    
+    [JsonProperty("disableFirstInPersonAffidavit")]
+    public Boolean DisableFirstInPersonAffidavit
+    {
+                get; set;
+        }
+    
+		    
     [JsonProperty("disableInPersonAffidavit")]
     public Boolean DisableInPersonAffidavit
+    {
+                get; set;
+        }
+    
+		    
+    [JsonProperty("disableSecondInPersonAffidavit")]
+    public Boolean DisableSecondInPersonAffidavit
     {
                 get; set;
         }
@@ -51,6 +65,20 @@ namespace Silanis.ESL.API
 		    
     [JsonProperty("hideCaptureText")]
     public Boolean HideCaptureText
+    {
+                get; set;
+        }
+    
+		    
+    [JsonProperty("hideLanguageDropdown")]
+    public Boolean HideLanguageDropdown
+    {
+                get; set;
+        }
+    
+		    
+    [JsonProperty("hidePackageOwnerInPerson")]
+    public Boolean HidePackageOwnerInPerson
     {
                 get; set;
         }

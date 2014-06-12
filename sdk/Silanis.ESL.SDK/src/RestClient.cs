@@ -43,7 +43,7 @@ namespace Silanis.ESL.SDK
         }
 
         public string PostMultipartFile(string path, byte[] fileBytes, string boundary, string json) {
-            support.LogRequest("POST1", path, json);
+            support.LogRequest("POST", path, json);
 
             headerGen = new ApiTokenAuthHeaderGenerator(apiToken);
 
@@ -55,7 +55,7 @@ namespace Silanis.ESL.SDK
         }
 
         public string PostMultipartFile(string path, byte[] fileBytes, string boundary, string sessionId, string json) {
-            support.LogRequest("POST2", path, json);
+            support.LogRequest("POST", path, json);
 
             headerGen = new SessionIdAuthHeaderGenerator(sessionId);
 
@@ -69,11 +69,19 @@ namespace Silanis.ESL.SDK
         public string Get(string path) {
             support.LogRequest("GET", path);
 
-			byte[] responseBytes = HttpMethods.GetHttpJson(apiToken, path);
+            byte[] responseBytes = HttpMethods.GetHttpJson(apiToken, path, "application/json");
             string response = Converter.ToString(responseBytes);
             support.LogResponse(response);
 
             return response;
+        }
+        
+        public string Get(string path, string acceptType)
+        {
+            support.LogRequest("GET", path);
+
+            byte[] responseBytes = HttpMethods.GetHttpJson(apiToken, path, acceptType);
+            return Converter.ToString(responseBytes);
         }
 
         public byte[] GetBytes(string path) {

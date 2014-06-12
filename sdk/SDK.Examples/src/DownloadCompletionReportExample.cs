@@ -80,7 +80,8 @@ namespace SDK.Examples
 			DateTime to = DateTime.Now;
 
 			sdkCompletionReport = eslClient.PackageService.DownloadCompletionReport(PackageStatus.DRAFT, senderUID, from, to);
-
+            string csvCompletionReport = eslClient.PackageService.DownloadCompletionReportAsCSV(PackageStatus.DRAFT, senderUID, from, to);
+            Console.Out.WriteLine("BLAH!");
 		}
     }
 }

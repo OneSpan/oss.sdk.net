@@ -92,13 +92,13 @@ namespace Silanis.ESL.SDK.Internal
             }
         }
 
-		public static byte[] GetHttpJson (string apiToken, string path)
+		public static byte[] GetHttpJson (string apiToken, string path, string acceptType)
 		{
 			try {
 				HttpWebRequest request = (HttpWebRequest)WebRequest.Create (path);
 				request.Method = "GET";
 				request.Headers.Add ("Authorization", "Basic " + apiToken);
-				request.Accept = "application/json";
+				request.Accept = acceptType;
 
 				WebResponse response = request.GetResponse ();
 

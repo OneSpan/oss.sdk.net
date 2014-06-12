@@ -62,6 +62,7 @@ namespace SDK.Examples
                 .WithTitle("title")
                 .WithLanguage( "language" )
                 .WithPhoneNumber( "phoneNumber" )
+                .WithStatus(SenderStatus.ACTIVE)
                 .Build()
             );
 

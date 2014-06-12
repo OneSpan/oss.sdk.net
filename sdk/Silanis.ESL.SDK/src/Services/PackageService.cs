@@ -8,6 +8,7 @@ using Silanis.ESL.SDK.Internal;
 using Silanis.ESL.SDK.Builder;
 using Silanis.ESL.API;
 using System.Globalization;
+using Newtonsoft.Json.Serialization;
 
 namespace Silanis.ESL.SDK.Services
 {
@@ -119,13 +120,13 @@ namespace Silanis.ESL.SDK.Services
 		}
 
 		public void UpdateDocumentMetadata(DocumentPackage package, Document document)
-		{
-			string path = template.UrlFor (UrlTemplate.DOCUMENT_ID_PATH)
-				.Replace ("{packageId}", package.Id.Id)
-				.Replace ("{documentId}", document.Id)
-				.Build ();
+        {
+            string path = template.UrlFor(UrlTemplate.DOCUMENT_ID_PATH)
+				.Replace("{packageId}", package.Id.Id)
+				.Replace("{documentId}", document.Id)
+				.Build();
 
-			Silanis.ESL.API.Document internalDoc = new DocumentConverter(document).ToAPIDocument();
+            Silanis.ESL.API.Document internalDoc = new DocumentConverter(document).ToAPIDocument();
             
             // Wipe out the members not related to the metadata
             internalDoc.Approvals = null;
@@ -141,6 +142,23 @@ namespace Silanis.ESL.SDK.Services
 			{
 				throw new EslException ("Could not upload document to package." + " Exception: " + e.Message,e);
 			}
+
+            IContractResolver prevContractResolver = settings.ContractResolver;
+            settings.ContractResolver = DocumentMetadataContractResolver.Instance;            
+            
+            try
+            {
+                string json = JsonConvert.SerializeObject(internalDoc, settings);
+                restClient.Post(path, json);
+            }
+            catch (Exception e)
+            {
+                throw new EslException("Could not upload document to package." + " Exception: " + e.Message, e);
+            }
+            finally
+            {
+                settings.ContractResolver = prevContractResolver;
+            }
 		}
 
 		public void OrderDocuments(DocumentPackage package)
@@ -658,20 +676,38 @@ namespace Silanis.ESL.SDK.Services
 			}
 		}
 
+        private string BuildCompletionReportUrl(Silanis.ESL.SDK.PackageStatus packageStatus, String senderId, DateTime from, DateTime to)
+        {
+            string toDate = DateHelper.dateToIsoUtcFormat(to);
+            string fromDate = DateHelper.dateToIsoUtcFormat(from);
+
+            return template.UrlFor(UrlTemplate.COMPLETION_REPORT_PATH)
+                .Replace("{from}", fromDate)
+                .Replace("{to}", toDate)
+                .Replace("{status}", packageStatus.ToString())
+                .Replace("{senderId}", senderId)
+                .Build();
+        }
+
+        public string DownloadCompletionReportAsCSV(Silanis.ESL.SDK.PackageStatus packageStatus, String senderId, DateTime from, DateTime to)
+        {
+            try
+            {
+                string path = BuildCompletionReportUrl(packageStatus,senderId, from, to);
+                string response = restClient.Get(path, "text/csv");
+                return response;
+            }
+            catch (Exception e)
+            {
+                throw new EslException("Could not download the completion report." + " Exception: " + e.Message, e);
+            }
+        }
+
 		public Silanis.ESL.SDK.CompletionReport DownloadCompletionReport(Silanis.ESL.SDK.PackageStatus packageStatus, String senderId, DateTime from, DateTime to)
 		{
-			string toDate = DateHelper.dateToIsoUtcFormat(to);
-			string fromDate = DateHelper.dateToIsoUtcFormat(from);
-
-			string path = template.UrlFor(UrlTemplate.COMPLETION_REPORT_PATH)
-				.Replace("{from}", fromDate)
-				.Replace("{to}", toDate)
-				.Replace("{status}", packageStatus.ToString())
-				.Replace("{senderId}", senderId)
-				.Build();
-
 			try
 			{
+                string path = BuildCompletionReportUrl(packageStatus,senderId, from, to);
 				string response = restClient.Get(path);
 				Silanis.ESL.API.CompletionReport apiCompletionReport = JsonConvert.DeserializeObject<Silanis.ESL.API.CompletionReport> (response, settings);
 				return new CompletionReportConverter(apiCompletionReport).ToSDKCompletionReport();
