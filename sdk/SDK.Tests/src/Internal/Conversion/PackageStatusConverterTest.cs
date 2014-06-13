@@ -7,8 +7,8 @@ namespace SDK.Tests
 	[TestFixture]
 	public class PackageStatusConverterTest
 	{
-		private Silanis.ESL.SDK.PackageStatus? sdkPackageStatus1 = null;
-		private Silanis.ESL.SDK.PackageStatus? sdkPackageStatus2 = null;
+		private Silanis.ESL.SDK.DocumentPackageStatus? sdkPackageStatus1 = null;
+		private Silanis.ESL.SDK.DocumentPackageStatus? sdkPackageStatus2 = null;
 		private Silanis.ESL.API.PackageStatus? apiPackageStatus1 = null;
 		private Silanis.ESL.API.PackageStatus? apiPackageStatus2 = null;
 		private PackageStatusConverter converter;
@@ -83,9 +83,9 @@ namespace SDK.Tests
 			Assert.AreEqual(apiPackageStatus1.ToString(), sdkPackageStatus1.ToString());
 		}
 
-		private Silanis.ESL.SDK.PackageStatus CreateTypicalSDKPackageStatus()
+		private Silanis.ESL.SDK.DocumentPackageStatus CreateTypicalSDKPackageStatus()
 		{
-			return PackageStatus.DRAFT;
+			return DocumentPackageStatus.DRAFT;
 		}
 
 		private Silanis.ESL.API.PackageStatus CreateTypicalAPIPackageStatus()

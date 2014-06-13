@@ -784,7 +784,7 @@ namespace Silanis.ESL.SDK.Services
 			}
 		}
 
-        private string BuildCompletionReportUrl(Silanis.ESL.SDK.PackageStatus packageStatus, String senderId, DateTime from, DateTime to)
+        private string BuildCompletionReportUrl(Silanis.ESL.SDK.DocumentPackageStatus packageStatus, String senderId, DateTime from, DateTime to)
         {
             string toDate = DateHelper.dateToIsoUtcFormat(to);
             string fromDate = DateHelper.dateToIsoUtcFormat(from);
@@ -797,7 +797,7 @@ namespace Silanis.ESL.SDK.Services
                 .Build();
         }
 
-        public string DownloadCompletionReportAsCSV(Silanis.ESL.SDK.PackageStatus packageStatus, String senderId, DateTime from, DateTime to)
+        public string DownloadCompletionReportAsCSV(Silanis.ESL.SDK.DocumentPackageStatus packageStatus, String senderId, DateTime from, DateTime to)
         {
             try
             {
@@ -815,7 +815,7 @@ namespace Silanis.ESL.SDK.Services
             }
         }
 
-		public Silanis.ESL.SDK.CompletionReport DownloadCompletionReport(Silanis.ESL.SDK.PackageStatus packageStatus, String senderId, DateTime from, DateTime to)
+		public Silanis.ESL.SDK.CompletionReport DownloadCompletionReport(Silanis.ESL.SDK.DocumentPackageStatus packageStatus, String senderId, DateTime from, DateTime to)
 		{
 			try
 			{

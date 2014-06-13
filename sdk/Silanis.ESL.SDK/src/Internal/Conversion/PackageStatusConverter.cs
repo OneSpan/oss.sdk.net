@@ -4,7 +4,7 @@ namespace Silanis.ESL.SDK
 {
 	internal class PackageStatusConverter
     {
-		private Silanis.ESL.SDK.PackageStatus? sdkPackageStatus = null;
+		private Silanis.ESL.SDK.DocumentPackageStatus? sdkPackageStatus = null;
 		private Silanis.ESL.API.PackageStatus? apiPackageStatus = null;
 
 		/// <summary>
@@ -20,7 +20,7 @@ namespace Silanis.ESL.SDK
 		/// Construct with SDK PackageStatus object involved in conversion.
 		/// </summary>
 		/// <param name="sdkPackageStatus">SDK package status.</param>
-		public PackageStatusConverter(Silanis.ESL.SDK.PackageStatus? sdkPackageStatus)
+		public PackageStatusConverter(Silanis.ESL.SDK.DocumentPackageStatus? sdkPackageStatus)
 		{
 			this.sdkPackageStatus = sdkPackageStatus;
 		}
@@ -33,19 +33,19 @@ namespace Silanis.ESL.SDK
 		{
 			switch (sdkPackageStatus)
 			{
-				case PackageStatus.DRAFT:
+				case DocumentPackageStatus.DRAFT:
 					return Silanis.ESL.API.PackageStatus.DRAFT;
-				case PackageStatus.SENT:
+				case DocumentPackageStatus.SENT:
 					return Silanis.ESL.API.PackageStatus.SENT;
-				case PackageStatus.COMPLETED:
+				case DocumentPackageStatus.COMPLETED:
 					return Silanis.ESL.API.PackageStatus.COMPLETED;
-				case PackageStatus.ARCHIVED:
+				case DocumentPackageStatus.ARCHIVED:
 					return Silanis.ESL.API.PackageStatus.ARCHIVED;
-				case PackageStatus.DECLINED:
+				case DocumentPackageStatus.DECLINED:
 					return Silanis.ESL.API.PackageStatus.DECLINED;
-				case PackageStatus.OPTED_OUT:
+				case DocumentPackageStatus.OPTED_OUT:
 					return Silanis.ESL.API.PackageStatus.OPTED_OUT;
-				case PackageStatus.EXPIRED:
+				case DocumentPackageStatus.EXPIRED:
 					return Silanis.ESL.API.PackageStatus.EXPIRED;
 				default:
 					break;
@@ -58,24 +58,24 @@ namespace Silanis.ESL.SDK
 		/// Convert from API PackageStatus to SDK PackageStatus.
 		/// </summary>
 		/// <returns>The SDK package status.</returns>
-		public Silanis.ESL.SDK.PackageStatus? ToSDKPackageStatus()
+		public Silanis.ESL.SDK.DocumentPackageStatus? ToSDKPackageStatus()
 		{
 			switch (apiPackageStatus)
 			{
 				case Silanis.ESL.API.PackageStatus.DRAFT:
-					return PackageStatus.DRAFT;
+					return DocumentPackageStatus.DRAFT;
 				case Silanis.ESL.API.PackageStatus.SENT:
-					return PackageStatus.SENT;
+					return DocumentPackageStatus.SENT;
 				case Silanis.ESL.API.PackageStatus.COMPLETED:
-					return PackageStatus.COMPLETED;
+					return DocumentPackageStatus.COMPLETED;
 				case Silanis.ESL.API.PackageStatus.ARCHIVED:
-					return PackageStatus.ARCHIVED;
+					return DocumentPackageStatus.ARCHIVED;
 				case Silanis.ESL.API.PackageStatus.DECLINED:
-					return PackageStatus.DECLINED;
+					return DocumentPackageStatus.DECLINED;
 				case Silanis.ESL.API.PackageStatus.OPTED_OUT:
-					return PackageStatus.OPTED_OUT;
+					return DocumentPackageStatus.OPTED_OUT;
 				case Silanis.ESL.API.PackageStatus.EXPIRED:
-					return PackageStatus.EXPIRED;
+					return DocumentPackageStatus.EXPIRED;
 				default:
 					break;
 			}

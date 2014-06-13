@@ -10,7 +10,7 @@ namespace Silanis.ESL.SDK
 		private string id;
 		private string name;
 		private IList<SignersCompletionReport> signers = new List<SignersCompletionReport>();
-		private PackageStatus? packageStatus;
+		private DocumentPackageStatus? packageStatus;
 		private Boolean trashed;
 
 		public PackageCompletionReport(string name)
@@ -88,7 +88,7 @@ namespace Silanis.ESL.SDK
 			this.signers.Add(signer);
 		}
 
-		public PackageStatus? PackageStatus
+		public DocumentPackageStatus? DocumentPackageStatus
 		{
 			get
 			{

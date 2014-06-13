@@ -178,7 +178,6 @@
     <Compile Include="src\PackageCompletionReport.cs" />
     <Compile Include="src\SenderCompletionReport.cs" />
     <Compile Include="src\SignersCompletionReport.cs" />
-    <Compile Include="src\PackageStatus.cs" />
     <Compile Include="src\Internal\Conversion\PackageStatusConverter.cs" />
     <Compile Include="src\Internal\Conversion\CompletionReportConverter.cs" />
     <Compile Include="src\Internal\DateHelper.cs" />
