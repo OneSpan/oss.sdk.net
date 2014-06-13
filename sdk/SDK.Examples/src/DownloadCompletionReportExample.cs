@@ -79,8 +79,8 @@ namespace SDK.Examples
 			DateTime from = DateTime.Today.AddDays(-1);
 			DateTime to = DateTime.Now;
 
-			sdkCompletionReport = eslClient.PackageService.DownloadCompletionReport(PackageStatus.DRAFT, senderUID, from, to);
-            string csvCompletionReport = eslClient.PackageService.DownloadCompletionReportAsCSV(PackageStatus.DRAFT, senderUID, from, to);
+			sdkCompletionReport = eslClient.PackageService.DownloadCompletionReport(DocumentPackageStatus.DRAFT, senderUID, from, to);
+            string csvCompletionReport = eslClient.PackageService.DownloadCompletionReportAsCSV(DocumentPackageStatus.DRAFT, senderUID, from, to);
             Console.Out.WriteLine("BLAH!");
 		}
     }

@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Reflection;
+using Silanis.ESL.API;
 
 namespace Silanis.ESL.SDK.Builder
 {
@@ -34,7 +35,7 @@ namespace Silanis.ESL.SDK.Builder
 			this.autocomplete = package.Autocomplete;
 			this.description = package.Description;
 			this.expiryDate = package.Due;
-			this.status = ConvertPackageStatus(package.Status);
+			this.status = new PackageStatusConverter(new Nullable<PackageStatus>(package.Status)).ToSDKPackageStatus().Value;
 			this.emailMessage = package.EmailMessage;
             this.settings = new DocumentPackageSettingsBuilder(package.Settings).build();
 			this.senderInfo = new SenderConverter(package.Sender).ToSDKSenderInfo();
@@ -68,7 +69,7 @@ namespace Silanis.ESL.SDK.Builder
 				WithDocument( document );
 			}
 		}
-
+/*
 		private DocumentPackageStatus ConvertPackageStatus (Silanis.ESL.API.PackageStatus status)
 		{
 			switch (status)
@@ -91,7 +92,7 @@ namespace Silanis.ESL.SDK.Builder
 				throw new EslException("Unknown Silanis.ESL.API.PackageStatus value: " + status,null);
 			}
 		}
-
+*/
 		public static PackageBuilder NewPackageNamed (string name)
 		{
 			return new PackageBuilder (name);

@@ -92,7 +92,7 @@ namespace Silanis.ESL.SDK
 			Silanis.ESL.SDK.PackageCompletionReport sdkPackageCompletionReport = new Silanis.ESL.SDK.PackageCompletionReport(apiPackageCompletionReport.Name);
 			sdkPackageCompletionReport.Id = apiPackageCompletionReport.Id;
 			sdkPackageCompletionReport.Created = apiPackageCompletionReport.Created;
-			sdkPackageCompletionReport.PackageStatus = new PackageStatusConverter(apiPackageCompletionReport.Status).ToSDKPackageStatus();
+			sdkPackageCompletionReport.DocumentPackageStatus = new PackageStatusConverter(apiPackageCompletionReport.Status).ToSDKPackageStatus();
 			sdkPackageCompletionReport.Trashed = apiPackageCompletionReport.Trashed;
 
 			return sdkPackageCompletionReport;

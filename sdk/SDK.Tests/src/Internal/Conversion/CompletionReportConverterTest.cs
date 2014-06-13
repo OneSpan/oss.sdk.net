@@ -36,7 +36,7 @@ namespace SDK.Tests
 			Silanis.ESL.SDK.PackageCompletionReport sdkPackageCompletionReport = sdkCompletionReport1.Senders[0].Packages[0];
 			Assert.AreEqual(sdkPackageCompletionReport.Id, apiPackageCompletionReport.Id);
 			Assert.AreEqual(sdkPackageCompletionReport.Name, apiPackageCompletionReport.Name);
-			Assert.AreEqual(sdkPackageCompletionReport.PackageStatus.ToString(), apiPackageCompletionReport.Status.ToString());
+			Assert.AreEqual(sdkPackageCompletionReport.DocumentPackageStatus.ToString(), apiPackageCompletionReport.Status.ToString());
 			Assert.AreEqual(sdkPackageCompletionReport.Created, apiPackageCompletionReport.Created);
 			Assert.AreEqual(sdkPackageCompletionReport.Documents.Count, 1);
 			Assert.AreEqual(sdkPackageCompletionReport.Signers.Count, 1);
