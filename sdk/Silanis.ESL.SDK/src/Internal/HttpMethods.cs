@@ -33,6 +33,16 @@ namespace Silanis.ESL.SDK.Internal
 					return result;
 				}
             }
+            catch (WebException e){
+                using (var stream = e.Response.GetResponseStream())
+                using (var reader = new StreamReader(stream))
+                {
+                    string errorDetails = reader.ReadToEnd();
+                    throw new EslServerException(String.Format("{0} HTTP {1} on URI {2}. Optional details: {3}", e.Message, 
+                                                               ((HttpWebResponse)e.Response).Method, e.Response.ResponseUri, errorDetails),
+                                                                errorDetails, e);
+                }
+            }
             catch (Exception e) {
                 throw new EslException("Error communicating with esl server. " + e.Message, e);
             }
@@ -62,6 +72,16 @@ namespace Silanis.ESL.SDK.Internal
 					return result;
 				}
 			}
+            catch (WebException e){
+                using (var stream = e.Response.GetResponseStream())
+                using (var reader = new StreamReader(stream))
+                {
+                    string errorDetails = reader.ReadToEnd();
+                    throw new EslServerException(String.Format("{0} HTTP {1} on URI {2}. Optional details: {3}", e.Message, 
+                                                               ((HttpWebResponse)e.Response).Method, e.Response.ResponseUri, errorDetails),
+                                                                errorDetails, e);
+                }
+            }
 			catch (Exception e) {
 				throw new EslException("Error communicating with esl server. " + e.Message,e);
 			}
@@ -87,6 +107,16 @@ namespace Silanis.ESL.SDK.Internal
                     return result;
                 }
             }
+            catch (WebException e){
+                using (var stream = e.Response.GetResponseStream())
+                using (var reader = new StreamReader(stream))
+                {
+                    string errorDetails = reader.ReadToEnd();
+                    throw new EslServerException(String.Format("{0} HTTP {1} on URI {2}. Optional details: {3}", e.Message, 
+                                                               ((HttpWebResponse)e.Response).Method, e.Response.ResponseUri, errorDetails),
+                                                                errorDetails, e);
+                }
+            }
             catch (Exception e) {
                 throw new EslException("Error communicating with esl server. " + e.Message,e);
             }
@@ -110,6 +140,16 @@ namespace Silanis.ESL.SDK.Internal
 					return result;
 				}
 			}
+            catch (WebException e){
+                using (var stream = e.Response.GetResponseStream())
+                using (var reader = new StreamReader(stream))
+                {
+                    string errorDetails = reader.ReadToEnd();
+                    throw new EslServerException(String.Format("{0} HTTP {1} on URI {2}. Optional details: {3}", e.Message, 
+                                                               ((HttpWebResponse)e.Response).Method, e.Response.ResponseUri, errorDetails),
+                                                                errorDetails, e);
+                }
+            }
 			catch (Exception e) {
 				throw new EslException("Error communicating with esl server. " + e.Message,e);
 			}
@@ -132,6 +172,16 @@ namespace Silanis.ESL.SDK.Internal
 					return result;
 				}
 			}
+            catch (WebException e){
+                using (var stream = e.Response.GetResponseStream())
+                using (var reader = new StreamReader(stream))
+                {
+                    string errorDetails = reader.ReadToEnd();
+                    throw new EslServerException(String.Format("{0} HTTP {1} on URI {2}. Optional details: {3}", e.Message, 
+                                                               ((HttpWebResponse)e.Response).Method, e.Response.ResponseUri, errorDetails),
+                                                                errorDetails, e);
+                }
+            }
 			catch (Exception e) {
 				throw new EslException("Error communicating with esl server. " + e.Message,e);
 			}
@@ -154,6 +204,16 @@ namespace Silanis.ESL.SDK.Internal
 					return result;
 				}
 			}
+            catch (WebException e){
+                using (var stream = e.Response.GetResponseStream())
+                using (var reader = new StreamReader(stream))
+                {
+                    string errorDetails = reader.ReadToEnd();
+                    throw new EslServerException(String.Format("{0} HTTP {1} on URI {2}. Optional details: {3}", e.Message, 
+                                                               ((HttpWebResponse)e.Response).Method, e.Response.ResponseUri, errorDetails),
+                                                                errorDetails, e);
+                }
+            }
 			catch (Exception e) {
 				throw new EslException("Error communicating with esl server. " + e.Message,e);
 			}
@@ -187,6 +247,16 @@ namespace Silanis.ESL.SDK.Internal
 					return result;
 				}
 			}
+            catch (WebException e){
+                using (var stream = e.Response.GetResponseStream())
+                using (var reader = new StreamReader(stream))
+                {
+                    string errorDetails = reader.ReadToEnd();
+                    throw new EslServerException(String.Format("{0} HTTP {1} on URI {2}. Optional details: {3}", e.Message, 
+                                                               ((HttpWebResponse)e.Response).Method, e.Response.ResponseUri, errorDetails),
+                                                                errorDetails, e);
+                }
+            }
 			catch (Exception e) {
 				throw new EslException("Error communicating with esl server. " + e.Message,e);
 			}

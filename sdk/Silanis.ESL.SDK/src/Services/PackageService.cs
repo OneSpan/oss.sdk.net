@@ -49,7 +49,9 @@ namespace Silanis.ESL.SDK.Services
 				PackageId result = JsonConvert.DeserializeObject<PackageId> (response);
 
 				return result;
-			} catch (Exception e) {
+            } catch (EslServerException e) {
+                throw new EslServerException ("Could not create a new package." + " Exception: " + e.Message, e.ServerError, e);
+            } catch (Exception e) {
 				throw new EslException ("Could not create a new package." + " Exception: " + e.Message,e);
 			}
 		}
@@ -87,7 +89,11 @@ namespace Silanis.ESL.SDK.Services
 			try {
                 string response = restClient.Get(path);
 				return JsonConvert.DeserializeObject<Silanis.ESL.API.Package> (response, settings);
-			} catch (Exception e) {
+			} 
+            catch (EslServerException e) {
+                throw new EslServerException ("Could not get package." + " Exception: " + e.Message, e.ServerError, e);
+            }
+            catch (Exception e) {
 				throw new EslException ("Could not get package." + " Exception: " + e.Message,e);
 			}
 		}
@@ -113,7 +119,11 @@ namespace Silanis.ESL.SDK.Services
 			{
 				restClient.Delete(path);
 			}
-			catch (Exception e)
+            catch (EslServerException e)
+            {
+                throw new EslServerException("Could not delete document from package." + " Exception: " + e.Message, e.ServerError, e);
+            }
+            catch (Exception e)
 			{
 				throw new EslException("Could not delete document from package." + " Exception: " + e.Message,e);
 			}
@@ -138,7 +148,11 @@ namespace Silanis.ESL.SDK.Services
 				string json = JsonConvert.SerializeObject (internalDoc, settings);
 				restClient.Post(path, json);
 			} 
-			catch (Exception e) 
+            catch (EslServerException e) 
+            {
+                throw new EslServerException ("Could not upload document to package." + " Exception: " + e.Message, e.ServerError, e);
+            }
+            catch (Exception e) 
 			{
 				throw new EslException ("Could not upload document to package." + " Exception: " + e.Message,e);
 			}
@@ -150,6 +164,10 @@ namespace Silanis.ESL.SDK.Services
             {
                 string json = JsonConvert.SerializeObject(internalDoc, settings);
                 restClient.Post(path, json);
+            }
+            catch (EslServerException e) 
+            {
+                throw new EslServerException ("Could not upload document to package." + " Exception: " + e.Message, e.ServerError, e);
             }
             catch (Exception e)
             {
@@ -178,7 +196,11 @@ namespace Silanis.ESL.SDK.Services
 				string json = JsonConvert.SerializeObject (documents, settings);
 				restClient.Put(path, json);
 			} 
-			catch (Exception e) 
+            catch (EslServerException e) 
+            {
+                throw new EslServerException ("Could not order documents." + " Exception: " + e.Message, e.ServerError, e);
+            }
+            catch (Exception e) 
 			{
 				throw new EslException ("Could not order documents." + " Exception: " + e.Message,e);
 			}
@@ -197,7 +219,11 @@ namespace Silanis.ESL.SDK.Services
 			try 
 			{			
                 restClient.Post(path, "{\"status\":\"SENT\"}");
-			} catch (Exception e) {
+			}
+            catch (EslServerException e) {
+                throw new EslServerException ("Could not send the package." + " Exception: " + e.Message, e.ServerError, e);
+            }
+            catch (Exception e) {
 				throw new EslException ("Could not send the package." + " Exception: " + e.Message,e);
 			}
 		}	
@@ -217,7 +243,11 @@ namespace Silanis.ESL.SDK.Services
 
 			try {
                 return restClient.GetBytes(path);
-			} catch (Exception e) {
+			} 
+            catch (EslServerException e) {
+                throw new EslServerException ("Could not download the pdf document." + " Exception: " + e.Message, e.ServerError, e);
+            }
+            catch (Exception e) {
 				throw new EslException ("Could not download the pdf document." + " Exception: " + e.Message, e);
 			}
 		}
@@ -235,7 +265,11 @@ namespace Silanis.ESL.SDK.Services
 
 			try {
                 return restClient.GetBytes(path);
-			} catch (Exception e) {
+			}
+            catch (EslServerException e) {
+                throw new EslServerException ("Could not download the documents to a zip file." + " Exception: " + e.Message, e.ServerError, e);
+            }
+            catch (Exception e) {
 				throw new EslException ("Could not download the documents to a zip file." + " Exception: " + e.Message, e);
 			}
 		}
@@ -253,7 +287,11 @@ namespace Silanis.ESL.SDK.Services
 
 			try {
                 return restClient.GetBytes(path);
-			} catch (Exception e) {
+			}
+            catch (EslServerException e) {
+                throw new EslServerException ("Could not download the evidence summary." + " Exception: " + e.Message, e.ServerError, e);
+            }
+            catch (Exception e) {
 				throw new EslException ("Could not download the evidence summary." + " Exception: " + e.Message, e);
 			}
 		}
@@ -267,7 +305,11 @@ namespace Silanis.ESL.SDK.Services
             try {
                 restClient.Post(path, JsonConvert.SerializeObject (package, settings));
                 restClient.GetBytes(path);
-            } catch (Exception e) {
+            }
+            catch (EslServerException e) {
+                throw new EslServerException ("Unable to update package settings." + " Exception: " + e.Message, e.ServerError, e);
+            }
+            catch (Exception e) {
                 throw new EslException ("Unable to update package settings." + " Exception: " + e.Message, e);
             }
         }
@@ -301,7 +343,11 @@ namespace Silanis.ESL.SDK.Services
 				Silanis.ESL.API.Document uploadedDoc = JsonConvert.DeserializeObject<Silanis.ESL.API.Document>(response);
 				return new DocumentConverter(uploadedDoc, internalPackage).ToSDKDocument();
 			} 
-			catch (Exception e) 
+            catch (EslServerException e) 
+            {
+                throw new EslServerException ("Could not upload document to package." + " Exception: " + e.Message, e.ServerError, e);
+            }
+            catch (Exception e) 
 			{
 				throw new EslException ("Could not upload document to package." + " Exception: " + e.Message, e);
 			}
@@ -355,7 +401,11 @@ namespace Silanis.ESL.SDK.Services
 				}
 
 				return SigningStatusUtility.FromString(reader.Value.ToString ());
-			} catch (Exception e) {
+			} 
+            catch (EslServerException e) {
+                throw new EslServerException ("Could not get signing status. Exception: " + e.Message, e.ServerError, e);
+            }
+            catch (Exception e) {
 				throw new EslException ("Could not get signing status. Exception: " + e.Message, e);
 			}
 		}
@@ -370,7 +420,11 @@ namespace Silanis.ESL.SDK.Services
 			{
 				string stringResponse = restClient.Get(path);
 				response = JsonConvert.DeserializeObject<Result<Role>> (stringResponse, settings);
-			} catch( Exception e ) {
+			} 
+            catch( EslServerException e ) {
+                throw new EslServerException("Unable to retrieve role list for package with id " + packageId.Id + ".  " + e.Message, e.ServerError,e);
+            }
+            catch( Exception e ) {
 				throw new EslException("Unable to retrieve role list for package with id " + packageId.Id + ".  " + e.Message, e);
 			}
 			return response.Results;
@@ -384,7 +438,11 @@ namespace Silanis.ESL.SDK.Services
 			{
                 restClient.Delete(path);
 			}
-			catch (Exception e)
+            catch (EslServerException e)
+            {
+                throw new EslServerException ("Could not delete package. Exception: " + e.Message, e.ServerError, e);    
+            }
+            catch (Exception e)
 			{
 				throw new EslException ("Could not delete package. Exception: " + e.Message, e);	
 			}
@@ -406,7 +464,11 @@ namespace Silanis.ESL.SDK.Services
 			try 
 			{
 				restClient.Post(path, JsonConvert.SerializeObject (package, settings));
-			} 
+			}
+            catch (EslServerException e) 
+            {
+                throw new EslServerException ("Unable to trash package." + " Exception: " + e.Message, e.ServerError, e);
+            }
 			catch (Exception e) 
 			{
 				throw new EslException ("Unable to trash package." + " Exception: " + e.Message, e);
@@ -426,7 +488,11 @@ namespace Silanis.ESL.SDK.Services
 			{
 				restClient.Put(path, "{\"status\":\"ARCHIVED\"}");
 			} 
-			catch (Exception e) 
+            catch (EslServerException e) 
+            {
+                throw new EslServerException ("Unable to archive package settings." + " Exception: " + e.Message, e.ServerError, e);
+            }
+            catch (Exception e) 
 			{
 				throw new EslException ("Unable to archive package settings." + " Exception: " + e.Message, e);
 			}
@@ -445,7 +511,11 @@ namespace Silanis.ESL.SDK.Services
 			{
 				restClient.Put(path, "{\"status\":\"DRAFT\"}");
 			} 
-			catch (Exception e) 
+            catch (EslServerException e) 
+            {
+                throw new EslServerException ("Unable to edit package." + " Exception: " + e.Message, e.ServerError, e);
+            }
+            catch (Exception e) 
 			{
 				throw new EslException ("Unable to edit package." + " Exception: " + e.Message, e);
 			}
@@ -487,7 +557,11 @@ namespace Silanis.ESL.SDK.Services
 			{
 				restClient.Post(path, "");
 			}
-			catch (Exception e)
+            catch (EslServerException e)
+            {
+                throw new EslServerException("Unable to send email notification.  " + e.Message, e.ServerError, e);
+            }
+            catch (Exception e)
 			{
 				throw new EslException("Unable to send email notification.  " + e.Message, e);
 			}
@@ -513,7 +587,11 @@ namespace Silanis.ESL.SDK.Services
 			{
                 restClient.Post(path, sw.ToString());
 			}
-			catch (Exception e)
+            catch (EslServerException e)
+            {
+                throw new EslServerException ("Could not send email notification to signer. Exception: " + e.Message, e.ServerError, e); 
+            }
+            catch (Exception e)
 			{
 				throw new EslException ("Could not send email notification to signer. Exception: " + e.Message, e);	
 			}
@@ -534,7 +612,12 @@ namespace Silanis.ESL.SDK.Services
 
 				return ConvertToPage(results, request);
 			}
-			catch (Exception e)
+            catch (EslServerException e)
+            {
+                Console.WriteLine (e.StackTrace);
+                throw new EslServerException ("Could not get package list. Exception: " + e.Message, e.ServerError, e);  
+            }
+            catch (Exception e)
 			{
 				Console.WriteLine (e.StackTrace);
 				throw new EslException ("Could not get package list. Exception: " + e.Message, e);	
@@ -553,6 +636,11 @@ namespace Silanis.ESL.SDK.Services
                 Silanis.ESL.API.Result<Silanis.ESL.API.Package> results = JsonConvert.DeserializeObject<Silanis.ESL.API.Result<Silanis.ESL.API.Package>> (response, settings);
 
                 return ConvertToPage(results, request);
+            }
+            catch (EslServerException e)
+            {
+                Console.WriteLine (e.StackTrace);
+                throw new EslServerException ("Could not get template list. Exception: " + e.Message, e.ServerError, e); 
             }
             catch (Exception e)
             {
@@ -601,7 +689,11 @@ namespace Silanis.ESL.SDK.Services
 				Role apiRole = JsonConvert.DeserializeObject<Role> (response);
 
 				return apiRole.Id;
-			} catch (Exception e) {
+			} 
+            catch (EslServerException e) {
+                throw new EslServerException ("Could not add signer." + " Exception: " + e.Message, e.ServerError, e);
+            }
+            catch (Exception e) {
 				throw new EslException ("Could not add signer." + " Exception: " + e.Message, e);
 			}
 		}
@@ -617,7 +709,11 @@ namespace Silanis.ESL.SDK.Services
 				string response = restClient.Get(path);
 				Silanis.ESL.API.Role apiRole = JsonConvert.DeserializeObject<Silanis.ESL.API.Role> (response, settings);
 				return SignerBuilder.NewSignerFromAPIRole(apiRole).Build();
-			} catch (Exception e) {
+            } 
+            catch (EslServerException e) {
+                throw new EslServerException ("Could not retrieve signer." + " Exception: " + e.Message, e.ServerError, e);
+            }
+            catch (Exception e) {
 				throw new EslException ("Could not retrieve signer." + " Exception: " + e.Message, e);
 			}
 		}
@@ -633,7 +729,11 @@ namespace Silanis.ESL.SDK.Services
 			try {
 				string json = JsonConvert.SerializeObject (apiPayload, settings);
 				restClient.Put(path, json);              
-			} catch (Exception e) {
+			}
+            catch (EslServerException e) {
+                throw new EslServerException ("Could not update signer." + " Exception: " + e.Message, e.ServerError, e);
+            }
+            catch (Exception e) {
 				throw new EslException ("Could not update signer." + " Exception: " + e.Message, e);
 			}
 		}
@@ -648,7 +748,11 @@ namespace Silanis.ESL.SDK.Services
 			try {
 				restClient.Delete(path);
 				return;
-			} catch (Exception e) {
+			}
+            catch (EslServerException e) {
+                throw new EslServerException ("Could not delete signer." + " Exception: " + e.Message, e.ServerError, e);
+            }
+            catch (Exception e) {
 				throw new EslException ("Could not delete signer." + " Exception: " + e.Message, e);
 			}
 		}
@@ -670,7 +774,11 @@ namespace Silanis.ESL.SDK.Services
 				string json = JsonConvert.SerializeObject (roles, settings);
 				restClient.Put(path, json);
 			} 
-			catch (Exception e) 
+            catch (EslServerException e) 
+            {
+                throw new EslServerException ("Could not order signers." + " Exception: " + e.Message, e.ServerError, e);
+            }
+            catch (Exception e) 
 			{
 				throw new EslException ("Could not order signers." + " Exception: " + e.Message, e);
 			}
@@ -697,6 +805,10 @@ namespace Silanis.ESL.SDK.Services
                 string response = restClient.Get(path, "text/csv");
                 return response;
             }
+            catch (EslServerException e)
+            {
+                throw new EslServerException("Could not download the completion report." + " Exception: " + e.Message, e.ServerError, e);
+            }
             catch (Exception e)
             {
                 throw new EslException("Could not download the completion report." + " Exception: " + e.Message, e);
@@ -712,7 +824,11 @@ namespace Silanis.ESL.SDK.Services
 				Silanis.ESL.API.CompletionReport apiCompletionReport = JsonConvert.DeserializeObject<Silanis.ESL.API.CompletionReport> (response, settings);
 				return new CompletionReportConverter(apiCompletionReport).ToSDKCompletionReport();
 			}
-			catch (Exception e)
+            catch (EslServerException e)
+            {
+                throw new EslServerException("Could not download the completion report." + " Exception: " + e.Message, e.ServerError, e);
+            }
+            catch (Exception e)
 			{
 				throw new EslException("Could not download the completion report." + " Exception: " + e.Message, e);
 			}

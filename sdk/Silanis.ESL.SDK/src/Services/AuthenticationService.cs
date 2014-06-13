@@ -27,7 +27,11 @@ namespace Silanis.ESL.SDK
                 string stringResponse = client.GetUnauthenticated(path);
                 SessionToken userSessionIdToken = JsonConvert.DeserializeObject<SessionToken> (stringResponse);
                 return userSessionIdToken.Token;
-            } catch (Exception e) {
+            }
+            catch (EslServerException e) {
+                throw new EslServerException("Could not authenticate using an authentication token."+ " Exception: " + e.Message, e.ServerError, e);
+            }
+            catch (Exception e) {
                 throw new EslException("Could not authenticate using an authentication token."+ " Exception: " + e.Message, e);
             }
         }        
@@ -58,7 +62,11 @@ namespace Silanis.ESL.SDK
                 string stringResponse = client.GetUnauthenticated(path);
                 SessionToken userSessionIdToken = JsonConvert.DeserializeObject<SessionToken> (stringResponse);
                 return userSessionIdToken.Token;
-            } catch (Exception e) {
+            } 
+            catch (EslServerException e) {
+                throw new EslServerException("Could not authenticate using a sender authentication token."+ " Exception: " + e.Message, e.ServerError, e);
+            }
+            catch (Exception e) {
                 throw new EslException("Could not authenticate using a sender authentication token."+ " Exception: " + e.Message, e);
             }
         }        
@@ -90,7 +98,11 @@ namespace Silanis.ESL.SDK
                 string stringResponse = client.GetUnauthenticated(path);
                 SessionToken userSessionIdToken = JsonConvert.DeserializeObject<SessionToken> (stringResponse);
                 return userSessionIdToken.Token;
-            } catch (Exception e) {
+            } 
+            catch (EslServerException e) {
+                throw new EslServerException("Could not authenticate using a signer authentication token."+ " Exception: " + e.Message, e.ServerError, e);
+            }
+            catch (Exception e) {
                 throw new EslException("Could not authenticate using a signer authentication token."+ " Exception: " + e.Message, e);
             }
         }        

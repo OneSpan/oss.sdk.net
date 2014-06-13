@@ -26,7 +26,11 @@ namespace Silanis.ESL.SDK.Services
                 Silanis.ESL.API.Sender sender = new AccountMemberConverter( accountMember ).ToAPISender();
                 string json = JsonConvert.SerializeObject (sender, settings);
                 restClient.Post(path, json);              
-            } catch (Exception e) {
+            }
+            catch (EslServerException e) {
+                throw new EslServerException ("Failed to invite new account member.\t" + " Exception: " + e.Message, e.ServerError, e);
+            }
+            catch (Exception e) {
                 throw new EslException ("Failed to invite new account member.\t" + " Exception: " + e.Message, e);
             }
         }

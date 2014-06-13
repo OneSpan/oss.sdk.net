@@ -295,6 +295,9 @@
     <Compile Include="src\Models\Visibility.cs" />
     <Compile Include="src\Services\ContractResolvers\DocumentMetadataContractResolver.cs" />
     <Compile Include="src\Internal\Conversion\DocumentPackageSettingsConverter.cs" />
+    <Compile Include="EslServerException.cs" />
+    <Compile Include="src\ServerError.cs" />
+    <Compile Include="src\Internal\Conversion\ErrorConverter.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSHARP.Targets" />
   <ProjectExtensions>

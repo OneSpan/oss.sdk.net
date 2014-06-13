@@ -38,7 +38,11 @@ namespace Silanis.ESL.SDK.Services
 			try {
 				string response = Converter.ToString (HttpMethods.GetHttp (apiToken, path));
 				return JsonConvert.DeserializeObject<List<FieldSummary>> (response);
-			} catch (Exception e) {
+			}
+            catch (EslServerException e) {
+                throw new EslServerException ("Could not get the field summary." + " Exception: " + e.Message,e.ServerError,e);
+            }
+            catch (Exception e) {
 				throw new EslException ("Could not get the field summary." + " Exception: " + e.Message,e);
 			}
 		}

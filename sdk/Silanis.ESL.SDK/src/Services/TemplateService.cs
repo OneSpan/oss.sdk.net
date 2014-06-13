@@ -32,6 +32,9 @@ namespace Silanis.ESL.SDK.Services
                 PackageId sdkResult = new PackageId(apiResult.Id);
 
                 return sdkResult;
+            } 
+            catch (EslServerException e) {
+                throw new EslServerException ("Could not create a template." + " Exception: " + e.Message, e.ServerError, e);
             } catch (Exception e) {
                 throw new EslException ("Could not create a template." + " Exception: " + e.Message, e);
             }
@@ -48,7 +51,11 @@ namespace Silanis.ESL.SDK.Services
                 PackageId sdkResult = new PackageId(apiResult.Id);
 
                 return sdkResult;
-            } catch (Exception e) {
+            } 
+            catch (EslServerException e) {
+                throw new EslServerException ("Could not create a package from template." + " Exception: " + e.Message, e.ServerError, e);
+            }
+            catch (Exception e) {
                 throw new EslException ("Could not create a package from template." + " Exception: " + e.Message, e);
             }
         }
@@ -65,7 +72,11 @@ namespace Silanis.ESL.SDK.Services
 
 				return JsonConvert.DeserializeObject<PackageId>(response);
 			}
-			catch (Exception e)
+            catch (EslServerException e)
+            {
+                throw new EslServerException ("Could not create template." + " Exception: " + e.Message, e.ServerError, e);
+            }
+            catch (Exception e)
 			{
 				throw new EslException ("Could not create template." + " Exception: " + e.Message, e);
 			}
@@ -91,7 +102,11 @@ namespace Silanis.ESL.SDK.Services
 
 				restClient.Post(path, json);
 			}
-			catch (Exception e)
+            catch (EslServerException e)
+            {
+                throw new EslServerException ("Could not update template." + " Exception: " + e.Message, e.ServerError, e);
+            }
+            catch (Exception e)
 			{
 				throw new EslException ("Could not update template." + " Exception: " + e.Message, e);
 			}
