@@ -26,24 +26,21 @@ namespace Silanis.ESL.SDK
                 set;
         }
 
+		public List<Translation> Translations
+		{
+			get
+			{
+				return translations;
+			}
+			set
+			{
+				translations = value;
+			}
+		}
+
         public void AddTranslations (IList<Translation> translations)
         {
                 this.translations.AddRange (translations);
-        }
-
-        internal Silanis.ESL.API.CustomField toAPICustomField() {
-            Silanis.ESL.API.CustomField result = new Silanis.ESL.API.CustomField();
-    
-            result.Id = Id;
-            result.Value = Value;
-			result.Name = "";
-    
-            foreach (Translation translation in translations) 
-            {
-                    result.AddTranslation (translation.toAPITranslation());
-            }
-    
-            return result;
         }
 
     }

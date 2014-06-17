@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 
 namespace Silanis.ESL.SDK.Builder
 {
@@ -6,6 +7,14 @@ namespace Silanis.ESL.SDK.Builder
     {
         private DocumentPackageAttributes attributes = new DocumentPackageAttributes();
 
+		public DocumentPackageAttributesBuilder() 
+		{
+		}
+
+		public DocumentPackageAttributesBuilder(IDictionary<string, object> data)
+		{
+			this.attributes.Contents = data;
+		}
         
         public DocumentPackageAttributesBuilder WithAttribute(string name, Object value)
         {

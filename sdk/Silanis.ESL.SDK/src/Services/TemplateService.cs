@@ -92,7 +92,7 @@ namespace Silanis.ESL.SDK.Services
 			string path = urls.UrlFor(UrlTemplate.PACKAGE_ID_PATH)
 				.Replace("{packageId}", template.Id.Id)
 				.Build();
-			Silanis.ESL.API.Package internalTemplate = template.ToAPIPackage();
+			Silanis.ESL.API.Package internalTemplate = new DocumentPackageConverter(template).ToAPIPackage();
 
 			internalTemplate.Type = BasePackageType.TEMPLATE;
 

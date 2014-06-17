@@ -149,68 +149,6 @@ namespace Silanis.ESL.SDK
 		public CeremonyLayoutSettings ()
 		{
 		}
-
-		internal LayoutOptions toAPILayoutOptions()
-		{
-			TitleBarOptions titleBarOptions = new TitleBarOptions();
-			if (showTitle != null) {
-				titleBarOptions.Title = showTitle.Value;
-			}
-			if (progressBar != null) {
-				titleBarOptions.ProgressBar = progressBar.Value;
-			}
-
-			HeaderOptions headerOptions = new HeaderOptions();
-			if (breadCrumbs != null) {
-				headerOptions.Breadcrumbs = breadCrumbs.Value;
-			}
-			if (sessionBar != null) {
-				headerOptions.SessionBar = sessionBar.Value;
-			}
-			if (globalNavigation != null) {
-				headerOptions.GlobalNavigation = globalNavigation.Value;
-			}
-			if (titleBarOptions != null) {
-				headerOptions.TitleBar = titleBarOptions;
-			}
-            GlobalActionsOptions globalActionsOptions = new GlobalActionsOptions();
-
-            if (showGlobalConfirmButton != null)
-            {
-                globalActionsOptions.Confirm = showGlobalConfirmButton.Value;
-            }
-            if (showGlobalDownloadButton != null)
-            {
-                globalActionsOptions.Download = showGlobalDownloadButton.Value;
-            }
-            if (ShowGlobalSaveAsLayoutButton != null)
-            {
-                globalActionsOptions.SaveAsLayout = showGlobalSaveAsLayoutButton.Value;
-            }
-            headerOptions.GlobalActions = globalActionsOptions;
-
-			BrandingBarOptions brandingBarOptions = null;
-			if ( logoImageLink != null || logoImageSource != null ) {
-				brandingBarOptions = new BrandingBarOptions();
-				Image logo = new Image();
-				logo.Link = logoImageLink;
-				logo.Src = logoImageSource;
-				brandingBarOptions.Logo = logo;
-			}
-
-			LayoutOptions result = new LayoutOptions();
-			if (iFrame != null) {
-				result.Iframe = iFrame.Value;
-			}
-			if (navigator != null) {
-				result.Navigator = navigator.Value;
-			}
-			result.Footer = new FooterOptions();
-			result.Header = headerOptions;
-			result.BrandingBar = brandingBarOptions;
-
-			return result;
-		}
 	}
 }
 

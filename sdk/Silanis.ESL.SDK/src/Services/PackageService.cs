@@ -327,7 +327,7 @@ namespace Silanis.ESL.SDK.Services
 				.Replace ("{packageId}", package.Id.Id)
 					.Build ();
 
-			Silanis.ESL.API.Package internalPackage = package.ToAPIPackage();
+			Silanis.ESL.API.Package internalPackage = new DocumentPackageConverter(package).ToAPIPackage();
 			Silanis.ESL.API.Document internalDoc = new DocumentConverter(document).ToAPIDocument(internalPackage);
 
 			try 

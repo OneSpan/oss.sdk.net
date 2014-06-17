@@ -78,6 +78,14 @@ namespace Silanis.ESL.SDK
 			set;
 		}
 
+		public Authentication Authentication
+		{
+			get
+			{
+				return authentication;
+			}
+		}
+
 		public AuthenticationMethod AuthenticationMethod {
 			get
 			{
@@ -133,44 +141,6 @@ namespace Silanis.ESL.SDK
 		public bool IsGroupSigner()
 		{
 			return GroupId != null;
-		}
-
-		internal Silanis.ESL.API.Signer ToAPISigner()
-        {
-            if (IsPlaceholderSigner())
-            {
-                return null;
-            }
-        
-			Silanis.ESL.API.Signer signer = new Silanis.ESL.API.Signer ();
-
-			if (!IsGroupSigner())
-			{
-				signer.Email = Email;
-				signer.FirstName = FirstName;
-				signer.LastName = LastName;
-				signer.Title = Title;
-				signer.Company = Company;
-				if (DeliverSignedDocumentsByEmail)
-				{
-					signer.Delivery = new Silanis.ESL.API.Delivery();
-					signer.Delivery.Email = DeliverSignedDocumentsByEmail;
-				}
-			}
-			else
-			{
-				signer.Group = new Silanis.ESL.API.Group();
-				signer.Group.Id = GroupId.Id;
-			}
-
-			if (!String.IsNullOrEmpty(Id))
-			{
-				signer.Id = Id;
-			}
-
-			signer.Auth = authentication.ToAPIAuthentication ();
-
-			return signer;
 		}
 	}
 }

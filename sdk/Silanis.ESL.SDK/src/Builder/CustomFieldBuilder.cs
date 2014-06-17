@@ -12,7 +12,7 @@ namespace Silanis.ESL.SDK.Builder
     {
         private string id;
         private string value;
-        private IList<Translation> translations;
+		private IList<Translation> translations = new List<Translation>();
         private Boolean required = true;
     
         /**
@@ -24,18 +24,7 @@ namespace Silanis.ESL.SDK.Builder
         public static CustomFieldBuilder CustomFieldWithId( string id ) {
             return new CustomFieldBuilder().WithId( id );
         }
-    
-        internal static CustomFieldBuilder CustomField( Silanis.ESL.API.CustomField apiCustomField ) {
-            CustomFieldBuilder result = new CustomFieldBuilder();
-            result.WithId( apiCustomField.Id )
-                    .WithDefaultValue( apiCustomField.Value );
-                   
-            foreach ( Silanis.ESL.API.Translation tran in apiCustomField.Translations ) {
-                result.WithTranslation( TranslationBuilder.NewTranslation( tran ) );
-            }
-            return result;
-        }
-    
+
         /**
          * Sets id of custom field
          *

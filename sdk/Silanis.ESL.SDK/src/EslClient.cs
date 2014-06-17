@@ -115,7 +115,7 @@ namespace Silanis.ESL.SDK
                 SetSdkVersionInPackageData(package);
             }
         
-			Silanis.ESL.API.Package packageToCreate = package.ToAPIPackage ();
+			Silanis.ESL.API.Package packageToCreate = new DocumentPackageConverter(package).ToAPIPackage();
 			PackageId id = packageService.CreatePackage (packageToCreate);
             DocumentPackage retrievedPackage = GetPackage(id);
 
@@ -141,7 +141,7 @@ namespace Silanis.ESL.SDK
 
         public PackageId CreateTemplateFromPackage(PackageId originalPackageId, DocumentPackage delta)
         {
-            return templateService.CreateTemplateFromPackage( originalPackageId, delta.ToAPIPackage() );
+			return templateService.CreateTemplateFromPackage( originalPackageId, new DocumentPackageConverter(delta).ToAPIPackage() );
         }
 
         public PackageId CreateTemplateFromPackage(PackageId originalPackageId, string templateName)
@@ -158,12 +158,12 @@ namespace Silanis.ESL.SDK
         
         public PackageId CreatePackageFromTemplate(PackageId templateId, DocumentPackage delta)
         {
-            return templateService.CreatePackageFromTemplate( templateId, delta.ToAPIPackage() );
+			return templateService.CreatePackageFromTemplate( templateId, new DocumentPackageConverter(delta).ToAPIPackage() );
         }
 
 		public PackageId CreateTemplate(DocumentPackage template)
 		{
-			PackageId templateId = templateService.CreateTemplate(template.ToAPIPackage());
+			PackageId templateId = templateService.CreateTemplate(new DocumentPackageConverter(template).ToAPIPackage());
 			DocumentPackage createdTemplate = GetPackage(templateId);
 
 			foreach (Document document in template.Documents.Values)
@@ -222,7 +222,7 @@ namespace Silanis.ESL.SDK
 
         public void UpdatePackage(Silanis.ESL.SDK.PackageId packageId, DocumentPackage sentSettings)
         {
-            packageService.UpdatePackage( packageId, sentSettings.ToAPIPackage() );
+			packageService.UpdatePackage( packageId, new DocumentPackageConverter(sentSettings).ToAPIPackage() );
         }
         
 		public SigningStatus GetSigningStatus (PackageId packageId, string signerId, string documentId)

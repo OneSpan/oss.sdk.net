@@ -44,6 +44,7 @@
     <Reference Include="log4net">
       <HintPath>..\References\log4net.dll</HintPath>
     </Reference>
+    <Reference Include="nunit.framework" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -297,6 +298,11 @@
     <Compile Include="EslServerException.cs" />
     <Compile Include="src\ServerError.cs" />
     <Compile Include="src\Internal\Conversion\ErrorConverter.cs" />
+    <Compile Include="src\Internal\Conversion\DocumentPackageConverter.cs" />
+    <Compile Include="src\Internal\Conversion\AuthenticationConverter.cs" />
+    <Compile Include="src\Internal\Conversion\AuthenticationMethodConverter.cs" />
+    <Compile Include="src\Internal\Conversion\CeremonyLayoutSettingsConverter.cs" />
+    <Compile Include="src\Internal\Conversion\CustomFieldConverter.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSHARP.Targets" />
   <ProjectExtensions>

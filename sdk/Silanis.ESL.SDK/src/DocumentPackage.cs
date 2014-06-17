@@ -99,60 +99,6 @@ namespace Silanis.ESL.SDK
         {
             get;
             set;
-        }
-
-        internal Silanis.ESL.API.Package ToAPIPackage()
-        {
-            Silanis.ESL.API.Package package = new Silanis.ESL.API.Package();
-
-            package.Name = Name;
-            if (Description != null)
-            {
-                package.Description = Description;
-            }
-            
-            package.Autocomplete = Autocomplete;
-            package.Due = ExpiryDate;
-            if (EmailMessage != null)
-            {
-                package.EmailMessage = EmailMessage;
-            }
-
-            if (Language != null)
-            {
-                package.Language = Language.TwoLetterISOLanguageName;
-            }
-
-            if (Settings != null)
-            {
-                package.Settings = Settings.toAPIPackageSettings();
-            }
-
-            if (SenderInfo != null)
-            {
-                package.Sender = new SenderConverter(SenderInfo).ToAPISender();
-            }
-
-            if (Attributes != null)
-            {
-                package.Data = Attributes.Contents;
-            }
-
-            int signerCount = 1;
-            foreach (Signer signer in Signers.Values)
-            {
-                Silanis.ESL.API.Role role = new SignerConverter(signer).ToAPIRole("role"+signerCount);
-                package.AddRole(role);
-                signerCount++;
-            }
-            foreach (Signer signer in Placeholders.Values)
-            {
-                Silanis.ESL.API.Role role = new SignerConverter(signer).ToAPIRole("role"+signerCount);
-                package.AddRole(role);
-                signerCount++;
-            }
-
-            return package;
-        }
+		}
     }
 }

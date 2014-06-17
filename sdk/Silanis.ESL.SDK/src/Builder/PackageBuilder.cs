@@ -69,34 +69,18 @@ namespace Silanis.ESL.SDK.Builder
 				WithDocument( document );
 			}
 		}
-/*
-		private DocumentPackageStatus ConvertPackageStatus (Silanis.ESL.API.PackageStatus status)
-		{
-			switch (status)
-			{
-			case Silanis.ESL.API.PackageStatus.DRAFT:
-				return DocumentPackageStatus.DRAFT;
-			case Silanis.ESL.API.PackageStatus.SENT:
-				return DocumentPackageStatus.SENT;
-			case Silanis.ESL.API.PackageStatus.COMPLETED:
-				return DocumentPackageStatus.COMPLETED;
-			case Silanis.ESL.API.PackageStatus.ARCHIVED:
-				return DocumentPackageStatus.ARCHIVED;
-			case Silanis.ESL.API.PackageStatus.DECLINED:
-				return DocumentPackageStatus.DECLINED;
-			case Silanis.ESL.API.PackageStatus.OPTED_OUT:
-				return DocumentPackageStatus.OPTED_OUT;
-			case Silanis.ESL.API.PackageStatus.EXPIRED:
-				return DocumentPackageStatus.EXPIRED;
-			default:
-				throw new EslException("Unknown Silanis.ESL.API.PackageStatus value: " + status,null);
-			}
-		}
-*/
+
 		public static PackageBuilder NewPackageNamed (string name)
 		{
 			return new PackageBuilder (name);
 		}
+
+		public PackageBuilder WithID(PackageId id)
+		{
+			this.id = id;
+			return this;
+		}
+
 
         public PackageBuilder WithAutomaticCompletion()
         {
@@ -187,6 +171,11 @@ namespace Silanis.ESL.SDK.Builder
             return this;
         }
         
+		public PackageBuilder WithStatus (DocumentPackageStatus status) {
+			this.status = status;
+			return this;
+		}
+
         public PackageBuilder WithAttributes(DocumentPackageAttributes attributes)
         {
             this.attributes = attributes;

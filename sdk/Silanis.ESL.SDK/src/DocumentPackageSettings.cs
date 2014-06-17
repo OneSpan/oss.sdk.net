@@ -240,7 +240,7 @@ namespace Silanis.ESL.SDK
 			}
 
 			if ( ceremonyLayoutSettings != null ) {
-				ceremonySettings.Layout = ceremonyLayoutSettings.toAPILayoutOptions();
+				ceremonySettings.Layout = new CeremonyLayoutSettingsConverter(ceremonyLayoutSettings).ToAPILayoutOptions();
 			}
 
 			PackageSettings result = new PackageSettings();

@@ -34,7 +34,7 @@ namespace Silanis.ESL.SDK.Services
             Silanis.ESL.API.CustomField apiRequest;
     
             try {
-                apiRequest = customField.toAPICustomField();
+				apiRequest = new CustomFieldConverter(customField).ToAPICustomField();
                 string stringResponse;
                 if ( DoesCustomFieldExist( customField.Id )){
                     stringResponse = client.Put(path,JsonConvert.SerializeObject(apiRequest, settings));
@@ -43,7 +43,7 @@ namespace Silanis.ESL.SDK.Services
                 }
                 
                 apiResponse = JsonConvert.DeserializeObject<Silanis.ESL.API.CustomField>(stringResponse);
-                sdkResponse = CustomFieldBuilder.CustomField( apiResponse ).Build();
+				sdkResponse = new CustomFieldConverter(apiResponse).ToSDKCustomField();
                 return sdkResponse;
             } 
             catch ( EslServerException e ) {

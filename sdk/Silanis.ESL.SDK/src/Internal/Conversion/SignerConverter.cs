@@ -4,19 +4,31 @@ namespace Silanis.ESL.SDK
 {
     internal class SignerConverter
     {
-        private Signer sdkSigner;
+		private Signer sdkSigner = null;
+		private Silanis.ESL.API.Signer apiSigner = null;
+		private Silanis.ESL.API.Role apiRole = null;
     
         public SignerConverter( Signer signer )
         {
             this.sdkSigner = signer;
         }
 
+		public SignerConverter (Silanis.ESL.API.Role apiRole)
+		{
+			this.apiRole = apiRole;
+
+			if (apiRole != null)
+			{
+				this.apiSigner = apiRole.Signers[0];
+			}
+		}
+
         public Silanis.ESL.API.Role ToAPIRole(string roleIdName)
         {
             Silanis.ESL.API.Role role = new Silanis.ESL.API.Role();
 
             if ( !sdkSigner.IsPlaceholderSigner() ) {
-                role.AddSigner(sdkSigner.ToAPISigner());
+				role.AddSigner(new SignerConverter(sdkSigner).ToAPISigner());
             }
             role.Index = sdkSigner.SigningOrder;
             role.Reassign = sdkSigner.CanChangeSigner;
@@ -50,6 +62,49 @@ namespace Silanis.ESL.SDK
             
             return role;
         }
+
+		internal Silanis.ESL.API.Signer ToAPISigner()
+		{
+			if (sdkSigner == null)
+			{
+				return apiSigner;
+			}
+
+			if (sdkSigner.IsPlaceholderSigner())
+			{
+				return null;
+			}
+
+			Silanis.ESL.API.Signer signer = new Silanis.ESL.API.Signer ();
+
+			if (!sdkSigner.IsGroupSigner())
+			{
+				signer.Email = sdkSigner.Email;
+				signer.FirstName = sdkSigner.FirstName;
+				signer.LastName = sdkSigner.LastName;
+				signer.Title = sdkSigner.Title;
+				signer.Company = sdkSigner.Company;
+				if (sdkSigner.DeliverSignedDocumentsByEmail)
+				{
+					signer.Delivery = new Silanis.ESL.API.Delivery();
+					signer.Delivery.Email = sdkSigner.DeliverSignedDocumentsByEmail;
+				}
+			}
+			else
+			{
+				signer.Group = new Silanis.ESL.API.Group();
+				signer.Group.Id = sdkSigner.GroupId.Id;
+			}
+
+			if (!String.IsNullOrEmpty(sdkSigner.Id))
+			{
+				signer.Id = sdkSigner.Id;
+			}
+
+			signer.Auth = new AuthenticationConverter(sdkSigner.Authentication).ToAPIAuthentication();
+
+			return signer;
+		}
     }
 }
 
