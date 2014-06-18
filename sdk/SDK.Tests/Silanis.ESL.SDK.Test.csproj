@@ -75,6 +75,8 @@
     <Compile Include="src\Internal\Conversion\AuthenticationMethodConverterTest.cs" />
     <Compile Include="src\Internal\Conversion\CeremonyLayoutSettingsConverterTest.cs" />
     <Compile Include="src\Internal\Conversion\CustomFieldConverterTest.cs" />
+    <Compile Include="src\Internal\Conversion\EventNotificationConverterTest.cs" />
+    <Compile Include="src\Internal\Conversion\EventNotificationConfigConverterTest.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

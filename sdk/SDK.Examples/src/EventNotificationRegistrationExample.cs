@@ -4,22 +4,41 @@ using System.IO;
 
 namespace SDK.Examples
 {
-    public class EventNotificationRegistrationExample : SDKSample
-    {
-        public static void Main (string[] args)
-        {
-            new EventNotificationRegistrationExample(Props.GetInstance()).Run();
-        }
+	public class EventNotificationRegistrationExample : SDKSample
+	{
+		private EventNotificationConfig eventNotificationConfig;
+		public const string URL = "http://my.url.com";
+		public const NotificationEvent EVENT1 = NotificationEvent.PACKAGE_ACTIVATE;
+		public const NotificationEvent EVENT2 = NotificationEvent.PACKAGE_COMPLETE;
+		public const NotificationEvent EVENT3 = NotificationEvent.PACKAGE_OPT_OUT;
 
-        public EventNotificationRegistrationExample( Props props ) : base(props.Get("api.url"), props.Get("api.key") ) {
-        }
+		public static void Main(string[] args)
+		{
+			new EventNotificationRegistrationExample(Props.GetInstance()).Run();
+		}
 
-        override public void Execute() {
-            eslClient.EventNotificationService.Register(EventNotificationConfigBuilder.NewEventNotificationConfig("http://my.url.com")
-                                                        .ForEvent(NotificationEvent.PACKAGE_ACTIVATE)
-                                                        .ForEvent(NotificationEvent.PACKAGE_COMPLETE)
-                                                        .ForEvent(NotificationEvent.PACKAGE_OPT_OUT));
-        }
-    }
+		public EventNotificationRegistrationExample(Props props) : base(props.Get("api.url"), props.Get("api.key"))
+		{
+		}
+
+		public EventNotificationConfig EventNotificationConfig
+		{
+			get
+			{
+				return eventNotificationConfig;
+			}
+		}
+
+		override public void Execute()
+		{
+			// Register for event notification
+			eslClient.EventNotificationService.Register(EventNotificationConfigBuilder.NewEventNotificationConfig(URL)
+				.ForEvent(EVENT1)
+				.ForEvent(EVENT2)
+				.ForEvent(EVENT3));
+
+			// Get the registered event notifications
+			eventNotificationConfig = eslClient.EventNotificationService.GetEventNotificationConfig();
+		}
+	}
 }
-

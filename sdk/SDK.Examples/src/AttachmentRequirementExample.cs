@@ -10,7 +10,7 @@ namespace SDK.Examples
     {
 		public static void Main(string[] args)
 		{
-			new TemplateExample(Props.GetInstance()).Run();
+			new AttachmentRequirementExample(Props.GetInstance()).Run();
 		}
 
         private PackageId packageId;

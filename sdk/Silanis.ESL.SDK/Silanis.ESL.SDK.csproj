@@ -303,6 +303,8 @@
     <Compile Include="src\Internal\Conversion\AuthenticationMethodConverter.cs" />
     <Compile Include="src\Internal\Conversion\CeremonyLayoutSettingsConverter.cs" />
     <Compile Include="src\Internal\Conversion\CustomFieldConverter.cs" />
+    <Compile Include="src\Internal\Conversion\EventNotificationConverter.cs" />
+    <Compile Include="src\Internal\Conversion\EventNotificationConfigConverter.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSHARP.Targets" />
   <ProjectExtensions>

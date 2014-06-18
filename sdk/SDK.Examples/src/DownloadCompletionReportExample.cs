@@ -81,7 +81,6 @@ namespace SDK.Examples
 
 			sdkCompletionReport = eslClient.PackageService.DownloadCompletionReport(DocumentPackageStatus.DRAFT, senderUID, from, to);
             string csvCompletionReport = eslClient.PackageService.DownloadCompletionReportAsCSV(DocumentPackageStatus.DRAFT, senderUID, from, to);
-            Console.Out.WriteLine("BLAH!");
 		}
     }
 }
