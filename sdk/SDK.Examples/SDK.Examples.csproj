@@ -113,6 +113,7 @@
     <Compile Include="src\AttachmentRequirementExample.cs" />
     <Compile Include="src\DownloadCompletionReportExample.cs" />
     <Compile Include="src\SenderManipulationExample.cs" />
+    <Compile Include="src\ExceptionHandlingExample.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
