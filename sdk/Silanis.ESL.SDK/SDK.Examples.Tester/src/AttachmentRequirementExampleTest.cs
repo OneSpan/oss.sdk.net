@@ -30,26 +30,26 @@ namespace SDK.Examples
 			IDictionary<string, AttachmentRequirement> signer2Attachments = retrievedPackage.Signers[example.Email2].Attachments;
 
 			Assert.AreEqual(signer1Attachments.Count, 1);
-			AttachmentRequirement signer1Att1 = signer1Attachments[example.name1];
-			Assert.AreEqual(signer1Att1.Name, example.name1);
-			Assert.AreEqual(signer1Att1.Description, example.description1);
+			AttachmentRequirement signer1Att1 = signer1Attachments[example.NAME1];
+			Assert.AreEqual(signer1Att1.Name, example.NAME1);
+			Assert.AreEqual(signer1Att1.Description, example.DESCRIPTION1);
 			Assert.AreEqual(signer1Att1.Required, true);
 			Assert.AreEqual(signer1Att1.Status.ToString(), RequirementStatus.INCOMPLETE.ToString());
 
 			Assert.AreEqual(signer2Attachments.Count, 2);
-			AttachmentRequirement signer2Att1 = signer2Attachments[example.name2];
-			AttachmentRequirement signer2Att2 = signer2Attachments[example.name3];
-			Assert.AreEqual(signer2Att1.Name, example.name2);
-			Assert.AreEqual(signer2Att1.Description, example.description2);
+			AttachmentRequirement signer2Att1 = signer2Attachments[example.NAME2];
+			AttachmentRequirement signer2Att2 = signer2Attachments[example.NAME3];
+			Assert.AreEqual(signer2Att1.Name, example.NAME2);
+			Assert.AreEqual(signer2Att1.Description, example.DESCRIPTION2);
 			Assert.AreEqual(signer2Att1.Required, false);
 			Assert.AreEqual(signer2Att1.Status.ToString(), RequirementStatus.INCOMPLETE.ToString());
-			Assert.AreEqual(signer2Att2.Name, example.name3);
-			Assert.AreEqual(signer2Att2.Description, example.description3);
+			Assert.AreEqual(signer2Att2.Name, example.NAME3);
+			Assert.AreEqual(signer2Att2.Description, example.DESCRIPTION3);
 			Assert.AreEqual(signer2Att2.Required, true);
 			Assert.AreEqual(signer2Att2.Status.ToString(), RequirementStatus.INCOMPLETE.ToString());
 
 			// Upload attachment for signer1
-			string signerAuthenticationToken = example.EslClient.AuthenticationTokenService.CreateSignerAuthenticationToken(example.PackageId, example.signer1Id);
+			string signerAuthenticationToken = example.EslClient.AuthenticationTokenService.CreateSignerAuthenticationToken(example.PackageId, example.SIGNER1ID);
 			AuthenticationClient authenticationClient = new AuthenticationClient(Props.GetInstance().Get("webpage.url"));
 			String sessionIdForSigner = authenticationClient.GetSessionIdForSignerAuthenticationToken(signerAuthenticationToken);
 
@@ -61,9 +61,9 @@ namespace SDK.Examples
 
 			// Reject signer1's attachment
 			example.RejectAttachment();
-			signer1Att1 = retrievedPackage.Signers[example.Email1].Attachments[example.name1];
+			signer1Att1 = retrievedPackage.Signers[example.Email1].Attachments[example.NAME1];
 			Assert.AreEqual(signer1Att1.Status.ToString(), RequirementStatus.REJECTED.ToString());
-			Assert.AreEqual(signer1Att1.SenderComment, example.rejectionComment);
+			Assert.AreEqual(signer1Att1.SenderComment, example.REJECTION_COMMENT);
 
 			// Accept signer1's attachment
 			example.AcceptAttachment();
