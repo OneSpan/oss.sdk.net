@@ -3,7 +3,6 @@ using NUnit.Framework;
 using Silanis.ESL.SDK;
 using System.IO;
 using Silanis.ESL.SDK.Builder;
-using Silanis.ESL.SDK.Internal.Conversion;
 
 namespace SDK.Tests
 {

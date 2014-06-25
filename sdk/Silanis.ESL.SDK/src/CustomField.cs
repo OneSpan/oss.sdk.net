@@ -1,7 +1,5 @@
 using System;
 using System.Collections.Generic;
-using Silanis.ESL.SDK.Internal.Conversion;
-
 namespace Silanis.ESL.SDK
 {
     public class CustomField
