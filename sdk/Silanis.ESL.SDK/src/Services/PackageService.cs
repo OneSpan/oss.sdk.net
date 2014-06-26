@@ -252,6 +252,30 @@ namespace Silanis.ESL.SDK.Services
 			}
 		}
 
+        /// <summary>
+        /// Downloads the orginal document (without fields) from the package and returns a byte array.
+        /// </summary>
+        /// <returns>The original document in bytes.</returns>
+        /// <param name="packageId">Package identifier.</param>
+        /// <param name="documentId">Document identifier.</param>
+        public byte[] DownloadOriginalDocument (PackageId packageId, String documentId)
+        {
+            string path = template.UrlFor(UrlTemplate.ORIGINAL_PATH)
+                .Replace("{packageId}", packageId.Id)
+                .Replace("{documentId}", documentId)
+                .Build();
+
+            try {
+                return restClient.GetBytes(path);
+            }
+            catch (EslServerException e) {
+                throw new EslServerException ("Could not download the original document." + " Exception: " + e.Message, e.ServerError, e);
+            }
+            catch (Exception e) {
+                throw new EslException ("Could not download the original document." + " Exception: " + e.Message, e);
+            }
+        }
+
 		/// <summary>
 		/// Downloads the documents from the package in a zip file and returns it in a byte array.
 		/// </summary>

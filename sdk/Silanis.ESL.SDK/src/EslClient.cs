@@ -203,6 +203,11 @@ namespace Silanis.ESL.SDK
 			return packageService.DownloadDocument (packageId, documentId);
 		}
 
+        public byte[] DownloadOriginalDocument(PackageId packageId, string documentId)
+        {
+            return packageService.DownloadOriginalDocument(packageId, documentId);
+        }
+
 		public byte[] DownloadEvidenceSummary (PackageId packageId)
 		{
 			return packageService.DownloadEvidenceSummary (packageId);
