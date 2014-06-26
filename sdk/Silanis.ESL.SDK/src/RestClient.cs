@@ -1,5 +1,6 @@
 using System;
 using Silanis.ESL.SDK.Internal;
+using System.Collections.Generic;
 
 namespace Silanis.ESL.SDK
 {
@@ -65,6 +66,18 @@ namespace Silanis.ESL.SDK
 
             return response;
 		}
+
+        public string PostMultipartPackage(string path, byte[] content, string boundary, string json) {
+            support.LogRequest("POST", path, json);
+
+            headerGen = new ApiTokenAuthHeaderGenerator(apiToken);
+
+            byte[] responseBytes = HttpMethods.MultipartPostHttp(apiToken, path, content, boundary, headerGen);
+            string response = Converter.ToString(responseBytes);
+            support.LogResponse(response);
+
+            return response;
+        }
 
         public string Get(string path) {
             support.LogRequest("GET", path);

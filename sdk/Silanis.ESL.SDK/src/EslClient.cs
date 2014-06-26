@@ -127,6 +127,21 @@ namespace Silanis.ESL.SDK
 			return id;
 		}
 
+        public PackageId CreatePackageOneStep(DocumentPackage package)
+        {
+            if (!IsSdkVersionSetInPackageData(package))
+            {
+                SetSdkVersionInPackageData(package);
+            }
+
+            Silanis.ESL.API.Package packageToCreate = new DocumentPackageConverter(package).ToAPIPackage();
+            foreach(Silanis.ESL.SDK.Document document in package.Documents.Values){
+                packageToCreate.AddDocument(new DocumentConverter(document).ToAPIDocument(packageToCreate));
+            }
+            PackageId id = packageService.CreatePackageOneStep (packageToCreate, package.Documents.Values);
+            return id;
+        }
+
 		public PackageId CreateAndSendPackage( DocumentPackage package ) 
 		{
 			PackageId packageId = CreatePackage (package);
