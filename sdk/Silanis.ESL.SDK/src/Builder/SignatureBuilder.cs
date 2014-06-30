@@ -10,6 +10,7 @@ namespace Silanis.ESL.SDK.Builder
 		public static double DEFAULT_WIDTH = 200d;
 		public static SignatureStyle DEFAULT_STYLE = SignatureStyle.FULL_NAME;
 
+        private SignatureId id;
         private string name;
 		private string signerEmail;
 		private double width = DEFAULT_WIDTH;
@@ -117,6 +118,12 @@ namespace Silanis.ESL.SDK.Builder
             return new SignatureBuilder(roleId).WithStyle(SignatureStyle.HAND_DRAWN);
         }
 
+        public SignatureBuilder WithId (SignatureId id)
+        {
+            this.id = id;
+            return this;
+        }
+
 		public SignatureBuilder WithName (string name)
 		{
 			this.name = name;
@@ -202,6 +209,7 @@ namespace Silanis.ESL.SDK.Builder
 			signature.Width = width;
 			signature.Style = style;
 			signature.AddFields (fields);
+            signature.Id = id;
 			signature.Name = name;
 			signature.Extract = extract;
             signature.TextAnchor = textAnchor;

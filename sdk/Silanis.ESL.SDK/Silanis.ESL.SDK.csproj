@@ -90,7 +90,6 @@
     <Compile Include="src\Services\FieldSummaryService.cs" />
     <Compile Include="src\Services\PackageService.cs" />
     <Compile Include="src\Services\SessionService.cs" />
-    <Compile Include="src\Internal\Conversion\Converter.cs" />
     <Compile Include="src\SigningStatus.cs" />
     <Compile Include="src\SigningStatusUtility.cs" />
     <Compile Include="src\DocumentPackageStatus.cs" />
@@ -305,6 +304,8 @@
     <Compile Include="src\Internal\Conversion\CustomFieldConverter.cs" />
     <Compile Include="src\Internal\Conversion\EventNotificationConverter.cs" />
     <Compile Include="src\Internal\Conversion\EventNotificationConfigConverter.cs" />
+    <Compile Include="src\Services\ApprovalService.cs" />
+    <Compile Include="src\SignatureId.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSHARP.Targets" />
   <ProjectExtensions>

@@ -101,6 +101,12 @@ namespace Silanis.ESL.SDK
 			}
 		}
 
+        public SignatureId Id
+        {
+            get;
+            set;
+        }
+
 		public string Name {
 			get;
 			set;

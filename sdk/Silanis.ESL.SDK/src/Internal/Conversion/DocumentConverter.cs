@@ -1,5 +1,4 @@
 using System;
-using Silanis.ESL.SDK.Internal.Conversion;
 using Silanis.ESL.API;
 using Silanis.ESL.SDK.Builder;
 
@@ -61,11 +60,10 @@ namespace Silanis.ESL.SDK
             }
 
             Silanis.ESL.API.Document doc = ToAPIDocument();
-            Converter converter = new Converter ();
 
             foreach (Signature signature in sdkDocument.Signatures)
             {
-                Silanis.ESL.API.Approval approval = converter.ConvertToApproval (signature);
+                Silanis.ESL.API.Approval approval = new SignatureConverter(signature).ToAPIApproval();
 
                 if (signature.IsPlaceholderSignature())
                 {

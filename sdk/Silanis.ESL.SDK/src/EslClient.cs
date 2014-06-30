@@ -24,6 +24,7 @@ namespace Silanis.ESL.SDK
         private CustomFieldService customFieldService;
         private GroupService groupService;
 		private AccountService accountService;
+        private ApprovalService approvalService;
 		private Services.ReminderService reminderService;
         private TemplateService templateService;
 		private AuthenticationTokenService authenticationTokenService;    
@@ -55,6 +56,7 @@ namespace Silanis.ESL.SDK
             customFieldService = new CustomFieldService( restClient, this.baseUrl, jsonSerializerSettings );
             groupService = new GroupService(restClient, this.baseUrl, jsonSerializerSettings);
 			accountService = new AccountService(restClient, this.baseUrl, jsonSerializerSettings);
+            approvalService = new ApprovalService(restClient, this.baseUrl, jsonSerializerSettings);
 			reminderService = new ReminderService(restClient, this.baseUrl, jsonSerializerSettings);
 			templateService = new TemplateService(restClient, this.baseUrl, packageService, jsonSerializerSettings);
 			authenticationTokenService = new AuthenticationTokenService(restClient, this.baseUrl); 
@@ -344,6 +346,14 @@ namespace Silanis.ESL.SDK
 				return accountService;
 			}
 		}
+
+        public ApprovalService ApprovalService
+        {
+            get
+            {
+                return approvalService;
+            }
+        }
 
 		public ReminderService ReminderService
 		{
