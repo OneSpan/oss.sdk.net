@@ -12,6 +12,7 @@ namespace SDK.Examples
         public DocumentPackage BuiltPackage{ get; set; }
         public DocumentPackage RetrievedPackage{ get; set; }
         public DocumentPackage RetrievedPackageWithNewDocument{ get; set; }
+        public Document RetrievedUpdatedDocument{ get; set; }
         public DocumentPackage RetrievedPackageWithUpdatedDocument{ get; set; }
         public DocumentPackage RetrievedPackageWithDeletedDocument{ get; set; }
         
@@ -21,6 +22,11 @@ namespace SDK.Examples
         public const string OriginalDocumentDescription = "Original Document Description";
         public const string UpdatedDocumentDescription = "Updated Document Description";
     
+        public static void Main(string[] args)
+        {
+            new DocumentOperationsExample(Props.GetInstance()).Run();
+        }
+
 		public DocumentOperationsExample(Props props) : base(props.Get("api.url"), props.Get("api.key"))
 		{
 		}
@@ -58,24 +64,20 @@ namespace SDK.Examples
             
             RetrievedPackageWithNewDocument = eslClient.GetPackage(packageId);
 
-			//This is how you would update a document's metadata (name, description)
+            //This is how you would update and get a document's metadata (name, description)
 			document.Name = UpdatedDocumentName;
 			document.Description = UpdatedDocumentDescription;
 
 			eslClient.PackageService.UpdateDocumentMetadata(RetrievedPackage, document);
 			Console.WriteLine("Document was updated");
 
+            RetrievedUpdatedDocument = eslClient.PackageService.GetDocumentMetadata(RetrievedPackage, document.Id);
             RetrievedPackageWithUpdatedDocument = eslClient.GetPackage(packageId);
 
 			//This is how you would delete a document from a package
 			eslClient.PackageService.DeleteDocument(packageId, document.Id);
 
             RetrievedPackageWithDeletedDocument = eslClient.GetPackage(packageId);
-		}
-
-		public static void Main(string[] args)
-		{
-			new DocumentOperationsExample(Props.GetInstance()).Run();
 		}
 	}
 }

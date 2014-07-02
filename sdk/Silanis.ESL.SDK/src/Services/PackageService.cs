@@ -159,6 +159,46 @@ namespace Silanis.ESL.SDK.Services
 			}
 		}
 
+        /// <summary>
+        /// Get the document's metadata from the package.
+        /// </summary>
+        /// <returns>The document's metadata.</returns>
+        /// <param name="package">The DocumentPackage we want to get document from.</param>
+        /// <param name="documentId">Id of document to get.</param>
+        public Silanis.ESL.SDK.Document GetDocumentMetadata(DocumentPackage package, string documentId)
+        {
+            string path = template.UrlFor(UrlTemplate.DOCUMENT_ID_PATH)
+                .Replace("{packageId}", package.Id.Id)
+                .Replace("{documentId}", documentId)
+                .Build();
+
+            try
+            {
+                string response = restClient.Get(path);
+                Silanis.ESL.API.Document apiDocument = JsonConvert.DeserializeObject<Silanis.ESL.API.Document> (response, settings);
+
+                // Wipe out the members not related to the metadata
+                apiDocument.Approvals = new List<Approval>();
+                apiDocument.Fields = new List<Silanis.ESL.API.Field>();
+                apiDocument.Pages = new List<Page>();
+
+                return new DocumentConverter(apiDocument, new DocumentPackageConverter(package).ToAPIPackage()).ToSDKDocument();
+            }
+            catch (EslServerException e)
+            {
+                throw new EslServerException("Could not get the document's metadata." + " Exception: " + e.Message, e.ServerError, e);
+            }
+            catch (Exception e)
+            {
+                throw new EslException("Could not get the document's metadata." + " Exception: " + e.Message,e);
+            }
+        }
+
+        /// <summary>
+        /// Updates the document's metadata from the package.
+        /// </summary>
+        /// <param name="package">The DocumentPackage to update.</param>
+        /// <param name="document">The Document to update.</param>
 		public void UpdateDocumentMetadata(DocumentPackage package, Document document)
         {
             string path = template.UrlFor(UrlTemplate.DOCUMENT_ID_PATH)
@@ -180,11 +220,11 @@ namespace Silanis.ESL.SDK.Services
 			} 
             catch (EslServerException e) 
             {
-                throw new EslServerException ("Could not upload document to package." + " Exception: " + e.Message, e.ServerError, e);
+                throw new EslServerException ("Could not update the document's metadata." + " Exception: " + e.Message, e.ServerError, e);
             }
             catch (Exception e) 
 			{
-				throw new EslException ("Could not upload document to package." + " Exception: " + e.Message, e);
+                throw new EslException ("Could not update the document's metadata." + " Exception: " + e.Message, e);
 			}
 
             IContractResolver prevContractResolver = settings.ContractResolver;
