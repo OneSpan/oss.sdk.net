@@ -91,7 +91,7 @@ namespace SDK.Examples
                              )
                 .Build();
 
-            packageId = eslClient.CreatePackage(superDuperPackage);
+            packageId = eslClient.CreatePackageOneStep(superDuperPackage);
             eslClient.SendPackage(packageId);
         }
     }

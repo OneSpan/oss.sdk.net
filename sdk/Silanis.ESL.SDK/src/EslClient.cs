@@ -24,6 +24,7 @@ namespace Silanis.ESL.SDK
         private CustomFieldService customFieldService;
         private GroupService groupService;
 		private AccountService accountService;
+        private ApprovalService approvalService;
 		private Services.ReminderService reminderService;
         private TemplateService templateService;
 		private AuthenticationTokenService authenticationTokenService;    
@@ -55,6 +56,7 @@ namespace Silanis.ESL.SDK
             customFieldService = new CustomFieldService( restClient, this.baseUrl, jsonSerializerSettings );
             groupService = new GroupService(restClient, this.baseUrl, jsonSerializerSettings);
 			accountService = new AccountService(restClient, this.baseUrl, jsonSerializerSettings, new AccountServiceApiClient(restClient, this.baseUrl, jsonSerializerSettings));
+            approvalService = new ApprovalService(restClient, this.baseUrl, jsonSerializerSettings);
 			reminderService = new ReminderService(restClient, this.baseUrl, jsonSerializerSettings);
 			templateService = new TemplateService(restClient, this.baseUrl, packageService, jsonSerializerSettings);
 			authenticationTokenService = new AuthenticationTokenService(restClient, this.baseUrl); 
@@ -126,6 +128,21 @@ namespace Silanis.ESL.SDK
 
 			return id;
 		}
+
+        public PackageId CreatePackageOneStep(DocumentPackage package)
+        {
+            if (!IsSdkVersionSetInPackageData(package))
+            {
+                SetSdkVersionInPackageData(package);
+            }
+
+            Silanis.ESL.API.Package packageToCreate = new DocumentPackageConverter(package).ToAPIPackage();
+            foreach(Silanis.ESL.SDK.Document document in package.Documents.Values){
+                packageToCreate.AddDocument(new DocumentConverter(document).ToAPIDocument(packageToCreate));
+            }
+            PackageId id = packageService.CreatePackageOneStep (packageToCreate, package.Documents.Values);
+            return id;
+        }
 
 		public PackageId CreateAndSendPackage( DocumentPackage package ) 
 		{
@@ -202,6 +219,11 @@ namespace Silanis.ESL.SDK
 		{
 			return packageService.DownloadDocument (packageId, documentId);
 		}
+
+        public byte[] DownloadOriginalDocument(PackageId packageId, string documentId)
+        {
+            return packageService.DownloadOriginalDocument(packageId, documentId);
+        }
 
 		public byte[] DownloadEvidenceSummary (PackageId packageId)
 		{
@@ -324,6 +346,14 @@ namespace Silanis.ESL.SDK
 				return accountService;
 			}
 		}
+
+        public ApprovalService ApprovalService
+        {
+            get
+            {
+                return approvalService;
+            }
+        }
 
 		public ReminderService ReminderService
 		{

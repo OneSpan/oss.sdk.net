@@ -29,6 +29,7 @@ namespace Silanis.ESL.SDK.Internal
 		public static readonly string ROLE_ID_PATH = "/packages/{packageId}/roles/{roleId}";
 		public static readonly string NOTIFICATIONS_PATH = "/packages/{packageId}/notifications";
 		public static readonly string PDF_PATH = "/packages/{packageId}/documents/{documentId}/pdf";
+		public static readonly string ORIGINAL_PATH = "/packages/{packageId}/documents/{documentId}/original";
 		public static readonly string ZIP_PATH = "/packages/{packageId}/documents/zip";
 		public static readonly string EVIDENCE_SUMMARY_PATH = "/packages/{packageId}/evidence/summary";
 		public static readonly string COMPLETION_REPORT_PATH = "/reports/completion?senderId={senderId}&status={status}&from={from}&to={to}";
@@ -69,6 +70,9 @@ namespace Silanis.ESL.SDK.Internal
         // Account Service
         public static readonly string ACCOUNT_MEMBER_PATH = "/account/senders";
         public static readonly string SENDER_PATH = "/account/senders/{senderUid}";
+
+        // Approval Service
+        public static readonly string APPROVAL_ID_PATH = "/packages/{packageId}/documents/{documentId}/approvals/{approvalId}";
 
 		// Reminder Service
 		public static readonly string REMINDER_PATH = "/packages/{packageId}/reminders";

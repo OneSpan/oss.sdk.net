@@ -224,7 +224,7 @@ namespace Silanis.ESL.SDK.Internal
 			request.Headers.Add(authHeaderGen.Name, authHeaderGen.Value);
 		}
 
-		public static byte[] MultipartPostHttp (string apiToken, string path, byte[] content, string boundary, AuthHeaderGenerator authHeaderGen)
+		 public static byte[] MultipartPostHttp (string apiToken, string path, byte[] content, string boundary, AuthHeaderGenerator authHeaderGen)
 		{
 			WebRequest request = WebRequest.Create (path);
 			try {

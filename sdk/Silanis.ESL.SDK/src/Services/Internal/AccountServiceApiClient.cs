@@ -40,6 +40,9 @@ namespace Silanis.ESL.SDK
                 string json = JsonConvert.SerializeObject (apiSender, jsonSettings);
                 restClient.Post(path, json);
             }
+            catch (EslServerException e) {
+                throw new EslServerException("Could not update sender.\t" + " Exception: " + e.Message, e.ServerError, e);
+            }
             catch (Exception e) {
                 throw new EslException("Could not update sender.\t" + " Exception: " + e.Message, e);
             }
@@ -51,6 +54,9 @@ namespace Silanis.ESL.SDK
                 .Build();
             try {
                 restClient.Delete(path);
+            }
+            catch (EslServerException e) {
+                throw new EslServerException("Could not delete sender.\t" + " Exception: " + e.Message, e.ServerError, e);
             }
             catch (Exception e) {
                 throw new EslException("Could not delete sender.\t" + " Exception: " + e.Message, e);
@@ -66,6 +72,9 @@ namespace Silanis.ESL.SDK
                     JsonConvert.DeserializeObject<Silanis.ESL.API.Result<Silanis.ESL.API.Sender>> (response, jsonSettings );
                
                 return apiResponse;
+            }
+            catch (EslServerException e) {
+                throw new EslServerException("Failed to retrieve Account Members List.\t" + " Exception: " + e.Message, e.ServerError, e);
             }
             catch (Exception e) {
                 throw new EslException("Failed to retrieve Account Members List.\t" + " Exception: " + e.Message, e);

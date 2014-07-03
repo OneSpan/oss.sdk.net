@@ -56,6 +56,36 @@ namespace Silanis.ESL.SDK.Services
 			}
 		}
 
+        /// <summary>
+        /// Creates a package based on the settings of the package parameter.
+        /// 
+        /// WARNING: This method does not work if the sender has a signature
+        /// 
+        /// </summary>
+        /// <returns>The package id.</returns>
+        /// <param name="package">The package to create.</param>
+        internal PackageId CreatePackageOneStep (Silanis.ESL.API.Package package, ICollection<Silanis.ESL.SDK.Document> documents)
+        {
+            string path = template.UrlFor (UrlTemplate.PACKAGE_PATH)
+                .Build ();
+            try {
+                string json = JsonConvert.SerializeObject (package, settings);
+                byte[] payloadBytes = Converter.ToBytes (json);
+
+                string boundary = GenerateBoundary();
+                byte[] content = CreateMultipartPackage(documents, payloadBytes, boundary);
+
+                string response = restClient.PostMultipartPackage(path, content, boundary, json);              
+                PackageId result = JsonConvert.DeserializeObject<PackageId> (response);
+
+                return result;
+            } catch (EslServerException e) {
+                throw new EslServerException ("Could not create a new package." + " Exception: " + e.Message, e.ServerError, e);
+            } catch (Exception e) {
+                throw new EslException ("Could not create a new package." + " Exception: " + e.Message,e);
+            }
+        }
+
 		/// <summary>
 		/// Updates the package's fields and roles.
 		/// </summary>
@@ -129,6 +159,46 @@ namespace Silanis.ESL.SDK.Services
 			}
 		}
 
+        /// <summary>
+        /// Get the document's metadata from the package.
+        /// </summary>
+        /// <returns>The document's metadata.</returns>
+        /// <param name="package">The DocumentPackage we want to get document from.</param>
+        /// <param name="documentId">Id of document to get.</param>
+        public Silanis.ESL.SDK.Document GetDocumentMetadata(DocumentPackage package, string documentId)
+        {
+            string path = template.UrlFor(UrlTemplate.DOCUMENT_ID_PATH)
+                .Replace("{packageId}", package.Id.Id)
+                .Replace("{documentId}", documentId)
+                .Build();
+
+            try
+            {
+                string response = restClient.Get(path);
+                Silanis.ESL.API.Document apiDocument = JsonConvert.DeserializeObject<Silanis.ESL.API.Document> (response, settings);
+
+                // Wipe out the members not related to the metadata
+                apiDocument.Approvals = new List<Approval>();
+                apiDocument.Fields = new List<Silanis.ESL.API.Field>();
+                apiDocument.Pages = new List<Page>();
+
+                return new DocumentConverter(apiDocument, new DocumentPackageConverter(package).ToAPIPackage()).ToSDKDocument();
+            }
+            catch (EslServerException e)
+            {
+                throw new EslServerException("Could not get the document's metadata." + " Exception: " + e.Message, e.ServerError, e);
+            }
+            catch (Exception e)
+            {
+                throw new EslException("Could not get the document's metadata." + " Exception: " + e.Message,e);
+            }
+        }
+
+        /// <summary>
+        /// Updates the document's metadata from the package.
+        /// </summary>
+        /// <param name="package">The DocumentPackage to update.</param>
+        /// <param name="document">The Document to update.</param>
 		public void UpdateDocumentMetadata(DocumentPackage package, Document document)
         {
             string path = template.UrlFor(UrlTemplate.DOCUMENT_ID_PATH)
@@ -150,11 +220,11 @@ namespace Silanis.ESL.SDK.Services
 			} 
             catch (EslServerException e) 
             {
-                throw new EslServerException ("Could not upload document to package." + " Exception: " + e.Message, e.ServerError, e);
+                throw new EslServerException ("Could not update the document's metadata." + " Exception: " + e.Message, e.ServerError, e);
             }
             catch (Exception e) 
 			{
-				throw new EslException ("Could not upload document to package." + " Exception: " + e.Message,e);
+                throw new EslException ("Could not update the document's metadata." + " Exception: " + e.Message, e);
 			}
 
             IContractResolver prevContractResolver = settings.ContractResolver;
@@ -251,6 +321,30 @@ namespace Silanis.ESL.SDK.Services
 				throw new EslException ("Could not download the pdf document." + " Exception: " + e.Message, e);
 			}
 		}
+
+        /// <summary>
+        /// Downloads the orginal document (without fields) from the package and returns a byte array.
+        /// </summary>
+        /// <returns>The original document in bytes.</returns>
+        /// <param name="packageId">Package identifier.</param>
+        /// <param name="documentId">Document identifier.</param>
+        public byte[] DownloadOriginalDocument (PackageId packageId, String documentId)
+        {
+            string path = template.UrlFor(UrlTemplate.ORIGINAL_PATH)
+                .Replace("{packageId}", packageId.Id)
+                .Replace("{documentId}", documentId)
+                .Build();
+
+            try {
+                return restClient.GetBytes(path);
+            }
+            catch (EslServerException e) {
+                throw new EslServerException ("Could not download the original document." + " Exception: " + e.Message, e.ServerError, e);
+            }
+            catch (Exception e) {
+                throw new EslException ("Could not download the original document." + " Exception: " + e.Message, e);
+            }
+        }
 
 		/// <summary>
 		/// Downloads the documents from the package in a zip file and returns it in a byte array.
@@ -353,23 +447,59 @@ namespace Silanis.ESL.SDK.Services
 			}
 		}
 
-		private byte[] CreateMultipartContent (string fileName, byte[] fileBytes, byte[] payloadBytes, string boundary)
+        private byte[] CreateMultipartContent (string fileName, byte[] fileBytes, byte[] payloadBytes, string boundary)
+        {
+
+            Encoding encoding = Encoding.UTF8;
+            Stream formDataStream = new MemoryStream ();
+
+            string header = string.Format ("--{0}\r\nContent-Disposition: form-data; name=\"{1}\"; filename=\"{2}\"\r\n\r\n",
+                                           boundary, "payload", "payload");
+            formDataStream.Write (encoding.GetBytes (header), 0, encoding.GetByteCount (header));
+            formDataStream.Write (payloadBytes, 0, payloadBytes.Length);
+
+            formDataStream.Write (encoding.GetBytes ("\r\n"), 0, encoding.GetByteCount ("\r\n"));
+
+            string data = string.Format("--{0}\r\nContent-Disposition: form-data; name=\"{1}\"; \r\nContent-Type: {2}\r\n\r\n",
+                                        boundary, "file", MimeTypeUtil.GetMIMEType(fileName));
+            formDataStream.Write(encoding.GetBytes(data), 0, encoding.GetByteCount(data));
+            formDataStream.Write(fileBytes, 0, fileBytes.Length);
+
+            string footer = "\r\n--" + boundary + "--\r\n";
+            formDataStream.Write (encoding.GetBytes (footer), 0, encoding.GetByteCount (footer));
+
+            //Dump the stream
+            formDataStream.Position = 0;
+            byte[] formData = new byte[formDataStream.Length];
+            formDataStream.Read (formData, 0, formData.Length);
+            formDataStream.Close ();
+
+            return formData;
+        }
+
+		private byte[] CreateMultipartPackage (ICollection<Silanis.ESL.SDK.Document> documents, byte[] payloadBytes, string boundary)
 		{
 
 			Encoding encoding = Encoding.UTF8;
 			Stream formDataStream = new MemoryStream ();
 
-			string header = string.Format ("--{0}\r\nContent-Disposition: form-data; name=\"{1}\"; filename=\"{2}\"\r\n\r\n",
-			                               boundary, "payload", "payload");
+            string header = string.Format ("--{0}\r\nContent-Disposition: form-data; name=\"{1}\"; filename=\"{2}\"\r\n\r\n",
+                                           boundary, "payload", "payload");
 			formDataStream.Write (encoding.GetBytes (header), 0, encoding.GetByteCount (header));
 			formDataStream.Write (payloadBytes, 0, payloadBytes.Length);
 
 			formDataStream.Write (encoding.GetBytes ("\r\n"), 0, encoding.GetByteCount ("\r\n"));
 
-			string data = string.Format ("--{0}\r\nContent-Disposition: form-data; name=\"{1}\"; \r\nContent-Type: {2}\r\n\r\n",
-			                            boundary, "file", MimeTypeUtil.GetMIMEType (fileName));
-			formDataStream.Write (encoding.GetBytes (data), 0, encoding.GetByteCount (data));
-			formDataStream.Write (fileBytes, 0, fileBytes.Length);
+            foreach ( Silanis.ESL.SDK.Document document in documents )
+            {
+                string fileName = document.FileName;
+                byte[] fileBytes = document.Content;
+
+                string data = string.Format("--{0}\r\nContent-Disposition: form-data; name=\"{1}\"; filename=\"{2}\"\r\n\r\n",
+                               boundary, "file", fileName);
+                formDataStream.Write(encoding.GetBytes(data), 0, encoding.GetByteCount(data));
+                formDataStream.Write(fileBytes, 0, fileBytes.Length);
+            }
 
 			string footer = "\r\n--" + boundary + "--\r\n";
 			formDataStream.Write (encoding.GetBytes (footer), 0, encoding.GetByteCount (footer));
