@@ -39,6 +39,7 @@ namespace SDK.Examples
                 .WithTitle( "title1" )
                 .WithLanguage( "language1" )
                 .WithPhoneNumber( "phoneNumber1" )
+                .WithStatus(SenderStatus.ACTIVE)
                 .Build();
 
             accountMember2 = AccountMemberBuilder.NewAccountMember(email2)
@@ -48,6 +49,7 @@ namespace SDK.Examples
                 .WithTitle( "title2" )
                 .WithLanguage( "language2" )
                 .WithPhoneNumber( "phoneNumber2" )
+                .WithStatus(SenderStatus.ACTIVE)
                 .Build();
 
             accountMember3 = AccountMemberBuilder.NewAccountMember(email3)
@@ -57,6 +59,7 @@ namespace SDK.Examples
                 .WithTitle( "title3" )
                 .WithLanguage( "language3" )
                 .WithPhoneNumber( "phoneNumber3" )
+                .WithStatus(SenderStatus.ACTIVE)
                 .Build();
 
             eslClient.AccountService.InviteUser(accountMember1);
