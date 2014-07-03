@@ -78,6 +78,7 @@ namespace Silanis.ESL.SDK.Services
                 .Build();
             try {
                 Silanis.ESL.API.Sender apiPayload = new SenderConverter(senderInfo).ToAPISender();
+                apiPayload.Id = senderId;
                 string json = JsonConvert.SerializeObject (apiPayload, settings);
                 restClient.Post(path, json);
             }
