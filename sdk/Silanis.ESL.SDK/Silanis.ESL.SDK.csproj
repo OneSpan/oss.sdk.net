@@ -304,6 +304,7 @@
     <Compile Include="src\Internal\Conversion\CustomFieldConverter.cs" />
     <Compile Include="src\Internal\Conversion\EventNotificationConverter.cs" />
     <Compile Include="src\Internal\Conversion\EventNotificationConfigConverter.cs" />
+    <Compile Include="src\Services\Internal\AccountServiceApiClient.cs" />
     <Compile Include="src\Services\ApprovalService.cs" />
     <Compile Include="src\SignatureId.cs" />
   </ItemGroup>
@@ -317,5 +318,6 @@
     <None Include="app.config" />
     <Folder Include="src\Models\" />
     <Folder Include="src\Services\ContractResolvers\" />
+    <Folder Include="src\Services\Internal\" />
   </ItemGroup>
 </Project>
