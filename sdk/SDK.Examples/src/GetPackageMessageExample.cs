@@ -1,5 +1,4 @@
-﻿using NUnit.Framework;
-using System;
+﻿using System;
 using System.IO;
 using Silanis.ESL.SDK;
 using Silanis.ESL.SDK.Builder;
