@@ -9,7 +9,7 @@
     <AssemblyName>Silanis.ESL</AssemblyName>
     <TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <ProductVersion>10.0.0</ProductVersion>
+    <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -310,6 +310,10 @@
     <Compile Include="src\Services\Internal\AttachmentRequirementApiClient.cs" />
     <Compile Include="src\Services\Internal\ApprovalApiClient.cs" />
     <Compile Include="src\Services\Internal\CustomFieldApiClient.cs" />
+    <Compile Include="src\Internal\Conversion\MessageConverter.cs" />
+    <Compile Include="src\Internal\Conversion\MessageStatusConverter.cs" />
+    <Compile Include="src\Message.cs" />
+    <Compile Include="src\MessageStatus.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSHARP.Targets" />
   <ProjectExtensions>

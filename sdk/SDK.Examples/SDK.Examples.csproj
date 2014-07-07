@@ -3,7 +3,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProductVersion>10.0.0</ProductVersion>
+    <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{8D6C84A6-459F-42E0-8673-F8890B6A57DC}</ProjectGuid>
     <OutputType>Exe</OutputType>
@@ -50,6 +50,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
+    <Reference Include="nunit.framework" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -115,6 +116,7 @@
     <Compile Include="src\SenderManipulationExample.cs" />
     <Compile Include="src\ExceptionHandlingExample.cs" />
     <Compile Include="src\SignatureManipulationExample.cs" />
+    <Compile Include="src\GetPackageMessageExample.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
