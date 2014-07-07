@@ -56,7 +56,7 @@ namespace Silanis.ESL.SDK
             customFieldService = new CustomFieldService( restClient, this.baseUrl, jsonSerializerSettings );
             groupService = new GroupService(restClient, this.baseUrl, jsonSerializerSettings);
 			accountService = new AccountService(new AccountApiClient(restClient, this.baseUrl, jsonSerializerSettings));
-            approvalService = new ApprovalService(restClient, this.baseUrl, jsonSerializerSettings);
+            approvalService = new ApprovalService(new ApprovalApiClient(restClient, this.baseUrl, jsonSerializerSettings));
 			reminderService = new ReminderService(restClient, this.baseUrl, jsonSerializerSettings);
 			templateService = new TemplateService(restClient, this.baseUrl, packageService, jsonSerializerSettings);
 			authenticationTokenService = new AuthenticationTokenService(restClient, this.baseUrl); 
