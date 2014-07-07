@@ -3,6 +3,7 @@ using System;
 using Silanis.ESL.SDK;
 using Silanis.ESL.SDK.Builder;
 using System.Globalization;
+using Silanis.ESL.API;
 
 namespace SDK.Tests
 {
@@ -36,9 +37,32 @@ namespace SDK.Tests
 			apiPackage1 = CreateTypicalAPIPackage();
 			converter = new DocumentPackageConverter(apiPackage1);
 			apiPackage2 = converter.ToAPIPackage();
+
 			Assert.IsNotNull(apiPackage2);
 			Assert.AreEqual(apiPackage2, apiPackage1);
 		}
+
+        [Test()]
+        public void ConvertAPIToSDK()
+        {
+            apiPackage1 = CreateTypicalAPIPackage();
+            sdkPackage1 = new PackageBuilder(apiPackage1).Build();
+
+            Assert.IsNotNull(sdkPackage1);
+            Assert.AreEqual(apiPackage1.Id, sdkPackage1.Id.Id);
+            Assert.AreEqual(apiPackage1.Autocomplete, sdkPackage1.Autocomplete);
+            Assert.AreEqual(apiPackage1.Description, sdkPackage1.Description);
+            Assert.AreEqual(apiPackage1.Due, sdkPackage1.ExpiryDate);
+            Assert.AreEqual(apiPackage1.Messages[0].Content, sdkPackage1.Messages[0].Content);
+            Assert.AreEqual(apiPackage1.Messages[0].Created, sdkPackage1.Messages[0].Created);
+            Assert.AreEqual(apiPackage1.Messages[0].Status.ToString(), sdkPackage1.Messages[0].Status.ToString());
+            Assert.AreEqual(apiPackage1.Messages[0].From.FirstName, sdkPackage1.Messages[0].From.FirstName);
+            Assert.AreEqual(apiPackage1.Messages[0].From.LastName, sdkPackage1.Messages[0].From.LastName);
+            Assert.AreEqual(apiPackage1.Messages[0].From.Email, sdkPackage1.Messages[0].From.Email);
+            Assert.AreEqual(apiPackage1.Messages[0].To[0].FirstName, sdkPackage1.Messages[0].To["email2@email.com"].FirstName);
+            Assert.AreEqual(apiPackage1.Messages[0].To[0].LastName, sdkPackage1.Messages[0].To["email2@email.com"].LastName);
+            Assert.AreEqual(apiPackage1.Messages[0].To[0].Email, sdkPackage1.Messages[0].To["email2@email.com"].Email);
+        }
 
 		[Test()]
 		public void ConvertSDKToAPI()
@@ -79,6 +103,22 @@ namespace SDK.Tests
 			apiPackage.Due = new DateTime?();
 			apiPackage.Name = "API package name";
 			apiPackage.Status = Silanis.ESL.API.PackageStatus.DRAFT;
+
+            Silanis.ESL.API.Message apiMessage = new Silanis.ESL.API.Message();
+            apiMessage.Content = "opt-out reason";
+            apiMessage.Status = Silanis.ESL.API.MessageStatus.NEW;
+            apiMessage.Created = DateTime.Now;
+            User fromUser = new User();
+            fromUser.FirstName = "John";
+            fromUser.LastName = "Smith";
+            fromUser.Email = "email@email.com";
+            apiMessage.From = fromUser;
+            apiPackage.AddMessage(apiMessage);
+            User toUser = new User();
+            toUser.FirstName = "Patty";
+            toUser.LastName = "Galant";
+            toUser.Email = "email2@email.com";
+            apiMessage.AddTo(toUser);
 
 			return apiPackage;
 		}

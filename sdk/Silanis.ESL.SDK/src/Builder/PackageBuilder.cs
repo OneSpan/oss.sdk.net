@@ -22,6 +22,7 @@ namespace Silanis.ESL.SDK.Builder
         private DocumentPackageSettings settings;
         private SenderInfo senderInfo;
         private DocumentPackageAttributes attributes;
+        private IList<Message> messages = new List<Message>();
 
 		private PackageBuilder(string packageName)
 		{
@@ -37,8 +38,17 @@ namespace Silanis.ESL.SDK.Builder
 			this.expiryDate = package.Due;
 			this.status = new PackageStatusConverter(new Nullable<PackageStatus>(package.Status)).ToSDKPackageStatus().Value;
 			this.emailMessage = package.EmailMessage;
-            this.settings = new DocumentPackageSettingsBuilder(package.Settings).build();
-			this.senderInfo = new SenderConverter(package.Sender).ToSDKSenderInfo();
+
+            if (package.Settings != null)
+            {
+                this.settings = new DocumentPackageSettingsBuilder(package.Settings).build();
+            }
+
+            if (package.Sender != null)
+            {
+                this.senderInfo = new SenderConverter(package.Sender).ToSDKSenderInfo();
+            }
+
             this.attributes = new DocumentPackageAttributes(package.Data);
 
 			foreach ( Silanis.ESL.API.Role role in package.Roles ) {
@@ -68,6 +78,11 @@ namespace Silanis.ESL.SDK.Builder
 
 				WithDocument( document );
 			}
+
+            foreach (Silanis.ESL.API.Message apiMessage in package.Messages)
+            {
+                messages.Add(new MessageConverter(apiMessage).ToSDKMessage());
+            }
 		}
 
 		public static PackageBuilder NewPackageNamed (string name)
@@ -203,6 +218,7 @@ namespace Silanis.ESL.SDK.Builder
             package.Settings = settings;
             package.SenderInfo = senderInfo;
             package.Attributes = attributes;
+            package.Messages = messages;
 
 			return package;
 		}

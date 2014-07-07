@@ -100,5 +100,11 @@ namespace Silanis.ESL.SDK
             get;
             set;
 		}
+
+        public IList<Message> Messages
+        {
+            get;
+            set;
+        }
     }
 }
