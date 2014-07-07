@@ -50,17 +50,17 @@ namespace Silanis.ESL.SDK
 			packageService = new PackageService (restClient, this.baseUrl, jsonSerializerSettings);
 			sessionService = new SessionService (apiKey, this.baseUrl);
 			fieldSummaryService = new FieldSummaryService (apiKey, this.baseUrl);
-			auditService = new AuditService (apiKey, this.baseUrl);
+            auditService = new AuditService(apiKey, this.baseUrl);
 
             eventNotificationService = new EventNotificationService(restClient, this.baseUrl, jsonSerializerSettings);
             customFieldService = new CustomFieldService( restClient, this.baseUrl, jsonSerializerSettings );
             groupService = new GroupService(restClient, this.baseUrl, jsonSerializerSettings);
-			accountService = new AccountService(new AccountServiceApiClient(restClient, this.baseUrl, jsonSerializerSettings));
+			accountService = new AccountService(new AccountApiClient(restClient, this.baseUrl, jsonSerializerSettings));
             approvalService = new ApprovalService(restClient, this.baseUrl, jsonSerializerSettings);
 			reminderService = new ReminderService(restClient, this.baseUrl, jsonSerializerSettings);
 			templateService = new TemplateService(restClient, this.baseUrl, packageService, jsonSerializerSettings);
 			authenticationTokenService = new AuthenticationTokenService(restClient, this.baseUrl); 
-			attachmentRequirementService = new AttachmentRequirementService(restClient, this.baseUrl, jsonSerializerSettings);
+			attachmentRequirementService = new AttachmentRequirementService(new AttachmentRequirementApiClient(restClient, this.baseUrl, jsonSerializerSettings));
 		}
         
         private void configureJsonSerializationSettings()

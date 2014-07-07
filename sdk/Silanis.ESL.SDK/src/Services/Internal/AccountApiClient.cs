@@ -5,13 +5,13 @@ using System.Collections.Generic;
 
 namespace Silanis.ESL.SDK
 {
-    internal class AccountServiceApiClient
+    internal class AccountApiClient
     {
         private UrlTemplate template;
         private RestClient restClient;
         private JsonSerializerSettings jsonSettings;
         
-        public AccountServiceApiClient(RestClient restClient, string apiUrl, JsonSerializerSettings jsonSettings)
+        public AccountApiClient(RestClient restClient, string apiUrl, JsonSerializerSettings jsonSettings)
         {
             this.restClient = restClient;
             template = new UrlTemplate (apiUrl);            

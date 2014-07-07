@@ -8,9 +8,9 @@ namespace Silanis.ESL.SDK.Services
 {
     public class AccountService
     {
-        private AccountServiceApiClient apiClient;
+        private AccountApiClient apiClient;
 
-        internal AccountService(AccountServiceApiClient apiClient)
+        internal AccountService(AccountApiClient apiClient)
         {
             this.apiClient = apiClient;
         }

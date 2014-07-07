@@ -10,15 +10,11 @@ namespace Silanis.ESL.SDK
 	/// </summary>
     public class AttachmentRequirementService
     {
-		private UrlTemplate template;
-		private JsonSerializerSettings settings;
-		private RestClient restClient;
+        private AttachmentRequirementApiClient apiClient;
 
-		public AttachmentRequirementService(RestClient restClient, string baseUrl, JsonSerializerSettings settings)
+		internal AttachmentRequirementService(AttachmentRequirementApiClient apiClient)
         {
-			this.restClient = restClient;
-			template = new UrlTemplate (baseUrl);
-			this.settings = settings;
+            this.apiClient = apiClient;
         }
 
 		/// <summary>
@@ -28,28 +24,14 @@ namespace Silanis.ESL.SDK
 		/// <param name="signer">Signer.</param>
 		/// <param name="attachmentId">Attachment identifier.</param>
 		public void AcceptAttachment(PackageId packageId, Signer signer, String attachmentId)
-		{
-			string path = template.UrlFor(UrlTemplate.UPDATE_SIGNER_PATH)
-				.Replace("{packageId}", packageId.Id)
-				.Replace("{roleId}", signer.Id)
-				.Build();
-
-			signer.Attachments[attachmentId].SenderComment = "";
-			signer.Attachments[attachmentId].Status = Silanis.ESL.SDK.RequirementStatus.COMPLETE;
-
-			Role apiPayload = new SignerConverter(signer).ToAPIRole(System.Guid.NewGuid().ToString());
-
-			try {
-				string json = JsonConvert.SerializeObject(apiPayload, settings);
-				restClient.Put(path, json);
-			} 
-            catch (EslServerException e) {
-                throw new EslServerException("Could not accept attachment for signer." + " Exception: " + e.Message, e.ServerError, e);
-            }
-            catch (Exception e) {
-				throw new EslException("Could not accept attachment for signer." + " Exception: " + e.Message,e);
-			}
-		}
+        {
+            signer.Attachments[attachmentId].SenderComment = "";
+            signer.Attachments[attachmentId].Status = Silanis.ESL.SDK.RequirementStatus.COMPLETE;
+            
+            Role apiRole = new SignerConverter(signer).ToAPIRole(System.Guid.NewGuid().ToString());
+            
+            apiClient.AcceptAttachment(packageId.Id, apiRole);
+        }
 
 		/// <summary>
 		/// Sender rejects signer's attachment requirement with a comment.
@@ -58,29 +40,14 @@ namespace Silanis.ESL.SDK
 		/// <param name="signer">Signer.</param>
 		/// <param name="attachmentId">Attachment identifier.</param>
 		/// <param name="senderComment">Sender comment.</param>
-		public void RejectAttachment(PackageId packageId, Signer signer, String attachmentId, String senderComment)
-		{
-			string path = template.UrlFor(UrlTemplate.UPDATE_SIGNER_PATH)
-				.Replace("{packageId}", packageId.Id)
-				.Replace("{roleId}", signer.Id)
-				.Build();
-
-			signer.Attachments[attachmentId].SenderComment = senderComment;
-			signer.Attachments[attachmentId].Status = RequirementStatus.REJECTED;
-
-			Role apiPayload = new SignerConverter(signer).ToAPIRole(System.Guid.NewGuid().ToString());
-
-			try {
-				string json = JsonConvert.SerializeObject(apiPayload, settings);
-				restClient.Put(path, json);              
-			} 
-            catch (EslServerException e) {
-                throw new EslServerException("Could not reject attachment for signer." + " Exception: " + e.Message, e.ServerError, e);
-            }
-            catch (Exception e) {
-				throw new EslException("Could not reject attachment for signer." + " Exception: " + e.Message,e);
-			}
-		}
+        public void RejectAttachment(PackageId packageId, Signer signer, String attachmentId, String senderComment)
+        {
+            signer.Attachments[attachmentId].SenderComment = senderComment;
+            signer.Attachments[attachmentId].Status = RequirementStatus.REJECTED;
+            Role apiRole = new SignerConverter(signer).ToAPIRole(System.Guid.NewGuid().ToString());
+            
+            apiClient.RejectAttachment(packageId.Id, apiRole);
+        }
 
 		/// <summary>
 		/// Sender downloads the attachment.
@@ -90,20 +57,7 @@ namespace Silanis.ESL.SDK
 		/// <param name="attachmentId">Attachment identifier.</param>
 		public byte[] DownloadAttachment(PackageId packageId, String attachmentId)
 		{
-			string path = template.UrlFor(UrlTemplate.ATTACHMENT_REQUIREMENT_PATH)
-				.Replace("{packageId}", packageId.Id)
-				.Replace("{attachmentId}", attachmentId)
-				.Build();
-
-			try {
-				return restClient.GetBytes(path);
-			}
-            catch (EslServerException e) {
-                throw new EslServerException("Could not download the pdf attachment." + " Exception: " + e.Message, e.ServerError, e);
-            }
-            catch (Exception e) {
-				throw new EslException("Could not download the pdf attachment." + " Exception: " + e.Message,e);
-			}
+            return apiClient.DownloadAttachments(packageId.Id, attachmentId);
 		}
     }
 }

@@ -304,9 +304,10 @@
     <Compile Include="src\Internal\Conversion\CustomFieldConverter.cs" />
     <Compile Include="src\Internal\Conversion\EventNotificationConverter.cs" />
     <Compile Include="src\Internal\Conversion\EventNotificationConfigConverter.cs" />
-    <Compile Include="src\Services\Internal\AccountServiceApiClient.cs" />
     <Compile Include="src\Services\ApprovalService.cs" />
     <Compile Include="src\SignatureId.cs" />
+    <Compile Include="src\Services\Internal\AccountApiClient.cs" />
+    <Compile Include="src\Services\Internal\AttachmentRequirementApiClient.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSHARP.Targets" />
   <ProjectExtensions>
