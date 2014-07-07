@@ -8,17 +8,13 @@ namespace Silanis.ESL.SDK.Services
 {
 	public class CustomFieldService
 	{
-		private UrlTemplate template;
-		private RestClient client;
-		private JsonSerializerSettings settings;
-
-		public CustomFieldService(RestClient client, string baseUrl, JsonSerializerSettings settings)
-		{
-			template = new UrlTemplate(baseUrl);
-			this.client = client;
-			this.settings = settings;
-		}
-
+        private CustomFieldApiClient apiClient;
+        
+        internal CustomFieldService(CustomFieldApiClient apiClient)
+        {
+            this.apiClient = apiClient;
+        }
+        
 		///
 		/// Create an account custom field.
 		/// If the custom field already existed then update it.
@@ -29,37 +25,9 @@ namespace Silanis.ESL.SDK.Services
 		///
 		public CustomField CreateCustomField(CustomField customField)
 		{
-			string path = template.UrlFor(UrlTemplate.ACCOUNT_CUSTOMFIELD_PATH).Build();
-            
-			CustomField sdkResponse = null;
-			Silanis.ESL.API.CustomField apiResponse;
-			Silanis.ESL.API.CustomField apiRequest;
-    
-			try
-			{
-				apiRequest = new CustomFieldConverter(customField).ToAPICustomField();
-				string stringResponse;
-				if (DoesCustomFieldExist(customField.Id))
-				{
-					stringResponse = client.Put(path, JsonConvert.SerializeObject(apiRequest, settings));
-				}
-				else
-				{
-					stringResponse = client.Post(path, JsonConvert.SerializeObject(apiRequest, settings));
-				}
-                
-				apiResponse = JsonConvert.DeserializeObject<Silanis.ESL.API.CustomField>(stringResponse);
-				sdkResponse = new CustomFieldConverter(apiResponse).ToSDKCustomField();
-				return sdkResponse;
-			}
-			catch (EslServerException e)
-			{
-				throw new EslServerException("Could not add/update the custom field to account." + " Exception: " + e.Message, e.ServerError, e);
-			}
-			catch (Exception e)
-			{
-				throw new EslException("Could not add/update the custom field to account." + " Exception: " + e.Message, e);
-			}
+            Silanis.ESL.API.CustomField apiCustomField = new CustomFieldConverter( customField ).ToAPICustomField();
+            apiCustomField = apiClient.CreateCustomField( apiCustomField );
+            return new CustomFieldConverter(apiCustomField).ToSDKCustomField();
 		}
 
 		///
@@ -68,30 +36,9 @@ namespace Silanis.ESL.SDK.Services
 		/// @param id of custom field
 		/// @return true if existed otherwise false
 		///
-		public bool DoesCustomFieldExist(string id)
+		public bool DoesCustomFieldExist(string customFieldId)
 		{
-			string path = template.UrlFor(UrlTemplate.ACCOUNT_CUSTOMFIELD_ID_PATH)
-				.Replace("{customFieldId}", id)
-				.Build();
-    
-			try
-			{
-				string stringResponse = client.Get(path);
-				if (string.IsNullOrEmpty(stringResponse))
-				{
-					return false;
-				}
-				JsonConvert.DeserializeObject<CustomFieldValue>(stringResponse);
-				return true;
-			}
-			catch (EslServerException e)
-			{
-				throw new EslServerException("Could not get the custom field from account." + " Exception: " + e.Message, e.ServerError, e);
-			}
-			catch (Exception e)
-			{
-				throw new EslException("Could not get the custom field from account." + " Exception: " + e.Message, e);
-			}
+            return apiClient.DoesCustomFieldExist(customFieldId);
 		}
 
 		/// <summary>
@@ -100,22 +47,7 @@ namespace Silanis.ESL.SDK.Services
 		/// <param name="id">id of custom field to delete.</param>
 		public void DeleteCustomField(string id)
 		{
-			string path = template.UrlFor(UrlTemplate.ACCOUNT_CUSTOMFIELD_ID_PATH)
-				.Replace("{customFieldId}", id)
-				.Build();
-
-			try
-			{
-				client.Delete(path);
-			}
-			catch (EslServerException e)
-			{
-				throw new EslServerException("Could not delete the custom field from account." + " Exception: " + e.Message, e.ServerError, e);
-			}
-			catch (Exception e)
-			{
-				throw new EslException("Could not delete the custom field from account." + " Exception: " + e.Message, e);
-			}
+            apiClient.DeleteCustomField(id);
 		}
 
 		///
@@ -128,34 +60,11 @@ namespace Silanis.ESL.SDK.Services
 		/// @throws com.silanis.esl.sdk.EslException
 		///
 		public CustomFieldValue SubmitCustomFieldValue(CustomFieldValue customFieldValue)
-		{
-			string path = template.UrlFor(UrlTemplate.USER_CUSTOMFIELD_PATH).Build();
-			string response;
-    
-			try
-			{
-				string payload = JsonConvert.SerializeObject(customFieldValue.toAPIUserCustomField(), settings);
-				if (DoesCustomFieldValueExist(customFieldValue.Id))
-				{
-					response = client.Put(path, payload);
-				}
-				else
-				{
-					response = client.Post(path, payload);
-				}
-				UserCustomField result = JsonConvert.DeserializeObject<UserCustomField>(response);
-    
-				return CustomFieldValueBuilder.CustomFieldValue(result).build();
-			}
-			catch (EslServerException e)
-			{
-				throw new EslServerException("Could not add/update the custom field to account." + " Exception: " + e.Message, e.ServerError, e);
-			}
-			catch (Exception e)
-			{
-				throw new EslException("Could not add/update the custom field to account." + " Exception: " + e.Message, e);
-			}
-		}
+        {   
+            UserCustomField apiCustomFieldValue = customFieldValue.toAPIUserCustomField();
+            apiCustomFieldValue = apiClient.SubmitCustomFieldValue(apiCustomFieldValue);
+            return CustomFieldValueBuilder.CustomFieldValue(apiCustomFieldValue).build();
+        }
 
 		///
 		/// Determine if an user custom field already existed
@@ -163,30 +72,9 @@ namespace Silanis.ESL.SDK.Services
 		/// @param id of user custom field
 		/// @return true if existed otherwise false
 		///
-		public bool DoesCustomFieldValueExist(string id)
+		public bool DoesCustomFieldValueExist(string customFieldId)
 		{
-			string path = template.UrlFor(UrlTemplate.USER_CUSTOMFIELD_ID_PATH)
-				.Replace("{customFieldId}", id)
-				.Build();
-    
-			try
-			{
-				string stringResponse = client.Get(path);
-				if (String.IsNullOrEmpty(stringResponse))
-				{
-					return false;
-				}
-				JsonConvert.DeserializeObject<UserCustomField>(stringResponse);
-				return true;
-			}
-			catch (EslServerException e)
-			{
-				throw new EslServerException("Could not get the custom field from user." + " Exception: " + e.Message, e.ServerError, e);
-			}
-			catch (Exception e)
-			{
-				throw new EslException("Could not get the custom field from user." + " Exception: " + e.Message, e);
-			}
+            return apiClient.DoesCustomFieldValueExist( customFieldId );
 		}
 	}
 }

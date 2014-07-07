@@ -309,6 +309,7 @@
     <Compile Include="src\Services\Internal\AccountApiClient.cs" />
     <Compile Include="src\Services\Internal\AttachmentRequirementApiClient.cs" />
     <Compile Include="src\Services\Internal\ApprovalApiClient.cs" />
+    <Compile Include="src\Services\Internal\CustomFieldApiClient.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSHARP.Targets" />
   <ProjectExtensions>
