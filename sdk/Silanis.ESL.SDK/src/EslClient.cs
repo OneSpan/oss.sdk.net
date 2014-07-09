@@ -47,9 +47,9 @@ namespace Silanis.ESL.SDK
             configureJsonSerializationSettings();
 
             RestClient restClient = new RestClient(apiKey);
-			packageService = new PackageService (restClient, this.baseUrl, jsonSerializerSettings);
-			sessionService = new SessionService (apiKey, this.baseUrl);
-			fieldSummaryService = new FieldSummaryService (apiKey, this.baseUrl);
+			packageService = new PackageService(restClient, this.baseUrl, jsonSerializerSettings);
+			sessionService = new SessionService(apiKey, this.baseUrl);
+			fieldSummaryService = new FieldSummaryService(new FieldSummaryApiClient(apiKey, this.baseUrl));
             auditService = new AuditService(apiKey, this.baseUrl);
 
             eventNotificationService = new EventNotificationService(new EventNotificationApiClient(restClient, this.baseUrl, jsonSerializerSettings));
