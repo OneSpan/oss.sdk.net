@@ -54,7 +54,7 @@ namespace Silanis.ESL.SDK
 
             eventNotificationService = new EventNotificationService(new EventNotificationApiClient(restClient, this.baseUrl, jsonSerializerSettings));
             customFieldService = new CustomFieldService( new CustomFieldApiClient(restClient, this.baseUrl, jsonSerializerSettings) );
-            groupService = new GroupService(restClient, this.baseUrl, jsonSerializerSettings);
+            groupService = new GroupService(new GroupApiClient(restClient, this.baseUrl, jsonSerializerSettings));
 			accountService = new AccountService(new AccountApiClient(restClient, this.baseUrl, jsonSerializerSettings));
             approvalService = new ApprovalService(new ApprovalApiClient(restClient, this.baseUrl));
 			reminderService = new ReminderService(restClient, this.baseUrl, jsonSerializerSettings);

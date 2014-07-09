@@ -7,112 +7,46 @@ namespace Silanis.ESL.SDK.Services
 {
     public class GroupService
     {
-        private UrlTemplate template;
-        private JsonSerializerSettings settings;
-        private RestClient restClient;
-
-        public GroupService(RestClient restClient, string baseUrl, JsonSerializerSettings settings)
+        private GroupApiClient apiClient;
+        
+        internal GroupService(GroupApiClient apiClient)
         {
-            this.restClient = restClient;
-            template = new UrlTemplate (baseUrl);
-            this.settings = settings;
+            this.apiClient = apiClient;
         }
-
+    
         public List<Group> GetMyGroups() {
-            string path = template.UrlFor (UrlTemplate.GROUPS_PATH)
-                    .Build ();
-
-            try {
-                string response = restClient.Get(path);
-				Silanis.ESL.API.Result<Silanis.ESL.API.Group> apiResponse = JsonConvert.DeserializeObject<Silanis.ESL.API.Result<Silanis.ESL.API.Group>> (response, settings );
-
-                List<Group> result = new List<Group>();
-				foreach ( Silanis.ESL.API.Group apiGroup in apiResponse.Results ) {
-                    result.Add( new GroupConverter( apiGroup ).ToSDKGroup() );
-                }
-                return result;
+            Silanis.ESL.API.Result<Silanis.ESL.API.Group> apiResponse = apiClient.GetMyGroups();
+            List<Group> result = new List<Group>();
+			foreach ( Silanis.ESL.API.Group apiGroup in apiResponse.Results ) {
+                result.Add( new GroupConverter( apiGroup ).ToSDKGroup() );
             }
-            catch (EslServerException e) {
-                throw new EslServerException ("Failed to retrieve group list." + " Exception: " + e.Message, e.ServerError, e);
-            }
-            catch (Exception e) {
-                throw new EslException ("Failed to retrieve group list." + " Exception: " + e.Message, e);
-            }
+            return result;
         }
 
         public Group GetGroup( GroupId groupId ) {
-            string path = template.UrlFor (UrlTemplate.GROUPS_ID_PATH)
-                .Replace ("{groupId}", groupId.Id)
-                    .Build ();
-
-            try {
-                string response = restClient.Get(path);
-                Silanis.ESL.API.Group apiGroup = JsonConvert.DeserializeObject<Silanis.ESL.API.Group> (response, settings);
-                Group sdkGroup = new GroupConverter( apiGroup ).ToSDKGroup();
-                return sdkGroup;
-            } 
-            catch (EslServerException e) {
-                throw new EslServerException ("Failed to retrieve group." + " Exception: " + e.Message, e.ServerError, e);
-            }
-            catch (Exception e) {
-                throw new EslException ("Failed to retrieve group." + " Exception: " + e.Message, e);
-            }
+            Silanis.ESL.API.Group apiGroup = apiClient.GetGroup(groupId.Id);
+            Group sdkGroup = new GroupConverter( apiGroup ).ToSDKGroup();
+            return sdkGroup;
         }
 
         public Group CreateGroup( Group group ) {
-            string path = template.UrlFor (UrlTemplate.GROUPS_PATH).Build ();
 			Silanis.ESL.API.Group apiGroup = new GroupConverter( group ).ToAPIGroupWithoutMembers();
-            try {
-                string json = JsonConvert.SerializeObject (apiGroup, settings);
-                string response = restClient.Post(path, json);              
-                Silanis.ESL.API.Group apiResponse = JsonConvert.DeserializeObject<Silanis.ESL.API.Group> (response);
-                Group sdkGroup = new GroupConverter( apiResponse ).ToSDKGroup();
-				foreach ( GroupMember groupMember in group.Members ) {
-					InviteMember( sdkGroup.Id, groupMember );
-				}
-                return sdkGroup;
-            } 
-            catch (EslServerException e) {
-                throw new EslServerException ("Failed to create new group." + " Exception: " + e.Message, e.ServerError, e);
+            apiGroup = apiClient.CreateGroup( apiGroup );
+            Group sdkGroup = new GroupConverter( apiGroup ).ToSDKGroup();
+            foreach ( GroupMember groupMember in group.Members ) {
+                InviteMember( sdkGroup.Id, groupMember );
             }
-            catch (Exception e) {
-                throw new EslException ("Failed to create new group." + " Exception: " + e.Message, e);
-            }
+            return sdkGroup;
         }
 
         public GroupMember InviteMember( GroupId groupId, GroupMember groupMember ) {
-            string path = template.UrlFor (UrlTemplate.GROUPS_MEMBER_PATH)
-				.Replace("{groupId}", groupId.Id )
-                .Build ();
-			Silanis.ESL.API.GroupMember apiGroupMember = new GroupMemberConverter(groupMember).ToAPIGroupMember();
-            try {
-				string json = JsonConvert.SerializeObject (apiGroupMember, settings);
-                string response = restClient.Post(path, json);              
-				Silanis.ESL.API.GroupMember apiResponse = JsonConvert.DeserializeObject<Silanis.ESL.API.GroupMember> (response);
-				return new GroupMemberConverter( apiResponse ).ToSDKGroupMember();
-            }
-            catch (EslServerException e) {
-                throw new EslServerException ("Could not create a new package." + " Exception: " + e.Message, e.ServerError, e);
-            }
-            catch (Exception e) {
-                throw new EslException ("Could not create a new package." + " Exception: " + e.Message, e);
-            }
+            Silanis.ESL.API.GroupMember apiGroupMember = new GroupMemberConverter(groupMember).ToAPIGroupMember();
+            Silanis.ESL.API.GroupMember apiResponse = apiClient.InviteMember( groupId.Id, apiGroupMember );
+            return new GroupMemberConverter( apiResponse ).ToSDKGroupMember();
         }
 
         public void DeleteGroup( GroupId groupId ) {
-            string path = template.UrlFor (UrlTemplate.GROUPS_ID_PATH)
-                .Replace ("{groupId}", groupId.Id)
-                    .Build ();
-
-            try {
-                restClient.Delete(path);
-            } 
-            catch (EslServerException e) {
-                throw new EslServerException ("Failed to delete group." + " Exception: " + e.Message, e.ServerError, e);
-            }
-            catch (Exception e) {
-                throw new EslException ("Failed to delete group." + " Exception: " + e.Message, e);
-            }
+            apiClient.DeleteGroup(groupId.Id);
         }
 
         public List<string> GetGroupMemberEmails( GroupId groupId ) {

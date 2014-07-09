@@ -318,6 +318,7 @@
     <Compile Include="src\MessageStatus.cs" />
     <Compile Include="src\Services\Internal\EventNotificationApiClient.cs" />
     <Compile Include="src\Services\Internal\FieldSummaryApiClient.cs" />
+    <Compile Include="src\Services\Internal\GroupApiClient.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSHARP.Targets" />
   <ProjectExtensions>
