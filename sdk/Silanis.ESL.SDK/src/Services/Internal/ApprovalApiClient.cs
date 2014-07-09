@@ -4,17 +4,15 @@ using Silanis.ESL.SDK.Internal;
 
 namespace Silanis.ESL.SDK
 {
-    public class ApprovalApiClient
+    internal class ApprovalApiClient
     {
         private UrlTemplate template;
-        private JsonSerializerSettings settings;
         private RestClient restClient;
 
-        public ApprovalApiClient(RestClient restClient, string baseUrl, JsonSerializerSettings settings)
+        public ApprovalApiClient(RestClient restClient, string baseUrl)
         {
             this.restClient = restClient;
             template = new UrlTemplate (baseUrl);
-            this.settings = settings;
         }        
         
         public void DeleteApproval(string packageId, string documentId, string approvalId)

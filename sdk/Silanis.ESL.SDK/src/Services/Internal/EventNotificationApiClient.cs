@@ -1,0 +1,60 @@
+using System;
+using Newtonsoft.Json;
+using Silanis.ESL.SDK.Internal;
+using Silanis.ESL.API;
+
+namespace Silanis.ESL.SDK
+{
+    internal class EventNotificationApiClient
+    {
+        private RestClient restClient;
+        private UrlTemplate template;
+        private JsonSerializerSettings settings;
+
+        public EventNotificationApiClient(RestClient restClient, string apiUrl, JsonSerializerSettings settings)
+        {
+            this.restClient = restClient;
+            template = new UrlTemplate(apiUrl);
+            this.settings = settings;
+        }
+        
+        public void Register(Callback callback)
+        {
+            try
+            {
+                string path = template.UrlFor(UrlTemplate.CALLBACK_PATH).Build();
+                string json = JsonConvert.SerializeObject(callback, settings);
+
+                restClient.Post(path, json);
+            }
+            catch (EslServerException e)
+            {
+                throw new EslServerException( "Unable to configure event notification. " + e.Message, e.ServerError, e);
+            }
+            catch (EslException e)
+            {
+                throw new EslException("Unable to configure event notification. " + e.Message, e);
+            }
+        }
+
+        public Callback GetEventNotificationConfig()
+        {
+            string path = template.UrlFor(UrlTemplate.CALLBACK_PATH).Build();
+
+            try
+            {
+                string stringResponse = restClient.Get(path);
+                return JsonConvert.DeserializeObject<Callback>(stringResponse, settings);
+            }
+            catch (EslServerException e)
+            {
+                throw new EslServerException("Could not retrieve event notification. " + e.Message, e.ServerError, e);
+            }
+            catch (Exception e)
+            {
+                throw new EslException("Could not retrieve event notification. " + e.Message, e);
+            }
+        }
+    }
+}
+

@@ -10,15 +10,11 @@ namespace Silanis.ESL.SDK.Services
 	/// </summary>
 	public class EventNotificationService
 	{
-		private RestClient restClient;
-		private UrlTemplate template;
-		private JsonSerializerSettings settings;
-
-		public EventNotificationService(RestClient restClient, string apiUrl, JsonSerializerSettings settings)
+        private EventNotificationApiClient apiClient;
+        
+		internal EventNotificationService(EventNotificationApiClient apiClient)
 		{
-			this.restClient = restClient;
-			template = new UrlTemplate(apiUrl);
-			this.settings = settings;
+            this.apiClient = apiClient;
 		}
 
 		/// <summary>
@@ -27,11 +23,7 @@ namespace Silanis.ESL.SDK.Services
 		/// <param name="config">Describes the event notification of interest.</param>
 		public void Register(EventNotificationConfig config)
 		{
-			string path = template.UrlFor(UrlTemplate.CALLBACK_PATH).Build();
-			Callback callback = new EventNotificationConfigConverter(config).ToAPICallback();
-			string json = JsonConvert.SerializeObject(callback, settings);
-
-			restClient.Post(path, json);
+            apiClient.Register( new EventNotificationConfigConverter(config).ToAPICallback() );
 		}
 
 		/// <summary>
@@ -50,22 +42,8 @@ namespace Silanis.ESL.SDK.Services
 		/// <returns>Description of registered event notifications.</returns>
 		public EventNotificationConfig GetEventNotificationConfig()
 		{
-			string path = template.UrlFor(UrlTemplate.CALLBACK_PATH).Build();
-
-			try
-			{
-				string stringResponse = restClient.Get(path);
-				Callback apiResponse = JsonConvert.DeserializeObject<Callback>(stringResponse, settings);
-				return new EventNotificationConfigConverter(apiResponse).ToSDKEventNotificationConfig();
-			}
-			catch (EslServerException e)
-			{
-				throw new EslServerException("Could not retrieve event notification. " + e.Message, e.ServerError, e);
-			}
-			catch (Exception e)
-			{
-				throw new EslException("Could not retrieve event notification. " + e.Message, e);
-			}
+            Callback apiResponse = apiClient.GetEventNotificationConfig();
+            return new EventNotificationConfigConverter(apiResponse).ToSDKEventNotificationConfig();
 		}
 	}
 }

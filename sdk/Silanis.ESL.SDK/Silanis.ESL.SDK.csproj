@@ -314,6 +314,7 @@
     <Compile Include="src\Internal\Conversion\MessageStatusConverter.cs" />
     <Compile Include="src\Message.cs" />
     <Compile Include="src\MessageStatus.cs" />
+    <Compile Include="src\Services\Internal\EventNotificationApiClient.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSHARP.Targets" />
   <ProjectExtensions>

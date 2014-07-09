@@ -52,11 +52,11 @@ namespace Silanis.ESL.SDK
 			fieldSummaryService = new FieldSummaryService (apiKey, this.baseUrl);
             auditService = new AuditService(apiKey, this.baseUrl);
 
-            eventNotificationService = new EventNotificationService(restClient, this.baseUrl, jsonSerializerSettings);
+            eventNotificationService = new EventNotificationService(new EventNotificationApiClient(restClient, this.baseUrl, jsonSerializerSettings));
             customFieldService = new CustomFieldService( new CustomFieldApiClient(restClient, this.baseUrl, jsonSerializerSettings) );
             groupService = new GroupService(restClient, this.baseUrl, jsonSerializerSettings);
 			accountService = new AccountService(new AccountApiClient(restClient, this.baseUrl, jsonSerializerSettings));
-            approvalService = new ApprovalService(new ApprovalApiClient(restClient, this.baseUrl, jsonSerializerSettings));
+            approvalService = new ApprovalService(new ApprovalApiClient(restClient, this.baseUrl));
 			reminderService = new ReminderService(restClient, this.baseUrl, jsonSerializerSettings);
 			templateService = new TemplateService(restClient, this.baseUrl, packageService, jsonSerializerSettings);
 			authenticationTokenService = new AuthenticationTokenService(restClient, this.baseUrl); 
