@@ -319,6 +319,7 @@
     <Compile Include="src\Services\Internal\EventNotificationApiClient.cs" />
     <Compile Include="src\Services\Internal\FieldSummaryApiClient.cs" />
     <Compile Include="src\Services\Internal\GroupApiClient.cs" />
+    <Compile Include="src\Services\Internal\ReminderApiClient.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSHARP.Targets" />
   <ProjectExtensions>
