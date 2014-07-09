@@ -46,13 +46,15 @@ namespace SDK.Tests
         public void ConvertAPIToSDK()
         {
             apiPackage1 = CreateTypicalAPIPackage();
-            sdkPackage1 = new PackageBuilder(apiPackage1).Build();
+            sdkPackage1 = new DocumentPackageConverter(apiPackage1).ToSDKPackage();
 
             Assert.IsNotNull(sdkPackage1);
             Assert.AreEqual(apiPackage1.Id, sdkPackage1.Id.Id);
             Assert.AreEqual(apiPackage1.Autocomplete, sdkPackage1.Autocomplete);
             Assert.AreEqual(apiPackage1.Description, sdkPackage1.Description);
             Assert.AreEqual(apiPackage1.Due, sdkPackage1.ExpiryDate);
+            Assert.AreEqual(apiPackage1.Status.ToString(), sdkPackage1.Status.ToString());
+            Assert.AreEqual(apiPackage1.Name, sdkPackage1.Name);
             Assert.AreEqual(apiPackage1.Messages[0].Content, sdkPackage1.Messages[0].Content);
             Assert.AreEqual(apiPackage1.Messages[0].Created, sdkPackage1.Messages[0].Created);
             Assert.AreEqual(apiPackage1.Messages[0].Status.ToString(), sdkPackage1.Messages[0].Status.ToString());

@@ -1,4 +1,6 @@
 using System;
+using Silanis.ESL.SDK.Builder;
+using Silanis.ESL.SDK.Internal;
 
 namespace Silanis.ESL.SDK
 {
@@ -105,6 +107,86 @@ namespace Silanis.ESL.SDK
 
 			return signer;
 		}
+
+        public Silanis.ESL.SDK.Signer ToSDKSigner()
+        {
+            if (apiRole == null)
+            {
+                return sdkSigner;
+            }
+
+            if (apiRole.Signers == null || apiRole.Signers.Count == 0)
+            {
+                return NewSignerPlaceholderFromAPIRole();
+            }
+            else
+            {
+                return NewRegularSignerFromAPIRole();
+            }
+
+        }
+
+        private Silanis.ESL.SDK.Signer NewSignerPlaceholderFromAPIRole()
+        {
+            Asserts.NotEmptyOrNull(apiRole.Id, "role.id");
+
+            SignerBuilder builder = SignerBuilder.NewSignerPlaceholder(new Placeholder(apiRole.Id))
+                .SigningOrder(apiRole.Index);
+
+            if ( apiRole.Reassign ) {
+                builder.CanChangeSigner ();
+            }
+
+            if ( apiRole.EmailMessage != null ) {
+                builder.WithEmailMessage( apiRole.EmailMessage.Content );
+            }
+
+            if ( apiRole.Locked ) {
+                builder.Lock();
+            }
+
+            return builder.Build();
+        }
+
+        private Silanis.ESL.SDK.Signer NewRegularSignerFromAPIRole()
+        {
+            Silanis.ESL.API.Signer eslSigner = apiRole.Signers[0];
+
+            SignerBuilder builder = SignerBuilder.NewSignerWithEmail(eslSigner.Email)
+                .WithCustomId(eslSigner.Id)   
+                .WithFirstName(eslSigner.FirstName)
+                .WithLastName(eslSigner.LastName)
+                .WithCompany(eslSigner.Company)
+                .WithTitle(eslSigner.Title)
+                .SigningOrder(apiRole.Index);
+
+            foreach (Silanis.ESL.API.AttachmentRequirement attachmentRequirement in apiRole.AttachmentRequirements)
+            {
+                builder.WithAttachmentRequirement(new AttachmentRequirementConverter(attachmentRequirement).ToSDKAttachmentRequirement());
+            }
+
+            if (apiRole.Id != null) {
+                builder.WithCustomId(apiRole.Id);
+            }
+
+            if ( apiRole.Reassign ) {
+                builder.CanChangeSigner ();
+            }
+
+            if ( apiRole.EmailMessage != null ) {
+                builder.WithEmailMessage( apiRole.EmailMessage.Content );
+            }
+
+            if ( apiRole.Locked ) {
+                builder.Lock();
+            }
+
+            if (eslSigner.Delivery != null && eslSigner.Delivery.Email) {
+                builder.DeliverSignedDocumentsByEmail();
+            }
+
+            return builder.Build();
+        }
     }
 }
 

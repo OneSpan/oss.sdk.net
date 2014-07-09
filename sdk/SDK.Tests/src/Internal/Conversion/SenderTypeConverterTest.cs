@@ -7,63 +7,8 @@ namespace SDK.Tests
 	[TestFixture]
     public class SenderTypeConverterTest
     {
-		private Silanis.ESL.SDK.SenderType? sdkSenderType1 = null;
-		private Silanis.ESL.SDK.SenderType? sdkSenderType2 = null;
-		private Silanis.ESL.API.SenderType? apiSenderType1 = null;
-		private Silanis.ESL.API.SenderType? apiSenderType2 = null;
-		private SenderTypeConverter converter;
-
-		[Test]
-		public void ConvertNullSDKToAPI()
-		{
-			sdkSenderType1 = null;
-			converter = new SenderTypeConverter(sdkSenderType1);
-			Assert.IsNull(converter.ToAPISenderType());
-		}
-
-		[Test]
-		public void ConvertNullAPIToSDK()
-		{
-			apiSenderType1 = null;
-			converter = new SenderTypeConverter(apiSenderType1);
-			Assert.IsNull(converter.ToSDKSenderType());
-		}
-
-		[Test]
-		public void ConvertNullSDKToSDK()
-		{
-			sdkSenderType1 = null;
-			converter = new SenderTypeConverter(sdkSenderType1);
-			Assert.IsNull(converter.ToSDKSenderType());
-		}
-
-		[Test]
-		public void ConvertNullAPIToAPI()
-		{
-			apiSenderType1 = null;
-			converter = new SenderTypeConverter(apiSenderType1);
-			Assert.IsNull(converter.ToAPISenderType());
-		}
-
-		[Test]
-		public void ConvertSDKToSDK()
-		{
-			sdkSenderType1 = CreateTypicalSDKSenderType();
-			sdkSenderType2 = new SenderTypeConverter(sdkSenderType1).ToSDKSenderType();
-
-			Assert.IsNotNull(sdkSenderType2);
-			Assert.AreEqual(sdkSenderType2, sdkSenderType1);
-		}
-
-		[Test]
-		public void ConvertAPIToAPI()
-		{
-			apiSenderType1 = CreateTypicalAPISenderType();
-			apiSenderType2 = new SenderTypeConverter(apiSenderType1).ToAPISenderType();
-
-			Assert.IsNotNull(apiSenderType2);
-			Assert.AreEqual(apiSenderType2, apiSenderType1);
-		}
+		private Silanis.ESL.SDK.SenderType sdkSenderType1;
+        private Silanis.ESL.API.SenderType apiSenderType1;
 
 		[Test]
 		public void ConvertAPIToSDK()

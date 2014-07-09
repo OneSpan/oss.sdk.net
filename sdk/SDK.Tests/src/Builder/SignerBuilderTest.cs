@@ -196,43 +196,5 @@ namespace SDK.Tests
 			Assert.AreEqual(signer.Attachments["Medicare card"].Required, attachmentRequirement2.Required);
 			Assert.AreEqual(signer.Attachments["Medicare card"].Status.ToString(), attachmentRequirement2.Status.ToString());
 		}
-
-		[Test]
-		public void ConvertAPIRoleToSDKSigner()
-		{
-			Role role = new Role();
-			role.Name = "roleName";
-			role.Id = "roleId";
-			role.Type = RoleType.SIGNER;
-
-			Silanis.ESL.API.Signer apiSigner = new Silanis.ESL.API.Signer();
-			apiSigner.FirstName = "Billy";
-			apiSigner.LastName = "Bob";
-			apiSigner.Email = "billy@bob.com";
-
-			role.AddSigner(apiSigner);
-
-			Silanis.ESL.API.AttachmentRequirement attachmentRequirement = new Silanis.ESL.API.AttachmentRequirement();
-			attachmentRequirement.Name = "attachmentName";
-			attachmentRequirement.Description = "attachment description";
-			attachmentRequirement.Id = "attachmentId";
-			attachmentRequirement.Required = true;
-			attachmentRequirement.Comment = "sender's comments";
-			attachmentRequirement.Status = Silanis.ESL.API.RequirementStatus.REJECTED;
-
-			role.AddAttachmentRequirement(new AttachmentRequirementConverter(attachmentRequirement).ToAPIAttachmentRequirement());
-
-			Silanis.ESL.SDK.Signer sdkSigner = SignerBuilder.NewSignerFromAPIRole(role).Build();
-
-			Assert.AreEqual(sdkSigner.FirstName, role.Signers[0].FirstName);
-			Assert.AreEqual(sdkSigner.LastName, role.Signers[0].LastName);
-			Assert.AreEqual(sdkSigner.Email, role.Signers[0].Email);
-			Assert.AreEqual(sdkSigner.Attachments["attachmentName"].Name, role.AttachmentRequirements[0].Name);
-			Assert.AreEqual(sdkSigner.Attachments["attachmentName"].Description, role.AttachmentRequirements[0].Description);
-			Assert.AreEqual(sdkSigner.Attachments["attachmentName"].Id, role.AttachmentRequirements[0].Id);
-			Assert.AreEqual(sdkSigner.Attachments["attachmentName"].Required, role.AttachmentRequirements[0].Required);
-			Assert.AreEqual(sdkSigner.Attachments["attachmentName"].SenderComment, role.AttachmentRequirements[0].Comment);
-			Assert.AreEqual(sdkSigner.Attachments["attachmentName"].Status.ToString(), role.AttachmentRequirements[0].Status.ToString());
-		}
 	}
 } 	

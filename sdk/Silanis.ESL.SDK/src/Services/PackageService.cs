@@ -846,7 +846,7 @@ namespace Silanis.ESL.SDK.Services
 
 			foreach (Silanis.ESL.API.Package package in results.Results)
 			{
-				DocumentPackage dp = new PackageBuilder (package).Build ();
+                DocumentPackage dp = new DocumentPackageConverter(package).ToSDKPackage();
 
 				converted.Add (dp);
 			}
@@ -899,7 +899,7 @@ namespace Silanis.ESL.SDK.Services
 			try {
 				string response = restClient.Get(path);
 				Silanis.ESL.API.Role apiRole = JsonConvert.DeserializeObject<Silanis.ESL.API.Role> (response, settings);
-				return SignerBuilder.NewSignerFromAPIRole(apiRole).Build();
+                return new SignerConverter(apiRole).ToSDKSigner();
             } 
             catch (EslServerException e) {
                 throw new EslServerException ("Could not retrieve signer." + " Exception: " + e.Message, e.ServerError, e);

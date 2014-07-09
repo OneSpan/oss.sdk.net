@@ -29,62 +29,6 @@ namespace Silanis.ESL.SDK.Builder
 			this.packageName = packageName;
 		}
 
-		internal PackageBuilder (Silanis.ESL.API.Package package)
-		{
-			this.id = new PackageId( package.Id );
-			this.packageName = package.Name;
-			this.autocomplete = package.Autocomplete;
-			this.description = package.Description;
-			this.expiryDate = package.Due;
-			this.status = new PackageStatusConverter(new Nullable<PackageStatus>(package.Status)).ToSDKPackageStatus().Value;
-			this.emailMessage = package.EmailMessage;
-
-            if (package.Settings != null)
-            {
-                this.settings = new DocumentPackageSettingsBuilder(package.Settings).build();
-            }
-
-            if (package.Sender != null)
-            {
-                this.senderInfo = new SenderConverter(package.Sender).ToSDKSenderInfo();
-            }
-
-            this.attributes = new DocumentPackageAttributes(package.Data);
-
-			foreach ( Silanis.ESL.API.Role role in package.Roles ) {
-				if ( role.Signers.Count == 0 ) {
-					WithSigner(SignerBuilder.NewSignerPlaceholder(new Placeholder(role.Id)));   
-				}
-				else if (role.Signers[0].Group != null)
-				{
-					WithSigner(SignerBuilder.NewSignerFromGroup(new GroupId(role.Signers[0].Group.Id)));
-				}
-				else
-				{
-					WithSigner(SignerBuilder.NewSignerFromAPIRole(role).Build());
-					if (role.Type == Silanis.ESL.API.RoleType.SENDER)
-					{
-						Silanis.ESL.API.Signer senderSigner = role.Signers[0];
-						WithSenderInfo( SenderInfoBuilder.NewSenderInfo(senderSigner.Email)
-							.WithName(senderSigner.FirstName, senderSigner.LastName)
-							.WithCompany(senderSigner.Company)
-							.WithTitle(senderSigner.Title));
-					}
-				}
-			}
-
-			foreach ( Silanis.ESL.API.Document apiDocument in package.Documents ) {
-				Document document = new DocumentConverter( apiDocument, package ).ToSDKDocument();
-
-				WithDocument( document );
-			}
-
-            foreach (Silanis.ESL.API.Message apiMessage in package.Messages)
-            {
-                messages.Add(new MessageConverter(apiMessage).ToSDKMessage());
-            }
-		}
-
 		public static PackageBuilder NewPackageNamed (string name)
 		{
 			return new PackageBuilder (name);
@@ -115,7 +59,7 @@ namespace Silanis.ESL.SDK.Builder
 			return this;
 		}
 
-		public PackageBuilder ExpiresOn (DateTime expiryDate)
+        public PackageBuilder ExpiresOn (Nullable<DateTime> expiryDate)
 		{
 			this.expiryDate = expiryDate;
 			return this;

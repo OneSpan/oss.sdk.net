@@ -7,63 +7,8 @@ namespace SDK.Tests
 	[TestFixture]
     public class SenderStatusConverterTest
     {
-		private Silanis.ESL.SDK.SenderStatus? sdkSenderStatus1 = null;
-		private Silanis.ESL.SDK.SenderStatus? sdkSenderStatus2 = null;
-		private Silanis.ESL.API.SenderStatus? apiSenderStatus1 = null;
-		private Silanis.ESL.API.SenderStatus? apiSenderStatus2 = null;
-		private SenderStatusConverter converter;
-
-		[Test]
-		public void ConvertNullSDKToAPI()
-		{
-			sdkSenderStatus1 = null;
-			converter = new SenderStatusConverter(sdkSenderStatus1);
-			Assert.IsNull(converter.ToAPISenderStatus());
-		}
-
-		[Test]
-		public void ConvertNullAPIToSDK()
-		{
-			apiSenderStatus1 = null;
-			converter = new SenderStatusConverter(apiSenderStatus1);
-			Assert.IsNull(converter.ToSDKSenderStatus());
-		}
-
-		[Test]
-		public void ConvertNullSDKToSDK()
-		{
-			sdkSenderStatus1 = null;
-			converter = new SenderStatusConverter(sdkSenderStatus1);
-			Assert.IsNull(converter.ToSDKSenderStatus());
-		}
-
-		[Test]
-		public void ConvertNullAPIToAPI()
-		{
-			apiSenderStatus1 = null;
-			converter = new SenderStatusConverter(apiSenderStatus1);
-			Assert.IsNull(converter.ToAPISenderStatus());
-		}
-
-		[Test]
-		public void ConvertSDKToSDK()
-		{
-			sdkSenderStatus1 = CreateTypicalSDKSenderStatus();
-			sdkSenderStatus2 = new SenderStatusConverter(sdkSenderStatus1).ToSDKSenderStatus();
-
-			Assert.IsNotNull(sdkSenderStatus2);
-			Assert.AreEqual(sdkSenderStatus2, sdkSenderStatus1);
-		}
-
-		[Test]
-		public void ConvertAPIToAPI()
-		{
-			apiSenderStatus1 = CreateTypicalAPISenderStatus();
-			apiSenderStatus2 = new SenderStatusConverter(apiSenderStatus1).ToAPISenderStatus();
-
-			Assert.IsNotNull(apiSenderStatus2);
-			Assert.AreEqual(apiSenderStatus2, apiSenderStatus1);
-		}
+		private Silanis.ESL.SDK.SenderStatus sdkSenderStatus1;
+        private Silanis.ESL.API.SenderStatus apiSenderStatus1;
 
 		[Test]
 		public void ConvertAPIToSDK()

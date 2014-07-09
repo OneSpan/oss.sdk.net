@@ -1,5 +1,7 @@
 using System;
 using Silanis.ESL.SDK.Builder;
+using System.Collections.Generic;
+using System.Globalization;
 
 namespace Silanis.ESL.SDK
 {
@@ -85,6 +87,105 @@ namespace Silanis.ESL.SDK
 
 			return package;
 		}
+
+        internal Silanis.ESL.SDK.DocumentPackage ToSDKPackage()
+        {
+            if (apiPackage == null)
+            {
+                return sdkPackage;
+            }
+
+            PackageBuilder packageBuilder = PackageBuilder.NewPackageNamed(apiPackage.Name);
+
+            packageBuilder.WithID(new PackageId(apiPackage.Id));
+
+            if (apiPackage.Autocomplete)
+            {
+                packageBuilder.WithAutomaticCompletion();
+            }
+            else
+            {
+                packageBuilder.WithoutAutomaticCompletion();
+            }
+
+            packageBuilder.ExpiresOn(apiPackage.Due);
+            packageBuilder.WithStatus(new PackageStatusConverter(apiPackage.Status).ToSDKPackageStatus());
+
+
+            if (apiPackage.Description != null)
+            {
+                packageBuilder.DescribedAs(apiPackage.Description);
+            }
+
+            if (apiPackage.EmailMessage != null)
+            {
+                packageBuilder.WithEmailMessage(apiPackage.EmailMessage);
+            }
+
+            if (apiPackage.Language != null)
+            {
+                packageBuilder.WithLanguage(new CultureInfo(apiPackage.Language));
+            }
+
+            if (apiPackage.Settings != null)
+            {
+                packageBuilder.WithSettings(new DocumentPackageSettingsConverter(apiPackage.Settings).toSDKDocumentPackageSettings());
+            }
+
+            if (apiPackage.Sender != null)
+            {
+                packageBuilder.WithSenderInfo(new SenderConverter(apiPackage.Sender).ToSDKSenderInfo());
+            }
+
+            packageBuilder.WithAttributes(new DocumentPackageAttributesBuilder(apiPackage.Data).Build());
+
+            foreach (Silanis.ESL.API.Role role in apiPackage.Roles)
+            {
+                if (role.Signers.Count == 0)
+                {
+                    packageBuilder.WithSigner(SignerBuilder.NewSignerPlaceholder(new Placeholder(role.Id)));
+                }
+                else if (role.Signers[0].Group != null)
+                {
+                    packageBuilder.WithSigner(SignerBuilder.NewSignerFromGroup(new GroupId(role.Signers[0].Group.Id)));
+                }
+                else
+                {
+                    packageBuilder.WithSigner(new SignerConverter(role).ToSDKSigner());
+
+                    // The custom sender information is stored in the role.signer object.
+                    if (role.Type == Silanis.ESL.API.RoleType.SENDER)
+                    {
+                        // Override sender info with the customized ones.
+                        Silanis.ESL.SDK.SenderInfo senderInfo = new Silanis.ESL.SDK.SenderInfo();
+
+                        Silanis.ESL.API.Signer signer = role.Signers[0];
+                        senderInfo.FirstName = signer.FirstName;
+                        senderInfo.LastName = signer.LastName;
+                        senderInfo.Title = signer.Title;
+                        senderInfo.Company = signer.Company;
+                        packageBuilder.WithSenderInfo(senderInfo);
+                    }
+                }
+            }
+
+            foreach (Silanis.ESL.API.Document apiDocument in apiPackage.Documents)
+            {
+                Document document = new DocumentConverter(apiDocument, apiPackage).ToSDKDocument();
+                packageBuilder.WithDocument(document);
+            }
+
+            DocumentPackage documentPackage = packageBuilder.Build();
+
+            IList<Message> messages = new List<Message>();
+            foreach (Silanis.ESL.API.Message apiMessage in apiPackage.Messages)
+            {
+                messages.Add(new MessageConverter(apiMessage).ToSDKMessage());
+            }
+            documentPackage.Messages = messages;
+
+            return documentPackage;
+        }
     }
 }
 

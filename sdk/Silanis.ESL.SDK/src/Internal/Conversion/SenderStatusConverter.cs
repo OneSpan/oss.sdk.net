@@ -4,14 +4,14 @@ namespace Silanis.ESL.SDK
 {
 	internal class SenderStatusConverter
     {
-		private Silanis.ESL.SDK.SenderStatus? sdkSenderStatus = null;
-		private Silanis.ESL.API.SenderStatus? apiSenderStatus = null;
+		private Silanis.ESL.SDK.SenderStatus sdkSenderStatus;
+		private Silanis.ESL.API.SenderStatus apiSenderStatus;
 
 		/// <summary>
 		/// Construct with API SenderStatus object involved in conversion.
 		/// </summary>
 		/// <param name="apiSenderStatus">API sender status.</param>
-		public SenderStatusConverter(Silanis.ESL.API.SenderStatus? apiSenderStatus)
+		public SenderStatusConverter(Silanis.ESL.API.SenderStatus apiSenderStatus)
 		{
 			this.apiSenderStatus = apiSenderStatus;
 		}
@@ -20,7 +20,7 @@ namespace Silanis.ESL.SDK
 		/// Construct with SDK SenderStatus object involved in conversion.
 		/// </summary>
 		/// <param name="sdkSenderStatus">SDK sender status.</param>
-		public SenderStatusConverter(Silanis.ESL.SDK.SenderStatus? sdkSenderStatus)
+		public SenderStatusConverter(Silanis.ESL.SDK.SenderStatus sdkSenderStatus)
 		{
 			this.sdkSenderStatus = sdkSenderStatus;
 		}
@@ -29,7 +29,7 @@ namespace Silanis.ESL.SDK
 		/// Convert from SDK SenderStatus to API SenderStatus.
 		/// </summary>
 		/// <returns>The API sender status.</returns>
-		public Silanis.ESL.API.SenderStatus? ToAPISenderStatus()
+		public Silanis.ESL.API.SenderStatus ToAPISenderStatus()
 		{
 			switch (sdkSenderStatus)
 			{
@@ -40,17 +40,15 @@ namespace Silanis.ESL.SDK
 				case SenderStatus.LOCKED:
 					return Silanis.ESL.API.SenderStatus.LOCKED;
 				default:
-					break;
+                    throw new EslException(String.Format("Unable to decode the sender status {0}", sdkSenderStatus), null);
 			}
-
-			return apiSenderStatus;
 		}
 
 		/// <summary>
 		/// Convert from API SenderStatus to SDK SenderStatus.
 		/// </summary>
 		/// <returns>The SDK sender status.</returns>
-		public Silanis.ESL.SDK.SenderStatus? ToSDKSenderStatus()
+		public Silanis.ESL.SDK.SenderStatus ToSDKSenderStatus()
 		{
 			switch (apiSenderStatus)
 			{
@@ -61,10 +59,8 @@ namespace Silanis.ESL.SDK
 				case Silanis.ESL.API.SenderStatus.LOCKED:
 					return SenderStatus.LOCKED;
 				default:
-					break;
+                    throw new EslException(String.Format("Unable to decode the sender status {0}", apiSenderStatus), null);
 			}
-
-			return sdkSenderStatus;
 		}
     }
 }

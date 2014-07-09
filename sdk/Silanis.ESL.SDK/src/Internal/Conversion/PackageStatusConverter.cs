@@ -4,14 +4,14 @@ namespace Silanis.ESL.SDK
 {
 	internal class PackageStatusConverter
     {
-		private Silanis.ESL.SDK.DocumentPackageStatus? sdkPackageStatus = null;
-		private Silanis.ESL.API.PackageStatus? apiPackageStatus = null;
+		private Silanis.ESL.SDK.DocumentPackageStatus sdkPackageStatus;
+		private Silanis.ESL.API.PackageStatus apiPackageStatus;
 
 		/// <summary>
 		/// Construct with API PackageStatus object involved in conversion.
 		/// </summary>
 		/// <param name="apiPackageStatus">API package status.</param>
-		public PackageStatusConverter(Silanis.ESL.API.PackageStatus? apiPackageStatus)
+		public PackageStatusConverter(Silanis.ESL.API.PackageStatus apiPackageStatus)
 		{
 			this.apiPackageStatus = apiPackageStatus;
 		}
@@ -20,7 +20,7 @@ namespace Silanis.ESL.SDK
 		/// Construct with SDK PackageStatus object involved in conversion.
 		/// </summary>
 		/// <param name="sdkPackageStatus">SDK package status.</param>
-		public PackageStatusConverter(Silanis.ESL.SDK.DocumentPackageStatus? sdkPackageStatus)
+		public PackageStatusConverter(Silanis.ESL.SDK.DocumentPackageStatus sdkPackageStatus)
 		{
 			this.sdkPackageStatus = sdkPackageStatus;
 		}
@@ -29,7 +29,7 @@ namespace Silanis.ESL.SDK
 		/// Convert from SDK PackageStatus to API PackageStatus.
 		/// </summary>
 		/// <returns>The API package status.</returns>
-		public Silanis.ESL.API.PackageStatus? ToAPIPackageStatus()
+		public Silanis.ESL.API.PackageStatus ToAPIPackageStatus()
 		{
 			switch (sdkPackageStatus)
 			{
@@ -48,17 +48,15 @@ namespace Silanis.ESL.SDK
 				case DocumentPackageStatus.EXPIRED:
 					return Silanis.ESL.API.PackageStatus.EXPIRED;
 				default:
-					break;
+                    throw new EslException(String.Format("Unable to decode the package status {0}", sdkPackageStatus), null);
 			}
-
-			return apiPackageStatus;
 		}
 
 		/// <summary>
 		/// Convert from API PackageStatus to SDK PackageStatus.
 		/// </summary>
 		/// <returns>The SDK package status.</returns>
-		public Silanis.ESL.SDK.DocumentPackageStatus? ToSDKPackageStatus()
+		public Silanis.ESL.SDK.DocumentPackageStatus ToSDKPackageStatus()
 		{
 			switch (apiPackageStatus)
 			{
@@ -77,10 +75,8 @@ namespace Silanis.ESL.SDK
 				case Silanis.ESL.API.PackageStatus.EXPIRED:
 					return DocumentPackageStatus.EXPIRED;
 				default:
-					break;
+                    throw new EslException(String.Format("Unable to decode the package status {0}", apiPackageStatus), null);
 			}
-
-			return sdkPackageStatus;
 		}
     }
 }

@@ -108,6 +108,36 @@ namespace SDK.Tests
 			Assert.IsNull(apiRole.EmailMessage);
         }
 
+        [Test()]
+        public void ConvertAPIToSDK()
+        {
+            apiRole = CreateTypicalAPIRole();
+            apiSigner1 = apiRole.Signers[0];
+
+            sdkSigner1 = new SignerConverter(apiRole).ToSDKSigner();
+
+            Assert.IsNotNull(sdkSigner1);
+            Assert.AreEqual(apiSigner1.Email, sdkSigner1.Email);
+            Assert.AreEqual(apiSigner1.FirstName, sdkSigner1.FirstName);
+            Assert.AreEqual(apiSigner1.LastName, sdkSigner1.LastName);
+            Assert.AreEqual(apiSigner1.Company, sdkSigner1.Company);
+            Assert.AreEqual(apiSigner1.Title, sdkSigner1.Title);
+            Assert.AreEqual(apiRole.Id, sdkSigner1.Id);
+            Assert.AreEqual(apiRole.Index, sdkSigner1.SigningOrder);
+            Assert.AreEqual(apiRole.Reassign, sdkSigner1.CanChangeSigner);
+            Assert.AreEqual(apiRole.EmailMessage.Content, sdkSigner1.Message);
+            Assert.AreEqual(apiSigner1.Delivery.Email, sdkSigner1.DeliverSignedDocumentsByEmail);
+
+            string attachmentName = apiRole.AttachmentRequirements[0].Name;
+            Silanis.ESL.API.AttachmentRequirement apiAttachment = apiRole.AttachmentRequirements[0];
+            Silanis.ESL.SDK.AttachmentRequirement sdkAttachment = sdkSigner1.Attachments[attachmentName];
+            Assert.AreEqual(attachmentName, sdkSigner1.Attachments[attachmentName].Name);
+            Assert.AreEqual(apiAttachment.Description, sdkAttachment.Description);
+            Assert.AreEqual(apiAttachment.Required, sdkAttachment.Required);
+            Assert.AreEqual(apiAttachment.Status.ToString(), sdkAttachment.Status.ToString());
+            Assert.AreEqual(apiAttachment.Comment, sdkAttachment.SenderComment);
+        }
+
 		private Silanis.ESL.SDK.Signer CreateTypicalSDKSigner()
 		{
 			return SignerBuilder.NewSignerWithEmail("abc@test.com")

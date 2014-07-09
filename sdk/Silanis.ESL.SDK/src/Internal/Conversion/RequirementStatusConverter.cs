@@ -40,10 +40,8 @@ namespace Silanis.ESL.SDK
 				case Silanis.ESL.SDK.RequirementStatus.COMPLETE:
 					return Silanis.ESL.API.RequirementStatus.COMPLETE;
 				default:
-					break;
+                    throw new EslException(String.Format("Unable to decode the requirement status {0}", sdkRequirementStatus), null);
 			}
-
-			return apiRequirementStatus;
 		}
 
 		/// <summary>
@@ -61,10 +59,8 @@ namespace Silanis.ESL.SDK
 				case Silanis.ESL.API.RequirementStatus.COMPLETE:
 					return Silanis.ESL.SDK.RequirementStatus.COMPLETE;
 				default:
-					break;
+                    throw new EslException(String.Format("Unable to decode the requirement status {0}", apiRequirementStatus), null);
 			}
-
-			return sdkRequirementStatus;
 		}
     }
 }

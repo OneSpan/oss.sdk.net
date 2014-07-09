@@ -239,7 +239,7 @@ namespace Silanis.ESL.SDK
 		{
 			Silanis.ESL.API.Package package = packageService.GetPackage (id);
 
-			return new PackageBuilder (package).Build ();
+            return new DocumentPackageConverter(package).ToSDKPackage();
 		}
 
         public void UpdatePackage(Silanis.ESL.SDK.PackageId packageId, DocumentPackage sentSettings)
