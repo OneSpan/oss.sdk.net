@@ -236,6 +236,67 @@ namespace Silanis.ESL.SDK.Services
 			}
 		}
 
+        /// <summary>
+        /// Uploads the list of documents from external providers.
+        /// In most cases, adding a document from an external provider requires pre-development configurations.
+        /// Please contact us for more information.
+        /// </summary>
+        /// <param name="packageId">The package id.</param>
+        /// <param name="document">The documents to be uploaded</param>
+        /// 
+        public void AddDocumentWithExternalContent(string packageId, IList<Document> providerDocuments)
+        {
+            string path = template.UrlFor (UrlTemplate.DOCUMENT_PATH)
+                .Replace ("{packageId}", packageId)
+                    .Build ();
+
+            IList<Silanis.ESL.API.Document> apiDocuments = new List<Silanis.ESL.API.Document>();
+            foreach (Document document in providerDocuments)
+            {
+                apiDocuments.Add(new DocumentConverter(document).ToAPIDocument());
+            }
+            try 
+            {
+                string json = JsonConvert.SerializeObject (apiDocuments, settings);
+
+                string response = restClient.Post(path, json);
+                //Silanis.ESL.API.Document uploadedDoc = JsonConvert.DeserializeObject<Silanis.ESL.API.Document>(response);
+            } 
+            catch (EslServerException e) 
+            {
+                throw new EslServerException ("Could not upload documents to package." + " Exception: " + e.Message, e.ServerError, e);
+            }
+            catch (Exception e) 
+            {
+                throw new EslException ("Could not upload documents to package." + " Exception: " + e.Message, e);
+            }
+        }
+
+        public IList<Document> GetDocuments()
+        {
+            string path = template.UrlFor(UrlTemplate.PROVIDER_DOCUMENTS).Build();
+
+            try 
+            {
+                string response = restClient.Get(path);
+                IList<Silanis.ESL.API.Document> apiResponse = 
+                    JsonConvert.DeserializeObject<IList<Silanis.ESL.API.Document>> (response, settings );
+                IList<Document> documents = new List<Document>();
+                foreach( Silanis.ESL.API.Document document in apiResponse){
+                    documents.Add( new DocumentConverter(document, null).ToSDKDocument());
+                }
+                return documents;
+            } 
+            catch (EslServerException e) 
+            {
+                throw new EslServerException ("Could not get documents." + " Exception: " + e.Message, e.ServerError, e);
+            }
+            catch (Exception e) 
+            {
+                throw new EslException ("Could not get documents." + " Exception: " + e.Message,e);
+            }
+        }
+
 		/// <summary>
 		/// Sends the package.
 		/// </summary>

@@ -10,7 +10,6 @@ namespace Silanis.ESL.SDK
         private Document sdkDocument;
         private Silanis.ESL.API.Document apiDocument;
         private Silanis.ESL.API.Package apiPackage;
-
         /*
          * Construct with API objects
          */
@@ -19,11 +18,10 @@ namespace Silanis.ESL.SDK
             this.apiDocument = apiDocument;
             this.apiPackage = apiPackage;
         }
-
         /*
          * Construct with SDK object
          */
-        public DocumentConverter( Document sdkDocument)
+        public DocumentConverter(Document sdkDocument)
         {
             this.sdkDocument = sdkDocument;
         }
@@ -38,8 +36,8 @@ namespace Silanis.ESL.SDK
             DocumentBuilder documentBuilder = DocumentBuilder.NewDocumentNamed(apiDocument.Name)
                 .WithId(apiDocument.Id)
                 .AtIndex(apiDocument.Index)
-                .WithDescription(apiDocument.Description);
-
+                    .WithDescription(apiDocument.Description);
+            documentBuilder.WithExternal(new ExternalConverter(apiDocument.External).ToSDKExternal());
             foreach (Approval apiApproval in apiDocument.Approvals)
             {
                 documentBuilder.WithSignature(new SignatureConverter(apiApproval, apiPackage).ToSDKSignature());
@@ -53,7 +51,7 @@ namespace Silanis.ESL.SDK
             return documentBuilder.Build();
         }
 
-        internal Silanis.ESL.API.Document ToAPIDocument (Silanis.ESL.API.Package apiPackage)
+        internal Silanis.ESL.API.Document ToAPIDocument(Silanis.ESL.API.Package apiPackage)
         {
             if (sdkDocument == null)
             {
@@ -61,30 +59,30 @@ namespace Silanis.ESL.SDK
             }
 
             Silanis.ESL.API.Document doc = ToAPIDocument();
-            Converter converter = new Converter ();
+            Converter converter = new Converter();
 
             foreach (Signature signature in sdkDocument.Signatures)
             {
-                Silanis.ESL.API.Approval approval = converter.ConvertToApproval (signature);
+                Silanis.ESL.API.Approval approval = converter.ConvertToApproval(signature);
 
                 if (signature.IsPlaceholderSignature())
                 {
                     approval.Role = signature.RoleId.Id;
                 }
-                else if (signature.IsGroupSignature() )
+                else if (signature.IsGroupSignature())
                 {
-                    approval.Role = FindRoleIdForGroup (signature.GroupId, apiPackage);
+                    approval.Role = FindRoleIdForGroup(signature.GroupId, apiPackage);
                 }
                 else
                 {
-                    approval.Role = FindRoleIdForSigner (signature.SignerEmail, apiPackage);
+                    approval.Role = FindRoleIdForSigner(signature.SignerEmail, apiPackage);
                 }
-                doc.AddApproval (approval);
+                doc.AddApproval(approval);
             }
 
             foreach (Field field in sdkDocument.Fields)
             {
-                doc.AddField (new FieldConverter(field).ToAPIField());
+                doc.AddField(new FieldConverter(field).ToAPIField());
             }
 
             return doc;
@@ -102,6 +100,7 @@ namespace Silanis.ESL.SDK
             doc.Name = sdkDocument.Name;
             doc.Index = sdkDocument.Index;
             doc.Extract = sdkDocument.Extract;
+            doc.External = new ExternalConverter(sdkDocument.External).ToAPIExternal();
 
             if (sdkDocument.Id != null)
             {
@@ -116,7 +115,7 @@ namespace Silanis.ESL.SDK
             return doc;
         }
 
-        private string FindRoleIdForGroup (GroupId groupId, Silanis.ESL.API.Package createdPackage )
+        private string FindRoleIdForGroup(GroupId groupId, Silanis.ESL.API.Package createdPackage)
         {
             foreach (Silanis.ESL.API.Role role in createdPackage.Roles)
             {
@@ -129,10 +128,10 @@ namespace Silanis.ESL.SDK
                 }
             }
 
-            throw new EslException(String.Format ("No Role found for group with id {0}", groupId.Id),null);
+            throw new EslException(String.Format("No Role found for group with id {0}", groupId.Id), null);
         }
 
-        private string FindRoleIdForSigner (string signerEmail, Silanis.ESL.API.Package createdPackage)
+        private string FindRoleIdForSigner(string signerEmail, Silanis.ESL.API.Package createdPackage)
         {
             foreach (Silanis.ESL.API.Role role in createdPackage.Roles)
             {
@@ -145,7 +144,7 @@ namespace Silanis.ESL.SDK
                 }
             }
 
-            throw new EslException(String.Format ("No Role found for signer email {0}", signerEmail),null);
+            throw new EslException(String.Format("No Role found for signer email {0}", signerEmail), null);
         }
     }
 }

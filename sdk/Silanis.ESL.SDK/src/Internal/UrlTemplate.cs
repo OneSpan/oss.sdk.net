@@ -71,6 +71,9 @@ namespace Silanis.ESL.SDK.Internal
         public static readonly string ACCOUNT_MEMBER_PATH = "/account/senders";
         public static readonly string SENDER_PATH = "/account/senders/{senderUid}";
 
+        // Provider Document Resource
+        public static readonly string PROVIDER_DOCUMENTS = "/documents";
+
 		// Reminder Service
 		public static readonly string REMINDER_PATH = "/packages/{packageId}/reminders";
 
