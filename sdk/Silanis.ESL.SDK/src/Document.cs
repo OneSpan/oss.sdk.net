@@ -52,6 +52,12 @@ namespace Silanis.ESL.SDK
             }
         }       
 
+        public External External
+        {
+            get;
+            set;
+        }
+
         public List<Field> Fields
         {
             get

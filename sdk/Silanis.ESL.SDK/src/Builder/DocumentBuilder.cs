@@ -16,6 +16,7 @@ namespace Silanis.ESL.SDK.Builder
 		private bool extract;
 		private IList<Field> injectedFields = new List<Field> ();
         private string description;
+        private External external;
 
 		private DocumentBuilder(string name)
 		{
@@ -32,6 +33,12 @@ namespace Silanis.ESL.SDK.Builder
 			this.id = id;
 			return this;
 		}
+
+        public DocumentBuilder WithExternal( External external)
+        {
+            this.external = external;
+            return this;
+        }
 
 		public DocumentBuilder FromFile (string fileName)
 		{
@@ -105,6 +112,7 @@ namespace Silanis.ESL.SDK.Builder
 			doc.Content = documentSource != null ? documentSource.Content () : null;
 			doc.AddSignatures (signatures);
 			doc.Index = index;
+            doc.External = external;
 			doc.Extract = extract;
 			doc.AddFields (injectedFields);
 			doc.Description = description;
