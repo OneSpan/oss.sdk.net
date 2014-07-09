@@ -70,6 +70,7 @@
     <Compile Include="src\EventNotificationRegistrationExampleTest.cs" />
     <Compile Include="src\DocumentRetrievalExampleTest.cs" />
     <Compile Include="src\SignatureManipulationExampleTest.cs" />
+    <Compile Include="src\HistoryDocumentExampleTest.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

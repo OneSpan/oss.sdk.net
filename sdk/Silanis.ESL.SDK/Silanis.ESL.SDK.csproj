@@ -306,6 +306,8 @@
     <Compile Include="src\Internal\Conversion\EventNotificationConfigConverter.cs" />
     <Compile Include="src\Services\ApprovalService.cs" />
     <Compile Include="src\SignatureId.cs" />
+    <Compile Include="src\External.cs" />
+    <Compile Include="src\Internal\Conversion\ExternalConverter.cs" />
     <Compile Include="src\Services\Internal\AccountApiClient.cs" />
     <Compile Include="src\Services\Internal\AttachmentRequirementApiClient.cs" />
     <Compile Include="src\Services\Internal\ApprovalApiClient.cs" />

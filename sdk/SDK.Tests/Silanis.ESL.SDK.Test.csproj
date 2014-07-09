@@ -78,6 +78,7 @@
     <Compile Include="src\Internal\Conversion\EventNotificationConverterTest.cs" />
     <Compile Include="src\Internal\Conversion\EventNotificationConfigConverterTest.cs" />
     <Compile Include="src\Internal\Conversion\MessageConverterTest.cs" />
+    <Compile Include="src\Internal\Conversion\ExternalConverterTest.cs" />
     <Compile Include="src\Internal\Conversion\MessageStatusConverterTest.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
