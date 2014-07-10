@@ -75,6 +75,9 @@ namespace Silanis.ESL.SDK
                     builder.WithHandOverLinkTooltip(apiSettings.Ceremony.HandOver.Title);
                 }
             }
+
+            builder.WithCeremonyLayoutSettings(new CeremonyLayoutSettingsConverter(apiSettings.Ceremony.Layout).ToSDKCeremonyLayoutSettings());
+
             return builder.Build();
         }
     }

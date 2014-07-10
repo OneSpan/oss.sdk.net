@@ -84,6 +84,48 @@ namespace Silanis.ESL.SDK
 
 			return result;
 		}
+
+        public Silanis.ESL.SDK.CeremonyLayoutSettings ToSDKCeremonyLayoutSettings()
+        {
+            if (apiLayoutOptions == null)
+            {
+                return sdkCeremonyLayoutSettings;
+            }
+
+            CeremonyLayoutSettings result = new CeremonyLayoutSettings();
+
+            result.IFrame = apiLayoutOptions.Iframe;
+
+            if (apiLayoutOptions.Header != null)
+            {
+                result.BreadCrumbs = apiLayoutOptions.Header.Breadcrumbs;
+                result.SessionBar = apiLayoutOptions.Header.SessionBar;
+                result.GlobalNavigation = apiLayoutOptions.Header.GlobalNavigation;
+
+                if (apiLayoutOptions.Header.GlobalActions != null)
+                {
+                    result.ShowGlobalConfirmButton = apiLayoutOptions.Header.GlobalActions.Confirm;
+                    result.ShowGlobalDownloadButton = apiLayoutOptions.Header.GlobalActions.Download;
+                    result.ShowGlobalSaveAsLayoutButton = apiLayoutOptions.Header.GlobalActions.SaveAsLayout;
+                }
+
+                if (apiLayoutOptions.Header.TitleBar != null)
+                {
+                    result.ShowTitle = apiLayoutOptions.Header.TitleBar.Title;
+                    result.ProgressBar = apiLayoutOptions.Header.TitleBar.ProgressBar;
+                }
+            }
+
+            result.Navigator = apiLayoutOptions.Navigator;
+
+            if (apiLayoutOptions.BrandingBar != null && apiLayoutOptions.BrandingBar.Logo != null)
+            {
+                result.LogoImageLink = apiLayoutOptions.BrandingBar.Logo.Link;
+                result.LogoImageSource = apiLayoutOptions.BrandingBar.Logo.Src;
+            }
+
+            return result;
+        }
     }
 }
 

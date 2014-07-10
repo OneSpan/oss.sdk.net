@@ -71,6 +71,7 @@
     <Compile Include="src\DocumentRetrievalExampleTest.cs" />
     <Compile Include="src\SignatureManipulationExampleTest.cs" />
     <Compile Include="src\HistoryDocumentExampleTest.cs" />
+    <Compile Include="src\BrandingBarConfigurationExampleTest.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

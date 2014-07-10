@@ -14,6 +14,15 @@ namespace SDK.Examples
 
         private string email1;
         private Stream fileStream1;
+        private PackageId packageId;
+
+        public PackageId PackageId
+        {
+            get
+            {
+                return packageId;
+            }
+        }
 
         public BrandingBarConfigurationExample(Props props) : this(props.Get("api.url"), props.Get("api.key"), props.Get("1.email"))
         {
@@ -48,7 +57,7 @@ namespace SDK.Examples
                                    .AtPosition( 100, 100 ) ) )
                     .Build();
 
-            PackageId packageId = eslClient.CreatePackage( superDuperPackage );
+            packageId = eslClient.CreatePackage( superDuperPackage );
             eslClient.SendPackage( packageId );
         }
     }

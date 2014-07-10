@@ -160,22 +160,6 @@ namespace Silanis.ESL.SDK
 		{
 		}
 
-		internal CeremonyLayoutSettingsBuilder( CeremonySettings ceremonySettings ) 
-		{
-			iFrame = ceremonySettings.Layout.Iframe;
-			breadCrumbs = ceremonySettings.Layout.Header.Breadcrumbs;
-			sessionBar = ceremonySettings.Layout.Header.SessionBar;
-			globalNavigation = ceremonySettings.Layout.Header.GlobalNavigation;
-			progressBar = ceremonySettings.Layout.Header.TitleBar.ProgressBar;
-			showTitle = ceremonySettings.Layout.Header.TitleBar.Title;
-			navigator = ceremonySettings.Layout.Navigator;
-            showGlobalConfirmButton = ceremonySettings.Layout.Header.GlobalActions.Confirm;
-            showGlobalDownloadButton = ceremonySettings.Layout.Header.GlobalActions.Download;
-            showGlobalSaveAsLayoutButton = ceremonySettings.Layout.Header.GlobalActions.SaveAsLayout;
-			logoImageSource = ceremonySettings.Layout.BrandingBar.Logo.Src;
-			logoImageLink = ceremonySettings.Layout.BrandingBar.Logo.Link;
-		}
-
 		public CeremonyLayoutSettings Build()
 		{
 			CeremonyLayoutSettings result = new CeremonyLayoutSettings ();
