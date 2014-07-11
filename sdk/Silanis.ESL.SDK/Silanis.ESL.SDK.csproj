@@ -320,6 +320,7 @@
     <Compile Include="src\Services\Internal\FieldSummaryApiClient.cs" />
     <Compile Include="src\Services\Internal\GroupApiClient.cs" />
     <Compile Include="src\Services\Internal\ReminderApiClient.cs" />
+    <Compile Include="src\Services\Internal\TemplateApiClient.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSHARP.Targets" />
   <ProjectExtensions>

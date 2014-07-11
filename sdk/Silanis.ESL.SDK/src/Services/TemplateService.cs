@@ -7,79 +7,32 @@ namespace Silanis.ESL.SDK.Services
 {
     public class TemplateService
     {
-		private UrlTemplate urls;
-        private JsonSerializerSettings settings;
-        private RestClient restClient;
 		private PackageService packageService;
+        private TemplateApiClient apiClient;
         
-		public TemplateService(RestClient restClient, string baseUrl, PackageService packageService, JsonSerializerSettings settings)
+        internal TemplateService(TemplateApiClient apiClient, PackageService packageService)
         {
-            this.restClient = restClient;
-			urls = new UrlTemplate (baseUrl);
+            this.apiClient = apiClient;
 			this.packageService = packageService;
-            this.settings = settings;
         }
         
-        internal PackageId CreateTemplateFromPackage(PackageId originalPackageId, Package delta)
+        internal PackageId CreateTemplateFromPackage(PackageId originalPackageId, Silanis.ESL.API.Package delta)
         {
-            delta.Type = BasePackageType.TEMPLATE;
-			string path = urls.UrlFor (UrlTemplate.CLONE_PACKAGE_PATH).Replace("{packageId}", originalPackageId.Id)
-                .Build ();
-            try {
-                string deltaJson = JsonConvert.SerializeObject (delta, settings);
-                string response = restClient.Post(path, deltaJson);              
-                Package apiResult = JsonConvert.DeserializeObject<Package> (response);
-                PackageId sdkResult = new PackageId(apiResult.Id);
-
-                return sdkResult;
-            } 
-            catch (EslServerException e) {
-                throw new EslServerException ("Could not create a template." + " Exception: " + e.Message, e.ServerError, e);
-            } catch (Exception e) {
-                throw new EslException ("Could not create a template." + " Exception: " + e.Message, e);
-            }
+            string templateId = apiClient.CreateTemplateFromPackage(originalPackageId.Id, delta);
+            return new PackageId(templateId);
         }
         
         internal PackageId CreatePackageFromTemplate(PackageId templateId, Package delta)
         {
-			string path = urls.UrlFor (UrlTemplate.CLONE_PACKAGE_PATH).Replace("{packageId}", templateId.Id)
-                .Build ();
-            try {
-                string deltaJson = JsonConvert.SerializeObject (delta, settings);
-                string response = restClient.Post(path, deltaJson);              
-                Package apiResult = JsonConvert.DeserializeObject<Package> (response);
-                PackageId sdkResult = new PackageId(apiResult.Id);
-
-                return sdkResult;
-            } 
-            catch (EslServerException e) {
-                throw new EslServerException ("Could not create a package from template." + " Exception: " + e.Message, e.ServerError, e);
-            }
-            catch (Exception e) {
-                throw new EslException ("Could not create a package from template." + " Exception: " + e.Message, e);
-            }
+            string packageId = apiClient.CreatePackageFromTemplate(templateId.Id, delta);
+            return new PackageId(packageId);
         }
-
+            
 		internal PackageId CreateTemplate(Package template)
 		{
-			template.Type = BasePackageType.TEMPLATE;
-			string path = urls.UrlFor(UrlTemplate.PACKAGE_PATH).Build();
-
-			try
-			{
-				string json = JsonConvert.SerializeObject(template, settings);
-				string response = restClient.Post(path, json);
-
-				return JsonConvert.DeserializeObject<PackageId>(response);
-			}
-            catch (EslServerException e)
-            {
-                throw new EslServerException ("Could not create template." + " Exception: " + e.Message, e.ServerError, e);
-            }
-            catch (Exception e)
-			{
-				throw new EslException ("Could not create template." + " Exception: " + e.Message, e);
-			}
+            template.Type = BasePackageType.TEMPLATE;
+            string packageId = apiClient.CreateTemplate(template);
+            return new PackageId(packageId);
 		}
 
 		public void Update(DocumentPackage template)
@@ -89,27 +42,9 @@ namespace Silanis.ESL.SDK.Services
 				throw new ArgumentNullException("template.Id");
 			}
 
-			string path = urls.UrlFor(UrlTemplate.PACKAGE_ID_PATH)
-				.Replace("{packageId}", template.Id.Id)
-				.Build();
-			Silanis.ESL.API.Package internalTemplate = new DocumentPackageConverter(template).ToAPIPackage();
-
-			internalTemplate.Type = BasePackageType.TEMPLATE;
-
-			try
-			{
-				string json = JsonConvert.SerializeObject(internalTemplate, settings);
-
-				restClient.Post(path, json);
-			}
-            catch (EslServerException e)
-            {
-                throw new EslServerException ("Could not update template." + " Exception: " + e.Message, e.ServerError, e);
-            }
-            catch (Exception e)
-			{
-				throw new EslException ("Could not update template." + " Exception: " + e.Message, e);
-			}
+			Silanis.ESL.API.Package apiTemplate = new DocumentPackageConverter(template).ToAPIPackage();
+			apiTemplate.Type = BasePackageType.TEMPLATE;
+            apiClient.Update(apiTemplate);
 		}
 
 		/// <summary>

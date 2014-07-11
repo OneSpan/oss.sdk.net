@@ -58,7 +58,7 @@ namespace Silanis.ESL.SDK
 			accountService = new AccountService(new AccountApiClient(restClient, this.baseUrl, jsonSerializerSettings));
             approvalService = new ApprovalService(new ApprovalApiClient(restClient, this.baseUrl));
 			reminderService = new ReminderService(new ReminderApiClient(restClient, this.baseUrl, jsonSerializerSettings));
-			templateService = new TemplateService(restClient, this.baseUrl, packageService, jsonSerializerSettings);
+			templateService = new TemplateService(new TemplateApiClient(restClient, this.baseUrl, jsonSerializerSettings), packageService);
 			authenticationTokenService = new AuthenticationTokenService(restClient, this.baseUrl); 
 			attachmentRequirementService = new AttachmentRequirementService(new AttachmentRequirementApiClient(restClient, this.baseUrl, jsonSerializerSettings));
 		}
