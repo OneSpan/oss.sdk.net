@@ -1,7 +1,6 @@
 using System;
 using NUnit.Framework;
 using Silanis.ESL.SDK;
-using Newtonsoft.Json;
 using System.Globalization;
 
 namespace SDK.Examples

@@ -2,7 +2,6 @@ using System;
 using Silanis.ESL.SDK;
 using NUnit.Framework;
 using Silanis.ESL.SDK.Builder;
-using Newtonsoft.Json;
 
 namespace SDK.Tests
 {
