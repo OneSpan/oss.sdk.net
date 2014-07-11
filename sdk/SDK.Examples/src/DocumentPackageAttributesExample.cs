@@ -15,6 +15,13 @@ namespace SDK.Examples
         private string email1;
         private Stream fileStream1;
 
+        public readonly string ATTRIBUTE_KEY_1 = "First Name";
+        public readonly string ATTRIBUTE_KEY_2 = "Last Name";
+        public readonly string ATTRIBUTE_KEY_3 = "Signing Order";
+        public readonly string ATTRIBUTE_1 = "Bill";
+        public readonly string ATTRIBUTE_2 = "Johnson";
+        public readonly string ATTRIBUTE_3 = "1";
+
         public DocumentPackageAttributesExample(Props props) : this(props.Get("api.url"), props.Get("api.key"), props.Get("1.email"))
         {
         }
@@ -47,13 +54,13 @@ namespace SDK.Examples
                                .WithValue( FieldBuilder.CHECKBOX_CHECKED ) )
                                    .AtPosition( 100, 100 ) ) )
                     .WithAttributes(new DocumentPackageAttributesBuilder()
-                                .WithAttribute("First Name", "Bill")
-                                .WithAttribute("Last Name", "Johnson")
-                                .WithAttribute("Signing Order", "1")
+                                .WithAttribute( ATTRIBUTE_KEY_1, ATTRIBUTE_1 )
+                                .WithAttribute( ATTRIBUTE_KEY_2, ATTRIBUTE_2 )
+                                .WithAttribute( ATTRIBUTE_KEY_3, ATTRIBUTE_3 )
                                 .Build())
                     .Build();
 
-            PackageId packageId = eslClient.CreatePackage( superDuperPackage );
+            packageId = eslClient.CreatePackage( superDuperPackage );
             eslClient.SendPackage( packageId );
         }
     }

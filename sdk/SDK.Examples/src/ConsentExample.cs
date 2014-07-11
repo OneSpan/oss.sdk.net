@@ -47,10 +47,10 @@ namespace SDK.Examples
                                    .AtPosition(100, 100)))
                     .Build ();
 
-            PackageId id = eslClient.CreatePackage (package);
-            eslClient.SendPackage(id);
+            packageId = eslClient.CreatePackage (package);
+            eslClient.SendPackage(packageId);
 
-            DocumentPackage retrievedPackage = eslClient.GetPackage(id);
+            DocumentPackage retrievedPackage = eslClient.GetPackage(packageId);
             Console.WriteLine("Document retrieved = " + retrievedPackage.Id);
         }
     }

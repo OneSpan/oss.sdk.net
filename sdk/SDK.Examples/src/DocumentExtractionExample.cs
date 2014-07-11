@@ -14,6 +14,7 @@ namespace SDK.Examples
 
         private string email1;
         private Stream fileStream1;
+        public readonly string DOCUMENT_NAME = "My Document";
 
         public DocumentExtractionExample( Props props ) : this(props.Get("api.url"), props.Get("api.key"), props.Get("1.email")) {
         }
@@ -32,15 +33,15 @@ namespace SDK.Examples
                                 .WithCustomId("Signer1")
                                 .WithFirstName("John")
                                 .WithLastName("Smith"))
-                    .WithDocument(DocumentBuilder.NewDocumentNamed("My Document")
+                .WithDocument(DocumentBuilder.NewDocumentNamed(DOCUMENT_NAME)
                                   .FromStream(fileStream1, DocumentType.PDF)
                                   .EnableExtraction() )
                     .Build();
 
-            PackageId id = eslClient.CreatePackage(package);
-            eslClient.SendPackage(id);
+            packageId = eslClient.CreatePackage(package);
+            eslClient.SendPackage(packageId);
 
-            DocumentPackage sentPackage = eslClient.GetPackage(id);
+            DocumentPackage sentPackage = eslClient.GetPackage(packageId);
             Console.WriteLine("Document sent = " + sentPackage.Id);
         }
     }

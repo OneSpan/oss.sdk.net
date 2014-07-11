@@ -14,6 +14,15 @@ namespace SDK.Examples
 
         private string email1;
         private Stream fileStream1;
+        public readonly string EMAIL_MESSAGE = "Hi John, could you sign this asap please?";
+
+        public string Email1
+        {
+            get
+            {
+                return email1;
+            }
+        }
 
         public SignerSpecificEmailMessageExample( Props props ) : this(props.Get("api.url"), props.Get("api.key"), props.Get("1.email")) {
         }
@@ -30,7 +39,7 @@ namespace SDK.Examples
 					.WithSigner(SignerBuilder.NewSignerWithEmail(email1)
 					            .WithFirstName("John")
 					            .WithLastName("Smith")
-					            .WithEmailMessage("Hi John, could you sign this asap please?"))
+                                .WithEmailMessage(EMAIL_MESSAGE))
 					.WithDocument(DocumentBuilder.NewDocumentNamed("My Document")
                                   .FromStream(fileStream1, DocumentType.PDF)
                                   .WithSignature(SignatureBuilder.SignatureFor(email1)
@@ -44,8 +53,8 @@ namespace SDK.Examples
 					               		.AtPosition (500, 300)))
 					.Build ();
 
-			PackageId id = eslClient.CreatePackage (package);
-			eslClient.SendPackage(id);
+            packageId = eslClient.CreatePackage (package);
+            eslClient.SendPackage(packageId);
 		}
 	}
 }

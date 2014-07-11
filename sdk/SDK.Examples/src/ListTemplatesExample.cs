@@ -5,6 +5,16 @@ namespace SDK.Examples
 {
     public class ListTemplatesExample : SDKSample
     {
+        private Page<DocumentPackage> templates;
+
+        public Page<DocumentPackage> Templates
+        {
+            get
+            {
+                return templates;
+            }
+        }
+
         public static void Main (string[] args)
         {
             new ListTemplatesExample(Props.GetInstance()).Run();
@@ -18,7 +28,7 @@ namespace SDK.Examples
 
         override public void Execute()
         {
-            Page<DocumentPackage> templates = eslClient.PackageService.GetTemplates(new PageRequest(0));
+            templates = eslClient.PackageService.GetTemplates(new PageRequest(0));
             Console.WriteLine("Templates = " + templates.Size);
         }
     }

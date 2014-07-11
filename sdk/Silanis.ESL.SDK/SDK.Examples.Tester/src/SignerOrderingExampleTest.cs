@@ -13,7 +13,7 @@ namespace SDK.Examples
             SignerOrderingExample example = new SignerOrderingExample( Props.GetInstance() );
             example.Run();
             
-            DocumentPackage package = example.EslClient.GetPackage( example.packageId );
+            DocumentPackage package = example.EslClient.GetPackage( example.PackageId );
             Assert.IsNotNull(package);
         }
     }

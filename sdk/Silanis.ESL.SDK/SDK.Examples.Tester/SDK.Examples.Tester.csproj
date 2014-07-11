@@ -69,6 +69,19 @@
     <Compile Include="src\SignatureManipulationExampleTest.cs" />
     <Compile Include="src\HistoryDocumentExampleTest.cs" />
     <Compile Include="src\BrandingBarConfigurationExampleTest.cs" />
+    <Compile Include="src\ConsentExampleTest.cs" />
+    <Compile Include="src\DocumentExtractionExampleTest.cs" />
+    <Compile Include="src\DocumentPackageAttributesExampleTest.cs" />
+    <Compile Include="src\DeletePackageExampleTest.cs" />
+    <Compile Include="src\DocumentUploadExampleTest.cs" />
+    <Compile Include="src\FieldValidationExampleTest.cs" />
+    <Compile Include="src\ReminderExampleTest.cs" />
+    <Compile Include="src\SignatureStylesExampleTest.cs" />
+    <Compile Include="src\SignerBoundFieldsExampleTest.cs" />
+    <Compile Include="src\SignerSpecificEmailMessageExampleTest.cs" />
+    <Compile Include="src\ListTemplatesExampleTest.cs" />
+    <Compile Include="src\CreatePackageFromTemplateExampleTest.cs" />
+    <Compile Include="src\CreateTemplateFromPackageExampleTest.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

@@ -14,15 +14,6 @@ namespace SDK.Examples
 
         private string email1;
         private Stream fileStream1;
-        private PackageId packageId;
-
-        public PackageId PackageId
-        {
-            get
-            {
-                return packageId;
-            }
-        }
 
         public BrandingBarConfigurationExample(Props props) : this(props.Get("api.url"), props.Get("api.key"), props.Get("1.email"))
         {

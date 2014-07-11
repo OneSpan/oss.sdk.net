@@ -25,15 +25,6 @@ namespace SDK.Examples
         public string externalDocumentName;
         private Stream fileStream1;
         private Stream fileStream2;
-        private PackageId packageId;
-
-        public PackageId PackageId
-        {
-            get
-            {
-                return packageId;
-            }
-        }
 
         public HistoryDocumentExample(Props props) : this(props.Get("api.url"), props.Get("api.key"), props.Get("1.email"), props.Get("2.email"))
         {

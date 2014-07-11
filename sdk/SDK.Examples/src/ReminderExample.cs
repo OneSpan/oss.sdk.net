@@ -14,6 +14,15 @@ namespace SDK.Examples
 
 		private string email1;
 		private Stream fileStream1;
+        private ReminderSchedule reminderSchedule;
+
+        public ReminderSchedule ReminderSchedule
+        {
+            get
+            {
+                return reminderSchedule;
+            }
+        }
 
 		public ReminderExample( Props props ) : this(props.Get("api.url"), props.Get("api.key"), props.Get("1.email")) {
 		}
@@ -36,7 +45,7 @@ namespace SDK.Examples
 						.AtPosition( 100, 100 ) ) )
 				.Build();
 
-			PackageId packageId = eslClient.CreatePackage( superDuperPackage );
+			packageId = eslClient.CreatePackage( superDuperPackage );
 
 			eslClient.ReminderService.SetReminderScheduleForPackage(
 				ReminderScheduleBuilder.ForPackageWithId(packageId)
@@ -46,13 +55,11 @@ namespace SDK.Examples
 					.Build()
 			);
 
-			ReminderSchedule reminderSchedule = eslClient.ReminderService.GetReminderScheduleForPackage(packageId);
+			reminderSchedule = eslClient.ReminderService.GetReminderScheduleForPackage(packageId);
 
 			eslClient.SendPackage( packageId );
 
 			eslClient.ReminderService.ClearReminderScheduleForPackage(packageId);
-
-			reminderSchedule = eslClient.ReminderService.GetReminderScheduleForPackage(packageId);
 		}
 	}
 }

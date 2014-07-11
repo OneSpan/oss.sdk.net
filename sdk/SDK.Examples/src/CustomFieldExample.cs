@@ -7,18 +7,9 @@ namespace SDK.Examples
 {
     public class CustomFieldExample: SDKSample
     {
-		private PackageId packageId;
         private string email1;
         private Stream documentInputStream1;
 		private string customFieldId1, customFieldId2;
-
-		public PackageId PackageId
-		{
-			get
-			{
-				return packageId;
-			}
-		}
 
 		public string Email1
 		{

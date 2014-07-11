@@ -18,6 +18,30 @@ namespace SDK.Examples
         private string sms3;
         private Stream fileStream1;
 
+        public string Email1
+        {
+            get
+            {
+                return email1;
+            }
+        }
+
+        public string Email2
+        {
+            get
+            {
+                return email2;
+            }
+        }
+
+        public string Email3
+        {
+            get
+            {
+                return email3;
+            }
+        }
+
         public AuthenticationMethodsExample( Props props ) 
             : this(props.Get("api.url"), 
                   props.Get("api.key"), 
@@ -41,7 +65,7 @@ namespace SDK.Examples
                     .WithSigner(SignerBuilder.NewSignerWithEmail(email1)
                                 .WithFirstName("John1")
                                 .WithLastName("Smith1"))
-				.WithSigner(SignerBuilder.NewSignerWithEmail(email2)
+				    .WithSigner(SignerBuilder.NewSignerWithEmail(email2)
 								.WithCustomId("signer2")
                                 .WithFirstName("John2")
                                 .WithLastName("Smith2")
@@ -60,10 +84,10 @@ namespace SDK.Examples
                                   .AtPosition(100,100)))
                     .Build();
 
-            PackageId id = eslClient.CreatePackage (package);
-            eslClient.SendPackage(id);
+            packageId = eslClient.CreatePackage (package);
+            eslClient.SendPackage(packageId);
 
-            DocumentPackage retrievedPackage = eslClient.GetPackage(id);
+            DocumentPackage retrievedPackage = eslClient.GetPackage(packageId);
 
             Console.WriteLine("Document retrieved = " + retrievedPackage.Id);
         }

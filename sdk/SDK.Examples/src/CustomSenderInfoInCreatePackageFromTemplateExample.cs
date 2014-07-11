@@ -13,15 +13,6 @@ namespace SDK.Examples
         public const string SENDER_COMPANY = "The Masons";
 
         private Stream fileStream1;
-
-        private PackageId packageId;
-        public PackageId PackageId
-        {
-            get
-            {
-                return packageId;
-            }
-        }
         private PackageId templateId;
         public PackageId TemplateId
         {

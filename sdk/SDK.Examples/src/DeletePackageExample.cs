@@ -37,9 +37,9 @@ namespace SDK.Examples
                                    .AtPosition(100, 100)))
                     .Build();
 
-            PackageId id = eslClient.CreatePackage(package);
-            eslClient.SendPackage(id);
-            eslClient.PackageService.DeletePackage(id);
+            packageId = eslClient.CreatePackage(package);
+            eslClient.SendPackage(packageId);
+            eslClient.PackageService.DeletePackage(packageId);
         }
     }
 }

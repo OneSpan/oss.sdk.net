@@ -14,6 +14,7 @@ namespace SDK.Examples
 
         private string email1;
         private Stream fileStream1;
+        public readonly string UPLOADED_DOCUMENT_NAME = "First Document";
 
         public DocumentUploadExample(Props props) : this(props.Get("api.url"), props.Get("api.key"), props.Get("1.email"))
         {
@@ -39,7 +40,8 @@ namespace SDK.Examples
                                 .WithTitle( "Managing Director" )
                                 .WithCompany( "Acme Inc." ) )
                     .Build();
-            superDuperPackage.Id = eslClient.CreatePackage( superDuperPackage );
+            packageId = eslClient.CreatePackage( superDuperPackage );
+            superDuperPackage.Id = packageId;
 
             // 2. Construct a document
             Document document = DocumentBuilder.NewDocumentNamed( "First Document" )
@@ -56,7 +58,7 @@ namespace SDK.Examples
             // 3. Attach the document to the created package by uploading the document.
             eslClient.UploadDocument(document, superDuperPackage);
 
-            eslClient.SendPackage(superDuperPackage.Id);
+            eslClient.SendPackage(packageId);
 
         }
     }

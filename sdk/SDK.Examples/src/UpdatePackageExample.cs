@@ -13,8 +13,6 @@ namespace SDK.Examples
             new UpdatePackageExample(Props.GetInstance()).Run();
         }
 
-        private PackageId packageId;
-        
         private DocumentPackage sentPackage;
         public DocumentPackage SentPackage
         {
@@ -67,11 +65,6 @@ namespace SDK.Examples
         public CeremonyLayoutSettings RetrievedLayoutSettings
         {
             get{ return retrievedLayoutSettings; }
-        }
-                
-        public PackageId PackageId
-        {
-            get{ return packageId; }
         }
         
         public UpdatePackageExample(Props props) : this(props.Get("api.url"), props.Get("api.key"))

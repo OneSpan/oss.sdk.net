@@ -12,15 +12,6 @@ namespace SDK.Examples
         private string email3;
         private Stream fileStream1;
         private Stream fileStream2;
-        private PackageId packageId;
-
-        public PackageId PackageId
-        {
-            get
-            {
-                return packageId;
-            }
-        }
         
         public SignerManipulationExample(Props props) : this(props.Get("api.url"), props.Get("api.key"), props.Get("1.email"), props.Get("2.email"), props.Get("3.email"))
         {

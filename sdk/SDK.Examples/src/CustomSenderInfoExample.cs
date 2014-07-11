@@ -32,15 +32,7 @@ namespace SDK.Examples
                 return package;
             }
         }
-
-        private PackageId packageId;
-        public PackageId PackageId
-        {
-            get
-            {
-                return packageId;
-            }
-        }
+            
 
         public CustomSenderInfoExample(Props props) : this(props.Get("api.url"), props.Get("api.key"))
         {

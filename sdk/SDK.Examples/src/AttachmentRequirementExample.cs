@@ -13,7 +13,6 @@ namespace SDK.Examples
 			new AttachmentRequirementExample(Props.GetInstance()).Run();
 		}
 
-        private PackageId packageId;
 		private string email1;
 		private string email2;
 		private Signer signer1;
@@ -39,13 +38,6 @@ namespace SDK.Examples
 			this.email2 = email2;
 		}
 
-        public PackageId PackageId
-        {
-            get
-            {
-                return packageId;
-            }
-        }
 		public string Email1
 		{
 			get { return email1; }

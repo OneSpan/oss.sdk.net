@@ -12,12 +12,6 @@ namespace SDK.Examples
             new GenericFieldsExample(Props.GetInstance()).Run();
         }
 
-        public PackageId PackageId
-        {
-            get;
-            set;
-        }
-
         private string email1;
         private Stream fileStream1;
         public static readonly string DOCUMENT_NAME = "My Document";
@@ -93,7 +87,7 @@ namespace SDK.Examples
                                     .AtPosition(500, 550))))
 					.Build();
 
-            PackageId = eslClient.CreatePackage(package);
+            packageId = eslClient.CreatePackage(package);
 
             eslClient.SendPackage(PackageId);
         }

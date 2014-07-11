@@ -51,6 +51,7 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="nunit.framework" />
+    <Reference Include="nunit.framework, Version=2.6.0.12051, Culture=neutral, PublicKeyToken=96d09a1eb7f44a77" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -118,6 +119,8 @@
     <Compile Include="src\SignatureManipulationExample.cs" />
     <Compile Include="src\HistoryDocumentExample.cs" />
     <Compile Include="src\GetPackageMessageExample.cs" />
+    <Compile Include="src\CreatePackageFromTemplateExample.cs" />
+    <Compile Include="src\CreateTemplateFromPackageExample.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

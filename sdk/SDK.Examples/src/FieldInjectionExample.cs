@@ -14,12 +14,6 @@ namespace SDK.Examples
         private string email1;
         private Stream fileStream1;
 
-        public PackageId PackageId
-        {
-            get;
-            set;
-        }
-
         public FieldInjectionExample( Props props ) : this(props.Get("api.url"), props.Get("api.key"), props.Get("1.email")) {
         }
 
@@ -45,7 +39,7 @@ namespace SDK.Examples
                                        .WithValue( "Test Value" ) ) )
                     .Build();
 
-            PackageId = eslClient.CreatePackage( superDuperPackage );
+            packageId = eslClient.CreatePackage( superDuperPackage );
             eslClient.SendPackage( PackageId );
         }
     }

@@ -14,8 +14,6 @@ namespace SDK.Examples
 
         private string email1;
         private string email2;
-        
-        public PackageId packageId;
 
         public SignerOrderingExample( Props props ) : this(props.Get("api.url"), props.Get("api.key"), props.Get("1.email"), props.Get("2.email")) {
         }
@@ -39,7 +37,7 @@ namespace SDK.Examples
                                 .SigningOrder(1))			
 					.Build ();
 
-			packageId = eslClient.CreatePackage (package);
+            packageId = eslClient.CreatePackage (package);
             
 			Console.WriteLine("Package created, id = " + packageId);
 

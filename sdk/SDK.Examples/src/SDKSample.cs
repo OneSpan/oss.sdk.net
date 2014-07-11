@@ -6,6 +6,7 @@ namespace SDK.Examples
     public abstract class SDKSample
     {
 		protected EslClient eslClient;
+        protected PackageId packageId;
 
 		public EslClient EslClient
 		{
@@ -14,6 +15,14 @@ namespace SDK.Examples
 				return eslClient;
 			}
 		}
+
+        public PackageId PackageId
+        {
+            get
+            {
+                return packageId;
+            }
+        }
 
         public SDKSample( string apiUrl, string apiKey )
         {

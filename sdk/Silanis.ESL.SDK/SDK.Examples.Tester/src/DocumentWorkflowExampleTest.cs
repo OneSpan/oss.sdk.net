@@ -13,7 +13,7 @@ namespace SDK.Examples
             DocumentWorkflowExample example = new DocumentWorkflowExample( Props.GetInstance() );
             example.Run();
             
-            DocumentPackage package = example.EslClient.GetPackage( example.packageId );
+            DocumentPackage package = example.EslClient.GetPackage( example.PackageId );
             Assert.IsNotNull(package);
             
         }

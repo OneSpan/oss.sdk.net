@@ -16,15 +16,7 @@ namespace SDK.Examples
         public string email2;
         private Stream fileStream1;
         private Stream fileStream2;
-        private PackageId packageId;
 
-        public PackageId PackageId
-        {
-            get
-            {
-                return packageId;
-            }
-        }
         public BasicPackageCreationExample(Props props) : this(props.Get("api.url"), props.Get("api.key"), props.Get("1.email"), props.Get("2.email"))
         {
         }

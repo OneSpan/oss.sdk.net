@@ -87,7 +87,7 @@ namespace SDK.Tests
             Assert.AreEqual(sdkCeremonyLayoutSettings1.GlobalNavigation, apiLayoutOptions1.Header.GlobalNavigation);
             Assert.AreEqual(sdkCeremonyLayoutSettings1.ShowGlobalConfirmButton, apiLayoutOptions1.Header.GlobalActions.Confirm);
             Assert.AreEqual(sdkCeremonyLayoutSettings1.ShowGlobalDownloadButton, apiLayoutOptions1.Header.GlobalActions.Download);
-            Assert.AreEqual(apiLayoutOptions1.Header.GlobalActions.SaveAsLayout, sdkCeremonyLayoutSettings1.ShowGlobalSaveAsLayoutButton);
+            Assert.AreEqual(sdkCeremonyLayoutSettings1.ShowGlobalSaveAsLayoutButton, apiLayoutOptions1.Header.GlobalActions.SaveAsLayout);
         }
 
 		[Test()]
