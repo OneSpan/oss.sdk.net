@@ -5,7 +5,6 @@ using Silanis.ESL.SDK.Builder;
 
 namespace SDK.Examples
 {
-    [TestFixture()]
     public class CreateTemplateFromPackageExample : SDKSample
     {
         public static void Main(string[] args)
