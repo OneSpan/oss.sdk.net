@@ -5,73 +5,114 @@ using System.Collections.Generic;
 
 namespace SDK.Tests
 {
-	[TestFixture()]
-	public class AuthenticationConverterTest
+    [TestFixture()]
+    public class AuthenticationConverterTest
     {
-		private Silanis.ESL.SDK.Authentication sdkAuth1 = null;
-		private Silanis.ESL.API.Auth apiAuth1 = null;
-		private Silanis.ESL.API.Auth apiAuth2 = null;
-		private AuthenticationConverter converter = null;
+        private Silanis.ESL.SDK.Authentication sdkAuth1 = null;
+        private Silanis.ESL.SDK.Authentication sdkAuth2 = null;
+        private Silanis.ESL.API.Auth apiAuth1 = null;
+        private Silanis.ESL.API.Auth apiAuth2 = null;
+        private AuthenticationConverter converter = null;
 
-		[Test()]
-		public void ConvertNullSDKToAPI()
-		{
-			sdkAuth1 = null;
-			converter = new AuthenticationConverter(sdkAuth1);
-			Assert.IsNull(converter.ToAPIAuthentication());
-		}
+        [Test()]
+        public void ConvertNullAPIToSDK()
+        {
+            apiAuth1 = null;
+            converter = new AuthenticationConverter(apiAuth1);
+            Assert.IsNull(converter.ToSDKAuthentication());
+        }
 
-		[Test()]
-		public void ConvertNullAPIToAPI()
-		{
-			apiAuth1 = null;
-			converter = new AuthenticationConverter(apiAuth1);
+        [Test()]
+        public void ConvertNullSDKToSDK()
+        {
+            sdkAuth1 = null;
+            converter = new AuthenticationConverter(sdkAuth1);
+            Assert.IsNull(converter.ToSDKAuthentication());
+        }
 
-			Assert.IsNull(converter.ToAPIAuthentication());
-		}
+        [Test()]
+        public void ConvertSDKToSDK()
+        {
+            sdkAuth1 = CreateTypicalSDKAuthentication();
+            converter = new AuthenticationConverter(sdkAuth1);
+            sdkAuth2 = converter.ToSDKAuthentication();
 
-		[Test()]
-		public void ConvertAPIToAPI()
-		{
-			apiAuth1 = CreateTypicalAPIAuthentication();
-			converter = new AuthenticationConverter(apiAuth1);
-			apiAuth2 = converter.ToAPIAuthentication();
+            Assert.IsNotNull(sdkAuth2);
+            Assert.AreEqual(sdkAuth2, sdkAuth1);
+        }
 
-			Assert.IsNotNull(apiAuth2);
-			Assert.AreEqual(apiAuth2, apiAuth1);
-		}
+        [Test()]
+        public void ConvertAPIToSDK()
+        {
+            apiAuth1 = CreateTypicalAPIAuthentication();
+            sdkAuth1 = new AuthenticationConverter(apiAuth1).ToSDKAuthentication();
 
-		[Test()]
-		public void ConvertSDKToAPI()
-		{
-			sdkAuth1 = CreateTypicalSDKAuthentication();
-			apiAuth1 = new AuthenticationConverter(sdkAuth1).ToAPIAuthentication();
+            Assert.IsNotNull(sdkAuth1);
+            Assert.AreEqual(sdkAuth1.Method.ToString(), apiAuth1.Scheme.ToString());
+            Assert.AreEqual(sdkAuth1.Challenges[0].Question, apiAuth1.Challenges[0].Question);
+            Assert.AreEqual(sdkAuth1.Challenges[0].Answer, apiAuth1.Challenges[0].Answer);
+        }
 
-			Assert.IsNotNull(apiAuth1);
-			Assert.AreEqual(apiAuth1.Scheme.ToString(), sdkAuth1.Method.ToString());
-			Assert.AreEqual(apiAuth1.Challenges[0].Question, sdkAuth1.Challenges[0].Question);
-			Assert.AreEqual(apiAuth1.Challenges[0].Answer, sdkAuth1.Challenges[0].Answer);
-		}
+        [Test()]
+        public void ConvertNullSDKToAPI()
+        {
+            sdkAuth1 = null;
+            converter = new AuthenticationConverter(sdkAuth1);
+            Assert.IsNull(converter.ToAPIAuthentication());
+        }
 
-		private Silanis.ESL.SDK.Authentication CreateTypicalSDKAuthentication()
-		{
-			IList<Challenge> sdkChallenges = new List<Challenge>();
-			sdkChallenges.Add(new Challenge("What is the name of your dog?", "John"));
-			Authentication result = new Authentication(sdkChallenges);
+        [Test()]
+        public void ConvertNullAPIToAPI()
+        {
+            apiAuth1 = null;
+            converter = new AuthenticationConverter(apiAuth1);
 
-			return result;
-		}
+            Assert.IsNull(converter.ToAPIAuthentication());
+        }
 
-		private Silanis.ESL.API.Auth CreateTypicalAPIAuthentication()
-		{
-			Silanis.ESL.API.Auth result = new Silanis.ESL.API.Auth();
-			Silanis.ESL.API.AuthChallenge authChallenge = new Silanis.ESL.API.AuthChallenge();
-			authChallenge.Question = "What is the name of your dog?";
-			authChallenge.Answer = "John";
-			result.AddChallenge(authChallenge);
+        [Test()]
+        public void ConvertAPIToAPI()
+        {
+            apiAuth1 = CreateTypicalAPIAuthentication();
+            converter = new AuthenticationConverter(apiAuth1);
+            apiAuth2 = converter.ToAPIAuthentication();
 
-			return result;
-		}
+            Assert.IsNotNull(apiAuth2);
+            Assert.AreEqual(apiAuth2, apiAuth1);
+        }
+
+        [Test()]
+        public void ConvertSDKToAPI()
+        {
+            sdkAuth1 = CreateTypicalSDKAuthentication();
+            apiAuth1 = new AuthenticationConverter(sdkAuth1).ToAPIAuthentication();
+
+            Assert.IsNotNull(apiAuth1);
+            Assert.AreEqual(apiAuth1.Scheme.ToString(), sdkAuth1.Method.ToString());
+            Assert.AreEqual(apiAuth1.Challenges[0].Question, sdkAuth1.Challenges[0].Question);
+            Assert.AreEqual(apiAuth1.Challenges[0].Answer, sdkAuth1.Challenges[0].Answer);
+        }
+
+        private Silanis.ESL.SDK.Authentication CreateTypicalSDKAuthentication()
+        {
+            IList<Challenge> sdkChallenges = new List<Challenge>();
+            sdkChallenges.Add(new Challenge("What is the name of your dog?", "Max"));
+            Authentication result = new Authentication(sdkChallenges);
+
+            return result;
+        }
+
+        private Silanis.ESL.API.Auth CreateTypicalAPIAuthentication()
+        {
+            Silanis.ESL.API.Auth result = new Silanis.ESL.API.Auth();
+            Silanis.ESL.API.AuthChallenge authChallenge = new Silanis.ESL.API.AuthChallenge();
+            authChallenge.Question = "What is the name of your dog?";
+            authChallenge.Answer = "Max";
+            result.AddChallenge(authChallenge);
+            result.Scheme = Silanis.ESL.API.AuthScheme.CHALLENGE;
+
+            return result;
+        }
     }
 }
 

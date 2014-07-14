@@ -1,6 +1,7 @@
 using NUnit.Framework;
 using System;
 using Silanis.ESL.SDK;
+using System.Collections.Generic;
 
 namespace SDK.Examples
 {
@@ -20,6 +21,10 @@ namespace SDK.Examples
 			Assert.AreEqual(CustomSenderInfoExample.SENDER_SECOND_NAME, package.SenderInfo.LastName);
 			Assert.AreEqual(CustomSenderInfoExample.SENDER_COMPANY, package.SenderInfo.Company);
 			Assert.AreEqual(CustomSenderInfoExample.SENDER_TITLE, package.SenderInfo.Title);
+
+            IDictionary<string, Silanis.ESL.SDK.Sender> senders = example.EslClient.AccountService.GetSenders();
+            Assert.IsTrue(senders.ContainsKey(example.SenderEmail));
+            Assert.AreEqual(senders[example.SenderEmail].Language, "fr");
         }
     }
 }

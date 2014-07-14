@@ -185,6 +185,8 @@ namespace Silanis.ESL.SDK
                 builder.DeliverSignedDocumentsByEmail();
             }
 
+            builder.WithAuthentication(new AuthenticationConverter(eslSigner.Auth).ToSDKAuthentication());
+
             return builder.Build();
         }
     }

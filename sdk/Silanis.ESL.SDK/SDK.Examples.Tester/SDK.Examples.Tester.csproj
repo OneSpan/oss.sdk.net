@@ -82,6 +82,8 @@
     <Compile Include="src\ListTemplatesExampleTest.cs" />
     <Compile Include="src\CreatePackageFromTemplateExampleTest.cs" />
     <Compile Include="src\CreateTemplateFromPackageExampleTest.cs" />
+    <Compile Include="src\AuthenticationMethodsExampleTest.cs" />
+    <Compile Include="src\PackageLanguageConfigurationExampleTest.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

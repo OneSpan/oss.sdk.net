@@ -22,9 +22,17 @@ namespace SDK.Examples
         }
 
         private string senderEmail;
+        private DocumentPackage package;
         private Stream fileStream1;
 
-        private DocumentPackage package;
+        public string SenderEmail
+        {
+            get
+            {
+                return senderEmail;
+            }
+        }
+
         public DocumentPackage Package
         {
             get
@@ -52,7 +60,7 @@ namespace SDK.Examples
                 .WithLastName("lastName")
                 .WithCompany("company")
                 .WithTitle("title")
-                .WithLanguage( "language" )
+                .WithLanguage( "fr" )
                 .WithPhoneNumber( "phoneNumber" )
                 .WithStatus(SenderStatus.ACTIVE)
                 .Build()

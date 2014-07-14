@@ -80,6 +80,7 @@
     <Compile Include="src\Internal\Conversion\MessageConverterTest.cs" />
     <Compile Include="src\Internal\Conversion\ExternalConverterTest.cs" />
     <Compile Include="src\Internal\Conversion\MessageStatusConverterTest.cs" />
+    <Compile Include="src\Internal\Conversion\ChallengeConverterTest.cs" />r
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

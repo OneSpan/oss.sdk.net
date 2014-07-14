@@ -7,7 +7,7 @@ namespace SDK.Examples
 {
     public class AuthenticationMethodsExample : SDKSample
     {
-        public static void Main (string[] args)
+        public static void Main(string[] args)
         {
             new AuthenticationMethodsExample(Props.GetInstance()).Run();
         }
@@ -42,16 +42,31 @@ namespace SDK.Examples
             }
         }
 
-        public AuthenticationMethodsExample( Props props ) 
-            : this(props.Get("api.url"), 
-                  props.Get("api.key"), 
-                  props.Get("1.email"), 
-                  props.Get("2.email"), 
-                  props.Get("3.email"), 
-                  props.Get("3.sms")) {
+        public string Sms3
+        {
+            get
+            {
+                return sms3;
+            }
         }
 
-        public AuthenticationMethodsExample( string apiKey, string apiUrl, string email1, string email2, string email3, string sms3 ) : base( apiKey, apiUrl ) {
+        public static string QUESTION1 = "What's 1+1?";
+        public static string ANSWER1 = "2";
+        public static string QUESTION2 = "What color's the sky?";
+        public static string ANSWER2 = "blue";
+
+        public AuthenticationMethodsExample(Props props) 
+            : this(props.Get("api.url"), 
+                   props.Get("api.key"), 
+                   props.Get("1.email"), 
+                   props.Get("2.email"), 
+                   props.Get("3.email"), 
+                   props.Get("3.sms"))
+        {
+        }
+
+        public AuthenticationMethodsExample(string apiKey, string apiUrl, string email1, string email2, string email3, string sms3) : base(apiKey, apiUrl)
+        {
             this.email1 = email1;
             this.email2 = email2;
             this.email3 = email3;
@@ -61,35 +76,31 @@ namespace SDK.Examples
 
         override public void Execute()
         {
-            DocumentPackage package = PackageBuilder.NewPackageNamed ("C# AuthenticationMethodsExample " + DateTime.Now)
-                    .WithSigner(SignerBuilder.NewSignerWithEmail(email1)
-                                .WithFirstName("John1")
-                                .WithLastName("Smith1"))
-				    .WithSigner(SignerBuilder.NewSignerWithEmail(email2)
-								.WithCustomId("signer2")
-                                .WithFirstName("John2")
-                                .WithLastName("Smith2")
-                                .ChallengedWithQuestions( ChallengeBuilder.FirstQuestion( "What's 1+1?" )
-											.Answer("2", Challenge.MaskOptions.None)
-                                            .SecondQuestion( "What color's the sky?" )
-											.Answer( "blue", Challenge.MaskOptions.MaskInput ) ) )
-                    .WithSigner(SignerBuilder.NewSignerWithEmail(email3)
-                                .WithFirstName("John3")
-                                .WithLastName("Smith3")
-                                .WithSMSSentTo(sms3))
-                    .WithDocument(DocumentBuilder.NewDocumentNamed( "Custom Consent Document" )
-                                  .FromStream(fileStream1, DocumentType.PDF)
-					.WithSignature(SignatureBuilder.SignatureFor(email2)
-                                  .OnPage(0)
-                                  .AtPosition(100,100)))
-                    .Build();
+            DocumentPackage package = PackageBuilder.NewPackageNamed("C# AuthenticationMethodsExample " + DateTime.Now)
+                .WithSigner(SignerBuilder.NewSignerWithEmail(email1)
+                    .WithFirstName("John1")
+                    .WithLastName("Smith1"))
+                .WithSigner(SignerBuilder.NewSignerWithEmail(email2)
+                    .WithCustomId("signer2")
+                    .WithFirstName("John2")
+                    .WithLastName("Smith2")
+                    .ChallengedWithQuestions(ChallengeBuilder.FirstQuestion(QUESTION1)
+                        .Answer(ANSWER1, Challenge.MaskOptions.None)
+                        .SecondQuestion(QUESTION2)
+                        .Answer(ANSWER2, Challenge.MaskOptions.MaskInput)))
+                .WithSigner(SignerBuilder.NewSignerWithEmail(email3)
+                    .WithFirstName("John3")
+                    .WithLastName("Smith3")
+                    .WithSMSSentTo(sms3))
+                .WithDocument(DocumentBuilder.NewDocumentNamed("Custom Consent Document")
+                    .FromStream(fileStream1, DocumentType.PDF)
+                    .WithSignature(SignatureBuilder.SignatureFor(email2)
+                        .OnPage(0)
+                        .AtPosition(100, 100)))
+                .Build();
 
-            packageId = eslClient.CreatePackage (package);
+            packageId = eslClient.CreatePackage(package);
             eslClient.SendPackage(packageId);
-
-            DocumentPackage retrievedPackage = eslClient.GetPackage(packageId);
-
-            Console.WriteLine("Document retrieved = " + retrievedPackage.Id);
         }
     }
 }

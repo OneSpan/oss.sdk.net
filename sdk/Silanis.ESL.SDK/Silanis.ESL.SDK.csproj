@@ -321,6 +321,7 @@
     <Compile Include="src\Services\Internal\GroupApiClient.cs" />
     <Compile Include="src\Services\Internal\ReminderApiClient.cs" />
     <Compile Include="src\Services\Internal\TemplateApiClient.cs" />
+    <Compile Include="src\Internal\Conversion\ChallengeConverter.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSHARP.Targets" />
   <ProjectExtensions>
