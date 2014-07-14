@@ -40,6 +40,7 @@ namespace Silanis.ESL.SDK.Builder
             this.settings = new DocumentPackageSettingsBuilder(package.Settings).build();
 			this.senderInfo = new SenderConverter(package.Sender).ToSDKSenderInfo();
             this.attributes = new DocumentPackageAttributes(package.Data);
+            this.language = CultureInfo.GetCultureInfo(package.Language);
 
 			foreach ( Silanis.ESL.API.Role role in package.Roles ) {
 				if ( role.Signers.Count == 0 ) {

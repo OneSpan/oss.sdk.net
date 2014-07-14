@@ -9,7 +9,7 @@
     <AssemblyName>Silanis.ESL</AssemblyName>
     <TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <ProductVersion>10.0.0</ProductVersion>
+    <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -294,6 +294,8 @@
     <Compile Include="src\Models\Visibility.cs" />
     <Compile Include="src\Services\ContractResolvers\DocumentMetadataContractResolver.cs" />
     <Compile Include="src\Internal\Conversion\DocumentPackageSettingsConverter.cs" />
+    <Compile Include="src\Internal\Conversion\AuthenticationConverter.cs" />
+    <Compile Include="src\Internal\Conversion\ChallengeConverter.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSHARP.Targets" />
   <ProjectExtensions>

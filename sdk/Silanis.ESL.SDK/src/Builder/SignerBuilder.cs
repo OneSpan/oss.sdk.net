@@ -12,6 +12,7 @@ namespace Silanis.ESL.SDK.Builder
 		private string title;
 		private string company;
 		private AuthenticationBuilder authenticationBuilder = new AuthenticationBuilder();
+        private Authentication authentication;
 		private bool deliverSignedDocumentsByEmail;
 		private int signingOrder;
 		private string message;
@@ -97,6 +98,8 @@ namespace Silanis.ESL.SDK.Builder
             if (eslSigner.Delivery != null && eslSigner.Delivery.Email) {
                 builder.DeliverSignedDocumentsByEmail();
             }
+
+            builder.WithAuthentication(new AuthenticationConverter(eslSigner.Auth).ToSDKAuthentication());
 
             return builder;
         }
@@ -202,6 +205,12 @@ namespace Silanis.ESL.SDK.Builder
 			return this;
 		}
 
+        public SignerBuilder WithAuthentication(Authentication authentication)
+        {
+            this.authentication = authentication;
+            return this;
+        }
+
 		public SignerBuilder DeliverSignedDocumentsByEmail ()
 		{
 			deliverSignedDocumentsByEmail = true;
@@ -284,7 +293,11 @@ namespace Silanis.ESL.SDK.Builder
             Asserts.NotEmptyOrNull (firstName, "firstName");
             Asserts.NotEmptyOrNull (lastName, "lastName");
                         
-            Authentication authentication = authenticationBuilder.Build();
+            if (authentication == null)
+            {
+                authentication = authenticationBuilder.Build();
+            }
+
             Signer result = new Signer (signerEmail, firstName, lastName, authentication);
             result.Title = title;
             result.Company = company;
