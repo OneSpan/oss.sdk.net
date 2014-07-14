@@ -1,0 +1,26 @@
+﻿using System;
+using NUnit.Framework;
+using Silanis.ESL.SDK;
+
+namespace SDK.Examples
+{
+    [TestFixture()]
+    public class SignerQnAChallengeExampleTest
+    {
+        [Test()]
+        public void VerifyResult()
+        {
+            SignerQnAChallengeExample example = new SignerQnAChallengeExample(Props.GetInstance());
+            example.Run();
+
+            DocumentPackage documentPackage = example.EslClient.GetPackage(example.PackageId);
+
+            // Note that for security reasons, the backend doesn't return challenge answers, so we don't verify the answers here.
+            foreach (Challenge challenge in documentPackage.Signers[example.email1].ChallengeQuestion)
+            {
+                Assert.IsTrue(String.Equals(challenge.Question, example.FIRST_QUESTION) || String.Equals(challenge.Question, example.SECOND_QUESTION));
+            }
+        }
+    }
+}
+

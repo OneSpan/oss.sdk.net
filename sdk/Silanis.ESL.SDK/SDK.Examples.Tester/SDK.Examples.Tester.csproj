@@ -84,6 +84,9 @@
     <Compile Include="src\CreateTemplateFromPackageExampleTest.cs" />
     <Compile Include="src\AuthenticationMethodsExampleTest.cs" />
     <Compile Include="src\PackageLanguageConfigurationExampleTest.cs" />
+    <Compile Include="src\ChangeSignerExampleTest.cs" />
+    <Compile Include="src\SignerQnAChallengeExampleTest.cs" />
+    <Compile Include="src\SignerSMSAuthenticationExampleTest.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
