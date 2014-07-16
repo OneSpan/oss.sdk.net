@@ -12,8 +12,8 @@ namespace SDK.Examples
         public readonly string ENGLISH_NAME = "Player Number";
         public readonly string ENGLISH_DESCRIPTION = "The number on your team jersey";
         public readonly string FRENCH_LANGUAGE = "fr";
-        public readonly string FRENCH_NAME = "Numéro du Joueur";
-        public readonly string FRENCH_DESCRIPTION = "Le numéro dans le dos de votre chandail d'équipe";
+        public readonly string FRENCH_NAME = "Numero du Joueur";
+        public readonly string FRENCH_DESCRIPTION = "Le numero dans le dos de votre chandail d'equipe";
         public readonly string FIELD_VALUE = "99";
 
         private string email1;
