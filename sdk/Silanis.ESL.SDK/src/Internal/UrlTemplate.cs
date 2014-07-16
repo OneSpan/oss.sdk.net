@@ -72,6 +72,7 @@ namespace Silanis.ESL.SDK.Internal
         public static readonly string SENDER_PATH = "/account/senders/{senderUid}";
 
         // Approval Service
+        public static readonly string APPROVAL_PATH = "/packages/{packageId}/documents/{documentId}/approvals";
         public static readonly string APPROVAL_ID_PATH = "/packages/{packageId}/documents/{documentId}/approvals/{approvalId}";
         
         // Provider Document Resource
