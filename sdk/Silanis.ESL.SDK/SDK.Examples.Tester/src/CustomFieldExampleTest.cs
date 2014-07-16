@@ -20,6 +20,16 @@ namespace SDK.Examples
 			Assert.AreEqual(documentPackage.Documents["First Document"].Signatures.Count, 1);
 			Assert.AreEqual(documentPackage.Documents["First Document"].Signatures[0].SignerEmail, example.Email1);
 			Assert.IsNotNull(documentPackage.Documents["First Document"].Signatures[0].Fields[0]);
+
+            CustomField retrievedCustomField = example.RetrievedCustomField;
+            Assert.AreEqual(retrievedCustomField.Id, example.CustomFieldId1);
+            Assert.AreEqual(retrievedCustomField.Value, example.DEFAULT_VALUE);
+            Assert.AreEqual(retrievedCustomField.Translations[0].Name, example.ENGLISH_NAME);
+            Assert.AreEqual(retrievedCustomField.Translations[0].Language, example.ENGLISH_LANGUAGE);
+            Assert.AreEqual(retrievedCustomField.Translations[0].Description, example.ENGLISH_DESCRIPTION);
+            Assert.AreEqual(retrievedCustomField.Translations[1].Name, example.FRENCH_NAME);
+            Assert.AreEqual(retrievedCustomField.Translations[1].Language, example.FRENCH_LANGUAGE);
+            Assert.AreEqual(retrievedCustomField.Translations[1].Description, example.FRENCH_DESCRIPTION);
 		}
     }
 }

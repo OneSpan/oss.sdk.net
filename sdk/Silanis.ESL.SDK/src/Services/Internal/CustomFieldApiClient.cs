@@ -97,7 +97,28 @@ namespace Silanis.ESL.SDK
                 throw new EslException("Could not add/update the custom field to account." + " Exception: " + e.Message, e);
             }
         }
-        
+
+        public Silanis.ESL.API.CustomField GetCustomField(string id)
+        {
+            string path = template.UrlFor(UrlTemplate.ACCOUNT_CUSTOMFIELD_ID_PATH)
+                .Replace("{customFieldId}", id)
+                .Build();
+
+            try 
+            {
+                string response = client.Get(path);
+                return JsonConvert.DeserializeObject<Silanis.ESL.API.CustomField>(response);
+            }
+            catch (EslServerException e)
+            {
+                throw new EslServerException("Could not get the custom field from account." + " Exception: " + e.Message, e.ServerError, e);
+            }
+            catch (Exception e)
+            {
+                throw new EslException("Could not get the custom field from account." + " Exception: " + e.Message, e);
+            }
+        }
+
         public void DeleteCustomField( string id )
         {
             string path = template.UrlFor(UrlTemplate.ACCOUNT_CUSTOMFIELD_ID_PATH)

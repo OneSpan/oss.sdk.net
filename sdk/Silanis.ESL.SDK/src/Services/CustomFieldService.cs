@@ -41,6 +41,17 @@ namespace Silanis.ESL.SDK.Services
             return apiClient.DoesCustomFieldExist(customFieldId);
 		}
 
+        /// <summary>
+        /// Get an account custom field.
+        /// </summary>
+        /// <returns>The account custom field.</returns>
+        /// <param name="id">Id of custom field to get.</param>
+        public CustomField GetCustomField(string id)
+        {
+            Silanis.ESL.API.CustomField apiCustomField = apiClient.GetCustomField(id);
+            return new CustomFieldConverter(apiCustomField).ToSDKCustomField();
+        }
+
 		/// <summary>
 		/// Delete an account custom field.
 		/// </summary>
