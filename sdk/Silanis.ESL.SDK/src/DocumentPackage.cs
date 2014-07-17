@@ -41,10 +41,11 @@ namespace Silanis.ESL.SDK
             set;
         }
 
+        private IDictionary<string, Signer> signers = new Dictionary<string, Signer>(StringComparer.OrdinalIgnoreCase);
         public IDictionary<string, Signer> Signers
         {
-            get;
-            private set;
+            get{ return signers;}
+            set{ signers = value;}
         }
 
         public IDictionary<string, Signer> Placeholders
