@@ -26,7 +26,7 @@ namespace SDK.Examples
             Assert.IsTrue(documentPackage.Attributes.Contents["sdk"].ToString().Contains(".NET"));
 
             // Signer 1
-            Signer signer = documentPackage.Signers[example.email1];
+            Signer signer = documentPackage.Signers[example.email1.ToLower()];
             Assert.AreEqual("Client1", signer.Id);
             Assert.AreEqual("John", signer.FirstName);
             Assert.AreEqual("Smith", signer.LastName);
@@ -34,7 +34,7 @@ namespace SDK.Examples
             Assert.AreEqual("Acme Inc.", signer.Company);
 
             // Signer 2
-            signer = documentPackage.Signers[example.email2];
+            signer = documentPackage.Signers[example.email2.ToLower()];
             Assert.AreEqual("Patty", signer.FirstName);
             Assert.AreEqual("Galant", signer.LastName);
 

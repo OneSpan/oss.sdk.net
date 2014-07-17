@@ -48,9 +48,21 @@ namespace Silanis.ESL.SDK
 			private set;
 		}
 
-		public string Email {
-			get;
-			private set;
+        private string email;
+		public string Email
+        {
+            get{ return email; }
+            private set
+            { 
+                if (value != null)
+                {
+                    email = value.ToLower();
+                }
+                else
+                {
+                    email = null;
+                }
+            }
 		}
 
 		public string FirstName {

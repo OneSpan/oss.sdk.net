@@ -13,7 +13,7 @@ namespace Silanis.ESL.SDK.Builder
 		private bool autocomplete = true;
 		private Nullable<DateTime> expiryDate;
 		private string emailMessage = String.Empty;
-		private IDictionary<string, Signer> signers = new Dictionary<string, Signer> ();
+		private IDictionary<string, Signer> signers = new Dictionary<string, Signer>(StringComparer.OrdinalIgnoreCase);
         private IDictionary<string, Signer> placeholders = new Dictionary<string, Signer> ();
 		private IDictionary<string, Document> documents = new Dictionary<string, Document>();
 		private PackageId id;

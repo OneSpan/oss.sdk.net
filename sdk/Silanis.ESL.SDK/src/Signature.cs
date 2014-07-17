@@ -43,10 +43,21 @@ namespace Silanis.ESL.SDK
             private set;
         }
 
-		public string SignerEmail 
-		{
-			get;
-			private set;
+        private string signerEmail;
+		public string SignerEmail
+        {
+            get { return signerEmail; }
+            private set
+            { 
+                if (value != null)
+                {
+                    signerEmail = value.ToLower(); 
+                }
+                else
+                {
+                    signerEmail = null;
+                }
+            }
 		}
 
         public Placeholder RoleId
