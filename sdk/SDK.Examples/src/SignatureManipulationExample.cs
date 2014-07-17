@@ -89,7 +89,7 @@ namespace SDK.Examples
 
             updatedSignature = SignatureBuilder.SignatureFor(email1)
                 .OnPage(0)
-                    .WithId(new SignatureId("updatedId"))
+                    .WithId(new SignatureId("signatureId3"))
                     .AtPosition(200, 400)
                     .Build();
 
@@ -106,7 +106,7 @@ namespace SDK.Examples
 
             // Updating the information for the third signature
             createdPackage = eslClient.GetPackage(packageId);
-            eslClient.ApprovalService.ModifyApproval(createdPackage, "documentId", "signatureId3", updatedSignature);
+            eslClient.ApprovalService.ModifyApproval(createdPackage, "documentId", updatedSignature);
             updatedSignatures = eslClient.GetPackage(packageId).Documents["SignatureManipulationExample"].Signatures;
         }
     }

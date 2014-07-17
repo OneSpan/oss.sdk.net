@@ -74,6 +74,8 @@ namespace Silanis.ESL.SDK.Internal
         // Approval Service
         public static readonly string APPROVAL_PATH = "/packages/{packageId}/documents/{documentId}/approvals";
         public static readonly string APPROVAL_ID_PATH = "/packages/{packageId}/documents/{documentId}/approvals/{approvalId}";
+        public static readonly string FIELD_PATH = "/packages/{packageId}/documents/{documentId}/approvals/{approvalId}/fields";
+        public static readonly string FIELD_ID_PATH = "/packages/{packageId}/documents/{documentId}/approvals/{approvalId}/fields/{fieldId}";
         
         // Provider Document Resource
         public static readonly string PROVIDER_DOCUMENTS = "/documents";

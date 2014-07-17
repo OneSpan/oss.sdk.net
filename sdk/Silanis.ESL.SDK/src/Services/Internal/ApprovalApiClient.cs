@@ -57,12 +57,12 @@ namespace Silanis.ESL.SDK
             }
         }
 
-        public void ModifyApproval(PackageId packageId, string documentId, string approvalId, Approval approval)
+        public void ModifyApproval(PackageId packageId, string documentId, Approval approval)
         {
             string path = template.UrlFor(UrlTemplate.APPROVAL_ID_PATH)
                 .Replace("{packageId}", packageId.Id)
                     .Replace("{documentId}", documentId)
-                    .Replace("{approvalId}", approvalId)
+                    .Replace("{approvalId}", approval.Id)
                     .Build();
 
             try {
@@ -70,10 +70,10 @@ namespace Silanis.ESL.SDK
                 restClient.Put(path, json);
             }
             catch (EslServerException e) {
-                throw new EslServerException("Could not add signature.\t" + " Exception: " + e.Message, e.ServerError, e);
+                throw new EslServerException("Could not modify signature.\t" + " Exception: " + e.Message, e.ServerError, e);
             }
             catch (Exception e) {
-                throw new EslException("Could not add signature.\t" + " Exception: " + e.Message, e);
+                throw new EslException("Could not modify signature.\t" + " Exception: " + e.Message, e);
             }
         }
 
@@ -91,10 +91,32 @@ namespace Silanis.ESL.SDK
                 return apiApproval;
             }
             catch (EslServerException e) {
-                throw new EslServerException("Could not add signature.\t" + " Exception: " + e.Message, e.ServerError, e);
+                throw new EslServerException("Could not get signature.\t" + " Exception: " + e.Message, e.ServerError, e);
             }
             catch (Exception e) {
-                throw new EslException("Could not add signature.\t" + " Exception: " + e.Message, e);
+                throw new EslException("Could not get signature.\t" + " Exception: " + e.Message, e);
+            }
+        }
+
+        public string AddField(PackageId packageId, String documentId, SignatureId signatureId, Silanis.ESL.API.Field field)
+        {
+            string path = template.UrlFor(UrlTemplate.FIELD_PATH)
+                .Replace("{packageId}", packageId.Id)
+                    .Replace("{documentId}", documentId)
+                    .Replace("{approvalId}", signatureId.Id)
+                    .Build();
+
+            try {
+                string json = JsonConvert.SerializeObject (field, jsonSettings);
+                string response = restClient.Post(path, json);
+                Silanis.ESL.API.Field apiField = JsonConvert.DeserializeObject<Silanis.ESL.API.Field> (response, jsonSettings);
+                return apiField.Id;
+            }
+            catch (EslServerException e) {
+                throw new EslServerException("Could not add field to signature.\t" + " Exception: " + e.Message, e.ServerError, e);
+            }
+            catch (Exception e) {
+                throw new EslException("Could not add field to signature.\t" + " Exception: " + e.Message, e);
             }
         }
 

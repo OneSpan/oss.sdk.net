@@ -40,7 +40,7 @@ namespace Silanis.ESL.SDK
             return apiClient.AddApproval(sdkPackage.Id, documentId, approval);
         }
 
-        public void ModifyApproval(DocumentPackage sdkPackage, string documentId, string approvalId, Signature signature)
+        public void ModifyApproval(DocumentPackage sdkPackage, string documentId, Signature signature)
         {
             Approval approval = new SignatureConverter(signature).ToAPIApproval();
             Package apiPackage = new DocumentPackageConverter(sdkPackage).ToAPIPackage();
@@ -58,7 +58,7 @@ namespace Silanis.ESL.SDK
                 approval.Role = FindRoleIdForSigner(signature.SignerEmail, apiPackage);
             }
 
-            apiClient.ModifyApproval(sdkPackage.Id, documentId, approvalId, approval);
+            apiClient.ModifyApproval(sdkPackage.Id, documentId, approval);
         }
 
         public Signature GetApproval(DocumentPackage sdkPackage, string documentId, string approvalId)
@@ -66,6 +66,12 @@ namespace Silanis.ESL.SDK
             Approval approval = apiClient.GetApproval(sdkPackage.Id, documentId, approvalId);
             Package aPackage = new DocumentPackageConverter(sdkPackage).ToAPIPackage();
             return new SignatureConverter(approval, aPackage).ToSDKSignature();
+        }
+
+        public string AddField(PackageId packageId, string documentId, SignatureId signatureId, Field sdkField)
+        {
+            Silanis.ESL.API.Field apiField = new FieldConverter(sdkField).ToAPIField();
+            return apiClient.AddField(packageId, documentId, signatureId, apiField);
         }
 
         private string FindRoleIdForGroup(GroupId groupId, Silanis.ESL.API.Package createdPackage)
