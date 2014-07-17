@@ -1,6 +1,7 @@
 using System;
 using NUnit.Framework;
 using Silanis.ESL.SDK;
+using System.Collections.Generic;
 
 namespace SDK.Examples
 {
@@ -13,34 +14,39 @@ namespace SDK.Examples
             SignatureManipulationExample example = new SignatureManipulationExample(Props.GetInstance());
             example.Run();
 
-            PackageId packageId = example.PackageId;
-            DocumentPackage createdPackage = example.EslClient.GetPackage(packageId);
-            Document sdkDocument = null;
-            Signature signature1 = null;
-            Signature signature2 = null;
+            // Test if all signatures are added properly
+            Dictionary<string,Signature> signaturesDictionary = ConvertListToMap(example.addedSignatures);
 
-            createdPackage.Documents.TryGetValue("First Document", out sdkDocument);
+            Assert.IsTrue(signaturesDictionary.ContainsKey(example.email1));
+            Assert.IsTrue(signaturesDictionary.ContainsKey(example.email2));
+            Assert.IsTrue(signaturesDictionary.ContainsKey(example.email3));
 
-            if (sdkDocument != null)
-            {
-                foreach(Signature signature in sdkDocument.Signatures)
-                {
-                    if (signature.Id.Id.Equals("signatureId1"))
-                    {
-                        signature1 = signature;
-                    }
-                    if (signature.Id.Id.Equals("signatureId2"))
-                    {
-                        signature2 = signature;
-                    }
-                }
-            }
+            // Test if signature1 is deleted properly
+            signaturesDictionary = ConvertListToMap(example.deletedSignatures);
 
-            Assert.IsNotNull(sdkDocument);
-            Assert.IsNull(signature1);
-            Assert.IsNotNull(signature2);
+            Assert.IsFalse(signaturesDictionary.ContainsKey(example.email1));
+            Assert.IsTrue(signaturesDictionary.ContainsKey(example.email2));
+            Assert.IsTrue(signaturesDictionary.ContainsKey(example.email3));
+
+            // Test if signature3 is updated properly and is assigned to signer1
+            signaturesDictionary = ConvertListToMap(example.updatedSignatures);
+
+            Assert.IsTrue(signaturesDictionary.ContainsKey(example.email1));
+            Assert.IsTrue(signaturesDictionary.ContainsKey(example.email2));
+            Assert.IsFalse(signaturesDictionary.ContainsKey(example.email3));
 
         }
+
+        private Dictionary<string,Signature> ConvertListToMap(List<Signature> signaturesList)
+        {
+            Dictionary<string,Signature> signaturesDictionary = new Dictionary<string,Signature>();
+            foreach(Signature signature in signaturesList)
+            {
+                signaturesDictionary.Add(signature.SignerEmail, signature);
+            }
+            return signaturesDictionary;
+        }
+
     }
 }
 
