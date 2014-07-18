@@ -17,6 +17,7 @@ namespace SDK.Examples
         public Field field1;
         public Field field2;
         public Field field3;
+        public Field updatedField;
 
         public List<Field> addedFields;
         public List<Field> deletedFields;
@@ -78,6 +79,13 @@ namespace SDK.Examples
                     .OnPage(0)
                     .Build();
 
+            updatedField = FieldBuilder.RadioButton("group1")
+                .WithName("updatedField")
+                    .WithId("fieldId3")
+                    .AtPosition(400, 300)
+                    .OnPage(0)
+                    .Build();
+
             // Adding the fields
             eslClient.ApprovalService.AddField(packageId, documentId, signatureId, field1);
             eslClient.ApprovalService.AddField(packageId, documentId, signatureId, field2);
@@ -91,6 +99,12 @@ namespace SDK.Examples
 
             createdPackage = eslClient.GetPackage(packageId);
             deletedFields = eslClient.ApprovalService.GetApproval(createdPackage, documentId, signatureId.Id).Fields;
+
+            // Updating the information for the third field
+            eslClient.ApprovalService.ModifyField(packageId, documentId, signatureId, updatedField);
+
+            createdPackage = eslClient.GetPackage(packageId);
+            updatedFields = eslClient.ApprovalService.GetApproval(createdPackage, documentId, signatureId.Id).Fields;
         }
     }
 }

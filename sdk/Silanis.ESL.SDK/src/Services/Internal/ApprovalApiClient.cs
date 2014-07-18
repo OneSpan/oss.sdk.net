@@ -120,6 +120,27 @@ namespace Silanis.ESL.SDK
             }
         }
 
+        public void ModifyField(PackageId packageId, string documentId, SignatureId signatureId, Silanis.ESL.API.Field field)
+        {
+            string path = template.UrlFor(UrlTemplate.FIELD_ID_PATH)
+                .Replace("{packageId}", packageId.Id)
+                    .Replace("{documentId}", documentId)
+                    .Replace("{approvalId}", signatureId.Id)
+                    .Replace("{fieldId}", field.Id)
+                    .Build();
+
+            try {
+                string json = JsonConvert.SerializeObject (field, jsonSettings);
+                restClient.Put(path, json);
+            }
+            catch (EslServerException e) {
+                throw new EslServerException("Could not modify field from signature.\t" + " Exception: " + e.Message, e.ServerError, e);
+            }
+            catch (Exception e) {
+                throw new EslException("Could not modify field from signature.\t" + " Exception: " + e.Message, e);
+            }
+        }
+
         public void DeleteField(PackageId packageId, string documentId, SignatureId signatureId, string fieldId)
         {
             string path = template.UrlFor(UrlTemplate.FIELD_ID_PATH)
