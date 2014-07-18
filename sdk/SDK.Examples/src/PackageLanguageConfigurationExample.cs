@@ -15,7 +15,6 @@ namespace SDK.Examples
 
         private string email1;
         private Stream fileStream1;
-        private PackageId packageId;
 
         public PackageLanguageConfigurationExample( Props props ) : this(props.Get("api.url"), props.Get("api.key"), props.Get("1.email")) {
         }
@@ -23,14 +22,6 @@ namespace SDK.Examples
         public PackageLanguageConfigurationExample( string apiKey, string apiUrl, string email1 ) : base( apiKey, apiUrl ) {
             this.email1 = email1;
             this.fileStream1 = File.OpenRead(new FileInfo(Directory.GetCurrentDirectory() + "/src/document.pdf").FullName);
-        }
-
-        public PackageId PackageId
-        {
-            get
-            {
-                return packageId;
-            }
         }
 
         override public void Execute()

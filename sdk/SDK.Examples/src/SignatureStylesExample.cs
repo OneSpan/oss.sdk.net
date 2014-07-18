@@ -38,8 +38,6 @@ namespace SDK.Examples
 
         override public void Execute()
         {
-            String signerId = "myCustomSignerId";
-
             DocumentPackage superDuperPackage = PackageBuilder.NewPackageNamed("SignatureStylesExample: " + DateTime.Now)
                 .WithSigner(SignerBuilder.NewSignerWithEmail(email1)
                             .WithFirstName("John")

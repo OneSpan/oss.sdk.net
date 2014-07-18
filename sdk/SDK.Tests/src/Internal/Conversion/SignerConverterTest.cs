@@ -9,9 +9,7 @@ namespace SDK.Tests
     public class SignerConverterTest
     {
 		private Silanis.ESL.SDK.Signer sdkSigner1 = null;
-		private Silanis.ESL.SDK.Signer sdkSigner2 = null;
 		private Silanis.ESL.API.Signer apiSigner1 = null;
-		private Silanis.ESL.API.Signer apiSigner2 = null;
 		private Silanis.ESL.API.Role apiRole = null;
 		private SignerConverter converter = null;
 

@@ -2,6 +2,7 @@ using System;
 using Silanis.ESL.SDK.Internal;
 using Newtonsoft.Json;
 using Silanis.ESL.API;
+using System.Collections.Generic;
 
 namespace Silanis.ESL.SDK
 {
@@ -116,6 +117,29 @@ namespace Silanis.ESL.SDK
             catch (Exception e)
             {
                 throw new EslException("Could not get the custom field from account." + " Exception: " + e.Message, e);
+            }
+        }
+
+        public IList<Silanis.ESL.API.CustomField> GetCustomFields(Direction direction, int from, int to)
+        {
+            string path = template.UrlFor(UrlTemplate.ACCOUNT_CUSTOMFIELD_LIST_PATH)
+                .Replace("{dir}", DirectionUtility.getDirection(direction))
+                .Replace("{from}", from.ToString())
+                .Replace("{to}", to.ToString())
+                .Build();
+
+            try 
+            {
+                string response = client.Get(path);
+                return JsonConvert.DeserializeObject<IList<Silanis.ESL.API.CustomField>> (response, settings);
+            }
+            catch (EslServerException e)
+            {
+                throw new EslServerException("Could not get the list of custom fields from account." + " Exception: " + e.Message, e.ServerError, e);
+            }
+            catch (Exception e)
+            {
+                throw new EslException("Could not get the list of custom fields from account." + " Exception: " + e.Message, e);
             }
         }
 

@@ -2,6 +2,7 @@ using System;
 using System.IO;
 using Silanis.ESL.SDK;
 using Silanis.ESL.SDK.Builder;
+using System.Collections.Generic;
 
 namespace SDK.Examples
 {
@@ -16,42 +17,11 @@ namespace SDK.Examples
         public readonly string FRENCH_DESCRIPTION = "Le numero dans le dos de votre chandail d'equipe";
         public readonly string FIELD_VALUE = "99";
 
-        private string email1;
+        public string email1;
         private Stream documentInputStream1;
-        private string customFieldId1, customFieldId2;
-        private CustomField retrievedCustomField;
-
-        public string Email1
-        {
-            get
-            {
-                return email1;
-            }
-        }
-
-        public string CustomFieldId1
-        {
-            get
-            {
-                return customFieldId1;
-            }
-        }
-
-        public string CustomFieldId2
-        {
-            get
-            {
-                return customFieldId2;
-            }
-        }
-
-        public CustomField RetrievedCustomField
-        {
-            get
-            {
-                return retrievedCustomField;
-            }
-        }
+        public string customFieldId1, customFieldId2;
+        public CustomField retrievedCustomField;
+        public IList<CustomField> retrievedCustomFieldList1, retrievedCustomFieldList2;
 
         public static void Main(string[] args)
         {
@@ -120,11 +90,17 @@ namespace SDK.Examples
             packageId = eslClient.CreatePackage(superDuperPackage);
             eslClient.SendPackage(packageId);
 
+            // Get the entire list of custom field from account
+            retrievedCustomFieldList1 = eslClient.GetCustomFieldService().GetCustomFields(Direction.ASCENDING);
+
+            // Get a list of custom fields from index [1, 2] sorted by its id (first two custom fields)
+            retrievedCustomFieldList2 = eslClient.GetCustomFieldService().GetCustomFields(Direction.DESCENDING, 1, 2);
+
             // Get the first custom field from account
             retrievedCustomField = eslClient.GetCustomFieldService().GetCustomField(customFieldId1);
 
             // Delete the second custom field from account
-            eslClient.GetCustomFieldService().DeleteCustomField(CustomFieldId2);
+            eslClient.GetCustomFieldService().DeleteCustomField(customFieldId2);
         }
     }
 }

@@ -58,6 +58,7 @@ namespace Silanis.ESL.SDK.Internal
 
         // Custom Field Service
         public static readonly string ACCOUNT_CUSTOMFIELD_PATH = "/account/customfields";
+        public static readonly string ACCOUNT_CUSTOMFIELD_LIST_PATH = "/account/customfields?dir={dir}&from={from}&to={to}";
 		public static readonly string ACCOUNT_CUSTOMFIELD_ID_PATH = "/account/customfields/{customFieldId}";
         public static readonly string USER_CUSTOMFIELD_PATH = "/user/customfields";
 		public static readonly string USER_CUSTOMFIELD_ID_PATH = "/user/customfields/{customFieldId}";

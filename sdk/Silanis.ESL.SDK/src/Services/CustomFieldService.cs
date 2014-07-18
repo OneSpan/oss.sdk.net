@@ -3,6 +3,7 @@ using Silanis.ESL.SDK.Internal;
 using Silanis.ESL.SDK.Builder;
 using Newtonsoft.Json;
 using Silanis.ESL.API;
+using System.Collections.Generic;
 
 namespace Silanis.ESL.SDK.Services
 {
@@ -50,6 +51,37 @@ namespace Silanis.ESL.SDK.Services
         {
             Silanis.ESL.API.CustomField apiCustomField = apiClient.GetCustomField(id);
             return new CustomFieldConverter(apiCustomField).ToSDKCustomField();
+        }
+
+        /// <summary>
+        /// Get the entire list of account custom fields.
+        /// </summary>
+        /// <returns>The list of custom fields.</returns>
+        /// <param name="direction">Direction of retrieved list to be sorted in ascending or descending order by id</param>
+        public IList<CustomField> GetCustomFields(Direction direction)
+        {
+            return GetCustomFields(direction, 0, 0);
+        }
+
+        /// <summary>
+        /// Get the list of account custom fields in the index [from, to] inclusively.
+        /// </summary>
+        /// 
+        /// <returns>The list of custom fields</returns>
+        /// <param name="direction">Direction of retrieved list to be sorted in ascending or descending order by id</param>
+        /// <param name="from">From index of custom field to start from @size(min="1")</param>
+        /// <param name="to">To index of custom field to end at @size(min="1")</param>
+        public IList<CustomField> GetCustomFields(Direction direction, int from, int to)
+        {
+            IList<Silanis.ESL.API.CustomField> apiCustomFieldList = apiClient.GetCustomFields(direction, from, to);
+
+            IList<Silanis.ESL.SDK.CustomField> result = new List<Silanis.ESL.SDK.CustomField>();
+            foreach (Silanis.ESL.API.CustomField apiCustomField in apiCustomFieldList)
+            {
+                result.Add(new CustomFieldConverter(apiCustomField).ToSDKCustomField());
+            }
+
+            return result;
         }
 
 		/// <summary>
