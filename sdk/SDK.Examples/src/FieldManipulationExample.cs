@@ -58,19 +58,22 @@ namespace SDK.Examples
 
             field1 = FieldBuilder.RadioButton("group1")
                 .WithName("field1")
-                .AtPosition(400, 100)
+                    .WithId("fieldId1")
+                    .AtPosition(400, 100)
                     .OnPage(0)
                     .Build();
 
 
             field2 = FieldBuilder.RadioButton("group1")
                 .WithName("field2")
+                    .WithId("fieldId2")
                     .AtPosition(400, 200)
                     .OnPage(0)
                     .Build();
 
             field3 = FieldBuilder.RadioButton("group1")
                 .WithName("field3")
+                    .WithId("fieldId3")
                     .AtPosition(400, 300)
                     .OnPage(0)
                     .Build();
@@ -82,6 +85,12 @@ namespace SDK.Examples
 
             createdPackage = eslClient.GetPackage(packageId);
             addedFields = eslClient.ApprovalService.GetApproval(createdPackage, documentId, signatureId.Id).Fields;
+
+            // Deleting field1
+            eslClient.ApprovalService.DeleteField(packageId, documentId, signatureId, field1.Id);
+
+            createdPackage = eslClient.GetPackage(packageId);
+            deletedFields = eslClient.ApprovalService.GetApproval(createdPackage, documentId, signatureId.Id).Fields;
         }
     }
 }

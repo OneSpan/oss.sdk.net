@@ -20,6 +20,12 @@ namespace SDK.Examples
             Assert.IsTrue(fieldDictionary.ContainsKey(example.field1.Name));
             Assert.IsTrue(fieldDictionary.ContainsKey(example.field2.Name));
             Assert.IsTrue(fieldDictionary.ContainsKey(example.field3.Name));
+
+            fieldDictionary = ConvertListToMap(example.deletedFields);
+
+            Assert.IsFalse(fieldDictionary.ContainsKey(example.field1.Name));
+            Assert.IsTrue(fieldDictionary.ContainsKey(example.field2.Name));
+            Assert.IsTrue(fieldDictionary.ContainsKey(example.field3.Name));
         }
 
         private Dictionary<string, Field> ConvertListToMap(List<Field> fieldList)

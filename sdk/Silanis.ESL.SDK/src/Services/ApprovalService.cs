@@ -74,6 +74,11 @@ namespace Silanis.ESL.SDK
             return apiClient.AddField(packageId, documentId, signatureId, apiField);
         }
 
+        public void DeleteField(PackageId packageId, string documentId, SignatureId signatureId, string fieldId)
+        {
+            apiClient.DeleteField(packageId, documentId, signatureId, fieldId);
+        }
+
         private string FindRoleIdForGroup(GroupId groupId, Silanis.ESL.API.Package createdPackage)
         {
             foreach (Silanis.ESL.API.Role role in createdPackage.Roles)
