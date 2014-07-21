@@ -12,9 +12,16 @@ namespace SDK.Examples
         {
             SignerOrderingExample example = new SignerOrderingExample( Props.GetInstance() );
             example.Run();
-            
-            DocumentPackage package = example.EslClient.GetPackage( example.PackageId );
-            Assert.IsNotNull(package);
+
+            // Initial signing order
+            DocumentPackage beforeReorder = example.savedPackage;
+            Assert.AreEqual(beforeReorder.Signers[example.email1].SigningOrder, 1);
+            Assert.AreEqual(beforeReorder.Signers[example.email2].SigningOrder, 2);
+
+            // After reordering signers
+            DocumentPackage afterReorder = example.afterReorder;
+            Assert.AreEqual(afterReorder.Signers[example.email1].SigningOrder, 2);
+            Assert.AreEqual(afterReorder.Signers[example.email2].SigningOrder, 1);
         }
     }
 }

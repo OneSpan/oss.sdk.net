@@ -12,8 +12,10 @@ namespace SDK.Examples
             new SignerOrderingExample(Props.GetInstance()).Run();
         }
 
-        private string email1;
-        private string email2;
+        public string email1;
+        public string email2;
+
+        public DocumentPackage savedPackage, afterReorder;
 
         public SignerOrderingExample( Props props ) : this(props.Get("api.url"), props.Get("api.key"), props.Get("1.email"), props.Get("2.email")) {
         }
@@ -41,12 +43,15 @@ namespace SDK.Examples
             
 			Console.WriteLine("Package created, id = " + packageId);
 
-			DocumentPackage savedPackage = EslClient.GetPackage(packageId);
-            
-			savedPackage.Signers[email2].SigningOrder = 1;
-			savedPackage.Signers[email1].SigningOrder = 2;
+			savedPackage = EslClient.GetPackage(packageId);
 
-			eslClient.PackageService.OrderSigners(savedPackage);
+            // Reorder signers
+            afterReorder = eslClient.GetPackage(packageId);
+            afterReorder.Signers[email2].SigningOrder = 1;
+            afterReorder.Signers[email1].SigningOrder = 2;
+            eslClient.PackageService.OrderSigners(afterReorder);
+
+            afterReorder = eslClient.GetPackage(packageId);
 
 			Console.WriteLine("Signer order changed");
 		}
