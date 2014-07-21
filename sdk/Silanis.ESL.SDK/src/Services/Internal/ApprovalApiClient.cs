@@ -141,6 +141,29 @@ namespace Silanis.ESL.SDK
             }
         }
 
+        public Silanis.ESL.API.Field GetField(PackageId packageId, string documentId, SignatureId signatureId, string fieldId)
+        {
+            string path = template.UrlFor(UrlTemplate.FIELD_ID_PATH)
+                .Replace("{packageId}", packageId.Id)
+                    .Replace("{documentId}", documentId)
+                    .Replace("{approvalId}", signatureId.Id)
+                    .Replace("{fieldId}", fieldId)
+                    .Build();
+
+            try {
+                string response = restClient.Get(path);
+                Silanis.ESL.API.Field apiField = JsonConvert.DeserializeObject<Silanis.ESL.API.Field> (response, jsonSettings);
+                return apiField;
+            }
+            catch (EslServerException e) {
+                throw new EslServerException("Could not get field from signature.\t" + " Exception: " + e.Message, e.ServerError, e);
+            }
+            catch (Exception e) {
+                throw new EslException("Could not get field from signature.\t" + " Exception: " + e.Message, e);
+            }
+
+        }
+
         public void DeleteField(PackageId packageId, string documentId, SignatureId signatureId, string fieldId)
         {
             string path = template.UrlFor(UrlTemplate.FIELD_ID_PATH)

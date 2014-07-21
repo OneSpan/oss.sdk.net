@@ -80,6 +80,12 @@ namespace Silanis.ESL.SDK
             apiClient.ModifyField(packageId, documentId, signatureId, apiField);
         }
 
+        public Field GetField(PackageId packageId, string documentId, SignatureId signatureId, string fieldId)
+        {
+            Silanis.ESL.API.Field apiField = apiClient.GetField(packageId, documentId, signatureId, fieldId);
+            return new FieldConverter(apiField).ToSDKField();
+        }
+
         public void DeleteField(PackageId packageId, string documentId, SignatureId signatureId, string fieldId)
         {
             apiClient.DeleteField(packageId, documentId, signatureId, fieldId);
