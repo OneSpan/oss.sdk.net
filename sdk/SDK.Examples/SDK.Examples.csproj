@@ -122,6 +122,7 @@
     <Compile Include="src\SignerQnAChallengeExample.cs" />
     <Compile Include="src\SignerSMSAuthenticationExample.cs" />
     <Compile Include="src\FieldManipulationExample.cs" />
+    <Compile Include="src\RetrieveFieldValuesExample.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
