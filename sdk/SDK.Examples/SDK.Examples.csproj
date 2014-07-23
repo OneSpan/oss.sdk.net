@@ -3,7 +3,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProductVersion>10.0.0</ProductVersion>
+    <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{8D6C84A6-459F-42E0-8673-F8890B6A57DC}</ProjectGuid>
     <OutputType>Exe</OutputType>
@@ -112,6 +112,7 @@
     <Compile Include="src\CustomSenderInfoInCreatePackageFromTemplateExample.cs" />
     <Compile Include="src\AttachmentRequirementExample.cs" />
     <Compile Include="src\DownloadCompletionReportExample.cs" />
+    <Compile Include="src\RetrieveFieldValuesExample.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

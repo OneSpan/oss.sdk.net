@@ -36,6 +36,13 @@ namespace Silanis.ESL.SDK
 		[JsonProperty("fieldValue")]
 		public string FieldValue { get; private set; }
 
+        /// <summary>
+        /// Gets the field name.
+        /// </summary>
+        /// <value>The field name.</value>
+        [JsonProperty("fieldName")]
+        public string FieldName { get; private set; }
+
 		/// <summary>
 		/// Initializes a new instance of the <see cref="Silanis.ESL.SDK.FieldSummary"/> class.
 		/// </summary>
