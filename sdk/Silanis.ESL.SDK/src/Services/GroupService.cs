@@ -39,6 +39,13 @@ namespace Silanis.ESL.SDK.Services
             return sdkGroup;
         }
 
+        public Group UpdateGroup( Group group, GroupId groupId ) {
+            Silanis.ESL.API.Group apiGroup = new GroupConverter( group ).ToAPIGroup();
+            apiGroup = apiClient.UpdateGroup( apiGroup, groupId.Id );
+            Group sdkGroup = new GroupConverter( apiGroup ).ToSDKGroup();
+            return sdkGroup;
+        }
+
         public GroupMember InviteMember( GroupId groupId, GroupMember groupMember ) {
             Silanis.ESL.API.GroupMember apiGroupMember = new GroupMemberConverter(groupMember).ToAPIGroupMember();
             Silanis.ESL.API.GroupMember apiResponse = apiClient.InviteMember( groupId.Id, apiGroupMember );
