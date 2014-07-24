@@ -34,15 +34,28 @@ namespace Silanis.ESL.SDK.Services
             apiGroup = apiClient.CreateGroup( apiGroup );
             Group sdkGroup = new GroupConverter( apiGroup ).ToSDKGroup();
             foreach ( GroupMember groupMember in group.Members ) {
-                InviteMember( sdkGroup.Id, groupMember );
+                AddMember( sdkGroup.Id, groupMember );
             }
             return sdkGroup;
         }
 
-        public GroupMember InviteMember( GroupId groupId, GroupMember groupMember ) {
+        public Group UpdateGroup( Group group, GroupId groupId ) {
+            Silanis.ESL.API.Group apiGroup = new GroupConverter( group ).ToAPIGroup();
+            apiGroup = apiClient.UpdateGroup( apiGroup, groupId.Id );
+            Group sdkGroup = new GroupConverter( apiGroup ).ToSDKGroup();
+            return sdkGroup;
+        }
+
+        public GroupMember AddMember( GroupId groupId, GroupMember groupMember ) {
             Silanis.ESL.API.GroupMember apiGroupMember = new GroupMemberConverter(groupMember).ToAPIGroupMember();
-            Silanis.ESL.API.GroupMember apiResponse = apiClient.InviteMember( groupId.Id, apiGroupMember );
+            Silanis.ESL.API.GroupMember apiResponse = apiClient.AddMember( groupId.Id, apiGroupMember );
             return new GroupMemberConverter( apiResponse ).ToSDKGroupMember();
+        }
+
+        public Group InviteMember( GroupId groupId, GroupMember groupMember ) {
+            Silanis.ESL.API.GroupMember apiGroupMember = new GroupMemberConverter(groupMember).ToAPIGroupMember();
+            Silanis.ESL.API.Group apiResponse = apiClient.InviteMember( groupId.Id, apiGroupMember );
+            return new GroupConverter( apiResponse ).ToSDKGroup();
         }
 
         public void DeleteGroup( GroupId groupId ) {

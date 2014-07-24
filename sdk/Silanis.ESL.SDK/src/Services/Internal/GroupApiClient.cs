@@ -68,8 +68,26 @@ namespace Silanis.ESL.SDK
                 throw new EslException ("Failed to create new group." + " Exception: " + e.Message, e);
             }
         }
+
+        public Silanis.ESL.API.Group UpdateGroup( Silanis.ESL.API.Group apiGroup, String groupId ) {
+            string path = template.UrlFor (UrlTemplate.GROUPS_ID_PATH)
+                .Replace("{groupId}", groupId)
+                .Build ();
+            try {
+                string json = JsonConvert.SerializeObject (apiGroup, settings);
+                string response = restClient.Put(path, json);              
+                Silanis.ESL.API.Group apiResponse = JsonConvert.DeserializeObject<Silanis.ESL.API.Group> (response);
+                return apiResponse;
+            } 
+            catch (EslServerException e) {
+                throw new EslServerException ("Failed to update group." + " Exception: " + e.Message, e.ServerError, e);
+            }
+            catch (Exception e) {
+                throw new EslException ("Failed to update group." + " Exception: " + e.Message, e);
+            }
+        }
         
-        public Silanis.ESL.API.GroupMember InviteMember( string groupId, Silanis.ESL.API.GroupMember apiGroupMember ) {
+        public Silanis.ESL.API.GroupMember AddMember( string groupId, Silanis.ESL.API.GroupMember apiGroupMember ) {
             string path = template.UrlFor (UrlTemplate.GROUPS_MEMBER_PATH)
                 .Replace("{groupId}", groupId )
                 .Build ();
@@ -80,10 +98,28 @@ namespace Silanis.ESL.SDK
                 return apiResponse;
             }
             catch (EslServerException e) {
-                throw new EslServerException ("Could not create a new package." + " Exception: " + e.Message, e.ServerError, e);
+                throw new EslServerException ("Failed to add new member." + " Exception: " + e.Message, e.ServerError, e);
             }
             catch (Exception e) {
-                throw new EslException ("Could not create a new package." + " Exception: " + e.Message, e);
+                throw new EslException ("Failed to add new member." + " Exception: " + e.Message, e);
+            }
+        }
+
+        public Silanis.ESL.API.Group InviteMember( string groupId, Silanis.ESL.API.GroupMember apiGroupMember ) {
+            string path = template.UrlFor (UrlTemplate.GROUPS_INVITE_PATH)
+                .Replace("{groupId}", groupId )
+                    .Build ();
+            try {
+                string json = JsonConvert.SerializeObject (apiGroupMember, settings);
+                string response = restClient.Post(path, json);              
+                Silanis.ESL.API.Group apiResponse = JsonConvert.DeserializeObject<Silanis.ESL.API.Group> (response);
+                return apiResponse;
+            }
+            catch (EslServerException e) {
+                throw new EslServerException ("Failed to invite member." + " Exception: " + e.Message, e.ServerError, e);
+            }
+            catch (Exception e) {
+                throw new EslException ("Failed to invite member." + " Exception: " + e.Message, e);
             }
         }
         
