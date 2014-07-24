@@ -105,11 +105,12 @@ namespace SDK.Examples
 				.Build();
 			createdEmptyGroup = eslClient.GroupService.CreateGroup(emptyGroup);
 			List<GroupMember> retrievedEmptyGroup = eslClient.GroupService.GetGroupMembers(createdEmptyGroup.Id);
-			eslClient.GroupService.InviteMember(createdEmptyGroup.Id,
+
+			GroupMember addMember = eslClient.GroupService.AddMember(createdEmptyGroup.Id,
 				GroupMemberBuilder.NewGroupMember(email1)
 				.AsMemberType(GroupMemberType.MANAGER)
 				.Build());
-			eslClient.GroupService.InviteMember(createdEmptyGroup.Id,
+			Group inviteMember = eslClient.GroupService.InviteMember(createdEmptyGroup.Id,
 				GroupMemberBuilder.NewGroupMember(email3)
 				.AsMemberType(GroupMemberType.MANAGER)
 				.Build());
@@ -128,12 +129,12 @@ namespace SDK.Examples
             createdGroup1 = eslClient.GroupService.CreateGroup(group1);
 			Console.Out.WriteLine("GroupId #1: " + createdGroup1.Id.Id);
 
-			eslClient.GroupService.InviteMember( createdGroup1.Id,
+			eslClient.GroupService.AddMember( createdGroup1.Id,
                                                 GroupMemberBuilder.NewGroupMember( email3 )
                                                 .AsMemberType( GroupMemberType.MANAGER )
                                                 .Build() );
 
-            eslClient.GroupService.InviteMember(createdGroup1.Id,
+            eslClient.GroupService.AddMember(createdGroup1.Id,
                 GroupMemberBuilder.NewGroupMember(email4)
                                                 .AsMemberType(GroupMemberType.REGULAR)
                                                 .Build());
