@@ -67,6 +67,11 @@ namespace SDK.Tests
             fieldStyle = new FieldStyleAndSubTypeConverter(fieldSubtype, binding).ToSDKFieldStyle();
             Assert.AreEqual(fieldStyle, FieldStyle.UNBOUND_RADIO_BUTTON);
 
+            fieldSubtype = FieldSubtype.QRCODE;
+            binding = null;
+            fieldStyle = new FieldStyleAndSubTypeConverter(fieldSubtype, binding).ToSDKFieldStyle();
+            Assert.AreEqual(fieldStyle, FieldStyle.UNBOUND_QRCODE);
+
             // Where the conversion is based on binding.
             fieldSubtype = new FieldSubtype();
             binding = BINDING_DATE;
@@ -111,6 +116,10 @@ namespace SDK.Tests
             fieldStyle = FieldStyle.UNBOUND_RADIO_BUTTON;
             fieldSubtype = new FieldStyleAndSubTypeConverter(fieldStyle).ToAPIFieldSubtype();
             Assert.AreEqual(fieldSubtype, FieldSubtype.RADIO);
+
+            fieldStyle = FieldStyle.UNBOUND_QRCODE;
+            fieldSubtype = new FieldStyleAndSubTypeConverter(fieldStyle).ToAPIFieldSubtype();
+            Assert.AreEqual(fieldSubtype, FieldSubtype.QRCODE);
 
             fieldStyle = FieldStyle.BOUND_DATE;
             fieldSubtype = new FieldStyleAndSubTypeConverter(fieldStyle).ToAPIFieldSubtype();

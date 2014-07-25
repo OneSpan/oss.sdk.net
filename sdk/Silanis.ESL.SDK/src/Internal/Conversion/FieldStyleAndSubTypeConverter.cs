@@ -51,6 +51,8 @@ namespace Silanis.ESL.SDK
                     return Silanis.ESL.API.FieldSubtype.RADIO;
                 case FieldStyle.UNBOUND_CUSTOM_FIELD:
                     return Silanis.ESL.API.FieldSubtype.CUSTOMFIELD;
+                case FieldStyle.UNBOUND_QRCODE:
+                    return Silanis.ESL.API.FieldSubtype.QRCODE;
                 default:
                     throw new EslException(String.Format ("Unable to decode the field subtype from style {0}", sdkFieldStyle),null );
             }
@@ -75,6 +77,8 @@ namespace Silanis.ESL.SDK
                         return FieldStyle.UNBOUND_CHECK_BOX;
                     case FieldSubtype.RADIO:
                         return FieldStyle.UNBOUND_RADIO_BUTTON;
+                    case FieldSubtype.QRCODE:
+                        return FieldStyle.UNBOUND_QRCODE;
                     default:
                         throw new EslException(String.Format("Unable to decode the style from field subtype {0}", apiFieldSubType),null);
                 }
