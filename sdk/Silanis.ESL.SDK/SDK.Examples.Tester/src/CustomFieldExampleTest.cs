@@ -35,8 +35,8 @@ namespace SDK.Examples
             // Get entire list of custom fields
             Assert.Greater(example.retrievedCustomFieldList1.Count, 0);
 
-            // Get first two custom fields
-            Assert.AreEqual(example.retrievedCustomFieldList2.Count, 2);
+            // Get first page of custom fields
+            Assert.Greater(example.retrievedCustomFieldList2.Count, 0);
 		}
     }
 }

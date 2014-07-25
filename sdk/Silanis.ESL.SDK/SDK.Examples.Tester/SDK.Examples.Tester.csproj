@@ -88,6 +88,7 @@
     <Compile Include="src\SignerQnAChallengeExampleTest.cs" />
     <Compile Include="src\SignerSMSAuthenticationExampleTest.cs" />
     <Compile Include="src\FieldManipulationExampleTest.cs" />
+    <Compile Include="src\DocumentLayoutExampleTest.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

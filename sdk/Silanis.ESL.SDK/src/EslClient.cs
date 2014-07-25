@@ -29,6 +29,7 @@ namespace Silanis.ESL.SDK
         private TemplateService templateService;
 		private AuthenticationTokenService authenticationTokenService;    
 		private AttachmentRequirementService attachmentRequirementService;
+        private LayoutService layoutService;
         
         private JsonSerializerSettings jsonSerializerSettings;
 
@@ -61,7 +62,8 @@ namespace Silanis.ESL.SDK
 			templateService = new TemplateService(new TemplateApiClient(restClient, this.baseUrl, jsonSerializerSettings), packageService);
 			authenticationTokenService = new AuthenticationTokenService(restClient, this.baseUrl); 
 			attachmentRequirementService = new AttachmentRequirementService(new AttachmentRequirementApiClient(restClient, this.baseUrl, jsonSerializerSettings));
-		}
+            layoutService = new LayoutService(new LayoutApiClient(restClient, this.baseUrl, jsonSerializerSettings));
+        }
         
         private void configureJsonSerializationSettings()
         {
@@ -386,5 +388,13 @@ namespace Silanis.ESL.SDK
 				return attachmentRequirementService;
 			}
 		}
+
+        public LayoutService LayoutService
+        {
+            get
+            {
+                return layoutService;
+            }
+        }
 	}
 }	

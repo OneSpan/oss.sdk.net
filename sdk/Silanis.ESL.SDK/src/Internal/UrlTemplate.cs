@@ -104,6 +104,11 @@ namespace Silanis.ESL.SDK.Internal
 		// AttachmentRequirement Service
 		public static readonly string ATTACHMENT_REQUIREMENT_PATH = "/packages/{packageId}/attachment/{attachmentId}";
 
+        // Layout Service
+        public static readonly string LAYOUT_PATH = "/layouts";
+        public static readonly string LAYOUT_LIST_PATH = "/layouts?to={to}&from={from}&dir={dir}";
+        public static readonly string APPLY_LAYOUT_PATH = "/packages/{packageId}/documents/{documentId}/layout?layoutId={layoutId}";
+
 		public UrlTemplate (string baseUrl)
 		{
 			this.baseUrl = baseUrl;

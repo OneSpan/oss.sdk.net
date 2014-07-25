@@ -120,12 +120,12 @@ namespace Silanis.ESL.SDK
             }
         }
 
-        public IList<Silanis.ESL.API.CustomField> GetCustomFields(Direction direction, int from, int to)
+        public IList<Silanis.ESL.API.CustomField> GetCustomFields(Direction direction, PageRequest request)
         {
             string path = template.UrlFor(UrlTemplate.ACCOUNT_CUSTOMFIELD_LIST_PATH)
                 .Replace("{dir}", DirectionUtility.getDirection(direction))
-                .Replace("{from}", from.ToString())
-                .Replace("{to}", to.ToString())
+                .Replace("{from}", request.From.ToString())
+                .Replace("{to}", request.To.ToString())
                 .Build();
 
             try 

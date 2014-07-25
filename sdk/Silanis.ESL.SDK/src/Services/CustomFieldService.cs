@@ -60,20 +60,19 @@ namespace Silanis.ESL.SDK.Services
         /// <param name="direction">Direction of retrieved list to be sorted in ascending or descending order by id</param>
         public IList<CustomField> GetCustomFields(Direction direction)
         {
-            return GetCustomFields(direction, 0, 0);
+            return GetCustomFields(direction, new PageRequest(-1, 0));
         }
 
         /// <summary>
-        /// Get the list of account custom fields in the index [from, to] inclusively.
+        /// Get the list of account custom fields.
         /// </summary>
         /// 
         /// <returns>The list of custom fields</returns>
         /// <param name="direction">Direction of retrieved list to be sorted in ascending or descending order by id</param>
-        /// <param name="from">From index of custom field to start from @size(min="1")</param>
-        /// <param name="to">To index of custom field to end at @size(min="1")</param>
-        public IList<CustomField> GetCustomFields(Direction direction, int from, int to)
+        /// <param name="request">Identifying which page of results to return.</param>
+        public IList<CustomField> GetCustomFields(Direction direction, PageRequest request)
         {
-            IList<Silanis.ESL.API.CustomField> apiCustomFieldList = apiClient.GetCustomFields(direction, from, to);
+            IList<Silanis.ESL.API.CustomField> apiCustomFieldList = apiClient.GetCustomFields(direction, request);
 
             IList<Silanis.ESL.SDK.CustomField> result = new List<Silanis.ESL.SDK.CustomField>();
             foreach (Silanis.ESL.API.CustomField apiCustomField in apiCustomFieldList)

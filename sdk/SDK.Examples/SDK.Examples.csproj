@@ -123,6 +123,7 @@
     <Compile Include="src\SignerSMSAuthenticationExample.cs" />
     <Compile Include="src\FieldManipulationExample.cs" />
     <Compile Include="src\RetrieveFieldValuesExample.cs" />
+    <Compile Include="src\DocumentLayoutExample.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
