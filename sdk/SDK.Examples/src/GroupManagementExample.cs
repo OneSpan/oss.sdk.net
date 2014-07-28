@@ -21,8 +21,11 @@ namespace SDK.Examples
 
         public Group createdEmptyGroup;
         public Group createdGroup1;
+        public Group retrievedGroup1;
         public Group createdGroup2;
+        public Group retrievedGroup2;
         public Group createdGroup3;
+        public Group retrievedGroup3;
         public Group createdGroup3Updated;
 
         public List<Group> allGroupsBeforeDelete;
@@ -137,9 +140,10 @@ namespace SDK.Examples
             eslClient.GroupService.AddMember(createdGroup1.Id,
                 GroupMemberBuilder.NewGroupMember(email4)
                                                 .AsMemberType(GroupMemberType.REGULAR)
-                                                .Build());
+                                             .Build());
 
-            Group retrievedGroup1 = eslClient.GroupService.GetGroup(createdGroup1.Id);
+            retrievedGroup1 = eslClient.GroupService.GetGroup(createdGroup1.Id);
+
             Group group2 = GroupBuilder.NewGroup(Guid.NewGuid().ToString())
                 .WithMember(GroupMemberBuilder.NewGroupMember(email2)
 					.AsMemberType(GroupMemberType.MANAGER) )
@@ -147,8 +151,8 @@ namespace SDK.Examples
                     .WithIndividualMemberEmailing()
                     .Build();
             createdGroup2 = eslClient.GroupService.CreateGroup(group2);
+            retrievedGroup2 = eslClient.GroupService.GetGroup(createdGroup2.Id);
 			Console.Out.WriteLine("GroupId #2: " + createdGroup2.Id.Id);
-            Group retrievedGroup2 = eslClient.GroupService.GetGroup(createdGroup2.Id);
 
             Group group3 = GroupBuilder.NewGroup(Guid.NewGuid().ToString())
                 .WithMember(GroupMemberBuilder.NewGroupMember(email3)
@@ -157,8 +161,8 @@ namespace SDK.Examples
                     .WithIndividualMemberEmailing()
                     .Build();
             createdGroup3 = eslClient.GroupService.CreateGroup(group3);
-            Console.Out.WriteLine("GroupId #3: " + createdGroup2.Id.Id);
-            Group retrievedGroup3 = eslClient.GroupService.GetGroup(createdGroup3.Id);
+            Console.Out.WriteLine("GroupId #3: " + createdGroup3.Id.Id);
+            retrievedGroup3 = eslClient.GroupService.GetGroup(createdGroup3.Id);
 
 			allGroupsBeforeDelete = eslClient.GroupService.GetMyGroups();
 

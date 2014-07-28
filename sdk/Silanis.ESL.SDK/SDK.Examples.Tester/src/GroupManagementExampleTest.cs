@@ -11,14 +11,10 @@ namespace SDK.Examples
         public void verify() {
             GroupManagementExample example = new GroupManagementExample(Props.GetInstance());
             example.Run();
-
-            Assert.Contains(example.createdGroup1.Id.Id, GetGroupsId(example.allGroupsBeforeDelete));
-            Assert.Contains(example.createdGroup2.Id.Id, GetGroupsId(example.allGroupsBeforeDelete));
-            Assert.Contains(example.createdGroup3.Id.Id, GetGroupsId(example.allGroupsBeforeDelete));
-
-            Assert.Contains(example.createdGroup1.Id.Id, GetGroupsId(example.allGroupsAfterDelete));
-            Assert.IsFalse(GetGroupsId(example.allGroupsAfterDelete).Contains(example.createdGroup2.Id.Id));
-            Assert.Contains(example.createdGroup3.Id.Id, GetGroupsId(example.allGroupsAfterDelete));
+            
+            Assert.AreEqual(example.createdGroup1.Id.Id, example.retrievedGroup1.Id.Id);
+            Assert.AreEqual(example.createdGroup2.Id.Id, example.retrievedGroup2.Id.Id);
+            Assert.AreEqual(example.createdGroup3.Id.Id, example.retrievedGroup3.Id.Id);
 
             Assert.Contains(example.email2, example.groupMemberEmailsAfterUpdate);
             Assert.Contains(example.email3, example.groupMemberEmailsAfterUpdate);
