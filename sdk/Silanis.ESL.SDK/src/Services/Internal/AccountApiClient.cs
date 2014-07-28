@@ -18,11 +18,13 @@ namespace Silanis.ESL.SDK
             this.jsonSettings = jsonSettings;
         }
         
-        public void InviteUser( Silanis.ESL.API.Sender invitee ) {
+        public Silanis.ESL.API.Sender InviteUser( Silanis.ESL.API.Sender invitee ) {
             string path = template.UrlFor(UrlTemplate.ACCOUNT_MEMBER_PATH).Build ();
             try {
                 string json = JsonConvert.SerializeObject (invitee, jsonSettings);
-                restClient.Post(path, json);              
+                string response = restClient.Post(path, json);
+                Silanis.ESL.API.Sender apiResponse = JsonConvert.DeserializeObject<Silanis.ESL.API.Sender> (response, jsonSettings );
+                return apiResponse;
             }
             catch (EslServerException e) {
                 throw new EslServerException ("Failed to invite new account member.\t" + " Exception: " + e.Message, e.ServerError, e);
@@ -33,7 +35,7 @@ namespace Silanis.ESL.SDK
         }        
 
         public void UpdateSender(Silanis.ESL.API.Sender apiSender, string senderId){
-            string path = template.UrlFor(UrlTemplate.SENDER_PATH)
+            string path = template.UrlFor(UrlTemplate.ACCOUNT_MEMBER_ID_PATH)
                 .Replace("{senderUid}", senderId)
                 .Build();
             try {
@@ -50,7 +52,7 @@ namespace Silanis.ESL.SDK
         }
 
         public void DeleteSender(string senderId){
-            string path = template.UrlFor(UrlTemplate.SENDER_PATH)
+            string path = template.UrlFor(UrlTemplate.ACCOUNT_MEMBER_ID_PATH)
                 .Replace("{senderUid}", senderId)
                 .Build();
             try {
@@ -79,6 +81,24 @@ namespace Silanis.ESL.SDK
             }
             catch (Exception e) {
                 throw new EslException("Failed to retrieve Account Members List.\t" + " Exception: " + e.Message, e);
+            }
+        }
+
+        public Silanis.ESL.API.Sender GetSender(string senderId) {
+            string path = template.UrlFor(UrlTemplate.ACCOUNT_MEMBER_ID_PATH)
+                .Replace("{senderUid}", senderId)
+                .Build();
+            try {
+                string response = restClient.Get(path);
+                Silanis.ESL.API.Sender apiResponse = JsonConvert.DeserializeObject<Silanis.ESL.API.Sender> (response, jsonSettings );
+
+                return apiResponse;
+            }
+            catch (EslServerException e) {
+                throw new EslServerException("Failed to retrieve Sender from Account.\t" + " Exception: " + e.Message, e.ServerError, e);
+            }
+            catch (Exception e) {
+                throw new EslException("Failed to retrieve Sender from Account.\t" + " Exception: " + e.Message, e);
             }
         }
     }

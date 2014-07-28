@@ -62,9 +62,10 @@ namespace SDK.Examples
                 .WithStatus(SenderStatus.ACTIVE)
                 .Build();
 
-            eslClient.AccountService.InviteUser(accountMember1);
-            eslClient.AccountService.InviteUser(accountMember2);
-            eslClient.AccountService.InviteUser(accountMember3);
+            Sender createdSender1 = eslClient.AccountService.InviteUser(accountMember1);
+            Sender retrievedSender1 = eslClient.AccountService.GetSender(createdSender1.Id);
+            Sender createdSender2 = eslClient.AccountService.InviteUser(accountMember2);
+            Sender createdSender3 = eslClient.AccountService.InviteUser(accountMember3);
 
             accountMembers = eslClient.AccountService.GetSenders();
 
