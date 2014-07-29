@@ -15,10 +15,12 @@ namespace Silanis.ESL.SDK.Services
             this.apiClient = apiClient;
         }
 
-        public void InviteUser(AccountMember invitee)
+        public Sender InviteUser(AccountMember invitee)
         {
             Silanis.ESL.API.Sender apiSender = new AccountMemberConverter( invitee ).ToAPISender();
-            apiClient.InviteUser( apiSender );
+            Silanis.ESL.API.Sender apiResponse = apiClient.InviteUser( apiSender );
+            Sender result = new SenderConverter( apiResponse ).ToSDKSender();
+            return result;
         }
 
         public IDictionary<string, Silanis.ESL.SDK.Sender> GetSenders()
@@ -30,6 +32,13 @@ namespace Silanis.ESL.SDK.Services
                 result.Add(apiSender.Email, new SenderConverter( apiSender ).ToSDKSender() );
             }
             
+            return result;
+        }
+
+        public Silanis.ESL.SDK.Sender GetSender(string senderId)
+        {
+            Silanis.ESL.API.Sender apiResponse = apiClient.GetSender(senderId);
+            Sender result = new SenderConverter(apiResponse).ToSDKSender();
             return result;
         }
 
