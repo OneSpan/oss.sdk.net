@@ -3,51 +3,41 @@ using System.IO;
 using Silanis.ESL.SDK;
 using Silanis.ESL.SDK.Builder;
 using Silanis.ESL.SDK.Internal;
+using System.Collections.Generic;
 
 namespace SDK.Examples
 {
-	public class DownloadCompletionReportExample : SDKSample
+    public class DownloadCompletionAndUsageReportExample : SDKSample
 	{
-		private string email1;
-		private string senderUID;
-		private Silanis.ESL.SDK.CompletionReport sdkCompletionReport;
-		private Stream fileStream1;
+        public string email1;
+        private string senderUID;
+        private Stream fileStream1;
+
+        public Silanis.ESL.SDK.CompletionReport sdkCompletionReport;
+        public Silanis.ESL.SDK.UsageReport sdkUsageReport;
+        public string csvCompletionReport;
+        public string csvUsageReport;
 
 		public static void Main(string[] args)
 		{
-			new DownloadCompletionReportExample(Props.GetInstance()).Run();
+            new DownloadCompletionAndUsageReportExample(Props.GetInstance()).Run();
 		}
 
-		public DownloadCompletionReportExample(Props props) : this(props.Get("api.url"), props.Get("api.key"), props.Get("1.email"))
+        public DownloadCompletionAndUsageReportExample(Props props) : this(props.Get("api.url"), props.Get("api.key"), props.Get("1.email"))
 		{
 		}
 
-		public DownloadCompletionReportExample(string apiUrl, string apiKey, string email1) : base( apiUrl, apiKey )
+        public DownloadCompletionAndUsageReportExample(string apiUrl, string apiKey, string email1) : base( apiUrl, apiKey )
 		{
 			this.email1 = email1;
 			this.senderUID = Converter.apiKeyToUID(apiKey);
 			this.fileStream1 = File.OpenRead(new FileInfo(Directory.GetCurrentDirectory() + "/src/document.pdf").FullName);
 		}
 
-		public string Email1
-		{
-			get { return email1; }
-		}
-
-		public string SenderUID
-		{
-			get { return senderUID; }
-		}
-
-		public Silanis.ESL.SDK.CompletionReport SdkCompletionReport
-		{
-			get { return sdkCompletionReport; }
-		}
-
 		override public void Execute()
 		{
 			DocumentPackage superDuperPackage =
-				PackageBuilder.NewPackageNamed("DownloadCompletionReport: " + DateTime.Now)
+                PackageBuilder.NewPackageNamed("DownloadCompletionAndUsageReport: " + DateTime.Now)
 					.DescribedAs("This is a package created using the e-SignLive SDK")
 					.ExpiresOn(DateTime.Now.AddMonths(100))
 					.WithEmailMessage("This message should be delivered to all signers")
@@ -78,8 +68,17 @@ namespace SDK.Examples
 			DateTime from = DateTime.Today.AddDays(-1);
 			DateTime to = DateTime.Now;
 
+            // Download the completion report
 			sdkCompletionReport = eslClient.PackageService.DownloadCompletionReport(DocumentPackageStatus.DRAFT, senderUID, from, to);
-            string csvCompletionReport = eslClient.PackageService.DownloadCompletionReportAsCSV(DocumentPackageStatus.DRAFT, senderUID, from, to);
+            csvCompletionReport = eslClient.PackageService.DownloadCompletionReportAsCSV(DocumentPackageStatus.DRAFT, senderUID, from, to);
+
+            // Download the usage report
+            sdkUsageReport = eslClient.PackageService.DownloadUsageReport(from, to);
+            csvUsageReport = eslClient.PackageService.DownloadUsageReportAsCSV(from, to);
+
+            // Get the number of packages in draft for sender
+            IDictionary<UsageReportCategory, int> categoryCounts = sdkUsageReport.SenderUsageReports[0].CountByUsageReportCategory;
+            int numOfDrafts = categoryCounts[UsageReportCategory.DRAFT];
 		}
     }
 }

@@ -111,7 +111,6 @@
     <Compile Include="src\CustomSenderInfoInCreateNewTemplateExample.cs" />
     <Compile Include="src\CustomSenderInfoInCreatePackageFromTemplateExample.cs" />
     <Compile Include="src\AttachmentRequirementExample.cs" />
-    <Compile Include="src\DownloadCompletionReportExample.cs" />
     <Compile Include="src\SenderManipulationExample.cs" />
     <Compile Include="src\ExceptionHandlingExample.cs" />
     <Compile Include="src\SignatureManipulationExample.cs" />
@@ -124,6 +123,7 @@
     <Compile Include="src\FieldManipulationExample.cs" />
     <Compile Include="src\RetrieveFieldValuesExample.cs" />
     <Compile Include="src\DocumentLayoutExample.cs" />
+    <Compile Include="src\DownloadCompletionAndUsageReportExample.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

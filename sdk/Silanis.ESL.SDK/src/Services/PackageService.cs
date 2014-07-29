@@ -998,11 +998,11 @@ namespace Silanis.ESL.SDK.Services
             }
             catch (EslServerException e)
             {
-                throw new EslServerException("Could not download the completion report." + " Exception: " + e.Message, e.ServerError, e);
+                throw new EslServerException("Could not download the completion report in csv." + " Exception: " + e.Message, e.ServerError, e);
             }
             catch (Exception e)
             {
-                throw new EslException("Could not download the completion report." + " Exception: " + e.Message, e);
+                throw new EslException("Could not download the completion report in csv." + " Exception: " + e.Message, e);
             }
         }
 
@@ -1024,5 +1024,55 @@ namespace Silanis.ESL.SDK.Services
 				throw new EslException("Could not download the completion report." + " Exception: " + e.Message, e);
 			}
 		}
+
+        private string BuildUsageReportUrl(DateTime from, DateTime to)
+        {
+            string toDate = DateHelper.dateToIsoUtcFormat(to);
+            string fromDate = DateHelper.dateToIsoUtcFormat(from);
+
+            return template.UrlFor(UrlTemplate.USAGE_REPORT_PATH)
+                .Replace("{from}", fromDate)
+                .Replace("{to}", toDate)
+                .Build(); 
+        }
+
+        public string DownloadUsageReportAsCSV(DateTime from, DateTime to)
+        {
+            string path = BuildUsageReportUrl(from, to);
+
+            try
+            {
+                string response = restClient.Get(path, "text/csv");
+                return response;
+            }
+            catch (EslServerException e)
+            {
+                throw new EslServerException("Could not download the usage report in csv." + " Exception: " + e.Message, e.ServerError, e);
+            }
+            catch (Exception e)
+            {
+                throw new EslException("Could not download the usage report in csv." + " Exception: " + e.Message, e);
+            }
+        }
+
+        public Silanis.ESL.SDK.UsageReport DownloadUsageReport(DateTime from, DateTime to)
+        {
+            string path = BuildUsageReportUrl(from, to);
+
+            try
+            {
+                string response = restClient.Get(path);
+                Silanis.ESL.API.UsageReport apiUsageReport = JsonConvert.DeserializeObject<Silanis.ESL.API.UsageReport> (response, settings);
+                return new UsageReportConverter(apiUsageReport).ToSDKUsageReport();
+            }
+            catch (EslServerException e)
+            {
+                throw new EslServerException("Could not download the usage report." + " Exception: " + e.Message, e.ServerError, e);
+            }
+            catch (Exception e)
+            {
+                throw new EslException("Could not download the usage report." + " Exception: " + e.Message, e);
+            }
+        }
 	}
 }

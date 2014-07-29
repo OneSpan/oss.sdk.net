@@ -60,7 +60,6 @@
     <Compile Include="src\GenericFieldsExampleTest.cs" />
     <Compile Include="src\AttachmentRequirementExampleTest.cs" />
     <Compile Include="src\internal\DocumentTypeUtility.cs" />
-    <Compile Include="src\DownloadCompletionReportExampleTest.cs" />
     <Compile Include="src\GroupManagementExampleTest.cs" />
     <Compile Include="src\DocumentPackageSettingsExampleTest.cs" />
     <Compile Include="src\SenderManipulationExampleTest.cs" />
@@ -89,6 +88,7 @@
     <Compile Include="src\SignerSMSAuthenticationExampleTest.cs" />
     <Compile Include="src\FieldManipulationExampleTest.cs" />
     <Compile Include="src\DocumentLayoutExampleTest.cs" />
+    <Compile Include="src\DownloadCompletionAndUsageReportExampleTest.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
