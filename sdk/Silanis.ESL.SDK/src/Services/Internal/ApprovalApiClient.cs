@@ -2,6 +2,7 @@ using System;
 using Newtonsoft.Json;
 using Silanis.ESL.SDK.Internal;
 using Silanis.ESL.API;
+using System.Collections.Generic;
 
 namespace Silanis.ESL.SDK
 {
@@ -74,6 +75,25 @@ namespace Silanis.ESL.SDK
             }
             catch (Exception e) {
                 throw new EslException("Could not modify signature.\t" + " Exception: " + e.Message, e);
+            }
+        }
+
+        public void UpdateApprovals(PackageId packageId, string documentId, IList<Approval> approvalList)
+        {
+            string path = template.UrlFor(UrlTemplate.APPROVAL_PATH)
+                .Replace("{packageId}", packageId.Id)
+                .Replace("{documentId}", documentId)
+                .Build();
+
+            try {
+                string json = JsonConvert.SerializeObject (approvalList, jsonSettings);
+                restClient.Put(path, json);
+            }
+            catch (EslServerException e) {
+                throw new EslServerException("Could not update signatures.\t" + " Exception: " + e.Message, e.ServerError, e);
+            }
+            catch (Exception e) {
+                throw new EslException("Could not update signatures.\t" + " Exception: " + e.Message, e);
             }
         }
 

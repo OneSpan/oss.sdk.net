@@ -29,12 +29,19 @@ namespace SDK.Examples
             Assert.IsTrue(signaturesDictionary.ContainsKey(example.email3));
 
             // Test if signature3 is updated properly and is assigned to signer1
-            signaturesDictionary = ConvertListToMap(example.updatedSignatures);
+            signaturesDictionary = ConvertListToMap(example.modifiedSignatures);
 
             Assert.IsTrue(signaturesDictionary.ContainsKey(example.email1));
             Assert.IsTrue(signaturesDictionary.ContainsKey(example.email2));
             Assert.IsFalse(signaturesDictionary.ContainsKey(example.email3));
 
+            // Test if the signatures were updated with the new list of signatures
+            signaturesDictionary = ConvertListToMap(example.updatedSignatures);
+
+            Assert.IsFalse(signaturesDictionary.ContainsKey(example.email1));
+            Assert.IsTrue(signaturesDictionary.ContainsKey(example.email2));
+            Assert.IsTrue(signaturesDictionary.ContainsKey(example.email3));
+            Assert.AreEqual(signaturesDictionary[example.email2].Fields[0].Style, FieldStyle.BOUND_NAME);
         }
 
         private Dictionary<string,Signature> ConvertListToMap(List<Signature> signaturesList)

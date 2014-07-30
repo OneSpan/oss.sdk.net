@@ -2,6 +2,8 @@ using System;
 using Silanis.ESL.SDK.Internal;
 using Newtonsoft.Json;
 using Silanis.ESL.API;
+using System.Collections;
+using System.Collections.Generic;
 
 namespace Silanis.ESL.SDK
 {
@@ -59,6 +61,32 @@ namespace Silanis.ESL.SDK
             }
 
             apiClient.ModifyApproval(sdkPackage.Id, documentId, approval);
+        }
+
+        public void UpdateApprovals(DocumentPackage sdkPackage, string documentId, IList<Signature> signatureList)
+        {
+            Package apiPackage = new DocumentPackageConverter(sdkPackage).ToAPIPackage();
+
+            IList<Approval> approvalList = new List<Approval>();
+            foreach (Signature signature in signatureList)
+            {
+                Approval approval = new SignatureConverter(signature).ToAPIApproval();
+                if (signature.IsPlaceholderSignature())
+                {
+                    approval.Role = signature.RoleId.Id;
+                }
+                else if (signature.IsGroupSignature())
+                {
+                    approval.Role = FindRoleIdForGroup(signature.GroupId, apiPackage);
+                }
+                else
+                {
+                    approval.Role = FindRoleIdForSigner(signature.SignerEmail, apiPackage);
+                }
+                approvalList.Add(approval);
+            }
+
+            apiClient.UpdateApprovals(sdkPackage.Id, documentId, approvalList);
         }
 
         public Signature GetApproval(DocumentPackage sdkPackage, string documentId, string approvalId)
