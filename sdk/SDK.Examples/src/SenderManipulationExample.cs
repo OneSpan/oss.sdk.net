@@ -67,9 +67,14 @@ namespace SDK.Examples
             Sender createdSender2 = eslClient.AccountService.InviteUser(accountMember2);
             Sender createdSender3 = eslClient.AccountService.InviteUser(accountMember3);
 
+            Console.Out.WriteLine(email2);
+
+            eslClient.AccountService.SendInvite(createdSender1.Id);
+
             accountMembers = eslClient.AccountService.GetSenders();
 
-            eslClient.AccountService.DeleteSender(accountMembers[email2].Id);
+            eslClient.AccountService.DeleteSender(createdSender2.Id);
+
             accountMembersWithDeletedSender = eslClient.AccountService.GetSenders();
 
             updatedSenderInfo = SenderInfoBuilder.NewSenderInfo(email3)

@@ -32,7 +32,22 @@ namespace Silanis.ESL.SDK
             catch (Exception e) {
                 throw new EslException ("Failed to invite new account member.\t" + " Exception: " + e.Message, e);
             }
-        }        
+        }
+
+        public void SendInvite( string senderId ) {
+            string path = template.UrlFor(UrlTemplate.ACCOUNT_MEMBER_INVITE_PATH)
+                .Replace("{senderUid}", senderId)
+                .Build ();
+            try {
+                restClient.Post(path, null);
+            }
+            catch (EslServerException e) {
+                throw new EslServerException ("Failed to send invite to sender.\t" + " Exception: " + e.Message, e.ServerError, e);
+            }
+            catch (Exception e) {
+                throw new EslException ("Failed to send invite to sender.\t" + " Exception: " + e.Message, e);
+            }
+        }
 
         public void UpdateSender(Silanis.ESL.API.Sender apiSender, string senderId){
             string path = template.UrlFor(UrlTemplate.ACCOUNT_MEMBER_ID_PATH)
