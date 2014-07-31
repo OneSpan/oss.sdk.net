@@ -81,8 +81,11 @@ namespace Silanis.ESL.SDK
             }
         }
 
-        public Silanis.ESL.API.Result<Silanis.ESL.API.Sender> GetSenders() {
-            string path = template.UrlFor(UrlTemplate.ACCOUNT_MEMBER_PATH)
+        public Silanis.ESL.API.Result<Silanis.ESL.API.Sender> GetSenders(Direction direction, PageRequest request) {
+            string path = template.UrlFor(UrlTemplate.ACCOUNT_MEMBER_LIST_PATH)
+                .Replace("{dir}", DirectionUtility.getDirection(direction))
+                .Replace("{from}", request.From.ToString())
+                .Replace("{to}", request.To.ToString())
                 .Build();
             try {
                 string response = restClient.Get(path);

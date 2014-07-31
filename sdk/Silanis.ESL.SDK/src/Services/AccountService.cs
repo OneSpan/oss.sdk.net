@@ -27,9 +27,9 @@ namespace Silanis.ESL.SDK.Services
             apiClient.SendInvite(senderId);
         }
 
-        public IDictionary<string, Silanis.ESL.SDK.Sender> GetSenders()
+        public IDictionary<string, Silanis.ESL.SDK.Sender> GetSenders(Direction direction, PageRequest request)
         {
-            Silanis.ESL.API.Result<Silanis.ESL.API.Sender> apiResponse = apiClient.GetSenders();
+            Silanis.ESL.API.Result<Silanis.ESL.API.Sender> apiResponse = apiClient.GetSenders(direction, request);
             
             IDictionary<string, Silanis.ESL.SDK.Sender> result = new Dictionary<string, Silanis.ESL.SDK.Sender>();
             foreach ( Silanis.ESL.API.Sender apiSender in apiResponse.Results ) {
