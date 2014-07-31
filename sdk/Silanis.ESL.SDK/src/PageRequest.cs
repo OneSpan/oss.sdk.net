@@ -14,14 +14,14 @@ namespace Silanis.ESL.SDK
 		public PageRequest (int from, int pageSize)
 		{
 			From = from;
-			if (pageSize > MaxPageSize)
-			{
-				PageSize = MaxPageSize;
-			}
-			else
-			{
+//			if (pageSize > MaxPageSize)
+//			{
+//				PageSize = MaxPageSize;
+//			}
+//			else
+//			{
 				PageSize = pageSize;
-			}		
+//			}		
 		}
 
 		public int From 
