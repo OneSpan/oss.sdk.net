@@ -23,6 +23,10 @@ namespace Silanis.ESL.SDK.Services
             return result;
         }
 
+        public void SendInvite(string senderId){
+            apiClient.SendInvite(senderId);
+        }
+
         public IDictionary<string, Silanis.ESL.SDK.Sender> GetSenders()
         {
             Silanis.ESL.API.Result<Silanis.ESL.API.Sender> apiResponse = apiClient.GetSenders();

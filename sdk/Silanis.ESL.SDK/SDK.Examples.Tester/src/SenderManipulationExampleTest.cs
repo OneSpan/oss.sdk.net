@@ -13,11 +13,6 @@ namespace SDK.Examples
             SenderManipulationExample example = new SenderManipulationExample(Props.GetInstance());
             example.Run();
 
-            // Invite Account Members
-            Assert.IsTrue(example.accountMembers.ContainsKey(example.email1));
-            Assert.IsTrue(example.accountMembers.ContainsKey(example.email2));
-            Assert.IsTrue(example.accountMembers.ContainsKey(example.email3));
-
             // Delete Sender
             Assert.IsFalse(example.accountMembersWithDeletedSender.ContainsKey(example.email2));
 
