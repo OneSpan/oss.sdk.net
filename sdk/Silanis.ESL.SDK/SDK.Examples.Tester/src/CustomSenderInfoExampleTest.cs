@@ -22,7 +22,7 @@ namespace SDK.Examples
 			Assert.AreEqual(CustomSenderInfoExample.SENDER_COMPANY, package.SenderInfo.Company);
 			Assert.AreEqual(CustomSenderInfoExample.SENDER_TITLE, package.SenderInfo.Title);
 
-            IDictionary<string, Silanis.ESL.SDK.Sender> senders = example.EslClient.AccountService.GetSenders(Direction.ASCENDING, new PageRequest(0, -1));
+            IDictionary<string, Silanis.ESL.SDK.Sender> senders = example.EslClient.AccountService.GetSenders(Direction.ASCENDING, new PageRequest(1, 500));
             Assert.IsTrue(senders.ContainsKey(example.SenderEmail));
             Assert.AreEqual(senders[example.SenderEmail].Language, "fr");
         }
