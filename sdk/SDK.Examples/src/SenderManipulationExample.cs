@@ -75,7 +75,7 @@ namespace SDK.Examples
 
             eslClient.AccountService.DeleteSender(createdSender2.Id);
 
-            accountMembersWithDeletedSender = eslClient.AccountService.GetSenders(Direction.ASCENDING, new PageRequest(1, 100));
+            accountMembersWithDeletedSender = eslClient.AccountService.GetSenders(Direction.ASCENDING, new PageRequest(1, 500));
 
             updatedSenderInfo = SenderInfoBuilder.NewSenderInfo(email3)
                 .WithName("updatedFirstName", "updatedLastName")
@@ -84,7 +84,7 @@ namespace SDK.Examples
                     .Build();
 
             eslClient.AccountService.UpdateSender(updatedSenderInfo, accountMembersWithDeletedSender[email3].Id);
-            accountMembersWithUpdatedSender = eslClient.AccountService.GetSenders(Direction.ASCENDING, new PageRequest(1, 100));
+            accountMembersWithUpdatedSender = eslClient.AccountService.GetSenders(Direction.ASCENDING, new PageRequest(1, 500));
         }
     }
 }
