@@ -34,6 +34,7 @@ namespace Silanis.ESL.SDK
             }
             role.Index = sdkSigner.SigningOrder;
             role.Reassign = sdkSigner.CanChangeSigner;
+            role.Locked = sdkSigner.Locked;
 
 			foreach (AttachmentRequirement attachmentRequirement in sdkSigner.Attachments.Values)
 			{

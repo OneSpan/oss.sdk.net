@@ -975,6 +975,27 @@ namespace Silanis.ESL.SDK.Services
 			}
 		}
 
+        public void UnlockSigner(PackageId packageId, string senderId)
+        {
+            string path = template.UrlFor (UrlTemplate.ROLE_UNLOCK_PATH)
+                .Replace ("{packageId}", packageId.Id)
+                    .Replace("{roleId}", senderId)
+                    .Build ();
+
+            try 
+            {
+                restClient.Post(path, null);
+            } 
+            catch (EslServerException e) 
+            {
+                throw new EslServerException ("Could not unlock signer." + " Exception: " + e.Message, e.ServerError, e);
+            }
+            catch (Exception e) 
+            {
+                throw new EslException ("Could not unlock signer." + " Exception: " + e.Message, e);
+            }
+        }
+
         private string BuildCompletionReportUrl(Silanis.ESL.SDK.DocumentPackageStatus packageStatus, String senderId, DateTime from, DateTime to)
         {
             string toDate = DateHelper.dateToIsoUtcFormat(to);

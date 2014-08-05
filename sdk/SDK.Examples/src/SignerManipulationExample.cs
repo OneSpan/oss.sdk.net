@@ -61,6 +61,7 @@ namespace SDK.Examples
                                                                               .WithFirstName("firstName3")
                                                                               .WithLastName("lastName3")
                                                                               .WithTitle("Title3")
+                                                                              .Lock()
                                                                               .Build()
             );
                                                                               
@@ -85,6 +86,8 @@ namespace SDK.Examples
                             .Build() );
 
 			Signer retrievedSigner = eslClient.PackageService.GetSigner(packageId, addedSignerId);
+            //eslClient.SendPackage(packageId);
+            eslClient.PackageService.UnlockSigner(PackageId, addedSignerId);
         }
     }
 }
