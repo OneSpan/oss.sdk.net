@@ -330,6 +330,8 @@
     <Compile Include="src\SenderUsageReport.cs" />
     <Compile Include="src\Internal\Conversion\UsageReportConverter.cs" />
     <Compile Include="src\UsageReportCategory.cs" />
+    <Compile Include="src\Services\QRCodeService.cs" />
+    <Compile Include="src\Services\Internal\QRCodeApiClient.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSHARP.Targets" />
   <ProjectExtensions>

@@ -81,6 +81,12 @@ namespace Silanis.ESL.SDK.Builder
 			return new FieldBuilder().WithStyle(FieldStyle.UNBOUND_CUSTOM_FIELD).WithName(name);
 		}
 
+        public static FieldBuilder QRCode()
+        {
+            return new FieldBuilder().WithStyle(FieldStyle.UNBOUND_QRCODE)
+                .WithSize(77.0, 77.0);
+        }
+
 		public FieldBuilder WithId (string id)
 		{
 			this.id = id;

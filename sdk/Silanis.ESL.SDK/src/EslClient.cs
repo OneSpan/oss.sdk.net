@@ -30,6 +30,7 @@ namespace Silanis.ESL.SDK
 		private AuthenticationTokenService authenticationTokenService;    
 		private AttachmentRequirementService attachmentRequirementService;
         private LayoutService layoutService;
+        private QRCodeService qrCodeService;
         
         private JsonSerializerSettings jsonSerializerSettings;
 
@@ -63,6 +64,7 @@ namespace Silanis.ESL.SDK
 			authenticationTokenService = new AuthenticationTokenService(restClient, this.baseUrl); 
 			attachmentRequirementService = new AttachmentRequirementService(new AttachmentRequirementApiClient(restClient, this.baseUrl, jsonSerializerSettings));
             layoutService = new LayoutService(new LayoutApiClient(restClient, this.baseUrl, jsonSerializerSettings));
+            qrCodeService = new QRCodeService(new QRCodeApiClient(restClient, this.baseUrl, jsonSerializerSettings));
         }
         
         private void configureJsonSerializationSettings()
@@ -72,9 +74,7 @@ namespace Silanis.ESL.SDK
             jsonSerializerSettings.DateTimeZoneHandling = DateTimeZoneHandling.Utc;
             jsonSerializerSettings.Converters.Add( new CultureInfoJsonCreationConverter() );
         }
-
-        
-
+            
 		private String AppendServicePath(string baseUrl)
 		{
 			if (baseUrl.EndsWith ("/")) 
@@ -394,6 +394,14 @@ namespace Silanis.ESL.SDK
             get
             {
                 return layoutService;
+            }
+        }
+
+        public QRCodeService QrCodeService
+        {
+            get
+            {
+                return qrCodeService;
             }
         }
 	}

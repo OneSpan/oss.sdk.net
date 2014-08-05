@@ -49,7 +49,16 @@ namespace Silanis.ESL.SDK
             }
 
             result.Value = sdkField.Value;
-            result.Type = Silanis.ESL.API.FieldType.INPUT;
+
+            if (sdkField.Style == FieldStyle.UNBOUND_QRCODE)
+            {
+                result.Type = Silanis.ESL.API.FieldType.IMAGE;
+            }
+            else
+            {
+                result.Type = Silanis.ESL.API.FieldType.INPUT;
+            }
+
             result.Subtype = new FieldStyleAndSubTypeConverter(sdkField.Style).ToAPIFieldSubtype();
             result.Binding = sdkField.Binding;
 

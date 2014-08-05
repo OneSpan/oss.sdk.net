@@ -124,6 +124,7 @@
     <Compile Include="src\RetrieveFieldValuesExample.cs" />
     <Compile Include="src\DocumentLayoutExample.cs" />
     <Compile Include="src\DownloadCompletionAndUsageReportExample.cs" />
+    <Compile Include="src\QRCodeExample.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
