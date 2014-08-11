@@ -16,13 +16,13 @@ namespace SDK.Examples
             example.Run();
 
             // Verify QR codes were added to document
-            Assert.AreEqual(example.addedQRCode1.Style, FieldStyle.UNBOUND_QRCODE);
+            Assert.AreEqual(example.addedQRCode1.Style, FieldStyle.BOUND_QRCODE);
             Assert.That(example.addedQRCode1.Height, Is.EqualTo(77.0).Within(1));
             Assert.That(example.addedQRCode1.Width, Is.EqualTo(77.0).Within(1));
             Assert.That(example.addedQRCode1.X, Is.EqualTo(400.0).Within(1));
             Assert.That(example.addedQRCode1.Y, Is.EqualTo(100.0).Within(1));
 
-            Assert.AreEqual(example.addedQRCode2.Style, FieldStyle.UNBOUND_QRCODE);
+            Assert.AreEqual(example.addedQRCode2.Style, FieldStyle.BOUND_QRCODE);
             Assert.That(example.addedQRCode2.Height, Is.EqualTo(77.0).Within(1));
             Assert.That(example.addedQRCode2.Width, Is.EqualTo(77.0).Within(1));
             Assert.That(example.addedQRCode2.X, Is.EqualTo(500.0).Within(1));
@@ -36,7 +36,7 @@ namespace SDK.Examples
             {
                 if (field.Id.Equals(example.qrCodeId1))
                 {
-                    Assert.AreEqual(field.Style, FieldStyle.UNBOUND_QRCODE);
+                    Assert.AreEqual(field.Style, FieldStyle.BOUND_QRCODE);
                     Assert.That(field.Height, Is.EqualTo(77.0).Within(1));
                     Assert.That(field.Width, Is.EqualTo(77.0).Within(1));
                     Assert.That(field.X, Is.EqualTo(400.0).Within(1));
@@ -55,7 +55,7 @@ namespace SDK.Examples
             {
                 if (updatedQRCode.Id.Equals(example.qrCodeId1))
                 {
-                    Assert.AreEqual(updatedQRCode.Style, FieldStyle.UNBOUND_QRCODE);
+                    Assert.AreEqual(updatedQRCode.Style, FieldStyle.BOUND_QRCODE);
                     Assert.That(updatedQRCode.Height, Is.EqualTo(77.0).Within(1));
                     Assert.That(updatedQRCode.Width, Is.EqualTo(77.0).Within(1));
                     Assert.That(updatedQRCode.X, Is.EqualTo(200.0).Within(1));
@@ -63,7 +63,7 @@ namespace SDK.Examples
                 }
                 if (updatedQRCode.Id.Equals(example.qrCodeId2))
                 {
-                    Assert.AreEqual(updatedQRCode.Style, FieldStyle.UNBOUND_QRCODE);
+                    Assert.AreEqual(updatedQRCode.Style, FieldStyle.BOUND_QRCODE);
                     Assert.That(updatedQRCode.Height, Is.EqualTo(77.0).Within(1));
                     Assert.That(updatedQRCode.Width, Is.EqualTo(77.0).Within(1));
                     Assert.That(updatedQRCode.X, Is.EqualTo(300.0).Within(1));

@@ -96,7 +96,7 @@ namespace SDK.Tests
         {
             Field field = FieldBuilder.QRCode().AtPosition(100, 100).Build();
 
-            Assert.AreEqual(FieldStyle.UNBOUND_QRCODE, field.Style);
+            Assert.AreEqual(FieldStyle.BOUND_QRCODE, field.Style);
             Assert.AreEqual(77.0, field.Height);
             Assert.AreEqual(77.0, field.Width);
         }

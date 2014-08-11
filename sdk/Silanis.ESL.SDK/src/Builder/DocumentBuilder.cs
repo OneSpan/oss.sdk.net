@@ -15,6 +15,7 @@ namespace Silanis.ESL.SDK.Builder
 		private int index;
 		private bool extract;
 		private IList<Field> injectedFields = new List<Field> ();
+        private IList<Field> qrCodes = new List<Field> ();
         private string description;
         private External external;
 
@@ -96,6 +97,17 @@ namespace Silanis.ESL.SDK.Builder
 			return this;
 		}
 
+        public DocumentBuilder WithQRCode (FieldBuilder builder)
+        {
+            return WithQRCode(builder.Build());
+        }
+
+        public DocumentBuilder WithQRCode (Field field)
+        {
+            qrCodes.Add(field);
+            return this;
+        }
+
         public DocumentBuilder WithDescription( string description ) {
             this.description = description;
             return this;
@@ -114,7 +126,8 @@ namespace Silanis.ESL.SDK.Builder
 			doc.Index = index;
             doc.External = external;
 			doc.Extract = extract;
-			doc.AddFields (injectedFields);
+			doc.AddFields(injectedFields);
+            doc.AddQRCodes(qrCodes);
 			doc.Description = description;
 
 			return doc;

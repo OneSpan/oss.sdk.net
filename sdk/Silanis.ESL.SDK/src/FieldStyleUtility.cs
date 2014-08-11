@@ -21,11 +21,11 @@ namespace Silanis.ESL.SDK
                     return BINDING_TITLE;
                 case FieldStyle.BOUND_COMPANY:
                     return BINDING_COMPANY;
+                case FieldStyle.BOUND_QRCODE:
                 case FieldStyle.UNBOUND_CUSTOM_FIELD:
                 case FieldStyle.UNBOUND_TEXT_FIELD:
                 case FieldStyle.UNBOUND_CHECK_BOX:
                 case FieldStyle.UNBOUND_RADIO_BUTTON:
-                case FieldStyle.UNBOUND_QRCODE:
                 case FieldStyle.LABEL:
                     return null;
                 default:

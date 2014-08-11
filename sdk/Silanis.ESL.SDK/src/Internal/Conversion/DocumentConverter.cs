@@ -44,7 +44,15 @@ namespace Silanis.ESL.SDK
 
             foreach (Silanis.ESL.API.Field apiField in apiDocument.Fields)
             {
-                documentBuilder.WithInjectedField(new FieldConverter(apiField).ToSDKField());
+                Field sdkField = new FieldConverter(apiField).ToSDKField();
+                if (apiField.Subtype != FieldSubtype.QRCODE)
+                {
+                    documentBuilder.WithInjectedField(sdkField);
+                }
+                else
+                {
+                    documentBuilder.WithQRCode(sdkField);
+                }
             }
 
             return documentBuilder.Build();
@@ -79,6 +87,11 @@ namespace Silanis.ESL.SDK
             }
 
             foreach (Field field in sdkDocument.Fields)
+            {
+                doc.AddField(new FieldConverter(field).ToAPIField());
+            }
+
+            foreach (Field field in sdkDocument.QRCodes)
             {
                 doc.AddField(new FieldConverter(field).ToAPIField());
             }

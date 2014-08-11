@@ -93,8 +93,8 @@ namespace SDK.Examples
             // Get the entire list of custom field from account
             retrievedCustomFieldList1 = eslClient.GetCustomFieldService().GetCustomFields(Direction.ASCENDING);
 
-            // Get a list of custom fields on page 1 sorted in descending order by its id
-            retrievedCustomFieldList2 = eslClient.GetCustomFieldService().GetCustomFields(Direction.DESCENDING, new PageRequest(1));
+            // Get a list of custom fields on page 1 sorted in ascending order by its id
+            retrievedCustomFieldList2 = eslClient.GetCustomFieldService().GetCustomFields(Direction.ASCENDING, new PageRequest(1));
 
             // Get the first custom field from account
             retrievedCustomField = eslClient.GetCustomFieldService().GetCustomField(customFieldId1);

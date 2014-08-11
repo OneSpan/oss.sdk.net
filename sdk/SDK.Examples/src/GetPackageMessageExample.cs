@@ -7,7 +7,7 @@ using System.Collections.Generic;
 namespace SDK.Examples
 {
     /// <summary>
-    /// Get a package's messages (ex: opt-out or decline messages from signers).
+    /// Get a package's messages (ex: opt out or decline messages from signers).
     /// </summary>
     public class GetPackageMessageExample : SDKSample
     {
@@ -53,10 +53,10 @@ namespace SDK.Examples
 
             // Signer opt-out or decline signing.
 
-            // Get the list of messages from signer (ex: opt-out or decline reasons)
-            IList<Message> declineMessages = eslClient.GetPackage(packageId).Messages;
-
-            Console.WriteLine("Decline reason : " + declineMessages[0].Content);
+            // Get the list of messages from signer (ex: opt out or decline reasons)
+            DocumentPackage documentPackage = eslClient.GetPackage(packageId);
+            IList<Message> messages = eslClient.GetPackage(packageId).Messages;
+            Console.WriteLine(documentPackage.Status.ToString() + " reason : " + messages[0].Content);
         }
     }
 }

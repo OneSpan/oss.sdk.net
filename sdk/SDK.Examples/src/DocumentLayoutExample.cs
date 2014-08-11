@@ -46,7 +46,7 @@ namespace SDK.Examples
 
         override public void Execute()
         {
-            // Create a package with one document and one signature with two fields.
+            // Create a package with one document and one signature with two fields
             DocumentPackage superDuperPackage = PackageBuilder.NewPackageNamed(LAYOUT_PACKAGE_NAME)
                 .DescribedAs(LAYOUT_PACKAGE_DESCRIPTION)
                 .WithSigner(SignerBuilder.NewSignerWithEmail(email1)
@@ -75,13 +75,13 @@ namespace SDK.Examples
             PackageId packageId1 = eslClient.CreatePackage(superDuperPackage);
             superDuperPackage.Id = packageId1;
 
-            // Create layout from package.
+            // Create layout from package
             layoutId = eslClient.LayoutService.CreateLayout(superDuperPackage);
 
             // Get a list of layouts
             layouts = eslClient.LayoutService.GetLayouts(Direction.ASCENDING, new PageRequest(1, 100));
 
-            // Create a new package to apply document layout to.
+            // Create a new package to apply document layout to
             DocumentPackage packageFromLayout = PackageBuilder.NewPackageNamed("DocumentLayoutExample " + DateTime.Now)
                 .DescribedAs("This is a package created using the e-SignLive SDK")
                 .WithEmailMessage("This message should be delivered to all signers")
@@ -99,7 +99,7 @@ namespace SDK.Examples
 
             packageId = eslClient.CreatePackage(packageFromLayout);
 
-            // Apply the layout to document in package.
+            // Apply the layout to document in package
             eslClient.LayoutService.ApplyLayout(packageId, APPLY_LAYOUT_DOCUMENT_ID, layoutId);
 
             packageWithLayout = eslClient.GetPackage(packageId);

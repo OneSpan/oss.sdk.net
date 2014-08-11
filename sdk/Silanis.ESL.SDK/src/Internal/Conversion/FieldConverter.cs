@@ -50,7 +50,7 @@ namespace Silanis.ESL.SDK
 
             result.Value = sdkField.Value;
 
-            if (sdkField.Style == FieldStyle.UNBOUND_QRCODE)
+            if (sdkField.Style == FieldStyle.BOUND_QRCODE)
             {
                 result.Type = Silanis.ESL.API.FieldType.IMAGE;
             }

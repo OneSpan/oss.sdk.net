@@ -49,10 +49,10 @@ namespace SDK.Examples
                         .WithSignature(SignatureBuilder.SignatureFor(email1)
                             .OnPage(0)
                             .AtPosition(100, 100))
-                        .WithInjectedField(FieldBuilder.QRCode()
-                            .WithId(qrCodeId1)
-                            .OnPage(0)
-                            .AtPosition(400, 100)))
+                    .WithQRCode(FieldBuilder.QRCode()
+                        .WithId(qrCodeId1)
+                        .OnPage(0)
+                        .AtPosition(400, 100)))
                     .Build();
 
             packageId = eslClient.CreatePackage(superDuperPackage);
@@ -77,11 +77,11 @@ namespace SDK.Examples
                 .Build();
 
             eslClient.QrCodeService.ModifyQRCode(packageId, DOCUMENT_ID, modifiedQRCode);
-            modifiedQRCodeList = eslClient.GetPackage(packageId).Documents[DOCUMENT_NAME].Fields;
+            modifiedQRCodeList = eslClient.GetPackage(packageId).Documents[DOCUMENT_NAME].QRCodes;
 
             // Delete the second QR code
             eslClient.QrCodeService.DeleteQRCode(packageId, DOCUMENT_ID, qrCodeId2);
-            deletedQRCodeList = eslClient.GetPackage(packageId).Documents[DOCUMENT_NAME].Fields;
+            deletedQRCodeList = eslClient.GetPackage(packageId).Documents[DOCUMENT_NAME].QRCodes;
 
             // Update all the QR codes in the document with the provided list of fields
             Field updatedQRCode1 = FieldBuilder.QRCode()
@@ -100,7 +100,7 @@ namespace SDK.Examples
             qrCodeList.Add(updatedQRCode1);
             qrCodeList.Add(updatedQRCode2);
             eslClient.QrCodeService.UpdateQRCodes(packageId, DOCUMENT_ID, qrCodeList);
-            updatedQRCodeList = eslClient.GetPackage(packageId).Documents[DOCUMENT_NAME].Fields;
+            updatedQRCodeList = eslClient.GetPackage(packageId).Documents[DOCUMENT_NAME].QRCodes;
         }
     }
 }

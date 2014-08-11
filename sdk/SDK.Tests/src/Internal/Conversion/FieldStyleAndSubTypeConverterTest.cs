@@ -70,7 +70,7 @@ namespace SDK.Tests
             fieldSubtype = FieldSubtype.QRCODE;
             binding = null;
             fieldStyle = new FieldStyleAndSubTypeConverter(fieldSubtype, binding).ToSDKFieldStyle();
-            Assert.AreEqual(fieldStyle, FieldStyle.UNBOUND_QRCODE);
+            Assert.AreEqual(fieldStyle, FieldStyle.BOUND_QRCODE);
 
             // Where the conversion is based on binding.
             fieldSubtype = new FieldSubtype();
@@ -117,7 +117,7 @@ namespace SDK.Tests
             fieldSubtype = new FieldStyleAndSubTypeConverter(fieldStyle).ToAPIFieldSubtype();
             Assert.AreEqual(fieldSubtype, FieldSubtype.RADIO);
 
-            fieldStyle = FieldStyle.UNBOUND_QRCODE;
+            fieldStyle = FieldStyle.BOUND_QRCODE;
             fieldSubtype = new FieldStyleAndSubTypeConverter(fieldStyle).ToAPIFieldSubtype();
             Assert.AreEqual(fieldSubtype, FieldSubtype.QRCODE);
 

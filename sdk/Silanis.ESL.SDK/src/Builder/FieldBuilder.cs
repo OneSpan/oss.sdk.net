@@ -83,7 +83,7 @@ namespace Silanis.ESL.SDK.Builder
 
         public static FieldBuilder QRCode()
         {
-            return new FieldBuilder().WithStyle(FieldStyle.UNBOUND_QRCODE)
+            return new FieldBuilder().WithStyle(FieldStyle.BOUND_QRCODE)
                 .WithSize(77.0, 77.0);
         }
 
