@@ -90,6 +90,7 @@
     <Compile Include="src\DocumentLayoutExampleTest.cs" />
     <Compile Include="src\DownloadCompletionAndUsageReportExampleTest.cs" />
     <Compile Include="src\QRCodeExampleTest.cs" />
+    <Compile Include="src\CreateTemplateOnBehalfOfAnotherSenderExampleTest.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
