@@ -51,11 +51,14 @@ namespace SDK.Examples
             RetrievedPackage = eslClient.GetPackage(packageId);
 
 			// 2. Construct a document
+            Signature signature = SignatureBuilder.SignatureFor("john.smith@email.com")
+                        .OnPage(0)
+                        .AtPosition(100,100)
+                        .Build();
 			Document document = DocumentBuilder.NewDocumentNamed( OriginalDocumentName )
                 .WithDescription( OriginalDocumentDescription )
 				.FromFile(file.FullName)
-				.WithSignature(SignatureBuilder.SignatureFor("john.smith@email.com")
-						.OnPage(0))                                
+				.WithSignature(signature)                                
 				.Build();
 
 			// 3. Attach the document to the created package by uploading the document.
@@ -64,9 +67,13 @@ namespace SDK.Examples
             
             RetrievedPackageWithNewDocument = eslClient.GetPackage(packageId);
 
-            //This is how you would update and get a document's metadata (name, description)
+            //This is how you would update and get a document's metadata (name, description, approvals, fields)
 			document.Name = UpdatedDocumentName;
 			document.Description = UpdatedDocumentDescription;
+            document.Signatures.Add(SignatureBuilder.SignatureFor("john.smith@email.com")
+                        .OnPage(0)
+                        .AtPosition(200,200)
+                        .Build());
 
 			eslClient.PackageService.UpdateDocumentMetadata(RetrievedPackage, document);
 			Console.WriteLine("Document was updated");

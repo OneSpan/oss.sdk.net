@@ -42,7 +42,7 @@ namespace Silanis.ESL.API
     
 		    
     [JsonProperty("senderQuantity")]
-    public Int32 SenderQuantity
+    public Nullable<Int32> SenderQuantity
     {
                 get; set;
         }

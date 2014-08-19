@@ -91,26 +91,30 @@ namespace Silanis.ESL.SDK
 		{
 			Silanis.ESL.SDK.PackageCompletionReport sdkPackageCompletionReport = new Silanis.ESL.SDK.PackageCompletionReport(apiPackageCompletionReport.Name);
 			sdkPackageCompletionReport.Id = apiPackageCompletionReport.Id;
+            
 			sdkPackageCompletionReport.Created = apiPackageCompletionReport.Created;
 			sdkPackageCompletionReport.DocumentPackageStatus = new PackageStatusConverter(apiPackageCompletionReport.Status).ToSDKPackageStatus();
-			sdkPackageCompletionReport.Trashed = apiPackageCompletionReport.Trashed;
+		    sdkPackageCompletionReport.Trashed = apiPackageCompletionReport.Trashed.Value;
 
 			return sdkPackageCompletionReport;
 		}
 
 		// Convert from API to SDK DocumentsCompletionReport
 		private Silanis.ESL.SDK.DocumentsCompletionReport ToSDKDocumentsCompletionReport(Silanis.ESL.API.DocumentsCompletionReport apiDocumentsCompletionReport)
-		{
-			Silanis.ESL.SDK.DocumentsCompletionReport sdkDocumentCompletionReport = new Silanis.ESL.SDK.DocumentsCompletionReport(apiDocumentsCompletionReport.Name);
-			sdkDocumentCompletionReport.Id = apiDocumentsCompletionReport.Id;
-			sdkDocumentCompletionReport.Completed = apiDocumentsCompletionReport.Completed;
+        {
+            Silanis.ESL.SDK.DocumentsCompletionReport sdkDocumentCompletionReport = new Silanis.ESL.SDK.DocumentsCompletionReport(apiDocumentsCompletionReport.Name);
+            sdkDocumentCompletionReport.Id = apiDocumentsCompletionReport.Id;
+            if (apiDocumentsCompletionReport.Completed.HasValue)
+            {
+                sdkDocumentCompletionReport.Completed = apiDocumentsCompletionReport.Completed.Value;
+            }
 
-			if (apiDocumentsCompletionReport.FirstSigned != null)
+			if (apiDocumentsCompletionReport.FirstSigned.HasValue)
 			{
 				sdkDocumentCompletionReport.FirstSigned = apiDocumentsCompletionReport.FirstSigned;
 			}
 
-			if (apiDocumentsCompletionReport.LastSigned != null)
+			if (apiDocumentsCompletionReport.LastSigned.HasValue)
 			{
 				sdkDocumentCompletionReport.LastSigned = apiDocumentsCompletionReport.LastSigned;
 			}
@@ -120,18 +124,22 @@ namespace Silanis.ESL.SDK
 
 		// Convert from API to SDK SignersCompletionReport
 		private Silanis.ESL.SDK.SignersCompletionReport ToSDKSignersCompletionReport(Silanis.ESL.API.SignersCompletionReport apiSignersCompletionReport)
-		{
-			Silanis.ESL.SDK.SignersCompletionReport sdkSignersCompletionReport = new Silanis.ESL.SDK.SignersCompletionReport(apiSignersCompletionReport.FirstName, apiSignersCompletionReport.LastName);
-			sdkSignersCompletionReport.Email = apiSignersCompletionReport.Email;
-			sdkSignersCompletionReport.Id = apiSignersCompletionReport.Id;
-			sdkSignersCompletionReport.Completed = apiSignersCompletionReport.Completed;
+        {
+            Silanis.ESL.SDK.SignersCompletionReport sdkSignersCompletionReport = new Silanis.ESL.SDK.SignersCompletionReport(apiSignersCompletionReport.FirstName, apiSignersCompletionReport.LastName);
+            sdkSignersCompletionReport.Email = apiSignersCompletionReport.Email;
+            sdkSignersCompletionReport.Id = apiSignersCompletionReport.Id;
+            
+            if (apiSignersCompletionReport.Completed.HasValue)
+            {
+                sdkSignersCompletionReport.Completed = apiSignersCompletionReport.Completed.Value;
+            }
 
-			if (apiSignersCompletionReport.FirstSigned != null)
+			if (apiSignersCompletionReport.FirstSigned.HasValue)
 			{
 				sdkSignersCompletionReport.FirstSigned = apiSignersCompletionReport.FirstSigned;
 			}
 
-			if (apiSignersCompletionReport.LastSigned != null)
+			if (apiSignersCompletionReport.LastSigned.HasValue)
 			{
 				sdkSignersCompletionReport.LastSigned = apiSignersCompletionReport.LastSigned;
 			}

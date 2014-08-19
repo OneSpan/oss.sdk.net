@@ -33,6 +33,7 @@ namespace Silanis.ESL.SDK
             fieldValidation.MinLength = fieldValidator.MinLength;
             fieldValidation.Required = fieldValidator.Required;
             fieldValidation.ErrorMessage = fieldValidator.Message;
+            fieldValidation.ErrorCode = fieldValidator.ErrorCode;
 
             if (!String.IsNullOrEmpty(fieldValidator.Regex)) {
                 fieldValidation.Pattern = fieldValidator.Regex;
@@ -58,10 +59,15 @@ namespace Silanis.ESL.SDK
             fieldValidator = new FieldValidator();
 
             fieldValidator.Message = fieldValidation.ErrorMessage;
-            fieldValidator.MaxLength = fieldValidation.MaxLength;
-            fieldValidator.MinLength = fieldValidation.MinLength;
+            if (fieldValidation.ErrorCode.HasValue)
+                fieldValidator.ErrorCode = fieldValidation.ErrorCode.Value;
+            if (fieldValidation.MaxLength.HasValue)
+                fieldValidator.MaxLength = fieldValidation.MaxLength.Value;
+            if (fieldValidation.MinLength.HasValue)
+                fieldValidator.MinLength = fieldValidation.MinLength.Value;
             fieldValidator.Regex = fieldValidation.Pattern;
-            fieldValidator.Required = fieldValidation.Required;
+            if (fieldValidation.Required.HasValue)
+                fieldValidator.Required = fieldValidation.Required.Value;
             if (fieldValidation.Enum != null)
             {
                 foreach (string option in fieldValidation.Enum)

@@ -6,36 +6,36 @@ namespace Silanis.ESL.API
 {
 	
 	
-	internal class GlobalActionsOptions
+	internal class GroupSummary
 	{
 		
 		// Fields
 		
 		// Accessors
 		    
-    [JsonProperty("confirm")]
-    public Nullable<Boolean> Confirm
+    [JsonProperty("data")]
+    public IDictionary<string, object> Data
     {
                 get; set;
         }
     
 		    
-    [JsonProperty("download")]
-    public Nullable<Boolean> Download
+    [JsonProperty("email")]
+    public String Email
     {
                 get; set;
         }
     
 		    
-    [JsonProperty("hideEvidenceSummary")]
-    public Nullable<Boolean> HideEvidenceSummary
+    [JsonProperty("id")]
+    public String Id
     {
                 get; set;
         }
     
 		    
-    [JsonProperty("saveAsLayout")]
-    public Nullable<Boolean> SaveAsLayout
+    [JsonProperty("name")]
+    public String Name
     {
                 get; set;
         }

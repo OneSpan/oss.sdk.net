@@ -99,7 +99,7 @@ namespace Silanis.ESL.SDK
 
             packageBuilder.WithID(new PackageId(apiPackage.Id));
 
-            if (apiPackage.Autocomplete)
+            if (apiPackage.Autocomplete.Value)
             {
                 packageBuilder.WithAutomaticCompletion();
             }

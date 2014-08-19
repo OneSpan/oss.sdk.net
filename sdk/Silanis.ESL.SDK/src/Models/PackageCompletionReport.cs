@@ -91,7 +91,7 @@ namespace Silanis.ESL.API
     
 		    
     [JsonProperty("trashed")]
-    public Boolean Trashed
+    public Nullable<Boolean> Trashed
     {
                 get; set;
         }

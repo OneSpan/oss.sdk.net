@@ -14,84 +14,91 @@ namespace Silanis.ESL.API
 		// Accessors
 		    
     [JsonProperty("attachments")]
-    public Boolean Attachments
+    public Nullable<Boolean> Attachments
     {
                 get; set;
         }
     
 		    
     [JsonProperty("authenticatedInbox")]
-    public Boolean AuthenticatedInbox
+    public Nullable<Boolean> AuthenticatedInbox
     {
                 get; set;
         }
     
 		    
     [JsonProperty("customFields")]
-    public Boolean CustomFields
+    public Nullable<Boolean> CustomFields
     {
                 get; set;
         }
     
 		    
     [JsonProperty("encryptDocuments")]
-    public Boolean EncryptDocuments
+    public Nullable<Boolean> EncryptDocuments
     {
                 get; set;
         }
     
 		    
     [JsonProperty("evidenceSummary")]
-    public Boolean EvidenceSummary
+    public Nullable<Boolean> EvidenceSummary
     {
                 get; set;
         }
     
 		    
     [JsonProperty("fastTrack")]
-    public Boolean FastTrack
+    public Nullable<Boolean> FastTrack
     {
                 get; set;
         }
     
 		    
     [JsonProperty("forceLogin")]
-    public Boolean ForceLogin
+    public Nullable<Boolean> ForceLogin
     {
                 get; set;
         }
     
 		    
     [JsonProperty("groups")]
-    public Boolean Groups
+    public Nullable<Boolean> Groups
     {
                 get; set;
         }
     
 		    
     [JsonProperty("inboxFiltering")]
-    public Boolean InboxFiltering
+    public Nullable<Boolean> InboxFiltering
+    {
+                get; set;
+        }
+    
+		    
+    [JsonProperty("kBA")]
+    public Nullable<Boolean> KBA
     {
                 get; set;
         }
     
 		    
     [JsonProperty("notarize")]
-    public Boolean Notarize
+    public Nullable<Boolean> Notarize
     {
                 get; set;
         }
     
 		    
     [JsonProperty("showDocumentsPreview")]
-    public Boolean ShowDocumentsPreview
+    public Nullable<Boolean> ShowDocumentsPreview
     {
                 get; set;
         }
     
 		    
     [JsonProperty("tamperSealEvidence")]
-    public Boolean TamperSealEvidence
+    public Nullable<Boolean> TamperSealEvidence
     {
                 get; set;
         }

@@ -14,14 +14,14 @@ namespace Silanis.ESL.API
 		// Accessors
 		    
     [JsonProperty("breadcrumbs")]
-    public Boolean Breadcrumbs
+    public Nullable<Boolean> Breadcrumbs
     {
                 get; set;
         }
     
 		    
     [JsonProperty("feedback")]
-    public Boolean Feedback
+    public Nullable<Boolean> Feedback
     {
                 get; set;
         }
@@ -35,14 +35,14 @@ namespace Silanis.ESL.API
     
 		    
     [JsonProperty("globalNavigation")]
-    public Boolean GlobalNavigation
+    public Nullable<Boolean> GlobalNavigation
     {
                 get; set;
         }
     
 		    
     [JsonProperty("sessionBar")]
-    public Boolean SessionBar
+    public Nullable<Boolean> SessionBar
     {
                 get; set;
         }

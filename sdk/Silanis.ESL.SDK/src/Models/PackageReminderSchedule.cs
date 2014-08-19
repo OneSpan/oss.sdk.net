@@ -15,7 +15,7 @@ namespace Silanis.ESL.API
 		// Accessors
 		    
     [JsonProperty("intervalInDays")]
-    public Int32 IntervalInDays
+    public Nullable<Int32> IntervalInDays
     {
                 get; set;
         }
@@ -49,14 +49,14 @@ namespace Silanis.ESL.API
     
 		    
     [JsonProperty("repetitionsCount")]
-    public Int32 RepetitionsCount
+    public Nullable<Int32> RepetitionsCount
     {
                 get; set;
         }
     
 		    
     [JsonProperty("startInDaysDelay")]
-    public Int32 StartInDaysDelay
+    public Nullable<Int32> StartInDaysDelay
     {
                 get; set;
         }

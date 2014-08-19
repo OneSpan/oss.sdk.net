@@ -73,12 +73,12 @@ namespace Silanis.ESL.SDK
             else
             {
                 signatureBuilder.WithStyle( new SignatureStyleConverter(apiSignatureField.Subtype).ToSDKSignatureStyle() )
-                    .OnPage( apiSignatureField.Page )
-                        .AtPosition( apiSignatureField.Left, apiSignatureField.Top )
-                        .WithSize( apiSignatureField.Width, apiSignatureField.Height );
+                    .OnPage( apiSignatureField.Page.Value )
+                        .AtPosition( apiSignatureField.Left.Value, apiSignatureField.Top.Value )
+                        .WithSize( apiSignatureField.Width.Value, apiSignatureField.Height.Value );
 
-                if ( apiSignatureField.Extract ) {
-                    signatureBuilder.EnableExtraction ();
+                if ( apiSignatureField.Extract.Value ) {
+                    signatureBuilder.WithPositionExtracted();
                 }                   
             }
             

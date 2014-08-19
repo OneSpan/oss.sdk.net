@@ -63,9 +63,12 @@ namespace Silanis.ESL.SDK
 				{
 					result.PackageId = new PackageId(api.PackageId);
 				}
-				result.DaysUntilFirstReminder = api.StartInDaysDelay;
-				result.DaysBetweenReminders = api.IntervalInDays;
-				result.NumberOfRepetitions = api.RepetitionsCount;
+                if (api.StartInDaysDelay.HasValue)
+				    result.DaysUntilFirstReminder = api.StartInDaysDelay.Value;
+                if (api.IntervalInDays.HasValue)
+				    result.DaysBetweenReminders = api.IntervalInDays.Value;
+                if (api.RepetitionsCount.HasValue)
+				    result.NumberOfRepetitions = api.RepetitionsCount.Value;
 
 				foreach (PackageReminder apiReminder in api.Reminders)
 				{

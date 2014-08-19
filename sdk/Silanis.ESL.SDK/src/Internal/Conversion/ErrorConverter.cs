@@ -21,7 +21,7 @@ namespace Silanis.ESL.SDK
 
             ServerError result = new ServerError();
 
-            result.Code = apiError.Code;
+            result.Code = apiError.Code.Value;
             result.Message = apiError.Message;
             result.MessageKey = apiError.MessageKey;
             result.Name = apiError.Name;

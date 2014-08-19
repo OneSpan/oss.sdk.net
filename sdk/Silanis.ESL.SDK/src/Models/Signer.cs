@@ -11,6 +11,7 @@ namespace Silanis.ESL.API
 		
 		// Fields
 		private IList<ProfessionalIdentityField> _professionalIdentityFields = new List<ProfessionalIdentityField>();
+		private IList<String> _specialTypes = new List<String>();
 		private IList<UserCustomField> _userCustomFields = new List<UserCustomField>();
 		
 		// Accessors
@@ -92,6 +93,13 @@ namespace Silanis.ESL.API
         }
     
 		    
+    [JsonProperty("knowledgeBasedAuthentication")]
+    public KnowledgeBasedAuthentication KnowledgeBasedAuthentication
+    {
+                get; set;
+        }
+    
+		    
     [JsonProperty("language")]
     public String Language
     {
@@ -145,6 +153,26 @@ namespace Silanis.ESL.API
     {
                 get; set;
         }
+    
+		    
+    [JsonProperty("specialTypes")]
+    public IList<String> SpecialTypes
+    {
+                get
+        {
+            return _specialTypes;
+        }
+        }
+        public Signer AddSpecialType(String value)
+    {
+        if (value == null)
+        {
+            throw new ArgumentNullException("Argument cannot be null");
+        }
+        
+        _specialTypes.Add(value);
+        return this;
+    }
     
 		    
     [JsonProperty("title")]

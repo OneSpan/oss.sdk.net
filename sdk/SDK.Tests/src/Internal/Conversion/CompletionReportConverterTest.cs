@@ -74,6 +74,7 @@ namespace SDK.Tests
 			signersCompletionReport.Completed = false;	
 
 			Silanis.ESL.API.PackageCompletionReport packageCompletionReport = new Silanis.ESL.API.PackageCompletionReport();
+            packageCompletionReport.Trashed = false;
 			packageCompletionReport.Id = "packageId";
 			packageCompletionReport.Name = "PackageName";
 			packageCompletionReport.Status = Silanis.ESL.API.PackageStatus.SENT;

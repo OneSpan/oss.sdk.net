@@ -43,7 +43,7 @@ namespace Silanis.ESL.API
     
 		    
     [JsonProperty("emailMembers")]
-    public Boolean EmailMembers
+    public Nullable<Boolean> EmailMembers
     {
                 get; set;
         }

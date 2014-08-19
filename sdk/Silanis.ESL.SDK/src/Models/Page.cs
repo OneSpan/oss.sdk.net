@@ -4,71 +4,64 @@ using System.Collections.Generic;
 using Newtonsoft.Json;
 namespace Silanis.ESL.API
 {
-
-
-    internal class Page
+	
+	
+	internal class Page
+	{
+		
+		// Fields
+		
+		// Accessors
+		    
+    [JsonProperty("height")]
+    public Nullable<Double> Height
     {
-
-        // Fields
-
-        // Accessors
-
-        [JsonProperty("height")]
-        public Double Height
-        {
-            get;
-            set;
+                get; set;
         }
-
-
-        [JsonProperty("id")]
-        public String Id
-        {
-            get;
-            set;
+    
+		    
+    [JsonProperty("id")]
+    public String Id
+    {
+                get; set;
         }
-
-
-        [JsonProperty("index")]
-        public Int32 Index
-        {
-            get;
-            set;
+    
+		    
+    [JsonProperty("index")]
+    public Nullable<Int32> Index
+    {
+                get; set;
         }
-
-
-        [JsonProperty("left")]
-        public Double Left
-        {
-            get;
-            set;
+    
+		    
+    [JsonProperty("left")]
+    public Nullable<Double> Left
+    {
+                get; set;
         }
-
-
-        [JsonProperty("top")]
-        public Double Top
-        {
-            get;
-            set;
+    
+		    
+    [JsonProperty("top")]
+    public Nullable<Double> Top
+    {
+                get; set;
         }
-
-
-        [JsonProperty("version")]
-        public Int32 Version
-        {
-            get;
-            set;
+    
+		    
+    [JsonProperty("version")]
+    public Nullable<Int32> Version
+    {
+                get; set;
         }
-
-
-        [JsonProperty("width")]
-        public Double Width
-        {
-            get;
-            set;
+    
+		    
+    [JsonProperty("width")]
+    public Nullable<Double> Width
+    {
+                get; set;
         }
-
-
-
-    }
+    
+		
+	
+	}
 }

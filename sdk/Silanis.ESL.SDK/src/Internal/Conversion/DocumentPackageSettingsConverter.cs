@@ -37,33 +37,51 @@ namespace Silanis.ESL.SDK
 
             if (apiSettings.Ceremony != null)
             {            
-                builder = (apiSettings.Ceremony.InPerson ? builder.WithInPerson() : builder.WithoutInPerson());
-                builder = (apiSettings.Ceremony.OptOutButton ? builder.WithOptOut() : builder.WithoutOptOut());
-                builder = (apiSettings.Ceremony.DeclineButton ? builder.WithDecline() : builder.WithoutDecline());
-                builder = (apiSettings.Ceremony.HideWatermark ? builder.WithoutWatermark() : builder.WithWatermark());
-                builder = (apiSettings.Ceremony.HideCaptureText ? builder.WithCaptureText() : builder.WithoutCaptureText());
-                builder = (apiSettings.Ceremony.DisableFirstInPersonAffidavit ? builder.DisableFirstAffidavit() : builder.EnableFirstAffidavit());
-                builder = (apiSettings.Ceremony.DisableSecondInPersonAffidavit ? builder.DisableSecondAffidavit() : builder.EnableSecondAffidavit());
-                builder = (apiSettings.Ceremony.HideLanguageDropdown ? builder.WithoutLanguageDropDown() : builder.WithLanguageDropDown());
-                builder = (apiSettings.Ceremony.HidePackageOwnerInPerson ? builder.HideOwnerInPersonDropDown() : builder.ShowOwnerInPersonDropDown());
+                if (apiSettings.Ceremony.InPerson.HasValue)
+                    builder = (apiSettings.Ceremony.InPerson.Value ? builder.WithInPerson() : builder.WithoutInPerson());
+                    
+                if (apiSettings.Ceremony.OptOutButton.HasValue)
+                    builder = (apiSettings.Ceremony.OptOutButton.Value ? builder.WithOptOut() : builder.WithoutOptOut());
+                    
+                if (apiSettings.Ceremony.DeclineButton.HasValue)
+                    builder = (apiSettings.Ceremony.DeclineButton.Value ? builder.WithDecline() : builder.WithoutDecline());
+                    
+                if (apiSettings.Ceremony.HideWatermark.HasValue)
+                    builder = (apiSettings.Ceremony.HideWatermark.Value ? builder.WithoutWatermark() : builder.WithWatermark());
+                    
+                if (apiSettings.Ceremony.HideCaptureText.HasValue)
+                    builder = (apiSettings.Ceremony.HideCaptureText.Value ? builder.WithCaptureText() : builder.WithoutCaptureText());
+                    
+                if (apiSettings.Ceremony.DisableFirstInPersonAffidavit.HasValue)
+                    builder = (apiSettings.Ceremony.DisableFirstInPersonAffidavit.Value ? builder.DisableFirstAffidavit() : builder.EnableFirstAffidavit());
+                    
+                if (apiSettings.Ceremony.DisableSecondInPersonAffidavit.HasValue)
+                    builder = (apiSettings.Ceremony.DisableSecondInPersonAffidavit.Value ? builder.DisableSecondAffidavit() : builder.EnableSecondAffidavit());
+                    
+                if (apiSettings.Ceremony.HideLanguageDropdown.HasValue)
+                    builder = (apiSettings.Ceremony.HideLanguageDropdown.Value ? builder.WithoutLanguageDropDown() : builder.WithLanguageDropDown());
+                    
+                if (apiSettings.Ceremony.HidePackageOwnerInPerson.HasValue)
+                    builder = (apiSettings.Ceremony.HidePackageOwnerInPerson.Value ? builder.HideOwnerInPersonDropDown() : builder.ShowOwnerInPersonDropDown());
             
                 foreach (string reason in apiSettings.Ceremony.OptOutReasons)
                 {
                     builder.WithOptOutReason(reason);
                 }
 
-                builder.WithMaxAuthAttempts(apiSettings.Ceremony.MaxAuthFailsAllowed);
+                if (apiSettings.Ceremony.MaxAuthFailsAllowed.HasValue)
+                    builder.WithMaxAuthAttempts(apiSettings.Ceremony.MaxAuthFailsAllowed.Value);
 
-                if (apiSettings.Ceremony.DocumentToolbarOptions != null)
+                if (apiSettings.Ceremony.DocumentToolbarOptions != null && apiSettings.Ceremony.DocumentToolbarOptions.DownloadButton.HasValue)
                 {
-                    builder = ( apiSettings.Ceremony.DocumentToolbarOptions.DownloadButton ? 
+                    builder = ( apiSettings.Ceremony.DocumentToolbarOptions.DownloadButton.Value ? 
                                     builder.WithDocumentToolbarDownloadButton() : 
                                     builder.WithoutDocumentToolbarDownloadButton() );
                 }
 
-                if (apiSettings.Ceremony.Events != null && apiSettings.Ceremony.Events.Complete != null)
+                if (apiSettings.Ceremony.Events != null && apiSettings.Ceremony.Events.Complete != null && apiSettings.Ceremony.Events.Complete.Dialog.HasValue)
                 {
-                    builder = ( apiSettings.Ceremony.Events.Complete.Dialog ?
+                    builder = ( apiSettings.Ceremony.Events.Complete.Dialog.Value ?
                                     builder.WithDialogOnComplete() :
                                     builder.WithoutDialogOnComplete() );
                 }

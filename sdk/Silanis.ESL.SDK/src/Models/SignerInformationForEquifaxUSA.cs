@@ -6,29 +6,22 @@ namespace Silanis.ESL.API
 {
 	
 	
-	internal class Signup
+	internal class SignerInformationForEquifaxUSA
 	{
 		
 		// Fields
 		
 		// Accessors
 		    
-    [JsonProperty("bill")]
-    public Bill Bill
+    [JsonProperty("city")]
+    public String City
     {
                 get; set;
         }
     
 		    
-    [JsonProperty("email")]
-    public String Email
-    {
-                get; set;
-        }
-    
-		    
-    [JsonProperty("emailVerified")]
-    public Nullable<Boolean> EmailVerified
+    [JsonProperty("dateOfBirth")]
+    public Nullable<DateTime> DateOfBirth
     {
                 get; set;
         }
@@ -41,6 +34,13 @@ namespace Silanis.ESL.API
         }
     
 		    
+    [JsonProperty("homePhoneNumber")]
+    public String HomePhoneNumber
+    {
+                get; set;
+        }
+    
+		    
     [JsonProperty("lastName")]
     public String LastName
     {
@@ -48,29 +48,29 @@ namespace Silanis.ESL.API
         }
     
 		    
-    [JsonProperty("name")]
-    public String Name
+    [JsonProperty("socialInsuranceNumber")]
+    public String SocialInsuranceNumber
     {
                 get; set;
         }
     
 		    
-    [JsonProperty("newPassword")]
-    public String NewPassword
+    [JsonProperty("state")]
+    public String State
     {
                 get; set;
         }
     
 		    
-    [JsonProperty("password")]
-    public String Password
+    [JsonProperty("streetAddress")]
+    public String StreetAddress
     {
                 get; set;
         }
     
 		    
-    [JsonProperty("phone")]
-    public String Phone
+    [JsonProperty("zip")]
+    public String Zip
     {
                 get; set;
         }

@@ -77,9 +77,9 @@ namespace Silanis.ESL.SDK
             }
 
             FieldBuilder fieldBuilder = FieldBuilder.NewField()
-                .OnPage( apiField.Page )
-                    .AtPosition( apiField.Left, apiField.Top )
-                    .WithSize( apiField.Width, apiField.Height )
+                    .OnPage( apiField.Page.Value )
+                    .AtPosition( apiField.Left.Value, apiField.Top.Value )
+                    .WithSize( apiField.Width.Value, apiField.Height.Value )
                     .WithStyle( new FieldStyleAndSubTypeConverter( apiField.Subtype, apiField.Binding ).ToSDKFieldStyle() )
                     .WithName( apiField.Name );
 
@@ -87,7 +87,7 @@ namespace Silanis.ESL.SDK
                 fieldBuilder.WithId( apiField.Id );
             }
 
-            if ( apiField.Extract ) {
+            if ( apiField.Extract.Value ) {
                 fieldBuilder.WithPositionExtracted();
             }
 

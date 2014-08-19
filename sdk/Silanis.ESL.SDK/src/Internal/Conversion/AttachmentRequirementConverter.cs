@@ -84,7 +84,7 @@ namespace Silanis.ESL.SDK
 				result.SenderComment = apiAttachmentRequirement.Comment;
 				result.Description = apiAttachmentRequirement.Description;
 				result.Id = apiAttachmentRequirement.Id;
-				result.Required = apiAttachmentRequirement.Required;
+				result.Required = apiAttachmentRequirement.Required.Value;
 				result.Data = apiAttachmentRequirement.Data;
 				result.Status = new RequirementStatusConverter(apiAttachmentRequirement.Status).ToSDKRequirementStatus();
 

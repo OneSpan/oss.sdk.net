@@ -178,9 +178,6 @@ namespace Silanis.ESL.SDK.Services
                 Silanis.ESL.API.Document apiDocument = JsonConvert.DeserializeObject<Silanis.ESL.API.Document> (response, settings);
 
                 // Wipe out the members not related to the metadata
-                apiDocument.Approvals = new List<Approval>();
-                apiDocument.Fields = new List<Silanis.ESL.API.Field>();
-                apiDocument.Pages = new List<Page>();
 
                 return new DocumentConverter(apiDocument, new DocumentPackageConverter(package).ToAPIPackage()).ToSDKDocument();
             }
@@ -195,7 +192,7 @@ namespace Silanis.ESL.SDK.Services
         }
 
         /// <summary>
-        /// Updates the document's metadata from the package.
+        /// Updates the document's data, but not the actually document binary..
         /// </summary>
         /// <param name="package">The DocumentPackage to update.</param>
         /// <param name="document">The Document to update.</param>
@@ -206,16 +203,25 @@ namespace Silanis.ESL.SDK.Services
 				.Replace("{documentId}", document.Id)
 				.Build();
 
-            Silanis.ESL.API.Document internalDoc = new DocumentConverter(document).ToAPIDocument();
-            
-            // Wipe out the members not related to the metadata
-            internalDoc.Approvals = null;
-            internalDoc.Fields = null;
-            internalDoc.Pages = null;
+            Silanis.ESL.API.Package apiPackage = new DocumentPackageConverter(package).ToAPIPackage();
+            Silanis.ESL.API.Document apiDocument = new DocumentConverter(document).ToAPIDocument(apiPackage);
 
+            foreach (Silanis.ESL.API.Document apiDoc in apiPackage.Documents)
+            {
+                if (apiDoc.Id.Equals(document.Id))
+                {
+                    apiDocument = apiDoc;
+                    break;
+                }
+            }
+            if (apiDocument == null)
+            {
+                throw new EslException("Document is not part of the package.", null);
+            }
+            
 			try 
 			{
-				string json = JsonConvert.SerializeObject (internalDoc, settings);
+				string json = JsonConvert.SerializeObject (apiDocument, settings);
 				restClient.Post(path, json);
 			} 
             catch (EslServerException e) 
@@ -232,7 +238,7 @@ namespace Silanis.ESL.SDK.Services
             
             try
             {
-                string json = JsonConvert.SerializeObject(internalDoc, settings);
+                string json = JsonConvert.SerializeObject(apiDocument, settings);
                 restClient.Post(path, json);
             }
             catch (EslServerException e) 
@@ -851,7 +857,7 @@ namespace Silanis.ESL.SDK.Services
 				converted.Add (dp);
 			}
 
-			return new Page<DocumentPackage> (converted, results.Count, request);
+			return new Page<DocumentPackage> (converted, results.Count.Value, request);
 		}
 
 		private string GenerateBoundary ()

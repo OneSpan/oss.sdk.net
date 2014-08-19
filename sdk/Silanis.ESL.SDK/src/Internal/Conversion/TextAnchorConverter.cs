@@ -31,13 +31,26 @@ namespace Silanis.ESL.SDK.src.Internal.Conversion
                 TextAnchor result = new TextAnchor();
 
                 result.Position = new TextAnchorPositionConverter(apiExtractAnchor.AnchorPoint).ToSDKTextAnchorPosition();
-                result.Occurrence = apiExtractAnchor.Index;
+                
+                if ( apiExtractAnchor.Index.HasValue )
+                    result.Occurrence = apiExtractAnchor.Index.Value;
+                    
                 result.AnchorText = apiExtractAnchor.Text;
-                result.Character = apiExtractAnchor.CharacterIndex;
-                result.XOffset = apiExtractAnchor.LeftOffset;
-                result.YOffset = apiExtractAnchor.TopOffset;
-                result.Width = apiExtractAnchor.Width;
-                result.Height = apiExtractAnchor.Height;
+                
+                if (apiExtractAnchor.CharacterIndex.HasValue)
+                    result.Character = apiExtractAnchor.CharacterIndex.Value;
+                    
+                if (apiExtractAnchor.LeftOffset.HasValue)
+                    result.XOffset = apiExtractAnchor.LeftOffset.Value;
+                    
+                if (apiExtractAnchor.TopOffset.HasValue)
+                    result.YOffset = apiExtractAnchor.TopOffset.Value;
+                    
+                if (apiExtractAnchor.Width.HasValue)
+                    result.Width = apiExtractAnchor.Width.Value;
+                    
+                if (apiExtractAnchor.Height.HasValue)
+                    result.Height = apiExtractAnchor.Height.Value;
 
                 return result;
             }

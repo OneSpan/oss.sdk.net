@@ -14,7 +14,7 @@ namespace Silanis.ESL.API
 		// Accessors
 		    
     [JsonProperty("completed")]
-    public Boolean Completed
+    public Nullable<Boolean> Completed
     {
                 get; set;
         }

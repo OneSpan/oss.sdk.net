@@ -85,7 +85,7 @@ namespace SDK.Tests
             sdkFieldValidator1 = CreateTypicalSDKValidator();
             apiFieldValidation1 = new FieldValidatorConverter(sdkFieldValidator1).ToAPIFieldValidation();
 
-            Assert.AreEqual(apiFieldValidation1.ErrorCode, 0);
+            Assert.AreEqual(apiFieldValidation1.ErrorCode, 150);
             Assert.AreEqual(apiFieldValidation1.ErrorMessage, sdkFieldValidator1.Message);
             Assert.AreEqual(apiFieldValidation1.MaxLength, sdkFieldValidator1.MaxLength);
             Assert.AreEqual(apiFieldValidation1.MinLength, sdkFieldValidator1.MinLength);
@@ -112,6 +112,7 @@ namespace SDK.Tests
                     .MaxLength(15)
                     .MinLength(5)
                     .Required()
+                    .WithErrorCode(150)
                     .WithErrorMessage("Error message for validation")
                     .Build();
 

@@ -14,7 +14,7 @@ namespace Silanis.ESL.API
 		// Accessors
 		    
     [JsonProperty("amount")]
-    public Int32 Amount
+    public Nullable<Int32> Amount
     {
                 get; set;
         }

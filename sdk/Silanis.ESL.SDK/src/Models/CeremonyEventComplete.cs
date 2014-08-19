@@ -14,7 +14,7 @@ namespace Silanis.ESL.API
 		// Accessors
 		    
     [JsonProperty("dialog")]
-    public Boolean Dialog
+    public Nullable<Boolean> Dialog
     {
                 get; set;
         }

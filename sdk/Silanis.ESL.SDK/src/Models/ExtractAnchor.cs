@@ -21,28 +21,28 @@ namespace Silanis.ESL.API
     
 		    
     [JsonProperty("characterIndex")]
-    public Int32 CharacterIndex
+    public Nullable<Int32> CharacterIndex
     {
                 get; set;
         }
     
 		    
     [JsonProperty("height")]
-    public Int32 Height
+    public Nullable<Int32> Height
     {
                 get; set;
         }
     
 		    
     [JsonProperty("index")]
-    public Int32 Index
+    public Nullable<Int32> Index
     {
                 get; set;
         }
     
 		    
     [JsonProperty("leftOffset")]
-    public Int32 LeftOffset
+    public Nullable<Int32> LeftOffset
     {
                 get; set;
         }
@@ -56,14 +56,14 @@ namespace Silanis.ESL.API
     
 		    
     [JsonProperty("topOffset")]
-    public Int32 TopOffset
+    public Nullable<Int32> TopOffset
     {
                 get; set;
         }
     
 		    
     [JsonProperty("width")]
-    public Int32 Width
+    public Nullable<Int32> Width
     {
                 get; set;
         }

@@ -29,7 +29,7 @@ namespace Silanis.ESL.API
     
 		    
     [JsonProperty("inPerson")]
-    public Boolean InPerson
+    public Nullable<Boolean> InPerson
     {
                 get; set;
         }

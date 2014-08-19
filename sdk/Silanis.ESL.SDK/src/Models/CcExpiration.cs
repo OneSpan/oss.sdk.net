@@ -14,14 +14,14 @@ namespace Silanis.ESL.API
 		// Accessors
 		    
     [JsonProperty("month")]
-    public Int32 Month
+    public Nullable<Int32> Month
     {
                 get; set;
         }
     
 		    
     [JsonProperty("year")]
-    public Int32 Year
+    public Nullable<Int32> Year
     {
                 get; set;
         }

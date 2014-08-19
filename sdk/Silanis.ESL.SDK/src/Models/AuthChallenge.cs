@@ -21,7 +21,7 @@ namespace Silanis.ESL.API
     
 		    
     [JsonProperty("maskInput")]
-    public Boolean MaskInput
+    public Nullable<Boolean> MaskInput
     {
                 get; set;
         }

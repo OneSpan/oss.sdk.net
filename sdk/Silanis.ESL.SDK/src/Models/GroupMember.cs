@@ -42,7 +42,7 @@ namespace Silanis.ESL.API
     
 		    
     [JsonProperty("pending")]
-    public Boolean Pending
+    public Nullable<Boolean> Pending
     {
                 get; set;
         }

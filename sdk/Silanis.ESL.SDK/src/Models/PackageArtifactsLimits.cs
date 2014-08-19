@@ -14,14 +14,14 @@ namespace Silanis.ESL.API
 		// Accessors
 		    
     [JsonProperty("documents")]
-    public Int32 Documents
+    public Nullable<Int32> Documents
     {
                 get; set;
         }
     
 		    
     [JsonProperty("roles")]
-    public Int32 Roles
+    public Nullable<Int32> Roles
     {
                 get; set;
         }

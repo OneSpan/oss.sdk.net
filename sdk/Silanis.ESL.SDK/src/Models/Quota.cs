@@ -21,7 +21,7 @@ namespace Silanis.ESL.API
     
 		    
     [JsonProperty("limit")]
-    public Int32 Limit
+    public Nullable<Int32> Limit
     {
                 get; set;
         }

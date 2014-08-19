@@ -26,12 +26,12 @@ namespace SDK.Examples
             document = getAddedDocument(example.RetrievedPackageWithUpdatedDocument, DocumentOperationsExample.OriginalDocumentName);
             Assert.IsNull(document);
 
-            // Assert the signature fields were not wiped out.
+            // Assert the signature fields were updated.
             document = getAddedDocument(example.RetrievedPackageWithUpdatedDocument, DocumentOperationsExample.UpdatedDocumentName);
             Assert.IsNotEmpty(document.Signatures);
-            Assert.AreEqual(1, document.Signatures.Count);
+            Assert.AreEqual(2, document.Signatures.Count);
 
-            // Assert the document's metadata was updated (document name and description). 
+            // Assert the document info was updated (document name and description). 
             document = example.RetrievedUpdatedDocument;
             Assert.IsNotNull(document);
             Assert.AreEqual(DocumentOperationsExample.UpdatedDocumentName, document.Name);

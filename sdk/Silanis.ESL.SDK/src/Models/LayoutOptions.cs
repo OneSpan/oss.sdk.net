@@ -35,14 +35,14 @@ namespace Silanis.ESL.API
     
 		    
     [JsonProperty("iframe")]
-    public Boolean Iframe
+    public Nullable<Boolean> Iframe
     {
                 get; set;
         }
     
 		    
     [JsonProperty("navigator")]
-    public Boolean Navigator
+    public Nullable<Boolean> Navigator
     {
                 get; set;
         }

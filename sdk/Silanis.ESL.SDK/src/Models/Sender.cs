@@ -12,6 +12,7 @@ namespace Silanis.ESL.API
 		// Fields
 		private IList<GroupMembership> _memberships = new List<GroupMembership>();
 		private IList<ProfessionalIdentityField> _professionalIdentityFields = new List<ProfessionalIdentityField>();
+		private IList<String> _specialTypes = new List<String>();
 		private IList<UserCustomField> _userCustomFields = new List<UserCustomField>();
 		
 		// Accessors
@@ -166,6 +167,26 @@ namespace Silanis.ESL.API
     {
                 get; set;
         }
+    
+		    
+    [JsonProperty("specialTypes")]
+    public IList<String> SpecialTypes
+    {
+                get
+        {
+            return _specialTypes;
+        }
+        }
+        public Sender AddSpecialType(String value)
+    {
+        if (value == null)
+        {
+            throw new ArgumentNullException("Argument cannot be null");
+        }
+        
+        _specialTypes.Add(value);
+        return this;
+    }
     
 		    
     [JsonProperty("status")]

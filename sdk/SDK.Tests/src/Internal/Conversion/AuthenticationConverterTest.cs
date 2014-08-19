@@ -108,6 +108,7 @@ namespace SDK.Tests
             Silanis.ESL.API.AuthChallenge authChallenge = new Silanis.ESL.API.AuthChallenge();
             authChallenge.Question = "What is the name of your dog?";
             authChallenge.Answer = "Max";
+            authChallenge.MaskInput = true;
             result.AddChallenge(authChallenge);
             result.Scheme = Silanis.ESL.API.AuthScheme.CHALLENGE;
 

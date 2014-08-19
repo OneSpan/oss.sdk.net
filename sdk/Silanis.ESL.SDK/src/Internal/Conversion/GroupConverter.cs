@@ -69,13 +69,12 @@ namespace Silanis.ESL.SDK
                 GroupBuilder builder = GroupBuilder.NewGroup(apiGroup.Name)
                     .WithEmail(apiGroup.Email);
 
-                if (apiGroup.EmailMembers)
+                if (apiGroup.EmailMembers.HasValue)
                 {
-                    builder.WithIndividualMemberEmailing();
-                }
-                else
-                {
-                    builder.WithoutIndividualMemberEmailing();
+                    if (apiGroup.EmailMembers.Value)
+                        builder.WithIndividualMemberEmailing();
+                    else
+                        builder.WithoutIndividualMemberEmailing();
                 }
 
                 if (apiGroup.Id != null)

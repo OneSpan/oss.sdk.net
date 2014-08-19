@@ -27,6 +27,12 @@ namespace Silanis.ESL.SDK
 			set;
 		}
 
+        public int ErrorCode
+        {
+            get;
+            set;
+        }
+
 		public bool Required {
 			get;
 			set;

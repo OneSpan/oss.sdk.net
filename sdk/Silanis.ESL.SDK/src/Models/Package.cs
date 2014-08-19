@@ -17,7 +17,7 @@ namespace Silanis.ESL.API
 		// Accessors
 		    
     [JsonProperty("autocomplete")]
-    public Boolean Autocomplete
+    public Nullable<Boolean> Autocomplete
     {
                 get; set;
         }
@@ -134,7 +134,14 @@ namespace Silanis.ESL.API
     
 		    
     [JsonProperty("notarized")]
-    public Boolean Notarized
+    public Nullable<Boolean> Notarized
+    {
+                get; set;
+        }
+    
+		    
+    [JsonProperty("notaryRoleId")]
+    public String NotaryRoleId
     {
                 get; set;
         }
@@ -189,7 +196,7 @@ namespace Silanis.ESL.API
     
 		    
     [JsonProperty("trashed")]
-    public Boolean Trashed
+    public Nullable<Boolean> Trashed
     {
                 get; set;
         }

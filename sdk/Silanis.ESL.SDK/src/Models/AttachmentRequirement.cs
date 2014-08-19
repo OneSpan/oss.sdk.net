@@ -49,7 +49,7 @@ namespace Silanis.ESL.API
     
 		    
     [JsonProperty("required")]
-    public Boolean Required
+    public Nullable<Boolean> Required
     {
                 get; set;
         }

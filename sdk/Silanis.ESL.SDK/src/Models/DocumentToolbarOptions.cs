@@ -14,7 +14,7 @@ namespace Silanis.ESL.API
 		// Accessors
 		    
     [JsonProperty("downloadButton")]
-    public Boolean DownloadButton
+    public Nullable<Boolean> DownloadButton
     {
                 get; set;
         }

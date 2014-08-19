@@ -50,7 +50,7 @@ namespace Silanis.ESL.SDK
 			CustomFieldBuilder result = new CustomFieldBuilder();
 			result.WithId(apiCustomField.Id)
 				.WithDefaultValue(apiCustomField.Value)
-				.IsRequired(apiCustomField.Required);
+				.IsRequired(apiCustomField.Required.Value);
 
 			foreach(Silanis.ESL.API.Translation translation in apiCustomField.Translations)
 			{

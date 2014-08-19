@@ -28,7 +28,7 @@ namespace Silanis.ESL.API
     
 		    
     [JsonProperty("extract")]
-    public Boolean Extract
+    public Nullable<Boolean> Extract
     {
                 get; set;
         }
@@ -42,7 +42,7 @@ namespace Silanis.ESL.API
     
 		    
     [JsonProperty("height")]
-    public Double Height
+    public Nullable<Double> Height
     {
                 get; set;
         }
@@ -56,7 +56,7 @@ namespace Silanis.ESL.API
     
 		    
     [JsonProperty("left")]
-    public Double Left
+    public Nullable<Double> Left
     {
                 get; set;
         }
@@ -70,7 +70,7 @@ namespace Silanis.ESL.API
     
 		    
     [JsonProperty("page")]
-    public Int32 Page
+    public Nullable<Int32> Page
     {
                 get; set;
         }
@@ -84,7 +84,7 @@ namespace Silanis.ESL.API
     
 		    
     [JsonProperty("top")]
-    public Double Top
+    public Nullable<Double> Top
     {
                 get; set;
         }
@@ -112,7 +112,7 @@ namespace Silanis.ESL.API
     
 		    
     [JsonProperty("width")]
-    public Double Width
+    public Nullable<Double> Width
     {
                 get; set;
         }

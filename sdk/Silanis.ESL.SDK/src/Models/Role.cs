@@ -12,6 +12,7 @@ namespace Silanis.ESL.API
 		// Fields
 		private IList<AttachmentRequirement> _attachmentRequirements = new List<AttachmentRequirement>();
 		private IList<Signer> _signers = new List<Signer>();
+		private IList<String> _specialTypes = new List<String>();
 		
 		// Accessors
 		    
@@ -57,14 +58,14 @@ namespace Silanis.ESL.API
     
 		    
     [JsonProperty("index")]
-    public Int32 Index
+    public Nullable<Int32> Index
     {
                 get; set;
         }
     
 		    
     [JsonProperty("locked")]
-    public Boolean Locked
+    public Nullable<Boolean> Locked
     {
                 get; set;
         }
@@ -78,7 +79,7 @@ namespace Silanis.ESL.API
     
 		    
     [JsonProperty("reassign")]
-    public Boolean Reassign
+    public Nullable<Boolean> Reassign
     {
                 get; set;
         }
@@ -100,6 +101,26 @@ namespace Silanis.ESL.API
         }
         
         _signers.Add(value);
+        return this;
+    }
+    
+		    
+    [JsonProperty("specialTypes")]
+    public IList<String> SpecialTypes
+    {
+                get
+        {
+            return _specialTypes;
+        }
+        }
+        public Role AddSpecialType(String value)
+    {
+        if (value == null)
+        {
+            throw new ArgumentNullException("Argument cannot be null");
+        }
+        
+        _specialTypes.Add(value);
         return this;
     }
     

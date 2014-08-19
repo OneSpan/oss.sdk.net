@@ -14,14 +14,14 @@ namespace Silanis.ESL.API
 		// Accessors
 		    
     [JsonProperty("progressBar")]
-    public Boolean ProgressBar
+    public Nullable<Boolean> ProgressBar
     {
                 get; set;
         }
     
 		    
     [JsonProperty("title")]
-    public Boolean Title
+    public Nullable<Boolean> Title
     {
                 get; set;
         }

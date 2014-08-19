@@ -15,7 +15,7 @@ namespace Silanis.ESL.API
 		// Accessors
 		    
     [JsonProperty("count")]
-    public Int32 Count
+    public Nullable<Int32> Count
     {
                 get; set;
         }

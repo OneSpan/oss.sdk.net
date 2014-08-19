@@ -132,9 +132,9 @@ namespace Silanis.ESL.SDK
             Asserts.NotEmptyOrNull(apiRole.Id, "role.id");
 
             SignerBuilder builder = SignerBuilder.NewSignerPlaceholder(new Placeholder(apiRole.Id))
-                .SigningOrder(apiRole.Index);
+                .SigningOrder(apiRole.Index.Value);
 
-            if ( apiRole.Reassign ) {
+            if ( apiRole.Reassign.Value ) {
                 builder.CanChangeSigner ();
             }
 
@@ -142,7 +142,7 @@ namespace Silanis.ESL.SDK
                 builder.WithEmailMessage( apiRole.EmailMessage.Content );
             }
 
-            if ( apiRole.Locked ) {
+            if ( apiRole.Locked.Value ) {
                 builder.Lock();
             }
 
@@ -158,8 +158,10 @@ namespace Silanis.ESL.SDK
                 .WithFirstName(eslSigner.FirstName)
                 .WithLastName(eslSigner.LastName)
                 .WithCompany(eslSigner.Company)
-                .WithTitle(eslSigner.Title)
-                .SigningOrder(apiRole.Index);
+                .WithTitle(eslSigner.Title);
+                
+            if (apiRole.Index.HasValue)
+                builder.SigningOrder(apiRole.Index.Value);
 
             foreach (Silanis.ESL.API.AttachmentRequirement attachmentRequirement in apiRole.AttachmentRequirements)
             {
@@ -170,7 +172,7 @@ namespace Silanis.ESL.SDK
                 builder.WithCustomId(apiRole.Id);
             }
 
-            if ( apiRole.Reassign ) {
+            if ( apiRole.Reassign.Value ) {
                 builder.CanChangeSigner ();
             }
 
@@ -178,11 +180,11 @@ namespace Silanis.ESL.SDK
                 builder.WithEmailMessage( apiRole.EmailMessage.Content );
             }
 
-            if ( apiRole.Locked ) {
+            if ( apiRole.Locked.Value ) {
                 builder.Lock();
             }
 
-            if (eslSigner.Delivery != null && eslSigner.Delivery.Email) {
+            if (eslSigner.Delivery != null && eslSigner.Delivery.Email.Value) {
                 builder.DeliverSignedDocumentsByEmail();
             }
 

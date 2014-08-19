@@ -14,21 +14,21 @@ namespace Silanis.ESL.API
 		// Accessors
 		    
     [JsonProperty("download")]
-    public Boolean Download
+    public Nullable<Boolean> Download
     {
                 get; set;
         }
     
 		    
     [JsonProperty("email")]
-    public Boolean Email
+    public Nullable<Boolean> Email
     {
                 get; set;
         }
     
 		    
     [JsonProperty("provider")]
-    public Boolean Provider
+    public Nullable<Boolean> Provider
     {
                 get; set;
         }

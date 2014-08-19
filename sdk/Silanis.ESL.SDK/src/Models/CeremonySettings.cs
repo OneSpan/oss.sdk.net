@@ -15,28 +15,35 @@ namespace Silanis.ESL.API
 		// Accessors
 		    
     [JsonProperty("declineButton")]
-    public Boolean DeclineButton
+    public Nullable<Boolean> DeclineButton
+    {
+                get; set;
+        }
+    
+		    
+    [JsonProperty("disableDownloadForUncompletedPackage")]
+    public Nullable<Boolean> DisableDownloadForUncompletedPackage
     {
                 get; set;
         }
     
 		    
     [JsonProperty("disableFirstInPersonAffidavit")]
-    public Boolean DisableFirstInPersonAffidavit
+    public Nullable<Boolean> DisableFirstInPersonAffidavit
     {
                 get; set;
         }
     
 		    
     [JsonProperty("disableInPersonAffidavit")]
-    public Boolean DisableInPersonAffidavit
+    public Nullable<Boolean> DisableInPersonAffidavit
     {
                 get; set;
         }
     
 		    
     [JsonProperty("disableSecondInPersonAffidavit")]
-    public Boolean DisableSecondInPersonAffidavit
+    public Nullable<Boolean> DisableSecondInPersonAffidavit
     {
                 get; set;
         }
@@ -64,35 +71,35 @@ namespace Silanis.ESL.API
     
 		    
     [JsonProperty("hideCaptureText")]
-    public Boolean HideCaptureText
+    public Nullable<Boolean> HideCaptureText
     {
                 get; set;
         }
     
 		    
     [JsonProperty("hideLanguageDropdown")]
-    public Boolean HideLanguageDropdown
+    public Nullable<Boolean> HideLanguageDropdown
     {
                 get; set;
         }
     
 		    
     [JsonProperty("hidePackageOwnerInPerson")]
-    public Boolean HidePackageOwnerInPerson
+    public Nullable<Boolean> HidePackageOwnerInPerson
     {
                 get; set;
         }
     
 		    
     [JsonProperty("hideWatermark")]
-    public Boolean HideWatermark
+    public Nullable<Boolean> HideWatermark
     {
                 get; set;
         }
     
 		    
     [JsonProperty("inPerson")]
-    public Boolean InPerson
+    public Nullable<Boolean> InPerson
     {
                 get; set;
         }
@@ -106,14 +113,14 @@ namespace Silanis.ESL.API
     
 		    
     [JsonProperty("maxAuthFailsAllowed")]
-    public Int32 MaxAuthFailsAllowed
+    public Nullable<Int32> MaxAuthFailsAllowed
     {
                 get; set;
         }
     
 		    
     [JsonProperty("optOutButton")]
-    public Boolean OptOutButton
+    public Nullable<Boolean> OptOutButton
     {
                 get; set;
         }

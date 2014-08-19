@@ -14,28 +14,28 @@ namespace Silanis.ESL.API
 		// Accessors
 		    
     [JsonProperty("height")]
-    public Double Height
+    public Nullable<Double> Height
     {
                 get; set;
         }
     
 		    
     [JsonProperty("left")]
-    public Double Left
+    public Nullable<Double> Left
     {
                 get; set;
         }
     
 		    
     [JsonProperty("top")]
-    public Double Top
+    public Nullable<Double> Top
     {
                 get; set;
         }
     
 		    
     [JsonProperty("width")]
-    public Double Width
+    public Nullable<Double> Width
     {
                 get; set;
         }

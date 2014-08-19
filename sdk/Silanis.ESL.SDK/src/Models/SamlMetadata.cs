@@ -21,7 +21,7 @@ namespace Silanis.ESL.API
     
 		    
     [JsonProperty("active")]
-    public Boolean Active
+    public Nullable<Boolean> Active
     {
                 get; set;
         }

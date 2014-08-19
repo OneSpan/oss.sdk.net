@@ -63,7 +63,7 @@ namespace Silanis.ESL.SDK
 
             Silanis.ESL.SDK.Challenge result; 
 
-            if (apiChallenge.MaskInput)
+            if (apiChallenge.MaskInput.Value)
             {
                 result = new Silanis.ESL.SDK.Challenge(apiChallenge.Question, apiChallenge.Answer, Challenge.MaskOptions.MaskInput);
             }
