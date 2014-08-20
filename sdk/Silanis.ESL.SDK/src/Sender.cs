@@ -13,11 +13,11 @@ namespace Silanis.ESL.SDK
 		private string lastName;
 		private string language;
 		private string phone;
-//		private string signerType;
 		private string title;
 		private Nullable<DateTime> updated;
 		private string id;
 		private string name;
+        private External external;
 
 		public Sender()
         {
@@ -131,18 +131,6 @@ namespace Silanis.ESL.SDK
 			}
 		}
 
-//		public string SignerType
-//		{
-//			get
-//			{
-//				return signerType;
-//			}
-//			set
-//			{
-//				signerType = value;
-//			}
-//		}
-
 		public string Title
 		{
 			get
@@ -190,6 +178,18 @@ namespace Silanis.ESL.SDK
 				name = value;
 			}
 		}
+
+        public External External
+        {
+            get
+            {
+                return external;
+            }
+            set
+            {
+                external = value;
+            }
+        }
     }
 }
 

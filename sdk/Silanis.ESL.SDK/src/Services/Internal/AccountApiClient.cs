@@ -119,6 +119,21 @@ namespace Silanis.ESL.SDK
                 throw new EslException("Failed to retrieve Sender from Account.\t" + " Exception: " + e.Message, e);
             }
         }
+
+        public IList<Silanis.ESL.API.Sender> GetContacts() {
+            string path = template.UrlFor(UrlTemplate.ACCOUNT_CONTACTS_PATH)
+                .Build();
+            try {
+                string response = restClient.Get(path);
+                return JsonConvert.DeserializeObject<IList<Silanis.ESL.API.Sender>> (response, jsonSettings);
+            }
+            catch (EslServerException e) {
+                throw new EslServerException("Failed to retrieve contacts.\t" + " Exception: " + e.Message, e.ServerError, e);
+            }
+            catch (Exception e) {
+                throw new EslException("Failed to retrieve contacts.\t" + " Exception: " + e.Message, e);
+            }
+        }
     }
 }
 

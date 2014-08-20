@@ -13,6 +13,9 @@ namespace SDK.Tests
 		private const string LAST_NAME = "lastName";
 		private const string COMPANY = "company";
 		private const string TITLE = "title";
+        private const string EXTERNAL_ID = "externalId";
+        private const string EXTERNAL_PROVIDER = "provider";
+        private const string EXTERNAL_PROVIDER_NAME = "providerName";
 
 		[Test()]
 		public void ToSDKFromAPISender()
@@ -84,8 +87,10 @@ namespace SDK.Tests
 			Assert.AreEqual(sdkSender.Title, apiSender.Title);
 			Assert.AreEqual(sdkSender.Type.ToString(), apiSender.Type.ToString());
 			Assert.AreEqual(sdkSender.Updated, apiSender.Updated);
-//			Assert.AreEqual(sdkSender.SignerType, apiSender.SignerType);
 			Assert.AreEqual(sdkSender.Id, apiSender.Id);
+            Assert.AreEqual(sdkSender.External.Id, apiSender.External.Id);
+            Assert.AreEqual(sdkSender.External.Provider, apiSender.External.Provider);
+            Assert.AreEqual(sdkSender.External.ProviderName, apiSender.External.ProviderName);
 		}
 
 		private Silanis.ESL.API.Sender CreateTypicalAPISender()
@@ -96,6 +101,11 @@ namespace SDK.Tests
 			sender.LastName = LAST_NAME;
 			sender.Company = COMPANY;
 			sender.Title = TITLE;
+
+            sender.External = new Silanis.ESL.API.External();
+            sender.External.Id = EXTERNAL_ID;
+            sender.External.Provider = EXTERNAL_PROVIDER;
+            sender.External.ProviderName = EXTERNAL_PROVIDER_NAME;
 
 			return sender;
 		}

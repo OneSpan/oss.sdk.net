@@ -71,7 +71,7 @@ namespace SDK.Examples
             eslClient.SendPackage(packageId);
 
             DocumentPackage documentWithExternalContent =
-                PackageBuilder.NewPackageNamed("BasicPackageCreationExample: " + DateTime.Now)
+                PackageBuilder.NewPackageNamed("HistoryDocumentExample: " + DateTime.Now)
                     .DescribedAs("This is a package created using the e-SignLive SDK")
                     .ExpiresOn(DateTime.Now.AddMonths(100))
                     .WithEmailMessage("This message should be delivered to all signers")

@@ -76,6 +76,7 @@ namespace Silanis.ESL.SDK.Internal
         public static readonly string ACCOUNT_MEMBER_ID_PATH = "/account/senders/{senderUid}";
         public static readonly string ACCOUNT_MEMBER_INVITE_PATH = "/account/senders/{senderUid}/invite";
         public static readonly string ACCOUNT_MEMBER_LIST_PATH = "/account/senders?to={to}&from={from}&dir={dir}";
+        public static readonly string ACCOUNT_CONTACTS_PATH = "/users";
 
         // Approval Service
         public static readonly string APPROVAL_PATH = "/packages/{packageId}/documents/{documentId}/approvals";

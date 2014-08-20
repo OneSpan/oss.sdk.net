@@ -3,6 +3,7 @@ using Silanis.ESL.SDK.Internal;
 using Newtonsoft.Json;
 using Silanis.ESL.API;
 using System.Collections.Generic;
+using System.Collections;
 
 namespace Silanis.ESL.SDK.Services
 {
@@ -56,6 +57,18 @@ namespace Silanis.ESL.SDK.Services
             Silanis.ESL.API.Sender apiSender = new SenderConverter(senderInfo).ToAPISender();
             apiSender.Id = senderId;
             apiClient.UpdateSender(apiSender, senderId);
+        }
+
+        public IDictionary<string, Silanis.ESL.SDK.Sender> GetContacts() {
+            IList<Silanis.ESL.API.Sender> contacts = apiClient.GetContacts();
+
+            IDictionary<string, Silanis.ESL.SDK.Sender> result = new Dictionary<string, Silanis.ESL.SDK.Sender>();
+            foreach (Silanis.ESL.API.Sender apiSender in contacts)
+            {
+                result[apiSender.Email] = new SenderConverter(apiSender).ToSDKSender();
+            }
+
+            return result;
         }
     }
 }
