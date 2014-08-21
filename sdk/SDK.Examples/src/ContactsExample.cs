@@ -34,11 +34,11 @@ namespace SDK.Examples
 
         override public void Execute()
         {
-            // Get the account contacts (Senders)
+            // Get the contacts (Senders) from account
             beforeContacts = eslClient.AccountService.GetContacts();
             signerForPackage = beforeContacts[email1];
 
-            // Create package with signer using information from the account contacts
+            // Create package with signer using information from contacts
             DocumentPackage superDuperPackage = PackageBuilder.NewPackageNamed("ContactsExample: " + DateTime.Now)
                     .DescribedAs("This is a package created using the e-SignLive SDK")
                     .ExpiresOn(DateTime.Now.AddMonths(100))
