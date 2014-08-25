@@ -8,10 +8,12 @@ namespace SDK.Examples
     [TestFixture()]
     public class CustomSenderInfoExampleTest
     {
+        private CustomSenderInfoExample example;
+
         [Test()]
 		public void VerifyResult()
         {
-			CustomSenderInfoExample example = new CustomSenderInfoExample(Props.GetInstance());
+			example = new CustomSenderInfoExample(Props.GetInstance());
 			example.Run();
 
 			DocumentPackage package = example.EslClient.GetPackage(example.PackageId);
@@ -22,9 +24,21 @@ namespace SDK.Examples
 			Assert.AreEqual(CustomSenderInfoExample.SENDER_COMPANY, package.SenderInfo.Company);
 			Assert.AreEqual(CustomSenderInfoExample.SENDER_TITLE, package.SenderInfo.Title);
 
-            IDictionary<string, Silanis.ESL.SDK.Sender> senders = example.EslClient.AccountService.GetSenders(Direction.ASCENDING, new PageRequest(1, 500));
+            IDictionary<string, Silanis.ESL.SDK.Sender> senders = assertSenderWasAdded(100, example.SenderEmail);
             Assert.IsTrue(senders.ContainsKey(example.SenderEmail));
             Assert.AreEqual(senders[example.SenderEmail].Language, "fr");
+        }
+
+        private IDictionary<string, Sender> assertSenderWasAdded(int numberOfResults, string senderEmail)
+        {
+            int i = 0;
+            IDictionary<string, Sender> senders = example.EslClient.AccountService.GetSenders(Direction.ASCENDING, new PageRequest(1, numberOfResults));
+            while (!senders.ContainsKey(senderEmail))
+            {
+                Assert.AreEqual(senders.Count, numberOfResults);
+                senders = example.EslClient.AccountService.GetSenders(Direction.ASCENDING, new PageRequest(i++ * numberOfResults, numberOfResults));
+            }
+            return senders;
         }
     }
 }

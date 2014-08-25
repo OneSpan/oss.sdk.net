@@ -14,10 +14,8 @@ namespace SDK.Examples
         public AccountMember accountMember2;
         public AccountMember accountMember3;
         public SenderInfo updatedSenderInfo;
-
-        public IDictionary<string, Sender> accountMembers;
-        public IDictionary<string, Sender> accountMembersWithDeletedSender;
-        public IDictionary<string, Sender> accountMembersWithUpdatedSender;
+        public Sender retrievedSender1, retrievedSender2, retrievedSender3;
+        public Sender retrievedUpdatedSender3;
 
         public SenderManipulationExample(Props props) : this(props.Get("api.url"), props.Get("api.key"), props.Get("1.email"), props.Get("2.email"), props.Get("3.email"))
         {
@@ -63,19 +61,16 @@ namespace SDK.Examples
                 .Build();
 
             Sender createdSender1 = eslClient.AccountService.InviteUser(accountMember1);
-            Sender retrievedSender1 = eslClient.AccountService.GetSender(createdSender1.Id);
             Sender createdSender2 = eslClient.AccountService.InviteUser(accountMember2);
             Sender createdSender3 = eslClient.AccountService.InviteUser(accountMember3);
 
-            Console.Out.WriteLine(email2);
+            retrievedSender1 = eslClient.AccountService.GetSender(createdSender1.Id);
+            retrievedSender2 = eslClient.AccountService.GetSender(createdSender2.Id);
+            retrievedSender3 = eslClient.AccountService.GetSender(createdSender3.Id);
 
             eslClient.AccountService.SendInvite(createdSender1.Id);
 
-            accountMembers = eslClient.AccountService.GetSenders(Direction.ASCENDING, new PageRequest(1, 1000));
-
             eslClient.AccountService.DeleteSender(createdSender2.Id);
-
-            accountMembersWithDeletedSender = eslClient.AccountService.GetSenders(Direction.ASCENDING, new PageRequest(1, 1000));
 
             updatedSenderInfo = SenderInfoBuilder.NewSenderInfo(email3)
                 .WithName("updatedFirstName", "updatedLastName")
@@ -83,8 +78,11 @@ namespace SDK.Examples
                     .WithTitle("updatedTitle")
                     .Build();
 
-            eslClient.AccountService.UpdateSender(updatedSenderInfo, accountMembersWithDeletedSender[email3].Id);
-            accountMembersWithUpdatedSender = eslClient.AccountService.GetSenders(Direction.ASCENDING, new PageRequest(1, 1000));
+            eslClient.AccountService.UpdateSender(updatedSenderInfo, createdSender3.Id);
+            retrievedUpdatedSender3 = eslClient.AccountService.GetSender(createdSender3.Id);
+
+            // Get senders in account
+            IDictionary<string, Sender> senders = eslClient.AccountService.GetSenders(Direction.ASCENDING, new PageRequest(1, 100));
         }
     }
 }
