@@ -8,13 +8,14 @@ namespace Silanis.ESL.SDK
 	{
 		private readonly Authentication authentication;
 
-		public Signer (string signerEmail, string firstName, string lastName, Authentication authentication)
+        public Signer (string signerEmail, string firstName, string lastName, Authentication authentication)
 		{
 			Email = signerEmail;
 			FirstName = firstName;
 			LastName = lastName;
 			this.authentication = authentication;
 			this.GroupId = null;
+            this.KnowledgeBasedAuthentication = null;
 		}
 
 		public Signer( GroupId groupId )
@@ -24,6 +25,7 @@ namespace Silanis.ESL.SDK
 			FirstName = null;
 			LastName = null;
 			authentication = new Authentication(AuthenticationMethod.EMAIL);
+            this.KnowledgeBasedAuthentication = null;
 		}
         
         public Signer(string id)
@@ -35,6 +37,7 @@ namespace Silanis.ESL.SDK
             authentication = null;
             this.Id = id;
             authentication = new Authentication(Silanis.ESL.SDK.AuthenticationMethod.EMAIL);
+            this.KnowledgeBasedAuthentication = null;
         }
 
 		public string Id {
@@ -47,6 +50,11 @@ namespace Silanis.ESL.SDK
 			get;
 			private set;
 		}
+
+        public KnowledgeBasedAuthentication KnowledgeBasedAuthentication
+        {
+            get; set;
+        }
 
         private string email;
 		public string Email

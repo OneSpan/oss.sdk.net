@@ -62,7 +62,7 @@ namespace Silanis.ESL.SDK
                 message.Content = sdkSigner.Message;
                 role.EmailMessage = message;
             }
-            
+
             return role;
         }
 
@@ -92,6 +92,7 @@ namespace Silanis.ESL.SDK
 					signer.Delivery = new Silanis.ESL.API.Delivery();
 					signer.Delivery.Email = sdkSigner.DeliverSignedDocumentsByEmail;
 				}
+                signer.KnowledgeBasedAuthentication = new KnowledgeBasedAuthenticationConverter(sdkSigner.KnowledgeBasedAuthentication).ToAPIKnowledgeBasedAuthentication();
 			}
 			else
 			{
@@ -158,7 +159,8 @@ namespace Silanis.ESL.SDK
                 .WithFirstName(eslSigner.FirstName)
                 .WithLastName(eslSigner.LastName)
                 .WithCompany(eslSigner.Company)
-                .WithTitle(eslSigner.Title);
+                .WithTitle(eslSigner.Title)
+                .ChallengedWithKnowledgeBasedAuthentication(new KnowledgeBasedAuthenticationConverter(eslSigner.KnowledgeBasedAuthentication).ToSDKKnowledgeBasedAuthentication());
                 
             if (apiRole.Index.HasValue)
                 builder.SigningOrder(apiRole.Index.Value);

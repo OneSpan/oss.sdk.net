@@ -48,8 +48,8 @@ namespace Silanis.ESL.API
         }
     
 		    
-    [JsonProperty("socialInsuranceNumber")]
-    public String SocialInsuranceNumber
+    [JsonProperty("socialSecurityNumber")]
+    public String SocialSecurityNumber
     {
                 get; set;
         }

@@ -127,6 +127,9 @@
     <Compile Include="src\QRCodeExample.cs" />
     <Compile Include="src\CreateTemplateOnBehalfOfAnotherSenderExample.cs" />
     <Compile Include="src\ContactsExample.cs" />
+    <Compile Include="src\SignerInformationForEquifaxCanadaExample.cs" />
+    <Compile Include="src\SignerInformationForEquifaxUSAExample.cs" />
+    <Compile Include="src\MixedSignerAuthenticationExample.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
@@ -156,11 +159,11 @@
     <None Include="jenkins.properties" />
     <None Include="signers.properties" />
   </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <ProjectReference Include="..\Silanis.ESL.SDK\Silanis.ESL.SDK.csproj">
       <Project>{0A9B8521-9624-460B-813E-079056B24B65}</Project>
       <Name>Silanis.ESL.SDK</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
 </Project>

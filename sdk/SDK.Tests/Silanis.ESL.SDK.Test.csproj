@@ -81,7 +81,7 @@
     <Compile Include="src\Internal\Conversion\ExternalConverterTest.cs" />
     <Compile Include="src\Internal\Conversion\MessageStatusConverterTest.cs" />
     <Compile Include="src\Internal\Conversion\ChallengeConverterTest.cs" />r
-  <Compile Include="src\Internal\Conversion\UsageReportConverterTest.cs" /></ItemGroup>
+  <Compile Include="src\Internal\Conversion\UsageReportConverterTest.cs" /><Compile Include="src\Internal\Conversion\SignerInformationForEquifaxCanadaConverterTest.cs" /><Compile Include="src\Builder\SignerInformationForEquifaxCanadaBuilderTest.cs" /><Compile Include="src\Builder\SignerInformationForEquifaxUSABuilderTest.cs" /><Compile Include="src\Internal\Conversion\SignerInformationForEquifaxUSAConverterTest.cs" /></ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
     <Folder Include="src\" />
@@ -100,5 +100,8 @@
       <Project>{0A9B8521-9624-460B-813E-079056B24B65}</Project>
       <Name>Silanis.ESL.SDK</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="signers.properties" />
   </ItemGroup>
 </Project>

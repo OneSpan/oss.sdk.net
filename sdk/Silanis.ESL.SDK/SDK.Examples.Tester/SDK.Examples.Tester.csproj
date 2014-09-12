@@ -92,6 +92,9 @@
     <Compile Include="src\QRCodeExampleTest.cs" />
     <Compile Include="src\CreateTemplateOnBehalfOfAnotherSenderExampleTest.cs" />
     <Compile Include="src\ContactsExampleTest.cs" />
+    <Compile Include="src\SignerInformationForEquifaxCanadaExampleTest.cs" />
+    <Compile Include="src\SignerInformationForEquifaxUSAExampleTest.cs" />
+    <Compile Include="src\MixedSignerAuthenticationExampleTest.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

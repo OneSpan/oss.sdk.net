@@ -62,8 +62,8 @@ namespace Silanis.ESL.API
         }
     
 		    
-    [JsonProperty("state")]
-    public String State
+    [JsonProperty("province")]
+    public String Province
     {
                 get; set;
         }
@@ -83,8 +83,8 @@ namespace Silanis.ESL.API
         }
     
 		    
-    [JsonProperty("zip")]
-    public String Zip
+    [JsonProperty("postalCode")]
+    public String PostalCode
     {
                 get; set;
         }
