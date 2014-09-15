@@ -342,7 +342,6 @@
     <Compile Include="src\Builder\SignerInformationForEquifaxCanadaBuilder.cs" />
     <Compile Include="src\KnowledgeBasedAuthentication.cs" />
     <Compile Include="src\SignerInformationForEquifaxUSA.cs" />
-    <Compile Include="src\Builder\KnowledgeBasedAuthenticationBuilder.cs" />
     <Compile Include="src\Internal\Conversion\KnowledgeBasedAuthenticationConverter.cs" />
     <Compile Include="src\Internal\Conversion\SignerInformationForEquifaxUSAConverter.cs" />
     <Compile Include="src\Builder\SignerInformationForEquifaxUSABuilder.cs" />

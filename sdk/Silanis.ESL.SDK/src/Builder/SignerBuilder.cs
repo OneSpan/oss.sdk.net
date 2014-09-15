@@ -176,14 +176,37 @@ namespace Silanis.ESL.SDK.Builder
 			attachments.Add(attachmentRequirement.Name, attachmentRequirement);
 		}
 
-        public SignerBuilder ChallengedWithKnowledgeBasedAuthentication (KnowledgeBasedAuthenticationBuilder builder)
-        {
-            return ChallengedWithKnowledgeBasedAuthentication(builder.Build());
-        }
-
         public SignerBuilder ChallengedWithKnowledgeBasedAuthentication (KnowledgeBasedAuthentication knowledgeBasedAuthentication)
         {
+            if (this.knowledgeBasedAuthentication == null) {
+                this.knowledgeBasedAuthentication = new KnowledgeBasedAuthentication();
+            }
             this.knowledgeBasedAuthentication = knowledgeBasedAuthentication;
+            return this;
+        }
+
+        public SignerBuilder ChallengedWithKnowledgeBasedAuthentication(SignerInformationForEquifaxCanadaBuilder signerInformationForEquifaxCanadaBuilder) {
+            return ChallengedWithKnowledgeBasedAuthentication(signerInformationForEquifaxCanadaBuilder.Build());
+        }
+
+        public SignerBuilder ChallengedWithKnowledgeBasedAuthentication(SignerInformationForEquifaxCanada signerInformationForEquifaxCanada) {
+
+            if (this.knowledgeBasedAuthentication == null) {
+                this.knowledgeBasedAuthentication = new KnowledgeBasedAuthentication();
+            }
+            this.knowledgeBasedAuthentication.SignerInformationForEquifaxCanada = signerInformationForEquifaxCanada;
+            return this;
+        }
+
+        public SignerBuilder ChallengedWithKnowledgeBasedAuthentication(SignerInformationForEquifaxUSABuilder signerInformationForEquifaxUSABuilder) {
+            return ChallengedWithKnowledgeBasedAuthentication(signerInformationForEquifaxUSABuilder.Build());
+        }
+
+        public SignerBuilder ChallengedWithKnowledgeBasedAuthentication(SignerInformationForEquifaxUSA signerInformationForEquifaxUSA) {
+            if (this.knowledgeBasedAuthentication == null) {
+                this.knowledgeBasedAuthentication = new KnowledgeBasedAuthentication();
+            }
+            this.knowledgeBasedAuthentication.SignerInformationForEquifaxUSA = signerInformationForEquifaxUSA;
             return this;
         }
 

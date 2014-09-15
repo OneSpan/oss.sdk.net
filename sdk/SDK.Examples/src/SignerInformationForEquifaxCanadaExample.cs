@@ -23,7 +23,7 @@ namespace SDK.Examples
         public readonly string DRIVERS_LICENSE_INDICATOR = "License indicator";
         public readonly string SOCIAL_INSURANCE_NUMBER = "111-222-333-444";
         public readonly string HOME_PHONE_NUMBER = "1-900-873-8733";
-        public readonly Nullable<DateTime> DATE_OF_BIRTH = new DateTime();
+        public readonly Nullable<DateTime> DATE_OF_BIRTH = new DateTime(2000, 1, 1);
         public readonly string SIGNER_EMAIL;
 
         private string signerId = "signerId";
@@ -55,7 +55,6 @@ namespace SDK.Examples
                     .WithLastName("Smith")
                     .WithCustomId(signerId)
                     .ChallengedWithKnowledgeBasedAuthentication(
-                        KnowledgeBasedAuthenticationBuilder.WithSignerInformationForEquifaxCanada(
                             SignerInformationForEquifaxCanadaBuilder.NewSignerInformationForEquifaxCanada()
                             .WithFirstName(FIRST_NAME)
                             .WithLastName(LAST_NAME)
@@ -69,7 +68,6 @@ namespace SDK.Examples
                             .WithHomePhoneNumber(HOME_PHONE_NUMBER)
                             .WithDateOfBirth(DATE_OF_BIRTH)
                             .Build()))
-                        .Build())
                     .WithDocument(DocumentBuilder.NewDocumentNamed(documentName)
                     .FromStream(file, DocumentType.PDF)
                     .WithSignature(SignatureBuilder.SignatureFor(SIGNER_EMAIL)

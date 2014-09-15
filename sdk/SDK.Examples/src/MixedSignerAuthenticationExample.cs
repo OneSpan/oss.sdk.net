@@ -15,24 +15,21 @@ namespace SDK.Examples
 
         public Signer SIGNER_WITH_AUTHENTICATION_EQUIFAX_CANADA;
         public Signer SIGNER_WITH_AUTHENTICATION_EQUIFAX_USA;
-        public Signer SIGNER_WITH_AUTHENTICATION_Q_AND_A;
 
         private string emailForSignerWithAuthenticationEquifaxCanada;
         private string emailForSignerWithAuthenticationEquifaxUsa;
-        private string emailForSignerWithAuthenticationQAndA;
 
         private DocumentPackage retrievedPackage;
         private string documentName = "My Document";
 
-        public MixedSignerAuthenticationExample(Props props) : this(props.Get("api.url"), props.Get("api.key"), props.Get("1.email"), props.Get("2.email"), props.Get("3.email"))
+        public MixedSignerAuthenticationExample(Props props) : this(props.Get("api.url"), props.Get("api.key"), props.Get("1.email"), props.Get("2.email"))
         {
         }
 
-        public MixedSignerAuthenticationExample(string apiKey, string apiUrl, string signer1Email, string signer2Email, string signer3Email) : base( apiKey, apiUrl )
+        public MixedSignerAuthenticationExample(string apiKey, string apiUrl, string signer1Email, string signer2Email) : base( apiKey, apiUrl )
         {
             this.emailForSignerWithAuthenticationEquifaxCanada = signer1Email;
             this.emailForSignerWithAuthenticationEquifaxUsa = signer2Email;
-            this.emailForSignerWithAuthenticationQAndA = signer3Email;
         }
 
         public DocumentPackage RetrievedPackage
@@ -50,7 +47,6 @@ namespace SDK.Examples
                     .WithLastName("Canada")
                     .WithCustomId("SingerCanadaID")
                     .ChallengedWithKnowledgeBasedAuthentication(
-                        KnowledgeBasedAuthenticationBuilder.WithSignerInformationForEquifaxCanada(
                             SignerInformationForEquifaxCanadaBuilder.NewSignerInformationForEquifaxCanada()
                                 .WithFirstName("Signer1")
                                 .WithLastName("lastNameCanada")
@@ -62,8 +58,11 @@ namespace SDK.Examples
                                 .WithDriversLicenseIndicator("Driver licence indicator")
                                 .WithSocialInsuranceNumber("111-222-333")
                                 .WithHomePhoneNumber("514-111-2222")
-                            .WithDateOfBirth(new DateTime())
-                                .Build()))
+                                .WithDateOfBirth(new DateTime(2000, 1, 1)))
+                    .ChallengedWithQuestions(ChallengeBuilder.FirstQuestion("What's your favorite restaurant? (answer: Staffany)")
+                        .Answer("Staffany")
+                        .SecondQuestion("What sport do you play? (answer: hockey)")
+                        .Answer("hockey"))
                     .Build();
 
             SIGNER_WITH_AUTHENTICATION_EQUIFAX_USA =
@@ -72,25 +71,16 @@ namespace SDK.Examples
                     .WithLastName("USA")
                     .WithCustomId("SignerUSAID")
                     .ChallengedWithKnowledgeBasedAuthentication(
-                        KnowledgeBasedAuthenticationBuilder.WithSignerInformationForEquifaxUSA(
                             SignerInformationForEquifaxUSABuilder.NewSignerInformationForEquifaxUSA()
-                            .WithFirstName("Singer2")
-                            .WithLastName("lastNameUSA")
-                            .WithStreetAddress("2222")
-                            .WithCity("New York")
-                            .WithState("NY")
-                            .WithZip("000000")
-                            .WithSocialSecurityNumber("222-667-909833")
-                            .WithHomePhoneNumber("870-111-6547")
-                            .WithDateOfBirth(new DateTime())
-                            .Build())
-                    )
-                    .Build();
-
-            SIGNER_WITH_AUTHENTICATION_Q_AND_A =
-                SignerBuilder.NewSignerWithEmail(emailForSignerWithAuthenticationQAndA)
-                    .WithFirstName("Signer3")
-                    .WithLastName("LastNameQnA")
+                                .WithFirstName("Singer2")
+                                .WithLastName("lastNameUSA")
+                                .WithStreetAddress("2222")
+                                .WithCity("New York")
+                                .WithState("NY")
+                                .WithZip("000000")
+                                .WithSocialSecurityNumber("222-667-909833")
+                                .WithHomePhoneNumber("870-111-6547")
+                                .WithDateOfBirth(new DateTime(2002, 2, 2)))
                     .ChallengedWithQuestions(ChallengeBuilder.FirstQuestion("What's your favorite sport? (answer: golf)")
                         .Answer("golf")
                         .SecondQuestion("What music instrument do you play? (answer: drums)")
@@ -101,14 +91,11 @@ namespace SDK.Examples
                 .DescribedAs("This is a package created using the e-SignLive SDK")
                 .WithSigner(SIGNER_WITH_AUTHENTICATION_EQUIFAX_CANADA)
                 .WithSigner(SIGNER_WITH_AUTHENTICATION_EQUIFAX_USA)
-                .WithSigner(SIGNER_WITH_AUTHENTICATION_Q_AND_A)
                 .WithDocument(DocumentBuilder.NewDocumentNamed(documentName)
                     .FromStream(file, DocumentType.PDF)
                     .WithSignature(SignatureBuilder.SignatureFor(emailForSignerWithAuthenticationEquifaxCanada)
                         .Build())
                     .WithSignature(SignatureBuilder.SignatureFor(emailForSignerWithAuthenticationEquifaxUsa)
-                        .Build())
-                    .WithSignature(SignatureBuilder.SignatureFor(emailForSignerWithAuthenticationQAndA)
                         .Build())
                     .Build())
                 .Build();
@@ -116,8 +103,6 @@ namespace SDK.Examples
             packageId = eslClient.CreateAndSendPackage(superDuperPackage);
 
             retrievedPackage = eslClient.GetPackage(packageId);
-
         }
-
     }
 }

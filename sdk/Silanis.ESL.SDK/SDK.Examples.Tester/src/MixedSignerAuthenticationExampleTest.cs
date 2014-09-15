@@ -23,37 +23,45 @@ namespace SDK.Examples
 
             DocumentPackage documentPackage = example.EslClient.GetPackage(example.PackageId);
 
-            SignerInformationForEquifaxCanada signerInformationForEquifaxCanada = documentPackage.Signers[example.SIGNER_WITH_AUTHENTICATION_EQUIFAX_CANADA.Email].KnowledgeBasedAuthentication.SignerInformationForEquifaxCanada;
+            Signer canadianSigner = documentPackage.Signers[example.SIGNER_WITH_AUTHENTICATION_EQUIFAX_CANADA.Email];
+            SignerInformationForEquifaxCanada canadianSignerInformationForEquifaxCanada = canadianSigner.KnowledgeBasedAuthentication.SignerInformationForEquifaxCanada;
 
-            Assert.AreEqual(signerInformationForEquifaxCanada.FirstName, example.SIGNER_WITH_AUTHENTICATION_EQUIFAX_CANADA.KnowledgeBasedAuthentication.SignerInformationForEquifaxCanada.FirstName);
-            Assert.AreEqual(signerInformationForEquifaxCanada.LastName, example.SIGNER_WITH_AUTHENTICATION_EQUIFAX_CANADA.KnowledgeBasedAuthentication.SignerInformationForEquifaxCanada.LastName);
-            Assert.AreEqual(signerInformationForEquifaxCanada.StreetAddress, example.SIGNER_WITH_AUTHENTICATION_EQUIFAX_CANADA.KnowledgeBasedAuthentication.SignerInformationForEquifaxCanada.StreetAddress);
-            Assert.AreEqual(signerInformationForEquifaxCanada.City, example.SIGNER_WITH_AUTHENTICATION_EQUIFAX_CANADA.KnowledgeBasedAuthentication.SignerInformationForEquifaxCanada.City);
-            Assert.AreEqual(signerInformationForEquifaxCanada.Province, example.SIGNER_WITH_AUTHENTICATION_EQUIFAX_CANADA.KnowledgeBasedAuthentication.SignerInformationForEquifaxCanada.Province);
-            Assert.AreEqual(signerInformationForEquifaxCanada.PostalCode, example.SIGNER_WITH_AUTHENTICATION_EQUIFAX_CANADA.KnowledgeBasedAuthentication.SignerInformationForEquifaxCanada.PostalCode);
-            Assert.AreEqual(signerInformationForEquifaxCanada.TimeAtAddress, example.SIGNER_WITH_AUTHENTICATION_EQUIFAX_CANADA.KnowledgeBasedAuthentication.SignerInformationForEquifaxCanada.TimeAtAddress);
-            Assert.AreEqual(signerInformationForEquifaxCanada.DriversLicenseIndicator, example.SIGNER_WITH_AUTHENTICATION_EQUIFAX_CANADA.KnowledgeBasedAuthentication.SignerInformationForEquifaxCanada.DriversLicenseIndicator);
-            Assert.AreEqual(signerInformationForEquifaxCanada.SocialInsuranceNumber, example.SIGNER_WITH_AUTHENTICATION_EQUIFAX_CANADA.KnowledgeBasedAuthentication.SignerInformationForEquifaxCanada.SocialInsuranceNumber);
-            Assert.AreEqual(signerInformationForEquifaxCanada.HomePhoneNumber, example.SIGNER_WITH_AUTHENTICATION_EQUIFAX_CANADA.KnowledgeBasedAuthentication.SignerInformationForEquifaxCanada.HomePhoneNumber);
-            Assert.AreEqual(signerInformationForEquifaxCanada.DateOfBirth, example.SIGNER_WITH_AUTHENTICATION_EQUIFAX_CANADA.KnowledgeBasedAuthentication.SignerInformationForEquifaxCanada.DateOfBirth);
+            Assert.AreEqual(canadianSignerInformationForEquifaxCanada.FirstName, example.SIGNER_WITH_AUTHENTICATION_EQUIFAX_CANADA.KnowledgeBasedAuthentication.SignerInformationForEquifaxCanada.FirstName);
+            Assert.AreEqual(canadianSignerInformationForEquifaxCanada.LastName, example.SIGNER_WITH_AUTHENTICATION_EQUIFAX_CANADA.KnowledgeBasedAuthentication.SignerInformationForEquifaxCanada.LastName);
+            Assert.AreEqual(canadianSignerInformationForEquifaxCanada.StreetAddress, example.SIGNER_WITH_AUTHENTICATION_EQUIFAX_CANADA.KnowledgeBasedAuthentication.SignerInformationForEquifaxCanada.StreetAddress);
+            Assert.AreEqual(canadianSignerInformationForEquifaxCanada.City, example.SIGNER_WITH_AUTHENTICATION_EQUIFAX_CANADA.KnowledgeBasedAuthentication.SignerInformationForEquifaxCanada.City);
+            Assert.AreEqual(canadianSignerInformationForEquifaxCanada.Province, example.SIGNER_WITH_AUTHENTICATION_EQUIFAX_CANADA.KnowledgeBasedAuthentication.SignerInformationForEquifaxCanada.Province);
+            Assert.AreEqual(canadianSignerInformationForEquifaxCanada.PostalCode, example.SIGNER_WITH_AUTHENTICATION_EQUIFAX_CANADA.KnowledgeBasedAuthentication.SignerInformationForEquifaxCanada.PostalCode);
+            Assert.AreEqual(canadianSignerInformationForEquifaxCanada.TimeAtAddress, example.SIGNER_WITH_AUTHENTICATION_EQUIFAX_CANADA.KnowledgeBasedAuthentication.SignerInformationForEquifaxCanada.TimeAtAddress);
+            Assert.AreEqual(canadianSignerInformationForEquifaxCanada.DriversLicenseIndicator, example.SIGNER_WITH_AUTHENTICATION_EQUIFAX_CANADA.KnowledgeBasedAuthentication.SignerInformationForEquifaxCanada.DriversLicenseIndicator);
+            Assert.AreEqual(canadianSignerInformationForEquifaxCanada.SocialInsuranceNumber, example.SIGNER_WITH_AUTHENTICATION_EQUIFAX_CANADA.KnowledgeBasedAuthentication.SignerInformationForEquifaxCanada.SocialInsuranceNumber);
+            Assert.AreEqual(canadianSignerInformationForEquifaxCanada.HomePhoneNumber, example.SIGNER_WITH_AUTHENTICATION_EQUIFAX_CANADA.KnowledgeBasedAuthentication.SignerInformationForEquifaxCanada.HomePhoneNumber);
+            Assert.AreEqual(canadianSignerInformationForEquifaxCanada.DateOfBirth, example.SIGNER_WITH_AUTHENTICATION_EQUIFAX_CANADA.KnowledgeBasedAuthentication.SignerInformationForEquifaxCanada.DateOfBirth);
 
-            SignerInformationForEquifaxUSA signerInformationForEquifaxUSA = documentPackage.Signers[example.SIGNER_WITH_AUTHENTICATION_EQUIFAX_USA.Email].KnowledgeBasedAuthentication.SignerInformationForEquifaxUSA;
-            Assert.AreEqual(signerInformationForEquifaxUSA.FirstName, example.SIGNER_WITH_AUTHENTICATION_EQUIFAX_USA.KnowledgeBasedAuthentication.SignerInformationForEquifaxUSA.FirstName);
-            Assert.AreEqual(signerInformationForEquifaxUSA.LastName, example.SIGNER_WITH_AUTHENTICATION_EQUIFAX_USA.KnowledgeBasedAuthentication.SignerInformationForEquifaxUSA.LastName);
-            Assert.AreEqual(signerInformationForEquifaxUSA.StreetAddress, example.SIGNER_WITH_AUTHENTICATION_EQUIFAX_USA.KnowledgeBasedAuthentication.SignerInformationForEquifaxUSA.StreetAddress);
-            Assert.AreEqual(signerInformationForEquifaxUSA.City, example.SIGNER_WITH_AUTHENTICATION_EQUIFAX_USA.KnowledgeBasedAuthentication.SignerInformationForEquifaxUSA.City);
-            Assert.AreEqual(signerInformationForEquifaxUSA.State, example.SIGNER_WITH_AUTHENTICATION_EQUIFAX_USA.KnowledgeBasedAuthentication.SignerInformationForEquifaxUSA.State);
-            Assert.AreEqual(signerInformationForEquifaxUSA.Zip, example.SIGNER_WITH_AUTHENTICATION_EQUIFAX_USA.KnowledgeBasedAuthentication.SignerInformationForEquifaxUSA.Zip);
-            Assert.AreEqual(signerInformationForEquifaxUSA.SocialSecurityNumber, example.SIGNER_WITH_AUTHENTICATION_EQUIFAX_USA.KnowledgeBasedAuthentication.SignerInformationForEquifaxUSA.SocialSecurityNumber);
-            Assert.AreEqual(signerInformationForEquifaxUSA.HomePhoneNumber, example.SIGNER_WITH_AUTHENTICATION_EQUIFAX_USA.KnowledgeBasedAuthentication.SignerInformationForEquifaxUSA.HomePhoneNumber);
-            Assert.AreEqual(signerInformationForEquifaxUSA.DateOfBirth, example.SIGNER_WITH_AUTHENTICATION_EQUIFAX_USA.KnowledgeBasedAuthentication.SignerInformationForEquifaxUSA.DateOfBirth);
-
-            Signer signerQnA = documentPackage.Signers[example.SIGNER_WITH_AUTHENTICATION_Q_AND_A.Email];
             // Note that for security reasons, the backend doesn't return challenge answers, so we don't verify the answers here.
-            foreach (Challenge challenge in signerQnA.ChallengeQuestion)
+            foreach (Challenge challenge in canadianSigner.ChallengeQuestion)
             {
-                Assert.IsTrue(String.Equals(challenge.Question, example.SIGNER_WITH_AUTHENTICATION_Q_AND_A.ChallengeQuestion[0].Question) || String.Equals(challenge.Question, example.SIGNER_WITH_AUTHENTICATION_Q_AND_A.ChallengeQuestion[1].Question));
+                Assert.IsTrue(String.Equals(challenge.Question, example.SIGNER_WITH_AUTHENTICATION_EQUIFAX_CANADA.ChallengeQuestion[0].Question) || String.Equals(challenge.Question, example.SIGNER_WITH_AUTHENTICATION_EQUIFAX_CANADA.ChallengeQuestion[1].Question));
             }
+
+            Signer usaSigner = documentPackage.Signers[example.SIGNER_WITH_AUTHENTICATION_EQUIFAX_USA.Email];
+            SignerInformationForEquifaxUSA usaSignerInformationForEquifaxUSA = usaSigner.KnowledgeBasedAuthentication.SignerInformationForEquifaxUSA;
+
+            Assert.AreEqual(usaSignerInformationForEquifaxUSA.FirstName, example.SIGNER_WITH_AUTHENTICATION_EQUIFAX_USA.KnowledgeBasedAuthentication.SignerInformationForEquifaxUSA.FirstName);
+            Assert.AreEqual(usaSignerInformationForEquifaxUSA.LastName, example.SIGNER_WITH_AUTHENTICATION_EQUIFAX_USA.KnowledgeBasedAuthentication.SignerInformationForEquifaxUSA.LastName);
+            Assert.AreEqual(usaSignerInformationForEquifaxUSA.StreetAddress, example.SIGNER_WITH_AUTHENTICATION_EQUIFAX_USA.KnowledgeBasedAuthentication.SignerInformationForEquifaxUSA.StreetAddress);
+            Assert.AreEqual(usaSignerInformationForEquifaxUSA.City, example.SIGNER_WITH_AUTHENTICATION_EQUIFAX_USA.KnowledgeBasedAuthentication.SignerInformationForEquifaxUSA.City);
+            Assert.AreEqual(usaSignerInformationForEquifaxUSA.State, example.SIGNER_WITH_AUTHENTICATION_EQUIFAX_USA.KnowledgeBasedAuthentication.SignerInformationForEquifaxUSA.State);
+            Assert.AreEqual(usaSignerInformationForEquifaxUSA.Zip, example.SIGNER_WITH_AUTHENTICATION_EQUIFAX_USA.KnowledgeBasedAuthentication.SignerInformationForEquifaxUSA.Zip);
+            Assert.AreEqual(usaSignerInformationForEquifaxUSA.SocialSecurityNumber, example.SIGNER_WITH_AUTHENTICATION_EQUIFAX_USA.KnowledgeBasedAuthentication.SignerInformationForEquifaxUSA.SocialSecurityNumber);
+            Assert.AreEqual(usaSignerInformationForEquifaxUSA.HomePhoneNumber, example.SIGNER_WITH_AUTHENTICATION_EQUIFAX_USA.KnowledgeBasedAuthentication.SignerInformationForEquifaxUSA.HomePhoneNumber);
+            Assert.AreEqual(usaSignerInformationForEquifaxUSA.DateOfBirth, example.SIGNER_WITH_AUTHENTICATION_EQUIFAX_USA.KnowledgeBasedAuthentication.SignerInformationForEquifaxUSA.DateOfBirth);
+
+            foreach (Challenge challenge in usaSigner.ChallengeQuestion)
+            {
+                Assert.IsTrue(String.Equals(challenge.Question, example.SIGNER_WITH_AUTHENTICATION_EQUIFAX_USA.ChallengeQuestion[0].Question) || String.Equals(challenge.Question, example.SIGNER_WITH_AUTHENTICATION_EQUIFAX_USA.ChallengeQuestion[1].Question));
+            }
+
         }
     }
 }
