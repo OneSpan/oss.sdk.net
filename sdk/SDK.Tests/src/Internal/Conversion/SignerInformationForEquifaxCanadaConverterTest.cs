@@ -75,8 +75,8 @@ namespace SDK.Tests
             Assert.AreEqual(sdkSignerInformationForEquifaxCanada1.LastName, apiSignerInformationForEquifaxCanada1.LastName);
             Assert.AreEqual(sdkSignerInformationForEquifaxCanada1.StreetAddress, apiSignerInformationForEquifaxCanada1.StreetAddress);
             Assert.AreEqual(sdkSignerInformationForEquifaxCanada1.City, apiSignerInformationForEquifaxCanada1.City);
-            Assert.AreEqual(sdkSignerInformationForEquifaxCanada1.Province, apiSignerInformationForEquifaxCanada1.Province);
-            Assert.AreEqual(sdkSignerInformationForEquifaxCanada1.PostalCode, apiSignerInformationForEquifaxCanada1.PostalCode);
+            Assert.AreEqual(sdkSignerInformationForEquifaxCanada1.Province, apiSignerInformationForEquifaxCanada1.State);
+            Assert.AreEqual(sdkSignerInformationForEquifaxCanada1.PostalCode, apiSignerInformationForEquifaxCanada1.Zip);
             Assert.AreEqual(sdkSignerInformationForEquifaxCanada1.TimeAtAddress, apiSignerInformationForEquifaxCanada1.TimeAtAddress);
             Assert.AreEqual(sdkSignerInformationForEquifaxCanada1.DriversLicenseIndicator, apiSignerInformationForEquifaxCanada1.DriversLicenseIndicator);
             Assert.AreEqual(sdkSignerInformationForEquifaxCanada1.SocialInsuranceNumber, apiSignerInformationForEquifaxCanada1.SocialInsuranceNumber);
@@ -94,8 +94,8 @@ namespace SDK.Tests
             Assert.AreEqual(apiSignerInformationForEquifaxCanada1.LastName, sdkSignerInformationForEquifaxCanada1.LastName);
             Assert.AreEqual(apiSignerInformationForEquifaxCanada1.StreetAddress, sdkSignerInformationForEquifaxCanada1.StreetAddress);
             Assert.AreEqual(apiSignerInformationForEquifaxCanada1.City, sdkSignerInformationForEquifaxCanada1.City);
-            Assert.AreEqual(apiSignerInformationForEquifaxCanada1.Province, sdkSignerInformationForEquifaxCanada1.Province);
-            Assert.AreEqual(apiSignerInformationForEquifaxCanada1.PostalCode, sdkSignerInformationForEquifaxCanada1.PostalCode);
+            Assert.AreEqual(apiSignerInformationForEquifaxCanada1.State, sdkSignerInformationForEquifaxCanada1.Province);
+            Assert.AreEqual(apiSignerInformationForEquifaxCanada1.Zip, sdkSignerInformationForEquifaxCanada1.PostalCode);
             Assert.AreEqual(apiSignerInformationForEquifaxCanada1.TimeAtAddress, sdkSignerInformationForEquifaxCanada1.TimeAtAddress);
             Assert.AreEqual(apiSignerInformationForEquifaxCanada1.DriversLicenseIndicator, sdkSignerInformationForEquifaxCanada1.DriversLicenseIndicator);
             Assert.AreEqual(apiSignerInformationForEquifaxCanada1.SocialInsuranceNumber, sdkSignerInformationForEquifaxCanada1.SocialInsuranceNumber);
@@ -130,8 +130,8 @@ namespace SDK.Tests
             SignerInformationForEquifaxCanada.LastName = "last name";
             SignerInformationForEquifaxCanada.StreetAddress = "1234 main street";
             SignerInformationForEquifaxCanada.City = "Montreal";
-            SignerInformationForEquifaxCanada.Province = "Quebec";
-            SignerInformationForEquifaxCanada.PostalCode = "1h27r4";
+            SignerInformationForEquifaxCanada.State = "Quebec";
+            SignerInformationForEquifaxCanada.Zip = "1h27r4";
             SignerInformationForEquifaxCanada.TimeAtAddress = "9";
             SignerInformationForEquifaxCanada.DriversLicenseIndicator = "licence 222";
             SignerInformationForEquifaxCanada.SocialInsuranceNumber = "222-099-888-333";

@@ -43,8 +43,8 @@ namespace Silanis.ESL.SDK
             result.LastName = sdkSignerInformationForEquifaxCanada.LastName;
             result.StreetAddress = sdkSignerInformationForEquifaxCanada.StreetAddress;
             result.City = sdkSignerInformationForEquifaxCanada.City;
-            result.Province = sdkSignerInformationForEquifaxCanada.Province;
-            result.PostalCode = sdkSignerInformationForEquifaxCanada.PostalCode;
+            result.State = sdkSignerInformationForEquifaxCanada.Province;
+            result.Zip = sdkSignerInformationForEquifaxCanada.PostalCode;
             result.TimeAtAddress = sdkSignerInformationForEquifaxCanada.TimeAtAddress;
             result.DriversLicenseIndicator = sdkSignerInformationForEquifaxCanada.DriversLicenseIndicator;
             result.SocialInsuranceNumber = sdkSignerInformationForEquifaxCanada.SocialInsuranceNumber;
@@ -71,8 +71,8 @@ namespace Silanis.ESL.SDK
             result.LastName = apiSignerInformationForEquifaxCanada.LastName;
             result.StreetAddress = apiSignerInformationForEquifaxCanada.StreetAddress;
             result.City = apiSignerInformationForEquifaxCanada.City;
-            result.Province = apiSignerInformationForEquifaxCanada.Province;
-            result.PostalCode = apiSignerInformationForEquifaxCanada.PostalCode;
+            result.Province = apiSignerInformationForEquifaxCanada.State;
+            result.PostalCode = apiSignerInformationForEquifaxCanada.Zip;
             result.TimeAtAddress = apiSignerInformationForEquifaxCanada.TimeAtAddress;
             result.DriversLicenseIndicator = apiSignerInformationForEquifaxCanada.DriversLicenseIndicator;
             result.SocialInsuranceNumber = apiSignerInformationForEquifaxCanada.SocialInsuranceNumber;
