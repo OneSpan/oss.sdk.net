@@ -19,8 +19,8 @@ namespace SDK.Examples
         public readonly string CITY = "Montreal";
         public readonly string PROVINCE = "Quebec";
         public readonly string POSTAL_CODE = "A2A J8J";
-        public readonly string TIME_AT_ADDRESS = "1";
-        public readonly string DRIVERS_LICENSE_INDICATOR = "License indicator";
+        public readonly Int32 TIME_AT_ADDRESS = 1;
+        public readonly string DRIVERS_LICENSE_NUMBER = "Driver's License Number";
         public readonly string SOCIAL_INSURANCE_NUMBER = "111-222-333-444";
         public readonly string HOME_PHONE_NUMBER = "1-900-873-8733";
         public readonly Nullable<DateTime> DATE_OF_BIRTH = new DateTime(2000, 1, 1);
@@ -63,7 +63,7 @@ namespace SDK.Examples
                             .WithProvince(PROVINCE)
                             .WithPostalCode(POSTAL_CODE)
                             .WithTimeAtAddress(TIME_AT_ADDRESS)
-                            .WithDriversLicenseIndicator(DRIVERS_LICENSE_INDICATOR)
+                            .WithDriversLicenseNumber(DRIVERS_LICENSE_NUMBER)
                             .WithSocialInsuranceNumber(SOCIAL_INSURANCE_NUMBER)
                             .WithHomePhoneNumber(HOME_PHONE_NUMBER)
                             .WithDateOfBirth(DATE_OF_BIRTH)

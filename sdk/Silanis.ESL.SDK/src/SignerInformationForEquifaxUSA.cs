@@ -17,6 +17,8 @@ namespace Silanis.ESL.SDK
             string zip,
             string socialSecurityNumber,
             string homePhoneNumber,
+            Int32 timeAtAddress,
+            string driversLicenseNumber,
             DateTime dateOfBirth)
         {
             FirstName = firstName;
@@ -27,6 +29,8 @@ namespace Silanis.ESL.SDK
             Zip = zip;
             SocialSecurityNumber = socialSecurityNumber;
             HomePhoneNumber = homePhoneNumber;
+            TimeAtAddress = timeAtAddress;
+            DriversLicenseNumber = driversLicenseNumber;
             DateOfBirth = dateOfBirth;
         }
 
@@ -38,6 +42,8 @@ namespace Silanis.ESL.SDK
             string state,
             string zip,
             string socialInsuranceNumber,
+            Int32 timeAtAddress,
+            string driversLicenseNumber,
             DateTime dateOfBirth)
         {
             FirstName = firstName;
@@ -47,6 +53,8 @@ namespace Silanis.ESL.SDK
             State = state;
             Zip = zip;
             SocialSecurityNumber = socialInsuranceNumber;
+            TimeAtAddress = timeAtAddress;
+            DriversLicenseNumber = driversLicenseNumber;
             DateOfBirth = dateOfBirth;
         }
 
@@ -89,8 +97,15 @@ namespace Silanis.ESL.SDK
             get;
             set;
         }
-
         public string Zip {
+            get;
+            set;
+        }
+        public Int32 TimeAtAddress {
+            get;
+            set;
+        }
+        public string DriversLicenseNumber {
             get;
             set;
         }

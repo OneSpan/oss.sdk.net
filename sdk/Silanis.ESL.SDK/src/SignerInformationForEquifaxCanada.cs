@@ -15,7 +15,7 @@ namespace Silanis.ESL.SDK
             string city,
             string province,
             string postalCode,
-            string timeAtAddress,
+            Int32 timeAtAddress,
             string driversLicenseIndicator,
             string socialSecurityNumber,
             string homePhoneNumber,
@@ -28,7 +28,7 @@ namespace Silanis.ESL.SDK
             Province = province;
             PostalCode = postalCode;
             TimeAtAddress = timeAtAddress;
-            DriversLicenseIndicator = driversLicenseIndicator;
+            DriversLicenseNumber = driversLicenseIndicator;
             SocialInsuranceNumber = socialSecurityNumber;
             HomePhoneNumber = homePhoneNumber;
             DateOfBirth = dateOfBirth;
@@ -41,7 +41,7 @@ namespace Silanis.ESL.SDK
             string city,
             string province,
             string postalCode,
-            string timeAtAddress,
+            Int32 timeAtAddress,
             string driversLicenseIndicator,
             DateTime dateOfBirth)
         {
@@ -52,7 +52,7 @@ namespace Silanis.ESL.SDK
             Province = province;
             PostalCode = postalCode;
             TimeAtAddress = timeAtAddress;
-            DriversLicenseIndicator = driversLicenseIndicator;
+            DriversLicenseNumber = driversLicenseIndicator;
             DateOfBirth = dateOfBirth;
         }
 
@@ -81,11 +81,11 @@ namespace Silanis.ESL.SDK
             get;
             set;
         }
-        public string TimeAtAddress {
+        public Int32 TimeAtAddress {
             get;
             set;
         }
-        public string DriversLicenseIndicator {
+        public string DriversLicenseNumber {
             get;
             set;
         }

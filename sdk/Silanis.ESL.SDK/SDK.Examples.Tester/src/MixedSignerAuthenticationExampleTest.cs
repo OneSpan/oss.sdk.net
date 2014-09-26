@@ -33,7 +33,7 @@ namespace SDK.Examples
             Assert.AreEqual(canadianSignerInformationForEquifaxCanada.Province, example.SIGNER_WITH_AUTHENTICATION_EQUIFAX_CANADA.KnowledgeBasedAuthentication.SignerInformationForEquifaxCanada.Province);
             Assert.AreEqual(canadianSignerInformationForEquifaxCanada.PostalCode, example.SIGNER_WITH_AUTHENTICATION_EQUIFAX_CANADA.KnowledgeBasedAuthentication.SignerInformationForEquifaxCanada.PostalCode);
             Assert.AreEqual(canadianSignerInformationForEquifaxCanada.TimeAtAddress, example.SIGNER_WITH_AUTHENTICATION_EQUIFAX_CANADA.KnowledgeBasedAuthentication.SignerInformationForEquifaxCanada.TimeAtAddress);
-            Assert.AreEqual(canadianSignerInformationForEquifaxCanada.DriversLicenseIndicator, example.SIGNER_WITH_AUTHENTICATION_EQUIFAX_CANADA.KnowledgeBasedAuthentication.SignerInformationForEquifaxCanada.DriversLicenseIndicator);
+            Assert.AreEqual(canadianSignerInformationForEquifaxCanada.DriversLicenseNumber, example.SIGNER_WITH_AUTHENTICATION_EQUIFAX_CANADA.KnowledgeBasedAuthentication.SignerInformationForEquifaxCanada.DriversLicenseNumber);
             Assert.AreEqual(canadianSignerInformationForEquifaxCanada.SocialInsuranceNumber, example.SIGNER_WITH_AUTHENTICATION_EQUIFAX_CANADA.KnowledgeBasedAuthentication.SignerInformationForEquifaxCanada.SocialInsuranceNumber);
             Assert.AreEqual(canadianSignerInformationForEquifaxCanada.HomePhoneNumber, example.SIGNER_WITH_AUTHENTICATION_EQUIFAX_CANADA.KnowledgeBasedAuthentication.SignerInformationForEquifaxCanada.HomePhoneNumber);
             Assert.AreEqual(canadianSignerInformationForEquifaxCanada.DateOfBirth, example.SIGNER_WITH_AUTHENTICATION_EQUIFAX_CANADA.KnowledgeBasedAuthentication.SignerInformationForEquifaxCanada.DateOfBirth);
@@ -56,6 +56,8 @@ namespace SDK.Examples
             Assert.AreEqual(usaSignerInformationForEquifaxUSA.SocialSecurityNumber, example.SIGNER_WITH_AUTHENTICATION_EQUIFAX_USA.KnowledgeBasedAuthentication.SignerInformationForEquifaxUSA.SocialSecurityNumber);
             Assert.AreEqual(usaSignerInformationForEquifaxUSA.HomePhoneNumber, example.SIGNER_WITH_AUTHENTICATION_EQUIFAX_USA.KnowledgeBasedAuthentication.SignerInformationForEquifaxUSA.HomePhoneNumber);
             Assert.AreEqual(usaSignerInformationForEquifaxUSA.DateOfBirth, example.SIGNER_WITH_AUTHENTICATION_EQUIFAX_USA.KnowledgeBasedAuthentication.SignerInformationForEquifaxUSA.DateOfBirth);
+            Assert.AreEqual(usaSignerInformationForEquifaxUSA.TimeAtAddress, example.SIGNER_WITH_AUTHENTICATION_EQUIFAX_USA.KnowledgeBasedAuthentication.SignerInformationForEquifaxUSA.TimeAtAddress);
+            Assert.AreEqual(usaSignerInformationForEquifaxUSA.DriversLicenseNumber, example.SIGNER_WITH_AUTHENTICATION_EQUIFAX_USA.KnowledgeBasedAuthentication.SignerInformationForEquifaxUSA.DriversLicenseNumber);
 
             foreach (Challenge challenge in usaSigner.ChallengeQuestion)
             {

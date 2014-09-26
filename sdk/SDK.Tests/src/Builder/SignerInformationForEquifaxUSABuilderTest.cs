@@ -15,6 +15,9 @@ namespace SDK.Tests
         private string zip = "A2A 3B3";
         private string socialSecurityNumber = "111-222-333-444";
         private string homePhoneNumber = "1-800-976-0934";
+        private Int32 timeAtAddress = 2;
+        private string driversLicenseNumber = "driver license";
+
         private Nullable<DateTime> dateOfBirth = new DateTime();
 
         [Test]
@@ -29,6 +32,8 @@ namespace SDK.Tests
                 .WithSocialSecurityNumber(socialSecurityNumber)
                 .WithHomePhoneNumber(homePhoneNumber)
                 .WithDateOfBirth(dateOfBirth)
+                .WithTimeAtAddress(timeAtAddress)
+                .WithDriversLicenseNumber(driversLicenseNumber)
                 .Build();
 
             Assert.AreEqual(firstName, signerInformationForEquifaxUSA.FirstName);
@@ -40,6 +45,8 @@ namespace SDK.Tests
             Assert.AreEqual(socialSecurityNumber, signerInformationForEquifaxUSA.SocialSecurityNumber);
             Assert.AreEqual(homePhoneNumber, signerInformationForEquifaxUSA.HomePhoneNumber);
             Assert.AreEqual(dateOfBirth, signerInformationForEquifaxUSA.DateOfBirth);
+            Assert.AreEqual(timeAtAddress, signerInformationForEquifaxUSA.TimeAtAddress);
+            Assert.AreEqual(driversLicenseNumber, signerInformationForEquifaxUSA.DriversLicenseNumber);
         }
     }
 }

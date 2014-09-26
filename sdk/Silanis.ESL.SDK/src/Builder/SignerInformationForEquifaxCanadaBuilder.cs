@@ -9,10 +9,10 @@ namespace Silanis.ESL.SDK
         private string lastName;
         private string streetAddress;
         private string city;
-        private string state;
-        private string zip;
-        private string timeAtAddress;
-        private string driversLicenseIndicator;
+        private string province;
+        private string postalCode;
+        private Int32 timeAtAddress;
+        private string driversLicenseNumber;
         private string socialInsuranceNumber;
         private string homePhoneNumber;
         private Nullable<DateTime> dateOfBirth;
@@ -46,27 +46,27 @@ namespace Silanis.ESL.SDK
             return this;
         }
 
-        public SignerInformationForEquifaxCanadaBuilder WithProvince(string state)
+        public SignerInformationForEquifaxCanadaBuilder WithProvince(string province)
         {
-            this.state = state;
+            this.province = province;
             return this;
         }
 
-        public SignerInformationForEquifaxCanadaBuilder WithPostalCode(string zip)
+        public SignerInformationForEquifaxCanadaBuilder WithPostalCode(string postalCode)
         {
-            this.zip = zip;
+            this.postalCode = postalCode;
             return this;
         }
 
-        public SignerInformationForEquifaxCanadaBuilder WithTimeAtAddress(string timeAtAddress)
+        public SignerInformationForEquifaxCanadaBuilder WithTimeAtAddress(Int32 timeAtAddress)
         {   
             this.timeAtAddress = timeAtAddress;
             return this;
         }
 
-        public SignerInformationForEquifaxCanadaBuilder WithDriversLicenseIndicator(string driversLicenseIndicator)
+        public SignerInformationForEquifaxCanadaBuilder WithDriversLicenseNumber(string driversLicenseNumber)
         {   
-            this.driversLicenseIndicator = driversLicenseIndicator;
+            this.driversLicenseNumber = driversLicenseNumber;
             return this;
         }
 
@@ -96,10 +96,10 @@ namespace Silanis.ESL.SDK
             result.LastName = lastName;
             result.StreetAddress = streetAddress;
             result.City = city;
-            result.Province = state;
-            result.PostalCode = zip;
+            result.Province = province;
+            result.PostalCode = postalCode;
             result.TimeAtAddress = timeAtAddress;
-            result.DriversLicenseIndicator = driversLicenseIndicator;
+            result.DriversLicenseNumber = driversLicenseNumber;
             result.SocialInsuranceNumber = socialInsuranceNumber;
             result.HomePhoneNumber = homePhoneNumber;
             result.DateOfBirth = dateOfBirth;

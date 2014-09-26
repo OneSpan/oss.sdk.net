@@ -43,10 +43,10 @@ namespace Silanis.ESL.SDK
             result.LastName = sdkSignerInformationForEquifaxCanada.LastName;
             result.StreetAddress = sdkSignerInformationForEquifaxCanada.StreetAddress;
             result.City = sdkSignerInformationForEquifaxCanada.City;
-            result.State = sdkSignerInformationForEquifaxCanada.Province;
-            result.Zip = sdkSignerInformationForEquifaxCanada.PostalCode;
+            result.Province = sdkSignerInformationForEquifaxCanada.Province;
+            result.PostalCode = sdkSignerInformationForEquifaxCanada.PostalCode;
             result.TimeAtAddress = sdkSignerInformationForEquifaxCanada.TimeAtAddress;
-            result.DriversLicenseIndicator = sdkSignerInformationForEquifaxCanada.DriversLicenseIndicator;
+            result.DriversLicenseNumber = sdkSignerInformationForEquifaxCanada.DriversLicenseNumber;
             result.SocialInsuranceNumber = sdkSignerInformationForEquifaxCanada.SocialInsuranceNumber;
             result.HomePhoneNumber = sdkSignerInformationForEquifaxCanada.HomePhoneNumber;
             result.DateOfBirth = sdkSignerInformationForEquifaxCanada.DateOfBirth;
@@ -71,10 +71,10 @@ namespace Silanis.ESL.SDK
             result.LastName = apiSignerInformationForEquifaxCanada.LastName;
             result.StreetAddress = apiSignerInformationForEquifaxCanada.StreetAddress;
             result.City = apiSignerInformationForEquifaxCanada.City;
-            result.Province = apiSignerInformationForEquifaxCanada.State;
-            result.PostalCode = apiSignerInformationForEquifaxCanada.Zip;
+            result.Province = apiSignerInformationForEquifaxCanada.Province;
+            result.PostalCode = apiSignerInformationForEquifaxCanada.PostalCode;
             result.TimeAtAddress = apiSignerInformationForEquifaxCanada.TimeAtAddress;
-            result.DriversLicenseIndicator = apiSignerInformationForEquifaxCanada.DriversLicenseIndicator;
+            result.DriversLicenseNumber = apiSignerInformationForEquifaxCanada.DriversLicenseNumber;
             result.SocialInsuranceNumber = apiSignerInformationForEquifaxCanada.SocialInsuranceNumber;
             result.HomePhoneNumber = apiSignerInformationForEquifaxCanada.HomePhoneNumber;
             result.DateOfBirth = apiSignerInformationForEquifaxCanada.DateOfBirth;

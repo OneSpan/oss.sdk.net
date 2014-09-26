@@ -26,7 +26,14 @@ namespace Silanis.ESL.API
                 get; set;
         }
     
-		    
+    [JsonProperty("driversLicenseNumber")]
+    public String DriversLicenseNumber
+        {
+            get; set;
+        }
+
+
+
     [JsonProperty("firstName")]
     public String FirstName
     {
@@ -68,7 +75,14 @@ namespace Silanis.ESL.API
                 get; set;
         }
     
-		    
+
+   [JsonProperty("timeAtAddress")]
+   public Int32 TimeAtAddress
+   {
+            get; set;
+        }
+
+
     [JsonProperty("zip")]
     public String Zip
     {

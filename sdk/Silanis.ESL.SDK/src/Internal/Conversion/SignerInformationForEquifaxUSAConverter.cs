@@ -47,6 +47,8 @@ namespace Silanis.ESL.SDK
             result.Zip = sdkSignerInformationForEquifaxUSA.Zip;
             result.SocialSecurityNumber = sdkSignerInformationForEquifaxUSA.SocialSecurityNumber;
             result.HomePhoneNumber = sdkSignerInformationForEquifaxUSA.HomePhoneNumber;
+            result.TimeAtAddress = sdkSignerInformationForEquifaxUSA.TimeAtAddress;
+            result.DriversLicenseNumber = sdkSignerInformationForEquifaxUSA.DriversLicenseNumber;
             result.DateOfBirth = sdkSignerInformationForEquifaxUSA.DateOfBirth;
             return result;
         }
@@ -72,6 +74,8 @@ namespace Silanis.ESL.SDK
             result.Zip = apiSignerInformationForEquifaxUSA.Zip;
             result.SocialSecurityNumber = apiSignerInformationForEquifaxUSA.SocialSecurityNumber;
             result.HomePhoneNumber = apiSignerInformationForEquifaxUSA.HomePhoneNumber;
+            result.TimeAtAddress = apiSignerInformationForEquifaxUSA.TimeAtAddress;
+            result.DriversLicenseNumber = apiSignerInformationForEquifaxUSA.DriversLicenseNumber;
             result.DateOfBirth = apiSignerInformationForEquifaxUSA.DateOfBirth;
 
             return result;

@@ -112,6 +112,8 @@ namespace SDK.Tests
                 .WithSocialSecurityNumber("111-222-333-444")
                 .WithHomePhoneNumber("1-800-123-8763")
                 .WithDateOfBirth(new DateTime())
+                .WithDriversLicenseNumber("98826278262728262")
+                .WithTimeAtAddress(2)
                 .Build();
 
             return SignerInformationForEquifaxUSA;
@@ -128,6 +130,8 @@ namespace SDK.Tests
             SignerInformationForEquifaxUSA.Zip = "1h27r4";
             SignerInformationForEquifaxUSA.SocialSecurityNumber = "222-099-888-333";
             SignerInformationForEquifaxUSA.HomePhoneNumber = "877-098-0974";
+            SignerInformationForEquifaxUSA.TimeAtAddress = 3;
+            SignerInformationForEquifaxUSA.DriversLicenseNumber = "97262872628463282";
             SignerInformationForEquifaxUSA.DateOfBirth = new DateTime();
 
             return SignerInformationForEquifaxUSA;

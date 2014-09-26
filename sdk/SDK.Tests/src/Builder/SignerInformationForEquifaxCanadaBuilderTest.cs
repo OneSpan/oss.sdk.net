@@ -13,8 +13,8 @@ namespace SDK.Tests
         private string city = "Montreal";
         private string province = "Quebec";
         private string postalCode = "A2A 3B3";
-        private string timeAtAddress = "1";
-        private string driversLicenseIndicator = "driver license";
+        private Int32 timeAtAddress = 1;
+        private string driversLicenseNumber = "driver license";
         private string socialInsuranceNumber = "111-222-333-444";
         private string homePhoneNumber = "1-800-976-0934";
         private Nullable<DateTime> dateOfBirth = new DateTime();
@@ -29,7 +29,7 @@ namespace SDK.Tests
                 .WithProvince(province)
                 .WithPostalCode(postalCode)
                 .WithTimeAtAddress(timeAtAddress)
-                .WithDriversLicenseIndicator(driversLicenseIndicator)
+                .WithDriversLicenseNumber(driversLicenseNumber)
                 .WithSocialInsuranceNumber(socialInsuranceNumber)
                 .WithHomePhoneNumber(homePhoneNumber)
                 .WithDateOfBirth(dateOfBirth)

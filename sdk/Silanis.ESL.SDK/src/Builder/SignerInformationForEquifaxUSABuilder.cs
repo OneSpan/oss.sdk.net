@@ -13,6 +13,8 @@ namespace Silanis.ESL.SDK
         private string zip;
         private string socialSecurityNumber;
         private string homePhoneNumber;
+        private string driversLicenseNumber;
+        private Int32 timeAtAddress;
         private Nullable<DateTime> dateOfBirth;
 
 
@@ -68,6 +70,19 @@ namespace Silanis.ESL.SDK
             return this;
         }
 
+        public SignerInformationForEquifaxUSABuilder WithTimeAtAddress(Int32 timeAtAddress)
+        {   
+            this.timeAtAddress = timeAtAddress;
+            return this;
+        }
+
+
+        public SignerInformationForEquifaxUSABuilder WithDriversLicenseNumber(string driversLicenseNumber)
+        {   
+            this.driversLicenseNumber = driversLicenseNumber;
+            return this;
+        }
+
         public SignerInformationForEquifaxUSABuilder WithDateOfBirth(Nullable<DateTime> dateOfBirth)
         {   
             this.dateOfBirth = dateOfBirth;
@@ -86,6 +101,8 @@ namespace Silanis.ESL.SDK
             result.Zip = zip;
             result.SocialSecurityNumber = socialSecurityNumber;
             result.HomePhoneNumber = homePhoneNumber;
+            result.DriversLicenseNumber = driversLicenseNumber;
+            result.TimeAtAddress = timeAtAddress;
             result.DateOfBirth = dateOfBirth;
 
             return result;
