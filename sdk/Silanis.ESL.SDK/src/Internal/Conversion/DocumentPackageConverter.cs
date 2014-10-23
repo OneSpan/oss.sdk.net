@@ -160,6 +160,7 @@ namespace Silanis.ESL.SDK
                         Silanis.ESL.SDK.SenderInfo senderInfo = new Silanis.ESL.SDK.SenderInfo();
 
                         Silanis.ESL.API.Signer signer = role.Signers[0];
+                        senderInfo.Email = signer.Email;
                         senderInfo.FirstName = signer.FirstName;
                         senderInfo.LastName = signer.LastName;
                         senderInfo.Title = signer.Title;
