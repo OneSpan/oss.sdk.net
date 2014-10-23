@@ -142,8 +142,8 @@ namespace Silanis.ESL.SDK.Internal
             }
 
             object obj = type.InvokeMember("Section",
-                BindingFlags.Static | BindingFlags.GetProperty | BindingFlags.NonPublic,
-                null, null, new object[] { });
+                                           BindingFlags.Static | BindingFlags.GetProperty | BindingFlags.NonPublic,
+                                           null, null, new object[] { });
 
             if (null == obj)
             {
@@ -202,8 +202,6 @@ namespace Silanis.ESL.SDK.Internal
 
 		public static byte[] GetHttp (string apiToken, string path)
 		{
-            string message = "";
-            UseUnsafeHeaderParsing(ref message);
 			try {
 				WebRequest request = WebRequest.Create (path);
 				request.Method = "GET";
@@ -233,48 +231,6 @@ namespace Silanis.ESL.SDK.Internal
 				throw new EslException("Error communicating with esl server. " + e.Message,e);
 			}
 		}
-
-        public static bool UseUnsafeHeaderParsing(ref string strError)
-        {
-            Assembly assembly = Assembly.GetAssembly(typeof(System.Net.Configuration.SettingsSection));
-            if (null == assembly)
-            {
-                strError = "Could not access Assembly";
-                return false;
-            }
-
-            Type type = assembly.GetType("System.Net.Configuration.SettingsSectionInternal");
-            if (null == type)
-            {
-                strError = "Could not access internal settings";
-                return false;
-            }
-
-            object obj = type.InvokeMember("Section",
-                BindingFlags.Static | BindingFlags.GetProperty | BindingFlags.NonPublic,
-                null, null, new object[] { });
-
-            if (null == obj)
-            {
-                strError = "Could not invoke Section member";
-                return false;
-            }
-
-            // If it's not already set, set it.
-            FieldInfo fi = type.GetField("useUnsafeHeaderParsing", BindingFlags.NonPublic | BindingFlags.Instance);
-            if (null == fi)
-            {
-                strError = "Could not access useUnsafeHeaderParsing field";
-                return false;
-            }
-
-            if (!Convert.ToBoolean(fi.GetValue(obj)))
-            {
-                fi.SetValue(obj, true);
-            }
-
-            return true;
-        }
 
 		public static byte[] DeleteHttp (string apiToken, string path)
 		{
