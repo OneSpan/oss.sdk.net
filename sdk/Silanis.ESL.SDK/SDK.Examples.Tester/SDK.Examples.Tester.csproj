@@ -111,9 +111,4 @@
       <Name>Silanis.ESL.SDK</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <None Include="signers.properties">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-  </ItemGroup>
 </Project>

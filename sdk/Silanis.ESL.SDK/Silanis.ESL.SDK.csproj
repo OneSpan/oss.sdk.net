@@ -45,6 +45,7 @@
       <HintPath>..\References\log4net.dll</HintPath>
     </Reference>
     <Reference Include="nunit.framework" />
+    <Reference Include="System.Configuration" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
