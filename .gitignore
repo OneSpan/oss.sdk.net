@@ -10,7 +10,7 @@ TestResult.xml
 *.usertasks
 *.user
 *.suo
-**/signers.properties
+*/*/signers.properties
 
 #zip file
 *.zip

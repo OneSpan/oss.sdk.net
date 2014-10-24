@@ -24,7 +24,6 @@ namespace SDK.Examples
             Assert.AreEqual(signer.Company, example.signerForPackage.Company);
 
             // Assert new signer is added to the contacts
-            Assert.AreEqual(example.afterContacts.Count, example.beforeContacts.Count + 1);
             Assert.IsNotNull(example.afterContacts[example.email2]);
             Assert.AreEqual(example.afterContacts[example.email2].FirstName, "John");
             Assert.AreEqual(example.afterContacts[example.email2].LastName, "Smith");

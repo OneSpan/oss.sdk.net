@@ -99,8 +99,7 @@ namespace SDK.Examples
                         .AtPosition(100, 100)))
                 .Build();
 
-            packageId = eslClient.CreatePackage(package);
-            eslClient.SendPackage(packageId);
+            packageId = eslClient.CreatePackage(package);            
         }
     }
 }

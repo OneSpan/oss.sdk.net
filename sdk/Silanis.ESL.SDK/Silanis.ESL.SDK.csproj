@@ -45,6 +45,7 @@
       <HintPath>..\References\log4net.dll</HintPath>
     </Reference>
     <Reference Include="nunit.framework" />
+    <Reference Include="System.Configuration" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -96,7 +97,9 @@
     <Compile Include="src\Page.cs" />
     <Compile Include="src\PageRequest.cs" />
     <Compile Include="src\Builder\LinkBuilder.cs" />
-    <Compile Include="src\CeremonyLayoutSettings.cs" />
+    <Compile Include="src\CeremonyLayoutSettings.cs">
+      <DependentUpon>CompletionReport.cs</DependentUpon>
+    </Compile>
     <Compile Include="src\Builder\CeremonyLayoutSettingsBuilder.cs" />
     <Compile Include="src\DocumentPackageSettings.cs" />
     <Compile Include="src\Builder\DocumentPackageSettingsBuilder.cs" />
@@ -276,7 +279,6 @@
     <Compile Include="src\Models\GuestAuth.cs" />
     <Compile Include="src\Models\HeaderOptions.cs" />
     <Compile Include="src\Models\Image.cs" />
-    <Compile Include="src\Models\KnowledgeBasedAuthentication.cs" />
     <Compile Include="src\Models\Layout.cs" />
     <Compile Include="src\Models\LayoutOptions.cs" />
     <Compile Include="src\Models\LayoutStyle.cs" />
@@ -336,6 +338,18 @@
     <Compile Include="src\Models\UserCustomField.cs" />
     <Compile Include="src\Models\ViewSettings.cs" />
     <Compile Include="src\Models\Visibility.cs" />
+    <Compile Include="src\SignerInformationForEquifaxCanada.cs" />
+    <Compile Include="src\Internal\Conversion\SignerInformationForEquifaxCanadaConverter.cs" />
+    <Compile Include="src\Builder\SignerInformationForEquifaxCanadaBuilder.cs" />
+    <Compile Include="src\KnowledgeBasedAuthentication.cs" />
+    <Compile Include="src\SignerInformationForEquifaxUSA.cs" />
+    <Compile Include="src\Internal\Conversion\KnowledgeBasedAuthenticationConverter.cs" />
+    <Compile Include="src\Internal\Conversion\SignerInformationForEquifaxUSAConverter.cs" />
+    <Compile Include="src\Builder\SignerInformationForEquifaxUSABuilder.cs" />
+    <Compile Include="src\Models\KnowledgeBasedAuthenticationStatus.cs" />
+    <Compile Include="src\KnowledgeBasedAuthenticationStatus.cs" />
+    <Compile Include="src\Internal\Conversion\KnowledgeBasedAuthenticationStatusConverter.cs" />
+    <Compile Include="src\Models\KnowledgeBasedAuthentication.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSHARP.Targets" />
   <ProjectExtensions>

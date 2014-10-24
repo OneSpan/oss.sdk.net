@@ -29,7 +29,7 @@ namespace SDK.Examples
             // Assert the signature fields were updated.
             document = getAddedDocument(example.RetrievedPackageWithUpdatedDocument, DocumentOperationsExample.UpdatedDocumentName);
             Assert.IsNotEmpty(document.Signatures);
-            Assert.AreEqual(2, document.Signatures.Count);
+            Assert.AreEqual(1, document.Signatures.Count);
 
             // Assert the document info was updated (document name and description). 
             document = example.RetrievedUpdatedDocument;

@@ -12,7 +12,13 @@ namespace Silanis.ESL.API
 		// Fields
 		
 		// Accessors
-		    
+
+        [JsonProperty("knowledgeBasedAuthenticationStatus")]
+        public KnowledgeBasedAuthenticationStatus KnowledgeBasedAuthenticationStatus
+        {
+            get; set;
+        }
+
     [JsonProperty("signerInformationForEquifaxCanada")]
     public SignerInformationForEquifaxCanada SignerInformationForEquifaxCanada
     {

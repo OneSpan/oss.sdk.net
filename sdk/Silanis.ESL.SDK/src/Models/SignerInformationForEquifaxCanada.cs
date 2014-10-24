@@ -27,8 +27,8 @@ namespace Silanis.ESL.API
         }
     
 		    
-    [JsonProperty("driversLicenseIndicator")]
-    public String DriversLicenseIndicator
+    [JsonProperty("driversLicenseNumber")]
+    public String DriversLicenseNumber
     {
                 get; set;
         }
@@ -62,8 +62,8 @@ namespace Silanis.ESL.API
         }
     
 		    
-    [JsonProperty("state")]
-    public String State
+    [JsonProperty("province")]
+    public String Province
     {
                 get; set;
         }
@@ -76,15 +76,16 @@ namespace Silanis.ESL.API
         }
     
 		    
-    [JsonProperty("timeAtAddress")]
-    public String TimeAtAddress
-    {
-                get; set;
+        [JsonProperty("timeAtAddress")]
+        public Int32 TimeAtAddress
+        {
+            get; set;
         }
-    
+
+
 		    
-    [JsonProperty("zip")]
-    public String Zip
+    [JsonProperty("postalCode")]
+    public String PostalCode
     {
                 get; set;
         }

@@ -196,49 +196,40 @@ namespace Silanis.ESL.SDK.Services
         /// </summary>
         /// <param name="package">The DocumentPackage to update.</param>
         /// <param name="document">The Document to update.</param>
-		public void UpdateDocumentMetadata(DocumentPackage package, Document document)
+        public void UpdateDocumentMetadata(DocumentPackage package, Document document)
         {
             string path = template.UrlFor(UrlTemplate.DOCUMENT_ID_PATH)
-				.Replace("{packageId}", package.Id.Id)
-				.Replace("{documentId}", document.Id)
-				.Build();
+                .Replace("{packageId}", package.Id.Id)
+                    .Replace("{documentId}", document.Id)
+                    .Build();
 
-            Silanis.ESL.API.Package apiPackage = new DocumentPackageConverter(package).ToAPIPackage();
-            Silanis.ESL.API.Document apiDocument = new DocumentConverter(document).ToAPIDocument(apiPackage);
+            Silanis.ESL.API.Document internalDoc = new DocumentConverter(document).ToAPIDocument();
 
-            foreach (Silanis.ESL.API.Document apiDoc in apiPackage.Documents)
+            // Wipe out the members not related to the metadata
+            internalDoc.Approvals = null;
+            internalDoc.Fields = null;
+            internalDoc.Pages = null;
+
+            try 
             {
-                if (apiDoc.Id.Equals(document.Id))
-                {
-                    apiDocument = apiDoc;
-                    break;
-                }
-            }
-            if (apiDocument == null)
-            {
-                throw new EslException("Document is not part of the package.", null);
-            }
-            
-			try 
-			{
-				string json = JsonConvert.SerializeObject (apiDocument, settings);
-				restClient.Post(path, json);
-			} 
+                string json = JsonConvert.SerializeObject (internalDoc, settings);
+                restClient.Post(path, json);
+            } 
             catch (EslServerException e) 
             {
                 throw new EslServerException ("Could not update the document's metadata." + " Exception: " + e.Message, e.ServerError, e);
             }
             catch (Exception e) 
-			{
+            {
                 throw new EslException ("Could not update the document's metadata." + " Exception: " + e.Message, e);
-			}
+            }
 
             IContractResolver prevContractResolver = settings.ContractResolver;
             settings.ContractResolver = DocumentMetadataContractResolver.Instance;            
-            
+
             try
             {
-                string json = JsonConvert.SerializeObject(apiDocument, settings);
+                string json = JsonConvert.SerializeObject(internalDoc, settings);
                 restClient.Post(path, json);
             }
             catch (EslServerException e) 
@@ -253,7 +244,7 @@ namespace Silanis.ESL.SDK.Services
             {
                 settings.ContractResolver = prevContractResolver;
             }
-		}
+        }
 
 		public void OrderDocuments(DocumentPackage package)
 		{

@@ -24,7 +24,7 @@ namespace SDK.Examples
         public SenderManipulationExample(string apiKey, string apiUrl, string email1, string email2, string email3) : base( apiKey, apiUrl )
         {
             this.email1 = email1;
-            this.email2 = email2;
+            this.email2 = Guid.NewGuid().ToString().Replace("-", "") + "@e-signlive.com";
             this.email3 = email3;
         }
 

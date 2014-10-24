@@ -45,9 +45,7 @@ namespace SDK.Examples
                         .AtPosition(199, 100)))
                 .Build();
 
-            packageId = eslClient.CreatePackage(superDuperPackage);
-
-            eslClient.SendPackage(packageId);
+            packageId = eslClient.CreatePackage(superDuperPackage);			            
         }
     }
 }
