@@ -70,6 +70,16 @@ namespace Silanis.ESL.SDK.Builder
 			return new FieldBuilder ().WithStyle (FieldStyle.UNBOUND_CHECK_BOX);
 		}
 
+        public static FieldBuilder TextArea ()
+        {
+            return new FieldBuilder ().WithStyle (FieldStyle.TEXT_AREA);
+        }
+
+        public static FieldBuilder DropList ()
+        {
+            return new FieldBuilder ().WithStyle (FieldStyle.DROP_LIST);
+        }
+
         public static FieldBuilder RadioButton ( string group )
         {
             return new FieldBuilder ().WithStyle(FieldStyle.UNBOUND_RADIO_BUTTON)

@@ -51,6 +51,10 @@ namespace Silanis.ESL.SDK
                     return Silanis.ESL.API.FieldSubtype.RADIO;
                 case FieldStyle.UNBOUND_CUSTOM_FIELD:
                     return Silanis.ESL.API.FieldSubtype.CUSTOMFIELD;
+                case FieldStyle.TEXT_AREA:
+                    return Silanis.ESL.API.FieldSubtype.TEXTAREA;
+                case FieldStyle.DROP_LIST:
+                    return Silanis.ESL.API.FieldSubtype.LIST;
                 case FieldStyle.BOUND_QRCODE:
                     return Silanis.ESL.API.FieldSubtype.QRCODE;
                 default:
@@ -77,6 +81,10 @@ namespace Silanis.ESL.SDK
                         return FieldStyle.UNBOUND_CHECK_BOX;
                     case FieldSubtype.RADIO:
                         return FieldStyle.UNBOUND_RADIO_BUTTON;
+                    case FieldSubtype.TEXTAREA:
+                        return FieldStyle.TEXT_AREA;
+                    case FieldSubtype.LIST:
+                        return FieldStyle.DROP_LIST;
                     case FieldSubtype.QRCODE:
                         return FieldStyle.BOUND_QRCODE;
                     default:

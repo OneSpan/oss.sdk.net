@@ -13,6 +13,8 @@ namespace Silanis.ESL.SDK
 		UNBOUND_CUSTOM_FIELD,
 		UNBOUND_CHECK_BOX,
         UNBOUND_RADIO_BUTTON,
-		LABEL
+		LABEL,
+        TEXT_AREA,
+        DROP_LIST
 	}
 }

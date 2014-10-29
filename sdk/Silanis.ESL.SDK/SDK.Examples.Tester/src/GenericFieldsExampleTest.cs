@@ -69,6 +69,23 @@ namespace SDK.Examples
                         Assert.AreEqual(GenericFieldsExample.RADIO_GROUP_2, field.Validator.Options[0]);
                         Assert.AreEqual("", field.Value);
                     }
+                    // Drop List
+                    if (field.Id == GenericFieldsExample.DROP_LIST_ID) 
+                    {
+                        Assert.AreEqual(GenericFieldsExample.DROP_LIST_PAGE, field.Page);
+                        Assert.AreEqual(FieldStyle.DROP_LIST, field.Style);
+                        Assert.AreEqual(GenericFieldsExample.DROP_LIST_OPTION1, field.Validator.Options[0]);
+                        Assert.AreEqual(GenericFieldsExample.DROP_LIST_OPTION2, field.Validator.Options[1]);
+                        Assert.AreEqual(GenericFieldsExample.DROP_LIST_OPTION3, field.Validator.Options[2]);
+                        Assert.AreEqual(GenericFieldsExample.DROP_LIST_OPTION2, field.Value);
+                    }
+                    // Text Area
+                    if (field.Id == GenericFieldsExample.TEXT_AREA_ID) 
+                    {
+                        Assert.AreEqual(GenericFieldsExample.TEXT_AREA_PAGE, field.Page);
+                        Assert.AreEqual(FieldStyle.TEXT_AREA, field.Style);
+                        Assert.AreEqual(GenericFieldsExample.TEXT_AREA_VALUE, field.Value);
+                    }
                 }
             }
         }

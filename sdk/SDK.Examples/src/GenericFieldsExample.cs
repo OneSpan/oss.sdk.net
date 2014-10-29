@@ -29,6 +29,14 @@ namespace SDK.Examples
         public static readonly string RADIO_ID_4 = "radioId4";
         public static readonly string RADIO_GROUP_1 = "group1";
         public static readonly string RADIO_GROUP_2 = "group2";
+        public static readonly string DROP_LIST_ID = "dropListId";
+        public static readonly int DROP_LIST_PAGE = 0;
+        public static readonly string DROP_LIST_OPTION1 = "one";
+        public static readonly string DROP_LIST_OPTION2 = "two";
+        public static readonly string DROP_LIST_OPTION3 = "three";
+        public static readonly string TEXT_AREA_ID = "textAreaId";
+        public static readonly int TEXT_AREA_PAGE = 0;
+        public static readonly string TEXT_AREA_VALUE = "textAreaValue";
 
         public GenericFieldsExample(Props props) : this(props.Get("api.url"), props.Get("api.key"), props.Get("1.email"))
         {
@@ -84,7 +92,23 @@ namespace SDK.Examples
                                     .WithValue(false)
                                     .WithSize(RADIO_WIDTH, RADIO_HEIGHT)
                                     .OnPage(RADIO_PAGE)
-                                    .AtPosition(500, 550))))
+                                    .AtPosition(500, 550))
+                               .WithField(FieldBuilder.DropList()
+                                    .WithId(DROP_LIST_ID)
+                                    .WithValue(DROP_LIST_OPTION2)
+                                    .WithValidation(FieldValidatorBuilder.Basic()
+                                        .WithOption(DROP_LIST_OPTION1)
+                                        .WithOption(DROP_LIST_OPTION2)
+                                        .WithOption(DROP_LIST_OPTION3))
+                                    .OnPage(DROP_LIST_PAGE)
+                                    .WithSize(100, 200)
+                               .AtPosition(100, 100))
+                               .WithField(FieldBuilder.TextArea()
+                                   .WithId(TEXT_AREA_ID)
+                                   .WithValue(TEXT_AREA_VALUE)
+                                   .OnPage(TEXT_AREA_PAGE)
+                                   .WithSize(400, 600)
+                                   .AtPosition(200, 200))))
 					.Build();
 
             packageId = eslClient.CreatePackage(package);

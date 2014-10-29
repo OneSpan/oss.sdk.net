@@ -67,6 +67,16 @@ namespace SDK.Tests
             fieldStyle = new FieldStyleAndSubTypeConverter(fieldSubtype, binding).ToSDKFieldStyle();
             Assert.AreEqual(fieldStyle, FieldStyle.UNBOUND_RADIO_BUTTON);
 
+            fieldSubtype = FieldSubtype.TEXTAREA;
+            binding = null;
+            fieldStyle = new FieldStyleAndSubTypeConverter(fieldSubtype, binding).ToSDKFieldStyle();
+            Assert.AreEqual(fieldStyle, FieldStyle.TEXT_AREA);
+
+            fieldSubtype = FieldSubtype.LIST;
+            binding = null;
+            fieldStyle = new FieldStyleAndSubTypeConverter(fieldSubtype, binding).ToSDKFieldStyle();
+            Assert.AreEqual(fieldStyle, FieldStyle.DROP_LIST);
+
             fieldSubtype = FieldSubtype.QRCODE;
             binding = null;
             fieldStyle = new FieldStyleAndSubTypeConverter(fieldSubtype, binding).ToSDKFieldStyle();
@@ -116,6 +126,14 @@ namespace SDK.Tests
             fieldStyle = FieldStyle.UNBOUND_RADIO_BUTTON;
             fieldSubtype = new FieldStyleAndSubTypeConverter(fieldStyle).ToAPIFieldSubtype();
             Assert.AreEqual(fieldSubtype, FieldSubtype.RADIO);
+
+            fieldStyle = FieldStyle.DROP_LIST;
+            fieldSubtype = new FieldStyleAndSubTypeConverter(fieldStyle).ToAPIFieldSubtype();
+            Assert.AreEqual(fieldSubtype, FieldSubtype.LIST);
+
+            fieldStyle = FieldStyle.TEXT_AREA;
+            fieldSubtype = new FieldStyleAndSubTypeConverter(fieldStyle).ToAPIFieldSubtype();
+            Assert.AreEqual(fieldSubtype, FieldSubtype.TEXTAREA);
 
             fieldStyle = FieldStyle.BOUND_QRCODE;
             fieldSubtype = new FieldStyleAndSubTypeConverter(fieldStyle).ToAPIFieldSubtype();
