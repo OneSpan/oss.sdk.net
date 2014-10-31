@@ -11,14 +11,24 @@ namespace Silanis.ESL.SDK.Internal
 	/// </summary>
 	public class HttpMethods
 	{
+        public const string ESL_API_VERSION = "10.6";
+        public const string ESL_API_VERSION_HEADER = "esl-api-version=" + ESL_API_VERSION;
+
+        public const string CONTENT_TYPE_APPLICATION_JSON = "application/json";
+        public const string ESL_CONTENT_TYPE_APPLICATION_JSON = CONTENT_TYPE_APPLICATION_JSON + "; " + ESL_API_VERSION_HEADER;
+
+        public const string ACCEPT_TYPE_APPLICATION_JSON = "application/json";
+        public const string ESL_ACCEPT_TYPE_APPLICATION_JSON = ACCEPT_TYPE_APPLICATION_JSON + "; " + ESL_API_VERSION_HEADER;
+
 		public static byte[] PostHttp (string apiToken, string path, byte[] content)
 		{
             try {
-				WebRequest request = WebRequest.Create (path);
+                HttpWebRequest request = (HttpWebRequest)WebRequest.Create (path);
 				request.Method = "POST";
-				request.ContentType = "application/json";
+				request.ContentType = ESL_CONTENT_TYPE_APPLICATION_JSON;
 				request.ContentLength = content.Length;
 				request.Headers.Add ("Authorization", "Basic " + apiToken);
+                request.Accept = ESL_ACCEPT_TYPE_APPLICATION_JSON;
 
 				using (Stream dataStream = request.GetRequestStream ()) {
 					dataStream.Write (content, 0, content.Length);
@@ -52,11 +62,12 @@ namespace Silanis.ESL.SDK.Internal
 		public static byte[] PutHttp (string apiToken, string path, byte[] content)
 		{
 			try {
-				WebRequest request = WebRequest.Create (path);
+                HttpWebRequest request = (HttpWebRequest)WebRequest.Create (path);
 				request.Method = "PUT";
-				request.ContentType = "application/json";
+				request.ContentType = ESL_CONTENT_TYPE_APPLICATION_JSON;
 				request.ContentLength = content.Length;
 				request.Headers.Add ("Authorization", "Basic " + apiToken);
+                request.Accept = ESL_ACCEPT_TYPE_APPLICATION_JSON;
 
 				using (Stream dataStream = request.GetRequestStream ()) {
 					dataStream.Write (content, 0, content.Length);
@@ -97,8 +108,9 @@ namespace Silanis.ESL.SDK.Internal
             string message = "";
             UseUnsafeHeaderParsing(ref message);
             try {
-                WebRequest request = WebRequest.Create (path);
+                HttpWebRequest request = (HttpWebRequest)WebRequest.Create (path);
                 request.Method = "GET";
+                request.Accept = ESL_ACCEPT_TYPE_APPLICATION_JSON;
 
                 WebResponse response = request.GetResponse ();
 
@@ -203,7 +215,7 @@ namespace Silanis.ESL.SDK.Internal
 		public static byte[] GetHttp (string apiToken, string path)
 		{
 			try {
-				WebRequest request = WebRequest.Create (path);
+                WebRequest request = WebRequest.Create (path);
 				request.Method = "GET";
 				request.Headers.Add ("Authorization", "Basic " + apiToken);
 
@@ -235,9 +247,10 @@ namespace Silanis.ESL.SDK.Internal
 		public static byte[] DeleteHttp (string apiToken, string path)
 		{
 			try {
-				WebRequest request = WebRequest.Create (path);
+                HttpWebRequest request = (HttpWebRequest)WebRequest.Create (path);
 				request.Method = "DELETE";
 				request.Headers.Add ("Authorization", "Basic " + apiToken);
+                request.Accept = ESL_ACCEPT_TYPE_APPLICATION_JSON;
 
 				WebResponse response = request.GetResponse ();
 

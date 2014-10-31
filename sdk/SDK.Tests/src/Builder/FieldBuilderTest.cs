@@ -92,6 +92,22 @@ namespace SDK.Tests
         }
 
         [Test]
+        public void creatingTextAreaFieldSetsStyle()
+        {
+            Field field = FieldBuilder.TextArea().AtPosition(100, 100).Build();
+
+            Assert.AreEqual(FieldStyle.TEXT_AREA, field.Style);
+        }
+
+        [Test]
+        public void creatingDropListFieldSetsStyle()
+        {
+            Field field = FieldBuilder.DropList().AtPosition(100, 100).Build();
+
+            Assert.AreEqual(FieldStyle.DROP_LIST, field.Style);
+        }
+
+        [Test]
         public void creatingQRCodeFieldSetsStyle()
         {
             Field field = FieldBuilder.QRCode().AtPosition(100, 100).Build();

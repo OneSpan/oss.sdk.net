@@ -10,6 +10,7 @@ namespace Silanis.ESL.SDK.Builder
 		private static String ALPHANUMERIC_REGEX = "^[\\s0-9a-zA-Z]+$";
 		private static String EMAIL_REGEX = "^([a-z0-9_\\.-]+)@([\\da-z\\.-]+)\\.([a-z\\.]{2,6})$";
 		private static String URL_REGEX = "^(https?:\\/\\/)?([\\da-z\\.-]+)\\.([a-z\\.]{2,6})([\\/\\w \\.-]*)*\\/?$";
+        private static String DEFAULT_REGEX = null;
 
 		private static int DEFAULT_MAX_LENGTH = Int32.MaxValue;
 
@@ -73,6 +74,11 @@ namespace Silanis.ESL.SDK.Builder
 			required = true;
 			return this;
 		}
+
+        public static FieldValidatorBuilder Basic() 
+        {
+            return new FieldValidatorBuilder( DEFAULT_REGEX );
+        }
 
 		public FieldValidatorBuilder WithErrorMessage (string message)
 		{
