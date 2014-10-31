@@ -82,6 +82,11 @@ namespace SDK.Tests
             fieldStyle = new FieldStyleAndSubTypeConverter(fieldSubtype, binding).ToSDKFieldStyle();
             Assert.AreEqual(fieldStyle, FieldStyle.BOUND_QRCODE);
 
+            fieldSubtype = FieldSubtype.SEAL;
+            binding = null;
+            fieldStyle = new FieldStyleAndSubTypeConverter(fieldSubtype, binding).ToSDKFieldStyle();
+            Assert.AreEqual(fieldStyle, FieldStyle.SEAL);
+
             // Where the conversion is based on binding.
             fieldSubtype = new FieldSubtype();
             binding = BINDING_DATE;
@@ -138,6 +143,10 @@ namespace SDK.Tests
             fieldStyle = FieldStyle.BOUND_QRCODE;
             fieldSubtype = new FieldStyleAndSubTypeConverter(fieldStyle).ToAPIFieldSubtype();
             Assert.AreEqual(fieldSubtype, FieldSubtype.QRCODE);
+
+            fieldStyle = FieldStyle.SEAL;
+            fieldSubtype = new FieldStyleAndSubTypeConverter(fieldStyle).ToAPIFieldSubtype();
+            Assert.AreEqual(fieldSubtype, FieldSubtype.SEAL);
 
             fieldStyle = FieldStyle.BOUND_DATE;
             fieldSubtype = new FieldStyleAndSubTypeConverter(fieldStyle).ToAPIFieldSubtype();

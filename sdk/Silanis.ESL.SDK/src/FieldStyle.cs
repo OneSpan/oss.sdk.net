@@ -15,6 +15,7 @@ namespace Silanis.ESL.SDK
         UNBOUND_RADIO_BUTTON,
 		LABEL,
         TEXT_AREA,
-        DROP_LIST
+        DROP_LIST,
+        SEAL
 	}
 }

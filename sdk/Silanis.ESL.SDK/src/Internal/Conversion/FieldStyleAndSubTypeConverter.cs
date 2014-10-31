@@ -57,6 +57,8 @@ namespace Silanis.ESL.SDK
                     return Silanis.ESL.API.FieldSubtype.LIST;
                 case FieldStyle.BOUND_QRCODE:
                     return Silanis.ESL.API.FieldSubtype.QRCODE;
+                case FieldStyle.SEAL:
+                    return Silanis.ESL.API.FieldSubtype.SEAL;
                 default:
                     throw new EslException(String.Format ("Unable to decode the field subtype from style {0}", sdkFieldStyle),null );
             }
@@ -87,6 +89,8 @@ namespace Silanis.ESL.SDK
                         return FieldStyle.DROP_LIST;
                     case FieldSubtype.QRCODE:
                         return FieldStyle.BOUND_QRCODE;
+                    case FieldSubtype.SEAL:
+                        return FieldStyle.SEAL;
                     default:
                         throw new EslException(String.Format("Unable to decode the style from field subtype {0}", apiFieldSubType),null);
                 }
