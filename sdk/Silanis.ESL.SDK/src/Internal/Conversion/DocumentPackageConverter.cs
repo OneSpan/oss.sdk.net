@@ -164,6 +164,8 @@ namespace Silanis.ESL.SDK
                         senderInfo.LastName = signer.LastName;
                         senderInfo.Title = signer.Title;
                         senderInfo.Company = signer.Company;
+                        senderInfo.Email = signer.Email;
+
                         packageBuilder.WithSenderInfo(senderInfo);
                     }
                 }
