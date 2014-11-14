@@ -41,6 +41,11 @@ namespace Silanis.ESL.SDK
 			package.Due = sdkPackage.ExpiryDate;
 			package.Autocomplete = sdkPackage.Autocomplete;
 
+            if (sdkPackage.Id != null)
+            {
+                package.Id = sdkPackage.Id.ToString();
+            }
+
 			if (sdkPackage.Description != null)
 			{
 				package.Description = sdkPackage.Description;
