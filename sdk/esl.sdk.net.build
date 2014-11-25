@@ -1,11 +1,12 @@
 <?xml version="1.0"?>
-<project name="Silanis.ESL.SDK.Net" default="package" basedir=".">    
+<project name="Silanis.ESL.SDK.Net" default="copy" basedir=".">    
     <property name="ESL-SDK" value="Silanis.ESL.SDK" />    
     <property name="source.dir" value="Silanis.ESL.SDK" />
-	<property name="output.dir" value="${source.dir}/bin/Release" />    
+    <property name="copy.dir" value="//KLIO/common/temp/ahabbab" />
+    <property name="output.dir" value="${source.dir}/bin/Release" />    
     <property name="parent.dir" value="${directory::get-parent-directory(project::get-base-directory())}" />
-    <property name="zip.file" value="${parent.dir}/${ESL-SDK}.zip" />
-
+    <property name="build.version" value="${assemblyname::get-version(assemblyname::get-assembly-name('C:/dev/esl.sdk.net/sdk/Silanis.ESL.SDK/bin/Release/Silanis.ESL.dll'))}" />
+    <property name="zip.file" value="${parent.dir}/${ESL-SDK}.${build.version}.zip" />
     <target name="clean" decription="Delete bin folder and zip file">
         <delete>
             <fileset basedir="${parent.dir}">                
@@ -13,23 +14,38 @@
             </fileset>
         </delete>
     </target>
-	
-	<target name="build" description="Compiles the source code and create dll and xml file in bin folder">       
-       
-	   <msbuild project="${source.dir}/Silanis.ESL.SDK.csproj" target="Clean;Rebuild">
-			<property name="Configuration" value="Release"/>
-			<property name="TargetFrameworkVersion" value="v2.0"/>
-	   </msbuild>
-				
+    
+    <target name="build" description="Compiles the source code and create dll and xml file in bin folder">       
+       <echo message="build" />
+       <msbuild project="${source.dir}/Silanis.ESL.SDK.csproj" target="Clean;Rebuild">
+            <property name="Configuration" value="Release"/>
+            <property name="TargetFrameworkVersion" value="v2.0"/>
+       </msbuild>
+                
     </target>
 
     <target name="package" decription="Package dll, references and examples to a zip file" depends="build">
+        <echo message="package" />
         <zip zipfile="${zip.file}">
             <fileset basedir="${output.dir}">
                 <include name="/*.dll" />
                 <include name="/*.xml" />
             </fileset>
         </zip>
+    </target>
+    
+    <target name="copy" decription="Copy zip file to" depends="package">
+        <echo message="copy" />
+        <delete>
+            <fileset basedir="${copy.dir}">                
+                <include name="*.zip" />
+            </fileset>
+        </delete>
+        <copy todir="${copy.dir}">
+            <fileset basedir="${parent.dir}">
+                <include name="${zip.file}" />
+            </fileset>
+        </copy>
     </target>
 
 </project>
