@@ -5,8 +5,7 @@
     <property name="copy.dir" value="//KLIO/common/temp/ahabbab" />
     <property name="output.dir" value="${source.dir}/bin/Release" />    
     <property name="parent.dir" value="${directory::get-parent-directory(project::get-base-directory())}" />
-    <property name="build.version" value="${assemblyname::get-version(assemblyname::get-assembly-name('C:/dev/esl.sdk.net/sdk/Silanis.ESL.SDK/bin/Release/Silanis.ESL.dll'))}" />
-    <property name="zip.file" value="${parent.dir}/${ESL-SDK}.${build.version}.zip" />
+    <property name="zip.file" value="${parent.dir}/${ESL-SDK}.zip" />
     <target name="clean" decription="Delete bin folder and zip file">
         <delete>
             <fileset basedir="${parent.dir}">                
@@ -34,7 +33,14 @@
         </zip>
     </target>
     
-    <target name="copy" decription="Copy zip file to" depends="package">
+    <target name="versioning" decription="change to file name with version" depends="package">
+        <echo message="versioning" />
+        <property name="build.version" value="${assemblyname::get-version(assemblyname::get-assembly-name('C:/dev/esl.sdk.net/sdk/Silanis.ESL.SDK/bin/Release/Silanis.ESL.dll'))}" />
+        <move file="${zip.file}" tofile ="${parent.dir}/${ESL-SDK}.${build.version}.zip">
+        </move>
+    </target>
+    
+    <target name="copy" decription="Copy zip file to" depends="versioning">
         <echo message="copy" />
         <delete>
             <fileset basedir="${copy.dir}">                
@@ -43,7 +49,7 @@
         </delete>
         <copy todir="${copy.dir}">
             <fileset basedir="${parent.dir}">
-                <include name="${zip.file}" />
+                <include name="${parent.dir}/${ESL-SDK}.${build.version}.zip" />
             </fileset>
         </copy>
     </target>
