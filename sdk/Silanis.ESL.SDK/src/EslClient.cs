@@ -177,7 +177,32 @@ namespace Silanis.ESL.SDK
         
         public PackageId CreatePackageFromTemplate(PackageId templateId, DocumentPackage delta)
         {
+            SetNewSignersIndexIfRoleWorkflowEnabled(templateId, delta);
 			return templateService.CreatePackageFromTemplate( templateId, new DocumentPackageConverter(delta).ToAPIPackage() );
+        }
+
+        private void SetNewSignersIndexIfRoleWorkflowEnabled (PackageId templateId, DocumentPackage documentPackage) 
+        {
+            DocumentPackage template = new DocumentPackageConverter(packageService.GetPackage(templateId)).ToSDKPackage();
+            if (CheckSignerOrdering(template)) {
+                int firstSignerIndex = template.Signers.Count;
+                foreach(Signer signer in documentPackage.Signers.Values)
+                {
+                    signer.SigningOrder = firstSignerIndex;
+                    firstSignerIndex++;
+                }
+            }
+        }
+
+        private bool CheckSignerOrdering(DocumentPackage template) {
+            foreach(Signer signer in template.Signers.Values)
+            {
+                if (signer.SigningOrder > 0) 
+                {
+                    return true;
+                }
+            }
+            return false;
         }
 
 		public PackageId CreateTemplate(DocumentPackage template)
