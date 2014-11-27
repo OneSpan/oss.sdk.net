@@ -118,6 +118,21 @@ namespace Silanis.ESL.SDK.Builder
             return new SignatureBuilder(roleId).WithStyle(SignatureStyle.HAND_DRAWN);
         }
 
+        public static SignatureBuilder MobileCaptureFor (string signerEmail)
+        {
+            return new SignatureBuilder (signerEmail).WithStyle (SignatureStyle.MOBILE_CAPTURE);
+        }
+
+        public static SignatureBuilder MobileCaptureFor (GroupId groupId)
+        {
+            return new SignatureBuilder(groupId).WithStyle(SignatureStyle.MOBILE_CAPTURE);
+        }
+
+        public static SignatureBuilder MobileCaptureFor(Placeholder roleId)
+        {
+            return new SignatureBuilder(roleId).WithStyle(SignatureStyle.MOBILE_CAPTURE);
+        }
+
         public SignatureBuilder WithId (SignatureId id)
         {
             this.id = id;

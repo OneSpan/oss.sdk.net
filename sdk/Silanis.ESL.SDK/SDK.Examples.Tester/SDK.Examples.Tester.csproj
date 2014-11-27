@@ -95,6 +95,7 @@
     <Compile Include="src\SignerInformationForEquifaxCanadaExampleTest.cs" />
     <Compile Include="src\SignerInformationForEquifaxUSAExampleTest.cs" />
     <Compile Include="src\MixedSignerAuthenticationExampleTest.cs" />
+    <Compile Include="src\MobileCaptureSignatureStyleExampleTest.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

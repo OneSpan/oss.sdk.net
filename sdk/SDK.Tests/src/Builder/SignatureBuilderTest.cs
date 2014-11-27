@@ -53,6 +53,17 @@ namespace SDK.Tests
 			Assert.AreEqual(SignatureStyle.INITIALS, signature.Style);
 		}
 
+        [Test]
+        public void BuildMobileCaptureForGroup()
+        {
+            GroupId groupId = new GroupId("myGroupId");
+            Signature signature = SignatureBuilder.MobileCaptureFor(groupId).Build();
+
+            Assert.AreEqual(groupId, signature.GroupId);
+            Assert.IsNull(signature.SignerEmail);
+            Assert.AreEqual(SignatureStyle.MOBILE_CAPTURE, signature.Style);
+        }
+
 		[Test]
 		public void BuildsWithDefaultValues()
 		{
@@ -97,5 +108,13 @@ namespace SDK.Tests
 
 			Assert.AreEqual (SignatureStyle.HAND_DRAWN, signature.Style);
 		}
+
+        [Test]
+        public void CreatingMobileCaptureForSignerSetsStyle()
+        {
+            Signature signature = SignatureBuilder.MobileCaptureFor ("some@dude.com").Build ();
+
+            Assert.AreEqual (SignatureStyle.MOBILE_CAPTURE, signature.Style);
+        }
 	}
 }
