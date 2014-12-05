@@ -4,6 +4,7 @@ namespace Silanis.ESL.SDK
 {
 	public enum FieldStyle
 	{
+        UPGRADE_NEEDED_VALUE,
         BOUND_DATE,
 		BOUND_NAME,
 		BOUND_TITLE,

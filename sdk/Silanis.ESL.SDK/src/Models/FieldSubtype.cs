@@ -1,11 +1,12 @@
 //
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
+
 namespace Silanis.ESL.API
 {
-    [JsonConverter(typeof(StringEnumConverter))]
+    [JsonConverter(typeof(UnknownEnumValuesHandleConverter))]
 	internal enum FieldSubtype
 	{
-        FULLNAME,INITIALS,CAPTURE,LABEL,TEXTFIELD,TEXTAREA,CHECKBOX,DATE,RADIO,LIST,QRCODE,CUSTOMFIELD,SEAL,MOBILE_CAPTURE
+        UPGRADE_NEEDED_VALUE,FULLNAME,INITIALS,CAPTURE,LABEL,TEXTFIELD,TEXTAREA,CHECKBOX,DATE,RADIO,LIST,QRCODE,CUSTOMFIELD,SEAL,MOBILE_CAPTURE
 	}
 }

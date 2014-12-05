@@ -36,6 +36,9 @@
     <Reference Include="nunit.framework">
       <HintPath>..\References\nunit.framework.dll</HintPath>
     </Reference>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\References\Newtonsoft.Json.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -81,7 +84,7 @@
     <Compile Include="src\Internal\Conversion\ExternalConverterTest.cs" />
     <Compile Include="src\Internal\Conversion\MessageStatusConverterTest.cs" />
     <Compile Include="src\Internal\Conversion\ChallengeConverterTest.cs" />r
-  <Compile Include="src\Internal\Conversion\UsageReportConverterTest.cs" /><Compile Include="src\Internal\Conversion\SignerInformationForEquifaxCanadaConverterTest.cs" /><Compile Include="src\Builder\SignerInformationForEquifaxCanadaBuilderTest.cs" /><Compile Include="src\Builder\SignerInformationForEquifaxUSABuilderTest.cs" /><Compile Include="src\Internal\Conversion\SignerInformationForEquifaxUSAConverterTest.cs" /></ItemGroup>
+  <Compile Include="src\Internal\Conversion\UsageReportConverterTest.cs" /><Compile Include="src\Internal\Conversion\SignerInformationForEquifaxCanadaConverterTest.cs" /><Compile Include="src\Builder\SignerInformationForEquifaxCanadaBuilderTest.cs" /><Compile Include="src\Builder\SignerInformationForEquifaxUSABuilderTest.cs" /><Compile Include="src\Internal\Conversion\SignerInformationForEquifaxUSAConverterTest.cs" /><Compile Include="src\Internal\Conversion\UnknownEnumValuesHandleConverterTest.cs" /></ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
     <Folder Include="src\" />

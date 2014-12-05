@@ -7,7 +7,7 @@ namespace Silanis.ESL.SDK
         private Nullable<Silanis.ESL.API.FieldSubtype> apiSubtype;
         private Nullable<SignatureStyle> sdkSignatureStyle;
         
-        public SignatureStyleConverter(Silanis.ESL.API.FieldSubtype apiSubtype)
+        public SignatureStyleConverter(Silanis.ESL.API.FieldSubtype? apiSubtype)
         {
             this.apiSubtype = apiSubtype;
             this.sdkSignatureStyle = null;

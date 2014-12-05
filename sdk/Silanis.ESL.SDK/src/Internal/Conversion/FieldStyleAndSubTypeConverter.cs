@@ -1,10 +1,14 @@
 using System;
 using Silanis.ESL.API;
+using log4net;
+using System.Reflection;
 
 namespace Silanis.ESL.SDK
 {
     internal class FieldStyleAndSubTypeConverter
     {
+        private ILog log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
+
         private static string BINDING_DATE = "{approval.signed}";
         private static string BINDING_TITLE = "{signer.title}";
         private static string BINDING_NAME = "{signer.name}";
@@ -21,7 +25,7 @@ namespace Silanis.ESL.SDK
             apiFieldBinding = null;
         }
 
-        public FieldStyleAndSubTypeConverter(FieldSubtype apiFieldSubtype, String apiFieldBinding)
+        public FieldStyleAndSubTypeConverter(FieldSubtype? apiFieldSubtype, String apiFieldBinding)
         {
             this.apiFieldSubType = apiFieldSubtype;
             this.apiFieldBinding = apiFieldBinding;
@@ -60,7 +64,8 @@ namespace Silanis.ESL.SDK
                 case FieldStyle.SEAL:
                     return Silanis.ESL.API.FieldSubtype.SEAL;
                 default:
-                    throw new EslException(String.Format ("Unable to decode the field subtype from style {0}", sdkFieldStyle),null );
+                    log.Warn("Unknown SDK field style.");
+                    return Silanis.ESL.API.FieldSubtype.UPGRADE_NEEDED_VALUE;
             }
         }
 
@@ -92,7 +97,8 @@ namespace Silanis.ESL.SDK
                     case FieldSubtype.SEAL:
                         return FieldStyle.SEAL;
                     default:
-                        throw new EslException(String.Format("Unable to decode the style from field subtype {0}", apiFieldSubType),null);
+                        log.Warn("Unknown API field SubType. The upgrade is required");
+                        return FieldStyle.UPGRADE_NEEDED_VALUE;
                 }
             }
             else
@@ -115,7 +121,8 @@ namespace Silanis.ESL.SDK
                 }
                 else
                 {
-                    throw new EslException(String.Format("Unable to decode the style from field binding {0}", apiFieldBinding),null);
+                    log.WarnFormat("Unknown field binding {0}. The upgrade is required", apiFieldBinding);
+                    return FieldStyle.UPGRADE_NEEDED_VALUE;
                 }
             }
         }

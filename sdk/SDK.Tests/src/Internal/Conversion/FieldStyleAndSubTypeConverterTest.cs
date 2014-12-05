@@ -87,6 +87,11 @@ namespace SDK.Tests
             fieldStyle = new FieldStyleAndSubTypeConverter(fieldSubtype, binding).ToSDKFieldStyle();
             Assert.AreEqual(fieldStyle, FieldStyle.SEAL);
 
+            fieldSubtype = FieldSubtype.UPGRADE_NEEDED_VALUE;
+            binding = null;
+            fieldStyle = new FieldStyleAndSubTypeConverter(fieldSubtype, binding).ToSDKFieldStyle();
+            Assert.AreEqual(fieldStyle, FieldStyle.UPGRADE_NEEDED_VALUE);
+
             // Where the conversion is based on binding.
             fieldSubtype = new FieldSubtype();
             binding = BINDING_DATE;
@@ -107,6 +112,11 @@ namespace SDK.Tests
             binding = BINDING_COMPANY;
             fieldStyle = new FieldStyleAndSubTypeConverter(fieldSubtype, binding).ToSDKFieldStyle();
             Assert.AreEqual(fieldStyle, FieldStyle.BOUND_COMPANY);
+
+            fieldSubtype = new FieldSubtype();
+            binding = "";
+            fieldStyle = new FieldStyleAndSubTypeConverter(fieldSubtype, binding).ToSDKFieldStyle();
+            Assert.AreEqual(fieldStyle, FieldStyle.UPGRADE_NEEDED_VALUE);
         }
 
         [Test()]

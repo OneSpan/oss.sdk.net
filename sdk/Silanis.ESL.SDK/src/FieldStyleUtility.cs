@@ -29,9 +29,8 @@ namespace Silanis.ESL.SDK
                 case FieldStyle.DROP_LIST:
                 case FieldStyle.TEXT_AREA:
                 case FieldStyle.LABEL:
-                    return null;
                 default:
-                    throw new EslException(String.Format("Unknown FieldStyle value {0}", style), null);
+                    return null;
             }
         }
     }

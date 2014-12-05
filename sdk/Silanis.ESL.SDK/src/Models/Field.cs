@@ -77,7 +77,7 @@ namespace Silanis.ESL.API
     
 		    
     [JsonProperty("subtype")]
-    public FieldSubtype Subtype
+    public FieldSubtype? Subtype
     {
                 get; set;
         }

@@ -131,6 +131,7 @@
     <Compile Include="src\SignerInformationForEquifaxUSAExample.cs" />
     <Compile Include="src\MixedSignerAuthenticationExample.cs" />
     <Compile Include="src\MobileCaptureSignatureStyleExample.cs" />
+    <Compile Include="src\PackageWithUnknownFieldSubtypeCreationExample.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
