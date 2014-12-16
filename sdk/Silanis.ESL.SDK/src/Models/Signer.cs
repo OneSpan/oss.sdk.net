@@ -207,6 +207,12 @@ namespace Silanis.ESL.API
         _userCustomFields.Add(value);
         return this;
     }
+
+    [JsonProperty("status")]
+    public SignerStatus Status
+    {
+        get; set;
+    }
     
 		
 	

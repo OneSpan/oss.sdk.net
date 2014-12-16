@@ -105,6 +105,10 @@ namespace Silanis.ESL.SDK
 				signer.Id = sdkSigner.Id;
 			}
 
+            if( sdkSigner.Status != null ) {
+                signer.Status = (Silanis.ESL.API.SignerStatus) Silanis.ESL.API.SignerStatus.Parse(typeof(Silanis.ESL.API.SignerStatus), sdkSigner.Status);
+            }
+
 			signer.Auth = new AuthenticationConverter(sdkSigner.Authentication).ToAPIAuthentication();
 
 			return signer;
@@ -192,7 +196,9 @@ namespace Silanis.ESL.SDK
 
             builder.WithAuthentication(new AuthenticationConverter(eslSigner.Auth).ToSDKAuthentication());
 
-            return builder.Build();
+            Silanis.ESL.SDK.Signer signer = builder.Build();
+            signer.Status = eslSigner.Status.ToString();
+            return signer;
         }
     }
 }
