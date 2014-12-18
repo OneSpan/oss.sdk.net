@@ -48,7 +48,7 @@ namespace Silanis.ESL.SDK
                     result.MaskInput = false;
                     break;
                 default:
-                    result.MaskInput = false;
+                    result.MaskInput = true;
                     break;
             }
 
