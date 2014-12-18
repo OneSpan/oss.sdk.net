@@ -57,7 +57,7 @@ namespace Silanis.ESL.API
     
 		    
     [JsonProperty("status")]
-    public MessageStatus Status
+    public string Status
     {
                 get; set;
         }

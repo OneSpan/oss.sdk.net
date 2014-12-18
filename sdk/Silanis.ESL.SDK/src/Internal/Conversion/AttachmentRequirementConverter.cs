@@ -57,7 +57,7 @@ namespace Silanis.ESL.SDK
 
 			if (sdkAttachmentRequirement.Status.Equals(null))
 			{
-				result.Status = Silanis.ESL.API.RequirementStatus.INCOMPLETE;
+                result.Status = Silanis.ESL.SDK.RequirementStatus.INCOMPLETE.getApiValue();
 			}
 			else
 			{

@@ -75,7 +75,7 @@ namespace SDK.Tests
 			Silanis.ESL.API.Sender apiSender = CreateTypicalAPISender();
 			Silanis.ESL.SDK.Sender sdkSender = new SenderConverter(apiSender).ToSDKSender();
 
-			Assert.AreEqual(sdkSender.Status.ToString(), apiSender.Status.ToString());
+			Assert.AreEqual(sdkSender.Status.getApiValue(), apiSender.Status);
 			Assert.AreEqual(sdkSender.LastName, apiSender.LastName);
 			Assert.AreEqual(sdkSender.FirstName, apiSender.FirstName);
 			Assert.AreEqual(sdkSender.Company, apiSender.Company);

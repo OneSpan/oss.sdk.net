@@ -14,7 +14,7 @@ namespace Silanis.ESL.API
 		// Accessors
 
         [JsonProperty("knowledgeBasedAuthenticationStatus")]
-        public KnowledgeBasedAuthenticationStatus KnowledgeBasedAuthenticationStatus
+        public string KnowledgeBasedAuthenticationStatus
         {
             get; set;
         }

@@ -35,7 +35,7 @@ namespace Silanis.ESL.API
     
 		    
     [JsonProperty("scheme")]
-    public AuthScheme Scheme
+    public string Scheme
     {
                 get; set;
         }

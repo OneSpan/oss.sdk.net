@@ -149,9 +149,9 @@ namespace SDK.Tests
             apiField.Id = "3";
             apiField.Name = "Field Name";
             apiField.Page = 1;
-            apiField.Subtype = FieldSubtype.TEXTFIELD;
+            apiField.Subtype = FieldStyle.UNBOUND_TEXT_FIELD.getApiValue();
             apiField.Top = 101.0;
-            apiField.Type = FieldType.INPUT;
+            apiField.Type = "INPUT";
             apiField.Value = "field value";
             apiField.Width = 102.0;
 

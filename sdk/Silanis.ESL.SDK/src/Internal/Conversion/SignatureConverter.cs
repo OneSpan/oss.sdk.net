@@ -57,7 +57,7 @@ namespace Silanis.ESL.SDK
 
             Silanis.ESL.API.Field apiSignatureField = null;
             foreach ( Silanis.ESL.API.Field apiField in apiApproval.Fields ) {
-                if ( apiField.Type == Silanis.ESL.API.FieldType.SIGNATURE ) {
+                if (FieldType.SIGNATURE.getApiValue().Equals(apiField.Type)) {
                     apiSignatureField = apiField;
                 } else {
                     Field field = new FieldConverter( apiField ).ToSDKField();
@@ -123,31 +123,10 @@ namespace Silanis.ESL.SDK
                 result.ExtractAnchor = new TextAnchorConverter(signature.TextAnchor).ToAPIExtractAnchor();
             }
 
-
-            result.Type = Silanis.ESL.API.FieldType.SIGNATURE;
-            result.Subtype = GetSignatureSubtype (signature);
-
+            result.Type = FieldType.SIGNATURE.getApiValue();
+            result.Subtype = signature.Style.getApiValue();
             return result;
-        }
-
-        private Silanis.ESL.API.FieldSubtype GetSignatureSubtype(Signature signature) {
-            switch (signature.Style) 
-            {
-                case SignatureStyle.FULL_NAME:
-                    return Silanis.ESL.API.FieldSubtype.FULLNAME;
-                    case SignatureStyle.HAND_DRAWN:
-                    return Silanis.ESL.API.FieldSubtype.CAPTURE;
-                    case SignatureStyle.INITIALS:
-                    return Silanis.ESL.API.FieldSubtype.INITIALS;
-                    case SignatureStyle.MOBILE_CAPTURE:
-                    return Silanis.ESL.API.FieldSubtype.MOBILE_CAPTURE;
-                    case SignatureStyle.ACCEPTANCE:
-                    return Silanis.ESL.API.FieldSubtype.FULLNAME;
-                    default:
-                    throw new EslException("Unknown SignatureStyle value: " + signature.Style, null );
-            }
-        }
+        }       
     }
-
 }
 

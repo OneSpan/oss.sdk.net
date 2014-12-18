@@ -14,8 +14,8 @@ namespace Silanis.ESL.SDK
         private static string BINDING_NAME = "{signer.name}";
         private static string BINDING_COMPANY = "{signer.company}";
 
-        private Nullable<FieldStyle> sdkFieldStyle;
-        private Nullable<FieldSubtype> apiFieldSubType;
+        private FieldStyle sdkFieldStyle;
+        private string apiFieldSubType;
         private string apiFieldBinding;
 
         public FieldStyleAndSubTypeConverter(FieldStyle sdkFieldStyle)
@@ -25,81 +25,32 @@ namespace Silanis.ESL.SDK
             apiFieldBinding = null;
         }
 
-        public FieldStyleAndSubTypeConverter(FieldSubtype? apiFieldSubtype, String apiFieldBinding)
+        public FieldStyleAndSubTypeConverter(string apiFieldSubtype, String apiFieldBinding)
         {
             this.apiFieldSubType = apiFieldSubtype;
             this.apiFieldBinding = apiFieldBinding;
             sdkFieldStyle = null;
         }
 
-        public FieldSubtype ToAPIFieldSubtype()
+        public string ToAPIFieldSubtype()
         {
-            if (!sdkFieldStyle.HasValue)
+            if (null==sdkFieldStyle)
             {
-                return apiFieldSubType.Value;
+                return apiFieldSubType;
             }
-
-            switch (sdkFieldStyle) 
-            {
-                case FieldStyle.UNBOUND_TEXT_FIELD:
-                    return Silanis.ESL.API.FieldSubtype.TEXTFIELD;
-                case FieldStyle.BOUND_DATE:
-                case FieldStyle.BOUND_NAME:
-                case FieldStyle.BOUND_TITLE:
-                case FieldStyle.BOUND_COMPANY:
-                case FieldStyle.LABEL:
-                    return Silanis.ESL.API.FieldSubtype.LABEL;
-                case FieldStyle.UNBOUND_CHECK_BOX:
-                    return Silanis.ESL.API.FieldSubtype.CHECKBOX;
-                case FieldStyle.UNBOUND_RADIO_BUTTON:
-                    return Silanis.ESL.API.FieldSubtype.RADIO;
-                case FieldStyle.UNBOUND_CUSTOM_FIELD:
-                    return Silanis.ESL.API.FieldSubtype.CUSTOMFIELD;
-                case FieldStyle.TEXT_AREA:
-                    return Silanis.ESL.API.FieldSubtype.TEXTAREA;
-                case FieldStyle.DROP_LIST:
-                    return Silanis.ESL.API.FieldSubtype.LIST;
-                case FieldStyle.BOUND_QRCODE:
-                    return Silanis.ESL.API.FieldSubtype.QRCODE;
-                case FieldStyle.SEAL:
-                    return Silanis.ESL.API.FieldSubtype.SEAL;
-                default:
-                    log.Warn("Unknown SDK field style.");
-                    return Silanis.ESL.API.FieldSubtype.UPGRADE_NEEDED_VALUE;
-            }
+            return sdkFieldStyle.getApiValue();       
         }
 
         public FieldStyle ToSDKFieldStyle()
         {
-            if (!apiFieldSubType.HasValue && apiFieldBinding == null) 
+            if (String.IsNullOrEmpty(apiFieldSubType) && apiFieldBinding == null) 
             {
-                return sdkFieldStyle.Value;
+                return sdkFieldStyle;
             }
 
             if (apiFieldBinding == null)
             {
-                switch (apiFieldSubType)
-                {
-                    case FieldSubtype.TEXTFIELD:
-                        return FieldStyle.UNBOUND_TEXT_FIELD;
-                    case FieldSubtype.CUSTOMFIELD:
-                        return FieldStyle.UNBOUND_CUSTOM_FIELD;
-                    case FieldSubtype.CHECKBOX:
-                        return FieldStyle.UNBOUND_CHECK_BOX;
-                    case FieldSubtype.RADIO:
-                        return FieldStyle.UNBOUND_RADIO_BUTTON;
-                    case FieldSubtype.TEXTAREA:
-                        return FieldStyle.TEXT_AREA;
-                    case FieldSubtype.LIST:
-                        return FieldStyle.DROP_LIST;
-                    case FieldSubtype.QRCODE:
-                        return FieldStyle.BOUND_QRCODE;
-                    case FieldSubtype.SEAL:
-                        return FieldStyle.SEAL;
-                    default:
-                        log.Warn("Unknown API field SubType. The upgrade is required");
-                        return FieldStyle.UPGRADE_NEEDED_VALUE;
-                }
+                return FieldStyle.valueOf(apiFieldSubType);
             }
             else
             {
@@ -121,8 +72,7 @@ namespace Silanis.ESL.SDK
                 }
                 else
                 {
-                    log.WarnFormat("Unknown field binding {0}. The upgrade is required", apiFieldBinding);
-                    return FieldStyle.UPGRADE_NEEDED_VALUE;
+                    return FieldStyle.valueOf(apiFieldBinding);
                 }
             }
         }

@@ -5,13 +5,13 @@ namespace Silanis.ESL.SDK
 	internal class SenderTypeConverter
     {
 		private Silanis.ESL.SDK.SenderType sdkSenderType;
-		private Silanis.ESL.API.SenderType apiSenderType;
+		private string apiSenderType;
 
 		/// <summary>
 		/// Construct with API SenderType object involved in conversion.
 		/// </summary>
 		/// <param name="apiSenderType">API sender type.</param>
-		public SenderTypeConverter(Silanis.ESL.API.SenderType apiSenderType)
+		public SenderTypeConverter(string apiSenderType)
 		{
 			this.apiSenderType = apiSenderType;
 		}
@@ -29,17 +29,9 @@ namespace Silanis.ESL.SDK
 		/// Convert from SDK SenderType to API SenderType.
 		/// </summary>
 		/// <returns>The API sender type.</returns>
-		public Silanis.ESL.API.SenderType ToAPISenderType()
+		public string ToAPISenderType()
 		{
-			switch (sdkSenderType)
-			{
-				case SenderType.MANAGER:
-					return Silanis.ESL.API.SenderType.MANAGER;
-				case SenderType.REGULAR:
-					return Silanis.ESL.API.SenderType.REGULAR;
-				default:
-                    throw new EslException(String.Format("Unable to decode the sender type {0}", sdkSenderType), null);
-			}
+            return sdkSenderType.getApiValue();
 		}
 
 		/// <summary>
@@ -48,15 +40,7 @@ namespace Silanis.ESL.SDK
 		/// <returns>The SDK sender type.</returns>
 		public Silanis.ESL.SDK.SenderType ToSDKSenderType()
 		{
-			switch (apiSenderType)
-			{
-				case Silanis.ESL.API.SenderType.MANAGER:
-					return SenderType.MANAGER;
-				case Silanis.ESL.API.SenderType.REGULAR:
-					return SenderType.REGULAR;
-				default:
-                    throw new EslException(String.Format("Unable to decode the sender type {0}", apiSenderType), null);
-			}
+            return Silanis.ESL.SDK.SenderType.valueOf(apiSenderType);
 		}
     }
 }

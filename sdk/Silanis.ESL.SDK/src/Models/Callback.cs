@@ -10,19 +10,19 @@ namespace Silanis.ESL.API
 	{
 		
 		// Fields
-		private IList<CallbackEvent> _events = new List<CallbackEvent>();
+		private IList<string> _events = new List<string>();
 		
 		// Accessors
 		    
     [JsonProperty("events")]
-    public IList<CallbackEvent> Events
+    public IList<string> Events
     {
                 get
         {
             return _events;
         }
         }
-        public Callback AddEvent(CallbackEvent value)
+        public Callback AddEvent(string value)
     {
         if (value == null)
         {

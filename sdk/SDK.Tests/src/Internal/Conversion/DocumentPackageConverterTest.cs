@@ -80,7 +80,7 @@ namespace SDK.Tests
 			Assert.AreEqual(apiPackage1.EmailMessage, sdkPackage1.EmailMessage);
 			Assert.AreEqual(apiPackage1.Language, sdkPackage1.Language.ToString());
 			Assert.AreEqual(apiPackage1.Due, sdkPackage1.ExpiryDate);
-			Assert.AreEqual(apiPackage1.Status.ToString(), sdkPackage1.Status.ToString());
+			Assert.AreEqual(apiPackage1.Status, sdkPackage1.Status.getApiValue());
 		}
 
 		private Silanis.ESL.SDK.DocumentPackage CreateTypicalSDKDocumentPackage()
@@ -106,11 +106,11 @@ namespace SDK.Tests
 			apiPackage.Description = "API document package description";
 			apiPackage.Due = new DateTime?();
 			apiPackage.Name = "API package name";
-			apiPackage.Status = Silanis.ESL.API.PackageStatus.DRAFT;
+            apiPackage.Status = DocumentPackageStatus.DRAFT.getApiValue();
 
             Silanis.ESL.API.Message apiMessage = new Silanis.ESL.API.Message();
             apiMessage.Content = "opt-out reason";
-            apiMessage.Status = Silanis.ESL.API.MessageStatus.NEW;
+            apiMessage.Status = Silanis.ESL.SDK.MessageStatus.NEW.getApiValue();
             apiMessage.Created = DateTime.Now;
             User fromUser = new User();
             fromUser.FirstName = "John";

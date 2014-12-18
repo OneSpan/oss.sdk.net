@@ -19,7 +19,7 @@ namespace Silanis.ESL.SDK
         
         internal string CreateTemplateFromPackage(string originalPackageId, Silanis.ESL.API.Package delta)
         {
-            delta.Type = Silanis.ESL.API.BasePackageType.TEMPLATE;
+            delta.Type = "TEMPLATE";
             string path = urls.UrlFor (UrlTemplate.CLONE_PACKAGE_PATH).Replace("{packageId}", originalPackageId)
                 .Build ();
             try {

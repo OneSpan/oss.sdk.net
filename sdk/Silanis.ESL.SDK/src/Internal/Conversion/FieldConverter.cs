@@ -52,11 +52,11 @@ namespace Silanis.ESL.SDK
 
             if (sdkField.Style == FieldStyle.BOUND_QRCODE)
             {
-                result.Type = Silanis.ESL.API.FieldType.IMAGE;
+                result.Type = new FieldTypeConverter(FieldType.IMAGE).ToAPIFieldType();
             }
             else
             {
-                result.Type = Silanis.ESL.API.FieldType.INPUT;
+                result.Type = new FieldTypeConverter(FieldType.INPUT).ToAPIFieldType();
             }
 
             result.Subtype = new FieldStyleAndSubTypeConverter(sdkField.Style).ToAPIFieldSubtype();

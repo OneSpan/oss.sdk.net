@@ -11,24 +11,24 @@ namespace Silanis.ESL.SDK
 
         public static string Binding(FieldStyle style)
         {
-            switch (style)
+            switch (style.getSdkValue())
             {
-                case FieldStyle.BOUND_DATE:
+                case "BOUND_DATE":
                     return BINDING_DATE;
-                case FieldStyle.BOUND_NAME:
+                case "BOUND_NAME":
                     return BINDING_NAME;
-                case FieldStyle.BOUND_TITLE:
+                case "BOUND_TITLE":
                     return BINDING_TITLE;
-                case FieldStyle.BOUND_COMPANY:
+                case "BOUND_COMPANY":
                     return BINDING_COMPANY;
-                case FieldStyle.BOUND_QRCODE:
-                case FieldStyle.UNBOUND_CUSTOM_FIELD:
-                case FieldStyle.UNBOUND_TEXT_FIELD:
-                case FieldStyle.UNBOUND_CHECK_BOX:
-                case FieldStyle.UNBOUND_RADIO_BUTTON:
-                case FieldStyle.DROP_LIST:
-                case FieldStyle.TEXT_AREA:
-                case FieldStyle.LABEL:
+                case "BOUND_QRCODE":
+                case "UNBOUND_CUSTOM_FIELD":
+                case "UNBOUND_TEXT_FIELD":
+                case "UNBOUND_CHECK_BOX":
+                case "UNBOUND_RADIO_BUTTON":
+                case "DROP_LIST":
+                case "TEXT_AREA":
+                case "LABEL":
                 default:
                     return null;
             }

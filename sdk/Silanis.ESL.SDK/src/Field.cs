@@ -4,6 +4,10 @@ namespace Silanis.ESL.SDK
 {
 	public class Field
 	{
+
+        public Field(){
+            Style = FieldStyle.BOUND_DATE;
+        }
 		public string Id {
 			get;
 			set;

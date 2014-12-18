@@ -12,7 +12,7 @@ namespace Silanis.ESL.SDK
         private string language;
         private string phoneNumber;
         private string title;
-        private SenderStatus? status = SenderStatus.INVITED;
+        private SenderStatus status = SenderStatus.INVITED;
 
         private AccountMemberBuilder( string email )
         {
@@ -79,7 +79,7 @@ namespace Silanis.ESL.SDK
             result.Language = language;
             result.PhoneNumber = phoneNumber;
             result.Title = title;
-            if ( status.HasValue ) result.Status = status.Value;
+            if ( null!=status ) result.Status = status;
 
             return result;
         }

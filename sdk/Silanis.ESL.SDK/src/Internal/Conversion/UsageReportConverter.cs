@@ -56,8 +56,9 @@ namespace Silanis.ESL.SDK
 
             IDictionary<UsageReportCategory, int> categoryCount = new Dictionary<UsageReportCategory, int>();
             foreach (KeyValuePair<string, object> entry in apiSenderUsageReport.Packages)
-            {
-                UsageReportCategory usageReportCategory = (UsageReportCategory)Enum.Parse(typeof(UsageReportCategory), entry.Key.ToUpper());
+            { 
+
+                UsageReportCategory usageReportCategory = UsageReportCategory.valueOf(entry.Key.ToUpper());
                 categoryCount.Add(usageReportCategory, Convert.ToInt32(entry.Value));
             }
             sdkSenderUsageReport.CountByUsageReportCategory = categoryCount;
