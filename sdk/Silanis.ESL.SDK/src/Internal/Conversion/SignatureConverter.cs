@@ -139,6 +139,8 @@ namespace Silanis.ESL.SDK
                     return Silanis.ESL.API.FieldSubtype.CAPTURE;
                     case SignatureStyle.INITIALS:
                     return Silanis.ESL.API.FieldSubtype.INITIALS;
+                    case SignatureStyle.MOBILE_CAPTURE:
+                    return Silanis.ESL.API.FieldSubtype.MOBILE_CAPTURE;
                     case SignatureStyle.ACCEPTANCE:
                     return Silanis.ESL.API.FieldSubtype.FULLNAME;
                     default:

@@ -41,6 +41,11 @@ namespace Silanis.ESL.SDK
 			package.Due = sdkPackage.ExpiryDate;
 			package.Autocomplete = sdkPackage.Autocomplete;
 
+            if (sdkPackage.Id != null)
+            {
+                package.Id = sdkPackage.Id.ToString();
+            }
+
 			if (sdkPackage.Description != null)
 			{
 				package.Description = sdkPackage.Description;
@@ -164,6 +169,8 @@ namespace Silanis.ESL.SDK
                         senderInfo.LastName = signer.LastName;
                         senderInfo.Title = signer.Title;
                         senderInfo.Company = signer.Company;
+                        senderInfo.Email = signer.Email;
+
                         packageBuilder.WithSenderInfo(senderInfo);
                     }
                 }

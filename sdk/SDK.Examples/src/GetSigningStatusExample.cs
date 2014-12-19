@@ -37,13 +37,13 @@ namespace SDK.Examples
 					               		.AtPosition(500, 100)))
 					.Build ();
 
-			PackageId id = eslClient.CreatePackage (package);
+            PackageId id = eslClient.CreatePackage (package);
 
-			SigningStatus status = eslClient.GetSigningStatus( id, null, null );
+            SigningStatus status = eslClient.GetSigningStatus( id, null, null );
 
-			eslClient.SendPackage(id);
+            eslClient.SendPackage(id);
 
-			status = eslClient.GetSigningStatus( id, null, null );
+            status = eslClient.GetSigningStatus( id, null, null );
             Console.WriteLine("Signing status = " + status);
 		}
 	}

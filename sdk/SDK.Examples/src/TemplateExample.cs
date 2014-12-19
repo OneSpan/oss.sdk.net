@@ -13,8 +13,26 @@ namespace SDK.Examples
             new TemplateExample(Props.GetInstance()).Run();
         }
 
-        private string email1;
-        private string email2;
+        public string email1;
+        public string email2;
+
+        public PackageId templateId;
+        public PackageId instantiatedTemplateId;
+
+        public readonly string UPDATED_TEMPLATE_NAME = "Modified name";
+        public readonly string UPDATED_TEMPLATE_DESCRIPTION = "Modified description";
+
+        public readonly string SIGNER1_FIRST_NAME = "John1";
+        public readonly string SIGNER1_LAST_NAME = "Smith1";
+        public readonly string SIGNER1_TITLE = "Managing Director1";
+        public readonly string SIGNER1_COMPANY = "Acme Inc.1";
+
+        public readonly string SIGNER2_FIRST_NAME = "John2";
+        public readonly string SIGNER2_LAST_NAME = "Smith2";
+        public readonly string SIGNER2_TITLE = "Managing Director2";
+        public readonly string SIGNER2_COMPANY = "Acme Inc.2";
+
+        public readonly string PACKAGE_NAME = "Package From Template";
 
         public TemplateExample(Props props) : this(props.Get("api.url"), props.Get("api.key"), props.Get("1.email"), props.Get("2.email") )
         {
@@ -38,17 +56,27 @@ namespace SDK.Examples
                 PackageBuilder.NewPackageNamed("CreateTemplateFromPackageExample: " + DateTime.Now)
                 .DescribedAs("This is a package created using the e-SignLive SDK")
                 .WithEmailMessage("This message should be delivered to all signers")
-                .WithSigner(SignerBuilder.NewSignerPlaceholder(new Placeholder("PlaceholderId1")))
-                .WithSigner(SignerBuilder.NewSignerPlaceholder(new Placeholder("PlaceholderId2")))
+                    .WithSigner( SignerBuilder.NewSignerWithEmail( email1 )
+                                .WithFirstName(SIGNER1_FIRST_NAME)
+                                .WithLastName(SIGNER1_LAST_NAME)
+                                .WithTitle(SIGNER1_TITLE)
+                                .WithCompany(SIGNER1_COMPANY)
+                                )
+                    .WithSigner( SignerBuilder.NewSignerWithEmail( email2 )
+                                .WithFirstName(SIGNER2_FIRST_NAME)
+                                .WithLastName(SIGNER2_LAST_NAME)
+                                .WithTitle(SIGNER2_TITLE)
+                                .WithCompany(SIGNER2_COMPANY)
+                                )
 				.WithDocument(document)
                 .Build();
 
-			PackageId templateId = eslClient.CreateTemplate(superDuperPackage);
+			templateId = eslClient.CreateTemplate(superDuperPackage);
 
 			superDuperPackage.Id = templateId;
 
-			superDuperPackage.Description = "Modified description";
-			superDuperPackage.Name = "Modified name";
+            superDuperPackage.Name = UPDATED_TEMPLATE_NAME;
+            superDuperPackage.Description = UPDATED_TEMPLATE_DESCRIPTION;
 			superDuperPackage.Autocomplete = false;
 
 			eslClient.TemplateService.Update(superDuperPackage);
@@ -60,23 +88,11 @@ namespace SDK.Examples
 
 			Console.WriteLine("Template {0} updated", templateId);
 
-            PackageId instantiatedTemplate = eslClient.CreatePackageFromTemplate(templateId,
-                                             PackageBuilder.NewPackageNamed("Package From Template")
-                                             .WithSigner( SignerBuilder.NewSignerWithEmail( email1 )
-                                                                        .WithFirstName("John1")
-                                                                        .WithLastName("Smith1")
-                                                                        .WithTitle("Managing Director1")
-                                                                        .WithCompany("Acme Inc.1")
-                                                                        .Replacing( new Placeholder( "PlaceholderId1" ) ) )
-                                             .WithSigner( SignerBuilder.NewSignerWithEmail( email2 )
-                                                                        .WithFirstName("John2")
-                                                                        .WithLastName("Smith2")
-                                                                        .WithTitle("Managing Director2")
-                                                                        .WithCompany("Acme Inc.2")
-                                                                        .Replacing( new Placeholder( "PlaceholderId2" ) ) )
+            instantiatedTemplateId = eslClient.CreatePackageFromTemplate(templateId,
+                                        PackageBuilder.NewPackageNamed(PACKAGE_NAME)
                                              .Build() );
                                              
-			Console.Out.WriteLine("Package from template = " + instantiatedTemplate.Id);
+			Console.Out.WriteLine("Package from template = " + instantiatedTemplateId.Id);
         }
     }
 }

@@ -64,6 +64,7 @@ namespace SDK.Tests
             Assert.AreEqual(apiPackage1.Messages[0].To[0].FirstName, sdkPackage1.Messages[0].To["email2@email.com"].FirstName);
             Assert.AreEqual(apiPackage1.Messages[0].To[0].LastName, sdkPackage1.Messages[0].To["email2@email.com"].LastName);
             Assert.AreEqual(apiPackage1.Messages[0].To[0].Email, sdkPackage1.Messages[0].To["email2@email.com"].Email);
+            Assert.AreEqual(apiPackage1.Sender.Email, sdkPackage1.SenderInfo.Email);
         }
 
 		[Test()]
@@ -73,9 +74,9 @@ namespace SDK.Tests
 			apiPackage1 = new DocumentPackageConverter(sdkPackage1).ToAPIPackage();
 
 			Assert.IsNotNull(apiPackage1);
+            Assert.AreEqual(apiPackage1.Id, sdkPackage1.Id.ToString());
 			Assert.AreEqual(apiPackage1.Name, sdkPackage1.Name);
 			Assert.AreEqual(apiPackage1.Description, sdkPackage1.Description);
-			Assert.AreEqual(apiPackage1.Id, sdkPackage1.Id);
 			Assert.AreEqual(apiPackage1.EmailMessage, sdkPackage1.EmailMessage);
 			Assert.AreEqual(apiPackage1.Language, sdkPackage1.Language.ToString());
 			Assert.AreEqual(apiPackage1.Due, sdkPackage1.ExpiryDate);
@@ -85,6 +86,7 @@ namespace SDK.Tests
 		private Silanis.ESL.SDK.DocumentPackage CreateTypicalSDKDocumentPackage()
 		{
 			Silanis.ESL.SDK.DocumentPackage sdkDocumentPackage = PackageBuilder.NewPackageNamed("SDK Package Name")
+                .WithID(new PackageId("packageId"))
 				.DescribedAs("typical description")
 				.WithEmailMessage("typical email message")
 				.WithLanguage(CultureInfo.GetCultureInfo("en"))
@@ -121,6 +123,10 @@ namespace SDK.Tests
             toUser.LastName = "Galant";
             toUser.Email = "email2@email.com";
             apiMessage.AddTo(toUser);
+
+            Silanis.ESL.API.Sender sender = new Silanis.ESL.API.Sender();
+            sender.Email = "sender@email.com";
+            apiPackage.Sender = sender;
 
 			return apiPackage;
 		}
