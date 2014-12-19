@@ -13,8 +13,6 @@ namespace SDK.Tests
 		private Silanis.ESL.API.Role apiRole = null;
 		private SignerConverter converter = null;
 
-        private const String SIGNER_STATUS_NONE = "NONE";
-
 		[Test()]
 		public void ConvertAPIToAPI()
 		{
@@ -73,8 +71,6 @@ namespace SDK.Tests
 			Assert.AreEqual(apiRole.Id, sdkSigner1.Id);
 			Assert.AreEqual(apiRole.Name, sdkSigner1.Id);
 			Assert.AreEqual(apiRole.EmailMessage.Content, sdkSigner1.Message);
-
-            Assert.AreEqual(apiRole.Signers[0].Status.ToString(), sdkSigner1.Status);
 
 			string attachmentName = apiRole.AttachmentRequirements[0].Name;
 			Assert.AreEqual(apiRole.AttachmentRequirements[0].Name, sdkSigner1.Attachments[attachmentName].Name);
@@ -142,7 +138,7 @@ namespace SDK.Tests
 
 		private Silanis.ESL.SDK.Signer CreateTypicalSDKSigner()
 		{
-            Silanis.ESL.SDK.Signer signer = SignerBuilder.NewSignerWithEmail("abc@test.com")
+            return SignerBuilder.NewSignerWithEmail("abc@test.com")
 				.CanChangeSigner()
 				.DeliverSignedDocumentsByEmail()
 				.Lock()
@@ -158,16 +154,25 @@ namespace SDK.Tests
 					.IsRequiredAttachment()
 					.Build())
 				.Build();
-
-            signer.Status = SIGNER_STATUS_NONE;
-            return signer;
 		}
 
 		private Silanis.ESL.API.Role CreateTypicalAPIRole()
 		{
 			Silanis.ESL.API.Role apiRole = new Silanis.ESL.API.Role();
 
-            Silanis.ESL.API.Signer apiSigner = CreateSigner();
+            Silanis.ESL.API.Signer apiSigner = new Silanis.ESL.API.Signer();
+            apiSigner.Email = "test@abc.com";
+            apiSigner.FirstName = "Signer first name";
+            apiSigner.LastName = "Signer last name";
+            apiSigner.Company = "ABC Inc.";
+            apiSigner.Title = "Doctor";
+
+            Silanis.ESL.API.Delivery delivery = new Silanis.ESL.API.Delivery();
+            delivery.Download = true;
+            delivery.Email = true;
+
+            apiSigner.Delivery = delivery;
+            apiSigner.Id = "1";
 
 			apiRole.AddSigner(apiSigner);
 			apiRole.Id = "3";
@@ -189,27 +194,6 @@ namespace SDK.Tests
 
 			return apiRole;
 		}
-
-        private Silanis.ESL.API.Signer CreateSigner()
-        {
-            Silanis.ESL.API.Signer apiSigner = new Silanis.ESL.API.Signer();
-            apiSigner.Email = "test@abc.com";
-            apiSigner.FirstName = "Signer first name";
-            apiSigner.LastName = "Signer last name";
-            apiSigner.Company = "ABC Inc.";
-            apiSigner.Title = "Doctor";
-
-            Silanis.ESL.API.Delivery delivery = new Silanis.ESL.API.Delivery();
-            delivery.Download = true;
-            delivery.Email = true;
-
-            apiSigner.Delivery = delivery;
-            apiSigner.Id = "1";
-
-            apiSigner.Status = Silanis.ESL.API.SignerStatus.NONE;
-
-            return apiSigner;
-        }
 
 	}
 }

@@ -115,7 +115,6 @@ namespace Silanis.ESL.SDK.Services
 			string path = template.UrlFor (UrlTemplate.PACKAGE_ID_PATH)
 				.Replace ("{packageId}", packageId.Id)
 				.Build ();
-            Console.WriteLine(path);
 
 			try {
                 string response = restClient.Get(path);
@@ -861,7 +860,6 @@ namespace Silanis.ESL.SDK.Services
 			for (int i = 0; i < stringChars.Length; i++) {
 				stringChars [i] = chars [random.Next (chars.Length)];
 			}
-
 
 			return new String (stringChars);
 		}        

@@ -25,7 +25,7 @@ namespace SDK.Examples
 
         override public void Execute()
         {
-            DocumentPackage package = PackageBuilder.NewPackageNamed ("GetSigningStatusExample " + DateTime.Now)
+            DocumentPackage package = PackageBuilder.NewPackageNamed ("C# GetSigningStatusExample " + DateTime.Now)
 					.DescribedAs ("This is a new package")
 					.WithSigner(SignerBuilder.NewSignerWithEmail(email1)
 					            .WithFirstName("John")
@@ -37,13 +37,13 @@ namespace SDK.Examples
 					               		.AtPosition(500, 100)))
 					.Build ();
 
-            packageId = eslClient.CreatePackage (package);
+            PackageId id = eslClient.CreatePackage (package);
 
-            SigningStatus status = eslClient.GetSigningStatus( packageId, null, null );
+            SigningStatus status = eslClient.GetSigningStatus( id, null, null );
 
-            eslClient.SendPackage(packageId);
+            eslClient.SendPackage(id);
 
-            status = eslClient.GetSigningStatus( packageId, null, null );
+            status = eslClient.GetSigningStatus( id, null, null );
             Console.WriteLine("Signing status = " + status);
 		}
 	}

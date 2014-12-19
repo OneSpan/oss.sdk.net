@@ -147,11 +147,6 @@ namespace Silanis.ESL.SDK
 			set;
 		}
 
-        public String Status
-        {
-            get; set;
-        }
-
 		public IDictionary<string, AttachmentRequirement> Attachments
 		{
 			get;

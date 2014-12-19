@@ -350,7 +350,6 @@
     <Compile Include="src\KnowledgeBasedAuthenticationStatus.cs" />
     <Compile Include="src\Internal\Conversion\KnowledgeBasedAuthenticationStatusConverter.cs" />
     <Compile Include="src\Models\KnowledgeBasedAuthentication.cs" />
-    <Compile Include="src\Models\SignerStatus.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSHARP.Targets" />
   <ProjectExtensions>

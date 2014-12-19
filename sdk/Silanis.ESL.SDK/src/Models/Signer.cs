@@ -208,13 +208,5 @@ namespace Silanis.ESL.API
         return this;
     }
 
-    [JsonProperty("status")]
-    public SignerStatus Status
-    {
-        get; set;
-    }
-    
-		
-	
 	}
 }
