@@ -14,7 +14,7 @@ namespace Silanis.ESL.API
 		// Accessors
 		    
     [JsonProperty("cycle")]
-    public Cycle Cycle
+        public string Cycle
     {
                 get; set;
         }
@@ -28,14 +28,14 @@ namespace Silanis.ESL.API
     
 		    
     [JsonProperty("scope")]
-    public Scope Scope
+    public string Scope
     {
                 get; set;
         }
     
 		    
     [JsonProperty("target")]
-    public Target Target
+    public string Target
     {
                 get; set;
         }

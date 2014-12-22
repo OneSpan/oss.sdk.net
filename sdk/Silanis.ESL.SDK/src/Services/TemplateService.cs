@@ -30,7 +30,7 @@ namespace Silanis.ESL.SDK.Services
             
 		internal PackageId CreateTemplate(Package template)
 		{
-            template.Type = BasePackageType.TEMPLATE;
+            template.Type = "TEMPLATE";
             string packageId = apiClient.CreateTemplate(template);
             return new PackageId(packageId);
 		}
@@ -43,7 +43,7 @@ namespace Silanis.ESL.SDK.Services
 			}
 
 			Silanis.ESL.API.Package apiTemplate = new DocumentPackageConverter(template).ToAPIPackage();
-			apiTemplate.Type = BasePackageType.TEMPLATE;
+            apiTemplate.Type = "TEMPLATE";
             apiClient.Update(apiTemplate);
 		}
 

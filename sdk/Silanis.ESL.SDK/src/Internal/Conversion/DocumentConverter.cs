@@ -45,7 +45,7 @@ namespace Silanis.ESL.SDK
             foreach (Silanis.ESL.API.Field apiField in apiDocument.Fields)
             {
                 Field sdkField = new FieldConverter(apiField).ToSDKField();
-                if (apiField.Subtype != FieldSubtype.QRCODE)
+                if (!FieldStyle.BOUND_QRCODE.getApiValue().Equals(apiField.Subtype))
                 {
                     documentBuilder.WithInjectedField(sdkField);
                 }

@@ -1,13 +1,68 @@
 using System;
+using System.Collections.Generic;
+using System.Reflection;
+using log4net;
 
 namespace Silanis.ESL.SDK
 {
-    public enum TextAnchorPosition
+    public class TextAnchorPosition : EslEnumeration
     {
-        TOPLEFT,
-        TOPRIGHT,
-        BOTTOMLEFT,
-        BOTTOMRIGHT
+        private static ILog log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
+
+        public static TextAnchorPosition TOPLEFT = new TextAnchorPosition("TOPLEFT", "TOPLEFT");
+        public static TextAnchorPosition TOPRIGHT = new TextAnchorPosition("TOPRIGHT", "TOPRIGHT");
+        public static TextAnchorPosition BOTTOMLEFT = new TextAnchorPosition("BOTTOMLEFT", "BOTTOMLEFT");
+        public static TextAnchorPosition BOTTOMRIGHT = new TextAnchorPosition("BOTTOMRIGHT", "BOTTOMRIGHT");
+        private static Dictionary<string,TextAnchorPosition> allTextAnchorPositions = new Dictionary<string,TextAnchorPosition>();
+
+        static TextAnchorPosition(){
+            allTextAnchorPositions.Add(TOPLEFT.getApiValue(), TextAnchorPosition.TOPLEFT);
+            allTextAnchorPositions.Add(TOPRIGHT.getApiValue(), TextAnchorPosition.TOPRIGHT);
+            allTextAnchorPositions.Add(BOTTOMLEFT.getApiValue(), TextAnchorPosition.BOTTOMLEFT);
+            allTextAnchorPositions.Add(BOTTOMRIGHT.getApiValue(), TextAnchorPosition.BOTTOMRIGHT);
+        }
+
+        private TextAnchorPosition(string apiValue, string sdkValue):base(apiValue,sdkValue) {           
+        }
+
+        internal static TextAnchorPosition valueOf (String apiValue){
+
+            if (!String.IsNullOrEmpty(apiValue) && allTextAnchorPositions.ContainsKey(apiValue))
+            {
+                return allTextAnchorPositions[apiValue];
+            }
+            log.WarnFormat("Unknown API TextAnchorPosition {0}. The upgrade is required.", apiValue);
+            return new TextAnchorPosition(apiValue, "UNRECOGNIZED");
+        }
+
+        public static string[] GetNames(){
+            string[] names = new string[allTextAnchorPositions.Count];
+            int i = 0;
+            foreach(TextAnchorPosition authenticationMethod in allTextAnchorPositions.Values){
+                names[i] = authenticationMethod.GetName();
+                i++;
+            }
+            return names;
+        }
+        public static TextAnchorPosition parse(string value){
+
+            if (null == value)
+            {
+                throw new ArgumentNullException("value is null");
+            }
+
+            if (value.Length == 0 || value.Trim().Length==0)
+            {
+                throw new ArgumentException("value is either an empty string or only contains white space");
+            }
+            foreach(TextAnchorPosition textAnchorPosition in allTextAnchorPositions.Values){
+                if (String.Equals(textAnchorPosition.GetName(), value))
+                {
+                    return textAnchorPosition;
+                }
+            }
+            throw new ArgumentException("value is a name, but not one of the named constants defined for the TextAnchorPosition");
+        }
     }
 }
 

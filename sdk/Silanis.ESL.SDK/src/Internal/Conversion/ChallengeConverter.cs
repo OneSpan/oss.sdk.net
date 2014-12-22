@@ -48,7 +48,8 @@ namespace Silanis.ESL.SDK
                     result.MaskInput = false;
                     break;
                 default:
-                    throw new EslException("Invalid SDK Challenge.MaskOption enum", null);
+                    result.MaskInput = true;
+                    break;
             }
 
             return result;

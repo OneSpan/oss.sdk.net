@@ -159,7 +159,7 @@ namespace Silanis.ESL.SDK
                     packageBuilder.WithSigner(new SignerConverter(role).ToSDKSigner());
 
                     // The custom sender information is stored in the role.signer object.
-                    if (role.Type == Silanis.ESL.API.RoleType.SENDER)
+                    if ("SENDER".Equals(role.Type))
                     {
                         // Override sender info with the customized ones.
                         Silanis.ESL.SDK.SenderInfo senderInfo = new Silanis.ESL.SDK.SenderInfo();

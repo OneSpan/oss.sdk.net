@@ -14,6 +14,11 @@ namespace Silanis.ESL.API
 		private IList<ProfessionalIdentityField> _professionalIdentityFields = new List<ProfessionalIdentityField>();
 		private IList<String> _specialTypes = new List<String>();
 		private IList<UserCustomField> _userCustomFields = new List<UserCustomField>();
+
+        internal Sender(){
+            Status = "INVITED";
+            Type = "REGULAR";
+        }
 		
 		// Accessors
 		    
@@ -190,7 +195,7 @@ namespace Silanis.ESL.API
     
 		    
     [JsonProperty("status")]
-    public SenderStatus Status
+    public string Status
     {
                 get; set;
         }
@@ -204,7 +209,7 @@ namespace Silanis.ESL.API
     
 		    
     [JsonProperty("type")]
-    public SenderType Type
+    public string Type
     {
                 get; set;
         }

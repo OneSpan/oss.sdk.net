@@ -15,6 +15,7 @@ namespace Silanis.ESL.SDK
             Signers = signers;
             Documents = documents;
             Placeholders = placeholders;
+            Status = DocumentPackageStatus.DRAFT;
         }
 
         public PackageId Id

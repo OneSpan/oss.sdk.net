@@ -14,8 +14,7 @@ namespace SDK.Tests
         [Test]
         public void ToSDKFromCapture()
         {
-            Silanis.ESL.API.FieldSubtype api = Silanis.ESL.API.FieldSubtype.CAPTURE;
-            SignatureStyleConverter converter = new SignatureStyleConverter(api);
+            SignatureStyleConverter converter = new SignatureStyleConverter(SignatureStyle.HAND_DRAWN.getApiValue());
             SignatureStyle sdk = converter.ToSDKSignatureStyle();
 
             Assert.IsNotNull(sdk);
@@ -25,8 +24,7 @@ namespace SDK.Tests
         [Test]
         public void ToSDKFromFullName()
         {
-            Silanis.ESL.API.FieldSubtype api = Silanis.ESL.API.FieldSubtype.FULLNAME;
-            SignatureStyleConverter converter = new SignatureStyleConverter(api);
+            SignatureStyleConverter converter = new SignatureStyleConverter(SignatureStyle.FULL_NAME.getApiValue());
             SignatureStyle sdk = converter.ToSDKSignatureStyle();
 
             Assert.IsNotNull(sdk);
@@ -36,8 +34,7 @@ namespace SDK.Tests
         [Test]
         public void ToSDKFromInitials()
         {
-            Silanis.ESL.API.FieldSubtype api = Silanis.ESL.API.FieldSubtype.INITIALS;
-            SignatureStyleConverter converter = new SignatureStyleConverter(api);
+            SignatureStyleConverter converter = new SignatureStyleConverter(SignatureStyle.INITIALS.getApiValue());
             SignatureStyle sdk = converter.ToSDKSignatureStyle();
 
             Assert.IsNotNull(sdk);
@@ -45,113 +42,103 @@ namespace SDK.Tests
         }
         
         [Test]
-        [ExpectedException( typeof( EslException ) )]
+
         public void ToSDKFromCheckbox()
         {
-            Silanis.ESL.API.FieldSubtype api = Silanis.ESL.API.FieldSubtype.CHECKBOX;
-            SignatureStyleConverter converter = new SignatureStyleConverter(api);
+            SignatureStyleConverter converter = new SignatureStyleConverter(FieldStyle.UNBOUND_CHECK_BOX.getApiValue());
             SignatureStyle sdk = converter.ToSDKSignatureStyle();
 
-            Assert.IsNull(sdk);
+            Assert.AreEqual(sdk.getApiValue(), FieldStyle.UNBOUND_CHECK_BOX.getApiValue());
         }
 
         [Test]
-        [ExpectedException( typeof( EslException ) )]
+
         public void ToSDKFromCustomField()
         {
-            Silanis.ESL.API.FieldSubtype api = Silanis.ESL.API.FieldSubtype.CUSTOMFIELD;
-            SignatureStyleConverter converter = new SignatureStyleConverter(api);
+            SignatureStyleConverter converter = new SignatureStyleConverter(FieldStyle.UNBOUND_CUSTOM_FIELD.getApiValue());
             SignatureStyle sdk = converter.ToSDKSignatureStyle();
 
-            Assert.IsNull(sdk);
+            Assert.AreEqual(sdk.getApiValue(), FieldStyle.UNBOUND_CUSTOM_FIELD.getApiValue());
         }
 
         [Test]
-        [ExpectedException( typeof( EslException ) )]
+
         public void ToSDKFromDate()
         {
-            Silanis.ESL.API.FieldSubtype api = Silanis.ESL.API.FieldSubtype.DATE;
-            SignatureStyleConverter converter = new SignatureStyleConverter(api);
+            SignatureStyleConverter converter = new SignatureStyleConverter("DATE");
             SignatureStyle sdk = converter.ToSDKSignatureStyle();
 
-            Assert.IsNull(sdk);
+            Assert.AreEqual(sdk.getApiValue(), "DATE");
         }
 
         [Test]
-        [ExpectedException( typeof( EslException ) )]
+
         public void ToSDKFromLabel()
         {
-            Silanis.ESL.API.FieldSubtype api = Silanis.ESL.API.FieldSubtype.LABEL;
-            SignatureStyleConverter converter = new SignatureStyleConverter(api);
+            SignatureStyleConverter converter = new SignatureStyleConverter(FieldStyle.LABEL.getApiValue());
             SignatureStyle sdk = converter.ToSDKSignatureStyle();
 
-            Assert.IsNull(sdk);
+            Assert.AreEqual(sdk.getApiValue(), FieldStyle.LABEL.getApiValue());
         }
 
         [Test]
-        [ExpectedException( typeof( EslException ) )]
+
         public void ToSDKFromList()
         {
-            Silanis.ESL.API.FieldSubtype api = Silanis.ESL.API.FieldSubtype.LIST;
-            SignatureStyleConverter converter = new SignatureStyleConverter(api);
+            SignatureStyleConverter converter = new SignatureStyleConverter(FieldStyle.DROP_LIST.getApiValue());
             SignatureStyle sdk = converter.ToSDKSignatureStyle();
 
-            Assert.IsNull(sdk);
+            Assert.AreEqual(sdk.getApiValue(), FieldStyle.DROP_LIST.getApiValue());
         }
 
         [Test]
-        [ExpectedException( typeof( EslException ) )]
+
         public void ToSDKFromNotarize()
         {
-            Silanis.ESL.API.FieldSubtype api = Silanis.ESL.API.FieldSubtype.SEAL;
-            SignatureStyleConverter converter = new SignatureStyleConverter(api);
+            SignatureStyleConverter converter = new SignatureStyleConverter(FieldStyle.SEAL.getApiValue());
             SignatureStyle sdk = converter.ToSDKSignatureStyle();
 
-            Assert.IsNull(sdk);
+            Assert.AreEqual(sdk.getApiValue(), FieldStyle.SEAL.getApiValue());
         }
 
         [Test]
-        [ExpectedException( typeof( EslException ) )]
+
         public void ToSDKFromQRCode()
         {
-            Silanis.ESL.API.FieldSubtype api = Silanis.ESL.API.FieldSubtype.QRCODE;
-            SignatureStyleConverter converter = new SignatureStyleConverter(api);
+            SignatureStyleConverter converter = new SignatureStyleConverter(FieldStyle.BOUND_QRCODE.getApiValue());
             SignatureStyle sdk = converter.ToSDKSignatureStyle();
 
-            Assert.IsNull(sdk);
+            Assert.AreEqual(sdk.getApiValue(), FieldStyle.BOUND_QRCODE.getApiValue());
         }
 
         [Test]
-        [ExpectedException( typeof( EslException ) )]
+
         public void ToSDKFromRadio()
         {
-            Silanis.ESL.API.FieldSubtype api = Silanis.ESL.API.FieldSubtype.RADIO;
-            SignatureStyleConverter converter = new SignatureStyleConverter(api);
+            SignatureStyleConverter converter = new SignatureStyleConverter(FieldStyle.UNBOUND_RADIO_BUTTON.getApiValue());
             SignatureStyle sdk = converter.ToSDKSignatureStyle();
 
-            Assert.IsNull(sdk);
+            Assert.AreEqual(sdk.getApiValue(), FieldStyle.UNBOUND_RADIO_BUTTON.getApiValue());
         }
 
         [Test]
-        [ExpectedException( typeof( EslException ) )]
+
         public void ToSDKFromTextArea()
         {
-            Silanis.ESL.API.FieldSubtype api = Silanis.ESL.API.FieldSubtype.TEXTAREA;
-            SignatureStyleConverter converter = new SignatureStyleConverter(api);
+            SignatureStyleConverter converter = new SignatureStyleConverter(FieldStyle.TEXT_AREA.getApiValue());
             SignatureStyle sdk = converter.ToSDKSignatureStyle();
 
-            Assert.IsNull(sdk);
+            Assert.AreEqual(sdk.getApiValue(), FieldStyle.TEXT_AREA.getApiValue());
         }
 
         [Test]
-        [ExpectedException( typeof( EslException ) )]
+
         public void ToSDKFromTextField()
         {
-            Silanis.ESL.API.FieldSubtype api = Silanis.ESL.API.FieldSubtype.TEXTFIELD;
-            SignatureStyleConverter converter = new SignatureStyleConverter(api);
+            SignatureStyleConverter converter = new SignatureStyleConverter(FieldStyle.UNBOUND_TEXT_FIELD.getApiValue());
             SignatureStyle sdk = converter.ToSDKSignatureStyle();
 
-            Assert.IsNull(sdk);
+            Assert.AreEqual(sdk.getApiValue(), FieldStyle.UNBOUND_TEXT_FIELD.getApiValue());
         }
     }
 }

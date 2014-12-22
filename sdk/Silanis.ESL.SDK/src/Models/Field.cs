@@ -8,6 +8,11 @@ namespace Silanis.ESL.API
 	
 	internal class Field
 	{
+
+        internal Field(){
+            Subtype = "FULLNAME";
+            Type = "SIGNATURE";
+        }
 		
 		// Fields
 		
@@ -77,7 +82,7 @@ namespace Silanis.ESL.API
     
 		    
     [JsonProperty("subtype")]
-    public FieldSubtype Subtype
+        public string Subtype
     {
                 get; set;
         }
@@ -91,7 +96,7 @@ namespace Silanis.ESL.API
     
 		    
     [JsonProperty("type")]
-    public FieldType Type
+    public string Type
     {
                 get; set;
         }

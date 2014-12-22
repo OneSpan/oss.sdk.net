@@ -187,7 +187,7 @@ namespace SDK.Tests
 			Silanis.ESL.API.AttachmentRequirement attachmentRequirement = new Silanis.ESL.API.AttachmentRequirement();
 			attachmentRequirement.Name = "Driver's license";
 			attachmentRequirement.Description = "Please upload your scanned driver's license.";
-			attachmentRequirement.Status = Silanis.ESL.API.RequirementStatus.INCOMPLETE;
+            attachmentRequirement.Status = Silanis.ESL.SDK.RequirementStatus.INCOMPLETE.getApiValue();
 			attachmentRequirement.Required = true;
 			attachmentRequirement.Comment = "Attachment was not uploaded";
 			apiRole.AddAttachmentRequirement(attachmentRequirement);

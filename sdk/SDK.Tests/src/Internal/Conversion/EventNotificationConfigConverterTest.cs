@@ -68,9 +68,9 @@ namespace SDK.Tests
 			Assert.IsNotNull(sdkEventNotificationConfig1);
 			Assert.AreEqual(sdkEventNotificationConfig1.Url, apiCallback1.Url);
 			Assert.AreEqual(sdkEventNotificationConfig1.NotificationEvents.Count, 3);
-			Assert.AreEqual(sdkEventNotificationConfig1.NotificationEvents[0].ToString(), apiCallback1.Events[0].ToString());
-			Assert.AreEqual(sdkEventNotificationConfig1.NotificationEvents[1].ToString(), apiCallback1.Events[1].ToString());
-			Assert.AreEqual(sdkEventNotificationConfig1.NotificationEvents[2].ToString(), apiCallback1.Events[2].ToString());
+            Assert.AreEqual(sdkEventNotificationConfig1.NotificationEvents[0].getApiValue(), apiCallback1.Events[0]);
+            Assert.AreEqual(sdkEventNotificationConfig1.NotificationEvents[1].getApiValue(), apiCallback1.Events[1]);
+            Assert.AreEqual(sdkEventNotificationConfig1.NotificationEvents[2].getApiValue(), apiCallback1.Events[2]);
 		}
 
 		
@@ -82,17 +82,17 @@ namespace SDK.Tests
 			Assert.IsNotNull(apiCallback1);
 			Assert.AreEqual(apiCallback1.Url, sdkEventNotificationConfig1.Url);
 			Assert.AreEqual(apiCallback1.Events.Count, 3);
-			Assert.AreEqual(apiCallback1.Events[0].ToString(), sdkEventNotificationConfig1.NotificationEvents[0].ToString());
-			Assert.AreEqual(apiCallback1.Events[1].ToString(), sdkEventNotificationConfig1.NotificationEvents[1].ToString());
-			Assert.AreEqual(apiCallback1.Events[2].ToString(), sdkEventNotificationConfig1.NotificationEvents[2].ToString());
+            Assert.AreEqual(apiCallback1.Events[0], sdkEventNotificationConfig1.NotificationEvents[0].getApiValue());
+            Assert.AreEqual(apiCallback1.Events[1], sdkEventNotificationConfig1.NotificationEvents[1].getApiValue());
+            Assert.AreEqual(apiCallback1.Events[2], sdkEventNotificationConfig1.NotificationEvents[2].getApiValue());
 		}
 
 		private Silanis.ESL.API.Callback CreateTypicalAPICallback() {
 			Callback callback = new Callback();
 			callback.Url = "callback url";
-			callback.AddEvent(CallbackEvent.DOCUMENT_SIGNED);
-			callback.AddEvent(CallbackEvent.PACKAGE_CREATE);
-			callback.AddEvent(CallbackEvent.PACKAGE_TRASH);
+            callback.AddEvent(NotificationEvent.DOCUMENT_SIGNED.getApiValue());
+            callback.AddEvent(NotificationEvent.PACKAGE_CREATE.getApiValue());
+            callback.AddEvent(NotificationEvent.PACKAGE_TRASH.getApiValue());
 
 			return callback;
 		}
