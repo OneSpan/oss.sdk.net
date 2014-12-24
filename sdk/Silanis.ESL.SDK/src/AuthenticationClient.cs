@@ -26,6 +26,10 @@ namespace Silanis.ESL.SDK
             return authenticationService.BuildRedirectToDesignerForSender(senderAuthenticationToken, packageId);
         }
 
+        public string BuildRedirectToPackageViewForSender(string senderAuthenticationToken, PackageId packageId) {
+            return authenticationService.BuildRedirectToPackageViewForSender(senderAuthenticationToken, packageId);
+        }
+
         public string GetSessionIdForSignerAuthenticationToken(string signerAuthenticationToken) {
             return authenticationService.GetSessionIdForSignerAuthenticationToken(signerAuthenticationToken);
         }
