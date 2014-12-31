@@ -14,7 +14,7 @@ namespace Silanis.ESL.SDK
         private string socialSecurityNumber;
         private string homePhoneNumber;
         private string driversLicenseNumber;
-        private Int32 timeAtAddress;
+        private Nullable<Int32> timeAtAddress;
         private Nullable<DateTime> dateOfBirth;
 
 

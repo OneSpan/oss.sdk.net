@@ -11,7 +11,7 @@ namespace Silanis.ESL.SDK
         private string city;
         private string province;
         private string postalCode;
-        private Int32 timeAtAddress;
+        private Nullable<Int32> timeAtAddress;
         private string driversLicenseNumber;
         private string socialInsuranceNumber;
         private string homePhoneNumber;
@@ -58,7 +58,7 @@ namespace Silanis.ESL.SDK
             return this;
         }
 
-        public SignerInformationForEquifaxCanadaBuilder WithTimeAtAddress(Int32 timeAtAddress)
+        public SignerInformationForEquifaxCanadaBuilder WithTimeAtAddress(Nullable<Int32> timeAtAddress)
         {   
             this.timeAtAddress = timeAtAddress;
             return this;

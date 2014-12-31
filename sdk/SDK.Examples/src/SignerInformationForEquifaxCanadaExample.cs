@@ -19,7 +19,7 @@ namespace SDK.Examples
         public readonly string CITY = "Montreal";
         public readonly string PROVINCE = "Quebec";
         public readonly string POSTAL_CODE = "A2A J8J";
-        public readonly Int32 TIME_AT_ADDRESS = 1;
+        public readonly Nullable<Int32> TIME_AT_ADDRESS = 1;
         public readonly string DRIVERS_LICENSE_NUMBER = "Driver's License Number";
         public readonly string SOCIAL_INSURANCE_NUMBER = "111-222-333-444";
         public readonly string HOME_PHONE_NUMBER = "1-900-873-8733";
