@@ -34,7 +34,7 @@ namespace SDK.Examples
             Assert.AreEqual(signerInformationForEquifaxUSA.HomePhoneNumber, example.HOME_PHONE_NUMBER);
             Assert.AreEqual(signerInformationForEquifaxUSA.DateOfBirth, example.DATE_OF_BIRTH);
             Assert.AreEqual(signerInformationForEquifaxUSA.DriversLicenseNumber, example.DRIVERS_LICENSE_NUMBER);
-//            Assert.AreEqual(signerInformationForEquifaxUSA.TimeAtAddress, example.TIME_AT_ADDRESS);
+            Assert.AreEqual(signerInformationForEquifaxUSA.TimeAtAddress, example.TIME_AT_ADDRESS);
 
         }
     }
