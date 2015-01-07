@@ -13,17 +13,16 @@ namespace SDK.Examples
             new SignerInformationForEquifaxUSAExample(Props.GetInstance()).Run();
         }
 
-        public readonly string FIRST_NAME = "First name";
-        public readonly string LAST_NAME = "Last name";
-        public readonly string STREET_ADDRESS = "1234 Decarie";
-        public readonly string CITY = "Montreal";
-        public readonly string STATE = "Quebec";
-        public readonly string ZIP = "A2A J8J";
-        public readonly string SOCIAL_SECURITY_NUMBER = "111-222-333-444";
-        public readonly string HOME_PHONE_NUMBER = "1-900-873-8733";
-        public readonly string DRIVERS_LICENSE_NUMBER = "098163837365621";
-        public readonly Nullable<Int32> TIME_AT_ADDRESS = 1;
-        public readonly Nullable<DateTime> DATE_OF_BIRTH = new DateTime(2002, 2, 2);
+        public readonly string FIRST_NAME = "John";
+        public readonly string LAST_NAME = "Smith";
+        public readonly string STREET_ADDRESS = "PO BOX 451";
+        public readonly string CITY = "CALERA";
+        public readonly string STATE = "AL";
+        public readonly string ZIP = "35040";
+        public readonly string SOCIAL_SECURITY_NUMBER = "666110007";
+        public readonly string HOME_PHONE_NUMBER = "2055551212";
+        public readonly string DRIVERS_LICENSE_NUMBER = "251689216";
+        public readonly Nullable<DateTime> DATE_OF_BIRTH = new DateTime(1973, 2, 2);
         public readonly string SIGNER_EMAIL;
 
         private string signerId = "signerId";
@@ -51,29 +50,28 @@ namespace SDK.Examples
             DocumentPackage superDuperPackage = PackageBuilder.NewPackageNamed("SignerInformationForEquifaxUSAExample: " + DateTime.Now)
                 .DescribedAs("This is a package created using the e-SignLive SDK")
                 .WithSigner(SignerBuilder.NewSignerWithEmail(SIGNER_EMAIL)
-                    .WithFirstName("John")
-                    .WithLastName("Smith")
-                    .WithCustomId(signerId)
-                    .ChallengedWithKnowledgeBasedAuthentication(
-                            SignerInformationForEquifaxUSABuilder.NewSignerInformationForEquifaxUSA()
-                            .WithFirstName(FIRST_NAME)
-                            .WithLastName(LAST_NAME)
-                            .WithStreetAddress(STREET_ADDRESS)
-                            .WithCity(CITY)
-                            .WithState(STATE)
-                            .WithZip(ZIP)
-                            .WithSocialSecurityNumber(SOCIAL_SECURITY_NUMBER)
-                            .WithHomePhoneNumber(HOME_PHONE_NUMBER)
-                            .WithDateOfBirth(DATE_OF_BIRTH)
-                            .WithDriversLicenseNumber(DRIVERS_LICENSE_NUMBER)
-                            .WithTimeAtAddress(TIME_AT_ADDRESS)
-                            .Build()))
-                    .WithDocument(DocumentBuilder.NewDocumentNamed(documentName)
-                    .FromStream(file, DocumentType.PDF)
-                    .WithSignature(SignatureBuilder.SignatureFor(SIGNER_EMAIL)
-                        .Build())
-                    .Build())
-                .Build();
+                                .WithFirstName(FIRST_NAME)
+                                .WithLastName(LAST_NAME)
+                                .WithCustomId(signerId)
+                                .ChallengedWithKnowledgeBasedAuthentication(
+                                        SignerInformationForEquifaxUSABuilder.NewSignerInformationForEquifaxUSA()
+                                        .WithFirstName(FIRST_NAME)
+                                        .WithLastName(LAST_NAME)
+                                        .WithStreetAddress(STREET_ADDRESS)
+                                        .WithCity(CITY)
+                                        .WithState(STATE)
+                                        .WithZip(ZIP)
+                                        .WithSocialSecurityNumber(SOCIAL_SECURITY_NUMBER)
+                                        .WithHomePhoneNumber(HOME_PHONE_NUMBER)
+                                        .WithDateOfBirth(DATE_OF_BIRTH)
+                                        .WithDriversLicenseNumber(DRIVERS_LICENSE_NUMBER)
+                                        .Build()))
+                                .WithDocument(DocumentBuilder.NewDocumentNamed(documentName)
+                                .FromStream(file, DocumentType.PDF)
+                                .WithSignature(SignatureBuilder.SignatureFor(SIGNER_EMAIL)
+                                    .Build())
+                                .Build())
+                            .Build();
 
             packageId = eslClient.CreateAndSendPackage(superDuperPackage);
 

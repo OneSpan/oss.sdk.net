@@ -23,11 +23,11 @@ namespace SDK.Examples
             Assert.AreEqual(signerInformationForEquifaxCanada.City, example.CITY);
             Assert.AreEqual(signerInformationForEquifaxCanada.Province, example.PROVINCE);
             Assert.AreEqual(signerInformationForEquifaxCanada.PostalCode, example.POSTAL_CODE);
-            Assert.AreEqual(signerInformationForEquifaxCanada.TimeAtAddress, example.TIME_AT_ADDRESS);
             Assert.AreEqual(signerInformationForEquifaxCanada.DriversLicenseNumber, example.DRIVERS_LICENSE_NUMBER);
-            Assert.AreEqual(signerInformationForEquifaxCanada.SocialInsuranceNumber, example.SOCIAL_INSURANCE_NUMBER);
+//            Assert.AreEqual(signerInformationForEquifaxCanada.SocialInsuranceNumber, example.SOCIAL_INSURANCE_NUMBER);
             Assert.AreEqual(signerInformationForEquifaxCanada.HomePhoneNumber, example.HOME_PHONE_NUMBER);
             Assert.AreEqual(signerInformationForEquifaxCanada.DateOfBirth, example.DATE_OF_BIRTH);
+            Assert.AreEqual(signerInformationForEquifaxCanada.TimeAtAddress, null);
 
         }
     }
