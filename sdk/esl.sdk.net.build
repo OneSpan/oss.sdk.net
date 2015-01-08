@@ -2,6 +2,7 @@
 <project name="Silanis.ESL.SDK.Net" default="copy" basedir=".">    
     <property name="ESL-SDK" value="Silanis.ESL.SDK" />    
     <property name="source.dir" value="Silanis.ESL.SDK" />
+    <property name="sign.dir" value="C:/dev/SDK" />
     <property name="copy.dir" value="//KLIO/common/temp/ahabbab" />
     <property name="output.dir" value="${source.dir}/bin/Release" />    
     <property name="parent.dir" value="${directory::get-parent-directory(project::get-base-directory())}" />
@@ -20,10 +21,15 @@
             <property name="Configuration" value="Release"/>
             <property name="TargetFrameworkVersion" value="v2.0"/>
        </msbuild>
-                
+    </target>
+    
+    <target name="sign" decription="Package dll, references and examples to a zip file" depends="build">
+        <echo message="sign" />
+        <exec program="self-sign.bat" basedir="${sign.dir}">
+        </exec>
     </target>
 
-    <target name="package" decription="Package dll, references and examples to a zip file" depends="build">
+    <target name="package" decription="Package dll, references and examples to a zip file" depends="sign">
         <echo message="package" />
         <zip zipfile="${zip.file}">
             <fileset basedir="${output.dir}">
