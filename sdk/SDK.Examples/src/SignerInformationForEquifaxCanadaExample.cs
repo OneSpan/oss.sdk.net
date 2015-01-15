@@ -17,11 +17,11 @@ namespace SDK.Examples
         public readonly string LAST_NAME = "Last name";
         public readonly string STREET_ADDRESS = "1234 Decarie";
         public readonly string CITY = "Montreal";
-        public readonly string PROVINCE = "Quebec";
-        public readonly string POSTAL_CODE = "A2A J8J";
+        public readonly string PROVINCE = "QC";
+        public readonly string POSTAL_CODE = "A2A4E8";
         public readonly Int32 TIME_AT_ADDRESS = 1;
         public readonly string DRIVERS_LICENSE_NUMBER = "Driver's License Number";
-        public readonly string SOCIAL_INSURANCE_NUMBER = "111-222-333-444";
+        public readonly string SOCIAL_INSURANCE_NUMBER = "111222333";
         public readonly string HOME_PHONE_NUMBER = "1-900-873-8733";
         public readonly Nullable<DateTime> DATE_OF_BIRTH = new DateTime(2000, 1, 1);
         public readonly string SIGNER_EMAIL;

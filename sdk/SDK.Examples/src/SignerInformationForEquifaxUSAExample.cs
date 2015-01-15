@@ -17,9 +17,9 @@ namespace SDK.Examples
         public readonly string LAST_NAME = "Last name";
         public readonly string STREET_ADDRESS = "1234 Decarie";
         public readonly string CITY = "Montreal";
-        public readonly string STATE = "Quebec";
-        public readonly string ZIP = "A2A J8J";
-        public readonly string SOCIAL_SECURITY_NUMBER = "111-222-333-444";
+        public readonly string STATE = "QC";
+        public readonly string ZIP = "23156";
+        public readonly string SOCIAL_SECURITY_NUMBER = "111222333";
         public readonly string HOME_PHONE_NUMBER = "1-900-873-8733";
         public readonly string DRIVERS_LICENSE_NUMBER = "098163837365621";
         public readonly Int32 TIME_AT_ADDRESS = 1;
