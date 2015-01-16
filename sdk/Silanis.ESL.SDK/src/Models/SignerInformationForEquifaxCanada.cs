@@ -77,7 +77,7 @@ namespace Silanis.ESL.API
     
 		    
         [JsonProperty("timeAtAddress")]
-        public Int32 TimeAtAddress
+        public Nullable<Int32> TimeAtAddress
         {
             get; set;
         }

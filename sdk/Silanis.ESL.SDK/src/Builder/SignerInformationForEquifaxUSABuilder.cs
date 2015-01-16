@@ -14,7 +14,7 @@ namespace Silanis.ESL.SDK
         private string socialSecurityNumber;
         private string homePhoneNumber;
         private string driversLicenseNumber;
-        private Int32 timeAtAddress;
+        private Nullable<Int32> timeAtAddress;
         private Nullable<DateTime> dateOfBirth;
 
 
@@ -70,7 +70,7 @@ namespace Silanis.ESL.SDK
             return this;
         }
 
-        public SignerInformationForEquifaxUSABuilder WithTimeAtAddress(Int32 timeAtAddress)
+        public SignerInformationForEquifaxUSABuilder WithTimeAtAddress(Nullable<Int32> timeAtAddress)
         {   
             this.timeAtAddress = timeAtAddress;
             return this;
