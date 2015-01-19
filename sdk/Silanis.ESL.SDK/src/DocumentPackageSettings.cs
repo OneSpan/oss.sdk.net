@@ -26,7 +26,7 @@ namespace Silanis.ESL.SDK
             get { return enableSecondAffidavit; }
             set { enableSecondAffidavit = value; }
         }
-        
+
         private Nullable<bool> showOwnerInPersonDropDown = null;
         public Nullable<bool> ShowOwnerInPersonDropDown
         {
@@ -34,7 +34,7 @@ namespace Silanis.ESL.SDK
             set { showOwnerInPersonDropDown = value; }
         }
         
-		private Nullable<bool> enableInPerson = null;
+		private Nullable<bool> enableInPerson = true;
 
 		public Nullable<bool> EnableInPerson {
 			get {
