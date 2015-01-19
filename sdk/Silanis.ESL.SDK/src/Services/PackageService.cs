@@ -243,7 +243,7 @@ namespace Silanis.ESL.SDK.Services
             try
             {
                 string json = JsonConvert.SerializeObject(internalDoc, settings);
-                restClient.Post(path, json);
+                restClient.Put(path, json);
             }
             catch (EslServerException e)
             {
@@ -484,7 +484,7 @@ namespace Silanis.ESL.SDK.Services
                 
             try
             {
-                restClient.Post(path, JsonConvert.SerializeObject(package, settings));
+                restClient.Put(path, JsonConvert.SerializeObject(package, settings));
                 restClient.GetBytes(path);
             }
             catch (EslServerException e)
