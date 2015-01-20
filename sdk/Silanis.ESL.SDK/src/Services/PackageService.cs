@@ -1089,6 +1089,18 @@ namespace Silanis.ESL.SDK.Services
                 .Build();
         }
 
+        private string BuildCompletionReportUrl(Silanis.ESL.SDK.DocumentPackageStatus packageStatus, DateTime from, DateTime to)
+        {
+            string toDate = DateHelper.dateToIsoUtcFormat(to);
+            string fromDate = DateHelper.dateToIsoUtcFormat(from);
+
+            return template.UrlFor(UrlTemplate.COMPLETION_REPORT_FOR_ALL_SENDERS_PATH)
+                .Replace("{from}", fromDate)
+                    .Replace("{to}", toDate)
+                    .Replace("{status}", packageStatus.ToString())
+                    .Build();
+        }
+
         public string DownloadCompletionReportAsCSV(Silanis.ESL.SDK.DocumentPackageStatus packageStatus, String senderId, DateTime from, DateTime to)
         {
             try
@@ -1112,6 +1124,43 @@ namespace Silanis.ESL.SDK.Services
             try
             {
                 string path = BuildCompletionReportUrl(packageStatus, senderId, from, to);
+                string response = restClient.Get(path);
+                Silanis.ESL.API.CompletionReport apiCompletionReport = JsonConvert.DeserializeObject<Silanis.ESL.API.CompletionReport>(response, settings);
+                return new CompletionReportConverter(apiCompletionReport).ToSDKCompletionReport();
+            }
+            catch (EslServerException e)
+            {
+                throw new EslServerException("Could not download the completion report." + " Exception: " + e.Message, e.ServerError, e);
+            }
+            catch (Exception e)
+            {
+                throw new EslException("Could not download the completion report." + " Exception: " + e.Message, e);
+            }
+        }
+
+        public string DownloadCompletionReportAsCSV(Silanis.ESL.SDK.DocumentPackageStatus packageStatus, DateTime from, DateTime to)
+        {
+            try
+            {
+                string path = BuildCompletionReportUrl(packageStatus, from, to);
+                string response = restClient.Get(path, "text/csv");
+                return response;
+            }
+            catch (EslServerException e)
+            {
+                throw new EslServerException("Could not download the completion report in csv." + " Exception: " + e.Message, e.ServerError, e);
+            }
+            catch (Exception e)
+            {
+                throw new EslException("Could not download the completion report in csv." + " Exception: " + e.Message, e);
+            }
+        }
+
+        public Silanis.ESL.SDK.CompletionReport DownloadCompletionReport(Silanis.ESL.SDK.DocumentPackageStatus packageStatus, DateTime from, DateTime to)
+        {
+            try
+            {
+                string path = BuildCompletionReportUrl(packageStatus, from, to);
                 string response = restClient.Get(path);
                 Silanis.ESL.API.CompletionReport apiCompletionReport = JsonConvert.DeserializeObject<Silanis.ESL.API.CompletionReport>(response, settings);
                 return new CompletionReportConverter(apiCompletionReport).ToSDKCompletionReport();
