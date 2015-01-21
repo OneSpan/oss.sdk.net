@@ -17,7 +17,6 @@ namespace SDK.Examples
         private string email2;
         private Signer signer1;
         private string attachment1Id;
-        private DocumentPackage retrievedPackage;
 
         public readonly string NAME1 = "Driver's license";
         public readonly string DESCRIPTION1 = "Please upload a scanned copy of your driver's license.";
@@ -46,11 +45,6 @@ namespace SDK.Examples
         public string Email2
         {
             get { return email2; }
-        }
-
-        public DocumentPackage RetrievedPackage
-        {
-            get { return retrievedPackage; }
         }
 
         override public void Execute()

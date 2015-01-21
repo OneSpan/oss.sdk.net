@@ -27,7 +27,6 @@ namespace SDK.Examples
         public readonly string SIGNER_EMAIL;
 
         private string signerId = "signerId";
-        private DocumentPackage retrievedPackage;
         private string documentName = "My Document";
 
         public SignerInformationForEquifaxUSAExample(Props props) : this(props.Get("api.url"), props.Get("api.key"), props.Get("1.email"))
@@ -37,11 +36,6 @@ namespace SDK.Examples
         public SignerInformationForEquifaxUSAExample(string apiKey, string apiUrl, string email1) : base( apiKey, apiUrl )
         {
             this.SIGNER_EMAIL = email1;
-        }
-
-        public DocumentPackage RetrievedPackage
-        {
-            get { return retrievedPackage; }
         }
 
         override public void Execute()

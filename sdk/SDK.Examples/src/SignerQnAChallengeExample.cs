@@ -55,6 +55,7 @@ namespace SDK.Examples
             packageId = eslClient.CreatePackage(superDuperPackage);
 
             eslClient.SendPackage(packageId);
+            retrievedPackage = eslClient.GetPackage(packageId);
         }
     }
 }

@@ -20,7 +20,7 @@ namespace SDK.Examples
             SignerInformationForEquifaxUSAExample example = new SignerInformationForEquifaxUSAExample(Props.GetInstance());
             example.Run();
 
-            DocumentPackage documentPackage = example.EslClient.GetPackage(example.PackageId);
+            DocumentPackage documentPackage = example.RetrievedPackage;
 
             SignerInformationForEquifaxUSA signerInformationForEquifaxUSA = documentPackage.Signers[example.SIGNER_EMAIL].KnowledgeBasedAuthentication.SignerInformationForEquifaxUSA;
 

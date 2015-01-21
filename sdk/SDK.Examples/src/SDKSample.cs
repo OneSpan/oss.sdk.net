@@ -7,6 +7,7 @@ namespace SDK.Examples
     {
 		protected EslClient eslClient;
         protected PackageId packageId;
+        protected DocumentPackage retrievedPackage;
 
 		public EslClient EslClient
 		{
@@ -22,6 +23,11 @@ namespace SDK.Examples
             {
                 return packageId;
             }
+        }
+
+        public DocumentPackage RetrievedPackage
+        {
+            get { return retrievedPackage; }
         }
 
         public SDKSample( string apiUrl, string apiKey )

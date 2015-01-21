@@ -13,7 +13,7 @@ namespace SDK.Examples
             SignerQnAChallengeExample example = new SignerQnAChallengeExample(Props.GetInstance());
             example.Run();
 
-            DocumentPackage documentPackage = example.EslClient.GetPackage(example.PackageId);
+            DocumentPackage documentPackage = example.RetrievedPackage;
 
             // Note that for security reasons, the backend doesn't return challenge answers, so we don't verify the answers here.
             foreach (Challenge challenge in documentPackage.Signers[example.email1].ChallengeQuestion)

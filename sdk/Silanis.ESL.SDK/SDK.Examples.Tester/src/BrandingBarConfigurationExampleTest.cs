@@ -13,7 +13,7 @@ namespace SDK.Examples
             BrandingBarConfigurationExample example = new BrandingBarConfigurationExample(Props.GetInstance());
             example.Run();
 
-            DocumentPackage documentPackage = example.EslClient.GetPackage(example.PackageId);
+            DocumentPackage documentPackage = example.RetrievedPackage;
 
             Assert.AreEqual(documentPackage.Settings.EnableOptOut, false);
             Assert.AreEqual(documentPackage.Settings.ShowDownloadButton, false);

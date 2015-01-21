@@ -82,7 +82,7 @@ namespace SDK.Examples
                 .Build();
 
             packageId = eslClient.CreatePackageFromTemplate(template.Id, newPackage);
-
+            retrievedPackage = eslClient.GetPackage(packageId);
         }
     }
 }

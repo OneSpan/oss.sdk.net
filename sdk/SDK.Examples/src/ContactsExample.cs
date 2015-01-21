@@ -62,6 +62,7 @@ namespace SDK.Examples
             eslClient.SendPackage(packageId);
 
             afterContacts = eslClient.AccountService.GetContacts();
+            retrievedPackage = eslClient.GetPackage(packageId);
         }
     }
 }

@@ -81,6 +81,7 @@ namespace SDK.Examples
                                          .WithTitle(SENDER_TITLE)
                                          .WithCompany(SENDER_COMPANY) )
                                      .Build() );
+            retrievedPackage = eslClient.GetPackage(packageId);
         }
     }
 }

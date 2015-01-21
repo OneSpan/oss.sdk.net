@@ -59,7 +59,7 @@ namespace SDK.Examples
             eslClient.UploadDocument(document, superDuperPackage);
 
             eslClient.SendPackage(packageId);
-
+            retrievedPackage = eslClient.GetPackage(packageId);
         }
     }
 }

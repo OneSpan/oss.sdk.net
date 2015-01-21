@@ -87,6 +87,7 @@ namespace SDK.Examples
 
             // Create package from template on behalf of another sender
             packageId = eslClient.CreatePackageFromTemplate(templateId, packageFromTemplate);
+            retrievedPackage = eslClient.GetPackage(packageId);
         }
     }
 }

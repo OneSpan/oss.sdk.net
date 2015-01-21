@@ -85,6 +85,7 @@ namespace SDK.Examples
             packageId = eslClient.CreatePackage( package );
 
 			eslClient.DownloadDocument(packageId, "doc1");
+            retrievedPackage = eslClient.GetPackage(packageId);
 
 			Console.WriteLine("Downloaded document");
         }

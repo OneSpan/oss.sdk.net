@@ -20,7 +20,7 @@ namespace SDK.Examples
             FieldValidationExample example = new FieldValidationExample(Props.GetInstance());
             example.Run();
 
-            DocumentPackage documentPackage = example.EslClient.GetPackage(example.PackageId);
+            DocumentPackage documentPackage = example.RetrievedPackage;
 
             Document document = documentPackage.Documents[example.DOCUMENT_NAME];
 

@@ -40,6 +40,7 @@ namespace SDK.Examples
             packageId = eslClient.CreatePackage(package);
             eslClient.SendPackage(packageId);
             eslClient.PackageService.DeletePackage(packageId);
+            retrievedPackage = eslClient.GetPackage(packageId);
         }
     }
 }

@@ -49,12 +49,6 @@ namespace SDK.Examples
             get{ return updatedLayoutSettings; }
         }
 
-        private DocumentPackage retrievedPackage;
-        public DocumentPackage RetrievedPackage
-        {
-            get{ return retrievedPackage; }
-        }
-        
         private DocumentPackageSettings retrievedSettings;
         public DocumentPackageSettings RetrievedSettings
         {

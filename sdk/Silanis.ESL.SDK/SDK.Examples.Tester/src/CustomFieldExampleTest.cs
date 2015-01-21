@@ -11,8 +11,7 @@ namespace SDK.Examples
 			CustomFieldExample example = new CustomFieldExample(Props.GetInstance());
 			example.Run();
 
-			DocumentPackage documentPackage = example.EslClient.GetPackage(example.PackageId);
-
+            DocumentPackage documentPackage = example.RetrievedPackage;
             Assert.IsTrue(example.EslClient.GetCustomFieldService().DoesCustomFieldExist(example.customFieldId1));
             Assert.IsTrue(example.EslClient.GetCustomFieldService().DoesCustomFieldValueExist(example.customFieldId1));
             Assert.IsFalse(example.EslClient.GetCustomFieldService().DoesCustomFieldExist(example.customFieldId2));

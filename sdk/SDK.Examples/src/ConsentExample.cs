@@ -49,8 +49,8 @@ namespace SDK.Examples
 
             packageId = eslClient.CreatePackage (package);
             eslClient.SendPackage(packageId);
+            retrievedPackage = eslClient.GetPackage(packageId);
 
-            DocumentPackage retrievedPackage = eslClient.GetPackage(packageId);
             Console.WriteLine("Document retrieved = " + retrievedPackage.Id);
         }
     }

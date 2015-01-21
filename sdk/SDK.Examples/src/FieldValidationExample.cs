@@ -118,6 +118,7 @@ namespace SDK.Examples
             packageId = eslClient.CreatePackage(package);
 
             eslClient.SendPackage(packageId);
+            retrievedPackage = eslClient.GetPackage(packageId);
         }
     }
 }

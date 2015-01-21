@@ -19,7 +19,6 @@ namespace SDK.Examples
         private string emailForSignerWithAuthenticationEquifaxCanada;
         private string emailForSignerWithAuthenticationEquifaxUsa;
 
-        private DocumentPackage retrievedPackage;
         private string documentName = "My Document";
 
         public MixedSignerAuthenticationExample(Props props) : this(props.Get("api.url"), props.Get("api.key"), props.Get("1.email"), props.Get("2.email"))
@@ -30,11 +29,6 @@ namespace SDK.Examples
         {
             this.emailForSignerWithAuthenticationEquifaxCanada = signer1Email;
             this.emailForSignerWithAuthenticationEquifaxUsa = signer2Email;
-        }
-
-        public DocumentPackage RetrievedPackage
-        {
-            get { return retrievedPackage; }
         }
 
         override public void Execute()

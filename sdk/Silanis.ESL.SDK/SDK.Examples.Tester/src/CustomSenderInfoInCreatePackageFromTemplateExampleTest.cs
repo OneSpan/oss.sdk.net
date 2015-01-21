@@ -14,7 +14,7 @@ namespace SDK.Examples
             example.Run();
             
             DocumentPackage template = example.EslClient.GetPackage( example.TemplateId );
-            DocumentPackage package = example.EslClient.GetPackage( example.PackageId );
+            DocumentPackage package = example.RetrievedPackage;
             
             Assert.IsNotNull(template.SenderInfo);
             Assert.AreEqual(CustomSenderInfoInCreatePackageFromTemplateExample.SENDER_FIRST_NAME, package.SenderInfo.FirstName);

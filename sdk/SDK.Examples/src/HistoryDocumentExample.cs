@@ -109,6 +109,7 @@ namespace SDK.Examples
             }
 
             eslClient.PackageService.AddDocumentWithExternalContent(packageId.Id, externalDocuments);
+            retrievedPackage = eslClient.GetPackage(packageId);
         }
     }
 }
