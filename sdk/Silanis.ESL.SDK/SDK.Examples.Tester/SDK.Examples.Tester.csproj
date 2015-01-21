@@ -98,6 +98,7 @@
     <Compile Include="src\MobileCaptureSignatureStyleExampleTest.cs" />
     <Compile Include="src\PackageViewRedirectForPackageSenderExampleTest.cs" />
     <Compile Include="src\GetCompletedPackagesWithinDateRangeExampleTest.cs" />
+    <Compile Include="src\MixingSignatureAndAcceptanceOnOnedocumentExampleTest.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
