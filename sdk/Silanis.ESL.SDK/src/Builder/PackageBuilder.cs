@@ -34,6 +34,7 @@ namespace Silanis.ESL.SDK.Builder
 			return new PackageBuilder (name);
 		}
 
+        [Obsolete("Please do not use WithID() from now on. Will get deleted in a future release.")]
 		public PackageBuilder WithID(PackageId id)
 		{
 			this.id = id;
