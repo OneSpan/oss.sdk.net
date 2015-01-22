@@ -497,6 +497,26 @@ namespace Silanis.ESL.SDK.Services
             }
         }
 
+        internal void ChangePackageStatusToDraft(PackageId packageId) 
+        {
+            string path = template.UrlFor(UrlTemplate.PACKAGE_ID_PATH)
+                .Replace("{packageId}", packageId.Id)
+                .Build();
+
+            try
+            {
+                restClient.Put(path, "{\"status\":\"DRAFT\"}");
+            }
+            catch (EslServerException e)
+            {
+                throw new EslServerException("Unable to change the package status to DRAFT." + " Exception: " + e.Message, e.ServerError, e);
+            }
+            catch (Exception e)
+            {
+                throw new EslException("Unable to change the package status to DRAFT." + " Exception: " + e.Message, e);
+            }
+        }
+
         /// <summary>
         /// Uploads the Document and file in byte[] to the package.
         /// </summary>

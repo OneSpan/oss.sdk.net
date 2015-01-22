@@ -300,6 +300,10 @@ namespace Silanis.ESL.SDK
         {
 			packageService.UpdatePackage( packageId, new DocumentPackageConverter(sentSettings).ToAPIPackage() );
         }
+
+        public void ChangePackageStatusToDraft(PackageId packageId) {
+            packageService.ChangePackageStatusToDraft(packageId);
+        }
         
 		public SigningStatus GetSigningStatus (PackageId packageId, string signerId, string documentId)
 		{

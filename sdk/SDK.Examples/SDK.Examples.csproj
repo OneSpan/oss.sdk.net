@@ -134,6 +134,7 @@
     <Compile Include="src\PackageViewRedirectForPackageSenderExample.cs" />
     <Compile Include="src\GetCompletedPackagesWithinDateRangeExample.cs" />
     <Compile Include="src\MixingSignatureAndAcceptanceOnOnedocumentExample.cs" />
+    <Compile Include="src\ChangePackageStatusExample.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
