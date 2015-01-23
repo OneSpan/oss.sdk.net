@@ -845,7 +845,7 @@ namespace Silanis.ESL.SDK.Services
         public Page<DocumentPackage> GetPackages(DocumentPackageStatus status, PageRequest request)
         {
             string path = template.UrlFor(UrlTemplate.PACKAGE_LIST_PATH)
-				.Replace("{status}", status.ToString())
+                .Replace("{status}", new PackageStatusConverter(status).ToAPIPackageStatus())
 				.Replace("{from}", request.From.ToString())
 				.Replace("{to}", request.To.ToString())
 				.Build();
@@ -869,13 +869,13 @@ namespace Silanis.ESL.SDK.Services
             }
         }
 
-        public Page<DocumentPackage> GetUpdatedPackagesWithinDateRange(DocumentPackageStatus status, PageRequest request, DateTime startDate, DateTime endDate)
+        public Page<DocumentPackage> GetUpdatedPackagesWithinDateRange(DocumentPackageStatus status, PageRequest request, DateTime from, DateTime to)
         {
-            string fromDate = DateHelper.dateToIsoUtcFormat(startDate);
-            string toDate = DateHelper.dateToIsoUtcFormat(endDate);
+            string fromDate = DateHelper.dateToIsoUtcFormat(from);
+            string toDate = DateHelper.dateToIsoUtcFormat(to);
 
             string path = template.UrlFor(UrlTemplate.PACKAGE_LIST_STATUS_DATE_RANGE_PATH)
-                    .Replace("{status}", status.ToString())
+                    .Replace("{status}", new PackageStatusConverter(status).ToAPIPackageStatus())
                     .Replace("{from}", request.From.ToString())
                     .Replace("{to}", request.To.ToString())
                     .Replace("{lastUpdatedStartDate}", fromDate)
@@ -1102,11 +1102,11 @@ namespace Silanis.ESL.SDK.Services
             string fromDate = DateHelper.dateToIsoUtcFormat(from);
 
             return template.UrlFor(UrlTemplate.COMPLETION_REPORT_PATH)
-                .Replace("{from}", fromDate)
-                .Replace("{to}", toDate)
-                .Replace("{status}", packageStatus.ToString())
-                .Replace("{senderId}", senderId)
-                .Build();
+                    .Replace("{from}", fromDate)
+                    .Replace("{to}", toDate)
+                    .Replace("{status}", new PackageStatusConverter(packageStatus).ToAPIPackageStatus())
+                    .Replace("{senderId}", senderId)
+                    .Build();
         }
 
         private string BuildCompletionReportUrl(Silanis.ESL.SDK.DocumentPackageStatus packageStatus, DateTime from, DateTime to)
@@ -1115,9 +1115,9 @@ namespace Silanis.ESL.SDK.Services
             string fromDate = DateHelper.dateToIsoUtcFormat(from);
 
             return template.UrlFor(UrlTemplate.COMPLETION_REPORT_FOR_ALL_SENDERS_PATH)
-                .Replace("{from}", fromDate)
+                    .Replace("{from}", fromDate)
                     .Replace("{to}", toDate)
-                    .Replace("{status}", packageStatus.ToString())
+                    .Replace("{status}", new PackageStatusConverter(packageStatus).ToAPIPackageStatus())
                     .Build();
         }
 

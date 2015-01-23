@@ -190,6 +190,9 @@ namespace Silanis.ESL.SDK
                 messages.Add(new MessageConverter(apiMessage).ToSDKMessage());
             }
             documentPackage.Messages = messages;
+            if (apiPackage.Updated != null) {
+                documentPackage.UpdatedDate = apiPackage.Updated;
+            }
 
             return documentPackage;
         }

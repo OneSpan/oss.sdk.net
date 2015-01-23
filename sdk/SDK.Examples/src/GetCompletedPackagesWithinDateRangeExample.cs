@@ -10,6 +10,15 @@ namespace SDK.Examples
             new GetCompletedPackagesWithinDateRangeExample(Props.GetInstance()).Run();
         }
 
+        public readonly DateTime START_DATE = DateTime.Now;
+        public readonly DateTime END_DATE = DateTime.Now;
+
+        public Page<DocumentPackage> draftPackages;
+        public Page<DocumentPackage> sentPackages;
+        public Page<DocumentPackage> declinedPackages;
+        public Page<DocumentPackage> archivedPackages;
+        public Page<DocumentPackage> completedPackages;
+
         public GetCompletedPackagesWithinDateRangeExample( Props props ) : this(props.Get("api.url"), props.Get("api.key")) {
         }
 
@@ -18,17 +27,24 @@ namespace SDK.Examples
 
         override public void Execute()
         {
+
+            draftPackages = getPackagesByPackageStatus(DocumentPackageStatus.DRAFT, START_DATE, END_DATE);
+            sentPackages = getPackagesByPackageStatus(DocumentPackageStatus.SENT, START_DATE, END_DATE);
+            declinedPackages = getPackagesByPackageStatus(DocumentPackageStatus.DECLINED, START_DATE, END_DATE);
+            archivedPackages = getPackagesByPackageStatus(DocumentPackageStatus.ARCHIVED, START_DATE, END_DATE);
+            completedPackages = getPackagesByPackageStatus(DocumentPackageStatus.COMPLETED, START_DATE, END_DATE);
+
             // get the packages completed today
-            Console.WriteLine("PackageStatus : {0}, The number of pakcages : {1}", DocumentPackageStatus.DRAFT, getNumberOfPackageByPackageStatus(DocumentPackageStatus.DRAFT, DateTime.Now, DateTime.Now));
-            Console.WriteLine("PackageStatus : {0}, The number of pakcages : {1}", DocumentPackageStatus.SENT, getNumberOfPackageByPackageStatus(DocumentPackageStatus.SENT, DateTime.Now, DateTime.Now));
-            Console.WriteLine("PackageStatus : {0}, The number of pakcages : {1}", DocumentPackageStatus.DECLINED, getNumberOfPackageByPackageStatus(DocumentPackageStatus.DECLINED, DateTime.Now, DateTime.Now));
-            Console.WriteLine("PackageStatus : {0}, The number of pakcages : {1}", DocumentPackageStatus.ARCHIVED, getNumberOfPackageByPackageStatus(DocumentPackageStatus.ARCHIVED, DateTime.Now, DateTime.Now));
-            Console.WriteLine("PackageStatus : {0}, The number of pakcages : {1}", DocumentPackageStatus.COMPLETED, getNumberOfPackageByPackageStatus(DocumentPackageStatus.COMPLETED, DateTime.Now, DateTime.Now));
+            Console.WriteLine("PackageStatus : {0}, The number of pakcages : {1}", DocumentPackageStatus.DRAFT, getPackagesByPackageStatus(DocumentPackageStatus.DRAFT, START_DATE, END_DATE));
+            Console.WriteLine("PackageStatus : {0}, The number of pakcages : {1}", DocumentPackageStatus.SENT, getPackagesByPackageStatus(DocumentPackageStatus.SENT, START_DATE, END_DATE));
+            Console.WriteLine("PackageStatus : {0}, The number of pakcages : {1}", DocumentPackageStatus.DECLINED, getPackagesByPackageStatus(DocumentPackageStatus.DECLINED, START_DATE, END_DATE));
+            Console.WriteLine("PackageStatus : {0}, The number of pakcages : {1}", DocumentPackageStatus.ARCHIVED, getPackagesByPackageStatus(DocumentPackageStatus.ARCHIVED, START_DATE, END_DATE));
+            Console.WriteLine("PackageStatus : {0}, The number of pakcages : {1}", DocumentPackageStatus.COMPLETED, getPackagesByPackageStatus(DocumentPackageStatus.COMPLETED, START_DATE, END_DATE));
         }
 
-        private int getNumberOfPackageByPackageStatus(DocumentPackageStatus packageStatus, DateTime startDateRange, DateTime endDateRange) {
-            Page<DocumentPackage> resultPage = eslClient.PackageService.GetUpdatedPackagesWithinDateRange(packageStatus, new PageRequest(1), startDateRange, endDateRange);
-            return resultPage.NumberOfElements;
+        private Page<DocumentPackage> getPackagesByPackageStatus(DocumentPackageStatus packageStatus, DateTime startDate, DateTime endDate) {
+            Page<DocumentPackage> resultPage = eslClient.PackageService.GetUpdatedPackagesWithinDateRange(packageStatus, new PageRequest(1), startDate, endDate);
+            return resultPage;
         }
     }
 }

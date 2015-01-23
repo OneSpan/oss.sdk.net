@@ -79,6 +79,12 @@ namespace Silanis.ESL.SDK
             set;
         }
 
+        public Nullable<DateTime> UpdatedDate
+        {
+            get;
+            set;
+        }
+
         public string EmailMessage
         {
             get;

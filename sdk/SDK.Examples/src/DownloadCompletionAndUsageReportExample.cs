@@ -89,7 +89,7 @@ namespace SDK.Examples
             csvCompletionReport = eslClient.PackageService.DownloadCompletionReportAsCSV(DocumentPackageStatus.DRAFT, from, to);
 
             // Display package id and name of packages in DRAFT from sender
-            foreach(SenderCompletionReport senderCompletionReport in sdkCompletionReportForSender.Senders) {
+            foreach(SenderCompletionReport senderCompletionReport in sdkCompletionReport.Senders) {
                 Console.Write("Sender: " + senderCompletionReport.Sender.Email);
                 Console.WriteLine(" has " + senderCompletionReport.Packages.Count + " packages in DRAFT");
                 foreach (PackageCompletionReport packageCompletionReport in senderCompletionReport.Packages) {
