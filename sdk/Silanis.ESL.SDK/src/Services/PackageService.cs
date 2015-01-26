@@ -1244,5 +1244,51 @@ namespace Silanis.ESL.SDK.Services
                 throw new EslException("Could not download the usage report." + " Exception: " + e.Message, e);
             }
         }
+
+        public string GetSigningUrl(PackageId packageId, string signerId) 
+        {
+            Package package = GetPackage(packageId);
+
+            return GetSigningUrl(packageId, GetRole(package, signerId));
+        }
+
+        private Role GetRole(Package package, string sigenrId) 
+        {
+            foreach(Role role in package.Roles) 
+            {
+                foreach(Silanis.ESL.API.Signer signer in role.Signers) 
+                {
+                    if(signer.Id.Equals(sigenrId)) 
+                    {
+                        return role;
+                    }
+                }
+            }
+            return new Role();
+        }
+
+        private string GetSigningUrl(PackageId packageId, Role role) 
+        {
+
+            string path = template.UrlFor(UrlTemplate.SIGNER_URL_PATH)
+                         .Replace("{packageId}", packageId.Id)
+                         .Replace("{roleId}", role.Id)
+                         .Build();
+
+            try 
+            {
+                string response = restClient.Get(path);
+                SigningUrl signingUrl = JsonConvert.DeserializeObject<Silanis.ESL.API.SigningUrl>(response, settings);
+                return signingUrl.Url;
+            } 
+            catch (EslServerException e)
+            {
+                throw new EslServerException("Could not get a signing url." + " Exception: " + e.Message, e.ServerError, e);
+            }
+            catch (Exception e)
+            {
+                throw new EslException("Could not get a signing url." + " Exception: " + e.Message, e);
+            }
+        }
     }
 }

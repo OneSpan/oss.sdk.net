@@ -100,6 +100,7 @@
     <Compile Include="src\GetCompletedPackagesWithinDateRangeExampleTest.cs" />
     <Compile Include="src\MixingSignatureAndAcceptanceOnOnedocumentExampleTest.cs" />
     <Compile Include="src\ChangePackageStatusExampleTest.cs" />
+    <Compile Include="src\GetSigningUrlExampleTest.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
