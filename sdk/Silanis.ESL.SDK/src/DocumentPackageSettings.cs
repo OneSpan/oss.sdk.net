@@ -89,6 +89,17 @@ namespace Silanis.ESL.SDK
 			}
 		}
 
+        private List<string> declineReasons = new List<string>();
+
+        public List<string> DeclineReasons {
+            get {
+                return declineReasons;
+            }
+            set {
+                declineReasons = value;
+            }
+        }
+
 		private List<string> optOutReasons = new List<string>();
 
 		public List<string> OptOutReasons {
@@ -208,8 +219,11 @@ namespace Silanis.ESL.SDK
             if ( showLanguageDropDown != null )
                 ceremonySettings.HideLanguageDropdown = !showLanguageDropDown.Value;
 
-			foreach ( string reason in optOutReasons )
-				ceremonySettings.OptOutReasons.Add( reason );
+            foreach ( string declineReason in declineReasons )
+                ceremonySettings.DeclineReasons.Add( declineReason );
+
+            foreach ( string optOutReason in optOutReasons )
+                ceremonySettings.OptOutReasons.Add( optOutReason );
 
             if ( maxAuthAttempts != null )
 			    ceremonySettings.MaxAuthFailsAllowed = maxAuthAttempts.Value;
