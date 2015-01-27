@@ -9,6 +9,7 @@ using Silanis.ESL.SDK.Builder;
 using Silanis.ESL.API;
 using System.Globalization;
 using Newtonsoft.Json.Serialization;
+using Newtonsoft.Json.Utilities.LinqBridge;
 
 namespace Silanis.ESL.SDK.Services
 {
@@ -1288,6 +1289,69 @@ namespace Silanis.ESL.SDK.Services
             catch (Exception e)
             {
                 throw new EslException("Could not get a signing url." + " Exception: " + e.Message, e);
+            }
+        }
+
+        public string StartFastTrack(PackageId packageId, List<FastTrackSigner> signers) 
+        {
+            string token = GetFastTrackToken(packageId, true);
+            string path = template.UrlFor(UrlTemplate.START_FAST_TRACK_PATH)
+                         .Replace("{token}", token)
+                         .Build();
+
+            List<FastTrackRole> roles = new List<FastTrackRole>();
+            foreach(FastTrackSigner signer in signers) {
+                FastTrackRole role = FastTrackRoleBuilder.NewRoleWithId(signer.Id)
+                        .WithName(signer.Id)
+                        .WithSigner(signer)
+                        .Build();
+                roles.Add(role);
+            }
+
+            string json = JsonConvert.SerializeObject(roles, settings);
+
+            try
+            {
+                string response = restClient.Post(path, json);
+                SigningUrl signingUrl = JsonConvert.DeserializeObject<Silanis.ESL.API.SigningUrl>(response, settings);
+                return signingUrl.Url;
+            }
+            catch (EslServerException e)
+            {
+                throw new EslServerException("Could not start fast track." + " Exception: " + e.Message, e.ServerError, e);
+            }
+            catch (Exception e)
+            {
+                throw new EslException("Could not start fast track." + " Exception: " + e.Message, e);
+            }
+        }
+
+        private string GetFastTrackToken(PackageId packageId, Boolean signing) {
+            string fastTrackUrl = GetFastTrackUrl(packageId, signing);
+            string finalUrl = RedirectResolver.ResolveUrlAfterRedirect(fastTrackUrl);
+
+            return finalUrl.Substring(finalUrl.LastIndexOf('=') + 1);
+        }
+
+        private string GetFastTrackUrl(PackageId packageId, Boolean signing) {
+            string path = template.UrlFor(UrlTemplate.FAST_TRACK_URL_PATH)
+                                  .Replace("{packageId}", packageId.Id)
+                                  .Replace("{signing}", signing.ToString())
+                                  .Build();
+
+            try 
+            {
+                string response = restClient.Get(path);
+                SigningUrl signingUrl = JsonConvert.DeserializeObject<Silanis.ESL.API.SigningUrl>(response, settings);
+                return signingUrl.Url;
+            } 
+            catch (EslServerException e)
+            {
+                throw new EslServerException("Could not get a fastTrack url." + " Exception: " + e.Message, e.ServerError, e);
+            }
+            catch (Exception e)
+            {
+                throw new EslException("Could not get a fastTrack url." + " Exception: " + e.Message, e);
             }
         }
     }

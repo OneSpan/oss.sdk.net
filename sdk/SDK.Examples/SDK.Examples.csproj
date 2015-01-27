@@ -136,6 +136,7 @@
     <Compile Include="src\MixingSignatureAndAcceptanceOnOnedocumentExample.cs" />
     <Compile Include="src\ChangePackageStatusExample.cs" />
     <Compile Include="src\GetSigningUrlExample.cs" />
+    <Compile Include="src\StartFastTrackExample.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

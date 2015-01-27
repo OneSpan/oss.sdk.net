@@ -336,6 +336,11 @@
     <Compile Include="src\EslEnumeration.cs" />
     <Compile Include="src\FieldType.cs" />
     <Compile Include="src\Internal\Conversion\FieldTypeConverter.cs" />
+    <Compile Include="src\FastTrackSigner.cs" />
+    <Compile Include="src\FastTrackRole.cs" />
+    <Compile Include="src\Builder\FastTrackSignerBuilder.cs" />
+    <Compile Include="src\Builder\FastTrackRoleBuilder.cs" />
+    <Compile Include="src\Internal\RedirectResolver.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSHARP.Targets" />
   <ProjectExtensions>

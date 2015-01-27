@@ -48,6 +48,10 @@ namespace Silanis.ESL.SDK.Internal
         public static readonly string REMOVE_SIGNER_PATH = "/packages/{packageId}/roles/{roleId}";
         public static readonly string SIGNER_URL_PATH = "/packages/{packageId}/roles/{roleId}/signingUrl";
 
+        // Fast Track Service
+        public static readonly string FAST_TRACK_URL_PATH = "/fastTrack/{packageId}/url?signing={signing}";
+        public static readonly string START_FAST_TRACK_PATH = "/fastTrack?token={token}";
+
         // Event Notification Service
         public static readonly string CALLBACK_PATH = "/callback";
 
