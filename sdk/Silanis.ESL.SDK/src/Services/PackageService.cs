@@ -1326,14 +1326,16 @@ namespace Silanis.ESL.SDK.Services
             }
         }
 
-        private string GetFastTrackToken(PackageId packageId, Boolean signing) {
+        private string GetFastTrackToken(PackageId packageId, Boolean signing) 
+        {
             string fastTrackUrl = GetFastTrackUrl(packageId, signing);
             string finalUrl = RedirectResolver.ResolveUrlAfterRedirect(fastTrackUrl);
 
             return finalUrl.Substring(finalUrl.LastIndexOf('=') + 1);
         }
 
-        private string GetFastTrackUrl(PackageId packageId, Boolean signing) {
+        private string GetFastTrackUrl(PackageId packageId, Boolean signing) 
+        {
             string path = template.UrlFor(UrlTemplate.FAST_TRACK_URL_PATH)
                                   .Replace("{packageId}", packageId.Id)
                                   .Replace("{signing}", signing.ToString())
@@ -1352,6 +1354,33 @@ namespace Silanis.ESL.SDK.Services
             catch (Exception e)
             {
                 throw new EslException("Could not get a fastTrack url." + " Exception: " + e.Message, e);
+            }
+        }
+
+        public void SendSmsToSigner(PackageId packageId, Signer signer) 
+        {
+            Role role = new SignerConverter(signer).ToAPIRole(System.Guid.NewGuid().ToString());
+            SendSmsToSigner(packageId, role);
+        }
+
+        private void SendSmsToSigner(PackageId packageId, Role role) 
+        {
+            String path = template.UrlFor(UrlTemplate.SEND_SMS_TO_SIGNER_PATH)
+                                  .Replace("{packageId}", packageId.Id)
+                                  .Replace("{roleId}", role.Id)
+                                  .Build();
+
+            try
+            {
+                restClient.Post(path, null);
+            } 
+            catch (EslServerException e)
+            {
+                throw new EslServerException("Could not send SMS to the signer." + " Exception: " + e.Message, e.ServerError, e);
+            }
+            catch (Exception e)
+            {
+                throw new EslException("Could not send SMS to the signer." + " Exception: " + e.Message, e);
             }
         }
     }

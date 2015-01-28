@@ -137,6 +137,7 @@
     <Compile Include="src\ChangePackageStatusExample.cs" />
     <Compile Include="src\GetSigningUrlExample.cs" />
     <Compile Include="src\StartFastTrackExample.cs" />
+    <Compile Include="src\SendSmsToSignerExample.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
