@@ -75,6 +75,7 @@ namespace Silanis.ESL.SDK.Internal
 
         // Groups Service
         public static readonly string GROUPS_PATH = "/groups";
+        public static readonly string GROUPS_SUMMARY_PATH = "/groups/summary";
         public static readonly string GROUPS_ID_PATH = "/groups/{groupId}";
         public static readonly string GROUPS_MEMBER_PATH = "/groups/{groupId}/members";
         public static readonly string GROUPS_INVITE_PATH = "/groups/{groupId}/invite";

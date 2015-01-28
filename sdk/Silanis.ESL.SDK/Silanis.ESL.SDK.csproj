@@ -342,6 +342,9 @@
     <Compile Include="src\Builder\FastTrackRoleBuilder.cs" />
     <Compile Include="src\Internal\RedirectResolver.cs" />
     <Compile Include="src\Internal\Conversion\CustomFieldValueConverter.cs" />
+    <Compile Include="src\GroupSummary.cs" />
+    <Compile Include="src\Builder\GroupSummaryBuilder.cs" />
+    <Compile Include="src\Internal\Conversion\GroupSummaryConverter.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSHARP.Targets" />
   <ProjectExtensions>

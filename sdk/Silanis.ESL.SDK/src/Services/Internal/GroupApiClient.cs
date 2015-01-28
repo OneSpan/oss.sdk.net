@@ -138,6 +138,23 @@ namespace Silanis.ESL.SDK
                 throw new EslException ("Failed to delete group." + " Exception: " + e.Message, e);
             }
         }
+
+        public Silanis.ESL.API.Result<Silanis.ESL.API.GroupSummary> GetGroupSummaries() {
+            string path = template.UrlFor (UrlTemplate.GROUPS_SUMMARY_PATH)
+                .Build ();
+
+            try {
+                string response = restClient.Get(path);
+                Silanis.ESL.API.Result<Silanis.ESL.API.GroupSummary> apiResponse = JsonConvert.DeserializeObject<Silanis.ESL.API.Result<Silanis.ESL.API.GroupSummary>> (response, settings );
+                return apiResponse;
+            }
+            catch (EslServerException e) {
+                throw new EslServerException ("Failed to retrieve Group Summary list." + " Exception: " + e.Message, e.ServerError, e);
+            }
+            catch (Exception e) {
+                throw new EslException ("Failed to retrieve Group Summary list." + " Exception: " + e.Message, e);
+            }
+        }
     }
 }
 
