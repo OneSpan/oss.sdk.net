@@ -36,6 +36,13 @@ namespace SDK.Examples
 
             // Get first page of custom fields
             Assert.Greater(example.retrievedCustomFieldList2.Count, 0);
+
+            // Get the custom field values for this user
+            Assert.GreaterOrEqual(example.retrieveCustomFieldValueList1.Count, 1);
+
+            // Get the custom field values for this user after deleting 1 user custom field for this user
+            Assert.AreEqual(example.retrieveCustomFieldValueList2.Count, example.retrieveCustomFieldValueList1.Count - 1);
+
 		}
     }
 }

@@ -17,15 +17,6 @@ namespace Silanis.ESL.SDK
                 get;
                 set;
         }
-        
-		internal UserCustomField toAPIUserCustomField() {
-            UserCustomField result = new UserCustomField();
-			result.Name = "";
-            result.Id = Id;
-            result.Value = Value;
-            return result;
-        }
-        
     }
 }
 

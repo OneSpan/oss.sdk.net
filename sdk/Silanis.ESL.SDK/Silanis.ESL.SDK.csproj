@@ -341,6 +341,7 @@
     <Compile Include="src\Builder\FastTrackSignerBuilder.cs" />
     <Compile Include="src\Builder\FastTrackRoleBuilder.cs" />
     <Compile Include="src\Internal\RedirectResolver.cs" />
+    <Compile Include="src\Internal\Conversion\CustomFieldValueConverter.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSHARP.Targets" />
   <ProjectExtensions>
