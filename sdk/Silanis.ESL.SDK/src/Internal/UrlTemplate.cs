@@ -99,6 +99,10 @@ namespace Silanis.ESL.SDK.Internal
 		// Reminder Service
 		public static readonly string REMINDER_PATH = "/packages/{packageId}/reminders";
 
+        // NotaryJournal Service
+        public static readonly string NOTARY_JOURNAL_PATH = "/user/{userId}/journal";
+        public static readonly string NOTARY_JOURNAL_LIST_PATH = "/user/{userId}/journal?to={to}&from={from}&dir={dir}";
+
         //Authentication Token Services
         public static readonly string ESL_AUTHENTICATION_PATH = "/auth";
         public static readonly string USER_AUTHENTICATION_TOKEN_PATH = "/authenticationTokens";

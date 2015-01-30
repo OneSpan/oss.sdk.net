@@ -16,7 +16,7 @@ namespace SDK.Examples
         {
         }
 
-        public GetGroupSummariesExample(string apiKey, string apiUrl) : base(apiKey, apiUrl)
+        public GetGroupSummariesExample(string apiUrl, string apiKey) : base(apiUrl, apiKey)
         {
         }
 
