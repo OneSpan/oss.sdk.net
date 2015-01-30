@@ -17,7 +17,7 @@ namespace SDK.Examples
         public Sender retrievedSender1, retrievedSender2, retrievedSender3;
         public Sender retrievedUpdatedSender3;
 
-        public SenderManipulationExample(Props props) : this(props.Get("api.url"), props.Get("api.key"))
+        public SenderManipulationExample(Props props) : this(props.Get("api.key"), props.Get("api.url"))
         {
         }
 

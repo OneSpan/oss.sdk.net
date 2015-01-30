@@ -18,7 +18,7 @@ namespace SDK.Examples
         private Stream fileStream;
 
 
-        public SenderAuthenticationTokenExample( Props props ) : this(props.Get("api.url"), props.Get("api.key"), props.Get("webpage.url"))
+        public SenderAuthenticationTokenExample( Props props ) : this(props.Get("api.key"), props.Get("api.url"), props.Get("webpage.url"))
         {
         }
 

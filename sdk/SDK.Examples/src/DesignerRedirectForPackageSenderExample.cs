@@ -18,9 +18,7 @@ namespace SDK.Examples
         private Stream fileStream;
         private string packageSenderEmail;
 
-        public DesignerRedirectForPackageSenderExample( Props props ) : this(props.Get("api.url"),
-                props.Get("api.key"),
-                props.Get("webpage.url"))
+        public DesignerRedirectForPackageSenderExample( Props props ) : this(props.Get("api.key"), props.Get("api.url"), props.Get("webpage.url"))
         {
         }
 

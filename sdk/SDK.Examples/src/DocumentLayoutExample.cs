@@ -33,7 +33,7 @@ namespace SDK.Examples
         public readonly string APPLY_LAYOUT_DOCUMENT_ID = "docId";
         public readonly string APPLY_LAYOUT_DOCUMENT_DESCRIPTION = "Document with applied layout description.";
 
-        public DocumentLayoutExample(Props props) : this(props.Get("api.url"), props.Get("api.key"), props.Get("1.email"))
+        public DocumentLayoutExample(Props props) : this(props.Get("api.key"), props.Get("api.url"), props.Get("1.email"))
         {
         }
 

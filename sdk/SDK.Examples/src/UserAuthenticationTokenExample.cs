@@ -14,7 +14,7 @@ namespace SDK.Examples
 
         private AuthenticationClient AuthenticationClient;
 
-        public UserAuthenticationTokenExample( Props props ) : this(props.Get("api.url"), props.Get("api.key"), props.Get("webpage.url")) {
+        public UserAuthenticationTokenExample( Props props ) : this(props.Get("api.key"), props.Get("api.url"), props.Get("webpage.url")) {
         }
 
         public UserAuthenticationTokenExample( string apiKey, string apiUrl, string webpageUrl) : base( apiKey, apiUrl ) {

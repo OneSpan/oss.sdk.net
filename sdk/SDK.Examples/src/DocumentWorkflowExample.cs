@@ -16,7 +16,7 @@ namespace SDK.Examples
         private Stream fileStream1;
         private Stream fileStream2;
 
-        public DocumentWorkflowExample( Props props ) : this(props.Get("api.url"), props.Get("api.key"), props.Get("1.email")) {
+        public DocumentWorkflowExample( Props props ) : this(props.Get("api.key"), props.Get("api.url"), props.Get("1.email")) {
         }
 
         public DocumentWorkflowExample( String apiKey, String apiUrl, String email1 ) : base( apiKey, apiUrl ) {

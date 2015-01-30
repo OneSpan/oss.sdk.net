@@ -23,7 +23,7 @@ namespace SDK.Examples
         public readonly string OPT_OUT_REASON_2 = "OptOut reason Two";
         public readonly string OPT_OUT_REASON_3 = "OptOut reason Three";
 
-        public DocumentPackageSettingsExample( Props props ) : this(props.Get("api.url"), props.Get("api.key"), props.Get("1.email")) {
+        public DocumentPackageSettingsExample( Props props ) : this(props.Get("api.key"), props.Get("api.url"), props.Get("1.email")) {
         }
 
         public DocumentPackageSettingsExample( String apiKey, String apiUrl, String email1 ) : base( apiKey, apiUrl ) {

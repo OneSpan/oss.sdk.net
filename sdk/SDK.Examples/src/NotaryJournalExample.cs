@@ -16,11 +16,11 @@ namespace SDK.Examples
             new NotaryJournalExample(Props.GetInstance()).Run();
         }
 
-        public NotaryJournalExample(Props props) : this(props.Get("api.url"), props.Get("api.key"))
+        public NotaryJournalExample(Props props) : this(props.Get("api.key"), props.Get("api.url"))
         {
         }
 
-        public NotaryJournalExample(string apiUrl, string apiKey) : base(apiUrl, apiKey)
+        public NotaryJournalExample(string apiKey, string apiUrl) : base(apiKey, apiUrl)
         {
             this.senderUID = Converter.apiKeyToUID(apiKey);
         }

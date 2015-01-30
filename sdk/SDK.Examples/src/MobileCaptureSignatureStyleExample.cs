@@ -20,7 +20,7 @@ namespace SDK.Examples
         public readonly int MOBILE_CAPTURE_SIGNATURE_POSITION_X = 500;
         public readonly int MOBILE_CAPTURE_SIGNATURE_POSITION_Y = 100;
 
-        public MobileCaptureSignatureStyleExample(Props props) : this(props.Get("api.url"), props.Get("api.key"), props.Get("1.email"))
+        public MobileCaptureSignatureStyleExample(Props props) : this(props.Get("api.key"), props.Get("api.url"), props.Get("1.email"))
         {
         }
 

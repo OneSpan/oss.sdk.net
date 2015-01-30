@@ -34,7 +34,7 @@ namespace SDK.Examples
         public readonly string PACKAGE_SIGNER2_COMPANY = "Elvis Presley International";
         public readonly string PACKAGE_SIGNER2_CUSTOM_ID = "Signer2";
 
-        public CreatePackageFromTemplateExample(Props props) : this(props.Get("api.url"), props.Get("api.key"), props.Get("1.email"), props.Get("2.email"))
+        public CreatePackageFromTemplateExample(Props props) : this(props.Get("api.key"), props.Get("api.url"), props.Get("1.email"), props.Get("2.email"))
         {
         }
 

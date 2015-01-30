@@ -35,7 +35,7 @@ namespace SDK.Examples
         }
 
 
-        public CustomSenderInfoInCreatePackageFromTemplateExample(Props props) : this(props.Get("api.url"), props.Get("api.key"))
+        public CustomSenderInfoInCreatePackageFromTemplateExample(Props props) : this(props.Get("api.key"), props.Get("api.url"))
         {
         }
 

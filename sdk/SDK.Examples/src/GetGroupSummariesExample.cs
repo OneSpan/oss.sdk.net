@@ -12,7 +12,7 @@ namespace SDK.Examples
             new GetGroupSummariesExample(Props.GetInstance()).Run();
         }
 
-        public GetGroupSummariesExample(Props props) : this(props.Get("api.url"), props.Get("api.key"))
+        public GetGroupSummariesExample(Props props) : this(props.Get("api.key"), props.Get("api.url"))
         {
         }
 

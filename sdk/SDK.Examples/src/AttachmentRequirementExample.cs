@@ -27,7 +27,7 @@ namespace SDK.Examples
         public readonly string SIGNER1ID = "signer1Id";
         public readonly string REJECTION_COMMENT = "Reject: uploaded wrong attachment.";
 
-        public AttachmentRequirementExample(Props props) : this(props.Get("api.url"), props.Get("api.key"), props.Get("1.email"), props.Get("2.email"))
+        public AttachmentRequirementExample(Props props) : this(props.Get("api.key"), props.Get("api.url"), props.Get("1.email"), props.Get("2.email"))
         {
         }
 

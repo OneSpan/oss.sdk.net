@@ -69,7 +69,7 @@ namespace SDK.Examples
             get{ return retrievedLayoutSettings; }
         }
         
-        public UpdatePackageExample(Props props) : this(props.Get("api.url"), props.Get("api.key"))
+        public UpdatePackageExample(Props props) : this(props.Get("api.key"), props.Get("api.url"))
         {
         }
 

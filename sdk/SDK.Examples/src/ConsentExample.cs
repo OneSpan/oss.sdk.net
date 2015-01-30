@@ -17,7 +17,7 @@ namespace SDK.Examples
         private Stream fileStream1;
         private Stream fileStream2;
 
-        public ConsentExample( Props props ) : this(props.Get("api.url"), props.Get("api.key"), props.Get("1.email"), props.Get("2.email")) {
+        public ConsentExample( Props props ) : this(props.Get("api.key"), props.Get("api.url"), props.Get("1.email"), props.Get("2.email")) {
         }
 
         public ConsentExample( String apiKey, String apiUrl, String email1, String email2 ) : base( apiKey, apiUrl ) {

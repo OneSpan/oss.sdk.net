@@ -32,8 +32,7 @@ namespace SDK.Examples
         public List<Group> allGroupsAfterDelete;
         public List<string> groupMemberEmailsAfterUpdate;
 
-        public GroupManagementExample( Props props ) : this(props.Get("api.url"), 
-                                                            props.Get("api.key")) {
+        public GroupManagementExample( Props props ) : this(props.Get("api.key"), props.Get("api.url")) {
         }
 
         public GroupManagementExample( string apiKey, string apiUrl ) : base( apiKey, apiUrl ) {

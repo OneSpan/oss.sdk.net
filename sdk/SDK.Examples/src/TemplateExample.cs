@@ -34,7 +34,7 @@ namespace SDK.Examples
 
         public readonly string PACKAGE_NAME = "Package From Template";
 
-        public TemplateExample(Props props) : this(props.Get("api.url"), props.Get("api.key"), props.Get("1.email"), props.Get("2.email") )
+        public TemplateExample(Props props) : this(props.Get("api.key"), props.Get("api.url"), props.Get("1.email"), props.Get("2.email") )
         {
         }
 

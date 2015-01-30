@@ -30,7 +30,7 @@ namespace SDK.Examples
             new CustomFieldExample(Props.GetInstance()).Run();
         }
 
-        public CustomFieldExample(Props props) : this(props.Get("api.url"), props.Get("api.key"), props.Get("1.email"))
+        public CustomFieldExample(Props props) : this(props.Get("api.key"), props.Get("api.url"), props.Get("1.email"))
         {
         }
 

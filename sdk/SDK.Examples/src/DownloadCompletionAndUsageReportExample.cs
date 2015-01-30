@@ -26,11 +26,11 @@ namespace SDK.Examples
             new DownloadCompletionAndUsageReportExample(Props.GetInstance()).Run();
 		}
 
-        public DownloadCompletionAndUsageReportExample(Props props) : this(props.Get("api.url"), props.Get("api.key"), props.Get("1.email"))
+        public DownloadCompletionAndUsageReportExample(Props props) : this(props.Get("api.key"), props.Get("api.url"), props.Get("1.email"))
 		{
 		}
 
-        public DownloadCompletionAndUsageReportExample(string apiUrl, string apiKey, string email1) : base( apiUrl, apiKey )
+        public DownloadCompletionAndUsageReportExample(string apiKey, string apiUrl, string email1) : base( apiKey, apiUrl )
 		{
 			this.email1 = email1;
 			this.senderUID = Converter.apiKeyToUID(apiKey);

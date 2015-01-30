@@ -23,7 +23,7 @@ namespace SDK.Examples
             new CreateTemplateOnBehalfOfAnotherSenderExample(Props.GetInstance()).Run();
         }
 
-        public CreateTemplateOnBehalfOfAnotherSenderExample(Props props) : this(props.Get("api.url"), props.Get("api.key"), props.Get("1.email"))
+        public CreateTemplateOnBehalfOfAnotherSenderExample(Props props) : this(props.Get("api.key"), props.Get("api.url"), props.Get("1.email"))
         {
         }
 

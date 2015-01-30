@@ -15,7 +15,7 @@ namespace SDK.Examples
         private string email1;
         private Stream fileStream1;
 
-        public CreatePackageFromStreamExample( Props props ) : this(props.Get("api.url"), props.Get("api.key"), props.Get("1.email")) {
+        public CreatePackageFromStreamExample( Props props ) : this(props.Get("api.key"), props.Get("api.url"), props.Get("1.email")) {
         }
 
         public CreatePackageFromStreamExample( String apiKey, String apiUrl, String email1 ) : base( apiKey, apiUrl ) {

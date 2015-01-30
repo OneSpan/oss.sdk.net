@@ -26,7 +26,7 @@ namespace SDK.Examples
         private Stream fileStream1;
         private Stream fileStream2;
 
-        public HistoryDocumentExample(Props props) : this(props.Get("api.url"), props.Get("api.key"), props.Get("1.email"), props.Get("2.email"))
+        public HistoryDocumentExample(Props props) : this(props.Get("api.key"), props.Get("api.url"), props.Get("1.email"), props.Get("2.email"))
         {
         }
 
