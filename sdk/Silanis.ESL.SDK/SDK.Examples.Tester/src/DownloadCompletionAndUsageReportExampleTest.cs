@@ -19,8 +19,8 @@ namespace SDK.Examples
             Assert.GreaterOrEqual(completionReportForSender.Senders[0].Packages.Count, 1, "Number of package completion reports should be greater than 1.");
             Assert.GreaterOrEqual(completionReportForSender.Senders[0].Packages[0].Documents.Count, 1, "Number of document completion reports should be greater than 1.");
             Assert.GreaterOrEqual(completionReportForSender.Senders[0].Packages[0].Signers.Count, 1, "Number of signer completion reports should be greater than 1.");
-            Assert.IsNotNull(example.csvCompletionReport);
-            Assert.IsNotEmpty(example.csvCompletionReport);
+            Assert.IsNotNull(example.csvCompletionReportForSender);
+            Assert.IsNotEmpty(example.csvCompletionReportForSender);
 
             // Assert correct download of completion report for all senders
             CompletionReport completionReport = example.sdkCompletionReport;

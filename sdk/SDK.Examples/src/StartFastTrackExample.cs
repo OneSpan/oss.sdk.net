@@ -17,7 +17,7 @@ namespace SDK.Examples
         private Stream fileStream1;
 
         public PackageId templateId;
-        public String signingUrl;
+        public string signingUrl;
 
         public readonly string TEMPLATE_NAME = "StartFastTrackExample " + DateTime.Now;
         public readonly string TEMPLATE_DESCRIPTION = "This is a package created using the e-SignLive SDK";
