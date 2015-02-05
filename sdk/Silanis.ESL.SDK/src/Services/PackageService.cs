@@ -1417,7 +1417,7 @@ namespace Silanis.ESL.SDK.Services
 
         public string GetJournalEntriesAsCSV(string userId) 
         {
-            string path = template.UrlFor(UrlTemplate.NOTARY_JOURNAL_PATH)
+            string path = template.UrlFor(UrlTemplate.NOTARY_JOURNAL_CSV_PATH)
                     .Replace("{userId}", userId)
                     .Build();
 

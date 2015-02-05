@@ -101,6 +101,7 @@ namespace Silanis.ESL.SDK.Internal
 
         // NotaryJournal Service
         public static readonly string NOTARY_JOURNAL_PATH = "/user/{userId}/journal";
+        public static readonly string NOTARY_JOURNAL_CSV_PATH = "/user/{userId}/journal/download";
         public static readonly string NOTARY_JOURNAL_LIST_PATH = "/user/{userId}/journal?to={to}&from={from}&dir={dir}";
 
         //Authentication Token Services
