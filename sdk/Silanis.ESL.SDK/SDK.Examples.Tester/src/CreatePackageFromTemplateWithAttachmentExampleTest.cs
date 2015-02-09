@@ -13,7 +13,6 @@ namespace SDK.Examples
             CreatePackageFromTemplateWithAttachmentExample example = new CreatePackageFromTemplateWithAttachmentExample(Props.GetInstance());
             example.Run();
 
-
             DocumentPackage documentPackage = example.RetrievedPackage;
 
             foreach (Signer signer in documentPackage.Signers.Values) {

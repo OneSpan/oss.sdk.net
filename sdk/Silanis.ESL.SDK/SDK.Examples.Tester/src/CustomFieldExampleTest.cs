@@ -13,7 +13,6 @@ namespace SDK.Examples
 
             DocumentPackage documentPackage = example.RetrievedPackage;
             Assert.IsTrue(example.EslClient.GetCustomFieldService().DoesCustomFieldExist(example.customFieldId1));
-            Assert.IsTrue(example.EslClient.GetCustomFieldService().DoesCustomFieldValueExist(example.customFieldId1));
             Assert.IsFalse(example.EslClient.GetCustomFieldService().DoesCustomFieldExist(example.customFieldId2));
 
 			Assert.AreEqual(documentPackage.Documents["First Document"].Signatures.Count, 1);
