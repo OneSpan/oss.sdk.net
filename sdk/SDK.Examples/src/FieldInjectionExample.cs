@@ -25,6 +25,7 @@ namespace SDK.Examples
         override public void Execute()
         {
             DocumentPackage superDuperPackage = PackageBuilder.NewPackageNamed( "FieldInjectionExample " + DateTime.Now )
+                .WithSettings(DocumentPackageSettingsBuilder.NewDocumentPackageSettings().WithInPerson())
                 .WithSigner( SignerBuilder.NewSignerWithEmail( email1 )
                             .WithFirstName( "John" )
                             .WithLastName( "Smith" ) )
@@ -34,9 +35,12 @@ namespace SDK.Examples
                                   .WithSignature( SignatureBuilder.SignatureFor( email1 )
                                    .WithPositionExtracted() )
                                   .WithInjectedField( FieldBuilder.TextField()
+                                       .WithPositionExtracted()
                                        .WithId( "AGENT_SIG_1" )
                                        .WithName( "AGENT_SIG_1" )
-                                       .WithValue( "Test Value" ) ) )
+                                       .WithValue( "Test Value" ) )
+                                  .WithInjectedField( FieldBuilder.SignatureDate()
+                                       .WithPositionExtracted() ) )
                     .Build();
 
             packageId = eslClient.CreatePackage( superDuperPackage );

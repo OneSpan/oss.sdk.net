@@ -19,16 +19,17 @@ namespace SDK.Examples
         private string senderEmail;
 
         public PackageViewRedirectForPackageSenderExample( Props props ) : this(props.Get("api.key"),
-                                                                             props.Get("api.url"),
-                                                                             props.Get("webpage.url"))
+                                                                                props.Get("api.url"),
+                                                                                props.Get("webpage.url"),
+                                                                                props.Get("sender.email"))
         {
         }
 
-        public PackageViewRedirectForPackageSenderExample( string apiKey, string apiUrl, string webpageUrl) : base( apiKey, apiUrl )
+        public PackageViewRedirectForPackageSenderExample( string apiKey, string apiUrl, string webpageUrl, string senderEmail) : base( apiKey, apiUrl )
         {
             this.authenticationClient = new AuthenticationClient(webpageUrl);
             this.fileStream = File.OpenRead(new FileInfo(Directory.GetCurrentDirectory() + "/src/document.pdf").FullName);
-            this.senderEmail = GetRandomEmail();
+            this.senderEmail = senderEmail;
         }
 
         override public void Execute()
@@ -57,13 +58,16 @@ namespace SDK.Examples
                     .WithEmailMessage("This message should be delivered to all signers")
                     .WithDocument(DocumentBuilder.NewDocumentNamed("First Document")
                                   .FromStream(fileStream, DocumentType.PDF)
-                                  .WithId("doc1"))
+                                  .WithSignature(SignatureBuilder.SignatureFor(senderEmail)
+                                   .OnPage(0)
+                                   .AtPosition(100, 100)))
                     .Build();
-            PackageId customSenderPackageId = eslClient.CreatePackage (customSenderPackage);
 
-            string senderAuthenticationToken = eslClient.AuthenticationTokenService.CreateSenderAuthenticationToken(customSenderPackageId);
+            PackageId packageId = eslClient.CreatePackage (customSenderPackage);
 
-            generatedLinkToPackageViewForSender = authenticationClient.BuildRedirectToPackageViewForSender(senderAuthenticationToken, customSenderPackageId);
+            string userAuthenticationToken = eslClient.AuthenticationTokenService.CreateUserAuthenticationToken();
+
+            generatedLinkToPackageViewForSender = authenticationClient.BuildRedirectToPackageViewForSender(userAuthenticationToken, packageId);
 
             System.Console.WriteLine("PackageView redirect url: " + generatedLinkToPackageViewForSender);
         }
