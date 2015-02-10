@@ -7,10 +7,10 @@
     <OutputType>Library</OutputType>
     <NoStandardLibraries>false</NoStandardLibraries>
     <AssemblyName>Silanis.ESL</AssemblyName>
-    <TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
+    <TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -350,6 +350,8 @@
     <Compile Include="src\KnowledgeBasedAuthenticationStatus.cs" />
     <Compile Include="src\Internal\Conversion\KnowledgeBasedAuthenticationStatusConverter.cs" />
     <Compile Include="src\Models\KnowledgeBasedAuthentication.cs" />
+    <Compile Include="src\ProxyConfiguration.cs" />
+    <Compile Include="src\Builder\ProxyConfigurationBuilder.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSHARP.Targets" />
   <ProjectExtensions>

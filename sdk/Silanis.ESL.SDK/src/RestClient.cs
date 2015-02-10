@@ -10,9 +10,21 @@ namespace Silanis.ESL.SDK
 		private AuthHeaderGenerator headerGen;
         private Support support = new Support();
 
-        public RestClient(string apiToken)
-        {
+        private ProxyConfiguration proxyConfiguration;
+        private readonly Boolean allowAllSSLCertificates;
+
+        public RestClient(string apiToken) : this(apiToken, false){}
+
+        public RestClient(string apiToken, Boolean allowAllSSLCertificates)
+            : this(apiToken, allowAllSSLCertificates, null) {}
+
+        public RestClient(string apiToken, ProxyConfiguration proxyConfiguration)
+            : this(apiToken, false, proxyConfiguration){}
+
+        public RestClient(string apiToken, Boolean allowAllSSLCertificates, ProxyConfiguration proxyConfiguration) {
             this.apiToken = apiToken;
+            this.allowAllSSLCertificates = allowAllSSLCertificates;
+            this.proxyConfiguration = proxyConfiguration;
         }
 
         public string Post(string path, string jsonPayload) {

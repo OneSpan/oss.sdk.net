@@ -34,6 +34,9 @@
     <Reference Include="nunit.framework">
       <HintPath>..\..\References\nunit.framework.dll</HintPath>
     </Reference>
+    <Reference Include="TrotiNet">
+      <HintPath>..\..\References\TrotiNet.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="src\CustomFieldExampleTest.cs" />
@@ -96,6 +99,7 @@
     <Compile Include="src\SignerInformationForEquifaxUSAExampleTest.cs" />
     <Compile Include="src\MixedSignerAuthenticationExampleTest.cs" />
     <Compile Include="src\MobileCaptureSignatureStyleExampleTest.cs" />
+    <Compile Include="src\ProxyConfigurationExampleTest.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

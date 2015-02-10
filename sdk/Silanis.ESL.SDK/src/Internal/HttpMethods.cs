@@ -3,6 +3,7 @@ using System.Net;
 using System.IO;
 using System.Collections.Generic;
 using System.Reflection;
+using Silanis.ESL.SDK;
 
 namespace Silanis.ESL.SDK.Internal
 {
@@ -11,7 +12,7 @@ namespace Silanis.ESL.SDK.Internal
 	/// </summary>
 	public class HttpMethods
 	{
-        public const string ESL_API_VERSION = "10.6";
+        public const string ESL_API_VERSION = "10.8";
         public const string ESL_API_VERSION_HEADER = "esl-api-version=" + ESL_API_VERSION;
 
         public const string CONTENT_TYPE_APPLICATION_JSON = "application/json";
@@ -19,6 +20,8 @@ namespace Silanis.ESL.SDK.Internal
 
         public const string ACCEPT_TYPE_APPLICATION_JSON = "application/json";
         public const string ESL_ACCEPT_TYPE_APPLICATION_JSON = ACCEPT_TYPE_APPLICATION_JSON + "; " + ESL_API_VERSION_HEADER;
+
+        public static ProxyConfiguration proxyConfiguration;
 
 		public static byte[] PostHttp (string apiToken, string path, byte[] content)
 		{
@@ -29,6 +32,7 @@ namespace Silanis.ESL.SDK.Internal
 				request.ContentLength = content.Length;
 				request.Headers.Add ("Authorization", "Basic " + apiToken);
                 request.Accept = ESL_ACCEPT_TYPE_APPLICATION_JSON;
+                SetProxy(request);
 
 				using (Stream dataStream = request.GetRequestStream ()) {
 					dataStream.Write (content, 0, content.Length);
@@ -68,6 +72,7 @@ namespace Silanis.ESL.SDK.Internal
 				request.ContentLength = content.Length;
 				request.Headers.Add ("Authorization", "Basic " + apiToken);
                 request.Accept = ESL_ACCEPT_TYPE_APPLICATION_JSON;
+                SetProxy(request);
 
 				using (Stream dataStream = request.GetRequestStream ()) {
 					dataStream.Write (content, 0, content.Length);
@@ -111,6 +116,7 @@ namespace Silanis.ESL.SDK.Internal
                 HttpWebRequest request = (HttpWebRequest)WebRequest.Create (path);
                 request.Method = "GET";
                 request.Accept = ESL_ACCEPT_TYPE_APPLICATION_JSON;
+                SetProxy(request);
 
                 WebResponse response = request.GetResponse ();
 
@@ -186,6 +192,7 @@ namespace Silanis.ESL.SDK.Internal
 				request.Method = "GET";
 				request.Headers.Add ("Authorization", "Basic " + apiToken);
 				request.Accept = acceptType;
+                SetProxy(request);
 
 				WebResponse response = request.GetResponse ();
 
@@ -218,6 +225,7 @@ namespace Silanis.ESL.SDK.Internal
                 WebRequest request = WebRequest.Create (path);
 				request.Method = "GET";
 				request.Headers.Add ("Authorization", "Basic " + apiToken);
+                SetProxy(request);
 
 				WebResponse response = request.GetResponse ();
 
@@ -251,6 +259,7 @@ namespace Silanis.ESL.SDK.Internal
 				request.Method = "DELETE";
 				request.Headers.Add ("Authorization", "Basic " + apiToken);
                 request.Accept = ESL_ACCEPT_TYPE_APPLICATION_JSON;
+                SetProxy(request);
 
 				WebResponse response = request.GetResponse ();
 
@@ -290,6 +299,7 @@ namespace Silanis.ESL.SDK.Internal
 				request.ContentType = string.Format ("multipart/form-data; boundary={0}", boundary);
 				request.ContentLength = content.Length;
 				AddAuthorizationHeader(request, authHeaderGen);
+                SetProxy(request);
 
 				using (Stream dataStream = request.GetRequestStream ()) {
 					dataStream.Write (content, 0, content.Length);
@@ -330,6 +340,18 @@ namespace Silanis.ESL.SDK.Internal
 			}
 		}
 
+        private static void SetProxy (WebRequest request)
+        {
+            if (proxyConfiguration != null)
+            {
+                WebProxy webProxy = new WebProxy(new Uri(proxyConfiguration.GetScheme() + "://" + proxyConfiguration.GetHost() + ":" + proxyConfiguration.GetPort()));
+                if (proxyConfiguration.HasCredentials())
+                {
+                    webProxy.Credentials = new NetworkCredential(proxyConfiguration.GetUserName(), proxyConfiguration.GetPassword());
+                }
+                request.Proxy = webProxy;
+            }
+        }
 	}
 }
 
