@@ -79,13 +79,13 @@ namespace Silanis.ESL.SDK
 			int signerCount = 1;
 			foreach (Signer signer in sdkPackage.Signers.Values)
 			{
-				Silanis.ESL.API.Role role = new SignerConverter(signer).ToAPIRole("role" + signerCount);
+                Silanis.ESL.API.Role role = new SignerConverter(signer).ToAPIRole("signer" + signerCount);
 				package.AddRole(role);
 				signerCount++;
 			}
 			foreach (Signer signer in sdkPackage.Placeholders.Values)
 			{
-				Silanis.ESL.API.Role role = new SignerConverter(signer).ToAPIRole("role" + signerCount);
+                Silanis.ESL.API.Role role = new SignerConverter(signer).ToAPIRole("signer" + signerCount);
 				package.AddRole(role);
 				signerCount++;
 			}

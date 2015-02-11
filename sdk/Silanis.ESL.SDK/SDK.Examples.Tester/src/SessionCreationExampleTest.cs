@@ -12,7 +12,7 @@ namespace SDK.Examples
 			SessionCreationExample example = new SessionCreationExample(Props.GetInstance());
 			example.Run();
 
-			Assert.IsNotNull(example.SignerSessionToken);
+			Assert.IsNotNull(example.signerSessionToken);
         }
     }
 }
