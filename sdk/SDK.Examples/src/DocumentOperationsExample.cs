@@ -10,7 +10,6 @@ namespace SDK.Examples
 	public class DocumentOperationsExample : SDKSample
 	{
         public DocumentPackage BuiltPackage{ get; set; }
-        public DocumentPackage RetrievedPackage{ get; set; }
         public DocumentPackage RetrievedPackageWithNewDocument{ get; set; }
         public Document RetrievedUpdatedDocument{ get; set; }
         public DocumentPackage RetrievedPackageWithUpdatedDocument{ get; set; }
@@ -27,7 +26,7 @@ namespace SDK.Examples
             new DocumentOperationsExample(Props.GetInstance()).Run();
         }
 
-		public DocumentOperationsExample(Props props) : base(props.Get("api.url"), props.Get("api.key"))
+		public DocumentOperationsExample(Props props) : base(props.Get("api.key"), props.Get("api.url"))
 		{
 		}
 
@@ -48,7 +47,7 @@ namespace SDK.Examples
             PackageId packageId = eslClient.CreatePackage(BuiltPackage);
 			Console.WriteLine("package created, id = " + packageId);
             
-            RetrievedPackage = eslClient.GetPackage(packageId);
+            retrievedPackage = eslClient.GetPackage(packageId);
 
 			// 2. Construct a document
             Signature signature = SignatureBuilder.SignatureFor("john.smith@email.com")
@@ -62,7 +61,7 @@ namespace SDK.Examples
 				.Build();
 
 			// 3. Attach the document to the created package by uploading the document.
-			document = eslClient.UploadDocument(document, RetrievedPackage);
+			document = eslClient.UploadDocument(document, retrievedPackage);
 			Console.WriteLine("Document was uploaded");
             
             RetrievedPackageWithNewDocument = eslClient.GetPackage(packageId);

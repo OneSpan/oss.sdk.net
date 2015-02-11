@@ -13,6 +13,14 @@ namespace SDK.Examples
             new UpdatePackageExample(Props.GetInstance()).Run();
         }
 
+        public readonly string DECLINE_REASON_1 = "Decline reason One";
+        public readonly string DECLINE_REASON_2 = "Decline reason Two";
+        public readonly string DECLINE_REASON_3 = "Decline reason Three";
+
+        public readonly string OPT_OUT_REASON_1 = "OptOut reason One";
+        public readonly string OPT_OUT_REASON_2 = "OptOut reason Two";
+        public readonly string OPT_OUT_REASON_3 = "OptOut reason Three";
+
         private DocumentPackage sentPackage;
         public DocumentPackage SentPackage
         {
@@ -49,12 +57,6 @@ namespace SDK.Examples
             get{ return updatedLayoutSettings; }
         }
 
-        private DocumentPackage retrievedPackage;
-        public DocumentPackage RetrievedPackage
-        {
-            get{ return retrievedPackage; }
-        }
-        
         private DocumentPackageSettings retrievedSettings;
         public DocumentPackageSettings RetrievedSettings
         {
@@ -67,7 +69,7 @@ namespace SDK.Examples
             get{ return retrievedLayoutSettings; }
         }
         
-        public UpdatePackageExample(Props props) : this(props.Get("api.url"), props.Get("api.key"))
+        public UpdatePackageExample(Props props) : this(props.Get("api.key"), props.Get("api.url"))
         {
         }
 
@@ -95,6 +97,9 @@ namespace SDK.Examples
             sentSettings = DocumentPackageSettingsBuilder.NewDocumentPackageSettings()
                     .WithCaptureText()
                     .WithDecline()
+                    .WithDeclineReason("old decline reason #1")
+                    .WithOptOutReason("old decline reason #2")
+                    .WithOptOutReason("old decline reason #3")
                     .WithDialogOnComplete()
                     .WithDocumentToolbarDownloadButton()
                     .WithHandOverLinkHref("http://www.old.ca")
@@ -137,7 +142,10 @@ namespace SDK.Examples
 
             updatedSettings = DocumentPackageSettingsBuilder.NewDocumentPackageSettings()
                     .WithoutCaptureText()
-                    .WithoutDecline()
+                    .WithDecline()
+                    .WithDeclineReason("new decline reason #1")
+                    .WithDeclineReason("new decline reason #2")
+                    .WithDeclineReason("new decline reason #3")
                     .WithoutDialogOnComplete()
                     .WithoutDocumentToolbarDownloadButton()
                     .WithHandOverLinkHref("http://www.new.ca")

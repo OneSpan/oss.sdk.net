@@ -21,7 +21,7 @@ namespace SDK.Examples
         public IDictionary<string, Sender> beforeContacts;
         public IDictionary<string, Sender> afterContacts;
 
-        public ContactsExample(Props props) : this(props.Get("api.url"), props.Get("api.key"), props.Get("1.email"))
+        public ContactsExample(Props props) : this(props.Get("api.key"), props.Get("api.url"), props.Get("1.email"))
         {
         }
 
@@ -62,6 +62,7 @@ namespace SDK.Examples
             eslClient.SendPackage(packageId);
 
             afterContacts = eslClient.AccountService.GetContacts();
+            retrievedPackage = eslClient.GetPackage(packageId);
         }
     }
 }

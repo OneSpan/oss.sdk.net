@@ -81,7 +81,7 @@ namespace Silanis.ESL.SDK
             get;
             set;
         }
-        public Int32 TimeAtAddress {
+        public Nullable<Int32> TimeAtAddress {
             get;
             set;
         }

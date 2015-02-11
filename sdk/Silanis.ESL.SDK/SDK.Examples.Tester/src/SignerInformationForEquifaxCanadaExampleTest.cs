@@ -13,7 +13,7 @@ namespace SDK.Examples
             SignerInformationForEquifaxCanadaExample example = new SignerInformationForEquifaxCanadaExample(Props.GetInstance());
             example.Run();
 
-            DocumentPackage documentPackage = example.EslClient.GetPackage(example.PackageId);
+            DocumentPackage documentPackage = example.RetrievedPackage;
 
             SignerInformationForEquifaxCanada signerInformationForEquifaxCanada = documentPackage.Signers[example.SIGNER_EMAIL].KnowledgeBasedAuthentication.SignerInformationForEquifaxCanada;
 
@@ -28,7 +28,6 @@ namespace SDK.Examples
             Assert.AreEqual(signerInformationForEquifaxCanada.SocialInsuranceNumber, example.SOCIAL_INSURANCE_NUMBER);
             Assert.AreEqual(signerInformationForEquifaxCanada.HomePhoneNumber, example.HOME_PHONE_NUMBER);
             Assert.AreEqual(signerInformationForEquifaxCanada.DateOfBirth, example.DATE_OF_BIRTH);
-
         }
     }
 }

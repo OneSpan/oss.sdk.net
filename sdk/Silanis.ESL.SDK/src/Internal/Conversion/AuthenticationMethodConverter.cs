@@ -1,13 +1,17 @@
+using log4net;
 using System;
+using System.Reflection;
 
 namespace Silanis.ESL.SDK
 {
 	internal class AuthenticationMethodConverter
 	{
-		private Silanis.ESL.SDK.AuthenticationMethod sdkAuthMethod;
-		private Silanis.ESL.API.AuthScheme apiAuthMethod;
+        private ILog log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
 
-		public AuthenticationMethodConverter(Silanis.ESL.API.AuthScheme apiAuthMethod)
+		private Silanis.ESL.SDK.AuthenticationMethod sdkAuthMethod;
+		private string apiAuthMethod;
+
+		public AuthenticationMethodConverter(string apiAuthMethod)
 		{
 			this.apiAuthMethod = apiAuthMethod;
 		}
@@ -17,32 +21,14 @@ namespace Silanis.ESL.SDK
 			this.sdkAuthMethod = sdkAuthMethod;
 		}
 
-		public Silanis.ESL.API.AuthScheme ToAPIAuthMethod()
+		public string ToAPIAuthMethod()
 		{
-			switch (sdkAuthMethod)
-			{
-				case AuthenticationMethod.EMAIL:
-					return Silanis.ESL.API.AuthScheme.NONE;
-				case AuthenticationMethod.CHALLENGE:
-					return Silanis.ESL.API.AuthScheme.CHALLENGE;
-				case AuthenticationMethod.SMS:
-					return Silanis.ESL.API.AuthScheme.SMS;
-				default:
-					throw new EslException("Unknown AuthenticationMethod", null);
-			}
+            return sdkAuthMethod.getApiValue();
 		}
 
 		public Silanis.ESL.SDK.AuthenticationMethod ToSDKAuthMethod()
 		{
-			switch (apiAuthMethod)
-			{
-				case Silanis.ESL.API.AuthScheme.CHALLENGE:
-					return Silanis.ESL.SDK.AuthenticationMethod.CHALLENGE;
-				case Silanis.ESL.API.AuthScheme.SMS:
-					return Silanis.ESL.SDK.AuthenticationMethod.SMS;
-				default:
-					return Silanis.ESL.SDK.AuthenticationMethod.EMAIL;
-			}
+            return Silanis.ESL.SDK.AuthenticationMethod.valueOf(apiAuthMethod);
 		}
 	}
 }

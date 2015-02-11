@@ -15,6 +15,7 @@ namespace Silanis.ESL.SDK
             Signers = signers;
             Documents = documents;
             Placeholders = placeholders;
+            Status = DocumentPackageStatus.DRAFT;
         }
 
         public PackageId Id
@@ -73,6 +74,12 @@ namespace Silanis.ESL.SDK
         }
 
         public Nullable<DateTime> ExpiryDate
+        {
+            get;
+            set;
+        }
+
+        public Nullable<DateTime> UpdatedDate
         {
             get;
             set;

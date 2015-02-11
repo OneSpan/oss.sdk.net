@@ -7,8 +7,6 @@ namespace Silanis.ESL.SDK
 
 		private string httpHost;
 		private int httpPort;
-		private string httpsHost;
-		private int httpsPort;
 		private string userName;
 		private string password;
 		private Scheme scheme;
@@ -17,8 +15,6 @@ namespace Silanis.ESL.SDK
 		public ProxyConfiguration(){
 			httpHost = null;
 			httpPort = 0;
-			httpsHost = null;
-			httpsPort = 0;
 			userName = null;
 			password = null;
 			scheme = 0;
@@ -39,20 +35,6 @@ namespace Silanis.ESL.SDK
 			this.httpPort = httpPort;
 		}
 
-		public string GetHttpsHost() {
-			return httpsHost;
-		}
-		public void SetHttpsHost(string httpsHost) {
-			this.httpsHost = httpsHost;
-		}
-
-		public int GetHttpsPort() {
-			return httpsPort;
-		}
-		public void SetHttpsPort(int httpsPort) {
-			this.httpsPort = httpsPort;
-		}
-
 		public string GetUserName() {
 			return userName;
 		}
@@ -68,10 +50,7 @@ namespace Silanis.ESL.SDK
 		}
 
 		public string GetScheme() {
-            if (scheme == Scheme.http)
                 return "http";
-            else
-                return "https";
 		}
 
 		public bool HasCredentials() {
@@ -82,21 +61,11 @@ namespace Silanis.ESL.SDK
 		}
 
 		public string GetHost() {
-			if(IsHttp()){
 				return httpHost;
-			}
-			else{
-				return httpsHost;
-			}
 		}
 
 		public int GetPort() {
-			if(IsHttp()){
 				return httpPort;
-			}
-			else{
-				return httpsPort;
-			}
 		}
 
 		private enum Scheme{
@@ -107,12 +76,5 @@ namespace Silanis.ESL.SDK
 			scheme = Scheme.http;
 		}
 
-		public void SetHttpsScheme() {
-			scheme = Scheme.https;
-		}
-
-		private bool IsHttp() {
-			return scheme == Scheme.http;
-		}
 	}
 }

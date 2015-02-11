@@ -19,10 +19,9 @@ namespace SDK.Examples
         private string emailForSignerWithAuthenticationEquifaxCanada;
         private string emailForSignerWithAuthenticationEquifaxUsa;
 
-        private DocumentPackage retrievedPackage;
         private string documentName = "My Document";
 
-        public MixedSignerAuthenticationExample(Props props) : this(props.Get("api.url"), props.Get("api.key"), props.Get("1.email"), props.Get("2.email"))
+        public MixedSignerAuthenticationExample(Props props) : this(props.Get("api.key"), props.Get("api.url"), props.Get("1.email"), props.Get("2.email"))
         {
         }
 
@@ -30,11 +29,6 @@ namespace SDK.Examples
         {
             this.emailForSignerWithAuthenticationEquifaxCanada = signer1Email;
             this.emailForSignerWithAuthenticationEquifaxUsa = signer2Email;
-        }
-
-        public DocumentPackage RetrievedPackage
-        {
-            get { return retrievedPackage; }
         }
 
         override public void Execute()
@@ -52,13 +46,13 @@ namespace SDK.Examples
                                 .WithLastName("lastNameCanada")
                                 .WithStreetAddress("1111")
                                 .WithCity("Montreal")
-                                .WithProvince("Quebec")
-                                .WithPostalCode("A1A 1A1")
+                                .WithProvince("QC")
+                                .WithPostalCode("A1A1A1")
                                 .WithTimeAtAddress(1)
                                 .WithDriversLicenseNumber("Driver licence number")
-                                .WithSocialInsuranceNumber("111-222-333")
+                                .WithSocialInsuranceNumber("111222333")
                                 .WithHomePhoneNumber("514-111-2222")
-                                .WithDateOfBirth(new DateTime(2000, 1, 1)))
+                                .WithDateOfBirth(new DateTime(1965, 1, 1)))
                     .ChallengedWithQuestions(ChallengeBuilder.FirstQuestion("What's your favorite restaurant? (answer: Staffany)")
                         .Answer("Staffany")
                         .SecondQuestion("What sport do you play? (answer: hockey)")
@@ -77,12 +71,12 @@ namespace SDK.Examples
                                 .WithStreetAddress("2222")
                                 .WithCity("New York")
                                 .WithState("NY")
-                                .WithZip("000000")
-                                .WithSocialSecurityNumber("222-667-909833")
+                                .WithZip("65212")
+                                .WithSocialSecurityNumber("222667098")
                                 .WithHomePhoneNumber("870-111-6547")
                                 .WithTimeAtAddress(3)
                                 .WithDriversLicenseNumber("Driver License Number")
-                                .WithDateOfBirth(new DateTime(2002, 2, 2)))
+                                .WithDateOfBirth(new DateTime(1967, 2, 2)))
                     .ChallengedWithQuestions(ChallengeBuilder.FirstQuestion("What's your favorite sport? (answer: golf)")
                         .Answer("golf")
                         .SecondQuestion("What music instrument do you play? (answer: drums)")

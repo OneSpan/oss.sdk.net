@@ -48,7 +48,7 @@ namespace SDK.Tests
             sdkAuth1 = new AuthenticationConverter(apiAuth1).ToSDKAuthentication();
 
             Assert.IsNotNull(sdkAuth1);
-            Assert.AreEqual(sdkAuth1.Method.ToString(), apiAuth1.Scheme.ToString());
+            Assert.AreEqual(sdkAuth1.Method.getApiValue(), apiAuth1.Scheme);
             Assert.AreEqual(sdkAuth1.Challenges[0].Question, apiAuth1.Challenges[0].Question);
             Assert.AreEqual(sdkAuth1.Challenges[0].Answer, apiAuth1.Challenges[0].Answer);
         }
@@ -88,7 +88,7 @@ namespace SDK.Tests
             apiAuth1 = new AuthenticationConverter(sdkAuth1).ToAPIAuthentication();
 
             Assert.IsNotNull(apiAuth1);
-            Assert.AreEqual(apiAuth1.Scheme.ToString(), sdkAuth1.Method.ToString());
+            Assert.AreEqual(apiAuth1.Scheme, sdkAuth1.Method.getApiValue());
             Assert.AreEqual(apiAuth1.Challenges[0].Question, sdkAuth1.Challenges[0].Question);
             Assert.AreEqual(apiAuth1.Challenges[0].Answer, sdkAuth1.Challenges[0].Answer);
         }
@@ -110,7 +110,7 @@ namespace SDK.Tests
             authChallenge.Answer = "Max";
             authChallenge.MaskInput = true;
             result.AddChallenge(authChallenge);
-            result.Scheme = Silanis.ESL.API.AuthScheme.CHALLENGE;
+            result.Scheme = Silanis.ESL.SDK.AuthenticationMethod.CHALLENGE.getApiValue();
 
             return result;
         }

@@ -17,15 +17,15 @@ namespace SDK.Examples
         public Sender retrievedSender1, retrievedSender2, retrievedSender3;
         public Sender retrievedUpdatedSender3;
 
-        public SenderManipulationExample(Props props) : this(props.Get("api.url"), props.Get("api.key"), props.Get("1.email"), props.Get("2.email"), props.Get("3.email"))
+        public SenderManipulationExample(Props props) : this(props.Get("api.key"), props.Get("api.url"))
         {
         }
 
-        public SenderManipulationExample(string apiKey, string apiUrl, string email1, string email2, string email3) : base( apiKey, apiUrl )
+        public SenderManipulationExample(string apiKey, string apiUrl) : base( apiKey, apiUrl )
         {
-            this.email1 = email1;
-            this.email2 = Guid.NewGuid().ToString().Replace("-", "") + "@e-signlive.com";
-            this.email3 = email3;
+            this.email1 = GetRandomEmail();
+            this.email2 = GetRandomEmail();
+            this.email3 = GetRandomEmail();
         }
 
         override public void Execute()

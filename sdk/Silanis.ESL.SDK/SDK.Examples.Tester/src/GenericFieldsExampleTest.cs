@@ -14,7 +14,7 @@ namespace SDK.Examples
             GenericFieldsExample example = new GenericFieldsExample(Props.GetInstance());
             example.Run();
 
-            DocumentPackage documentPackage = example.EslClient.GetPackage(example.PackageId);
+            DocumentPackage documentPackage = example.RetrievedPackage;
 
             foreach (Signature signature in documentPackage.Documents[GenericFieldsExample.DOCUMENT_NAME].Signatures)
             {

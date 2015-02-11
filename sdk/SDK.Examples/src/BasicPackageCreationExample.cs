@@ -17,7 +17,7 @@ namespace SDK.Examples
         private Stream fileStream1;
         private Stream fileStream2;
 
-        public BasicPackageCreationExample(Props props) : this(props.Get("api.url"), props.Get("api.key"), props.Get("1.email"), props.Get("2.email"))
+        public BasicPackageCreationExample(Props props) : this(props.Get("api.key"), props.Get("api.url"), props.Get("1.email"), props.Get("2.email"))
         {
         }
 
@@ -85,6 +85,7 @@ namespace SDK.Examples
 
             packageId = eslClient.CreatePackageOneStep(superDuperPackage);
             eslClient.SendPackage(packageId);
+            retrievedPackage = eslClient.GetPackage(packageId);
         }
     }
 }

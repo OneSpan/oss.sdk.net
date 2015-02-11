@@ -15,7 +15,7 @@ namespace SDK.Examples
         private string email1;
         private Stream fileStream1;
 
-        public DeliverSignedDocumentsByEmailExample( Props props ) : this(props.Get("api.url"), props.Get("api.key"), props.Get("1.email")) {
+        public DeliverSignedDocumentsByEmailExample( Props props ) : this(props.Get("api.key"), props.Get("api.url"), props.Get("1.email")) {
         }
 
         public DeliverSignedDocumentsByEmailExample( String apiKey, String apiUrl, String email1 ) : base( apiKey, apiUrl ) {

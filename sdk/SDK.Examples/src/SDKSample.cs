@@ -7,6 +7,7 @@ namespace SDK.Examples
     {
 		protected EslClient eslClient;
         protected PackageId packageId;
+        protected DocumentPackage retrievedPackage;
 
 		public EslClient EslClient
 		{
@@ -24,7 +25,12 @@ namespace SDK.Examples
             }
         }
 
-        public SDKSample( string apiUrl, string apiKey )
+        public DocumentPackage RetrievedPackage
+        {
+            get { return retrievedPackage; }
+        }
+
+        public SDKSample( string apiKey, string apiUrl )
         {
             Console.Out.WriteLine("apiUrl: " + apiUrl + ", apiKey: " + apiKey);
             eslClient = new EslClient(apiKey, apiUrl);

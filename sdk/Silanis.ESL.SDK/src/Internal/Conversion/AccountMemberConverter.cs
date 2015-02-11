@@ -18,7 +18,7 @@ namespace Silanis.ESL.SDK
         }
 
         public Silanis.ESL.API.Sender ToAPISender() {
-            if (sdkAccountMember != null ) {
+            if (null!=sdkAccountMember) {
                 Silanis.ESL.API.Sender result = new Silanis.ESL.API.Sender();
                 
                 result.Address = new AddressConverter(sdkAccountMember.Address).ToAPIAddress();
@@ -29,8 +29,8 @@ namespace Silanis.ESL.SDK
                 result.Email = sdkAccountMember.Email;
                 result.Phone = sdkAccountMember.PhoneNumber;
                 result.Language = sdkAccountMember.Language;
-                Silanis.ESL.API.SenderStatus? convertedStatus = new SenderStatusConverter(sdkAccountMember.Status).ToAPISenderStatus();
-                if ( convertedStatus.HasValue ) result.Status = convertedStatus.Value;
+                string convertedStatus = new SenderStatusConverter(sdkAccountMember.Status).ToAPISenderStatus();
+                if ( !String.IsNullOrEmpty(convertedStatus) ) result.Status = convertedStatus;
                 return result;
             }
             else {

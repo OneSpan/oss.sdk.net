@@ -15,7 +15,7 @@ namespace SDK.Examples
         private string email1;
         private Stream fileStream1;
 
-        public DeletePackageExample( Props props ) : this(props.Get("api.url"), props.Get("api.key"), props.Get("1.email")) {
+        public DeletePackageExample( Props props ) : this(props.Get("api.key"), props.Get("api.url"), props.Get("1.email")) {
         }
 
         public DeletePackageExample( String apiKey, String apiUrl, String email1 ) : base( apiKey, apiUrl ) {
@@ -40,6 +40,7 @@ namespace SDK.Examples
             packageId = eslClient.CreatePackage(package);
             eslClient.SendPackage(packageId);
             eslClient.PackageService.DeletePackage(packageId);
+            retrievedPackage = eslClient.GetPackage(packageId);
         }
     }
 }

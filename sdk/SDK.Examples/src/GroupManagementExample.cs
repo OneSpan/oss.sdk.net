@@ -32,19 +32,14 @@ namespace SDK.Examples
         public List<Group> allGroupsAfterDelete;
         public List<string> groupMemberEmailsAfterUpdate;
 
-        public GroupManagementExample( Props props ) : this(props.Get("api.url"), 
-                                                            props.Get("api.key"), 
-                                                            props.Get("1.email"), 
-                                                            props.Get("2.email"), 
-                                                            props.Get("3.email"), 
-                                                            props.Get("4.email")) {
+        public GroupManagementExample( Props props ) : this(props.Get("api.key"), props.Get("api.url")) {
         }
 
-        public GroupManagementExample( string apiKey, string apiUrl, string email1, string email2, string email3, string email4 ) : base( apiKey, apiUrl ) {
-            this.email1 = email1;
-            this.email2 = email2;
-            this.email3 = email3;
-            this.email4 = email4;
+        public GroupManagementExample( string apiKey, string apiUrl ) : base( apiKey, apiUrl ) {
+            this.email1 = GetRandomEmail();
+            this.email2 = GetRandomEmail();
+            this.email3 = GetRandomEmail();
+            this.email4 = GetRandomEmail();
             this.fileStream1 = File.OpenRead(new FileInfo(Directory.GetCurrentDirectory() + "/src/document.pdf").FullName);
         }
 

@@ -15,20 +15,22 @@ namespace SDK.Examples
         public readonly string FRENCH_LANGUAGE = "fr";
         public readonly string FRENCH_NAME = "Numero du Joueur";
         public readonly string FRENCH_DESCRIPTION = "Le numero dans le dos de votre chandail d'equipe";
-        public readonly string FIELD_VALUE = "99";
+        public readonly string FIELD_VALUE1 = "11";
+        public readonly string FIELD_VALUE2 = "22";
 
         public string email1;
         private Stream documentInputStream1;
         public string customFieldId1, customFieldId2;
         public CustomField retrievedCustomField;
         public IList<CustomField> retrievedCustomFieldList1, retrievedCustomFieldList2;
+        public IList<CustomFieldValue> retrieveCustomFieldValueList1, retrieveCustomFieldValueList2;
 
         public static void Main(string[] args)
         {
             new CustomFieldExample(Props.GetInstance()).Run();
         }
 
-        public CustomFieldExample(Props props) : this(props.Get("api.url"), props.Get("api.key"), props.Get("1.email"))
+        public CustomFieldExample(Props props) : this(props.Get("api.key"), props.Get("api.url"), props.Get("1.email"))
         {
         }
 
@@ -56,7 +58,7 @@ namespace SDK.Examples
 
             CustomFieldValue customFieldValue = eslClient.GetCustomFieldService()
                 .SubmitCustomFieldValue(CustomFieldValueBuilder.CustomFieldValueWithId(customField1.Id)
-                        .WithValue(FIELD_VALUE)
+                        .WithValue(FIELD_VALUE1)
                         .build());
 
             // Second custom field
@@ -70,6 +72,11 @@ namespace SDK.Examples
 						WithDescription("The color of your team jersey"))
 					.Build());
 
+            CustomFieldValue customFieldValue2 = eslClient.GetCustomFieldService()
+                .SubmitCustomFieldValue(CustomFieldValueBuilder.CustomFieldValueWithId(customField2.Id)
+                                        .WithValue(FIELD_VALUE2)
+                                        .build());
+
             DocumentPackage superDuperPackage = PackageBuilder.NewPackageNamed("Sample Insurance policy")
                 .WithSigner(SignerBuilder.NewSignerWithEmail(email1)
                         .WithFirstName("John")
@@ -82,13 +89,14 @@ namespace SDK.Examples
 							.WithField(FieldBuilder.CustomField(customFieldValue.Id)
                                         .OnPage(0)
                                         .AtPosition(400, 200))
-						.WithField(FieldBuilder.CustomField(customField2.Id)
+                            .WithField(FieldBuilder.CustomField(customFieldValue2.Id)
 							.OnPage(0)
 							.AtPosition(400, 400))))
                 .Build();
 
             packageId = eslClient.CreatePackage(superDuperPackage);
             eslClient.SendPackage(packageId);
+            retrievedPackage = eslClient.GetPackage(packageId);
 
             // Get the entire list of custom field from account
             retrievedCustomFieldList1 = eslClient.GetCustomFieldService().GetCustomFields(Direction.ASCENDING);
@@ -101,6 +109,16 @@ namespace SDK.Examples
 
             // Delete the second custom field from account
             eslClient.GetCustomFieldService().DeleteCustomField(customFieldId2);
+
+            // Get the entire list of user custom field from the user
+            retrieveCustomFieldValueList1 = eslClient.GetCustomFieldService().GetCustomFieldValues();
+
+            // Delete the second custom field from the user
+            eslClient.GetCustomFieldService().DeleteCustomFieldValue(retrieveCustomFieldValueList1[1].Id);
+
+            // Get the entire list of user custom field from the user
+            retrieveCustomFieldValueList2 = eslClient.GetCustomFieldService().GetCustomFieldValues();
+
         }
     }
 }

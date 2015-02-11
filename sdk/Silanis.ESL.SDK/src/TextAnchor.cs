@@ -11,6 +11,9 @@ namespace Silanis.ESL.SDK
         private int xOffset, yOffset;
         private int width, height;
 
+        public TextAnchor(){
+            Position = TextAnchorPosition.TOPLEFT;
+        }
         public string AnchorText
         {
             get

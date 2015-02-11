@@ -7,11 +7,12 @@ namespace Silanis.ESL.SDK
 {
 	public class DocumentPackageSettingsBuilder
 	{
-		private Nullable<bool> enableInPerson = null;
+		private Nullable<bool> enableInPerson = true;
 		private Nullable<bool> enableOptOut = null;
 		private Nullable<bool> enableDecline = null;
 		private Nullable<bool> hideWatermark = null;
 		private Nullable<bool> hideCaptureText = null;
+        private List<string> declineReasons = new List<string>();
 		private List<string> optOutReasons = new List<string>();
 		private Nullable<int> maxAuthAttempts = null;
 		private Nullable<bool> showDocumentToolbarDownloadButton = true;
@@ -185,6 +186,12 @@ namespace Silanis.ESL.SDK
 			return this;
 		}
 
+        public DocumentPackageSettingsBuilder WithDeclineReason( String reason )
+        {
+            declineReasons.Add( reason );
+            return this;
+        }
+
 		public DocumentPackageSettingsBuilder WithOptOutReason( String reason )
 		{
 			optOutReasons.Add( reason );
@@ -222,8 +229,10 @@ namespace Silanis.ESL.SDK
 			result.EnableDecline = enableDecline;
 			result.HideWatermark = hideWatermark;
 			result.HideCaptureText = hideCaptureText;
-			foreach ( string reason in optOutReasons )
-				result.OptOutReasons.Add( reason );
+            foreach ( string declineReason in declineReasons )
+                result.DeclineReasons.Add( declineReason );
+            foreach ( string optOutReason in optOutReasons )
+                result.OptOutReasons.Add( optOutReason );
 			result.MaxAuthAttempts = maxAuthAttempts;
 			result.ShowDownloadButton = showDocumentToolbarDownloadButton;
 			result.ShowDialogOnComplete = showDialogOnComplete;
@@ -257,9 +266,14 @@ namespace Silanis.ESL.SDK
             showOwnerInPersonDropDown = !apiPackageSettings.Ceremony.HidePackageOwnerInPerson;
             showLanguageDropDown = !apiPackageSettings.Ceremony.HideLanguageDropdown;
 
-            foreach (string reason in apiPackageSettings.Ceremony.OptOutReasons)
+            foreach (string declineReason in apiPackageSettings.Ceremony.DeclineReasons)
             {
-                optOutReasons.Add(reason);
+                declineReasons.Add(declineReason);
+            }
+
+            foreach (string optOutReason in apiPackageSettings.Ceremony.OptOutReasons)
+            {
+                optOutReasons.Add(optOutReason);
             }
 
             maxAuthAttempts = apiPackageSettings.Ceremony.MaxAuthFailsAllowed;

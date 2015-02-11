@@ -6,6 +6,7 @@ using Silanis.ESL.API;
 using Newtonsoft.Json;
 using System.Reflection;
 using Silanis.ESL.SDK;
+using System.Collections.Generic;
 
 namespace Silanis.ESL.SDK
 {
@@ -155,6 +156,7 @@ namespace Silanis.ESL.SDK
 
 		public PackageId CreatePackage(DocumentPackage package)
         {
+            ValidateSignatures(package);
             if (!IsSdkVersionSetInPackageData(package))
             {
                 SetSdkVersionInPackageData(package);
@@ -174,6 +176,7 @@ namespace Silanis.ESL.SDK
 
         public PackageId CreatePackageOneStep(DocumentPackage package)
         {
+            ValidateSignatures(package);
             if (!IsSdkVersionSetInPackageData(package))
             {
                 SetSdkVersionInPackageData(package);
@@ -218,6 +221,7 @@ namespace Silanis.ESL.SDK
         
         public PackageId CreatePackageFromTemplate(PackageId templateId, DocumentPackage delta)
         {
+            ValidateSignatures(delta);
             SetNewSignersIndexIfRoleWorkflowEnabled(templateId, delta);
 			return templateService.CreatePackageFromTemplate( templateId, new DocumentPackageConverter(delta).ToAPIPackage() );
         }
@@ -233,6 +237,29 @@ namespace Silanis.ESL.SDK
                     firstSignerIndex++;
                 }
             }
+        }
+
+        private void ValidateSignatures(DocumentPackage documentPackage) {
+            foreach(KeyValuePair<string,Document> document in documentPackage.Documents) {
+                ValidateMixingSignatureAndAcceptance(document.Value);
+            }
+        }
+
+        private void ValidateMixingSignatureAndAcceptance(Document document) {
+            if(CheckAcceptanceSignatureStyle(document)) {
+                foreach(Signature signature in document.Signatures) {
+                    if (signature.Style != SignatureStyle.ACCEPTANCE )
+                        throw new EslException("It is not allowed to use acceptance signature styles and other signature styles together in one document.", null);
+                }
+            }
+        }
+
+        private bool CheckAcceptanceSignatureStyle(Document document) {
+            foreach (Signature signature in document.Signatures) {
+                if (signature.Style == SignatureStyle.ACCEPTANCE)
+                    return true;
+            }
+            return false;
         }
 
         private bool CheckSignerOrdering(DocumentPackage template) {
@@ -313,6 +340,10 @@ namespace Silanis.ESL.SDK
         public void UpdatePackage(Silanis.ESL.SDK.PackageId packageId, DocumentPackage sentSettings)
         {
 			packageService.UpdatePackage( packageId, new DocumentPackageConverter(sentSettings).ToAPIPackage() );
+        }
+
+        public void ChangePackageStatusToDraft(PackageId packageId) {
+            packageService.ChangePackageStatusToDraft(packageId);
         }
         
 		public SigningStatus GetSigningStatus (PackageId packageId, string signerId, string documentId)

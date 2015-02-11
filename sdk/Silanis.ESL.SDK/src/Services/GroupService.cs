@@ -89,6 +89,15 @@ namespace Silanis.ESL.SDK.Services
             }
             return result;
         }
+
+        public List<GroupSummary> GetGroupSummaries() {
+            Silanis.ESL.API.Result<Silanis.ESL.API.GroupSummary> apiResponse = apiClient.GetGroupSummaries();
+            List<GroupSummary> result = new List<GroupSummary>();
+            foreach ( Silanis.ESL.API.GroupSummary apiGroupSummary in apiResponse.Results ) {
+                result.Add( new GroupSummaryConverter( apiGroupSummary ).ToSDKGroupSummary() );
+            }
+            return result;
+        }
     }
 }
 

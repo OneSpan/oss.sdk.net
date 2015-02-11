@@ -11,7 +11,7 @@ namespace SDK.Examples
             new ExceptionHandlingExample(Props.GetInstance()).Run();
         }
 
-        public ExceptionHandlingExample(Props props) : this(props.Get("api.url"), props.Get("api.key"))
+        public ExceptionHandlingExample(Props props) : this(props.Get("api.key"), props.Get("api.url"))
         {
         }
 

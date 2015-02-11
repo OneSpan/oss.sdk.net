@@ -13,7 +13,7 @@ namespace SDK.Examples
             SignerBoundFieldsExample example = new SignerBoundFieldsExample(Props.GetInstance());
             example.Run();
 
-            DocumentPackage documentPackage = example.EslClient.GetPackage(example.PackageId);
+            DocumentPackage documentPackage = example.RetrievedPackage;
 
             foreach (Signature signature in documentPackage.Documents[example.DOCUMENT_NAME].Signatures)
             {

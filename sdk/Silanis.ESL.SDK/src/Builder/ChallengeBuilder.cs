@@ -23,11 +23,18 @@ namespace Silanis.ESL.SDK.Builder
 			return Answer(answer, Challenge.MaskOptions.None);
 		}
 
+        [Obsolete]
 		public ChallengeBuilder Answer(string answer, Challenge.MaskOptions maskOption)
 		{
 			challenges.Add (new Challenge(question, answer, maskOption));
 			return this;
 		}
+
+        public ChallengeBuilder AnswerWithMaskInput(string answer)
+        {
+            challenges.Add (new Challenge(question, answer, Challenge.MaskOptions.MaskInput));
+            return this;
+        }
 
 		public ChallengeBuilder SecondQuestion (string question)
 		{

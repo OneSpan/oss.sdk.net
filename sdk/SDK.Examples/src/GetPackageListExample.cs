@@ -13,7 +13,7 @@ namespace SDK.Examples
             new GetPackageExample(Props.GetInstance()).Run();
         }
 
-        public GetPackageListExample( Props props ) : this(props.Get("api.url"), props.Get("api.key")) {
+        public GetPackageListExample( Props props ) : this(props.Get("api.key"), props.Get("api.url")) {
         }
 
         public GetPackageListExample( String apiKey, String apiUrl ) : base( apiKey, apiUrl ) {

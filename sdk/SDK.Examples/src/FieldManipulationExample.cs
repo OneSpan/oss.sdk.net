@@ -25,7 +25,7 @@ namespace SDK.Examples
 
         public DocumentPackage createdPackage;
 
-        public FieldManipulationExample(Props props) : this(props.Get("api.url"), props.Get("api.key"), props.Get("1.email"))
+        public FieldManipulationExample(Props props) : this(props.Get("api.key"), props.Get("api.url"), props.Get("1.email"))
         {
         }
 

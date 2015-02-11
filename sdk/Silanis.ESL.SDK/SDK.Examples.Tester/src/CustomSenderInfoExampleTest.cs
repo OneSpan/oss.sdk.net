@@ -16,7 +16,7 @@ namespace SDK.Examples
 			example = new CustomSenderInfoExample(Props.GetInstance());
 			example.Run();
 
-			DocumentPackage package = example.EslClient.GetPackage(example.PackageId);
+            DocumentPackage package = example.RetrievedPackage;
 
 			Assert.IsNotNull(package.SenderInfo);
 			Assert.AreEqual(CustomSenderInfoExample.SENDER_FIRST_NAME, package.SenderInfo.FirstName);

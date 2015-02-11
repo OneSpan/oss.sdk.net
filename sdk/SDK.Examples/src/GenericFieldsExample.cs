@@ -38,7 +38,7 @@ namespace SDK.Examples
         public static readonly int TEXT_AREA_PAGE = 0;
         public static readonly string TEXT_AREA_VALUE = "textAreaValue";
 
-        public GenericFieldsExample(Props props) : this(props.Get("api.url"), props.Get("api.key"), props.Get("1.email"))
+        public GenericFieldsExample(Props props) : this(props.Get("api.key"), props.Get("api.url"), props.Get("1.email"))
         {
         }
 
@@ -114,6 +114,7 @@ namespace SDK.Examples
             packageId = eslClient.CreatePackage(package);
 
             eslClient.SendPackage(PackageId);
+            retrievedPackage = eslClient.GetPackage(packageId);
         }
     }
 }

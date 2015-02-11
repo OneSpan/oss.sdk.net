@@ -15,7 +15,7 @@ namespace SDK.Examples
             BasicPackageCreationExample example = new BasicPackageCreationExample( Props.GetInstance() );
             example.Run();
 
-            DocumentPackage documentPackage = example.EslClient.GetPackage(example.PackageId);
+            DocumentPackage documentPackage = example.RetrievedPackage;
 
             // Verify if the package is created correctly
             Assert.AreEqual("This is a package created using the e-SignLive SDK", documentPackage.Description);

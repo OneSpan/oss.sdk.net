@@ -5,13 +5,13 @@ namespace Silanis.ESL.SDK
 	internal class SenderStatusConverter
     {
 		private Silanis.ESL.SDK.SenderStatus sdkSenderStatus;
-		private Silanis.ESL.API.SenderStatus apiSenderStatus;
+		private string apiSenderStatus;
 
 		/// <summary>
 		/// Construct with API SenderStatus object involved in conversion.
 		/// </summary>
 		/// <param name="apiSenderStatus">API sender status.</param>
-		public SenderStatusConverter(Silanis.ESL.API.SenderStatus apiSenderStatus)
+		public SenderStatusConverter(string apiSenderStatus)
 		{
 			this.apiSenderStatus = apiSenderStatus;
 		}
@@ -29,19 +29,9 @@ namespace Silanis.ESL.SDK
 		/// Convert from SDK SenderStatus to API SenderStatus.
 		/// </summary>
 		/// <returns>The API sender status.</returns>
-		public Silanis.ESL.API.SenderStatus ToAPISenderStatus()
+		public string ToAPISenderStatus()
 		{
-			switch (sdkSenderStatus)
-			{
-				case SenderStatus.ACTIVE:
-					return Silanis.ESL.API.SenderStatus.ACTIVE;
-				case SenderStatus.INVITED:
-					return Silanis.ESL.API.SenderStatus.INVITED;
-				case SenderStatus.LOCKED:
-					return Silanis.ESL.API.SenderStatus.LOCKED;
-				default:
-                    throw new EslException(String.Format("Unable to decode the sender status {0}", sdkSenderStatus), null);
-			}
+            return sdkSenderStatus.getApiValue();
 		}
 
 		/// <summary>
@@ -50,17 +40,7 @@ namespace Silanis.ESL.SDK
 		/// <returns>The SDK sender status.</returns>
 		public Silanis.ESL.SDK.SenderStatus ToSDKSenderStatus()
 		{
-			switch (apiSenderStatus)
-			{
-				case Silanis.ESL.API.SenderStatus.ACTIVE:
-					return SenderStatus.ACTIVE;
-				case Silanis.ESL.API.SenderStatus.INVITED:
-					return SenderStatus.INVITED;
-				case Silanis.ESL.API.SenderStatus.LOCKED:
-					return SenderStatus.LOCKED;
-				default:
-                    throw new EslException(String.Format("Unable to decode the sender status {0}", apiSenderStatus), null);
-			}
+           return Silanis.ESL.SDK.SenderStatus.valueOf(apiSenderStatus);
 		}
     }
 }

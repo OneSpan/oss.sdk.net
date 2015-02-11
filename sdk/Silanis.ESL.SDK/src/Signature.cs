@@ -15,6 +15,7 @@ namespace Silanis.ESL.SDK
 			Page = page;
 			X = x;
 			Y = y;
+            Style = SignatureStyle.HAND_DRAWN;
 		}
 
         public Signature( GroupId groupId, int page, double x, double y)
@@ -25,6 +26,7 @@ namespace Silanis.ESL.SDK
             Page = page;
             X = x;
             Y = y;
+            Style = SignatureStyle.HAND_DRAWN;
         }
         
         public Signature(Placeholder roleId, int page, double x, double y)
@@ -35,6 +37,7 @@ namespace Silanis.ESL.SDK
             Page = page;
             X = x;
             Y = y;
+            Style = SignatureStyle.HAND_DRAWN;
         }
 
         public GroupId GroupId

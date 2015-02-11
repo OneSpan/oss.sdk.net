@@ -13,7 +13,7 @@ namespace SDK.Examples
             ChangeSignerExample example = new ChangeSignerExample(Props.GetInstance());
             example.Run();
 
-            DocumentPackage documentPackage = example.EslClient.GetPackage(example.PackageId);
+            DocumentPackage documentPackage = example.RetrievedPackage;
             Assert.IsTrue(documentPackage.Signers[example.email1].CanChangeSigner);
         }
     }

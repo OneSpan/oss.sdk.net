@@ -6,7 +6,7 @@ namespace Silanis.ESL.SDK.src.Internal.Conversion
 {
     class TextAnchorPositionConverter
     {
-        private Nullable<TextAnchorPosition> sdkPosition = null;
+        private TextAnchorPosition sdkPosition = null;
         private String apiAnchorPoint = null;
 
         public TextAnchorPositionConverter(TextAnchorPosition sdkPosition)
@@ -23,11 +23,11 @@ namespace Silanis.ESL.SDK.src.Internal.Conversion
         {
             if (sdkPosition != null)
             {
-                return sdkPosition.Value;
+                return sdkPosition;
             }
             else
             {
-                return (TextAnchorPosition)Enum.Parse(typeof(TextAnchorPosition), apiAnchorPoint);
+                return TextAnchorPosition.valueOf(apiAnchorPoint);
             }
         }
 
@@ -37,10 +37,7 @@ namespace Silanis.ESL.SDK.src.Internal.Conversion
             {
                 return apiAnchorPoint;
             }
-            else
-            {
-                return sdkPosition.ToString();
-            }
+            return sdkPosition.getApiValue();
         }
     }
 }

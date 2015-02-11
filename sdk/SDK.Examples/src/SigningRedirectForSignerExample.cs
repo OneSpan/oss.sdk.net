@@ -22,8 +22,8 @@ namespace SDK.Examples
         private Stream fileStream;
         private string signerEmail;
 
-        public SigningRedirectForSignerExample( Props props ) : this(props.Get("api.url"),
-                props.Get("api.key"),
+        public SigningRedirectForSignerExample( Props props ) : this(props.Get("api.key"),
+                props.Get("api.url"),
                 props.Get("webpage.url"),
                 props.Get("1.email"))
         {

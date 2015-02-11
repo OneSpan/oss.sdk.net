@@ -13,7 +13,7 @@ namespace SDK.Examples
             SignerSMSAuthenticationExample example = new SignerSMSAuthenticationExample(Props.GetInstance());
             example.Run();
 
-            DocumentPackage documentPackage = example.EslClient.GetPackage(example.PackageId);
+            DocumentPackage documentPackage = example.RetrievedPackage;
 
             Assert.AreEqual(documentPackage.Signers[example.email1].AuthenticationMethod, AuthenticationMethod.SMS);
             Assert.AreEqual(documentPackage.Signers[example.email1].ChallengeQuestion.Count, 0);

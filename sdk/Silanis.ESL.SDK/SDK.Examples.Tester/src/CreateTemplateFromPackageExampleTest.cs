@@ -21,8 +21,6 @@ namespace SDK.Examples
 
             Assert.AreEqual(templatePackage.Name, example.PACKAGE_NAME_NEW);
             // TODO: Make sure that this is correctly preserved.
-//            Assert.AreEqual(templatePackage.Description, example.PACKAGE_DESCRIPTION);
-//            Assert.AreEqual(templatePackage.EmailMessage, example.PACKAGE_EMAIL_MESSAGE);
             Assert.AreEqual(templatePackage.Signers.Count, 3);
             Assert.AreEqual(templatePackage.Signers[example.email1].FirstName, example.PACKAGE_SIGNER1_FIRST);
             Assert.AreEqual(templatePackage.Signers[example.email1].LastName, example.PACKAGE_SIGNER1_LAST);

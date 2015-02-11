@@ -13,7 +13,7 @@ namespace SDK.Examples
             ContactsExample example = new ContactsExample(Props.GetInstance());
             example.Run();
 
-            DocumentPackage documentPackage = example.EslClient.GetPackage(example.PackageId);
+            DocumentPackage documentPackage = example.RetrievedPackage;
             Signer signer = documentPackage.Signers[example.email1];
 
             // Assert signer information is correct

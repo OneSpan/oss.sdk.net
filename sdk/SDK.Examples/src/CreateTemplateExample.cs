@@ -16,7 +16,7 @@ namespace SDK.Examples
         private Stream fileStream1;
         private Stream fileStream2;
 
-		public CreateTemplateExample(Props props) : this(props.Get("api.url"), props.Get("api.key"))
+		public CreateTemplateExample(Props props) : this(props.Get("api.key"), props.Get("api.url"))
         {
         }
 

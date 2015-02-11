@@ -4,8 +4,8 @@ namespace Silanis.ESL.SDK
 {
     public class Sender
     {
-		private SenderStatus? status;
-		private SenderType? type;
+		private SenderStatus status;
+		private SenderType type;
 		private string company;
 		private Nullable<DateTime> created;
 		private string email;
@@ -21,9 +21,11 @@ namespace Silanis.ESL.SDK
 
 		public Sender()
         {
+            status = SenderStatus.INVITED;
+            type = SenderType.REGULAR;
         }
 
-		public SenderStatus? Status
+		public SenderStatus Status
 		{
 			get
 			{
@@ -35,7 +37,7 @@ namespace Silanis.ESL.SDK
 			}
 		}
 
-		public SenderType? Type
+		public SenderType Type
 		{
 			get
 			{

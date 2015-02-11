@@ -10,8 +10,6 @@ namespace Silanis.ESL.SDK.Builder
 
 		private string httpHost;
 		private int httpPort;
-		private string httpsHost;
-		private int httpsPort;
 		private string userName;
 		private string password;
 
@@ -32,16 +30,6 @@ namespace Silanis.ESL.SDK.Builder
 			return this;
 		}
 
-		public ProxyConfigurationBuilder WithHttpsHost(string httpsHost) {
-			this.httpsHost = httpsHost;
-			return this;
-		}
-
-		public ProxyConfigurationBuilder WithHttpsPort(int httpsPort) {
-			this.httpsPort = httpsPort;
-			return this;
-		}
-
 		public ProxyConfigurationBuilder WithCredentials(string userName, string password) {
 			this.userName = userName;
 			this.password = password;
@@ -55,11 +43,7 @@ namespace Silanis.ESL.SDK.Builder
 				result.SetHttpHost(httpHost);
 				result.SetHttpPort(httpPort);
 				result.SetHttpScheme();
-			} else if (IsHttpsProxy()) {
-				result.SetHttpsHost(httpsHost);
-				result.SetHttpsPort(httpsPort);
-				result.SetHttpsScheme();
-			}
+			} 
 			if (IsCredentialsNotNull()) {
 				result.SetUserName(userName);
 				result.SetPassword(password);
@@ -69,24 +53,14 @@ namespace Silanis.ESL.SDK.Builder
 		}
 
 		private void Validate() {
-			if ((IsHttpProxy()) && (httpsHost != null || httpsPort != 0)
-			    || ((IsHttpsProxy()) && (httpHost != null || httpPort != 0))) {
-                throw new EslException("Cannot set up both the http and https proxy, Use either http or https.", null);
-			}
 			if ((httpHost != null && httpPort == 0)
-			    || (httpHost == null && httpPort != 0)
-			    || (httpsHost != null && httpsPort == 0)
-			    || (httpsHost == null && httpsPort != 0)) {
-                throw new EslException("Neither http nor https proxy is setup.", null);
+			    || (httpHost == null && httpPort != 0)){
+                throw new EslException("Proxy setup error.", null);
 			}
 		}
 
 		private bool IsCredentialsNotNull() {
 			return userName != null && password != null;
-		}
-
-		private bool IsHttpsProxy() {
-			return httpsHost != null && httpsPort != 0;
 		}
 
 		private bool IsHttpProxy() {

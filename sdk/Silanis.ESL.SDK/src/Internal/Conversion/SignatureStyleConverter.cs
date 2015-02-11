@@ -4,10 +4,10 @@ namespace Silanis.ESL.SDK
 {
     internal class SignatureStyleConverter
     {
-        private Nullable<Silanis.ESL.API.FieldSubtype> apiSubtype;
-        private Nullable<SignatureStyle> sdkSignatureStyle;
+        private string apiSubtype;
+        private SignatureStyle sdkSignatureStyle;
         
-        public SignatureStyleConverter(Silanis.ESL.API.FieldSubtype apiSubtype)
+        public SignatureStyleConverter(string apiSubtype)
         {
             this.apiSubtype = apiSubtype;
             this.sdkSignatureStyle = null;
@@ -15,22 +15,12 @@ namespace Silanis.ESL.SDK
         
         public SignatureStyle ToSDKSignatureStyle()
         {
-            if (sdkSignatureStyle.HasValue)
+            if (null!=sdkSignatureStyle)
             {
-                return sdkSignatureStyle.Value;
+                return sdkSignatureStyle;
             }
             
-            switch( apiSubtype ) 
-            {
-            case Silanis.ESL.API.FieldSubtype.INITIALS:
-                return SignatureStyle.INITIALS;
-            case Silanis.ESL.API.FieldSubtype.CAPTURE:
-                return SignatureStyle.HAND_DRAWN;
-            case Silanis.ESL.API.FieldSubtype.FULLNAME:
-                return SignatureStyle.FULL_NAME;
-            default:
-                throw new EslException ("FieldSubtype unknown: " + apiSubtype, null);
-            }
+            return SignatureStyle.valueOf(apiSubtype);
         }
     }
 }

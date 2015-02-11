@@ -18,6 +18,9 @@ namespace Silanis.ESL.SDK.Internal
         public const string CONTENT_TYPE_APPLICATION_JSON = "application/json";
         public const string ESL_CONTENT_TYPE_APPLICATION_JSON = CONTENT_TYPE_APPLICATION_JSON + "; " + ESL_API_VERSION_HEADER;
 
+        public const string CONTENT_TYPE_APPLICATION_MULTIPART = "multipart/form-data";
+        public const string ESL_CONTENT_TYPE_APPLICATION_MULTIPART = CONTENT_TYPE_APPLICATION_MULTIPART + "; " + ESL_API_VERSION_HEADER + "; boundary={0}";
+
         public const string ACCEPT_TYPE_APPLICATION_JSON = "application/json";
         public const string ESL_ACCEPT_TYPE_APPLICATION_JSON = ACCEPT_TYPE_APPLICATION_JSON + "; " + ESL_API_VERSION_HEADER;
 
@@ -296,7 +299,7 @@ namespace Silanis.ESL.SDK.Internal
 			WebRequest request = WebRequest.Create (path);
 			try {
 				request.Method = "POST";
-				request.ContentType = string.Format ("multipart/form-data; boundary={0}", boundary);
+                request.ContentType = string.Format (ESL_CONTENT_TYPE_APPLICATION_MULTIPART, boundary);
 				request.ContentLength = content.Length;
 				AddAuthorizationHeader(request, authHeaderGen);
                 SetProxy(request);
@@ -344,10 +347,15 @@ namespace Silanis.ESL.SDK.Internal
         {
             if (proxyConfiguration != null)
             {
-                WebProxy webProxy = new WebProxy(new Uri(proxyConfiguration.GetScheme() + "://" + proxyConfiguration.GetHost() + ":" + proxyConfiguration.GetPort()));
+                WebProxy webProxy = new WebProxy(new Uri(proxyConfiguration.GetScheme() 
+                                                         + "://" 
+                                                         + proxyConfiguration.GetHost() 
+                                                         + ":" 
+                                                         + proxyConfiguration.GetPort()));
                 if (proxyConfiguration.HasCredentials())
                 {
-                    webProxy.Credentials = new NetworkCredential(proxyConfiguration.GetUserName(), proxyConfiguration.GetPassword());
+                    webProxy.Credentials = new NetworkCredential(proxyConfiguration.GetUserName(), 
+                                                                 proxyConfiguration.GetPassword());
                 }
                 request.Proxy = webProxy;
             }

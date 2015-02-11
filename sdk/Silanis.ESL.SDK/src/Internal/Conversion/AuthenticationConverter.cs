@@ -66,7 +66,7 @@ namespace Silanis.ESL.SDK
                 IList<Challenge> sdkChallenges = new List<Challenge>();
                 foreach (AuthChallenge apiChallenge in apiAuth.Challenges)
                 {
-                    if (apiAuth.Scheme == AuthScheme.CHALLENGE)
+                    if (AuthenticationMethod.CHALLENGE.getApiValue().Equals(apiAuth.Scheme))
                     {
                         sdkChallenges.Add(new ChallengeConverter(apiChallenge).ToSDKChallenge());
                     }
@@ -77,7 +77,7 @@ namespace Silanis.ESL.SDK
                     }
                 }
 
-                if (apiAuth.Scheme == AuthScheme.CHALLENGE)
+                if (AuthenticationMethod.CHALLENGE.getApiValue().Equals(apiAuth.Scheme))
                 {
                     sdkAuthentication = new Silanis.ESL.SDK.Authentication(sdkChallenges);
                 }

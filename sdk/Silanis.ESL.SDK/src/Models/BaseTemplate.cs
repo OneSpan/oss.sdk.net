@@ -182,14 +182,14 @@ namespace Silanis.ESL.API
     
 		    
     [JsonProperty("status")]
-    public PackageStatus Status
+    public string Status
     {
                 get; set;
         }
     
 		    
     [JsonProperty("type")]
-    public BasePackageType Type
+    public string Type
     {
                 get; set;
         }
@@ -203,7 +203,7 @@ namespace Silanis.ESL.API
     
 		    
     [JsonProperty("visibility")]
-    public Visibility Visibility
+    public string Visibility
     {
                 get; set;
         }

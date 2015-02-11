@@ -26,7 +26,7 @@ namespace Silanis.ESL.SDK
             get { return enableSecondAffidavit; }
             set { enableSecondAffidavit = value; }
         }
-        
+
         private Nullable<bool> showOwnerInPersonDropDown = null;
         public Nullable<bool> ShowOwnerInPersonDropDown
         {
@@ -34,7 +34,7 @@ namespace Silanis.ESL.SDK
             set { showOwnerInPersonDropDown = value; }
         }
         
-		private Nullable<bool> enableInPerson = null;
+		private Nullable<bool> enableInPerson = true;
 
 		public Nullable<bool> EnableInPerson {
 			get {
@@ -88,6 +88,17 @@ namespace Silanis.ESL.SDK
 				hideCaptureText = value;
 			}
 		}
+
+        private List<string> declineReasons = new List<string>();
+
+        public List<string> DeclineReasons {
+            get {
+                return declineReasons;
+            }
+            set {
+                declineReasons = value;
+            }
+        }
 
 		private List<string> optOutReasons = new List<string>();
 
@@ -208,8 +219,11 @@ namespace Silanis.ESL.SDK
             if ( showLanguageDropDown != null )
                 ceremonySettings.HideLanguageDropdown = !showLanguageDropDown.Value;
 
-			foreach ( string reason in optOutReasons )
-				ceremonySettings.OptOutReasons.Add( reason );
+            foreach ( string declineReason in declineReasons )
+                ceremonySettings.DeclineReasons.Add( declineReason );
+
+            foreach ( string optOutReason in optOutReasons )
+                ceremonySettings.OptOutReasons.Add( optOutReason );
 
             if ( maxAuthAttempts != null )
 			    ceremonySettings.MaxAuthFailsAllowed = maxAuthAttempts.Value;
