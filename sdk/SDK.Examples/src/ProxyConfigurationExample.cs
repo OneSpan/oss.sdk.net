@@ -9,20 +9,20 @@ namespace SDK.Examples
 {
     public class ProxyConfigurationExample : SDKSample
     {
-        public EslClient EslClientWithHttpProxy;
+        public EslClient eslClientWithHttpProxy;
 
-        private readonly string HttpProxyURL = "10.0.22.81";
-        private readonly int HttpProxyPort = 8001;
+        private readonly string httpProxyURL = "10.0.22.81";
+        private readonly int httpProxyPort = 8001;
         private bool allowAllSSLCertificates = true;
 
-        private readonly string HttpProxyWithCredentialsURL = "10.0.22.81";
-        private readonly int HttpProxyWithCredentialsPort = 8002;
-        private readonly string HttpProxyUserName = "httpUser";
-        private readonly string HttpProxyPassword = "httpPwd";
+        private readonly string httpProxyWithCredentialsURL = "10.0.22.81";
+        private readonly int httpProxyWithCredentialsPort = 8002;
+        private readonly string httpProxyUserName = "httpUser";
+        private readonly string httpProxyPassword = "httpPwd";
 
-        public readonly string Email1;
-        public EslClient EslClientWithHttpProxyHasCredentials;
-        private Stream FileStream1, FileStream2;
+        public string email1;
+        public EslClient eslClientWithHttpProxyHasCredentials;
+        private Stream fileStream1, fileStream2;
 
         public static void Main (string[] args)
         {
@@ -37,39 +37,38 @@ namespace SDK.Examples
         public ProxyConfigurationExample( Props props ) : this(props.Get("api.key"), props.Get("api.url"), props.Get("1.email")) {
         }
 
-        public ProxyConfigurationExample(string apiKey, string apiUrl, string email1) 
-            : base(apiKey, apiUrl)
+        public ProxyConfigurationExample(string apiKey, string apiUrl, string email1) : base(apiKey, apiUrl)
         {
 
             ProxyConfiguration httpProxyConfiguration = ProxyConfigurationBuilder.NewProxyConfiguration()
-                .WithHttpHost(HttpProxyURL)
-                    .WithHttpPort(HttpProxyPort)
+                .WithHttpHost(httpProxyURL)
+                    .WithHttpPort(httpProxyPort)
                     .Build();
 
             ProxyConfiguration httpProxyWithCredentialsConfiguration = ProxyConfigurationBuilder.NewProxyConfiguration()
-                .WithHttpHost(HttpProxyWithCredentialsURL)
-                    .WithHttpPort(HttpProxyWithCredentialsPort)
-                    .WithCredentials(HttpProxyUserName, HttpProxyPassword)
+                .WithHttpHost(httpProxyWithCredentialsURL)
+                    .WithHttpPort(httpProxyWithCredentialsPort)
+                    .WithCredentials(httpProxyUserName, httpProxyPassword)
                     .Build();
 
-            this.Email1 = email1;
-            this.FileStream1 = File.OpenRead(new FileInfo(Directory.GetCurrentDirectory() + "/src/document.pdf").FullName);
-            this.FileStream2 = File.OpenRead(new FileInfo(Directory.GetCurrentDirectory() + "/src/document.pdf").FullName);
+            this.email1 = email1;
+            this.fileStream1 = File.OpenRead(new FileInfo(Directory.GetCurrentDirectory() + "/src/document.pdf").FullName);
+            this.fileStream2 = File.OpenRead(new FileInfo(Directory.GetCurrentDirectory() + "/src/document.pdf").FullName);
 
-            EslClientWithHttpProxy = new EslClient(apiKey, apiUrl, allowAllSSLCertificates, httpProxyConfiguration);
-            EslClientWithHttpProxyHasCredentials = new EslClient(apiKey, apiUrl, allowAllSSLCertificates, httpProxyWithCredentialsConfiguration);
+            eslClientWithHttpProxy = new EslClient(apiKey, apiUrl, allowAllSSLCertificates, httpProxyConfiguration);
+            eslClientWithHttpProxyHasCredentials = new EslClient(apiKey, apiUrl, allowAllSSLCertificates, httpProxyWithCredentialsConfiguration);
 
         }
 
         private DocumentPackage CreateTestPackage(Stream documentStream) {
-            DocumentPackage package = PackageBuilder.NewPackageNamed("C# CreatePackageFromStream " + DateTime.Now)
+            DocumentPackage package = PackageBuilder.NewPackageNamed("ProxyConfigurationExample: " + DateTime.Now)
                 .DescribedAs("This is a new package")
-                    .WithSigner(SignerBuilder.NewSignerWithEmail(Email1)
+                    .WithSigner(SignerBuilder.NewSignerWithEmail(email1)
                                 .WithFirstName("John")
                                 .WithLastName("Smith"))
                     .WithDocument(DocumentBuilder.NewDocumentNamed("My Document")
                                   .FromStream(documentStream, DocumentType.PDF)
-                                  .WithSignature(SignatureBuilder.SignatureFor(Email1)
+                                  .WithSignature(SignatureBuilder.SignatureFor(email1)
                                    .OnPage(0)
                                    .AtPosition(100, 100)))
                     .Build();
@@ -78,15 +77,15 @@ namespace SDK.Examples
         }
 
         public void ExecuteViaHttpProxy() {
-            DocumentPackage packageTest = CreateTestPackage(FileStream1);
-            packageId = EslClientWithHttpProxy.CreatePackage(packageTest);
-            EslClientWithHttpProxy.SendPackage(packageId);
+            DocumentPackage packageTest = CreateTestPackage(fileStream1);
+            packageId = eslClientWithHttpProxy.CreatePackage(packageTest);
+            eslClientWithHttpProxy.SendPackage(packageId);
         }
 
         public void ExecuteViaHttpProxyWithCredentials() {
-            DocumentPackage packageTest = CreateTestPackage(FileStream2);
-            packageId = EslClientWithHttpProxyHasCredentials.CreatePackage(packageTest);
-            EslClientWithHttpProxyHasCredentials.SendPackage(packageId);
+            DocumentPackage packageTest = CreateTestPackage(fileStream2);
+            packageId = eslClientWithHttpProxyHasCredentials.CreatePackage(packageTest);
+            eslClientWithHttpProxyHasCredentials.SendPackage(packageId);
         }
 
     }

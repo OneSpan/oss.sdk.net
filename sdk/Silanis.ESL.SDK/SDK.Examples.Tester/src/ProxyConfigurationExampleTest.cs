@@ -13,14 +13,13 @@ namespace SDK.Examples
         public void verifyResult()
         {
             ExecutionByHttpProxy();
-            //ExecutionByHttpProxyWithCredentials();
         }
 
         public void ExecutionByHttpProxy(){
 
             ProxyConfigurationExample example = new ProxyConfigurationExample(Props.GetInstance());
             example.ExecuteViaHttpProxy();
-            DocumentPackage documentPackage1 = example.EslClientWithHttpProxy.GetPackage(example.PackageId);
+            DocumentPackage documentPackage1 = example.eslClientWithHttpProxy.GetPackage(example.PackageId);
             Assert.AreEqual(documentPackage1.Id.Id, example.PackageId.Id);
 
         }
@@ -29,9 +28,8 @@ namespace SDK.Examples
 
             ProxyConfigurationExample example = new ProxyConfigurationExample(Props.GetInstance());
             example.ExecuteViaHttpProxyWithCredentials();
-            DocumentPackage documentPackage2 = example.EslClientWithHttpProxyHasCredentials.GetPackage(example.PackageId);
+            DocumentPackage documentPackage2 = example.eslClientWithHttpProxyHasCredentials.GetPackage(example.PackageId);
             Assert.AreEqual(documentPackage2.Id.Id, example.PackageId.Id);
-
         }
 
     }
