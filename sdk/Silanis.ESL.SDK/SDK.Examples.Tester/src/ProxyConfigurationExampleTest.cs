@@ -6,24 +6,24 @@ using System.Collections.Generic;
 
 namespace SDK.Examples
 {
+    [TestFixture()]
     public class ProxyConfigurationExampleTest
     {
         [Test]
         public void verifyResult()
         {
             ProxyConfigurationExample example = new ProxyConfigurationExample(Props.GetInstance());
+            example.Run();
 
-            example.ExecuteViaHttpProxy();
-            DocumentPackage documentPackage1 = example.eslClientWithHttpProxy.GetPackage(example.PackageId);
-            DocumentPackage documentPackage2 = example.EslClient.GetPackage(example.PackageId);
-            Assert.AreEqual(example.PackageId.Id, documentPackage1.Id.Id);
-            Assert.AreEqual(example.PackageId.Id, documentPackage2.Id.Id);
+            DocumentPackage documentPackage1 = example.eslClientWithHttpProxy.GetPackage(example.packageId1);
+            DocumentPackage documentPackage2 = example.EslClient.GetPackage(example.packageId1);
+            Assert.AreEqual(example.packageId1.Id, documentPackage1.Id.Id);
+            Assert.AreEqual(example.packageId1.Id, documentPackage2.Id.Id);
 
-            example.ExecuteViaHttpProxyWithCredentials();
-            DocumentPackage documentPackage3 = example.eslClientWithHttpProxyHasCredentials.GetPackage(example.PackageId);
-            DocumentPackage documentPackage4 = example.EslClient.GetPackage(example.PackageId);
-            Assert.AreEqual(example.PackageId.Id, documentPackage3.Id.Id);
-            Assert.AreEqual(example.PackageId.Id, documentPackage4.Id.Id);
+            DocumentPackage documentPackage3 = example.eslClientWithHttpProxyHasCredentials.GetPackage(example.packageId2);
+            DocumentPackage documentPackage4 = example.EslClient.GetPackage(example.packageId2);
+            Assert.AreEqual(example.packageId2.Id, documentPackage3.Id.Id);
+            Assert.AreEqual(example.packageId2.Id, documentPackage4.Id.Id);
         }
     }
 }
