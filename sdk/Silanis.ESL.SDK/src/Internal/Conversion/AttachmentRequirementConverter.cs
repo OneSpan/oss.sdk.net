@@ -39,17 +39,11 @@ namespace Silanis.ESL.SDK
 
 			Silanis.ESL.API.AttachmentRequirement result = new Silanis.ESL.API.AttachmentRequirement();
 
-			if (String.IsNullOrEmpty(sdkAttachmentRequirement.Id))
+			if (!String.IsNullOrEmpty(sdkAttachmentRequirement.Id))
 			{
-				result.Id = sdkAttachmentRequirement.Name;
-				result.Name = sdkAttachmentRequirement.Name;
+                result.Id = sdkAttachmentRequirement.Id;
 			}
-			else
-			{
-				result.Id = sdkAttachmentRequirement.Id;
-				result.Name = sdkAttachmentRequirement.Name;
-			}
-
+            result.Name = sdkAttachmentRequirement.Name;
 			result.Comment = sdkAttachmentRequirement.SenderComment;
 			result.Description = sdkAttachmentRequirement.Description;
 			result.Required = sdkAttachmentRequirement.Required;
@@ -57,7 +51,7 @@ namespace Silanis.ESL.SDK
 
 			if (sdkAttachmentRequirement.Status.Equals(null))
 			{
-				result.Status = Silanis.ESL.API.RequirementStatus.INCOMPLETE;
+                result.Status = Silanis.ESL.SDK.RequirementStatus.INCOMPLETE.getApiValue();
 			}
 			else
 			{

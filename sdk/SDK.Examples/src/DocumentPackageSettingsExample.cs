@@ -15,7 +15,15 @@ namespace SDK.Examples
         private string email1;
         private Stream fileStream1;
 
-        public DocumentPackageSettingsExample( Props props ) : this(props.Get("api.url"), props.Get("api.key"), props.Get("1.email")) {
+        public readonly string DECLINE_REASON_1 = "Decline reason One";
+        public readonly string DECLINE_REASON_2 = "Decline reason Two";
+        public readonly string DECLINE_REASON_3 = "Decline reason Three";
+
+        public readonly string OPT_OUT_REASON_1 = "OptOut reason One";
+        public readonly string OPT_OUT_REASON_2 = "OptOut reason Two";
+        public readonly string OPT_OUT_REASON_3 = "OptOut reason Three";
+
+        public DocumentPackageSettingsExample( Props props ) : this(props.Get("api.key"), props.Get("api.url"), props.Get("1.email")) {
         }
 
         public DocumentPackageSettingsExample( String apiKey, String apiUrl, String email1 ) : base( apiKey, apiUrl ) {
@@ -31,11 +39,14 @@ namespace SDK.Examples
                               .DisableFirstAffidavit()
                               .DisableSecondAffidavit()
                               .HideOwnerInPersonDropDown()
-				              .WithoutDecline()
+				              .WithDecline()
 							  .WithOptOut()
-				              .WithOptOutReason("Reason One")
-				              .WithOptOutReason("Reason Two")
-				              .WithOptOutReason("Reason Three")
+                              .WithDeclineReason(DECLINE_REASON_1)
+                              .WithDeclineReason(DECLINE_REASON_2)
+                              .WithDeclineReason(DECLINE_REASON_3)
+                              .WithOptOutReason(OPT_OUT_REASON_1)
+                              .WithOptOutReason(OPT_OUT_REASON_2)
+                              .WithOptOutReason(OPT_OUT_REASON_3)
 				              .WithHandOverLinkHref("http://www.google.ca")
 				              .WithHandOverLinkText("click here")
 				              .WithHandOverLinkTooltip("link tooltip")
@@ -54,6 +65,7 @@ namespace SDK.Examples
 					.Build();
 
             packageId = eslClient.CreateAndSendPackage(superDuperPackage);
+            retrievedPackage = eslClient.GetPackage( packageId );
         }
     }
 }

@@ -138,7 +138,7 @@ namespace SDK.Tests
         {
             Silanis.ESL.API.Message apiMessage = new Silanis.ESL.API.Message();
             apiMessage.Content = "Opt-out reason";
-            apiMessage.Status = Silanis.ESL.API.MessageStatus.READ;
+            apiMessage.Status = Silanis.ESL.SDK.MessageStatus.READ.getApiValue();
             apiMessage.Created = DateTime.Now;
 
             User fromUser = new User();

@@ -42,7 +42,7 @@ namespace SDK.Examples
         }
             
 
-        public CustomSenderInfoExample(Props props) : this(props.Get("api.url"), props.Get("api.key"))
+        public CustomSenderInfoExample(Props props) : this(props.Get("api.key"), props.Get("api.url"))
         {
         }
 
@@ -85,6 +85,7 @@ namespace SDK.Examples
             packageId = eslClient.CreatePackage( package );
 
 			eslClient.DownloadDocument(packageId, "doc1");
+            retrievedPackage = eslClient.GetPackage(packageId);
 
 			Console.WriteLine("Downloaded document");
         }

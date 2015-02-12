@@ -36,7 +36,7 @@ namespace Silanis.ESL.API
     
 		    
     [JsonProperty("status")]
-    public LicenseStatus Status
+    public string Status
     {
                 get; set;
         }

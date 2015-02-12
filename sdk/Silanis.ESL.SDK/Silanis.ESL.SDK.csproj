@@ -7,10 +7,10 @@
     <OutputType>Library</OutputType>
     <NoStandardLibraries>false</NoStandardLibraries>
     <AssemblyName>Silanis.ESL</AssemblyName>
-    <TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
+    <TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -234,16 +234,13 @@
     <Compile Include="src\Models\Auth.cs" />
     <Compile Include="src\Models\AuthChallenge.cs" />
     <Compile Include="src\Models\AuthenticationToken.cs" />
-    <Compile Include="src\Models\AuthScheme.cs" />
     <Compile Include="src\Models\BaseMessage.cs" />
     <Compile Include="src\Models\BasePackage.cs" />
-    <Compile Include="src\Models\BasePackageType.cs" />
     <Compile Include="src\Models\BaseTemplate.cs" />
     <Compile Include="src\Models\Bill.cs" />
     <Compile Include="src\Models\Box.cs" />
     <Compile Include="src\Models\BrandingBarOptions.cs" />
     <Compile Include="src\Models\Callback.cs" />
-    <Compile Include="src\Models\CallbackEvent.cs" />
     <Compile Include="src\Models\CcExpiration.cs" />
     <Compile Include="src\Models\CeremonyEventComplete.cs" />
     <Compile Include="src\Models\CeremonyEvents.cs" />
@@ -254,7 +251,6 @@
     <Compile Include="src\Models\CreditCard.cs" />
     <Compile Include="src\Models\Currency.cs" />
     <Compile Include="src\Models\CustomField.cs" />
-    <Compile Include="src\Models\Cycle.cs" />
     <Compile Include="src\Models\CycleCount.cs" />
     <Compile Include="src\Models\Delivery.cs" />
     <Compile Include="src\Models\Document.cs" />
@@ -266,8 +262,6 @@
     <Compile Include="src\Models\ExtractAnchor.cs" />
     <Compile Include="src\Models\Features.cs" />
     <Compile Include="src\Models\Field.cs" />
-    <Compile Include="src\Models\FieldSubtype.cs" />
-    <Compile Include="src\Models\FieldType.cs" />
     <Compile Include="src\Models\FieldValidation.cs" />
     <Compile Include="src\Models\FooterOptions.cs" />
     <Compile Include="src\Models\GlobalActionsOptions.cs" />
@@ -283,18 +277,14 @@
     <Compile Include="src\Models\LayoutOptions.cs" />
     <Compile Include="src\Models\LayoutStyle.cs" />
     <Compile Include="src\Models\License.cs" />
-    <Compile Include="src\Models\LicenseStatus.cs" />
     <Compile Include="src\Models\Link.cs" />
-    <Compile Include="src\Models\MemberType.cs" />
     <Compile Include="src\Models\Message.cs" />
-    <Compile Include="src\Models\MessageStatus.cs" />
     <Compile Include="src\Models\Package.cs" />
     <Compile Include="src\Models\PackageArtifactsLimits.cs" />
     <Compile Include="src\Models\PackageCompletionReport.cs" />
     <Compile Include="src\Models\PackageReminder.cs" />
     <Compile Include="src\Models\PackageReminderSchedule.cs" />
     <Compile Include="src\Models\PackageSettings.cs" />
-    <Compile Include="src\Models\PackageStatus.cs" />
     <Compile Include="src\Models\Page.cs" />
     <Compile Include="src\Models\Plan.cs" />
     <Compile Include="src\Models\Price.cs" />
@@ -302,17 +292,12 @@
     <Compile Include="src\Models\Provider.cs" />
     <Compile Include="src\Models\Quota.cs" />
     <Compile Include="src\Models\Report.cs" />
-    <Compile Include="src\Models\RequirementStatus.cs" />
     <Compile Include="src\Models\Result.cs" />
     <Compile Include="src\Models\Role.cs" />
-    <Compile Include="src\Models\RoleType.cs" />
     <Compile Include="src\Models\SamlMetadata.cs" />
-    <Compile Include="src\Models\Scope.cs" />
     <Compile Include="src\Models\Sender.cs" />
     <Compile Include="src\Models\SenderAuthenticationToken.cs" />
     <Compile Include="src\Models\SenderCompletionReport.cs" />
-    <Compile Include="src\Models\SenderStatus.cs" />
-    <Compile Include="src\Models\SenderType.cs" />
     <Compile Include="src\Models\SenderUsageReport.cs" />
     <Compile Include="src\Models\Session.cs" />
     <Compile Include="src\Models\Settings.cs" />
@@ -327,7 +312,6 @@
     <Compile Include="src\Models\Signup.cs" />
     <Compile Include="src\Models\Style.cs" />
     <Compile Include="src\Models\SupportConfiguration.cs" />
-    <Compile Include="src\Models\Target.cs" />
     <Compile Include="src\Models\Template.cs" />
     <Compile Include="src\Models\TextualSignatureStyle.cs" />
     <Compile Include="src\Models\TitleBarOptions.cs" />
@@ -337,7 +321,6 @@
     <Compile Include="src\Models\User.cs" />
     <Compile Include="src\Models\UserCustomField.cs" />
     <Compile Include="src\Models\ViewSettings.cs" />
-    <Compile Include="src\Models\Visibility.cs" />
     <Compile Include="src\SignerInformationForEquifaxCanada.cs" />
     <Compile Include="src\Internal\Conversion\SignerInformationForEquifaxCanadaConverter.cs" />
     <Compile Include="src\Builder\SignerInformationForEquifaxCanadaBuilder.cs" />
@@ -346,10 +329,28 @@
     <Compile Include="src\Internal\Conversion\KnowledgeBasedAuthenticationConverter.cs" />
     <Compile Include="src\Internal\Conversion\SignerInformationForEquifaxUSAConverter.cs" />
     <Compile Include="src\Builder\SignerInformationForEquifaxUSABuilder.cs" />
-    <Compile Include="src\Models\KnowledgeBasedAuthenticationStatus.cs" />
     <Compile Include="src\KnowledgeBasedAuthenticationStatus.cs" />
     <Compile Include="src\Internal\Conversion\KnowledgeBasedAuthenticationStatusConverter.cs" />
     <Compile Include="src\Models\KnowledgeBasedAuthentication.cs" />
+    <Compile Include="src\ProxyConfiguration.cs" />
+    <Compile Include="src\Builder\ProxyConfigurationBuilder.cs" />
+    <Compile Include="src\Services\UnknownEnumValuesHandleConverter.cs" />
+    <Compile Include="src\EslEnumeration.cs" />
+    <Compile Include="src\FieldType.cs" />
+    <Compile Include="src\Internal\Conversion\FieldTypeConverter.cs" />
+    <Compile Include="src\FastTrackSigner.cs" />
+    <Compile Include="src\FastTrackRole.cs" />
+    <Compile Include="src\Builder\FastTrackSignerBuilder.cs" />
+    <Compile Include="src\Builder\FastTrackRoleBuilder.cs" />
+    <Compile Include="src\Internal\RedirectResolver.cs" />
+    <Compile Include="src\Internal\Conversion\CustomFieldValueConverter.cs" />
+    <Compile Include="src\GroupSummary.cs" />
+    <Compile Include="src\Builder\GroupSummaryBuilder.cs" />
+    <Compile Include="src\Internal\Conversion\GroupSummaryConverter.cs" />
+    <Compile Include="src\Models\NotaryJournalEntry.cs" />
+    <Compile Include="src\NotaryJournalEntry.cs" />
+    <Compile Include="src\Builder\NotaryJournalEntryBuilder.cs" />
+    <Compile Include="src\Internal\Conversion\NotaryJournalEntryConverter.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSHARP.Targets" />
   <ProjectExtensions>

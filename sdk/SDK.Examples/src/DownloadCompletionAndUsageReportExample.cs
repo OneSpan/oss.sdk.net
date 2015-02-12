@@ -13,21 +13,24 @@ namespace SDK.Examples
         private string senderUID;
         private Stream fileStream1;
 
+        public Silanis.ESL.SDK.CompletionReport sdkCompletionReportForSender;
         public Silanis.ESL.SDK.CompletionReport sdkCompletionReport;
         public Silanis.ESL.SDK.UsageReport sdkUsageReport;
+        public string csvCompletionReportForSender;
         public string csvCompletionReport;
         public string csvUsageReport;
+
 
 		public static void Main(string[] args)
 		{
             new DownloadCompletionAndUsageReportExample(Props.GetInstance()).Run();
 		}
 
-        public DownloadCompletionAndUsageReportExample(Props props) : this(props.Get("api.url"), props.Get("api.key"), props.Get("1.email"))
+        public DownloadCompletionAndUsageReportExample(Props props) : this(props.Get("api.key"), props.Get("api.url"), props.Get("1.email"))
 		{
 		}
 
-        public DownloadCompletionAndUsageReportExample(string apiUrl, string apiKey, string email1) : base( apiUrl, apiKey )
+        public DownloadCompletionAndUsageReportExample(string apiKey, string apiUrl, string email1) : base( apiKey, apiUrl )
 		{
 			this.email1 = email1;
 			this.senderUID = Converter.apiKeyToUID(apiKey);
@@ -68,9 +71,31 @@ namespace SDK.Examples
 			DateTime from = DateTime.Today.AddDays(-1);
 			DateTime to = DateTime.Now;
 
-            // Download the completion report
-			sdkCompletionReport = eslClient.PackageService.DownloadCompletionReport(DocumentPackageStatus.DRAFT, senderUID, from, to);
-            csvCompletionReport = eslClient.PackageService.DownloadCompletionReportAsCSV(DocumentPackageStatus.DRAFT, senderUID, from, to);
+            // Download the completion report for a sender
+			sdkCompletionReportForSender = eslClient.PackageService.DownloadCompletionReport(DocumentPackageStatus.DRAFT, senderUID, from, to);
+            csvCompletionReportForSender = eslClient.PackageService.DownloadCompletionReportAsCSV(DocumentPackageStatus.DRAFT, senderUID, from, to);
+
+            // Display package id and name of packages in DRAFT from sender
+            foreach(SenderCompletionReport senderCompletionReport in sdkCompletionReportForSender.Senders) {
+                Console.Write("Sender: " + senderCompletionReport.Sender.Email);
+                Console.WriteLine(" has " + senderCompletionReport.Packages.Count + " packages in DRAFT");
+                foreach (PackageCompletionReport packageCompletionReport in senderCompletionReport.Packages) {
+                    Console.WriteLine(packageCompletionReport.Id + " , " + packageCompletionReport.Name + " , Sender : " + eslClient.GetPackage(new PackageId(packageCompletionReport.Id)).SenderInfo.Email);
+                }
+            }
+
+            // Download the completion report for all senders
+            sdkCompletionReport = eslClient.PackageService.DownloadCompletionReport(DocumentPackageStatus.DRAFT, from, to);
+            csvCompletionReport = eslClient.PackageService.DownloadCompletionReportAsCSV(DocumentPackageStatus.DRAFT, from, to);
+
+            // Display package id and name of packages in DRAFT from sender
+            foreach(SenderCompletionReport senderCompletionReport in sdkCompletionReport.Senders) {
+                Console.Write("Sender: " + senderCompletionReport.Sender.Email);
+                Console.WriteLine(" has " + senderCompletionReport.Packages.Count + " packages in DRAFT");
+                foreach (PackageCompletionReport packageCompletionReport in senderCompletionReport.Packages) {
+                    Console.WriteLine(packageCompletionReport.Id + " , " + packageCompletionReport.Name + " , Sender : " + eslClient.GetPackage(new PackageId(packageCompletionReport.Id)).SenderInfo.Email);
+                }
+            }
 
             // Download the usage report
             sdkUsageReport = eslClient.PackageService.DownloadUsageReport(from, to);

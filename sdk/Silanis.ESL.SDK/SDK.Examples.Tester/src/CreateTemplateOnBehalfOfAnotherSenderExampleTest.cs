@@ -20,7 +20,7 @@ namespace SDK.Examples
             verifySenderInfo(retrievedTemplate);
 
             // Verify the package created from template has the correct sender
-            DocumentPackage retrievedPackage = example.EslClient.GetPackage(example.PackageId);
+            DocumentPackage retrievedPackage = example.RetrievedPackage;
             verifySenderInfo(retrievedPackage);
         }
 

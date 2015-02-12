@@ -162,6 +162,26 @@ namespace Silanis.ESL.SDK
                 throw new EslException("Could not delete the custom field from account." + " Exception: " + e.Message, e);
             }
         }
+
+        public IList<UserCustomField> GetUserCustomFields()
+        {
+            string path = template.UrlFor(UrlTemplate.USER_CUSTOMFIELD_PATH).Build();
+            string response;
+
+            try 
+            {
+                response = client.Get(path);
+                return JsonConvert.DeserializeObject<IList<Silanis.ESL.API.UserCustomField>> (response, settings);
+            } 
+            catch (EslServerException e)
+            {
+                throw new EslServerException("Could not get the custom fields for the user." + " Exception: " + e.Message, e.ServerError, e);
+            }
+            catch (Exception e)
+            {
+                throw new EslException("Could not get the custom fields for the user." + " Exception: " + e.Message, e);
+            }
+        }
         
         public UserCustomField SubmitCustomFieldValue(UserCustomField apiCustomFieldValue)
         {
@@ -188,6 +208,25 @@ namespace Silanis.ESL.SDK
             catch (Exception e)
             {
                 throw new EslException("Could not add/update the custom field to account." + " Exception: " + e.Message, e);
+            }
+        }
+
+        public void DeleteUserCustomField(string id) 
+        {
+            string path = template.UrlFor(UrlTemplate.USER_CUSTOMFIELD_ID_PATH)
+                    .Replace("{customFieldId}", id)
+                    .Build();
+            try 
+            {
+                client.Delete(path);
+            } 
+            catch (EslServerException e)
+            {
+                throw new EslServerException("Could not delete the custom field from user." + " Exception: " + e.Message, e.ServerError, e);
+            }
+            catch (Exception e)
+            {
+                throw new EslException("Could not delete the custom field from user." + " Exception: " + e.Message, e);
             }
         }
 

@@ -24,7 +24,7 @@ namespace SDK.Examples
             }
         }
 
-        public SignerSpecificEmailMessageExample( Props props ) : this(props.Get("api.url"), props.Get("api.key"), props.Get("1.email")) {
+        public SignerSpecificEmailMessageExample( Props props ) : this(props.Get("api.key"), props.Get("api.url"), props.Get("1.email")) {
         }
 
         public SignerSpecificEmailMessageExample( string apiKey, string apiUrl, string email1 ) : base( apiKey, apiUrl ) {
@@ -55,6 +55,7 @@ namespace SDK.Examples
 
             packageId = eslClient.CreatePackage (package);
             eslClient.SendPackage(packageId);
+            retrievedPackage = eslClient.GetPackage(packageId);
 		}
 	}
 }

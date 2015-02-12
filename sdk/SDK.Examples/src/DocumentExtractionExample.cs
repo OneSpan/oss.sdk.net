@@ -16,7 +16,7 @@ namespace SDK.Examples
         private Stream fileStream1;
         public readonly string DOCUMENT_NAME = "My Document";
 
-        public DocumentExtractionExample( Props props ) : this(props.Get("api.url"), props.Get("api.key"), props.Get("1.email")) {
+        public DocumentExtractionExample( Props props ) : this(props.Get("api.key"), props.Get("api.url"), props.Get("1.email")) {
         }
 
         public DocumentExtractionExample( String apiKey, String apiUrl, String email1 ) : base( apiKey, apiUrl ) {
@@ -42,6 +42,7 @@ namespace SDK.Examples
             eslClient.SendPackage(packageId);
 
             DocumentPackage sentPackage = eslClient.GetPackage(packageId);
+            retrievedPackage = eslClient.GetPackage(packageId);
             Console.WriteLine("Document sent = " + sentPackage.Id);
         }
     }

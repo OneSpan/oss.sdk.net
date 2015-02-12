@@ -79,13 +79,13 @@ namespace Silanis.ESL.SDK
 			int signerCount = 1;
 			foreach (Signer signer in sdkPackage.Signers.Values)
 			{
-				Silanis.ESL.API.Role role = new SignerConverter(signer).ToAPIRole("role" + signerCount);
+                Silanis.ESL.API.Role role = new SignerConverter(signer).ToAPIRole("signer" + signerCount);
 				package.AddRole(role);
 				signerCount++;
 			}
 			foreach (Signer signer in sdkPackage.Placeholders.Values)
 			{
-				Silanis.ESL.API.Role role = new SignerConverter(signer).ToAPIRole("role" + signerCount);
+                Silanis.ESL.API.Role role = new SignerConverter(signer).ToAPIRole("signer" + signerCount);
 				package.AddRole(role);
 				signerCount++;
 			}
@@ -159,7 +159,7 @@ namespace Silanis.ESL.SDK
                     packageBuilder.WithSigner(new SignerConverter(role).ToSDKSigner());
 
                     // The custom sender information is stored in the role.signer object.
-                    if (role.Type == Silanis.ESL.API.RoleType.SENDER)
+                    if ("SENDER".Equals(role.Type))
                     {
                         // Override sender info with the customized ones.
                         Silanis.ESL.SDK.SenderInfo senderInfo = new Silanis.ESL.SDK.SenderInfo();
@@ -190,6 +190,9 @@ namespace Silanis.ESL.SDK
                 messages.Add(new MessageConverter(apiMessage).ToSDKMessage());
             }
             documentPackage.Messages = messages;
+            if (apiPackage.Updated != null) {
+                documentPackage.UpdatedDate = apiPackage.Updated;
+            }
 
             return documentPackage;
         }

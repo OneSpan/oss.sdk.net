@@ -13,7 +13,7 @@ namespace SDK.Examples
             DocumentUploadExample example = new DocumentUploadExample(Props.GetInstance());
             example.Run();
 
-            DocumentPackage documentPackage = example.EslClient.GetPackage(example.PackageId);
+            DocumentPackage documentPackage = example.RetrievedPackage;
 
             // Verify if the document was uploaded correctly.
 

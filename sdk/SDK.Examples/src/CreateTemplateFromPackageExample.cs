@@ -36,7 +36,7 @@ namespace SDK.Examples
             }
         }
 
-        public CreateTemplateFromPackageExample(Props props) : this(props.Get("api.url"), props.Get("api.key"), props.Get("1.email"), props.Get("2.email"))
+        public CreateTemplateFromPackageExample(Props props) : this(props.Get("api.key"), props.Get("api.url"), props.Get("1.email"), props.Get("2.email"))
         {
         }
 

@@ -13,12 +13,19 @@ namespace SDK.Examples
             DownloadCompletionAndUsageReportExample example = new DownloadCompletionAndUsageReportExample(Props.GetInstance());
 			example.Run();
 
-            // Assert correct download of completion report
+            // Assert correct download of completion report for a sender
+            CompletionReport completionReportForSender = example.sdkCompletionReportForSender;
+            Assert.AreEqual(completionReportForSender.Senders.Count, 1, "There should be only 1 sender.");
+            Assert.GreaterOrEqual(completionReportForSender.Senders[0].Packages.Count, 1, "Number of package completion reports should be greater than 1.");
+            Assert.GreaterOrEqual(completionReportForSender.Senders[0].Packages[0].Documents.Count, 1, "Number of document completion reports should be greater than 1.");
+            Assert.GreaterOrEqual(completionReportForSender.Senders[0].Packages[0].Signers.Count, 1, "Number of signer completion reports should be greater than 1.");
+            Assert.IsNotNull(example.csvCompletionReportForSender);
+            Assert.IsNotEmpty(example.csvCompletionReportForSender);
+
+            // Assert correct download of completion report for all senders
             CompletionReport completionReport = example.sdkCompletionReport;
-			Assert.GreaterOrEqual(completionReport.Senders.Count, 1, "There should be only 1 sender.");
-			Assert.GreaterOrEqual(completionReport.Senders[0].Packages.Count, 1, "Number of package completion reports should be greater than 1.");
-			Assert.GreaterOrEqual(completionReport.Senders[0].Packages[0].Documents.Count, 1, "Number of document completion reports should be greater than 1.");
-			Assert.GreaterOrEqual(completionReport.Senders[0].Packages[0].Signers.Count, 1, "Number of signer completion reports should be greater than 1.");
+            Assert.GreaterOrEqual(completionReport.Senders.Count, 1, "Number of sender should be greater than 1.");
+            Assert.GreaterOrEqual(completionReport.Senders[0].Packages.Count, 0, "Number of package completion reports should be greater than 0.");
             Assert.IsNotNull(example.csvCompletionReport);
             Assert.IsNotEmpty(example.csvCompletionReport);
 

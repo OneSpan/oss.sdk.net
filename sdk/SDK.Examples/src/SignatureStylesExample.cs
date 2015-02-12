@@ -26,7 +26,7 @@ namespace SDK.Examples
         public readonly int HAND_DRAWN_SIGNATURE_POSITION_X = 500;
         public readonly int HAND_DRAWN_SIGNATURE_POSITION_Y = 500;
 
-        public SignatureStylesExample(Props props) : this(props.Get("api.url"), props.Get("api.key"), props.Get("1.email"))
+        public SignatureStylesExample(Props props) : this(props.Get("api.key"), props.Get("api.url"), props.Get("1.email"))
         {
         }
 
@@ -57,6 +57,7 @@ namespace SDK.Examples
 
             packageId = eslClient.CreatePackage(superDuperPackage);
             eslClient.SendPackage(packageId);
+            retrievedPackage = eslClient.GetPackage(packageId);
         }
     }
 }

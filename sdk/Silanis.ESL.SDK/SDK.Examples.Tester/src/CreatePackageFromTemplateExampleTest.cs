@@ -13,7 +13,7 @@ namespace SDK.Examples
             CreatePackageFromTemplateExample example = new CreatePackageFromTemplateExample(Props.GetInstance());
             example.Run();
 
-            DocumentPackage documentPackage = example.EslClient.GetPackage(example.PackageId);
+            DocumentPackage documentPackage = example.RetrievedPackage;
             Document document = documentPackage.Documents[example.DOCUMENT_NAME];
 
             Assert.AreEqual(document.Name, example.DOCUMENT_NAME);

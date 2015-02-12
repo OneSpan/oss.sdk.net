@@ -14,7 +14,7 @@ namespace SDK.Examples
             DeletePackageExample example = new DeletePackageExample(Props.GetInstance());
             example.Run();
 
-            Assert.IsNull(example.EslClient.GetPackage(example.PackageId));
+            Assert.IsNull(example.RetrievedPackage);
         }
     }
 }

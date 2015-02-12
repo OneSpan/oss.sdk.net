@@ -85,9 +85,27 @@ namespace Silanis.ESL.SDK
 
                 return path;
             } catch (Exception e) {
-                throw new EslException("Could not authenticate using a user authentication token."+ " Exception: " + e.Message, e);
+                throw new EslException("Could not create a redirect to designer for a sender."+ " Exception: " + e.Message, e);
             }
         }        
+
+        public string BuildRedirectToPackageViewForSender(string userAuthenticationToken, PackageId packageId)
+        {
+            try {
+                string redirectPath = webpageTemplate.UrlFor(UrlTemplate.PACKAGE_VIEW_REDIRECT_PATH)
+                    .Replace("{packageId}", packageId.Id)
+                        .Build();
+                string encodedRedirectPath = HttpUtility.UrlEncode(redirectPath);
+                string path = authenticationTemplate.UrlFor(UrlTemplate.AUTHENTICATION_PATH_FOR_USER_AUTHENTICATION_TOKEN_WITH_REDIRECT)
+                    .Replace("{authenticationToken}", userAuthenticationToken)
+                        .Replace("{redirectUrl}", encodedRedirectPath)
+                        .Build();
+
+                return path;
+            } catch (Exception e) {
+                throw new EslException("Could not create a redirect to package view for a sender."+ " Exception: " + e.Message, e);
+            }
+        }       
 
         public string GetSessionIdForSignerAuthenticationToken(string signerAuthenticationToken)
         {

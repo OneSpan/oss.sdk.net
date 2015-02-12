@@ -28,7 +28,7 @@ namespace Silanis.ESL.API
     
 		    
     [JsonProperty("memberType")]
-    public MemberType MemberType
+    public string MemberType
     {
                 get; set;
         }

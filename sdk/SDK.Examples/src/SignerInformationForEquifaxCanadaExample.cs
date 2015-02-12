@@ -22,25 +22,20 @@ namespace SDK.Examples
         public readonly string DRIVERS_LICENSE_NUMBER = "C54625641298452";
         public readonly string SOCIAL_INSURANCE_NUMBER = "247018476";
         public readonly string HOME_PHONE_NUMBER = "5145786234";
+        public readonly Nullable<Int32> TIME_AT_ADDRESS = 1;
         public readonly Nullable<DateTime> DATE_OF_BIRTH = new DateTime(1971, 1, 1);
         public readonly string SIGNER_EMAIL;
 
         private string signerId = "signerId";
-        private DocumentPackage retrievedPackage;
         private string documentName = "My Document";
 
-        public SignerInformationForEquifaxCanadaExample(Props props) : this(props.Get("api.url"), props.Get("api.key"), props.Get("1.email"))
+        public SignerInformationForEquifaxCanadaExample(Props props) : this(props.Get("api.key"), props.Get("api.url"), props.Get("1.email"))
         {
         }
 
         public SignerInformationForEquifaxCanadaExample(string apiKey, string apiUrl, string signerEmail) : base( apiKey, apiUrl )
         {
             this.SIGNER_EMAIL = signerEmail;
-        }
-
-        public DocumentPackage RetrievedPackage
-        {
-            get { return retrievedPackage; }
         }
 
         override public void Execute()
@@ -61,8 +56,9 @@ namespace SDK.Examples
                                         .WithCity(CITY)
                                         .WithProvince(PROVINCE)
                                         .WithPostalCode(POSTAL_CODE)
+                                        .WithTimeAtAddress(TIME_AT_ADDRESS)
                                         .WithDriversLicenseNumber(DRIVERS_LICENSE_NUMBER)
-//                                        .WithSocialInsuranceNumber(SOCIAL_INSURANCE_NUMBER)
+                                        .WithSocialInsuranceNumber(SOCIAL_INSURANCE_NUMBER)
                                         .WithHomePhoneNumber(HOME_PHONE_NUMBER)
                                         .WithDateOfBirth(DATE_OF_BIRTH)
                                         .Build()))
@@ -76,7 +72,6 @@ namespace SDK.Examples
             packageId = eslClient.CreateAndSendPackage(superDuperPackage);
 
             retrievedPackage = eslClient.GetPackage(packageId);
-
         }
 
     }

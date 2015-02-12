@@ -43,7 +43,7 @@ namespace Silanis.ESL.SDK
 			}
 
 			EventNotificationConfig eventNotificationConfig = new EventNotificationConfig(apiCallback.Url);
-			foreach (CallbackEvent callbackEvent in apiCallback.Events)
+			foreach (string callbackEvent in apiCallback.Events)
 			{
 				eventNotificationConfig.AddEvent(new EventNotificationConverter(callbackEvent).ToSDKNotificationEvent());
 			}

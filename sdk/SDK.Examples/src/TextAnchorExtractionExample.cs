@@ -18,7 +18,7 @@ namespace SDK.Examples
         public int FieldHeight = 40;
         public DocumentPackage retrievedPackage;
 
-        public TextAnchorExtractionExample( Props props ) : this(props.Get("api.url"), props.Get("api.key"), props.Get("1.email"))
+        public TextAnchorExtractionExample( Props props ) : this(props.Get("api.key"), props.Get("api.url"), props.Get("1.email"))
         {
         }
 

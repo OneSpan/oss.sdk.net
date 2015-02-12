@@ -15,7 +15,7 @@ namespace SDK.Examples
             DocumentPackageAttributesExample example = new DocumentPackageAttributesExample(Props.GetInstance());
             example.Run();
 
-            DocumentPackage documentPackage = example.EslClient.GetPackage(example.PackageId);
+            DocumentPackage documentPackage = example.RetrievedPackage;
             DocumentPackageAttributes attributes = documentPackage.Attributes;
             IDictionary<string, object> attributeMap = attributes.Contents;
 

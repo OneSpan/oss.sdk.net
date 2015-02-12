@@ -8,16 +8,16 @@ namespace SDK.Examples
 	{
 		private EventNotificationConfig eventNotificationConfig;
 		public const string URL = "http://my.url.com";
-		public const NotificationEvent EVENT1 = NotificationEvent.PACKAGE_ACTIVATE;
-		public const NotificationEvent EVENT2 = NotificationEvent.PACKAGE_COMPLETE;
-		public const NotificationEvent EVENT3 = NotificationEvent.PACKAGE_OPT_OUT;
+		public static readonly NotificationEvent EVENT1 = NotificationEvent.PACKAGE_ACTIVATE;
+        public static readonly NotificationEvent EVENT2 = NotificationEvent.PACKAGE_COMPLETE;
+        public static readonly NotificationEvent EVENT3 = NotificationEvent.PACKAGE_OPT_OUT;
 
 		public static void Main(string[] args)
 		{
 			new EventNotificationRegistrationExample(Props.GetInstance()).Run();
 		}
 
-		public EventNotificationRegistrationExample(Props props) : base(props.Get("api.url"), props.Get("api.key"))
+		public EventNotificationRegistrationExample(Props props) : base(props.Get("api.key"), props.Get("api.url"))
 		{
 		}
 

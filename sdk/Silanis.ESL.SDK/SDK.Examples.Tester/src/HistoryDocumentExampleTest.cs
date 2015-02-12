@@ -13,7 +13,7 @@ namespace SDK.Examples
             HistoryDocumentExample example = new HistoryDocumentExample( Props.GetInstance() );
             example.Run();
 
-            DocumentPackage documentPackage = example.EslClient.GetPackage(example.PackageId);
+            DocumentPackage documentPackage = example.RetrievedPackage;
 
             // Verify if the package is created correctly
             Document historyDocument = documentPackage.Documents[example.externalDocumentName];

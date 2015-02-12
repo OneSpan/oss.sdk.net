@@ -96,6 +96,17 @@
     <Compile Include="src\SignerInformationForEquifaxUSAExampleTest.cs" />
     <Compile Include="src\MixedSignerAuthenticationExampleTest.cs" />
     <Compile Include="src\MobileCaptureSignatureStyleExampleTest.cs" />
+    <Compile Include="src\ProxyConfigurationExampleTest.cs" />
+    <Compile Include="src\PackageViewRedirectForPackageSenderExampleTest.cs" />
+    <Compile Include="src\GetCompletedPackagesWithinDateRangeExampleTest.cs" />
+    <Compile Include="src\MixingSignatureAndAcceptanceOnOnedocumentExampleTest.cs" />
+    <Compile Include="src\ChangePackageStatusExampleTest.cs" />
+    <Compile Include="src\GetSigningUrlExampleTest.cs" />
+    <Compile Include="src\StartFastTrackExampleTest.cs" />
+    <Compile Include="src\SendSmsToSignerExampleTest.cs" />
+    <Compile Include="src\GetGroupSummariesExampleTest.cs" />
+    <Compile Include="src\NotaryJournalExampleTest.cs" />
+    <Compile Include="src\CreatePackageFromTemplateWithAttachmentExampleTest.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

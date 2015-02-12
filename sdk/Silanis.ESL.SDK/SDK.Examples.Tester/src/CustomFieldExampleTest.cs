@@ -11,10 +11,8 @@ namespace SDK.Examples
 			CustomFieldExample example = new CustomFieldExample(Props.GetInstance());
 			example.Run();
 
-			DocumentPackage documentPackage = example.EslClient.GetPackage(example.PackageId);
-
+            DocumentPackage documentPackage = example.RetrievedPackage;
             Assert.IsTrue(example.EslClient.GetCustomFieldService().DoesCustomFieldExist(example.customFieldId1));
-            Assert.IsTrue(example.EslClient.GetCustomFieldService().DoesCustomFieldValueExist(example.customFieldId1));
             Assert.IsFalse(example.EslClient.GetCustomFieldService().DoesCustomFieldExist(example.customFieldId2));
 
 			Assert.AreEqual(documentPackage.Documents["First Document"].Signatures.Count, 1);
@@ -37,6 +35,13 @@ namespace SDK.Examples
 
             // Get first page of custom fields
             Assert.Greater(example.retrievedCustomFieldList2.Count, 0);
+
+            // Get the custom field values for this user
+            Assert.GreaterOrEqual(example.retrieveCustomFieldValueList1.Count, 1);
+
+            // Get the custom field values for this user after deleting 1 user custom field for this user
+            Assert.AreEqual(example.retrieveCustomFieldValueList2.Count, example.retrieveCustomFieldValueList1.Count - 1);
+
 		}
     }
 }

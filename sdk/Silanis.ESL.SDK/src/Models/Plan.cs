@@ -15,14 +15,14 @@ namespace Silanis.ESL.API
 		// Accessors
 		    
     [JsonProperty("contract")]
-    public Cycle Contract
+    public string Contract
     {
                 get; set;
         }
     
 		    
     [JsonProperty("cycle")]
-    public Cycle Cycle
+        public string Cycle
     {
                 get; set;
         }

@@ -6,38 +6,38 @@ namespace Silanis.ESL.SDK
     internal class GroupMemberTypeConverter
     {
         private GroupMemberType groupMemberType;
-        private MemberType memberType;
+        private string memberType;
 
         public GroupMemberTypeConverter( GroupMemberType groupMemberType )
         {
             this.groupMemberType = groupMemberType;
         }
 
-        public GroupMemberTypeConverter( MemberType memberType ) {
+        public GroupMemberTypeConverter( string memberType ) {
             this.memberType = memberType;
         }
 
-        internal MemberType ToAPIMemberType() {
-            if (groupMemberType == GroupMemberType.MANAGER)
+        internal string ToAPIMemberType() {
+            if (null == groupMemberType)
             {
-                return MemberType.MANAGER;
+                return memberType;
             }
-            else
-            {
-                return MemberType.REGULAR;
-            }
+            return groupMemberType.getApiValue();
         }
 
         internal GroupMemberType ToSDKGroupMemberType() {
-            if (memberType == MemberType.MANAGER)
+            if (GroupMemberType.MANAGER.Equals(memberType))
             {
                 return GroupMemberType.MANAGER;
             }
-            else
+            else if (GroupMemberType.REGULAR.Equals(memberType))
             {
                 return GroupMemberType.REGULAR;
+            }
+            else
+            {
+                return GroupMemberType.valueOf(memberType);            
             }
         }
     }
 }
-

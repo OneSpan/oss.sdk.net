@@ -17,7 +17,7 @@ namespace SDK.Examples
 
         public DocumentPackage savedPackage, afterReorder;
 
-        public SignerOrderingExample( Props props ) : this(props.Get("api.url"), props.Get("api.key"), props.Get("1.email"), props.Get("2.email")) {
+        public SignerOrderingExample( Props props ) : this(props.Get("api.key"), props.Get("api.url"), props.Get("1.email"), props.Get("2.email")) {
         }
 
         public SignerOrderingExample( string apiKey, string apiUrl, string email1, string email2 ) : base( apiKey, apiUrl ) {

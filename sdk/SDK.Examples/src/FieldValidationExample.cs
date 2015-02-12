@@ -52,7 +52,7 @@ namespace SDK.Examples
             }
         }
 
-        public FieldValidationExample(Props props) : this(props.Get("api.url"), props.Get("api.key"), props.Get("1.email"))
+        public FieldValidationExample(Props props) : this(props.Get("api.key"), props.Get("api.url"), props.Get("1.email"))
         {
         }
 
@@ -118,6 +118,7 @@ namespace SDK.Examples
             packageId = eslClient.CreatePackage(package);
 
             eslClient.SendPackage(packageId);
+            retrievedPackage = eslClient.GetPackage(packageId);
         }
     }
 }

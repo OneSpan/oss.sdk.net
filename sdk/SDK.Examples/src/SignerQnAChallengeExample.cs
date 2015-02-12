@@ -24,7 +24,7 @@ namespace SDK.Examples
         public readonly string SECOND_QUESTION = "What music instrument do you play? (answer: drums)";
         public readonly string SECOND_ANSWER = "drums";
 
-        public SignerQnAChallengeExample(Props props) : this(props.Get("api.url"), props.Get("api.key"), props.Get("1.email"))
+        public SignerQnAChallengeExample(Props props) : this(props.Get("api.key"), props.Get("api.url"), props.Get("1.email"))
         {
         }
 
@@ -55,6 +55,7 @@ namespace SDK.Examples
             packageId = eslClient.CreatePackage(superDuperPackage);
 
             eslClient.SendPackage(packageId);
+            retrievedPackage = eslClient.GetPackage(packageId);
         }
     }
 }

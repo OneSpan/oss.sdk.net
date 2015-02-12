@@ -13,7 +13,7 @@ namespace SDK.Examples
             PackageLanguageConfigurationExample example = new PackageLanguageConfigurationExample(Props.GetInstance());
             example.Run();
 
-            DocumentPackage retrievedPackage = example.EslClient.GetPackage(example.PackageId);
+            DocumentPackage retrievedPackage = example.RetrievedPackage;
 
             Assert.AreEqual(retrievedPackage.Language.Name, "fr");
         }

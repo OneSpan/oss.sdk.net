@@ -12,7 +12,7 @@ namespace SDK.Examples
         {
             BasicPackageCreationExample example = new BasicPackageCreationExample( Props.GetInstance() );
             example.Run();
-            DocumentPackage documentPackage = example.EslClient.GetPackage(example.PackageId);
+            DocumentPackage documentPackage = example.RetrievedPackage;
             
             Assert.IsTrue(documentPackage.Attributes.Contents.ContainsKey( "sdk" ));
             Assert.IsTrue(documentPackage.Attributes.Contents["sdk"].ToString().Contains(".NET"));

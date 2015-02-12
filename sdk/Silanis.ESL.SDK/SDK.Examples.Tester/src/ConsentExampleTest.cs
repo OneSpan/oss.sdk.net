@@ -13,7 +13,7 @@ namespace SDK.Examples
             ConsentExample example = new ConsentExample(Props.GetInstance());
             example.Run();
 
-            DocumentPackage documentPackage = example.EslClient.GetPackage(example.PackageId);
+            DocumentPackage documentPackage = example.RetrievedPackage;
 
             // Verify if the required information is correctly extracted.
             Document document = documentPackage.Documents["Custom Consent Document"];

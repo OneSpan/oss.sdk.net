@@ -20,7 +20,7 @@ namespace SDK.Examples
             SignerInformationForEquifaxUSAExample example = new SignerInformationForEquifaxUSAExample(Props.GetInstance());
             example.Run();
 
-            DocumentPackage documentPackage = example.EslClient.GetPackage(example.PackageId);
+            DocumentPackage documentPackage = example.RetrievedPackage;
 
             SignerInformationForEquifaxUSA signerInformationForEquifaxUSA = documentPackage.Signers[example.SIGNER_EMAIL].KnowledgeBasedAuthentication.SignerInformationForEquifaxUSA;
 
@@ -30,11 +30,11 @@ namespace SDK.Examples
             Assert.AreEqual(signerInformationForEquifaxUSA.City, example.CITY);
             Assert.AreEqual(signerInformationForEquifaxUSA.State, example.STATE);
             Assert.AreEqual(signerInformationForEquifaxUSA.Zip, example.ZIP);
+            Assert.AreEqual(signerInformationForEquifaxUSA.TimeAtAddress, example.TIME_AT_ADDRESS);
             Assert.AreEqual(signerInformationForEquifaxUSA.SocialSecurityNumber, example.SOCIAL_SECURITY_NUMBER);
             Assert.AreEqual(signerInformationForEquifaxUSA.HomePhoneNumber, example.HOME_PHONE_NUMBER);
             Assert.AreEqual(signerInformationForEquifaxUSA.DateOfBirth, example.DATE_OF_BIRTH);
             Assert.AreEqual(signerInformationForEquifaxUSA.DriversLicenseNumber, example.DRIVERS_LICENSE_NUMBER);
-            Assert.AreEqual(signerInformationForEquifaxUSA.TimeAtAddress, null);
         }
     }
 }

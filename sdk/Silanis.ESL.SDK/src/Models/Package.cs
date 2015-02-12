@@ -14,6 +14,11 @@ namespace Silanis.ESL.API
 		private IList<Message> _messages = new List<Message>();
 		private IList<Role> _roles = new List<Role>();
 		
+        internal Package(){
+            Status = "DRAFT";
+            Visibility = "ACCOUNT";
+            Type = "PACKAGE";
+        }
 		// Accessors
 		    
     [JsonProperty("autocomplete")]
@@ -189,7 +194,7 @@ namespace Silanis.ESL.API
     
 		    
     [JsonProperty("status")]
-    public PackageStatus Status
+    public string Status
     {
                 get; set;
         }
@@ -203,7 +208,7 @@ namespace Silanis.ESL.API
     
 		    
     [JsonProperty("type")]
-    public BasePackageType Type
+    public string Type
     {
                 get; set;
         }
@@ -217,7 +222,7 @@ namespace Silanis.ESL.API
     
 		    
     [JsonProperty("visibility")]
-    public Visibility Visibility
+    public string Visibility
     {
                 get; set;
         }

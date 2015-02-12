@@ -126,7 +126,7 @@ namespace Silanis.ESL.API
     
 		    
     [JsonProperty("type")]
-    public RoleType Type
+    public string Type
     {
                 get; set;
         }

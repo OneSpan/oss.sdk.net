@@ -20,7 +20,7 @@ namespace SDK.Examples
         private Stream FileStream;
         private string SignerEmail;
 
-        public SignerAuthenticationTokenExample( Props props ) : this(props.Get("api.url"), props.Get("api.key"), props.Get("webpage.url"), props.Get("1.email"))
+        public SignerAuthenticationTokenExample( Props props ) : this(props.Get("api.key"), props.Get("api.url"), props.Get("webpage.url"), props.Get("1.email"))
         {
         }
 

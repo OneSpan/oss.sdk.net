@@ -13,7 +13,7 @@ namespace SDK.Examples
             AuthenticationMethodsExample example = new AuthenticationMethodsExample(Props.GetInstance());
             example.Run();
 
-            DocumentPackage documentPackage = example.EslClient.GetPackage(example.PackageId);
+            DocumentPackage documentPackage = example.RetrievedPackage;
 
             Assert.AreEqual(documentPackage.Signers[example.Email1].AuthenticationMethod, AuthenticationMethod.EMAIL);
             Assert.AreEqual(documentPackage.Signers[example.Email1].ChallengeQuestion.Count, 0);

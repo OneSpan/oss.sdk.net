@@ -75,7 +75,7 @@ namespace SDK.Tests
 			Assert.AreEqual(sdkAttachmentRequirement1.Description, apiAttachmentRequirement1.Description);
 			Assert.AreEqual(sdkAttachmentRequirement1.Id, apiAttachmentRequirement1.Id);
 			Assert.AreEqual(sdkAttachmentRequirement1.Required, apiAttachmentRequirement1.Required);
-			Assert.AreEqual(sdkAttachmentRequirement1.Status.ToString(), apiAttachmentRequirement1.Status.ToString());
+			Assert.AreEqual(sdkAttachmentRequirement1.Status.getApiValue(), apiAttachmentRequirement1.Status);
 			Assert.AreEqual(sdkAttachmentRequirement1.SenderComment, apiAttachmentRequirement1.Comment);
 		}
 
@@ -89,9 +89,20 @@ namespace SDK.Tests
 			Assert.AreEqual(apiAttachmentRequirement1.Description, sdkAttachmentRequirement1.Description);
 			Assert.AreEqual(apiAttachmentRequirement1.Id, sdkAttachmentRequirement1.Id);
 			Assert.AreEqual(apiAttachmentRequirement1.Required, sdkAttachmentRequirement1.Required);
-			Assert.AreEqual(apiAttachmentRequirement1.Status.ToString(), sdkAttachmentRequirement1.Status.ToString());
+			Assert.AreEqual(apiAttachmentRequirement1.Status, sdkAttachmentRequirement1.Status.ToString());
 			Assert.AreEqual(apiAttachmentRequirement1.Comment, sdkAttachmentRequirement1.SenderComment);
 		}
+
+        [Test]
+        public void ConvertSDKToAPIWhenSdkAttachmentRequirementIsNull()
+        {
+            sdkAttachmentRequirement1 = CreateTypicalSDKAttachmentRequirement();
+            sdkAttachmentRequirement1.Id = null;
+            apiAttachmentRequirement1 = new AttachmentRequirementConverter(sdkAttachmentRequirement1).ToAPIAttachmentRequirement();
+
+            Assert.IsNull(apiAttachmentRequirement1.Id);
+        }
+
 
 		private Silanis.ESL.SDK.AttachmentRequirement CreateTypicalSDKAttachmentRequirement()
 		{

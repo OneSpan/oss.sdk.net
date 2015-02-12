@@ -21,7 +21,7 @@ namespace Silanis.ESL.API
     
 		    
     [JsonProperty("cycle")]
-    public Cycle Cycle
+    public string Cycle
     {
                 get; set;
         }

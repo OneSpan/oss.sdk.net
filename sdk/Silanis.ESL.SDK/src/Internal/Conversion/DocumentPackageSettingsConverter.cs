@@ -64,9 +64,14 @@ namespace Silanis.ESL.SDK
                 if (apiSettings.Ceremony.HidePackageOwnerInPerson.HasValue)
                     builder = (apiSettings.Ceremony.HidePackageOwnerInPerson.Value ? builder.HideOwnerInPersonDropDown() : builder.ShowOwnerInPersonDropDown());
             
-                foreach (string reason in apiSettings.Ceremony.OptOutReasons)
+                foreach (string declineReason in apiSettings.Ceremony.DeclineReasons)
                 {
-                    builder.WithOptOutReason(reason);
+                    builder.WithDeclineReason(declineReason);
+                }
+
+                foreach (string optOutReason in apiSettings.Ceremony.OptOutReasons)
+                {
+                    builder.WithOptOutReason(optOutReason);
                 }
 
                 if (apiSettings.Ceremony.MaxAuthFailsAllowed.HasValue)

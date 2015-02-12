@@ -92,6 +92,24 @@ namespace Silanis.ESL.SDK.Services
             apiClient.DeleteCustomField(id);
 		}
 
+        ///
+        /// Get all custom fields for the user.
+        ///
+        /// @return user custom field list
+        /// 
+        public IList<CustomFieldValue> GetCustomFieldValues() 
+        {
+            IList<UserCustomField> userCustomFields = apiClient.GetUserCustomFields();
+
+            IList<CustomFieldValue> customFieldValues = new List<CustomFieldValue>();
+            foreach (UserCustomField userCustomField in userCustomFields) 
+            {
+                customFieldValues.Add(new CustomFieldValueConverter(userCustomField).ToSDKCustomFieldValue());
+            }
+
+            return customFieldValues;
+        }
+
 		///
 		/// Create an user custom field.
 		/// If the custom field already existed then update it.
@@ -103,9 +121,18 @@ namespace Silanis.ESL.SDK.Services
 		///
 		public CustomFieldValue SubmitCustomFieldValue(CustomFieldValue customFieldValue)
         {   
-            UserCustomField apiCustomFieldValue = customFieldValue.toAPIUserCustomField();
+            UserCustomField apiCustomFieldValue = new CustomFieldValueConverter(customFieldValue).ToAPIUserCustomField();
             apiCustomFieldValue = apiClient.SubmitCustomFieldValue(apiCustomFieldValue);
             return CustomFieldValueBuilder.CustomFieldValue(apiCustomFieldValue).build();
+        }
+
+        ///
+        /// Delete an user custom field.
+        ///
+        /// @param id of user custom field to delete.
+        ///
+        public void DeleteCustomFieldValue(string id) {
+            apiClient.DeleteUserCustomField(id);
         }
 
 		///

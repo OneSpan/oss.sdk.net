@@ -29,7 +29,7 @@ namespace Silanis.ESL.SDK
             string path = template.UrlFor (UrlTemplate.USER_AUTHENTICATION_TOKEN_PATH).Build ();
 
             try {
-                string response = restClient.Post(path, null);              
+                string response = restClient.Post(path, "");              
                 return JsonConvert.DeserializeObject<Silanis.ESL.API.AuthenticationToken> (response).Value;
             }
             catch (EslServerException e) {

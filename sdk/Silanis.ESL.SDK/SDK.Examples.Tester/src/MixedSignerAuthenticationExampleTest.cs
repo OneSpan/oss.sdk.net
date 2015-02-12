@@ -21,7 +21,7 @@ namespace SDK.Examples
             MixedSignerAuthenticationExample example = new MixedSignerAuthenticationExample(Props.GetInstance());
             example.Run();
 
-            DocumentPackage documentPackage = example.EslClient.GetPackage(example.PackageId);
+            DocumentPackage documentPackage = example.RetrievedPackage;
 
             Signer canadianSigner = documentPackage.Signers[example.SIGNER_WITH_AUTHENTICATION_EQUIFAX_CANADA.Email];
             SignerInformationForEquifaxCanada canadianSignerInformationForEquifaxCanada = canadianSigner.KnowledgeBasedAuthentication.SignerInformationForEquifaxCanada;
