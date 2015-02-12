@@ -17,7 +17,7 @@ namespace SDK.Examples
         private Stream fileStream1;
 
         public PackageId templateId;
-        public String signingUrl;
+        public string signingUrl;
 
         public readonly string TEMPLATE_NAME = "StartFastTrackExample " + DateTime.Now;
         public readonly string TEMPLATE_DESCRIPTION = "This is a package created using the e-SignLive SDK";
@@ -32,7 +32,7 @@ namespace SDK.Examples
         public readonly string DOCUMENT_NAME = "First Document";
         public readonly string DOCUMENT_ID = "doc1";
 
-        public StartFastTrackExample(Props props) : this(props.Get("api.url"), props.Get("api.key"), props.Get("1.email"))
+        public StartFastTrackExample(Props props) : this(props.Get("api.key"), props.Get("api.url"), props.Get("1.email"))
         {
         }
 

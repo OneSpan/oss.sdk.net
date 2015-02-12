@@ -19,7 +19,7 @@ namespace SDK.Examples
         private string email1;
         private Stream fileStream1;
 
-        public GetPackageMessageExample(Props props) : this(props.Get("api.url"), props.Get("api.key"), props.Get("1.email"))
+        public GetPackageMessageExample(Props props) : this(props.Get("api.key"), props.Get("api.url"), props.Get("1.email"))
         {
         }
 

@@ -14,29 +14,22 @@ namespace SDK.Examples
 
         private string email1;
         private Stream fileStream1;
+        private string webpageUrl;
+        private string signerId = "myCustomSignerId";
 
-		private SessionToken signerSessionToken = null;
+        public SessionToken signerSessionToken;
 
-		public SessionToken SignerSessionToken
-		{
-			get
-			{
-				return signerSessionToken;
-			}
-		}
-
-        public SessionCreationExample( Props props ) : this(props.Get("api.url"), props.Get("api.key"), props.Get("1.email")) {
+        public SessionCreationExample( Props props ) : this(props.Get("api.key"), props.Get("api.url"), props.Get("webpage.url"), props.Get("1.email")) {
         }
 
-        public SessionCreationExample( string apiKey, string apiUrl, string email1 ) : base( apiKey, apiUrl ) {
+        public SessionCreationExample( string apiKey, string apiUrl, string webpageUrl, string email1 ) : base( apiKey, apiUrl ) {
             this.email1 = email1;
             this.fileStream1 = File.OpenRead(new FileInfo(Directory.GetCurrentDirectory() + "/src/document.pdf").FullName);
+            this.webpageUrl = webpageUrl;
         }
 
         override public void Execute()
         {
-            String signerId = "myCustomSignerId";
-
             DocumentPackage superDuperPackage = PackageBuilder.NewPackageNamed( "SessionCreationExample: " + DateTime.Now )
                 .WithSigner(SignerBuilder.NewSignerWithEmail(email1)
                             .WithFirstName( "John" )
@@ -52,7 +45,7 @@ namespace SDK.Examples
             PackageId packageId = eslClient.CreatePackage( superDuperPackage );
             eslClient.SendPackage( packageId );
 			signerSessionToken = eslClient.CreateSignerSessionToken( packageId, email1 );
-           
+            Console.WriteLine("{0}/access?sessionToken={1}", webpageUrl, signerSessionToken.Token);
         }
     }
 }

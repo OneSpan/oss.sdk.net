@@ -22,7 +22,7 @@ namespace SDK.Examples
         public readonly string ATTRIBUTE_2 = "Johnson";
         public readonly string ATTRIBUTE_3 = "1";
 
-        public DocumentPackageAttributesExample(Props props) : this(props.Get("api.url"), props.Get("api.key"), props.Get("1.email"))
+        public DocumentPackageAttributesExample(Props props) : this(props.Get("api.key"), props.Get("api.url"), props.Get("1.email"))
         {
         }
 

@@ -18,7 +18,7 @@ namespace SDK.Examples
 
         public readonly string DOCUMENT_NAME = "First Document";
 
-        public ChangePackageStatusExample(Props props) : this(props.Get("api.url"), props.Get("api.key"), props.Get("1.email"))
+        public ChangePackageStatusExample(Props props) : this(props.Get("api.key"), props.Get("api.url"), props.Get("1.email"))
         {
         }
 

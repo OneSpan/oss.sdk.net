@@ -19,7 +19,7 @@ namespace SDK.Examples
         public Page<DocumentPackage> archivedPackages;
         public Page<DocumentPackage> completedPackages;
 
-        public GetCompletedPackagesWithinDateRangeExample( Props props ) : this(props.Get("api.url"), props.Get("api.key")) {
+        public GetCompletedPackagesWithinDateRangeExample( Props props ) : this(props.Get("api.key"), props.Get("api.url")) {
         }
 
         public GetCompletedPackagesWithinDateRangeExample( String apiKey, String apiUrl ) : base( apiKey, apiUrl ) {

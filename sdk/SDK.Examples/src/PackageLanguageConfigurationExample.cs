@@ -16,7 +16,7 @@ namespace SDK.Examples
         private string email1;
         private Stream fileStream1;
 
-        public PackageLanguageConfigurationExample( Props props ) : this(props.Get("api.url"), props.Get("api.key"), props.Get("1.email")) {
+        public PackageLanguageConfigurationExample( Props props ) : this(props.Get("api.key"), props.Get("api.url"), props.Get("1.email")) {
         }
 
         public PackageLanguageConfigurationExample( string apiKey, string apiUrl, string email1 ) : base( apiKey, apiUrl ) {

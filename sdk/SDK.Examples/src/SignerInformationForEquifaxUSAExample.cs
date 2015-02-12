@@ -29,7 +29,7 @@ namespace SDK.Examples
         private string signerId = "signerId";
         private string documentName = "My Document";
 
-        public SignerInformationForEquifaxUSAExample(Props props) : this(props.Get("api.url"), props.Get("api.key"), props.Get("1.email"))
+        public SignerInformationForEquifaxUSAExample(Props props) : this(props.Get("api.key"), props.Get("api.url"), props.Get("1.email"))
         {
         }
 

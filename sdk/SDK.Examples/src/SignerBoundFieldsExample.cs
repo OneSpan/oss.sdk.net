@@ -29,7 +29,7 @@ namespace SDK.Examples
         public readonly int SIGNER_COMPANY_POSITION_X = 500;
         public readonly int SIGNER_COMPANY_POSITION_Y = 500;
 
-        public SignerBoundFieldsExample(Props props) : this(props.Get("api.url"), props.Get("api.key"), props.Get("1.email"))
+        public SignerBoundFieldsExample(Props props) : this(props.Get("api.key"), props.Get("api.url"), props.Get("1.email"))
         {
         }
 

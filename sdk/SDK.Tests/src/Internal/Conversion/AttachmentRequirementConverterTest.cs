@@ -93,6 +93,16 @@ namespace SDK.Tests
 			Assert.AreEqual(apiAttachmentRequirement1.Comment, sdkAttachmentRequirement1.SenderComment);
 		}
 
+        [Test]
+        public void ConvertSDKToAPIWhenSdkAttachmentRequirementIsNull()
+        {
+            sdkAttachmentRequirement1 = CreateTypicalSDKAttachmentRequirement();
+            sdkAttachmentRequirement1.Id = null;
+            apiAttachmentRequirement1 = new AttachmentRequirementConverter(sdkAttachmentRequirement1).ToAPIAttachmentRequirement();
+
+            Assert.IsNull(apiAttachmentRequirement1.Id);
+        }
+
 
 		private Silanis.ESL.SDK.AttachmentRequirement CreateTypicalSDKAttachmentRequirement()
 		{

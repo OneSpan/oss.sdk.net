@@ -22,7 +22,7 @@ namespace SDK.Examples
         public string qrCodeId2;
         public IList<Silanis.ESL.SDK.Field> modifiedQRCodeList, deletedQRCodeList, updatedQRCodeList;
 
-        public QRCodeExample(Props props) : this(props.Get("api.url"), props.Get("api.key"), props.Get("1.email"))
+        public QRCodeExample(Props props) : this(props.Get("api.key"), props.Get("api.url"), props.Get("1.email"))
         {
         }
 

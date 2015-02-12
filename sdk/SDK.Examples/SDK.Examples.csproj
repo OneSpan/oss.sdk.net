@@ -131,6 +131,7 @@
     <Compile Include="src\SignerInformationForEquifaxUSAExample.cs" />
     <Compile Include="src\MixedSignerAuthenticationExample.cs" />
     <Compile Include="src\MobileCaptureSignatureStyleExample.cs" />
+    <Compile Include="src\ProxyConfigurationExample.cs" />
     <Compile Include="src\PackageViewRedirectForPackageSenderExample.cs" />
     <Compile Include="src\GetCompletedPackagesWithinDateRangeExample.cs" />
     <Compile Include="src\MixingSignatureAndAcceptanceOnOnedocumentExample.cs" />
@@ -139,6 +140,8 @@
     <Compile Include="src\StartFastTrackExample.cs" />
     <Compile Include="src\SendSmsToSignerExample.cs" />
     <Compile Include="src\GetGroupSummariesExample.cs" />
+    <Compile Include="src\NotaryJournalExample.cs" />
+    <Compile Include="src\CreatePackageFromTemplateWithAttachmentExample.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

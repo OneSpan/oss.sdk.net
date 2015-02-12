@@ -56,12 +56,7 @@ namespace SDK.Examples
         public static string ANSWER2 = "blue";
 
         public AuthenticationMethodsExample(Props props) 
-            : this(props.Get("api.url"), 
-                   props.Get("api.key"), 
-                   props.Get("1.email"), 
-                   props.Get("2.email"), 
-                   props.Get("3.email"), 
-                   props.Get("3.sms"))
+            : this(props.Get("api.key"), props.Get("api.url"), props.Get("1.email"), props.Get("2.email"), props.Get("3.email"), props.Get("3.sms"))
         {
         }
 

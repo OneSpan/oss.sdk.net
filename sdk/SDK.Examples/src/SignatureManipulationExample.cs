@@ -31,7 +31,7 @@ namespace SDK.Examples
 
         public DocumentPackage createdPackage;
 
-        public SignatureManipulationExample(Props props) : this(props.Get("api.url"), props.Get("api.key"), props.Get("1.email"), props.Get("2.email"), props.Get("3.email"))
+        public SignatureManipulationExample(Props props) : this(props.Get("api.key"), props.Get("api.url"), props.Get("1.email"), props.Get("2.email"), props.Get("3.email"))
         {
         }
 

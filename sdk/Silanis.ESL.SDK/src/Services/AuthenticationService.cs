@@ -89,15 +89,15 @@ namespace Silanis.ESL.SDK
             }
         }        
 
-        public string BuildRedirectToPackageViewForSender(string senderAuthenticationToken, PackageId packageId)
+        public string BuildRedirectToPackageViewForSender(string userAuthenticationToken, PackageId packageId)
         {
             try {
                 string redirectPath = webpageTemplate.UrlFor(UrlTemplate.PACKAGE_VIEW_REDIRECT_PATH)
                     .Replace("{packageId}", packageId.Id)
                         .Build();
                 string encodedRedirectPath = HttpUtility.UrlEncode(redirectPath);
-                string path = authenticationTemplate.UrlFor(UrlTemplate.AUTHENTICATION_PATH_FOR_SENDER_AUTHENTICATION_TOKEN_WITH_REDIRECT)
-                    .Replace("{senderAuthenticationToken}", senderAuthenticationToken)
+                string path = authenticationTemplate.UrlFor(UrlTemplate.AUTHENTICATION_PATH_FOR_USER_AUTHENTICATION_TOKEN_WITH_REDIRECT)
+                    .Replace("{authenticationToken}", userAuthenticationToken)
                         .Replace("{redirectUrl}", encodedRedirectPath)
                         .Build();
 

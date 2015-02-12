@@ -15,7 +15,7 @@ namespace SDK.Examples
         public string email1;
         private Stream fileStream1;
 
-        public ChangeSignerExample(Props props) : this(props.Get("api.url"), props.Get("api.key"), props.Get("1.email"))
+        public ChangeSignerExample(Props props) : this(props.Get("api.key"), props.Get("api.url"), props.Get("1.email"))
         {
         }
 

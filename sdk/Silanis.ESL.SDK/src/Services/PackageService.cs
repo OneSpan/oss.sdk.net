@@ -227,7 +227,7 @@ namespace Silanis.ESL.SDK.Services
             try
             {
                 string json = JsonConvert.SerializeObject(internalDoc, settings);
-                restClient.Post(path, json);
+                restClient.Put(path, json);
             }
             catch (EslServerException e)
             {
@@ -1365,7 +1365,7 @@ namespace Silanis.ESL.SDK.Services
 
         private void SendSmsToSigner(PackageId packageId, Role role) 
         {
-            String path = template.UrlFor(UrlTemplate.SEND_SMS_TO_SIGNER_PATH)
+            string path = template.UrlFor(UrlTemplate.SEND_SMS_TO_SIGNER_PATH)
                                   .Replace("{packageId}", packageId.Id)
                                   .Replace("{roleId}", role.Id)
                                   .Build();
@@ -1381,6 +1381,57 @@ namespace Silanis.ESL.SDK.Services
             catch (Exception e)
             {
                 throw new EslException("Could not send SMS to the signer." + " Exception: " + e.Message, e);
+            }
+        }
+
+        public List<Silanis.ESL.SDK.NotaryJournalEntry> GetJournalEntries(string userId) 
+        {
+            List<Silanis.ESL.SDK.NotaryJournalEntry> result = new List<Silanis.ESL.SDK.NotaryJournalEntry>();
+
+            string path = template.UrlFor(UrlTemplate.NOTARY_JOURNAL_PATH)
+                    .Replace("{userId}", userId)
+                    .Build();
+
+            try
+            {
+                string response = restClient.Get(path);
+                Silanis.ESL.API.Result<Silanis.ESL.API.NotaryJournalEntry> apiResponse = JsonConvert.DeserializeObject<Silanis.ESL.API.Result<Silanis.ESL.API.NotaryJournalEntry>> (response, settings );
+
+                foreach ( Silanis.ESL.API.NotaryJournalEntry apiNotaryJournalEntry in apiResponse.Results ) 
+                {
+                    result.Add( new NotaryJournalEntryConverter( apiNotaryJournalEntry ).ToSDKNotaryJournalEntry() );
+                }
+
+                return result;
+
+            } 
+            catch (EslServerException e)
+            {
+                throw new EslServerException("Could not get Journal Entries." + " Exception: " + e.Message, e.ServerError, e);
+            }
+            catch (Exception e)
+            {
+                throw new EslException("Could not get Journal Entries." + " Exception: " + e.Message, e);
+            }
+        }
+
+        public string GetJournalEntriesAsCSV(string userId) 
+        {
+            string path = template.UrlFor(UrlTemplate.NOTARY_JOURNAL_CSV_PATH)
+                    .Replace("{userId}", userId)
+                    .Build();
+
+            try
+            {
+                return restClient.Get(path, "text/csv");
+            } 
+            catch (EslServerException e)
+            {
+                throw new EslServerException("Could not get Journal Entries in csv." + " Exception: " + e.Message, e.ServerError, e);
+            }
+            catch (Exception e)
+            {
+                throw new EslException("Could not get Journal Entries in csv." + " Exception: " + e.Message, e);
             }
         }
     }

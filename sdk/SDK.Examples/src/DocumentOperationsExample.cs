@@ -26,7 +26,7 @@ namespace SDK.Examples
             new DocumentOperationsExample(Props.GetInstance()).Run();
         }
 
-		public DocumentOperationsExample(Props props) : base(props.Get("api.url"), props.Get("api.key"))
+		public DocumentOperationsExample(Props props) : base(props.Get("api.key"), props.Get("api.url"))
 		{
 		}
 

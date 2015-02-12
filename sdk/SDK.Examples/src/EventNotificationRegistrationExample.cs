@@ -17,7 +17,7 @@ namespace SDK.Examples
 			new EventNotificationRegistrationExample(Props.GetInstance()).Run();
 		}
 
-		public EventNotificationRegistrationExample(Props props) : base(props.Get("api.url"), props.Get("api.key"))
+		public EventNotificationRegistrationExample(Props props) : base(props.Get("api.key"), props.Get("api.url"))
 		{
 		}
 

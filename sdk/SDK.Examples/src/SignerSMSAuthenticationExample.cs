@@ -19,7 +19,7 @@ namespace SDK.Examples
         public string sms1;
         private Stream fileStream1;
 
-        public SignerSMSAuthenticationExample(Props props) : this(props.Get("api.url"), props.Get("api.key"), props.Get("1.email"), props.Get("1.sms"))
+        public SignerSMSAuthenticationExample(Props props) : this(props.Get("api.key"), props.Get("api.url"), props.Get("1.email"), props.Get("1.sms"))
         {
         }
 

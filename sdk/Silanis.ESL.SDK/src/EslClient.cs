@@ -5,6 +5,7 @@ using Silanis.ESL.SDK.Builder;
 using Silanis.ESL.API;
 using Newtonsoft.Json;
 using System.Reflection;
+using Silanis.ESL.SDK;
 using System.Collections.Generic;
 
 namespace Silanis.ESL.SDK
@@ -50,24 +51,64 @@ namespace Silanis.ESL.SDK
             configureJsonSerializationSettings();
 
             RestClient restClient = new RestClient(apiKey);
-			packageService = new PackageService(restClient, this.baseUrl, jsonSerializerSettings);
-			sessionService = new SessionService(apiKey, this.baseUrl);
-			fieldSummaryService = new FieldSummaryService(new FieldSummaryApiClient(apiKey, this.baseUrl));
-            auditService = new AuditService(apiKey, this.baseUrl);
+            init(restClient, apiKey);
+        }
 
+        public EslClient (string apiKey, string baseURL, Boolean allowAllSSLCertificates)
+        {
+            Asserts.NotEmptyOrNull (apiKey, "apiKey");
+            Asserts.NotEmptyOrNull (baseUrl, "baseUrl");
+            this.baseUrl = AppendServicePath (baseUrl);
+
+            configureJsonSerializationSettings();
+
+            RestClient restClient = new RestClient(apiKey, allowAllSSLCertificates);
+            init(restClient, apiKey);
+        }
+
+        public EslClient (string apiKey, string baseUrl, ProxyConfiguration proxyConfiguration)
+        {
+            Asserts.NotEmptyOrNull (apiKey, "apiKey");
+            Asserts.NotEmptyOrNull (baseUrl, "baseUrl");
+            this.baseUrl = AppendServicePath (baseUrl);
+
+            configureJsonSerializationSettings();
+
+            RestClient restClient = new RestClient(apiKey, proxyConfiguration);
+            init(restClient, apiKey);
+        }
+
+        public EslClient (string apiKey, string baseUrl, bool allowAllSSLCertificates, ProxyConfiguration proxyConfiguration)
+        {
+            Asserts.NotEmptyOrNull (apiKey, "apiKey");
+            Asserts.NotEmptyOrNull (baseUrl, "baseUrl");
+            this.baseUrl = AppendServicePath (baseUrl);
+
+            configureJsonSerializationSettings();
+
+            RestClient restClient = new RestClient(apiKey, allowAllSSLCertificates, proxyConfiguration);
+            init(restClient, apiKey);
+        }
+
+        private void init(RestClient restClient, String apiKey)
+        {
+            packageService = new PackageService(restClient, this.baseUrl, jsonSerializerSettings);
+            sessionService = new SessionService(apiKey, this.baseUrl);
+            fieldSummaryService = new FieldSummaryService(new FieldSummaryApiClient(apiKey, this.baseUrl));
+            auditService = new AuditService(apiKey, this.baseUrl);
             eventNotificationService = new EventNotificationService(new EventNotificationApiClient(restClient, this.baseUrl, jsonSerializerSettings));
             customFieldService = new CustomFieldService( new CustomFieldApiClient(restClient, this.baseUrl, jsonSerializerSettings) );
             groupService = new GroupService(new GroupApiClient(restClient, this.baseUrl, jsonSerializerSettings));
-			accountService = new AccountService(new AccountApiClient(restClient, this.baseUrl, jsonSerializerSettings));
+            accountService = new AccountService(new AccountApiClient(restClient, this.baseUrl, jsonSerializerSettings));
             approvalService = new ApprovalService(new ApprovalApiClient(restClient, this.baseUrl, jsonSerializerSettings));
-			reminderService = new ReminderService(new ReminderApiClient(restClient, this.baseUrl, jsonSerializerSettings));
-			templateService = new TemplateService(new TemplateApiClient(restClient, this.baseUrl, jsonSerializerSettings), packageService);
-			authenticationTokenService = new AuthenticationTokenService(restClient, this.baseUrl); 
-			attachmentRequirementService = new AttachmentRequirementService(new AttachmentRequirementApiClient(restClient, this.baseUrl, jsonSerializerSettings));
+            reminderService = new ReminderService(new ReminderApiClient(restClient, this.baseUrl, jsonSerializerSettings));
+            templateService = new TemplateService(new TemplateApiClient(restClient, this.baseUrl, jsonSerializerSettings), packageService);
+            authenticationTokenService = new AuthenticationTokenService(restClient, this.baseUrl); 
+            attachmentRequirementService = new AttachmentRequirementService(new AttachmentRequirementApiClient(restClient, this.baseUrl, jsonSerializerSettings));
             layoutService = new LayoutService(new LayoutApiClient(restClient, this.baseUrl, jsonSerializerSettings));
             qrCodeService = new QRCodeService(new QRCodeApiClient(restClient, this.baseUrl, jsonSerializerSettings));
         }
-        
+
         private void configureJsonSerializationSettings()
         {
             jsonSerializerSettings = new JsonSerializerSettings ();

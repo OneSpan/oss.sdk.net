@@ -30,7 +30,7 @@ namespace SDK.Examples
             get { return retrievedPackage; }
         }
 
-        public SDKSample( string apiUrl, string apiKey )
+        public SDKSample( string apiKey, string apiUrl )
         {
             Console.Out.WriteLine("apiUrl: " + apiUrl + ", apiKey: " + apiKey);
             eslClient = new EslClient(apiKey, apiUrl);

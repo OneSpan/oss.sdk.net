@@ -15,7 +15,7 @@ namespace SDK.Examples
             new RetrieveFieldValuesExample(Props.GetInstance()).Run();
         }
 
-        public RetrieveFieldValuesExample(Props props) : this(props.Get("api.url"), props.Get("api.key"))
+        public RetrieveFieldValuesExample(Props props) : this(props.Get("api.key"), props.Get("api.url"))
         {
         }
 

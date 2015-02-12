@@ -20,7 +20,7 @@ namespace SDK.Examples
             new ListTemplatesExample(Props.GetInstance()).Run();
         }
 
-        public ListTemplatesExample( Props props ) : this(props.Get("api.url"), props.Get("api.key")) {
+        public ListTemplatesExample( Props props ) : this(props.Get("api.key"), props.Get("api.url")) {
         }
 
         public ListTemplatesExample( string apiKey, string apiUrl ) : base( apiKey, apiUrl ) {

@@ -9,6 +9,7 @@ namespace Silanis.ESL.SDK
 	{
 		public EslException (string message, Exception cause) : base(message, cause)
 		{
+            String s = message;
 		}
 	}
 }
