@@ -11,6 +11,7 @@ namespace SDK.Examples
         {
             new PackageViewRedirectForPackageSenderExample(Props.GetInstance()).Run();
         }
+        public readonly string PACKAGE_NAME = "PackageViewRedirectForPackageSenderExample " + DateTime.Now;
 
         public string generatedLinkToPackageViewForSender;
 
@@ -51,7 +52,7 @@ namespace SDK.Examples
                     .WithCompany("company")
                     .Build();
 
-            DocumentPackage customSenderPackage = PackageBuilder.NewPackageNamed("PackageViewRedirectForPackageSenderExample " + DateTime.Now)
+            DocumentPackage customSenderPackage = PackageBuilder.NewPackageNamed(PACKAGE_NAME)
                 .WithSenderInfo(customSenderInfo)
                     .DescribedAs("This is a package created using the e-SignLive SDK")
                     .ExpiresOn(DateTime.Now.AddMonths(1))
