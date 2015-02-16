@@ -15,6 +15,8 @@ namespace SDK.Examples
             Assert.IsNotNull(example.PdfDocumentBytes);
             Assert.IsNotNull(example.OriginalPdfDocumentBytes);
             Assert.AreNotEqual(example.PdfDocumentBytes, example.OriginalPdfDocumentBytes);
+
+            Assert.IsNotNull(example.ZippedDocumentsBytes);
         }
     }
 }

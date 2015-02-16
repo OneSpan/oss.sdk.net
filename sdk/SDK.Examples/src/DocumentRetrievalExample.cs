@@ -14,7 +14,7 @@ namespace SDK.Examples
 
         private string email1;
         private Stream fileStream1;
-        private byte[] pdfDocumentBytes, originalPdfDocumentBytes;
+        private byte[] pdfDocumentBytes, originalPdfDocumentBytes, zippedDocumentsBytes;
 
         public DocumentRetrievalExample(Props props) : this(props.Get("api.key"), props.Get("api.url"), props.Get("1.email"))
         {
@@ -42,27 +42,33 @@ namespace SDK.Examples
             }
         }
 
+        public byte[] ZippedDocumentsBytes
+        {
+            get
+            {
+                return zippedDocumentsBytes;
+            }
+        }
+
         override public void Execute()
         {
-            string documentId = "myDocumentId";
-            DocumentPackage package = PackageBuilder.NewPackageNamed("DocumentRetrievalExample " + DateTime.Now)
-                .DescribedAs("This is a new package")
-                    .WithSigner(SignerBuilder.NewSignerWithEmail(email1)
-                                .WithFirstName("John")
-                                .WithLastName("Smith"))
-                    .WithDocument(DocumentBuilder.NewDocumentNamed("My Document")
-                                  .FromStream(fileStream1, DocumentType.PDF)
-                                  .WithId(documentId)
-                                  .WithSignature(SignatureBuilder.SignatureFor(email1)
-                                   .OnPage(0)
-                                   .AtPosition(100, 100)))
-                    .Build();
+            String docId = "myDocumentId";
+            PackageId package = eslClient.CreatePackageOneStep(PackageBuilder.NewPackageNamed("DocumentRetrievalExample " + DateTime.Now)
+                        .WithSigner(SignerBuilder.NewSignerWithEmail(email1)
+                            .WithFirstName("George")
+                            .WithLastName("Faltour").Build())
+                         .WithDocument(DocumentBuilder.NewDocumentNamed("Signature électronique  OACIQ - Une première firme accréditée par l’OACIQ.pdf")
+                            .FromStream(fileStream1, DocumentType.PDF)
+                            .WithId(docId)
+                            .WithSignature(SignatureBuilder.SignatureFor(email1)
+                           .    AtPosition(100, 100).OnPage(0))
+                          ).Build());
 
-            PackageId packageId = eslClient.CreatePackage(package);
-            eslClient.SendPackage(packageId);
+            eslClient.SendPackage(package);
 
-            pdfDocumentBytes = eslClient.DownloadDocument(packageId, documentId);
-            originalPdfDocumentBytes = eslClient.DownloadOriginalDocument(packageId, documentId);
+            pdfDocumentBytes = eslClient.DownloadDocument(package, docId);  
+            originalPdfDocumentBytes = eslClient.DownloadOriginalDocument(package, docId);
+            zippedDocumentsBytes = eslClient.DownloadZippedDocuments(package);
 
             // To write the byte[] to a file, use:
             // System.IO.File.WriteAllBytes("/path/to/directory/myDocument.pdf", pdfDocumentBytes);
