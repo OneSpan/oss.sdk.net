@@ -7,7 +7,7 @@ namespace Silanis.ESL.SDK
 {
 	public class DocumentPackageSettingsBuilder
 	{
-		private Nullable<bool> enableInPerson = true;
+		private Nullable<bool> enableInPerson = false;
 		private Nullable<bool> enableOptOut = null;
 		private Nullable<bool> enableDecline = null;
 		private Nullable<bool> hideWatermark = null;

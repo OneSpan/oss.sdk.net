@@ -33,8 +33,8 @@ namespace Silanis.ESL.SDK
             get { return showOwnerInPersonDropDown; }
             set { showOwnerInPersonDropDown = value; }
         }
-        
-		private Nullable<bool> enableInPerson = true;
+
+		private Nullable<bool> enableInPerson = false;
 
 		public Nullable<bool> EnableInPerson {
 			get {
