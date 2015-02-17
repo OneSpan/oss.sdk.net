@@ -19,11 +19,13 @@ namespace SDK.Examples
 
         public FieldInjectionExample( String apiKey, String apiUrl, String email1 ) : base( apiKey, apiUrl ) {
             this.email1 = email1;
-            this.fileStream1 = File.OpenRead(new FileInfo(Directory.GetCurrentDirectory() + "/src/document-with-fields.pdf").FullName);
+            this.fileStream1 = File.OpenRead(new FileInfo(Directory.GetCurrentDirectory() + "/src/field_groups.pdf").FullName);
         }
 
         override public void Execute()
         {
+            // Note that the field ID for injected field is not a significant for the field injection.
+            // InjectedField list is not returned by the esl-backend.
             DocumentPackage superDuperPackage = PackageBuilder.NewPackageNamed( "FieldInjectionExample " + DateTime.Now )
                 .WithSettings(DocumentPackageSettingsBuilder.NewDocumentPackageSettings().WithInPerson())
                 .WithSigner( SignerBuilder.NewSignerWithEmail( email1 )
@@ -31,20 +33,16 @@ namespace SDK.Examples
                             .WithLastName( "Smith" ) )
                     .WithDocument( DocumentBuilder.NewDocumentNamed( "First Document" )
                                   .FromStream(fileStream1, DocumentType.PDF)
-                                  .EnableExtraction()
-                                  .WithSignature( SignatureBuilder.SignatureFor( email1 )
-                                   .WithPositionExtracted() )
-                                  .WithInjectedField( FieldBuilder.TextField()
-                                       .WithPositionExtracted()
-                                       .WithId( "AGENT_SIG_1" )
-                                       .WithName( "AGENT_SIG_1" )
-                                       .WithValue( "Test Value" ) )
-                                  .WithInjectedField( FieldBuilder.SignatureDate()
-                                       .WithPositionExtracted() ) )
+                                  .WithInjectedField(FieldBuilder.TextField().WithName("Text1").WithValue("First Injected Value"))
+                                  .WithInjectedField(FieldBuilder.TextField().WithName("Text2").WithValue("Second Injected Value"))
+                                  .WithInjectedField(FieldBuilder.TextField().WithName("Text3").WithValue("Third Injected Value"))
+                                  .WithInjectedField(FieldBuilder.TextField().WithName("Text4").WithValue("Fourth Injected Value"))
+                                  .WithInjectedField(FieldBuilder.TextField().WithName("Text5").WithValue("Fifth Injected Value"))
+                                  .WithInjectedField(FieldBuilder.TextField().WithName("Text6").WithValue("Sixth Injected Value")))
                     .Build();
 
             packageId = eslClient.CreatePackage( superDuperPackage );
-            eslClient.SendPackage( PackageId );
+            retrievedPackage = eslClient.GetPackage( PackageId );
         }
     }
 }

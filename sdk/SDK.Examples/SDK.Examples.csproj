@@ -170,6 +170,12 @@
     </None>
     <None Include="jenkins.properties" />
     <None Include="signers.properties" />
+    <None Include="src\extract_document.pdf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="src\field_groups.pdf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

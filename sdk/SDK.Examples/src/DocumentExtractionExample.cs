@@ -13,15 +13,19 @@ namespace SDK.Examples
         }
 
         private string email1;
+        private string email2;
+        private string email3;
         private Stream fileStream1;
         public readonly string DOCUMENT_NAME = "My Document";
 
-        public DocumentExtractionExample( Props props ) : this(props.Get("api.key"), props.Get("api.url"), props.Get("1.email")) {
+        public DocumentExtractionExample( Props props ) : this(props.Get("api.key"), props.Get("api.url"), props.Get("1.email"), props.Get("2.email"), props.Get("3.email")) {
         }
 
-        public DocumentExtractionExample( String apiKey, String apiUrl, String email1 ) : base( apiKey, apiUrl ) {
+        public DocumentExtractionExample( string apiKey, string apiUrl, string email1, string email2, string email3 ) : base( apiKey, apiUrl ) {
             this.email1 = email1;
-            this.fileStream1 = File.OpenRead(new FileInfo(Directory.GetCurrentDirectory() + "/src/document-with-fields.pdf").FullName);
+            this.email2 = email2;
+            this.email3 = email3;
+            this.fileStream1 = File.OpenRead(new FileInfo(Directory.GetCurrentDirectory() + "/src/extract_document.pdf").FullName);
         }
 
         override public void Execute()
@@ -29,10 +33,14 @@ namespace SDK.Examples
             DocumentPackage package = PackageBuilder.NewPackageNamed("C# DocumentExtractionExample " + DateTime.Now)
                 .DescribedAs("This is a new package")
                     .WithSigner(SignerBuilder.NewSignerWithEmail(email1)
-                                .WithCustomId("Signer1")
-                                .WithCustomId("Signer1")
-                                .WithFirstName("John")
-                                .WithLastName("Smith"))
+                                .WithFirstName("John1")
+                                .WithLastName("Smith1"))
+                    .WithSigner(SignerBuilder.NewSignerWithEmail(email2)
+                                .WithFirstName("John2")
+                                .WithLastName("Smith2"))
+                    .WithSigner(SignerBuilder.NewSignerWithEmail(email3)
+                                .WithFirstName("John3")
+                                .WithLastName("Smith3"))
                 .WithDocument(DocumentBuilder.NewDocumentNamed(DOCUMENT_NAME)
                                   .FromStream(fileStream1, DocumentType.PDF)
                                   .EnableExtraction() )
@@ -41,9 +49,7 @@ namespace SDK.Examples
             packageId = eslClient.CreatePackage(package);
             eslClient.SendPackage(packageId);
 
-            DocumentPackage sentPackage = eslClient.GetPackage(packageId);
             retrievedPackage = eslClient.GetPackage(packageId);
-            Console.WriteLine("Document sent = " + sentPackage.Id);
         }
     }
 }
