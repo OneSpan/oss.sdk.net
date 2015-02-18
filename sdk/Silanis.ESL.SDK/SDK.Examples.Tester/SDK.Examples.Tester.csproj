@@ -107,6 +107,7 @@
     <Compile Include="src\GetGroupSummariesExampleTest.cs" />
     <Compile Include="src\NotaryJournalExampleTest.cs" />
     <Compile Include="src\CreatePackageFromTemplateWithAttachmentExampleTest.cs" />
+    <Compile Include="src\StampFieldValueExampleTest.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
