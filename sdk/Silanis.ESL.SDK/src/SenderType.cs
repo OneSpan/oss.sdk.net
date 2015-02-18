@@ -9,8 +9,8 @@ namespace Silanis.ESL.SDK
     {
         private static ILog log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
 
-        public static SenderType REGULAR = new SenderType("REGULAR", "REGULAR");
-        public static SenderType MANAGER = new SenderType("MANAGER", "MANAGER");
+        public static SenderType REGULAR = new SenderType("REGULAR", "REGULAR", 0);
+        public static SenderType MANAGER = new SenderType("MANAGER", "MANAGER", 1);
         private static Dictionary<string,SenderType> allSenderTypes = new Dictionary<string,SenderType>();
 
         static SenderType(){
@@ -19,7 +19,7 @@ namespace Silanis.ESL.SDK
         }
 
         
-        private SenderType(string apiValue, string sdkValue):base(apiValue,sdkValue) {           
+        private SenderType(string apiValue, string sdkValue, int index):base(apiValue,sdkValue,index) {           
         }
 
         internal static SenderType valueOf (String apiValue){
@@ -29,7 +29,7 @@ namespace Silanis.ESL.SDK
                 return allSenderTypes[apiValue];
             }
             log.WarnFormat("Unknown API SenderType {0}. The upgrade is required.", apiValue);
-            return new SenderType(apiValue, "UNRECOGNIZED");
+            return new SenderType(apiValue, "UNRECOGNIZED", allSenderTypes.Values.Count);
         }
 
         public static string[] GetNames(){
@@ -40,6 +40,10 @@ namespace Silanis.ESL.SDK
                 i++;
             }
             return names;
+        }
+
+        public static SenderType[] Values(){
+            return (new List<SenderType>(allSenderTypes.Values)).ToArray();
         }
 
         public static SenderType parse(string value){

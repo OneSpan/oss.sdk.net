@@ -9,11 +9,11 @@ namespace Silanis.ESL.SDK
 	{
         private static ILog log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
 
-        public static SignatureStyle HAND_DRAWN = new SignatureStyle("CAPTURE", "HAND_DRAWN");
-        public static SignatureStyle FULL_NAME = new SignatureStyle("FULLNAME", "FULL_NAME");
-        public static SignatureStyle INITIALS = new SignatureStyle("INITIALS", "INITIALS");
-        public static SignatureStyle ACCEPTANCE = new SignatureStyle("FULLNAME", "ACCEPTANCE");
-        public static SignatureStyle MOBILE_CAPTURE = new SignatureStyle("MOBILE_CAPTURE", "MOBILE_CAPTURE");
+        public static SignatureStyle HAND_DRAWN = new SignatureStyle("CAPTURE", "HAND_DRAWN", 0);
+        public static SignatureStyle FULL_NAME = new SignatureStyle("FULLNAME", "FULL_NAME", 1);
+        public static SignatureStyle INITIALS = new SignatureStyle("INITIALS", "INITIALS", 2);
+        public static SignatureStyle ACCEPTANCE = new SignatureStyle("FULLNAME", "ACCEPTANCE", 3);
+        public static SignatureStyle MOBILE_CAPTURE = new SignatureStyle("MOBILE_CAPTURE", "MOBILE_CAPTURE", 4);
         private static Dictionary<string,SignatureStyle> allSignatureStyles = new Dictionary<string,SignatureStyle>();
 
         static SignatureStyle(){
@@ -24,7 +24,7 @@ namespace Silanis.ESL.SDK
         }
 
         
-        private SignatureStyle(string apiValue, string sdkValue):base(apiValue,sdkValue) {           
+        private SignatureStyle(string apiValue, string sdkValue, int index):base(apiValue,sdkValue,index) {           
         }
 
         internal static SignatureStyle valueOf (String apiValue){
@@ -34,7 +34,7 @@ namespace Silanis.ESL.SDK
                 return allSignatureStyles[apiValue];
             }
             log.WarnFormat("Unknown API SignatureStyle {0}. The upgrade is required.", apiValue);
-            return new SignatureStyle(apiValue, "UNRECOGNIZED");
+            return new SignatureStyle(apiValue, "UNRECOGNIZED", allSignatureStyles.Values.Count);
         }
 
         public static string[] GetNames(){
@@ -45,6 +45,10 @@ namespace Silanis.ESL.SDK
                 i++;
             }
             return names;
+        }
+
+        public static SignatureStyle[] Values(){
+            return (new List<SignatureStyle>(allSignatureStyles.Values)).ToArray();
         }
 
         public static SignatureStyle parse(string value){

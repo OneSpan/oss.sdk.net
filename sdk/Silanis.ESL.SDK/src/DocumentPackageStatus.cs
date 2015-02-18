@@ -9,13 +9,13 @@ namespace Silanis.ESL.SDK
 	{
         private static ILog log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
 
-        public static DocumentPackageStatus DRAFT = new DocumentPackageStatus("DRAFT", "DRAFT");
-        public static DocumentPackageStatus SENT = new DocumentPackageStatus("SENT", "SENT");
-        public static DocumentPackageStatus COMPLETED = new DocumentPackageStatus("COMPLETED", "COMPLETED");
-        public static DocumentPackageStatus ARCHIVED = new DocumentPackageStatus("ARCHIVED", "ARCHIVED");
-        public static DocumentPackageStatus DECLINED = new DocumentPackageStatus("DECLINED", "DECLINED");
-        public static DocumentPackageStatus OPTED_OUT = new DocumentPackageStatus("OPTED_OUT", "OPTED_OUT");
-        public static DocumentPackageStatus EXPIRED = new DocumentPackageStatus("EXPIRED", "EXPIRED");
+        public static DocumentPackageStatus DRAFT = new DocumentPackageStatus("DRAFT", "DRAFT", 0);
+        public static DocumentPackageStatus SENT = new DocumentPackageStatus("SENT", "SENT", 1);
+        public static DocumentPackageStatus COMPLETED = new DocumentPackageStatus("COMPLETED", "COMPLETED", 2);
+        public static DocumentPackageStatus ARCHIVED = new DocumentPackageStatus("ARCHIVED", "ARCHIVED", 3);
+        public static DocumentPackageStatus DECLINED = new DocumentPackageStatus("DECLINED", "DECLINED", 4);
+        public static DocumentPackageStatus OPTED_OUT = new DocumentPackageStatus("OPTED_OUT", "OPTED_OUT", 5);
+        public static DocumentPackageStatus EXPIRED = new DocumentPackageStatus("EXPIRED", "EXPIRED", 6);
         private static Dictionary<string,DocumentPackageStatus> allDocumentPackageStatus = new Dictionary<string,DocumentPackageStatus>();
 
         static DocumentPackageStatus(){
@@ -28,7 +28,7 @@ namespace Silanis.ESL.SDK
             allDocumentPackageStatus.Add(EXPIRED.getApiValue(), DocumentPackageStatus.EXPIRED);
         }
 
-        private DocumentPackageStatus(string apiValue, string sdkValue):base(apiValue, sdkValue) {           
+        private DocumentPackageStatus(string apiValue, string sdkValue, int index):base(apiValue, sdkValue, index) {           
         }
 
         internal static DocumentPackageStatus valueOf (String apiValue){
@@ -38,7 +38,7 @@ namespace Silanis.ESL.SDK
                 return allDocumentPackageStatus[apiValue];
             }
             log.WarnFormat("Unknown API DocumentPackageStatus {0}. The upgrade is required.", apiValue);
-            return new DocumentPackageStatus(apiValue, "UNRECOGNIZED");
+            return new DocumentPackageStatus(apiValue, "UNRECOGNIZED", allDocumentPackageStatus.Values.Count);
         }
 
         public static string[] GetNames(){
@@ -49,6 +49,10 @@ namespace Silanis.ESL.SDK
                 i++;
             }
             return names;
+        }
+
+        public static DocumentPackageStatus[] Values(){
+            return (new List<DocumentPackageStatus>(allDocumentPackageStatus.Values)).ToArray();
         }
 
         public static DocumentPackageStatus parse(string value){
