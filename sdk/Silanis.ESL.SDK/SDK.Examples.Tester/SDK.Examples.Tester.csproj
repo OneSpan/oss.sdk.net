@@ -108,6 +108,7 @@
     <Compile Include="src\NotaryJournalExampleTest.cs" />
     <Compile Include="src\CreatePackageFromTemplateWithAttachmentExampleTest.cs" />
     <Compile Include="src\CreateSenderTemplateExampleTest.cs" />
+    <Compile Include="src\StampFieldValueExampleTest.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

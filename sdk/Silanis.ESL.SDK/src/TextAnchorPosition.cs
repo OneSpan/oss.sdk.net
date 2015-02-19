@@ -9,10 +9,10 @@ namespace Silanis.ESL.SDK
     {
         private static ILog log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
 
-        public static TextAnchorPosition TOPLEFT = new TextAnchorPosition("TOPLEFT", "TOPLEFT");
-        public static TextAnchorPosition TOPRIGHT = new TextAnchorPosition("TOPRIGHT", "TOPRIGHT");
-        public static TextAnchorPosition BOTTOMLEFT = new TextAnchorPosition("BOTTOMLEFT", "BOTTOMLEFT");
-        public static TextAnchorPosition BOTTOMRIGHT = new TextAnchorPosition("BOTTOMRIGHT", "BOTTOMRIGHT");
+        public static TextAnchorPosition TOPLEFT = new TextAnchorPosition("TOPLEFT", "TOPLEFT", 0);
+        public static TextAnchorPosition TOPRIGHT = new TextAnchorPosition("TOPRIGHT", "TOPRIGHT", 1);
+        public static TextAnchorPosition BOTTOMLEFT = new TextAnchorPosition("BOTTOMLEFT", "BOTTOMLEFT", 2);
+        public static TextAnchorPosition BOTTOMRIGHT = new TextAnchorPosition("BOTTOMRIGHT", "BOTTOMRIGHT", 3);
         private static Dictionary<string,TextAnchorPosition> allTextAnchorPositions = new Dictionary<string,TextAnchorPosition>();
 
         static TextAnchorPosition(){
@@ -22,7 +22,7 @@ namespace Silanis.ESL.SDK
             allTextAnchorPositions.Add(BOTTOMRIGHT.getApiValue(), TextAnchorPosition.BOTTOMRIGHT);
         }
 
-        private TextAnchorPosition(string apiValue, string sdkValue):base(apiValue,sdkValue) {           
+        private TextAnchorPosition(string apiValue, string sdkValue, int index):base(apiValue,sdkValue,index) {           
         }
 
         internal static TextAnchorPosition valueOf (String apiValue){
@@ -32,7 +32,7 @@ namespace Silanis.ESL.SDK
                 return allTextAnchorPositions[apiValue];
             }
             log.WarnFormat("Unknown API TextAnchorPosition {0}. The upgrade is required.", apiValue);
-            return new TextAnchorPosition(apiValue, "UNRECOGNIZED");
+            return new TextAnchorPosition(apiValue, "UNRECOGNIZED", allTextAnchorPositions.Values.Count);
         }
 
         public static string[] GetNames(){
@@ -44,6 +44,11 @@ namespace Silanis.ESL.SDK
             }
             return names;
         }
+
+        public static TextAnchorPosition[] Values(){
+            return (new List<TextAnchorPosition>(allTextAnchorPositions.Values)).ToArray();
+        }
+
         public static TextAnchorPosition parse(string value){
 
             if (null == value)

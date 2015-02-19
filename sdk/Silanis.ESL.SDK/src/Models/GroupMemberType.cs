@@ -9,8 +9,8 @@ namespace Silanis.ESL.SDK
     {
         private static ILog log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
 
-        public static GroupMemberType REGULAR = new GroupMemberType("REGULAR", "REGULAR");
-        public static GroupMemberType MANAGER = new GroupMemberType("MANAGER", "MANAGER");
+        public static GroupMemberType REGULAR = new GroupMemberType("REGULAR", "REGULAR", 0);
+        public static GroupMemberType MANAGER = new GroupMemberType("MANAGER", "MANAGER", 1);
 
         private static Dictionary<string,GroupMemberType> allGroupMemberTypes = new Dictionary<string,GroupMemberType>();
 
@@ -19,7 +19,7 @@ namespace Silanis.ESL.SDK
             allGroupMemberTypes.Add(MANAGER.getApiValue(), GroupMemberType.MANAGER);
         }
 
-        private GroupMemberType(string apiValue, string sdkValue):base(apiValue,sdkValue) {           
+        private GroupMemberType(string apiValue, string sdkValue, int index):base(apiValue,sdkValue,index) {           
         }
 
         internal static GroupMemberType valueOf (String apiValue){
@@ -29,7 +29,7 @@ namespace Silanis.ESL.SDK
                 return allGroupMemberTypes[apiValue];
             }
             log.WarnFormat("Unknown API GroupMemberType {0}. The upgrade is required.", apiValue);
-            return new GroupMemberType(apiValue, "UNRECOGNIZED");
+            return new GroupMemberType(apiValue, "UNRECOGNIZED", allGroupMemberTypes.Values.Count);
         }
 
         public static string[] GetNames(){
@@ -40,6 +40,10 @@ namespace Silanis.ESL.SDK
                 i++;
             }
             return names;
+        }
+
+        public static GroupMemberType[] Values(){
+            return (new List<GroupMemberType>(allGroupMemberTypes.Values)).ToArray();
         }
 
         public static GroupMemberType parse(string value){

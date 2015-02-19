@@ -32,13 +32,11 @@ namespace SDK.Examples
 					            .WithLastName("Smith"))
 					.WithDocument(DocumentBuilder.NewDocumentNamed("My Document")
                                     .FromStream(fileStream1, DocumentType.PDF)
-					              	.EnableExtraction()
 					              	.WithSignature(SignatureBuilder.SignatureFor(email1)
-					            		.WithName("AGENT_SIG_1")
-					               		.EnableExtraction())
+					            		.WithName("AGENT_SIG_1"))
 					              	.WithInjectedField(FieldBuilder.Label()
 					           			.WithName ("AGENT_SIG_2")
-					           			.WithValue("Value to be stamped")))
+                                       .WithValue("Céline Lelièvre")))
 					.Build ();
 
 			PackageId id = eslClient.CreatePackage (package);
