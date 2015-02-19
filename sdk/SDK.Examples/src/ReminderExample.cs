@@ -14,15 +14,9 @@ namespace SDK.Examples
 
 		private string email1;
 		private Stream fileStream1;
-        private ReminderSchedule reminderSchedule;
 
-        public ReminderSchedule ReminderSchedule
-        {
-            get
-            {
-                return reminderSchedule;
-            }
-        }
+        public ReminderSchedule reminderScheduleToCreate, reminderScheduleToUpdate;
+        public ReminderSchedule createdReminderSchedule, updatedReminderSchedule, removedReminderSchedule;
 
 		public ReminderExample( Props props ) : this(props.Get("api.key"), props.Get("api.url"), props.Get("1.email")) {
 		}
@@ -47,19 +41,29 @@ namespace SDK.Examples
 
 			packageId = eslClient.CreatePackage( superDuperPackage );
 
-			eslClient.ReminderService.SetReminderScheduleForPackage(
-				ReminderScheduleBuilder.ForPackageWithId(packageId)
-					.WithDaysUntilFirstReminder(2)
-					.WithDaysBetweenReminders(1)
-					.WithNumberOfRepetitions(5)
-					.Build()
-			);
+            reminderScheduleToCreate = ReminderScheduleBuilder.ForPackageWithId(packageId)
+                .WithDaysUntilFirstReminder(2)
+                    .WithDaysBetweenReminders(1)
+                    .WithNumberOfRepetitions(5)
+                    .Build();
 
-			reminderSchedule = eslClient.ReminderService.GetReminderScheduleForPackage(packageId);
+            eslClient.ReminderService.CreateReminderScheduleForPackage(reminderScheduleToCreate);
 
-			eslClient.SendPackage( packageId );
+            eslClient.SendPackage( packageId );
+
+            createdReminderSchedule = eslClient.ReminderService.GetReminderScheduleForPackage(packageId);
+
+            reminderScheduleToUpdate = ReminderScheduleBuilder.ForPackageWithId( packageId )
+                .WithDaysUntilFirstReminder( 3 )
+                    .WithDaysBetweenReminders( 2 )
+                    .WithNumberOfRepetitions( 10 )
+                    .Build();
+
+            eslClient.ReminderService.UpdateReminderScheduleForPackage(reminderScheduleToUpdate);
+            updatedReminderSchedule = eslClient.ReminderService.GetReminderScheduleForPackage(packageId);
 
 			eslClient.ReminderService.ClearReminderScheduleForPackage(packageId);
+            removedReminderSchedule = eslClient.ReminderService.GetReminderScheduleForPackage(packageId);
 		}
 	}
 }

@@ -16,16 +16,33 @@ namespace Silanis.ESL.SDK.Services
 		public ReminderSchedule GetReminderScheduleForPackage( PackageId packageId )
 		{
             PackageReminderSchedule apiResponse = apiClient.GetReminderScheduleForPackage(packageId.Id);
+            if (null == apiResponse) 
+            {
+                return null;
+            }
             ReminderSchedule sdkReminderSchedule = new ReminderScheduleConverter( apiResponse ).ToSDKReminderSchedule();
             return sdkReminderSchedule;
 		}
 
+        [Obsolete("Please use CreateReminderScheduleForPackage(ReminderSchedule) instead")]    
 		public ReminderSchedule SetReminderScheduleForPackage( ReminderSchedule reminderSchedule )
 		{
-			PackageReminderSchedule apiPayload = new ReminderScheduleConverter(reminderSchedule).ToAPIPackageReminderSchedule();
-            PackageReminderSchedule apiResponse = apiClient.SetReminderScheduleForPackage(apiPayload);
-			return new ReminderScheduleConverter( apiResponse ).ToSDKReminderSchedule();
+            return CreateReminderScheduleForPackage(reminderSchedule);
 		}
+
+        public ReminderSchedule CreateReminderScheduleForPackage( ReminderSchedule reminderSchedule )
+        {
+            PackageReminderSchedule apiPayload = new ReminderScheduleConverter(reminderSchedule).ToAPIPackageReminderSchedule();
+            PackageReminderSchedule apiResponse = apiClient.CreateReminderScheduleForPackage(apiPayload);
+            return new ReminderScheduleConverter( apiResponse ).ToSDKReminderSchedule();
+        }
+
+        public ReminderSchedule UpdateReminderScheduleForPackage( ReminderSchedule reminderSchedule )
+        {
+            PackageReminderSchedule apiPayload = new ReminderScheduleConverter(reminderSchedule).ToAPIPackageReminderSchedule();
+            PackageReminderSchedule apiResponse = apiClient.UpdateReminderScheduleForPackage(apiPayload);
+            return new ReminderScheduleConverter( apiResponse ).ToSDKReminderSchedule();
+        }
 
 		public void ClearReminderScheduleForPackage( PackageId packageId )
 		{

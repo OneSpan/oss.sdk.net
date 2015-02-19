@@ -42,8 +42,14 @@ namespace Silanis.ESL.SDK
                 throw new EslException ("Failed to retrieve reminder schedule for package with id: " + packageId + ". Exception: " + e.Message, e);
             }
         }
-        
+
+        [Obsolete("Please use CreateReminderScheduleForPackage(ReminderSchedule) instead")]  
         public PackageReminderSchedule SetReminderScheduleForPackage( PackageReminderSchedule apiPayload )
+        {
+            return CreateReminderScheduleForPackage(apiPayload);
+        }
+
+        public PackageReminderSchedule CreateReminderScheduleForPackage( PackageReminderSchedule apiPayload )
         {
             try {
                 string response = restClient.Post(Path(apiPayload.PackageId), JsonConvert.SerializeObject (apiPayload, settings));
@@ -51,13 +57,27 @@ namespace Silanis.ESL.SDK
                 return apiResponse;
             }
             catch (EslServerException e) {
-                throw new EslServerException ("Failed to set reminder schedule for package with id: " + apiPayload.PackageId + ". Exception: " + e.Message, e.ServerError, e);
+                throw new EslServerException ("Failed to create reminder schedule for package with id: " + apiPayload.PackageId + ". Exception: " + e.Message, e.ServerError, e);
             }
             catch (Exception e) {
-                throw new EslException ("Failed to set reminder schedule for package with id: " + apiPayload.PackageId + ". Exception: " + e.Message, e);
+                throw new EslException ("Failed to create reminder schedule for package with id: " + apiPayload.PackageId + ". Exception: " + e.Message, e);
             }
         }
 
+        public PackageReminderSchedule UpdateReminderScheduleForPackage( PackageReminderSchedule apiPayload )
+        {
+            try {
+                string response = restClient.Put(Path(apiPayload.PackageId), JsonConvert.SerializeObject (apiPayload, settings));
+                PackageReminderSchedule apiResponse = JsonConvert.DeserializeObject<PackageReminderSchedule> (response, settings );
+                return apiResponse;
+            }
+            catch (EslServerException e) {
+                throw new EslServerException ("Failed to update reminder schedule for package with id: " + apiPayload.PackageId + ". Exception: " + e.Message, e.ServerError, e);
+            }
+            catch (Exception e) {
+                throw new EslException ("Failed to update reminder schedule for package with id: " + apiPayload.PackageId + ". Exception: " + e.Message, e);
+            }
+        }
 
         public void ClearReminderScheduleForPackage( string packageId )
         {
