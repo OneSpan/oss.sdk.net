@@ -142,6 +142,7 @@
     <Compile Include="src\GetGroupSummariesExample.cs" />
     <Compile Include="src\NotaryJournalExample.cs" />
     <Compile Include="src\CreatePackageFromTemplateWithAttachmentExample.cs" />
+    <Compile Include="src\CreateSenderTemplateExample.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
