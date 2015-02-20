@@ -35,6 +35,11 @@ namespace Silanis.ESL.SDK
             return GetName();
         }
 
+        public static T Convert<T>(string value)
+        {
+            return (T)Enum.Parse(typeof(T), value);
+        }
+
         internal int Ordinal() {
             return index;
         }

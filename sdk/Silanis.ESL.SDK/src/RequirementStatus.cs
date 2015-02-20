@@ -44,6 +44,11 @@ namespace Silanis.ESL.SDK
             return names;
         }
 
+        public static explicit operator RequirementStatus(Enum enumType)
+        {
+            return parse(enumType.ToString());
+        }
+
         public static RequirementStatus[] Values(){
             return (new List<RequirementStatus>(allRequirementStatus.Values)).ToArray();
         }

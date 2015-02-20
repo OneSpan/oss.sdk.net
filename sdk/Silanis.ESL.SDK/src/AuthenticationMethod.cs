@@ -45,6 +45,11 @@ namespace Silanis.ESL.SDK
             return names;
         }
 
+        public static explicit operator AuthenticationMethod(Enum enumType)
+        {
+            return parse(enumType.ToString());
+        }
+
         public static AuthenticationMethod[] Values(){
             return (new List<AuthenticationMethod>(allAuthenticationMethods.Values)).ToArray();
         }

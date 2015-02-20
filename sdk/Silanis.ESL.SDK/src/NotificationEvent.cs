@@ -66,6 +66,11 @@ namespace Silanis.ESL.SDK
             return names;
         }
 
+        public static explicit operator NotificationEvent(Enum enumType)
+        {
+            return parse(enumType.ToString());
+        }
+
         public static NotificationEvent[] Values(){
             return (new List<NotificationEvent>(allNotificationEvents.Values)).ToArray();
         }

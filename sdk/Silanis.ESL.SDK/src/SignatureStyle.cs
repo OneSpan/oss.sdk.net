@@ -47,6 +47,11 @@ namespace Silanis.ESL.SDK
             return names;
         }
 
+        public static explicit operator SignatureStyle(Enum enumType)
+        {
+            return parse(enumType.ToString());
+        }
+
         public static SignatureStyle[] Values(){
             return (new List<SignatureStyle>(allSignatureStyles.Values)).ToArray();
         }

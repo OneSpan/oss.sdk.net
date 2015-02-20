@@ -42,6 +42,11 @@ namespace Silanis.ESL.SDK
             return names;
         }
 
+        public static explicit operator SenderType(Enum enumType)
+        {
+            return parse(enumType.ToString());
+        }
+
         public static SenderType[] Values(){
             return (new List<SenderType>(allSenderTypes.Values)).ToArray();
         }

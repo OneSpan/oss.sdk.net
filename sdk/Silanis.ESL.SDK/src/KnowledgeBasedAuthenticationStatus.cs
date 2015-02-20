@@ -44,6 +44,11 @@ namespace Silanis.ESL.SDK
             return names;
         }
 
+        public static explicit operator KnowledgeBasedAuthenticationStatus(Enum enumType)
+        {
+            return parse(enumType.ToString());
+        }
+
         public static KnowledgeBasedAuthenticationStatus[] Values(){
             return (new List<KnowledgeBasedAuthenticationStatus>(allKnowledgeBasedAuthenticationStatus.Values)).ToArray();
         }

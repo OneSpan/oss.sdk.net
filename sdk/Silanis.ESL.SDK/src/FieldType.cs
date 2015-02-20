@@ -43,6 +43,11 @@ namespace Silanis.ESL.SDK
             return names;
         }
 
+        public static explicit operator FieldType(Enum enumType)
+        {
+            return parse(enumType.ToString());
+        }
+
         public static FieldType[] Values(){
             return (new List<FieldType>(allFieldTypes.Values)).ToArray();
         }

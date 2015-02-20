@@ -43,6 +43,11 @@ namespace Silanis.ESL.SDK
             return names;
         }
 
+        public static explicit operator MessageStatus(Enum enumType)
+        {
+            return parse(enumType.ToString());
+        }
+
         public static MessageStatus[] Values(){
             return (new List<MessageStatus>(allMessageStatus.Values)).ToArray();
         }

@@ -57,6 +57,11 @@ namespace Silanis.ESL.SDK
             return names;
         }
 
+        public static explicit operator UsageReportCategory(Enum enumType)
+        {
+            return parse(enumType.ToString());
+        }
+
         public static UsageReportCategory[] Values(){
             return (new List<UsageReportCategory>(allUsageReportCategorys.Values)).ToArray();
         }

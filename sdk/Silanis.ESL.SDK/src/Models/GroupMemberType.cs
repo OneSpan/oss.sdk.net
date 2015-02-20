@@ -42,6 +42,11 @@ namespace Silanis.ESL.SDK
             return names;
         }
 
+        public static explicit operator GroupMemberType(Enum enumType)
+        {
+            return parse(enumType.ToString());
+        }
+
         public static GroupMemberType[] Values(){
             return (new List<GroupMemberType>(allGroupMemberTypes.Values)).ToArray();
         }

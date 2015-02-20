@@ -51,6 +51,11 @@ namespace Silanis.ESL.SDK
             return names;
         }
 
+        public static explicit operator DocumentPackageStatus(Enum enumType)
+        {
+            return parse(enumType.ToString());
+        }
+
         public static DocumentPackageStatus[] Values(){
             return (new List<DocumentPackageStatus>(allDocumentPackageStatus.Values)).ToArray();
         }
