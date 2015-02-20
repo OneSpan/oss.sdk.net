@@ -146,8 +146,8 @@ namespace Silanis.ESL.SDK
                 packageBuilder.WithSenderInfo(new SenderConverter(apiPackage.Sender).ToSDKSenderInfo());
             }
 
-            if (apiPackage.Visibility != null && apiPackage.Visibility.Equals("SENDER", StringComparison.InvariantCultureIgnoreCase)) {
-                packageBuilder.WithPrivateVisibility();
+            if (apiPackage.Visibility != null) {
+                packageBuilder.WithVisibility(new VisibilityConverter(apiPackage.Visibility).ToSDKVisibility());
             }
 
             packageBuilder.WithAttributes(new DocumentPackageAttributesBuilder(apiPackage.Data).Build());

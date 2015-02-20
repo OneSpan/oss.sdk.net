@@ -8,11 +8,11 @@ namespace SDK.Examples
 {
     public class CreateSenderTemplateExample : SDKSample
     {
-        public String TEMPLATE_SENDER_VISIBILITY = "SENDER";
-
         private Stream fileStream1;
-        private String email1;         
-        public PackageId templateId;     
+        private String email1; 
+
+        public PackageId templateId;
+        public Visibility visibility = Visibility.SENDER;
 
         public static void Main(string[] args)
         {
@@ -34,7 +34,7 @@ namespace SDK.Examples
             DocumentPackage template =
                 PackageBuilder.NewPackageNamed("CreateSenderTemplateExample: " + DateTime.Now)
                     .DescribedAs("This is a Template created using the e-SignLive SDK")      
-                    .WithPrivateVisibility()
+                    .WithVisibility(visibility)
                     .WithEmailMessage("This message should be delivered to all signers")
                     .WithSigner(SignerBuilder.NewSignerWithEmail(email1)
                                                     .WithFirstName("Patty")    

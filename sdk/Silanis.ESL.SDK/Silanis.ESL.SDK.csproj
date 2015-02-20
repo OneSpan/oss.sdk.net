@@ -353,6 +353,8 @@
     <Compile Include="src\Internal\Conversion\NotaryJournalEntryConverter.cs" />
     <Compile Include="src\Internal\HttpRequestUtil.cs" />
     <Compile Include="src\Internal\AuthRequestParameters.cs" />
+    <Compile Include="src\Visibility.cs" />
+    <Compile Include="src\Internal\Conversion\VisibilityConverter.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSHARP.Targets" />
   <ProjectExtensions>

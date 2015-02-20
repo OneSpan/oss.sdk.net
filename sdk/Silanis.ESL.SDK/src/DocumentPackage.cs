@@ -115,7 +115,7 @@ namespace Silanis.ESL.SDK
             set;
         }
 
-        public string Visibility
+        public Visibility Visibility
         {
             get;
             set;

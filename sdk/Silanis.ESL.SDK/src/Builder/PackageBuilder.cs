@@ -8,8 +8,6 @@ namespace Silanis.ESL.SDK.Builder
 {
 	public class PackageBuilder
 	{
-        private const String TEMPLATE_SENDER_VISIBILITY = "SENDER";
-
 		private readonly string packageName;
 		private string description = String.Empty;
 		private bool autocomplete = true;
@@ -25,7 +23,7 @@ namespace Silanis.ESL.SDK.Builder
         private SenderInfo senderInfo;
         private DocumentPackageAttributes attributes;
         private IList<Message> messages = new List<Message>();
-        private string visibility;
+        private Visibility visibility;
 
 		private PackageBuilder(string packageName)
 		{
@@ -155,8 +153,8 @@ namespace Silanis.ESL.SDK.Builder
             return WithAttributes( attributes );
         } 
 
-        public PackageBuilder WithPrivateVisibility() {
-            this.visibility = TEMPLATE_SENDER_VISIBILITY;
+        public PackageBuilder WithVisibility(Visibility visibility) {
+            this.visibility = visibility;
             return this;
         }
 
