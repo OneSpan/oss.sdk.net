@@ -9,9 +9,9 @@ namespace Silanis.ESL.SDK
     {
         private static ILog log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
 
-        public static FieldType IMAGE = new FieldType("IMAGE", "IMAGE");
-        public static FieldType INPUT = new FieldType("INPUT", "INPUT");
-        public static FieldType SIGNATURE = new FieldType("SIGNATURE", "SIGNATURE");
+        public static FieldType SIGNATURE = new FieldType("SIGNATURE", "SIGNATURE", 0);
+        public static FieldType INPUT = new FieldType("INPUT", "INPUT", 1);
+        public static FieldType IMAGE = new FieldType("IMAGE", "IMAGE", 2);
         private static Dictionary<string,FieldType> allFieldTypes = new Dictionary<string,FieldType>();
 
         static FieldType(){
@@ -20,7 +20,7 @@ namespace Silanis.ESL.SDK
             allFieldTypes.Add(SIGNATURE.getApiValue(), FieldType.SIGNATURE);
         }
 
-        private FieldType(string apiValue, string sdkValue):base(apiValue, sdkValue) {           
+        private FieldType(string apiValue, string sdkValue, int index):base(apiValue, sdkValue, index) {           
         }
 
         internal static FieldType valueOf (String apiValue){
@@ -30,7 +30,7 @@ namespace Silanis.ESL.SDK
                 return allFieldTypes[apiValue];
             }
             log.WarnFormat("Unknown API FieldType {0}. The upgrade is required.", apiValue);
-            return new FieldType(apiValue, "UNRECOGNIZED");
+            return new FieldType(apiValue, "UNRECOGNIZED", allFieldTypes.Values.Count);
         }
 
         public static string[] GetNames(){
@@ -41,6 +41,15 @@ namespace Silanis.ESL.SDK
                 i++;
             }
             return names;
+        }
+
+        public static explicit operator FieldType(Enum enumType)
+        {
+            return parse(enumType.ToString());
+        }
+
+        public static FieldType[] Values(){
+            return (new List<FieldType>(allFieldTypes.Values)).ToArray();
         }
 
         public static FieldType parse(string value){

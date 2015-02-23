@@ -1,5 +1,6 @@
 using NUnit.Framework;
 using System;
+using Silanis.ESL.SDK.Internal;
 
 namespace SDK.Examples
 {
@@ -17,6 +18,9 @@ namespace SDK.Examples
             example.Run();
 
             Assert.IsNotNull(example.GeneratedLinkToSigningForSigner);
+
+            string stringResponse = HttpRequestUtil.GetUrlContent(example.GeneratedLinkToSigningForSigner);
+            StringAssert.Contains("Electronic Disclosures and Signatures Consent", stringResponse);
         }
     }
 }

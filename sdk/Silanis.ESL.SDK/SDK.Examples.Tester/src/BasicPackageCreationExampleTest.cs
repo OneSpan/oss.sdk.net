@@ -21,6 +21,8 @@ namespace SDK.Examples
             Assert.AreEqual("This is a package created using the e-SignLive SDK", documentPackage.Description);
             Assert.AreEqual("This message should be delivered to all signers", documentPackage.EmailMessage);
 
+            Assert.AreEqual(false, documentPackage.Settings.EnableInPerson);
+
             // Verify if the sdk version is set correctly
             Assert.IsTrue(documentPackage.Attributes.Contents.ContainsKey( "sdk" ));
             Assert.IsTrue(documentPackage.Attributes.Contents["sdk"].ToString().Contains(".NET"));

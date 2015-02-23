@@ -114,5 +114,11 @@ namespace Silanis.ESL.SDK
             get;
             set;
         }
+
+        public Visibility Visibility
+        {
+            get;
+            set;
+        }
     }
 }

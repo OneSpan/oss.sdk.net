@@ -76,6 +76,10 @@ namespace Silanis.ESL.SDK
 				package.Data = sdkPackage.Attributes.Contents;
 			}
 
+            if ( sdkPackage.Visibility != null ) {
+                package.Visibility = sdkPackage.Visibility;
+            }
+
 			int signerCount = 1;
 			foreach (Signer signer in sdkPackage.Signers.Values)
 			{
@@ -140,6 +144,10 @@ namespace Silanis.ESL.SDK
             if (apiPackage.Sender != null)
             {
                 packageBuilder.WithSenderInfo(new SenderConverter(apiPackage.Sender).ToSDKSenderInfo());
+            }
+
+            if (apiPackage.Visibility != null) {
+                packageBuilder.WithVisibility(new VisibilityConverter(apiPackage.Visibility).ToSDKVisibility());
             }
 
             packageBuilder.WithAttributes(new DocumentPackageAttributesBuilder(apiPackage.Data).Build());

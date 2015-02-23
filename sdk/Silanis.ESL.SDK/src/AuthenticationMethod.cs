@@ -9,10 +9,10 @@ namespace Silanis.ESL.SDK
 	{
         private static ILog log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
 
-        public static AuthenticationMethod EMAIL = new AuthenticationMethod("NONE", "EMAIL");
-        public static AuthenticationMethod CHALLENGE = new AuthenticationMethod("CHALLENGE", "CHALLENGE");
-        public static AuthenticationMethod SMS = new AuthenticationMethod("SMS", "SMS");
-        public static AuthenticationMethod KBA = new AuthenticationMethod("KBA", "KBA");
+        public static AuthenticationMethod EMAIL = new AuthenticationMethod("NONE", "EMAIL", 0);
+        public static AuthenticationMethod CHALLENGE = new AuthenticationMethod("CHALLENGE", "CHALLENGE", 1);
+        public static AuthenticationMethod SMS = new AuthenticationMethod("SMS", "SMS", 2);
+        public static AuthenticationMethod KBA = new AuthenticationMethod("KBA", "KBA", 3);
         private static Dictionary<string,AuthenticationMethod> allAuthenticationMethods = new Dictionary<string,AuthenticationMethod>();
 
         static AuthenticationMethod(){
@@ -22,7 +22,7 @@ namespace Silanis.ESL.SDK
             allAuthenticationMethods.Add(KBA.getApiValue(), AuthenticationMethod.KBA);
         }
 
-        private AuthenticationMethod(string apiValue, string sdkValue):base(apiValue,sdkValue) {           
+        private AuthenticationMethod(string apiValue, string sdkValue, int index):base(apiValue,sdkValue,index) {           
         }
 
         internal static AuthenticationMethod valueOf (String apiValue){
@@ -32,7 +32,7 @@ namespace Silanis.ESL.SDK
                 return allAuthenticationMethods[apiValue];
             }
             log.WarnFormat("Unknown API AuthenticationMethod {0}. The upgrade is required.", apiValue);
-            return new AuthenticationMethod(apiValue, "UNRECOGNIZED");
+            return new AuthenticationMethod(apiValue, "UNRECOGNIZED", allAuthenticationMethods.Values.Count);
         }
 
         public static string[] GetNames(){
@@ -43,6 +43,15 @@ namespace Silanis.ESL.SDK
                 i++;
             }
             return names;
+        }
+
+        public static explicit operator AuthenticationMethod(Enum enumType)
+        {
+            return parse(enumType.ToString());
+        }
+
+        public static AuthenticationMethod[] Values(){
+            return (new List<AuthenticationMethod>(allAuthenticationMethods.Values)).ToArray();
         }
 
         public static AuthenticationMethod parse(string value){
@@ -64,8 +73,6 @@ namespace Silanis.ESL.SDK
             }
             throw new ArgumentException("value is a name, but not one of the named constants defined for the AuthenticationMethod");
         }
-
-
 	}
 
 

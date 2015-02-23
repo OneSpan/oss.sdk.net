@@ -9,15 +9,15 @@ namespace Silanis.ESL.SDK
     {
         private static ILog log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
 
-        public static UsageReportCategory ACTIVE = new UsageReportCategory("ACTIVE", "ACTIVE");
-        public static UsageReportCategory DRAFT = new UsageReportCategory("DRAFT", "DRAFT");
-        public static UsageReportCategory SENT = new UsageReportCategory("SENT", "SENT");
-        public static UsageReportCategory COMPLETED = new UsageReportCategory("COMPLETED", "COMPLETED");
-        public static UsageReportCategory ARCHIVED = new UsageReportCategory("ARCHIVED", "ARCHIVED");
-        public static UsageReportCategory DECLINED = new UsageReportCategory("DECLINED", "DECLINED");
-        public static UsageReportCategory OPTED_OUT = new UsageReportCategory("OPTED_OUT", "OPTED_OUT");
-        public static UsageReportCategory EXPIRED = new UsageReportCategory("EXPIRED", "EXPIRED");
-        public static UsageReportCategory TRASHED = new UsageReportCategory("TRASHED", "TRASHED");
+        public static UsageReportCategory ACTIVE = new UsageReportCategory("ACTIVE", "ACTIVE", 0);
+        public static UsageReportCategory DRAFT = new UsageReportCategory("DRAFT", "DRAFT", 1);
+        public static UsageReportCategory SENT = new UsageReportCategory("SENT", "SENT", 2);
+        public static UsageReportCategory COMPLETED = new UsageReportCategory("COMPLETED", "COMPLETED", 3);
+        public static UsageReportCategory ARCHIVED = new UsageReportCategory("ARCHIVED", "ARCHIVED", 4);
+        public static UsageReportCategory DECLINED = new UsageReportCategory("DECLINED", "DECLINED", 5);
+        public static UsageReportCategory OPTED_OUT = new UsageReportCategory("OPTED_OUT", "OPTED_OUT", 6);
+        public static UsageReportCategory EXPIRED = new UsageReportCategory("EXPIRED", "EXPIRED", 7);
+        public static UsageReportCategory TRASHED = new UsageReportCategory("TRASHED", "TRASHED", 8);
 
         private static Dictionary<string,UsageReportCategory> allUsageReportCategorys = new Dictionary<string,UsageReportCategory>();
 
@@ -34,7 +34,7 @@ namespace Silanis.ESL.SDK
         }
 
         
-        private UsageReportCategory(string apiValue, string sdkValue):base(apiValue,sdkValue) {           
+        private UsageReportCategory(string apiValue, string sdkValue, int index):base(apiValue,sdkValue,index) {           
         }
 
         internal static UsageReportCategory valueOf (String apiValue){
@@ -44,7 +44,7 @@ namespace Silanis.ESL.SDK
                 return allUsageReportCategorys[apiValue];
             }
             log.WarnFormat("Unknown API UsageReportCategory {0}. The upgrade is required.", apiValue);
-            return new UsageReportCategory(apiValue, "UNRECOGNIZED");
+            return new UsageReportCategory(apiValue, "UNRECOGNIZED", allUsageReportCategorys.Values.Count);
         }
 
         public static string[] GetNames(){
@@ -55,6 +55,15 @@ namespace Silanis.ESL.SDK
                 i++;
             }
             return names;
+        }
+
+        public static explicit operator UsageReportCategory(Enum enumType)
+        {
+            return parse(enumType.ToString());
+        }
+
+        public static UsageReportCategory[] Values(){
+            return (new List<UsageReportCategory>(allUsageReportCategorys.Values)).ToArray();
         }
 
         public static UsageReportCategory parse(string value){

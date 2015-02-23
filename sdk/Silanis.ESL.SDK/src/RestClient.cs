@@ -141,6 +141,15 @@ namespace Silanis.ESL.SDK
             return HttpMethods.GetHttp(apiToken, path);
         }
 
+        public byte[] GetHttpAsOctetStream(string path) {
+            support.LogRequest("GET", path);
+
+            if (proxyConfiguration != null) 
+                HttpMethods.proxyConfiguration = proxyConfiguration;
+
+            return HttpMethods.GetHttpAsOctetStream(apiToken, path);
+        }
+
         public string Delete(string path) {
             support.LogRequest("DELETE", path);
 

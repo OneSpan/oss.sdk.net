@@ -23,6 +23,7 @@ namespace Silanis.ESL.SDK.Builder
         private SenderInfo senderInfo;
         private DocumentPackageAttributes attributes;
         private IList<Message> messages = new List<Message>();
+        private Visibility visibility;
 
 		private PackageBuilder(string packageName)
 		{
@@ -152,6 +153,12 @@ namespace Silanis.ESL.SDK.Builder
             return WithAttributes( attributes );
         } 
 
+        public PackageBuilder WithVisibility(Visibility visibility) {
+            this.visibility = visibility;
+            return this;
+        }
+
+
 		public DocumentPackage Build()
         {
             DocumentPackage package = new DocumentPackage(id, packageName, autocomplete, signers, placeholders, documents);
@@ -164,6 +171,10 @@ namespace Silanis.ESL.SDK.Builder
             package.SenderInfo = senderInfo;
             package.Attributes = attributes;
             package.Messages = messages;
+
+            if ( visibility != null ) {
+                package.Visibility = visibility;
+            }
 
 			return package;
 		}

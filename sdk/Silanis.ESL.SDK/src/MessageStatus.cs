@@ -9,9 +9,9 @@ namespace Silanis.ESL.SDK
     {
         private static ILog log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
 
-        public static MessageStatus NEW = new MessageStatus("NEW", "NEW");
-        public static MessageStatus READ = new MessageStatus("READ", "READ");
-        public static MessageStatus TRASHED = new MessageStatus("TRASHED", "TRASHED");
+        public static MessageStatus NEW = new MessageStatus("NEW", "NEW", 0);
+        public static MessageStatus READ = new MessageStatus("READ", "READ", 1);
+        public static MessageStatus TRASHED = new MessageStatus("TRASHED", "TRASHED", 2);
         private static Dictionary<string,MessageStatus> allMessageStatus = new Dictionary<string,MessageStatus>();
 
         static MessageStatus(){
@@ -20,7 +20,7 @@ namespace Silanis.ESL.SDK
             allMessageStatus.Add(TRASHED.getApiValue(), MessageStatus.TRASHED);
         }
 
-        private MessageStatus(string apiValue, string sdkValue):base(apiValue,sdkValue) {           
+        private MessageStatus(string apiValue, string sdkValue, int index):base(apiValue,sdkValue,index) {           
         }
 
         internal static MessageStatus valueOf (String apiValue){
@@ -30,7 +30,7 @@ namespace Silanis.ESL.SDK
                 return allMessageStatus[apiValue];
             }
             log.WarnFormat("Unknown API MessageStatus {0}. The upgrade is required.", apiValue);
-            return new MessageStatus(apiValue, "UNRECOGNIZED");
+            return new MessageStatus(apiValue, "UNRECOGNIZED", allMessageStatus.Values.Count);
         }
 
         public static string[] GetNames(){
@@ -41,6 +41,15 @@ namespace Silanis.ESL.SDK
                 i++;
             }
             return names;
+        }
+
+        public static explicit operator MessageStatus(Enum enumType)
+        {
+            return parse(enumType.ToString());
+        }
+
+        public static MessageStatus[] Values(){
+            return (new List<MessageStatus>(allMessageStatus.Values)).ToArray();
         }
 
         public static MessageStatus parse(string value){

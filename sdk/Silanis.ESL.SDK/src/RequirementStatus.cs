@@ -9,9 +9,9 @@ namespace Silanis.ESL.SDK
 	{
         private static ILog log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
 
-        public static RequirementStatus INCOMPLETE = new RequirementStatus("INCOMPLETE", "INCOMPLETE");
-        public static RequirementStatus REJECTED = new RequirementStatus("REJECTED", "REJECTED");
-        public static RequirementStatus COMPLETE = new RequirementStatus("COMPLETE", "COMPLETE");
+        public static RequirementStatus INCOMPLETE = new RequirementStatus("INCOMPLETE", "INCOMPLETE", 0);
+        public static RequirementStatus REJECTED = new RequirementStatus("REJECTED", "REJECTED", 1);
+        public static RequirementStatus COMPLETE = new RequirementStatus("COMPLETE", "COMPLETE", 2);
         private static Dictionary<string,RequirementStatus> allRequirementStatus = new Dictionary<string,RequirementStatus>();
 
         static RequirementStatus(){
@@ -21,7 +21,7 @@ namespace Silanis.ESL.SDK
         }
 
         
-        private RequirementStatus(string apiValue, string sdkValue):base(apiValue,sdkValue) {           
+        private RequirementStatus(string apiValue, string sdkValue, int index):base(apiValue,sdkValue,index) {           
         }
 
         internal static RequirementStatus valueOf (String apiValue){
@@ -31,7 +31,7 @@ namespace Silanis.ESL.SDK
                 return allRequirementStatus[apiValue];
             }
             log.WarnFormat("Unknown API RequirementStatus {0}. The upgrade is required.", apiValue);
-            return new RequirementStatus(apiValue, "UNRECOGNIZED");
+            return new RequirementStatus(apiValue, "UNRECOGNIZED", allRequirementStatus.Values.Count);
         }
 
         public static string[] GetNames(){
@@ -42,6 +42,15 @@ namespace Silanis.ESL.SDK
                 i++;
             }
             return names;
+        }
+
+        public static explicit operator RequirementStatus(Enum enumType)
+        {
+            return parse(enumType.ToString());
+        }
+
+        public static RequirementStatus[] Values(){
+            return (new List<RequirementStatus>(allRequirementStatus.Values)).ToArray();
         }
 
         public static RequirementStatus parse(string value){

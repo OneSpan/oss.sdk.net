@@ -9,19 +9,19 @@ namespace Silanis.ESL.SDK
 	{
         private static ILog log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
 
-        public static FieldStyle BOUND_DATE = new FieldStyle("LABEL", "BOUND_DATE");
-        public static FieldStyle BOUND_NAME = new FieldStyle("LABEL", "BOUND_NAME");
-        public static FieldStyle BOUND_TITLE = new FieldStyle("LABEL", "BOUND_TITLE");
-        public static FieldStyle BOUND_COMPANY = new FieldStyle("LABEL","BOUND_COMPANY");
-        public static FieldStyle BOUND_QRCODE = new FieldStyle("QRCODE", "BOUND_QRCODE");
-        public static FieldStyle UNBOUND_TEXT_FIELD = new FieldStyle("TEXTFIELD", "UNBOUND_TEXT_FIELD");
-        public static FieldStyle UNBOUND_CUSTOM_FIELD = new FieldStyle("CUSTOMFIELD", "UNBOUND_CUSTOM_FIELD");
-        public static FieldStyle UNBOUND_CHECK_BOX = new FieldStyle("CHECKBOX", "UNBOUND_CHECK_BOX");
-        public static FieldStyle UNBOUND_RADIO_BUTTON = new FieldStyle("RADIO", "UNBOUND_RADIO_BUTTON");
-        public static FieldStyle LABEL = new FieldStyle("LABEL", "LABEL");
-        public static FieldStyle TEXT_AREA = new FieldStyle("TEXTAREA", "TEXT_AREA");
-        public static FieldStyle DROP_LIST = new FieldStyle("LIST", "DROP_LIST");
-        public static FieldStyle SEAL = new FieldStyle("SEAL", "SEAL");
+        public static FieldStyle BOUND_DATE = new FieldStyle("LABEL", "BOUND_DATE", 0);
+        public static FieldStyle BOUND_NAME = new FieldStyle("LABEL", "BOUND_NAME", 1);
+        public static FieldStyle BOUND_TITLE = new FieldStyle("LABEL", "BOUND_TITLE", 2);
+        public static FieldStyle BOUND_COMPANY = new FieldStyle("LABEL","BOUND_COMPANY", 3);
+        public static FieldStyle BOUND_QRCODE = new FieldStyle("QRCODE", "BOUND_QRCODE", 4);
+        public static FieldStyle UNBOUND_TEXT_FIELD = new FieldStyle("TEXTFIELD", "UNBOUND_TEXT_FIELD", 5);
+        public static FieldStyle UNBOUND_CUSTOM_FIELD = new FieldStyle("CUSTOMFIELD", "UNBOUND_CUSTOM_FIELD", 6);
+        public static FieldStyle UNBOUND_CHECK_BOX = new FieldStyle("CHECKBOX", "UNBOUND_CHECK_BOX", 7);
+        public static FieldStyle UNBOUND_RADIO_BUTTON = new FieldStyle("RADIO", "UNBOUND_RADIO_BUTTON", 8);
+        public static FieldStyle LABEL = new FieldStyle("LABEL", "LABEL", 9);
+        public static FieldStyle TEXT_AREA = new FieldStyle("TEXTAREA", "TEXT_AREA", 10);
+        public static FieldStyle DROP_LIST = new FieldStyle("LIST", "DROP_LIST", 11);
+        public static FieldStyle SEAL = new FieldStyle("SEAL", "SEAL", 12);
         private static Dictionary<string,FieldStyle> allFieldStyles = new Dictionary<string,FieldStyle>();
 
         static FieldStyle(){
@@ -36,7 +36,7 @@ namespace Silanis.ESL.SDK
             allFieldStyles.Add(SEAL.getApiValue(), FieldStyle.SEAL);
         }
 
-        private FieldStyle(string apiValue, string sdkValue):base(apiValue, sdkValue) {           
+        private FieldStyle(string apiValue, string sdkValue, int index):base(apiValue, sdkValue, index) {           
         }
       
         internal static FieldStyle valueOf (String apiValue){
@@ -46,7 +46,7 @@ namespace Silanis.ESL.SDK
                 return allFieldStyles[apiValue];
             }
             log.WarnFormat("Unknown API FieldStyle {0}. The upgrade is required.", apiValue);
-            return new FieldStyle(apiValue, "UNRECOGNIZED");
+            return new FieldStyle(apiValue, "UNRECOGNIZED", allFieldStyles.Values.Count);
         }
 
         public static string[] GetNames(){
@@ -57,6 +57,15 @@ namespace Silanis.ESL.SDK
                 i++;
             }
             return names;
+        }
+
+        public static explicit operator FieldStyle(Enum enumType)
+        {
+            return parse(enumType.ToString());
+        }
+
+        public static FieldStyle[] Values(){
+            return (new List<FieldStyle>(allFieldStyles.Values)).ToArray();
         }
 
         public static FieldStyle parse(string value){

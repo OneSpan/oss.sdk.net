@@ -9,9 +9,9 @@ namespace Silanis.ESL.SDK
     {
         private static ILog log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
 
-        public static SenderStatus INVITED = new SenderStatus("INVITED","INVITED");
-        public static SenderStatus ACTIVE = new SenderStatus("ACTIVE","ACTIVE");
-        public static SenderStatus LOCKED = new SenderStatus("LOCKED","LOCKED");
+        public static SenderStatus INVITED = new SenderStatus("INVITED","INVITED", 0);
+        public static SenderStatus ACTIVE = new SenderStatus("ACTIVE","ACTIVE", 1);
+        public static SenderStatus LOCKED = new SenderStatus("LOCKED","LOCKED", 2);
         private static Dictionary<string,SenderStatus> allSenderStatus = new Dictionary<string,SenderStatus>();
 
         static SenderStatus(){
@@ -21,7 +21,7 @@ namespace Silanis.ESL.SDK
         }
 
         
-        private SenderStatus(string apiValue, string sdkValue):base(apiValue,sdkValue) {           
+        private SenderStatus(string apiValue, string sdkValue, int index):base(apiValue,sdkValue,index) {           
         }
 
         internal static SenderStatus valueOf (String apiValue){
@@ -31,7 +31,7 @@ namespace Silanis.ESL.SDK
                 return allSenderStatus[apiValue];
             }
             log.WarnFormat("Unknown API SenderStatus {1}. The upgrade is required.", apiValue);
-            return new SenderStatus(apiValue, "UNRECOGNIZED");
+            return new SenderStatus(apiValue, "UNRECOGNIZED", allSenderStatus.Values.Count);
         }
 
         public static string[] GetNames(){
@@ -42,6 +42,15 @@ namespace Silanis.ESL.SDK
                 i++;
             }
             return names;
+        }
+
+        public static explicit operator SenderStatus(Enum enumType)
+        {
+            return parse(enumType.ToString());
+        }
+
+        public static SenderStatus[] Values(){
+            return (new List<SenderStatus>(allSenderStatus.Values)).ToArray();
         }
 
         public static SenderStatus parse(string value){

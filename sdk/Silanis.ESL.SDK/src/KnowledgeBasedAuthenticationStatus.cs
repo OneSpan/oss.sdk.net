@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Reflection;
 using log4net;
@@ -9,9 +9,9 @@ namespace Silanis.ESL.SDK
     {
         private static ILog log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
 
-        public static KnowledgeBasedAuthenticationStatus NOT_YET_ATTEMPTED = new KnowledgeBasedAuthenticationStatus("NOT_YET_ATTEMPTED", "NOT_YET_ATTEMPTED");
-        public static KnowledgeBasedAuthenticationStatus PASSED = new KnowledgeBasedAuthenticationStatus("PASSED", "PASSED");
-        public static KnowledgeBasedAuthenticationStatus FAILED = new KnowledgeBasedAuthenticationStatus("FAILED", "FAILED");
+        public static KnowledgeBasedAuthenticationStatus NOT_YET_ATTEMPTED = new KnowledgeBasedAuthenticationStatus("NOT_YET_ATTEMPTED", "NOT_YET_ATTEMPTED", 0);
+        public static KnowledgeBasedAuthenticationStatus PASSED = new KnowledgeBasedAuthenticationStatus("PASSED", "PASSED", 1);
+        public static KnowledgeBasedAuthenticationStatus FAILED = new KnowledgeBasedAuthenticationStatus("FAILED", "FAILED", 2);
         private static Dictionary<string,KnowledgeBasedAuthenticationStatus> allKnowledgeBasedAuthenticationStatus = new Dictionary<string,KnowledgeBasedAuthenticationStatus>();
 
 
@@ -21,7 +21,7 @@ namespace Silanis.ESL.SDK
             allKnowledgeBasedAuthenticationStatus.Add(FAILED.getApiValue(), KnowledgeBasedAuthenticationStatus.FAILED);
         }
 
-        private KnowledgeBasedAuthenticationStatus(string apiValue, string sdkValue):base(apiValue, sdkValue) {           
+        private KnowledgeBasedAuthenticationStatus(string apiValue, string sdkValue, int index):base(apiValue, sdkValue,index) {           
         }
        
         internal static KnowledgeBasedAuthenticationStatus valueOf (String apiValue){
@@ -31,7 +31,7 @@ namespace Silanis.ESL.SDK
                 return allKnowledgeBasedAuthenticationStatus[apiValue];
             }
             log.WarnFormat("Unknown API KnowledgeBasedAuthenticationStatus {0}. The upgrade is required.", apiValue);
-            return new KnowledgeBasedAuthenticationStatus(apiValue, "UNRECOGNIZED");
+            return new KnowledgeBasedAuthenticationStatus(apiValue, "UNRECOGNIZED", allKnowledgeBasedAuthenticationStatus.Values.Count);
         }
 
         public static string[] GetNames(){
@@ -42,6 +42,15 @@ namespace Silanis.ESL.SDK
                 i++;
             }
             return names;
+        }
+
+        public static explicit operator KnowledgeBasedAuthenticationStatus(Enum enumType)
+        {
+            return parse(enumType.ToString());
+        }
+
+        public static KnowledgeBasedAuthenticationStatus[] Values(){
+            return (new List<KnowledgeBasedAuthenticationStatus>(allKnowledgeBasedAuthenticationStatus.Values)).ToArray();
         }
 
         public static KnowledgeBasedAuthenticationStatus parse(string value){
