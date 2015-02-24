@@ -23,7 +23,7 @@ namespace SDK.Examples
         public DocumentRetrievalExample(String apiKey, String apiUrl, String email1) : base(apiKey, apiUrl)
         {
             this.email1 = email1;
-            this.fileStream1 = File.OpenRead(new FileInfo(Directory.GetCurrentDirectory() + "/src/document.pdf").FullName);
+            this.fileStream1 = File.OpenRead(new FileInfo(Directory.GetCurrentDirectory() + "/src/prêt.pdf").FullName);
         }
 
         public byte[] PdfDocumentBytes
@@ -57,7 +57,7 @@ namespace SDK.Examples
                         .WithSigner(SignerBuilder.NewSignerWithEmail(email1)
                             .WithFirstName("George")
                             .WithLastName("Faltour").Build())
-                         .WithDocument(DocumentBuilder.NewDocumentNamed("Signature électronique  OACIQ - Une première firme accréditée par l’OACIQ.pdf")
+                            .WithDocument(DocumentBuilder.NewDocumentNamed("prêt.pdf")
                             .FromStream(fileStream1, DocumentType.PDF)
                             .WithId(docId)
                             .WithSignature(SignatureBuilder.SignatureFor(email1)
