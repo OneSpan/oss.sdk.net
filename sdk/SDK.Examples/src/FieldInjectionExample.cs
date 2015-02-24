@@ -38,7 +38,7 @@ namespace SDK.Examples
                                   .WithInjectedField(FieldBuilder.TextField().WithName("Text3").WithValue("Third Injected Value"))
                                   .WithInjectedField(FieldBuilder.TextField().WithName("Text4").WithValue("Fourth Injected Value"))
                                   .WithInjectedField(FieldBuilder.TextField().WithName("Text5").WithValue("Fifth Injected Value"))
-                                  .WithInjectedField(FieldBuilder.TextField().WithName("Text6").WithValue("Sixth Injected Value")))
+                                  .WithInjectedField(FieldBuilder.TextField().WithName("Text6").WithValue("À à Â â Æ æ Ç ç È è É é Ê ë")))
                     .Build();
 
             packageId = eslClient.CreatePackage( superDuperPackage );
