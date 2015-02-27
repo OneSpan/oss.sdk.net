@@ -109,6 +109,7 @@
     <Compile Include="src\CreateSenderTemplateExampleTest.cs" />
     <Compile Include="src\StampFieldValueExampleTest.cs" />
     <Compile Include="src\UpdatePackageExampleTest.cs" />
+    <Compile Include="src\UpdateInjectedFieldsFromTemplateExampleTest.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
