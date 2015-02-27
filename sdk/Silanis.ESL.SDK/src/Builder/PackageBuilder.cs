@@ -23,6 +23,7 @@ namespace Silanis.ESL.SDK.Builder
         private SenderInfo senderInfo;
         private DocumentPackageAttributes attributes;
         private IList<Message> messages = new List<Message>();
+        private Nullable<Boolean> notarized;
         private Visibility visibility;
 
 		private PackageBuilder(string packageName)
@@ -153,6 +154,11 @@ namespace Silanis.ESL.SDK.Builder
             return WithAttributes( attributes );
         } 
 
+        public PackageBuilder WithNotarized(Nullable<Boolean> notarized) {
+            this.notarized = notarized;
+            return this;
+        }
+
         public PackageBuilder WithVisibility(Visibility visibility) {
             this.visibility = visibility;
             return this;
@@ -171,6 +177,7 @@ namespace Silanis.ESL.SDK.Builder
             package.SenderInfo = senderInfo;
             package.Attributes = attributes;
             package.Messages = messages;
+            package.Notarized = notarized;
 
             if ( visibility != null ) {
                 package.Visibility = visibility;

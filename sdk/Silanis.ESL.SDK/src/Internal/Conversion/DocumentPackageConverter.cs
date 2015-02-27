@@ -76,6 +76,10 @@ namespace Silanis.ESL.SDK
 				package.Data = sdkPackage.Attributes.Contents;
 			}
 
+            if ( sdkPackage.Notarized != null ) {
+                package.Notarized = sdkPackage.Notarized;
+            }
+
             if ( sdkPackage.Visibility != null ) {
                 package.Visibility = sdkPackage.Visibility;
             }
@@ -144,6 +148,10 @@ namespace Silanis.ESL.SDK
             if (apiPackage.Sender != null)
             {
                 packageBuilder.WithSenderInfo(new SenderConverter(apiPackage.Sender).ToSDKSenderInfo());
+            }
+
+            if (apiPackage.Notarized != null) {
+                packageBuilder.WithNotarized(apiPackage.Notarized);
             }
 
             if (apiPackage.Visibility != null) {

@@ -43,7 +43,6 @@
     <Compile Include="src\TextAnchorExtractionExampleTest.cs" />
     <Compile Include="src\TemplateExampleTest.cs" />
     <Compile Include="src\PackageDataContainsSDKVersionTest.cs" />
-    <Compile Include="src\UpdatePackageExampleTester.cs" />
     <Compile Include="src\SignerManipulationExampleTest.cs" />
     <Compile Include="src\SignerOrderingExampleTest.cs" />
     <Compile Include="src\DocumentWorkflowExampleTest.cs" />
@@ -109,6 +108,7 @@
     <Compile Include="src\CreatePackageFromTemplateWithAttachmentExampleTest.cs" />
     <Compile Include="src\CreateSenderTemplateExampleTest.cs" />
     <Compile Include="src\StampFieldValueExampleTest.cs" />
+    <Compile Include="src\UpdatePackageExampleTest.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

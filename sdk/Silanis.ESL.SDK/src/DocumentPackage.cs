@@ -115,6 +115,12 @@ namespace Silanis.ESL.SDK
             set;
         }
 
+        public Nullable<Boolean> Notarized
+        {
+            get;
+            set;
+        }
+
         public Visibility Visibility
         {
             get;
