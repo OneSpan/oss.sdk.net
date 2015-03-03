@@ -145,6 +145,7 @@
     <Compile Include="src\CreateSenderTemplateExample.cs" />
     <Compile Include="src\UpdateInjectedFieldsFromTemplateExample.cs" />
     <Compile Include="src\MergeFieldValidationExample.cs" />
+    <Compile Include="src\GettingStartedExample.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
