@@ -40,8 +40,13 @@ namespace Silanis.ESL.SDK
 
         public List<string> Options
         {
-            get{
+            get
+            {
                 return options;
+            }
+            set
+            {
+                options = value;
             }
         }
 

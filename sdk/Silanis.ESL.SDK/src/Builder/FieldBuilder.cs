@@ -148,9 +148,30 @@ namespace Silanis.ESL.SDK.Builder
 
 		public FieldBuilder WithValidation (FieldValidator validator)
 		{
-			this.validator = validator;
+            MergeValidation(validator);
 			return this;
 		}
+
+        private void MergeValidation(FieldValidator validator) 
+        {
+            if (null != this.validator) 
+            {
+                this.validator.ErrorCode = validator.ErrorCode;
+                this.validator.MaxLength = validator.MaxLength;
+                this.validator.MinLength = validator.MinLength;
+
+                if(null != validator.Regex)
+                    this.validator.Regex = validator.Regex;
+                if(null != validator.Options && validator.Options.Count > 0)
+                    this.validator.Options = validator.Options;
+
+                this.validator.Required = validator.Required;
+            } 
+            else 
+            {
+                this.validator = validator;
+            }
+        }
 
         public FieldBuilder WithValue (bool value)
         {
