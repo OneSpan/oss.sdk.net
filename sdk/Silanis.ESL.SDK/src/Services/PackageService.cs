@@ -388,7 +388,7 @@ namespace Silanis.ESL.SDK.Services
 
             try
             {
-                return restClient.GetHttpAsOctetStream(path);
+                return restClient.GetBytes(path);
             }
             catch (EslServerException e)
             {
@@ -415,7 +415,7 @@ namespace Silanis.ESL.SDK.Services
 
             try
             {
-                return restClient.GetHttpAsOctetStream(path);
+                return restClient.GetBytes(path);
             }
             catch (EslServerException e)
             {
