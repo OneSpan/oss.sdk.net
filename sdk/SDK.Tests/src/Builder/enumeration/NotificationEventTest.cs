@@ -48,12 +48,12 @@ namespace SDK.Tests
         }
 
         [Test]
-        public void whenBuildingNotificationEventWithSDKValuePACKAGE_EXPIREThenNotificationEventWithAPIValuePACKAGE_DELETEIsReturned()
+        public void whenBuildingNotificationEventWithAPIValuePACKAGE_EXPIREThenPACKAGE_EXPIRENotificationEventIsReturned()
         {
-            string expectedAPIValue = "PACKAGE_DELETE";
+            string expectedAPIValue = "PACKAGE_EXPIRE";
 
 
-            NotificationEvent classUnderTest = NotificationEvent.PACKAGE_EXPIRE;
+            NotificationEvent classUnderTest = NotificationEvent.valueOf("PACKAGE_EXPIRE");
             string actualAPIValue = classUnderTest.getApiValue();
 
 

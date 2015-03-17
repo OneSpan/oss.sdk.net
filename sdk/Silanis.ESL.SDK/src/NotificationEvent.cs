@@ -11,7 +11,7 @@ namespace Silanis.ESL.SDK
 
         public static NotificationEvent PACKAGE_ACTIVATE = new NotificationEvent("PACKAGE_ACTIVATE", "PACKAGE_ACTIVATE", 0);
         public static NotificationEvent PACKAGE_COMPLETE = new NotificationEvent("PACKAGE_COMPLETE", "PACKAGE_COMPLETE", 1);
-        public static NotificationEvent PACKAGE_EXPIRE = new NotificationEvent("PACKAGE_DELETE", "PACKAGE_EXPIRE", 2);
+        public static NotificationEvent PACKAGE_EXPIRE = new NotificationEvent("PACKAGE_EXPIRE", "PACKAGE_EXPIRE", 2);
         public static NotificationEvent PACKAGE_OPT_OUT = new NotificationEvent("PACKAGE_OPT_OUT", "PACKAGE_OPT_OUT", 3);
         public static NotificationEvent PACKAGE_DECLINE = new NotificationEvent("PACKAGE_DECLINE", "PACKAGE_DECLINE", 4);
         public static NotificationEvent SIGNER_COMPLETE = new NotificationEvent("SIGNER_COMPLETE", "SIGNER_COMPLETE", 5);
@@ -23,11 +23,17 @@ namespace Silanis.ESL.SDK
         public static NotificationEvent PACKAGE_TRASH = new NotificationEvent("PACKAGE_TRASH", "PACKAGE_TRASH", 11);
         public static NotificationEvent PACKAGE_RESTORE = new NotificationEvent("PACKAGE_RESTORE", "PACKAGE_RESTORE", 12);
         public static NotificationEvent PACKAGE_DELETE = new NotificationEvent("PACKAGE_DELETE", "PACKAGE_DELETE", 13);
+        public static NotificationEvent KBA_FAILURE = new NotificationEvent("KBA_FAILURE", "KBA_FAILURE", 14);
+        public static NotificationEvent EMAIL_BOUNCE = new NotificationEvent("EMAIL_BOUNCE", "EMAIL_BOUNCE", 15);
+        public static NotificationEvent PACKAGE_ATTACHMENT = new NotificationEvent("PACKAGE_ATTACHMENT", "PACKAGE_ATTACHMENT", 16);
+        public static NotificationEvent SIGNER_LOCKED = new NotificationEvent("SIGNER_LOCKED", "SIGNER_LOCKED", 17);
+
         private static Dictionary<string,NotificationEvent> allNotificationEvents = new Dictionary<string,NotificationEvent>();
 
         static NotificationEvent(){
             allNotificationEvents.Add(PACKAGE_ACTIVATE.getApiValue(), PACKAGE_ACTIVATE);
             allNotificationEvents.Add(PACKAGE_COMPLETE.getApiValue(), PACKAGE_COMPLETE);
+            allNotificationEvents.Add(PACKAGE_EXPIRE.getApiValue(), PACKAGE_EXPIRE);
             allNotificationEvents.Add(PACKAGE_OPT_OUT.getApiValue(), PACKAGE_OPT_OUT);
             allNotificationEvents.Add(PACKAGE_DECLINE.getApiValue(), PACKAGE_DECLINE);
             allNotificationEvents.Add(SIGNER_COMPLETE.getApiValue(), SIGNER_COMPLETE);
@@ -38,9 +44,11 @@ namespace Silanis.ESL.SDK
             allNotificationEvents.Add(PACKAGE_READY_FOR_COMPLETION.getApiValue(), PACKAGE_READY_FOR_COMPLETION);
             allNotificationEvents.Add(PACKAGE_TRASH.getApiValue(), PACKAGE_TRASH);
             allNotificationEvents.Add(PACKAGE_RESTORE.getApiValue(), PACKAGE_RESTORE);
-            allNotificationEvents.Add("PACKAGE_EXPIRE", PACKAGE_DELETE);
             allNotificationEvents.Add(PACKAGE_DELETE.getApiValue(), PACKAGE_DELETE);
-
+            allNotificationEvents.Add(KBA_FAILURE.getApiValue(), KBA_FAILURE);
+            allNotificationEvents.Add(EMAIL_BOUNCE.getApiValue(), EMAIL_BOUNCE);
+            allNotificationEvents.Add(PACKAGE_ATTACHMENT.getApiValue(), PACKAGE_ATTACHMENT);
+            allNotificationEvents.Add(SIGNER_LOCKED.getApiValue(), SIGNER_LOCKED);
         }
 
         private NotificationEvent(string apiValue, string sdkValue, int index):base(apiValue,sdkValue,index) {           

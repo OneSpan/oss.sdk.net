@@ -35,11 +35,6 @@ namespace Silanis.ESL.SDK
 		/// <returns>The API callback event.</returns>
 		internal string ToAPICallbackEvent()
 		{
-            if (sdkNotificationEvent.getApiValue().Equals(Silanis.ESL.SDK.NotificationEvent.PACKAGE_EXPIRE.getApiValue()))
-            {
-                return Silanis.ESL.SDK.NotificationEvent.PACKAGE_DELETE.getApiValue();
-            }
-
             return sdkNotificationEvent.getApiValue();
 		}
 

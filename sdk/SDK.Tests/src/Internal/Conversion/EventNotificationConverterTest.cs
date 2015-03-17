@@ -31,12 +31,12 @@ namespace SDK.Tests
         }
 
         [Test]
-        public void ConvertAPIPACKAGE_EXPIREToPACKAGE_DELETENotificationEvent()
+        public void ConvertAPIPACKAGE_EXPIREToPACKAGE_EXPIRENotificationEvent()
         {
             apiNotificationEvent1 = "PACKAGE_EXPIRE";
             sdkNotificationEvent1 = new EventNotificationConverter(apiNotificationEvent1).ToSDKNotificationEvent();
 
-            Assert.AreEqual("PACKAGE_DELETE", sdkNotificationEvent1.getApiValue());
+            Assert.AreEqual(apiNotificationEvent1, sdkNotificationEvent1.getApiValue());
         }
 
         [Test]
@@ -166,9 +166,9 @@ namespace SDK.Tests
         }
 
         [Test]
-        public void ConvertSDKCOMPLETEToAPICOMPLETE()
+        public void ConvertSDKDELETEToAPIDELETE()
         {
-            sdkNotificationEvent1 = Silanis.ESL.SDK.NotificationEvent.PACKAGE_EXPIRE;
+            sdkNotificationEvent1 = Silanis.ESL.SDK.NotificationEvent.PACKAGE_DELETE;
             apiNotificationEvent1 = new EventNotificationConverter(sdkNotificationEvent1).ToAPICallbackEvent();
 
             Assert.AreEqual("PACKAGE_DELETE", apiNotificationEvent1);
@@ -274,6 +274,42 @@ namespace SDK.Tests
             apiNotificationEvent1 = new EventNotificationConverter(sdkNotificationEvent1).ToAPICallbackEvent();
 
             Assert.AreEqual("PACKAGE_DELETE", apiNotificationEvent1);
+        }
+
+        [Test]
+        public void ConvertSDKKBA_FAILUREToAPIKBA_FAILURE()
+        {
+            sdkNotificationEvent1 = Silanis.ESL.SDK.NotificationEvent.KBA_FAILURE;
+            apiNotificationEvent1 = new EventNotificationConverter(sdkNotificationEvent1).ToAPICallbackEvent();
+
+            Assert.AreEqual("KBA_FAILURE", apiNotificationEvent1);
+        }
+
+        [Test]
+        public void ConvertSDKEMAIL_BOUNCEToAPIEMAIL_BOUNCE()
+        {
+            sdkNotificationEvent1 = Silanis.ESL.SDK.NotificationEvent.EMAIL_BOUNCE;
+            apiNotificationEvent1 = new EventNotificationConverter(sdkNotificationEvent1).ToAPICallbackEvent();
+
+            Assert.AreEqual("EMAIL_BOUNCE", apiNotificationEvent1);
+        }
+
+        [Test]
+        public void ConvertSDKPACKAGE_ATTACHMENTToAPIPACKAGE_ATTACHMENT()
+        {
+            sdkNotificationEvent1 = Silanis.ESL.SDK.NotificationEvent.PACKAGE_ATTACHMENT;
+            apiNotificationEvent1 = new EventNotificationConverter(sdkNotificationEvent1).ToAPICallbackEvent();
+
+            Assert.AreEqual("PACKAGE_ATTACHMENT", apiNotificationEvent1);
+        }
+
+        [Test]
+        public void ConvertSDKSIGNER_LOCKEDToAPISIGNER_LOCKED()
+        {
+            sdkNotificationEvent1 = Silanis.ESL.SDK.NotificationEvent.SIGNER_LOCKED;
+            apiNotificationEvent1 = new EventNotificationConverter(sdkNotificationEvent1).ToAPICallbackEvent();
+
+            Assert.AreEqual("SIGNER_LOCKED", apiNotificationEvent1);
         }
 
         [Test]
