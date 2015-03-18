@@ -355,6 +355,7 @@
     <Compile Include="src\Internal\AuthRequestParameters.cs" />
     <Compile Include="src\Visibility.cs" />
     <Compile Include="src\Internal\Conversion\VisibilityConverter.cs" />
+    <Compile Include="src\Internal\VersionUtil.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSHARP.Targets" />
   <ProjectExtensions>
