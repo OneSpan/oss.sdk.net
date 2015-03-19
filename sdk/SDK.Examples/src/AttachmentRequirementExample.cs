@@ -3,6 +3,8 @@ using Silanis.ESL.SDK;
 using Silanis.ESL.SDK.Builder;
 using System.IO;
 using System.Collections.Generic;
+using Silanis.ESL.SDK.Builder.Internal;
+using ICSharpCode.SharpZipLib.Zip;
 
 namespace SDK.Examples
 {
@@ -12,6 +14,8 @@ namespace SDK.Examples
         {
             new AttachmentRequirementExample(Props.GetInstance()).Run();
         }
+
+        private Stream fileStream1, attachmentInputStream1, attachmentInputStream2, attachmentInputStream3;
 
         private string email1;
         private string email2;
@@ -24,8 +28,28 @@ namespace SDK.Examples
         public readonly string DESCRIPTION2 = "Optional attachment.";
         public readonly string NAME3 = "Third Attachment";
         public readonly string DESCRIPTION3 = "Third description";
-        public readonly string SIGNER1ID = "signer1Id";
+        public readonly string SIGNER1_ID = "signer1Id";
+        public readonly string SIGNER2_ID = "signer2Id";
         public readonly string REJECTION_COMMENT = "Reject: uploaded wrong attachment.";
+
+        public readonly string DOWNLOADED_ATTACHMENT_PDF = "downloadedAttachment.pdf";
+        public readonly string DOWNLOADED_ALL_ATTACHMENTS_FOR_PACKAGE_ZIP = "downloadedAllAttachmentsForPackage.zip";
+        public readonly string DOWNLOADED_ALL_ATTACHMENTS_FOR_SIGNER1_IN_PACKAGE_ZIP = "downloadedAllAttachmentsForSigner1InPackage.zip";
+        public readonly string DOWNLOADED_ALL_ATTACHMENTS_FOR_SIGNER2_IN_PACKAGE_ZIP = "downloadedAllAttachmentsForSigner2InPackage.zip";
+
+        public DocumentPackage retrievedPackageAfterRejection, retrievedPackageAfterAccepting;
+        public IDictionary<string, AttachmentRequirement> signer1Attachments, signer2Attachments;
+        public AttachmentRequirement signer1Att1, signer2Att1, signer2Att2;
+        public RequirementStatus retrievedSigner1Att1RequirementStatus, retrievedSigner2Att1RequirementStatus,
+            retrievedSigner2Att2RequirementStatus, retrievedSigner1Att1RequirementStatusAfterRejection,
+            retrievedSigner1Att1RequirementStatusAfterAccepting;
+
+        public string retrievedSigner1Att1RequirementSenderCommentAfterRejection,
+            retrievedSigner1Att1RequirementSenderCommentAfterAccepting;
+
+        public FileInfo downloadedAttachemnt1;
+        public long attachment1ForSigner1FileSize;
+        public ZipFile downloadedAllAttachmentsForPackageZip, downloadedAllAttachmentsForSigner1InPackageZip, downloadedAllAttachmentsForSigner2InPackageZip;
 
         public AttachmentRequirementExample(Props props) : this(props.Get("api.key"), props.Get("api.url"), props.Get("1.email"), props.Get("2.email"))
         {
@@ -35,16 +59,11 @@ namespace SDK.Examples
         {
             this.email1 = email1;
             this.email2 = email2;
-        }
 
-        public string Email1
-        {
-            get { return email1; }
-        }
-
-        public string Email2
-        {
-            get { return email2; }
+            this.fileStream1 = File.OpenRead(new FileInfo(Directory.GetCurrentDirectory() + "/src/document.pdf").FullName);
+            this.attachmentInputStream1 = File.OpenRead(new FileInfo(Directory.GetCurrentDirectory() + "/src/document-for-anchor-extraction.pdf").FullName);
+            this.attachmentInputStream2 = File.OpenRead(new FileInfo(Directory.GetCurrentDirectory() + "/src/document-with-fields.pdf").FullName);
+            this.attachmentInputStream3 = File.OpenRead(new FileInfo(Directory.GetCurrentDirectory() + "/src/extract_document.pdf").FullName);
         }
 
         override public void Execute()
@@ -53,7 +72,7 @@ namespace SDK.Examples
             signer1 = SignerBuilder.NewSignerWithEmail(email1)
                 .WithFirstName("John")
                     .WithLastName("Smith")
-                    .WithCustomId(SIGNER1ID)
+                    .WithCustomId(SIGNER1_ID)
                     .WithAttachmentRequirement(AttachmentRequirementBuilder.NewAttachmentRequirementWithName(NAME1)
                                                .WithDescription(DESCRIPTION1)
                                                .IsRequiredAttachment()
@@ -64,6 +83,7 @@ namespace SDK.Examples
             Signer signer2 = SignerBuilder.NewSignerWithEmail(email2)
                 .WithFirstName("Patty")
                     .WithLastName("Galant")
+                    .WithCustomId(SIGNER2_ID)
                     .WithAttachmentRequirement(AttachmentRequirementBuilder.NewAttachmentRequirementWithName(NAME2)
                                                .WithDescription(DESCRIPTION2)
                                                .Build())
@@ -73,15 +93,12 @@ namespace SDK.Examples
                                                .Build())
                     .Build();
 
-
-            Stream file = File.OpenRead(new FileInfo(Directory.GetCurrentDirectory() + "/src/document.pdf").FullName);
-
             DocumentPackage superDuperPackage = PackageBuilder.NewPackageNamed("AttachmentRequirementExample: " + DateTime.Now)
                 .DescribedAs("This is a package created using the e-SignLive SDK")
                     .WithSigner(signer1)
                     .WithSigner(signer2)
                     .WithDocument(DocumentBuilder.NewDocumentNamed("test document")
-                                  .FromStream(file, DocumentType.PDF)
+                                  .FromStream(fileStream1, DocumentType.PDF)
                                   .WithSignature(SignatureBuilder.SignatureFor(email1)
                                    .Build())
                                   .Build())
@@ -94,29 +111,60 @@ namespace SDK.Examples
             attachment1Id = retrievedPackage.Signers[email1].Attachments[NAME1].Id;
             signer1 = retrievedPackage.Signers[email1];
 
-            // Signer1 uploads required attachment
-            // Sender can accept/reject the uploaded attachment
+            signer1Attachments = retrievedPackage.Signers[email1].Attachments;
+            signer2Attachments = retrievedPackage.Signers[email2].Attachments;
 
-        }
+            signer1Att1 = signer1Attachments[NAME1];
+            signer2Att1 = signer2Attachments[NAME2];
+            signer2Att2 = signer2Attachments[NAME3];
 
-        // Sender rejects Signer1's uploaded attachment
-        public void RejectAttachment()
-        {
+            retrievedSigner1Att1RequirementStatus = signer1Att1.Status;
+            retrievedSigner2Att1RequirementStatus = signer2Att1.Status;
+            retrievedSigner2Att2RequirementStatus = signer2Att2.Status;
+
+            // Upload attachment for signer1
+
+            byte[] attachment1ForSigner1FileContent = new StreamDocumentSource(attachmentInputStream1).Content();
+            attachment1ForSigner1FileSize = attachment1ForSigner1FileContent.Length;
+            eslClient.UploadAttachment(PackageId, signer1Att1.Id, DocumentTypeUtility.NormalizeName (DocumentType.PDF, "The attachment1 for signer1"), attachment1ForSigner1FileContent, SIGNER1_ID);
+            eslClient.UploadAttachment(PackageId, signer2Att1.Id, DocumentTypeUtility.NormalizeName (DocumentType.PDF, "The attachment1 for signer2"), 
+                                       new StreamDocumentSource(attachmentInputStream2).Content(), SIGNER2_ID);
+            eslClient.UploadAttachment(PackageId, signer2Att2.Id, DocumentTypeUtility.NormalizeName (DocumentType.PDF, "The attachment2 for signer2"), 
+                                       new StreamDocumentSource(attachmentInputStream3).Content(), SIGNER2_ID);
+
+            // Sender rejects Signer1's uploaded attachment
             eslClient.AttachmentRequirementService.RejectAttachment(packageId, signer1, NAME1, REJECTION_COMMENT);
-            retrievedPackage = eslClient.GetPackage(packageId);
-        }
+            retrievedPackageAfterRejection = eslClient.GetPackage(packageId);
+            retrievedSigner1Att1RequirementStatusAfterRejection = retrievedPackageAfterRejection.Signers[email1].Attachments[NAME1].Status;
+            retrievedSigner1Att1RequirementSenderCommentAfterRejection = retrievedPackageAfterRejection.Signers[email1].Attachments[NAME1].SenderComment;
 
-        // Sender accepts Signer1's uploaded attachment
-        public void AcceptAttachment()
-        {
+            // Sender accepts Signer1's uploaded attachment
             eslClient.AttachmentRequirementService.AcceptAttachment(packageId, signer1, NAME1);
-            retrievedPackage = eslClient.GetPackage(packageId);
-        }
+            retrievedPackageAfterAccepting = eslClient.GetPackage(packageId);
 
-        // Sender downloads Signer1's attachment
-        public byte[] DownloadAttachment()
-        {
-            return eslClient.AttachmentRequirementService.DownloadAttachment(packageId, attachment1Id);
+            retrievedSigner1Att1RequirementStatusAfterAccepting = retrievedPackageAfterAccepting.Signers[email1].Attachments[NAME1].Status;
+            retrievedSigner1Att1RequirementSenderCommentAfterAccepting = retrievedPackageAfterAccepting.Signers[email1].Attachments[NAME1].SenderComment;
+
+            // Download signer1's attachment
+            byte[] downloadedAttachment = eslClient.AttachmentRequirementService.DownloadAttachment(packageId, attachment1Id);
+            System.IO.File.WriteAllBytes(DOWNLOADED_ATTACHMENT_PDF, downloadedAttachment);
+
+            // Download all attachments for the package
+            byte[] downloadedAllAttachmentsForPackage = eslClient.AttachmentRequirementService.DownloadAllAttachmentsForPackage(packageId);
+            System.IO.File.WriteAllBytes(DOWNLOADED_ALL_ATTACHMENTS_FOR_PACKAGE_ZIP, downloadedAllAttachmentsForPackage);
+
+            // Download all attachments for the signer1 in the package
+            byte[] downloadedAllAttachmentsForSigner1InPackage = eslClient.AttachmentRequirementService.DownloadAllAttachmentsForSignerInPackage(retrievedPackage, signer1);
+            System.IO.File.WriteAllBytes(DOWNLOADED_ALL_ATTACHMENTS_FOR_SIGNER1_IN_PACKAGE_ZIP, downloadedAllAttachmentsForSigner1InPackage);
+
+            // Download all attachments for the signer2 in the package
+            byte[] downloadedAllAttachmentsForSigner2InPackage = eslClient.AttachmentRequirementService.DownloadAllAttachmentsForSignerInPackage(retrievedPackage, signer2);
+            System.IO.File.WriteAllBytes(DOWNLOADED_ALL_ATTACHMENTS_FOR_SIGNER2_IN_PACKAGE_ZIP, downloadedAllAttachmentsForSigner2InPackage);
+
+            downloadedAttachemnt1 = new FileInfo(DOWNLOADED_ATTACHMENT_PDF);
+            downloadedAllAttachmentsForPackageZip = new ZipFile(DOWNLOADED_ALL_ATTACHMENTS_FOR_PACKAGE_ZIP);
+            downloadedAllAttachmentsForSigner1InPackageZip = new ZipFile(DOWNLOADED_ALL_ATTACHMENTS_FOR_SIGNER1_IN_PACKAGE_ZIP);
+            downloadedAllAttachmentsForSigner2InPackageZip = new ZipFile(DOWNLOADED_ALL_ATTACHMENTS_FOR_SIGNER2_IN_PACKAGE_ZIP);
         }
     }
 }

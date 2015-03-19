@@ -2,7 +2,7 @@ using System;
 
 namespace Silanis.ESL.SDK
 {
-	internal class DocumentTypeUtility
+	public class DocumentTypeUtility
 	{
 		public static string NormalizeName(DocumentType type, string name)
 		{

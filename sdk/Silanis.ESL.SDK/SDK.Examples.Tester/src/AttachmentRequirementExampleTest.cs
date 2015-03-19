@@ -8,14 +8,13 @@ using System.IO;
 using Silanis.ESL.SDK.Builder;
 using Silanis.ESL.SDK.Builder.Internal;
 using System.Text;
+using ICSharpCode.SharpZipLib.Zip;
 
 namespace SDK.Examples
 {
 	[TestFixture]
 	public class AttachmentRequirementExampleTest
     {
-		private RestClient client;
-		private UrlTemplate template;
 		private AttachmentRequirementExample example;
 
 		[Test]
@@ -25,119 +24,34 @@ namespace SDK.Examples
 			example.Run();
 
 			// Asserts the attachment requirements for each signer is set correctly.
-			DocumentPackage retrievedPackage = example.RetrievedPackage;
-			IDictionary<string, AttachmentRequirement> signer1Attachments = retrievedPackage.Signers[example.Email1].Attachments;
-			IDictionary<string, AttachmentRequirement> signer2Attachments = retrievedPackage.Signers[example.Email2].Attachments;
+            Assert.AreEqual(1, example.signer1Attachments.Count);
+            Assert.AreEqual(example.NAME1, example.signer1Att1.Name);
+            Assert.AreEqual(example.DESCRIPTION1, example.signer1Att1.Description);
+            Assert.AreEqual(true, example.signer1Att1.Required);
+            Assert.AreEqual(RequirementStatus.INCOMPLETE.ToString(), example.retrievedSigner1Att1RequirementStatus.ToString());
+                               
+            Assert.AreEqual(2, example.signer2Attachments.Count);
+            Assert.AreEqual(example.NAME2, example.signer2Att1.Name);
+            Assert.AreEqual(example.DESCRIPTION2, example.signer2Att1.Description);
+            Assert.AreEqual(false, example.signer2Att1.Required);
+            Assert.AreEqual(RequirementStatus.INCOMPLETE.ToString(), example.retrievedSigner2Att1RequirementStatus.ToString());
+            Assert.AreEqual(example.NAME3, example.signer2Att2.Name);
+            Assert.AreEqual(example.DESCRIPTION3, example.signer2Att2.Description);
+            Assert.AreEqual(true, example.signer2Att2.Required);
+            Assert.AreEqual(RequirementStatus.INCOMPLETE.ToString(), example.retrievedSigner2Att2RequirementStatus.ToString());
 
-			Assert.AreEqual(signer1Attachments.Count, 1);
-			AttachmentRequirement signer1Att1 = signer1Attachments[example.NAME1];
-			Assert.AreEqual(signer1Att1.Name, example.NAME1);
-			Assert.AreEqual(signer1Att1.Description, example.DESCRIPTION1);
-			Assert.AreEqual(signer1Att1.Required, true);
-			Assert.AreEqual(signer1Att1.Status.ToString(), RequirementStatus.INCOMPLETE.ToString());
+            Assert.AreEqual(RequirementStatus.REJECTED.ToString(), example.retrievedSigner1Att1RequirementStatusAfterRejection.ToString());
+            Assert.AreEqual(example.REJECTION_COMMENT, example.retrievedSigner1Att1RequirementSenderCommentAfterRejection);
 
-			Assert.AreEqual(signer2Attachments.Count, 2);
-			AttachmentRequirement signer2Att1 = signer2Attachments[example.NAME2];
-			AttachmentRequirement signer2Att2 = signer2Attachments[example.NAME3];
-			Assert.AreEqual(signer2Att1.Name, example.NAME2);
-			Assert.AreEqual(signer2Att1.Description, example.DESCRIPTION2);
-			Assert.AreEqual(signer2Att1.Required, false);
-			Assert.AreEqual(signer2Att1.Status.ToString(), RequirementStatus.INCOMPLETE.ToString());
-			Assert.AreEqual(signer2Att2.Name, example.NAME3);
-			Assert.AreEqual(signer2Att2.Description, example.DESCRIPTION3);
-			Assert.AreEqual(signer2Att2.Required, true);
-			Assert.AreEqual(signer2Att2.Status.ToString(), RequirementStatus.INCOMPLETE.ToString());
+            Assert.AreEqual(RequirementStatus.COMPLETE.ToString(), example.retrievedSigner1Att1RequirementStatusAfterAccepting.ToString());
+            Assert.AreEqual("", example.retrievedSigner1Att1RequirementSenderCommentAfterAccepting);
 
-			// Upload attachment for signer1
-			string signerAuthenticationToken = example.EslClient.AuthenticationTokenService.CreateSignerAuthenticationToken(example.PackageId, example.SIGNER1ID);
-			AuthenticationClient authenticationClient = new AuthenticationClient(Props.GetInstance().Get("webpage.url"));
-			String sessionIdForSigner = authenticationClient.GetSessionIdForSignerAuthenticationToken(signerAuthenticationToken);
+            Assert.AreEqual(example.DOWNLOADED_ATTACHMENT_PDF, example.downloadedAttachemnt1.Name);
+            Assert.AreEqual(example.attachment1ForSigner1FileSize, example.downloadedAttachemnt1.Length);
 
-			client = new RestClient("");
-			template = new UrlTemplate(Props.GetInstance().Get("api.url"));
-
-			Stream fileStream1 = File.OpenRead(new FileInfo(Directory.GetCurrentDirectory() + "/src/document.pdf").FullName);
-			uploadAttachment(example.PackageId, signer1Att1.Id, "Test Attachment", fileStream1, sessionIdForSigner);
-
-			// Reject signer1's attachment
-			example.RejectAttachment();
-			signer1Att1 = retrievedPackage.Signers[example.Email1].Attachments[example.NAME1];
-			Assert.AreEqual(signer1Att1.Status.ToString(), RequirementStatus.REJECTED.ToString());
-			Assert.AreEqual(signer1Att1.SenderComment, example.REJECTION_COMMENT);
-
-			// Accept signer1's attachment
-			example.AcceptAttachment();
-			Assert.AreEqual(signer1Att1.Status.ToString(), RequirementStatus.COMPLETE.ToString());
-			Assert.AreEqual(signer1Att1.SenderComment, "");
-
-			// Download signer1's attachment
-			byte[] downloadedAttachment = example.DownloadAttachment();
-			System.IO.File.WriteAllBytes("/dev/null", downloadedAttachment);
-		}
-
-		private void uploadAttachment(PackageId packageId, string attachmentId, string filename, Stream fileStream, string sessionId)
-		{
-			string path = template.UrlFor(UrlTemplate.ATTACHMENT_REQUIREMENT_PATH)
-				.Replace("{packageId}", packageId.Id)
-				.Replace("{attachmentId}", attachmentId)
-				.Build();
-			byte[] fileBytes = new StreamDocumentSource(fileStream).Content();
-			string fileName = DocumentTypeUtility.NormalizeName (DocumentType.PDF, filename);
-			string boundary = GenerateBoundary();
-
-			byte[] bytes = new byte[fileName.Length * sizeof(char)];
-			System.Buffer.BlockCopy(fileName.ToCharArray(), 0, bytes, 0, bytes.Length);
-
-			byte[] content = CreateMultipartContent(fileName, fileBytes, bytes, boundary);
-
-			try {
-				client.PostMultipartFile(path, content, boundary, sessionId, Converter.ToString(bytes));
-			} catch (Exception e) {
-				throw new EslException ("Could not upload attachment for signer." + " Exception: " + e.Message, e);
-			}
-		}
-
-		private string GenerateBoundary ()
-		{
-			var chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-			var stringChars = new char[16];
-			var random = new Random ();
-
-			for (int i = 0; i < stringChars.Length; i++) {
-				stringChars [i] = chars [random.Next (chars.Length)];
-			}
-
-			return new String (stringChars);
-		}  
-
-		private byte[] CreateMultipartContent (string fileName, byte[] fileBytes, byte[] payloadBytes, string boundary)
-		{
-
-			Encoding encoding = Encoding.UTF8;
-			Stream formDataStream = new MemoryStream ();
-
-			string header = string.Format ("--{0}\r\nContent-Disposition: form-data; name=\"{1}\"; filename=\"{2}\"\r\n\r\n",
-				boundary, "payload", "paylaod");
-			formDataStream.Write (encoding.GetBytes (header), 0, encoding.GetByteCount (header));
-			formDataStream.Write (payloadBytes, 0, payloadBytes.Length);
-
-			formDataStream.Write (encoding.GetBytes ("\r\n"), 0, encoding.GetByteCount ("\r\n"));
-
-			string data = string.Format ("--{0}\r\nContent-Disposition: form-data; name=\"{1}\"; filename=\"{2}\"\r\nContent-Type: {3}\r\n\r\n",
-				boundary, "file", fileName, MimeTypeUtil.GetMIMEType (fileName));
-			formDataStream.Write (encoding.GetBytes (data), 0, encoding.GetByteCount (data));
-			formDataStream.Write (fileBytes, 0, fileBytes.Length);
-
-			string footer = "\r\n--" + boundary + "--\r\n";
-			formDataStream.Write (encoding.GetBytes (footer), 0, encoding.GetByteCount (footer));
-
-			//Dump the stream
-			formDataStream.Position = 0;
-			byte[] formData = new byte[formDataStream.Length];
-			formDataStream.Read (formData, 0, formData.Length);
-			formDataStream.Close ();
-
-			return formData;
+            Assert.AreEqual(3, example.downloadedAllAttachmentsForPackageZip.Size);
+            Assert.AreEqual(1, example.downloadedAllAttachmentsForSigner1InPackageZip.Size);
+            Assert.AreEqual(2, example.downloadedAllAttachmentsForSigner2InPackageZip.Size);
 		}
     }
 }

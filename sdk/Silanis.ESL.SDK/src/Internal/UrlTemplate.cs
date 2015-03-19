@@ -123,6 +123,8 @@ namespace Silanis.ESL.SDK.Internal
 
 		// AttachmentRequirement Service
 		public static readonly string ATTACHMENT_REQUIREMENT_PATH = "/packages/{packageId}/attachment/{attachmentId}";
+        public static readonly string ALL_ATTACHMENTS_PATH = "/packages/{packageId}/attachment/zip";
+        public static readonly string ALL_ATTACHMENTS_FOR_ROLE_PATH = "/packages/{packageId}/attachment/zip/{roleId}";
 
         // Layout Service
         public static readonly string LAYOUT_PATH = "/layouts";

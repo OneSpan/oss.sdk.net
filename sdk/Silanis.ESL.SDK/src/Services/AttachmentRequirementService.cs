@@ -2,6 +2,7 @@ using System;
 using Silanis.ESL.SDK.Internal;
 using Newtonsoft.Json;
 using Silanis.ESL.API;
+using System.IO;
 
 namespace Silanis.ESL.SDK
 {
@@ -57,8 +58,35 @@ namespace Silanis.ESL.SDK
 		/// <param name="attachmentId">Attachment identifier.</param>
 		public byte[] DownloadAttachment(PackageId packageId, String attachmentId)
 		{
-            return apiClient.DownloadAttachments(packageId.Id, attachmentId);
+            return apiClient.DownloadAttachment(packageId.Id, attachmentId);
 		}
+
+        /// <summary>
+        /// Sender downloads the attachment.
+        /// </summary>
+        /// <returns>The attachment.</returns>
+        /// <param name="packageId">Package identifier.</param>
+        /// <param name="attachmentId">Attachment identifier.</param>
+        public byte[] DownloadAllAttachmentsForPackage(PackageId packageId)
+        {
+            return apiClient.DownloadAllAttachmentsForPackage(packageId.Id);
+        }
+
+        /// <summary>
+        /// Sender downloads the attachment.
+        /// </summary>
+        /// <returns>The attachment.</returns>
+        /// <param name="packageId">Package identifier.</param>
+        /// <param name="attachmentId">Attachment identifier.</param>
+        public byte[] DownloadAllAttachmentsForSignerInPackage(DocumentPackage sdkPackage, Signer signer)
+        {
+            return apiClient.DownloadAllAttachmentsForSignerInPackage(sdkPackage, signer);
+        }
+
+        public void UploadAttachment(PackageId packageId, string attachmentId, string fileName, byte[] fileBytes, string signerSessionId)
+        {
+            apiClient.UploadAttachment(packageId, attachmentId, fileName, fileBytes, signerSessionId);
+        }
     }
 }
 

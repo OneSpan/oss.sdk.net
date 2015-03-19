@@ -557,32 +557,32 @@ namespace Silanis.ESL.SDK.Services
             }
         }
 
-        private byte[] CreateMultipartContent(string fileName, byte[] fileBytes, byte[] payloadBytes, string boundary)
+        private byte[] CreateMultipartContent (string fileName, byte[] fileBytes, byte[] payloadBytes, string boundary)
         {
 
             Encoding encoding = Encoding.UTF8;
-            Stream formDataStream = new MemoryStream();
+            Stream formDataStream = new MemoryStream ();
 
-            string header = string.Format("--{0}\r\nContent-Disposition: form-data; name=\"{1}\"; filename=\"{2}\"\r\n\r\n",
-                                           boundary, "payload", "payload");
-            formDataStream.Write(encoding.GetBytes(header), 0, encoding.GetByteCount(header));
-            formDataStream.Write(payloadBytes, 0, payloadBytes.Length);
+            string header = string.Format ("--{0}\r\nContent-Disposition: form-data; name=\"{1}\"; filename=\"{2}\"\r\n\r\n",
+                                           boundary, "payload", "paylaod");
+            formDataStream.Write (encoding.GetBytes (header), 0, encoding.GetByteCount (header));
+            formDataStream.Write (payloadBytes, 0, payloadBytes.Length);
 
-            formDataStream.Write(encoding.GetBytes("\r\n"), 0, encoding.GetByteCount("\r\n"));
+            formDataStream.Write (encoding.GetBytes ("\r\n"), 0, encoding.GetByteCount ("\r\n"));
 
-            string data = string.Format("--{0}\r\nContent-Disposition: form-data; name=\"{1}\"; \r\nContent-Type: {2}\r\n\r\n",
-                                        boundary, "file", MimeTypeUtil.GetMIMEType(fileName));
-            formDataStream.Write(encoding.GetBytes(data), 0, encoding.GetByteCount(data));
-            formDataStream.Write(fileBytes, 0, fileBytes.Length);
+            string data = string.Format ("--{0}\r\nContent-Disposition: form-data; name=\"{1}\"; filename=\"{2}\"\r\nContent-Type: {3}\r\n\r\n",
+                                         boundary, "file", fileName, MimeTypeUtil.GetMIMEType (fileName));
+            formDataStream.Write (encoding.GetBytes (data), 0, encoding.GetByteCount (data));
+            formDataStream.Write (fileBytes, 0, fileBytes.Length);
 
             string footer = "\r\n--" + boundary + "--\r\n";
-            formDataStream.Write(encoding.GetBytes(footer), 0, encoding.GetByteCount(footer));
+            formDataStream.Write (encoding.GetBytes (footer), 0, encoding.GetByteCount (footer));
 
             //Dump the stream
             formDataStream.Position = 0;
             byte[] formData = new byte[formDataStream.Length];
-            formDataStream.Read(formData, 0, formData.Length);
-            formDataStream.Close();
+            formDataStream.Read (formData, 0, formData.Length);
+            formDataStream.Close ();
 
             return formData;
         }

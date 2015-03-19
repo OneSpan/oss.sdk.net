@@ -7,6 +7,9 @@ using Newtonsoft.Json;
 using System.Reflection;
 using Silanis.ESL.SDK;
 using System.Collections.Generic;
+using System.IO;
+using System.Text;
+using Silanis.ESL.SDK.Builder.Internal;
 
 namespace Silanis.ESL.SDK
 {
@@ -18,6 +21,7 @@ namespace Silanis.ESL.SDK
 	{
 
 		private string baseUrl;
+        private string webpageUrl;
 		private PackageService packageService;
 		private SessionService sessionService;
 		private FieldSummaryService fieldSummaryService;
@@ -33,6 +37,7 @@ namespace Silanis.ESL.SDK
 		private AttachmentRequirementService attachmentRequirementService;
         private LayoutService layoutService;
         private QRCodeService qrCodeService;
+        private AuthenticationService authenticationService;
         
         private JsonSerializerSettings jsonSerializerSettings;
 
@@ -47,6 +52,30 @@ namespace Silanis.ESL.SDK
 			Asserts.NotEmptyOrNull (apiKey, "apiKey");
 			Asserts.NotEmptyOrNull (baseUrl, "baseUrl");
 			this.baseUrl = AppendServicePath (baseUrl);
+            webpageUrl = AppendServicePath (baseUrl);
+            if (webpageUrl.EndsWith("/api")) {
+                webpageUrl = webpageUrl.Remove(webpageUrl.Length - 4);
+            }
+
+            configureJsonSerializationSettings();
+
+            RestClient restClient = new RestClient(apiKey);
+            init(restClient, apiKey);
+        }
+
+        /// <summary>
+        /// EslClient constructor.
+        /// Initiates service classes that can be used by the client.
+        /// </summary>
+        /// <param name="apiKey">The client's api key.</param>
+        /// <param name="baseUrl">The staging or production url.</param>
+        public EslClient (string apiKey, string baseUrl, string webpageUrl)
+        {
+            Asserts.NotEmptyOrNull (apiKey, "apiKey");
+            Asserts.NotEmptyOrNull (baseUrl, "baseUrl");
+            Asserts.NotEmptyOrNull (webpageUrl, "webpageUrl");
+            this.baseUrl = AppendServicePath (baseUrl);
+            webpageUrl = AppendServicePath (webpageUrl);
 
             configureJsonSerializationSettings();
 
@@ -107,6 +136,7 @@ namespace Silanis.ESL.SDK
             attachmentRequirementService = new AttachmentRequirementService(new AttachmentRequirementApiClient(restClient, this.baseUrl, jsonSerializerSettings));
             layoutService = new LayoutService(new LayoutApiClient(restClient, this.baseUrl, jsonSerializerSettings));
             qrCodeService = new QRCodeService(new QRCodeApiClient(restClient, this.baseUrl, jsonSerializerSettings));
+            authenticationService = new AuthenticationService(this.webpageUrl);
         }
 
         private void configureJsonSerializationSettings()
@@ -368,6 +398,13 @@ namespace Silanis.ESL.SDK
 
 			return UploadDocument(document, documentPackage);
 		}
+
+        public void UploadAttachment(PackageId packageId, string attachmentId, string filename, byte[] fileBytes, string signerId) {
+            string signerAuthenticationToken = authenticationTokenService.CreateSignerAuthenticationToken(packageId, signerId);
+            string signerSessionId = authenticationService.GetSessionIdForSignerAuthenticationToken(signerAuthenticationToken);
+
+            attachmentRequirementService.UploadAttachment(packageId, attachmentId, filename, fileBytes, signerSessionId);
+        }
         
         /// <summary>
         /// BaseUrl property
