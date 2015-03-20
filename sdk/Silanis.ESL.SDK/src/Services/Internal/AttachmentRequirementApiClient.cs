@@ -20,7 +20,8 @@ namespace Silanis.ESL.SDK
             template = new UrlTemplate (apiUrl);            
             this.jsonSettings = jsonSettings;
         }
-        
+
+        [Obsolete("AcceptAttachment() in AttachmentRequirementApiClient is deprecated, please use AcceptAttachment() in AttachmentRequirementService instead.")]
         public void AcceptAttachment(string packageId, Role role)
         {
             string path = template.UrlFor(UrlTemplate.UPDATE_SIGNER_PATH)
@@ -42,7 +43,8 @@ namespace Silanis.ESL.SDK
                 throw new EslException("Could not accept attachment for signer." + " Exception: " + e.Message,e);
             }
         }
-        
+
+        [Obsolete("RejectAttachment() in AttachmentRequirementApiClient is deprecated, please use RejectAttachment() in AttachmentRequirementService instead.")]
         public void RejectAttachment(string packageId, Role role)
         {
             string path = template.UrlFor(UrlTemplate.UPDATE_SIGNER_PATH)

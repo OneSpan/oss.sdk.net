@@ -133,7 +133,7 @@ namespace Silanis.ESL.SDK
             reminderService = new ReminderService(new ReminderApiClient(restClient, this.baseUrl, jsonSerializerSettings));
             templateService = new TemplateService(new TemplateApiClient(restClient, this.baseUrl, jsonSerializerSettings), packageService);
             authenticationTokenService = new AuthenticationTokenService(restClient, this.baseUrl); 
-            attachmentRequirementService = new AttachmentRequirementService(new AttachmentRequirementApiClient(restClient, this.baseUrl, jsonSerializerSettings));
+            attachmentRequirementService = new AttachmentRequirementService(restClient, this.baseUrl, jsonSerializerSettings);
             layoutService = new LayoutService(new LayoutApiClient(restClient, this.baseUrl, jsonSerializerSettings));
             qrCodeService = new QRCodeService(new QRCodeApiClient(restClient, this.baseUrl, jsonSerializerSettings));
             authenticationService = new AuthenticationService(this.webpageUrl);

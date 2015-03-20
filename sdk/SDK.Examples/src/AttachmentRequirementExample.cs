@@ -126,8 +126,8 @@ namespace SDK.Examples
 
             byte[] attachment1ForSigner1FileContent = new StreamDocumentSource(attachmentInputStream1).Content();
             attachment1ForSigner1FileSize = attachment1ForSigner1FileContent.Length;
-            eslClient.UploadAttachment(PackageId, signer1Att1.Id, DocumentTypeUtility.NormalizeName (DocumentType.PDF, "The attachment1 for signer1"), attachment1ForSigner1FileContent, SIGNER1_ID);
-            eslClient.UploadAttachment(PackageId, signer2Att1.Id, DocumentTypeUtility.NormalizeName (DocumentType.PDF, "The attachment1 for signer2"), 
+            eslClient.UploadAttachment(packageId, signer1Att1.Id, DocumentTypeUtility.NormalizeName (DocumentType.PDF, "The attachment1 for signer1"), attachment1ForSigner1FileContent, SIGNER1_ID);
+            eslClient.UploadAttachment(packageId, signer2Att1.Id, DocumentTypeUtility.NormalizeName (DocumentType.PDF, "The attachment1 for signer2"), 
                                        new StreamDocumentSource(attachmentInputStream2).Content(), SIGNER2_ID);
             eslClient.UploadAttachment(PackageId, signer2Att2.Id, DocumentTypeUtility.NormalizeName (DocumentType.PDF, "The attachment2 for signer2"), 
                                        new StreamDocumentSource(attachmentInputStream3).Content(), SIGNER2_ID);

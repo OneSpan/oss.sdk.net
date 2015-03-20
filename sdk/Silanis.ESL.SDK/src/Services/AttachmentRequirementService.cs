@@ -3,6 +3,7 @@ using Silanis.ESL.SDK.Internal;
 using Newtonsoft.Json;
 using Silanis.ESL.API;
 using System.IO;
+using Silanis.ESL.SDK.Services;
 
 namespace Silanis.ESL.SDK
 {
@@ -12,10 +13,12 @@ namespace Silanis.ESL.SDK
     public class AttachmentRequirementService
     {
         private AttachmentRequirementApiClient apiClient;
+        private PackageService packageService;
 
-		internal AttachmentRequirementService(AttachmentRequirementApiClient apiClient)
+        internal AttachmentRequirementService(RestClient restClient, string baseUrl, JsonSerializerSettings settings)
         {
-            this.apiClient = apiClient;
+            packageService = new PackageService(restClient, baseUrl, settings);
+            apiClient = new AttachmentRequirementApiClient(restClient, baseUrl, settings);
         }
 
 		/// <summary>
@@ -29,9 +32,7 @@ namespace Silanis.ESL.SDK
             signer.Attachments[attachmentId].SenderComment = "";
             signer.Attachments[attachmentId].Status = Silanis.ESL.SDK.RequirementStatus.COMPLETE;
             
-            Role apiRole = new SignerConverter(signer).ToAPIRole(System.Guid.NewGuid().ToString());
-            
-            apiClient.AcceptAttachment(packageId.Id, apiRole);
+            packageService.UpdateSigner(packageId, signer);
         }
 
 		/// <summary>
@@ -45,9 +46,8 @@ namespace Silanis.ESL.SDK
         {
             signer.Attachments[attachmentId].SenderComment = senderComment;
             signer.Attachments[attachmentId].Status = RequirementStatus.REJECTED;
-            Role apiRole = new SignerConverter(signer).ToAPIRole(System.Guid.NewGuid().ToString());
             
-            apiClient.RejectAttachment(packageId.Id, apiRole);
+            packageService.UpdateSigner(packageId, signer);
         }
 
 		/// <summary>
