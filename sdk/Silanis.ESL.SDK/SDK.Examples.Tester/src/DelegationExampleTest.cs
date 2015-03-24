@@ -20,27 +20,27 @@ namespace SDK.Examples
 
             Assert.AreEqual(3, example.delegationUserListAfterAdding.Count);
 
-            Assert.IsTrue(assertContainDelegationUser(example.delegationUserListAfterAdding, example.delegationUser1));
-            Assert.IsTrue(assertContainDelegationUser(example.delegationUserListAfterAdding, example.delegationUser2));
-            Assert.IsTrue(assertContainDelegationUser(example.delegationUserListAfterAdding, example.delegationUser3));
+            Assert.IsTrue(AssertContainDelegationUser(example.delegationUserListAfterAdding, example.delegationUser1));
+            Assert.IsTrue(AssertContainDelegationUser(example.delegationUserListAfterAdding, example.delegationUser2));
+            Assert.IsTrue(AssertContainDelegationUser(example.delegationUserListAfterAdding, example.delegationUser3));
 
             Assert.AreEqual(2, example.delegationUserListAfterRemoving.Count);
-            Assert.IsTrue(assertContainDelegationUser(example.delegationUserListAfterRemoving, example.delegationUser1));
-            Assert.IsFalse(assertContainDelegationUser(example.delegationUserListAfterRemoving, example.delegationUser2));
-            Assert.IsTrue(assertContainDelegationUser(example.delegationUserListAfterRemoving, example.delegationUser3));
+            Assert.IsTrue(AssertContainDelegationUser(example.delegationUserListAfterRemoving, example.delegationUser1));
+            Assert.IsFalse(AssertContainDelegationUser(example.delegationUserListAfterRemoving, example.delegationUser2));
+            Assert.IsTrue(AssertContainDelegationUser(example.delegationUserListAfterRemoving, example.delegationUser3));
 
             Assert.AreEqual(6, example.delegationUserListAfterUpdating.Count);
-            Assert.IsTrue(assertContainDelegationUser(example.delegationUserListAfterUpdating, example.delegationUser4));
-            Assert.IsTrue(assertContainDelegationUser(example.delegationUserListAfterUpdating, example.delegationUser5));
-            Assert.IsTrue(assertContainDelegationUser(example.delegationUserListAfterUpdating, example.delegationUser6));
-            Assert.IsTrue(assertContainDelegationUser(example.delegationUserListAfterUpdating, example.delegationUser7));
-            Assert.IsTrue(assertContainDelegationUser(example.delegationUserListAfterUpdating, example.delegationUser8));
-            Assert.IsTrue(assertContainDelegationUser(example.delegationUserListAfterUpdating, example.delegationUser9));
+            Assert.IsTrue(AssertContainDelegationUser(example.delegationUserListAfterUpdating, example.delegationUser4));
+            Assert.IsTrue(AssertContainDelegationUser(example.delegationUserListAfterUpdating, example.delegationUser5));
+            Assert.IsTrue(AssertContainDelegationUser(example.delegationUserListAfterUpdating, example.delegationUser6));
+            Assert.IsTrue(AssertContainDelegationUser(example.delegationUserListAfterUpdating, example.delegationUser7));
+            Assert.IsTrue(AssertContainDelegationUser(example.delegationUserListAfterUpdating, example.delegationUser8));
+            Assert.IsTrue(AssertContainDelegationUser(example.delegationUserListAfterUpdating, example.delegationUser9));
 
             Assert.AreEqual(0, example.delegationUserListAfterClearing.Count);
         }
 
-        private bool assertContainDelegationUser(IList<DelegationUser> delegationUserList, DelegationUser delegationUser) 
+        private bool AssertContainDelegationUser(IList<DelegationUser> delegationUserList, DelegationUser delegationUser) 
         {
             foreach(DelegationUser delegationUserToCompare in delegationUserList) 
             {

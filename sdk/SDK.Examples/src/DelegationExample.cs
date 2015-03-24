@@ -42,16 +42,16 @@ namespace SDK.Examples
 
         override public void Execute()
         {
-            AccountMember ownerMember = getAccountMember(ownerEmail, "firstName", "lastName", "company", "title", "language", "phoneNumber");
-            AccountMember accountMember1 = getAccountMember(email1, "firstName1", "lastName", "company1", "title1", "language1", "phoneNumber1");
-            AccountMember accountMember2 = getAccountMember(email2, "firstName2", "lastName2", "company2", "title2", "language2", "phoneNumber2");
-            AccountMember accountMember3 = getAccountMember(email3, "firstName3", "lastName3", "company3", "title3", "language3", "phoneNumber3");
-            AccountMember accountMember4 = getAccountMember(email4, "firstName4", "lastName4", "company4", "title4", "language4", "phoneNumber4");
-            AccountMember accountMember5 = getAccountMember(email5, "firstName5", "lastName5", "company5", "title5", "language5", "phoneNumber5");
-            AccountMember accountMember6 = getAccountMember(email6, "firstName6", "lastName6", "company6", "title6", "language6", "phoneNumber6");
-            AccountMember accountMember7 = getAccountMember(email7, "firstName7", "lastName7", "company7", "title7", "language7", "phoneNumber7");
-            AccountMember accountMember8 = getAccountMember(email8, "firstName8", "lastName8", "company8", "title8", "language8", "phoneNumber8");
-            AccountMember accountMember9 = getAccountMember(email9, "firstName9", "lastName9", "company9", "title9", "language9", "phoneNumber9");
+            AccountMember ownerMember = GetAccountMember(ownerEmail, "firstName", "lastName", "company", "title", "language", "phoneNumber");
+            AccountMember accountMember1 = GetAccountMember(email1, "firstName1", "lastName", "company1", "title1", "language1", "phoneNumber1");
+            AccountMember accountMember2 = GetAccountMember(email2, "firstName2", "lastName2", "company2", "title2", "language2", "phoneNumber2");
+            AccountMember accountMember3 = GetAccountMember(email3, "firstName3", "lastName3", "company3", "title3", "language3", "phoneNumber3");
+            AccountMember accountMember4 = GetAccountMember(email4, "firstName4", "lastName4", "company4", "title4", "language4", "phoneNumber4");
+            AccountMember accountMember5 = GetAccountMember(email5, "firstName5", "lastName5", "company5", "title5", "language5", "phoneNumber5");
+            AccountMember accountMember6 = GetAccountMember(email6, "firstName6", "lastName6", "company6", "title6", "language6", "phoneNumber6");
+            AccountMember accountMember7 = GetAccountMember(email7, "firstName7", "lastName7", "company7", "title7", "language7", "phoneNumber7");
+            AccountMember accountMember8 = GetAccountMember(email8, "firstName8", "lastName8", "company8", "title8", "language8", "phoneNumber8");
+            AccountMember accountMember9 = GetAccountMember(email9, "firstName9", "lastName9", "company9", "title9", "language9", "phoneNumber9");
 
             Sender createdOwnerMember = eslClient.AccountService.InviteUser(ownerMember);
             Sender createdSender1 = eslClient.AccountService.InviteUser(accountMember1);
@@ -110,7 +110,8 @@ namespace SDK.Examples
             delegationUserListAfterClearing = eslClient.AccountService.GetDelegates(createdOwnerMember.Id);
         }
 
-        private AccountMember getAccountMember(string email, string firstName, string lastName, string company, string title, string language, string phoneNumber) {
+        private AccountMember GetAccountMember(string email, string firstName, string lastName, string company, string title, string language, string phoneNumber) 
+        {
             return AccountMemberBuilder.NewAccountMember(email)
                 .WithFirstName(firstName)
                 .WithLastName(lastName)
