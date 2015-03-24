@@ -104,6 +104,10 @@ namespace Silanis.ESL.SDK.Internal
         public static readonly string NOTARY_JOURNAL_CSV_PATH = "/user/{userId}/journal/download";
         public static readonly string NOTARY_JOURNAL_LIST_PATH = "/user/{userId}/journal?to={to}&from={from}&dir={dir}";
 
+        // Delegation Service
+        public static readonly string DELEGATES_PATH = "/account/senders/{senderId}/delegates";
+        public static readonly string DELEGATE_ID_PATH = "/account/senders/{senderId}/delegates/{delegateId}";
+
         //Authentication Token Services
         public static readonly string ESL_AUTHENTICATION_PATH = "/auth";
         public static readonly string USER_AUTHENTICATION_TOKEN_PATH = "/authenticationTokens";

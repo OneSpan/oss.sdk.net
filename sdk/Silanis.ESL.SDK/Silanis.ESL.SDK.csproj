@@ -356,6 +356,10 @@
     <Compile Include="src\Visibility.cs" />
     <Compile Include="src\Internal\Conversion\VisibilityConverter.cs" />
     <Compile Include="src\Internal\VersionUtil.cs" />
+    <Compile Include="src\Models\DelegationUser.cs" />
+    <Compile Include="src\DelegationUser.cs" />
+    <Compile Include="src\Builder\DelegationUserBuilder.cs" />
+    <Compile Include="src\Internal\Conversion\DelegationUserConverter.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSHARP.Targets" />
   <ProjectExtensions>

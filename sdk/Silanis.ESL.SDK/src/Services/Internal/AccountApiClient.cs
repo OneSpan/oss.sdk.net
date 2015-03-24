@@ -2,6 +2,7 @@ using System;
 using Silanis.ESL.SDK.Internal;
 using Newtonsoft.Json;
 using System.Collections.Generic;
+using Silanis.ESL.API;
 
 namespace Silanis.ESL.SDK
 {
@@ -117,6 +118,90 @@ namespace Silanis.ESL.SDK
             }
             catch (Exception e) {
                 throw new EslException("Failed to retrieve Sender from Account.\t" + " Exception: " + e.Message, e);
+            }
+        }
+
+        public IList<Silanis.ESL.API.DelegationUser> GetDelegates(string senderId) {
+            string path = template.UrlFor(UrlTemplate.DELEGATES_PATH)
+                .Replace("{senderId}", senderId)
+                .Build();
+
+            try {
+                string stringResponse = restClient.Get(path);
+                return JsonConvert.DeserializeObject<IList<Silanis.ESL.API.DelegationUser>>(stringResponse, jsonSettings);
+            }
+            catch (EslServerException e) {
+                    throw new EslServerException("Failed to retrieve delegate users from Sender.\t" + " Exception: " + e.Message, e.ServerError, e);
+            }
+            catch (Exception e) {
+                    throw new EslException("Failed to retrieve delegate users from Sender.\t" + " Exception: " + e.Message, e);
+            }
+
+        }
+
+        public void UpdateDelegates(string senderId, List<string> delegateIds) {
+            string path = template.UrlFor(UrlTemplate.DELEGATES_PATH)
+                .Replace("{senderId}", senderId)
+                .Build();
+
+            try {
+                string json = JsonConvert.SerializeObject(delegateIds, jsonSettings);
+                restClient.Put(path, json);
+            }
+
+            catch (EslServerException e) {
+                throw new EslServerException("Failed to update delegates of the Sender.\t" + " Exception: " + e.Message, e.ServerError, e);
+            }
+            catch (Exception e) {
+                throw new EslException("Failed to update delegates of the Sender.\t" + " Exception: " + e.Message, e);
+            }
+        }
+
+        public void AddDelegate(string senderId, Silanis.ESL.API.DelegationUser delegationUser) {
+            string path = template.UrlFor(UrlTemplate.DELEGATE_ID_PATH)
+                .Replace("{senderId}", senderId)
+                .Replace("{delegateId}", delegationUser.Id)
+                .Build();
+            try {
+                string json = JsonConvert.SerializeObject(delegationUser, jsonSettings);
+                restClient.Post(path, json);
+            }
+            catch (EslServerException e) {
+                throw new EslServerException("Failed to add delegate into the sender.\t" + " Exception: " + e.Message, e.ServerError, e);
+            }
+            catch (Exception e) {
+                throw new EslException("Failed to add delegate into the sender.\t" + " Exception: " + e.Message, e);
+            }
+        }
+
+        public void RemoveDelegate(string senderId, string delegateId) {
+            string path = template.UrlFor(UrlTemplate.DELEGATE_ID_PATH)
+                .Replace("{senderId}", senderId)
+                .Replace("{delegateId}", delegateId)
+                .Build();
+            try {
+                restClient.Delete(path);
+            }
+            catch (EslServerException e) {
+                throw new EslServerException("Failed to remove delegate from the sender.\t" + " Exception: " + e.Message, e.ServerError, e);
+            }
+            catch (Exception e) {
+                throw new EslException("Failed to remove delegate from the sender.\t" + " Exception: " + e.Message, e);
+            }
+        }
+
+        public void ClearDelegates(string senderId) {
+            string path = template.UrlFor(UrlTemplate.DELEGATES_PATH)
+                .Replace("{senderId}", senderId)
+                .Build();
+            try {
+                restClient.Delete(path);
+            } 
+            catch (EslServerException e) {
+                throw new EslServerException("Failed to clear all delegates from the sender.\t" + " Exception: " + e.Message, e.ServerError, e);
+            }
+            catch (Exception e) {
+                throw new EslException("Failed to clear all delegates from the sender.\t" + " Exception: " + e.Message, e);
             }
         }
 

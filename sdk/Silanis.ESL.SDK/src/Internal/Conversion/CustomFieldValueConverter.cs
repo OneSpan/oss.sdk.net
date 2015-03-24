@@ -3,7 +3,7 @@ using Silanis.ESL.SDK.Builder;
 
 namespace Silanis.ESL.SDK
 {
-    public class CustomFieldValueConverter
+    internal class CustomFieldValueConverter
     {
         private Silanis.ESL.SDK.CustomFieldValue sdkCustomFieldValue = null;
         private Silanis.ESL.API.UserCustomField apiUserCustomField = null;

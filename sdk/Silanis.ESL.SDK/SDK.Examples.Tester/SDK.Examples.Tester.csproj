@@ -114,6 +114,7 @@
     <Compile Include="src\MergeFieldValidationExampleTest.cs" />
     <Compile Include="src\GettingStartedExampleTest.cs" />
     <Compile Include="src\CreatePackageFromTemplateWithReplacingPlaceholderExampleTest.cs" />
+    <Compile Include="src\DelegationExampleTest.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
