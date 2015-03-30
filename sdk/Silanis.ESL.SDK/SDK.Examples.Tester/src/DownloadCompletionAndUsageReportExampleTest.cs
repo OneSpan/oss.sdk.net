@@ -5,12 +5,12 @@ using Silanis.ESL.SDK;
 namespace SDK.Examples
 {
 	[TestFixture()]
-    public class DownloadCompletionAndUsageReportExampleTest
+    public class DownloadReportExampleTest
     {
 		[Test()]
 		public void VerifyResult()
 		{
-            DownloadCompletionAndUsageReportExample example = new DownloadCompletionAndUsageReportExample(Props.GetInstance());
+            DownloadReportExample example = new DownloadReportExample(Props.GetInstance());
 			example.Run();
 
             // Assert correct download of completion report for a sender

@@ -23,6 +23,7 @@ namespace Silanis.ESL.SDK
 		private string baseUrl;
         private string webpageUrl;
 		private PackageService packageService;
+        private ReportService reportService;
 		private SessionService sessionService;
 		private FieldSummaryService fieldSummaryService;
 		private AuditService auditService;
@@ -122,6 +123,7 @@ namespace Silanis.ESL.SDK
         private void init(RestClient restClient, String apiKey)
         {
             packageService = new PackageService(restClient, this.baseUrl, jsonSerializerSettings);
+            reportService = new ReportService(restClient, this.baseUrl, jsonSerializerSettings);
             sessionService = new SessionService(apiKey, this.baseUrl);
             fieldSummaryService = new FieldSummaryService(new FieldSummaryApiClient(apiKey, this.baseUrl));
             auditService = new AuditService(apiKey, this.baseUrl);
@@ -423,6 +425,12 @@ namespace Silanis.ESL.SDK
 				return this.packageService;
 			}
 		}
+
+        public ReportService ReportService {
+            get {
+                return this.reportService;
+            }
+        }
 		        
         public TemplateService TemplateService
 		{

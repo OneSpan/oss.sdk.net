@@ -360,6 +360,13 @@
     <Compile Include="src\DelegationUser.cs" />
     <Compile Include="src\Builder\DelegationUserBuilder.cs" />
     <Compile Include="src\Internal\Conversion\DelegationUserConverter.cs" />
+    <Compile Include="src\Models\DelegationEventReport.cs" />
+    <Compile Include="src\Models\DelegationReport.cs" />
+    <Compile Include="src\DelegationEventReport.cs" />
+    <Compile Include="src\DelegationReport.cs" />
+    <Compile Include="src\Services\ReportService.cs" />
+    <Compile Include="src\Internal\Conversion\DelegationReportConverter.cs" />
+    <Compile Include="src\Internal\Conversion\DelegationEventReportConverter.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSHARP.Targets" />
   <ProjectExtensions>
