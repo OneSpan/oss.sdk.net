@@ -42,7 +42,7 @@ namespace SDK.Examples
 		override public void Execute()
 		{
 			DocumentPackage superDuperPackage =
-                PackageBuilder.NewPackageNamed("DownloadCompletionAndUsageReport: " + DateTime.Now)
+                PackageBuilder.NewPackageNamed("DownloadReport: " + DateTime.Now)
 					.DescribedAs("This is a package created using the e-SignLive SDK")
 					.ExpiresOn(DateTime.Now.AddMonths(100))
 					.WithEmailMessage("This message should be delivered to all signers")
