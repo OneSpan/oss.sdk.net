@@ -96,6 +96,20 @@ namespace Silanis.ESL.SDK
             return new SignatureConverter(approval, aPackage).ToSDKSignature();
         }
 
+        public IList<Signature> GetAllSignableSignatures(DocumentPackage sdkPackage, string documentId, string signerId)
+        {
+            IList<Signature> signatures = new List<Signature>();
+
+            Package aPackage = new DocumentPackageConverter(sdkPackage).ToAPIPackage();
+            IList<Approval> approvals = apiClient.GetAllSignableApprovals(sdkPackage.Id, documentId, signerId);
+
+            foreach(Approval approval in approvals) 
+            {
+                signatures.Add(new SignatureConverter(approval, aPackage).ToSDKSignature());
+            }
+            return  signatures;
+        }
+
         public string AddField(PackageId packageId, string documentId, SignatureId signatureId, Field sdkField)
         {
             Silanis.ESL.API.Field apiField = new FieldConverter(sdkField).ToAPIField();

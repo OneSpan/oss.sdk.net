@@ -100,7 +100,8 @@ namespace Silanis.ESL.SDK.Internal
         public static readonly string APPROVAL_ID_PATH = "/packages/{packageId}/documents/{documentId}/approvals/{approvalId}";
         public static readonly string FIELD_PATH = "/packages/{packageId}/documents/{documentId}/approvals/{approvalId}/fields";
         public static readonly string FIELD_ID_PATH = "/packages/{packageId}/documents/{documentId}/approvals/{approvalId}/fields/{fieldId}";
-        
+        public static readonly string SIGNABLE_APPROVAL_PATH = "/packages/{packageId}/documents/{documentId}/signers/{signerId}/approvals";
+
         // Provider Document Resource
         public static readonly string PROVIDER_DOCUMENTS = "/documents";
 

@@ -204,6 +204,28 @@ namespace Silanis.ESL.SDK
             }
         }
 
+        public IList<Approval> GetAllSignableApprovals(PackageId packageId, string documentId, string signerId)
+        {
+            string path = template.UrlFor(UrlTemplate.SIGNABLE_APPROVAL_PATH)
+                .Replace("{packageId}", packageId.Id)
+                    .Replace("{documentId}", documentId)
+                    .Replace("{signerId}", signerId)
+                    .Build();
+            IList<Approval> response = null;
+
+            try {
+                string stringResponse = restClient.Get(path);
+                response = JsonConvert.DeserializeObject<IList<Approval>>(stringResponse, jsonSettings);
+            }
+            catch (EslServerException e) {
+                throw new EslServerException("Could not get all signable signatures.\t" + " Exception: " + e.Message, e.ServerError, e);
+            }
+            catch (Exception e) {
+                throw new EslException("Could not get all signable signatures.\t" + " Exception: " + e.Message, e);
+            }
+
+            return response;
+        }
     }
 }
 

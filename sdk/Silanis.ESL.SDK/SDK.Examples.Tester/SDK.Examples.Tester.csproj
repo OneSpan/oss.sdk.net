@@ -118,6 +118,7 @@
     <Compile Include="src\ThankYouDialogExampleTest.cs" />
     <Compile Include="src\ApplicationVersionExampleTest.cs" />
     <Compile Include="src\PackageInformationExampleTest.cs" />
+    <Compile Include="src\SignableSignaturesExampleTest.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
