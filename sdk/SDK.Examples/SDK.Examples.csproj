@@ -151,6 +151,7 @@
     <Compile Include="src\DownloadReportExample.cs" />
     <Compile Include="src\ThankYouDialogExample.cs" />
     <Compile Include="src\ApplicationVersionExample.cs" />
+    <Compile Include="src\PackageInformationExample.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

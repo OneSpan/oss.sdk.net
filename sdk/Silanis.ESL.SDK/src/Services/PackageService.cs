@@ -1346,5 +1346,27 @@ namespace Silanis.ESL.SDK.Services
                 throw new EslException("Could not get thank you dialog content." + " Exception: " + e.Message, e);
             }
         }
+
+        public SupportConfiguration GetConfig(PackageId packageId) 
+        {
+            string path = template.UrlFor(UrlTemplate.PACKAGE_INFORMATION_CONFIG_PATH)
+                    .Replace("{packageId}", packageId.Id)
+                    .Build();
+
+            try
+            {
+                string response = restClient.Get(path);
+                Silanis.ESL.API.SupportConfiguration apiSupportConfiguration = JsonConvert.DeserializeObject<Silanis.ESL.API.SupportConfiguration>(response, settings);
+                return new SupportConfigurationConverter(apiSupportConfiguration).ToSDKSupportConfiguration();
+            } 
+            catch (EslServerException e)
+            {
+                throw new EslServerException("Could not get support configuration." + " Exception: " + e.Message, e.ServerError, e);
+            }
+            catch (Exception e)
+            {
+                throw new EslException("Could not get support configuration." + " Exception: " + e.Message, e);
+            }
+        }
     }
 }
