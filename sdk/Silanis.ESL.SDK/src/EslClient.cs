@@ -39,6 +39,7 @@ namespace Silanis.ESL.SDK
         private LayoutService layoutService;
         private QRCodeService qrCodeService;
         private AuthenticationService authenticationService;
+        private SystemService systemService;
         
         private JsonSerializerSettings jsonSerializerSettings;
 
@@ -124,6 +125,7 @@ namespace Silanis.ESL.SDK
         {
             packageService = new PackageService(restClient, this.baseUrl, jsonSerializerSettings);
             reportService = new ReportService(restClient, this.baseUrl, jsonSerializerSettings);
+            systemService = new SystemService(restClient, this.baseUrl, jsonSerializerSettings);
             sessionService = new SessionService(apiKey, this.baseUrl);
             fieldSummaryService = new FieldSummaryService(new FieldSummaryApiClient(apiKey, this.baseUrl));
             auditService = new AuditService(apiKey, this.baseUrl);
@@ -544,6 +546,14 @@ namespace Silanis.ESL.SDK
             get
             {
                 return qrCodeService;
+            }
+        }
+
+        public SystemService SystemService
+        {
+            get
+            {
+                return systemService;
             }
         }
 	}

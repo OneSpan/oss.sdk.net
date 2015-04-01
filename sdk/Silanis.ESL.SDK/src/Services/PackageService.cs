@@ -10,6 +10,7 @@ using Silanis.ESL.API;
 using System.Globalization;
 using Newtonsoft.Json.Serialization;
 using Newtonsoft.Json.Utilities.LinqBridge;
+using System.Collections.Specialized;
 
 namespace Silanis.ESL.SDK.Services
 {
@@ -1321,6 +1322,28 @@ namespace Silanis.ESL.SDK.Services
             catch (Exception e)
             {
                 throw new EslException("Could not get Journal Entries in csv." + " Exception: " + e.Message, e);
+            }
+        }
+
+        public string GetThankYouDialogContent(PackageId packageId) 
+        {
+            string path = template.UrlFor(UrlTemplate.THANK_YOU_DIALOG_PATH)
+                    .Replace("{packageId}", packageId.Id)
+                    .Build();
+
+            try
+            {
+                string response = restClient.Get(path);
+                Dictionary<string, string> thankYouDialogContent = JsonConvert.DeserializeObject<Dictionary<string, string>>(response, settings);
+                return thankYouDialogContent["body"];
+            } 
+            catch (EslServerException e)
+            {
+                throw new EslServerException("Could not get thank you dialog content." + " Exception: " + e.Message, e.ServerError, e);
+            }
+            catch (Exception e)
+            {
+                throw new EslException("Could not get thank you dialog content." + " Exception: " + e.Message, e);
             }
         }
     }

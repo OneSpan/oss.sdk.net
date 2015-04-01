@@ -367,6 +367,7 @@
     <Compile Include="src\Services\ReportService.cs" />
     <Compile Include="src\Internal\Conversion\DelegationReportConverter.cs" />
     <Compile Include="src\Internal\Conversion\DelegationEventReportConverter.cs" />
+    <Compile Include="src\Services\SystemService.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSHARP.Targets" />
   <ProjectExtensions>

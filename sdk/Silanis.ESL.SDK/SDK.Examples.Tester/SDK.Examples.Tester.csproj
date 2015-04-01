@@ -115,6 +115,8 @@
     <Compile Include="src\CreatePackageFromTemplateWithReplacingPlaceholderExampleTest.cs" />
     <Compile Include="src\DelegationExampleTest.cs" />
     <Compile Include="src\DownloadReportExampleTest.cs" />
+    <Compile Include="src\ThankYouDialogExampleTest.cs" />
+    <Compile Include="src\ApplicationVersionExampleTest.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

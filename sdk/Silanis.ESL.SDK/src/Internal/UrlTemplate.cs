@@ -37,6 +37,7 @@ namespace Silanis.ESL.SDK.Internal
 		public static readonly string SIGNING_STATUS_PATH = "/packages/{packageId}/signingStatus?signer={signerId}&document={documentId}";
 		public static readonly string NOTIFY_ROLE_PATH = "/packages/{packageId}/roles/{roleId}/notifications";
         public static readonly string CLONE_PACKAGE_PATH = "/packages/{packageId}/clone";
+        public static readonly string THANK_YOU_DIALOG_PATH = "/packages/{packageId}/thank_you_dialog";
 
         // Report Service
         public static readonly string COMPLETION_REPORT_PATH = "/reports/completion?senderId={senderId}&status={status}&from={from}&to={to}";
@@ -55,6 +56,9 @@ namespace Silanis.ESL.SDK.Internal
         // Fast Track Service
         public static readonly string FAST_TRACK_URL_PATH = "/fastTrack/{packageId}/url?signing={signing}";
         public static readonly string START_FAST_TRACK_PATH = "/fastTrack?token={token}";
+
+        // System Service
+        public static readonly string SYSTEM_PATH = "/sysinfo";
 
         // Event Notification Service
         public static readonly string CALLBACK_PATH = "/callback";
