@@ -182,6 +182,28 @@ namespace Silanis.ESL.SDK
                 throw new EslException("Could not get the custom fields for the user." + " Exception: " + e.Message, e);
             }
         }
+
+        public UserCustomField GetUserCustomField(string customFieldId)
+        {
+            string path = template.UrlFor(UrlTemplate.USER_CUSTOMFIELD_ID_PATH)
+                .Replace("{customFieldId}", customFieldId)
+                .Build();
+
+            string response;
+            try 
+            {
+                response = client.Get(path);
+                return JsonConvert.DeserializeObject<Silanis.ESL.API.UserCustomField> (response, settings);
+            } 
+            catch (EslServerException e)
+            {
+                throw new EslServerException("Could not get the custom field for the user." + " Exception: " + e.Message, e.ServerError, e);
+            }
+            catch (Exception e)
+            {
+                throw new EslException("Could not get the custom field for the user." + " Exception: " + e.Message, e);
+            }
+        }
         
         public UserCustomField SubmitCustomFieldValue(UserCustomField apiCustomFieldValue)
         {

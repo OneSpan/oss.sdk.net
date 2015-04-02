@@ -110,6 +110,17 @@ namespace Silanis.ESL.SDK.Services
             return customFieldValues;
         }
 
+        ///
+        /// Get a custom field for the user.
+        ///
+        /// @return user custom field
+        /// 
+        public CustomFieldValue GetCustomFieldValue(string customFieldId) 
+        {
+            UserCustomField userCustomField = apiClient.GetUserCustomField(customFieldId);
+            return new CustomFieldValueConverter(userCustomField).ToSDKCustomFieldValue();
+        }
+
 		///
 		/// Create an user custom field.
 		/// If the custom field already existed then update it.

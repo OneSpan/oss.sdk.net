@@ -38,6 +38,8 @@ namespace SDK.Examples
 
             // Get the custom field values for this user
             Assert.GreaterOrEqual(example.retrieveCustomFieldValueList1.Count, 1);
+            Assert.AreEqual(example.customFieldId1, example.retrieveCustomFieldValue1.Id);
+            Assert.AreEqual(example.customFieldId2, example.retrieveCustomFieldValue2.Id);
 
             // Get the custom field values for this user after deleting 1 user custom field for this user
             Assert.AreEqual(example.retrieveCustomFieldValueList2.Count, example.retrieveCustomFieldValueList1.Count - 1);
