@@ -369,7 +369,7 @@ namespace Silanis.ESL.SDK.Internal
 
 		private static void CopyTo (Stream input, Stream output)
 		{
-			byte[] buffer = new byte[16 * 1024]; // Fairly arbitrary size
+			byte[] buffer = new byte[64 * 1024]; // Fairly arbitrary size
 			int bytesRead;
 
 			while ((bytesRead = input.Read(buffer, 0, buffer.Length)) > 0) {
