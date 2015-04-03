@@ -1,13 +1,13 @@
 using System;
 using System.Collections.Generic;
 using System.Reflection;
-using log4net;
+using Silanis.ESL.SDK.Internal;
 
 namespace Silanis.ESL.SDK
 {
 	public class DocumentPackageStatus : EslEnumeration
 	{
-        private static ILog log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
+        private static ILog log = Log4NetLogger.Initialize();
 
         public static DocumentPackageStatus DRAFT = new DocumentPackageStatus("DRAFT", "DRAFT", 0);
         public static DocumentPackageStatus SENT = new DocumentPackageStatus("SENT", "SENT", 1);

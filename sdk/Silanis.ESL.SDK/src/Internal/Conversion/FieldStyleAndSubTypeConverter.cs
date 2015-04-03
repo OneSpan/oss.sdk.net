@@ -1,13 +1,13 @@
 using System;
 using Silanis.ESL.API;
-using log4net;
+using Silanis.ESL.SDK.Internal;
 using System.Reflection;
 
 namespace Silanis.ESL.SDK
 {
     internal class FieldStyleAndSubTypeConverter
     {
-        private ILog log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
+        private static ILog log = Log4NetLogger.Initialize();
 
         private static string BINDING_DATE = "{approval.signed}";
         private static string BINDING_TITLE = "{signer.title}";

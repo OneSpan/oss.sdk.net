@@ -1,13 +1,13 @@
 using System;
 using System.Collections.Generic;
 using System.Reflection;
-using log4net;
+using Silanis.ESL.SDK.Internal;
 
 namespace Silanis.ESL.SDK
 {
     public class SignatureStyle : EslEnumeration
 	{
-        private static ILog log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
+        private static ILog log = Log4NetLogger.Initialize();
 
         public static SignatureStyle HAND_DRAWN = new SignatureStyle("CAPTURE", "HAND_DRAWN", 0);
         public static SignatureStyle FULL_NAME = new SignatureStyle("FULLNAME", "FULL_NAME", 1);

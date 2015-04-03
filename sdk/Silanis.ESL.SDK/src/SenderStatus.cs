@@ -1,13 +1,13 @@
 using System;
 using System.Collections.Generic;
 using System.Reflection;
-using log4net;
+using Silanis.ESL.SDK.Internal;
 
 namespace Silanis.ESL.SDK
 {
     public class SenderStatus : EslEnumeration
     {
-        private static ILog log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
+        private static ILog log = Log4NetLogger.Initialize();
 
         public static SenderStatus INVITED = new SenderStatus("INVITED","INVITED", 0);
         public static SenderStatus ACTIVE = new SenderStatus("ACTIVE","ACTIVE", 1);

@@ -1,5 +1,5 @@
 using System;
-using log4net;
+using Silanis.ESL.SDK.Internal;
 using Silanis.ESL.API;
 using System.Runtime.CompilerServices;
 using System.Diagnostics;
@@ -11,7 +11,7 @@ namespace Silanis.ESL.SDK
 {
     public class Support
     {
-        private ILog log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
+        private static ILog log = Log4NetLogger.Initialize();
 
         public Support() 
 		{

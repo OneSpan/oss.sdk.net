@@ -1,4 +1,4 @@
-using log4net;
+using Silanis.ESL.SDK.Internal;
 using System;
 using System.Reflection;
 
@@ -6,7 +6,7 @@ namespace Silanis.ESL.SDK
 {
 	internal class AuthenticationMethodConverter
 	{
-        private ILog log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
+        private static ILog log = Log4NetLogger.Initialize();
 
 		private Silanis.ESL.SDK.AuthenticationMethod sdkAuthMethod;
 		private string apiAuthMethod;
