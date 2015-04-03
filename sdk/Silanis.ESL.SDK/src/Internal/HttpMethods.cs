@@ -347,7 +347,9 @@ namespace Silanis.ESL.SDK.Internal
 				using (Stream responseStream = response.GetResponseStream()) {
 					var memoryStream = new MemoryStream ();
 					CopyTo (responseStream, memoryStream);
+                    Console.WriteLine("MultipartPostHttp memoryStream.Length : " + memoryStream.Length);
 					byte[] result = memoryStream.ToArray();
+                    Console.WriteLine("MultipartPostHttp result :" + result.ToString() + "#");
 
 					return result;
 				}
