@@ -7,7 +7,7 @@ using System.Collections.Generic;
 
 namespace SDK.Examples
 {
-    public class DownloadCompletionAndUsageReportExample : SDKSample
+    public class DownloadReportExample : SDKSample
 	{
         public string email1;
         private string senderUID;
@@ -16,21 +16,23 @@ namespace SDK.Examples
         public Silanis.ESL.SDK.CompletionReport sdkCompletionReportForSender;
         public Silanis.ESL.SDK.CompletionReport sdkCompletionReport;
         public Silanis.ESL.SDK.UsageReport sdkUsageReport;
+        public Silanis.ESL.SDK.DelegationReport sdkDelegationReport;
         public string csvCompletionReportForSender;
         public string csvCompletionReport;
         public string csvUsageReport;
+        public string csvDelegationReport;
 
 
 		public static void Main(string[] args)
 		{
-            new DownloadCompletionAndUsageReportExample(Props.GetInstance()).Run();
+            new DownloadReportExample(Props.GetInstance()).Run();
 		}
 
-        public DownloadCompletionAndUsageReportExample(Props props) : this(props.Get("api.key"), props.Get("api.url"), props.Get("1.email"))
+        public DownloadReportExample(Props props) : this(props.Get("api.key"), props.Get("api.url"), props.Get("1.email"))
 		{
 		}
 
-        public DownloadCompletionAndUsageReportExample(string apiKey, string apiUrl, string email1) : base( apiKey, apiUrl )
+        public DownloadReportExample(string apiKey, string apiUrl, string email1) : base( apiKey, apiUrl )
 		{
 			this.email1 = email1;
 			this.senderUID = Converter.apiKeyToUID(apiKey);
@@ -40,7 +42,7 @@ namespace SDK.Examples
 		override public void Execute()
 		{
 			DocumentPackage superDuperPackage =
-                PackageBuilder.NewPackageNamed("DownloadCompletionAndUsageReport: " + DateTime.Now)
+                PackageBuilder.NewPackageNamed("DownloadReport: " + DateTime.Now)
 					.DescribedAs("This is a package created using the e-SignLive SDK")
 					.ExpiresOn(DateTime.Now.AddMonths(100))
 					.WithEmailMessage("This message should be delivered to all signers")
@@ -72,8 +74,8 @@ namespace SDK.Examples
 			DateTime to = DateTime.Now;
 
             // Download the completion report for a sender
-			sdkCompletionReportForSender = eslClient.PackageService.DownloadCompletionReport(DocumentPackageStatus.DRAFT, senderUID, from, to);
-            csvCompletionReportForSender = eslClient.PackageService.DownloadCompletionReportAsCSV(DocumentPackageStatus.DRAFT, senderUID, from, to);
+            sdkCompletionReportForSender = eslClient.ReportService.DownloadCompletionReport(DocumentPackageStatus.DRAFT, senderUID, from, to);
+            csvCompletionReportForSender = eslClient.ReportService.DownloadCompletionReportAsCSV(DocumentPackageStatus.DRAFT, senderUID, from, to);
 
             // Display package id and name of packages in DRAFT from sender
             foreach(SenderCompletionReport senderCompletionReport in sdkCompletionReportForSender.Senders) {
@@ -85,8 +87,8 @@ namespace SDK.Examples
             }
 
             // Download the completion report for all senders
-            sdkCompletionReport = eslClient.PackageService.DownloadCompletionReport(DocumentPackageStatus.DRAFT, from, to);
-            csvCompletionReport = eslClient.PackageService.DownloadCompletionReportAsCSV(DocumentPackageStatus.DRAFT, from, to);
+            sdkCompletionReport = eslClient.ReportService.DownloadCompletionReport(DocumentPackageStatus.DRAFT, from, to);
+            csvCompletionReport = eslClient.ReportService.DownloadCompletionReportAsCSV(DocumentPackageStatus.DRAFT, from, to);
 
             // Display package id and name of packages in DRAFT from sender
             foreach(SenderCompletionReport senderCompletionReport in sdkCompletionReport.Senders) {
@@ -98,12 +100,12 @@ namespace SDK.Examples
             }
 
             // Download the usage report
-            sdkUsageReport = eslClient.PackageService.DownloadUsageReport(from, to);
-            csvUsageReport = eslClient.PackageService.DownloadUsageReportAsCSV(from, to);
+            sdkUsageReport = eslClient.ReportService.DownloadUsageReport(from, to);
+            csvUsageReport = eslClient.ReportService.DownloadUsageReportAsCSV(from, to);
 
-            // Get the number of packages in draft for sender
-            IDictionary<UsageReportCategory, int> categoryCounts = sdkUsageReport.SenderUsageReports[0].CountByUsageReportCategory;
-            int numOfDrafts = categoryCounts[UsageReportCategory.DRAFT];
+            // Download the delegation report for a sender
+            sdkDelegationReport = eslClient.ReportService.DownloadDelegationReport(senderUID, from, to);
+            csvDelegationReport = eslClient.ReportService.DownloadDelegationReportAsCSV(senderUID, from, to);
 		}
     }
 }

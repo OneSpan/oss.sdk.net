@@ -6,7 +6,7 @@ namespace Silanis.ESL.SDK
     /// <summary>
     /// Conversion from API to SDK Usage Report.
     /// </summary>
-    public class UsageReportConverter
+    internal class UsageReportConverter
     {
         private Silanis.ESL.SDK.UsageReport sdkUsageReport = null;
         private Silanis.ESL.API.UsageReport apiUsageReport = null;

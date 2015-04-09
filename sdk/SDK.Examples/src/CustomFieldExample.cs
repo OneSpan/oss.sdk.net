@@ -24,6 +24,7 @@ namespace SDK.Examples
         public CustomField retrievedCustomField;
         public IList<CustomField> retrievedCustomFieldList1, retrievedCustomFieldList2;
         public IList<CustomFieldValue> retrieveCustomFieldValueList1, retrieveCustomFieldValueList2;
+        public CustomFieldValue retrieveCustomFieldValue1, retrieveCustomFieldValue2;
 
         public static void Main(string[] args)
         {
@@ -112,6 +113,8 @@ namespace SDK.Examples
 
             // Get the entire list of user custom field from the user
             retrieveCustomFieldValueList1 = eslClient.GetCustomFieldService().GetCustomFieldValues();
+            retrieveCustomFieldValue1 = eslClient.GetCustomFieldService().GetCustomFieldValue(customFieldId1);
+            retrieveCustomFieldValue2 = eslClient.GetCustomFieldService().GetCustomFieldValue(customFieldId2);
 
             // Delete the second custom field from the user
             eslClient.GetCustomFieldService().DeleteCustomFieldValue(retrieveCustomFieldValueList1[1].Id);

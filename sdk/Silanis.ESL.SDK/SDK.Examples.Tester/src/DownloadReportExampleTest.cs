@@ -5,12 +5,12 @@ using Silanis.ESL.SDK;
 namespace SDK.Examples
 {
 	[TestFixture()]
-    public class DownloadCompletionAndUsageReportExampleTest
+    public class DownloadReportExampleTest
     {
 		[Test()]
 		public void VerifyResult()
 		{
-            DownloadCompletionAndUsageReportExample example = new DownloadCompletionAndUsageReportExample(Props.GetInstance());
+            DownloadReportExample example = new DownloadReportExample(Props.GetInstance());
 			example.Run();
 
             // Assert correct download of completion report for a sender
@@ -37,6 +37,12 @@ namespace SDK.Examples
             Assert.Greater(usageReport.SenderUsageReports[0].CountByUsageReportCategory[UsageReportCategory.DRAFT], 0, "Number of drafts should be greater than 0.");
             Assert.IsNotNull(example.csvUsageReport, "Usage report in csv cannot be null.");
             Assert.IsNotEmpty(example.csvUsageReport, "Usage report in csv cannot be empty.");
+
+			// Assert correct download of delegation report
+			DelegationReport delegationReport = example.sdkDelegationReport;
+            Assert.GreaterOrEqual(delegationReport.DelegationEventReports.Count, 0, "Number of DelegationEventReports should be greater than 0.");
+            Assert.IsNotNull(example.csvDelegationReport, "Delegation report in csv cannot be null.");
+            Assert.IsNotEmpty(example.csvDelegationReport, "Delegation report in csv cannot be empty.");
 		}
     }
 }

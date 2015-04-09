@@ -24,7 +24,8 @@ namespace Silanis.ESL.SDK.Services
             return result;
         }
 
-        public void SendInvite(string senderId){
+        public void SendInvite(string senderId)
+        {
             apiClient.SendInvite(senderId);
         }
 
@@ -59,7 +60,8 @@ namespace Silanis.ESL.SDK.Services
             apiClient.UpdateSender(apiSender, senderId);
         }
 
-        public IDictionary<string, Silanis.ESL.SDK.Sender> GetContacts() {
+        public IDictionary<string, Silanis.ESL.SDK.Sender> GetContacts() 
+        {
             IList<Silanis.ESL.API.Sender> contacts = apiClient.GetContacts();
 
             IDictionary<string, Silanis.ESL.SDK.Sender> result = new Dictionary<string, Silanis.ESL.SDK.Sender>();
@@ -69,6 +71,38 @@ namespace Silanis.ESL.SDK.Services
             }
 
             return result;
+        }
+
+        public IList<Silanis.ESL.SDK.DelegationUser> GetDelegates(string senderId) 
+        {
+            IList<Silanis.ESL.SDK.DelegationUser> result = new List<Silanis.ESL.SDK.DelegationUser>();
+            IList<Silanis.ESL.API.DelegationUser> apiDelegationUsers = apiClient.GetDelegates(senderId);
+            foreach (Silanis.ESL.API.DelegationUser delegationUser in apiDelegationUsers) 
+            {
+                result.Add(new DelegationUserConverter(delegationUser).ToSDKDelegationUser());
+            }
+            return result;
+        }
+
+        public void UpdateDelegates(string senderId, List<string> delegateIds) 
+        {
+            apiClient.UpdateDelegates(senderId, delegateIds);
+        }
+
+        public void AddDelegate(string senderId, Silanis.ESL.SDK.DelegationUser delegationUser) 
+        {
+            Silanis.ESL.API.DelegationUser apiDelegationUser = new DelegationUserConverter(delegationUser).ToAPIDelegationUser();
+            apiClient.AddDelegate(senderId, apiDelegationUser);
+        }
+
+        public void RemoveDelegate(string senderId, string delegateId) 
+        {
+            apiClient.RemoveDelegate(senderId, delegateId);
+        }
+
+        public void ClearDelegates(string senderId) 
+        {
+            apiClient.ClearDelegates(senderId);
         }
     }
 }

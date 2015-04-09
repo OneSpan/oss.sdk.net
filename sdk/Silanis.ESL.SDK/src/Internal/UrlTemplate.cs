@@ -34,12 +34,17 @@ namespace Silanis.ESL.SDK.Internal
 		public static readonly string ORIGINAL_PATH = "/packages/{packageId}/documents/{documentId}/original";
 		public static readonly string ZIP_PATH = "/packages/{packageId}/documents/zip";
 		public static readonly string EVIDENCE_SUMMARY_PATH = "/packages/{packageId}/evidence/summary";
-		public static readonly string COMPLETION_REPORT_PATH = "/reports/completion?senderId={senderId}&status={status}&from={from}&to={to}";
-        public static readonly string COMPLETION_REPORT_FOR_ALL_SENDERS_PATH = "/reports/completion?status={status}&from={from}&to={to}";
-        public static readonly string USAGE_REPORT_PATH = "/reports/usage?from={from}&to={to}";
 		public static readonly string SIGNING_STATUS_PATH = "/packages/{packageId}/signingStatus?signer={signerId}&document={documentId}";
 		public static readonly string NOTIFY_ROLE_PATH = "/packages/{packageId}/roles/{roleId}/notifications";
         public static readonly string CLONE_PACKAGE_PATH = "/packages/{packageId}/clone";
+        public static readonly string THANK_YOU_DIALOG_PATH = "/packages/{packageId}/thank_you_dialog";
+        public static readonly string PACKAGE_INFORMATION_CONFIG_PATH = "/package_information/{packageId}/support_information";
+
+        // Report Service
+        public static readonly string COMPLETION_REPORT_PATH = "/reports/completion?senderId={senderId}&status={status}&from={from}&to={to}";
+        public static readonly string COMPLETION_REPORT_FOR_ALL_SENDERS_PATH = "/reports/completion?status={status}&from={from}&to={to}";
+        public static readonly string USAGE_REPORT_PATH = "/reports/usage?from={from}&to={to}";
+        public static readonly string DELEGATION_REPORT_PATH = "/reports/delegation?senderId={senderId}&from={from}&to={to}";
 
         // Signer Service
         public static readonly string GET_SIGNER_PATH = "/packages/{packageId}/roles/{roleId}";
@@ -52,6 +57,9 @@ namespace Silanis.ESL.SDK.Internal
         // Fast Track Service
         public static readonly string FAST_TRACK_URL_PATH = "/fastTrack/{packageId}/url?signing={signing}";
         public static readonly string START_FAST_TRACK_PATH = "/fastTrack?token={token}";
+
+        // System Service
+        public static readonly string SYSTEM_PATH = "/sysinfo";
 
         // Event Notification Service
         public static readonly string CALLBACK_PATH = "/callback";
@@ -92,7 +100,8 @@ namespace Silanis.ESL.SDK.Internal
         public static readonly string APPROVAL_ID_PATH = "/packages/{packageId}/documents/{documentId}/approvals/{approvalId}";
         public static readonly string FIELD_PATH = "/packages/{packageId}/documents/{documentId}/approvals/{approvalId}/fields";
         public static readonly string FIELD_ID_PATH = "/packages/{packageId}/documents/{documentId}/approvals/{approvalId}/fields/{fieldId}";
-        
+        public static readonly string SIGNABLE_APPROVAL_PATH = "/packages/{packageId}/documents/{documentId}/signers/{signerId}/approvals";
+
         // Provider Document Resource
         public static readonly string PROVIDER_DOCUMENTS = "/documents";
 
@@ -103,6 +112,10 @@ namespace Silanis.ESL.SDK.Internal
         public static readonly string NOTARY_JOURNAL_PATH = "/user/{userId}/journal";
         public static readonly string NOTARY_JOURNAL_CSV_PATH = "/user/{userId}/journal/download";
         public static readonly string NOTARY_JOURNAL_LIST_PATH = "/user/{userId}/journal?to={to}&from={from}&dir={dir}";
+
+        // Delegation Service
+        public static readonly string DELEGATES_PATH = "/account/senders/{senderId}/delegates";
+        public static readonly string DELEGATE_ID_PATH = "/account/senders/{senderId}/delegates/{delegateId}";
 
         //Authentication Token Services
         public static readonly string ESL_AUTHENTICATION_PATH = "/auth";

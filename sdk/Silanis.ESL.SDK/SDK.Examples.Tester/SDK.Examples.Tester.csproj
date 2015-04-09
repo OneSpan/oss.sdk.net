@@ -88,7 +88,6 @@
     <Compile Include="src\SignerSMSAuthenticationExampleTest.cs" />
     <Compile Include="src\FieldManipulationExampleTest.cs" />
     <Compile Include="src\DocumentLayoutExampleTest.cs" />
-    <Compile Include="src\DownloadCompletionAndUsageReportExampleTest.cs" />
     <Compile Include="src\QRCodeExampleTest.cs" />
     <Compile Include="src\CreateTemplateOnBehalfOfAnotherSenderExampleTest.cs" />
     <Compile Include="src\ContactsExampleTest.cs" />
@@ -114,6 +113,12 @@
     <Compile Include="src\MergeFieldValidationExampleTest.cs" />
     <Compile Include="src\GettingStartedExampleTest.cs" />
     <Compile Include="src\CreatePackageFromTemplateWithReplacingPlaceholderExampleTest.cs" />
+    <Compile Include="src\DelegationExampleTest.cs" />
+    <Compile Include="src\DownloadReportExampleTest.cs" />
+    <Compile Include="src\ThankYouDialogExampleTest.cs" />
+    <Compile Include="src\ApplicationVersionExampleTest.cs" />
+    <Compile Include="src\PackageInformationExampleTest.cs" />
+    <Compile Include="src\SignableSignaturesExampleTest.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
