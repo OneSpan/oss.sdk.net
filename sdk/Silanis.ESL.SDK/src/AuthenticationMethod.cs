@@ -7,7 +7,7 @@ namespace Silanis.ESL.SDK
 {
     public class AuthenticationMethod : EslEnumeration
 	{
-        private static ILog log = Log4NetLogger.Initialize();
+        private static ILog log = Logger.initializeFacade();
 
         public static AuthenticationMethod EMAIL = new AuthenticationMethod("NONE", "EMAIL", 0);
         public static AuthenticationMethod CHALLENGE = new AuthenticationMethod("CHALLENGE", "CHALLENGE", 1);

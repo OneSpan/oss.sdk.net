@@ -7,7 +7,7 @@ namespace Silanis.ESL.SDK
 {
     public class SenderType : EslEnumeration
     {
-        private static ILog log = Log4NetLogger.Initialize();
+        private static ILog log = Logger.initializeFacade();
 
         public static SenderType REGULAR = new SenderType("REGULAR", "REGULAR", 0);
         public static SenderType MANAGER = new SenderType("MANAGER", "MANAGER", 1);

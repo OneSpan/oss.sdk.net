@@ -3,7 +3,7 @@ using Silanis.ESL.SDK.Internal;
 
 namespace Silanis.ESL.SDK
 {
-    public class NoOpLogger : ILog
+    internal class NoOpLogger : ILog
     {
         
         /// <summary>

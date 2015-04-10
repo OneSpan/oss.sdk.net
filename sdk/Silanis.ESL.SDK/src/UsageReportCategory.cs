@@ -7,7 +7,7 @@ namespace Silanis.ESL.SDK
 {
     public class UsageReportCategory : EslEnumeration
     {
-        private static ILog log = Log4NetLogger.Initialize();
+        private static ILog log = Logger.initializeFacade();
 
         public static UsageReportCategory ACTIVE = new UsageReportCategory("ACTIVE", "ACTIVE", 0);
         public static UsageReportCategory DRAFT = new UsageReportCategory("DRAFT", "DRAFT", 1);

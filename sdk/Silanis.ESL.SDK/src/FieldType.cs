@@ -7,7 +7,7 @@ namespace Silanis.ESL.SDK
 {
     public class FieldType : EslEnumeration
     {
-        private static ILog log = Log4NetLogger.Initialize();
+        private static ILog log = Logger.initializeFacade();
 
         public static FieldType SIGNATURE = new FieldType("SIGNATURE", "SIGNATURE", 0);
         public static FieldType INPUT = new FieldType("INPUT", "INPUT", 1);

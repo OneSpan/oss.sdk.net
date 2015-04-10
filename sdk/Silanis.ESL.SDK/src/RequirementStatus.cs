@@ -7,7 +7,7 @@ namespace Silanis.ESL.SDK
 {
     public class RequirementStatus : EslEnumeration
 	{
-        private static ILog log = Log4NetLogger.Initialize();
+        private static ILog log = Logger.initializeFacade();
 
         public static RequirementStatus INCOMPLETE = new RequirementStatus("INCOMPLETE", "INCOMPLETE", 0);
         public static RequirementStatus REJECTED = new RequirementStatus("REJECTED", "REJECTED", 1);

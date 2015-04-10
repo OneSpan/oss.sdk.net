@@ -7,7 +7,7 @@ namespace Silanis.ESL.SDK
 {
     public class TextAnchorPosition : EslEnumeration
     {
-        private static ILog log = Log4NetLogger.Initialize();
+        private static ILog log = Logger.initializeFacade();
 
         public static TextAnchorPosition TOPLEFT = new TextAnchorPosition("TOPLEFT", "TOPLEFT", 0);
         public static TextAnchorPosition TOPRIGHT = new TextAnchorPosition("TOPRIGHT", "TOPRIGHT", 1);

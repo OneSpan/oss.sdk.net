@@ -7,7 +7,7 @@ namespace Silanis.ESL.SDK
 {
     internal class FieldStyleAndSubTypeConverter
     {
-        private static ILog log = Log4NetLogger.Initialize();
+        private static ILog log = Logger.initializeFacade();
 
         private static string BINDING_DATE = "{approval.signed}";
         private static string BINDING_TITLE = "{signer.title}";

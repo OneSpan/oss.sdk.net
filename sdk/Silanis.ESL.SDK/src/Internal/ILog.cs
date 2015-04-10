@@ -4,7 +4,7 @@ using System.Reflection;
 
 namespace Silanis.ESL.SDK.Internal
 {
-	interface ILog
+    internal interface ILog
 	{
         bool IsDebugEnabled
         {

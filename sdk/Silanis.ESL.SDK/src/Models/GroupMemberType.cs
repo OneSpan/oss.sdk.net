@@ -7,7 +7,7 @@ namespace Silanis.ESL.SDK
 {
     public class GroupMemberType : EslEnumeration
     {
-        private static ILog log = Log4NetLogger.Initialize();
+        private static ILog log = Logger.initializeFacade();
 
         public static GroupMemberType REGULAR = new GroupMemberType("REGULAR", "REGULAR", 0);
         public static GroupMemberType MANAGER = new GroupMemberType("MANAGER", "MANAGER", 1);

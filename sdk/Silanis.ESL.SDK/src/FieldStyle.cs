@@ -7,7 +7,7 @@ namespace Silanis.ESL.SDK
 {
 	public class FieldStyle : EslEnumeration
 	{
-        private static ILog log = Log4NetLogger.Initialize();
+        private static ILog log = Logger.initializeFacade();
 
         public static FieldStyle BOUND_DATE = new FieldStyle("LABEL", "BOUND_DATE", 0);
         public static FieldStyle BOUND_NAME = new FieldStyle("LABEL", "BOUND_NAME", 1);

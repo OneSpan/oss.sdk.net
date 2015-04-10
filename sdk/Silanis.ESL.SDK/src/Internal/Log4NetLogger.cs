@@ -6,7 +6,7 @@ using System.Globalization;
 
 namespace Silanis.ESL.SDK.Internal
 {
-    class Log4NetLogger : ILog 
+    internal class Log4NetLogger : ILog 
     {
         private log4net.ILog log4netLogger;
 

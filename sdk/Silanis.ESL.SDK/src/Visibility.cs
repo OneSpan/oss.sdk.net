@@ -7,7 +7,7 @@ namespace Silanis.ESL.SDK
 {
     public class Visibility : EslEnumeration
     {
-        private static ILog log = Log4NetLogger.Initialize();
+        private static ILog log = Logger.initializeFacade();
 
         public static Visibility ACCOUNT = new Visibility("ACCOUNT", "ACCOUNT", 0);
         public static Visibility SENDER = new Visibility("SENDER", "SENDER", 1);

@@ -7,7 +7,7 @@ namespace Silanis.ESL.SDK
 {
 	public class DocumentPackageStatus : EslEnumeration
 	{
-        private static ILog log = Log4NetLogger.Initialize();
+        private static ILog log = Logger.initializeFacade();
 
         public static DocumentPackageStatus DRAFT = new DocumentPackageStatus("DRAFT", "DRAFT", 0);
         public static DocumentPackageStatus SENT = new DocumentPackageStatus("SENT", "SENT", 1);

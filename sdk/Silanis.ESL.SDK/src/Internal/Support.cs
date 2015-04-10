@@ -11,7 +11,7 @@ namespace Silanis.ESL.SDK
 {
     public class Support
     {
-        private static ILog log = Log4NetLogger.Initialize();
+        private static ILog log = Logger.initializeFacade();
 
         public Support() 
 		{
