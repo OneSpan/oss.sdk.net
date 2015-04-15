@@ -92,11 +92,11 @@ namespace Silanis.ESL.SDK.Services
             }
             catch (EslServerException e)
             {
-                throw new EslServerException("Could not create a new package." + " Exception: " + e.Message, e.ServerError, e);
+                throw new EslServerException("Could not create a new package one step." + " Exception: " + e.Message, e.ServerError, e);
             }
             catch (Exception e)
             {
-                throw new EslException("Could not create a new package." + " Exception: " + e.Message, e);
+                throw new EslException("Could not create a new package one step." + " Exception: " + e.Message, e);
             }
         }
 
@@ -251,11 +251,11 @@ namespace Silanis.ESL.SDK.Services
             }
             catch (EslServerException e)
             {
-                throw new EslServerException("Could not upload document to package." + " Exception: " + e.Message, e.ServerError, e);
+                throw new EslServerException("Could not update the document's metadata." + " Exception: " + e.Message, e.ServerError, e);
             }
             catch (Exception e)
             {
-                throw new EslException("Could not upload document to package." + " Exception: " + e.Message, e);
+                throw new EslException("Could not update the document's metadata." + " Exception: " + e.Message, e);
             }
             finally
             {
@@ -318,11 +318,11 @@ namespace Silanis.ESL.SDK.Services
             }
             catch (EslServerException e)
             {
-                throw new EslServerException("Could not upload documents to package." + " Exception: " + e.Message, e.ServerError, e);
+                throw new EslServerException("Could not add document with external content." + " Exception: " + e.Message, e.ServerError, e);
             }
             catch (Exception e)
             {
-                throw new EslException("Could not upload documents to package." + " Exception: " + e.Message, e);
+                throw new EslException("Could not add document with external content." + " Exception: " + e.Message, e);
             }
         }
 
