@@ -50,7 +50,7 @@
         <echo message="copy" />
         <delete>
             <fileset basedir="${copy.dir}">                
-                <include name="*.zip" />
+                <include name="${ESL-SDK}.${build.version}.zip" />
             </fileset>
         </delete>
         <copy todir="${copy.dir}">
