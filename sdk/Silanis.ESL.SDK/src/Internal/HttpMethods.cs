@@ -26,6 +26,8 @@ namespace Silanis.ESL.SDK.Internal
 
         public static ProxyConfiguration proxyConfiguration;
 
+        private static readonly object syncLock = new object();
+
 		public static byte[] PostHttp (string apiToken, string path, byte[] content)
 		{
             try {
@@ -328,45 +330,51 @@ namespace Silanis.ESL.SDK.Internal
 			request.Headers.Add(authHeaderGen.Name, authHeaderGen.Value);
 		}
 
-		 public static byte[] MultipartPostHttp (string apiToken, string path, byte[] content, string boundary, AuthHeaderGenerator authHeaderGen)
+		public static byte[] MultipartPostHttp (string apiToken, string path, byte[] content, string boundary, AuthHeaderGenerator authHeaderGen)
 		{
-			WebRequest request = WebRequest.Create (path);
-			try {
-				request.Method = "POST";
-                request.ContentType = string.Format (ESL_CONTENT_TYPE_APPLICATION_MULTIPART, boundary);
-				request.ContentLength = content.Length;
-				AddAuthorizationHeader(request, authHeaderGen);
-                SetProxy(request);
-
-				using (Stream dataStream = request.GetRequestStream ()) {
-					dataStream.Write (content, 0, content.Length);
-				}
-
-				WebResponse response = request.GetResponse ();
-
-				using (Stream responseStream = response.GetResponseStream()) {
-					var memoryStream = new MemoryStream ();
-					CopyTo (responseStream, memoryStream);
-                    Console.WriteLine("MultipartPostHttp memoryStream.Length : " + memoryStream.Length);
-					byte[] result = memoryStream.ToArray();
-                    Console.WriteLine("MultipartPostHttp result :" + result.ToString() + "#");
-
-					return result;
-				}
-			}
-            catch (WebException e){
-                using (var stream = e.Response.GetResponseStream())
-                using (var reader = new StreamReader(stream))
+            lock (syncLock)
+            {
+                WebRequest request = WebRequest.Create(path);
+                try
                 {
-                    string errorDetails = reader.ReadToEnd();
-                    throw new EslServerException(String.Format("{0} HTTP {1} on URI {2}. Optional details: {3}", e.Message, 
+                    request.Method = "POST";
+                    request.ContentType = string.Format(ESL_CONTENT_TYPE_APPLICATION_MULTIPART, boundary);
+                    request.ContentLength = content.Length;
+                    AddAuthorizationHeader(request, authHeaderGen);
+                    SetProxy(request);
+
+                    using (Stream dataStream = request.GetRequestStream ())
+                    {
+                        dataStream.Write(content, 0, content.Length);
+                    }
+
+                    WebResponse response = request.GetResponse();
+
+                    using (Stream responseStream = response.GetResponseStream())
+                    {
+                        var memoryStream = new MemoryStream();
+                        CopyTo(responseStream, memoryStream);
+                        byte[] result = memoryStream.ToArray();
+
+                        return result;
+                    }
+                }
+                catch (WebException e)
+                {
+                    using (var stream = e.Response.GetResponseStream())
+                    using (var reader = new StreamReader(stream))
+                    {
+                        string errorDetails = reader.ReadToEnd();
+                        throw new EslServerException(String.Format("{0} HTTP {1} on URI {2}. Optional details: {3}", e.Message, 
                                                                ((HttpWebResponse)e.Response).Method, e.Response.ResponseUri, errorDetails),
-                                                                errorDetails, e);
+                                                 errorDetails, e);
+                    }
+                }
+                catch (Exception e)
+                {
+                    throw new EslException("Error communicating with esl server. " + e.Message, e);
                 }
             }
-			catch (Exception e) {
-				throw new EslException("Error communicating with esl server. " + e.Message,e);
-			}
 		}
 
 		private static void CopyTo (Stream input, Stream output)
