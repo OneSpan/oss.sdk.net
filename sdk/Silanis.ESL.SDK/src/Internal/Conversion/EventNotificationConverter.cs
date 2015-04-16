@@ -1,4 +1,4 @@
-using log4net;
+using Silanis.ESL.SDK.Internal;
 using Silanis.ESL.API;
 using System;
 using System.Reflection;
@@ -7,7 +7,6 @@ namespace Silanis.ESL.SDK
 {
 	internal class EventNotificationConverter
     {
-        private ILog log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
 		private Silanis.ESL.SDK.NotificationEvent sdkNotificationEvent;
 		private string apiCallbackEvent;
 

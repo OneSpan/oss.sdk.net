@@ -1,13 +1,13 @@
 using System;
 using System.Collections.Generic;
 using System.Reflection;
-using log4net;
+using Silanis.ESL.SDK.Internal;
 
 namespace Silanis.ESL.SDK
 {
 	public class FieldStyle : EslEnumeration
 	{
-        private static ILog log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
+        private static ILog log = Logger.initializeFacade();
 
         public static FieldStyle BOUND_DATE = new FieldStyle("LABEL", "BOUND_DATE", 0);
         public static FieldStyle BOUND_NAME = new FieldStyle("LABEL", "BOUND_NAME", 1);

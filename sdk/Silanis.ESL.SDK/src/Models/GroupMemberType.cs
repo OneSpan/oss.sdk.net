@@ -1,13 +1,13 @@
 using System;
 using System.Reflection;
 using System.Collections.Generic;
-using log4net;
+using Silanis.ESL.SDK.Internal;
 
 namespace Silanis.ESL.SDK
 {
     public class GroupMemberType : EslEnumeration
     {
-        private static ILog log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
+        private static ILog log = Logger.initializeFacade();
 
         public static GroupMemberType REGULAR = new GroupMemberType("REGULAR", "REGULAR", 0);
         public static GroupMemberType MANAGER = new GroupMemberType("MANAGER", "MANAGER", 1);

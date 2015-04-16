@@ -1,13 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Reflection;
-using log4net;
+using Silanis.ESL.SDK.Internal;
 
 namespace Silanis.ESL.SDK
 {
     public class UsageReportCategory : EslEnumeration
     {
-        private static ILog log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
+        private static ILog log = Logger.initializeFacade();
 
         public static UsageReportCategory ACTIVE = new UsageReportCategory("ACTIVE", "ACTIVE", 0);
         public static UsageReportCategory DRAFT = new UsageReportCategory("DRAFT", "DRAFT", 1);

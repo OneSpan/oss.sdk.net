@@ -57,7 +57,7 @@ namespace SDK.Examples
                         .WithSigner(SignerBuilder.NewSignerWithEmail(email1)
                             .WithFirstName("George")
                             .WithLastName("Faltour").Build())
-                            .WithDocument(DocumentBuilder.NewDocumentNamed("prêt.pdf")
+                            .WithDocument(DocumentBuilder.NewDocumentNamed("My Document")
                             .FromStream(fileStream1, DocumentType.PDF)
                             .WithId(docId)
                             .WithSignature(SignatureBuilder.SignatureFor(email1)

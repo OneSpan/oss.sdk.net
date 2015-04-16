@@ -1,13 +1,13 @@
 using System;
 using System.Collections.Generic;
 using System.Reflection;
-using log4net;
+using Silanis.ESL.SDK.Internal;
 
 namespace Silanis.ESL.SDK
 {
     public class FieldType : EslEnumeration
     {
-        private static ILog log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
+        private static ILog log = Logger.initializeFacade();
 
         public static FieldType SIGNATURE = new FieldType("SIGNATURE", "SIGNATURE", 0);
         public static FieldType INPUT = new FieldType("INPUT", "INPUT", 1);

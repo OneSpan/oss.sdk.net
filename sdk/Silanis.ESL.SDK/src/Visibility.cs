@@ -1,5 +1,5 @@
 using System;
-using log4net;
+using Silanis.ESL.SDK.Internal;
 using System.Reflection;
 using System.Collections.Generic;
 
@@ -7,7 +7,7 @@ namespace Silanis.ESL.SDK
 {
     public class Visibility : EslEnumeration
     {
-        private static ILog log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
+        private static ILog log = Logger.initializeFacade();
 
         public static Visibility ACCOUNT = new Visibility("ACCOUNT", "ACCOUNT", 0);
         public static Visibility SENDER = new Visibility("SENDER", "SENDER", 1);
