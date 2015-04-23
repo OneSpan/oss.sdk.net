@@ -77,27 +77,9 @@ namespace SDK.Examples
             sdkCompletionReportForSender = eslClient.ReportService.DownloadCompletionReport(DocumentPackageStatus.DRAFT, senderUID, from, to);
             csvCompletionReportForSender = eslClient.ReportService.DownloadCompletionReportAsCSV(DocumentPackageStatus.DRAFT, senderUID, from, to);
 
-            // Display package id and name of packages in DRAFT from sender
-            foreach(SenderCompletionReport senderCompletionReport in sdkCompletionReportForSender.Senders) {
-                Console.Write("Sender: " + senderCompletionReport.Sender.Email);
-                Console.WriteLine(" has " + senderCompletionReport.Packages.Count + " packages in DRAFT");
-                foreach (PackageCompletionReport packageCompletionReport in senderCompletionReport.Packages) {
-                    Console.WriteLine(packageCompletionReport.Id + " , " + packageCompletionReport.Name + " , Sender : " + eslClient.GetPackage(new PackageId(packageCompletionReport.Id)).SenderInfo.Email);
-                }
-            }
-
             // Download the completion report for all senders
             sdkCompletionReport = eslClient.ReportService.DownloadCompletionReport(DocumentPackageStatus.DRAFT, from, to);
             csvCompletionReport = eslClient.ReportService.DownloadCompletionReportAsCSV(DocumentPackageStatus.DRAFT, from, to);
-
-            // Display package id and name of packages in DRAFT from sender
-            foreach(SenderCompletionReport senderCompletionReport in sdkCompletionReport.Senders) {
-                Console.Write("Sender: " + senderCompletionReport.Sender.Email);
-                Console.WriteLine(" has " + senderCompletionReport.Packages.Count + " packages in DRAFT");
-                foreach (PackageCompletionReport packageCompletionReport in senderCompletionReport.Packages) {
-                    Console.WriteLine(packageCompletionReport.Id + " , " + packageCompletionReport.Name + " , Sender : " + eslClient.GetPackage(new PackageId(packageCompletionReport.Id)).SenderInfo.Email);
-                }
-            }
 
             // Download the usage report
             sdkUsageReport = eslClient.ReportService.DownloadUsageReport(from, to);
