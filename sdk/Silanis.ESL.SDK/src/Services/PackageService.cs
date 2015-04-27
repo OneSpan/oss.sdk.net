@@ -89,10 +89,7 @@ namespace Silanis.ESL.SDK.Services
                     string boundary = GenerateBoundary();
                     byte[] content = CreateMultipartPackage(documents, payloadBytes, boundary);
 
-                    Console.WriteLine("CreatePackageOneStep restClient : '" + restClient + "'");
-
                     string response = restClient.PostMultipartPackage(path, content, boundary, json); 
-                    Console.WriteLine("CreatePackageOneStep response : '" + response + "'");
 
                     PackageId result = JsonConvert.DeserializeObject<PackageId>(response);
 
@@ -556,11 +553,7 @@ namespace Silanis.ESL.SDK.Services
                     string boundary = GenerateBoundary();
                     byte[] content = CreateMultipartContent(fileName, fileBytes, payloadBytes, boundary);
 
-                    Console.WriteLine("UploadDocument restClient : '" + restClient + "'");
-
                     string response = restClient.PostMultipartFile(path, content, boundary, json);
-
-                    Console.WriteLine("UploadDocument response : '" + response + "'");
 
                     Silanis.ESL.API.Document uploadedDoc = JsonConvert.DeserializeObject<Silanis.ESL.API.Document>(response);
                     return new DocumentConverter(uploadedDoc, internalPackage).ToSDKDocument();
