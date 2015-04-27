@@ -18,6 +18,7 @@ namespace SDK.Examples
 
 			Assert.IsNotNull(eventNotificationConfig);
             Assert.AreEqual(eventNotificationConfig.Url, example.URL);
+            Assert.AreEqual(eventNotificationConfig.Key, example.KEY);
 			Assert.AreEqual(eventNotificationConfig.NotificationEvents.Count, 18);
 
             List<NotificationEvent> eventList = new List<NotificationEvent>();

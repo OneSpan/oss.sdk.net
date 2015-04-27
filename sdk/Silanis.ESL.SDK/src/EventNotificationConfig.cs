@@ -6,7 +6,8 @@ namespace Silanis.ESL.SDK
 {
 	public class EventNotificationConfig
 	{
-		private string url;
+        private string url;
+		private string key;
 		private List<NotificationEvent> notificationEvents;
 
 		public EventNotificationConfig(string url)
@@ -14,6 +15,13 @@ namespace Silanis.ESL.SDK
 			this.url = url;
 			notificationEvents = new List<NotificationEvent>();
 		}
+
+        public EventNotificationConfig(string url, string key)
+        {
+            this.url = url;
+            this.key = key;
+            notificationEvents = new List<NotificationEvent>();
+        }
 
 		public string Url
 		{
@@ -26,6 +34,18 @@ namespace Silanis.ESL.SDK
 				url = value;
 			}
 		}
+
+        public string Key
+        {
+            get
+            {
+                return key;
+            }
+            set
+            {
+                key = value;
+            }
+        }
 
 		public List<NotificationEvent> NotificationEvents
 		{

@@ -8,6 +8,7 @@ namespace SDK.Examples
 	{
 		private EventNotificationConfig eventNotificationConfig;
 		public string URL = "http://my.url.com";
+        public string KEY = "abc";
 
         public readonly NotificationEvent EVENT1 = NotificationEvent.PACKAGE_CREATE;
         public readonly NotificationEvent EVENT2 = NotificationEvent.PACKAGE_ACTIVATE;
@@ -49,6 +50,7 @@ namespace SDK.Examples
 		{
 			// Register for event notification
 			eslClient.EventNotificationService.Register(EventNotificationConfigBuilder.NewEventNotificationConfig(URL)
+                .WithKey(KEY)
 				.ForEvent(EVENT1)
                 .ForEvent(EVENT2)
                 .ForEvent(EVENT3)

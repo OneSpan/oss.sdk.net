@@ -26,7 +26,8 @@ namespace Silanis.ESL.SDK
 			}
 
 			Callback callback = new Callback();
-			callback.Url = sdkEventNotificationConfig.Url;
+            callback.Url = sdkEventNotificationConfig.Url;
+			callback.Key = sdkEventNotificationConfig.Key;
 			foreach (NotificationEvent notificationEvent in sdkEventNotificationConfig.NotificationEvents)
 			{
 				callback.AddEvent(new EventNotificationConverter(notificationEvent).ToAPICallbackEvent());
@@ -43,6 +44,7 @@ namespace Silanis.ESL.SDK
 			}
 
 			EventNotificationConfig eventNotificationConfig = new EventNotificationConfig(apiCallback.Url);
+            eventNotificationConfig.Key = apiCallback.Key;
 			foreach (string callbackEvent in apiCallback.Events)
 			{
 				eventNotificationConfig.AddEvent(new EventNotificationConverter(callbackEvent).ToSDKNotificationEvent());

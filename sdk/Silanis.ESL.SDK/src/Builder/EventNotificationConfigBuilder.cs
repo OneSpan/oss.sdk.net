@@ -6,6 +6,7 @@ namespace Silanis.ESL.SDK
     public class EventNotificationConfigBuilder
     {
         private string url;
+        private string key;
         private List<NotificationEvent> events;
 
         private EventNotificationConfigBuilder(string url)
@@ -14,8 +15,20 @@ namespace Silanis.ESL.SDK
             this.events = new List<NotificationEvent>();
         }
 
+        private EventNotificationConfigBuilder(string url, string key)
+        {
+            this.url = url;
+            this.key = key;
+            this.events = new List<NotificationEvent>();
+        }
+
         public static EventNotificationConfigBuilder NewEventNotificationConfig( string url ) {
             return new EventNotificationConfigBuilder(url);
+        }
+
+        public EventNotificationConfigBuilder WithKey( string key ) {
+            this.key = key;
+            return this;
         }
 
         public EventNotificationConfigBuilder ForEvent( NotificationEvent notificationEvent ) {
@@ -25,6 +38,7 @@ namespace Silanis.ESL.SDK
 
         public EventNotificationConfig build() {
             EventNotificationConfig result = new EventNotificationConfig(url);
+            result.Key = key;
             foreach (NotificationEvent notificationEvent in events)
             {
                 result.NotificationEvents.Add(notificationEvent);
