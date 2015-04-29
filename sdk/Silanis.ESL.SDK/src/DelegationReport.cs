@@ -5,24 +5,15 @@ namespace Silanis.ESL.SDK
 {
     public class DelegationReport
     {
-        private IList<DelegationEventReport> delegationEventReports = new List<DelegationEventReport>();
+        private IDictionary<string, IList<DelegationEventReport>> delegationEvents = new Dictionary<string, IList<DelegationEventReport>> ();
 
-        public IList<DelegationEventReport> DelegationEventReports
+        public IDictionary<string, IList<DelegationEventReport>> DelegationEvents
         {
             get
             {
-                return delegationEventReports;
+                return delegationEvents;
             }
-            set{ delegationEventReports = value;}
-        }
-        public void AddDelegationEventReport(DelegationEventReport value)
-        {
-            if (value == null)
-            {
-                throw new ArgumentNullException("Argument cannot be null");
-            }
-
-            delegationEventReports.Add(value);
+            set{ delegationEvents = value;}
         }
 
         public Nullable<DateTime> From

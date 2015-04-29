@@ -40,7 +40,7 @@ namespace SDK.Examples
 
 			// Assert correct download of delegation report
 			DelegationReport delegationReport = example.sdkDelegationReport;
-            Assert.GreaterOrEqual(delegationReport.DelegationEventReports.Count, 0, "Number of DelegationEventReports should be greater than 0.");
+            Assert.GreaterOrEqual(delegationReport.DelegationEvents.Count, 0, "Number of DelegationEventReports should be greater than 0.");
             Assert.IsNotNull(example.csvDelegationReport, "Delegation report in csv cannot be null.");
             Assert.IsNotEmpty(example.csvDelegationReport, "Delegation report in csv cannot be empty.");
 		}
