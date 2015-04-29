@@ -53,16 +53,31 @@ namespace Silanis.ESL.SDK.Services
                     .Build(); 
         }
 
+        private string BuildDelegationReportUrl()
+        {
+            return template.UrlFor(UrlTemplate.DELEGATION_REPORT_PATH)
+                    .Build(); 
+        }
+
+        private string BuildDelegationReportUrl(DateTime from, DateTime to)
+        {
+            string toDate = DateHelper.dateToIsoUtcFormat(to);
+            string fromDate = DateHelper.dateToIsoUtcFormat(from);
+
+            return template.UrlFor(UrlTemplate.DELEGATION_REPORT_PATH).Build() + "?from={from}&to={to}"
+                    .Replace("{from}", fromDate)
+                    .Replace("{to}", toDate); 
+        }
+
         private string BuildDelegationReportUrl(string senderId, DateTime from, DateTime to)
         {
             string toDate = DateHelper.dateToIsoUtcFormat(to);
             string fromDate = DateHelper.dateToIsoUtcFormat(from);
 
-            return template.UrlFor(UrlTemplate.DELEGATION_REPORT_PATH)
+            return template.UrlFor(UrlTemplate.DELEGATION_REPORT_PATH).Build() + "?senderId={senderId}&from={from}&to={to}"
                 .Replace("{senderId}", senderId)
                 .Replace("{from}", fromDate)
-                .Replace("{to}", toDate)
-                .Build(); 
+                .Replace("{to}", toDate); 
         }
 
         public Silanis.ESL.SDK.CompletionReport DownloadCompletionReport(Silanis.ESL.SDK.DocumentPackageStatus packageStatus, String senderId, DateTime from, DateTime to)
@@ -178,6 +193,44 @@ namespace Silanis.ESL.SDK.Services
             }
         }
 
+        public Silanis.ESL.SDK.DelegationReport DownloadDelegationReport()
+        {
+            try
+            {
+                string path = BuildDelegationReportUrl();
+                string response = restClient.Get(path);
+                Silanis.ESL.API.DelegationReport apiDelegationReport = JsonConvert.DeserializeObject<Silanis.ESL.API.DelegationReport>(response, settings);
+                return new DelegationReportConverter(apiDelegationReport).ToSDKDelegationReport();
+            }
+            catch (EslServerException e)
+            {
+                throw new EslServerException("Could not download the delegation report." + " Exception: " + e.Message, e.ServerError, e);
+            }
+            catch (Exception e)
+            {
+                throw new EslException("Could not download the delegation report." + " Exception: " + e.Message, e);
+            }
+        }
+
+        public Silanis.ESL.SDK.DelegationReport DownloadDelegationReport(DateTime from, DateTime to)
+        {
+            try
+            {
+                string path = BuildDelegationReportUrl(from, to);
+                string response = restClient.Get(path);
+                Silanis.ESL.API.DelegationReport apiDelegationReport = JsonConvert.DeserializeObject<Silanis.ESL.API.DelegationReport>(response, settings);
+                return new DelegationReportConverter(apiDelegationReport).ToSDKDelegationReport();
+            }
+            catch (EslServerException e)
+            {
+                throw new EslServerException("Could not download the delegation report." + " Exception: " + e.Message, e.ServerError, e);
+            }
+            catch (Exception e)
+            {
+                throw new EslException("Could not download the delegation report." + " Exception: " + e.Message, e);
+            }
+        }
+
         public Silanis.ESL.SDK.DelegationReport DownloadDelegationReport(string senderId, DateTime from, DateTime to)
         {
             try
@@ -194,6 +247,42 @@ namespace Silanis.ESL.SDK.Services
             catch (Exception e)
             {
                 throw new EslException("Could not download the delegation report." + " Exception: " + e.Message, e);
+            }
+        }
+
+        public string DownloadDelegationReportAsCSV()
+        {
+            try
+            {
+                string path = BuildDelegationReportUrl();
+                string response = restClient.Get(path, "text/csv");
+                return response;
+            }
+            catch (EslServerException e)
+            {
+                throw new EslServerException("Could not download the delegation report in csv." + " Exception: " + e.Message, e.ServerError, e);
+            }
+            catch (Exception e)
+            {
+                throw new EslException("Could not download the delegation report in csv." + " Exception: " + e.Message, e);
+            }
+        }
+
+        public string DownloadDelegationReportAsCSV(DateTime from, DateTime to)
+        {
+            try
+            {
+                string path = BuildDelegationReportUrl(from, to);
+                string response = restClient.Get(path, "text/csv");
+                return response;
+            }
+            catch (EslServerException e)
+            {
+                throw new EslServerException("Could not download the delegation report in csv." + " Exception: " + e.Message, e.ServerError, e);
+            }
+            catch (Exception e)
+            {
+                throw new EslException("Could not download the delegation report in csv." + " Exception: " + e.Message, e);
             }
         }
 

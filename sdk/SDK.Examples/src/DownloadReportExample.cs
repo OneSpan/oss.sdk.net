@@ -16,11 +16,15 @@ namespace SDK.Examples
         public Silanis.ESL.SDK.CompletionReport sdkCompletionReportForSender;
         public Silanis.ESL.SDK.CompletionReport sdkCompletionReport;
         public Silanis.ESL.SDK.UsageReport sdkUsageReport;
-        public Silanis.ESL.SDK.DelegationReport sdkDelegationReport;
+        public Silanis.ESL.SDK.DelegationReport sdkDelegationReportForAccountWithoutDate;
+        public Silanis.ESL.SDK.DelegationReport sdkDelegationReportForAccount;
+        public Silanis.ESL.SDK.DelegationReport sdkDelegationReportForSender;
         public string csvCompletionReportForSender;
         public string csvCompletionReport;
         public string csvUsageReport;
-        public string csvDelegationReport;
+        public string csvDelegationReportForAccountWithoutDate;
+        public string csvDelegationReportForAccount;
+        public string csvDelegationReportForSender;
 
 
 		public static void Main(string[] args)
@@ -86,8 +90,14 @@ namespace SDK.Examples
             csvUsageReport = eslClient.ReportService.DownloadUsageReportAsCSV(from, to);
 
             // Download the delegation report for a sender
-            sdkDelegationReport = eslClient.ReportService.DownloadDelegationReport(senderUID, from, to);
-            csvDelegationReport = eslClient.ReportService.DownloadDelegationReportAsCSV(senderUID, from, to);
+            sdkDelegationReportForAccountWithoutDate = eslClient.ReportService.DownloadDelegationReport();
+            csvDelegationReportForAccountWithoutDate = eslClient.ReportService.DownloadDelegationReportAsCSV();
+
+            sdkDelegationReportForAccount = eslClient.ReportService.DownloadDelegationReport(from, to);
+            csvDelegationReportForAccount = eslClient.ReportService.DownloadDelegationReportAsCSV(from, to);
+
+            sdkDelegationReportForSender = eslClient.ReportService.DownloadDelegationReport(senderUID, from, to);
+            csvDelegationReportForSender = eslClient.ReportService.DownloadDelegationReportAsCSV(senderUID, from, to);
 		}
     }
 }

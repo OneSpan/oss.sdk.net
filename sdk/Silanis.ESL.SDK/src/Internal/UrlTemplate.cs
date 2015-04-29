@@ -44,7 +44,7 @@ namespace Silanis.ESL.SDK.Internal
         public static readonly string COMPLETION_REPORT_PATH = "/reports/completion?senderId={senderId}&status={status}&from={from}&to={to}";
         public static readonly string COMPLETION_REPORT_FOR_ALL_SENDERS_PATH = "/reports/completion?status={status}&from={from}&to={to}";
         public static readonly string USAGE_REPORT_PATH = "/reports/usage?from={from}&to={to}";
-        public static readonly string DELEGATION_REPORT_PATH = "/reports/delegation?senderId={senderId}&from={from}&to={to}";
+        public static readonly string DELEGATION_REPORT_PATH = "/reports/delegation";
 
         // Signer Service
         public static readonly string GET_SIGNER_PATH = "/packages/{packageId}/roles/{roleId}";

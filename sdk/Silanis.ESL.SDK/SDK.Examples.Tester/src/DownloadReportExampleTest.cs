@@ -39,10 +39,20 @@ namespace SDK.Examples
             Assert.IsNotEmpty(example.csvUsageReport, "Usage report in csv cannot be empty.");
 
 			// Assert correct download of delegation report
-			DelegationReport delegationReport = example.sdkDelegationReport;
-            Assert.GreaterOrEqual(delegationReport.DelegationEvents.Count, 0, "Number of DelegationEventReports should be greater than 0.");
-            Assert.IsNotNull(example.csvDelegationReport, "Delegation report in csv cannot be null.");
-            Assert.IsNotEmpty(example.csvDelegationReport, "Delegation report in csv cannot be empty.");
+            DelegationReport delegationReportForAccountWithoutDate = example.sdkDelegationReportForAccountWithoutDate;
+            Assert.GreaterOrEqual(delegationReportForAccountWithoutDate.DelegationEvents.Count, 0, "Number of DelegationEventReports should be greater than 0.");
+            Assert.IsNotNull(example.csvDelegationReportForAccountWithoutDate, "Delegation report in csv cannot be null.");
+            Assert.IsNotEmpty(example.csvDelegationReportForAccountWithoutDate, "Delegation report in csv cannot be empty.");
+
+            DelegationReport delegationReportForAccount = example.sdkDelegationReportForAccount;
+            Assert.GreaterOrEqual(delegationReportForAccount.DelegationEvents.Count, 0, "Number of DelegationEventReports should be greater than 0.");
+            Assert.IsNotNull(example.csvDelegationReportForAccount, "Delegation report in csv cannot be null.");
+            Assert.IsNotEmpty(example.csvDelegationReportForAccount, "Delegation report in csv cannot be empty.");
+
+            DelegationReport delegationReportForSender = example.sdkDelegationReportForSender;
+            Assert.GreaterOrEqual(delegationReportForAccountWithoutDate.DelegationEvents.Count, 0, "Number of DelegationEventReports should be greater than 0.");
+            Assert.IsNotNull(example.csvDelegationReportForSender, "Delegation report in csv cannot be null.");
+            Assert.IsNotEmpty(example.csvDelegationReportForSender, "Delegation report in csv cannot be empty.");
 		}
     }
 }
