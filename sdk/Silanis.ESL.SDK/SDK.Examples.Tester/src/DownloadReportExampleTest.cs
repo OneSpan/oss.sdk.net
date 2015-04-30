@@ -50,7 +50,7 @@ namespace SDK.Examples
             Assert.IsNotEmpty(example.csvDelegationReportForAccount, "Delegation report in csv cannot be empty.");
 
             DelegationReport delegationReportForSender = example.sdkDelegationReportForSender;
-            Assert.GreaterOrEqual(delegationReportForAccountWithoutDate.DelegationEvents.Count, 0, "Number of DelegationEventReports should be greater than 0.");
+            Assert.GreaterOrEqual(delegationReportForSender.DelegationEvents.Count, 0, "Number of DelegationEventReports should be greater than 0.");
             Assert.IsNotNull(example.csvDelegationReportForSender, "Delegation report in csv cannot be null.");
             Assert.IsNotEmpty(example.csvDelegationReportForSender, "Delegation report in csv cannot be empty.");
 		}
