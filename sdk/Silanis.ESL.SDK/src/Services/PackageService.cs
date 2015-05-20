@@ -388,7 +388,7 @@ namespace Silanis.ESL.SDK.Services
         /// <returns>The document to download.</returns>
         /// <param name="packageId">The package id.</param>
         /// <param name="documentId">The id of the document to download.</param>
-        public byte[] DownloadDocument(PackageId packageId, String documentId)
+        public DownloadedFile DownloadDocument(PackageId packageId, String documentId)
         {
             string path = template.UrlFor(UrlTemplate.PDF_PATH)
 				.Replace("{packageId}", packageId.Id)
@@ -415,7 +415,7 @@ namespace Silanis.ESL.SDK.Services
         /// <returns>The original document in bytes.</returns>
         /// <param name="packageId">Package identifier.</param>
         /// <param name="documentId">Document identifier.</param>
-        public byte[] DownloadOriginalDocument(PackageId packageId, String documentId)
+        public DownloadedFile DownloadOriginalDocument(PackageId packageId, String documentId)
         {
             string path = template.UrlFor(UrlTemplate.ORIGINAL_PATH)
                 .Replace("{packageId}", packageId.Id)
@@ -441,7 +441,7 @@ namespace Silanis.ESL.SDK.Services
         /// </summary>
         /// <returns>The zipped documents in byte array.</returns>
         /// <param name="packageId">.</param>
-        public byte[] DownloadZippedDocuments(PackageId packageId)
+        public DownloadedFile DownloadZippedDocuments(PackageId packageId)
         {
             string path = template.UrlFor(UrlTemplate.ZIP_PATH)
             .Replace("{packageId}", packageId.Id)
@@ -466,7 +466,7 @@ namespace Silanis.ESL.SDK.Services
         /// </summary>
         /// <returns>The evidence summary in byte array.</returns>
         /// <param name="packageId">The package id.</param>
-        public byte[] DownloadEvidenceSummary(PackageId packageId)
+        public DownloadedFile DownloadEvidenceSummary(PackageId packageId)
         {
             string path = template.UrlFor(UrlTemplate.EVIDENCE_SUMMARY_PATH)
                 .Replace("{packageId}", packageId.Id)
@@ -1314,7 +1314,7 @@ namespace Silanis.ESL.SDK.Services
             }
         }
 
-        public string GetJournalEntriesAsCSV(string userId) 
+        public DownloadedFile GetJournalEntriesAsCSV(string userId) 
         {
             string path = template.UrlFor(UrlTemplate.NOTARY_JOURNAL_CSV_PATH)
                     .Replace("{userId}", userId)
@@ -1322,7 +1322,7 @@ namespace Silanis.ESL.SDK.Services
 
             try
             {
-                return restClient.Get(path, "text/csv");
+                return restClient.GetBytes(path);
             } 
             catch (EslServerException e)
             {

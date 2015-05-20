@@ -114,7 +114,7 @@ namespace Silanis.ESL.SDK
             if (proxyConfiguration != null) 
                 HttpMethods.proxyConfiguration = proxyConfiguration;
 
-            byte[] responseBytes = HttpMethods.GetHttpJson(apiToken, path, HttpMethods.ESL_ACCEPT_TYPE_APPLICATION_JSON);
+            DownloadedFile responseBytes = HttpMethods.GetHttpJson(apiToken, path, HttpMethods.ESL_ACCEPT_TYPE_APPLICATION_JSON);
             string response = Converter.ToString(responseBytes);
             support.LogResponse(response);
 
@@ -128,11 +128,11 @@ namespace Silanis.ESL.SDK
             if (proxyConfiguration != null) 
                 HttpMethods.proxyConfiguration = proxyConfiguration;
 
-            byte[] responseBytes = HttpMethods.GetHttpJson(apiToken, path, acceptType);
+            DownloadedFile responseBytes = HttpMethods.GetHttpJson(apiToken, path, acceptType);
             return Converter.ToString(responseBytes);
         }
 
-        public byte[] GetBytes(string path) {
+        public DownloadedFile GetBytes(string path) {
             support.LogRequest("GET", path);
 
             if (proxyConfiguration != null) 
@@ -141,7 +141,7 @@ namespace Silanis.ESL.SDK
             return HttpMethods.GetHttp(apiToken, path);
         }
 
-        public byte[] GetHttpAsOctetStream(string path) {
+        public DownloadedFile GetHttpAsOctetStream(string path) {
             support.LogRequest("GET", path);
 
             if (proxyConfiguration != null) 

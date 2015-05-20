@@ -38,6 +38,21 @@ namespace Silanis.ESL.SDK.Internal
 			}
 		}
 
+        public static string ToString (DownloadedFile downloadedFile)
+        {
+            byte[] bytes = downloadedFile.Contents;
+            if (bytes != null && bytes.Length > 0)
+            {
+                System.Text.UTF8Encoding enc = new System.Text.UTF8Encoding();
+                string result = enc.GetString(bytes);
+                return result;
+            }
+            else
+            {
+                return "";
+            }
+        }
+
 		public static string apiKeyToUID (string apiKey)
 		{
 			string decodedString = Encoding.UTF8.GetString(Convert.FromBase64String(apiKey));

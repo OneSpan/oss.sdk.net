@@ -344,22 +344,22 @@ namespace Silanis.ESL.SDK
 			return authenticationTokenService.CreateAuthenticationToken();
 		}
 
-		public byte[] DownloadDocument (PackageId packageId, string documentId)
+        public DownloadedFile DownloadDocument (PackageId packageId, string documentId)
 		{
 			return packageService.DownloadDocument (packageId, documentId);
 		}
 
-        public byte[] DownloadOriginalDocument(PackageId packageId, string documentId)
+        public DownloadedFile DownloadOriginalDocument(PackageId packageId, string documentId)
         {
             return packageService.DownloadOriginalDocument(packageId, documentId);
         }
 
-		public byte[] DownloadEvidenceSummary (PackageId packageId)
+        public DownloadedFile DownloadEvidenceSummary (PackageId packageId)
 		{
 			return packageService.DownloadEvidenceSummary (packageId);
 		}
 
-		public byte[] DownloadZippedDocuments (PackageId packageId)
+        public DownloadedFile DownloadZippedDocuments (PackageId packageId)
 		{
 			return packageService.DownloadZippedDocuments (packageId);
 		}

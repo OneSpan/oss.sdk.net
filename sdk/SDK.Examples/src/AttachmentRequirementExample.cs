@@ -32,7 +32,10 @@ namespace SDK.Examples
         public readonly string SIGNER2_ID = "signer2Id";
         public readonly string REJECTION_COMMENT = "Reject: uploaded wrong attachment.";
 
-        public readonly string DOWNLOADED_ATTACHMENT_PDF = "downloadedAttachment.pdf";
+        public readonly string ATTACHMENT_FILE_NAME1 = DocumentTypeUtility.NormalizeName (DocumentType.PDF, "The attachment1 for signer1");
+        public readonly string ATTACHMENT_FILE_NAME2 = DocumentTypeUtility.NormalizeName (DocumentType.PDF, "The attachment2 for signer1");
+        public readonly string ATTACHMENT_FILE_NAME3 = DocumentTypeUtility.NormalizeName (DocumentType.PDF, "The attachment2 for signer2");
+
         public readonly string DOWNLOADED_ALL_ATTACHMENTS_FOR_PACKAGE_ZIP = "downloadedAllAttachmentsForPackage.zip";
         public readonly string DOWNLOADED_ALL_ATTACHMENTS_FOR_SIGNER1_IN_PACKAGE_ZIP = "downloadedAllAttachmentsForSigner1InPackage.zip";
         public readonly string DOWNLOADED_ALL_ATTACHMENTS_FOR_SIGNER2_IN_PACKAGE_ZIP = "downloadedAllAttachmentsForSigner2InPackage.zip";
@@ -126,10 +129,10 @@ namespace SDK.Examples
 
             byte[] attachment1ForSigner1FileContent = new StreamDocumentSource(attachmentInputStream1).Content();
             attachment1ForSigner1FileSize = attachment1ForSigner1FileContent.Length;
-            eslClient.UploadAttachment(packageId, signer1Att1.Id, DocumentTypeUtility.NormalizeName (DocumentType.PDF, "The attachment1 for signer1"), attachment1ForSigner1FileContent, SIGNER1_ID);
-            eslClient.UploadAttachment(packageId, signer2Att1.Id, DocumentTypeUtility.NormalizeName (DocumentType.PDF, "The attachment1 for signer2"), 
+            eslClient.UploadAttachment(packageId, signer1Att1.Id, ATTACHMENT_FILE_NAME1, attachment1ForSigner1FileContent, SIGNER1_ID);
+            eslClient.UploadAttachment(packageId, signer2Att1.Id, ATTACHMENT_FILE_NAME2, 
                                        new StreamDocumentSource(attachmentInputStream2).Content(), SIGNER2_ID);
-            eslClient.UploadAttachment(PackageId, signer2Att2.Id, DocumentTypeUtility.NormalizeName (DocumentType.PDF, "The attachment2 for signer2"), 
+            eslClient.UploadAttachment(PackageId, signer2Att2.Id, ATTACHMENT_FILE_NAME3, 
                                        new StreamDocumentSource(attachmentInputStream3).Content(), SIGNER2_ID);
 
             // Sender rejects Signer1's uploaded attachment
@@ -146,22 +149,22 @@ namespace SDK.Examples
             retrievedSigner1Att1RequirementSenderCommentAfterAccepting = retrievedPackageAfterAccepting.Signers[email1].Attachments[NAME1].SenderComment;
 
             // Download signer1's attachment
-            byte[] downloadedAttachment = eslClient.AttachmentRequirementService.DownloadAttachment(packageId, attachment1Id);
-            System.IO.File.WriteAllBytes(DOWNLOADED_ATTACHMENT_PDF, downloadedAttachment);
+            DownloadedFile downloadedAttachment = eslClient.AttachmentRequirementService.DownloadAttachment(packageId, attachment1Id);
+            System.IO.File.WriteAllBytes(downloadedAttachment.Filename, downloadedAttachment.Contents);
 
             // Download all attachments for the package
-            byte[] downloadedAllAttachmentsForPackage = eslClient.AttachmentRequirementService.DownloadAllAttachmentsForPackage(packageId);
-            System.IO.File.WriteAllBytes(DOWNLOADED_ALL_ATTACHMENTS_FOR_PACKAGE_ZIP, downloadedAllAttachmentsForPackage);
+            DownloadedFile downloadedAllAttachmentsForPackage = eslClient.AttachmentRequirementService.DownloadAllAttachmentsForPackage(packageId);
+            System.IO.File.WriteAllBytes(DOWNLOADED_ALL_ATTACHMENTS_FOR_PACKAGE_ZIP, downloadedAllAttachmentsForPackage.Contents);
 
             // Download all attachments for the signer1 in the package
-            byte[] downloadedAllAttachmentsForSigner1InPackage = eslClient.AttachmentRequirementService.DownloadAllAttachmentsForSignerInPackage(retrievedPackage, signer1);
-            System.IO.File.WriteAllBytes(DOWNLOADED_ALL_ATTACHMENTS_FOR_SIGNER1_IN_PACKAGE_ZIP, downloadedAllAttachmentsForSigner1InPackage);
+            DownloadedFile downloadedAllAttachmentsForSigner1InPackage = eslClient.AttachmentRequirementService.DownloadAllAttachmentsForSignerInPackage(retrievedPackage, signer1);
+            System.IO.File.WriteAllBytes(DOWNLOADED_ALL_ATTACHMENTS_FOR_SIGNER1_IN_PACKAGE_ZIP, downloadedAllAttachmentsForSigner1InPackage.Contents);
 
             // Download all attachments for the signer2 in the package
-            byte[] downloadedAllAttachmentsForSigner2InPackage = eslClient.AttachmentRequirementService.DownloadAllAttachmentsForSignerInPackage(retrievedPackage, signer2);
-            System.IO.File.WriteAllBytes(DOWNLOADED_ALL_ATTACHMENTS_FOR_SIGNER2_IN_PACKAGE_ZIP, downloadedAllAttachmentsForSigner2InPackage);
+            DownloadedFile downloadedAllAttachmentsForSigner2InPackage = eslClient.AttachmentRequirementService.DownloadAllAttachmentsForSignerInPackage(retrievedPackage, signer2);
+            System.IO.File.WriteAllBytes(DOWNLOADED_ALL_ATTACHMENTS_FOR_SIGNER2_IN_PACKAGE_ZIP, downloadedAllAttachmentsForSigner2InPackage.Contents);
 
-            downloadedAttachemnt1 = new FileInfo(DOWNLOADED_ATTACHMENT_PDF);
+            downloadedAttachemnt1 = new FileInfo(downloadedAttachment.Filename);
             downloadedAllAttachmentsForPackageZip = new ZipFile(DOWNLOADED_ALL_ATTACHMENTS_FOR_PACKAGE_ZIP);
             downloadedAllAttachmentsForSigner1InPackageZip = new ZipFile(DOWNLOADED_ALL_ATTACHMENTS_FOR_SIGNER1_IN_PACKAGE_ZIP);
             downloadedAllAttachmentsForSigner2InPackageZip = new ZipFile(DOWNLOADED_ALL_ATTACHMENTS_FOR_SIGNER2_IN_PACKAGE_ZIP);

@@ -190,7 +190,7 @@ namespace Silanis.ESL.SDK.Internal
             return true;
         }
 
-		public static byte[] GetHttpJson (string apiToken, string path, string acceptType)
+        public static DownloadedFile GetHttpJson (string apiToken, string path, string acceptType)
 		{
 			try {
 				HttpWebRequest request = (HttpWebRequest)WebRequest.Create (path);
@@ -202,11 +202,13 @@ namespace Silanis.ESL.SDK.Internal
 				WebResponse response = request.GetResponse ();
 
 				using (Stream responseStream = response.GetResponseStream()) {
+
 					var memoryStream = new MemoryStream ();
 					CopyTo (responseStream, memoryStream);
 					byte[] result = memoryStream.ToArray();
 
-					return result;
+                    DownloadedFile downloadedFile = new DownloadedFile("", result);
+                    return downloadedFile;
 				}
 			}
             catch (WebException e){
@@ -224,7 +226,7 @@ namespace Silanis.ESL.SDK.Internal
 			}
 		}
 
-		public static byte[] GetHttp (string apiToken, string path)
+        public static DownloadedFile GetHttp (string apiToken, string path)
 		{
 			try {
                 WebRequest request = WebRequest.Create (path);
@@ -237,9 +239,22 @@ namespace Silanis.ESL.SDK.Internal
 				using (Stream responseStream = response.GetResponseStream()) {
 					var memoryStream = new MemoryStream ();
 					CopyTo (responseStream, memoryStream);
-					byte[] result = memoryStream.ToArray();
+                    byte[] result = memoryStream.ToArray();
 
-					return result;
+                    string fileName = "";
+                    if(!String.IsNullOrEmpty(response.Headers["Content-Disposition"])) 
+                    {
+                        string disposition = response.Headers["Content-Disposition"].ToString();
+                        if(null != disposition) {
+                            int index = disposition.IndexOf("filename=", StringComparison.CurrentCultureIgnoreCase);
+                            if (index > 0) {
+                                fileName = disposition.Substring(index + 10, disposition.Length - index - 11);
+                            }
+                        }
+                    }
+                    DownloadedFile downloadedFile = new DownloadedFile(fileName, result);
+
+                    return downloadedFile;
 				}
 			}
             catch (WebException e){
@@ -257,7 +272,7 @@ namespace Silanis.ESL.SDK.Internal
 			}
 		}
 
-        public static byte[] GetHttpAsOctetStream (string apiToken, string path)
+        public static DownloadedFile GetHttpAsOctetStream (string apiToken, string path)
         {
             try {
                 HttpWebRequest request = (HttpWebRequest)WebRequest.Create (path);
@@ -273,7 +288,9 @@ namespace Silanis.ESL.SDK.Internal
                     CopyTo (responseStream, memoryStream);
                     byte[] result = memoryStream.ToArray();
 
-                    return result;
+                    DownloadedFile downloadedFile = new DownloadedFile("", result);
+
+                    return downloadedFile;
                 }
             }
             catch (WebException e){

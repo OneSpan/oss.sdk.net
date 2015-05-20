@@ -8,7 +8,7 @@ namespace SDK.Examples
     public class NotaryJournalExample : SDKSample
     {
         public List<NotaryJournalEntry> sdkJournalEntries;
-        public string csvJournalEntries;
+        public DownloadedFile csvJournalEntries;
         private string senderUID;
 
         public static void Main(string[] args)

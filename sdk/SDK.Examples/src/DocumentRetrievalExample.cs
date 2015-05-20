@@ -14,7 +14,8 @@ namespace SDK.Examples
 
         private string email1;
         private Stream fileStream1;
-        private byte[] pdfDocumentBytes, originalPdfDocumentBytes, zippedDocumentsBytes;
+
+        public DownloadedFile pdfDownloadedFile, originalPdfDownloadedFile, zippedDownloadedFile;
 
         public DocumentRetrievalExample(Props props) : this(props.Get("api.key"), props.Get("api.url"), props.Get("1.email"))
         {
@@ -24,30 +25,6 @@ namespace SDK.Examples
         {
             this.email1 = email1;
             this.fileStream1 = File.OpenRead(new FileInfo(Directory.GetCurrentDirectory() + "/src/prêt.pdf").FullName);
-        }
-
-        public byte[] PdfDocumentBytes
-        {
-            get
-            {
-                return pdfDocumentBytes;
-            }
-        }
-
-        public byte[] OriginalPdfDocumentBytes
-        {
-            get
-            {
-                return originalPdfDocumentBytes;
-            }
-        }
-
-        public byte[] ZippedDocumentsBytes
-        {
-            get
-            {
-                return zippedDocumentsBytes;
-            }
         }
 
         override public void Execute()
@@ -66,9 +43,9 @@ namespace SDK.Examples
 
             eslClient.SendPackage(package);
 
-            pdfDocumentBytes = eslClient.DownloadDocument(package, docId);  
-            originalPdfDocumentBytes = eslClient.DownloadOriginalDocument(package, docId);
-            zippedDocumentsBytes = eslClient.DownloadZippedDocuments(package);
+            pdfDownloadedFile = eslClient.DownloadDocument(package, docId);  
+            originalPdfDownloadedFile = eslClient.DownloadOriginalDocument(package, docId);
+            zippedDownloadedFile = eslClient.DownloadZippedDocuments(package);
 
             // To write the byte[] to a file, use:
             // System.IO.File.WriteAllBytes("/path/to/directory/myDocument.pdf", pdfDocumentBytes);

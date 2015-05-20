@@ -67,7 +67,7 @@ namespace Silanis.ESL.SDK
             }
         }
         
-        public byte[] DownloadAttachment(string packageId, string attachmentId)
+        public DownloadedFile DownloadAttachment(string packageId, string attachmentId)
         {
             string path = template.UrlFor(UrlTemplate.ATTACHMENT_REQUIREMENT_PATH)
                 .Replace("{packageId}", packageId)
@@ -88,7 +88,7 @@ namespace Silanis.ESL.SDK
             }
         }
 
-        public byte[] DownloadAllAttachmentsForPackage(string packageId)
+        public DownloadedFile DownloadAllAttachmentsForPackage(string packageId)
         {
             string path = template.UrlFor(UrlTemplate.ALL_ATTACHMENTS_PATH)
                 .Replace("{packageId}", packageId)
@@ -108,7 +108,7 @@ namespace Silanis.ESL.SDK
             }
         }
 
-        public byte[] DownloadAllAttachmentsForSignerInPackage(DocumentPackage sdkPackage, Signer signer)
+        public DownloadedFile DownloadAllAttachmentsForSignerInPackage(DocumentPackage sdkPackage, Signer signer)
         {
             Package apiPackage = new DocumentPackageConverter(sdkPackage).ToAPIPackage();
             string roleId = "";
@@ -126,7 +126,7 @@ namespace Silanis.ESL.SDK
             return DownloadAllAttachmentsForSignerInPackage(sdkPackage.Id.Id, roleId);
         }
 
-        private byte[] DownloadAllAttachmentsForSignerInPackage(string packageId, string roleId)
+        private DownloadedFile DownloadAllAttachmentsForSignerInPackage(string packageId, string roleId)
         {
             string path = template.UrlFor(UrlTemplate.ALL_ATTACHMENTS_FOR_ROLE_PATH)
                 .Replace("{packageId}", packageId)

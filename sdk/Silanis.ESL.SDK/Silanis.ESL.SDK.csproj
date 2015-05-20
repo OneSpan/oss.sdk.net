@@ -375,6 +375,7 @@
     <Compile Include="src\Internal\NoOpLogger.cs" />
     <Compile Include="src\Internal\Logger.cs" />
     <Compile Include="src\Internal\TraceLogger.cs" />
+    <Compile Include="src\DownloadedFile.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSHARP.Targets" />
   <ProjectExtensions>

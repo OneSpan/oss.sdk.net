@@ -18,8 +18,8 @@ namespace SDK.Examples
             // Verify if the document was uploaded correctly.
 
             Document document = documentPackage.Documents[example.UPLOADED_DOCUMENT_NAME];
-            byte[] documentBinary = example.EslClient.DownloadDocument(example.PackageId, document.Id);
-            Assert.Greater(documentBinary.Length, 0);
+            DownloadedFile documentFile = example.EslClient.DownloadDocument(example.PackageId, document.Id);
+            Assert.Greater(documentFile.Contents.Length, 0);
         }
     }
 }

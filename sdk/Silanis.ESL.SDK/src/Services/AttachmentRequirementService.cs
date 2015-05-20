@@ -56,7 +56,7 @@ namespace Silanis.ESL.SDK
 		/// <returns>The attachment.</returns>
 		/// <param name="packageId">Package identifier.</param>
 		/// <param name="attachmentId">Attachment identifier.</param>
-		public byte[] DownloadAttachment(PackageId packageId, String attachmentId)
+        public DownloadedFile DownloadAttachment(PackageId packageId, String attachmentId)
 		{
             return apiClient.DownloadAttachment(packageId.Id, attachmentId);
 		}
@@ -67,7 +67,7 @@ namespace Silanis.ESL.SDK
         /// <returns>The attachment.</returns>
         /// <param name="packageId">Package identifier.</param>
         /// <param name="attachmentId">Attachment identifier.</param>
-        public byte[] DownloadAllAttachmentsForPackage(PackageId packageId)
+        public DownloadedFile DownloadAllAttachmentsForPackage(PackageId packageId)
         {
             return apiClient.DownloadAllAttachmentsForPackage(packageId.Id);
         }
@@ -78,7 +78,7 @@ namespace Silanis.ESL.SDK
         /// <returns>The attachment.</returns>
         /// <param name="packageId">Package identifier.</param>
         /// <param name="attachmentId">Attachment identifier.</param>
-        public byte[] DownloadAllAttachmentsForSignerInPackage(DocumentPackage sdkPackage, Signer signer)
+        public DownloadedFile DownloadAllAttachmentsForSignerInPackage(DocumentPackage sdkPackage, Signer signer)
         {
             return apiClient.DownloadAllAttachmentsForSignerInPackage(sdkPackage, signer);
         }
