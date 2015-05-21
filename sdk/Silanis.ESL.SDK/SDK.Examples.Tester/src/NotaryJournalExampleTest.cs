@@ -13,7 +13,8 @@ namespace SDK.Examples
             example.Run();
 
             Assert.IsNotNull(example.sdkJournalEntries);
-            Assert.IsNotNull(example.csvJournalEntries);
+            Assert.IsNotNull(example.csvJournalEntries.Filename);
+            Assert.IsNotNull(example.csvJournalEntries.Contents);
         }
     }
 }
