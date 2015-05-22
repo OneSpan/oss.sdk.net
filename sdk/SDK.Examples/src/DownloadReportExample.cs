@@ -10,17 +10,18 @@ namespace SDK.Examples
     public class DownloadReportExample : SDKSample
 	{
         public string email1;
-        private string senderUID;
+        public string senderUID;
         private Stream fileStream1;
+        private Stream fileStream2;
 
-        public Silanis.ESL.SDK.CompletionReport sdkCompletionReportForSender;
-        public Silanis.ESL.SDK.CompletionReport sdkCompletionReport;
+        public PackageId package2Id;
+        public Silanis.ESL.SDK.CompletionReport sdkCompletionReportForSenderDraft, sdkCompletionReportForSenderSent, sdkCompletionReportDraft, sdkCompletionReportSent;
         public Silanis.ESL.SDK.UsageReport sdkUsageReport;
         public Silanis.ESL.SDK.DelegationReport sdkDelegationReportForAccountWithoutDate;
         public Silanis.ESL.SDK.DelegationReport sdkDelegationReportForAccount;
         public Silanis.ESL.SDK.DelegationReport sdkDelegationReportForSender;
-        public string csvCompletionReportForSender;
-        public string csvCompletionReport;
+
+        public string csvCompletionReportForSenderDraft, csvCompletionReportForSenderSent, csvCompletionReportDraft, csvCompletionReportSent;
         public string csvUsageReport;
         public string csvDelegationReportForAccountWithoutDate;
         public string csvDelegationReportForAccount;
@@ -40,13 +41,14 @@ namespace SDK.Examples
 		{
 			this.email1 = email1;
 			this.senderUID = Converter.apiKeyToUID(apiKey);
-			this.fileStream1 = File.OpenRead(new FileInfo(Directory.GetCurrentDirectory() + "/src/document.pdf").FullName);
+            this.fileStream1 = File.OpenRead(new FileInfo(Directory.GetCurrentDirectory() + "/src/document.pdf").FullName);
+			this.fileStream2 = File.OpenRead(new FileInfo(Directory.GetCurrentDirectory() + "/src/document.pdf").FullName);
 		}
 
 		override public void Execute()
 		{
 			DocumentPackage superDuperPackage =
-                PackageBuilder.NewPackageNamed("DownloadReport: " + DateTime.Now)
+                PackageBuilder.NewPackageNamed("DownloadReportForDraft: " + DateTime.Now)
 					.DescribedAs("This is a package created using the e-SignLive SDK")
 					.ExpiresOn(DateTime.Now.AddMonths(100))
 					.WithEmailMessage("This message should be delivered to all signers")
@@ -73,17 +75,51 @@ namespace SDK.Examples
 
 			packageId = eslClient.CreatePackage(superDuperPackage);
 
+            DocumentPackage superDuperPackage2 =
+                PackageBuilder.NewPackageNamed("DownloadReportForSent: " + DateTime.Now)
+                    .DescribedAs("This is a package created using the e-SignLive SDK")
+                    .ExpiresOn(DateTime.Now.AddMonths(100))
+                    .WithEmailMessage("This message should be delivered to all signers")
+                    .WithSigner(SignerBuilder.NewSignerWithEmail(email1)
+                                .WithCustomId("Client1")
+                                .WithFirstName("John")
+                                .WithLastName("Smith")
+                                .WithTitle("Managing Director")
+                                .WithCompany("Acme Inc.")
+                                )
+                    .WithDocument(DocumentBuilder.NewDocumentNamed("First Document")
+                                  .FromStream(fileStream2, DocumentType.PDF)
+                                  .WithSignature(SignatureBuilder.SignatureFor(email1)
+                                   .OnPage(0)
+                                   .WithField(FieldBuilder.CheckBox()
+                               .OnPage(0)
+                               .AtPosition(400, 200)
+                               .WithValue(FieldBuilder.CHECKBOX_CHECKED)
+                               )
+                                   .AtPosition(100, 100)
+                                   )
+                                  )
+                    .Build();
+
+            package2Id = eslClient.CreateAndSendPackage(superDuperPackage2);
+
 			// Date and time range to get completion report.
 			DateTime from = DateTime.Today.AddDays(-1);
 			DateTime to = DateTime.Now;
 
             // Download the completion report for a sender
-            sdkCompletionReportForSender = eslClient.ReportService.DownloadCompletionReport(DocumentPackageStatus.DRAFT, senderUID, from, to);
-            csvCompletionReportForSender = eslClient.ReportService.DownloadCompletionReportAsCSV(DocumentPackageStatus.DRAFT, senderUID, from, to);
+            sdkCompletionReportForSenderDraft = eslClient.ReportService.DownloadCompletionReport(DocumentPackageStatus.DRAFT, senderUID, from, to);
+            csvCompletionReportForSenderDraft = eslClient.ReportService.DownloadCompletionReportAsCSV(DocumentPackageStatus.DRAFT, senderUID, from, to);
+
+            sdkCompletionReportForSenderSent = eslClient.ReportService.DownloadCompletionReport(DocumentPackageStatus.SENT, senderUID, from, to);
+            csvCompletionReportForSenderSent = eslClient.ReportService.DownloadCompletionReportAsCSV(DocumentPackageStatus.SENT, senderUID, from, to);
 
             // Download the completion report for all senders
-            sdkCompletionReport = eslClient.ReportService.DownloadCompletionReport(DocumentPackageStatus.DRAFT, from, to);
-            csvCompletionReport = eslClient.ReportService.DownloadCompletionReportAsCSV(DocumentPackageStatus.DRAFT, from, to);
+            sdkCompletionReportDraft = eslClient.ReportService.DownloadCompletionReport(DocumentPackageStatus.DRAFT, from, to);
+            csvCompletionReportDraft = eslClient.ReportService.DownloadCompletionReportAsCSV(DocumentPackageStatus.DRAFT, from, to);
+
+            sdkCompletionReportSent = eslClient.ReportService.DownloadCompletionReport(DocumentPackageStatus.SENT, from, to);
+            csvCompletionReportSent = eslClient.ReportService.DownloadCompletionReportAsCSV(DocumentPackageStatus.SENT, from, to);
 
             // Download the usage report
             sdkUsageReport = eslClient.ReportService.DownloadUsageReport(from, to);
