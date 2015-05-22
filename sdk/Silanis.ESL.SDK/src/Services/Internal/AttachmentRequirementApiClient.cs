@@ -66,13 +66,19 @@ namespace Silanis.ESL.SDK
                 throw new EslException("Could not reject attachment for signer." + " Exception: " + e.Message,e);
             }
         }
-        
-        public DownloadedFile DownloadAttachment(string packageId, string attachmentId)
+
+        [Obsolete("This method was replaced by DownloadAttachmentFile")]
+        public byte[] DownloadAttachment(string packageId, string attachmentId)
+        {
+            return DownloadAttachmentFile(packageId, attachmentId).Contents;
+        }
+
+        public DownloadedFile DownloadAttachmentFile(string packageId, string attachmentId)
         {
             string path = template.UrlFor(UrlTemplate.ATTACHMENT_REQUIREMENT_PATH)
                 .Replace("{packageId}", packageId)
-                .Replace("{attachmentId}", attachmentId)
-                .Build();
+                    .Replace("{attachmentId}", attachmentId)
+                    .Build();
 
             try 
             {
@@ -88,7 +94,13 @@ namespace Silanis.ESL.SDK
             }
         }
 
-        public DownloadedFile DownloadAllAttachmentsForPackage(string packageId)
+        [Obsolete("This method was replaced by DownloadAllAttachmentFilesForPackage")]
+        public byte[] DownloadAllAttachmentsForPackage(string packageId)
+        {
+            return DownloadAllAttachmentFilesForPackage(packageId).Contents;
+        }
+
+        public DownloadedFile DownloadAllAttachmentFilesForPackage(string packageId)
         {
             string path = template.UrlFor(UrlTemplate.ALL_ATTACHMENTS_PATH)
                 .Replace("{packageId}", packageId)
@@ -108,7 +120,13 @@ namespace Silanis.ESL.SDK
             }
         }
 
-        public DownloadedFile DownloadAllAttachmentsForSignerInPackage(DocumentPackage sdkPackage, Signer signer)
+        [Obsolete("This method was replaced by DownloadAllAttachmentFilesForSignerInPackage")]
+        public byte[] DownloadAllAttachmentsForSignerInPackage(DocumentPackage sdkPackage, Signer signer)
+        {
+            return DownloadAllAttachmentFilesForSignerInPackage(sdkPackage, signer).Contents;
+        }
+
+        public DownloadedFile DownloadAllAttachmentFilesForSignerInPackage(DocumentPackage sdkPackage, Signer signer)
         {
             Package apiPackage = new DocumentPackageConverter(sdkPackage).ToAPIPackage();
             string roleId = "";

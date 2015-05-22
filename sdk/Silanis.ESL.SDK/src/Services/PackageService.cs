@@ -388,7 +388,7 @@ namespace Silanis.ESL.SDK.Services
         /// <returns>The document to download.</returns>
         /// <param name="packageId">The package id.</param>
         /// <param name="documentId">The id of the document to download.</param>
-        public DownloadedFile DownloadDocument(PackageId packageId, String documentId)
+        public byte[] DownloadDocument(PackageId packageId, String documentId)
         {
             string path = template.UrlFor(UrlTemplate.PDF_PATH)
 				.Replace("{packageId}", packageId.Id)
@@ -397,7 +397,7 @@ namespace Silanis.ESL.SDK.Services
 
             try
             {
-                return restClient.GetHttpAsOctetStream(path);
+                return restClient.GetHttpAsOctetStream(path).Contents;
             }
             catch (EslServerException e)
             {
@@ -415,7 +415,7 @@ namespace Silanis.ESL.SDK.Services
         /// <returns>The original document in bytes.</returns>
         /// <param name="packageId">Package identifier.</param>
         /// <param name="documentId">Document identifier.</param>
-        public DownloadedFile DownloadOriginalDocument(PackageId packageId, String documentId)
+        public byte[] DownloadOriginalDocument(PackageId packageId, String documentId)
         {
             string path = template.UrlFor(UrlTemplate.ORIGINAL_PATH)
                 .Replace("{packageId}", packageId.Id)
@@ -424,7 +424,7 @@ namespace Silanis.ESL.SDK.Services
 
             try
             {
-                return restClient.GetHttpAsOctetStream(path);
+                return restClient.GetHttpAsOctetStream(path).Contents;
             }
             catch (EslServerException e)
             {
@@ -441,7 +441,7 @@ namespace Silanis.ESL.SDK.Services
         /// </summary>
         /// <returns>The zipped documents in byte array.</returns>
         /// <param name="packageId">.</param>
-        public DownloadedFile DownloadZippedDocuments(PackageId packageId)
+        public byte[] DownloadZippedDocuments(PackageId packageId)
         {
             string path = template.UrlFor(UrlTemplate.ZIP_PATH)
             .Replace("{packageId}", packageId.Id)
@@ -449,7 +449,7 @@ namespace Silanis.ESL.SDK.Services
 
             try
             {
-                return restClient.GetBytes(path);
+                return restClient.GetBytes(path).Contents;
             }
             catch (EslServerException e)
             {
@@ -466,7 +466,7 @@ namespace Silanis.ESL.SDK.Services
         /// </summary>
         /// <returns>The evidence summary in byte array.</returns>
         /// <param name="packageId">The package id.</param>
-        public DownloadedFile DownloadEvidenceSummary(PackageId packageId)
+        public byte[] DownloadEvidenceSummary(PackageId packageId)
         {
             string path = template.UrlFor(UrlTemplate.EVIDENCE_SUMMARY_PATH)
                 .Replace("{packageId}", packageId.Id)
@@ -474,7 +474,7 @@ namespace Silanis.ESL.SDK.Services
 
             try
             {
-                return restClient.GetBytes(path);
+                return restClient.GetBytes(path).Contents;
             }
             catch (EslServerException e)
             {

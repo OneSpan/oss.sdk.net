@@ -149,19 +149,19 @@ namespace SDK.Examples
             retrievedSigner1Att1RequirementSenderCommentAfterAccepting = retrievedPackageAfterAccepting.Signers[email1].Attachments[NAME1].SenderComment;
 
             // Download signer1's attachment
-            DownloadedFile downloadedAttachment = eslClient.AttachmentRequirementService.DownloadAttachment(packageId, attachment1Id);
+            DownloadedFile downloadedAttachment = eslClient.AttachmentRequirementService.DownloadAttachmentFile(packageId, attachment1Id);
             System.IO.File.WriteAllBytes(downloadedAttachment.Filename, downloadedAttachment.Contents);
 
             // Download all attachments for the package
-            DownloadedFile downloadedAllAttachmentsForPackage = eslClient.AttachmentRequirementService.DownloadAllAttachmentsForPackage(packageId);
+            DownloadedFile downloadedAllAttachmentsForPackage = eslClient.AttachmentRequirementService.DownloadAllAttachmentFilesForPackage(packageId);
             System.IO.File.WriteAllBytes(DOWNLOADED_ALL_ATTACHMENTS_FOR_PACKAGE_ZIP, downloadedAllAttachmentsForPackage.Contents);
 
             // Download all attachments for the signer1 in the package
-            DownloadedFile downloadedAllAttachmentsForSigner1InPackage = eslClient.AttachmentRequirementService.DownloadAllAttachmentsForSignerInPackage(retrievedPackage, signer1);
+            DownloadedFile downloadedAllAttachmentsForSigner1InPackage = eslClient.AttachmentRequirementService.DownloadAllAttachmentFilesForSignerInPackage(retrievedPackage, signer1);
             System.IO.File.WriteAllBytes(DOWNLOADED_ALL_ATTACHMENTS_FOR_SIGNER1_IN_PACKAGE_ZIP, downloadedAllAttachmentsForSigner1InPackage.Contents);
 
             // Download all attachments for the signer2 in the package
-            DownloadedFile downloadedAllAttachmentsForSigner2InPackage = eslClient.AttachmentRequirementService.DownloadAllAttachmentsForSignerInPackage(retrievedPackage, signer2);
+            DownloadedFile downloadedAllAttachmentsForSigner2InPackage = eslClient.AttachmentRequirementService.DownloadAllAttachmentFilesForSignerInPackage(retrievedPackage, signer2);
             System.IO.File.WriteAllBytes(DOWNLOADED_ALL_ATTACHMENTS_FOR_SIGNER2_IN_PACKAGE_ZIP, downloadedAllAttachmentsForSigner2InPackage.Contents);
 
             downloadedAttachemnt1 = new FileInfo(downloadedAttachment.Filename);

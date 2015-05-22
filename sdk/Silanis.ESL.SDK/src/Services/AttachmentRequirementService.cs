@@ -50,37 +50,54 @@ namespace Silanis.ESL.SDK
             packageService.UpdateSigner(packageId, signer);
         }
 
-		/// <summary>
-		/// Sender downloads the attachment.
-		/// </summary>
-		/// <returns>The attachment.</returns>
-		/// <param name="packageId">Package identifier.</param>
-		/// <param name="attachmentId">Attachment identifier.</param>
-        public DownloadedFile DownloadAttachment(PackageId packageId, String attachmentId)
+        [Obsolete("This method was replaced by DownloadAttachmentFile")]
+        public byte[] DownloadAttachment(PackageId packageId, String attachmentId)
 		{
-            return apiClient.DownloadAttachment(packageId.Id, attachmentId);
+            return DownloadAttachmentFile(packageId, attachmentId).Contents;
 		}
 
         /// <summary>
-        /// Sender downloads the attachment.
+        /// Sender downloads the attachment file.
         /// </summary>
-        /// <returns>The attachment.</returns>
+        /// <returns>The attachment file with file name.</returns>
         /// <param name="packageId">Package identifier.</param>
         /// <param name="attachmentId">Attachment identifier.</param>
-        public DownloadedFile DownloadAllAttachmentsForPackage(PackageId packageId)
+        public DownloadedFile DownloadAttachmentFile(PackageId packageId, String attachmentId)
         {
-            return apiClient.DownloadAllAttachmentsForPackage(packageId.Id);
+            return apiClient.DownloadAttachmentFile(packageId.Id, attachmentId);
+        }
+
+        [Obsolete("This method was replaced by DownloadAllAttachmentFilesForPackage")]
+        public byte[] DownloadAllAttachmentsForPackage(PackageId packageId)
+        {
+            return DownloadAllAttachmentFilesForPackage(packageId).Contents;
         }
 
         /// <summary>
-        /// Sender downloads the attachment.
+        /// Sender downloads all attachment files for the package.
         /// </summary>
-        /// <returns>The attachment.</returns>
+        /// <returns>The attachment files with file name.</returns>
         /// <param name="packageId">Package identifier.</param>
-        /// <param name="attachmentId">Attachment identifier.</param>
-        public DownloadedFile DownloadAllAttachmentsForSignerInPackage(DocumentPackage sdkPackage, Signer signer)
+        public DownloadedFile DownloadAllAttachmentFilesForPackage(PackageId packageId)
         {
-            return apiClient.DownloadAllAttachmentsForSignerInPackage(sdkPackage, signer);
+            return apiClient.DownloadAllAttachmentFilesForPackage(packageId.Id);
+        }
+
+        [Obsolete("This method was replaced by DownloadAllAttachmentFilesForSignerInPackage")]
+        public byte[] DownloadAllAttachmentsForSignerInPackage(DocumentPackage sdkPackage, Signer signer)
+        {
+            return DownloadAllAttachmentFilesForSignerInPackage(sdkPackage, signer).Contents;
+        }
+
+        /// <summary>
+        /// Sender downloads all attachment files for the signer in the package.
+        /// </summary>
+        /// <returns>The attachment files with file name.</returns>
+        /// <param name="packageId">Package identifier.</param>
+        /// <param name="signer">Signer.</param>
+        public DownloadedFile DownloadAllAttachmentFilesForSignerInPackage(DocumentPackage sdkPackage, Signer signer)
+        {
+            return apiClient.DownloadAllAttachmentFilesForSignerInPackage(sdkPackage, signer);
         }
 
         public void UploadAttachment(PackageId packageId, string attachmentId, string fileName, byte[] fileBytes, string signerSessionId)

@@ -15,7 +15,7 @@ namespace SDK.Examples
         private string email1;
         private Stream fileStream1;
 
-        public DownloadedFile pdfDownloadedFile, originalPdfDownloadedFile, zippedDownloadedFile;
+        public byte[] pdfDownloadedBytes, originalPdfDownloadedBytes, zippedDownloadedBytes;
 
         public DocumentRetrievalExample(Props props) : this(props.Get("api.key"), props.Get("api.url"), props.Get("1.email"))
         {
@@ -43,9 +43,9 @@ namespace SDK.Examples
 
             eslClient.SendPackage(package);
 
-            pdfDownloadedFile = eslClient.DownloadDocument(package, docId);  
-            originalPdfDownloadedFile = eslClient.DownloadOriginalDocument(package, docId);
-            zippedDownloadedFile = eslClient.DownloadZippedDocuments(package);
+            pdfDownloadedBytes = eslClient.DownloadDocument(package, docId);  
+            originalPdfDownloadedBytes = eslClient.DownloadOriginalDocument(package, docId);
+            zippedDownloadedBytes = eslClient.DownloadZippedDocuments(package);
 
             // To write the byte[] to a file, use:
             // System.IO.File.WriteAllBytes("/path/to/directory/myDocument.pdf", pdfDocumentBytes);
