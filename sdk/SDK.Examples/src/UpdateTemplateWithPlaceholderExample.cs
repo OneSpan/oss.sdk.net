@@ -12,7 +12,7 @@ namespace SDK.Examples
             new UpdateTemplateWithPlaceholderExample(Props.GetInstance()).Run();
         }
 
-        private string email1, email2;
+        private string email1;
         private Stream fileStream1, fileStream2;
 
         public PackageId templateId;
@@ -25,9 +25,6 @@ namespace SDK.Examples
         public readonly string TEMPLATE_EMAIL_MESSAGE = "This message should be delivered to all signers";
         public readonly string TEMPLATE_SIGNER_FIRST = "John";
         public readonly string TEMPLATE_SIGNER_LAST = "Smith";
-
-        public readonly string PACKAGE_NAME = "UpdateTemplateWithPlaceholderExample Package: "  + DateTime.Now;
-        public readonly string PACKAGE_DESCRIPTION = "This is a package created using the e-SignLive SDK";
 
         public readonly string PLACEHOLDER_ID = "PlaceholderId1";
         public readonly string PLACEHOLDER2_ID = "PlaceholderId2";
