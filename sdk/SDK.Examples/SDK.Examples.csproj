@@ -153,6 +153,7 @@
     <Compile Include="src\ApplicationVersionExample.cs" />
     <Compile Include="src\PackageInformationExample.cs" />
     <Compile Include="src\SignableSignaturesExample.cs" />
+    <Compile Include="src\UpdateTemplateWithPlaceholderExample.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

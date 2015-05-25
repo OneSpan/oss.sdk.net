@@ -121,6 +121,7 @@
     <Compile Include="src\PackageInformationExampleTest.cs" />
     <Compile Include="src\SignableSignaturesExampleTest.cs" />
     <Compile Include="src\internal\CSVReader.cs" />
+    <Compile Include="src\UpdateTemplateWithPlaceholderExampleTest.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
