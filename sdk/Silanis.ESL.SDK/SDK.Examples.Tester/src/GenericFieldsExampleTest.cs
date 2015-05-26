@@ -86,6 +86,13 @@ namespace SDK.Examples
                         Assert.AreEqual(FieldStyle.TEXT_AREA, field.Style);
                         Assert.AreEqual(GenericFieldsExample.TEXT_AREA_VALUE, field.Value);
                     }
+                    // Label Field
+                    if (field.Id == GenericFieldsExample.LABEL_FIELD_ID) 
+                    {
+                        Assert.AreEqual(GenericFieldsExample.LABEL_FIELD_PAGE, field.Page);
+                        Assert.AreEqual(FieldStyle.LABELFIELD, field.Style);
+                        Assert.AreEqual(GenericFieldsExample.LABEL_FIELD_VALUE, field.Value);
+                    }
                 }
             }
         }

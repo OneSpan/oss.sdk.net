@@ -37,6 +37,9 @@ namespace SDK.Examples
         public static readonly string TEXT_AREA_ID = "textAreaId";
         public static readonly int TEXT_AREA_PAGE = 0;
         public static readonly string TEXT_AREA_VALUE = "textAreaValue";
+        public static readonly string LABEL_FIELD_ID = "labelFieldId";
+        public static readonly int LABEL_FIELD_PAGE = 0;
+        public static readonly string LABEL_FIELD_VALUE = "labelFieldValue";
 
         public GenericFieldsExample(Props props) : this(props.Get("api.key"), props.Get("api.url"), props.Get("1.email"))
         {
@@ -108,7 +111,13 @@ namespace SDK.Examples
                                    .WithValue(TEXT_AREA_VALUE)
                                    .OnPage(TEXT_AREA_PAGE)
                                    .WithSize(400, 600)
-                                   .AtPosition(200, 200))))
+                                   .AtPosition(200, 200))
+                               .WithField(FieldBuilder.Labelfield()
+                                   .WithId(LABEL_FIELD_ID)
+                                   .WithValue(LABEL_FIELD_VALUE)
+                                   .OnPage(LABEL_FIELD_PAGE)
+                                   .WithSize(100, 60)
+                                   .AtPosition(220, 220))))
 					.Build();
 
             packageId = eslClient.CreatePackage(package);
