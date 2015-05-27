@@ -10,148 +10,161 @@ namespace SDK.Examples
 	[TestFixture()]
     public class DownloadReportExampleTest
     {
+        private System.Object lockThis = new System.Object();
+
 		[Test()]
 		public void VerifyResult()
 		{
-            DownloadReportExample example = new DownloadReportExample(Props.GetInstance());
-			example.Run();
+            lock (lockThis)
+            {
+                DownloadReportExample example = new DownloadReportExample(Props.GetInstance());
+                example.Run();
 
-            // Assert correct download of completion report for a sender
-            CompletionReport completionReportForSender = example.sdkCompletionReportForSenderDraft;
-            Assert.AreEqual(completionReportForSender.Senders.Count, 1, "There should be only 1 sender.");
-            Assert.GreaterOrEqual(completionReportForSender.Senders[0].Packages.Count, 1, "Number of package completion reports should be greater than 1.");
-            Assert.GreaterOrEqual(completionReportForSender.Senders[0].Packages[0].Documents.Count, 1, "Number of document completion reports should be greater than 1.");
-            Assert.GreaterOrEqual(completionReportForSender.Senders[0].Packages[0].Signers.Count, 1, "Number of signer completion reports should be greater than 1.");
+                // Assert correct download of completion report for a sender
+                CompletionReport completionReportForSender = example.sdkCompletionReportForSenderDraft;
+                Assert.AreEqual(completionReportForSender.Senders.Count, 1, "There should be only 1 sender.");
+                Assert.GreaterOrEqual(completionReportForSender.Senders[0].Packages.Count, 1, "Number of package completion reports should be greater than 1.");
+                Assert.GreaterOrEqual(completionReportForSender.Senders[0].Packages[0].Documents.Count, 1, "Number of document completion reports should be greater than 1.");
+                Assert.GreaterOrEqual(completionReportForSender.Senders[0].Packages[0].Signers.Count, 1, "Number of signer completion reports should be greater than 1.");
 
-            AssertCreatedPackageIncludedInCompletionReport(completionReportForSender, example.senderUID, example.PackageId, "DRAFT");
+                AssertCreatedPackageIncludedInCompletionReport(completionReportForSender, example.senderUID, example.PackageId, "DRAFT");
 
-            Assert.IsNotNull(example.csvCompletionReportForSenderDraft);
-            Assert.IsNotEmpty(example.csvCompletionReportForSenderDraft);
+                Assert.IsNotNull(example.csvCompletionReportForSenderDraft);
+                Assert.IsNotEmpty(example.csvCompletionReportForSenderDraft);
 
-            CSVReader reader = new CSVReader(new StreamReader(new MemoryStream(Encoding.UTF8.GetBytes(example.csvCompletionReportForSenderDraft))));
-            IList<string[]> rows = reader.readAll();
+                CSVReader reader = new CSVReader(new StreamReader(new MemoryStream(Encoding.UTF8.GetBytes(example.csvCompletionReportForSenderDraft))));
+                IList<string[]> rows = reader.readAll();
 
-            if(completionReportForSender.Senders[0].Packages.Count > 0) {
-                Assert.AreEqual(completionReportForSender.Senders[0].Packages.Count + 1, rows.Count);
-            }
+                if (completionReportForSender.Senders[0].Packages.Count > 0)
+                {
+                    Assert.AreEqual(completionReportForSender.Senders[0].Packages.Count + 1, rows.Count);
+                }
 
-            AssertCreatedPackageIncludedInCSV(rows, example.PackageId, "DRAFT");
+                AssertCreatedPackageIncludedInCSV(rows, example.PackageId, "DRAFT");
 
-            completionReportForSender = example.sdkCompletionReportForSenderSent;
-            Assert.AreEqual(completionReportForSender.Senders.Count, 1, "There should be only 1 sender.");
-            Assert.GreaterOrEqual(completionReportForSender.Senders[0].Packages.Count, 1, "Number of package completion reports should be greater than 1.");
-            Assert.GreaterOrEqual(completionReportForSender.Senders[0].Packages[0].Documents.Count, 1, "Number of document completion reports should be greater than 1.");
-            Assert.GreaterOrEqual(completionReportForSender.Senders[0].Packages[0].Signers.Count, 1, "Number of signer completion reports should be greater than 1.");
+                completionReportForSender = example.sdkCompletionReportForSenderSent;
+                Assert.AreEqual(completionReportForSender.Senders.Count, 1, "There should be only 1 sender.");
+                Assert.GreaterOrEqual(completionReportForSender.Senders[0].Packages.Count, 1, "Number of package completion reports should be greater than 1.");
+                Assert.GreaterOrEqual(completionReportForSender.Senders[0].Packages[0].Documents.Count, 1, "Number of document completion reports should be greater than 1.");
+                Assert.GreaterOrEqual(completionReportForSender.Senders[0].Packages[0].Signers.Count, 1, "Number of signer completion reports should be greater than 1.");
 
-            AssertCreatedPackageIncludedInCompletionReport(completionReportForSender, example.senderUID, example.package2Id, "SENT");
+                AssertCreatedPackageIncludedInCompletionReport(completionReportForSender, example.senderUID, example.package2Id, "SENT");
 
-            Assert.IsNotNull(example.csvCompletionReportForSenderSent);
-            Assert.IsNotEmpty(example.csvCompletionReportForSenderSent);
+                Assert.IsNotNull(example.csvCompletionReportForSenderSent);
+                Assert.IsNotEmpty(example.csvCompletionReportForSenderSent);
 
-            reader = new CSVReader(new StreamReader(new MemoryStream(Encoding.UTF8.GetBytes(example.csvCompletionReportForSenderSent))));
-            rows = reader.readAll();
+                reader = new CSVReader(new StreamReader(new MemoryStream(Encoding.UTF8.GetBytes(example.csvCompletionReportForSenderSent))));
+                rows = reader.readAll();
 
-            if(completionReportForSender.Senders[0].Packages.Count > 0) {
-                Assert.AreEqual(completionReportForSender.Senders[0].Packages.Count + 1, rows.Count);
-            }
+                if (completionReportForSender.Senders[0].Packages.Count > 0)
+                {
+                    Assert.AreEqual(completionReportForSender.Senders[0].Packages.Count + 1, rows.Count);
+                }
 
-            AssertCreatedPackageIncludedInCSV(rows, example.package2Id, "SENT");
+                AssertCreatedPackageIncludedInCSV(rows, example.package2Id, "SENT");
 
-            // Assert correct download of completion report for all senders
-            CompletionReport completionReport = example.sdkCompletionReportDraft;
-            Assert.GreaterOrEqual(completionReport.Senders.Count, 1, "Number of sender should be greater than 1.");
-            Assert.GreaterOrEqual(completionReport.Senders[0].Packages.Count, 0, "Number of package completion reports should be greater than 0.");
+                // Assert correct download of completion report for all senders
+                CompletionReport completionReport = example.sdkCompletionReportDraft;
+                Assert.GreaterOrEqual(completionReport.Senders.Count, 1, "Number of sender should be greater than 1.");
+                Assert.GreaterOrEqual(completionReport.Senders[0].Packages.Count, 0, "Number of package completion reports should be greater than 0.");
 
-            AssertCreatedPackageIncludedInCompletionReport(completionReport, example.senderUID, example.PackageId, "DRAFT");
+                AssertCreatedPackageIncludedInCompletionReport(completionReport, example.senderUID, example.PackageId, "DRAFT");
 
-            Assert.IsNotNull(example.csvCompletionReportDraft);
-            Assert.IsNotEmpty(example.csvCompletionReportDraft);
+                Assert.IsNotNull(example.csvCompletionReportDraft);
+                Assert.IsNotEmpty(example.csvCompletionReportDraft);
 
-            reader = new CSVReader(new StreamReader(new MemoryStream(Encoding.UTF8.GetBytes(example.csvCompletionReportDraft))));
-            rows = reader.readAll();
+                reader = new CSVReader(new StreamReader(new MemoryStream(Encoding.UTF8.GetBytes(example.csvCompletionReportDraft))));
+                rows = reader.readAll();
 
-            if(completionReport.Senders[0].Packages.Count > 0) {
-                Assert.AreEqual(GetCompletionReportCount(completionReport) + 1, rows.Count);
-            }
+                if (completionReport.Senders[0].Packages.Count > 0)
+                {
+                    Assert.AreEqual(GetCompletionReportCount(completionReport) + 1, rows.Count);
+                }
 
-            AssertCreatedPackageIncludedInCSV(rows, example.PackageId, "DRAFT");
+                AssertCreatedPackageIncludedInCSV(rows, example.PackageId, "DRAFT");
 
-            completionReport = example.sdkCompletionReportSent;
-            Assert.GreaterOrEqual(completionReport.Senders.Count, 1, "Number of sender should be greater than 1.");
-            Assert.GreaterOrEqual(completionReport.Senders[0].Packages.Count, 0, "Number of package completion reports should be greater than 0.");
+                completionReport = example.sdkCompletionReportSent;
+                Assert.GreaterOrEqual(completionReport.Senders.Count, 1, "Number of sender should be greater than 1.");
+                Assert.GreaterOrEqual(completionReport.Senders[0].Packages.Count, 0, "Number of package completion reports should be greater than 0.");
 
-            AssertCreatedPackageIncludedInCompletionReport(completionReport, example.senderUID, example.package2Id, "SENT");
+                AssertCreatedPackageIncludedInCompletionReport(completionReport, example.senderUID, example.package2Id, "SENT");
 
-            Assert.IsNotNull(example.csvCompletionReportSent);
-            Assert.IsNotEmpty(example.csvCompletionReportSent);
+                Assert.IsNotNull(example.csvCompletionReportSent);
+                Assert.IsNotEmpty(example.csvCompletionReportSent);
 
-            reader = new CSVReader(new StreamReader(new MemoryStream(Encoding.UTF8.GetBytes(example.csvCompletionReportSent))));
-            rows = reader.readAll();
+                reader = new CSVReader(new StreamReader(new MemoryStream(Encoding.UTF8.GetBytes(example.csvCompletionReportSent))));
+                rows = reader.readAll();
 
-            if(completionReport.Senders[0].Packages.Count > 0) {
-                Assert.AreEqual(GetCompletionReportCount(completionReport) + 1, rows.Count);
-            }
+                if (completionReport.Senders[0].Packages.Count > 0)
+                {
+                    Assert.AreEqual(GetCompletionReportCount(completionReport) + 1, rows.Count);
+                }
 
-            AssertCreatedPackageIncludedInCSV(rows, example.package2Id, "SENT");
+                AssertCreatedPackageIncludedInCSV(rows, example.package2Id, "SENT");
 
-            // Assert correct download of usage report
-            UsageReport usageReport = example.sdkUsageReport;
-            Assert.Greater(usageReport.SenderUsageReports.Count, 0, "There should be only 1 sender.");
-            Assert.Greater(usageReport.SenderUsageReports[0].CountByUsageReportCategory.Count, 0, "Number of dictionary entries should be greater than 0.");
-            Assert.IsTrue(usageReport.SenderUsageReports[0].CountByUsageReportCategory.ContainsKey(UsageReportCategory.DRAFT), "There should be at a draft key in packages map.");
-            Assert.Greater(usageReport.SenderUsageReports[0].CountByUsageReportCategory[UsageReportCategory.DRAFT], 0, "Number of drafts should be greater than 0.");
+                // Assert correct download of usage report
+                UsageReport usageReport = example.sdkUsageReport;
+                Assert.Greater(usageReport.SenderUsageReports.Count, 0, "There should be only 1 sender.");
+                Assert.Greater(usageReport.SenderUsageReports[0].CountByUsageReportCategory.Count, 0, "Number of dictionary entries should be greater than 0.");
+                Assert.IsTrue(usageReport.SenderUsageReports[0].CountByUsageReportCategory.ContainsKey(UsageReportCategory.DRAFT), "There should be at a draft key in packages map.");
+                Assert.Greater(usageReport.SenderUsageReports[0].CountByUsageReportCategory[UsageReportCategory.DRAFT], 0, "Number of drafts should be greater than 0.");
 
-            Assert.IsNotNull(example.csvUsageReport, "Usage report in csv cannot be null.");
-            Assert.IsNotEmpty(example.csvUsageReport, "Usage report in csv cannot be empty.");
+                Assert.IsNotNull(example.csvUsageReport, "Usage report in csv cannot be null.");
+                Assert.IsNotEmpty(example.csvUsageReport, "Usage report in csv cannot be empty.");
 
-            reader = new CSVReader(new StreamReader(new MemoryStream(Encoding.UTF8.GetBytes(example.csvUsageReport))));
-            rows = reader.readAll();
+                reader = new CSVReader(new StreamReader(new MemoryStream(Encoding.UTF8.GetBytes(example.csvUsageReport))));
+                rows = reader.readAll();
 
-            if(usageReport.SenderUsageReports.Count > 0) {
-                Assert.AreEqual(usageReport.SenderUsageReports.Count + 1, rows.Count);
-            }
+                if (usageReport.SenderUsageReports.Count > 0)
+                {
+                    Assert.AreEqual(usageReport.SenderUsageReports.Count + 1, rows.Count);
+                }
 
-			// Assert correct download of delegation report
-            DelegationReport delegationReportForAccountWithoutDate = example.sdkDelegationReportForAccountWithoutDate;
-            Assert.GreaterOrEqual(delegationReportForAccountWithoutDate.DelegationEvents.Count, 0, "Number of DelegationEventReports should be greater than 0.");
+                // Assert correct download of delegation report
+                DelegationReport delegationReportForAccountWithoutDate = example.sdkDelegationReportForAccountWithoutDate;
+                Assert.GreaterOrEqual(delegationReportForAccountWithoutDate.DelegationEvents.Count, 0, "Number of DelegationEventReports should be greater than 0.");
 
-            Assert.IsNotNull(example.csvDelegationReportForAccountWithoutDate, "Delegation report in csv cannot be null.");
-            Assert.IsNotEmpty(example.csvDelegationReportForAccountWithoutDate, "Delegation report in csv cannot be empty.");
+                Assert.IsNotNull(example.csvDelegationReportForAccountWithoutDate, "Delegation report in csv cannot be null.");
+                Assert.IsNotEmpty(example.csvDelegationReportForAccountWithoutDate, "Delegation report in csv cannot be empty.");
 
-            reader = new CSVReader(new StreamReader(new MemoryStream(Encoding.UTF8.GetBytes(example.csvDelegationReportForAccountWithoutDate))));
-            rows = reader.readAll();
+                reader = new CSVReader(new StreamReader(new MemoryStream(Encoding.UTF8.GetBytes(example.csvDelegationReportForAccountWithoutDate))));
+                rows = reader.readAll();
 
-            if(delegationReportForAccountWithoutDate.DelegationEvents.Count > 0) {
-                rows = GetRowsBySender(rows, example.senderUID);
-                Assert.AreEqual(delegationReportForAccountWithoutDate.DelegationEvents[example.senderUID].Count, rows.Count);
-            }
+                if (delegationReportForAccountWithoutDate.DelegationEvents.Count > 0)
+                {
+                    rows = GetRowsBySender(rows, example.senderUID);
+                    Assert.AreEqual(delegationReportForAccountWithoutDate.DelegationEvents[example.senderUID].Count, rows.Count);
+                }
 
-            DelegationReport delegationReportForAccount = example.sdkDelegationReportForAccount;
-            Assert.GreaterOrEqual(delegationReportForAccount.DelegationEvents.Count, 0, "Number of DelegationEventReports should be greater than 0.");
+                DelegationReport delegationReportForAccount = example.sdkDelegationReportForAccount;
+                Assert.GreaterOrEqual(delegationReportForAccount.DelegationEvents.Count, 0, "Number of DelegationEventReports should be greater than 0.");
 
-            Assert.IsNotNull(example.csvDelegationReportForAccount, "Delegation report in csv cannot be null.");
-            Assert.IsNotEmpty(example.csvDelegationReportForAccount, "Delegation report in csv cannot be empty.");
+                Assert.IsNotNull(example.csvDelegationReportForAccount, "Delegation report in csv cannot be null.");
+                Assert.IsNotEmpty(example.csvDelegationReportForAccount, "Delegation report in csv cannot be empty.");
 
-            reader = new CSVReader(new StreamReader(new MemoryStream(Encoding.UTF8.GetBytes(example.csvDelegationReportForAccount))));
-            rows = reader.readAll();
+                reader = new CSVReader(new StreamReader(new MemoryStream(Encoding.UTF8.GetBytes(example.csvDelegationReportForAccount))));
+                rows = reader.readAll();
 
-            if(delegationReportForAccount.DelegationEvents.Count > 0) {
-                rows = GetRowsBySender(rows, example.senderUID);
-                Assert.AreEqual(delegationReportForAccount.DelegationEvents[example.senderUID].Count, rows.Count);
-            }
+                if (delegationReportForAccount.DelegationEvents.Count > 0)
+                {
+                    rows = GetRowsBySender(rows, example.senderUID);
+                    Assert.AreEqual(delegationReportForAccount.DelegationEvents[example.senderUID].Count, rows.Count);
+                }
 
-            DelegationReport delegationReportForSender = example.sdkDelegationReportForSender;
-            Assert.GreaterOrEqual(delegationReportForSender.DelegationEvents.Count, 0, "Number of DelegationEventReports should be greater than 0.");
+                DelegationReport delegationReportForSender = example.sdkDelegationReportForSender;
+                Assert.GreaterOrEqual(delegationReportForSender.DelegationEvents.Count, 0, "Number of DelegationEventReports should be greater than 0.");
 
-            Assert.IsNotNull(example.csvDelegationReportForSender, "Delegation report in csv cannot be null.");
-            Assert.IsNotEmpty(example.csvDelegationReportForSender, "Delegation report in csv cannot be empty.");
+                Assert.IsNotNull(example.csvDelegationReportForSender, "Delegation report in csv cannot be null.");
+                Assert.IsNotEmpty(example.csvDelegationReportForSender, "Delegation report in csv cannot be empty.");
 
-            reader = new CSVReader(new StreamReader(new MemoryStream(Encoding.UTF8.GetBytes(example.csvDelegationReportForSender))));
-            rows = reader.readAll();
+                reader = new CSVReader(new StreamReader(new MemoryStream(Encoding.UTF8.GetBytes(example.csvDelegationReportForSender))));
+                rows = reader.readAll();
 
-            if(delegationReportForSender.DelegationEvents.Count > 0) {
-                rows = GetRowsBySender(rows, example.senderUID);
-                Assert.AreEqual(delegationReportForSender.DelegationEvents[example.senderUID].Count, rows.Count);
+                if (delegationReportForSender.DelegationEvents.Count > 0)
+                {
+                    rows = GetRowsBySender(rows, example.senderUID);
+                    Assert.AreEqual(delegationReportForSender.DelegationEvents[example.senderUID].Count, rows.Count);
+                }
             }
 		}
 
