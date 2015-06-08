@@ -143,8 +143,10 @@ namespace Silanis.ESL.SDK
                 builder.WithEmailMessage( apiRole.EmailMessage.Content );
             }
 
+            Signer signer = builder.Build();
+
             if ( apiRole.Locked.Value ) {
-                builder.Lock();
+                signer.Locked = true;
             }
 
             return builder.Build();
@@ -182,17 +184,18 @@ namespace Silanis.ESL.SDK
                 builder.WithEmailMessage( apiRole.EmailMessage.Content );
             }
 
-            if ( apiRole.Locked.Value ) {
-                builder.Lock();
-            }
-
             if (eslSigner.Delivery != null && eslSigner.Delivery.Email.Value) {
                 builder.DeliverSignedDocumentsByEmail();
             }
 
             builder.WithAuthentication(new AuthenticationConverter(eslSigner.Auth).ToSDKAuthentication());
 
-            return builder.Build();
+            Signer signer = builder.Build();
+            if ( apiRole.Locked.Value ) {
+                signer.Locked = true;
+            }
+
+            return signer;
         }
     }
 }

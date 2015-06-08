@@ -61,7 +61,6 @@ namespace SDK.Examples
                                                                               .WithFirstName("firstName3")
                                                                               .WithLastName("lastName3")
                                                                               .WithTitle("Title3")
-                                                                              .Lock()
                                                                               .Build()
             );
                                                                               

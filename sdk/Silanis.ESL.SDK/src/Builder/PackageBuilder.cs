@@ -17,7 +17,7 @@ namespace Silanis.ESL.SDK.Builder
         private IDictionary<string, Signer> placeholders = new Dictionary<string, Signer> ();
 		private IDictionary<string, Document> documents = new Dictionary<string, Document>();
 		private PackageId id;
-		private DocumentPackageStatus status = DocumentPackageStatus.DRAFT;
+		private DocumentPackageStatus status;
 		private CultureInfo language;
         private DocumentPackageSettings settings;
         private SenderInfo senderInfo;
