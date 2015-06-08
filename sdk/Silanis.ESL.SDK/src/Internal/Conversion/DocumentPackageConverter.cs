@@ -46,6 +46,11 @@ namespace Silanis.ESL.SDK
                 package.Id = sdkPackage.Id.ToString();
             }
 
+            if (sdkPackage.Status != null)
+            {
+                package.Status = sdkPackage.Status;
+            }
+
 			if (sdkPackage.Description != null)
 			{
 				package.Description = sdkPackage.Description;
