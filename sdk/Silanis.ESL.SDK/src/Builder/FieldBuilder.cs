@@ -75,11 +75,6 @@ namespace Silanis.ESL.SDK.Builder
             return new FieldBuilder ().WithStyle (FieldStyle.TEXT_AREA);
         }
 
-        public static FieldBuilder Labelfield ()
-        {
-            return new FieldBuilder ().WithStyle (FieldStyle.LABELFIELD);
-        }
-
         public static FieldBuilder DropList ()
         {
             return new FieldBuilder ().WithStyle (FieldStyle.DROP_LIST);

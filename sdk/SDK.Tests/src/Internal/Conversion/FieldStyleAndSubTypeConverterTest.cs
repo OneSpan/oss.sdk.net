@@ -87,11 +87,6 @@ namespace SDK.Tests
             fieldStyle = new FieldStyleAndSubTypeConverter(fieldSubtype, binding).ToSDKFieldStyle();
             Assert.AreEqual(fieldStyle, FieldStyle.SEAL);
 
-            fieldSubtype = FieldStyle.LABELFIELD.getApiValue();
-            binding = null;
-            fieldStyle = new FieldStyleAndSubTypeConverter(fieldSubtype, binding).ToSDKFieldStyle();
-            Assert.AreEqual(fieldStyle, FieldStyle.LABELFIELD);
-
             fieldSubtype = "THIS_IS_A_NEW_FIELD_ADDED";
             binding = null;
             fieldStyle = new FieldStyleAndSubTypeConverter(fieldSubtype, binding).ToSDKFieldStyle();
@@ -162,10 +157,6 @@ namespace SDK.Tests
             fieldStyle = FieldStyle.SEAL;
             fieldSubtype = new FieldStyleAndSubTypeConverter(fieldStyle).ToAPIFieldSubtype();
             Assert.AreEqual(fieldSubtype, FieldStyle.SEAL.getApiValue());
-
-            fieldStyle = FieldStyle.LABELFIELD;
-            fieldSubtype = new FieldStyleAndSubTypeConverter(fieldStyle).ToAPIFieldSubtype();
-            Assert.AreEqual(fieldSubtype, FieldStyle.LABELFIELD.getApiValue());
 
             fieldStyle = FieldStyle.BOUND_DATE;
             fieldSubtype = new FieldStyleAndSubTypeConverter(fieldStyle).ToAPIFieldSubtype();

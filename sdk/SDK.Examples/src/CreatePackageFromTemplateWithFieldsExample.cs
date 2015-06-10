@@ -52,9 +52,9 @@ namespace SDK.Examples
         public readonly string TEXT_AREA_ID = "textAreaId";
         public readonly int TEXT_AREA_PAGE = 0;
         public readonly string TEXT_AREA_VALUE = "textAreaValue";
-        public readonly string LABEL_FIELD_ID = "labelFieldId";
-        public readonly int LABEL_FIELD_PAGE = 0;
-        public readonly string LABEL_FIELD_VALUE = "labelFieldValue";
+        public readonly string LABEL_ID = "labelId";
+        public readonly int LABEL_PAGE = 0;
+        public readonly string LABEL_VALUE = "labelValue";
 
         private int textfieldPositionX = 400;
         private int textfieldPositionY = 200;
@@ -152,10 +152,10 @@ namespace SDK.Examples
                                        .OnPage(TEXT_AREA_PAGE)
                                        .WithSize(textAreaWidth, textAreaHeight)
                                        .AtPosition(textAreaPositionX, textAreaPositionY))
-                                  .WithField(FieldBuilder.Labelfield()
-                                       .WithId(LABEL_FIELD_ID)
-                                       .WithValue(LABEL_FIELD_VALUE)
-                                       .OnPage(LABEL_FIELD_PAGE)
+                                  .WithField(FieldBuilder.Label()
+                                       .WithId(LABEL_ID)
+                                       .WithValue(LABEL_VALUE)
+                                       .OnPage(LABEL_PAGE)
                                        .WithSize(labelFieldWidth, labelFieldHeight)
                                        .AtPosition(labelFieldPositionX, labelFieldPositionY))))
                     .Build();

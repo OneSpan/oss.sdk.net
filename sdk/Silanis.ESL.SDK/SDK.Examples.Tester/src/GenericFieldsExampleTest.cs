@@ -87,11 +87,11 @@ namespace SDK.Examples
                         Assert.AreEqual(GenericFieldsExample.TEXT_AREA_VALUE, field.Value);
                     }
                     // Label Field
-                    if (field.Id == GenericFieldsExample.LABEL_FIELD_ID) 
+                    if (field.Id == GenericFieldsExample.LABEL_ID) 
                     {
-                        Assert.AreEqual(GenericFieldsExample.LABEL_FIELD_PAGE, field.Page);
-                        Assert.AreEqual(FieldStyle.LABELFIELD, field.Style);
-                        Assert.AreEqual(GenericFieldsExample.LABEL_FIELD_VALUE, field.Value);
+                        Assert.AreEqual(GenericFieldsExample.LABEL_PAGE, field.Page);
+                        Assert.AreEqual(FieldStyle.LABEL, field.Style);
+                        Assert.AreEqual(GenericFieldsExample.LABEL_VALUE, field.Value);
                     }
                 }
             }

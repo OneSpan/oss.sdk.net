@@ -22,7 +22,6 @@ namespace Silanis.ESL.SDK
         public static FieldStyle TEXT_AREA = new FieldStyle("TEXTAREA", "TEXT_AREA", 10);
         public static FieldStyle DROP_LIST = new FieldStyle("LIST", "DROP_LIST", 11);
         public static FieldStyle SEAL = new FieldStyle("SEAL", "SEAL", 12);
-        public static FieldStyle LABELFIELD = new FieldStyle("LABELFIELD", "LABELFIELD", 13);
         private static Dictionary<string,FieldStyle> allFieldStyles = new Dictionary<string,FieldStyle>();
 
         static FieldStyle(){
@@ -35,7 +34,6 @@ namespace Silanis.ESL.SDK
             allFieldStyles.Add(TEXT_AREA.getApiValue(), FieldStyle.TEXT_AREA);
             allFieldStyles.Add(DROP_LIST.getApiValue(), FieldStyle.DROP_LIST);
             allFieldStyles.Add(SEAL.getApiValue(), FieldStyle.SEAL);
-            allFieldStyles.Add(LABELFIELD.getApiValue(), FieldStyle.LABELFIELD);
         }
 
         private FieldStyle(string apiValue, string sdkValue, int index):base(apiValue, sdkValue, index) {           
