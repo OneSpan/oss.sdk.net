@@ -37,8 +37,8 @@ namespace SDK.Examples
 
                 if (completionReportForSender.Senders[0].Packages.Count > 0)
                 {
-                    Assert.GreaterOrEqual(completionReportForSender.Senders[0].Packages.Count - 1, rows.Count);
-                    Assert.LessOrEqual(completionReportForSender.Senders[0].Packages.Count + 3, rows.Count);
+                    Assert.GreaterOrEqual(rows.Count, completionReportForSender.Senders[0].Packages.Count - 1);
+                    Assert.LessOrEqual(rows.Count, completionReportForSender.Senders[0].Packages.Count + 3);
                 }
 
                 AssertCreatedPackageIncludedInCSV(rows, example.PackageId, "DRAFT");
@@ -59,8 +59,8 @@ namespace SDK.Examples
 
                 if (completionReportForSender.Senders[0].Packages.Count > 0)
                 {
-                    Assert.GreaterOrEqual(completionReportForSender.Senders[0].Packages.Count - 1, rows.Count);
-                    Assert.LessOrEqual(completionReportForSender.Senders[0].Packages.Count + 3, rows.Count);
+                    Assert.GreaterOrEqual(rows.Count, completionReportForSender.Senders[0].Packages.Count - 1);
+                    Assert.LessOrEqual(rows.Count, completionReportForSender.Senders[0].Packages.Count + 3);
                 }
 
                 AssertCreatedPackageIncludedInCSV(rows, example.package2Id, "SENT");
@@ -80,8 +80,8 @@ namespace SDK.Examples
 
                 if (completionReport.Senders[0].Packages.Count > 0)
                 {
-                    Assert.GreaterOrEqual(GetCompletionReportCount(completionReport) - 1, rows.Count);
-                    Assert.LessOrEqual(GetCompletionReportCount(completionReport) + 3, rows.Count);
+                    Assert.GreaterOrEqual(rows.Count, GetCompletionReportCount(completionReport) - 1);
+                    Assert.LessOrEqual(rows.Count, GetCompletionReportCount(completionReport) + 3);
                 }
 
                 AssertCreatedPackageIncludedInCSV(rows, example.PackageId, "DRAFT");
@@ -100,8 +100,8 @@ namespace SDK.Examples
 
                 if (completionReport.Senders[0].Packages.Count > 0)
                 {
-                    Assert.GreaterOrEqual(GetCompletionReportCount(completionReport) - 1, rows.Count);
-                    Assert.LessOrEqual(GetCompletionReportCount(completionReport) + 3, rows.Count);
+                    Assert.GreaterOrEqual(rows.Count, GetCompletionReportCount(completionReport) - 1);
+                    Assert.LessOrEqual(rows.Count, GetCompletionReportCount(completionReport) + 3);
                 }
 
                 AssertCreatedPackageIncludedInCSV(rows, example.package2Id, "SENT");
@@ -121,8 +121,8 @@ namespace SDK.Examples
 
                 if (usageReport.SenderUsageReports.Count > 0)
                 {
-                    Assert.GreaterOrEqual(usageReport.SenderUsageReports.Count - 1, rows.Count);
-                    Assert.LessOrEqual(usageReport.SenderUsageReports.Count + 3, rows.Count);
+                    Assert.GreaterOrEqual(rows.Count, usageReport.SenderUsageReports.Count - 1);
+                    Assert.LessOrEqual(rows.Count, usageReport.SenderUsageReports.Count + 3);
                 }
 
                 // Assert correct download of delegation report

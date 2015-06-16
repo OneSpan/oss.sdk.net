@@ -56,6 +56,17 @@ namespace Silanis.ESL.SDK
 			}
 		}
 
+        private Nullable<bool> disableOptOutOther = null;
+
+        public Nullable<bool> DisableOptOutOther {
+            get {
+                return disableOptOutOther;
+            }
+            set {
+                disableOptOutOther = value;
+            }
+        }
+
 		private Nullable<bool> enableDecline = null;
 
 		public Nullable<bool> EnableDecline {
@@ -66,6 +77,17 @@ namespace Silanis.ESL.SDK
 				enableDecline = value;
 			}
 		}
+
+        private Nullable<bool> disableDeclineOther = null;
+
+        public Nullable<bool> DisableDeclineOther {
+            get {
+                return disableDeclineOther;
+            }
+            set {
+                disableDeclineOther = value;
+            }
+        }
 
 		private Nullable<bool> hideWatermark = null;
 
@@ -200,6 +222,12 @@ namespace Silanis.ESL.SDK
 
 			if ( enableDecline != null )
 			    ceremonySettings.DeclineButton = enableDecline.Value;
+
+            if ( disableOptOutOther != null )
+                ceremonySettings.DisableOptOutOther = disableOptOutOther.Value; 
+
+            if ( disableDeclineOther != null )
+                ceremonySettings.DisableDeclineOther = disableDeclineOther.Value;
 
             if ( hideWatermark != null )
 			    ceremonySettings.HideWatermark = hideWatermark.Value;
