@@ -13,7 +13,7 @@ namespace SDK.Examples
         }
 
         private string email1;
-        private Stream fileStream1, fileStream2;
+        private Stream fileStream;
 
         public PackageId templateId;
 
@@ -37,8 +37,7 @@ namespace SDK.Examples
         public UpdateTemplateWithPlaceholderExample(string apiKey, string apiUrl, string email1) : base(apiKey, apiUrl)
         {
             this.email1 = email1;
-            this.fileStream1 = File.OpenRead(new FileInfo(Directory.GetCurrentDirectory() + "/src/document.pdf").FullName);
-            this.fileStream2 = File.OpenRead(new FileInfo(Directory.GetCurrentDirectory() + "/src/document.pdf").FullName);
+            this.fileStream = File.OpenRead(new FileInfo(Directory.GetCurrentDirectory() + "/src/document.pdf").FullName);
         }
 
         override public void Execute()
@@ -52,7 +51,7 @@ namespace SDK.Examples
                     .WithSigner(SignerBuilder.NewSignerPlaceholder(new Placeholder(PLACEHOLDER_ID)))
                     .WithDocument(DocumentBuilder.NewDocumentNamed(DOCUMENT_NAME)
                                   .WithId(DOCUMENT_ID)
-                                  .FromStream(fileStream1, DocumentType.PDF)
+                                  .FromStream(fileStream, DocumentType.PDF)
                                   .WithSignature(SignatureBuilder.SignatureFor(email1)
                                    .OnPage(0)
                                    .AtPosition(100, 100))
