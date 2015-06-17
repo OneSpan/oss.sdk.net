@@ -19,8 +19,7 @@ namespace SDK.Examples
 
         public readonly string DOCUMENT_NAME = "First Document";
         public readonly string DOCUMENT_ID = "doc1";
-        public readonly string TEMPLATE1_NAME = "UpdateTemplateWithPlaceholderExample Template1: "  + DateTime.Now;
-        public readonly string TEMPLATE2_NAME = "UpdateTemplateWithPlaceholderExample Template2: "  + DateTime.Now;
+        public readonly string TEMPLATE_NAME = "UpdateTemplateWithPlaceholderExample Template: "  + DateTime.Now;
         public readonly string TEMPLATE_DESCRIPTION = "This is a template created using the e-SignLive SDK";
         public readonly string TEMPLATE_EMAIL_MESSAGE = "This message should be delivered to all signers";
         public readonly string TEMPLATE_SIGNER_FIRST = "John";
@@ -44,7 +43,7 @@ namespace SDK.Examples
 
         override public void Execute()
         {
-            DocumentPackage template1 = PackageBuilder.NewPackageNamed(TEMPLATE1_NAME)
+            DocumentPackage template = PackageBuilder.NewPackageNamed(TEMPLATE_NAME)
                 .DescribedAs(TEMPLATE_DESCRIPTION)
                     .WithEmailMessage(TEMPLATE_EMAIL_MESSAGE)
                     .WithSigner(SignerBuilder.NewSignerWithEmail(email1)
@@ -62,35 +61,17 @@ namespace SDK.Examples
                                    .AtPosition(400, 100)))
                     .Build();
 
-            DocumentPackage template2 = PackageBuilder.NewPackageNamed(TEMPLATE2_NAME)
-                .DescribedAs(TEMPLATE_DESCRIPTION)
-                    .WithEmailMessage(TEMPLATE_EMAIL_MESSAGE)
-                    .WithSigner(SignerBuilder.NewSignerWithEmail(email1)
-                                .WithFirstName(TEMPLATE_SIGNER_FIRST)
-                                .WithLastName(TEMPLATE_SIGNER_LAST))
-                    .WithSigner(SignerBuilder.NewSignerPlaceholder(new Placeholder(PLACEHOLDER_ID)))
-                    .WithSigner(SignerBuilder.NewSignerPlaceholder(new Placeholder(PLACEHOLDER2_ID)))
-                    .WithDocument(DocumentBuilder.NewDocumentNamed(DOCUMENT_NAME)
-                                  .WithId(DOCUMENT_ID)
-                                  .FromStream(fileStream2, DocumentType.PDF)
-                                  .WithSignature(SignatureBuilder.SignatureFor(email1)
-                                   .OnPage(0)
-                                   .AtPosition(100, 100))
-                                  .WithSignature(SignatureBuilder.SignatureFor(new Placeholder(PLACEHOLDER_ID))
-                                   .OnPage(0)
-                                   .AtPosition(400, 100))
-                                  .WithSignature(SignatureBuilder.SignatureFor(new Placeholder(PLACEHOLDER2_ID))
-                                   .OnPage(0)
-                                   .AtPosition(500, 100)))
-                    .Build();
-
-            templateId = eslClient.CreateTemplate(template1);
-
+            templateId = eslClient.CreateTemplate(template);
             retrievedTemplate = eslClient.GetPackage(templateId);
-            template2.Id = templateId;
 
-            eslClient.TemplateService.Update(template2);
+            eslClient.TemplateService.AddPlaceholder(templateId, new Placeholder(PLACEHOLDER2_ID));
+            updatedTemplate = eslClient.GetPackage(templateId);
 
+            Signature newSignature = SignatureBuilder.SignatureFor(new Placeholder(PLACEHOLDER2_ID))
+                    .OnPage(0)
+                    .AtPosition(400, 300).Build();
+
+            eslClient.ApprovalService.AddApproval(updatedTemplate, DOCUMENT_ID, newSignature);
             updatedTemplate = eslClient.GetPackage(templateId);
         }
     }

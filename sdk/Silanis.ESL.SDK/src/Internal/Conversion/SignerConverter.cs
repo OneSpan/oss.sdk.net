@@ -15,6 +15,11 @@ namespace Silanis.ESL.SDK
             this.sdkSigner = signer;
         }
 
+        public SignerConverter( Placeholder placeholder )
+        {
+            this.sdkSigner = new Signer(placeholder.Id);
+        }
+
 		public SignerConverter (Silanis.ESL.API.Role apiRole)
 		{
 			this.apiRole = apiRole;
