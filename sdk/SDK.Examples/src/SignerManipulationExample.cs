@@ -48,8 +48,8 @@ namespace SDK.Examples
             
             DocumentPackage createdPackage = eslClient.GetPackage(packageId);
             
-            string signerId = createdPackage.Signers[1].Id;
-            string signer2Id = createdPackage.Signers[2].Id;
+            string signerId = createdPackage.GetSigner(email1).Id;
+            string signer2Id = createdPackage.GetSigner(email2).Id;
             
 //            eslClient.SignerService.UpdateSigner( packageId, signerId, SignerBuilder.NewSignerWithEmail(email1)
 //                                                                    .WithFirstName("firstName1b")

@@ -49,10 +49,34 @@ namespace Silanis.ESL.SDK
             set{ signers = value;}
         }
 
+        public Signer GetSigner(string email) 
+        {
+            foreach(Signer signer in Signers) 
+            {
+                if(string.Equals(signer.Email, email, StringComparison.OrdinalIgnoreCase)) 
+                {
+                    return signer;
+                }
+            }
+            return null;
+        }
+
         public IList<Signer> Placeholders
         {
             get;
             private set;
+        }
+
+        public Signer GetPlaceholder(string id) 
+        {
+            foreach(Signer signer in Placeholders) 
+            {
+                if(string.Equals(signer.Id, id, StringComparison.OrdinalIgnoreCase)) 
+                {
+                    return signer;
+                }
+            }
+            return null;
         }
 
         public IDictionary<string, Document> Documents
