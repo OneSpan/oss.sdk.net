@@ -24,13 +24,13 @@ namespace SDK.Examples
             Assert.AreEqual(documentPackage.EmailMessage, example.PACKAGE_EMAIL_MESSAGE2);
 
             Assert.AreEqual(documentPackage.Signers.Count, 3);
-            Assert.AreEqual(documentPackage.Signers[example.email1].FirstName, example.PACKAGE_SIGNER1_FIRST);
-            Assert.AreEqual(documentPackage.Signers[example.email1].LastName, example.PACKAGE_SIGNER1_LAST);
-            Assert.AreEqual(documentPackage.Signers[example.email2].FirstName, example.PACKAGE_SIGNER2_FIRST);
-            Assert.AreEqual(documentPackage.Signers[example.email2].LastName, example.PACKAGE_SIGNER2_LAST);
+            Assert.AreEqual(documentPackage.Signers[1].FirstName, example.PACKAGE_SIGNER1_FIRST);
+            Assert.AreEqual(documentPackage.Signers[1].LastName, example.PACKAGE_SIGNER1_LAST);
+            Assert.AreEqual(documentPackage.Signers[2].FirstName, example.PACKAGE_SIGNER2_FIRST);
+            Assert.AreEqual(documentPackage.Signers[2].LastName, example.PACKAGE_SIGNER2_LAST);
 
             // TODO: Make sure that this is correctly preserved.
-//            Assert.IsFalse(documentPackage.Settings.EnableInPerson.Value);
+            Assert.IsFalse(documentPackage.Settings.EnableInPerson.Value);
             Assert.IsFalse(documentPackage.Settings.EnableDecline.Value);
             Assert.IsFalse(documentPackage.Settings.EnableOptOut.Value);
             Assert.IsFalse(documentPackage.Settings.HideWatermark.Value);

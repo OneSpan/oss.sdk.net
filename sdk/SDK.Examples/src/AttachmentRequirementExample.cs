@@ -111,11 +111,11 @@ namespace SDK.Examples
 
             retrievedPackage = eslClient.GetPackage(packageId);
 
-            attachment1Id = retrievedPackage.Signers[email1].Attachments[NAME1].Id;
-            signer1 = retrievedPackage.Signers[email1];
+            attachment1Id = retrievedPackage.Signers[1].Attachments[NAME1].Id;
+            signer1 = retrievedPackage.Signers[1];
 
-            signer1Attachments = retrievedPackage.Signers[email1].Attachments;
-            signer2Attachments = retrievedPackage.Signers[email2].Attachments;
+            signer1Attachments = retrievedPackage.Signers[1].Attachments;
+            signer2Attachments = retrievedPackage.Signers[2].Attachments;
 
             signer1Att1 = signer1Attachments[NAME1];
             signer2Att1 = signer2Attachments[NAME2];
@@ -138,15 +138,15 @@ namespace SDK.Examples
             // Sender rejects Signer1's uploaded attachment
             eslClient.AttachmentRequirementService.RejectAttachment(packageId, signer1, NAME1, REJECTION_COMMENT);
             retrievedPackageAfterRejection = eslClient.GetPackage(packageId);
-            retrievedSigner1Att1RequirementStatusAfterRejection = retrievedPackageAfterRejection.Signers[email1].Attachments[NAME1].Status;
-            retrievedSigner1Att1RequirementSenderCommentAfterRejection = retrievedPackageAfterRejection.Signers[email1].Attachments[NAME1].SenderComment;
+            retrievedSigner1Att1RequirementStatusAfterRejection = retrievedPackageAfterRejection.Signers[1].Attachments[NAME1].Status;
+            retrievedSigner1Att1RequirementSenderCommentAfterRejection = retrievedPackageAfterRejection.Signers[1].Attachments[NAME1].SenderComment;
 
             // Sender accepts Signer1's uploaded attachment
             eslClient.AttachmentRequirementService.AcceptAttachment(packageId, signer1, NAME1);
             retrievedPackageAfterAccepting = eslClient.GetPackage(packageId);
 
-            retrievedSigner1Att1RequirementStatusAfterAccepting = retrievedPackageAfterAccepting.Signers[email1].Attachments[NAME1].Status;
-            retrievedSigner1Att1RequirementSenderCommentAfterAccepting = retrievedPackageAfterAccepting.Signers[email1].Attachments[NAME1].SenderComment;
+            retrievedSigner1Att1RequirementStatusAfterAccepting = retrievedPackageAfterAccepting.Signers[1].Attachments[NAME1].Status;
+            retrievedSigner1Att1RequirementSenderCommentAfterAccepting = retrievedPackageAfterAccepting.Signers[1].Attachments[NAME1].SenderComment;
 
             // Download signer1's attachment
             DownloadedFile downloadedAttachment = eslClient.AttachmentRequirementService.DownloadAttachmentFile(packageId, attachment1Id);

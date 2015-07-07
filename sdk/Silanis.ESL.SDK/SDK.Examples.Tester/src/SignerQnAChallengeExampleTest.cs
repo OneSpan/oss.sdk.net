@@ -16,7 +16,7 @@ namespace SDK.Examples
             DocumentPackage documentPackage = example.RetrievedPackage;
 
             // Note that for security reasons, the backend doesn't return challenge answers, so we don't verify the answers here.
-            foreach (Challenge challenge in documentPackage.Signers[example.email1].ChallengeQuestion)
+            foreach (Challenge challenge in documentPackage.Signers[0].ChallengeQuestion)
             {
                 Assert.IsTrue(String.Equals(challenge.Question, example.FIRST_QUESTION) || String.Equals(challenge.Question, example.SECOND_QUESTION));
             }

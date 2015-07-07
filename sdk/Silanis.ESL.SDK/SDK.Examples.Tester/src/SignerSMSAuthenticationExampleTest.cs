@@ -15,10 +15,10 @@ namespace SDK.Examples
 
             DocumentPackage documentPackage = example.RetrievedPackage;
 
-            Assert.AreEqual(documentPackage.Signers[example.email1].AuthenticationMethod, AuthenticationMethod.SMS);
-            Assert.AreEqual(documentPackage.Signers[example.email1].ChallengeQuestion.Count, 0);
-            Assert.AreEqual(documentPackage.Signers[example.email1].Authentication.PhoneNumber, example.sms1);
-            Assert.AreEqual(documentPackage.Signers[example.email1].PhoneNumber, example.sms1);
+            Assert.AreEqual(documentPackage.Signers[1].AuthenticationMethod, AuthenticationMethod.SMS);
+            Assert.AreEqual(documentPackage.Signers[1].ChallengeQuestion.Count, 0);
+            Assert.AreEqual(documentPackage.Signers[1].Authentication.PhoneNumber, example.sms1);
+            Assert.AreEqual(documentPackage.Signers[1].PhoneNumber, example.sms1);
         }
     }
 }

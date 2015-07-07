@@ -15,7 +15,7 @@ namespace SDK.Examples
 
             DocumentPackage documentPackage = example.RetrievedPackage;
 
-            Assert.AreEqual(documentPackage.Signers[example.Email1].Message, example.EMAIL_MESSAGE);
+            Assert.AreEqual(documentPackage.Signers[1].Message, example.EMAIL_MESSAGE);
         }
     }
 }

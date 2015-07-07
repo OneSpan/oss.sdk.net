@@ -1068,7 +1068,7 @@ namespace Silanis.ESL.SDK.Services
 				.Build();
 
             List<Silanis.ESL.API.Role> roles = new List<Silanis.ESL.API.Role>();
-            foreach (Signer signer in package.Signers.Values)
+            foreach (Signer signer in package.Signers)
             {
                 roles.Add(new SignerConverter(signer).ToAPIRole(signer.Id));
             }

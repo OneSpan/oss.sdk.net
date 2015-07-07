@@ -17,8 +17,8 @@ namespace SDK.Examples
             Assert.AreEqual(3, example.RetrievedPackage.Signers.Count);
             Assert.AreEqual(0, example.RetrievedPackage.Placeholders.Count);
 
-            Signer signer1 = example.RetrievedPackage.Signers[example.email1];
-            Signer signer2 = example.RetrievedPackage.Signers[example.email2];
+            Signer signer1 = example.RetrievedPackage.Signers[1];
+            Signer signer2 = example.RetrievedPackage.Signers[2];
 
             Assert.AreEqual(example.TEMPLATE_SIGNER_FIRST, signer1.FirstName);
             Assert.AreEqual(example.TEMPLATE_SIGNER_LAST, signer1.LastName);

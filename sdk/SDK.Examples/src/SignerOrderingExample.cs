@@ -47,8 +47,8 @@ namespace SDK.Examples
 
             // Reorder signers
             afterReorder = eslClient.GetPackage(packageId);
-            afterReorder.Signers[email2].SigningOrder = 1;
-            afterReorder.Signers[email1].SigningOrder = 2;
+            afterReorder.Signers[2].SigningOrder = 1;
+            afterReorder.Signers[1].SigningOrder = 2;
             eslClient.PackageService.OrderSigners(afterReorder);
 
             afterReorder = eslClient.GetPackage(packageId);

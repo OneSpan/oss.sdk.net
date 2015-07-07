@@ -14,7 +14,7 @@ namespace SDK.Examples
             example.Run();
 
             DocumentPackage documentPackage = example.RetrievedPackage;
-            Signer signer = documentPackage.Signers[example.email1];
+            Signer signer = documentPackage.Signers[1];
 
             // Assert signer information is correct
             Assert.AreEqual(signer.Email, example.signerForPackage.Email);

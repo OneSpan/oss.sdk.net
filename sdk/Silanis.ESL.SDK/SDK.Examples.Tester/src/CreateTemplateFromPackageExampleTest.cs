@@ -22,10 +22,10 @@ namespace SDK.Examples
             Assert.AreEqual(templatePackage.Name, example.PACKAGE_NAME_NEW);
             // TODO: Make sure that this is correctly preserved.
             Assert.AreEqual(templatePackage.Signers.Count, 3);
-            Assert.AreEqual(templatePackage.Signers[example.email1].FirstName, example.PACKAGE_SIGNER1_FIRST);
-            Assert.AreEqual(templatePackage.Signers[example.email1].LastName, example.PACKAGE_SIGNER1_LAST);
-            Assert.AreEqual(templatePackage.Signers[example.email2].FirstName, example.PACKAGE_SIGNER2_FIRST);
-            Assert.AreEqual(templatePackage.Signers[example.email2].LastName, example.PACKAGE_SIGNER2_LAST);
+            Assert.AreEqual(templatePackage.Signers[1].FirstName, example.PACKAGE_SIGNER1_FIRST);
+            Assert.AreEqual(templatePackage.Signers[1].LastName, example.PACKAGE_SIGNER1_LAST);
+            Assert.AreEqual(templatePackage.Signers[2].FirstName, example.PACKAGE_SIGNER2_FIRST);
+            Assert.AreEqual(templatePackage.Signers[2].LastName, example.PACKAGE_SIGNER2_LAST);
         }
     }
 }

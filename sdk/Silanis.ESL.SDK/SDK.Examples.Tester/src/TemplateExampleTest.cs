@@ -22,15 +22,15 @@ namespace SDK.Examples
 
             Assert.AreEqual(example.PACKAGE_NAME, documentPackage.Name);
 
-            Assert.AreEqual(example.SIGNER1_FIRST_NAME, documentPackage.Signers[example.email1].FirstName);
-            Assert.AreEqual(example.SIGNER1_LAST_NAME, documentPackage.Signers[example.email1].LastName);
-            Assert.AreEqual(example.SIGNER1_TITLE, documentPackage.Signers[example.email1].Title);
-            Assert.AreEqual(example.SIGNER1_COMPANY, documentPackage.Signers[example.email1].Company);
+            Assert.AreEqual(example.SIGNER1_FIRST_NAME, documentPackage.Signers[1].FirstName);
+            Assert.AreEqual(example.SIGNER1_LAST_NAME, documentPackage.Signers[1].LastName);
+            Assert.AreEqual(example.SIGNER1_TITLE, documentPackage.Signers[1].Title);
+            Assert.AreEqual(example.SIGNER1_COMPANY, documentPackage.Signers[1].Company);
 
-            Assert.AreEqual(example.SIGNER2_FIRST_NAME, documentPackage.Signers[example.email2].FirstName);
-            Assert.AreEqual(example.SIGNER2_LAST_NAME, documentPackage.Signers[example.email2].LastName);
-            Assert.AreEqual(example.SIGNER2_TITLE, documentPackage.Signers[example.email2].Title);
-            Assert.AreEqual(example.SIGNER2_COMPANY, documentPackage.Signers[example.email2].Company);
+            Assert.AreEqual(example.SIGNER2_FIRST_NAME, documentPackage.Signers[2].FirstName);
+            Assert.AreEqual(example.SIGNER2_LAST_NAME, documentPackage.Signers[2].LastName);
+            Assert.AreEqual(example.SIGNER2_TITLE, documentPackage.Signers[2].Title);
+            Assert.AreEqual(example.SIGNER2_COMPANY, documentPackage.Signers[2].Company);
         }
     }
 }

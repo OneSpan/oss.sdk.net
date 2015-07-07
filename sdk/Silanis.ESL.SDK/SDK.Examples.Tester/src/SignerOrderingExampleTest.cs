@@ -15,13 +15,13 @@ namespace SDK.Examples
 
             // Initial signing order
             DocumentPackage beforeReorder = example.savedPackage;
-            Assert.AreEqual(beforeReorder.Signers[example.email1].SigningOrder, 1);
-            Assert.AreEqual(beforeReorder.Signers[example.email2].SigningOrder, 2);
+            Assert.AreEqual(beforeReorder.Signers[1].Email, example.email1);
+            Assert.AreEqual(beforeReorder.Signers[2].Email, example.email2);
 
             // After reordering signers
             DocumentPackage afterReorder = example.afterReorder;
-            Assert.AreEqual(afterReorder.Signers[example.email1].SigningOrder, 2);
-            Assert.AreEqual(afterReorder.Signers[example.email2].SigningOrder, 1);
+            Assert.AreEqual(afterReorder.Signers[1].Email, example.email2);
+            Assert.AreEqual(afterReorder.Signers[2].Email, example.email1);
         }
     }
 }
