@@ -71,7 +71,7 @@ namespace Silanis.ESL.SDK
         {
             foreach(Signer signer in Placeholders) 
             {
-                if(string.Equals(signer.Id, id, StringComparison.OrdinalIgnoreCase)) 
+                if(signer.Id.Equals(id)) 
                 {
                     return signer;
                 }
