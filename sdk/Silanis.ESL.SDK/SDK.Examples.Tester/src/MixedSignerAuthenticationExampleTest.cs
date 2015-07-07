@@ -23,7 +23,7 @@ namespace SDK.Examples
 
             DocumentPackage documentPackage = example.RetrievedPackage;
 
-            Signer canadianSigner = documentPackage.Signers[1];
+            Signer canadianSigner = documentPackage.GetSigner(example.SIGNER_WITH_AUTHENTICATION_EQUIFAX_CANADA.Email);
             SignerInformationForEquifaxCanada canadianSignerInformationForEquifaxCanada = canadianSigner.KnowledgeBasedAuthentication.SignerInformationForEquifaxCanada;
 
             Assert.AreEqual(canadianSignerInformationForEquifaxCanada.FirstName, example.SIGNER_WITH_AUTHENTICATION_EQUIFAX_CANADA.KnowledgeBasedAuthentication.SignerInformationForEquifaxCanada.FirstName);
@@ -44,7 +44,7 @@ namespace SDK.Examples
                 Assert.IsTrue(String.Equals(challenge.Question, example.SIGNER_WITH_AUTHENTICATION_EQUIFAX_CANADA.ChallengeQuestion[0].Question) || String.Equals(challenge.Question, example.SIGNER_WITH_AUTHENTICATION_EQUIFAX_CANADA.ChallengeQuestion[1].Question));
             }
 
-            Signer usaSigner = documentPackage.Signers[2];
+            Signer usaSigner = documentPackage.GetSigner(example.SIGNER_WITH_AUTHENTICATION_EQUIFAX_USA.Email);
             SignerInformationForEquifaxUSA usaSignerInformationForEquifaxUSA = usaSigner.KnowledgeBasedAuthentication.SignerInformationForEquifaxUSA;
 
             Assert.AreEqual(usaSignerInformationForEquifaxUSA.FirstName, example.SIGNER_WITH_AUTHENTICATION_EQUIFAX_USA.KnowledgeBasedAuthentication.SignerInformationForEquifaxUSA.FirstName);
