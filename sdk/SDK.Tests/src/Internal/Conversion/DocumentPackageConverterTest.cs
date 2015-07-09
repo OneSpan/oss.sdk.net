@@ -87,6 +87,7 @@ namespace SDK.Tests
 		{
 			Silanis.ESL.SDK.DocumentPackage sdkDocumentPackage = PackageBuilder.NewPackageNamed("SDK Package Name")
                 .WithID(new PackageId("packageId"))
+                .WithStatus(DocumentPackageStatus.DRAFT)
 				.DescribedAs("typical description")
 				.WithEmailMessage("typical email message")
 				.WithLanguage(CultureInfo.GetCultureInfo("en"))

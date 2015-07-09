@@ -14,7 +14,7 @@ namespace SDK.Examples
             example.Run();
 
             DocumentPackage documentPackage = example.RetrievedPackage;
-            Assert.IsTrue(documentPackage.Signers[example.email1].CanChangeSigner);
+            Assert.IsTrue(documentPackage.GetSigner(example.email1).CanChangeSigner);
         }
     }
 }

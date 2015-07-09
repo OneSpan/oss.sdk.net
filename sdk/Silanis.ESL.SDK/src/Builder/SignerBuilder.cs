@@ -18,7 +18,6 @@ namespace Silanis.ESL.SDK.Builder
 		private string message;
 		private string id;
 		private bool canChangeSigner;
-		private bool locked;
         private GroupId groupId;
 		private IDictionary<string, AttachmentRequirement> attachments = new Dictionary<string, AttachmentRequirement>();
         private KnowledgeBasedAuthentication knowledgeBasedAuthentication;
@@ -57,12 +56,6 @@ namespace Silanis.ESL.SDK.Builder
         {
 			return new SignerBuilder(groupId);
         }
-
-		public SignerBuilder Lock ()
-		{
-			locked = true;
-			return this;
-		}
 
 		public SignerBuilder WithCustomId (string id)
 		{
@@ -217,7 +210,6 @@ namespace Silanis.ESL.SDK.Builder
             result.CanChangeSigner = canChangeSigner;
             result.Message = message;
             result.Id = id;
-            result.Locked = locked;
 			result.Attachments = attachments;
             
             return result;
@@ -231,7 +223,6 @@ namespace Silanis.ESL.SDK.Builder
             result.SigningOrder = signingOrder;
             result.CanChangeSigner = canChangeSigner;
             result.Message = message;
-            result.Locked = locked;
 			result.Attachments = attachments;
 			            
             return result;
@@ -256,7 +247,6 @@ namespace Silanis.ESL.SDK.Builder
             result.CanChangeSigner = canChangeSigner;
             result.Message = message;
             result.Id = id;
-            result.Locked = locked;
 			result.Attachments = attachments;
             result.KnowledgeBasedAuthentication = knowledgeBasedAuthentication;
 			            

@@ -265,7 +265,7 @@ namespace Silanis.ESL.SDK
             DocumentPackage template = new DocumentPackageConverter(packageService.GetPackage(templateId)).ToSDKPackage();
             if (CheckSignerOrdering(template)) {
                 int firstSignerIndex = template.Signers.Count;
-                foreach(Signer signer in documentPackage.Signers.Values)
+                foreach(Signer signer in documentPackage.Signers)
                 {
                     signer.SigningOrder = firstSignerIndex;
                     firstSignerIndex++;
@@ -297,7 +297,7 @@ namespace Silanis.ESL.SDK
         }
 
         private bool CheckSignerOrdering(DocumentPackage template) {
-            foreach(Signer signer in template.Signers.Values)
+            foreach(Signer signer in template.Signers)
             {
                 if (signer.SigningOrder > 0) 
                 {

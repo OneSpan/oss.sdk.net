@@ -15,7 +15,7 @@ namespace SDK.Examples
 
             DocumentPackage documentPackage = example.RetrievedPackage;
 
-            foreach (Signer signer in documentPackage.Signers.Values) {
+            foreach (Signer signer in documentPackage.Signers) {
                 foreach (AttachmentRequirement attachmentRequirement in signer.Attachments.Values) {
                     Assert.IsNotNull(attachmentRequirement);
                 }

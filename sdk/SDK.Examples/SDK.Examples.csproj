@@ -155,6 +155,7 @@
     <Compile Include="src\SignableSignaturesExample.cs" />
     <Compile Include="src\UpdateTemplateWithPlaceholderExample.cs" />
     <Compile Include="src\CreatePackageFromTemplateWithFieldsExample.cs" />
+    <Compile Include="src\CreatePackageWithoutDocumentExample.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

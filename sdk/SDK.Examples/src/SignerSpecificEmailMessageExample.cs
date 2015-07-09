@@ -12,17 +12,9 @@ namespace SDK.Examples
             new SignerSpecificEmailMessageExample(Props.GetInstance()).Run();
         }
 
-        private string email1;
+        public string email1;
         private Stream fileStream1;
         public readonly string EMAIL_MESSAGE = "Hi John, could you sign this asap please?";
-
-        public string Email1
-        {
-            get
-            {
-                return email1;
-            }
-        }
 
         public SignerSpecificEmailMessageExample( Props props ) : this(props.Get("api.key"), props.Get("api.url"), props.Get("1.email")) {
         }

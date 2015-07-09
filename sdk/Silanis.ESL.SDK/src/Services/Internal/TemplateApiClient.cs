@@ -1,6 +1,7 @@
 using System;
 using Silanis.ESL.SDK.Internal;
 using Newtonsoft.Json;
+using Silanis.ESL.API;
 
 namespace Silanis.ESL.SDK
 {
@@ -71,6 +72,31 @@ namespace Silanis.ESL.SDK
             catch (Exception e)
             {
                 throw new EslException ("Could not create template." + " Exception: " + e.Message, e);
+            }
+        }
+
+        internal Placeholder AddPlaceholder(PackageId templateId, Placeholder placeholder)
+        {
+            string path = urls.UrlFor(UrlTemplate.ROLE_PATH)
+                .Replace("{packageId}", templateId.Id)
+                    .Build();
+            Role apiPayload = new Role();
+            apiPayload.Id = placeholder.Id;
+
+            try
+            {
+                string json = JsonConvert.SerializeObject(apiPayload, settings);
+                string response = restClient.Post(path, json);
+                Silanis.ESL.API.Role apiRole = JsonConvert.DeserializeObject<Silanis.ESL.API.Role>(response);
+                return new Placeholder(apiRole.Id);
+            }
+            catch (EslServerException e)
+            {
+                throw new EslServerException ("Could not add placeholder." + " Exception: " + e.Message, e.ServerError, e);
+            }
+            catch (Exception e)
+            {
+                throw new EslException ("Could not add placeholder." + " Exception: " + e.Message, e);
             }
         }
         

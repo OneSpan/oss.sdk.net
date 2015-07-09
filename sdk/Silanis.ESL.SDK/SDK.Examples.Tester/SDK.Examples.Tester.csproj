@@ -123,6 +123,7 @@
     <Compile Include="src\internal\CSVReader.cs" />
     <Compile Include="src\UpdateTemplateWithPlaceholderExampleTest.cs" />
     <Compile Include="src\CreatePackageFromTemplateWithFieldsExampleTest.cs" />
+    <Compile Include="src\CreatePackageWithoutDocumentExampleTest.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

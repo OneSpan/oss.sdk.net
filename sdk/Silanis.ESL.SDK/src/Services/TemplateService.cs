@@ -66,5 +66,10 @@ namespace Silanis.ESL.SDK.Services
 		{
 			packageService.UpdateDocumentMetadata(template, document);
 		}
+
+        public Placeholder AddPlaceholder(PackageId templateId, Placeholder placeholder)
+        {
+            return apiClient.AddPlaceholder(templateId, placeholder);
+        }
     }
 }

@@ -31,7 +31,7 @@ namespace SDK.Examples
             Assert.AreEqual(example.SENDER_TITLE, senderInfo.Title);
             Assert.AreEqual(example.SENDER_COMPANY, senderInfo.Company);
 
-            Signer sender = documentPackage.Signers[example.senderEmail];
+            Signer sender = documentPackage.GetSigner(example.senderEmail);
             Assert.AreEqual(example.SENDER_FIRST_NAME, sender.FirstName);
             Assert.AreEqual(example.SENDER_LAST_NAME, sender.LastName);
             Assert.AreEqual(example.senderEmail, sender.Email);
