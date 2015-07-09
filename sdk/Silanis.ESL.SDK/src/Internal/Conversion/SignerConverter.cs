@@ -36,7 +36,7 @@ namespace Silanis.ESL.SDK
             role.Reassign = sdkSigner.CanChangeSigner;
             role.Locked = sdkSigner.Locked;
 
-			foreach (AttachmentRequirement attachmentRequirement in sdkSigner.Attachments.Values)
+			foreach (AttachmentRequirement attachmentRequirement in sdkSigner.Attachments)
 			{
 				role.AddAttachmentRequirement(new AttachmentRequirementConverter(attachmentRequirement).ToAPIAttachmentRequirement());
 			}

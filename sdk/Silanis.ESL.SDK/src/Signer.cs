@@ -147,11 +147,23 @@ namespace Silanis.ESL.SDK
 			set;
 		}
 
-		public IDictionary<string, AttachmentRequirement> Attachments
+		public IList<AttachmentRequirement> Attachments
 		{
 			get;
 			set;
 		}
+
+        public AttachmentRequirement GetAttachmentRequirement(string attachmentName) 
+        {
+            foreach(AttachmentRequirement attachment in Attachments) 
+            {
+                if(attachment.Name.Equals(attachmentName)) 
+                {
+                    return attachment;
+                }
+            }
+            return null;
+        }
 
         public bool IsPlaceholderSigner()
         {

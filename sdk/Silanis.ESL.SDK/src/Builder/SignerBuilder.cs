@@ -20,7 +20,7 @@ namespace Silanis.ESL.SDK.Builder
 		private bool canChangeSigner;
 		private bool locked;
         private GroupId groupId;
-		private IDictionary<string, AttachmentRequirement> attachments = new Dictionary<string, AttachmentRequirement>();
+		private IList<AttachmentRequirement> attachments = new List<AttachmentRequirement>();
         private KnowledgeBasedAuthentication knowledgeBasedAuthentication;
 
         private SignerBuilder(string signerEmail)
@@ -173,7 +173,7 @@ namespace Silanis.ESL.SDK.Builder
 
 		private void AddAttachmentRequirement (AttachmentRequirement attachmentRequirement)
 		{
-			attachments.Add(attachmentRequirement.Name, attachmentRequirement);
+			attachments.Add(attachmentRequirement);
 		}
 
         public SignerBuilder ChallengedWithKnowledgeBasedAuthentication (KnowledgeBasedAuthentication knowledgeBasedAuthentication)

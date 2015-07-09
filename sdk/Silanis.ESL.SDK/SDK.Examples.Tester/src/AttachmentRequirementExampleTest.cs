@@ -31,6 +31,10 @@ namespace SDK.Examples
             Assert.AreEqual(RequirementStatus.INCOMPLETE.ToString(), example.retrievedSigner1Att1RequirementStatus.ToString());
                                
             Assert.AreEqual(2, example.signer2Attachments.Count);
+            // Check Attachments ordering
+            Assert.AreEqual(example.NAME2, example.signer2Attachments[0].Name);
+            Assert.AreEqual(example.NAME3, example.signer2Attachments[1].Name);
+
             Assert.AreEqual(example.NAME2, example.signer2Att1.Name);
             Assert.AreEqual(example.DESCRIPTION2, example.signer2Att1.Description);
             Assert.AreEqual(false, example.signer2Att1.Required);

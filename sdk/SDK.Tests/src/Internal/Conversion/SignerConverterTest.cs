@@ -73,9 +73,9 @@ namespace SDK.Tests
 			Assert.AreEqual(apiRole.EmailMessage.Content, sdkSigner1.Message);
 
 			string attachmentName = apiRole.AttachmentRequirements[0].Name;
-			Assert.AreEqual(apiRole.AttachmentRequirements[0].Name, sdkSigner1.Attachments[attachmentName].Name);
-			Assert.AreEqual(apiRole.AttachmentRequirements[0].Description, sdkSigner1.Attachments[attachmentName].Description);
-			Assert.AreEqual(apiRole.AttachmentRequirements[0].Required, sdkSigner1.Attachments[attachmentName].Required);
+			Assert.AreEqual(apiRole.AttachmentRequirements[0].Name, sdkSigner1.GetAttachmentRequirement(attachmentName).Name);
+			Assert.AreEqual(apiRole.AttachmentRequirements[0].Description, sdkSigner1.GetAttachmentRequirement(attachmentName).Description);
+			Assert.AreEqual(apiRole.AttachmentRequirements[0].Required, sdkSigner1.GetAttachmentRequirement(attachmentName).Required);
 		}
 
         [Test()]
@@ -128,8 +128,8 @@ namespace SDK.Tests
 
             string attachmentName = apiRole.AttachmentRequirements[0].Name;
             Silanis.ESL.API.AttachmentRequirement apiAttachment = apiRole.AttachmentRequirements[0];
-            Silanis.ESL.SDK.AttachmentRequirement sdkAttachment = sdkSigner1.Attachments[attachmentName];
-            Assert.AreEqual(attachmentName, sdkSigner1.Attachments[attachmentName].Name);
+            Silanis.ESL.SDK.AttachmentRequirement sdkAttachment = sdkSigner1.GetAttachmentRequirement(attachmentName);
+            Assert.AreEqual(attachmentName, sdkSigner1.GetAttachmentRequirement(attachmentName).Name);
             Assert.AreEqual(apiAttachment.Description, sdkAttachment.Description);
             Assert.AreEqual(apiAttachment.Required, sdkAttachment.Required);
             Assert.AreEqual(apiAttachment.Status.ToString(), sdkAttachment.Status.ToString());
