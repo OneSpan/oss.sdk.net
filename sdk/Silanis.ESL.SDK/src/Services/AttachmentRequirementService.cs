@@ -27,10 +27,10 @@ namespace Silanis.ESL.SDK
 		/// <param name="packageId">Package identifier.</param>
 		/// <param name="signer">Signer.</param>
 		/// <param name="attachmentId">Attachment identifier.</param>
-		public void AcceptAttachment(PackageId packageId, Signer signer, String attachmentId)
+		public void AcceptAttachment(PackageId packageId, Signer signer, String attachmentName)
         {
-            signer.Attachments[attachmentId].SenderComment = "";
-            signer.Attachments[attachmentId].Status = Silanis.ESL.SDK.RequirementStatus.COMPLETE;
+            signer.GetAttachmentRequirement(attachmentName).SenderComment = "";
+            signer.GetAttachmentRequirement(attachmentName).Status = Silanis.ESL.SDK.RequirementStatus.COMPLETE;
             
             packageService.UpdateSigner(packageId, signer);
         }
@@ -42,10 +42,10 @@ namespace Silanis.ESL.SDK
 		/// <param name="signer">Signer.</param>
 		/// <param name="attachmentId">Attachment identifier.</param>
 		/// <param name="senderComment">Sender comment.</param>
-        public void RejectAttachment(PackageId packageId, Signer signer, String attachmentId, String senderComment)
+        public void RejectAttachment(PackageId packageId, Signer signer, String attachmentName, String senderComment)
         {
-            signer.Attachments[attachmentId].SenderComment = senderComment;
-            signer.Attachments[attachmentId].Status = RequirementStatus.REJECTED;
+            signer.GetAttachmentRequirement(attachmentName).SenderComment = senderComment;
+            signer.GetAttachmentRequirement(attachmentName).Status = RequirementStatus.REJECTED;
             
             packageService.UpdateSigner(packageId, signer);
         }
