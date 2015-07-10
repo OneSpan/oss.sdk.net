@@ -161,10 +161,10 @@ namespace SDK.Tests
 				.Build();
 
 			Assert.AreEqual(signer.Attachments.Count, 1);
-			Assert.AreEqual(signer.Attachments["Driver's license"].Name, attachmentRequirement.Name);
-			Assert.AreEqual(signer.Attachments["Driver's license"].Description, attachmentRequirement.Description);
-			Assert.AreEqual(signer.Attachments["Driver's license"].Required, attachmentRequirement.Required);
-			Assert.AreEqual(signer.Attachments["Driver's license"].Status, attachmentRequirement.Status);
+			Assert.AreEqual(signer.GetAttachmentRequirement("Driver's license").Name, attachmentRequirement.Name);
+			Assert.AreEqual(signer.GetAttachmentRequirement("Driver's license").Description, attachmentRequirement.Description);
+			Assert.AreEqual(signer.GetAttachmentRequirement("Driver's license").Required, attachmentRequirement.Required);
+			Assert.AreEqual(signer.GetAttachmentRequirement("Driver's license").Status, attachmentRequirement.Status);
 		}
 
 		[Test]
@@ -187,14 +187,14 @@ namespace SDK.Tests
 				.Build();
 
 			Assert.AreEqual(signer.Attachments.Count, 2);
-			Assert.AreEqual(signer.Attachments["Driver's license"].Name, attachmentRequirement1.Name);
-			Assert.AreEqual(signer.Attachments["Driver's license"].Description, attachmentRequirement1.Description);
-			Assert.AreEqual(signer.Attachments["Driver's license"].Required, attachmentRequirement1.Required);
-			Assert.AreEqual(signer.Attachments["Driver's license"].Status, attachmentRequirement1.Status);
-			Assert.AreEqual(signer.Attachments["Medicare card"].Name, attachmentRequirement2.Name);
-			Assert.AreEqual(signer.Attachments["Medicare card"].Description, attachmentRequirement2.Description);
-			Assert.AreEqual(signer.Attachments["Medicare card"].Required, attachmentRequirement2.Required);
-			Assert.AreEqual(signer.Attachments["Medicare card"].Status.ToString(), attachmentRequirement2.Status.ToString());
+			Assert.AreEqual(signer.GetAttachmentRequirement("Driver's license").Name, attachmentRequirement1.Name);
+			Assert.AreEqual(signer.GetAttachmentRequirement("Driver's license").Description, attachmentRequirement1.Description);
+			Assert.AreEqual(signer.GetAttachmentRequirement("Driver's license").Required, attachmentRequirement1.Required);
+			Assert.AreEqual(signer.GetAttachmentRequirement("Driver's license").Status, attachmentRequirement1.Status);
+			Assert.AreEqual(signer.GetAttachmentRequirement("Medicare card").Name, attachmentRequirement2.Name);
+			Assert.AreEqual(signer.GetAttachmentRequirement("Medicare card").Description, attachmentRequirement2.Description);
+			Assert.AreEqual(signer.GetAttachmentRequirement("Medicare card").Required, attachmentRequirement2.Required);
+			Assert.AreEqual(signer.GetAttachmentRequirement("Medicare card").Status.ToString(), attachmentRequirement2.Status.ToString());
 		}
 	}
 } 	
