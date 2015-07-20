@@ -66,13 +66,19 @@ namespace Silanis.ESL.SDK
                 throw new EslException("Could not reject attachment for signer." + " Exception: " + e.Message,e);
             }
         }
-        
+
+        [Obsolete("This method was replaced by DownloadAttachmentFile")]
         public byte[] DownloadAttachment(string packageId, string attachmentId)
+        {
+            return DownloadAttachmentFile(packageId, attachmentId).Contents;
+        }
+
+        public DownloadedFile DownloadAttachmentFile(string packageId, string attachmentId)
         {
             string path = template.UrlFor(UrlTemplate.ATTACHMENT_REQUIREMENT_PATH)
                 .Replace("{packageId}", packageId)
-                .Replace("{attachmentId}", attachmentId)
-                .Build();
+                    .Replace("{attachmentId}", attachmentId)
+                    .Build();
 
             try 
             {
@@ -88,7 +94,13 @@ namespace Silanis.ESL.SDK
             }
         }
 
+        [Obsolete("This method was replaced by DownloadAllAttachmentFilesForPackage")]
         public byte[] DownloadAllAttachmentsForPackage(string packageId)
+        {
+            return DownloadAllAttachmentFilesForPackage(packageId).Contents;
+        }
+
+        public DownloadedFile DownloadAllAttachmentFilesForPackage(string packageId)
         {
             string path = template.UrlFor(UrlTemplate.ALL_ATTACHMENTS_PATH)
                 .Replace("{packageId}", packageId)
@@ -108,7 +120,13 @@ namespace Silanis.ESL.SDK
             }
         }
 
+        [Obsolete("This method was replaced by DownloadAllAttachmentFilesForSignerInPackage")]
         public byte[] DownloadAllAttachmentsForSignerInPackage(DocumentPackage sdkPackage, Signer signer)
+        {
+            return DownloadAllAttachmentFilesForSignerInPackage(sdkPackage, signer).Contents;
+        }
+
+        public DownloadedFile DownloadAllAttachmentFilesForSignerInPackage(DocumentPackage sdkPackage, Signer signer)
         {
             Package apiPackage = new DocumentPackageConverter(sdkPackage).ToAPIPackage();
             string roleId = "";
@@ -126,7 +144,7 @@ namespace Silanis.ESL.SDK
             return DownloadAllAttachmentsForSignerInPackage(sdkPackage.Id.Id, roleId);
         }
 
-        private byte[] DownloadAllAttachmentsForSignerInPackage(string packageId, string roleId)
+        private DownloadedFile DownloadAllAttachmentsForSignerInPackage(string packageId, string roleId)
         {
             string path = template.UrlFor(UrlTemplate.ALL_ATTACHMENTS_FOR_ROLE_PATH)
                 .Replace("{packageId}", packageId)

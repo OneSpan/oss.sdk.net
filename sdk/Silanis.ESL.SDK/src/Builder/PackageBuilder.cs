@@ -13,11 +13,11 @@ namespace Silanis.ESL.SDK.Builder
 		private bool autocomplete = true;
 		private Nullable<DateTime> expiryDate;
 		private string emailMessage = String.Empty;
-		private IDictionary<string, Signer> signers = new Dictionary<string, Signer>(StringComparer.OrdinalIgnoreCase);
-        private IDictionary<string, Signer> placeholders = new Dictionary<string, Signer> ();
+        private IList<Signer> signers = new List<Signer>();
+        private IList<Signer> placeholders = new List<Signer> ();
 		private IDictionary<string, Document> documents = new Dictionary<string, Document>();
 		private PackageId id;
-		private DocumentPackageStatus status = DocumentPackageStatus.DRAFT;
+		private DocumentPackageStatus status;
 		private CultureInfo language;
         private DocumentPackageSettings settings;
         private SenderInfo senderInfo;
@@ -89,15 +89,11 @@ namespace Silanis.ESL.SDK.Builder
         {
             if (signer.IsPlaceholderSigner())
             {
-                placeholders[signer.Id] = signer;
+                placeholders.Add(signer);
             }
-			else if (signer.IsGroupSigner())
-			{
-				signers[signer.GroupId.Id] = signer;
-			}
 			else
 			{
-				signers[signer.Email] = signer;
+				signers.Add(signer);
 			}
 			return this;
 		}

@@ -12,43 +12,11 @@ namespace SDK.Examples
             new AuthenticationMethodsExample(Props.GetInstance()).Run();
         }
 
-        private string email1;
-        private string email2;
-        private string email3;
-        private string sms3;
+        public string email1;
+        public string email2;
+        public string email3;
+        public string sms3;
         private Stream fileStream1;
-
-        public string Email1
-        {
-            get
-            {
-                return email1;
-            }
-        }
-
-        public string Email2
-        {
-            get
-            {
-                return email2;
-            }
-        }
-
-        public string Email3
-        {
-            get
-            {
-                return email3;
-            }
-        }
-
-        public string Sms3
-        {
-            get
-            {
-                return sms3;
-            }
-        }
 
         public static string QUESTION1 = "What's 1+1?";
         public static string ANSWER1 = "2";

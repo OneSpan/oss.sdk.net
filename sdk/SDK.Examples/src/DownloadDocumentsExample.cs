@@ -16,14 +16,14 @@ namespace SDK.Examples
 			EslClient client = new EslClient (apiToken, baseUrl);
 			PackageId packageId = new PackageId ("GLK2xasqLvFe2wc4qwO5iTKyjx42");
 
-			byte[] documentContent = client.DownloadDocument (packageId, "testing");
-			File.WriteAllBytes (Directory.GetCurrentDirectory() + "/downloaded.pdf", documentContent);
+            byte[] downloadedDocument = client.DownloadDocument (packageId, "testing");
+            File.WriteAllBytes (Directory.GetCurrentDirectory() + "/downloaded.pdf", downloadedDocument);
 
-			byte[] evidenceContent = client.DownloadEvidenceSummary (packageId);
-			File.WriteAllBytes (Directory.GetCurrentDirectory() + "/evidence-summary.pdf", evidenceContent);
+            byte[] downloadedEvidence = client.DownloadEvidenceSummary (packageId);
+            File.WriteAllBytes (Directory.GetCurrentDirectory() + "/evidence-summary.pdf", downloadedEvidence);
 
-			byte[] zipContent = client.DownloadZippedDocuments (packageId);
-			File.WriteAllBytes (Directory.GetCurrentDirectory() + "/package-documents.zip", zipContent);
+            byte[] downloadedZip = client.DownloadZippedDocuments (packageId);
+            File.WriteAllBytes (Directory.GetCurrentDirectory() + "/package-documents.zip", downloadedZip);
 		}
 	}
 }

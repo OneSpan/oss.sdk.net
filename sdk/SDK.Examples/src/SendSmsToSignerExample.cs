@@ -62,8 +62,8 @@ namespace SDK.Examples
             eslClient.SendPackage(packageId);
             retrievedPackage = eslClient.GetPackage(packageId);
 
-            eslClient.PackageService.SendSmsToSigner(packageId, retrievedPackage.Signers[email1]);
-            eslClient.PackageService.SendSmsToSigner(packageId, retrievedPackage.Signers[email2]);
+            eslClient.PackageService.SendSmsToSigner(packageId, retrievedPackage.GetSigner(email1));
+            eslClient.PackageService.SendSmsToSigner(packageId, retrievedPackage.GetSigner(email2));
 
             retrievedPackage = eslClient.GetPackage(packageId);
         }

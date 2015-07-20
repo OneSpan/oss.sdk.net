@@ -21,6 +21,8 @@ namespace Silanis.ESL.SDK
         private Nullable<bool> enableFirstAffidavit = null;
         private Nullable<bool> enableSecondAffidavit = null;
         private Nullable<bool> showOwnerInPersonDropDown = null;
+        private Nullable<bool> disableDeclineOther = null;
+        private Nullable<bool> disableOptOutOther = null;
 
 		private string linkText = null;
 		private string linkTooltip = null;
@@ -215,6 +217,30 @@ namespace Silanis.ESL.SDK
             return this;
         }
 
+        public DocumentPackageSettingsBuilder WithDeclineOther()
+        {
+            this.disableDeclineOther = false;
+            return this;
+        }
+
+        public DocumentPackageSettingsBuilder WithoutDeclineOther()
+        {
+            this.disableDeclineOther = true;
+            return this;
+        }
+
+        public DocumentPackageSettingsBuilder WithOptOutOther()
+        {
+            this.disableOptOutOther = false;
+            return this;
+        }
+
+        public DocumentPackageSettingsBuilder WithoutOptOutOther()
+        {
+            this.disableOptOutOther = true;
+            return this;
+        }
+
         public DocumentPackageSettings build()
         {
             return Build();
@@ -240,6 +266,8 @@ namespace Silanis.ESL.SDK
             result.EnableFirstAffidavit = enableFirstAffidavit;
             result.EnableSecondAffidavit = enableSecondAffidavit;
             result.ShowOwnerInPersonDropDown = showOwnerInPersonDropDown;
+            result.DisableDeclineOther = disableDeclineOther;
+            result.DisableOptOutOther = disableOptOutOther;
 			result.LinkHref = linkHref;
 			result.LinkText = linkText;
 			result.LinkTooltip = linkTooltip;
@@ -265,6 +293,8 @@ namespace Silanis.ESL.SDK
             enableSecondAffidavit = !apiPackageSettings.Ceremony.DisableSecondInPersonAffidavit;
             showOwnerInPersonDropDown = !apiPackageSettings.Ceremony.HidePackageOwnerInPerson;
             showLanguageDropDown = !apiPackageSettings.Ceremony.HideLanguageDropdown;
+            disableDeclineOther = apiPackageSettings.Ceremony.DisableDeclineOther;
+            disableOptOutOther = apiPackageSettings.Ceremony.DisableOptOutOther;
 
             foreach (string declineReason in apiPackageSettings.Ceremony.DeclineReasons)
             {

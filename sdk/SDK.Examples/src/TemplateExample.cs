@@ -72,17 +72,18 @@ namespace SDK.Examples
                 .Build();
 
 			templateId = eslClient.CreateTemplate(superDuperPackage);
+            DocumentPackage template = eslClient.GetPackage(templateId);
 
-			superDuperPackage.Id = templateId;
+            template.Id = templateId;
 
-            superDuperPackage.Name = UPDATED_TEMPLATE_NAME;
-            superDuperPackage.Description = UPDATED_TEMPLATE_DESCRIPTION;
-			superDuperPackage.Autocomplete = false;
+            template.Name = UPDATED_TEMPLATE_NAME;
+            template.Description = UPDATED_TEMPLATE_DESCRIPTION;
+            template.Autocomplete = false;
 
-			eslClient.TemplateService.Update(superDuperPackage);
+            eslClient.TemplateService.Update(template);
 
 			document.Description = "Updated description";
-			eslClient.TemplateService.UpdateDocumentMetadata(superDuperPackage, document);
+            eslClient.TemplateService.UpdateDocumentMetadata(template, document);
 
 			eslClient.TemplateService.DeleteDocument(templateId, "doc1");
 

@@ -50,7 +50,7 @@ namespace SDK.Examples
             Assert.AreEqual(RequirementStatus.COMPLETE.ToString(), example.retrievedSigner1Att1RequirementStatusAfterAccepting.ToString());
             Assert.AreEqual("", example.retrievedSigner1Att1RequirementSenderCommentAfterAccepting);
 
-            Assert.AreEqual(example.DOWNLOADED_ATTACHMENT_PDF, example.downloadedAttachemnt1.Name);
+            Assert.AreEqual(example.ATTACHMENT_FILE_NAME1, example.downloadedAttachemnt1.Name);
             Assert.AreEqual(example.attachment1ForSigner1FileSize, example.downloadedAttachemnt1.Length);
 
             Assert.AreEqual(3, example.downloadedAllAttachmentsForPackageZip.Size);

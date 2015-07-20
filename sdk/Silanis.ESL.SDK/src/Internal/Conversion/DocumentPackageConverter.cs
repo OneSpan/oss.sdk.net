@@ -46,6 +46,11 @@ namespace Silanis.ESL.SDK
                 package.Id = sdkPackage.Id.ToString();
             }
 
+            if (sdkPackage.Status != null)
+            {
+                package.Status = sdkPackage.Status;
+            }
+
 			if (sdkPackage.Description != null)
 			{
 				package.Description = sdkPackage.Description;
@@ -85,13 +90,13 @@ namespace Silanis.ESL.SDK
             }
 
 			int signerCount = 1;
-			foreach (Signer signer in sdkPackage.Signers.Values)
+			foreach (Signer signer in sdkPackage.Signers)
 			{
                 Silanis.ESL.API.Role role = new SignerConverter(signer).ToAPIRole("signer" + signerCount);
 				package.AddRole(role);
 				signerCount++;
 			}
-			foreach (Signer signer in sdkPackage.Placeholders.Values)
+			foreach (Signer signer in sdkPackage.Placeholders)
 			{
                 Silanis.ESL.API.Role role = new SignerConverter(signer).ToAPIRole("signer" + signerCount);
 				package.AddRole(role);

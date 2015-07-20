@@ -15,7 +15,6 @@ namespace Silanis.ESL.API
 		private IList<Role> _roles = new List<Role>();
 		
         internal Package(){
-            Status = "DRAFT";
             Visibility = "ACCOUNT";
             Type = "PACKAGE";
         }

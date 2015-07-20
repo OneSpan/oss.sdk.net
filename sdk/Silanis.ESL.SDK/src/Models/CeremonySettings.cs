@@ -29,8 +29,7 @@ namespace Silanis.ESL.API
             {
                 return _declineReasons;
             }
-            set
-            {
+            set {
                 _declineReasons = value;
             }
         }
@@ -172,8 +171,7 @@ namespace Silanis.ESL.API
             {
                 return _optOutReasons;
             }
-            set
-            {
+            set {
                 _optOutReasons = value;
             }
         }

@@ -20,11 +20,67 @@ namespace Silanis.ESL.SDK
         
         public PackageSettings toAPIPackageSettings()
         {
-            if ( apiSettings != null )
+            if ( sdkSettings == null )
                 return apiSettings;
                 
+            CeremonySettings ceremonySettings = new CeremonySettings();
+
+            ceremonySettings.InPerson = sdkSettings.EnableInPerson;
+            ceremonySettings.OptOutButton = sdkSettings.EnableOptOut;
+            ceremonySettings.DeclineButton = sdkSettings.EnableDecline;
+            ceremonySettings.HideWatermark = sdkSettings.HideWatermark;
+            ceremonySettings.HideCaptureText = sdkSettings.HideCaptureText;
+            ceremonySettings.DeclineReasons = sdkSettings.DeclineReasons;
+            ceremonySettings.OptOutReasons = sdkSettings.OptOutReasons;
+            ceremonySettings.MaxAuthFailsAllowed = sdkSettings.MaxAuthAttempts;
+            ceremonySettings.DisableDeclineOther = sdkSettings.DisableDeclineOther;
+            ceremonySettings.DisableOptOutOther = sdkSettings.DisableOptOutOther;
+
+            if (sdkSettings.EnableFirstAffidavit.HasValue) {
+                ceremonySettings.DisableFirstInPersonAffidavit = !sdkSettings.EnableFirstAffidavit;
+            }
+
+            if (sdkSettings.EnableSecondAffidavit.HasValue) {
+                ceremonySettings.DisableSecondInPersonAffidavit = !sdkSettings.EnableSecondAffidavit;
+            }
+
+            if (sdkSettings.ShowLanguageDropDown.HasValue) {
+                ceremonySettings.HideLanguageDropdown = !sdkSettings.ShowLanguageDropDown;
+            }
+
+            if (sdkSettings.ShowOwnerInPersonDropDown.HasValue) {
+                ceremonySettings.HidePackageOwnerInPerson = !sdkSettings.ShowOwnerInPersonDropDown;
+            }
+
+            if (sdkSettings.LinkHref != null) {
+                Link link = new Link();
+                link.Href =  sdkSettings.LinkHref ;
+                link.Text =  sdkSettings.LinkText == null ? sdkSettings.LinkHref : sdkSettings.LinkText ;
+                link.Title =  sdkSettings.LinkTooltip == null ? sdkSettings.LinkHref : sdkSettings.LinkTooltip ;
+                ceremonySettings.HandOver = link;
+            }
+
+            if ( sdkSettings.ShowDialogOnComplete.HasValue) {
+                CeremonyEvents ceremonyEvents = new CeremonyEvents();
+                CeremonyEventComplete ceremonyEventComplete = new CeremonyEventComplete();
+                ceremonyEventComplete.Dialog = sdkSettings.ShowDialogOnComplete;
+                ceremonyEvents.Complete = ceremonyEventComplete;
+                ceremonySettings.Events = ceremonyEvents;
+            }
+
+            if ( sdkSettings.ShowDownloadButton.HasValue) {
+                DocumentToolbarOptions documentToolbarOptions = new DocumentToolbarOptions();
+                documentToolbarOptions.DownloadButton = sdkSettings.ShowDownloadButton;
+                ceremonySettings.DocumentToolbarOptions = documentToolbarOptions;
+            }
+
+            if ( sdkSettings.CeremonyLayoutSettings != null) {
+                ceremonySettings.Layout = new CeremonyLayoutSettingsConverter(sdkSettings.CeremonyLayoutSettings).ToAPILayoutOptions();
+            }
+
             PackageSettings result = new PackageSettings();
-                
+            result.Ceremony = ceremonySettings;
+
             return result;
         }
         
@@ -50,7 +106,7 @@ namespace Silanis.ESL.SDK
                     builder = (apiSettings.Ceremony.HideWatermark.Value ? builder.WithoutWatermark() : builder.WithWatermark());
                     
                 if (apiSettings.Ceremony.HideCaptureText.HasValue)
-                    builder = (apiSettings.Ceremony.HideCaptureText.Value ? builder.WithCaptureText() : builder.WithoutCaptureText());
+                    builder = (apiSettings.Ceremony.HideCaptureText.Value ? builder.WithoutCaptureText() : builder.WithCaptureText());
                     
                 if (apiSettings.Ceremony.DisableFirstInPersonAffidavit.HasValue)
                     builder = (apiSettings.Ceremony.DisableFirstInPersonAffidavit.Value ? builder.DisableFirstAffidavit() : builder.EnableFirstAffidavit());
@@ -63,6 +119,12 @@ namespace Silanis.ESL.SDK
                     
                 if (apiSettings.Ceremony.HidePackageOwnerInPerson.HasValue)
                     builder = (apiSettings.Ceremony.HidePackageOwnerInPerson.Value ? builder.HideOwnerInPersonDropDown() : builder.ShowOwnerInPersonDropDown());
+
+                if (apiSettings.Ceremony.DisableDeclineOther.HasValue)
+                    builder = (apiSettings.Ceremony.DisableDeclineOther.Value ? builder.WithoutDeclineOther() : builder.WithDeclineOther());
+
+                if (apiSettings.Ceremony.DisableOptOutOther.HasValue)
+                    builder = (apiSettings.Ceremony.DisableOptOutOther.Value ? builder.WithoutOptOutOther() : builder.WithOptOutOther());
             
                 foreach (string declineReason in apiSettings.Ceremony.DeclineReasons)
                 {

@@ -22,7 +22,7 @@ namespace SDK.Examples
 
             DocumentPackage documentPackage = example.RetrievedPackage;
 
-            SignerInformationForEquifaxUSA signerInformationForEquifaxUSA = documentPackage.Signers[example.SIGNER_EMAIL].KnowledgeBasedAuthentication.SignerInformationForEquifaxUSA;
+            SignerInformationForEquifaxUSA signerInformationForEquifaxUSA = documentPackage.GetSigner(example.SIGNER_EMAIL).KnowledgeBasedAuthentication.SignerInformationForEquifaxUSA;
 
             Assert.AreEqual(signerInformationForEquifaxUSA.FirstName, example.FIRST_NAME);
             Assert.AreEqual(signerInformationForEquifaxUSA.LastName, example.LAST_NAME);

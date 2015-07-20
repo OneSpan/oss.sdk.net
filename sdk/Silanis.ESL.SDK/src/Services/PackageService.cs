@@ -397,7 +397,7 @@ namespace Silanis.ESL.SDK.Services
 
             try
             {
-                return restClient.GetHttpAsOctetStream(path);
+                return restClient.GetHttpAsOctetStream(path).Contents;
             }
             catch (EslServerException e)
             {
@@ -424,7 +424,7 @@ namespace Silanis.ESL.SDK.Services
 
             try
             {
-                return restClient.GetHttpAsOctetStream(path);
+                return restClient.GetHttpAsOctetStream(path).Contents;
             }
             catch (EslServerException e)
             {
@@ -449,7 +449,7 @@ namespace Silanis.ESL.SDK.Services
 
             try
             {
-                return restClient.GetBytes(path);
+                return restClient.GetBytes(path).Contents;
             }
             catch (EslServerException e)
             {
@@ -474,7 +474,7 @@ namespace Silanis.ESL.SDK.Services
 
             try
             {
-                return restClient.GetBytes(path);
+                return restClient.GetBytes(path).Contents;
             }
             catch (EslServerException e)
             {
@@ -1068,7 +1068,7 @@ namespace Silanis.ESL.SDK.Services
 				.Build();
 
             List<Silanis.ESL.API.Role> roles = new List<Silanis.ESL.API.Role>();
-            foreach (Signer signer in package.Signers.Values)
+            foreach (Signer signer in package.Signers)
             {
                 roles.Add(new SignerConverter(signer).ToAPIRole(signer.Id));
             }
@@ -1314,7 +1314,7 @@ namespace Silanis.ESL.SDK.Services
             }
         }
 
-        public string GetJournalEntriesAsCSV(string userId) 
+        public DownloadedFile GetJournalEntriesAsCSV(string userId) 
         {
             string path = template.UrlFor(UrlTemplate.NOTARY_JOURNAL_CSV_PATH)
                     .Replace("{userId}", userId)
@@ -1322,7 +1322,7 @@ namespace Silanis.ESL.SDK.Services
 
             try
             {
-                return restClient.Get(path, "text/csv");
+                return restClient.GetBytes(path);
             } 
             catch (EslServerException e)
             {
