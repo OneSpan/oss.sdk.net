@@ -53,24 +53,37 @@ namespace SDK.Examples
             document = documentPackage.Documents["Second Document"];
             fields = document.Signatures[0].Fields;
 
-            field = fields[0];
+            field = findFieldByName("firstField", fields);
             Assert.AreEqual(FieldStyle.UNBOUND_RADIO_BUTTON, field.Style);
             Assert.AreEqual(0, field.Page);
             Assert.AreEqual("", field.Value);
             Assert.AreEqual("group", field.Validator.Options[0]);
 
-            field = fields[1];
+            field = findFieldByName("secondField", fields);
             Assert.AreEqual(FieldStyle.UNBOUND_RADIO_BUTTON, field.Style);
             Assert.AreEqual(0, field.Page);
             Assert.AreEqual(FieldBuilder.RADIO_SELECTED, field.Value);
             Assert.AreEqual("group", field.Validator.Options[0]);
 
-            field = fields[2];
+            field = findFieldByName("thirdField", fields);
             Assert.AreEqual(FieldStyle.UNBOUND_RADIO_BUTTON, field.Style);
             Assert.AreEqual(0, field.Page);
             Assert.AreEqual("", field.Value);
             Assert.AreEqual("group", field.Validator.Options[0]);
 
+        }
+
+        private Field findFieldByName(string fieldName, List<Field> fields)
+        {
+            foreach (Field field in fields) 
+            {
+                if (field.Name != null && field.Name.Equals(fieldName)) 
+                {
+                    return field;
+                }
+            }
+            
+            return null;
         }
     }
 }
