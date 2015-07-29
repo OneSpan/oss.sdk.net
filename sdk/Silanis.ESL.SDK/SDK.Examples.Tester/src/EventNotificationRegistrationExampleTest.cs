@@ -14,37 +14,31 @@ namespace SDK.Examples
 			EventNotificationRegistrationExample example = new EventNotificationRegistrationExample(Props.GetInstance());
 			example.Run();
 
-			EventNotificationConfig eventNotificationConfig = example.EventNotificationConfig;
+            EventNotificationConfig config = example.config;
 
-			Assert.IsNotNull(eventNotificationConfig);
-            Assert.AreEqual(eventNotificationConfig.Url, example.URL);
-            Assert.AreEqual(eventNotificationConfig.Key, example.KEY);
-			Assert.AreEqual(eventNotificationConfig.NotificationEvents.Count, 18);
+			Assert.IsNotNull(config);
+            Assert.AreEqual(config.Url, example.URL);
+            Assert.AreEqual(config.Key, example.KEY);
+			Assert.AreEqual(config.NotificationEvents.Count, 18);
 
-            List<NotificationEvent> eventList = new List<NotificationEvent>();
-            eventList.Add(example.EVENT1);
-            eventList.Add(example.EVENT2);
-            eventList.Add(example.EVENT3);
-            eventList.Add(example.EVENT4);
-            eventList.Add(example.EVENT5);
-            eventList.Add(example.EVENT6);
-            eventList.Add(example.EVENT7);
-            eventList.Add(example.EVENT8);
-            eventList.Add(example.EVENT9);
-            eventList.Add(example.EVENT10);
-            eventList.Add(example.EVENT11);
-            eventList.Add(example.EVENT12);
-            eventList.Add(example.EVENT13);
-            eventList.Add(example.EVENT14);
-            eventList.Add(example.EVENT15);
-            eventList.Add(example.EVENT16);
-            eventList.Add(example.EVENT17);
-            eventList.Add(example.EVENT18);
+            AssertEvents(config, example.events);
 
-            foreach (NotificationEvent notificationEvent in eventList)
+            EventNotificationConfig connectorsConfig = example.connectorsConfig;
+
+            Assert.IsNotNull(connectorsConfig);
+            Assert.AreEqual(connectorsConfig.Url, example.CONNECTORS_URL);
+            Assert.AreEqual(connectorsConfig.Key, example.CONNECTORS_KEY);
+            Assert.AreEqual(connectorsConfig.NotificationEvents.Count, 9);
+
+            AssertEvents(connectorsConfig, example.connectorsEvents);
+		}
+
+        private void AssertEvents(EventNotificationConfig config, IList<NotificationEvent> events)
+        {
+            foreach (NotificationEvent notificationEvent in events)
             {
                 bool found = false;
-                foreach (NotificationEvent receivedEvent in eventNotificationConfig.NotificationEvents) 
+                foreach (NotificationEvent receivedEvent in config.NotificationEvents) 
                 {
                     if (receivedEvent.ToString().Equals(notificationEvent.ToString())) 
                     {
@@ -52,9 +46,9 @@ namespace SDK.Examples
                         break;
                     }
                 }
-                Assert.IsTrue(found, "Callback has wrong event for EVENT" + (eventList.IndexOf(notificationEvent) + 1));
+                Assert.IsTrue(found, "Callback has wrong event for EVENT" + (events.IndexOf(notificationEvent) + 1));
             }
-		}
+        }
 	}
 }
 

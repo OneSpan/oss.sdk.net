@@ -36,6 +36,11 @@ namespace Silanis.ESL.SDK
             return this;
         }
 
+        public EventNotificationConfigBuilder SetEvents( List<NotificationEvent> events ) {
+            this.events = events;
+            return this;
+        }
+
         public EventNotificationConfig build() {
             EventNotificationConfig result = new EventNotificationConfig(url);
             result.Key = key;

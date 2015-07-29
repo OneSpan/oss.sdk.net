@@ -29,14 +29,14 @@ namespace SDK.Examples
 		{
 			DocumentPackage package = PackageBuilder.NewPackageNamed ("Signing Order " + DateTime.Now)
 					.DescribedAs ("This is a signer workflow example")
-					.WithSigner(SignerBuilder.NewSignerWithEmail(email2)
+					.WithSigner(SignerBuilder.NewSignerWithEmail(email1)
 					            .WithFirstName("Coco")
 					            .WithLastName("Beware")
-								.SigningOrder(2))
-                    .WithSigner(SignerBuilder.NewSignerWithEmail(email1)
+								.SigningOrder(1))
+                    .WithSigner(SignerBuilder.NewSignerWithEmail(email2)
                                 .WithFirstName("John")
                                 .WithLastName("Smith")
-                                .SigningOrder(1))			
+                                .SigningOrder(2))			
 					.Build ();
 
             packageId = eslClient.CreatePackage (package);

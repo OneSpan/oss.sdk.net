@@ -63,6 +63,7 @@ namespace Silanis.ESL.SDK.Internal
 
         // Event Notification Service
         public static readonly string CALLBACK_PATH = "/callback";
+        public static readonly string CONNECTORS_CALLBACK_PATH = "/callback/connectors/{origin}";
 
 		// Audit Service
 		public static readonly string AUDIT_PATH = "/packages/{packageId}/audit";
