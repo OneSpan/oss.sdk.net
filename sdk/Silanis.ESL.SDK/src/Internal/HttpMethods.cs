@@ -244,14 +244,9 @@ namespace Silanis.ESL.SDK.Internal
                     string fileName = "";
                     if(!String.IsNullOrEmpty(response.Headers["Content-Disposition"])) 
                     {
-                        string disposition = response.Headers["Content-Disposition"].ToString();
-                        if(null != disposition) {
-                            int index = disposition.IndexOf("filename=", StringComparison.CurrentCultureIgnoreCase);
-                            if (index > 0) {
-                                fileName = disposition.Substring(index + 10, disposition.Length - index - 11);
-                            }
-                        }
+                        fileName = GetFilename(response.Headers["Content-Disposition"].ToString());
                     }
+
                     DownloadedFile downloadedFile = new DownloadedFile(fileName, result);
 
                     return downloadedFile;
@@ -271,6 +266,23 @@ namespace Silanis.ESL.SDK.Internal
 				throw new EslException("Error communicating with esl server. " + e.Message,e);
 			}
 		}
+
+        private static string GetFilename(string disposition) 
+        {
+            string fileNameTitle = "filename*=UTF-8'";
+            string[] parts = disposition.Split(';');
+
+            foreach(string part in parts) 
+            {
+                int index = part.IndexOf(fileNameTitle);
+                if (index > 0) 
+                {
+                    return part.Substring(index + fileNameTitle.Length);
+                }
+            }
+
+            return "";
+        }
 
         public static DownloadedFile GetHttpAsOctetStream (string apiToken, string path)
         {
