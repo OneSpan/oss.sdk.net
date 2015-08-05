@@ -17,6 +17,11 @@ namespace Silanis.ESL.SDK
             {
                 version = version + "." + fileVersionInfo.ProductBuildPart;
             }
+
+            if (fileVersionInfo.ProductPrivatePart != 0) 
+            {
+                version = version + "." + fileVersionInfo.ProductPrivatePart;
+            }
             return version;
         }
     }

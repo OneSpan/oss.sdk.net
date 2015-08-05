@@ -517,11 +517,11 @@ namespace Silanis.ESL.SDK
             }
         }
         
-        public Version CurrentVersion
+        public string CurrentVersion
         {
             get
             {
-                return Assembly.GetExecutingAssembly().GetName().Version;
+                return VersionUtil.getVersion();
             }
         }   
 
