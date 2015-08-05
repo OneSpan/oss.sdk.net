@@ -22,7 +22,11 @@ namespace Silanis.ESL.SDK.Internal
         public const string ESL_CONTENT_TYPE_APPLICATION_MULTIPART = CONTENT_TYPE_APPLICATION_MULTIPART + "; " + ESL_API_VERSION_HEADER + "; boundary={0}";
 
         public const string ACCEPT_TYPE_APPLICATION_JSON = "application/json";
+        public const string ACCEPT_TYPE_APPLICATION_OCTET_STREAM = "application/octet-stream";
+        public const string ACCEPT_TYPE_APPLICATION = "*/*";
         public const string ESL_ACCEPT_TYPE_APPLICATION_JSON = ACCEPT_TYPE_APPLICATION_JSON + "; " + ESL_API_VERSION_HEADER;
+        public const string ESL_ACCEPT_TYPE_APPLICATION_OCTET_STREAM = ACCEPT_TYPE_APPLICATION_OCTET_STREAM + "; " + ESL_API_VERSION_HEADER;
+        public const string ESL_ACCEPT_TYPE_APPLICATION = ACCEPT_TYPE_APPLICATION + "; " + ESL_API_VERSION_HEADER;
 
         public static ProxyConfiguration proxyConfiguration;
 
@@ -229,9 +233,10 @@ namespace Silanis.ESL.SDK.Internal
         public static DownloadedFile GetHttp (string apiToken, string path)
 		{
 			try {
-                WebRequest request = WebRequest.Create (path);
+                HttpWebRequest request = (HttpWebRequest)WebRequest.Create (path);
 				request.Method = "GET";
 				request.Headers.Add ("Authorization", "Basic " + apiToken);
+                request.Accept = ESL_ACCEPT_TYPE_APPLICATION;
                 SetProxy(request);
 
 				WebResponse response = request.GetResponse ();
@@ -269,7 +274,7 @@ namespace Silanis.ESL.SDK.Internal
 
         private static string GetFilename(string disposition) 
         {
-            string fileNameTitle = "filename*=UTF-8'";
+            string fileNameTitle = "filename=\"";
             string[] parts = disposition.Split(';');
 
             foreach(string part in parts) 
@@ -277,7 +282,7 @@ namespace Silanis.ESL.SDK.Internal
                 int index = part.IndexOf(fileNameTitle);
                 if (index > 0) 
                 {
-                    return part.Substring(index + fileNameTitle.Length);
+                    return part.Substring(fileNameTitle.Length+1, part.Length-fileNameTitle.Length-2);
                 }
             }
 
@@ -290,7 +295,7 @@ namespace Silanis.ESL.SDK.Internal
                 HttpWebRequest request = (HttpWebRequest)WebRequest.Create (path);
                 request.Method = "GET";
                 request.Headers.Add ("Authorization", "Basic " + apiToken);
-                request.Accept = "application/octet-stream";
+                request.Accept = ESL_ACCEPT_TYPE_APPLICATION_OCTET_STREAM;
                 SetProxy(request);
 
                 WebResponse response = request.GetResponse ();
