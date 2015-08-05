@@ -41,7 +41,9 @@
     
     <target name="versioning" decription="change to file name with version" depends="package">
         <echo message="versioning" />
-        <property name="build.version" value="${assemblyname::get-version(assemblyname::get-assembly-name('C:/dev/esl.sdk.net/sdk/Silanis.ESL.SDK/bin/Release/Silanis.ESL.dll'))}" />
+        <property name="build.version" value="${version::get-major(fileversioninfo::get-product-version(fileversioninfo::get-version-info('C:/dev/esl.sdk.net/sdk/Silanis.ESL.SDK/bin/Release/Silanis.ESL.dll')))}" />
+        <property name="build.version" value="${build.version}.${version::get-minor(fileversioninfo::get-product-version(fileversioninfo::get-version-info('C:/dev/esl.sdk.net/sdk/Silanis.ESL.SDK/bin/Release/Silanis.ESL.dll')))}" if="${version::get-minor(fileversioninfo::get-product-version(fileversioninfo::get-version-info('C:/dev/esl.sdk.net/sdk/Silanis.ESL.SDK/bin/Release/Silanis.ESL.dll'))) != 0}" />
+        <property name="build.version" value="${build.version}.${version::get-build(fileversioninfo::get-product-version(fileversioninfo::get-version-info('C:/dev/esl.sdk.net/sdk/Silanis.ESL.SDK/bin/Release/Silanis.ESL.dll')))}" if="${version::get-build(fileversioninfo::get-product-version(fileversioninfo::get-version-info('C:/dev/esl.sdk.net/sdk/Silanis.ESL.SDK/bin/Release/Silanis.ESL.dll'))) != 0}" />
         <move file="${zip.file}" tofile ="${parent.dir}/${ESL-SDK}.${build.version}.zip">
         </move>
     </target>
