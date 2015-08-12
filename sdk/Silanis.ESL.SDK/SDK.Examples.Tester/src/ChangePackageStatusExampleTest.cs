@@ -15,6 +15,8 @@ namespace SDK.Examples
 
             Assert.AreEqual(DocumentPackageStatus.SENT, example.sentPackage.Status);
             Assert.AreEqual(DocumentPackageStatus.DRAFT, example.RetrievedPackage.Status);
+            Assert.IsTrue(example.trashedPackage.Trashed);
+            Assert.IsFalse(example.restoredPackage.Trashed);
         }
     }
 }

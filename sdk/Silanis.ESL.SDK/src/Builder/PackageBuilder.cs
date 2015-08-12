@@ -24,6 +24,7 @@ namespace Silanis.ESL.SDK.Builder
         private DocumentPackageAttributes attributes;
         private IList<Message> messages = new List<Message>();
         private Nullable<Boolean> notarized;
+        private bool trashed;
         private Visibility visibility;
 
 		private PackageBuilder(string packageName)
@@ -155,6 +156,11 @@ namespace Silanis.ESL.SDK.Builder
             return this;
         }
 
+        public PackageBuilder WithTrashed(bool trashed) {
+            this.trashed = trashed;
+            return this;
+        }
+
         public PackageBuilder WithVisibility(Visibility visibility) {
             this.visibility = visibility;
             return this;
@@ -174,6 +180,7 @@ namespace Silanis.ESL.SDK.Builder
             package.Attributes = attributes;
             package.Messages = messages;
             package.Notarized = notarized;
+            package.Trashed = trashed;
 
             if ( visibility != null ) {
                 package.Visibility = visibility;

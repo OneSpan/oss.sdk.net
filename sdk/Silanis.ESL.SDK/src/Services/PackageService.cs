@@ -706,6 +706,29 @@ namespace Silanis.ESL.SDK.Services
             }
         }
 
+        public void Restore(PackageId id)
+        {
+            if (id == null)
+            {
+                throw new ArgumentNullException("id");
+            }
+
+            string path = template.UrlFor(UrlTemplate.PACKAGE_ID_PATH).Replace("{packageId}", id.Id).Build();
+
+            try
+            {
+                restClient.Post(path, "{\"trashed\":false}");
+            }
+            catch (EslServerException e)
+            {
+                throw new EslServerException("Unable to restore the package." + " Exception: " + e.Message, e.ServerError, e);
+            }
+            catch (Exception e)
+            {
+                throw new EslException("Unable to restore the package." + " Exception: " + e.Message, e);
+            }
+        }
+
         public void Trash(PackageId id)
         {
             if (id == null)
@@ -714,22 +737,18 @@ namespace Silanis.ESL.SDK.Services
             }
 
             string path = template.UrlFor(UrlTemplate.PACKAGE_ID_PATH).Replace("{packageId}", id.Id).Build();
-            Silanis.ESL.API.Package package = new Silanis.ESL.API.Package();
-
-            package.Id = id.Id;
-            package.Trashed = true;
 
             try
             {
-                restClient.Post(path, JsonConvert.SerializeObject(package, settings));
+                restClient.Post(path, "{\"trashed\":true}");
             }
             catch (EslServerException e)
             {
-                throw new EslServerException("Unable to trash package." + " Exception: " + e.Message, e.ServerError, e);
+                throw new EslServerException("Unable to trash the package." + " Exception: " + e.Message, e.ServerError, e);
             }
             catch (Exception e)
             {
-                throw new EslException("Unable to trash package." + " Exception: " + e.Message, e);
+                throw new EslException("Unable to trash the package." + " Exception: " + e.Message, e);
             }
         }
 
@@ -748,11 +767,34 @@ namespace Silanis.ESL.SDK.Services
             }
             catch (EslServerException e)
             {
-                throw new EslServerException("Unable to archive package settings." + " Exception: " + e.Message, e.ServerError, e);
+                throw new EslServerException("Unable to archive the package." + " Exception: " + e.Message, e.ServerError, e);
             }
             catch (Exception e)
             {
-                throw new EslException("Unable to archive package settings." + " Exception: " + e.Message, e);
+                throw new EslException("Unable to archive the package." + " Exception: " + e.Message, e);
+            }
+        }
+
+        public void MarkComplete(PackageId id)
+        {
+            if (id == null)
+            {
+                throw new ArgumentNullException("id");
+            }
+
+            string path = template.UrlFor(UrlTemplate.PACKAGE_ID_PATH).Replace("{packageId}", id.Id).Build();
+
+            try
+            {
+                restClient.Put(path, "{\"status\":\"COMPLETED\"}");
+            }
+            catch (EslServerException e)
+            {
+                throw new EslServerException("Unable to mark complete on the package." + " Exception: " + e.Message, e.ServerError, e);
+            }
+            catch (Exception e)
+            {
+                throw new EslException("Unable to mark complete on the package." + " Exception: " + e.Message, e);
             }
         }
 

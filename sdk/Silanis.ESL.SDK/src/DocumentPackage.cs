@@ -145,6 +145,12 @@ namespace Silanis.ESL.SDK
             set;
         }
 
+        public bool Trashed
+        {
+            get;
+            set;
+        }
+
         public Visibility Visibility
         {
             get;

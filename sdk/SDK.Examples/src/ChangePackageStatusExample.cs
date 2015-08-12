@@ -14,7 +14,7 @@ namespace SDK.Examples
 
         private string email1;
         private Stream fileStream1;
-        public DocumentPackage sentPackage;
+        public DocumentPackage sentPackage, trashedPackage, restoredPackage;
 
         public readonly string DOCUMENT_NAME = "First Document";
 
@@ -47,6 +47,10 @@ namespace SDK.Examples
             sentPackage = eslClient.GetPackage(packageId);
             eslClient.ChangePackageStatusToDraft(packageId);
             retrievedPackage = eslClient.GetPackage( packageId );
+            eslClient.PackageService.Trash(packageId);
+            trashedPackage = eslClient.GetPackage(packageId);
+            eslClient.PackageService.Restore(packageId);
+            restoredPackage = eslClient.GetPackage(packageId);
         }
     }
 }

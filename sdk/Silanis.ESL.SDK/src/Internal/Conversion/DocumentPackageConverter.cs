@@ -85,6 +85,10 @@ namespace Silanis.ESL.SDK
                 package.Notarized = sdkPackage.Notarized;
             }
 
+            if ( sdkPackage.Trashed != null ) {
+                package.Trashed = sdkPackage.Trashed;
+            }
+
             if ( sdkPackage.Visibility != null ) {
                 package.Visibility = sdkPackage.Visibility;
             }
@@ -157,6 +161,10 @@ namespace Silanis.ESL.SDK
 
             if (apiPackage.Notarized != null) {
                 packageBuilder.WithNotarized(apiPackage.Notarized);
+            }
+
+            if (apiPackage.Trashed != null) {
+                packageBuilder.WithTrashed(apiPackage.Trashed.Value);
             }
 
             if (apiPackage.Visibility != null) {
