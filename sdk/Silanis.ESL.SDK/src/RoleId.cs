@@ -4,19 +4,28 @@ namespace Silanis.ESL.SDK
 {
     public class Placeholder
     {
-        private string id;
-
         public string Id
         {
-            get
-            {
-                return id;
-            }
+            get;
+            set;
+        }
+
+        public string Name
+        {
+            get;
+            set;
         }
 
         public Placeholder( string id )
         {
-            this.id = id;
+            Id = id;
+            Name = id;
+        }
+
+        public Placeholder( string id, string name )
+        {
+            Id = id;
+            Name = name;
         }
     }
 }

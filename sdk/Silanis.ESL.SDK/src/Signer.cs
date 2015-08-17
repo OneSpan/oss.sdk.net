@@ -45,6 +45,11 @@ namespace Silanis.ESL.SDK
 			set;
 		}
 
+        public string PlaceholderName {
+            get;
+            set;
+        }
+
 		public GroupId GroupId
 		{
 			get;

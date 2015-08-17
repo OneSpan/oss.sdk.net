@@ -102,7 +102,7 @@ namespace Silanis.ESL.SDK
 			}
 			foreach (Signer signer in sdkPackage.Placeholders)
 			{
-                Silanis.ESL.API.Role role = new SignerConverter(signer).ToAPIRole("signer" + signerCount);
+                Silanis.ESL.API.Role role = new SignerConverter(signer).ToAPIRole(signer.Id, signer.PlaceholderName);
 				package.AddRole(role);
 				signerCount++;
 			}
@@ -177,7 +177,7 @@ namespace Silanis.ESL.SDK
             {
                 if (role.Signers.Count == 0)
                 {
-                    packageBuilder.WithSigner(SignerBuilder.NewSignerPlaceholder(new Placeholder(role.Id)));
+                    packageBuilder.WithSigner(SignerBuilder.NewSignerPlaceholder(new Placeholder(role.Id, role.Name)));
                 }
                 else if (role.Signers[0].Group != null)
                 {

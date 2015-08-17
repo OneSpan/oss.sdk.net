@@ -71,6 +71,55 @@ namespace Silanis.ESL.SDK
             return role;
         }
 
+        public Silanis.ESL.API.Role ToAPIRole(string id, string name)
+        {
+            Silanis.ESL.API.Role role = new Silanis.ESL.API.Role();
+
+            if ( !sdkSigner.IsPlaceholderSigner() ) {
+                role.AddSigner(new SignerConverter(sdkSigner).ToAPISigner());
+            }
+            role.Index = sdkSigner.SigningOrder;
+            role.Reassign = sdkSigner.CanChangeSigner;
+            role.Locked = sdkSigner.Locked;
+
+            foreach (AttachmentRequirement attachmentRequirement in sdkSigner.Attachments)
+            {
+                role.AddAttachmentRequirement(new AttachmentRequirementConverter(attachmentRequirement).ToAPIAttachmentRequirement());
+            }
+
+            if (!String.IsNullOrEmpty(sdkSigner.Id))
+            {
+                role.Id = sdkSigner.Id;
+            }
+            else if (sdkSigner.IsGroupSigner())
+            {
+                role.Id = sdkSigner.GroupId.Id;
+            }
+            else
+            {
+                role.Id = id;
+            }
+
+            if (!String.IsNullOrEmpty(sdkSigner.PlaceholderName))
+            {
+                role.Name = sdkSigner.PlaceholderName;
+            }
+            else
+            {
+                role.Name = name;
+            }
+
+            if (!String.IsNullOrEmpty(sdkSigner.Message))
+            {
+                Silanis.ESL.API.BaseMessage message = new Silanis.ESL.API.BaseMessage();
+
+                message.Content = sdkSigner.Message;
+                role.EmailMessage = message;
+            }
+
+            return role;
+        }
+
 		internal Silanis.ESL.API.Signer ToAPISigner()
 		{
 			if (sdkSigner == null)

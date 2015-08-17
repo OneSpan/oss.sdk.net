@@ -124,6 +124,7 @@
     <Compile Include="src\UpdateTemplateWithPlaceholderExampleTest.cs" />
     <Compile Include="src\CreatePackageFromTemplateWithFieldsExampleTest.cs" />
     <Compile Include="src\CreatePackageWithoutDocumentExampleTest.cs" />
+    <Compile Include="src\ChangePlaceholderNameExampleTest.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

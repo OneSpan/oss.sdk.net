@@ -82,6 +82,7 @@ namespace Silanis.ESL.SDK
                     .Build();
             Role apiPayload = new Role();
             apiPayload.Id = placeholder.Id;
+            apiPayload.Name = placeholder.Name;
 
             try
             {
@@ -97,6 +98,32 @@ namespace Silanis.ESL.SDK
             catch (Exception e)
             {
                 throw new EslException ("Could not add placeholder." + " Exception: " + e.Message, e);
+            }
+        }
+        
+        internal Placeholder UpdatePlaceholder(PackageId templateId, Placeholder placeholder)
+        {
+            string path = urls.UrlFor(UrlTemplate.ROLE_ID_PATH)
+                .Replace("{packageId}", templateId.Id)
+                .Replace("{roleId}", placeholder.Id)
+                .Build();
+            Role apiPayload = new Role();
+            apiPayload.Id = placeholder.Id;
+            apiPayload.Name = placeholder.Name;
+
+            try {
+                string json = JsonConvert.SerializeObject(apiPayload, settings);
+                string response = restClient.Put(path, json);
+                Silanis.ESL.API.Role apiRole = JsonConvert.DeserializeObject<Silanis.ESL.API.Role>(response);
+                return new Placeholder(apiRole.Id, apiRole.Name);
+            }
+            catch (EslServerException e)
+            {
+                throw new EslServerException ("Could not update the placeholder." + " Exception: " + e.Message, e.ServerError, e);
+            }
+            catch (Exception e)
+            {
+                throw new EslException ("Could not update the placeholder." + " Exception: " + e.Message, e);
             }
         }
         

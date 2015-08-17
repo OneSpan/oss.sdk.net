@@ -71,5 +71,10 @@ namespace Silanis.ESL.SDK.Services
         {
             return apiClient.AddPlaceholder(templateId, placeholder);
         }
+
+        public Placeholder UpdatePlaceholder(PackageId templateId, Placeholder placeholder)
+        {
+            return apiClient.UpdatePlaceholder(templateId, placeholder);
+        }
     }
 }

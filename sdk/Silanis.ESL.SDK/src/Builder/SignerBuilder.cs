@@ -17,6 +17,7 @@ namespace Silanis.ESL.SDK.Builder
 		private int signingOrder;
 		private string message;
 		private string id;
+        private string placeholderName;
 		private bool canChangeSigner;
         private GroupId groupId;
 		private IList<AttachmentRequirement> attachments = new List<AttachmentRequirement>();
@@ -34,16 +35,17 @@ namespace Silanis.ESL.SDK.Builder
             this.groupId = groupId;
         }
         
-        private SignerBuilder(Placeholder roleId)
+        private SignerBuilder(Placeholder placeholder)
         {
             this.signerEmail = null;
             this.groupId = null;
-            this.id = roleId.Id;
+            this.id = placeholder.Id;
+            this.placeholderName = placeholder.Name;
         }
 
-        public static SignerBuilder NewSignerPlaceholder(Placeholder roleId)
+        public static SignerBuilder NewSignerPlaceholder(Placeholder placeholder)
         {
-            return new SignerBuilder(roleId);
+            return new SignerBuilder(placeholder);
         }
 
 		public static SignerBuilder NewSignerWithEmail (string signerEmail)
@@ -220,6 +222,7 @@ namespace Silanis.ESL.SDK.Builder
             Asserts.NotEmptyOrNull( id, "No placeholder set for this signer!" );
                     
             Signer result = new Signer(id);
+            result.PlaceholderName = placeholderName;
             result.SigningOrder = signingOrder;
             result.CanChangeSigner = canChangeSigner;
             result.Message = message;
