@@ -32,7 +32,7 @@ namespace SDK.Examples
         public readonly string SIGNER2_ID = "signer2Id";
         public readonly string REJECTION_COMMENT = "Reject: uploaded wrong attachment.";
 
-        public readonly string ATTACHMENT_FILE_NAME1 = DocumentTypeUtility.NormalizeName (DocumentType.PDF, "The attachment1 for signer1");
+        public readonly string ATTACHMENT_FILE_NAME1 = "The attachment1 for signer1.pdf";
         public readonly string ATTACHMENT_FILE_NAME2 = DocumentTypeUtility.NormalizeName (DocumentType.PDF, "The attachment2 for signer1");
         public readonly string ATTACHMENT_FILE_NAME3 = DocumentTypeUtility.NormalizeName (DocumentType.PDF, "The attachment2 for signer2");
 
