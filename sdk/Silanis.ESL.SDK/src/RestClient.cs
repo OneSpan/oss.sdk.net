@@ -71,8 +71,7 @@ namespace Silanis.ESL.SDK
             if (proxyConfiguration != null) 
                 HttpMethods.proxyConfiguration = proxyConfiguration;
 
-			byte[] responseBytes = HttpMethods.MultipartPostHttp(apiToken, path, fileBytes, boundary, headerGen);
-            string response = Converter.ToString(responseBytes);
+            string response = HttpMethods.MultipartPostHttp(apiToken, path, fileBytes, boundary, headerGen);
             support.LogResponse(response);
 
             return response;
@@ -86,8 +85,7 @@ namespace Silanis.ESL.SDK
             if (proxyConfiguration != null) 
                 HttpMethods.proxyConfiguration = proxyConfiguration;
 
-			byte[] responseBytes = HttpMethods.MultipartPostHttp(apiToken, path, fileBytes, boundary, headerGen);
-            string response = Converter.ToString(responseBytes);
+            string response = HttpMethods.MultipartPostHttp(apiToken, path, fileBytes, boundary, headerGen);
             support.LogResponse(response);
 
             return response;
@@ -101,8 +99,7 @@ namespace Silanis.ESL.SDK
             if (proxyConfiguration != null) 
                 HttpMethods.proxyConfiguration = proxyConfiguration;
 
-            byte[] responseBytes = HttpMethods.MultipartPostHttp(apiToken, path, content, boundary, headerGen);
-            string response = Converter.ToString(responseBytes);
+            string response = HttpMethods.MultipartPostHttp(apiToken, path, content, boundary, headerGen);
             support.LogResponse(response);
 
             return response;
