@@ -100,7 +100,7 @@ namespace SDK.Examples
             // Adding injectedFields to new document
             documentToChange.AddFields(injectedFields);
 
-            Document retrievedDocument = retrievedPackage.Documents[DOCUMENT_NAME];
+            Document retrievedDocument = retrievedPackage.GetDocument(DOCUMENT_NAME);
 
             // Deleting the existing document.
             eslClient.PackageService.DeleteDocument(packageId, retrievedDocument.Id);

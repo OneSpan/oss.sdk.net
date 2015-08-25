@@ -25,7 +25,7 @@ namespace Silanis.ESL.SDK
         public string CreateLayout(DocumentPackage layout)
         {
             Package layoutToCreate = new DocumentPackageConverter(layout).ToAPIPackage();
-            foreach (Silanis.ESL.SDK.Document document in layout.Documents.Values)
+            foreach (Silanis.ESL.SDK.Document document in layout.Documents)
             {
                 layoutToCreate.AddDocument(new DocumentConverter(document).ToAPIDocument(layoutToCreate));
             }

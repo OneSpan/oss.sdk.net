@@ -8,6 +8,7 @@ namespace SDK.Examples
 {
     public class CustomFieldExample: SDKSample
     {
+        public readonly string DOCUMENT_NAME = "First Document";
         public readonly string DEFAULT_VALUE = "#12345";
         public readonly string ENGLISH_LANGUAGE = "en";
         public readonly string ENGLISH_NAME = "Player Number";
@@ -82,7 +83,7 @@ namespace SDK.Examples
                 .WithSigner(SignerBuilder.NewSignerWithEmail(email1)
                         .WithFirstName("John")
                         .WithLastName("Smith"))
-                .WithDocument(DocumentBuilder.NewDocumentNamed("First Document")
+                    .WithDocument(DocumentBuilder.NewDocumentNamed(DOCUMENT_NAME)
                         .FromStream(documentInputStream1, DocumentType.PDF)
                         .WithSignature(SignatureBuilder.SignatureFor(email1)
                                 .OnPage(0)

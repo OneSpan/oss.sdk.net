@@ -102,16 +102,16 @@ namespace SDK.Examples
             eslClient.ApprovalService.AddApproval(createdPackage, documentId, signature1);
             eslClient.ApprovalService.AddApproval(createdPackage, documentId, signature2);
             eslClient.ApprovalService.AddApproval(createdPackage, documentId, signature3);
-            addedSignatures = eslClient.GetPackage(packageId).Documents[DOCUMENT_NAME].Signatures;
+            addedSignatures = eslClient.GetPackage(packageId).GetDocument(DOCUMENT_NAME).Signatures;
 
             // Deleting signature for signer 1
             eslClient.ApprovalService.DeleteApproval(packageId, "documentId", "signatureId1");
-            deletedSignatures = eslClient.GetPackage(packageId).Documents[DOCUMENT_NAME].Signatures;
+            deletedSignatures = eslClient.GetPackage(packageId).GetDocument(DOCUMENT_NAME).Signatures;
 
             // Updating the information for the third signature
             createdPackage = eslClient.GetPackage(packageId);
             eslClient.ApprovalService.ModifyApproval(createdPackage, "documentId", modifiedSignature);
-            modifiedSignatures = eslClient.GetPackage(packageId).Documents[DOCUMENT_NAME].Signatures;
+            modifiedSignatures = eslClient.GetPackage(packageId).GetDocument(DOCUMENT_NAME).Signatures;
 
             // Update all the signatures in the document with the provided list of signatures
             updatedSignature1 = SignatureBuilder.SignatureFor(email2)
@@ -133,7 +133,7 @@ namespace SDK.Examples
             signatureList.Add(updatedSignature1);
             signatureList.Add(updatedSignature2);
             eslClient.ApprovalService.UpdateApprovals(createdPackage, documentId, signatureList);
-            updatedSignatures = eslClient.GetPackage(packageId).Documents[DOCUMENT_NAME].Signatures;
+            updatedSignatures = eslClient.GetPackage(packageId).GetDocument(DOCUMENT_NAME).Signatures;
         }
     }
 }

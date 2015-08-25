@@ -17,7 +17,7 @@ namespace SDK.Examples
             DocumentPackage documentPackage = example.RetrievedPackage;
 
             // Verify if the required information is correctly extracted.
-            Document document = documentPackage.Documents[example.DOCUMENT_NAME];
+            Document document = documentPackage.GetDocument(example.DOCUMENT_NAME);
 
             Assert.AreEqual(6, document.Signatures.Count);
 

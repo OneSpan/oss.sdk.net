@@ -15,9 +15,9 @@ namespace SDK.Examples
             Assert.IsTrue(example.EslClient.GetCustomFieldService().DoesCustomFieldExist(example.customFieldId1));
             Assert.IsFalse(example.EslClient.GetCustomFieldService().DoesCustomFieldExist(example.customFieldId2));
 
-			Assert.AreEqual(documentPackage.Documents["First Document"].Signatures.Count, 1);
-            Assert.AreEqual(documentPackage.Documents["First Document"].Signatures[0].SignerEmail, example.email1);
-			Assert.IsNotNull(documentPackage.Documents["First Document"].Signatures[0].Fields[0]);
+            Assert.AreEqual(documentPackage.GetDocument(example.DOCUMENT_NAME).Signatures.Count, 1);
+            Assert.AreEqual(documentPackage.GetDocument(example.DOCUMENT_NAME).Signatures[0].SignerEmail, example.email1);
+            Assert.IsNotNull(documentPackage.GetDocument(example.DOCUMENT_NAME).Signatures[0].Fields[0]);
 
             // Get first custom field
             CustomField retrievedCustomField = example.retrievedCustomField;

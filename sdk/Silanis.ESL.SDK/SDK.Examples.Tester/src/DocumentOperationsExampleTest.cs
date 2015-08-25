@@ -44,7 +44,7 @@ namespace SDK.Examples
 
         private Document getAddedDocument(DocumentPackage documentPackage, string documentName)
         {
-            foreach (Document document in documentPackage.Documents.Values)
+            foreach (Document document in documentPackage.Documents)
             {
                 if (document.Name.Equals(documentName))
                 {

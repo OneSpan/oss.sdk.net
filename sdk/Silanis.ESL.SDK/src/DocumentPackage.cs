@@ -7,7 +7,7 @@ namespace Silanis.ESL.SDK
     public class DocumentPackage
     {
 
-        public DocumentPackage(PackageId id, string packageName, bool autocomplete, IList<Signer> signers, IList<Signer> placeholders, IDictionary<string, Document> documents)
+        public DocumentPackage(PackageId id, string packageName, bool autocomplete, IList<Signer> signers, IList<Signer> placeholders, IList<Document> documents)
         {
             Id = id;
             Name = packageName;
@@ -79,10 +79,22 @@ namespace Silanis.ESL.SDK
             return null;
         }
 
-        public IDictionary<string, Document> Documents
+        public IList<Document> Documents
         {
             get;
             private set;
+        }
+
+        public Document GetDocument(string name) 
+        {
+            foreach(Document document in Documents) 
+            {
+                if(string.Equals(document.Name, name))
+                {
+                    return document;
+                }
+            }
+            return null;
         }
 
         public string Description

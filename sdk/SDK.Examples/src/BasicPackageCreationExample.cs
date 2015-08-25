@@ -7,6 +7,9 @@ namespace SDK.Examples
 {
     public class BasicPackageCreationExample : SDKSample
     {
+        public readonly string DOCUMENT1_NAME = "First Document";
+        public readonly string DOCUMENT2_NAME = "Second Document";
+
         public static void Main(string[] args)
         {
             new BasicPackageCreationExample(Props.GetInstance()).Run();
@@ -47,7 +50,7 @@ namespace SDK.Examples
                             .WithFirstName("Patty")
                             .WithLastName("Galant")
                            )
-                .WithDocument(DocumentBuilder.NewDocumentNamed("First Document")
+                    .WithDocument(DocumentBuilder.NewDocumentNamed(DOCUMENT1_NAME)
                               .FromStream(fileStream1, DocumentType.PDF)
                               .WithSignature(SignatureBuilder.SignatureFor(email1)
                                              .OnPage(0)
@@ -59,7 +62,7 @@ namespace SDK.Examples
                                              .AtPosition(100, 100)
                                             )
                              )
-                .WithDocument(DocumentBuilder.NewDocumentNamed("Second Document")
+                    .WithDocument(DocumentBuilder.NewDocumentNamed(DOCUMENT2_NAME)
                               .FromStream(fileStream2, DocumentType.PDF)
                               .WithSignature(SignatureBuilder.SignatureFor(email2)
                                              .OnPage(0)

@@ -17,7 +17,7 @@ namespace SDK.Examples
 
             DocumentPackage documentPackage = example.RetrievedPackage;
 
-            List<Signature> signatures = documentPackage.Documents["First Document"].Signatures;
+            List<Signature> signatures = documentPackage.GetDocument("First Document").Signatures;
 
             Assert.AreEqual(2, signatures.Count);
             Assert.AreEqual(SignatureStyle.FULL_NAME, signatures[0].Style);

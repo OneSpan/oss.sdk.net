@@ -15,7 +15,7 @@ namespace Silanis.ESL.SDK.Builder
 		private string emailMessage = String.Empty;
         private IList<Signer> signers = new List<Signer>();
         private IList<Signer> placeholders = new List<Signer> ();
-		private IDictionary<string, Document> documents = new Dictionary<string, Document>();
+        private IList<Document> documents = new List<Document>();
 		private PackageId id;
 		private DocumentPackageStatus status;
 		private CultureInfo language;
@@ -106,7 +106,7 @@ namespace Silanis.ESL.SDK.Builder
 
 		public PackageBuilder WithDocument (Document document)
 		{
-			documents [document.Name] = document;
+			documents.Add(document);
 			return this;
 		}
 

@@ -30,7 +30,7 @@ namespace SDK.Examples
                     Assert.AreEqual(layout.Documents.Count, 1);
                     Assert.AreEqual(layout.Signers.Count, 2);
 
-                    Document document = layout.Documents[example.LAYOUT_DOCUMENT_NAME];
+                    Document document = layout.GetDocument(example.LAYOUT_DOCUMENT_NAME);
                     Assert.AreEqual(document.Signatures.Count, 1);
 
                     // Validate the signature fields of layout were saved correctly.
@@ -46,7 +46,7 @@ namespace SDK.Examples
             Assert.AreEqual(packageWithLayout.Signers.Count, 2);
             Assert.AreEqual(packageWithLayout.Documents.Count, 2);
 
-            Document documentWithLayout = packageWithLayout.Documents[example.APPLY_LAYOUT_DOCUMENT_NAME];
+            Document documentWithLayout = packageWithLayout.GetDocument(example.APPLY_LAYOUT_DOCUMENT_NAME);
             Assert.AreEqual(documentWithLayout.Description, example.APPLY_LAYOUT_DOCUMENT_DESCRIPTION);
             Assert.AreEqual(documentWithLayout.Id, example.APPLY_LAYOUT_DOCUMENT_ID);
             Assert.AreEqual(documentWithLayout.Signatures.Count, 1);

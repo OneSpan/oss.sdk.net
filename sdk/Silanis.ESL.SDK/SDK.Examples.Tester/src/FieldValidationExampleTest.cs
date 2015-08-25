@@ -22,7 +22,7 @@ namespace SDK.Examples
 
             DocumentPackage documentPackage = example.RetrievedPackage;
 
-            Document document = documentPackage.Documents[example.DOCUMENT_NAME];
+            Document document = documentPackage.GetDocument(example.DOCUMENT_NAME);
 
             foreach (Signature signature in document.Signatures)
             {

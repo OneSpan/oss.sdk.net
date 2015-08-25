@@ -27,7 +27,7 @@ namespace SDK.Examples
             Assert.AreEqual(example.PLACEHOLDER_ID, signer2.Id);
 
 
-            List<Signature> signatures = example.RetrievedPackage.Documents[example.DOCUMENT_NAME].Signatures;
+            List<Signature> signatures = example.RetrievedPackage.GetDocument(example.DOCUMENT_NAME).Signatures;
 
             Assert.AreEqual(2, signatures.Count);
             Assert.AreEqual(example.email1, signatures[0].SignerEmail);

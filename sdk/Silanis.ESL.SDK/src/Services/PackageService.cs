@@ -276,7 +276,7 @@ namespace Silanis.ESL.SDK.Services
 				.Build();
 
             List<Silanis.ESL.API.Document> documents = new List<Silanis.ESL.API.Document>();
-            foreach (Document doc in package.Documents.Values)
+            foreach (Document doc in package.Documents)
             {
                 documents.Add(new DocumentConverter(doc).ToAPIDocument());
             }

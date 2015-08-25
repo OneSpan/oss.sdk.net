@@ -15,7 +15,7 @@ namespace SDK.Examples
 
             DocumentPackage documentPackage = example.RetrievedPackage;
 
-            foreach (Signature signature in documentPackage.Documents[example.DOCUMENT_NAME].Signatures)
+            foreach (Signature signature in documentPackage.GetDocument(example.DOCUMENT_NAME).Signatures)
             {
 				if ((int)(signature.X + 0.1) == example.MOBILE_CAPTURE_SIGNATURE_POSITION_X && (int)(signature.Y + 0.1) == example.MOBILE_CAPTURE_SIGNATURE_POSITION_Y)
                 {

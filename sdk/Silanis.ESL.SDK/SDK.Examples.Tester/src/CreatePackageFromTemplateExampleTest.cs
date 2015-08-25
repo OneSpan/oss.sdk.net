@@ -14,7 +14,7 @@ namespace SDK.Examples
             example.Run();
 
             DocumentPackage documentPackage = example.RetrievedPackage;
-            Document document = documentPackage.Documents[example.DOCUMENT_NAME];
+            Document document = documentPackage.GetDocument(example.DOCUMENT_NAME);
 
             Assert.AreEqual(document.Name, example.DOCUMENT_NAME);
             Assert.AreEqual(document.Id, example.DOCUMENT_ID);

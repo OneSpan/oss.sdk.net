@@ -16,7 +16,7 @@ namespace SDK.Examples
             DocumentPackage documentPackage = example.RetrievedPackage;
 
             // Verify if the required information is correctly extracted.
-            Document document = documentPackage.Documents["Custom Consent Document"];
+            Document document = documentPackage.GetDocument("Custom Consent Document");
 
             Assert.AreEqual(document.Signatures[0].Style, SignatureStyle.ACCEPTANCE);
         }

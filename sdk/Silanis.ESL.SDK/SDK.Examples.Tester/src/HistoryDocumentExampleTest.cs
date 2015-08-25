@@ -16,7 +16,7 @@ namespace SDK.Examples
             DocumentPackage documentPackage = example.RetrievedPackage;
 
             // Verify if the package is created correctly
-            Document historyDocument = documentPackage.Documents[example.externalDocumentName];
+            Document historyDocument = documentPackage.GetDocument(example.externalDocumentName);
             Assert.IsNotNull(historyDocument);
             Assert.AreEqual(example.externalDocumentName, historyDocument.Name);
 

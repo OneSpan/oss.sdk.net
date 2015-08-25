@@ -200,7 +200,7 @@ namespace Silanis.ESL.SDK
 			PackageId id = packageService.CreatePackage (packageToCreate);
             DocumentPackage retrievedPackage = GetPackage(id);
 
-			foreach (Document document in package.Documents.Values)
+			foreach (Document document in package.Documents)
 			{
                 UploadDocument(document, retrievedPackage);
 			}
@@ -217,10 +217,10 @@ namespace Silanis.ESL.SDK
             }
 
             Silanis.ESL.API.Package packageToCreate = new DocumentPackageConverter(package).ToAPIPackage();
-            foreach(Silanis.ESL.SDK.Document document in package.Documents.Values){
+            foreach(Silanis.ESL.SDK.Document document in package.Documents){
                 packageToCreate.AddDocument(new DocumentConverter(document).ToAPIDocument(packageToCreate));
             }
-            PackageId id = packageService.CreatePackageOneStep (packageToCreate, package.Documents.Values);
+            PackageId id = packageService.CreatePackageOneStep (packageToCreate, package.Documents);
             return id;
         }
 
@@ -274,8 +274,8 @@ namespace Silanis.ESL.SDK
         }
 
         private void ValidateSignatures(DocumentPackage documentPackage) {
-            foreach(KeyValuePair<string,Document> document in documentPackage.Documents) {
-                ValidateMixingSignatureAndAcceptance(document.Value);
+            foreach(Document document in documentPackage.Documents) {
+                ValidateMixingSignatureAndAcceptance(document);
             }
         }
 
@@ -312,7 +312,7 @@ namespace Silanis.ESL.SDK
 			PackageId templateId = templateService.CreateTemplate(new DocumentPackageConverter(template).ToAPIPackage());
 			DocumentPackage createdTemplate = GetPackage(templateId);
 
-			foreach (Document document in template.Documents.Values)
+			foreach (Document document in template.Documents)
 			{
 				UploadDocument(document, createdTemplate);
 			}
@@ -393,7 +393,7 @@ namespace Silanis.ESL.SDK
         {
 			Document uploaded = packageService.UploadDocument(documentPackage, fileName, fileContent, document);
 
-			documentPackage.Documents[uploaded.Name] = uploaded;
+			documentPackage.Documents.Add(uploaded);
 			return uploaded;
         }
 

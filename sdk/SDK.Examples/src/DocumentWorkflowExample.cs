@@ -51,8 +51,8 @@ namespace SDK.Examples
 
 			DocumentPackage savedPackage = eslClient.GetPackage(packageId);
 
-			savedPackage.Documents["First Document"].Index = 2;
-			savedPackage.Documents["Second Document"].Index = 1;
+			savedPackage.GetDocument("First Document").Index = 2;
+            savedPackage.GetDocument("Second Document").Index = 1;
 
 			eslClient.PackageService.OrderDocuments(savedPackage);
 

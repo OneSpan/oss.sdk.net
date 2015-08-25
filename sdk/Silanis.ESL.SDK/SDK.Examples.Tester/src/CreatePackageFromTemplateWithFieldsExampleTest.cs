@@ -16,7 +16,7 @@ namespace SDK.Examples
 
             DocumentPackage documentPackage = example.RetrievedPackage;
 
-            foreach (Signature signature in documentPackage.Documents[example.DOCUMENT_NAME].Signatures)
+            foreach (Signature signature in documentPackage.GetDocument(example.DOCUMENT_NAME).Signatures)
             {
                 foreach (Field field in signature.Fields)
                 {
