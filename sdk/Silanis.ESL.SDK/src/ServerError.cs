@@ -6,7 +6,7 @@ namespace Silanis.ESL.SDK
     public class ServerError
     {
 
-        public Int32 Code
+        public Nullable<Int32> Code
         {
             get; set;
         }
