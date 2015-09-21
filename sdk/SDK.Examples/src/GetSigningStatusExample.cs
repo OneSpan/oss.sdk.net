@@ -14,6 +14,7 @@ namespace SDK.Examples
 
         private string email1;
         private Stream fileStream1;
+        public SigningStatus draftSigningStatus, sentSigningStatus, trashedSigningStatus;
 
         public GetSigningStatusExample( Props props ) : this(props.Get("api.key"), props.Get("api.url"), props.Get("1.email")) {
         }
@@ -37,14 +38,14 @@ namespace SDK.Examples
 					               		.AtPosition(500, 100)))
 					.Build ();
 
-            PackageId id = eslClient.CreatePackage (package);
+            PackageId packageId = eslClient.CreatePackage (package);
+            draftSigningStatus = eslClient.GetSigningStatus(packageId, null, null);
 
-            SigningStatus status = eslClient.GetSigningStatus( id, null, null );
+            eslClient.SendPackage(packageId);
+            sentSigningStatus = eslClient.GetSigningStatus(packageId, null, null);
 
-            eslClient.SendPackage(id);
-
-            status = eslClient.GetSigningStatus( id, null, null );
-            Console.WriteLine("Signing status = " + status);
+            eslClient.PackageService.Trash(packageId);
+            trashedSigningStatus = eslClient.GetSigningStatus(packageId, null, null);
 		}
 	}
 }
