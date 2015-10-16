@@ -17,14 +17,14 @@ namespace Silanis.ESL.SDK
             this.settings = settings;
         }
 
-        public DownloadedFile GetSignatureImageForSender(string senderId, string acceptType) 
+        public DownloadedFile GetSignatureImageForSender(string senderId, SignatureImageFormat format) 
         {
             string path = template.UrlFor( UrlTemplate.SIGNATURE_IMAGE_FOR_SENDER_PATH)
                 .Replace("{senderId}", senderId)
                 .Build();
             try 
             {
-                return client.GetBytes(path, acceptType);
+                return client.GetBytes(path, AcceptType(format));
             }
             catch (EslServerException e)
             {
@@ -36,7 +36,7 @@ namespace Silanis.ESL.SDK
             }
         }
 
-        public DownloadedFile GetSignatureImageForPackageRole(PackageId packageId, string signerId, string acceptType) 
+        public DownloadedFile GetSignatureImageForPackageRole(PackageId packageId, string signerId, SignatureImageFormat format) 
         {
             string path = template.UrlFor(UrlTemplate.SIGNATURE_IMAGE_FOR_PACKAGE_ROLE_PATH)
                 .Replace("{packageId}", packageId.Id)
@@ -44,7 +44,7 @@ namespace Silanis.ESL.SDK
                 .Build();
             try 
             {
-                return client.GetBytes(path, acceptType);
+                return client.GetBytes(path, AcceptType(format));
             }
             catch (EslServerException e)
             {
@@ -53,6 +53,21 @@ namespace Silanis.ESL.SDK
             catch (Exception e)
             {
                 throw new EslException("Could not download signature image for package signer." + " Exception: " + e.Message, e);
+            }
+        }
+
+        private string AcceptType(SignatureImageFormat format)
+        {
+            switch (format)
+            {
+                case SignatureImageFormat.PNG:
+                    return "image/png";
+                case SignatureImageFormat.JPG:
+                    return "image/jpeg";
+                case SignatureImageFormat.GIF:
+                    return "image/gif";
+                default:
+                    throw new EslException("Unknown SignatureImageFormat: " + format, null);
             }
         }
     }

@@ -18,7 +18,6 @@ namespace SDK.Examples
 
         public string email1;
         public string senderUID;
-        private readonly string acceptType = "image/jpeg";
 
         public SignatureImageExample(Props props) : this(props.Get("api.key"), props.Get("api.url"), props.Get("1.email"))
         {
@@ -51,8 +50,8 @@ namespace SDK.Examples
             packageId = eslClient.CreatePackage(superDuperPackage);
             eslClient.SendPackage(packageId);
 
-            eslClient.SignatureImageService.GetSignatureImageForSender(senderUID, acceptType);
-            eslClient.SignatureImageService.GetSignatureImageForPackageRole(packageId, signer1.Id, acceptType);
+            eslClient.SignatureImageService.GetSignatureImageForSender(senderUID, SignatureImageFormat.GIF);
+            eslClient.SignatureImageService.GetSignatureImageForPackageRole(packageId, signer1.Id, SignatureImageFormat.JPG);
         }
     }
 }

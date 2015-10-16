@@ -377,6 +377,7 @@
     <Compile Include="src\Internal\TraceLogger.cs" />
     <Compile Include="src\DownloadedFile.cs" />
     <Compile Include="src\Services\SignatureImageService.cs" />
+    <Compile Include="src\SignatureImageFormat.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSHARP.Targets" />
   <ProjectExtensions>
