@@ -9,6 +9,8 @@ namespace SDK.Examples
     [TestFixture()]
     public class DocumentLayoutExampleTest
     {
+        private readonly double TOLERANCE = 1.25;
+
         private DocumentLayoutExample example;
 
         [Test()]
@@ -69,20 +71,20 @@ namespace SDK.Examples
                     {
                         Assert.AreEqual(field.Style, FieldStyle.BOUND_TITLE);
                         Assert.AreEqual(field.Page, 0);
-                        Assert.Greater(field.X, 99);
-                        Assert.Less(field.X, 101);
-                        Assert.Greater(field.Y, 199);
-                        Assert.Less(field.Y, 201);
+                        Assert.Greater(field.X, 100 - TOLERANCE);
+                        Assert.Less(field.X, 100 + TOLERANCE);
+                        Assert.Greater(field.Y, 200 - TOLERANCE);
+                        Assert.Less(field.Y, 200 + TOLERANCE);
                     }
 
                     if (field.Name.Equals(example.FIELD_2_NAME))
                     {
                         Assert.AreEqual(field.Style, FieldStyle.BOUND_COMPANY);
                         Assert.AreEqual(field.Page, 0);
-                        Assert.Greater(field.X, 99);
-                        Assert.Less(field.X, 101);
-                        Assert.Greater(field.Y, 299);
-                        Assert.Less(field.Y, 301);
+                        Assert.Greater(field.X, 100 - TOLERANCE);
+                        Assert.Less(field.X, 100 + TOLERANCE);
+                        Assert.Greater(field.Y, 300 - TOLERANCE);
+                        Assert.Less(field.Y, 300 + TOLERANCE);
                     }
                 }
             }

@@ -8,6 +8,7 @@ namespace SDK.Examples
     public class GetSigningStatusExampleTest
     {
         [Test()]
+        [Category("NotFor60")]
         public void VerifyResult()
         {
             GetSigningStatusExample example = new GetSigningStatusExample(Props.GetInstance());

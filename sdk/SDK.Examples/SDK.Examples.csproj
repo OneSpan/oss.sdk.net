@@ -185,7 +185,6 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="jenkins.properties" />
-    <None Include="signers.properties" />
     <None Include="src\extract_document.pdf">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>

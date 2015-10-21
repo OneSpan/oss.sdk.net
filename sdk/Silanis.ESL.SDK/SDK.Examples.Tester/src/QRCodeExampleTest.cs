@@ -10,6 +10,7 @@ namespace SDK.Examples
     public class QRCodeExampleTest
     {
         [Test()]
+        [Category("NotFor60")]
         public void VerifyResult()
         {
             QRCodeExample example = new QRCodeExample(Props.GetInstance());

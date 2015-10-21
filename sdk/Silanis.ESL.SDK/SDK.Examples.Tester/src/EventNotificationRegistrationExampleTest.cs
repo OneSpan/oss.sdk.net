@@ -9,6 +9,7 @@ namespace SDK.Examples
 	public class EventNotificationRegistrationExampleTest
 	{
 		[Test()]
+        [Category("NotFor60")]
 		public void VerifyResult()
 		{
 			EventNotificationRegistrationExample example = new EventNotificationRegistrationExample(Props.GetInstance());
