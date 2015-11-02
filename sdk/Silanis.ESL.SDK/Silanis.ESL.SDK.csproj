@@ -44,7 +44,6 @@
     <Reference Include="log4net">
       <HintPath>..\References\log4net.dll</HintPath>
     </Reference>
-    <Reference Include="nunit.framework" />
     <Reference Include="System.Configuration" />
   </ItemGroup>
   <ItemGroup>
