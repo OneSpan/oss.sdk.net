@@ -7,14 +7,14 @@ namespace Silanis.ESL.SDK.src.Internal.Conversion
     class TextAnchorPositionConverter
     {
         private TextAnchorPosition sdkPosition = null;
-        private String apiAnchorPoint = null;
+        private string apiAnchorPoint = null;
 
         public TextAnchorPositionConverter(TextAnchorPosition sdkPosition)
         {
             this.sdkPosition = sdkPosition;
         }
 
-        public TextAnchorPositionConverter(String apiAnchorPoint)
+        public TextAnchorPositionConverter(string apiAnchorPoint)
         {
             this.apiAnchorPoint = apiAnchorPoint;
         }
@@ -31,11 +31,14 @@ namespace Silanis.ESL.SDK.src.Internal.Conversion
             }
         }
 
-        public String ToAPIAnchorPoint()
+        public string ToAPIAnchorPoint()
         {
             if (apiAnchorPoint != null)
             {
                 return apiAnchorPoint;
+            }
+            if (null == sdkPosition) {
+                return null;
             }
             return sdkPosition.getApiValue();
         }
