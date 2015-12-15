@@ -82,7 +82,13 @@ namespace Silanis.ESL.SDK
                 }                   
             }
             
-            return signatureBuilder.Build();
+            Signature signature = signatureBuilder.Build();
+            if (null != apiApproval.Accepted)
+            {
+                signature.Accepted = apiApproval.Accepted;
+            }
+
+            return signature;
         }
 
         public Silanis.ESL.API.Approval ToAPIApproval ()

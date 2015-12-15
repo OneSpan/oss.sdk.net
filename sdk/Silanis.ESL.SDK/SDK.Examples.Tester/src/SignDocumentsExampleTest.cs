@@ -1,5 +1,7 @@
 using NUnit.Framework;
 using System;
+using System.Collections.Generic;
+using Silanis.ESL.SDK;
 
 namespace SDK.Examples
 {
@@ -12,29 +14,39 @@ namespace SDK.Examples
             SignDocumentsExample example = new SignDocumentsExample(Props.GetInstance());
             example.Run();
 
-//            AssertSignatures(example.retrievedPackageBeforeSigning.getDocuments(), example.senderEmail, nullValue(), example.email1, nullValue());
-//            Assert.AreEqual(PackageStatus.SENT, example.retrievedPackageBeforeSigning.getStatus());
-//
-//            AssertSignatures(example.retrievedPackageAfterSigningApproval1.getDocuments(), example.senderEmail, notNullValue(), example.email1, nullValue());
-//            Assert.AreEqual(PackageStatus.SENT, example.retrievedPackageAfterSigningApproval1.getStatus());
-//
-//            AssertSignatures(example.retrievedPackageAfterSigningApproval2.getDocuments(), example.senderEmail, notNullValue(), example.email1, notNullValue());
-//            Assert.AreEqual(PackageStatus.COMPLETED, example.retrievedPackageAfterSigningApproval2.getStatus());
+            AssertSignedSignatures(example.retrievedPackageBeforeSigning.Documents, example.senderEmail, false);
+            AssertSignedSignatures(example.retrievedPackageBeforeSigning.Documents, example.email1, false);
+            Assert.AreEqual(DocumentPackageStatus.SENT, example.retrievedPackageBeforeSigning.Status);
+
+            AssertSignedSignatures(example.retrievedPackageAfterSigningApproval1.Documents, example.senderEmail, true);
+            AssertSignedSignatures(example.retrievedPackageAfterSigningApproval1.Documents, example.email1, false);
+            Assert.AreEqual(DocumentPackageStatus.SENT, example.retrievedPackageAfterSigningApproval1.Status);
+
+            AssertSignedSignatures(example.retrievedPackageAfterSigningApproval2.Documents, example.senderEmail, true);
+            AssertSignedSignatures(example.retrievedPackageAfterSigningApproval2.Documents, example.email1, true);
+            Assert.AreEqual(DocumentPackageStatus.COMPLETED, example.retrievedPackageAfterSigningApproval2.Status);
+        }
+
+        private void AssertSignedSignatures(IList<Document> documents, string signerEmail, bool signed) 
+        {
+            foreach(Document document in documents)
+            {
+                foreach(Signature signature in document.Signatures) 
+                {
+                    if (signerEmail.Equals(signature.SignerEmail))
+                    {
+                        if (signed)
+                        {
+                            Assert.IsNotNull(signature.Accepted);
+                        } 
+                        else
+                        {
+                            Assert.IsNull(signature.Accepted);
+                        }
+                    }
+                }
+            }
         }
     }
-
-//    private void AssertSignatures(IList<Document> documents, string senderEmail, Matcher<Object> senderAccepted, string signerEmail, Matcher<Object> signerAccepted) 
-//    {
-//        foreach(Document document in documents)
-//        {
-//            foreach(Signature signature in document.getSignatures()) 
-//            {
-//                if(senderEmail.equals(signature.getSignerEmail()))
-//                    Assert.AreEqual(signature.getAccepted(), senderAccepted);
-//                if(signerEmail.equals(signature.getSignerEmail()))
-//                    Assert.AreEqual(signature.getAccepted(), signerAccepted);
-//            }
-//        }
-//    }
 }
 

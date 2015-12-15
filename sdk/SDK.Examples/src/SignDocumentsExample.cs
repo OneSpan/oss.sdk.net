@@ -12,7 +12,7 @@ namespace SDK.Examples
             new SignDocumentsExample(Props.GetInstance()).Run();
         }
 
-        private string senderEmail, email1;
+        public string senderEmail, email1;
         private Stream fileStream1, fileStream2;
         public DocumentPackage retrievedPackageBeforeSigning, retrievedPackageAfterSigningApproval1, retrievedPackageAfterSigningApproval2;
 
