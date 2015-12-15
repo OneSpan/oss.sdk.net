@@ -377,6 +377,8 @@
     <Compile Include="src\DownloadedFile.cs" />
     <Compile Include="src\Services\SignatureImageService.cs" />
     <Compile Include="src\SignatureImageFormat.cs" />
+    <Compile Include="src\Services\SigningService.cs" />
+    <Compile Include="src\Models\SignedDocuments.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSHARP.Targets" />
   <ProjectExtensions>

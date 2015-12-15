@@ -73,6 +73,46 @@ namespace Silanis.ESL.SDK.Internal
             }
 		}
 
+        public static byte[] PostHttp (AuthHeaderGenerator authHeaderGen, string path, byte[] content)
+        {
+            try {
+                HttpWebRequest request = (HttpWebRequest)WebRequest.Create (path);
+                request.Method = "POST";
+                request.ContentType = ESL_CONTENT_TYPE_APPLICATION_JSON;
+                request.ContentLength = content.Length;
+                AddAuthorizationHeader(request, authHeaderGen);
+                request.Accept = ESL_ACCEPT_TYPE_APPLICATION_JSON;
+                SetProxy(request);
+
+                using (Stream dataStream = request.GetRequestStream ()) {
+                    dataStream.Write (content, 0, content.Length);
+                }
+
+                WebResponse response = request.GetResponse ();
+
+                using (Stream responseStream = response.GetResponseStream()) {
+                    var memoryStream = new MemoryStream ();
+                    CopyTo (responseStream, memoryStream);
+
+                    byte[] result = memoryStream.ToArray();
+                    return result;
+                }
+            }
+            catch (WebException e){
+                using (var stream = e.Response.GetResponseStream())
+                    using (var reader = new StreamReader(stream))
+                {
+                    string errorDetails = reader.ReadToEnd();
+                    throw new EslServerException(String.Format("{0} HTTP {1} on URI {2}. Optional details: {3}", e.Message, 
+                                                               ((HttpWebResponse)e.Response).Method, e.Response.ResponseUri, errorDetails),
+                                                 errorDetails, e);
+                }
+            }
+            catch (Exception e) {
+                throw new EslException("Error communicating with esl server. " + e.Message, e);
+            }
+        }
+
 		public static byte[] PutHttp (string apiToken, string path, byte[] content)
 		{
 			try {

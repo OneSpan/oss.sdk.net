@@ -109,6 +109,10 @@ namespace Silanis.ESL.SDK.Internal
 		// Reminder Service
 		public static readonly string REMINDER_PATH = "/packages/{packageId}/reminders";
 
+        // Signing Service
+        public static readonly string SIGN_DOCUMENT_PATH = "/packages/{packageId}/documents/signConfirm";
+        public static readonly string SIGN_DOCUMENTS_PATH = "/packages/{packageId}/documents/signed_documents";
+
         // NotaryJournal Service
         public static readonly string NOTARY_JOURNAL_PATH = "/user/{userId}/journal";
         public static readonly string NOTARY_JOURNAL_CSV_PATH = "/user/{userId}/journal/download";

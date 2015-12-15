@@ -41,6 +41,7 @@ namespace Silanis.ESL.SDK
         private AuthenticationService authenticationService;
         private SystemService systemService;
         private SignatureImageService signatureImageService;
+        private SigningService signingService;
         
         private JsonSerializerSettings jsonSerializerSettings;
 
@@ -127,6 +128,7 @@ namespace Silanis.ESL.SDK
             packageService = new PackageService(restClient, this.baseUrl, jsonSerializerSettings);
             reportService = new ReportService(restClient, this.baseUrl, jsonSerializerSettings);
             systemService = new SystemService(restClient, this.baseUrl, jsonSerializerSettings);
+            signingService = new SigningService(restClient, this.baseUrl, jsonSerializerSettings);
             signatureImageService = new SignatureImageService(restClient, this.baseUrl, jsonSerializerSettings);
             sessionService = new SessionService(apiKey, this.baseUrl);
             fieldSummaryService = new FieldSummaryService(new FieldSummaryApiClient(apiKey, this.baseUrl));
@@ -224,6 +226,46 @@ namespace Silanis.ESL.SDK
             }
             PackageId id = packageService.CreatePackageOneStep (packageToCreate, package.Documents);
             return id;
+        }
+
+        public void SignDocument(PackageId packageId, string documentName) 
+        {
+            Silanis.ESL.API.Package package = packageService.GetPackage(packageId);
+            foreach(Silanis.ESL.API.Document document in package.Documents) 
+            {
+                if(document.Name.Equals(documentName)) 
+                {
+                    document.Approvals.Clear();
+                    signingService.SignDocument(packageId, document);
+                }
+            }
+        }
+
+        public void SignDocuments(PackageId packageId) 
+        {
+            SignedDocuments signedDocuments = new SignedDocuments();
+            Package package = packageService.GetPackage(packageId);
+            foreach(Silanis.ESL.API.Document document in package.Documents) 
+            {
+                document.Approvals.Clear();
+                signedDocuments.AddDocument(document);
+            }
+            signingService.SignDocuments(packageId, signedDocuments);
+        }
+
+        public void SignDocuments(PackageId packageId, string signerId) 
+        {
+            string signerAuthenticationToken = authenticationTokenService.CreateSignerAuthenticationToken(packageId, signerId);
+            string signerSessionId = authenticationService.GetSessionIdForSignerAuthenticationToken(signerAuthenticationToken);
+
+            SignedDocuments signedDocuments = new SignedDocuments();
+            Package package = packageService.GetPackage(packageId);
+            foreach(Silanis.ESL.API.Document document in package.Documents) 
+            {
+                document.Approvals.Clear();
+                signedDocuments.AddDocument(document);
+            }
+            signingService.SignDocuments(packageId, signedDocuments, signerSessionId);
         }
 
 		public PackageId CreateAndSendPackage( DocumentPackage package ) 
@@ -562,6 +604,14 @@ namespace Silanis.ESL.SDK
             get
             {
                 return systemService;
+            }
+        }
+
+        public SigningService SigningService
+        {
+            get
+            {
+                return signingService;
             }
         }
 	}

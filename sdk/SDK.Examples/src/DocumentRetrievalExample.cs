@@ -30,22 +30,24 @@ namespace SDK.Examples
         override public void Execute()
         {
             String docId = "myDocumentId";
-            PackageId package = eslClient.CreatePackageOneStep(PackageBuilder.NewPackageNamed("DocumentRetrievalExample " + DateTime.Now)
-                        .WithSigner(SignerBuilder.NewSignerWithEmail(email1)
+            var superDuperPackage = PackageBuilder.NewPackageNamed("DocumentRetrievalExample " + DateTime.Now)
+                            .WithSigner(SignerBuilder.NewSignerWithEmail(email1)
                             .WithFirstName("George")
                             .WithLastName("Faltour").Build())
-                            .WithDocument(DocumentBuilder.NewDocumentNamed("My Document")
-                            .FromStream(fileStream1, DocumentType.PDF)
+                    .WithDocument(DocumentBuilder.NewDocumentNamed("My Document")
+                    .FromStream(fileStream1, DocumentType.PDF)
                             .WithId(docId)
                             .WithSignature(SignatureBuilder.SignatureFor(email1)
                            .    AtPosition(100, 100).OnPage(0))
-                          ).Build());
+                          ).Build();
 
-            eslClient.SendPackage(package);
+            var packageId = eslClient.CreatePackageOneStep(superDuperPackage);
 
-            pdfDownloadedBytes = eslClient.DownloadDocument(package, docId);  
-            originalPdfDownloadedBytes = eslClient.DownloadOriginalDocument(package, docId);
-            zippedDownloadedBytes = eslClient.DownloadZippedDocuments(package);
+            eslClient.SendPackage(packageId);
+
+            pdfDownloadedBytes = eslClient.DownloadDocument(packageId, docId);  
+            originalPdfDownloadedBytes = eslClient.DownloadOriginalDocument(packageId, docId);
+            zippedDownloadedBytes = eslClient.DownloadZippedDocuments(packageId);
 
             // To write the byte[] to a file, use:
             // System.IO.File.WriteAllBytes("/path/to/directory/myDocument.pdf", pdfDocumentBytes);

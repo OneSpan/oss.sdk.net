@@ -158,6 +158,7 @@
     <Compile Include="src\CreatePackageWithoutDocumentExample.cs" />
     <Compile Include="src\ChangePlaceholderNameExample.cs" />
     <Compile Include="src\SignatureImageExample.cs" />
+    <Compile Include="src\SignDocumentsExample.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
