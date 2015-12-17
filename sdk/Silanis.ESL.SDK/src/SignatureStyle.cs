@@ -16,7 +16,8 @@ namespace Silanis.ESL.SDK
         public static SignatureStyle MOBILE_CAPTURE = new SignatureStyle("MOBILE_CAPTURE", "MOBILE_CAPTURE", 4);
         private static Dictionary<string,SignatureStyle> allSignatureStyles = new Dictionary<string,SignatureStyle>();
 
-        static SignatureStyle(){
+        static SignatureStyle()
+        {
             allSignatureStyles.Add(HAND_DRAWN.getApiValue(), SignatureStyle.HAND_DRAWN);
             allSignatureStyles.Add(FULL_NAME.getApiValue(), SignatureStyle.FULL_NAME);
             allSignatureStyles.Add(INITIALS.getApiValue(), SignatureStyle.INITIALS);
@@ -24,10 +25,12 @@ namespace Silanis.ESL.SDK
         }
 
         
-        private SignatureStyle(string apiValue, string sdkValue, int index):base(apiValue,sdkValue,index) {           
+        private SignatureStyle(string apiValue, string sdkValue, int index):base(apiValue,sdkValue,index) 
+        {           
         }
 
-        internal static SignatureStyle valueOf (String apiValue){
+        internal static SignatureStyle valueOf (string apiValue)
+        {
 
             if (!String.IsNullOrEmpty(apiValue) && allSignatureStyles.ContainsKey(apiValue))
             {
@@ -37,10 +40,12 @@ namespace Silanis.ESL.SDK
             return new SignatureStyle(apiValue, "UNRECOGNIZED", allSignatureStyles.Values.Count);
         }
 
-        public static string[] GetNames(){
+        public static string[] GetNames()
+        {
             string[] names = new string[allSignatureStyles.Count];
             int i = 0;
-            foreach(SignatureStyle signatureStyle in allSignatureStyles.Values){
+            foreach(SignatureStyle signatureStyle in allSignatureStyles.Values)
+            {
                 names[i] = signatureStyle.GetName();
                 i++;
             }
@@ -52,11 +57,13 @@ namespace Silanis.ESL.SDK
             return parse(enumType.ToString());
         }
 
-        public static SignatureStyle[] Values(){
+        public static SignatureStyle[] Values()
+        {
             return (new List<SignatureStyle>(allSignatureStyles.Values)).ToArray();
         }
 
-        public static SignatureStyle parse(string value){
+        public static SignatureStyle parse(string value)
+        {
 
             if (null == value)
             {
@@ -67,7 +74,8 @@ namespace Silanis.ESL.SDK
             {
                 throw new ArgumentException("value is either an empty string or only contains white space");
             }
-            foreach(SignatureStyle signatureStyle in allSignatureStyles.Values){
+            foreach(SignatureStyle signatureStyle in allSignatureStyles.Values)
+            {
                 if (String.Equals(signatureStyle.GetName(), value))
                 {
                     return signatureStyle;
@@ -75,6 +83,5 @@ namespace Silanis.ESL.SDK
             }
             throw new ArgumentException("value is a name, but not one of the named constants defined for the SignatureStyle");
         }
-
 	}
 }

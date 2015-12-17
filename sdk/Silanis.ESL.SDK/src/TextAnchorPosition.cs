@@ -15,17 +15,20 @@ namespace Silanis.ESL.SDK
         public static TextAnchorPosition BOTTOMRIGHT = new TextAnchorPosition("BOTTOMRIGHT", "BOTTOMRIGHT", 3);
         private static Dictionary<string,TextAnchorPosition> allTextAnchorPositions = new Dictionary<string,TextAnchorPosition>();
 
-        static TextAnchorPosition(){
+        static TextAnchorPosition()
+        {
             allTextAnchorPositions.Add(TOPLEFT.getApiValue(), TextAnchorPosition.TOPLEFT);
             allTextAnchorPositions.Add(TOPRIGHT.getApiValue(), TextAnchorPosition.TOPRIGHT);
             allTextAnchorPositions.Add(BOTTOMLEFT.getApiValue(), TextAnchorPosition.BOTTOMLEFT);
             allTextAnchorPositions.Add(BOTTOMRIGHT.getApiValue(), TextAnchorPosition.BOTTOMRIGHT);
         }
 
-        private TextAnchorPosition(string apiValue, string sdkValue, int index):base(apiValue,sdkValue,index) {           
+        private TextAnchorPosition(string apiValue, string sdkValue, int index):base(apiValue,sdkValue,index) 
+        {           
         }
 
-        internal static TextAnchorPosition valueOf (String apiValue){
+        internal static TextAnchorPosition valueOf (string apiValue)
+        {
 
             if (!String.IsNullOrEmpty(apiValue) && allTextAnchorPositions.ContainsKey(apiValue))
             {
@@ -35,10 +38,12 @@ namespace Silanis.ESL.SDK
             return new TextAnchorPosition(apiValue, "UNRECOGNIZED", allTextAnchorPositions.Values.Count);
         }
 
-        public static string[] GetNames(){
+        public static string[] GetNames()
+        {
             string[] names = new string[allTextAnchorPositions.Count];
             int i = 0;
-            foreach(TextAnchorPosition authenticationMethod in allTextAnchorPositions.Values){
+            foreach(TextAnchorPosition authenticationMethod in allTextAnchorPositions.Values)
+            {
                 names[i] = authenticationMethod.GetName();
                 i++;
             }
@@ -50,11 +55,13 @@ namespace Silanis.ESL.SDK
             return parse(enumType.ToString());
         }
 
-        public static TextAnchorPosition[] Values(){
+        public static TextAnchorPosition[] Values()
+        {
             return (new List<TextAnchorPosition>(allTextAnchorPositions.Values)).ToArray();
         }
 
-        public static TextAnchorPosition parse(string value){
+        public static TextAnchorPosition parse(string value)
+        {
 
             if (null == value)
             {
@@ -65,7 +72,8 @@ namespace Silanis.ESL.SDK
             {
                 throw new ArgumentException("value is either an empty string or only contains white space");
             }
-            foreach(TextAnchorPosition textAnchorPosition in allTextAnchorPositions.Values){
+            foreach(TextAnchorPosition textAnchorPosition in allTextAnchorPositions.Values)
+            {
                 if (String.Equals(textAnchorPosition.GetName(), value))
                 {
                     return textAnchorPosition;

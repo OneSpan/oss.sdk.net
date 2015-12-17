@@ -7,7 +7,7 @@ namespace Silanis.ESL.SDK.Internal
         internal static ILog facade = initializeFacade();
 
         internal static ILog initializeFacade() {
-            ILog result = Log4NetLogger.Initialize() ?? TraceLogger.Initialize() ?? NoOpLogger.Initialize();
+            ILog result = TraceLogger.Initialize() ?? NoOpLogger.Initialize();
             return result;
         }
 

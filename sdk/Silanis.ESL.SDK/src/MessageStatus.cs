@@ -14,16 +14,19 @@ namespace Silanis.ESL.SDK
         public static MessageStatus TRASHED = new MessageStatus("TRASHED", "TRASHED", 2);
         private static Dictionary<string,MessageStatus> allMessageStatus = new Dictionary<string,MessageStatus>();
 
-        static MessageStatus(){
+        static MessageStatus()
+        {
             allMessageStatus.Add(NEW.getApiValue(), MessageStatus.NEW);
             allMessageStatus.Add(READ.getApiValue(), MessageStatus.READ);
             allMessageStatus.Add(TRASHED.getApiValue(), MessageStatus.TRASHED);
         }
 
-        private MessageStatus(string apiValue, string sdkValue, int index):base(apiValue,sdkValue,index) {           
+        private MessageStatus(string apiValue, string sdkValue, int index):base(apiValue,sdkValue,index) 
+        {           
         }
 
-        internal static MessageStatus valueOf (String apiValue){
+        internal static MessageStatus valueOf (string apiValue)
+        {
 
             if (!String.IsNullOrEmpty(apiValue) && allMessageStatus.ContainsKey(apiValue))
             {
@@ -33,10 +36,12 @@ namespace Silanis.ESL.SDK
             return new MessageStatus(apiValue, "UNRECOGNIZED", allMessageStatus.Values.Count);
         }
 
-        public static string[] GetNames(){
+        public static string[] GetNames()
+        {
             string[] names = new string[allMessageStatus.Count];
             int i = 0;
-            foreach(MessageStatus messageStatus in allMessageStatus.Values){
+            foreach(MessageStatus messageStatus in allMessageStatus.Values)
+            {
                 names[i] = messageStatus.GetName();
                 i++;
             }
@@ -48,11 +53,13 @@ namespace Silanis.ESL.SDK
             return parse(enumType.ToString());
         }
 
-        public static MessageStatus[] Values(){
+        public static MessageStatus[] Values()
+        {
             return (new List<MessageStatus>(allMessageStatus.Values)).ToArray();
         }
 
-        public static MessageStatus parse(string value){
+        public static MessageStatus parse(string value)
+        {
 
             if (null == value)
             {
@@ -63,7 +70,8 @@ namespace Silanis.ESL.SDK
             {
                 throw new ArgumentException("value is either an empty string or only contains white space");
             }
-            foreach(MessageStatus messageStatus in allMessageStatus.Values){
+            foreach(MessageStatus messageStatus in allMessageStatus.Values)
+            {
                 if (String.Equals(messageStatus.GetName(), value))
                 {
                     return messageStatus;
@@ -71,7 +79,6 @@ namespace Silanis.ESL.SDK
             }
             throw new ArgumentException("value is a name, but not one of the named constants defined for the MessageStatus");
         }
-
     }
 }
 

@@ -24,7 +24,8 @@ namespace Silanis.ESL.SDK
         public static FieldStyle SEAL = new FieldStyle("SEAL", "SEAL", 12);
         private static Dictionary<string,FieldStyle> allFieldStyles = new Dictionary<string,FieldStyle>();
 
-        static FieldStyle(){
+        static FieldStyle()
+        {
             allFieldStyles.Add(BOUND_QRCODE.getApiValue(), FieldStyle.BOUND_QRCODE);
             allFieldStyles.Add(UNBOUND_TEXT_FIELD.getApiValue(), FieldStyle.UNBOUND_TEXT_FIELD);
             allFieldStyles.Add(UNBOUND_CUSTOM_FIELD.getApiValue(), FieldStyle.UNBOUND_CUSTOM_FIELD);
@@ -36,10 +37,12 @@ namespace Silanis.ESL.SDK
             allFieldStyles.Add(SEAL.getApiValue(), FieldStyle.SEAL);
         }
 
-        private FieldStyle(string apiValue, string sdkValue, int index):base(apiValue, sdkValue, index) {           
+        private FieldStyle(string apiValue, string sdkValue, int index):base(apiValue, sdkValue, index) 
+        {           
         }
       
-        internal static FieldStyle valueOf (String apiValue){
+        internal static FieldStyle valueOf (string apiValue)
+        {
 
             if (!String.IsNullOrEmpty(apiValue) && allFieldStyles.ContainsKey(apiValue))
             {
@@ -49,10 +52,12 @@ namespace Silanis.ESL.SDK
             return new FieldStyle(apiValue, "UNRECOGNIZED", allFieldStyles.Values.Count);
         }
 
-        public static string[] GetNames(){
+        public static string[] GetNames()
+        {
             string[] names = new string[allFieldStyles.Count];
             int i = 0;
-            foreach(FieldStyle fieldStyle in allFieldStyles.Values){
+            foreach(FieldStyle fieldStyle in allFieldStyles.Values)
+            {
                 names[i] = fieldStyle.GetName();
                 i++;
             }
@@ -64,11 +69,13 @@ namespace Silanis.ESL.SDK
             return parse(enumType.ToString());
         }
 
-        public static FieldStyle[] Values(){
+        public static FieldStyle[] Values()
+        {
             return (new List<FieldStyle>(allFieldStyles.Values)).ToArray();
         }
 
-        public static FieldStyle parse(string value){
+        public static FieldStyle parse(string value)
+        {
 
             if (null == value)
             {
@@ -87,6 +94,5 @@ namespace Silanis.ESL.SDK
             }
             throw new ArgumentException("value is a name, but not one of the named constants defined for the FieldStyle");
         }
-
 	}
 }
