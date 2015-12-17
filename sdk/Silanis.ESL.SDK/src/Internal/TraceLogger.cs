@@ -9,7 +9,6 @@ namespace Silanis.ESL.SDK.Internal
         TraceSwitch traceSwitch = new TraceSwitch("OpenID", "OpenID Trace Switch");
 
         /// 
-
         /// Returns a new logger that uses the  class 
         /// if sufficient CAS permissions are granted to use it, otherwise returns false.
         /// 

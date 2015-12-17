@@ -13,15 +13,18 @@ namespace Silanis.ESL.SDK
         public static Visibility SENDER = new Visibility("SENDER", "SENDER", 1);
         private static Dictionary<string,Visibility> allVisibilities = new Dictionary<string,Visibility>();
 
-        static Visibility(){
+        static Visibility()
+        {
             allVisibilities.Add(ACCOUNT.getApiValue(), Visibility.ACCOUNT);
             allVisibilities.Add(SENDER.getApiValue(), Visibility.SENDER);
         }
 
-        private Visibility(string apiValue, string sdkValue, int index):base(apiValue,sdkValue,index) {           
+        private Visibility(string apiValue, string sdkValue, int index):base(apiValue,sdkValue,index) 
+        {           
         }
 
-        internal static Visibility valueOf (String apiValue){
+        internal static Visibility valueOf (string apiValue)
+        {
 
             if (!String.IsNullOrEmpty(apiValue) && allVisibilities.ContainsKey(apiValue))
             {
@@ -31,10 +34,12 @@ namespace Silanis.ESL.SDK
             return new Visibility(apiValue, "UNRECOGNIZED", allVisibilities.Values.Count);
         }
 
-        public static string[] GetNames(){
+        public static string[] GetNames()
+        {
             string[] names = new string[allVisibilities.Count];
             int i = 0;
-            foreach(Visibility visibility in allVisibilities.Values){
+            foreach(Visibility visibility in allVisibilities.Values)
+            {
                 names[i] = visibility.GetName();
                 i++;
             }
@@ -46,12 +51,13 @@ namespace Silanis.ESL.SDK
             return parse(enumType.ToString());
         }
 
-        public static Visibility[] Values(){
+        public static Visibility[] Values()
+        {
             return (new List<Visibility>(allVisibilities.Values)).ToArray();
         }
 
-        public static Visibility parse(string value){
-
+        public static Visibility parse(string value)
+        {
             if (null == value)
             {
                 throw new ArgumentNullException("value is null");
@@ -61,7 +67,8 @@ namespace Silanis.ESL.SDK
             {
                 throw new ArgumentException("value is either an empty string or only contains white space");
             }
-            foreach(Visibility visibility in allVisibilities.Values){
+            foreach(Visibility visibility in allVisibilities.Values)
+            {
                 if (String.Equals(visibility.GetName(), value))
                 {
                     return visibility;

@@ -41,9 +41,6 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Web" />
-    <Reference Include="log4net">
-      <HintPath>..\References\log4net.dll</HintPath>
-    </Reference>
     <Reference Include="System.Configuration" />
   </ItemGroup>
   <ItemGroup>
@@ -370,7 +367,6 @@
     <Compile Include="src\SupportConfiguration.cs" />
     <Compile Include="src\Internal\Conversion\SupportConfigurationConverter.cs" />
     <Compile Include="src\Internal\ILog.cs" />
-    <Compile Include="src\Internal\Log4NetLogger.cs" />
     <Compile Include="src\Internal\NoOpLogger.cs" />
     <Compile Include="src\Internal\Logger.cs" />
     <Compile Include="src\Internal\TraceLogger.cs" />
@@ -385,7 +381,6 @@
   <ItemGroup />
   <ItemGroup />
   <ItemGroup>
-    <None Include="app.config" />
     <Folder Include="src\Models\" />
     <Folder Include="src\Services\ContractResolvers\" />
     <Folder Include="src\Services\Internal\" />

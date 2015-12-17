@@ -15,16 +15,19 @@ namespace Silanis.ESL.SDK
         private static Dictionary<string,KnowledgeBasedAuthenticationStatus> allKnowledgeBasedAuthenticationStatus = new Dictionary<string,KnowledgeBasedAuthenticationStatus>();
 
 
-        static KnowledgeBasedAuthenticationStatus(){
+        static KnowledgeBasedAuthenticationStatus()
+        {
             allKnowledgeBasedAuthenticationStatus.Add(NOT_YET_ATTEMPTED.getApiValue(), KnowledgeBasedAuthenticationStatus.NOT_YET_ATTEMPTED);
             allKnowledgeBasedAuthenticationStatus.Add(PASSED.getApiValue(), KnowledgeBasedAuthenticationStatus.PASSED);
             allKnowledgeBasedAuthenticationStatus.Add(FAILED.getApiValue(), KnowledgeBasedAuthenticationStatus.FAILED);
         }
 
-        private KnowledgeBasedAuthenticationStatus(string apiValue, string sdkValue, int index):base(apiValue, sdkValue,index) {           
+        private KnowledgeBasedAuthenticationStatus(string apiValue, string sdkValue, int index):base(apiValue, sdkValue,index) 
+        {           
         }
        
-        internal static KnowledgeBasedAuthenticationStatus valueOf (String apiValue){
+        internal static KnowledgeBasedAuthenticationStatus valueOf (string apiValue)
+        {
 
             if (!String.IsNullOrEmpty(apiValue) && allKnowledgeBasedAuthenticationStatus.ContainsKey(apiValue))
             {
@@ -34,10 +37,12 @@ namespace Silanis.ESL.SDK
             return new KnowledgeBasedAuthenticationStatus(apiValue, "UNRECOGNIZED", allKnowledgeBasedAuthenticationStatus.Values.Count);
         }
 
-        public static string[] GetNames(){
+        public static string[] GetNames()
+        {
             string[] names = new string[allKnowledgeBasedAuthenticationStatus.Count];
             int i = 0;
-            foreach(KnowledgeBasedAuthenticationStatus kbaStatus in allKnowledgeBasedAuthenticationStatus.Values){
+            foreach(KnowledgeBasedAuthenticationStatus kbaStatus in allKnowledgeBasedAuthenticationStatus.Values)
+            {
                 names[i] = kbaStatus.GetName();
                 i++;
             }
@@ -49,11 +54,13 @@ namespace Silanis.ESL.SDK
             return parse(enumType.ToString());
         }
 
-        public static KnowledgeBasedAuthenticationStatus[] Values(){
+        public static KnowledgeBasedAuthenticationStatus[] Values()
+        {
             return (new List<KnowledgeBasedAuthenticationStatus>(allKnowledgeBasedAuthenticationStatus.Values)).ToArray();
         }
 
-        public static KnowledgeBasedAuthenticationStatus parse(string value){
+        public static KnowledgeBasedAuthenticationStatus parse(string value)
+        {
 
             if (null == value)
             {
@@ -64,7 +71,8 @@ namespace Silanis.ESL.SDK
             {
                 throw new ArgumentException("value is either an empty string or only contains white space");
             }
-            foreach(KnowledgeBasedAuthenticationStatus kbaStatus in allKnowledgeBasedAuthenticationStatus.Values){
+            foreach(KnowledgeBasedAuthenticationStatus kbaStatus in allKnowledgeBasedAuthenticationStatus.Values)
+            {
                 if (String.Equals(kbaStatus.GetName(), value))
                 {
                     return kbaStatus;
@@ -72,7 +80,6 @@ namespace Silanis.ESL.SDK
             }
             throw new ArgumentException("value is a name, but not one of the named constants defined for the KnowledgeBasedAuthenticationStatus");
         }
-
     }
 }
 

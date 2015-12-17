@@ -15,17 +15,20 @@ namespace Silanis.ESL.SDK
         public static AuthenticationMethod KBA = new AuthenticationMethod("KBA", "KBA", 3);
         private static Dictionary<string,AuthenticationMethod> allAuthenticationMethods = new Dictionary<string,AuthenticationMethod>();
 
-        static AuthenticationMethod(){
+        static AuthenticationMethod()
+        {
             allAuthenticationMethods.Add(EMAIL.getApiValue(), AuthenticationMethod.EMAIL);
             allAuthenticationMethods.Add(CHALLENGE.getApiValue(), AuthenticationMethod.CHALLENGE);
             allAuthenticationMethods.Add(SMS.getApiValue(), AuthenticationMethod.SMS);
             allAuthenticationMethods.Add(KBA.getApiValue(), AuthenticationMethod.KBA);
         }
 
-        private AuthenticationMethod(string apiValue, string sdkValue, int index):base(apiValue,sdkValue,index) {           
+        private AuthenticationMethod(string apiValue, string sdkValue, int index):base(apiValue,sdkValue,index) 
+        {           
         }
 
-        internal static AuthenticationMethod valueOf (String apiValue){
+        internal static AuthenticationMethod valueOf (string apiValue)
+        {
 
             if (!String.IsNullOrEmpty(apiValue) && allAuthenticationMethods.ContainsKey(apiValue))
             {
@@ -35,10 +38,12 @@ namespace Silanis.ESL.SDK
             return new AuthenticationMethod(apiValue, "UNRECOGNIZED", allAuthenticationMethods.Values.Count);
         }
 
-        public static string[] GetNames(){
+        public static string[] GetNames()
+        {
             string[] names = new string[allAuthenticationMethods.Count];
             int i = 0;
-            foreach(AuthenticationMethod authenticationMethod in allAuthenticationMethods.Values){
+            foreach(AuthenticationMethod authenticationMethod in allAuthenticationMethods.Values)
+            {
                 names[i] = authenticationMethod.GetName();
                 i++;
             }
@@ -50,11 +55,13 @@ namespace Silanis.ESL.SDK
             return parse(enumType.ToString());
         }
 
-        public static AuthenticationMethod[] Values(){
+        public static AuthenticationMethod[] Values()
+        {
             return (new List<AuthenticationMethod>(allAuthenticationMethods.Values)).ToArray();
         }
 
-        public static AuthenticationMethod parse(string value){
+        public static AuthenticationMethod parse(string value)
+        {
 
             if (null == value)
             {
@@ -65,7 +72,8 @@ namespace Silanis.ESL.SDK
             {
                 throw new ArgumentException("value is either an empty string or only contains white space");
             }
-            foreach(AuthenticationMethod authenticationMethod in allAuthenticationMethods.Values){
+            foreach(AuthenticationMethod authenticationMethod in allAuthenticationMethods.Values)
+            {
                 if (String.Equals(authenticationMethod.GetName(), value))
                 {
                     return authenticationMethod;
