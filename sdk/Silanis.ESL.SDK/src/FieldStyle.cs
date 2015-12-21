@@ -7,7 +7,7 @@ namespace Silanis.ESL.SDK
 {
 	public class FieldStyle : EslEnumeration
 	{
-        private static ILog log = Logger.initializeFacade();
+        private static ILogger log = LoggerFactory.get(typeof(FieldStyle));
 
         public static FieldStyle BOUND_DATE = new FieldStyle("LABEL", "BOUND_DATE", 0);
         public static FieldStyle BOUND_NAME = new FieldStyle("LABEL", "BOUND_NAME", 1);
@@ -48,7 +48,7 @@ namespace Silanis.ESL.SDK
             {
                 return allFieldStyles[apiValue];
             }
-            log.WarnFormat("Unknown API FieldStyle {0}. The upgrade is required.", apiValue);
+            log.Warn("Unknown API FieldStyle {0}. The upgrade is required.", apiValue);
             return new FieldStyle(apiValue, "UNRECOGNIZED", allFieldStyles.Values.Count);
         }
 

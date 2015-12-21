@@ -144,6 +144,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <None Include="jenkins.properties" />
     <None Include="signers.properties">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

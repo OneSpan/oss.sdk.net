@@ -7,7 +7,7 @@ namespace Silanis.ESL.SDK
 {
     public class Visibility : EslEnumeration
     {
-        private static ILog log = Logger.initializeFacade();
+        private static ILogger log = LoggerFactory.get(typeof(AuthenticationMethod));
 
         public static Visibility ACCOUNT = new Visibility("ACCOUNT", "ACCOUNT", 0);
         public static Visibility SENDER = new Visibility("SENDER", "SENDER", 1);
@@ -30,7 +30,7 @@ namespace Silanis.ESL.SDK
             {
                 return allVisibilities[apiValue];
             }
-            log.WarnFormat("Unknown API Visibility {0}. The upgrade is required.", apiValue);
+            log.Warn("Unknown API Visibility {0}. The upgrade is required.", apiValue);
             return new Visibility(apiValue, "UNRECOGNIZED", allVisibilities.Values.Count);
         }
 

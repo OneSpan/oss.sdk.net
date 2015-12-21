@@ -7,7 +7,7 @@ namespace Silanis.ESL.SDK
 {
     public class TextAnchorPosition : EslEnumeration
     {
-        private static ILog log = Logger.initializeFacade();
+        private static ILogger log = LoggerFactory.get(typeof(AuthenticationMethod));
 
         public static TextAnchorPosition TOPLEFT = new TextAnchorPosition("TOPLEFT", "TOPLEFT", 0);
         public static TextAnchorPosition TOPRIGHT = new TextAnchorPosition("TOPRIGHT", "TOPRIGHT", 1);
@@ -34,7 +34,7 @@ namespace Silanis.ESL.SDK
             {
                 return allTextAnchorPositions[apiValue];
             }
-            log.WarnFormat("Unknown API TextAnchorPosition {0}. The upgrade is required.", apiValue);
+            log.Warn("Unknown API TextAnchorPosition {0}. The upgrade is required.", apiValue);
             return new TextAnchorPosition(apiValue, "UNRECOGNIZED", allTextAnchorPositions.Values.Count);
         }
 

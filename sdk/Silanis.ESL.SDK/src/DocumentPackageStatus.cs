@@ -7,7 +7,7 @@ namespace Silanis.ESL.SDK
 {
 	public class DocumentPackageStatus : EslEnumeration
 	{
-        private static ILog log = Logger.initializeFacade();
+        private static ILogger log = LoggerFactory.get(typeof(AuthenticationMethod));
 
         public static DocumentPackageStatus DRAFT = new DocumentPackageStatus("DRAFT", "DRAFT", 0);
         public static DocumentPackageStatus SENT = new DocumentPackageStatus("SENT", "SENT", 1);
@@ -40,7 +40,7 @@ namespace Silanis.ESL.SDK
             {
                 return allDocumentPackageStatus[apiValue];
             }
-            log.WarnFormat("Unknown API DocumentPackageStatus {0}. The upgrade is required.", apiValue);
+            log.Warn("Unknown API DocumentPackageStatus {0}. The upgrade is required.", apiValue);
             return new DocumentPackageStatus(apiValue, "UNRECOGNIZED", allDocumentPackageStatus.Values.Count);
         }
 

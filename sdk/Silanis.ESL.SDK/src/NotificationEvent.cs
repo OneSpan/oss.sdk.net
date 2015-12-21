@@ -7,7 +7,7 @@ namespace Silanis.ESL.SDK
 {
     public class NotificationEvent : EslEnumeration
     {
-        private static ILog log = Logger.initializeFacade();
+        private static ILogger log = LoggerFactory.get(typeof(AuthenticationMethod));
 
         public static NotificationEvent PACKAGE_ACTIVATE = new NotificationEvent("PACKAGE_ACTIVATE", "PACKAGE_ACTIVATE", 0);
         public static NotificationEvent PACKAGE_COMPLETE = new NotificationEvent("PACKAGE_COMPLETE", "PACKAGE_COMPLETE", 1);
@@ -63,7 +63,7 @@ namespace Silanis.ESL.SDK
             {
                 return allNotificationEvents[apiValue];
             }
-            log.WarnFormat("Unknown API NotificationEvent {0}. The upgrade is required.", apiValue);
+            log.Warn("Unknown API NotificationEvent {0}. The upgrade is required.", apiValue);
             return new NotificationEvent(apiValue, "UNRECOGNIZED", allNotificationEvents.Values.Count);
         }
 

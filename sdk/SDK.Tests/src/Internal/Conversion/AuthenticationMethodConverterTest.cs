@@ -110,7 +110,5 @@ namespace SDK.Tests
 
             Assert.AreEqual(apiAuthScheme1, acutalApiScheme);
         }
-		
     }
 }
-

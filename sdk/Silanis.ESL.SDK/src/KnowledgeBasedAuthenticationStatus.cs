@@ -7,7 +7,7 @@ namespace Silanis.ESL.SDK
 {
     public class KnowledgeBasedAuthenticationStatus : EslEnumeration
     {
-        private static ILog log = Logger.initializeFacade();
+        private static ILogger log = LoggerFactory.get(typeof(AuthenticationMethod));
 
         public static KnowledgeBasedAuthenticationStatus NOT_YET_ATTEMPTED = new KnowledgeBasedAuthenticationStatus("NOT_YET_ATTEMPTED", "NOT_YET_ATTEMPTED", 0);
         public static KnowledgeBasedAuthenticationStatus PASSED = new KnowledgeBasedAuthenticationStatus("PASSED", "PASSED", 1);
@@ -33,7 +33,7 @@ namespace Silanis.ESL.SDK
             {
                 return allKnowledgeBasedAuthenticationStatus[apiValue];
             }
-            log.WarnFormat("Unknown API KnowledgeBasedAuthenticationStatus {0}. The upgrade is required.", apiValue);
+            log.Warn("Unknown API KnowledgeBasedAuthenticationStatus {0}. The upgrade is required.", apiValue);
             return new KnowledgeBasedAuthenticationStatus(apiValue, "UNRECOGNIZED", allKnowledgeBasedAuthenticationStatus.Values.Count);
         }
 

@@ -7,7 +7,7 @@ namespace Silanis.ESL.SDK
 {
     public class SenderType : EslEnumeration
     {
-        private static ILog log = Logger.initializeFacade();
+        private static ILogger log = LoggerFactory.get(typeof(AuthenticationMethod));
 
         public static SenderType REGULAR = new SenderType("REGULAR", "REGULAR", 0);
         public static SenderType MANAGER = new SenderType("MANAGER", "MANAGER", 1);
@@ -31,7 +31,7 @@ namespace Silanis.ESL.SDK
             {
                 return allSenderTypes[apiValue];
             }
-            log.WarnFormat("Unknown API SenderType {0}. The upgrade is required.", apiValue);
+            log.Warn("Unknown API SenderType {0}. The upgrade is required.", apiValue);
             return new SenderType(apiValue, "UNRECOGNIZED", allSenderTypes.Values.Count);
         }
 

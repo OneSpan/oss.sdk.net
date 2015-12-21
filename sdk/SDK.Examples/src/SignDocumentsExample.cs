@@ -37,7 +37,7 @@ namespace SDK.Examples
             DocumentPackage superDuperPackage = PackageBuilder.NewPackageNamed("SignDocumentsExample: " + DateTime.Now)
                 .WithSettings(DocumentPackageSettingsBuilder.NewDocumentPackageSettings().WithInPerson())
                     .WithSigner(SignerBuilder.NewSignerWithEmail(email1)
-                                .WithCustomId("signer1")
+                                .WithCustomId(signer1Id)
                                 .WithFirstName("John1")
                                 .WithLastName("Smith1"))
                     .WithDocument(DocumentBuilder.NewDocumentNamed(document1Name)
@@ -47,7 +47,7 @@ namespace SDK.Examples
                                    .AtPosition(100, 100))
                                   .WithSignature(SignatureBuilder.SignatureFor(email1)
                                    .OnPage(0)
-                                   .AtPosition(300, 100)))
+                                   .AtPosition(400, 100)))
                     .WithDocument(DocumentBuilder.NewDocumentNamed(document2Name)
                                   .FromStream(fileStream2, DocumentType.PDF)
                                   .WithSignature(SignatureBuilder.SignatureFor(senderEmail)
@@ -55,14 +55,12 @@ namespace SDK.Examples
                                    .AtPosition(100, 100))
                                   .WithSignature(SignatureBuilder.SignatureFor(email1)
                                    .OnPage(0)
-                                   .AtPosition(300, 100)))
+                                   .AtPosition(400, 100)))
                     .Build();
 
             packageId = eslClient.CreatePackage(superDuperPackage);
             eslClient.SendPackage(packageId);
             retrievedPackageBeforeSigning = eslClient.GetPackage(packageId);
-
-//            eslClient.SignDocument(packageId, document1Name);
 
             eslClient.SignDocuments(packageId);
             retrievedPackageAfterSigningApproval1 = eslClient.GetPackage(packageId);

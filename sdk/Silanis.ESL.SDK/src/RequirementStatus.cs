@@ -7,7 +7,7 @@ namespace Silanis.ESL.SDK
 {
     public class RequirementStatus : EslEnumeration
 	{
-        private static ILog log = Logger.initializeFacade();
+        private static ILogger log = LoggerFactory.get(typeof(AuthenticationMethod));
 
         public static RequirementStatus INCOMPLETE = new RequirementStatus("INCOMPLETE", "INCOMPLETE", 0);
         public static RequirementStatus REJECTED = new RequirementStatus("REJECTED", "REJECTED", 1);
@@ -33,7 +33,7 @@ namespace Silanis.ESL.SDK
             {
                 return allRequirementStatus[apiValue];
             }
-            log.WarnFormat("Unknown API RequirementStatus {0}. The upgrade is required.", apiValue);
+            log.Warn("Unknown API RequirementStatus {0}. The upgrade is required.", apiValue);
             return new RequirementStatus(apiValue, "UNRECOGNIZED", allRequirementStatus.Values.Count);
         }
 
