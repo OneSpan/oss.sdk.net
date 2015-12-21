@@ -7,7 +7,7 @@ namespace Silanis.ESL.SDK
 {
     public class UsageReportCategory : EslEnumeration
     {
-        private static ILog log = Logger.initializeFacade();
+        private static ILogger log = LoggerFactory.get(typeof(AuthenticationMethod));
 
         public static UsageReportCategory ACTIVE = new UsageReportCategory("ACTIVE", "ACTIVE", 0);
         public static UsageReportCategory DRAFT = new UsageReportCategory("DRAFT", "DRAFT", 1);
@@ -46,7 +46,7 @@ namespace Silanis.ESL.SDK
             {
                 return allUsageReportCategorys[apiValue];
             }
-            log.WarnFormat("Unknown API UsageReportCategory {0}. The upgrade is required.", apiValue);
+            log.Warn("Unknown API UsageReportCategory {0}. The upgrade is required.", apiValue);
             return new UsageReportCategory(apiValue, "UNRECOGNIZED", allUsageReportCategorys.Values.Count);
         }
 

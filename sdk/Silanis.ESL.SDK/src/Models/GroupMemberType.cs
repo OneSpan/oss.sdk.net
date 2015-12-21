@@ -7,7 +7,7 @@ namespace Silanis.ESL.SDK
 {
     public class GroupMemberType : EslEnumeration
     {
-        private static ILog log = Logger.initializeFacade();
+        private static ILogger log = LoggerFactory.get(typeof(AuthenticationMethod));
 
         public static GroupMemberType REGULAR = new GroupMemberType("REGULAR", "REGULAR", 0);
         public static GroupMemberType MANAGER = new GroupMemberType("MANAGER", "MANAGER", 1);
@@ -30,7 +30,7 @@ namespace Silanis.ESL.SDK
             {
                 return allGroupMemberTypes[apiValue];
             }
-            log.WarnFormat("Unknown API GroupMemberType {0}. The upgrade is required.", apiValue);
+            log.Warn("Unknown API GroupMemberType {0}. The upgrade is required.", apiValue);
             return new GroupMemberType(apiValue, "UNRECOGNIZED", allGroupMemberTypes.Values.Count);
         }
 

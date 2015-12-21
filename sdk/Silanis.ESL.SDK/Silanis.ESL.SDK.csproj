@@ -42,6 +42,7 @@
     <Reference Include="System" />
     <Reference Include="System.Web" />
     <Reference Include="System.Configuration" />
+    <Reference Include="Microsoft.Build.Framework" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -366,13 +367,13 @@
     <Compile Include="src\Services\SystemService.cs" />
     <Compile Include="src\SupportConfiguration.cs" />
     <Compile Include="src\Internal\Conversion\SupportConfigurationConverter.cs" />
-    <Compile Include="src\Internal\ILog.cs" />
-    <Compile Include="src\Internal\NoOpLogger.cs" />
-    <Compile Include="src\Internal\Logger.cs" />
-    <Compile Include="src\Internal\TraceLogger.cs" />
     <Compile Include="src\DownloadedFile.cs" />
     <Compile Include="src\Services\SignatureImageService.cs" />
     <Compile Include="src\SignatureImageFormat.cs" />
+    <Compile Include="src\Internal\ApplicationLogger.cs" />
+    <Compile Include="src\Internal\LoggerFactory.cs" />
+    <Compile Include="src\Internal\RollOverTextWriter.cs" />
+    <Compile Include="src\Internal\ILogger.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSHARP.Targets" />
   <ProjectExtensions>
@@ -384,5 +385,8 @@
     <Folder Include="src\Models\" />
     <Folder Include="src\Services\ContractResolvers\" />
     <Folder Include="src\Services\Internal\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
   </ItemGroup>
 </Project>

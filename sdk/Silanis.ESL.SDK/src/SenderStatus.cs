@@ -7,7 +7,7 @@ namespace Silanis.ESL.SDK
 {
     public class SenderStatus : EslEnumeration
     {
-        private static ILog log = Logger.initializeFacade();
+        private static ILogger log = LoggerFactory.get(typeof(AuthenticationMethod));
 
         public static SenderStatus INVITED = new SenderStatus("INVITED","INVITED", 0);
         public static SenderStatus ACTIVE = new SenderStatus("ACTIVE","ACTIVE", 1);
@@ -33,7 +33,7 @@ namespace Silanis.ESL.SDK
             {
                 return allSenderStatus[apiValue];
             }
-            log.WarnFormat("Unknown API SenderStatus {0}. The upgrade is required.", apiValue);
+            log.Warn("Unknown API SenderStatus {0}. The upgrade is required.", apiValue);
             return new SenderStatus(apiValue, "UNRECOGNIZED", allSenderStatus.Values.Count);
         }
 

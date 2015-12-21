@@ -7,7 +7,7 @@ namespace Silanis.ESL.SDK
 {
     public class SignatureStyle : EslEnumeration
 	{
-        private static ILog log = Logger.initializeFacade();
+        private static ILogger log = LoggerFactory.get(typeof(AuthenticationMethod));
 
         public static SignatureStyle HAND_DRAWN = new SignatureStyle("CAPTURE", "HAND_DRAWN", 0);
         public static SignatureStyle FULL_NAME = new SignatureStyle("FULLNAME", "FULL_NAME", 1);
@@ -36,7 +36,7 @@ namespace Silanis.ESL.SDK
             {
                 return allSignatureStyles[apiValue];
             }
-            log.WarnFormat("Unknown API SignatureStyle {0}. The upgrade is required.", apiValue);
+            log.Warn("Unknown API SignatureStyle {0}. The upgrade is required.", apiValue);
             return new SignatureStyle(apiValue, "UNRECOGNIZED", allSignatureStyles.Values.Count);
         }
 

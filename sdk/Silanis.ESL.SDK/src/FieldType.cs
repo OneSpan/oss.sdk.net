@@ -7,7 +7,7 @@ namespace Silanis.ESL.SDK
 {
     public class FieldType : EslEnumeration
     {
-        private static ILog log = Logger.initializeFacade();
+        private static ILogger log = LoggerFactory.get(typeof(AuthenticationMethod));
 
         public static FieldType SIGNATURE = new FieldType("SIGNATURE", "SIGNATURE", 0);
         public static FieldType INPUT = new FieldType("INPUT", "INPUT", 1);
@@ -32,7 +32,7 @@ namespace Silanis.ESL.SDK
             {
                 return allFieldTypes[apiValue];
             }
-            log.WarnFormat("Unknown API FieldType {0}. The upgrade is required.", apiValue);
+            log.Warn("Unknown API FieldType {0}. The upgrade is required.", apiValue);
             return new FieldType(apiValue, "UNRECOGNIZED", allFieldTypes.Values.Count);
         }
 

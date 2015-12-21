@@ -6,7 +6,7 @@ namespace Silanis.ESL.SDK
 {
 	internal class AuthenticationMethodConverter
 	{
-        private static ILog log = Logger.initializeFacade();
+        private static ILogger log = LoggerFactory.get(typeof(AuthenticationMethod));
 
 		private Silanis.ESL.SDK.AuthenticationMethod sdkAuthMethod;
 		private string apiAuthMethod;

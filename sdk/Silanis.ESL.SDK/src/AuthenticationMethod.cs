@@ -7,7 +7,7 @@ namespace Silanis.ESL.SDK
 {
     public class AuthenticationMethod : EslEnumeration
 	{
-        private static ILog log = Logger.initializeFacade();
+        private static ILogger log = LoggerFactory.get(typeof(AuthenticationMethod));
 
         public static AuthenticationMethod EMAIL = new AuthenticationMethod("NONE", "EMAIL", 0);
         public static AuthenticationMethod CHALLENGE = new AuthenticationMethod("CHALLENGE", "CHALLENGE", 1);
@@ -34,7 +34,7 @@ namespace Silanis.ESL.SDK
             {
                 return allAuthenticationMethods[apiValue];
             }
-            log.WarnFormat("Unknown API AuthenticationMethod {0}. The upgrade is required.", apiValue);
+            log.Warn("Unknown API AuthenticationMethod {0}. The upgrade is required.", apiValue);
             return new AuthenticationMethod(apiValue, "UNRECOGNIZED", allAuthenticationMethods.Values.Count);
         }
 
@@ -82,6 +82,4 @@ namespace Silanis.ESL.SDK
             throw new ArgumentException("value is a name, but not one of the named constants defined for the AuthenticationMethod");
         }
 	}
-
-
 }
