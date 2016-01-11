@@ -9,6 +9,8 @@ namespace SDK.Examples
     [TestFixture()]
     public class DocumentPackageAttributesExampleTest
     {
+        public const string ORIGIN_KEY = "origin";
+
         [Test()]
         public void VerifyResult()
         {
@@ -19,13 +21,15 @@ namespace SDK.Examples
             DocumentPackageAttributes attributes = documentPackage.Attributes;
             IDictionary<string, object> attributeMap = attributes.Contents;
 
+            Assert.IsTrue(attributeMap.ContainsKey(ORIGIN_KEY));
             Assert.IsTrue(attributeMap.ContainsKey(example.ATTRIBUTE_KEY_1));
             Assert.IsTrue(attributeMap.ContainsKey(example.ATTRIBUTE_KEY_2));
             Assert.IsTrue(attributeMap.ContainsKey(example.ATTRIBUTE_KEY_3));
 
-            Assert.AreEqual(attributeMap[example.ATTRIBUTE_KEY_1], example.ATTRIBUTE_1);
-            Assert.AreEqual(attributeMap[example.ATTRIBUTE_KEY_2], example.ATTRIBUTE_2);
-            Assert.AreEqual(attributeMap[example.ATTRIBUTE_KEY_3], example.ATTRIBUTE_3);
+            Assert.AreEqual(Connector.DYNAMICS_2015.Name, attributeMap[ORIGIN_KEY]);
+            Assert.AreEqual(example.ATTRIBUTE_1, attributeMap[example.ATTRIBUTE_KEY_1]);
+            Assert.AreEqual(example.ATTRIBUTE_2, attributeMap[example.ATTRIBUTE_KEY_2]);
+            Assert.AreEqual(example.ATTRIBUTE_3, attributeMap[example.ATTRIBUTE_KEY_3]);
         }
     }
 }
