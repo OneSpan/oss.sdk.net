@@ -35,7 +35,7 @@ namespace SDK.Examples
 			FileInfo file = new FileInfo(Directory.GetCurrentDirectory() + "/src/document.pdf");
 
 			// 1. Create a package
-			BuiltPackage = PackageBuilder.NewPackageNamed("Policy " + DateTime.Now)
+            BuiltPackage = PackageBuilder.NewPackageNamed("DocumentOperationsExample " + DateTime.Now)
 				.DescribedAs("This is a package demonstrating document upload")
 			    .WithSigner(SignerBuilder.NewSignerWithEmail("john.smith@email.com")
       					.WithFirstName("John")

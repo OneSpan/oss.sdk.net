@@ -376,6 +376,7 @@
     <Compile Include="src\Internal\LoggerFactory.cs" />
     <Compile Include="src\Internal\RollOverTextWriter.cs" />
     <Compile Include="src\Internal\ILogger.cs" />
+    <Compile Include="src\Connector.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSHARP.Targets" />
   <ProjectExtensions>

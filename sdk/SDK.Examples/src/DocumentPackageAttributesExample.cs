@@ -34,7 +34,7 @@ namespace SDK.Examples
 
         override public void Execute()
         {
-            DocumentPackage superDuperPackage = PackageBuilder.NewPackageNamed( "Policy " + DateTime.Now )
+            DocumentPackage superDuperPackage = PackageBuilder.NewPackageNamed( "DocumentPackageAttributesExample " + DateTime.Now )
                 .DescribedAs( "This is a package created using the e-SignLive SDK" )
                     .ExpiresOn( DateTime.Now.AddMonths(1) )
                     .WithEmailMessage( "This message should be delivered to all signers" )
@@ -53,6 +53,7 @@ namespace SDK.Examples
                                .AtPosition( 400, 200 )
                                .WithValue( FieldBuilder.CHECKBOX_CHECKED ) )
                                    .AtPosition( 100, 100 ) ) )
+                    .WithOrigin(Connector.DYNAMICS_2015)
                     .WithAttributes(new DocumentPackageAttributesBuilder()
                                 .WithAttribute( ATTRIBUTE_KEY_1, ATTRIBUTE_1 )
                                 .WithAttribute( ATTRIBUTE_KEY_2, ATTRIBUTE_2 )

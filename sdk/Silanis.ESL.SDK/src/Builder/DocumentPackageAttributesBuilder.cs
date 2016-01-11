@@ -23,7 +23,8 @@ namespace Silanis.ESL.SDK.Builder
         }
         
         [Obsolete("Use WithAttribute() instead.  Notice the uppercase W.")]
-        public DocumentPackageAttributesBuilder withAttribute( string name, Object value ) {
+        public DocumentPackageAttributesBuilder withAttribute( string name, Object value ) 
+        {
             return WithAttribute( name, value );
         }
 

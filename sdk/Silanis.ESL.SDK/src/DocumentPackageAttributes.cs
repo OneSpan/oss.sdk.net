@@ -29,11 +29,25 @@ namespace Silanis.ESL.SDK
 
         public virtual void Append(string name, object value)
         {
+            if (null == Contents) 
+            {
+                this.Contents = new Dictionary<string, object>();
+            }
             this.Contents[name] = value;
         }
 
+        public virtual void Append( DocumentPackageAttributes attributes )
+        {
+            if (null == attributes || null == attributes.Contents) 
+            {
+                return;
+            }
+            foreach(var content in attributes.Contents)
+            {
+                Append((string)content.Key, content.Value);
+            }
+        }
     }
-
 }
 
 

@@ -29,7 +29,7 @@ namespace SDK.Examples
         override public void Execute()
         {
             // 1. Create a package
-            DocumentPackage superDuperPackage = PackageBuilder.NewPackageNamed( "Policy " + DateTime.Now )
+            DocumentPackage superDuperPackage = PackageBuilder.NewPackageNamed( "DocumentUploadExample " + DateTime.Now )
                 .DescribedAs( "This is a package created using the e-SignLive SDK" )
                     .ExpiresOn( DateTime.Now.AddMonths(1) )
                     .WithEmailMessage( "This message should be delivered to all signers" )

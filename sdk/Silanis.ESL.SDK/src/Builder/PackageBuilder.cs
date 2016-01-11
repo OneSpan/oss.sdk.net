@@ -27,6 +27,8 @@ namespace Silanis.ESL.SDK.Builder
         private bool trashed;
         private Visibility visibility;
 
+        private const string ORIGIN_KEY = "origin";
+
 		private PackageBuilder(string packageName)
 		{
 			this.packageName = packageName;
@@ -137,13 +139,28 @@ namespace Silanis.ESL.SDK.Builder
 
         public PackageBuilder WithAttributes(DocumentPackageAttributes attributes)
         {
-            this.attributes = attributes;
+            if(null == this.attributes) 
+            {
+                this.attributes = new DocumentPackageAttributes();
+            }
+            this.attributes.Append(attributes);
             return this;
         }
 
         public PackageBuilder WithAttributes(DocumentPackageAttributesBuilder attributesBuilder)
         {
             return WithAttributes( attributesBuilder.Build() );
+        }
+
+        public PackageBuilder WithOrigin(Connector connector)
+        {
+
+            if(null == this.attributes) 
+            {
+                this.attributes = new DocumentPackageAttributes();
+            }
+            this.attributes.Append(ORIGIN_KEY, connector.Name);
+            return this;
         }
 
         [Obsolete("Use WithAttributes() instead.  Notice the uppercase W.")]
@@ -188,7 +205,5 @@ namespace Silanis.ESL.SDK.Builder
 
 			return package;
 		}
-        
     }
-    
 }
