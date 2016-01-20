@@ -255,8 +255,13 @@ namespace Silanis.ESL.SDK
 
         public void SignDocuments(PackageId packageId, string signerId) 
         {
+            string bulkSigningKey = "Bulk Signing on behalf of";
+
             string signerAuthenticationToken = authenticationTokenService.CreateSignerAuthenticationToken(packageId, signerId);
-            string signerSessionId = authenticationService.GetSessionIdForSignerAuthenticationToken(signerAuthenticationToken);
+
+            IDictionary<string, string> signerSessionFields = new Dictionary<string, string>();
+            signerSessionFields.Add(bulkSigningKey, signerId);
+            string signerSessionId = authenticationService.GetSessionIdForSignerAuthenticationToken(signerAuthenticationToken, signerSessionFields);
 
             SignedDocuments signedDocuments = new SignedDocuments();
             Package package = packageService.GetPackage(packageId);
