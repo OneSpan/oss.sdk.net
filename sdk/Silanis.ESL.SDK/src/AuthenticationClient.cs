@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 
 namespace Silanis.ESL.SDK
 {
@@ -31,7 +32,11 @@ namespace Silanis.ESL.SDK
         }
 
         public string GetSessionIdForSignerAuthenticationToken(string signerAuthenticationToken) {
-            return authenticationService.GetSessionIdForSignerAuthenticationToken(signerAuthenticationToken);
+            return authenticationService.GetSessionIdForSignerAuthenticationToken(signerAuthenticationToken, null);
+        }
+
+        public string GetSessionIdForSignerAuthenticationToken(string signerAuthenticationToken, IDictionary<string, string> signerSessionFields) {
+            return authenticationService.GetSessionIdForSignerAuthenticationToken(signerAuthenticationToken, signerSessionFields);
         }
 
         public string BuildRedirectToSigningForSigner(string signerAuthenticationToken, PackageId packageId) {

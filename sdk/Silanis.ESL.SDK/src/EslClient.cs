@@ -453,8 +453,12 @@ namespace Silanis.ESL.SDK
 		}
 
         public void UploadAttachment(PackageId packageId, string attachmentId, string filename, byte[] fileBytes, string signerId) {
+            string signerSessionFieldKey = "Upload Attachment on behalf of";
+
+            IDictionary<string, string> signerSessionFields = new Dictionary<string, string>();
+            signerSessionFields.Add(signerSessionFieldKey, signerId);
             string signerAuthenticationToken = authenticationTokenService.CreateSignerAuthenticationToken(packageId, signerId);
-            string signerSessionId = authenticationService.GetSessionIdForSignerAuthenticationToken(signerAuthenticationToken);
+            string signerSessionId = authenticationService.GetSessionIdForSignerAuthenticationToken(signerAuthenticationToken, signerSessionFields);
 
             attachmentRequirementService.UploadAttachment(packageId, attachmentId, filename, fileBytes, signerSessionId);
         }

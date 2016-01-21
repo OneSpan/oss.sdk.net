@@ -2,6 +2,7 @@ using System;
 using Silanis.ESL.SDK;
 using Silanis.ESL.SDK.Builder;
 using System.IO;
+using System.Collections.Generic;
 
 namespace SDK.Examples
 {
@@ -18,7 +19,8 @@ namespace SDK.Examples
 
         private AuthenticationClient AuthenticationClient;
         private Stream FileStream;
-        private string SignerEmail;
+        private string signerEmail;
+        private string signerSessionFieldKey = "SDK SignerAuthenticationTokenExample Signer";
 
         public SignerAuthenticationTokenExample( Props props ) : this(props.Get("api.key"), props.Get("api.url"), props.Get("webpage.url"), props.Get("1.email"))
         {
@@ -27,7 +29,7 @@ namespace SDK.Examples
         public SignerAuthenticationTokenExample( string apiKey, string apiUrl, string webpageUrl, string signerEmail) : base( apiKey, apiUrl )
         {
             this.AuthenticationClient = new AuthenticationClient(webpageUrl);
-            this.SignerEmail = signerEmail;
+            this.signerEmail = signerEmail;
             this.FileStream = File.OpenRead(new FileInfo(Directory.GetCurrentDirectory() + "/src/document.pdf").FullName);
         }
 
@@ -36,7 +38,7 @@ namespace SDK.Examples
             string signerId = System.Guid.NewGuid().ToString();
             DocumentPackage package = PackageBuilder.NewPackageNamed ("SignerAuthenticationTokenExample " + DateTime.Now)
                     .DescribedAs ("This is a new package")
-                    .WithSigner(SignerBuilder.NewSignerWithEmail(SignerEmail)
+                    .WithSigner(SignerBuilder.NewSignerWithEmail(signerEmail)
                                 .WithFirstName("John")
                                 .WithLastName("Smith")
                                 .WithCompany ("Acme Inc")
@@ -44,7 +46,7 @@ namespace SDK.Examples
                                 .WithCustomId(signerId))
                     .WithDocument(DocumentBuilder.NewDocumentNamed("My Document")
                                   .FromStream(FileStream, DocumentType.PDF)
-                                  .WithSignature(SignatureBuilder.SignatureFor(SignerEmail)
+                                  .WithSignature(SignatureBuilder.SignatureFor(signerEmail)
                                         .OnPage(0)
                                         .AtPosition(500, 100)))
                     .Build ();
@@ -57,9 +59,10 @@ namespace SDK.Examples
 
 
             //This session id can be set in a cookie header
-            SignerSessionId = AuthenticationClient.GetSessionIdForSignerAuthenticationToken(signerAuthenticationToken);
+            IDictionary<string, string> signerSessionFields = new Dictionary<string, string>();
+            signerSessionFields.Add(signerSessionFieldKey, signerEmail);
+            SignerSessionId = AuthenticationClient.GetSessionIdForSignerAuthenticationToken(signerAuthenticationToken, signerSessionFields);
         }
-
     }
 }
 
