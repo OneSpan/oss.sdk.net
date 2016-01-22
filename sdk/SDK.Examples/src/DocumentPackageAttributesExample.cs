@@ -15,6 +15,7 @@ namespace SDK.Examples
         private string email1;
         private Stream fileStream1;
 
+        public readonly string DYNAMICS_2015 = "dynamics2015";
         public readonly string ATTRIBUTE_KEY_1 = "First Name";
         public readonly string ATTRIBUTE_KEY_2 = "Last Name";
         public readonly string ATTRIBUTE_KEY_3 = "Signing Order";
@@ -53,7 +54,7 @@ namespace SDK.Examples
                                .AtPosition( 400, 200 )
                                .WithValue( FieldBuilder.CHECKBOX_CHECKED ) )
                                    .AtPosition( 100, 100 ) ) )
-                    .WithOrigin(Connector.DYNAMICS_2015)
+                    .WithOrigin(DYNAMICS_2015)
                     .WithAttributes(new DocumentPackageAttributesBuilder()
                                 .WithAttribute( ATTRIBUTE_KEY_1, ATTRIBUTE_1 )
                                 .WithAttribute( ATTRIBUTE_KEY_2, ATTRIBUTE_2 )

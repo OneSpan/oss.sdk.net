@@ -152,14 +152,14 @@ namespace Silanis.ESL.SDK.Builder
             return WithAttributes( attributesBuilder.Build() );
         }
 
-        public PackageBuilder WithOrigin(Connector connector)
+        public PackageBuilder WithOrigin(string origin)
         {
 
             if(null == this.attributes) 
             {
                 this.attributes = new DocumentPackageAttributes();
             }
-            this.attributes.Append(ORIGIN_KEY, connector.Name);
+            this.attributes.Append(ORIGIN_KEY, origin);
             return this;
         }
 
