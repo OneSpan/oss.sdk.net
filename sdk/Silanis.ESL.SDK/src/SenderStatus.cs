@@ -7,37 +7,42 @@ namespace Silanis.ESL.SDK
 {
     public class SenderStatus : EslEnumeration
     {
-        private static ILog log = Logger.initializeFacade();
+        private static ILogger log = LoggerFactory.get(typeof(AuthenticationMethod));
 
         public static SenderStatus INVITED = new SenderStatus("INVITED","INVITED", 0);
         public static SenderStatus ACTIVE = new SenderStatus("ACTIVE","ACTIVE", 1);
         public static SenderStatus LOCKED = new SenderStatus("LOCKED","LOCKED", 2);
         private static Dictionary<string,SenderStatus> allSenderStatus = new Dictionary<string,SenderStatus>();
 
-        static SenderStatus(){
+        static SenderStatus()
+        {
             allSenderStatus.Add(INVITED.getApiValue(), SenderStatus.INVITED);
             allSenderStatus.Add(ACTIVE.getApiValue(), SenderStatus.ACTIVE);
             allSenderStatus.Add(LOCKED.getApiValue(), SenderStatus.LOCKED);
         }
 
         
-        private SenderStatus(string apiValue, string sdkValue, int index):base(apiValue,sdkValue,index) {           
+        private SenderStatus(string apiValue, string sdkValue, int index):base(apiValue,sdkValue,index) 
+        {           
         }
 
-        internal static SenderStatus valueOf (String apiValue){
+        internal static SenderStatus valueOf (string apiValue)
+        {
 
             if (!String.IsNullOrEmpty(apiValue) && allSenderStatus.ContainsKey(apiValue))
             {
                 return allSenderStatus[apiValue];
             }
-            log.WarnFormat("Unknown API SenderStatus {0}. The upgrade is required.", apiValue);
+            log.Warn("Unknown API SenderStatus {0}. The upgrade is required.", apiValue);
             return new SenderStatus(apiValue, "UNRECOGNIZED", allSenderStatus.Values.Count);
         }
 
-        public static string[] GetNames(){
+        public static string[] GetNames()
+        {
             string[] names = new string[allSenderStatus.Count];
             int i = 0;
-            foreach(SenderStatus senderStatus in allSenderStatus.Values){
+            foreach(SenderStatus senderStatus in allSenderStatus.Values)
+            {
                 names[i] = senderStatus.GetName();
                 i++;
             }
@@ -49,11 +54,13 @@ namespace Silanis.ESL.SDK
             return parse(enumType.ToString());
         }
 
-        public static SenderStatus[] Values(){
+        public static SenderStatus[] Values()
+        {
             return (new List<SenderStatus>(allSenderStatus.Values)).ToArray();
         }
 
-        public static SenderStatus parse(string value){
+        public static SenderStatus parse(string value)
+        {
 
             if (null == value)
             {
@@ -64,7 +71,8 @@ namespace Silanis.ESL.SDK
             {
                 throw new ArgumentException("value is either an empty string or only contains white space");
             }
-            foreach(SenderStatus senderStatus in allSenderStatus.Values){
+            foreach(SenderStatus senderStatus in allSenderStatus.Values)
+            {
                 if (String.Equals(senderStatus.GetName(), value))
                 {
                     return senderStatus;
@@ -72,7 +80,6 @@ namespace Silanis.ESL.SDK
             }
             throw new ArgumentException("value is a name, but not one of the named constants defined for the SenderStatus");
         }
-
     }
 }
 

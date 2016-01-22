@@ -7,35 +7,39 @@ namespace Silanis.ESL.SDK
 {
     public class GroupMemberType : EslEnumeration
     {
-        private static ILog log = Logger.initializeFacade();
+        private static ILogger log = LoggerFactory.get(typeof(AuthenticationMethod));
 
         public static GroupMemberType REGULAR = new GroupMemberType("REGULAR", "REGULAR", 0);
         public static GroupMemberType MANAGER = new GroupMemberType("MANAGER", "MANAGER", 1);
 
         private static Dictionary<string,GroupMemberType> allGroupMemberTypes = new Dictionary<string,GroupMemberType>();
 
-        static GroupMemberType(){
+        static GroupMemberType()
+        {
             allGroupMemberTypes.Add(REGULAR.getApiValue(), GroupMemberType.REGULAR);
             allGroupMemberTypes.Add(MANAGER.getApiValue(), GroupMemberType.MANAGER);
         }
 
-        private GroupMemberType(string apiValue, string sdkValue, int index):base(apiValue,sdkValue,index) {           
+        private GroupMemberType(string apiValue, string sdkValue, int index):base(apiValue,sdkValue,index) 
+        {           
         }
 
-        internal static GroupMemberType valueOf (String apiValue){
-
+        internal static GroupMemberType valueOf (string apiValue)
+        {
             if (!String.IsNullOrEmpty(apiValue) && allGroupMemberTypes.ContainsKey(apiValue))
             {
                 return allGroupMemberTypes[apiValue];
             }
-            log.WarnFormat("Unknown API GroupMemberType {0}. The upgrade is required.", apiValue);
+            log.Warn("Unknown API GroupMemberType {0}. The upgrade is required.", apiValue);
             return new GroupMemberType(apiValue, "UNRECOGNIZED", allGroupMemberTypes.Values.Count);
         }
 
-        public static string[] GetNames(){
+        public static string[] GetNames()
+        {
             string[] names = new string[allGroupMemberTypes.Count];
             int i = 0;
-            foreach(GroupMemberType groupMemberType in allGroupMemberTypes.Values){
+            foreach(GroupMemberType groupMemberType in allGroupMemberTypes.Values)
+            {
                 names[i] = groupMemberType.GetName();
                 i++;
             }
@@ -47,12 +51,13 @@ namespace Silanis.ESL.SDK
             return parse(enumType.ToString());
         }
 
-        public static GroupMemberType[] Values(){
+        public static GroupMemberType[] Values()
+        {
             return (new List<GroupMemberType>(allGroupMemberTypes.Values)).ToArray();
         }
 
-        public static GroupMemberType parse(string value){
-
+        public static GroupMemberType parse(string value)
+        {
             if (null == value)
             {
                 throw new ArgumentNullException("value is null");
@@ -62,7 +67,8 @@ namespace Silanis.ESL.SDK
             {
                 throw new ArgumentException("value is either an empty string or only contains white space");
             }
-            foreach(GroupMemberType groupMemberType in allGroupMemberTypes.Values){
+            foreach(GroupMemberType groupMemberType in allGroupMemberTypes.Values)
+            {
                 if (String.Equals(groupMemberType.GetName(), value))
                 {
                     return groupMemberType;

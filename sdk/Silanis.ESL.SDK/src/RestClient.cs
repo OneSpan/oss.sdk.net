@@ -138,6 +138,15 @@ namespace Silanis.ESL.SDK
             return HttpMethods.GetHttp(apiToken, path);
         }
 
+        public DownloadedFile GetBytes(string path, string acceptType) {
+            support.LogRequest("GET", path);
+
+            if (proxyConfiguration != null) 
+                HttpMethods.proxyConfiguration = proxyConfiguration;
+
+            return HttpMethods.GetHttpJson(apiToken, path, acceptType);
+        }
+
         public DownloadedFile GetHttpAsOctetStream(string path) {
             support.LogRequest("GET", path);
 

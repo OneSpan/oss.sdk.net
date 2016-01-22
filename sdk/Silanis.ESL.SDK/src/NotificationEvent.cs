@@ -7,7 +7,7 @@ namespace Silanis.ESL.SDK
 {
     public class NotificationEvent : EslEnumeration
     {
-        private static ILog log = Logger.initializeFacade();
+        private static ILogger log = LoggerFactory.get(typeof(AuthenticationMethod));
 
         public static NotificationEvent PACKAGE_ACTIVATE = new NotificationEvent("PACKAGE_ACTIVATE", "PACKAGE_ACTIVATE", 0);
         public static NotificationEvent PACKAGE_COMPLETE = new NotificationEvent("PACKAGE_COMPLETE", "PACKAGE_COMPLETE", 1);
@@ -30,7 +30,8 @@ namespace Silanis.ESL.SDK
 
         private static Dictionary<string,NotificationEvent> allNotificationEvents = new Dictionary<string,NotificationEvent>();
 
-        static NotificationEvent(){
+        static NotificationEvent()
+        {
             allNotificationEvents.Add(PACKAGE_ACTIVATE.getApiValue(), PACKAGE_ACTIVATE);
             allNotificationEvents.Add(PACKAGE_COMPLETE.getApiValue(), PACKAGE_COMPLETE);
             allNotificationEvents.Add(PACKAGE_EXPIRE.getApiValue(), PACKAGE_EXPIRE);
@@ -51,23 +52,27 @@ namespace Silanis.ESL.SDK
             allNotificationEvents.Add(SIGNER_LOCKED.getApiValue(), SIGNER_LOCKED);
         }
 
-        private NotificationEvent(string apiValue, string sdkValue, int index):base(apiValue,sdkValue,index) {           
+        private NotificationEvent(string apiValue, string sdkValue, int index):base(apiValue,sdkValue,index) 
+        {           
         }
 
-        internal static NotificationEvent valueOf (String apiValue){
+        internal static NotificationEvent valueOf (string apiValue)
+        {
 
             if (!String.IsNullOrEmpty(apiValue) && allNotificationEvents.ContainsKey(apiValue))
             {
                 return allNotificationEvents[apiValue];
             }
-            log.WarnFormat("Unknown API NotificationEvent {0}. The upgrade is required.", apiValue);
+            log.Warn("Unknown API NotificationEvent {0}. The upgrade is required.", apiValue);
             return new NotificationEvent(apiValue, "UNRECOGNIZED", allNotificationEvents.Values.Count);
         }
 
-        public static string[] GetNames(){
+        public static string[] GetNames()
+        {
             string[] names = new string[allNotificationEvents.Count];
             int i = 0;
-            foreach(NotificationEvent notificationEvent in allNotificationEvents.Values){
+            foreach(NotificationEvent notificationEvent in allNotificationEvents.Values)
+            {
                 names[i] = notificationEvent.GetName();
                 i++;
             }
@@ -83,7 +88,8 @@ namespace Silanis.ESL.SDK
             return (new List<NotificationEvent>(allNotificationEvents.Values)).ToArray();
         }
         
-        public static NotificationEvent parse(string value){
+        public static NotificationEvent parse(string value)
+        {
 
             if (null == value)
             {

@@ -38,6 +38,10 @@ namespace Silanis.ESL.SDK
 			{
 				return SigningStatus.SIGNING_COMPLETE;
 			} 
+            else if ("DELETED".Equals (status))
+            {
+                return SigningStatus.DELETED;
+            } 
 			else
 			{
 				return SigningStatus.INACTIVE;

@@ -9,24 +9,29 @@ namespace Silanis.ESL.SDK
         private readonly string apiValue;
         private readonly int index;
 
-        protected EslEnumeration(string apiValue, int index):this(apiValue, apiValue, index) {
+        protected EslEnumeration(string apiValue, int index):this(apiValue, apiValue, index) 
+        {
 		}
 
-        protected EslEnumeration(string apiValue, string sdkValue, int index) {
+        protected EslEnumeration(string apiValue, string sdkValue, int index) 
+        {
             this.apiValue = apiValue;
             this.sdkValue = sdkValue;           
             this.index = index;			
         }
 		
-		internal string getSdkValue() {
+		internal string getSdkValue() 
+        {
 			return this.sdkValue;
 		}
 
-        internal string getApiValue(){
+        internal string getApiValue()
+        {
 			return this.apiValue;
         }
 
-        public string GetName(){
+        public string GetName()
+        {
             return getSdkValue();
         }
 
@@ -40,7 +45,8 @@ namespace Silanis.ESL.SDK
             return (T)Enum.Parse(typeof(T), value);
         }
 
-        internal int Ordinal() {
+        internal int Ordinal() 
+        {
             return index;
         }
 

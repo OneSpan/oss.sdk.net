@@ -104,7 +104,7 @@ namespace SDK.Examples
             package2Id = eslClient.CreateAndSendPackage(superDuperPackage2);
 
 			// Date and time range to get completion report.
-			DateTime from = DateTime.Now.AddMinutes(-5);
+            DateTime from = DateTime.Now.AddMinutes(-5);
             DateTime to = DateTime.Now.AddMinutes(5);
 
             // Download the completion report for a sender

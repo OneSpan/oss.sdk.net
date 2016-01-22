@@ -7,37 +7,42 @@ namespace Silanis.ESL.SDK
 {
     public class RequirementStatus : EslEnumeration
 	{
-        private static ILog log = Logger.initializeFacade();
+        private static ILogger log = LoggerFactory.get(typeof(AuthenticationMethod));
 
         public static RequirementStatus INCOMPLETE = new RequirementStatus("INCOMPLETE", "INCOMPLETE", 0);
         public static RequirementStatus REJECTED = new RequirementStatus("REJECTED", "REJECTED", 1);
         public static RequirementStatus COMPLETE = new RequirementStatus("COMPLETE", "COMPLETE", 2);
         private static Dictionary<string,RequirementStatus> allRequirementStatus = new Dictionary<string,RequirementStatus>();
 
-        static RequirementStatus(){
+        static RequirementStatus()
+        {
             allRequirementStatus.Add(INCOMPLETE.getApiValue(), INCOMPLETE);
             allRequirementStatus.Add(REJECTED.getApiValue(), REJECTED);
             allRequirementStatus.Add(COMPLETE.getApiValue(), COMPLETE);
         }
 
         
-        private RequirementStatus(string apiValue, string sdkValue, int index):base(apiValue,sdkValue,index) {           
+        private RequirementStatus(string apiValue, string sdkValue, int index):base(apiValue,sdkValue,index) 
+        {           
         }
 
-        internal static RequirementStatus valueOf (String apiValue){
+        internal static RequirementStatus valueOf (string apiValue)
+        {
 
             if (!String.IsNullOrEmpty(apiValue) && allRequirementStatus.ContainsKey(apiValue))
             {
                 return allRequirementStatus[apiValue];
             }
-            log.WarnFormat("Unknown API RequirementStatus {0}. The upgrade is required.", apiValue);
+            log.Warn("Unknown API RequirementStatus {0}. The upgrade is required.", apiValue);
             return new RequirementStatus(apiValue, "UNRECOGNIZED", allRequirementStatus.Values.Count);
         }
 
-        public static string[] GetNames(){
+        public static string[] GetNames()
+        {
             string[] names = new string[allRequirementStatus.Count];
             int i = 0;
-            foreach(RequirementStatus requirementStatus in allRequirementStatus.Values){
+            foreach(RequirementStatus requirementStatus in allRequirementStatus.Values)
+            {
                 names[i] = requirementStatus.GetName();
                 i++;
             }
@@ -49,11 +54,13 @@ namespace Silanis.ESL.SDK
             return parse(enumType.ToString());
         }
 
-        public static RequirementStatus[] Values(){
+        public static RequirementStatus[] Values()
+        {
             return (new List<RequirementStatus>(allRequirementStatus.Values)).ToArray();
         }
 
-        public static RequirementStatus parse(string value){
+        public static RequirementStatus parse(string value)
+        {
 
             if (null == value)
             {
@@ -64,7 +71,8 @@ namespace Silanis.ESL.SDK
             {
                 throw new ArgumentException("value is either an empty string or only contains white space");
             }
-            foreach(RequirementStatus requirementStatus in allRequirementStatus.Values){
+            foreach(RequirementStatus requirementStatus in allRequirementStatus.Values)
+            {
                 if (String.Equals(requirementStatus.GetName(), value))
                 {
                     return requirementStatus;

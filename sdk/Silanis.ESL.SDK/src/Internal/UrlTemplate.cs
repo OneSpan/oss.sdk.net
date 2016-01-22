@@ -149,6 +149,11 @@ namespace Silanis.ESL.SDK.Internal
         public static readonly string QRCODE_PATH = "/packages/{packageId}/documents/{documentId}/fields";
         public static readonly string QRCODE_ID_PATH = "/packages/{packageId}/documents/{documentId}/fields/{fieldId}";
 
+        // Signature Image Service
+        public static readonly string SIGNATURE_IMAGE_FOR_SENDER_PATH = "/account/senders/{senderId}/signatureImage";
+        public static readonly string SIGNATURE_IMAGE_FOR_PACKAGE_ROLE_PATH = "/packages/{packageId}/roles/{roleId}/signatureImage";
+
+
 		public UrlTemplate (string baseUrl)
 		{
 			this.baseUrl = baseUrl;

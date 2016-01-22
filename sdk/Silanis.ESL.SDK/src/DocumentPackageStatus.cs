@@ -7,7 +7,7 @@ namespace Silanis.ESL.SDK
 {
 	public class DocumentPackageStatus : EslEnumeration
 	{
-        private static ILog log = Logger.initializeFacade();
+        private static ILogger log = LoggerFactory.get(typeof(AuthenticationMethod));
 
         public static DocumentPackageStatus DRAFT = new DocumentPackageStatus("DRAFT", "DRAFT", 0);
         public static DocumentPackageStatus SENT = new DocumentPackageStatus("SENT", "SENT", 1);
@@ -18,7 +18,8 @@ namespace Silanis.ESL.SDK
         public static DocumentPackageStatus EXPIRED = new DocumentPackageStatus("EXPIRED", "EXPIRED", 6);
         private static Dictionary<string,DocumentPackageStatus> allDocumentPackageStatus = new Dictionary<string,DocumentPackageStatus>();
 
-        static DocumentPackageStatus(){
+        static DocumentPackageStatus()
+        {
             allDocumentPackageStatus.Add(DRAFT.getApiValue(), DocumentPackageStatus.DRAFT);
             allDocumentPackageStatus.Add(SENT.getApiValue(), DocumentPackageStatus.SENT);
             allDocumentPackageStatus.Add(COMPLETED.getApiValue(), DocumentPackageStatus.COMPLETED);
@@ -28,23 +29,27 @@ namespace Silanis.ESL.SDK
             allDocumentPackageStatus.Add(EXPIRED.getApiValue(), DocumentPackageStatus.EXPIRED);
         }
 
-        private DocumentPackageStatus(string apiValue, string sdkValue, int index):base(apiValue, sdkValue, index) {           
+        private DocumentPackageStatus(string apiValue, string sdkValue, int index):base(apiValue, sdkValue, index) 
+        {           
         }
 
-        internal static DocumentPackageStatus valueOf (String apiValue){
+        internal static DocumentPackageStatus valueOf (string apiValue)
+        {
 
             if (!String.IsNullOrEmpty(apiValue) && allDocumentPackageStatus.ContainsKey(apiValue))
             {
                 return allDocumentPackageStatus[apiValue];
             }
-            log.WarnFormat("Unknown API DocumentPackageStatus {0}. The upgrade is required.", apiValue);
+            log.Warn("Unknown API DocumentPackageStatus {0}. The upgrade is required.", apiValue);
             return new DocumentPackageStatus(apiValue, "UNRECOGNIZED", allDocumentPackageStatus.Values.Count);
         }
 
-        public static string[] GetNames(){
+        public static string[] GetNames()
+        {
             string[] names = new string[allDocumentPackageStatus.Count];
             int i = 0;
-            foreach(DocumentPackageStatus documentPackageStatus in allDocumentPackageStatus.Values){
+            foreach(DocumentPackageStatus documentPackageStatus in allDocumentPackageStatus.Values)
+            {
                 names[i] = documentPackageStatus.GetName();
                 i++;
             }
@@ -56,11 +61,13 @@ namespace Silanis.ESL.SDK
             return parse(enumType.ToString());
         }
 
-        public static DocumentPackageStatus[] Values(){
+        public static DocumentPackageStatus[] Values()
+        {
             return (new List<DocumentPackageStatus>(allDocumentPackageStatus.Values)).ToArray();
         }
 
-        public static DocumentPackageStatus parse(string value){
+        public static DocumentPackageStatus parse(string value)
+        {
 
             if (null == value)
             {
@@ -71,7 +78,8 @@ namespace Silanis.ESL.SDK
             {
                 throw new ArgumentException("value is either an empty string or only contains white space");
             }
-            foreach(DocumentPackageStatus documentPackageStatus in allDocumentPackageStatus.Values){
+            foreach(DocumentPackageStatus documentPackageStatus in allDocumentPackageStatus.Values)
+            {
                 if (String.Equals(documentPackageStatus.GetName(), value))
                 {
                     return documentPackageStatus;

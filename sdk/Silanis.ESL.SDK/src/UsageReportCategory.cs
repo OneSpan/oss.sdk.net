@@ -7,7 +7,7 @@ namespace Silanis.ESL.SDK
 {
     public class UsageReportCategory : EslEnumeration
     {
-        private static ILog log = Logger.initializeFacade();
+        private static ILogger log = LoggerFactory.get(typeof(AuthenticationMethod));
 
         public static UsageReportCategory ACTIVE = new UsageReportCategory("ACTIVE", "ACTIVE", 0);
         public static UsageReportCategory DRAFT = new UsageReportCategory("DRAFT", "DRAFT", 1);
@@ -21,7 +21,8 @@ namespace Silanis.ESL.SDK
 
         private static Dictionary<string,UsageReportCategory> allUsageReportCategorys = new Dictionary<string,UsageReportCategory>();
 
-        static UsageReportCategory(){
+        static UsageReportCategory()
+        {
             allUsageReportCategorys.Add(ACTIVE.getApiValue(), UsageReportCategory.ACTIVE);
             allUsageReportCategorys.Add(DRAFT.getApiValue(), UsageReportCategory.DRAFT);
             allUsageReportCategorys.Add(SENT.getApiValue(), UsageReportCategory.SENT);
@@ -34,23 +35,27 @@ namespace Silanis.ESL.SDK
         }
 
         
-        private UsageReportCategory(string apiValue, string sdkValue, int index):base(apiValue,sdkValue,index) {           
+        private UsageReportCategory(string apiValue, string sdkValue, int index):base(apiValue,sdkValue,index) 
+        {           
         }
 
-        internal static UsageReportCategory valueOf (String apiValue){
+        internal static UsageReportCategory valueOf (string apiValue)
+        {
 
             if (!String.IsNullOrEmpty(apiValue) && allUsageReportCategorys.ContainsKey(apiValue))
             {
                 return allUsageReportCategorys[apiValue];
             }
-            log.WarnFormat("Unknown API UsageReportCategory {0}. The upgrade is required.", apiValue);
+            log.Warn("Unknown API UsageReportCategory {0}. The upgrade is required.", apiValue);
             return new UsageReportCategory(apiValue, "UNRECOGNIZED", allUsageReportCategorys.Values.Count);
         }
 
-        public static string[] GetNames(){
+        public static string[] GetNames()
+        {
             string[] names = new string[allUsageReportCategorys.Count];
             int i = 0;
-            foreach(UsageReportCategory usageReportCategory in allUsageReportCategorys.Values){
+            foreach(UsageReportCategory usageReportCategory in allUsageReportCategorys.Values)
+            {
                 names[i] = usageReportCategory.GetName();
                 i++;
             }
@@ -62,11 +67,13 @@ namespace Silanis.ESL.SDK
             return parse(enumType.ToString());
         }
 
-        public static UsageReportCategory[] Values(){
+        public static UsageReportCategory[] Values()
+        {
             return (new List<UsageReportCategory>(allUsageReportCategorys.Values)).ToArray();
         }
 
-        public static UsageReportCategory parse(string value){
+        public static UsageReportCategory parse(string value)
+        {
 
             if (null == value)
             {
@@ -77,7 +84,8 @@ namespace Silanis.ESL.SDK
             {
                 throw new ArgumentException("value is either an empty string or only contains white space");
             }
-            foreach(UsageReportCategory usageReportCategory in allUsageReportCategorys.Values){
+            foreach(UsageReportCategory usageReportCategory in allUsageReportCategorys.Values)
+            {
                 if (String.Equals(usageReportCategory.GetName(), value))
                 {
                     return usageReportCategory;
@@ -85,7 +93,6 @@ namespace Silanis.ESL.SDK
             }
             throw new ArgumentException("value is a name, but not one of the named constants defined for the UsageReportCategory");
         }
-
     }
 }
 

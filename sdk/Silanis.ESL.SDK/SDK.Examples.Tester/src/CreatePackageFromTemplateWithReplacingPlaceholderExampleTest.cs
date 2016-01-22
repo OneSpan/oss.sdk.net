@@ -17,8 +17,8 @@ namespace SDK.Examples
             Assert.AreEqual(3, example.RetrievedPackage.Signers.Count);
             Assert.AreEqual(0, example.RetrievedPackage.Placeholders.Count);
 
-            Signer signer1 = example.RetrievedPackage.GetSigner(example.email1);
-            Signer signer2 = example.RetrievedPackage.GetSigner(example.email2);
+            Signer signer1 = example.RetrievedPackage.Signers[1];
+            Signer signer2 = example.RetrievedPackage.Signers[2];
 
             Assert.AreEqual(example.TEMPLATE_SIGNER_FIRST, signer1.FirstName);
             Assert.AreEqual(example.TEMPLATE_SIGNER_LAST, signer1.LastName);
@@ -30,9 +30,24 @@ namespace SDK.Examples
             List<Signature> signatures = example.RetrievedPackage.GetDocument(example.DOCUMENT_NAME).Signatures;
 
             Assert.AreEqual(2, signatures.Count);
-            Assert.AreEqual(example.email1, signatures[0].SignerEmail);
-            Assert.AreEqual(example.email2, signatures[1].SignerEmail);
+
+            Signature sig1 = getSignatureForEmail(signatures, example.email1);
+            Assert.IsNotNull(sig1);
+            Signature sig2 = getSignatureForEmail(signatures, example.email2);
+            Assert.IsNotNull(sig2);
         }
+
+        private Signature getSignatureForEmail(List<Signature> signatures, string email) 
+        {
+            foreach (Signature signature in signatures) 
+            {
+                if (String.Equals(signature.SignerEmail, email)) 
+                {
+                    return signature;
+                }
+            }
+            return null;
+        }
+
     }
 }
-

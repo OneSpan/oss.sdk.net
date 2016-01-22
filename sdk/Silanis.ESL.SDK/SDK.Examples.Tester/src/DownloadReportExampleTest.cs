@@ -22,10 +22,12 @@ namespace SDK.Examples
 
                 // Assert correct download of completion report for a sender
                 CompletionReport completionReportForSender = example.sdkCompletionReportForSenderDraft;
+                SenderCompletionReport senderCompletionReportForSenderId1 = getSenderCompletionReportForSenderId(example.sdkCompletionReportForSenderDraft.Senders, example.senderUID);
+
                 Assert.AreEqual(completionReportForSender.Senders.Count, 1, "There should be only 1 sender.");
-                Assert.GreaterOrEqual(completionReportForSender.Senders[0].Packages.Count, 1, "Number of package completion reports should be greater than 1.");
-                Assert.GreaterOrEqual(completionReportForSender.Senders[0].Packages[0].Documents.Count, 1, "Number of document completion reports should be greater than 1.");
-                Assert.GreaterOrEqual(completionReportForSender.Senders[0].Packages[0].Signers.Count, 1, "Number of signer completion reports should be greater than 1.");
+                Assert.GreaterOrEqual(senderCompletionReportForSenderId1.Packages.Count, 1, "Number of package completion reports should be greater than 1.");
+                Assert.GreaterOrEqual(senderCompletionReportForSenderId1.Packages[0].Documents.Count, 1, "Number of document completion reports should be greater than 1.");
+                Assert.GreaterOrEqual(senderCompletionReportForSenderId1.Packages[0].Signers.Count, 1, "Number of signer completion reports should be greater than 1.");
 
                 AssertCreatedPackageIncludedInCompletionReport(completionReportForSender, example.senderUID, example.PackageId, "DRAFT");
 
@@ -35,19 +37,20 @@ namespace SDK.Examples
                 CSVReader reader = new CSVReader(new StreamReader(new MemoryStream(Encoding.UTF8.GetBytes(example.csvCompletionReportForSenderDraft))));
                 IList<string[]> rows = reader.readAll();
 
-                if (completionReportForSender.Senders[0].Packages.Count > 0)
+                if (senderCompletionReportForSenderId1.Packages.Count > 0)
                 {
-                    Assert.GreaterOrEqual(rows.Count, completionReportForSender.Senders[0].Packages.Count - 1);
-                    Assert.LessOrEqual(rows.Count, completionReportForSender.Senders[0].Packages.Count + 3);
+                    Assert.GreaterOrEqual(rows.Count, senderCompletionReportForSenderId1.Packages.Count - 1);
+                    Assert.LessOrEqual(rows.Count, senderCompletionReportForSenderId1.Packages.Count + 3);
                 }
 
                 AssertCreatedPackageIncludedInCSV(rows, example.PackageId, "DRAFT");
-
+                SenderCompletionReport senderCompletionReportForSenderId3 = getSenderCompletionReportForSenderId(example.sdkCompletionReportForSenderSent.Senders, example.senderUID);
                 completionReportForSender = example.sdkCompletionReportForSenderSent;
+
                 Assert.AreEqual(completionReportForSender.Senders.Count, 1, "There should be only 1 sender.");
-                Assert.GreaterOrEqual(completionReportForSender.Senders[0].Packages.Count, 1, "Number of package completion reports should be greater than 1.");
-                Assert.GreaterOrEqual(completionReportForSender.Senders[0].Packages[0].Documents.Count, 1, "Number of document completion reports should be greater than 1.");
-                Assert.GreaterOrEqual(completionReportForSender.Senders[0].Packages[0].Signers.Count, 1, "Number of signer completion reports should be greater than 1.");
+                Assert.GreaterOrEqual(senderCompletionReportForSenderId3.Packages.Count, 1, "Number of package completion reports should be greater than 1.");
+                Assert.GreaterOrEqual(senderCompletionReportForSenderId3.Packages[0].Documents.Count, 1, "Number of document completion reports should be greater than 1.");
+                Assert.GreaterOrEqual(senderCompletionReportForSenderId3.Packages[0].Signers.Count, 1, "Number of signer completion reports should be greater than 1.");
 
                 AssertCreatedPackageIncludedInCompletionReport(completionReportForSender, example.senderUID, example.package2Id, "SENT");
 
@@ -57,18 +60,20 @@ namespace SDK.Examples
                 reader = new CSVReader(new StreamReader(new MemoryStream(Encoding.UTF8.GetBytes(example.csvCompletionReportForSenderSent))));
                 rows = reader.readAll();
 
-                if (completionReportForSender.Senders[0].Packages.Count > 0)
+                if (senderCompletionReportForSenderId3.Packages.Count > 0)
                 {
-                    Assert.GreaterOrEqual(rows.Count, completionReportForSender.Senders[0].Packages.Count - 1);
-                    Assert.LessOrEqual(rows.Count, completionReportForSender.Senders[0].Packages.Count + 3);
+                    Assert.GreaterOrEqual(rows.Count, senderCompletionReportForSenderId3.Packages.Count - 1);
+                    Assert.LessOrEqual(rows.Count, senderCompletionReportForSenderId3.Packages.Count + 3);
                 }
 
                 AssertCreatedPackageIncludedInCSV(rows, example.package2Id, "SENT");
 
                 // Assert correct download of completion report for all senders
                 CompletionReport completionReport = example.sdkCompletionReportDraft;
+                SenderCompletionReport senderCompletionReportForSenderId2 = getSenderCompletionReportForSenderId(completionReport.Senders, example.senderUID);
+
                 Assert.GreaterOrEqual(completionReport.Senders.Count, 1, "Number of sender should be greater than 1.");
-                Assert.GreaterOrEqual(completionReport.Senders[0].Packages.Count, 0, "Number of package completion reports should be greater than 0.");
+                Assert.GreaterOrEqual(senderCompletionReportForSenderId2.Packages.Count, 0, "Number of package completion reports should be greater than 0.");
 
                 AssertCreatedPackageIncludedInCompletionReport(completionReport, example.senderUID, example.PackageId, "DRAFT");
 
@@ -78,7 +83,7 @@ namespace SDK.Examples
                 reader = new CSVReader(new StreamReader(new MemoryStream(Encoding.UTF8.GetBytes(example.csvCompletionReportDraft))));
                 rows = reader.readAll();
 
-                if (completionReport.Senders[0].Packages.Count > 0)
+                if (senderCompletionReportForSenderId2.Packages.Count > 0)
                 {
                     Assert.GreaterOrEqual(rows.Count, GetCompletionReportCount(completionReport) - 1);
                     Assert.LessOrEqual(rows.Count, GetCompletionReportCount(completionReport) + 3);
@@ -88,7 +93,7 @@ namespace SDK.Examples
 
                 completionReport = example.sdkCompletionReportSent;
                 Assert.GreaterOrEqual(completionReport.Senders.Count, 1, "Number of sender should be greater than 1.");
-                Assert.GreaterOrEqual(completionReport.Senders[0].Packages.Count, 0, "Number of package completion reports should be greater than 0.");
+                Assert.GreaterOrEqual(senderCompletionReportForSenderId2.Packages.Count, 0, "Number of package completion reports should be greater than 0.");
 
                 AssertCreatedPackageIncludedInCompletionReport(completionReport, example.senderUID, example.package2Id, "SENT");
 
@@ -98,7 +103,7 @@ namespace SDK.Examples
                 reader = new CSVReader(new StreamReader(new MemoryStream(Encoding.UTF8.GetBytes(example.csvCompletionReportSent))));
                 rows = reader.readAll();
 
-                if (completionReport.Senders[0].Packages.Count > 0)
+                if (senderCompletionReportForSenderId2.Packages.Count > 0)
                 {
                     Assert.GreaterOrEqual(rows.Count, GetCompletionReportCount(completionReport) - 1);
                     Assert.LessOrEqual(rows.Count, GetCompletionReportCount(completionReport) + 3);
@@ -108,10 +113,12 @@ namespace SDK.Examples
 
                 // Assert correct download of usage report
                 UsageReport usageReport = example.sdkUsageReport;
+                SenderUsageReport senderUsageReportForSenderId = getSenderUsageReportForSenderId(usageReport.SenderUsageReports, example.senderUID);
+
                 Assert.Greater(usageReport.SenderUsageReports.Count, 0, "There should be only 1 sender.");
-                Assert.Greater(usageReport.SenderUsageReports[0].CountByUsageReportCategory.Count, 0, "Number of dictionary entries should be greater than 0.");
-                Assert.IsTrue(usageReport.SenderUsageReports[0].CountByUsageReportCategory.ContainsKey(UsageReportCategory.DRAFT), "There should be at a draft key in packages map.");
-                Assert.Greater(usageReport.SenderUsageReports[0].CountByUsageReportCategory[UsageReportCategory.DRAFT], 0, "Number of drafts should be greater than 0.");
+                Assert.GreaterOrEqual(senderUsageReportForSenderId.CountByUsageReportCategory.Count, 1, "Number of map entries should be greater or equal to 1.");
+                Assert.IsTrue(senderUsageReportForSenderId.CountByUsageReportCategory.ContainsKey(UsageReportCategory.DRAFT), "There should be at a draft key in packages map.");
+                Assert.GreaterOrEqual(senderUsageReportForSenderId.CountByUsageReportCategory[UsageReportCategory.DRAFT], 1, "Number of drafts should be greater or equal to 1.");
 
                 Assert.IsNotNull(example.csvUsageReport, "Usage report in csv cannot be null.");
                 Assert.IsNotEmpty(example.csvUsageReport, "Usage report in csv cannot be empty.");
@@ -172,6 +179,30 @@ namespace SDK.Examples
                 }
             }
 		}
+
+        private SenderCompletionReport getSenderCompletionReportForSenderId(IList<SenderCompletionReport> senderCompletionReports, String senderId) 
+        {
+            foreach (SenderCompletionReport senderCompletionReport in senderCompletionReports) 
+            {
+                if (String.Equals(senderId, senderCompletionReport.Sender.Id)) 
+                {
+                    return senderCompletionReport;
+                }
+            }
+            throw new AssertionException("Could not find SenderCompletionReport for SenderId " + senderId);
+        }
+
+        private SenderUsageReport getSenderUsageReportForSenderId(IList<SenderUsageReport> senderUsageReports, String senderId) 
+        {
+            foreach (SenderUsageReport senderUsageReport in senderUsageReports) 
+            {
+                if (String.Equals(senderId, senderUsageReport.Sender.Id)) 
+                {
+                    return senderUsageReport;
+                }
+            }
+            throw new AssertionException("Could not find SenderUsageReport for SenderId " + senderId);
+        }
 
         private int GetCompletionReportCount(CompletionReport completionReport) {
             int count = 0;
