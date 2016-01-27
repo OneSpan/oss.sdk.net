@@ -257,11 +257,11 @@ namespace Silanis.ESL.SDK
         {
             string bulkSigningKey = "Bulk Signing on behalf of";
 
-            string signerAuthenticationToken = authenticationTokenService.CreateSignerAuthenticationToken(packageId, signerId);
-
             IDictionary<string, string> signerSessionFields = new Dictionary<string, string>();
             signerSessionFields.Add(bulkSigningKey, signerId);
-            string signerSessionId = authenticationService.GetSessionIdForSignerAuthenticationToken(signerAuthenticationToken, signerSessionFields);
+            string signerAuthenticationToken = authenticationTokenService.CreateSignerAuthenticationToken(packageId, signerId, signerSessionFields);
+
+            string signerSessionId = authenticationService.GetSessionIdForSignerAuthenticationToken(signerAuthenticationToken);
 
             SignedDocuments signedDocuments = new SignedDocuments();
             Package package = packageService.GetPackage(packageId);
@@ -457,8 +457,8 @@ namespace Silanis.ESL.SDK
 
             IDictionary<string, string> signerSessionFields = new Dictionary<string, string>();
             signerSessionFields.Add(signerSessionFieldKey, signerId);
-            string signerAuthenticationToken = authenticationTokenService.CreateSignerAuthenticationToken(packageId, signerId);
-            string signerSessionId = authenticationService.GetSessionIdForSignerAuthenticationToken(signerAuthenticationToken, signerSessionFields);
+            string signerAuthenticationToken = authenticationTokenService.CreateSignerAuthenticationToken(packageId, signerId, signerSessionFields);
+            string signerSessionId = authenticationService.GetSessionIdForSignerAuthenticationToken(signerAuthenticationToken);
 
             attachmentRequirementService.UploadAttachment(packageId, attachmentId, filename, fileBytes, signerSessionId);
         }

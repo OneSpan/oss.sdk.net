@@ -32,11 +32,7 @@ namespace Silanis.ESL.SDK
         }
 
         public string GetSessionIdForSignerAuthenticationToken(string signerAuthenticationToken) {
-            return authenticationService.GetSessionIdForSignerAuthenticationToken(signerAuthenticationToken, null);
-        }
-
-        public string GetSessionIdForSignerAuthenticationToken(string signerAuthenticationToken, IDictionary<string, string> signerSessionFields) {
-            return authenticationService.GetSessionIdForSignerAuthenticationToken(signerAuthenticationToken, signerSessionFields);
+            return authenticationService.GetSessionIdForSignerAuthenticationToken(signerAuthenticationToken);
         }
 
         public string BuildRedirectToSigningForSigner(string signerAuthenticationToken, PackageId packageId) {

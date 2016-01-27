@@ -27,7 +27,14 @@ namespace SDK.Examples
 
         public DocumentPackage RetrievedPackage
         {
-            get { return retrievedPackage; }
+            get 
+            {
+                if (null == retrievedPackage) 
+                {
+                    retrievedPackage = eslClient.GetPackage(packageId);
+                }
+                return retrievedPackage; 
+            }
         }
 
         public SDKSample( string apiKey, string apiUrl )

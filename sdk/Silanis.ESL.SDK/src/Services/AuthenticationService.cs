@@ -111,16 +111,9 @@ namespace Silanis.ESL.SDK
 
         public string GetSessionIdForSignerAuthenticationToken(string signerAuthenticationToken)
         {
-            return GetSessionIdForSignerAuthenticationToken(signerAuthenticationToken, null);
-        }
-
-        public string GetSessionIdForSignerAuthenticationToken(string signerAuthenticationToken, IDictionary<string, string> signerSessionFields)
-        {
             string path = authenticationTemplate.UrlFor(UrlTemplate.AUTHENTICATION_PATH_FOR_SIGNER_AUTHENTICATION_TOKEN)
                 .Replace("{signerAuthenticationToken}", signerAuthenticationToken)
                     .Build();
-
-            path += GetSignerSessionFieldsString(signerSessionFields);
 
             try {
                 string stringResponse = client.GetUnauthenticated(path);
@@ -133,27 +126,6 @@ namespace Silanis.ESL.SDK
             catch (Exception e) {
                 throw new EslException("Could not authenticate using a signer authentication token."+ " Exception: " + e.Message, e);
             }
-        }
-
-        private string GetSignerSessionFieldsString(IDictionary<string, string> signerSessionFields) 
-        {
-            if(null == signerSessionFields)
-            {
-                return "";
-            }
-
-            StringBuilder signerSessionFieldsString = new StringBuilder();
-            foreach (KeyValuePair<string, string> pair in signerSessionFields)  
-            {
-                signerSessionFieldsString.Append("&").Append(HttpUtility.UrlEncode(pair.Key)).Append("=").Append(HttpUtility.UrlEncode(pair.Value));
-            }
-
-            if(signerSessionFieldsString.Length > 200) 
-            {
-                throw new EslException("The maximum of 200 characters has been exceeded for the key-value pairs.", null);
-            }
-
-            return signerSessionFieldsString.ToString();
         }
 
         public string BuildRedirectToSigningForSigner(string signerAuthenticationToken, PackageId packageId)
