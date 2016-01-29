@@ -10,7 +10,7 @@ namespace SDK.Examples
         [Test()]
         public void VerifyResult()
         {
-            AuthenticationMethodsExample example = new AuthenticationMethodsExample(Props.GetInstance());
+            AuthenticationMethodsExample example = new AuthenticationMethodsExample();
             example.Run();
 
             DocumentPackage documentPackage = example.RetrievedPackage;

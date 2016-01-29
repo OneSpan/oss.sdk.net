@@ -10,7 +10,7 @@ namespace SDK.Examples
         [Test()]
         public void VerifyResult()
         {
-            UpdateSignerExample example = new UpdateSignerExample(Props.GetInstance());
+            UpdateSignerExample example = new UpdateSignerExample();
             example.Run();
 
             Assert.IsNotNull(example.RetrievedPackage.GetSigner(example.email1));

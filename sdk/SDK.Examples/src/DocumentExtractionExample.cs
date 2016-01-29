@@ -9,28 +9,16 @@ namespace SDK.Examples
     {
         public static void Main (string[] args)
         {
-            new DocumentExtractionExample(Props.GetInstance()).Run();
+            new DocumentExtractionExample().Run();
         }
 
-        private string email1;
-        private string email2;
-        private string email3;
-        private Stream fileStream1;
         public readonly string DOCUMENT_NAME = "My Document";
-
-        public DocumentExtractionExample( Props props ) : this(props.Get("api.key"), props.Get("api.url"), props.Get("1.email"), props.Get("2.email"), props.Get("3.email")) {
-        }
-
-        public DocumentExtractionExample( string apiKey, string apiUrl, string email1, string email2, string email3 ) : base( apiKey, apiUrl ) {
-            this.email1 = email1;
-            this.email2 = email2;
-            this.email3 = email3;
-            this.fileStream1 = File.OpenRead(new FileInfo(Directory.GetCurrentDirectory() + "/src/extract_document.pdf").FullName);
-        }
 
         override public void Execute()
         {
-            DocumentPackage package = PackageBuilder.NewPackageNamed("C# DocumentExtractionExample " + DateTime.Now)
+            this.fileStream1 = File.OpenRead(new FileInfo(Directory.GetCurrentDirectory() + "/src/extract_document.pdf").FullName);
+
+            DocumentPackage package = PackageBuilder.NewPackageNamed(PackageName)
                 .DescribedAs("This is a new package")
                     .WithSigner(SignerBuilder.NewSignerWithEmail(email1)
                                 .WithFirstName("John1")

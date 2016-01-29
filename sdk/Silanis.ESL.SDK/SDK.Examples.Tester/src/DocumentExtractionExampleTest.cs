@@ -15,7 +15,7 @@ namespace SDK.Examples
         [Test()]
         public void VerifyResult()
         {
-            DocumentExtractionExample example = new DocumentExtractionExample(Props.GetInstance());
+            DocumentExtractionExample example = new DocumentExtractionExample();
             example.Run();
 
             DocumentPackage documentPackage = example.RetrievedPackage;

@@ -9,37 +9,17 @@ namespace SDK.Examples
     {
         public static void Main(string[] args)
         {
-            new AuthenticationMethodsExample(Props.GetInstance()).Run();
+            new AuthenticationMethodsExample().Run();
         }
-
-        public string email1;
-        public string email2;
-        public string email3;
-        public string sms3;
-        private Stream fileStream1;
 
         public static string QUESTION1 = "What's 1+1?";
         public static string ANSWER1 = "2";
         public static string QUESTION2 = "What color's the sky?";
         public static string ANSWER2 = "blue";
 
-        public AuthenticationMethodsExample(Props props) 
-            : this(props.Get("api.key"), props.Get("api.url"), props.Get("1.email"), props.Get("2.email"), props.Get("3.email"), props.Get("3.sms"))
-        {
-        }
-
-        public AuthenticationMethodsExample(string apiKey, string apiUrl, string email1, string email2, string email3, string sms3) : base(apiKey, apiUrl)
-        {
-            this.email1 = email1;
-            this.email2 = email2;
-            this.email3 = email3;
-            this.sms3 = sms3;
-            this.fileStream1 = File.OpenRead(new FileInfo(Directory.GetCurrentDirectory() + "/src/document.pdf").FullName);
-        }
-
         override public void Execute()
         {
-            DocumentPackage package = PackageBuilder.NewPackageNamed("C# AuthenticationMethodsExample " + DateTime.Now)
+            DocumentPackage package = PackageBuilder.NewPackageNamed(PackageName)
                 .WithSigner(SignerBuilder.NewSignerWithEmail(email1)
                     .WithFirstName("John1")
                     .WithLastName("Smith1"))

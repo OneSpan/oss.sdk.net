@@ -10,7 +10,7 @@ namespace SDK.Examples
         [Test()]
         public void VerifyResult()
         {
-            GetSigningUrlExample example = new GetSigningUrlExample(Props.GetInstance());
+            GetSigningUrlExample example = new GetSigningUrlExample();
             example.Run();
 
             Assert.IsNotNull(example.signingUrlForSigner1);

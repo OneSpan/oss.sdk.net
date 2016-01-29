@@ -10,31 +10,19 @@ namespace SDK.Examples
     {
         public static void Main(string[] args)
         {
-            new QRCodeExample(Props.GetInstance()).Run();
+            new QRCodeExample().Run();
         }
 
-        private Stream fileStream1;
         public readonly string DOCUMENT_NAME = "First Document";
         public readonly string DOCUMENT_ID = "documentId";
-        public string email1;
         public Field addedQRCode1, addedQRCode2;
         public string qrCodeId1 = "QRCode_Id";
         public string qrCodeId2;
         public IList<Silanis.ESL.SDK.Field> modifiedQRCodeList, deletedQRCodeList, updatedQRCodeList;
 
-        public QRCodeExample(Props props) : this(props.Get("api.key"), props.Get("api.url"), props.Get("1.email"))
-        {
-        }
-
-        public QRCodeExample(string apiKey, string apiUrl, string email1) : base(apiKey, apiUrl)
-        {
-            this.email1 = email1;
-            this.fileStream1 = File.OpenRead(new FileInfo(Directory.GetCurrentDirectory() + "/src/document.pdf").FullName);
-        }
-
         override public void Execute()
         {
-            DocumentPackage superDuperPackage = PackageBuilder.NewPackageNamed("QRCodeExample: " + DateTime.Now)
+            DocumentPackage superDuperPackage = PackageBuilder.NewPackageNamed(PackageName)
                     .DescribedAs("This is a package created using the e-SignLive SDK")
                     .WithEmailMessage("This message should be delivered to all signers")
                     .WithSigner(SignerBuilder.NewSignerWithEmail(email1)

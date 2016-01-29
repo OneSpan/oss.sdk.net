@@ -7,17 +7,15 @@ namespace SDK.Examples
     {
         public static void Main (string[] args)
         {
-            new UserAuthenticationTokenExample(Props.GetInstance()).Run();
+            new UserAuthenticationTokenExample().Run();
         }
 
         public string UserSessionId{ get; private set; }
 
         private AuthenticationClient AuthenticationClient;
 
-        public UserAuthenticationTokenExample( Props props ) : this(props.Get("api.key"), props.Get("api.url"), props.Get("webpage.url")) {
-        }
-
-        public UserAuthenticationTokenExample( string apiKey, string apiUrl, string webpageUrl) : base( apiKey, apiUrl ) {
+        public UserAuthenticationTokenExample()
+        {
             this.AuthenticationClient = new AuthenticationClient(webpageUrl);
         }
 

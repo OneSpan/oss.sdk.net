@@ -13,43 +13,32 @@ namespace SDK.Examples
 
         public static void Main (string[] args)
         {
-            new SigningRedirectForSignerExample(Props.GetInstance()).Run();
+            new SigningRedirectForSignerExample().Run();
         }
 
         public string GeneratedLinkToSigningForSigner{ get; private set; }
 
         private AuthenticationClient authenticationClient;
-        private Stream fileStream;
-        private string signerEmail;
 
-        public SigningRedirectForSignerExample( Props props ) : this(props.Get("api.key"),
-                props.Get("api.url"),
-                props.Get("webpage.url"),
-                props.Get("1.email"))
+        public SigningRedirectForSignerExample()
         {
-        }
-
-        public SigningRedirectForSignerExample( string apiKey, string apiUrl, string webpageUrl, string signerEmail) : base( apiKey, apiUrl )
-        {
-            this.signerEmail = signerEmail;
             this.authenticationClient = new AuthenticationClient(webpageUrl);
-            this.fileStream = File.OpenRead(new FileInfo(Directory.GetCurrentDirectory() + "/src/document.pdf").FullName);
         }
 
         override public void Execute()
         {
             string signerId = System.Guid.NewGuid().ToString();
-            DocumentPackage package = PackageBuilder.NewPackageNamed ("SignerAuthenticationTokenExample " + DateTime.Now)
+            DocumentPackage package = PackageBuilder.NewPackageNamed (PackageName)
                     .DescribedAs ("This is a new package")
-                    .WithSigner(SignerBuilder.NewSignerWithEmail(signerEmail)
+                    .WithSigner(SignerBuilder.NewSignerWithEmail(email1)
                                 .WithFirstName("John")
                                 .WithLastName("Smith")
                                 .WithCompany ("Acme Inc")
                                 .WithTitle ("Managing Director")
                                 .WithCustomId(signerId))
                     .WithDocument(DocumentBuilder.NewDocumentNamed("My Document")
-                                  .FromStream(fileStream, DocumentType.PDF)
-                                  .WithSignature(SignatureBuilder.SignatureFor(signerEmail)
+                                  .FromStream(fileStream1, DocumentType.PDF)
+                                  .WithSignature(SignatureBuilder.SignatureFor(email1)
                                         .OnPage(0)
                                         .AtPosition(500, 100)))
                     .Build ();

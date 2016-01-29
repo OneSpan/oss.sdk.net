@@ -17,7 +17,7 @@ namespace SDK.Examples
 		{
             lock (lockThis)
             {
-                DownloadReportExample example = new DownloadReportExample(Props.GetInstance());
+                DownloadReportExample example = new DownloadReportExample();
                 example.Run();
 
                 // Assert correct download of completion report for a sender

@@ -12,8 +12,6 @@ namespace SDK.Examples
         public const string SENDER_TITLE = "Chief Vizier";
         public const string SENDER_COMPANY = "The Masons";
 
-        private Stream fileStream1;
-        
         private PackageId templateId;
         public PackageId TemplateId
         {
@@ -21,28 +19,11 @@ namespace SDK.Examples
             {
                 return templateId;
             }
-        }                
-        private string senderEmail;
-        public string SenderEmail
-        {
-            get
-            {
-                return senderEmail;
-            }
-        }    
+        }      
+
         public static void Main(string[] args)
         {
-            new CustomSenderInfoInCreateNewTemplateExample(Props.GetInstance()).Run();
-        }
-                
-
-        public CustomSenderInfoInCreateNewTemplateExample(Props props) : this(props.Get("api.key"), props.Get("api.url"))
-        {
-        }
-
-        public CustomSenderInfoInCreateNewTemplateExample(string apiKey, string apiUrl) : base( apiKey, apiUrl )
-        {
-            this.fileStream1 = File.OpenRead(new FileInfo(Directory.GetCurrentDirectory() + "/src/document.pdf").FullName);
+            new CustomSenderInfoInCreateNewTemplateExample().Run();
         }
 
         override public void Execute()
@@ -66,7 +47,7 @@ namespace SDK.Examples
                                     .Build();
         
             DocumentPackage template =
-                PackageBuilder.NewPackageNamed("CustomSenderInfoInCreateNewTemplateExample: " + DateTime.Now)
+                PackageBuilder.NewPackageNamed(PackageName)
                     .DescribedAs("This is a template created using the e-SignLive SDK")                 
                     .WithEmailMessage("This message should be delivered to all signers")
                     .WithSenderInfo(senderInfo)

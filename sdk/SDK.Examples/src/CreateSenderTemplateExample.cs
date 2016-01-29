@@ -8,25 +8,12 @@ namespace SDK.Examples
 {
     public class CreateSenderTemplateExample : SDKSample
     {
-        private Stream fileStream1;
-        private String email1; 
-
         public PackageId templateId;
         public Visibility visibility = Visibility.SENDER;
 
         public static void Main(string[] args)
         {
-            new CreateSenderTemplateExample(Props.GetInstance()).Run();
-        }
-
-        public CreateSenderTemplateExample(Props props) : this(props.Get("api.key"), props.Get("api.url"), props.Get("1.email"))
-        {
-        }
-
-        public CreateSenderTemplateExample(string apiKey, string apiUrl, string email1) : base( apiKey, apiUrl )
-        {
-            this.email1 = email1;
-            this.fileStream1 = File.OpenRead(new FileInfo(Directory.GetCurrentDirectory() + "/src/document.pdf").FullName);
+            new CreateSenderTemplateExample().Run();
         }
 
         override public void Execute()

@@ -9,24 +9,18 @@ namespace SDK.Examples
     {
         public static void Main (string[] args)
         {
-            new DesignerRedirectForPackageSenderExample(Props.GetInstance()).Run();
+            new DesignerRedirectForPackageSenderExample().Run();
         }
 
         public string GeneratedLinkToDesignerForSender{ get; private set; }
 
         private AuthenticationClient authenticationClient;
-        private Stream fileStream;
         private string packageSenderEmail;
 
-        public DesignerRedirectForPackageSenderExample( Props props ) : this(props.Get("api.key"), props.Get("api.url"), props.Get("webpage.url"))
-        {
-        }
-
-        public DesignerRedirectForPackageSenderExample( string apiKey, string apiUrl, string webpageUrl) : base( apiKey, apiUrl )
+        public DesignerRedirectForPackageSenderExample()
         {
             this.packageSenderEmail = GetRandomEmail();
             this.authenticationClient = new AuthenticationClient(webpageUrl);
-            this.fileStream = File.OpenRead(new FileInfo(Directory.GetCurrentDirectory() + "/src/document.pdf").FullName);
         }
 
         override public void Execute()
@@ -63,13 +57,13 @@ namespace SDK.Examples
                                     .WithCompany("company")
                                     .Build();
 
-            DocumentPackage customSenderPackage = PackageBuilder.NewPackageNamed("DesignerRedirectForPackageSenderExample " + DateTime.Now)
+            DocumentPackage customSenderPackage = PackageBuilder.NewPackageNamed(PackageName)
                 .WithSenderInfo(customSenderInfo)
                 .DescribedAs("This is a package created using the e-SignLive SDK")
                 .ExpiresOn(DateTime.Now.AddMonths(1))
                 .WithEmailMessage("This message should be delivered to all signers")
                 .WithDocument(DocumentBuilder.NewDocumentNamed("First Document")
-                              .FromStream(fileStream, DocumentType.PDF)
+                              .FromStream(fileStream1, DocumentType.PDF)
                               .WithId("doc1"))
                 .Build();
             PackageId customSenderPackageId = eslClient.CreatePackage (customSenderPackage);

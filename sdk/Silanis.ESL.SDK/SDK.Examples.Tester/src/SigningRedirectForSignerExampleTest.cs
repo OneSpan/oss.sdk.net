@@ -14,7 +14,7 @@ namespace SDK.Examples
         [Test()]
         public void VerifyResult()
         {
-            SigningRedirectForSignerExample example = new SigningRedirectForSignerExample(Props.GetInstance());
+            SigningRedirectForSignerExample example = new SigningRedirectForSignerExample();
             example.Run();
 
             Assert.IsNotNull(example.GeneratedLinkToSigningForSigner);

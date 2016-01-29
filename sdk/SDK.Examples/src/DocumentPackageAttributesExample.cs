@@ -9,11 +9,8 @@ namespace SDK.Examples
     {
         public static void Main(string[] args)
         {
-            new DocumentPackageAttributesExample(Props.GetInstance()).Run();
+            new DocumentPackageAttributesExample().Run();
         }
-
-        private string email1;
-        private Stream fileStream1;
 
         public readonly string DYNAMICS_2015 = "dynamics2015";
         public readonly string ATTRIBUTE_KEY_1 = "First Name";
@@ -23,19 +20,9 @@ namespace SDK.Examples
         public readonly string ATTRIBUTE_2 = "Johnson";
         public readonly string ATTRIBUTE_3 = "1";
 
-        public DocumentPackageAttributesExample(Props props) : this(props.Get("api.key"), props.Get("api.url"), props.Get("1.email"))
-        {
-        }
-
-        public DocumentPackageAttributesExample(string apiKey, string apiUrl, string email1) : base( apiKey, apiUrl )
-        {
-            this.email1 = email1;
-            this.fileStream1 = File.OpenRead(new FileInfo(Directory.GetCurrentDirectory() + "/src/document.pdf").FullName);
-        }
-
         override public void Execute()
         {
-            DocumentPackage superDuperPackage = PackageBuilder.NewPackageNamed( "DocumentPackageAttributesExample " + DateTime.Now )
+            DocumentPackage superDuperPackage = PackageBuilder.NewPackageNamed(PackageName)
                 .DescribedAs( "This is a package created using the e-SignLive SDK" )
                     .ExpiresOn( DateTime.Now.AddMonths(1) )
                     .WithEmailMessage( "This message should be delivered to all signers" )

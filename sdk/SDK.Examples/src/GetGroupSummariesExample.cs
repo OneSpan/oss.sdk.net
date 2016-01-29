@@ -9,15 +9,7 @@ namespace SDK.Examples
         public List<GroupSummary> retrievedGroupSummaries;
         public static void Main(string[] args)
         {
-            new GetGroupSummariesExample(Props.GetInstance()).Run();
-        }
-
-        public GetGroupSummariesExample(Props props) : this(props.Get("api.key"), props.Get("api.url"))
-        {
-        }
-
-        public GetGroupSummariesExample(string apiUrl, string apiKey) : base(apiUrl, apiKey)
-        {
+            new GetGroupSummariesExample().Run();
         }
 
         override public void Execute()

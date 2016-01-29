@@ -10,11 +10,8 @@ namespace SDK.Examples
     {
         public static void Main(string[] args)
         {
-            new TemplateExample(Props.GetInstance()).Run();
+            new TemplateExample().Run();
         }
-
-        public string email1;
-        public string email2;
 
         public PackageId templateId;
         public PackageId instantiatedTemplateId;
@@ -34,26 +31,15 @@ namespace SDK.Examples
 
         public readonly string PACKAGE_NAME = "Package From Template";
 
-        public TemplateExample(Props props) : this(props.Get("api.key"), props.Get("api.url"), props.Get("1.email"), props.Get("2.email") )
-        {
-        }
-
-        public TemplateExample(string apiKey, string apiUrl, string email1, string email2) : base( apiKey, apiUrl )
-        {
-            this.email1 = email1;
-            this.email2 = email2;
-        }
-
         override public void Execute()
         {
-			Stream file = File.OpenRead(new FileInfo(Directory.GetCurrentDirectory() + "/src/document.pdf").FullName);
 			Document document = DocumentBuilder.NewDocumentNamed("First Document")
 				.WithId("doc1")
-				.FromStream(file, DocumentType.PDF)
+				.FromStream(fileStream1, DocumentType.PDF)
 				.Build();
 
             DocumentPackage superDuperPackage =
-                PackageBuilder.NewPackageNamed("CreateTemplateFromPackageExample: " + DateTime.Now)
+                PackageBuilder.NewPackageNamed(PackageName)
                 .DescribedAs("This is a package created using the e-SignLive SDK")
                 .WithEmailMessage("This message should be delivered to all signers")
                     .WithSigner( SignerBuilder.NewSignerWithEmail( email1 )

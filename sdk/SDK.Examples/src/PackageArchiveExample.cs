@@ -10,15 +10,7 @@ namespace SDK.Examples
 	{
         public static void Main (string[] args)
         {
-			new PackageArchiveExample(Props.GetInstance()).Run();
-        }
-
-		public PackageArchiveExample( Props props ) : this(props.Get("api.key"), props.Get("api.url"), props.Get("1.email")) 
-		{
-        }
-
-		public PackageArchiveExample( string apiKey, string apiUrl, string email1 ) : base( apiKey, apiUrl ) 
-		{        
+			new PackageArchiveExample().Run();
         }
 
         override public void Execute()

@@ -13,7 +13,7 @@ namespace SDK.Examples
         [Test()]
         public void VerifyResult()
         {
-            example = new SenderManipulationExample(Props.GetInstance());            
+            example = new SenderManipulationExample();            
             example.Run();
 
             // Invite three senders

@@ -9,20 +9,10 @@ namespace SDK.Examples
     {
         public List<NotaryJournalEntry> sdkJournalEntries;
         public DownloadedFile csvJournalEntries;
-        private string senderUID;
 
         public static void Main(string[] args)
         {
-            new NotaryJournalExample(Props.GetInstance()).Run();
-        }
-
-        public NotaryJournalExample(Props props) : this(props.Get("api.key"), props.Get("api.url"))
-        {
-        }
-
-        public NotaryJournalExample(string apiKey, string apiUrl) : base(apiKey, apiUrl)
-        {
-            this.senderUID = Converter.apiKeyToUID(apiKey);
+            new NotaryJournalExample().Run();
         }
 
         override public void Execute()

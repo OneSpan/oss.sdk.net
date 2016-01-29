@@ -9,7 +9,7 @@ namespace SDK.Examples
         [Test()]
         public void VerifyResult()
         {
-            UpdateTemplateWithPlaceholderExample example = new UpdateTemplateWithPlaceholderExample(Props.GetInstance());
+            UpdateTemplateWithPlaceholderExample example = new UpdateTemplateWithPlaceholderExample();
             example.Run();
 
             Assert.AreEqual(example.TEMPLATE_NAME, example.retrievedTemplate.Name);

@@ -11,7 +11,7 @@ namespace SDK.Examples
         [Test()]
         public void VerifyResult()
         {
-            CreateSenderTemplateExample example = new CreateSenderTemplateExample(Props.GetInstance());
+            CreateSenderTemplateExample example = new CreateSenderTemplateExample();
             example.Run();
 
             DocumentPackage retrievedTemplate = example.EslClient.GetPackage(example.templateId);

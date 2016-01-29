@@ -20,7 +20,7 @@ namespace SDK.Examples
 		[Test]
 		public void VerifyResult()
 		{
-			example = new AttachmentRequirementExample( Props.GetInstance() );
+			example = new AttachmentRequirementExample(  );
 			example.Run();
 
 			// Asserts the attachment requirements for each signer is set correctly.

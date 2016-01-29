@@ -9,14 +9,8 @@ namespace SDK.Examples
     {
         public static void Main(string[] args)
         {
-            new SendSmsToSignerExample(Props.GetInstance()).Run();
+            new SendSmsToSignerExample().Run();
         }
-
-        private string email1;
-        private string email2;
-        private string sms1;
-        private string sms2;
-        private Stream fileStream1;
 
         public readonly string SIGNER1_FIRST = "John";
         public readonly string SIGNER1_LAST = "Smith";
@@ -24,22 +18,9 @@ namespace SDK.Examples
         public readonly string SIGNER2_LAST = "Galant";
         public readonly string DOCUMENT_NAME = "First Document";
 
-        public SendSmsToSignerExample(Props props) : this(props.Get("api.key"), props.Get("api.url"), props.Get("1.email"), props.Get("2.email"), props.Get("1.sms"), props.Get("2.sms"))
-        {
-        }
-
-        public SendSmsToSignerExample(string apiKey, string apiUrl, string email1, string email2, string sms1, string sms2) : base(apiKey, apiUrl)
-        {
-            this.email1 = email1;
-            this.email2 = email2;
-            this.sms1 = sms1;
-            this.sms2 = sms2;
-            this.fileStream1 = File.OpenRead(new FileInfo(Directory.GetCurrentDirectory() + "/src/document.pdf").FullName);
-        }
-
         override public void Execute()
         {
-            DocumentPackage superDuperPackage = PackageBuilder.NewPackageNamed("SendSmsToSignerExample: " + DateTime.Now)
+            DocumentPackage superDuperPackage = PackageBuilder.NewPackageNamed(PackageName)
                     .WithSigner(SignerBuilder.NewSignerWithEmail(email1)
                                 .WithFirstName(SIGNER1_FIRST)
                                 .WithLastName(SIGNER1_LAST)

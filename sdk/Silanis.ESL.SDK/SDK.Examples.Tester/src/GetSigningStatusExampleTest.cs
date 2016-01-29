@@ -11,7 +11,7 @@ namespace SDK.Examples
         [Category("NotFor60")]
         public void VerifyResult()
         {
-            GetSigningStatusExample example = new GetSigningStatusExample(Props.GetInstance());
+            GetSigningStatusExample example = new GetSigningStatusExample();
             example.Run();
 
             Assert.AreEqual(example.draftSigningStatus, SigningStatus.INACTIVE);

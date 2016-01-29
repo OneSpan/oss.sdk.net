@@ -10,20 +10,12 @@ namespace SDK.Examples
 	{
         public static void Main (string[] args)
         {
-			new PackageTrashExample(Props.GetInstance()).Run();
-        }
-
-		public PackageTrashExample( Props props ) : this(props.Get("api.key"), props.Get("api.url"), props.Get("1.email")) 
-		{
-        }
-
-		public PackageTrashExample( string apiKey, string apiUrl, string email1 ) : base( apiKey, apiUrl ) 
-		{        
+			new PackageTrashExample().Run();
         }
 
         override public void Execute()
         {
-			DocumentPackage superDuperPackage = PackageBuilder.NewPackageNamed( "PackageTrashArchiveExample: " + DateTime.Now )
+            DocumentPackage superDuperPackage = PackageBuilder.NewPackageNamed(PackageName)
 				.DescribedAs( "This package should be trashed" )					                                                           
                     .Build();
 

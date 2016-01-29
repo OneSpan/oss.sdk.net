@@ -9,7 +9,7 @@ namespace SDK.Examples
     {
         [Test]
         public void verify() {
-            GroupManagementExample example = new GroupManagementExample(Props.GetInstance());
+            GroupManagementExample example = new GroupManagementExample();
             example.Run();
             
             Assert.AreEqual(example.createdGroup1.Id.Id, example.retrievedGroup1.Id.Id);

@@ -13,40 +13,32 @@ namespace SDK.Examples
         **/
         public static void Main (string[] args)
         {
-            new SignerAuthenticationTokenExample(Props.GetInstance()).Run();
+            new SignerAuthenticationTokenExample().Run();
         }
         public string SignerSessionId { get; private set; }
 
         private AuthenticationClient AuthenticationClient;
-        private Stream FileStream;
-        private string signerEmail;
         private string signerSessionFieldKey = "SDK SignerAuthenticationTokenExample Signer";
 
-        public SignerAuthenticationTokenExample( Props props ) : this(props.Get("api.key"), props.Get("api.url"), props.Get("webpage.url"), props.Get("1.email"))
-        {
-        }
-
-        public SignerAuthenticationTokenExample( string apiKey, string apiUrl, string webpageUrl, string signerEmail) : base( apiKey, apiUrl )
+        public SignerAuthenticationTokenExample()
         {
             this.AuthenticationClient = new AuthenticationClient(webpageUrl);
-            this.signerEmail = signerEmail;
-            this.FileStream = File.OpenRead(new FileInfo(Directory.GetCurrentDirectory() + "/src/document.pdf").FullName);
         }
 
         override public void Execute()
         {
             string signerId = System.Guid.NewGuid().ToString();
-            DocumentPackage package = PackageBuilder.NewPackageNamed ("SignerAuthenticationTokenExample " + DateTime.Now)
+            DocumentPackage package = PackageBuilder.NewPackageNamed (PackageName)
                     .DescribedAs ("This is a new package")
-                    .WithSigner(SignerBuilder.NewSignerWithEmail(signerEmail)
+                    .WithSigner(SignerBuilder.NewSignerWithEmail(email1)
                                 .WithFirstName("John")
                                 .WithLastName("Smith")
                                 .WithCompany ("Acme Inc")
                                 .WithTitle ("Managing Director")
                                 .WithCustomId(signerId))
                     .WithDocument(DocumentBuilder.NewDocumentNamed("My Document")
-                                  .FromStream(FileStream, DocumentType.PDF)
-                                  .WithSignature(SignatureBuilder.SignatureFor(signerEmail)
+                                  .FromStream(fileStream1, DocumentType.PDF)
+                                  .WithSignature(SignatureBuilder.SignatureFor(email1)
                                         .OnPage(0)
                                         .AtPosition(500, 100)))
                     .Build ();
@@ -55,7 +47,7 @@ namespace SDK.Examples
             eslClient.SendPackage(packageId);
 
             IDictionary<string, string> signerSessionFields = new Dictionary<string, string>();
-            signerSessionFields.Add(signerSessionFieldKey, signerEmail);
+            signerSessionFields.Add(signerSessionFieldKey, email1);
             string signerAuthenticationToken = eslClient.AuthenticationTokenService.CreateSignerAuthenticationToken(packageId, signerId, signerSessionFields);
 
             //This session id can be set in a cookie header

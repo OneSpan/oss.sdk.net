@@ -10,7 +10,7 @@ namespace SDK.Examples
         [Test()]
         public void VerifyResult()
         {
-            HistoryDocumentExample example = new HistoryDocumentExample( Props.GetInstance() );
+            HistoryDocumentExample example = new HistoryDocumentExample(  );
             example.Run();
 
             DocumentPackage documentPackage = example.RetrievedPackage;

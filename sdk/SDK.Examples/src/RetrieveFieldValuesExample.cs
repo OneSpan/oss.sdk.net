@@ -12,15 +12,7 @@ namespace SDK.Examples
     {
         public static void Main(string[] args)
         {
-            new RetrieveFieldValuesExample(Props.GetInstance()).Run();
-        }
-
-        public RetrieveFieldValuesExample(Props props) : this(props.Get("api.key"), props.Get("api.url"))
-        {
-        }
-
-        public RetrieveFieldValuesExample(string apiKey, string apiUrl) : base(apiKey, apiUrl)
-        {
+            new RetrieveFieldValuesExample().Run();
         }
 
         override public void Execute()

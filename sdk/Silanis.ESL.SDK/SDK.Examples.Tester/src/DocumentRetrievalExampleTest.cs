@@ -9,7 +9,7 @@ namespace SDK.Examples
         [Test()]
         public void VerifyResult()
         {
-            DocumentRetrievalExample example = new DocumentRetrievalExample(Props.GetInstance());
+            DocumentRetrievalExample example = new DocumentRetrievalExample();
             example.Run();
 
             Assert.IsNotNull(example.pdfDownloadedBytes);

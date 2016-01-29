@@ -10,25 +10,10 @@ namespace SDK.Examples
     {
         public static void Main(string[] args)
         {
-            new SignatureImageExample(Props.GetInstance()).Run();
+            new SignatureImageExample().Run();
         }
 
-        private Stream fileStream1;
         public DocumentPackage sentPackage;
-
-        public string email1;
-        public string senderUID;
-
-        public SignatureImageExample(Props props) : this(props.Get("api.key"), props.Get("api.url"), props.Get("1.email"))
-        {
-        }
-
-        public SignatureImageExample(string apiKey, string apiUrl, string email1) : base(apiKey, apiUrl)
-        {
-            this.email1 = email1;
-            this.senderUID = Converter.apiKeyToUID(apiKey);;
-            this.fileStream1 = File.OpenRead(new FileInfo(Directory.GetCurrentDirectory() + "/src/document.pdf").FullName);
-        }
 
         override public void Execute()
         {
@@ -37,7 +22,7 @@ namespace SDK.Examples
                 .WithFirstName("John1")
                 .WithLastName("Smith1").Build();
 
-            DocumentPackage superDuperPackage = PackageBuilder.NewPackageNamed("SignatureImageExample: " + DateTime.Now)
+            DocumentPackage superDuperPackage = PackageBuilder.NewPackageNamed(PackageName)
                 .WithSettings(DocumentPackageSettingsBuilder.NewDocumentPackageSettings().WithInPerson())
                     .WithSigner(signer1)
                     .WithDocument(DocumentBuilder.NewDocumentNamed("First Document")

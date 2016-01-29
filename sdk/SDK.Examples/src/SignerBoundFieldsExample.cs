@@ -9,11 +9,8 @@ namespace SDK.Examples
     {
         public static void Main(string[] args)
         {
-            new SignerBoundFieldsExample(Props.GetInstance()).Run();
+            new SignerBoundFieldsExample().Run();
         }
-
-        private string email1;
-        private Stream fileStream1;
 
         public readonly string DOCUMENT_NAME = "My Document";
         public readonly int SIGNATURE_DATE_PAGE = 0;
@@ -29,19 +26,9 @@ namespace SDK.Examples
         public readonly int SIGNER_COMPANY_POSITION_X = 500;
         public readonly int SIGNER_COMPANY_POSITION_Y = 500;
 
-        public SignerBoundFieldsExample(Props props) : this(props.Get("api.key"), props.Get("api.url"), props.Get("1.email"))
-        {
-        }
-
-        public SignerBoundFieldsExample(string apiKey, string apiUrl, string email1) : base(apiKey, apiUrl)
-        {
-            this.email1 = email1;
-            this.fileStream1 = File.OpenRead(new FileInfo(Directory.GetCurrentDirectory() + "/src/document.pdf").FullName);
-        }
-
         override public void Execute()
         {
-            DocumentPackage package = PackageBuilder.NewPackageNamed("SignerBoundFieldsExample " + DateTime.Now)
+            DocumentPackage package = PackageBuilder.NewPackageNamed(PackageName)
 					.DescribedAs("This is a new package")
 					.WithSigner(SignerBuilder.NewSignerWithEmail(email1)
 					            .WithFirstName("John")

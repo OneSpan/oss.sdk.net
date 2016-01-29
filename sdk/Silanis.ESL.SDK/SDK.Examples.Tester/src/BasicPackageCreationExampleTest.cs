@@ -12,7 +12,7 @@ namespace SDK.Examples
         [Test()]
         public void VerifyResult()
         {
-            BasicPackageCreationExample example = new BasicPackageCreationExample( Props.GetInstance() );
+            BasicPackageCreationExample example = new BasicPackageCreationExample();
             example.Run();
 
             DocumentPackage documentPackage = example.RetrievedPackage;

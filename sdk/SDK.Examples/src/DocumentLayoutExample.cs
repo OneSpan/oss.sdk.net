@@ -13,12 +13,8 @@ namespace SDK.Examples
     {
         public static void Main(string[] args)
         {
-            new DocumentLayoutExample(Props.GetInstance()).Run();
+            new DocumentLayoutExample().Run();
         }
-
-        public string email1;
-        private Stream fileStream1;
-        private Stream fileStream2;
 
         public string layoutId;
         public IList<DocumentPackage> layouts;
@@ -32,17 +28,6 @@ namespace SDK.Examples
         public readonly string APPLY_LAYOUT_DOCUMENT_NAME = "Apply Layout Document";
         public readonly string APPLY_LAYOUT_DOCUMENT_ID = "docId";
         public readonly string APPLY_LAYOUT_DOCUMENT_DESCRIPTION = "Document with applied layout description.";
-
-        public DocumentLayoutExample(Props props) : this(props.Get("api.key"), props.Get("api.url"), props.Get("1.email"))
-        {
-        }
-
-        public DocumentLayoutExample(string apiKey, string apiUrl, string email1) : base( apiKey, apiUrl )
-        {
-            this.email1 = email1;
-            this.fileStream1 = File.OpenRead(new FileInfo(Directory.GetCurrentDirectory() + "/src/document.pdf").FullName);
-            this.fileStream2 = File.OpenRead(new FileInfo(Directory.GetCurrentDirectory() + "/src/document.pdf").FullName);
-        }
 
         override public void Execute()
         {
@@ -82,7 +67,7 @@ namespace SDK.Examples
             layouts = eslClient.LayoutService.GetLayouts(Direction.ASCENDING, new PageRequest(1, 100));
 
             // Create a new package to apply document layout to
-            DocumentPackage packageFromLayout = PackageBuilder.NewPackageNamed("DocumentLayoutExample " + DateTime.Now)
+            DocumentPackage packageFromLayout = PackageBuilder.NewPackageNamed(PackageName)
                 .DescribedAs("This is a package created using the e-SignLive SDK")
                 .WithEmailMessage("This message should be delivered to all signers")
                 .WithSigner(SignerBuilder.NewSignerWithEmail(email1)

@@ -9,7 +9,7 @@ namespace SDK.Examples
         [Test()]
         public void VerifyResult()
         {
-            ChangePlaceholderNameExample example = new ChangePlaceholderNameExample(Props.GetInstance());
+            ChangePlaceholderNameExample example = new ChangePlaceholderNameExample();
             example.Run();
 
             Assert.IsNotNull(example.RetrievedPackage.GetPlaceholder(example.PLACEHOLDER_ID));

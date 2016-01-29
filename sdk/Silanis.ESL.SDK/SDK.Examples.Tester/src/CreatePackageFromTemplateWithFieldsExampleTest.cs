@@ -11,7 +11,7 @@ namespace SDK.Examples
         [Test()]
         public void VerifyResult()
         {
-            CreatePackageFromTemplateWithFieldsExample example = new CreatePackageFromTemplateWithFieldsExample(Props.GetInstance());
+            CreatePackageFromTemplateWithFieldsExample example = new CreatePackageFromTemplateWithFieldsExample();
             example.Run();
 
             DocumentPackage documentPackage = example.RetrievedPackage;

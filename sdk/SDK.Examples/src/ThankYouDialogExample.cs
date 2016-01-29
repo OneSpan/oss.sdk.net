@@ -9,29 +9,16 @@ namespace SDK.Examples
     {
         public static void Main(string[] args)
         {
-            new ThankYouDialogExample(Props.GetInstance()).Run();
+            new ThankYouDialogExample().Run();
         }
 
-        private string email1;
-        private Stream fileStream1;
-        
         public readonly string DOCUMENT_NAME = "First Document";
 
         public string thankYouDialogContent;
 
-        public ThankYouDialogExample(Props props) : this(props.Get("api.key"), props.Get("api.url"), props.Get("1.email"))
-        {
-        }
-
-        public ThankYouDialogExample(string apiKey, string apiUrl, string email1) : base(apiKey, apiUrl)
-        {
-            this.email1 = email1;
-            this.fileStream1 = File.OpenRead(new FileInfo(Directory.GetCurrentDirectory() + "/src/document.pdf").FullName);
-        }
-
         override public void Execute()
         {
-            DocumentPackage superDuperPackage = PackageBuilder.NewPackageNamed("ThankYouDialogExample: " + DateTime.Now)
+            DocumentPackage superDuperPackage = PackageBuilder.NewPackageNamed(PackageName)
                 .WithSettings(DocumentPackageSettingsBuilder.NewDocumentPackageSettings().WithInPerson())
                     .WithSigner(SignerBuilder.NewSignerWithEmail(email1)
                                 .WithFirstName("John1")

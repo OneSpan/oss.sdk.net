@@ -9,10 +9,10 @@ namespace SDK.Examples
         [Test()]
         public void VerifyResult()
         {
-            CreatePackageWithoutDocumentExample example = new CreatePackageWithoutDocumentExample(Props.GetInstance());
+            CreatePackageWithoutDocumentExample example = new CreatePackageWithoutDocumentExample();
             example.Run();
 
-            Assert.AreEqual(example.PACKAGE_NAME, example.RetrievedPackage.Name);
+            Assert.AreEqual(example.PackageName, example.RetrievedPackage.Name);
         }
     }
 }

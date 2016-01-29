@@ -10,7 +10,7 @@ namespace SDK.Examples
         [Test()]
         public void VerifyResult()
         {
-            UpdateInjectedFieldsFromTemplateExample example = new UpdateInjectedFieldsFromTemplateExample(Props.GetInstance());
+            UpdateInjectedFieldsFromTemplateExample example = new UpdateInjectedFieldsFromTemplateExample();
             example.Run();
         }
     }

@@ -10,7 +10,7 @@ namespace SDK.Examples
         [Test()]
         public void VerifyResult()
         {
-            CreatePackageFromTemplateExample example = new CreatePackageFromTemplateExample(Props.GetInstance());
+            CreatePackageFromTemplateExample example = new CreatePackageFromTemplateExample();
             example.Run();
 
             DocumentPackage documentPackage = example.RetrievedPackage;
@@ -19,7 +19,7 @@ namespace SDK.Examples
             Assert.AreEqual(document.Name, example.DOCUMENT_NAME);
             Assert.AreEqual(document.Id, example.DOCUMENT_ID);
 
-            Assert.AreEqual(documentPackage.Name, example.PACKAGE_NAME);
+            Assert.AreEqual(documentPackage.Name, example.PackageName);
             Assert.AreEqual(documentPackage.Description, example.PACKAGE_DESCRIPTION);
             Assert.AreEqual(documentPackage.EmailMessage, example.PACKAGE_EMAIL_MESSAGE2);
 

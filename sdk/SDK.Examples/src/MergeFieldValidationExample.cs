@@ -7,23 +7,10 @@ namespace SDK.Examples
 {
     public class MergeFieldValidationExample : SDKSample
     {
-        public string email1;
-        private Stream fileStream;
-
-        public MergeFieldValidationExample(Props props) : this(props.Get("api.key"), props.Get("api.url"), props.Get("1.email"))
-        {
-        }
-
-        public MergeFieldValidationExample(string apiKey, string apiUrl, string email1) : base( apiKey, apiUrl )
-        {
-            this.email1 = email1;
-            this.fileStream = File.OpenRead(new FileInfo(Directory.GetCurrentDirectory() + "/src/document.pdf").FullName);
-        }
-
         override public void Execute()
         {
             DocumentPackage superDuperPackage =
-                PackageBuilder.NewPackageNamed("MergeFieldValidationExample: " + DateTime.Now)
+                PackageBuilder.NewPackageNamed(PackageName)
                     .DescribedAs("This is a package created using the e-SignLive SDK")
                     .WithSettings(DocumentPackageSettingsBuilder.NewDocumentPackageSettings().WithInPerson())
                     .ExpiresOn(DateTime.Now.AddMonths(100))
@@ -33,7 +20,7 @@ namespace SDK.Examples
                                 .WithLastName("lastName1"))
                     .WithDocument(DocumentBuilder.NewDocumentNamed("First Document")
                                   .WithId("documentId")
-                                  .FromStream(fileStream, DocumentType.PDF)
+                                  .FromStream(fileStream1, DocumentType.PDF)
                                   .WithSignature(SignatureBuilder.CaptureFor(email1)
                                   .WithName("Signature1")
                                   .WithSize(100, 22)

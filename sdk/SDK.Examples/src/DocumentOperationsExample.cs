@@ -23,19 +23,13 @@ namespace SDK.Examples
     
         public static void Main(string[] args)
         {
-            new DocumentOperationsExample(Props.GetInstance()).Run();
+            new DocumentOperationsExample().Run();
         }
-
-		public DocumentOperationsExample(Props props) : base(props.Get("api.key"), props.Get("api.url"))
-		{
-		}
 
 		override public void Execute()
 		{
-			FileInfo file = new FileInfo(Directory.GetCurrentDirectory() + "/src/document.pdf");
-
 			// 1. Create a package
-            BuiltPackage = PackageBuilder.NewPackageNamed("DocumentOperationsExample " + DateTime.Now)
+            BuiltPackage = PackageBuilder.NewPackageNamed(PackageName)
 				.DescribedAs("This is a package demonstrating document upload")
 			    .WithSigner(SignerBuilder.NewSignerWithEmail("john.smith@email.com")
       					.WithFirstName("John")
@@ -56,7 +50,7 @@ namespace SDK.Examples
                         .Build();
 			Document document = DocumentBuilder.NewDocumentNamed( OriginalDocumentName )
                 .WithDescription( OriginalDocumentDescription )
-				.FromFile(file.FullName)
+                .FromStream( fileStream1, DocumentType.PDF )
 				.WithSignature(signature)                                
 				.Build();
 

@@ -10,7 +10,7 @@ namespace SDK.Examples
         [Test()]
         public void VerifyResult()
         {
-            FieldInjectionExample example = new FieldInjectionExample( Props.GetInstance() );
+            FieldInjectionExample example = new FieldInjectionExample(  );
             example.Run();
             
             // InjectedField list is not returned by the esl-backend.

@@ -10,7 +10,7 @@ namespace SDK.Examples
         [Test()]
         public void VerifyResult()
         {
-            DesignerRedirectForApiKeyExample example = new DesignerRedirectForApiKeyExample(Props.GetInstance());
+            DesignerRedirectForApiKeyExample example = new DesignerRedirectForApiKeyExample();
             example.Run();
 
             Assert.IsNotNull(example.GeneratedLinkToDesignerForApiKey);

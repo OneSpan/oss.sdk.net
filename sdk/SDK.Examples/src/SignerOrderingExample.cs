@@ -9,25 +9,14 @@ namespace SDK.Examples
 	{
         public static void Main (string[] args)
         {
-            new SignerOrderingExample(Props.GetInstance()).Run();
+            new SignerOrderingExample().Run();
         }
-
-        public string email1;
-        public string email2;
 
         public DocumentPackage savedPackage, afterReorder;
 
-        public SignerOrderingExample( Props props ) : this(props.Get("api.key"), props.Get("api.url"), props.Get("1.email"), props.Get("2.email")) {
-        }
-
-        public SignerOrderingExample( string apiKey, string apiUrl, string email1, string email2 ) : base( apiKey, apiUrl ) {
-            this.email1 = email1;
-            this.email2 = email2;            
-        }
-
         override public void Execute()
 		{
-			DocumentPackage package = PackageBuilder.NewPackageNamed ("Signing Order " + DateTime.Now)
+            DocumentPackage package = PackageBuilder.NewPackageNamed (PackageName)
 					.DescribedAs ("This is a signer workflow example")
 					.WithSigner(SignerBuilder.NewSignerWithEmail(email1)
 					            .WithFirstName("Coco")

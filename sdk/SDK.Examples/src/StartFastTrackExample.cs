@@ -10,16 +10,12 @@ namespace SDK.Examples
     {
         public static void Main(string[] args)
         {
-            new StartFastTrackExample(Props.GetInstance()).Run();
+            new StartFastTrackExample().Run();
         }
-
-        private string email1;
-        private Stream fileStream1;
 
         public PackageId templateId;
         public string signingUrl;
 
-        public readonly string TEMPLATE_NAME = "StartFastTrackExample " + DateTime.Now;
         public readonly string TEMPLATE_DESCRIPTION = "This is a package created using the e-SignLive SDK";
         public readonly string TEMPLATE_EMAIL_MESSAGE = "This message should be delivered to all signers";
         public readonly string TEMPLATE_SIGNER_FIRST = "John";
@@ -32,16 +28,6 @@ namespace SDK.Examples
         public readonly string DOCUMENT_NAME = "First Document";
         public readonly string DOCUMENT_ID = "doc1";
 
-        public StartFastTrackExample(Props props) : this(props.Get("api.key"), props.Get("api.url"), props.Get("1.email"))
-        {
-        }
-
-        public StartFastTrackExample(string apiKey, string apiUrl, string email1) : base(apiKey, apiUrl)
-        {
-            this.email1 = email1;
-            this.fileStream1 = File.OpenRead(new FileInfo(Directory.GetCurrentDirectory() + "/src/document.pdf").FullName);
-        }
-
         override public void Execute()
         {
 
@@ -50,7 +36,7 @@ namespace SDK.Examples
                     .WithLastName(TEMPLATE_SIGNER_LAST).Build();
             Signer signer2 = SignerBuilder.NewSignerPlaceholder(new Placeholder(PLACEHOLDER_ID)).Build();
 
-            DocumentPackage template = PackageBuilder.NewPackageNamed(TEMPLATE_NAME)
+            DocumentPackage template = PackageBuilder.NewPackageNamed(PackageName)
                 .DescribedAs(TEMPLATE_DESCRIPTION)
                     .WithEmailMessage(TEMPLATE_EMAIL_MESSAGE)
                     .WithSigner(signer1)

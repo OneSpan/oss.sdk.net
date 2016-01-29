@@ -10,12 +10,12 @@ namespace SDK.Examples
         [Test()]
         public void VerifyResult()
         {
-            SignerInformationForEquifaxCanadaExample example = new SignerInformationForEquifaxCanadaExample(Props.GetInstance());
+            SignerInformationForEquifaxCanadaExample example = new SignerInformationForEquifaxCanadaExample();
             example.Run();
 
             DocumentPackage documentPackage = example.RetrievedPackage;
 
-            SignerInformationForEquifaxCanada signerInformationForEquifaxCanada = documentPackage.GetSigner(example.SIGNER_EMAIL).KnowledgeBasedAuthentication.SignerInformationForEquifaxCanada;
+            SignerInformationForEquifaxCanada signerInformationForEquifaxCanada = documentPackage.GetSigner(example.email1).KnowledgeBasedAuthentication.SignerInformationForEquifaxCanada;
 
             Assert.AreEqual(signerInformationForEquifaxCanada.FirstName, example.FIRST_NAME);
             Assert.AreEqual(signerInformationForEquifaxCanada.LastName, example.LAST_NAME);

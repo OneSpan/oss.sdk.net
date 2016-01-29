@@ -9,7 +9,7 @@ namespace SDK.Examples
         [Test()]
 		public void VerifyResult()
         {
-			SessionCreationExample example = new SessionCreationExample(Props.GetInstance());
+			SessionCreationExample example = new SessionCreationExample();
 			example.Run();
 
 			Assert.IsNotNull(example.signerSessionToken);

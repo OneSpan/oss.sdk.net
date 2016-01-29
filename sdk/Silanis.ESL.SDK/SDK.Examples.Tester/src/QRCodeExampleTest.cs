@@ -13,7 +13,7 @@ namespace SDK.Examples
         [Category("NotFor60")]
         public void VerifyResult()
         {
-            QRCodeExample example = new QRCodeExample(Props.GetInstance());
+            QRCodeExample example = new QRCodeExample();
             example.Run();
 
             // Verify QR codes were added to document

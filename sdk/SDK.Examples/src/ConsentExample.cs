@@ -9,27 +9,12 @@ namespace SDK.Examples
     {
         public static void Main (string[] args)
         {
-            new ConsentExample(Props.GetInstance()).Run();
-        }
-
-        private string email1;
-        private string email2;
-        private Stream fileStream1;
-        private Stream fileStream2;
-
-        public ConsentExample( Props props ) : this(props.Get("api.key"), props.Get("api.url"), props.Get("1.email"), props.Get("2.email")) {
-        }
-
-        public ConsentExample( String apiKey, String apiUrl, String email1, String email2 ) : base( apiKey, apiUrl ) {
-            this.email1 = email1;
-            this.email2 = email2;
-            this.fileStream1 = File.OpenRead(new FileInfo(Directory.GetCurrentDirectory() + "/src/document.pdf").FullName);
-            this.fileStream2 = File.OpenRead(new FileInfo(Directory.GetCurrentDirectory() + "/src/document.pdf").FullName);
+            new ConsentExample().Run();
         }
 
         override public void Execute()
         {
-            DocumentPackage package = PackageBuilder.NewPackageNamed ("C# ConsentExample " + DateTime.Now)
+            DocumentPackage package = PackageBuilder.NewPackageNamed (PackageName)
                 .DescribedAs ("This is a package created using the e-SignLive SDK")
                     .WithSigner(SignerBuilder.NewSignerWithEmail(email1)
                                 .WithFirstName("John1")

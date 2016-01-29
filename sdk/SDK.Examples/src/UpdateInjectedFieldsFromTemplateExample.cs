@@ -10,16 +10,11 @@ namespace SDK.Examples
     {
         public static void Main(string[] args)
         {
-            new UpdateInjectedFieldsFromTemplateExample(Props.GetInstance()).Run();
+            new UpdateInjectedFieldsFromTemplateExample().Run();
         }
-
-        private string email1;
-        private Stream fileStream1;
-        private Stream fileStream2;
 
         public readonly string DOCUMENT_NAME = "First Document";
         public readonly string DOCUMENT_ID = "doc1";
-        public readonly string PACKAGE_NAME = "UpdateInjectedFieldsFromTemplateExample: " + DateTime.Now;
         public readonly string PACKAGE_DESCRIPTION = "This is a package created using the e-SignLive SDK";
         public readonly string PACKAGE_EMAIL_MESSAGE = "This message should be delivered to all signers";
         public readonly string PACKAGE_EMAIL_MESSAGE2 = "Changed the email message";
@@ -37,19 +32,11 @@ namespace SDK.Examples
 
         public readonly string PLACEHOLDER_ID = "PlaceholderId1";
 
-        public UpdateInjectedFieldsFromTemplateExample(Props props) : this(props.Get("api.key"), props.Get("api.url"), props.Get("1.email"))
-        {
-        }
-
-        public UpdateInjectedFieldsFromTemplateExample(string apiKey, string apiUrl, string email1) : base( apiKey, apiUrl )
-        {
-            this.email1 = email1;
-            this.fileStream1 = File.OpenRead(new FileInfo(Directory.GetCurrentDirectory() + "/src/document-with-fields.pdf").FullName);
-            this.fileStream2 = File.OpenRead(new FileInfo(Directory.GetCurrentDirectory() + "/src/document-with-fields.pdf").FullName);
-        }
-
         override public void Execute()
         {
+            this.fileStream1 = File.OpenRead(new FileInfo(Directory.GetCurrentDirectory() + "/src/document-with-fields.pdf").FullName);
+            this.fileStream2 = File.OpenRead(new FileInfo(Directory.GetCurrentDirectory() + "/src/document-with-fields.pdf").FullName);
+
             DocumentPackage template = PackageBuilder.NewPackageNamed("Template")
                     .WithEmailMessage(PACKAGE_EMAIL_MESSAGE)
                     .WithSigner(SignerBuilder.NewSignerPlaceholder(new Placeholder(PLACEHOLDER_ID)))
@@ -64,7 +51,7 @@ namespace SDK.Examples
 
             template.Id = eslClient.CreateTemplate(template);
 
-            DocumentPackage newPackage = PackageBuilder.NewPackageNamed(PACKAGE_NAME)
+            DocumentPackage newPackage = PackageBuilder.NewPackageNamed(PackageName)
                 .DescribedAs(PACKAGE_DESCRIPTION)
                     .WithEmailMessage(PACKAGE_EMAIL_MESSAGE2)
                     .WithSigner(SignerBuilder.NewSignerWithEmail(email1)

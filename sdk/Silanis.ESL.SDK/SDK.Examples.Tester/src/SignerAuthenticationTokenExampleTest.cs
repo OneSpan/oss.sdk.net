@@ -13,7 +13,7 @@ namespace SDK.Examples
         [Test()]
 		public void VerifyResult()
         {
-			SignerAuthenticationTokenExample example = new SignerAuthenticationTokenExample(Props.GetInstance());
+			SignerAuthenticationTokenExample example = new SignerAuthenticationTokenExample();
 			example.Run();
 
 			Assert.IsNotNull(example.SignerSessionId);

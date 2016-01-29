@@ -9,28 +9,16 @@ namespace SDK.Examples
     {
         public static void Main (string[] args)
         {
-            new SessionCreationExample(Props.GetInstance()).Run();
+            new SessionCreationExample().Run();
         }
 
-        private string email1;
-        private Stream fileStream1;
-        private string webpageUrl;
         private string signerId = "myCustomSignerId";
 
         public SessionToken signerSessionToken;
 
-        public SessionCreationExample( Props props ) : this(props.Get("api.key"), props.Get("api.url"), props.Get("webpage.url"), props.Get("1.email")) {
-        }
-
-        public SessionCreationExample( string apiKey, string apiUrl, string webpageUrl, string email1 ) : base( apiKey, apiUrl ) {
-            this.email1 = email1;
-            this.fileStream1 = File.OpenRead(new FileInfo(Directory.GetCurrentDirectory() + "/src/document.pdf").FullName);
-            this.webpageUrl = webpageUrl;
-        }
-
         override public void Execute()
         {
-            DocumentPackage superDuperPackage = PackageBuilder.NewPackageNamed( "SessionCreationExample: " + DateTime.Now )
+            DocumentPackage superDuperPackage = PackageBuilder.NewPackageNamed(PackageName)
                 .WithSigner(SignerBuilder.NewSignerWithEmail(email1)
                             .WithFirstName( "John" )
                             .WithLastName( "Smith" )

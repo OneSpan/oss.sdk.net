@@ -9,11 +9,8 @@ namespace SDK.Examples
     {
         public static void Main (string[] args)
         {
-            new DocumentPackageSettingsExample(Props.GetInstance()).Run();
+            new DocumentPackageSettingsExample().Run();
         }
-
-        private string email1;
-        private Stream fileStream1;
 
         public readonly string DECLINE_REASON_1 = "Decline reason One";
         public readonly string DECLINE_REASON_2 = "Decline reason Two";
@@ -23,16 +20,8 @@ namespace SDK.Examples
         public readonly string OPT_OUT_REASON_2 = "OptOut reason Two";
         public readonly string OPT_OUT_REASON_3 = "OptOut reason Three";
 
-        public DocumentPackageSettingsExample( Props props ) : this(props.Get("api.key"), props.Get("api.url"), props.Get("1.email")) {
-        }
-
-        public DocumentPackageSettingsExample( String apiKey, String apiUrl, String email1 ) : base( apiKey, apiUrl ) {
-            this.email1 = email1;
-            this.fileStream1 = File.OpenRead(new FileInfo(Directory.GetCurrentDirectory() + "/src/document.pdf").FullName);
-        }
-
         override public void Execute() {
-            DocumentPackage superDuperPackage = PackageBuilder.NewPackageNamed("DocumentPackageSettingsExample " + DateTime.Now)
+            DocumentPackage superDuperPackage = PackageBuilder.NewPackageNamed(PackageName)
 				.WithSettings(DocumentPackageSettingsBuilder.NewDocumentPackageSettings()
 				              .WithInPerson()
                               .WithoutLanguageDropDown()

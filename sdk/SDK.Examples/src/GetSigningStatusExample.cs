@@ -9,24 +9,14 @@ namespace SDK.Examples
 	{
         public static void Main (string[] args)
         {
-            new GetSigningStatusExample(Props.GetInstance()).Run();
+            new GetSigningStatusExample().Run();
         }
 
-        private string email1;
-        private Stream fileStream1;
         public SigningStatus draftSigningStatus, sentSigningStatus, trashedSigningStatus;
-
-        public GetSigningStatusExample( Props props ) : this(props.Get("api.key"), props.Get("api.url"), props.Get("1.email")) {
-        }
-
-        public GetSigningStatusExample( String apiKey, String apiUrl, String email1 ) : base( apiKey, apiUrl ) {
-            this.email1 = email1;
-            this.fileStream1 = File.OpenRead(new FileInfo(Directory.GetCurrentDirectory() + "/src/document.pdf").FullName);
-        }
 
         override public void Execute()
         {
-            DocumentPackage package = PackageBuilder.NewPackageNamed ("C# GetSigningStatusExample " + DateTime.Now)
+            DocumentPackage package = PackageBuilder.NewPackageNamed (PackageName)
 					.DescribedAs ("This is a new package")
 					.WithSigner(SignerBuilder.NewSignerWithEmail(email1)
 					            .WithFirstName("John")

@@ -9,28 +9,15 @@ namespace SDK.Examples
     {
         public static void Main (string[] args)
         {
-            new PackageViewRedirectForPackageSenderExample(Props.GetInstance()).Run();
+            new PackageViewRedirectForPackageSenderExample().Run();
         }
-        public readonly string PACKAGE_NAME = "PackageViewRedirectForPackageSenderExample " + DateTime.Now;
-
         public string generatedLinkToPackageViewForSender;
 
         private AuthenticationClient authenticationClient;
-        private Stream fileStream;
-        private string senderEmail;
 
-        public PackageViewRedirectForPackageSenderExample( Props props ) : this(props.Get("api.key"),
-                                                                                props.Get("api.url"),
-                                                                                props.Get("webpage.url"),
-                                                                                props.Get("sender.email"))
-        {
-        }
-
-        public PackageViewRedirectForPackageSenderExample( string apiKey, string apiUrl, string webpageUrl, string senderEmail) : base( apiKey, apiUrl )
+        public PackageViewRedirectForPackageSenderExample()
         {
             this.authenticationClient = new AuthenticationClient(webpageUrl);
-            this.fileStream = File.OpenRead(new FileInfo(Directory.GetCurrentDirectory() + "/src/document.pdf").FullName);
-            this.senderEmail = senderEmail;
         }
 
         override public void Execute()
@@ -52,13 +39,13 @@ namespace SDK.Examples
                     .WithCompany("company")
                     .Build();
 
-            DocumentPackage customSenderPackage = PackageBuilder.NewPackageNamed(PACKAGE_NAME)
+            DocumentPackage customSenderPackage = PackageBuilder.NewPackageNamed(PackageName)
                 .WithSenderInfo(customSenderInfo)
                     .DescribedAs("This is a package created using the e-SignLive SDK")
                     .ExpiresOn(DateTime.Now.AddMonths(1))
                     .WithEmailMessage("This message should be delivered to all signers")
                     .WithDocument(DocumentBuilder.NewDocumentNamed("First Document")
-                                  .FromStream(fileStream, DocumentType.PDF)
+                                  .FromStream(fileStream1, DocumentType.PDF)
                                   .WithSignature(SignatureBuilder.SignatureFor(senderEmail)
                                    .OnPage(0)
                                    .AtPosition(100, 100)))

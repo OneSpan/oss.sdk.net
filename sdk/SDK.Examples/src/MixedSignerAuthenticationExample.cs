@@ -10,33 +10,18 @@ namespace SDK.Examples
     {
         public static void Main(string[] args)
         {
-            new MixedSignerAuthenticationExample(Props.GetInstance()).Run();
+            new MixedSignerAuthenticationExample().Run();
         }
 
         public Signer SIGNER_WITH_AUTHENTICATION_EQUIFAX_CANADA;
         public Signer SIGNER_WITH_AUTHENTICATION_EQUIFAX_USA;
 
-        private string emailForSignerWithAuthenticationEquifaxCanada;
-        private string emailForSignerWithAuthenticationEquifaxUsa;
-
         private string documentName = "My Document";
-
-        public MixedSignerAuthenticationExample(Props props) : this(props.Get("api.key"), props.Get("api.url"), props.Get("1.email"), props.Get("2.email"))
-        {
-        }
-
-        public MixedSignerAuthenticationExample(string apiKey, string apiUrl, string signer1Email, string signer2Email) : base( apiKey, apiUrl )
-        {
-            this.emailForSignerWithAuthenticationEquifaxCanada = signer1Email;
-            this.emailForSignerWithAuthenticationEquifaxUsa = signer2Email;
-        }
 
         override public void Execute()
         {
-            Stream file = File.OpenRead(new FileInfo(Directory.GetCurrentDirectory() + "/src/document.pdf").FullName);
-
             SIGNER_WITH_AUTHENTICATION_EQUIFAX_CANADA = 
-                SignerBuilder.NewSignerWithEmail(emailForSignerWithAuthenticationEquifaxCanada)
+                SignerBuilder.NewSignerWithEmail(email1)
                     .WithFirstName("Signer1")
                     .WithLastName("Canada")
                     .WithCustomId("SingerCanadaID")
@@ -60,7 +45,7 @@ namespace SDK.Examples
                     .Build();
 
             SIGNER_WITH_AUTHENTICATION_EQUIFAX_USA =
-                SignerBuilder.NewSignerWithEmail(emailForSignerWithAuthenticationEquifaxUsa)
+                SignerBuilder.NewSignerWithEmail(email2)
                     .WithFirstName("Signer2")
                     .WithLastName("USA")
                     .WithCustomId("SignerUSAID")
@@ -83,15 +68,15 @@ namespace SDK.Examples
                         .Answer("drums"))
                     .Build();
 
-            DocumentPackage superDuperPackage = PackageBuilder.NewPackageNamed("MixedSignerAuthenticationExample: " + DateTime.Now)
+            DocumentPackage superDuperPackage = PackageBuilder.NewPackageNamed(PackageName)
                 .DescribedAs("This is a package created using the e-SignLive SDK")
                 .WithSigner(SIGNER_WITH_AUTHENTICATION_EQUIFAX_CANADA)
                 .WithSigner(SIGNER_WITH_AUTHENTICATION_EQUIFAX_USA)
                 .WithDocument(DocumentBuilder.NewDocumentNamed(documentName)
-                    .FromStream(file, DocumentType.PDF)
-                    .WithSignature(SignatureBuilder.SignatureFor(emailForSignerWithAuthenticationEquifaxCanada)
+                    .FromStream(fileStream1, DocumentType.PDF)
+                    .WithSignature(SignatureBuilder.SignatureFor(email1)
                         .Build())
-                    .WithSignature(SignatureBuilder.SignatureFor(emailForSignerWithAuthenticationEquifaxUsa)
+                    .WithSignature(SignatureBuilder.SignatureFor(email2)
                         .Build())
                     .Build())
                 .Build();

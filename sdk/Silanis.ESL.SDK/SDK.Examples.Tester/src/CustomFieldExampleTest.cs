@@ -8,7 +8,7 @@ namespace SDK.Examples
     {
 		[Test]
 		public void verify() {
-			CustomFieldExample example = new CustomFieldExample(Props.GetInstance());
+			CustomFieldExample example = new CustomFieldExample();
 			example.Run();
 
             DocumentPackage documentPackage = example.RetrievedPackage;

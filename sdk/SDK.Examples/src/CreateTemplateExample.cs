@@ -10,26 +10,13 @@ namespace SDK.Examples
     {
         public static void Main(string[] args)
         {
-			new CreateTemplateExample(Props.GetInstance()).Run();
+			new CreateTemplateExample().Run();
         }
 		        
-        private Stream fileStream1;
-        private Stream fileStream2;
-
-		public CreateTemplateExample(Props props) : this(props.Get("api.key"), props.Get("api.url"))
-        {
-        }
-
-		public CreateTemplateExample(string apiKey, string apiUrl) : base( apiKey, apiUrl )
-        {
-            this.fileStream1 = File.OpenRead(new FileInfo(Directory.GetCurrentDirectory() + "/src/document.pdf").FullName);
-            this.fileStream2 = File.OpenRead(new FileInfo(Directory.GetCurrentDirectory() + "/src/document.pdf").FullName);
-        }
-
         override public void Execute()
         {
 			DocumentPackage template =
-                PackageBuilder.NewPackageNamed("CreateTemplateExample: " + DateTime.Now)
+                PackageBuilder.NewPackageNamed(PackageName)
 					.DescribedAs("This is a template created using the e-SignLive SDK")                	
                 	.WithEmailMessage("This message should be delivered to all signers")
                 	.WithSigner(SignerBuilder.NewSignerPlaceholder(new Placeholder("PlaceholderId1")))

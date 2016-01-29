@@ -9,13 +9,9 @@ namespace SDK.Examples
     {
         public static void Main(string[] args)
         {
-            new CreatePackageFromTemplateWithReplacingPlaceholderExample(Props.GetInstance()).Run();
+            new CreatePackageFromTemplateWithReplacingPlaceholderExample().Run();
         }
 
-        private Stream fileStream1;
-
-        public string email1;
-        public string email2;
         public PackageId templateId;
 
         public readonly string DOCUMENT_NAME = "First Document";
@@ -26,24 +22,12 @@ namespace SDK.Examples
         public readonly string TEMPLATE_SIGNER_FIRST = "John";
         public readonly string TEMPLATE_SIGNER_LAST = "Smith";
 
-        public readonly string PACKAGE_NAME = "CreatePackageFromTemplateWithReplacingPlaceholderExample Package: " + DateTime.Now;
         public readonly string PACKAGE_DESCRIPTION = "This is a package created using the e-SignLive SDK";
         public readonly string PACKAGE_EMAIL_MESSAGE = "This message should be delivered to all signers";
         public readonly string PACKAGE_SIGNER_FIRST = "Patty";
         public readonly string PACKAGE_SIGNER_LAST = "Galant";
 
         public readonly string PLACEHOLDER_ID = "PlaceholderId1";
-
-        public CreatePackageFromTemplateWithReplacingPlaceholderExample(Props props) : this(props.Get("api.key"), props.Get("api.url"), props.Get("1.email"), props.Get("2.email") )
-        {
-        }
-
-        public CreatePackageFromTemplateWithReplacingPlaceholderExample(string apiKey, string apiUrl, string email1, string email2) : base( apiKey, apiUrl )
-        {
-            this.email1 = email1;
-            this.email2 = email2;
-            this.fileStream1 = File.OpenRead(new FileInfo(Directory.GetCurrentDirectory() + "/src/document.pdf").FullName);
-        }
 
         override public void Execute()
         {
@@ -67,7 +51,7 @@ namespace SDK.Examples
 
             templateId = eslClient.CreateTemplate(template);
 
-            DocumentPackage newPackage = PackageBuilder.NewPackageNamed(PACKAGE_NAME)
+            DocumentPackage newPackage = PackageBuilder.NewPackageNamed(PackageName)
                 .DescribedAs(PACKAGE_DESCRIPTION)
                     .WithEmailMessage(PACKAGE_EMAIL_MESSAGE)
                     .WithSigner(SignerBuilder.NewSignerWithEmail(email2)

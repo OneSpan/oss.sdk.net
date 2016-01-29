@@ -9,7 +9,7 @@ namespace SDK.Examples
         [Test()]
         public void VerifyResult()
         {
-            SendSmsToSignerExample example = new SendSmsToSignerExample(Props.GetInstance());
+            SendSmsToSignerExample example = new SendSmsToSignerExample();
             example.Run();
         }
     }

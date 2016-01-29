@@ -11,35 +11,23 @@ namespace SDK.Examples
     {
         public static void Main(string[] args)
         {
-            new ContactsExample(Props.GetInstance()).Run();
+            new ContactsExample().Run();
         }
 
-        public string email1;
-        public string email2;
-        private Stream fileStream1;
         public Sender signerForPackage;
         public IDictionary<string, Sender> beforeContacts;
         public IDictionary<string, Sender> afterContacts;
 
-        public ContactsExample(Props props) : this(props.Get("api.key"), props.Get("api.url"), props.Get("1.email"))
-        {
-        }
-
-        public ContactsExample(string apiKey, string apiUrl, string email1) : base(apiKey, apiUrl)
-        {
-            this.email1 = email1;
-            this.email2 = Guid.NewGuid().ToString().Replace("-", "") + "@e-signlive.com";
-            this.fileStream1 = File.OpenRead(new FileInfo(Directory.GetCurrentDirectory() + "/src/document.pdf").FullName);
-        }
-
         override public void Execute()
         {
+            this.email2 = GetRandomEmail();
+
             // Get the contacts (Senders) from account
             beforeContacts = eslClient.AccountService.GetContacts();
             signerForPackage = beforeContacts[email1];
 
             // Create package with signer using information from contacts
-            DocumentPackage superDuperPackage = PackageBuilder.NewPackageNamed("ContactsExample: " + DateTime.Now)
+            DocumentPackage superDuperPackage = PackageBuilder.NewPackageNamed(PackageName)
                     .DescribedAs("This is a package created using the e-SignLive SDK")
                     .ExpiresOn(DateTime.Now.AddMonths(100))
                     .WithEmailMessage("This message should be delivered to all signers")

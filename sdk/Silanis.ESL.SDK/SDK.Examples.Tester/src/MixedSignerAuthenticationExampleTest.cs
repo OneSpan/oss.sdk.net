@@ -18,7 +18,7 @@ namespace SDK.Examples
         [Test()]
         public void VerifyResult()
         {
-            MixedSignerAuthenticationExample example = new MixedSignerAuthenticationExample(Props.GetInstance());
+            MixedSignerAuthenticationExample example = new MixedSignerAuthenticationExample();
             example.Run();
 
             DocumentPackage documentPackage = example.RetrievedPackage;

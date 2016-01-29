@@ -11,7 +11,7 @@ namespace SDK.Examples
         [Test()]
         public void VerifyResult()
         {
-            GenericFieldsExample example = new GenericFieldsExample(Props.GetInstance());
+            GenericFieldsExample example = new GenericFieldsExample();
             example.Run();
 
             DocumentPackage documentPackage = example.RetrievedPackage;

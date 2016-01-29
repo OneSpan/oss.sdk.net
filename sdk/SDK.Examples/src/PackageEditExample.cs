@@ -10,23 +10,13 @@ namespace SDK.Examples
 	{
         public static void Main (string[] args)
         {
-			new PackageEditExample(Props.GetInstance()).Run();
-        }
-
-		public PackageEditExample( Props props ) : this(props.Get("api.key"), props.Get("api.url"), props.Get("1.email")) 
-		{
-        }
-
-		public PackageEditExample( string apiKey, string apiUrl, string email1 ) : base( apiKey, apiUrl ) 
-		{        
+			new PackageEditExample().Run();
         }
 
         override public void Execute()
         {
-			Stream fileStream = File.OpenRead(new FileInfo(Directory.GetCurrentDirectory() + "/src/document.pdf").FullName);
-
 			DocumentPackage superDuperPackage =
-				PackageBuilder.NewPackageNamed("PackageEditExample: " + DateTime.Now)
+                PackageBuilder.NewPackageNamed(PackageName)
 					.DescribedAs("This is a package created using the e-SignLive SDK")
 					.WithSigner(SignerBuilder.NewSignerWithEmail("john.smith@acme.com")
 						.WithCustomId("Client1")
@@ -34,7 +24,7 @@ namespace SDK.Examples
 						.WithLastName("Smith")
 					)
 					.WithDocument(DocumentBuilder.NewDocumentNamed("First Document")
-						.FromStream(fileStream, DocumentType.PDF)
+						.FromStream(fileStream1, DocumentType.PDF)
 						.WithSignature(SignatureBuilder.SignatureFor("john.smith@acme.com")
 							.OnPage(0)
 							.AtPosition(100, 100)

@@ -9,35 +9,20 @@ namespace SDK.Examples
     {
         public static void Main(string[] args)
         {
-            new GetSigningUrlExample(Props.GetInstance()).Run();
+            new GetSigningUrlExample().Run();
         }
-
-        private string email1;
-        private string email2;
-        private Stream fileStream1;
 
         public string signingUrlForSigner1;
         public string signingUrlForSigner2;
 
         public readonly string DOCUMENT_NAME = "First Document";
 
-        public GetSigningUrlExample(Props props) : this(props.Get("api.key"), props.Get("api.url"), props.Get("1.email"), props.Get("2.email"))
-        {
-        }
-
-        public GetSigningUrlExample(string apiKey, string apiUrl, string email1, string email2) : base(apiKey, apiUrl)
-        {
-            this.email1 = email1;
-            this.email2 = email2;
-            this.fileStream1 = File.OpenRead(new FileInfo(Directory.GetCurrentDirectory() + "/src/document.pdf").FullName);
-        }
-
         override public void Execute()
         {
             string signer1Id = Guid.NewGuid().ToString().Replace("-", "");
             string signer2Id = Guid.NewGuid().ToString().Replace("-", "");
 
-            DocumentPackage superDuperPackage = PackageBuilder.NewPackageNamed("GetSigningUrlExample: " + DateTime.Now)
+            DocumentPackage superDuperPackage = PackageBuilder.NewPackageNamed(PackageName)
                 .WithSettings(DocumentPackageSettingsBuilder.NewDocumentPackageSettings().WithInPerson())
                     .WithSigner(SignerBuilder.NewSignerWithEmail(email1)
                                 .WithFirstName("John1")

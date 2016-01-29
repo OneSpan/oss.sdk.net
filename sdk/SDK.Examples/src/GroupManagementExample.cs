@@ -10,14 +10,8 @@ namespace SDK.Examples
     {
         public static void Main (string[] args)
         {
-            new GroupManagementExample(Props.GetInstance()).Run();
+            new GroupManagementExample().Run();
         }
-
-        public string email1;
-        public string email2;
-        public string email3;
-        public string email4;
-        private Stream fileStream1;
 
         public Group createdEmptyGroup;
         public Group createdGroup1;
@@ -32,15 +26,12 @@ namespace SDK.Examples
         public List<Group> allGroupsAfterDelete;
         public List<string> groupMemberEmailsAfterUpdate;
 
-        public GroupManagementExample( Props props ) : this(props.Get("api.key"), props.Get("api.url")) {
-        }
-
-        public GroupManagementExample( string apiKey, string apiUrl ) : base( apiKey, apiUrl ) {
+        public GroupManagementExample()
+        {
             this.email1 = GetRandomEmail();
             this.email2 = GetRandomEmail();
             this.email3 = GetRandomEmail();
             this.email4 = GetRandomEmail();
-            this.fileStream1 = File.OpenRead(new FileInfo(Directory.GetCurrentDirectory() + "/src/document.pdf").FullName);
         }
 
 		private void displayAccountGroupsAndMembers() {
@@ -180,7 +171,7 @@ namespace SDK.Examples
 
             groupMemberEmailsAfterUpdate = eslClient.GroupService.GetGroupMemberEmails(createdGroup3Updated.Id);
 
-			DocumentPackage superDuperPackage = PackageBuilder.NewPackageNamed("GroupManagementExample " + DateTime.Now.ToString())
+            DocumentPackage superDuperPackage = PackageBuilder.NewPackageNamed(PackageName)
 			    .WithSigner(SignerBuilder.NewSignerFromGroup(createdGroup1.Id)
 			                .CanChangeSigner()
 			                .DeliverSignedDocumentsByEmail())

@@ -9,7 +9,7 @@ namespace SDK.Examples
         [Test()]
         public void VerifyResult()
         {
-            PackageInformationExample example = new PackageInformationExample(Props.GetInstance());
+            PackageInformationExample example = new PackageInformationExample();
             example.Run();
 
             Assert.IsNotNull(example.supportConfiguration);

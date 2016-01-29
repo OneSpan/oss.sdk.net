@@ -10,7 +10,7 @@ namespace SDK.Examples
         [Test()]
         public void VerifyResult()
         {
-            ReminderExample example = new ReminderExample(Props.GetInstance());
+            ReminderExample example = new ReminderExample();
             example.Run();
 
             Assert.IsNotNull(example.createdReminderSchedule);

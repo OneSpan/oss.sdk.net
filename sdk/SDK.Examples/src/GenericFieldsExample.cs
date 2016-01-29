@@ -9,11 +9,9 @@ namespace SDK.Examples
     {
         public static void Main(string[] args)
         {
-            new GenericFieldsExample(Props.GetInstance()).Run();
+            new GenericFieldsExample().Run();
         }
 
-        private string email1;
-        private Stream fileStream1;
         public static readonly string DOCUMENT_NAME = "My Document";
         public static readonly string TEXTFIELD_ID = "textFieldId";
         public static readonly int TEXTFIELD_PAGE = 0;
@@ -41,19 +39,9 @@ namespace SDK.Examples
         public static readonly int LABEL_PAGE = 0;
         public static readonly string LABEL_VALUE = "labelValue";
 
-        public GenericFieldsExample(Props props) : this(props.Get("api.key"), props.Get("api.url"), props.Get("1.email"))
-        {
-        }
-
-        public GenericFieldsExample(String apiKey, String apiUrl, String email1) : base( apiKey, apiUrl )
-        {
-            this.email1 = email1;
-            this.fileStream1 = File.OpenRead(new FileInfo(Directory.GetCurrentDirectory() + "/src/document.pdf").FullName);
-        }
-
         override public void Execute()
         {
-            DocumentPackage package = PackageBuilder.NewPackageNamed("GenericFieldsExample " + DateTime.Now)
+            DocumentPackage package = PackageBuilder.NewPackageNamed(PackageName)
 					.DescribedAs("This is a new package")
 					.WithSigner(SignerBuilder.NewSignerWithEmail(email1)
 					            .WithFirstName("John")

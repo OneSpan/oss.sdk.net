@@ -9,26 +9,15 @@ namespace SDK.Examples
     {
 		public static void Main (string[] args)
 		{
-			new ReminderExample(Props.GetInstance()).Run();
+			new ReminderExample().Run();
 		}
-
-		private string email1;
-		private Stream fileStream1;
 
         public ReminderSchedule reminderScheduleToCreate, reminderScheduleToUpdate;
         public ReminderSchedule createdReminderSchedule, updatedReminderSchedule, removedReminderSchedule;
 
-		public ReminderExample( Props props ) : this(props.Get("api.key"), props.Get("api.url"), props.Get("1.email")) {
-		}
-
-		public ReminderExample( string apiKey, string apiUrl, string email1 ) : base( apiKey, apiUrl ) {
-			this.email1 = email1;
-			this.fileStream1 = File.OpenRead(new FileInfo(Directory.GetCurrentDirectory() + "/src/document.pdf").FullName);
-		}
-
 		override public void Execute()
 		{
-			DocumentPackage superDuperPackage = PackageBuilder.NewPackageNamed( "ReminderExample: " + DateTime.Now )
+            DocumentPackage superDuperPackage = PackageBuilder.NewPackageNamed(PackageName)
 				.WithSigner( SignerBuilder.NewSignerWithEmail( email1 )
 					.WithFirstName( "Patty" )
 					.WithLastName( "Galant" ) )

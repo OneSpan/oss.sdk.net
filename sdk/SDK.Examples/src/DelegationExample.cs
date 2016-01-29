@@ -10,10 +10,10 @@ namespace SDK.Examples
 
         public static void Main(string[] args)
         {
-            new DelegationExample(Props.GetInstance()).Run();
+            new DelegationExample().Run();
         }
 
-        public string ownerEmail, email1, email2, email3, email4, email5, email6, email7, email8, email9;
+        public string email7, email8, email9;
 
         public Sender retrievedOwner, retrievedSender1, retrievedSender2, retrievedSender3,
         retrievedSender4, retrievedSender5, retrievedSender6, retrievedSender7, retrievedSender8, retrievedSender9;
@@ -22,13 +22,8 @@ namespace SDK.Examples
         public IList<DelegationUser> delegationUserListAfterAdding, delegationUserListAfterRemoving, delegationUserListAfterUpdating
             ,delegationUserListAfterClearing;
 
-        public DelegationExample(Props props) : this(props.Get("api.key"), props.Get("api.url"), props.Get("sender.email"))
+        public DelegationExample()
         {
-        }
-
-        public DelegationExample(string apiKey, string apiUrl, string ownerEmail) : base(apiKey, apiUrl)
-        {
-            this.ownerEmail = ownerEmail;
             this.email1 = Guid.NewGuid().ToString().Replace("-", "") + "@e-signlive.com";
             this.email2 = Guid.NewGuid().ToString().Replace("-", "") + "@e-signlive.com";
             this.email3 = Guid.NewGuid().ToString().Replace("-", "") + "@e-signlive.com";
@@ -42,7 +37,7 @@ namespace SDK.Examples
 
         override public void Execute()
         {
-            AccountMember ownerMember = GetAccountMember(ownerEmail, "firstName", "lastName", "company", "title", "language", "phoneNumber");
+            AccountMember ownerMember = GetAccountMember(senderEmail, "firstName", "lastName", "company", "title", "language", "phoneNumber");
             AccountMember accountMember1 = GetAccountMember(email1, "firstName1", "lastName", "company1", "title1", "language1", "phoneNumber1");
             AccountMember accountMember2 = GetAccountMember(email2, "firstName2", "lastName2", "company2", "title2", "language2", "phoneNumber2");
             AccountMember accountMember3 = GetAccountMember(email3, "firstName3", "lastName3", "company3", "title3", "language3", "phoneNumber3");

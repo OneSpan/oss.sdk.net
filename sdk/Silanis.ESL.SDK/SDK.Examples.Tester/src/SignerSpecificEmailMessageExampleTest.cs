@@ -10,7 +10,7 @@ namespace SDK.Examples
         [Test()]
         public void VerifyResult()
         {
-            SignerSpecificEmailMessageExample example = new SignerSpecificEmailMessageExample(Props.GetInstance());
+            SignerSpecificEmailMessageExample example = new SignerSpecificEmailMessageExample();
             example.Run();
 
             DocumentPackage documentPackage = example.RetrievedPackage;

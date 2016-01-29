@@ -11,7 +11,7 @@ namespace SDK.Examples
         [Test()]
         public void VerifyResult()
         {
-            NotaryJournalExample example = new NotaryJournalExample(Props.GetInstance());
+            NotaryJournalExample example = new NotaryJournalExample();
             example.Run();
 
             Assert.IsNotNull(example.sdkJournalEntries);

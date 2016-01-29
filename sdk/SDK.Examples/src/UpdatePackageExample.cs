@@ -10,7 +10,7 @@ namespace SDK.Examples
     {
         public static void Main(string[] args)
         {
-            new UpdatePackageExample(Props.GetInstance()).Run();
+            new UpdatePackageExample().Run();
         }
 
         public readonly string OPT_OUT_REASON_1 = "OptOut reason One";
@@ -69,14 +69,6 @@ namespace SDK.Examples
         public DocumentPackage packageToCreate, packageToUpdate, createdPackage, updatedPackage;
         public DocumentPackageSettings settingsToCreate, settingsToUpdate, createdSettings, updatedSettings;
         public CeremonyLayoutSettings layoutSettingsToCreate, layoutSettingsToUpdate, createdLayoutSettings, updatedLayoutSettings;
-
-        public UpdatePackageExample(Props props) : this(props.Get("api.key"), props.Get("api.url"))
-        {
-        }
-
-        public UpdatePackageExample(string apiKey, string apiUrl) : base( apiKey, apiUrl )
-        {
-        }
 
         override public void Execute()
         {

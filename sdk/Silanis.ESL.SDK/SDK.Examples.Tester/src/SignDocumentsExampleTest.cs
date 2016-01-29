@@ -11,7 +11,7 @@ namespace SDK.Examples
         [Test()]
         public void VerifyResult()
         {
-            SignDocumentsExample example = new SignDocumentsExample(Props.GetInstance());
+            SignDocumentsExample example = new SignDocumentsExample();
             example.Run();
 
             AssertSignedSignatures(example.retrievedPackageBeforeSigning.Documents, example.senderEmail, false);
