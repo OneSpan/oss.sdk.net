@@ -71,10 +71,7 @@ namespace Silanis.ESL.SDK
                 SignerAuthenticationToken signerAuthenticationToken = new SignerAuthenticationToken();
                 signerAuthenticationToken.PackageId = packageId.Id;
                 signerAuthenticationToken.SignerId = signerId;
-
-                SessionFields sessionFields = new SessionFields();
-                sessionFields.Fields = fields;
-                signerAuthenticationToken.SessionFields = sessionFields;
+                signerAuthenticationToken.SessionFields = fields;
 
                 string serializedObject = JsonConvert.SerializeObject(signerAuthenticationToken);
                 string response = restClient.Post(path, serializedObject);              

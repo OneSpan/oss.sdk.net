@@ -28,7 +28,7 @@ namespace Silanis.ESL.API
 
 
     [JsonProperty("sessionFields")]
-    public SessionFields SessionFields
+    public IDictionary<string, string> SessionFields
     {
             get; set;
         }
