@@ -55,11 +55,8 @@ namespace Silanis.ESL.SDK
 		{
 			Asserts.NotEmptyOrNull (apiKey, "apiKey");
 			Asserts.NotEmptyOrNull (baseUrl, "baseUrl");
-			this.baseUrl = AppendServicePath (baseUrl);
-            webpageUrl = AppendServicePath (baseUrl);
-            if (webpageUrl.EndsWith("/api")) {
-                webpageUrl = webpageUrl.Remove(webpageUrl.Length - 4);
-            }
+            SetBaseUrl (baseUrl);
+            SetWebpageUrl (baseUrl);
 
             configureJsonSerializationSettings();
 
@@ -78,8 +75,8 @@ namespace Silanis.ESL.SDK
             Asserts.NotEmptyOrNull (apiKey, "apiKey");
             Asserts.NotEmptyOrNull (baseUrl, "baseUrl");
             Asserts.NotEmptyOrNull (webpageUrl, "webpageUrl");
-            this.baseUrl = AppendServicePath (baseUrl);
-            webpageUrl = AppendServicePath (webpageUrl);
+            SetBaseUrl (baseUrl);
+            this.webpageUrl = AppendServicePath (webpageUrl);
 
             configureJsonSerializationSettings();
 
@@ -87,11 +84,12 @@ namespace Silanis.ESL.SDK
             init(restClient, apiKey);
         }
 
-        public EslClient (string apiKey, string baseURL, Boolean allowAllSSLCertificates)
+        public EslClient (string apiKey, string baseUrl, Boolean allowAllSSLCertificates)
         {
             Asserts.NotEmptyOrNull (apiKey, "apiKey");
             Asserts.NotEmptyOrNull (baseUrl, "baseUrl");
-            this.baseUrl = AppendServicePath (baseUrl);
+            SetBaseUrl (baseUrl);
+            SetWebpageUrl (baseUrl);
 
             configureJsonSerializationSettings();
 
@@ -103,7 +101,8 @@ namespace Silanis.ESL.SDK
         {
             Asserts.NotEmptyOrNull (apiKey, "apiKey");
             Asserts.NotEmptyOrNull (baseUrl, "baseUrl");
-            this.baseUrl = AppendServicePath (baseUrl);
+            SetBaseUrl (baseUrl);
+            SetWebpageUrl (baseUrl);
 
             configureJsonSerializationSettings();
 
@@ -115,7 +114,8 @@ namespace Silanis.ESL.SDK
         {
             Asserts.NotEmptyOrNull (apiKey, "apiKey");
             Asserts.NotEmptyOrNull (baseUrl, "baseUrl");
-            this.baseUrl = AppendServicePath (baseUrl);
+            SetBaseUrl (baseUrl);
+            SetWebpageUrl (baseUrl);
 
             configureJsonSerializationSettings();
 
@@ -154,8 +154,24 @@ namespace Silanis.ESL.SDK
             jsonSerializerSettings.DateTimeZoneHandling = DateTimeZoneHandling.Utc;
             jsonSerializerSettings.Converters.Add( new CultureInfoJsonCreationConverter() );
         }
+
+        private void SetBaseUrl(string baseUrl) 
+        {
+            this.baseUrl = baseUrl;
+            this.baseUrl = AppendServicePath (this.baseUrl);
+        }
+
+        private void SetWebpageUrl(string baseUrl) 
+        {
+            webpageUrl = baseUrl;
+            if (webpageUrl.EndsWith("/api")) 
+            {
+                webpageUrl = webpageUrl.Replace("/api", "");
+            }
+            webpageUrl = AppendServicePath (webpageUrl);
+        }
             
-		private String AppendServicePath(string baseUrl)
+		private string AppendServicePath(string baseUrl)
 		{
 			if (baseUrl.EndsWith ("/")) 
 			{

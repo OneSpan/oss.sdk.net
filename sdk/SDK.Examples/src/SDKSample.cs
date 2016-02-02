@@ -19,7 +19,7 @@ namespace SDK.Examples
 
         public SDKSample()
         {
-            eslClient = new EslClient(props.Get( "api.key" ), props.Get( "api.url" ));
+            eslClient = new EslClient(props.Get( "api.key" ), props.Get( "api.url" ), props.Get( "webpage.url" ));
             SetProperties();
         }
 
