@@ -123,7 +123,6 @@
     <Compile Include="src\FieldManipulationExample.cs" />
     <Compile Include="src\RetrieveFieldValuesExample.cs" />
     <Compile Include="src\DocumentLayoutExample.cs" />
-    <Compile Include="src\QRCodeExample.cs" />
     <Compile Include="src\CreateTemplateOnBehalfOfAnotherSenderExample.cs" />
     <Compile Include="src\ContactsExample.cs" />
     <Compile Include="src\SignerInformationForEquifaxCanadaExample.cs" />

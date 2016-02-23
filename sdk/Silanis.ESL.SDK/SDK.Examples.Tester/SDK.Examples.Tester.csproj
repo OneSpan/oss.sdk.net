@@ -88,7 +88,6 @@
     <Compile Include="src\SignerSMSAuthenticationExampleTest.cs" />
     <Compile Include="src\FieldManipulationExampleTest.cs" />
     <Compile Include="src\DocumentLayoutExampleTest.cs" />
-    <Compile Include="src\QRCodeExampleTest.cs" />
     <Compile Include="src\CreateTemplateOnBehalfOfAnotherSenderExampleTest.cs" />
     <Compile Include="src\ContactsExampleTest.cs" />
     <Compile Include="src\SignerInformationForEquifaxCanadaExampleTest.cs" />
