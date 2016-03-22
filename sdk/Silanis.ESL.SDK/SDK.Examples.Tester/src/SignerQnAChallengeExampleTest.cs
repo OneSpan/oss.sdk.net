@@ -10,7 +10,7 @@ namespace SDK.Examples
         [Test()]
         public void VerifyResult()
         {
-            SignerQnAChallengeExample example = new SignerQnAChallengeExample(Props.GetInstance());
+            SignerQnAChallengeExample example = new SignerQnAChallengeExample();
             example.Run();
 
             DocumentPackage documentPackage = example.RetrievedPackage;

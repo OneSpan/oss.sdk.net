@@ -105,4 +105,7 @@
       <Name>Silanis.ESL.SDK</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+  </ItemGroup>
 </Project>

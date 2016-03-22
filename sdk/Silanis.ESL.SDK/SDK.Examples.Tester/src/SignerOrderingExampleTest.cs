@@ -10,7 +10,7 @@ namespace SDK.Examples
         [Test()]
         public void VerifyResult()
         {
-            SignerOrderingExample example = new SignerOrderingExample( Props.GetInstance() );
+            SignerOrderingExample example = new SignerOrderingExample(  );
             example.Run();
 
             // Initial signing order

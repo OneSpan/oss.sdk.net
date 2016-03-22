@@ -7,10 +7,6 @@ namespace SDK.Examples
 {
     public class CreateTemplateOnBehalfOfAnotherSenderExample : SDKSample
     {
-        private Stream fileStream1;
-        private Stream fileStream2;
-        public string senderEmail;
-        public string email1;
         public PackageId templateId;
 
         public readonly string SENDER_FIRST_NAME = "Rob";
@@ -20,23 +16,13 @@ namespace SDK.Examples
 
         public static void Main(string[] args)
         {
-            new CreateTemplateOnBehalfOfAnotherSenderExample(Props.GetInstance()).Run();
-        }
-
-        public CreateTemplateOnBehalfOfAnotherSenderExample(Props props) : this(props.Get("api.key"), props.Get("api.url"), props.Get("1.email"))
-        {
-        }
-
-        public CreateTemplateOnBehalfOfAnotherSenderExample(string apiKey, string apiUrl, string email1) : base(apiKey, apiUrl)
-        {
-            this.email1 = email1;
-            this.senderEmail = System.Guid.NewGuid().ToString().Replace("-", "") + "@e-signlive.com";
-            this.fileStream1 = File.OpenRead(new FileInfo(Directory.GetCurrentDirectory() + "/src/document.pdf").FullName);
-            this.fileStream2 = File.OpenRead(new FileInfo(Directory.GetCurrentDirectory() + "/src/document.pdf").FullName);
+            new CreateTemplateOnBehalfOfAnotherSenderExample().Run();
         }
 
         override public void Execute()
         {
+            this.senderEmail = GetRandomEmail();
+
             // Invite the sender to account
             eslClient.AccountService.InviteUser(AccountMemberBuilder.NewAccountMember(senderEmail)
                 .WithFirstName("firstName")
@@ -49,7 +35,7 @@ namespace SDK.Examples
             );
 
             // Create the template specifying the sender
-            DocumentPackage superDuperPackage = PackageBuilder.NewPackageNamed("CreateTemplateOnBehalfOfAnotherSenderExample " + DateTime.Now)
+            DocumentPackage superDuperPackage = PackageBuilder.NewPackageNamed(PackageName)
                 .DescribedAs("This is a package created using the e-SignLive SDK")
                 .WithEmailMessage("This message should be delivered to all signers")
                 .WithSenderInfo(SenderInfoBuilder.NewSenderInfo(senderEmail)

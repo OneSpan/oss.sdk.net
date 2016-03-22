@@ -9,24 +9,14 @@ namespace SDK.Examples
 	{
         public static void Main (string[] args)
         {
-            new SignerSpecificEmailMessageExample(Props.GetInstance()).Run();
+            new SignerSpecificEmailMessageExample().Run();
         }
 
-        public string email1;
-        private Stream fileStream1;
         public readonly string EMAIL_MESSAGE = "Hi John, could you sign this asap please?";
-
-        public SignerSpecificEmailMessageExample( Props props ) : this(props.Get("api.key"), props.Get("api.url"), props.Get("1.email")) {
-        }
-
-        public SignerSpecificEmailMessageExample( string apiKey, string apiUrl, string email1 ) : base( apiKey, apiUrl ) {
-            this.email1 = email1;
-            this.fileStream1 = File.OpenRead(new FileInfo(Directory.GetCurrentDirectory() + "/src/document.pdf").FullName);
-        }
 
         override public void Execute()
         {
-            DocumentPackage package = PackageBuilder.NewPackageNamed ("SignerSpecificEmailMessageExample " + DateTime.Now)
+            DocumentPackage package = PackageBuilder.NewPackageNamed (PackageName)
 					.DescribedAs ("This is a new package")
 					.WithSigner(SignerBuilder.NewSignerWithEmail(email1)
 					            .WithFirstName("John")

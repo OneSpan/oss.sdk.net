@@ -9,34 +9,27 @@ namespace SDK.Examples
     {
         public static void Main (string[] args)
         {
-            new SenderAuthenticationTokenExample(Props.GetInstance()).Run();
+            new SenderAuthenticationTokenExample().Run();
         }
 
         public string SenderSessionId { get; private set; }
         
         private AuthenticationClient AuthenticationClient;
-        private Stream fileStream;
 
-
-        public SenderAuthenticationTokenExample( Props props ) : this(props.Get("api.key"), props.Get("api.url"), props.Get("webpage.url"))
-        {
-        }
-
-        public SenderAuthenticationTokenExample( string apiKey, string apiUrl, string webpageUrl) : base( apiKey, apiUrl )
+        public SenderAuthenticationTokenExample()
         {
             this.AuthenticationClient = new AuthenticationClient(webpageUrl);
-            this.fileStream = File.OpenRead(new FileInfo(Directory.GetCurrentDirectory() + "/src/document.pdf").FullName);
         }
 
         override public void Execute()
         {
             DocumentPackage superDuperPackage =
-                PackageBuilder.NewPackageNamed("SenderAuthenticationTokenExample: " + DateTime.Now)
+                PackageBuilder.NewPackageNamed(PackageName)
                 .DescribedAs("This is a package created using the e-SignLive SDK")
                 .ExpiresOn(DateTime.Now.AddMonths(1))
                 .WithEmailMessage("This message should be delivered to all signers")
                 .WithDocument(DocumentBuilder.NewDocumentNamed("First Document")
-                              .FromStream(fileStream, DocumentType.PDF)
+                              .FromStream(fileStream1, DocumentType.PDF)
                              )
                 .Build();
 

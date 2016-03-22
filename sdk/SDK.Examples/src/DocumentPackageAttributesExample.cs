@@ -9,12 +9,10 @@ namespace SDK.Examples
     {
         public static void Main(string[] args)
         {
-            new DocumentPackageAttributesExample(Props.GetInstance()).Run();
+            new DocumentPackageAttributesExample().Run();
         }
 
-        private string email1;
-        private Stream fileStream1;
-
+        public readonly string DYNAMICS_2015 = "dynamics2015";
         public readonly string ATTRIBUTE_KEY_1 = "First Name";
         public readonly string ATTRIBUTE_KEY_2 = "Last Name";
         public readonly string ATTRIBUTE_KEY_3 = "Signing Order";
@@ -22,19 +20,9 @@ namespace SDK.Examples
         public readonly string ATTRIBUTE_2 = "Johnson";
         public readonly string ATTRIBUTE_3 = "1";
 
-        public DocumentPackageAttributesExample(Props props) : this(props.Get("api.key"), props.Get("api.url"), props.Get("1.email"))
-        {
-        }
-
-        public DocumentPackageAttributesExample(string apiKey, string apiUrl, string email1) : base( apiKey, apiUrl )
-        {
-            this.email1 = email1;
-            this.fileStream1 = File.OpenRead(new FileInfo(Directory.GetCurrentDirectory() + "/src/document.pdf").FullName);
-        }
-
         override public void Execute()
         {
-            DocumentPackage superDuperPackage = PackageBuilder.NewPackageNamed( "Policy " + DateTime.Now )
+            DocumentPackage superDuperPackage = PackageBuilder.NewPackageNamed(PackageName)
                 .DescribedAs( "This is a package created using the e-SignLive SDK" )
                     .ExpiresOn( DateTime.Now.AddMonths(1) )
                     .WithEmailMessage( "This message should be delivered to all signers" )
@@ -53,6 +41,7 @@ namespace SDK.Examples
                                .AtPosition( 400, 200 )
                                .WithValue( FieldBuilder.CHECKBOX_CHECKED ) )
                                    .AtPosition( 100, 100 ) ) )
+                    .WithOrigin(DYNAMICS_2015)
                     .WithAttributes(new DocumentPackageAttributesBuilder()
                                 .WithAttribute( ATTRIBUTE_KEY_1, ATTRIBUTE_1 )
                                 .WithAttribute( ATTRIBUTE_KEY_2, ATTRIBUTE_2 )

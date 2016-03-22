@@ -2,6 +2,7 @@ using System;
 using Silanis.ESL.SDK.Internal;
 using Silanis.ESL.API;
 using Newtonsoft.Json;
+using System.Collections.Generic;
 
 namespace Silanis.ESL.SDK
 {
@@ -60,11 +61,18 @@ namespace Silanis.ESL.SDK
 
         public string CreateSignerAuthenticationToken (PackageId packageId, string signerId)
         {
+            return CreateSignerAuthenticationToken(packageId, signerId, null);
+        }
+
+        public string CreateSignerAuthenticationToken (PackageId packageId, string signerId, IDictionary<string, string> fields)
+        {
             try {
                 string path = template.UrlFor (UrlTemplate.SIGNER_AUTHENTICATION_TOKEN_PATH).Build ();
                 SignerAuthenticationToken signerAuthenticationToken = new SignerAuthenticationToken();
                 signerAuthenticationToken.PackageId = packageId.Id;
                 signerAuthenticationToken.SignerId = signerId;
+                signerAuthenticationToken.SessionFields = fields;
+
                 string serializedObject = JsonConvert.SerializeObject(signerAuthenticationToken);
                 string response = restClient.Post(path, serializedObject);              
                 return JsonConvert.DeserializeObject<SignerAuthenticationToken> (response).Value;

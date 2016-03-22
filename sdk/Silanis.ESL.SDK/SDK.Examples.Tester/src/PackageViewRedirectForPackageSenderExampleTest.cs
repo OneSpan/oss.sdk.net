@@ -10,13 +10,13 @@ namespace SDK.Examples
         [Test()]
         public void VerifyResult()
         {
-            PackageViewRedirectForPackageSenderExample example = new PackageViewRedirectForPackageSenderExample(Props.GetInstance());
+            PackageViewRedirectForPackageSenderExample example = new PackageViewRedirectForPackageSenderExample();
             example.Run();
 
             Assert.IsNotNull(example.generatedLinkToPackageViewForSender);
 
             string stringResponse = HttpRequestUtil.GetUrlContent(example.generatedLinkToPackageViewForSender);
-            StringAssert.Contains(example.PACKAGE_NAME, stringResponse);
+            StringAssert.Contains(example.PackageName, stringResponse);
         }
     }
 }

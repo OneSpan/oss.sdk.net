@@ -14,16 +14,14 @@ namespace SDK.Examples
 
         public static void Main(string[] args)
         {
-            CustomSenderInfoExample example = new CustomSenderInfoExample(Props.GetInstance());
+            CustomSenderInfoExample example = new CustomSenderInfoExample();
             example.Run();
 
             DocumentPackage documentPackage = example.eslClient.GetPackage(example.PackageId);
             Console.WriteLine("Document packages = " + documentPackage.Id);
         }
 
-        private string senderEmail;
         private DocumentPackage package;
-        private Stream fileStream1;
 
         public string SenderEmail
         {
@@ -39,16 +37,6 @@ namespace SDK.Examples
             {
                 return package;
             }
-        }
-            
-
-        public CustomSenderInfoExample(Props props) : this(props.Get("api.key"), props.Get("api.url"))
-        {
-        }
-
-        public CustomSenderInfoExample(string apiKey, string apiUrl) : base( apiKey, apiUrl )
-        {
-            this.fileStream1 = File.OpenRead(new FileInfo(Directory.GetCurrentDirectory() + "/src/document.pdf").FullName);
         }
 
         override public void Execute()
@@ -72,7 +60,7 @@ namespace SDK.Examples
                                     .WithCompany(SENDER_COMPANY)
                                     .Build();
 
-            package = PackageBuilder.NewPackageNamed( "CustomSenderInfoExample " + DateTime.Now )
+            package = PackageBuilder.NewPackageNamed(PackageName)
                       .WithSenderInfo( senderInfo )
                       .DescribedAs( "This is a package created using the e-SignLive SDK" )
                       .ExpiresOn( DateTime.Now.AddMonths(1) )

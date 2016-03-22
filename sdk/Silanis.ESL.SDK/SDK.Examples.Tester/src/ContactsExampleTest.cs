@@ -10,7 +10,7 @@ namespace SDK.Examples
         [Test()]
         public void VerifyResult()
         {
-            ContactsExample example = new ContactsExample(Props.GetInstance());
+            ContactsExample example = new ContactsExample();
             example.Run();
 
             DocumentPackage documentPackage = example.RetrievedPackage;

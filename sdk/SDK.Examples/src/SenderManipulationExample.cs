@@ -6,10 +6,6 @@ namespace SDK.Examples
 {
     public class SenderManipulationExample : SDKSample
     {
-        public string email1;
-        public string email2;
-        public string email3;
-
         public AccountMember accountMember1;
         public AccountMember accountMember2;
         public AccountMember accountMember3;
@@ -17,11 +13,7 @@ namespace SDK.Examples
         public Sender retrievedSender1, retrievedSender2, retrievedSender3;
         public Sender retrievedUpdatedSender3;
 
-        public SenderManipulationExample(Props props) : this(props.Get("api.key"), props.Get("api.url"))
-        {
-        }
-
-        public SenderManipulationExample(string apiKey, string apiUrl) : base( apiKey, apiUrl )
+        public SenderManipulationExample()
         {
             this.email1 = GetRandomEmail();
             this.email2 = GetRandomEmail();

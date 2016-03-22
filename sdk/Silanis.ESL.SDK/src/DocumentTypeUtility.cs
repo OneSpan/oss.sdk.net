@@ -29,6 +29,10 @@ namespace Silanis.ESL.SDK
 				return "pdf";
 			case DocumentType.WORD:
 				return "docx";
+            case DocumentType.RTF:
+                return "rtf";
+            case DocumentType.ODT:
+                return "odt";
 			default:
 				throw new EslException("Unknown DocumentType: " + type, null);
 			}

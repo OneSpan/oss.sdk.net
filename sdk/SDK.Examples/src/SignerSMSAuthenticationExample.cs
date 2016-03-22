@@ -12,27 +12,12 @@ namespace SDK.Examples
     {
         public static void Main(string[] args)
         {
-            new SignerSMSAuthenticationExample(Props.GetInstance()).Run();
-        }
-
-        public string email1;
-        public string sms1;
-        private Stream fileStream1;
-
-        public SignerSMSAuthenticationExample(Props props) : this(props.Get("api.key"), props.Get("api.url"), props.Get("1.email"), props.Get("1.sms"))
-        {
-        }
-
-        public SignerSMSAuthenticationExample(string apiKey, string apiUrl, string email1, string sms1) : base(apiKey, apiUrl)
-        {
-            this.email1 = email1;
-            this.sms1 = sms1;
-            this.fileStream1 = File.OpenRead(new FileInfo(Directory.GetCurrentDirectory() + "/src/document.pdf").FullName);
+            new SignerSMSAuthenticationExample().Run();
         }
 
         override public void Execute()
         {
-            DocumentPackage superDuperPackage = PackageBuilder.NewPackageNamed("SignerSMSAuthenticationExample: " + DateTime.Now)
+            DocumentPackage superDuperPackage = PackageBuilder.NewPackageNamed(PackageName)
                 .DescribedAs("This is a SMS authentication example")
                 .WithSigner(SignerBuilder.NewSignerWithEmail(email1)
                     .WithFirstName("John")

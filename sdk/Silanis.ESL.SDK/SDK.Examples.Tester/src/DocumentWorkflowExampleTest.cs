@@ -10,7 +10,7 @@ namespace SDK.Examples
         [Test()]
         public void VerifyResult()
         {
-            DocumentWorkflowExample example = new DocumentWorkflowExample( Props.GetInstance() );
+            DocumentWorkflowExample example = new DocumentWorkflowExample(  );
             example.Run();
             
             DocumentPackage package = example.EslClient.GetPackage( example.PackageId );

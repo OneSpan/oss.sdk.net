@@ -12,7 +12,7 @@ namespace SDK.Examples
         [Test()]
         public void VerifyResult()
         {
-            TextAnchorExtractionExample example = new TextAnchorExtractionExample(Props.GetInstance());
+            TextAnchorExtractionExample example = new TextAnchorExtractionExample();
             example.Run();
 
             Document document = example.RetrievedPackage.GetDocument(example.DOCUMENT_NAME);

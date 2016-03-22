@@ -10,11 +10,6 @@ namespace SDK.Examples
     {
         public readonly string DOCUMENT_NAME = "SignatureManipulationExample";
 
-        public string email1;
-        public string email2;
-        public string email3;
-        private Stream fileStream;
-
         private string documentId = "documentId";
 
         public Signature signature1;
@@ -31,22 +26,10 @@ namespace SDK.Examples
 
         public DocumentPackage createdPackage;
 
-        public SignatureManipulationExample(Props props) : this(props.Get("api.key"), props.Get("api.url"), props.Get("1.email"), props.Get("2.email"), props.Get("3.email"))
-        {
-        }
-
-        public SignatureManipulationExample(string apiKey, string apiUrl, string email1, string email2, string email3) : base( apiKey, apiUrl )
-        {
-            this.email1 = email1;
-            this.email2 = email2;
-            this.email3 = email3;
-            this.fileStream = File.OpenRead(new FileInfo(Directory.GetCurrentDirectory() + "/src/document.pdf").FullName);
-        }
-
         override public void Execute()
         {
             DocumentPackage superDuperPackage =
-                PackageBuilder.NewPackageNamed("SignatureManipulationExample: " + DateTime.Now)
+                PackageBuilder.NewPackageNamed(PackageName)
                     .DescribedAs("This is a package created using the e-SignLive SDK")
                     .ExpiresOn(DateTime.Now.AddMonths(100))
                     .WithSigner(SignerBuilder.NewSignerWithEmail(email1)
@@ -66,7 +49,7 @@ namespace SDK.Examples
             )
                     .WithDocument(DocumentBuilder.NewDocumentNamed(DOCUMENT_NAME)
                                   .WithId("documentId")
-                                  .FromStream(fileStream, DocumentType.PDF)
+                                  .FromStream(fileStream1, DocumentType.PDF)
             )
 
                     .Build();

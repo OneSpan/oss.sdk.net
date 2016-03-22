@@ -11,7 +11,7 @@ namespace SDK.Examples
         [Test()]
         public void VerifyResult()
         {
-            FieldManipulationExample example = new FieldManipulationExample(Props.GetInstance());
+            FieldManipulationExample example = new FieldManipulationExample();
             example.Run();
 
             // Test if all signatures are added properly

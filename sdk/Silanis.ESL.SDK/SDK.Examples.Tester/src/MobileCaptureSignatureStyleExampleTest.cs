@@ -10,7 +10,7 @@ namespace SDK.Examples
         [Test()]
         public void VerifyResult()
         {
-            MobileCaptureSignatureStyleExample example = new MobileCaptureSignatureStyleExample(Props.GetInstance());
+            MobileCaptureSignatureStyleExample example = new MobileCaptureSignatureStyleExample();
             example.Run();
 
             DocumentPackage documentPackage = example.RetrievedPackage;

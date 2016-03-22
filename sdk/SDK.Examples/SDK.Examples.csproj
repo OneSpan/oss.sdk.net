@@ -74,7 +74,6 @@
     <Compile Include="src\BasicPackageCreationExample.cs" />
     <Compile Include="src\AuthenticationMethodsExample.cs" />
     <Compile Include="src\BrandingBarConfigurationExample.cs" />
-    <Compile Include="src\ChangeSignerExample.cs" />
     <Compile Include="src\DeletePackageExample.cs" />
     <Compile Include="src\DeliverSignedDocumentsByEmailExample.cs" />
     <Compile Include="src\DocumentExtractionExample.cs" />
@@ -124,7 +123,6 @@
     <Compile Include="src\FieldManipulationExample.cs" />
     <Compile Include="src\RetrieveFieldValuesExample.cs" />
     <Compile Include="src\DocumentLayoutExample.cs" />
-    <Compile Include="src\QRCodeExample.cs" />
     <Compile Include="src\CreateTemplateOnBehalfOfAnotherSenderExample.cs" />
     <Compile Include="src\ContactsExample.cs" />
     <Compile Include="src\SignerInformationForEquifaxCanadaExample.cs" />
@@ -158,6 +156,8 @@
     <Compile Include="src\CreatePackageWithoutDocumentExample.cs" />
     <Compile Include="src\ChangePlaceholderNameExample.cs" />
     <Compile Include="src\SignatureImageExample.cs" />
+    <Compile Include="src\SignDocumentsExample.cs" />
+    <Compile Include="src\UpdateSignerExample.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
@@ -191,6 +191,12 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="src\prêt.pdf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="src\document.rtf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="src\document.odt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>

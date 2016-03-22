@@ -13,7 +13,7 @@ namespace SDK.Examples
         [Test()]
 		public void VerifyResult()
         {
-			example = new CustomSenderInfoExample(Props.GetInstance());
+			example = new CustomSenderInfoExample();
 			example.Run();
 
             DocumentPackage package = example.RetrievedPackage;

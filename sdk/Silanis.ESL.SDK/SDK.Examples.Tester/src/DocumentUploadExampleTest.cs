@@ -10,7 +10,7 @@ namespace SDK.Examples
         [Test()]
         public void VerifyResult()
         {
-            DocumentUploadExample example = new DocumentUploadExample(Props.GetInstance());
+            DocumentUploadExample example = new DocumentUploadExample();
             example.Run();
 
             DocumentPackage documentPackage = example.RetrievedPackage;

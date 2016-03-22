@@ -9,7 +9,7 @@ namespace SDK.Examples
         [Test()]
         public void VerifyResult()
         {
-            ApplicationVersionExample example = new ApplicationVersionExample(Props.GetInstance());
+            ApplicationVersionExample example = new ApplicationVersionExample();
             example.Run();
 
             Assert.IsNotNull(example.applicationVersion);

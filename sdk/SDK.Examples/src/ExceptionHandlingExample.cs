@@ -8,15 +8,7 @@ namespace SDK.Examples
     {
         public static void Main(string[] args)
         {
-            new ExceptionHandlingExample(Props.GetInstance()).Run();
-        }
-
-        public ExceptionHandlingExample(Props props) : this(props.Get("api.key"), props.Get("api.url"))
-        {
-        }
-
-        public ExceptionHandlingExample(string apiKey, string apiUrl) : base( apiKey, apiUrl )
-        {
+            new ExceptionHandlingExample().Run();
         }
 
         override public void Execute()

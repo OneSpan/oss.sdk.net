@@ -10,10 +10,9 @@ namespace SDK.Examples
     {
         public static void Main(string[] args)
         {
-            new SignableSignaturesExample(Props.GetInstance()).Run();
+            new SignableSignaturesExample().Run();
         }
 
-        private Stream fileStream1;
         public DocumentPackage sentPackage;
 
         private string signer1Id = "signer1Id";
@@ -21,24 +20,11 @@ namespace SDK.Examples
         private string documentId = "documentId";
         private string DOCUMENT_NAME = "First Document";
 
-        public string email1;
-        public string email2;
         public IList<Signature> signer1SignableSignatures, signer2SignableSignatures;
-
-        public SignableSignaturesExample(Props props) : this(props.Get("api.key"), props.Get("api.url"), props.Get("1.email"), props.Get("2.email"))
-        {
-        }
-
-        public SignableSignaturesExample(string apiKey, string apiUrl, string email1, string email2) : base(apiKey, apiUrl)
-        {
-            this.email1 = email1;
-            this.email2 = email2;
-            this.fileStream1 = File.OpenRead(new FileInfo(Directory.GetCurrentDirectory() + "/src/document.pdf").FullName);
-        }
 
         override public void Execute()
         {
-            DocumentPackage superDuperPackage = PackageBuilder.NewPackageNamed("SignableSignaturesExample: " + DateTime.Now)
+            DocumentPackage superDuperPackage = PackageBuilder.NewPackageNamed(PackageName)
                 .WithSettings(DocumentPackageSettingsBuilder.NewDocumentPackageSettings().WithInPerson())
                     .WithSigner(SignerBuilder.NewSignerWithEmail(email1)
                         .WithFirstName("John1")

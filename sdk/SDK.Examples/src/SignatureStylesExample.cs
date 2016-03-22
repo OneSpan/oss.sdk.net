@@ -9,11 +9,8 @@ namespace SDK.Examples
     {
         public static void Main(string[] args)
         {
-            new SignatureStylesExample(Props.GetInstance()).Run();
+            new SignatureStylesExample().Run();
         }
-
-        private string email1;
-        private Stream fileStream1;
 
         public readonly string DOCUMENT_NAME = "First Document";
         public readonly int FULL_NAME_SIGNATURE_PAGE = 0;
@@ -26,19 +23,9 @@ namespace SDK.Examples
         public readonly int HAND_DRAWN_SIGNATURE_POSITION_X = 500;
         public readonly int HAND_DRAWN_SIGNATURE_POSITION_Y = 500;
 
-        public SignatureStylesExample(Props props) : this(props.Get("api.key"), props.Get("api.url"), props.Get("1.email"))
-        {
-        }
-
-        public SignatureStylesExample(string apiKey, string apiUrl, string email1) : base(apiKey, apiUrl)
-        {
-            this.email1 = email1;
-            this.fileStream1 = File.OpenRead(new FileInfo(Directory.GetCurrentDirectory() + "/src/document.pdf").FullName);
-        }
-
         override public void Execute()
         {
-            DocumentPackage superDuperPackage = PackageBuilder.NewPackageNamed("SignatureStylesExample: " + DateTime.Now)
+            DocumentPackage superDuperPackage = PackageBuilder.NewPackageNamed(PackageName)
                 .WithSigner(SignerBuilder.NewSignerWithEmail(email1)
                             .WithFirstName("John")
                             .WithLastName("Smith"))

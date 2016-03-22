@@ -9,29 +9,14 @@ namespace SDK.Examples
     {
         public static void Main(string[] args)
         {
-            new MixingSignatureAndAcceptanceOnOnedocumentExample(Props.GetInstance()).Run();
+            new MixingSignatureAndAcceptanceOnOnedocumentExample().Run();
         }
-
-        private string email1;
-        private string email2;
-        private Stream fileStream1;
 
         public readonly string DOCUMENT_NAME = "First Document";
 
-        public MixingSignatureAndAcceptanceOnOnedocumentExample(Props props) : this(props.Get("api.key"), props.Get("api.url"), props.Get("1.email"), props.Get("2.email"))
-        {
-        }
-
-        public MixingSignatureAndAcceptanceOnOnedocumentExample(string apiKey, string apiUrl, string email1, string email2) : base(apiKey, apiUrl)
-        {
-            this.email1 = email1;
-            this.email2 = email2;
-            this.fileStream1 = File.OpenRead(new FileInfo(Directory.GetCurrentDirectory() + "/src/document.pdf").FullName);
-        }
-
         override public void Execute()
         {
-            DocumentPackage superDuperPackage = PackageBuilder.NewPackageNamed("MixingSignatureAndAcceptanceOnOnedocumentExample: " + DateTime.Now)
+            DocumentPackage superDuperPackage = PackageBuilder.NewPackageNamed(PackageName)
                 .WithSettings(DocumentPackageSettingsBuilder.NewDocumentPackageSettings().WithInPerson())
                     .WithSigner(SignerBuilder.NewSignerWithEmail(email1)
                                 .WithFirstName("John1")

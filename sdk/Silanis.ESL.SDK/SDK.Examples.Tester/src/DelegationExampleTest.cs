@@ -11,7 +11,7 @@ namespace SDK.Examples
         [Test()]
         public void VerifyResult()
         {
-            DelegationExample example = new DelegationExample(Props.GetInstance());
+            DelegationExample example = new DelegationExample();
             example.Run();
 
             Assert.AreEqual(example.email1, example.retrievedSender1.Email);

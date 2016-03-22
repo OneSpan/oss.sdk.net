@@ -18,8 +18,6 @@ namespace SDK.Examples
         private string httpProxyUserName = "httpUser";
         private string httpProxyPassword = "httpPwd";
 
-        private string email1;
-        private Stream fileStream1, fileStream2;
         private ProxyConfiguration httpProxyConfiguration, httpProxyWithCredentialsConfiguration;
 
         public EslClient eslClient, eslClientWithHttpProxy, eslClientWithHttpProxyHasCredentials;
@@ -31,15 +29,11 @@ namespace SDK.Examples
             new ProxyConfigurationExample(Props.GetInstance()).Run();
         }
 
-        public ProxyConfigurationExample( Props props ) : this(props.Get("api.key"), props.Get("api.url"), props.Get("1.email")) {
+        public ProxyConfigurationExample( Props props ) : this(props.Get("api.key"), props.Get("api.url")) {
         }
 
-        public ProxyConfigurationExample(string apiKey, string apiUrl, string email1) : base(apiKey, apiUrl)
+        public ProxyConfigurationExample(string apiKey, string apiUrl) : base(apiKey, apiUrl)
         {
-            this.email1 = email1;
-            fileStream1 = File.OpenRead(new FileInfo(Directory.GetCurrentDirectory() + "/src/document.pdf").FullName);
-            fileStream2 = File.OpenRead(new FileInfo(Directory.GetCurrentDirectory() + "/src/document.pdf").FullName);
-
             httpProxyConfiguration = ProxyConfigurationBuilder.NewProxyConfiguration()
                 .WithHttpHost(httpProxyURL)
                     .WithHttpPort(httpProxyPort)

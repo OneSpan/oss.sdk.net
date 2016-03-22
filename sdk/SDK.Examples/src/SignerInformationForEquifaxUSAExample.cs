@@ -10,7 +10,7 @@ namespace SDK.Examples
     {
         public static void Main(string[] args)
         {
-            new SignerInformationForEquifaxUSAExample(Props.GetInstance()).Run();
+            new SignerInformationForEquifaxUSAExample().Run();
         }
 
         public readonly string FIRST_NAME = "John";
@@ -24,27 +24,15 @@ namespace SDK.Examples
         public readonly string HOME_PHONE_NUMBER = "2055551212";
         public readonly string DRIVERS_LICENSE_NUMBER = "251689216";
         public readonly Nullable<DateTime> DATE_OF_BIRTH = new DateTime(1973, 2, 2);
-        public readonly string SIGNER_EMAIL;
 
         private string signerId = "signerId";
         private string documentName = "My Document";
 
-        public SignerInformationForEquifaxUSAExample(Props props) : this(props.Get("api.key"), props.Get("api.url"), props.Get("1.email"))
-        {
-        }
-
-        public SignerInformationForEquifaxUSAExample(string apiKey, string apiUrl, string email1) : base( apiKey, apiUrl )
-        {
-            this.SIGNER_EMAIL = email1;
-        }
-
         override public void Execute()
         {
-            Stream file = File.OpenRead(new FileInfo(Directory.GetCurrentDirectory() + "/src/document.pdf").FullName);
-
-            DocumentPackage superDuperPackage = PackageBuilder.NewPackageNamed("SignerInformationForEquifaxUSAExample: " + DateTime.Now)
+            DocumentPackage superDuperPackage = PackageBuilder.NewPackageNamed(PackageName)
                 .DescribedAs("This is a package created using the e-SignLive SDK")
-                .WithSigner(SignerBuilder.NewSignerWithEmail(SIGNER_EMAIL)
+                .WithSigner(SignerBuilder.NewSignerWithEmail(email1)
                                 .WithFirstName(FIRST_NAME)
                                 .WithLastName(LAST_NAME)
                                 .WithCustomId(signerId)
@@ -63,8 +51,8 @@ namespace SDK.Examples
                                         .WithDriversLicenseNumber(DRIVERS_LICENSE_NUMBER)
                                         .Build()))
                                 .WithDocument(DocumentBuilder.NewDocumentNamed(documentName)
-                                .FromStream(file, DocumentType.PDF)
-                                .WithSignature(SignatureBuilder.SignatureFor(SIGNER_EMAIL)
+                                .FromStream(fileStream1, DocumentType.PDF)
+                                .WithSignature(SignatureBuilder.SignatureFor(email1)
                                     .Build())
                                 .Build())
                             .Build();

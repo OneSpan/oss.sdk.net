@@ -10,7 +10,7 @@ namespace SDK.Examples
         [Test()]
         public void VerifyResult()
         {
-            SignerSMSAuthenticationExample example = new SignerSMSAuthenticationExample(Props.GetInstance());
+            SignerSMSAuthenticationExample example = new SignerSMSAuthenticationExample();
             example.Run();
 
             DocumentPackage documentPackage = example.RetrievedPackage;

@@ -9,7 +9,7 @@ namespace SDK.Examples
         [Test]
         public void verify()
         {
-            DocumentOperationsExample example = new DocumentOperationsExample(Props.GetInstance());
+            DocumentOperationsExample example = new DocumentOperationsExample();
             example.Run();
 
             // Verify if the document was uploaded correctly.

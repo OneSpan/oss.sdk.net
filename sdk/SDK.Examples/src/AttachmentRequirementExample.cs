@@ -12,13 +12,11 @@ namespace SDK.Examples
     {
         public static void Main(string[] args)
         {
-            new AttachmentRequirementExample(Props.GetInstance()).Run();
+            new AttachmentRequirementExample().Run();
         }
 
-        private Stream fileStream1, attachmentInputStream1, attachmentInputStream2, attachmentInputStream3;
+        private Stream attachmentInputStream1, attachmentInputStream2, attachmentInputStream3;
 
-        private string email1;
-        private string email2;
         private Signer signer1;
         private string attachment1Id;
 
@@ -54,16 +52,8 @@ namespace SDK.Examples
         public long attachment1ForSigner1FileSize;
         public ZipFile downloadedAllAttachmentsForPackageZip, downloadedAllAttachmentsForSigner1InPackageZip, downloadedAllAttachmentsForSigner2InPackageZip;
 
-        public AttachmentRequirementExample(Props props) : this(props.Get("api.key"), props.Get("api.url"), props.Get("1.email"), props.Get("2.email"))
+        public AttachmentRequirementExample()
         {
-        }
-
-        public AttachmentRequirementExample(string apiKey, string apiUrl, string email1, string email2) : base( apiKey, apiUrl )
-        {
-            this.email1 = email1;
-            this.email2 = email2;
-
-            this.fileStream1 = File.OpenRead(new FileInfo(Directory.GetCurrentDirectory() + "/src/document.pdf").FullName);
             this.attachmentInputStream1 = File.OpenRead(new FileInfo(Directory.GetCurrentDirectory() + "/src/document-for-anchor-extraction.pdf").FullName);
             this.attachmentInputStream2 = File.OpenRead(new FileInfo(Directory.GetCurrentDirectory() + "/src/document-with-fields.pdf").FullName);
             this.attachmentInputStream3 = File.OpenRead(new FileInfo(Directory.GetCurrentDirectory() + "/src/extract_document.pdf").FullName);
@@ -96,7 +86,7 @@ namespace SDK.Examples
                                                .Build())
                     .Build();
 
-            DocumentPackage superDuperPackage = PackageBuilder.NewPackageNamed("AttachmentRequirementExample: " + DateTime.Now)
+            DocumentPackage superDuperPackage = PackageBuilder.NewPackageNamed(PackageName)
                 .DescribedAs("This is a package created using the e-SignLive SDK")
                     .WithSigner(signer1)
                     .WithSigner(signer2)

@@ -41,6 +41,7 @@ namespace Silanis.ESL.SDK
         private AuthenticationService authenticationService;
         private SystemService systemService;
         private SignatureImageService signatureImageService;
+        private SigningService signingService;
         
         private JsonSerializerSettings jsonSerializerSettings;
 
@@ -54,11 +55,8 @@ namespace Silanis.ESL.SDK
 		{
 			Asserts.NotEmptyOrNull (apiKey, "apiKey");
 			Asserts.NotEmptyOrNull (baseUrl, "baseUrl");
-			this.baseUrl = AppendServicePath (baseUrl);
-            webpageUrl = AppendServicePath (baseUrl);
-            if (webpageUrl.EndsWith("/api")) {
-                webpageUrl = webpageUrl.Remove(webpageUrl.Length - 4);
-            }
+            SetBaseUrl (baseUrl);
+            SetWebpageUrl (baseUrl);
 
             configureJsonSerializationSettings();
 
@@ -77,8 +75,8 @@ namespace Silanis.ESL.SDK
             Asserts.NotEmptyOrNull (apiKey, "apiKey");
             Asserts.NotEmptyOrNull (baseUrl, "baseUrl");
             Asserts.NotEmptyOrNull (webpageUrl, "webpageUrl");
-            this.baseUrl = AppendServicePath (baseUrl);
-            webpageUrl = AppendServicePath (webpageUrl);
+            SetBaseUrl (baseUrl);
+            this.webpageUrl = AppendServicePath (webpageUrl);
 
             configureJsonSerializationSettings();
 
@@ -86,11 +84,12 @@ namespace Silanis.ESL.SDK
             init(restClient, apiKey);
         }
 
-        public EslClient (string apiKey, string baseURL, Boolean allowAllSSLCertificates)
+        public EslClient (string apiKey, string baseUrl, Boolean allowAllSSLCertificates)
         {
             Asserts.NotEmptyOrNull (apiKey, "apiKey");
             Asserts.NotEmptyOrNull (baseUrl, "baseUrl");
-            this.baseUrl = AppendServicePath (baseUrl);
+            SetBaseUrl (baseUrl);
+            SetWebpageUrl (baseUrl);
 
             configureJsonSerializationSettings();
 
@@ -102,7 +101,8 @@ namespace Silanis.ESL.SDK
         {
             Asserts.NotEmptyOrNull (apiKey, "apiKey");
             Asserts.NotEmptyOrNull (baseUrl, "baseUrl");
-            this.baseUrl = AppendServicePath (baseUrl);
+            SetBaseUrl (baseUrl);
+            SetWebpageUrl (baseUrl);
 
             configureJsonSerializationSettings();
 
@@ -114,7 +114,8 @@ namespace Silanis.ESL.SDK
         {
             Asserts.NotEmptyOrNull (apiKey, "apiKey");
             Asserts.NotEmptyOrNull (baseUrl, "baseUrl");
-            this.baseUrl = AppendServicePath (baseUrl);
+            SetBaseUrl (baseUrl);
+            SetWebpageUrl (baseUrl);
 
             configureJsonSerializationSettings();
 
@@ -127,6 +128,7 @@ namespace Silanis.ESL.SDK
             packageService = new PackageService(restClient, this.baseUrl, jsonSerializerSettings);
             reportService = new ReportService(restClient, this.baseUrl, jsonSerializerSettings);
             systemService = new SystemService(restClient, this.baseUrl, jsonSerializerSettings);
+            signingService = new SigningService(restClient, this.baseUrl, jsonSerializerSettings);
             signatureImageService = new SignatureImageService(restClient, this.baseUrl, jsonSerializerSettings);
             sessionService = new SessionService(apiKey, this.baseUrl);
             fieldSummaryService = new FieldSummaryService(new FieldSummaryApiClient(apiKey, this.baseUrl));
@@ -152,8 +154,24 @@ namespace Silanis.ESL.SDK
             jsonSerializerSettings.DateTimeZoneHandling = DateTimeZoneHandling.Utc;
             jsonSerializerSettings.Converters.Add( new CultureInfoJsonCreationConverter() );
         }
+
+        private void SetBaseUrl(string baseUrl) 
+        {
+            this.baseUrl = baseUrl;
+            this.baseUrl = AppendServicePath (this.baseUrl);
+        }
+
+        private void SetWebpageUrl(string baseUrl) 
+        {
+            webpageUrl = baseUrl;
+            if (webpageUrl.EndsWith("/api")) 
+            {
+                webpageUrl = webpageUrl.Replace("/api", "");
+            }
+            webpageUrl = AppendServicePath (webpageUrl);
+        }
             
-		private String AppendServicePath(string baseUrl)
+		private string AppendServicePath(string baseUrl)
 		{
 			if (baseUrl.EndsWith ("/")) 
 			{
@@ -224,6 +242,51 @@ namespace Silanis.ESL.SDK
             }
             PackageId id = packageService.CreatePackageOneStep (packageToCreate, package.Documents);
             return id;
+        }
+
+        public void SignDocument(PackageId packageId, string documentName) 
+        {
+            Silanis.ESL.API.Package package = packageService.GetPackage(packageId);
+            foreach(Silanis.ESL.API.Document document in package.Documents) 
+            {
+                if(document.Name.Equals(documentName)) 
+                {
+                    document.Approvals.Clear();
+                    signingService.SignDocument(packageId, document);
+                }
+            }
+        }
+
+        public void SignDocuments(PackageId packageId) 
+        {
+            SignedDocuments signedDocuments = new SignedDocuments();
+            Package package = packageService.GetPackage(packageId);
+            foreach(Silanis.ESL.API.Document document in package.Documents) 
+            {
+                document.Approvals.Clear();
+                signedDocuments.AddDocument(document);
+            }
+            signingService.SignDocuments(packageId, signedDocuments);
+        }
+
+        public void SignDocuments(PackageId packageId, string signerId) 
+        {
+            string bulkSigningKey = "Bulk Signing on behalf of";
+
+            IDictionary<string, string> signerSessionFields = new Dictionary<string, string>();
+            signerSessionFields.Add(bulkSigningKey, signerId);
+            string signerAuthenticationToken = authenticationTokenService.CreateSignerAuthenticationToken(packageId, signerId, signerSessionFields);
+
+            string signerSessionId = authenticationService.GetSessionIdForSignerAuthenticationToken(signerAuthenticationToken);
+
+            SignedDocuments signedDocuments = new SignedDocuments();
+            Package package = packageService.GetPackage(packageId);
+            foreach(Silanis.ESL.API.Document document in package.Documents) 
+            {
+                document.Approvals.Clear();
+                signedDocuments.AddDocument(document);
+            }
+            signingService.SignDocuments(packageId, signedDocuments, signerSessionId);
         }
 
 		public PackageId CreateAndSendPackage( DocumentPackage package ) 
@@ -406,7 +469,11 @@ namespace Silanis.ESL.SDK
 		}
 
         public void UploadAttachment(PackageId packageId, string attachmentId, string filename, byte[] fileBytes, string signerId) {
-            string signerAuthenticationToken = authenticationTokenService.CreateSignerAuthenticationToken(packageId, signerId);
+            string signerSessionFieldKey = "Upload Attachment on behalf of";
+
+            IDictionary<string, string> signerSessionFields = new Dictionary<string, string>();
+            signerSessionFields.Add(signerSessionFieldKey, signerId);
+            string signerAuthenticationToken = authenticationTokenService.CreateSignerAuthenticationToken(packageId, signerId, signerSessionFields);
             string signerSessionId = authenticationService.GetSessionIdForSignerAuthenticationToken(signerAuthenticationToken);
 
             attachmentRequirementService.UploadAttachment(packageId, attachmentId, filename, fileBytes, signerSessionId);
@@ -562,6 +629,14 @@ namespace Silanis.ESL.SDK
             get
             {
                 return systemService;
+            }
+        }
+
+        public SigningService SigningService
+        {
+            get
+            {
+                return signingService;
             }
         }
 	}

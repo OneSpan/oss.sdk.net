@@ -17,7 +17,7 @@ namespace SDK.Examples
         [Test()]
         public void VerifyResult()
         {
-            FieldValidationExample example = new FieldValidationExample(Props.GetInstance());
+            FieldValidationExample example = new FieldValidationExample();
             example.Run();
 
             DocumentPackage documentPackage = example.RetrievedPackage;

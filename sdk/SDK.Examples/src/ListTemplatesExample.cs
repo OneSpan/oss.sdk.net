@@ -17,13 +17,7 @@ namespace SDK.Examples
 
         public static void Main (string[] args)
         {
-            new ListTemplatesExample(Props.GetInstance()).Run();
-        }
-
-        public ListTemplatesExample( Props props ) : this(props.Get("api.key"), props.Get("api.url")) {
-        }
-
-        public ListTemplatesExample( string apiKey, string apiUrl ) : base( apiKey, apiUrl ) {
+            new ListTemplatesExample().Run();
         }
 
         override public void Execute()

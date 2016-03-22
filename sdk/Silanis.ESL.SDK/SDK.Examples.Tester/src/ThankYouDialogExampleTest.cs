@@ -9,7 +9,7 @@ namespace SDK.Examples
         [Test()]
         public void VerifyResult()
         {
-            ThankYouDialogExample example = new ThankYouDialogExample(Props.GetInstance());
+            ThankYouDialogExample example = new ThankYouDialogExample();
             example.Run();
 
             Assert.IsNotNull(example.thankYouDialogContent);

@@ -51,6 +51,32 @@ namespace Silanis.ESL.SDK
             return response;
         }
 
+        public string Post(string path, string jsonPayload, string sessionId) {
+            support.LogRequest("POST", path, jsonPayload);
+
+            headerGen = new SessionIdAuthHeaderGenerator(sessionId);
+
+            byte[] payloadBytes = null;
+            if (jsonPayload != null)
+            {
+                payloadBytes = Converter.ToBytes(jsonPayload);
+            }
+            else
+            {
+                payloadBytes = new byte[0];
+            }
+
+            if (proxyConfiguration != null) 
+                HttpMethods.proxyConfiguration = proxyConfiguration;
+
+            byte[] responseBytes = HttpMethods.PostHttp(headerGen, path, payloadBytes);
+
+            String response = Converter.ToString(responseBytes);
+            support.LogResponse(response);
+
+            return response;
+        }
+
         public string Put(string path, string jsonPayload) {
             support.LogRequest("PUT", path, jsonPayload);
 

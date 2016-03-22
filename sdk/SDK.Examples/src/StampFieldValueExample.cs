@@ -9,23 +9,14 @@ namespace SDK.Examples
 	{
         public static void Main (string[] args)
         {
-            new StampFieldValueExample(Props.GetInstance()).Run();
-        }
-
-        private string email1;
-        private Stream fileStream1;
-
-        public StampFieldValueExample( Props props ) : this(props.Get("api.key"), props.Get("api.url"), props.Get("1.email")) {
-        }
-
-        public StampFieldValueExample( string apiKey, string apiUrl, string email1 ) : base( apiKey, apiUrl ) {
-            this.email1 = email1;
-            this.fileStream1 = File.OpenRead(new FileInfo(Directory.GetCurrentDirectory() + "/src/document-with-fields.pdf").FullName);
+            new StampFieldValueExample().Run();
         }
 
         override public void Execute()
         {
-            DocumentPackage package = PackageBuilder.NewPackageNamed ("StampFieldValueExample " + DateTime.Now)
+            this.fileStream1 = File.OpenRead(new FileInfo(Directory.GetCurrentDirectory() + "/src/document-with-fields.pdf").FullName);
+
+            DocumentPackage package = PackageBuilder.NewPackageNamed (PackageName)
 				.DescribedAs ("This is a new package")
 					.WithSigner(SignerBuilder.NewSignerWithEmail(email1)
 					            .WithFirstName("John")

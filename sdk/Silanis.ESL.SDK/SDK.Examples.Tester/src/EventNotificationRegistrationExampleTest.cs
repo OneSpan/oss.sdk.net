@@ -12,7 +12,7 @@ namespace SDK.Examples
         [Category("NotFor60")]
 		public void VerifyResult()
 		{
-			EventNotificationRegistrationExample example = new EventNotificationRegistrationExample(Props.GetInstance());
+			EventNotificationRegistrationExample example = new EventNotificationRegistrationExample();
 			example.Run();
 
             EventNotificationConfig config = example.config;

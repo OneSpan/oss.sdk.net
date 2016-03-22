@@ -10,7 +10,7 @@ namespace SDK.Examples
         [Test()]
         public void VerifyResult()
         {
-            ConsentExample example = new ConsentExample(Props.GetInstance());
+            ConsentExample example = new ConsentExample();
             example.Run();
 
             DocumentPackage documentPackage = example.RetrievedPackage;

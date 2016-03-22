@@ -10,7 +10,7 @@ namespace SDK.Examples
         [Test()]
         public void VerifyResult()
         {
-            PackageLanguageConfigurationExample example = new PackageLanguageConfigurationExample(Props.GetInstance());
+            PackageLanguageConfigurationExample example = new PackageLanguageConfigurationExample();
             example.Run();
 
             DocumentPackage retrievedPackage = example.RetrievedPackage;

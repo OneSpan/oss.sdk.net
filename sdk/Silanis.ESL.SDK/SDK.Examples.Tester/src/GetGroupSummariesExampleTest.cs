@@ -9,7 +9,7 @@ namespace SDK.Examples
         [Test()]
         public void VerifyResult()
         {
-            GetGroupSummariesExample example = new GetGroupSummariesExample(Props.GetInstance());
+            GetGroupSummariesExample example = new GetGroupSummariesExample();
             example.Run();
 
             Assert.IsNotNull(example.retrievedGroupSummaries);

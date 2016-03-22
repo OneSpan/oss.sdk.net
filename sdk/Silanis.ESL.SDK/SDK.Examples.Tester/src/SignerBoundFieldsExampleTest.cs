@@ -10,7 +10,7 @@ namespace SDK.Examples
         [Test()]
         public void VerifyResult()
         {
-            SignerBoundFieldsExample example = new SignerBoundFieldsExample(Props.GetInstance());
+            SignerBoundFieldsExample example = new SignerBoundFieldsExample();
             example.Run();
 
             DocumentPackage documentPackage = example.RetrievedPackage;

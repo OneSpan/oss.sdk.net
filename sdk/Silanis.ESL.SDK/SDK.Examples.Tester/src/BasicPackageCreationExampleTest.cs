@@ -12,7 +12,7 @@ namespace SDK.Examples
         [Test()]
         public void VerifyResult()
         {
-            BasicPackageCreationExample example = new BasicPackageCreationExample( Props.GetInstance() );
+            BasicPackageCreationExample example = new BasicPackageCreationExample();
             example.Run();
 
             DocumentPackage documentPackage = example.RetrievedPackage;
@@ -26,6 +26,10 @@ namespace SDK.Examples
             // Verify if the sdk version is set correctly
             Assert.IsTrue(documentPackage.Attributes.Contents.ContainsKey( "sdk" ));
             Assert.IsTrue(documentPackage.Attributes.Contents["sdk"].ToString().Contains(".NET"));
+
+            // Verify if the origin is set correctly
+            Assert.IsTrue(documentPackage.Attributes.Contents.ContainsKey("origin"));
+            Assert.IsTrue(documentPackage.Attributes.Contents["origin"].ToString().Contains("api"));
 
             // Signer 1
             Signer signer = documentPackage.GetSigner(example.email1);

@@ -11,7 +11,7 @@ namespace SDK.Examples
         [ExpectedException(typeof(Silanis.ESL.SDK.EslServerException))]
         public void VerifyResult()
         {
-            DeletePackageExample example = new DeletePackageExample(Props.GetInstance());
+            DeletePackageExample example = new DeletePackageExample();
             example.Run();
 
             Assert.IsNull(example.RetrievedPackage);

@@ -16,7 +16,7 @@ namespace SDK.Examples
         [Test()]
         public void VerifyResult()
         {
-            example = new DocumentLayoutExample(Props.GetInstance());
+            example = new DocumentLayoutExample();
             example.Run();
 
             // Assert the layout was created correctly.

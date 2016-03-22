@@ -9,7 +9,7 @@ namespace SDK.Examples
         [Test()]
         public void VerifyResult()
         {
-            SignerManipulationExample example = new SignerManipulationExample(Props.GetInstance());
+            SignerManipulationExample example = new SignerManipulationExample();
             example.Run();
         }
     }

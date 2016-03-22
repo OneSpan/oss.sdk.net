@@ -9,7 +9,7 @@ namespace SDK.Examples
     {
         [Test]
         public void verify() {
-            GetCompletedPackagesWithinDateRangeExample example = new GetCompletedPackagesWithinDateRangeExample(Props.GetInstance());
+            GetCompletedPackagesWithinDateRangeExample example = new GetCompletedPackagesWithinDateRangeExample();
             example.Run();
 
             assertEqualsPackageUpdatedDate(example.draftPackages, example.START_DATE, example.END_DATE);

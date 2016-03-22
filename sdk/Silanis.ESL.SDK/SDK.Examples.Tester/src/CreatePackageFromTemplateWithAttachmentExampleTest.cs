@@ -10,7 +10,7 @@ namespace SDK.Examples
         [Test()]
         public void VerifyResult()
         {
-            CreatePackageFromTemplateWithAttachmentExample example = new CreatePackageFromTemplateWithAttachmentExample(Props.GetInstance());
+            CreatePackageFromTemplateWithAttachmentExample example = new CreatePackageFromTemplateWithAttachmentExample();
             example.Run();
 
             DocumentPackage documentPackage = example.RetrievedPackage;

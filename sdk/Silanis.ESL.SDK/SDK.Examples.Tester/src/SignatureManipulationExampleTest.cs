@@ -11,7 +11,7 @@ namespace SDK.Examples
         [Test()]
         public void VerifyResult()
         {
-            SignatureManipulationExample example = new SignatureManipulationExample(Props.GetInstance());
+            SignatureManipulationExample example = new SignatureManipulationExample();
             example.Run();
 
             // Test if all signatures are added properly

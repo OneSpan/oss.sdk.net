@@ -10,7 +10,7 @@ namespace SDK.Examples
         [Test()]
         public void VerifyResult()
         {
-            BrandingBarConfigurationExample example = new BrandingBarConfigurationExample(Props.GetInstance());
+            BrandingBarConfigurationExample example = new BrandingBarConfigurationExample();
             example.Run();
 
             DocumentPackage documentPackage = example.RetrievedPackage;

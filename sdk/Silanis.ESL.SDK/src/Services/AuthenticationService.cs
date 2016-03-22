@@ -2,6 +2,8 @@ using System;
 using System.Web;
 using Silanis.ESL.SDK.Internal;
 using Newtonsoft.Json;
+using System.Collections.Generic;
+using System.Text;
 
 namespace Silanis.ESL.SDK
 {
@@ -110,8 +112,9 @@ namespace Silanis.ESL.SDK
         public string GetSessionIdForSignerAuthenticationToken(string signerAuthenticationToken)
         {
             string path = authenticationTemplate.UrlFor(UrlTemplate.AUTHENTICATION_PATH_FOR_SIGNER_AUTHENTICATION_TOKEN)
-                                                .Replace("{signerAuthenticationToken}", signerAuthenticationToken)
-                                                .Build();
+                .Replace("{signerAuthenticationToken}", signerAuthenticationToken)
+                    .Build();
+
             try {
                 string stringResponse = client.GetUnauthenticated(path);
                 SessionToken userSessionIdToken = JsonConvert.DeserializeObject<SessionToken> (stringResponse);
@@ -123,7 +126,7 @@ namespace Silanis.ESL.SDK
             catch (Exception e) {
                 throw new EslException("Could not authenticate using a signer authentication token."+ " Exception: " + e.Message, e);
             }
-        }        
+        }
 
         public string BuildRedirectToSigningForSigner(string signerAuthenticationToken, PackageId packageId)
         {

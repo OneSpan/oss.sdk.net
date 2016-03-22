@@ -12,7 +12,7 @@ namespace SDK.Examples
         [ExpectedException(typeof(Silanis.ESL.SDK.EslException))]
         public void VerifyResult()
         {
-            MixingSignatureAndAcceptanceOnOnedocumentExample example = new MixingSignatureAndAcceptanceOnOnedocumentExample(Props.GetInstance());
+            MixingSignatureAndAcceptanceOnOnedocumentExample example = new MixingSignatureAndAcceptanceOnOnedocumentExample();
             example.Run();
 
             DocumentPackage documentPackage = example.RetrievedPackage;

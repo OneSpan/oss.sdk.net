@@ -13,30 +13,17 @@ namespace SDK.Examples
     {
         public static void Main(string[] args)
         {
-            new SignerQnAChallengeExample(Props.GetInstance()).Run();
+            new SignerQnAChallengeExample().Run();
         }
-
-        public string email1;
-        private Stream fileStream1;
 
         public readonly string FIRST_QUESTION = "What's your favorite sport? (answer: golf)";
         public readonly string FIRST_ANSWER = "golf";
         public readonly string SECOND_QUESTION = "What music instrument do you play? (answer: drums)";
         public readonly string SECOND_ANSWER = "drums";
 
-        public SignerQnAChallengeExample(Props props) : this(props.Get("api.key"), props.Get("api.url"), props.Get("1.email"))
-        {
-        }
-
-        public SignerQnAChallengeExample(string apiKey, string apiUrl, string email1) : base(apiKey, apiUrl)
-        {
-            this.email1 = email1;
-            this.fileStream1 = File.OpenRead(new FileInfo(Directory.GetCurrentDirectory() + "/src/document.pdf").FullName);
-        }
-
         override public void Execute()
         {
-            DocumentPackage superDuperPackage = PackageBuilder.NewPackageNamed("SignerQnAChallengeExample: " + DateTime.Now)
+            DocumentPackage superDuperPackage = PackageBuilder.NewPackageNamed(PackageName)
                 .DescribedAs("This is a Q&A authentication example")
                 .WithSigner(SignerBuilder.NewSignerWithEmail(email1)
                     .WithFirstName("John")

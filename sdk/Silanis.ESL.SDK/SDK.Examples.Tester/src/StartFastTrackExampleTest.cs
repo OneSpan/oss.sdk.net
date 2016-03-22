@@ -10,7 +10,7 @@ namespace SDK.Examples
         [Test()]
         public void VerifyResult()
         {
-            StartFastTrackExample example = new StartFastTrackExample(Props.GetInstance());
+            StartFastTrackExample example = new StartFastTrackExample();
             example.Run();
 
             Assert.IsNotNull(example.signingUrl);

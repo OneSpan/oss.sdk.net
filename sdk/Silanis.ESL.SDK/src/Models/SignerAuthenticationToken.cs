@@ -25,6 +25,13 @@ namespace Silanis.ESL.API
     {
                 get; set;
         }
+
+
+    [JsonProperty("sessionFields")]
+    public IDictionary<string, string> SessionFields
+    {
+            get; set;
+        }
     
 		    
     [JsonProperty("value")]

@@ -9,7 +9,7 @@ namespace SDK.Examples
         [Test()]
 		public void VerifyResult()
         {
-			SenderAuthenticationTokenExample example = new SenderAuthenticationTokenExample(Props.GetInstance());
+			SenderAuthenticationTokenExample example = new SenderAuthenticationTokenExample();
 			example.Run();
 
 			Assert.IsNotNull(example.SenderSessionId);

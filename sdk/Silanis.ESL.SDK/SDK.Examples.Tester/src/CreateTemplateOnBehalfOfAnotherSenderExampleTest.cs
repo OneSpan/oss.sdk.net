@@ -12,7 +12,7 @@ namespace SDK.Examples
         [Test()]
         public void VerifyResult()
         {
-            example = new CreateTemplateOnBehalfOfAnotherSenderExample(Props.GetInstance());
+            example = new CreateTemplateOnBehalfOfAnotherSenderExample();
             example.Run();
 
             // Verify the template has the correct sender

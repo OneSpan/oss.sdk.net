@@ -10,7 +10,7 @@ namespace SDK.Examples
         [Test()]
         public void VerifyResult()
         {
-            ChangePackageStatusExample example = new ChangePackageStatusExample(Props.GetInstance());
+            ChangePackageStatusExample example = new ChangePackageStatusExample();
             example.Run();
 
             Assert.AreEqual(DocumentPackageStatus.SENT, example.sentPackage.Status);

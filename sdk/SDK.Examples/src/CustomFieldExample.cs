@@ -19,8 +19,6 @@ namespace SDK.Examples
         public readonly string FIELD_VALUE1 = "11";
         public readonly string FIELD_VALUE2 = "22";
 
-        public string email1;
-        private Stream documentInputStream1;
         public string customFieldId1, customFieldId2;
         public CustomField retrievedCustomField;
         public IList<CustomField> retrievedCustomFieldList1, retrievedCustomFieldList2;
@@ -29,17 +27,7 @@ namespace SDK.Examples
 
         public static void Main(string[] args)
         {
-            new CustomFieldExample(Props.GetInstance()).Run();
-        }
-
-        public CustomFieldExample(Props props) : this(props.Get("api.key"), props.Get("api.url"), props.Get("1.email"))
-        {
-        }
-
-        public CustomFieldExample(string apiKey, string apiUrl, string email1) : base(apiKey, apiUrl)
-        {
-            this.email1 = email1;
-            this.documentInputStream1 = File.OpenRead(new FileInfo(Directory.GetCurrentDirectory() + "/src/document-with-fields.pdf").FullName);
+            new CustomFieldExample().Run();
         }
 
         override public void Execute()
@@ -79,12 +67,12 @@ namespace SDK.Examples
                                         .WithValue(FIELD_VALUE2)
                                         .build());
 
-            DocumentPackage superDuperPackage = PackageBuilder.NewPackageNamed("Sample Insurance policy")
+            DocumentPackage superDuperPackage = PackageBuilder.NewPackageNamed(PackageName)
                 .WithSigner(SignerBuilder.NewSignerWithEmail(email1)
                         .WithFirstName("John")
                         .WithLastName("Smith"))
                     .WithDocument(DocumentBuilder.NewDocumentNamed(DOCUMENT_NAME)
-                        .FromStream(documentInputStream1, DocumentType.PDF)
+                        .FromStream(fileStream1, DocumentType.PDF)
                         .WithSignature(SignatureBuilder.SignatureFor(email1)
                                 .OnPage(0)
                                 .AtPosition(100, 100)

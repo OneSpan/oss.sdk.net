@@ -9,11 +9,6 @@ namespace SDK.Examples
 {
     public class DownloadReportExample : SDKSample
 	{
-        public string email1;
-        public string senderUID;
-        private Stream fileStream1;
-        private Stream fileStream2;
-
         public PackageId package2Id;
         public Silanis.ESL.SDK.CompletionReport sdkCompletionReportForSenderDraft, sdkCompletionReportForSenderSent, sdkCompletionReportDraft, sdkCompletionReportSent;
         public Silanis.ESL.SDK.UsageReport sdkUsageReport;
@@ -30,25 +25,13 @@ namespace SDK.Examples
 
 		public static void Main(string[] args)
 		{
-            new DownloadReportExample(Props.GetInstance()).Run();
-		}
-
-        public DownloadReportExample(Props props) : this(props.Get("api.key"), props.Get("api.url"), props.Get("1.email"))
-		{
-		}
-
-        public DownloadReportExample(string apiKey, string apiUrl, string email1) : base( apiKey, apiUrl )
-		{
-			this.email1 = email1;
-			this.senderUID = Converter.apiKeyToUID(apiKey);
-            this.fileStream1 = File.OpenRead(new FileInfo(Directory.GetCurrentDirectory() + "/src/document.pdf").FullName);
-			this.fileStream2 = File.OpenRead(new FileInfo(Directory.GetCurrentDirectory() + "/src/document.pdf").FullName);
+            new DownloadReportExample().Run();
 		}
 
 		override public void Execute()
 		{
 			DocumentPackage superDuperPackage =
-                PackageBuilder.NewPackageNamed("DownloadReportForDraft: " + DateTime.Now)
+                PackageBuilder.NewPackageNamed(PackageName)
 					.DescribedAs("This is a package created using the e-SignLive SDK")
 					.ExpiresOn(DateTime.Now.AddMonths(100))
 					.WithEmailMessage("This message should be delivered to all signers")

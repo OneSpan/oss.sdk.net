@@ -11,7 +11,7 @@ namespace SDK.Examples
         [Test()]
         public void VerifyResult()
         {
-            CreatePackageFromTemplateWithReplacingPlaceholderExample example = new CreatePackageFromTemplateWithReplacingPlaceholderExample(Props.GetInstance());
+            CreatePackageFromTemplateWithReplacingPlaceholderExample example = new CreatePackageFromTemplateWithReplacingPlaceholderExample();
             example.Run();
 
             Assert.AreEqual(3, example.RetrievedPackage.Signers.Count);

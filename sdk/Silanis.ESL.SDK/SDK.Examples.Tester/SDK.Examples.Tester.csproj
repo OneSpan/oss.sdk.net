@@ -84,12 +84,10 @@
     <Compile Include="src\CreateTemplateFromPackageExampleTest.cs" />
     <Compile Include="src\AuthenticationMethodsExampleTest.cs" />
     <Compile Include="src\PackageLanguageConfigurationExampleTest.cs" />
-    <Compile Include="src\ChangeSignerExampleTest.cs" />
     <Compile Include="src\SignerQnAChallengeExampleTest.cs" />
     <Compile Include="src\SignerSMSAuthenticationExampleTest.cs" />
     <Compile Include="src\FieldManipulationExampleTest.cs" />
     <Compile Include="src\DocumentLayoutExampleTest.cs" />
-    <Compile Include="src\QRCodeExampleTest.cs" />
     <Compile Include="src\CreateTemplateOnBehalfOfAnotherSenderExampleTest.cs" />
     <Compile Include="src\ContactsExampleTest.cs" />
     <Compile Include="src\SignerInformationForEquifaxCanadaExampleTest.cs" />
@@ -126,6 +124,8 @@
     <Compile Include="src\CreatePackageWithoutDocumentExampleTest.cs" />
     <Compile Include="src\ChangePlaceholderNameExampleTest.cs" />
     <Compile Include="src\GetSigningStatusExampleTest.cs" />
+    <Compile Include="src\SignDocumentsExampleTest.cs" />
+    <Compile Include="src\UpdateSignerExampleTest.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
@@ -143,9 +143,9 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <None Include="jenkins.properties" />
     <None Include="signers.properties">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="jenkins.properties" />
   </ItemGroup>
 </Project>

@@ -4,6 +4,6 @@ namespace Silanis.ESL.SDK
 {
 	public enum DocumentType
 	{
-		PDF, WORD
+        PDF, WORD, RTF, ODT
 	}
 }

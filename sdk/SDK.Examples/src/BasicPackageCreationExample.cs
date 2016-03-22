@@ -12,30 +12,13 @@ namespace SDK.Examples
 
         public static void Main(string[] args)
         {
-            new BasicPackageCreationExample(Props.GetInstance()).Run();
-        }
-
-        public string email1;
-        public string email2;
-        private Stream fileStream1;
-        private Stream fileStream2;
-
-        public BasicPackageCreationExample(Props props) : this(props.Get("api.key"), props.Get("api.url"), props.Get("1.email"), props.Get("2.email"))
-        {
-        }
-
-        public BasicPackageCreationExample(string apiKey, string apiUrl, string email1, string email2) : base( apiKey, apiUrl )
-        {
-            this.email1 = email1;
-            this.email2 = email2;
-            this.fileStream1 = File.OpenRead(new FileInfo(Directory.GetCurrentDirectory() + "/src/document.pdf").FullName);
-            this.fileStream2 = File.OpenRead(new FileInfo(Directory.GetCurrentDirectory() + "/src/document.pdf").FullName);
+            new BasicPackageCreationExample().Run();
         }
 
         override public void Execute()
         {
             DocumentPackage superDuperPackage =
-                PackageBuilder.NewPackageNamed("BasicPackageCreationExample: " + DateTime.Now)
+                PackageBuilder.NewPackageNamed(PackageName)
                 .DescribedAs("This is a package created using the e-SignLive SDK")
                 .ExpiresOn(DateTime.Now.AddMonths(100))
                 .WithEmailMessage("This message should be delivered to all signers")

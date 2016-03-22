@@ -38,11 +38,7 @@ namespace SDK.Examples
 
 		public static void Main(string[] args)
 		{
-			new EventNotificationRegistrationExample(Props.GetInstance()).Run();
-		}
-
-		public EventNotificationRegistrationExample(Props props) : base(props.Get("api.key"), props.Get("api.url"))
-		{
+			new EventNotificationRegistrationExample().Run();
 		}
 
 		override public void Execute()

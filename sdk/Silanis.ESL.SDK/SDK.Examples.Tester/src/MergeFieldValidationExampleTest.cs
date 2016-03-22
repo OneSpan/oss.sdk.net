@@ -9,7 +9,7 @@ namespace SDK.Examples
         [Test()]
         public void VerifyResult()
         {
-            MergeFieldValidationExample example = new MergeFieldValidationExample(Props.GetInstance());
+            MergeFieldValidationExample example = new MergeFieldValidationExample();
             example.Run();
         }
     }

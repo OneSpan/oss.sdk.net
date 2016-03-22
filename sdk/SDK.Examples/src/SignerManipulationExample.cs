@@ -7,30 +7,12 @@ namespace SDK.Examples
 {
     public class SignerManipulationExample : SDKSample
     {
-        private string email1;
-        private string email2;
-        private string email3;
-        private Stream fileStream1;
-        private Stream fileStream2;
-        
-        public SignerManipulationExample(Props props) : this(props.Get("api.key"), props.Get("api.url"), props.Get("1.email"), props.Get("2.email"), props.Get("3.email"))
-        {
-        }
-
-        public SignerManipulationExample(string apiKey, string apiUrl, string email1, string email2, string email3) : base( apiKey, apiUrl )
-        {
-            this.email1 = email1;
-            this.email2 = email2;
-            this.email3 = email3;
-            this.fileStream1 = File.OpenRead(new FileInfo(Directory.GetCurrentDirectory() + "/src/document.pdf").FullName);
-            this.fileStream2 = File.OpenRead(new FileInfo(Directory.GetCurrentDirectory() + "/src/document.pdf").FullName);
-        }
 
         override public void Execute()
         {
             Placeholder signer1Id = new Placeholder( Guid.NewGuid().ToString() );
             DocumentPackage superDuperPackage = 
-                PackageBuilder.NewPackageNamed("SignerManipulationExample: " + DateTime.Now)
+                PackageBuilder.NewPackageNamed(PackageName)
                 .DescribedAs("This is a package created using the e-SignLive SDK")
                 .WithSigner(SignerBuilder.NewSignerWithEmail(email1)
                             .WithFirstName("firstName1")

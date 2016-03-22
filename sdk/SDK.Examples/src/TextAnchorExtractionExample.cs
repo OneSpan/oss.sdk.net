@@ -9,29 +9,18 @@ namespace SDK.Examples
     {
         public static void Main (string[] args)
         {
-            new TextAnchorExtractionExample(Props.GetInstance()).Run();
+            new TextAnchorExtractionExample().Run();
         }
-
-        private string email1;
-        private Stream fileStream1;
 
         public readonly string DOCUMENT_NAME = "Document With Anchors";
         public readonly int FIELD_WIDTH = 150;
         public readonly int FIELD_HEIGHT = 40;
 
-        public TextAnchorExtractionExample( Props props ) : this(props.Get("api.key"), props.Get("api.url"), props.Get("1.email"))
-        {
-        }
-
-        public TextAnchorExtractionExample( string apiKey, string apiUrl, string email1 ) : base( apiKey, apiUrl )
-        {
-            this.email1 = email1;
-            this.fileStream1 = File.OpenRead(new FileInfo(Directory.GetCurrentDirectory() + "/src/document-for-anchor-extraction.pdf").FullName);
-        }
-
         override public void Execute()
         {
-            DocumentPackage superDuperPackage = PackageBuilder.NewPackageNamed( "TextAnchorExtractionExample: " + DateTime.Now )
+            this.fileStream1 = File.OpenRead(new FileInfo(Directory.GetCurrentDirectory() + "/src/document-for-anchor-extraction.pdf").FullName);
+
+            DocumentPackage superDuperPackage = PackageBuilder.NewPackageNamed(PackageName)
                                                 .WithSigner(SignerBuilder.NewSignerWithEmail(email1)
                                                         .WithFirstName( "John" )
                                                         .WithLastName( "Smith" ) )

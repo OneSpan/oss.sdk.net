@@ -9,27 +9,23 @@ namespace SDK.Examples
     {
         public static void Main (string[] args)
         {
-            new DesignerRedirectForApiKeyExample(Props.GetInstance()).Run();
+            new DesignerRedirectForApiKeyExample().Run();
         }
 
         public string GeneratedLinkToDesignerForApiKey{ get; private set; }
         private AuthenticationClient authenticationClient;
-        private Stream fileStream;
 
-        public DesignerRedirectForApiKeyExample( Props props ) : this(props.Get("api.key"), props.Get("api.url"), props.Get("webpage.url")) {
-        }
-
-        public DesignerRedirectForApiKeyExample( string apiKey, string apiUrl, string webpageUrl) : base( apiKey, apiUrl ) {
+        public DesignerRedirectForApiKeyExample()
+        {
             this.authenticationClient = new AuthenticationClient(webpageUrl);
-            this.fileStream = File.OpenRead(new FileInfo(Directory.GetCurrentDirectory() + "/src/document.pdf").FullName);
         }
 
         override public void Execute()
         {            
-            DocumentPackage package = PackageBuilder.NewPackageNamed ("SignerAuthenticationTokenExample " + DateTime.Now)
+            DocumentPackage package = PackageBuilder.NewPackageNamed (PackageName)
                     .DescribedAs ("This is a new package")
                     .WithDocument(DocumentBuilder.NewDocumentNamed("My Document")
-                                  .FromStream(fileStream, DocumentType.PDF))
+                                  .FromStream(fileStream1, DocumentType.PDF))
                     .Build();
 
             PackageId packageId = eslClient.CreatePackage (package);

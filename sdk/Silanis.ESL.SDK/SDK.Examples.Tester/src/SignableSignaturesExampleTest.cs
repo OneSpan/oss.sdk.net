@@ -9,7 +9,7 @@ namespace SDK.Examples
         [Test()]
         public void VerifyResult()
         {
-            SignableSignaturesExample example = new SignableSignaturesExample(Props.GetInstance());
+            SignableSignaturesExample example = new SignableSignaturesExample();
             example.Run();
 
             Assert.AreEqual(2, example.signer1SignableSignatures.Count);

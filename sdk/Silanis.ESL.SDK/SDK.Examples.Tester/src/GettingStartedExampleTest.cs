@@ -9,7 +9,7 @@ namespace SDK.Examples
         [Test()]
         public void VerifyResult()
         {
-            GettingStartedExample example = new GettingStartedExample(Props.GetInstance());
+            GettingStartedExample example = new GettingStartedExample();
             example.Run();
 
         }

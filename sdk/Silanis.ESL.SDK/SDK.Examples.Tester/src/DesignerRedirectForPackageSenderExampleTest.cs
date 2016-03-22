@@ -10,7 +10,7 @@ namespace SDK.Examples
         [Test()]
         public void VerifyResult()
         {
-            DesignerRedirectForPackageSenderExample example = new DesignerRedirectForPackageSenderExample(Props.GetInstance());
+            DesignerRedirectForPackageSenderExample example = new DesignerRedirectForPackageSenderExample();
             example.Run();
 
             Assert.IsNotNull(example.GeneratedLinkToDesignerForSender);

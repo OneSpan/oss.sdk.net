@@ -12,7 +12,6 @@ namespace SDK.Examples
         public const string SENDER_TITLE = "Chief Vizier";
         public const string SENDER_COMPANY = "The Masons";
 
-        private Stream fileStream1;
         private PackageId templateId;
         public PackageId TemplateId
         {
@@ -21,27 +20,10 @@ namespace SDK.Examples
                 return templateId;
             }
         }
-        private string senderEmail;
-        public string SenderEmail
-        {
-            get
-            {
-                return senderEmail;
-            }
-        }
+
         public static void Main(string[] args)
         {
-            new CustomSenderInfoInCreatePackageFromTemplateExample(Props.GetInstance()).Run();
-        }
-
-
-        public CustomSenderInfoInCreatePackageFromTemplateExample(Props props) : this(props.Get("api.key"), props.Get("api.url"))
-        {
-        }
-
-        public CustomSenderInfoInCreatePackageFromTemplateExample(string apiKey, string apiUrl) : base( apiKey, apiUrl )
-        {
-            this.fileStream1 = File.OpenRead(new FileInfo(Directory.GetCurrentDirectory() + "/src/document.pdf").FullName);
+            new CustomSenderInfoInCreatePackageFromTemplateExample().Run();
         }
 
         override public void Execute()
@@ -75,7 +57,7 @@ namespace SDK.Examples
             templateId = eslClient.CreateTemplate(template);
 
             packageId = eslClient.CreatePackageFromTemplate(templateId,
-                        PackageBuilder.NewPackageNamed("CustomSenderInfoInCreatePackageFromTemplate packageFromTemplate")
+                         PackageBuilder.NewPackageNamed(PackageName)
                         .WithSenderInfo( SenderInfoBuilder.NewSenderInfo(senderEmail)
                                          .WithName(SENDER_FIRST_NAME, SENDER_SECOND_NAME)
                                          .WithTitle(SENDER_TITLE)

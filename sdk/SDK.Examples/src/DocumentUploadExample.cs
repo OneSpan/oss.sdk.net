@@ -9,27 +9,15 @@ namespace SDK.Examples
     {
         public static void Main(string[] args)
         {
-            new DocumentUploadExample(Props.GetInstance()).Run();
+            new DocumentUploadExample().Run();
         }
 
-        private string email1;
-        private Stream fileStream1;
         public readonly string UPLOADED_DOCUMENT_NAME = "First Document";
-
-        public DocumentUploadExample(Props props) : this(props.Get("api.key"), props.Get("api.url"), props.Get("1.email"))
-        {
-        }
-
-        public DocumentUploadExample(string apiKey, string apiUrl, string email1) : base( apiKey, apiUrl )
-        {
-            this.email1 = email1;
-            this.fileStream1 = File.OpenRead(new FileInfo(Directory.GetCurrentDirectory() + "/src/document.pdf").FullName);
-        }
 
         override public void Execute()
         {
             // 1. Create a package
-            DocumentPackage superDuperPackage = PackageBuilder.NewPackageNamed( "Policy " + DateTime.Now )
+            DocumentPackage superDuperPackage = PackageBuilder.NewPackageNamed(PackageName)
                 .DescribedAs( "This is a package created using the e-SignLive SDK" )
                     .ExpiresOn( DateTime.Now.AddMonths(1) )
                     .WithEmailMessage( "This message should be delivered to all signers" )

@@ -10,7 +10,7 @@ namespace SDK.Examples
         [Test()]
         public void VerifyResult()
         {
-            SignatureStylesExample example = new SignatureStylesExample(Props.GetInstance());
+            SignatureStylesExample example = new SignatureStylesExample();
             example.Run();
 
             DocumentPackage documentPackage = example.RetrievedPackage;

@@ -9,11 +9,8 @@ namespace SDK.Examples
     {
         public static void Main(string[] args)
         {
-            new UpdateTemplateWithPlaceholderExample(Props.GetInstance()).Run();
+            new UpdateTemplateWithPlaceholderExample().Run();
         }
-
-        private string email1;
-        private Stream fileStream;
 
         public PackageId templateId;
 
@@ -30,16 +27,6 @@ namespace SDK.Examples
 
         public DocumentPackage retrievedTemplate, updatedTemplate;
 
-        public UpdateTemplateWithPlaceholderExample(Props props) : this(props.Get("api.key"), props.Get("api.url"), props.Get("1.email"))
-        {
-        }
-
-        public UpdateTemplateWithPlaceholderExample(string apiKey, string apiUrl, string email1) : base(apiKey, apiUrl)
-        {
-            this.email1 = email1;
-            this.fileStream = File.OpenRead(new FileInfo(Directory.GetCurrentDirectory() + "/src/document.pdf").FullName);
-        }
-
         override public void Execute()
         {
             DocumentPackage template = PackageBuilder.NewPackageNamed(TEMPLATE_NAME)
@@ -51,7 +38,7 @@ namespace SDK.Examples
                     .WithSigner(SignerBuilder.NewSignerPlaceholder(new Placeholder(PLACEHOLDER_ID)))
                     .WithDocument(DocumentBuilder.NewDocumentNamed(DOCUMENT_NAME)
                                   .WithId(DOCUMENT_ID)
-                                  .FromStream(fileStream, DocumentType.PDF)
+                                  .FromStream(fileStream1, DocumentType.PDF)
                                   .WithSignature(SignatureBuilder.SignatureFor(email1)
                                    .OnPage(0)
                                    .AtPosition(100, 100))

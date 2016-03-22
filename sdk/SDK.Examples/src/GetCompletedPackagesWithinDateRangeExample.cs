@@ -7,7 +7,7 @@ namespace SDK.Examples
     {
         public static void Main (string[] args)
         {
-            new GetCompletedPackagesWithinDateRangeExample(Props.GetInstance()).Run();
+            new GetCompletedPackagesWithinDateRangeExample().Run();
         }
 
         public readonly DateTime START_DATE = DateTime.Now;
@@ -18,12 +18,6 @@ namespace SDK.Examples
         public Page<DocumentPackage> declinedPackages;
         public Page<DocumentPackage> archivedPackages;
         public Page<DocumentPackage> completedPackages;
-
-        public GetCompletedPackagesWithinDateRangeExample( Props props ) : this(props.Get("api.key"), props.Get("api.url")) {
-        }
-
-        public GetCompletedPackagesWithinDateRangeExample( String apiKey, String apiUrl ) : base( apiKey, apiUrl ) {
-        }
 
         override public void Execute()
         {

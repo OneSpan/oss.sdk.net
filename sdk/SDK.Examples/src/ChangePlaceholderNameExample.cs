@@ -9,11 +9,8 @@ namespace SDK.Examples
     {
         public static void Main(string[] args)
         {
-            new ChangePlaceholderNameExample(Props.GetInstance()).Run();
+            new ChangePlaceholderNameExample().Run();
         }
-
-        private string email1;
-        private Stream fileStream1;
 
         public readonly string DOCUMENT_NAME = "First Document";
         public readonly string DOCUMENT_ID = "doc1";
@@ -26,16 +23,6 @@ namespace SDK.Examples
 
         public Placeholder newPlaceholder, updatedPlaceholder;
         public DocumentPackage updatedTemplate;
-
-        public ChangePlaceholderNameExample(Props props) : this(props.Get("api.key"), props.Get("api.url"), props.Get("1.email"))
-        {
-        }
-
-        public ChangePlaceholderNameExample(string apiKey, string apiUrl, string email1) : base(apiKey, apiUrl)
-        {
-            this.email1 = email1;
-            this.fileStream1 = File.OpenRead(new FileInfo(Directory.GetCurrentDirectory() + "/src/document.pdf").FullName);
-        }
 
         override public void Execute()
         {

@@ -9,7 +9,7 @@ namespace SDK.Examples
         [Test()]
         public void VerifyResult()
         {
-            StampFieldValueExample example = new StampFieldValueExample(Props.GetInstance());
+            StampFieldValueExample example = new StampFieldValueExample();
             example.Run();
 
         }

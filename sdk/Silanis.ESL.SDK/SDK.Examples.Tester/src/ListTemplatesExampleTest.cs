@@ -10,7 +10,7 @@ namespace SDK.Examples
         [Test()]
         public void VerifyResult()
         {
-            ListTemplatesExample example = new ListTemplatesExample(Props.GetInstance());
+            ListTemplatesExample example = new ListTemplatesExample();
             example.Run();
 
             Page<DocumentPackage> templateList = example.Templates;

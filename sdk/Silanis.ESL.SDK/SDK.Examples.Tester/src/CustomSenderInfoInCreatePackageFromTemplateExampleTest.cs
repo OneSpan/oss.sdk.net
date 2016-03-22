@@ -10,7 +10,7 @@ namespace SDK.Examples
         [Test()]
         public void VerifyResult()
         {
-            CustomSenderInfoInCreatePackageFromTemplateExample example = new CustomSenderInfoInCreatePackageFromTemplateExample(Props.GetInstance());
+            CustomSenderInfoInCreatePackageFromTemplateExample example = new CustomSenderInfoInCreatePackageFromTemplateExample();
             example.Run();
             
             DocumentPackage template = example.EslClient.GetPackage( example.TemplateId );

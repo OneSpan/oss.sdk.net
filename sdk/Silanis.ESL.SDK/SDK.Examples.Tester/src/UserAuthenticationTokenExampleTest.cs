@@ -9,7 +9,7 @@ namespace SDK.Examples
         [Test()]
 		public void VerifyResult()
         {
-			UserAuthenticationTokenExample example = new UserAuthenticationTokenExample(Props.GetInstance());
+			UserAuthenticationTokenExample example = new UserAuthenticationTokenExample();
 			example.Run();
 
 			Assert.IsNotNull(example.UserSessionId);

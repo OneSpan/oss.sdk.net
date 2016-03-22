@@ -10,7 +10,7 @@ namespace SDK.Examples
         [Test()]
         public void VerifyResult()
         {
-            DocumentPackageSettingsExample example = new DocumentPackageSettingsExample( Props.GetInstance() );
+            DocumentPackageSettingsExample example = new DocumentPackageSettingsExample(  );
             example.Run();
             
             DocumentPackage result = example.EslClient.GetPackage( example.PackageId );

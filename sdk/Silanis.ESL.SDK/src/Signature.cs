@@ -69,6 +69,12 @@ namespace Silanis.ESL.SDK
             private set;
         }
 
+        public Nullable<DateTime> Accepted 
+        {
+            get;
+            internal set;
+        }
+
 		public int Page 
 		{
 			get;

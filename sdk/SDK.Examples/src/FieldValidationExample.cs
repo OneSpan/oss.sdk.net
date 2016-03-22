@@ -9,11 +9,8 @@ namespace SDK.Examples
     {
         public static void Main(string[] args)
         {
-            new FieldValidationExample(Props.GetInstance()).Run();
+            new FieldValidationExample().Run();
         }
-
-        private string email1;
-        private Stream fileStream1;
 
         public readonly string DOCUMENT_NAME = "My Document";
 
@@ -52,19 +49,9 @@ namespace SDK.Examples
             }
         }
 
-        public FieldValidationExample(Props props) : this(props.Get("api.key"), props.Get("api.url"), props.Get("1.email"))
-        {
-        }
-
-        public FieldValidationExample(String apiKey, String apiUrl, String email1) : base(apiKey, apiUrl)
-        {
-            this.email1 = email1;
-            this.fileStream1 = File.OpenRead(new FileInfo(Directory.GetCurrentDirectory() + "/src/document.pdf").FullName);
-        }
-
         override public void Execute()
         {
-            DocumentPackage package = PackageBuilder.NewPackageNamed("FieldValidationExample example " + DateTime.Now)
+            DocumentPackage package = PackageBuilder.NewPackageNamed(PackageName)
 					.DescribedAs("This is a new package")
 					.WithSigner(SignerBuilder.NewSignerWithEmail(email1)
 					            .WithFirstName("John")
