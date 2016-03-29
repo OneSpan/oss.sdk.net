@@ -36,7 +36,6 @@ namespace SDK.Examples
 
             packageId = eslClient.CreatePackage( superDuperPackage );
             eslClient.SendPackage( packageId );
-            eslClient.PackageService.NotifySigner( packageId, email1, "HELLO SIGNER" );
             retrievedPackage = eslClient.GetPackage(packageId);
         }
 	}
