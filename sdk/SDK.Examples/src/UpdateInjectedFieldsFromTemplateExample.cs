@@ -37,7 +37,7 @@ namespace SDK.Examples
             this.fileStream1 = File.OpenRead(new FileInfo(Directory.GetCurrentDirectory() + "/src/document-with-fields.pdf").FullName);
             this.fileStream2 = File.OpenRead(new FileInfo(Directory.GetCurrentDirectory() + "/src/document-with-fields.pdf").FullName);
 
-            DocumentPackage template = PackageBuilder.NewPackageNamed("Template")
+            DocumentPackage template = PackageBuilder.NewPackageNamed("Template " + PackageName)
                     .WithEmailMessage(PACKAGE_EMAIL_MESSAGE)
                     .WithSigner(SignerBuilder.NewSignerPlaceholder(new Placeholder(PLACEHOLDER_ID)))
                     .WithDocument(DocumentBuilder.NewDocumentNamed(DOCUMENT_NAME)

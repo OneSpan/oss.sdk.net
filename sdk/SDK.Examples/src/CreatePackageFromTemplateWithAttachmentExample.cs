@@ -36,7 +36,7 @@ namespace SDK.Examples
 
         override public void Execute()
         {
-            DocumentPackage template = PackageBuilder.NewPackageNamed("Template")
+            DocumentPackage template = PackageBuilder.NewPackageNamed("Template " + PackageName)
                 .DescribedAs("first message")
                     .WithEmailMessage(PACKAGE_EMAIL_MESSAGE)
                     .WithSigner(SignerBuilder.NewSignerPlaceholder(new Placeholder(PLACEHOLDER_ID)))
