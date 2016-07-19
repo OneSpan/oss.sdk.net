@@ -116,7 +116,6 @@ namespace SDK.Examples
             retrievedSigner2Att2RequirementStatus = signer2Att2.Status;
 
             // Upload attachment for signer1
-
             byte[] attachment1ForSigner1FileContent = new StreamDocumentSource(attachmentInputStream1).Content();
             attachment1ForSigner1FileSize = attachment1ForSigner1FileContent.Length;
             eslClient.UploadAttachment(packageId, signer1Att1.Id, ATTACHMENT_FILE_NAME1, attachment1ForSigner1FileContent, SIGNER1_ID);
@@ -161,4 +160,3 @@ namespace SDK.Examples
         }
     }
 }
-

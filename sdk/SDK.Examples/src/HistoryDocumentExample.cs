@@ -51,7 +51,7 @@ namespace SDK.Examples
             )
                         .Build();
 
-            packageId = eslClient.CreatePackageOneStep(superDuperPackage);
+            packageId = eslClient.CreatePackage(superDuperPackage);
             eslClient.SendPackage(packageId);
 
             DocumentPackage documentWithExternalContent =
@@ -79,7 +79,7 @@ namespace SDK.Examples
                                   )
                     .Build();
 
-            packageId = eslClient.CreatePackageOneStep(superDuperPackage);
+            packageId = eslClient.CreatePackage(superDuperPackage);
 
             IList<Silanis.ESL.SDK.Document> documentsHistory = eslClient.PackageService.GetDocuments();
             IList<Silanis.ESL.SDK.Document> externalDocuments = new List<Silanis.ESL.SDK.Document>();
