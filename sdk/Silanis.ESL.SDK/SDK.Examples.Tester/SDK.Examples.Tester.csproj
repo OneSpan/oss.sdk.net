@@ -34,8 +34,8 @@
     <Reference Include="nunit.framework">
       <HintPath>..\..\References\nunit.framework.dll</HintPath>
     </Reference>
-    <Reference Include="ICSharpCode.SharpZipLib" />
     <Reference Include="System.Data" />
+    <Reference Include="ICSharpCode.SharpZipLib" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="src\CustomFieldExampleTest.cs" />

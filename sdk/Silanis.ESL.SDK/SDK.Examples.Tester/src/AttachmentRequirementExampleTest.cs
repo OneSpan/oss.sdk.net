@@ -12,24 +12,24 @@ using ICSharpCode.SharpZipLib.Zip;
 
 namespace SDK.Examples
 {
-	[TestFixture]
-	public class AttachmentRequirementExampleTest
+    [TestFixture]
+    public class AttachmentRequirementExampleTest
     {
-		private AttachmentRequirementExample example;
+        private AttachmentRequirementExample example;
 
-		[Test]
-		public void VerifyResult()
-		{
-			example = new AttachmentRequirementExample(  );
-			example.Run();
+        [Test]
+        public void VerifyResult()
+        {
+            example = new AttachmentRequirementExample(  );
+            example.Run();
 
-			// Asserts the attachment requirements for each signer is set correctly.
+            // Asserts the attachment requirements for each signer is set correctly.
             Assert.AreEqual(1, example.signer1Attachments.Count);
             Assert.AreEqual(example.NAME1, example.signer1Att1.Name);
             Assert.AreEqual(example.DESCRIPTION1, example.signer1Att1.Description);
             Assert.AreEqual(true, example.signer1Att1.Required);
             Assert.AreEqual(RequirementStatus.INCOMPLETE.ToString(), example.retrievedSigner1Att1RequirementStatus.ToString());
-                               
+
             Assert.AreEqual(2, example.signer2Attachments.Count);
             // Check Attachments ordering
             Assert.AreEqual(example.NAME2, example.signer2Attachments[0].Name);
@@ -56,7 +56,6 @@ namespace SDK.Examples
             Assert.AreEqual(3, example.downloadedAllAttachmentsForPackageZip.Size);
             Assert.AreEqual(1, example.downloadedAllAttachmentsForSigner1InPackageZip.Size);
             Assert.AreEqual(2, example.downloadedAllAttachmentsForSigner2InPackageZip.Size);
-		}
+        }
     }
 }
-
