@@ -114,7 +114,6 @@
     <Compile Include="src\SenderManipulationExample.cs" />
     <Compile Include="src\ExceptionHandlingExample.cs" />
     <Compile Include="src\SignatureManipulationExample.cs" />
-    <Compile Include="src\HistoryDocumentExample.cs" />
     <Compile Include="src\GetPackageMessageExample.cs" />
     <Compile Include="src\CreatePackageFromTemplateExample.cs" />
     <Compile Include="src\CreateTemplateFromPackageExample.cs" />
@@ -124,7 +123,6 @@
     <Compile Include="src\RetrieveFieldValuesExample.cs" />
     <Compile Include="src\DocumentLayoutExample.cs" />
     <Compile Include="src\CreateTemplateOnBehalfOfAnotherSenderExample.cs" />
-    <Compile Include="src\ContactsExample.cs" />
     <Compile Include="src\SignerInformationForEquifaxCanadaExample.cs" />
     <Compile Include="src\SignerInformationForEquifaxUSAExample.cs" />
     <Compile Include="src\MixedSignerAuthenticationExample.cs" />
