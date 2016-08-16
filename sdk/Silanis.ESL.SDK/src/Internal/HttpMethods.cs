@@ -315,7 +315,7 @@ namespace Silanis.ESL.SDK.Internal
 
         private static string GetFilename(string disposition) 
         {
-            string fileNameTitle = "filename=\"";
+            string fileNameTitle = "filename*=UTF-8''";
             string[] parts = disposition.Split(';');
 
             foreach(string part in parts) 
@@ -323,7 +323,7 @@ namespace Silanis.ESL.SDK.Internal
                 int index = part.IndexOf(fileNameTitle);
                 if (index > 0) 
                 {
-                    return Uri.UnescapeDataString(part.Substring(fileNameTitle.Length+1, part.Length-fileNameTitle.Length-2));
+                    return Uri.UnescapeDataString(part.Substring(fileNameTitle.Length+1, part.Length-fileNameTitle.Length-1));
                 }
             }
 
