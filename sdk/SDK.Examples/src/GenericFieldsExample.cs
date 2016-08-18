@@ -38,6 +38,11 @@ namespace SDK.Examples
         public static readonly string LABEL_ID = "labelId";
         public static readonly int LABEL_PAGE = 0;
         public static readonly string LABEL_VALUE = "labelValue";
+        public static readonly string DATEPICKER_ID = "datepickerId";
+        public static readonly string DATEPICKER_NAME = "datepickerName";
+        public static readonly int DATEPICKER_PAGE = 0;
+        public static readonly string DATEPICKER_VALUE = "datepickerValue";
+        public static readonly string DATEPICKER_FORMAT = "MM-dd-YYYY";
 
         override public void Execute()
         {
@@ -93,7 +98,7 @@ namespace SDK.Examples
                                         .WithOption(DROP_LIST_OPTION3))
                                     .OnPage(DROP_LIST_PAGE)
                                     .WithSize(100, 200)
-                               .AtPosition(100, 100))
+                                    .AtPosition(100, 100))
                                .WithField(FieldBuilder.TextArea()
                                    .WithId(TEXT_AREA_ID)
                                    .WithValue(TEXT_AREA_VALUE)
@@ -105,7 +110,16 @@ namespace SDK.Examples
                                    .WithValue(LABEL_VALUE)
                                    .OnPage(LABEL_PAGE)
                                    .WithSize(100, 60)
-                                   .AtPosition(220, 220))))
+                                   .AtPosition(220, 220))
+                               .WithField(FieldBuilder.Datepicker()
+                                   .WithId(DATEPICKER_ID)
+                                   .WithName(DATEPICKER_NAME)
+                                   .WithValue(DATEPICKER_VALUE)
+                                   .OnPage(DATEPICKER_PAGE)
+                                   .WithSize(100, 60)
+                                   .AtPosition(150, 150)
+                                   .WithValidation(FieldValidatorBuilder.DatepickerFormat(DATEPICKER_FORMAT)
+                                       .Required()))))
 					.Build();
 
             packageId = eslClient.CreatePackage(package);

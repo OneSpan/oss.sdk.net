@@ -93,6 +93,16 @@ namespace SDK.Examples
                         Assert.AreEqual(FieldStyle.LABEL, field.Style);
                         Assert.AreEqual(GenericFieldsExample.LABEL_VALUE, field.Value);
                     }
+                    // Datepicker Field
+                    if (field.Id == GenericFieldsExample.DATEPICKER_ID) 
+                    {
+                        Assert.AreEqual(GenericFieldsExample.DATEPICKER_PAGE, field.Page);
+                        Assert.AreEqual(FieldStyle.DATEPICKER, field.Style);
+                        Assert.AreEqual(GenericFieldsExample.DATEPICKER_VALUE, field.Value);
+                        Assert.IsTrue(field.Validator.Required);
+                        Assert.AreEqual(GenericFieldsExample.DATEPICKER_FORMAT, field.Validator.Regex);
+                        Assert.AreEqual(field.Validator.Message, FieldValidatorBuilder.DATEPICKER_ERROR_MESSAGE);
+                    }
                 }
             }
         }

@@ -22,6 +22,10 @@ namespace Silanis.ESL.SDK
         public static FieldStyle TEXT_AREA = new FieldStyle("TEXTAREA", "TEXT_AREA", 10);
         public static FieldStyle DROP_LIST = new FieldStyle("LIST", "DROP_LIST", 11);
         public static FieldStyle SEAL = new FieldStyle("SEAL", "SEAL", 12);
+        public static FieldStyle MOBILE_CAPTURE = new FieldStyle("MOBILE_CAPTURE", "MOBILE_CAPTURE", 13);
+        public static FieldStyle RAW_CAPTURE = new FieldStyle("RAW_CAPTURE", "RAW_CAPTURE", 14);
+        public static FieldStyle DATEPICKER = new FieldStyle("DATEPICKER", "DATEPICKER", 15);
+
         private static Dictionary<string,FieldStyle> allFieldStyles = new Dictionary<string,FieldStyle>();
 
         static FieldStyle()
@@ -35,6 +39,9 @@ namespace Silanis.ESL.SDK
             allFieldStyles.Add(TEXT_AREA.getApiValue(), FieldStyle.TEXT_AREA);
             allFieldStyles.Add(DROP_LIST.getApiValue(), FieldStyle.DROP_LIST);
             allFieldStyles.Add(SEAL.getApiValue(), FieldStyle.SEAL);
+            allFieldStyles.Add(MOBILE_CAPTURE.getApiValue(), FieldStyle.MOBILE_CAPTURE);
+            allFieldStyles.Add(RAW_CAPTURE.getApiValue(), FieldStyle.RAW_CAPTURE);
+            allFieldStyles.Add(DATEPICKER.getApiValue(), FieldStyle.DATEPICKER);
         }
 
         private FieldStyle(string apiValue, string sdkValue, int index):base(apiValue, sdkValue, index) 

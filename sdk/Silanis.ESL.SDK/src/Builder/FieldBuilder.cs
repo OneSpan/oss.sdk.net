@@ -65,6 +65,11 @@ namespace Silanis.ESL.SDK.Builder
 			return new FieldBuilder ().WithStyle (FieldStyle.LABEL);
 		}
 
+        public static FieldBuilder Datepicker ()
+        {
+            return new FieldBuilder ().WithStyle (FieldStyle.DATEPICKER);
+        }
+
 		public static FieldBuilder CheckBox ()
 		{
 			return new FieldBuilder ().WithStyle (FieldStyle.UNBOUND_CHECK_BOX);
