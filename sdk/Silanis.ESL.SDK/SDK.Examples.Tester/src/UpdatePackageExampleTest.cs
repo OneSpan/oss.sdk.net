@@ -56,7 +56,6 @@ namespace SDK.Examples
         private void assertLayoutSettings(CeremonyLayoutSettings actualLayoutSettings, CeremonyLayoutSettings expectedLayoutSettings) {
             Assert.AreEqual( expectedLayoutSettings.BreadCrumbs, actualLayoutSettings.BreadCrumbs );
             Assert.AreEqual( expectedLayoutSettings.GlobalNavigation, actualLayoutSettings.GlobalNavigation );
-            Assert.AreEqual( expectedLayoutSettings.IFrame, actualLayoutSettings.IFrame );
             Assert.AreEqual( expectedLayoutSettings.LogoImageLink, actualLayoutSettings.LogoImageLink );
             Assert.AreEqual( expectedLayoutSettings.LogoImageSource, actualLayoutSettings.LogoImageSource );
             Assert.AreEqual( expectedLayoutSettings.Navigator, actualLayoutSettings.Navigator );
@@ -67,21 +66,6 @@ namespace SDK.Examples
             Assert.AreEqual( expectedLayoutSettings.ShowGlobalSaveAsLayoutButton, actualLayoutSettings.ShowGlobalSaveAsLayoutButton );
             Assert.AreEqual( expectedLayoutSettings.ShowTitle, actualLayoutSettings.ShowTitle );
         }
-        
-//        [Test]
-//        public void verifyCultureInfoDeserialisation()
-//        {
-//            JsonSerializerSettings settings = new JsonSerializerSettings ();
-//            settings.NullValueHandling = NullValueHandling.Ignore;
-//            settings.DateTimeZoneHandling = DateTimeZoneHandling.Local;
-//            settings.Converters.Add( new CultureInfoJsonCreationConverter() );
-//
-//            string json = "{ \"cultureInfo\":\"en\" }";
-//            
-//            Bob bob = JsonConvert.DeserializeObject<Bob> (json, settings);
-//            
-//            Console.Out.WriteLine( "Blah" );
-//        }
     }
 }
 

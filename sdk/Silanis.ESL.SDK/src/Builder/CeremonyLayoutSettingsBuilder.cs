@@ -5,7 +5,6 @@ namespace Silanis.ESL.SDK
 {
 	public class CeremonyLayoutSettingsBuilder
 	{
-		private Nullable<bool> iFrame = null;
 		private Nullable<bool> breadCrumbs = null;
 		private Nullable<bool> sessionBar = null;
 		private Nullable<bool> globalNavigation = null;
@@ -52,18 +51,6 @@ namespace Silanis.ESL.SDK
         public CeremonyLayoutSettingsBuilder WithoutGlobalConfirmButton()
         {
             showGlobalConfirmButton = false;
-            return this;
-        }
-
-		public CeremonyLayoutSettingsBuilder WithIFrame()
-		{
-			iFrame = true;
-			return this;
-		}
-
-        public CeremonyLayoutSettingsBuilder WithoutIFrame()
-        {
-            iFrame = false;
             return this;
         }
 
@@ -163,7 +150,6 @@ namespace Silanis.ESL.SDK
 		public CeremonyLayoutSettings Build()
 		{
 			CeremonyLayoutSettings result = new CeremonyLayoutSettings ();
-			result.IFrame = iFrame;
 			result.BreadCrumbs = breadCrumbs;
 			result.SessionBar = sessionBar;
 			result.GlobalNavigation = globalNavigation;
