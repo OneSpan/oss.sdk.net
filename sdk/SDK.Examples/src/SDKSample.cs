@@ -15,7 +15,11 @@ namespace SDK.Examples
 
         protected Props props = Props.GetInstance();
 
-        public string email1, email2, email3, email4, email5, email6, senderEmail, sms1, sms2, sms3, sms4, sms5, sms6, senderSms, webpageUrl, senderUID;
+        public string email1, email2, email3, email4, email5, email6, senderEmail, 
+            sms1, sms2, sms3, sms4, sms5, sms6, senderSms, webpageUrl, senderUID,
+            proxyHost, proxyWithCredentialsHost, proxyUserName, proxyPassword;
+
+        public int proxyPort, proxyWithCredentialsPort;
 
         public SDKSample()
         {
@@ -53,6 +57,12 @@ namespace SDK.Examples
             sms6 = props.Get( "6.sms" );
             senderSms = props.Get( "sender.sms" );
             webpageUrl = props.Get( "webpage.url" );
+            proxyHost = props.Get( "proxy.host" );
+            proxyPort = Int32.Parse(props.Get( "proxy.port" ));
+            proxyWithCredentialsHost = props.Get( "proxyWithCredentials.host" );
+            proxyWithCredentialsPort = Int32.Parse(props.Get( "proxyWithCredentials.port" ));
+            proxyUserName = props.Get( "proxy.userName" );
+            proxyPassword = props.Get( "proxy.password" );
             senderUID = Converter.apiKeyToUID(props.Get("api.key"));
 
             this.fileStream1 = File.OpenRead(new FileInfo(Directory.GetCurrentDirectory() + "/src/document.pdf").FullName);

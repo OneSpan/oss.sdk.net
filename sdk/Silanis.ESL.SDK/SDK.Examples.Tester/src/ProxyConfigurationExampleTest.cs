@@ -10,6 +10,7 @@ namespace SDK.Examples
     public class ProxyConfigurationExampleTest
     {
         [Test]
+        [Category("Proxy")]
         public void verifyResult()
         {
             ProxyConfigurationExample example = new ProxyConfigurationExample(Props.GetInstance());

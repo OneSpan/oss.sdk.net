@@ -9,14 +9,7 @@ namespace SDK.Examples
 {
     public class ProxyConfigurationExample : SDKSample
     {
-        private string httpProxyURL = "10.0.22.81";
-        private int httpProxyPort = 8001;
         private bool allowAllSSLCertificates = true;
-
-        private string httpProxyWithCredentialsURL = "10.0.22.81";
-        private int httpProxyWithCredentialsPort = 8002;
-        private string httpProxyUserName = "httpUser";
-        private string httpProxyPassword = "httpPwd";
 
         private ProxyConfiguration httpProxyConfiguration, httpProxyWithCredentialsConfiguration;
 
@@ -35,14 +28,14 @@ namespace SDK.Examples
         public ProxyConfigurationExample(string apiKey, string apiUrl) : base(apiKey, apiUrl)
         {
             httpProxyConfiguration = ProxyConfigurationBuilder.NewProxyConfiguration()
-                .WithHttpHost(httpProxyURL)
-                    .WithHttpPort(httpProxyPort)
+                .WithHttpHost(proxyHost)
+                    .WithHttpPort(proxyPort)
                     .Build();
 
             httpProxyWithCredentialsConfiguration = ProxyConfigurationBuilder.NewProxyConfiguration()
-                .WithHttpHost(httpProxyWithCredentialsURL)
-                    .WithHttpPort(httpProxyWithCredentialsPort)
-                    .WithCredentials(httpProxyUserName, httpProxyPassword)
+                .WithHttpHost(proxyWithCredentialsHost)
+                    .WithHttpPort(proxyWithCredentialsPort)
+                    .WithCredentials(proxyUserName, proxyPassword)
                     .Build();
 
             eslClientWithHttpProxy = new EslClient(apiKey, apiUrl, allowAllSSLCertificates, httpProxyConfiguration);
