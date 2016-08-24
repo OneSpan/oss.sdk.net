@@ -16,7 +16,7 @@ namespace SDK.Examples
         public PackageId templateId;
         public PackageId instantiatedTemplateId;
 
-        public readonly string UPDATED_TEMPLATE_NAME = "Modified name";
+        public readonly string UPDATED_TEMPLATE_NAME = "Modified name" + " : " + DateTime.Now;
         public readonly string UPDATED_TEMPLATE_DESCRIPTION = "Modified description";
 
         public readonly string SIGNER1_FIRST_NAME = "John1";
