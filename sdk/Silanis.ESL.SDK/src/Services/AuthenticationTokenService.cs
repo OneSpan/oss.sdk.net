@@ -67,7 +67,7 @@ namespace Silanis.ESL.SDK
         public string CreateSignerAuthenticationToken (PackageId packageId, string signerId, IDictionary<string, string> fields)
         {
             try {
-                string path = template.UrlFor (UrlTemplate.SIGNER_AUTHENTICATION_TOKEN_PATH).Build ();
+                string path = template.UrlFor (UrlTemplate.SIGNER_AUTHENTICATION_TOKEN_MULTI_USE_PATH).Build ();
                 SignerAuthenticationToken signerAuthenticationToken = new SignerAuthenticationToken();
                 signerAuthenticationToken.PackageId = packageId.Id;
                 signerAuthenticationToken.SignerId = signerId;
@@ -78,10 +78,31 @@ namespace Silanis.ESL.SDK
                 return JsonConvert.DeserializeObject<SignerAuthenticationToken> (response).Value;
             } 
             catch (EslServerException e) {
-                throw new EslServerException ("Could not create an authentication token for a signer." + " Exception: " + e.Message, e.ServerError, e);
+                throw new EslServerException ("Could not create a signer authentication token." + " Exception: " + e.Message, e.ServerError, e);
             }
             catch (Exception e) {
-                throw new EslException ("Could not create an authentication token for a signer." + " Exception: " + e.Message, e);
+                throw new EslException ("Could not create a signer authentication token." + " Exception: " + e.Message, e);
+            }
+        }
+
+        public string CreateSignerAuthenticationTokenForSingleUse (PackageId packageId, string signerId, IDictionary<string, string> fields)
+        {
+            try {
+                string path = template.UrlFor (UrlTemplate.SIGNER_AUTHENTICATION_TOKEN_SINGLE_USE_PATH).Build ();
+                SignerAuthenticationToken signerAuthenticationToken = new SignerAuthenticationToken();
+                signerAuthenticationToken.PackageId = packageId.Id;
+                signerAuthenticationToken.SignerId = signerId;
+                signerAuthenticationToken.SessionFields = fields;
+
+                string serializedObject = JsonConvert.SerializeObject(signerAuthenticationToken);
+                string response = restClient.Post(path, serializedObject);              
+                return JsonConvert.DeserializeObject<SignerAuthenticationToken> (response).Value;
+            } 
+            catch (EslServerException e) {
+                throw new EslServerException ("Could not create a signer authentication token for for single use." + " Exception: " + e.Message, e.ServerError, e);
+            }
+            catch (Exception e) {
+                throw new EslException ("Could not create a signer authentication token for single use." + " Exception: " + e.Message, e);
             }
         }
     }

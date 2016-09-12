@@ -15,7 +15,8 @@ namespace SDK.Examples
         {
             new SignerAuthenticationTokenExample().Run();
         }
-        public string SignerSessionId { get; private set; }
+        public string SignerSessionIdForMultiUse { get; private set; }
+        public string SignerSessionIdForSingleUse { get; private set; }
 
         private AuthenticationClient AuthenticationClient;
         private string signerSessionFieldKey = "SDK SignerAuthenticationTokenExample Signer";
@@ -49,9 +50,11 @@ namespace SDK.Examples
             IDictionary<string, string> signerSessionFields = new Dictionary<string, string>();
             signerSessionFields.Add(signerSessionFieldKey, email1);
             string signerAuthenticationToken = eslClient.AuthenticationTokenService.CreateSignerAuthenticationToken(packageId, signerId, signerSessionFields);
+            string signerAuthenticationTokenForSingleUse = eslClient.AuthenticationTokenService.CreateSignerAuthenticationTokenForSingleUse(packageId, signerId, signerSessionFields);
 
             //This session id can be set in a cookie header
-            SignerSessionId = AuthenticationClient.GetSessionIdForSignerAuthenticationToken(signerAuthenticationToken);
+            SignerSessionIdForMultiUse = AuthenticationClient.GetSessionIdForSignerAuthenticationToken(signerAuthenticationToken);
+            SignerSessionIdForSingleUse = AuthenticationClient.GetSessionIdForSignerAuthenticationToken(signerAuthenticationTokenForSingleUse);
         }
     }
 }

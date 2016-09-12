@@ -1,23 +1,21 @@
 using System;
 using Silanis.ESL.SDK;
 using Silanis.ESL.SDK.Builder;
-using System.IO;
 
 namespace SDK.Examples
 {
-    public class SigningRedirectForSignerExample: SDKSample
+    public class SigningRedirectForSignerForSingleUseExample: SDKSample
     {
-
         public static void Main (string[] args)
         {
-            new SigningRedirectForSignerExample().Run();
+            new SigningRedirectForSignerForSingleUseExample().Run();
         }
 
         public string GeneratedLinkToSigningForSigner{ get; private set; }
 
         private AuthenticationClient authenticationClient;
 
-        public SigningRedirectForSignerExample()
+        public SigningRedirectForSignerForSingleUseExample()
         {
             this.authenticationClient = new AuthenticationClient(webpageUrl);
         }
@@ -26,7 +24,7 @@ namespace SDK.Examples
         {
             string signerId = System.Guid.NewGuid().ToString();
             DocumentPackage package = PackageBuilder.NewPackageNamed (PackageName)
-                    .DescribedAs ("This is a new package")
+                .DescribedAs ("This is a new package")
                     .WithSigner(SignerBuilder.NewSignerWithEmail(email1)
                                 .WithFirstName("John")
                                 .WithLastName("Smith")
@@ -36,22 +34,21 @@ namespace SDK.Examples
                     .WithDocument(DocumentBuilder.NewDocumentNamed("My Document")
                                   .FromStream(fileStream1, DocumentType.PDF)
                                   .WithSignature(SignatureBuilder.SignatureFor(email1)
-                                        .OnPage(0)
-                                        .AtPosition(500, 100)))
+                                   .OnPage(0)
+                                   .AtPosition(500, 100)))
                     .Build ();
 
             PackageId packageId = eslClient.CreatePackage (package);
             eslClient.SendPackage(packageId);
 
 
-            string signerAuthenticationToken = eslClient.AuthenticationTokenService.CreateSignerAuthenticationToken(packageId, signerId);
+            string signerAuthenticationToken = eslClient.AuthenticationTokenService.CreateSignerAuthenticationTokenForSingleUse(packageId, signerId, null);
 
 
             GeneratedLinkToSigningForSigner = authenticationClient.BuildRedirectToSigningForSigner(signerAuthenticationToken, packageId);
 
-            //This is an example url that can be used in an iFrame or to open a browser window with a signing session (created from the signer authentication token) and a redirect to the signing page.
             System.Console.WriteLine("Signing redirect url: " + GeneratedLinkToSigningForSigner);
         }
-
     }
 }
+

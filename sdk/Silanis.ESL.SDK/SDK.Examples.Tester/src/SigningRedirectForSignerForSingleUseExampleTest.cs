@@ -1,16 +1,15 @@
 using NUnit.Framework;
 using System;
-using Silanis.ESL.SDK.Internal;
 
 namespace SDK.Examples
 {
     [TestFixture()]
-    public class SigningRedirectForSignerExampleTest
+    public class SigningRedirectForSignerForSingleUseExampleTest
     {
         [Test()]
         public void VerifyResult()
         {
-            SigningRedirectForSignerExample example = new SigningRedirectForSignerExample();
+            SigningRedirectForSignerForSingleUseExample example = new SigningRedirectForSignerForSingleUseExample();
             example.Run();
 
             Assert.IsNotEmpty(example.GeneratedLinkToSigningForSigner);

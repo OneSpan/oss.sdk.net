@@ -6,9 +6,6 @@ namespace SDK.Examples
     [TestFixture()]
     public class SignerAuthenticationTokenExampleTest
     {
-        /** 
-        Will not be supported until later release.
-        **/
 
         [Test()]
 		public void VerifyResult()
@@ -16,7 +13,8 @@ namespace SDK.Examples
 			SignerAuthenticationTokenExample example = new SignerAuthenticationTokenExample();
 			example.Run();
 
-			Assert.IsNotNull(example.SignerSessionId);
+            Assert.IsNotNull(example.SignerSessionIdForMultiUse);
+			Assert.IsNotNull(example.SignerSessionIdForSingleUse);
         }
     }
 }

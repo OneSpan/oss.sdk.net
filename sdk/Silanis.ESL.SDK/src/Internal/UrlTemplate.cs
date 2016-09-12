@@ -124,13 +124,14 @@ namespace Silanis.ESL.SDK.Internal
 
         //Authentication Token Services
         public static readonly string ESL_AUTHENTICATION_PATH = "/auth";
-        public static readonly string USER_AUTHENTICATION_TOKEN_PATH = "/authenticationTokens";
+        public static readonly string USER_AUTHENTICATION_TOKEN_PATH = "/authenticationTokens/user";
         public static readonly string AUTHENTICATION_PATH_FOR_USER_AUTHENTICATION_TOKEN = "?authenticationToken={authenticationToken}";
         public static readonly string AUTHENTICATION_PATH_FOR_USER_AUTHENTICATION_TOKEN_WITH_REDIRECT = "?authenticationToken={authenticationToken}&target={redirectUrl}";
-        public static readonly string SENDER_AUTHENTICATION_TOKEN_PATH = "/senderAuthenticationTokens";
+        public static readonly string SENDER_AUTHENTICATION_TOKEN_PATH = "/authenticationTokens/sender";
         public static readonly string AUTHENTICATION_PATH_FOR_SENDER_AUTHENTICATION_TOKEN = "?senderAuthenticationToken={senderAuthenticationToken}";
         public static readonly string AUTHENTICATION_PATH_FOR_SENDER_AUTHENTICATION_TOKEN_WITH_REDIRECT = "?senderAuthenticationToken={senderAuthenticationToken}&target={redirectUrl}";
-        public static readonly string SIGNER_AUTHENTICATION_TOKEN_PATH = "/signerAuthenticationTokens";
+        public static readonly string SIGNER_AUTHENTICATION_TOKEN_MULTI_USE_PATH = "/authenticationTokens/signer/multiUse";
+        public static readonly string SIGNER_AUTHENTICATION_TOKEN_SINGLE_USE_PATH = "/authenticationTokens/signer/singleUse";
         public static readonly string AUTHENTICATION_PATH_FOR_SIGNER_AUTHENTICATION_TOKEN = "?signerAuthenticationToken={signerAuthenticationToken}";
         public static readonly string AUTHENTICATION_PATH_FOR_SIGNER_AUTHENTICATION_TOKEN_WITH_REDIRECT = "?signerAuthenticationToken={signerAuthenticationToken}&target={redirectUrl}";
 
