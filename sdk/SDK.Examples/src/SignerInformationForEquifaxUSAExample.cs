@@ -21,7 +21,7 @@ namespace SDK.Examples
         public readonly string ZIP = "35040";
         public readonly Nullable<Int32> TIME_AT_ADDRESS = 2;
         public readonly string SOCIAL_SECURITY_NUMBER = "666110007";
-        public readonly string HOME_PHONE_NUMBER = "2055551212";
+        public readonly string HOME_PHONE_NUMBER = "+12055551212";
         public readonly string DRIVERS_LICENSE_NUMBER = "251689216";
         public readonly Nullable<DateTime> DATE_OF_BIRTH = new DateTime(1973, 2, 2);
 
