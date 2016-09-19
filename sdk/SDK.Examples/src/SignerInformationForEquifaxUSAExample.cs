@@ -31,7 +31,7 @@ namespace SDK.Examples
         override public void Execute()
         {
             DocumentPackage superDuperPackage = PackageBuilder.NewPackageNamed(PackageName)
-                .DescribedAs("This is a package created using the e-SignLive SDK")
+                .DescribedAs("This is a package created using the eSignLive SDK")
                 .WithSigner(SignerBuilder.NewSignerWithEmail(email1)
                                 .WithFirstName(FIRST_NAME)
                                 .WithLastName(LAST_NAME)

@@ -14,7 +14,7 @@ using Silanis.ESL.SDK.Builder.Internal;
 namespace Silanis.ESL.SDK
 {
     /// <summary>
-    /// The EslClient acts as a E-SignLive client.
+    /// The EslClient acts as a eSignLive client.
     /// The EslClient has access to service classes that help create packages and retrieve resources from the client's account.
     /// </summary>
 	public class EslClient

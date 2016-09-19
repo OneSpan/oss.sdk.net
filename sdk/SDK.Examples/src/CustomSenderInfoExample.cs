@@ -62,7 +62,7 @@ namespace SDK.Examples
 
             package = PackageBuilder.NewPackageNamed(PackageName)
                       .WithSenderInfo( senderInfo )
-                      .DescribedAs( "This is a package created using the e-SignLive SDK" )
+                      .DescribedAs( "This is a package created using the eSignLive SDK" )
                       .ExpiresOn( DateTime.Now.AddMonths(1) )
                       .WithEmailMessage( "This message should be delivered to all signers" )
                       .WithDocument(DocumentBuilder.NewDocumentNamed("First Document")

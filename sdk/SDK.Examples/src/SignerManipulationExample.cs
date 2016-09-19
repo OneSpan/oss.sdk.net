@@ -13,7 +13,7 @@ namespace SDK.Examples
             Placeholder signer1Id = new Placeholder( Guid.NewGuid().ToString() );
             DocumentPackage superDuperPackage = 
                 PackageBuilder.NewPackageNamed(PackageName)
-                .DescribedAs("This is a package created using the e-SignLive SDK")
+                .DescribedAs("This is a package created using the eSignLive SDK")
                 .WithSigner(SignerBuilder.NewSignerWithEmail(email1)
                             .WithFirstName("firstName1")
                             .WithLastName("lastName1")

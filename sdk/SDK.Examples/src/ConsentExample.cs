@@ -15,7 +15,7 @@ namespace SDK.Examples
         override public void Execute()
         {
             DocumentPackage package = PackageBuilder.NewPackageNamed (PackageName)
-                .DescribedAs ("This is a package created using the e-SignLive SDK")
+                .DescribedAs ("This is a package created using the eSignLive SDK")
                     .WithSigner(SignerBuilder.NewSignerWithEmail(email1)
                                 .WithFirstName("John1")
                                 .WithLastName("Smith1"))

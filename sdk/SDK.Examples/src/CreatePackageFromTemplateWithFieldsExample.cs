@@ -15,7 +15,7 @@ namespace SDK.Examples
         public readonly string DOCUMENT_NAME = "First Document";
         public readonly string DOCUMENT_ID = "doc1";
         public readonly string TEMPLATE_NAME = "CreatePackageFromTemplateWithFieldsExample Template: " + DateTime.Now;
-        public readonly string PACKAGE_DESCRIPTION = "This is a package created using the e-SignLive SDK";
+        public readonly string PACKAGE_DESCRIPTION = "This is a package created using the eSignLive SDK";
         public readonly string PACKAGE_EMAIL_MESSAGE = "This message should be delivered to all signers";
         public readonly string TEMPLATE_SIGNER1_FIRST = "John";
         public readonly string TEMPLATE_SIGNER1_LAST = "Smith";

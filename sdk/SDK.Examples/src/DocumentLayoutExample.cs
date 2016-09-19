@@ -68,7 +68,7 @@ namespace SDK.Examples
 
             // Create a new package to apply document layout to
             DocumentPackage packageFromLayout = PackageBuilder.NewPackageNamed(PackageName)
-                .DescribedAs("This is a package created using the e-SignLive SDK")
+                .DescribedAs("This is a package created using the eSignLive SDK")
                 .WithEmailMessage("This message should be delivered to all signers")
                 .WithSigner(SignerBuilder.NewSignerWithEmail(email1)
                     .WithCustomId("Client1")

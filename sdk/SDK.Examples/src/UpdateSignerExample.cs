@@ -60,7 +60,7 @@ namespace SDK.Examples
                     .WithCustomId(SIGNER2_CUSTOM_ID).Build();
 
             DocumentPackage superDuperPackage = PackageBuilder.NewPackageNamed(PackageName)
-                .DescribedAs( "This is a package created using the e-SignLive SDK" )
+                .DescribedAs( "This is a package created using the eSignLive SDK" )
                     .WithSigner(signer1)
                     .WithSigner(signer2)
                     .WithDocument( DocumentBuilder.NewDocumentNamed( "First Document" )

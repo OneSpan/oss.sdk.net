@@ -11,7 +11,7 @@ namespace SDK.Examples
         {
             DocumentPackage superDuperPackage =
                 PackageBuilder.NewPackageNamed(PackageName)
-                    .DescribedAs("This is a package created using the e-SignLive SDK")
+                    .DescribedAs("This is a package created using the eSignLive SDK")
                     .WithSettings(DocumentPackageSettingsBuilder.NewDocumentPackageSettings().WithInPerson())
                     .ExpiresOn(DateTime.Now.AddMonths(100))
                     .WithSigner(SignerBuilder.NewSignerWithEmail(email1)

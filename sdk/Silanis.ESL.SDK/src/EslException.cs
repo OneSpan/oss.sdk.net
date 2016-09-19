@@ -3,7 +3,7 @@ using System;
 namespace Silanis.ESL.SDK
 {
 	/// <summary>
-	/// E-SignLive exception.
+	/// eSignLive exception.
 	/// </summary>
 	public class EslException : Exception
 	{

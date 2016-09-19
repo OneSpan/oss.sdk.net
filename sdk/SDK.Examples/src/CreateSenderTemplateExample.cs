@@ -20,7 +20,7 @@ namespace SDK.Examples
         {
             DocumentPackage template =
                 PackageBuilder.NewPackageNamed("CreateSenderTemplateExample: " + DateTime.Now)
-                    .DescribedAs("This is a Template created using the e-SignLive SDK")      
+                    .DescribedAs("This is a Template created using the eSignLive SDK")      
                     .WithVisibility(visibility)
                     .WithEmailMessage("This message should be delivered to all signers")
                     .WithSigner(SignerBuilder.NewSignerWithEmail(email1)

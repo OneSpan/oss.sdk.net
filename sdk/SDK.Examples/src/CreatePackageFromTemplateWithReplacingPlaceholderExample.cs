@@ -17,12 +17,12 @@ namespace SDK.Examples
         public readonly string DOCUMENT_NAME = "First Document";
         public readonly string DOCUMENT_ID = "doc1";
         public readonly string TEMPLATE_NAME = "CreatePackageFromTemplateWithReplacingPlaceholderExample Template: " + DateTime.Now;
-        public readonly string TEMPLATE_DESCRIPTION = "This is a template created using the e-SignLive SDK";
+        public readonly string TEMPLATE_DESCRIPTION = "This is a template created using the eSignLive SDK";
         public readonly string TEMPLATE_EMAIL_MESSAGE = "This message should be delivered to all signers";
         public readonly string TEMPLATE_SIGNER_FIRST = "John";
         public readonly string TEMPLATE_SIGNER_LAST = "Smith";
 
-        public readonly string PACKAGE_DESCRIPTION = "This is a package created using the e-SignLive SDK";
+        public readonly string PACKAGE_DESCRIPTION = "This is a package created using the eSignLive SDK";
         public readonly string PACKAGE_EMAIL_MESSAGE = "This message should be delivered to all signers";
         public readonly string PACKAGE_SIGNER_FIRST = "Patty";
         public readonly string PACKAGE_SIGNER_LAST = "Galant";

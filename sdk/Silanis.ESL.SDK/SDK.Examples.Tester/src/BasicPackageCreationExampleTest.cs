@@ -18,7 +18,7 @@ namespace SDK.Examples
             DocumentPackage documentPackage = example.RetrievedPackage;
 
             // Verify if the package is created correctly
-            Assert.AreEqual("This is a package created using the e-SignLive SDK", documentPackage.Description);
+            Assert.AreEqual("This is a package created using the eSignLive SDK", documentPackage.Description);
             Assert.AreEqual("This message should be delivered to all signers", documentPackage.EmailMessage);
 
             Assert.AreEqual(false, documentPackage.Settings.EnableInPerson);

@@ -36,7 +36,7 @@ namespace SDK.Examples
 
             // Create the template specifying the sender
             DocumentPackage superDuperPackage = PackageBuilder.NewPackageNamed(PackageName)
-                .DescribedAs("This is a package created using the e-SignLive SDK")
+                .DescribedAs("This is a package created using the eSignLive SDK")
                 .WithEmailMessage("This message should be delivered to all signers")
                 .WithSenderInfo(SenderInfoBuilder.NewSenderInfo(senderEmail)
                     .WithName(SENDER_FIRST_NAME, SENDER_LAST_NAME)
