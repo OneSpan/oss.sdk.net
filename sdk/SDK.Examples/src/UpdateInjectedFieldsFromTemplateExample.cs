@@ -93,7 +93,7 @@ namespace SDK.Examples
             eslClient.PackageService.DeleteDocument(packageId, retrievedDocument.Id);
 
             // Uploading newly created document.
-            eslClient.UploadDocument(documentToChange.FileName, documentToChange.Content, documentToChange, retrievedPackage);
+            eslClient.UploadDocument(documentToChange.FileName, documentToChange.Content, documentToChange, packageId);
         }
     }
 }

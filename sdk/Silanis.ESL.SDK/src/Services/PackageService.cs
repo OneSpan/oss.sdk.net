@@ -534,38 +534,35 @@ namespace Silanis.ESL.SDK.Services
         /// <param name="fileName">The name of the document.</param>
         /// <param name="fileBytes">The file to upload in bytes.</param>
         /// <param name="document">The document object that has field settings.</param>
-        internal Document UploadDocument(DocumentPackage package, string fileName, byte[] fileBytes, Document document)
+        internal Document UploadDocument(PackageId packageId, string fileName, byte[] fileBytes, Document document)
         {
-            lock (syncLock)
+            string path = template.UrlFor(UrlTemplate.DOCUMENT_PATH)
+                .Replace("{packageId}", packageId.Id)
+				.Build();
+
+            Silanis.ESL.API.Package internalPackage = GetPackage(packageId);
+            Silanis.ESL.API.Document internalDoc = new DocumentConverter(document).ToAPIDocument(internalPackage);
+
+            try
             {
-                string path = template.UrlFor(UrlTemplate.DOCUMENT_PATH)
-				.Replace("{packageId}", package.Id.Id)
-					.Build();
+                string json = JsonConvert.SerializeObject(internalDoc, settings);
+                byte[] payloadBytes = Converter.ToBytes(json);
 
-                Silanis.ESL.API.Package internalPackage = new DocumentPackageConverter(package).ToAPIPackage();
-                Silanis.ESL.API.Document internalDoc = new DocumentConverter(document).ToAPIDocument(internalPackage);
+                string boundary = GenerateBoundary();
+                byte[] content = CreateMultipartContent(fileName, fileBytes, payloadBytes, boundary);
 
-                try
-                {
-                    string json = JsonConvert.SerializeObject(internalDoc, settings);
-                    byte[] payloadBytes = Converter.ToBytes(json);
+                string response = restClient.PostMultipartFile(path, content, boundary, json);
 
-                    string boundary = GenerateBoundary();
-                    byte[] content = CreateMultipartContent(fileName, fileBytes, payloadBytes, boundary);
-
-                    string response = restClient.PostMultipartFile(path, content, boundary, json);
-
-                    Silanis.ESL.API.Document uploadedDoc = JsonConvert.DeserializeObject<Silanis.ESL.API.Document>(response);
-                    return new DocumentConverter(uploadedDoc, internalPackage).ToSDKDocument();
-                }
-                catch (EslServerException e)
-                {
-                    throw new EslServerException("Could not upload document to package." + " Exception: " + e.Message, e.ServerError, e);
-                }
-                catch (Exception e)
-                {
-                    throw new EslException("Could not upload document to package." + " Exception: " + e.Message, e);
-                }
+                Silanis.ESL.API.Document uploadedDoc = JsonConvert.DeserializeObject<Silanis.ESL.API.Document>(response);
+                return new DocumentConverter(uploadedDoc, internalPackage).ToSDKDocument();
+            }
+            catch (EslServerException e)
+            {
+                throw new EslServerException("Could not upload document to package." + " Exception: " + e.Message, e.ServerError, e);
+            }
+            catch (Exception e)
+            {
+                throw new EslException("Could not upload document to package." + " Exception: " + e.Message, e);
             }
         }
 

@@ -218,11 +218,10 @@ namespace Silanis.ESL.SDK
         
 			Silanis.ESL.API.Package packageToCreate = new DocumentPackageConverter(package).ToAPIPackage();
 			PackageId id = packageService.CreatePackage (packageToCreate);
-            DocumentPackage retrievedPackage = GetPackage(id);
 
 			foreach (Document document in package.Documents)
 			{
-                UploadDocument(document, retrievedPackage);
+                UploadDocument(document, id);
 			}
 
 			return id;
@@ -375,11 +374,10 @@ namespace Silanis.ESL.SDK
 		public PackageId CreateTemplate(DocumentPackage template)
 		{
 			PackageId templateId = templateService.CreateTemplate(new DocumentPackageConverter(template).ToAPIPackage());
-			DocumentPackage createdTemplate = GetPackage(templateId);
 
 			foreach (Document document in template.Documents)
 			{
-				UploadDocument(document, createdTemplate);
+                UploadDocument(document, templateId);
 			}
 
 			return templateId;
@@ -450,23 +448,25 @@ namespace Silanis.ESL.SDK
 			return packageService.GetSigningStatus (packageId, signerId, documentId);
 		}
 
+        [Obsolete("Please use UploadDocument(Document document, PackageId packageId ) instead of this method.")]
 		public Document UploadDocument(Document document, DocumentPackage documentPackage ) {
-			return UploadDocument( document.FileName, document.Content, document, documentPackage );
+			return UploadDocument( document.FileName, document.Content, document, documentPackage.Id );
 		}
 
-		public Document UploadDocument(String fileName, byte[] fileContent, Document document, DocumentPackage documentPackage)
-        {
-			Document uploaded = packageService.UploadDocument(documentPackage, fileName, fileContent, document);
-
-			documentPackage.Documents.Add(uploaded);
-			return uploaded;
+        public Document UploadDocument(Document document, PackageId packageId ) {
+            return UploadDocument( document.FileName, document.Content, document, packageId );
         }
 
-		public Document UploadDocument( Document document, PackageId packageId ) {
-			DocumentPackage documentPackage = GetPackage(packageId);
+        [Obsolete("Please use UploadDocument(string fileName, byte[] fileContent, Document document, PackageId packageId) instead of this method.")]
+		public Document UploadDocument(string fileName, byte[] fileContent, Document document, DocumentPackage documentPackage)
+        {
+            return UploadDocument(fileName, fileContent, document, documentPackage.Id);
+        }
 
-			return UploadDocument(document, documentPackage);
-		}
+        public Document UploadDocument(string fileName, byte[] fileContent, Document document, PackageId packageId)
+        {
+            return packageService.UploadDocument(packageId, fileName, fileContent, document);
+        }
 
         public void UploadAttachment(PackageId packageId, string attachmentId, string filename, byte[] fileBytes, string signerId) {
             string signerSessionFieldKey = "Upload Attachment on behalf of";

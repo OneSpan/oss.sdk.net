@@ -55,7 +55,7 @@ namespace SDK.Examples
 				.Build();
 
 			// 3. Attach the document to the created package by uploading the document.
-			document = eslClient.UploadDocument(document, retrievedPackage);
+            document = eslClient.UploadDocument(document, packageId);
 			Console.WriteLine("Document was uploaded");
             
             RetrievedPackageWithNewDocument = eslClient.GetPackage(packageId);
