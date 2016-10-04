@@ -10,12 +10,13 @@ namespace Silanis.ESL.SDK
         {
             try 
             {
-                HttpWebRequest request = (HttpWebRequest)WebRequest.Create (url);
+                HttpWebRequest request = (HttpWebRequest) WebRequest.Create (url);
 
                 request.AllowAutoRedirect = false;
-                HttpWebResponse response = (HttpWebResponse)request.GetResponse();
+                HttpWebResponse response = (HttpWebResponse) request.GetResponse();
                 string locationHeader = response.Headers["Location"];
-                return locationHeader;
+
+                return String.IsNullOrEmpty(locationHeader) ? url : locationHeader;
             } 
             catch (WebException e) 
             {
