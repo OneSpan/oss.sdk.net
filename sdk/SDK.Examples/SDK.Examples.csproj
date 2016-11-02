@@ -9,7 +9,7 @@
     <OutputType>Exe</OutputType>
     <RootNamespace>SDK.Examples</RootNamespace>
     <AssemblyName>SDK.Examples</AssemblyName>
-    <TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <StartupObject>SDK.Examples.BasicPackageCreationExample</StartupObject>
     <PublishUrl>publish\</PublishUrl>
     <Install>true</Install>

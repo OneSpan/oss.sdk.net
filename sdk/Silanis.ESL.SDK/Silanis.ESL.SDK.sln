@@ -34,7 +34,6 @@ Global
 	EndGlobalSection
 	GlobalSection(MonoDevelopProperties) = preSolution
 		BaseDirectory = ..\..
-		StartupItem = SDK.Examples.Tester\SDK.Examples.Tester.csproj
 		Policies = $0
 		$0.TextStylePolicy = $1
 		$1.FileWidth = 120
@@ -72,6 +71,7 @@ Global
 		$3.inheritsSet = VisualStudio
 		$3.inheritsScope = text/plain
 		$3.scope = text/plain
+		StartupItem = SDK.Examples.Tester\SDK.Examples.Tester.csproj
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

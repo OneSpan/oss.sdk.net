@@ -6,12 +6,15 @@ test-results/
 TestResult.xml
 
 #user-specific files
+/packages/
 *.userprefs
 *.usertasks
 *.user
 *.suo
 */*/signers.properties
 */*/*/signers.properties
+*/*/packages.config
+*/*/*/packages.config
 
 #zip file
 *.zip

@@ -77,32 +77,29 @@ namespace Silanis.ESL.SDK.Services
         /// <param name="package">The package to create.</param>
         internal PackageId CreatePackageOneStep(Silanis.ESL.API.Package package, ICollection<Silanis.ESL.SDK.Document> documents)
         {
-            lock (syncLock)
+            string path = template.UrlFor(UrlTemplate.PACKAGE_PATH)
+            .Build();
+            try
             {
-                string path = template.UrlFor(UrlTemplate.PACKAGE_PATH)
-                .Build();
-                try
-                {
-                    string json = JsonConvert.SerializeObject(package, settings);
-                    byte[] payloadBytes = Converter.ToBytes(json);
+                string json = JsonConvert.SerializeObject(package, settings);
+                byte[] payloadBytes = Converter.ToBytes(json);
 
-                    string boundary = GenerateBoundary();
-                    byte[] content = CreateMultipartPackage(documents, payloadBytes, boundary);
+                string boundary = GenerateBoundary();
+                byte[] content = CreateMultipartPackage(documents, payloadBytes, boundary);
 
-                    string response = restClient.PostMultipartPackage(path, content, boundary, json); 
+                string response = restClient.PostMultipartPackage(path, content, boundary, json); 
 
-                    PackageId result = JsonConvert.DeserializeObject<PackageId>(response);
+                PackageId result = JsonConvert.DeserializeObject<PackageId>(response);
 
-                    return result;
-                }
-                catch (EslServerException e)
-                {
-                    throw new EslServerException("Could not create a new package one step." + " Exception: " + e.Message, e.ServerError, e);
-                }
-                catch (Exception e)
-                {
-                    throw new EslException("Could not create a new package one step." + " Exception: " + e.Message, e);
-                }
+                return result;
+            }
+            catch (EslServerException e)
+            {
+                throw new EslServerException("Could not create a new package one step." + " Exception: " + e.Message, e.ServerError, e);
+            }
+            catch (Exception e)
+            {
+                throw new EslException("Could not create a new package one step." + " Exception: " + e.Message, e);
             }
         }
 
