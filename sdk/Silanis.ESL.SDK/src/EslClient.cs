@@ -378,8 +378,29 @@ namespace Silanis.ESL.SDK
 			packageService.UpdatePackage( packageId, new DocumentPackageConverter(sentSettings).ToAPIPackage() );
         }
 
-        public void ChangePackageStatusToDraft(PackageId packageId) {
+        public void ChangePackageStatusToDraft(PackageId packageId) 
+        {
             packageService.ChangePackageStatusToDraft(packageId);
+        }
+
+        public void ConfigureDocumentVisibility(PackageId packageId, DocumentVisibility visibility) 
+        {
+            packageService.ConfigureDocumentVisibility(packageId, visibility);
+        }
+
+        public DocumentVisibility getDocumentVisibility(PackageId packageId) 
+        {
+            return packageService.GetDocumentVisibility(packageId);
+        }
+
+        public IList<Document> GetDocuments( PackageId packageId, string signerId ) 
+        {
+            return packageService.GetDocuments(packageId, signerId);
+        }
+
+        public IList<Signer> GetSigners( PackageId packageId, string documentId ) 
+        {
+            return packageService.GetSigners(packageId, documentId);
         }
         
 		public SigningStatus GetSigningStatus (PackageId packageId, string signerId, string documentId)

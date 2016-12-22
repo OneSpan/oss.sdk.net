@@ -10,7 +10,7 @@
     <FileAlignment>512</FileAlignment>
     <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -377,6 +377,16 @@
     <Compile Include="src\DownloadedFile.cs" />
     <Compile Include="src\Services\SignatureImageService.cs" />
     <Compile Include="src\SignatureImageFormat.cs" />
+    <Compile Include="src\Models\DocumentVisibility.cs" />
+    <Compile Include="src\Models\DocumentVisibilityConfiguration.cs" />
+    <Compile Include="src\DocumentVisibility.cs" />
+    <Compile Include="src\DocumentVisibilityConfiguration.cs" />
+    <Compile Include="src\Builder\DocumentVisibilityBuilder.cs" />
+    <Compile Include="src\Builder\DocumentVisibilityConfigurationBuilder.cs" />
+    <Compile Include="src\Builder\DocumentVisibilityBasedOnSignerBuilder.cs" />
+    <Compile Include="src\Builder\DocumentVisibilityConfigurationBasedOnSignerBuilder.cs" />
+    <Compile Include="src\Internal\Conversion\DocumentVisibilityConfigurationConverter.cs" />
+    <Compile Include="src\Internal\Conversion\DocumentVisibilityConverter.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSHARP.Targets" />
   <ProjectExtensions>

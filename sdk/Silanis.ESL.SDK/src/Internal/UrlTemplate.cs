@@ -26,6 +26,7 @@ namespace Silanis.ESL.SDK.Internal
 		public static readonly string PACKAGE_ID_PATH = "/packages/{packageId}";
 		public static readonly string DOCUMENT_PATH = "/packages/{packageId}/documents";
 		public static readonly string DOCUMENT_ID_PATH = "/packages/{packageId}/documents/{documentId}";
+        public static readonly string DOCUMENT_VISIBILITY_PATH = "/packages/{packageId}/documents/visibility";
 		public static readonly string ROLE_PATH = "/packages/{packageId}/roles";
         public static readonly string ROLE_ID_PATH = "/packages/{packageId}/roles/{roleId}";
         public static readonly string ROLE_UNLOCK_PATH = "/packages/{packageId}/roles/{roleId}/unlock";

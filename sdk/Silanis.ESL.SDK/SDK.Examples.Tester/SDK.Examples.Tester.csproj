@@ -9,7 +9,7 @@
     <OutputType>Library</OutputType>
     <RootNamespace>SDK.Examples</RootNamespace>
     <AssemblyName>SDK.Examples.Tester</AssemblyName>
-    <TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -89,7 +89,6 @@
     <Compile Include="src\SignerSMSAuthenticationExampleTest.cs" />
     <Compile Include="src\FieldManipulationExampleTest.cs" />
     <Compile Include="src\DocumentLayoutExampleTest.cs" />
-    <Compile Include="src\QRCodeExampleTest.cs" />
     <Compile Include="src\CreateTemplateOnBehalfOfAnotherSenderExampleTest.cs" />
     <Compile Include="src\ContactsExampleTest.cs" />
     <Compile Include="src\SignerInformationForEquifaxCanadaExampleTest.cs" />
@@ -126,6 +125,7 @@
     <Compile Include="src\CreatePackageWithoutDocumentExampleTest.cs" />
     <Compile Include="src\ChangePlaceholderNameExampleTest.cs" />
     <Compile Include="src\GetSigningStatusExampleTest.cs" />
+    <Compile Include="src\DocumentVisibilityExampleTest.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
@@ -146,5 +146,6 @@
     <None Include="signers.properties">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Include="jenkins.properties" />
   </ItemGroup>
 </Project>

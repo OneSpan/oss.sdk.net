@@ -9,7 +9,7 @@
     <OutputType>Exe</OutputType>
     <RootNamespace>SDK.Examples</RootNamespace>
     <AssemblyName>SDK.Examples</AssemblyName>
-    <TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <StartupObject>SDK.Examples.BasicPackageCreationExample</StartupObject>
     <PublishUrl>publish\</PublishUrl>
     <Install>true</Install>
@@ -124,7 +124,6 @@
     <Compile Include="src\FieldManipulationExample.cs" />
     <Compile Include="src\RetrieveFieldValuesExample.cs" />
     <Compile Include="src\DocumentLayoutExample.cs" />
-    <Compile Include="src\QRCodeExample.cs" />
     <Compile Include="src\CreateTemplateOnBehalfOfAnotherSenderExample.cs" />
     <Compile Include="src\ContactsExample.cs" />
     <Compile Include="src\SignerInformationForEquifaxCanadaExample.cs" />
@@ -158,6 +157,7 @@
     <Compile Include="src\CreatePackageWithoutDocumentExample.cs" />
     <Compile Include="src\ChangePlaceholderNameExample.cs" />
     <Compile Include="src\SignatureImageExample.cs" />
+    <Compile Include="src\DocumentVisibilityExample.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
@@ -184,7 +184,6 @@
     <None Include="src\document-for-anchor-extraction.pdf">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="jenkins.properties" />
     <None Include="src\extract_document.pdf">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
