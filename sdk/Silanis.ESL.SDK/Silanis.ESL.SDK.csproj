@@ -379,6 +379,16 @@
     <Compile Include="src\Internal\LoggerFactory.cs" />
     <Compile Include="src\Internal\RollOverTextWriter.cs" />
     <Compile Include="src\Internal\ILogger.cs" />
+    <Compile Include="src\Models\DocumentVisibility.cs" />
+    <Compile Include="src\Models\DocumentVisibilityConfiguration.cs" />
+    <Compile Include="src\DocumentVisibility.cs" />
+    <Compile Include="src\DocumentVisibilityConfiguration.cs" />
+    <Compile Include="src\Builder\DocumentVisibilityBuilder.cs" />
+    <Compile Include="src\Builder\DocumentVisibilityConfigurationBuilder.cs" />
+    <Compile Include="src\Builder\DocumentVisibilityBasedOnSignerBuilder.cs" />
+    <Compile Include="src\Builder\DocumentVisibilityConfigurationBasedOnSignerBuilder.cs" />
+    <Compile Include="src\Internal\Conversion\DocumentVisibilityConfigurationConverter.cs" />
+    <Compile Include="src\Internal\Conversion\DocumentVisibilityConverter.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSHARP.Targets" />
   <ProjectExtensions>

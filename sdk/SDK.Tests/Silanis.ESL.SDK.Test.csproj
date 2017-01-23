@@ -108,6 +108,8 @@
     <Compile Include="src\Internal\Conversion\VisibilityConverterTest.cs" />
     <Compile Include="src\Internal\Conversion\DocumentPackageSettingsConverterTest.cs" />
     <Compile Include="src\Internal\RollOverTextWriterTest.cs" />
+    <Compile Include="src\Internal\Conversion\DocumentVisibilityConfigurationConverterTest.cs" />
+    <Compile Include="src\Internal\Conversion\DocumentVisibilityConverterTest.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
