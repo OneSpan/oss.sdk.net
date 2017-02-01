@@ -9,7 +9,7 @@
     <OutputType>Exe</OutputType>
     <RootNamespace>SDK.Examples</RootNamespace>
     <AssemblyName>SDK.Examples</AssemblyName>
-    <TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <StartupObject>SDK.Examples.BasicPackageCreationExample</StartupObject>
     <PublishUrl>publish\</PublishUrl>
     <Install>true</Install>
@@ -74,7 +74,6 @@
     <Compile Include="src\BasicPackageCreationExample.cs" />
     <Compile Include="src\AuthenticationMethodsExample.cs" />
     <Compile Include="src\BrandingBarConfigurationExample.cs" />
-    <Compile Include="src\DeletePackageExample.cs" />
     <Compile Include="src\DeliverSignedDocumentsByEmailExample.cs" />
     <Compile Include="src\DocumentExtractionExample.cs" />
     <Compile Include="src\DocumentPackageSettingsExample.cs" />
@@ -130,7 +129,6 @@
     <Compile Include="src\ProxyConfigurationExample.cs" />
     <Compile Include="src\PackageViewRedirectForPackageSenderExample.cs" />
     <Compile Include="src\GetCompletedPackagesWithinDateRangeExample.cs" />
-    <Compile Include="src\MixingSignatureAndAcceptanceOnOnedocumentExample.cs" />
     <Compile Include="src\ChangePackageStatusExample.cs" />
     <Compile Include="src\GetSigningUrlExample.cs" />
     <Compile Include="src\StartFastTrackExample.cs" />
@@ -157,6 +155,9 @@
     <Compile Include="src\SignDocumentsExample.cs" />
     <Compile Include="src\UpdateSignerExample.cs" />
     <Compile Include="src\SigningRedirectForSignerForSingleUseExample.cs" />
+    <Compile Include="src\DocumentVisibilityExample.cs" />
+    <Compile Include="src\notAllowed\MixingSignatureAndAcceptanceOnOnedocumentExample.cs" />
+    <Compile Include="src\notAllowed\DeletePackageExample.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
@@ -205,5 +206,8 @@
       <Project>{0A9B8521-9624-460B-813E-079056B24B65}</Project>
       <Name>Silanis.ESL.SDK</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="src\notAllowed\" />
   </ItemGroup>
 </Project>

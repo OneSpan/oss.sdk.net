@@ -77,32 +77,29 @@ namespace Silanis.ESL.SDK.Services
         /// <param name="package">The package to create.</param>
         internal PackageId CreatePackageOneStep(Silanis.ESL.API.Package package, ICollection<Silanis.ESL.SDK.Document> documents)
         {
-            lock (syncLock)
+            string path = template.UrlFor(UrlTemplate.PACKAGE_PATH)
+            .Build();
+            try
             {
-                string path = template.UrlFor(UrlTemplate.PACKAGE_PATH)
-                .Build();
-                try
-                {
-                    string json = JsonConvert.SerializeObject(package, settings);
-                    byte[] payloadBytes = Converter.ToBytes(json);
+                string json = JsonConvert.SerializeObject(package, settings);
+                byte[] payloadBytes = Converter.ToBytes(json);
 
-                    string boundary = GenerateBoundary();
-                    byte[] content = CreateMultipartPackage(documents, payloadBytes, boundary);
+                string boundary = GenerateBoundary();
+                byte[] content = CreateMultipartPackage(documents, payloadBytes, boundary);
 
-                    string response = restClient.PostMultipartPackage(path, content, boundary, json); 
+                string response = restClient.PostMultipartPackage(path, content, boundary, json); 
 
-                    PackageId result = JsonConvert.DeserializeObject<PackageId>(response);
+                PackageId result = JsonConvert.DeserializeObject<PackageId>(response);
 
-                    return result;
-                }
-                catch (EslServerException e)
-                {
-                    throw new EslServerException("Could not create a new package one step." + " Exception: " + e.Message, e.ServerError, e);
-                }
-                catch (Exception e)
-                {
-                    throw new EslException("Could not create a new package one step." + " Exception: " + e.Message, e);
-                }
+                return result;
+            }
+            catch (EslServerException e)
+            {
+                throw new EslServerException("Could not create a new package one step." + " Exception: " + e.Message, e.ServerError, e);
+            }
+            catch (Exception e)
+            {
+                throw new EslException("Could not create a new package one step." + " Exception: " + e.Message, e);
             }
         }
 
@@ -1146,6 +1143,71 @@ namespace Silanis.ESL.SDK.Services
             {
                 throw new EslException("Could not unlock signer." + " Exception: " + e.Message, e);
             }
+        }
+
+        public void ConfigureDocumentVisibility(PackageId packageId, DocumentVisibility visibility)
+        {
+            string path = template.UrlFor( UrlTemplate.DOCUMENT_VISIBILITY_PATH )
+                .Replace("{packageId}", packageId.Id)
+                .Build();
+
+            Silanis.ESL.API.DocumentVisibility apiVisibility = new DocumentVisibilityConverter(visibility).ToAPIDocumentVisibility();
+            string json = JsonConvert.SerializeObject(apiVisibility, settings);
+
+            try 
+            {
+                restClient.Post(path, json);
+            } 
+            catch (EslServerException e)
+            {
+                throw new EslServerException("Could not configure document visibility." + " Exception: " + e.Message, e.ServerError, e);
+            }
+            catch (Exception e)
+            {
+                throw new EslException("Could not configure document visibility." + " Exception: " + e.Message, e);
+            }
+        }
+
+        public DocumentVisibility GetDocumentVisibility(PackageId packageId) 
+        {
+            string path = template.UrlFor( UrlTemplate.DOCUMENT_VISIBILITY_PATH )
+                .Replace("{packageId}", packageId.Id)
+                .Build();
+
+            try {
+                string response = restClient.Get(path);
+                Silanis.ESL.API.DocumentVisibility apiVisibility = JsonConvert.DeserializeObject<Silanis.ESL.API.DocumentVisibility>(response, settings);
+
+                return new DocumentVisibilityConverter(apiVisibility).ToSDKDocumentVisibility();
+            } 
+            catch (EslServerException e)
+            {
+                throw new EslServerException("Could not get document visibility." + " Exception: " + e.Message, e.ServerError, e);
+            }
+            catch (Exception e)
+            {
+                throw new EslException("Could not get document visibility." + " Exception: " + e.Message, e);
+            }
+        }
+
+        public IList<Silanis.ESL.SDK.Document> GetDocuments(PackageId packageId, string signerId) 
+        {
+            Package aPackage = GetPackage(packageId);
+            DocumentPackageConverter converter = new DocumentPackageConverter(aPackage);
+            DocumentPackage documentPackage = converter.ToSDKPackage();
+            DocumentVisibility visibility = GetDocumentVisibility(packageId);
+
+            return visibility.GetDocuments(documentPackage, signerId);
+        }
+
+        public IList<Silanis.ESL.SDK.Signer> GetSigners(PackageId packageId, string documentId) 
+        {
+            Package aPackage = GetPackage(packageId);
+            DocumentPackageConverter converter = new DocumentPackageConverter(aPackage);
+            DocumentPackage documentPackage = converter.ToSDKPackage();
+            DocumentVisibility visibility = GetDocumentVisibility(packageId);
+
+            return visibility.GetSigners(documentPackage, documentId);
         }
 
         [Obsolete("Use Silanis.ESL.SDK.Services.ReportService.DownloadCompletionReportAsCSV")]
