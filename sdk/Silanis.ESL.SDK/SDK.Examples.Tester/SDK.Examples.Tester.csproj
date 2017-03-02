@@ -147,5 +147,6 @@
     <None Include="signers.properties">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Include="app.config" />
   </ItemGroup>
 </Project>

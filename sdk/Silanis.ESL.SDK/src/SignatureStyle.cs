@@ -7,7 +7,7 @@ namespace Silanis.ESL.SDK
 {
     public class SignatureStyle : EslEnumeration
 	{
-        private static ILogger log = LoggerFactory.get(typeof(AuthenticationMethod));
+        private static ILogger log = LoggerFactory.get(typeof(SignatureStyle));
 
         public static SignatureStyle HAND_DRAWN = new SignatureStyle("CAPTURE", "HAND_DRAWN", 0);
         public static SignatureStyle FULL_NAME = new SignatureStyle("FULLNAME", "FULL_NAME", 1);

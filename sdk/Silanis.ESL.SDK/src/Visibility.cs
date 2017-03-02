@@ -7,7 +7,7 @@ namespace Silanis.ESL.SDK
 {
     public class Visibility : EslEnumeration
     {
-        private static ILogger log = LoggerFactory.get(typeof(AuthenticationMethod));
+        private static ILogger log = LoggerFactory.get(typeof(Visibility));
 
         public static Visibility ACCOUNT = new Visibility("ACCOUNT", "ACCOUNT", 0);
         public static Visibility SENDER = new Visibility("SENDER", "SENDER", 1);

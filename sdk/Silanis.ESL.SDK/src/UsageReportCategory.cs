@@ -7,7 +7,7 @@ namespace Silanis.ESL.SDK
 {
     public class UsageReportCategory : EslEnumeration
     {
-        private static ILogger log = LoggerFactory.get(typeof(AuthenticationMethod));
+        private static ILogger log = LoggerFactory.get(typeof(UsageReportCategory));
 
         public static UsageReportCategory ACTIVE = new UsageReportCategory("ACTIVE", "ACTIVE", 0);
         public static UsageReportCategory DRAFT = new UsageReportCategory("DRAFT", "DRAFT", 1);

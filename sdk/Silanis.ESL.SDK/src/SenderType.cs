@@ -7,7 +7,7 @@ namespace Silanis.ESL.SDK
 {
     public class SenderType : EslEnumeration
     {
-        private static ILogger log = LoggerFactory.get(typeof(AuthenticationMethod));
+        private static ILogger log = LoggerFactory.get(typeof(SenderType));
 
         public static SenderType REGULAR = new SenderType("REGULAR", "REGULAR", 0);
         public static SenderType MANAGER = new SenderType("MANAGER", "MANAGER", 1);

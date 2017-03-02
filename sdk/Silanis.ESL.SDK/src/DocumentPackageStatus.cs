@@ -7,7 +7,7 @@ namespace Silanis.ESL.SDK
 {
 	public class DocumentPackageStatus : EslEnumeration
 	{
-        private static ILogger log = LoggerFactory.get(typeof(AuthenticationMethod));
+        private static ILogger log = LoggerFactory.get(typeof(DocumentPackageStatus));
 
         public static DocumentPackageStatus DRAFT = new DocumentPackageStatus("DRAFT", "DRAFT", 0);
         public static DocumentPackageStatus SENT = new DocumentPackageStatus("SENT", "SENT", 1);

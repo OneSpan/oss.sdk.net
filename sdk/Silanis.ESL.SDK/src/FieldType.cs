@@ -7,7 +7,7 @@ namespace Silanis.ESL.SDK
 {
     public class FieldType : EslEnumeration
     {
-        private static ILogger log = LoggerFactory.get(typeof(AuthenticationMethod));
+        private static ILogger log = LoggerFactory.get(typeof(FieldType));
 
         public static FieldType SIGNATURE = new FieldType("SIGNATURE", "SIGNATURE", 0);
         public static FieldType INPUT = new FieldType("INPUT", "INPUT", 1);

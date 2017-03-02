@@ -7,7 +7,7 @@ namespace Silanis.ESL.SDK
 {
     internal class FieldStyleAndSubTypeConverter
     {
-        private static ILogger log = LoggerFactory.get(typeof(AuthenticationMethod));
+        private static ILogger log = LoggerFactory.get(typeof(FieldStyleAndSubTypeConverter));
 
         private static string BINDING_DATE = "{approval.signed}";
         private static string BINDING_TITLE = "{signer.title}";

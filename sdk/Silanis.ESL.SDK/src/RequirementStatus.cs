@@ -7,7 +7,7 @@ namespace Silanis.ESL.SDK
 {
     public class RequirementStatus : EslEnumeration
 	{
-        private static ILogger log = LoggerFactory.get(typeof(AuthenticationMethod));
+        private static ILogger log = LoggerFactory.get(typeof(RequirementStatus));
 
         public static RequirementStatus INCOMPLETE = new RequirementStatus("INCOMPLETE", "INCOMPLETE", 0);
         public static RequirementStatus REJECTED = new RequirementStatus("REJECTED", "REJECTED", 1);

@@ -7,7 +7,7 @@ namespace Silanis.ESL.SDK
 {
     public class SenderStatus : EslEnumeration
     {
-        private static ILogger log = LoggerFactory.get(typeof(AuthenticationMethod));
+        private static ILogger log = LoggerFactory.get(typeof(SenderStatus));
 
         public static SenderStatus INVITED = new SenderStatus("INVITED","INVITED", 0);
         public static SenderStatus ACTIVE = new SenderStatus("ACTIVE","ACTIVE", 1);

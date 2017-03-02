@@ -11,7 +11,7 @@ namespace Silanis.ESL.SDK
 {
     public class Support
     {
-        private static ILogger log = LoggerFactory.get(typeof(AuthenticationMethod));
+        private static ILogger log = LoggerFactory.get(typeof(Support));
 
         public Support() 
 		{

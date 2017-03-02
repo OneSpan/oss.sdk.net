@@ -7,7 +7,7 @@ namespace Silanis.ESL.SDK
 {
     public class MessageStatus : EslEnumeration
     {
-        private static ILogger log = LoggerFactory.get(typeof(AuthenticationMethod));
+        private static ILogger log = LoggerFactory.get(typeof(MessageStatus));
 
         public static MessageStatus NEW = new MessageStatus("NEW", "NEW", 0);
         public static MessageStatus READ = new MessageStatus("READ", "READ", 1);

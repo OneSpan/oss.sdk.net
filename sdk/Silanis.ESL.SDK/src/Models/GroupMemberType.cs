@@ -7,7 +7,7 @@ namespace Silanis.ESL.SDK
 {
     public class GroupMemberType : EslEnumeration
     {
-        private static ILogger log = LoggerFactory.get(typeof(AuthenticationMethod));
+        private static ILogger log = LoggerFactory.get(typeof(GroupMemberType));
 
         public static GroupMemberType REGULAR = new GroupMemberType("REGULAR", "REGULAR", 0);
         public static GroupMemberType MANAGER = new GroupMemberType("MANAGER", "MANAGER", 1);
