@@ -223,6 +223,10 @@ namespace Silanis.ESL.SDK
                 documentPackage.UpdatedDate = apiPackage.Updated;
             }
 
+            if (apiPackage.Created != null) {
+                documentPackage.CreatedDate = apiPackage.Created;
+            }
+
             return documentPackage;
         }
     }

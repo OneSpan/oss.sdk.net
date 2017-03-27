@@ -65,6 +65,8 @@ namespace SDK.Tests
             Assert.AreEqual(apiPackage1.Messages[0].To[0].LastName, sdkPackage1.Messages[0].To["email2@email.com"].LastName);
             Assert.AreEqual(apiPackage1.Messages[0].To[0].Email, sdkPackage1.Messages[0].To["email2@email.com"].Email);
             Assert.AreEqual(apiPackage1.Sender.Email, sdkPackage1.SenderInfo.Email);
+            Assert.AreEqual(apiPackage1.Created, sdkPackage1.CreatedDate);
+
         }
 
 		[Test()]
@@ -108,6 +110,7 @@ namespace SDK.Tests
 			apiPackage.Due = new DateTime?();
 			apiPackage.Name = "API package name";
             apiPackage.Status = DocumentPackageStatus.DRAFT.getApiValue();
+            apiPackage.Created = DateTime.Now;
 
             Silanis.ESL.API.Message apiMessage = new Silanis.ESL.API.Message();
             apiMessage.Content = "opt-out reason";
