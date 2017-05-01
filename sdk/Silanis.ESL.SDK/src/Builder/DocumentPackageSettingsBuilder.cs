@@ -15,7 +15,7 @@ namespace Silanis.ESL.SDK
         private List<string> declineReasons = new List<string>();
 		private List<string> optOutReasons = new List<string>();
 		private Nullable<int> maxAuthAttempts = null;
-		private Nullable<bool> showDocumentToolbarDownloadButton = true;
+		private Nullable<bool> showDocumentToolbarDownloadButton = null;
 		private Nullable<bool> showDialogOnComplete = null;
         private Nullable<bool> showLanguageDropDown = null;
         private Nullable<bool> enableFirstAffidavit = null;

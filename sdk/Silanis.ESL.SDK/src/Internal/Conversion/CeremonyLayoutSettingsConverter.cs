@@ -25,15 +25,18 @@ namespace Silanis.ESL.SDK
 				return apiLayoutOptions;
 			}
 
-			TitleBarOptions titleBarOptions = new TitleBarOptions();
-			if (sdkCeremonyLayoutSettings.ShowTitle != null) {
-				titleBarOptions.Title = sdkCeremonyLayoutSettings.ShowTitle.Value;
-			}
-			if (sdkCeremonyLayoutSettings.ProgressBar != null) {
-				titleBarOptions.ProgressBar = sdkCeremonyLayoutSettings.ProgressBar.Value;
-			}
-
-			HeaderOptions headerOptions = new HeaderOptions();
+            HeaderOptions headerOptions = new HeaderOptions();
+            if (sdkCeremonyLayoutSettings.ShowTitle != null || sdkCeremonyLayoutSettings.ProgressBar != null) {
+                TitleBarOptions titleBarOptions = new TitleBarOptions();
+                if (sdkCeremonyLayoutSettings.ShowTitle != null) {
+                    titleBarOptions.Title = sdkCeremonyLayoutSettings.ShowTitle.Value;
+                }
+                if (sdkCeremonyLayoutSettings.ProgressBar != null) {
+                    titleBarOptions.ProgressBar = sdkCeremonyLayoutSettings.ProgressBar.Value;
+                }
+                headerOptions.TitleBar = titleBarOptions;
+            }
+                
 			if (sdkCeremonyLayoutSettings.BreadCrumbs != null) {
 				headerOptions.Breadcrumbs = sdkCeremonyLayoutSettings.BreadCrumbs.Value;
 			}
@@ -42,9 +45,6 @@ namespace Silanis.ESL.SDK
 			}
 			if (sdkCeremonyLayoutSettings.GlobalNavigation != null) {
 				headerOptions.GlobalNavigation = sdkCeremonyLayoutSettings.GlobalNavigation.Value;
-			}
-			if (titleBarOptions != null) {
-				headerOptions.TitleBar = titleBarOptions;
 			}
 			GlobalActionsOptions globalActionsOptions = new GlobalActionsOptions();
 
@@ -78,7 +78,6 @@ namespace Silanis.ESL.SDK
 			if (sdkCeremonyLayoutSettings.Navigator != null) {
 				result.Navigator = sdkCeremonyLayoutSettings.Navigator.Value;
 			}
-			result.Footer = new FooterOptions();
 			result.Header = headerOptions;
 			result.BrandingBar = brandingBarOptions;
 
