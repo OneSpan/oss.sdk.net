@@ -144,7 +144,7 @@ namespace Silanis.ESL.SDK
 			}
 		}
 
-		private Nullable<bool> showDownloadButton = true;
+		private Nullable<bool> showDownloadButton = null;
 
 		public Nullable<bool> ShowDownloadButton {
 			get {
