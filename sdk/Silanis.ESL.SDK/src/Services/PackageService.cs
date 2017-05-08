@@ -524,6 +524,70 @@ namespace Silanis.ESL.SDK.Services
             }
         }
 
+        internal void CreateSignerVerifications(string packageId, DocumentPackage documentPackage) 
+        {
+            Package createdPackage = GetPackage(new PackageId(packageId));
+            foreach(Signer signer in documentPackage.Signers) 
+            {
+                if(signer.VerificationType != null && signer.VerificationType != "") 
+                {
+                    Role role = GetRoleByEmail(createdPackage, signer.Email);
+                    Verification verification = new Verification();
+                    verification.TypeKey = signer.VerificationType;
+                    CreateSignerVerification(createdPackage.Id, role.Id, verification);
+                }
+            }
+        }
+
+        private Verification CreateSignerVerification(string packageId, string roleId, Verification verification)
+        {
+            string path = template.UrlFor(UrlTemplate.SIGNER_VERIFICATION_PATH)
+                .Replace("{packageId}", packageId)
+                .Replace("{roleId}", roleId)
+                .Build();
+            try
+            {
+                string json = JsonConvert.SerializeObject(verification, settings);
+                string response = restClient.Post(path, json);              
+                Verification result = JsonConvert.DeserializeObject<Verification>(response);
+
+                return result;
+            }
+            catch (EslServerException e)
+            {
+                throw new EslServerException("Could not create a signer verification." + " Exception: " + e.Message, e.ServerError, e);
+            }
+            catch (Exception e)
+            {
+                throw new EslException("Could not create a signer verification." + " Exception: " + e.Message, e);
+            }
+        }
+
+        internal Verification GetSignerVerification(string packageId, string roleId)
+        {
+            string path = template.UrlFor(UrlTemplate.SIGNER_VERIFICATION_PATH)
+                .Replace("{packageId}", packageId)
+                .Replace("{roleId}", roleId)
+                .Build();
+
+            try
+            {
+                string response = restClient.Get(path);
+                if(response == null || response == "") {
+                    return null;
+                }
+                return JsonConvert.DeserializeObject<Silanis.ESL.API.Verification>(response, settings);
+            }
+            catch (EslServerException e)
+            {
+                throw new EslServerException("Could not get signer verification." + " Exception: " + e.Message, e.ServerError, e);
+            }
+            catch (Exception e)
+            {
+                throw new EslException("Could not get signer verification." + " Exception: " + e.Message, e);
+            }
+        }
+
         /// <summary>
         /// Uploads the Document and file in byte[] to the package.
         /// </summary>
@@ -1260,6 +1324,21 @@ namespace Silanis.ESL.SDK.Services
                 foreach(Silanis.ESL.API.Signer signer in role.Signers) 
                 {
                     if(signer.Id.Equals(sigenrId)) 
+                    {
+                        return role;
+                    }
+                }
+            }
+            return new Role();
+        }
+
+        private Role GetRoleByEmail(Package package, string signerEmail)
+        {
+            foreach(Role role in package.Roles) 
+            {
+                foreach(Silanis.ESL.API.Signer signer in role.Signers) 
+                {
+                    if(signer.Email.Equals(signerEmail)) 
                     {
                         return role;
                     }

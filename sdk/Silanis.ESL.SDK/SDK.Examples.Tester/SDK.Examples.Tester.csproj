@@ -126,6 +126,7 @@
     <Compile Include="src\UpdateSignerExampleTest.cs" />
     <Compile Include="src\SigningRedirectForSignerForSingleUseExampleTest.cs" />
     <Compile Include="src\DocumentVisibilityExampleTest.cs" />
+    <Compile Include="src\SignerVerificationExampleTest.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

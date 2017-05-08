@@ -55,6 +55,9 @@ namespace Silanis.ESL.SDK.Internal
         public static readonly string SIGNER_URL_PATH = "/packages/{packageId}/roles/{roleId}/signingUrl";
         public static readonly string SEND_SMS_TO_SIGNER_PATH = "/packages/{packageId}/roles/{roleId}/sms_notification";
 
+        // Signer Verification Service
+        public static readonly string SIGNER_VERIFICATION_PATH = "/packages/{packageId}/roles/{roleId}/verification";
+
         // Fast Track Service
         public static readonly string FAST_TRACK_URL_PATH = "/fastTrack/{packageId}/url?signing={signing}";
         public static readonly string START_FAST_TRACK_PATH = "/fastTrack?token={token}";

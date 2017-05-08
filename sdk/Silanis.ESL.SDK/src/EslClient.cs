@@ -224,6 +224,8 @@ namespace Silanis.ESL.SDK
                 UploadDocument(document, id);
 			}
 
+            packageService.CreateSignerVerifications(id.Id, package);
+
 			return id;
 		}
 
@@ -240,6 +242,8 @@ namespace Silanis.ESL.SDK
                 packageToCreate.AddDocument(new DocumentConverter(document).ToAPIDocument(packageToCreate));
             }
             PackageId id = packageService.CreatePackageOneStep (packageToCreate, package.Documents);
+
+            packageService.CreateSignerVerifications(id.Id, package);
             return id;
         }
 
@@ -431,8 +435,30 @@ namespace Silanis.ESL.SDK
 		{
 			Silanis.ESL.API.Package package = packageService.GetPackage (id);
 
-            return new DocumentPackageConverter(package).ToSDKPackage();
+            DocumentPackage documentPackage = new DocumentPackageConverter(package).ToSDKPackage();
+            if(!"TEMPLATE".Equals(package.Type))
+            {
+                SetSignerVerificationToSDKPackage(package, documentPackage);
+            }
+
+            return documentPackage;
 		}
+                
+        private void SetSignerVerificationToSDKPackage(Package aPackage, DocumentPackage documentPackage) 
+        {
+            foreach(Role role in aPackage.Roles) 
+            {
+                if(role.Signers.Count == 0)
+                    continue;
+
+                Verification verification = packageService.GetSignerVerification(aPackage.Id, role.Id);
+                if(verification != null && verification.TypeKey != null && verification.TypeKey != "")
+                {
+                    string signerEmail = role.Signers[0].Email;
+                    documentPackage.GetSigner(signerEmail).VerificationType = verification.TypeKey;
+                }
+            }
+        }
 
         public void UpdatePackage(Silanis.ESL.SDK.PackageId packageId, DocumentPackage sentSettings)
         {

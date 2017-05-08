@@ -19,6 +19,7 @@ namespace Silanis.ESL.SDK.Builder
 		private string id;
         private string placeholderName;
 		private bool canChangeSigner;
+        private string verificationType;
         private GroupId groupId;
 		private IList<AttachmentRequirement> attachments = new List<AttachmentRequirement>();
         private KnowledgeBasedAuthentication knowledgeBasedAuthentication;
@@ -88,6 +89,12 @@ namespace Silanis.ESL.SDK.Builder
 			this.company = company;
 			return this;
 		}
+
+        public SignerBuilder WithSignerVerification (string verificationType)
+        {
+            this.verificationType = verificationType;
+            return this;
+        }
 
         [Obsolete("Please use Replacing() instead")]
         public SignerBuilder WithRoleId(string roleId)
@@ -213,6 +220,7 @@ namespace Silanis.ESL.SDK.Builder
             result.Message = message;
             result.Id = id;
 			result.Attachments = attachments;
+            result.VerificationType = verificationType;
             
             return result;
         }
@@ -227,6 +235,7 @@ namespace Silanis.ESL.SDK.Builder
             result.CanChangeSigner = canChangeSigner;
             result.Message = message;
 			result.Attachments = attachments;
+            result.VerificationType = verificationType;
 			            
             return result;
         }
@@ -252,6 +261,7 @@ namespace Silanis.ESL.SDK.Builder
             result.Id = id;
 			result.Attachments = attachments;
             result.KnowledgeBasedAuthentication = knowledgeBasedAuthentication;
+            result.VerificationType = verificationType;
 			            
             return result;
         }
