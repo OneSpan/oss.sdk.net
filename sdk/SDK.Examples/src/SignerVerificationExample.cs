@@ -11,9 +11,10 @@ namespace SDK.Examples
             new SignerVerificationExample().Run();
         }
 
-        public DocumentPackage sentPackage;
+        public DocumentPackage createdPackage, updatedPackage;
+        public string firstVerificationType, deletedVerificationType;
 
-        public readonly string DOCUMENT_NAME = "First Document";
+        public readonly string CERTIFICATE = "personalCertificateSigning";
 
         override public void Execute()
         {
@@ -22,7 +23,7 @@ namespace SDK.Examples
                 .WithSigner(SignerBuilder.NewSignerWithEmail(email1)
                     .WithFirstName("John1")
                     .WithLastName("Smith1")
-                    .WithSignerVerification("CERTIFICATE"))
+                    .WithSignerVerification(CERTIFICATE))
                 .WithDocument(DocumentBuilder.NewDocumentNamed("First Document")
                     .FromStream(fileStream1, DocumentType.PDF)
                     .WithSignature(SignatureBuilder.SignatureFor(email1)
@@ -30,9 +31,18 @@ namespace SDK.Examples
                         .AtPosition(100, 100)))
                 .Build();
 
-            packageId = eslClient.CreatePackage(superDuperPackage);
-            eslClient.SendPackage(packageId);
-            sentPackage = eslClient.GetPackage(packageId);
+            packageId = eslClient.CreatePackage( superDuperPackage );
+            createdPackage = eslClient.GetPackage( packageId );
+
+            Signer signer = createdPackage.GetSigner(email1);
+            firstVerificationType = signer.VerificationType;
+
+            signer.VerificationType = "";
+            eslClient.UpdatePackage(packageId, createdPackage);
+            updatedPackage = eslClient.GetPackage( packageId );
+
+            signer = updatedPackage.GetSigner(email1);
+            deletedVerificationType = signer.VerificationType;
         }
     }
 }

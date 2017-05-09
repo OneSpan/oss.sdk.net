@@ -563,6 +563,111 @@ namespace Silanis.ESL.SDK.Services
             }
         }
 
+        internal void UpdateSignerVerification(string packageId, DocumentPackage documentPackage) 
+        {
+            Silanis.ESL.API.Package apiPackage = GetPackage(new PackageId(packageId));
+            foreach(Role role in apiPackage.Roles) 
+            {
+                if(role.Signers.Count == 0)
+                    continue;
+
+                Verification verification = GetSignerVerification(apiPackage.Id, role.Id);
+                string signerEmail = role.Signers[0].Email;
+                Silanis.ESL.SDK.Signer sdkSigner = documentPackage.GetSigner(signerEmail);
+
+                if(sdkSigner == null)
+                    continue;
+
+                string sdkVerificationType = sdkSigner.VerificationType;
+
+                if(Equals(verification, sdkVerificationType))
+                    continue;
+
+                if(!IsEmptyVerification(verification) && String.IsNullOrEmpty(sdkVerificationType)) 
+                {
+                    DeleteSignerVerification(packageId, role.Id);
+                    continue;
+                }
+
+                if(IsEmptyVerification(verification) && String.IsNullOrEmpty(sdkVerificationType)) 
+                {
+                    CreateSignerVerification(packageId, role.Id, verification);
+                    continue;
+                }
+
+                verification.TypeKey = sdkVerificationType;
+                UpdateSignerVerification(packageId, role.Id, verification);
+            }
+        }
+
+        private bool Equals(Verification verification, string verificationType) 
+        {
+            if(verification == null && String.IsNullOrEmpty(verificationType))
+                return true;
+
+            if(verification == null)
+                return false;
+
+            return String.Equals(verification.TypeKey, verificationType);
+        }
+
+        private bool IsEmptyVerification(Verification verification) 
+        {
+            if(verification == null)
+                return true;
+
+            if(String.IsNullOrEmpty(verification.TypeKey))
+                return true;
+
+            return false;
+        }
+
+        internal Verification UpdateSignerVerification(string packageId, string roleId, Verification verification) 
+        {
+            string path = template.UrlFor(UrlTemplate.SIGNER_VERIFICATION_PATH)
+                .Replace("{packageId}", packageId)
+                .Replace("{roleId}", roleId)
+                .Build();
+
+            try 
+            {
+                string json = JsonConvert.SerializeObject(verification, settings);
+                string response = restClient.Put(path, json);              
+                Verification result = JsonConvert.DeserializeObject<Verification>(response);
+
+                return result;
+            }
+            catch (EslServerException e)
+            {
+                throw new EslServerException("Could not update a signer verification." + " Exception: " + e.Message, e.ServerError, e);
+            }
+            catch (Exception e)
+            {
+                throw new EslException("Could not update a signer verification." + " Exception: " + e.Message, e);
+            }
+        }
+
+        private void DeleteSignerVerification(string packageId, string roleId)
+        {
+            string path = template.UrlFor(UrlTemplate.SIGNER_VERIFICATION_PATH)
+                .Replace("{packageId}", packageId)
+                .Replace("{roleId}", roleId)
+                .Build();
+
+            try
+            {
+                restClient.Delete(path);
+            }
+            catch (EslServerException e)
+            {
+                throw new EslServerException("Could not delete signer verification. Exception: " + e.Message, e.ServerError, e);    
+            }
+            catch (Exception e)
+            {
+                throw new EslException("Could not delete signer verification. Exception: " + e.Message, e); 
+            }
+        }
+
         internal Verification GetSignerVerification(string packageId, string roleId)
         {
             string path = template.UrlFor(UrlTemplate.SIGNER_VERIFICATION_PATH)
@@ -695,7 +800,7 @@ namespace Silanis.ESL.SDK.Services
 
         public SigningStatus GetSigningStatus(PackageId packageId, string signerId, string documentId)
         {
-            String path = template.UrlFor(UrlTemplate.SIGNING_STATUS_PATH)
+            string path = template.UrlFor(UrlTemplate.SIGNING_STATUS_PATH)
 				.Replace("{packageId}", packageId.Id)
 				.Replace("{signerId}", !String.IsNullOrEmpty(signerId) ? signerId : "")
 				.Replace("{documentId}", !String.IsNullOrEmpty(documentId) ? documentId : "")

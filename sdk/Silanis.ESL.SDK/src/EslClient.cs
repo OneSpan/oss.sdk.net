@@ -460,9 +460,10 @@ namespace Silanis.ESL.SDK
             }
         }
 
-        public void UpdatePackage(Silanis.ESL.SDK.PackageId packageId, DocumentPackage sentSettings)
+        public void UpdatePackage(Silanis.ESL.SDK.PackageId packageId, DocumentPackage documentPackage)
         {
-			packageService.UpdatePackage( packageId, new DocumentPackageConverter(sentSettings).ToAPIPackage() );
+            packageService.UpdatePackage( packageId, new DocumentPackageConverter(documentPackage).ToAPIPackage() );
+            packageService.UpdateSignerVerification(packageId.Id, documentPackage);
         }
 
         public void ChangePackageStatusToDraft(PackageId packageId) 

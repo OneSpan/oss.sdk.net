@@ -12,8 +12,8 @@ namespace SDK.Examples
             SignerVerificationExample example = new SignerVerificationExample();
             example.Run();
 
-            Assert.AreEqual("CERTIFICATE", example.sentPackage.GetSigner(example.email1).VerificationType);
+            Assert.AreEqual(example.CERTIFICATE, example.firstVerificationType);
+            Assert.IsNull(example.deletedVerificationType);
         }
     }
 }
-
