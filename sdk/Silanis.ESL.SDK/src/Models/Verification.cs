@@ -9,8 +9,8 @@ namespace Silanis.ESL.API
 
         // Accessors
 
-        [JsonProperty("typeKey")]
-        internal string TypeKey
+        [JsonProperty("typeId")]
+        internal string TypeId
         {
             get; set;
         }

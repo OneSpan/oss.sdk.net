@@ -117,6 +117,12 @@ namespace Silanis.ESL.SDK.Internal
         public static readonly string SIGN_DOCUMENT_PATH = "/packages/{packageId}/documents/signConfirm";
         public static readonly string SIGN_DOCUMENTS_PATH = "/packages/{packageId}/documents/signed_documents";
 
+        // Signer Verification Service
+        public static readonly string ADD_SIGNER_VERIFICATION_PATH = "/packages/{packageId}/roles/{roleId}/verification";
+        public static readonly string UPDATE_SIGNER_VERIFICATION_PATH = "/packages/{packageId}/roles/{roleId}/verification";
+        public static readonly string GET_SIGNER_VERIFICATION_PATH = "/packages/{packageId}/roles/{roleId}/verification";
+        public static readonly string DELETE_SIGNER_VERIFICATION_PATH = "/packages/{packageId}/roles/{roleId}/verification";
+
         // NotaryJournal Service
         public static readonly string NOTARY_JOURNAL_PATH = "/user/{userId}/journal";
         public static readonly string NOTARY_JOURNAL_CSV_PATH = "/user/{userId}/journal/download";

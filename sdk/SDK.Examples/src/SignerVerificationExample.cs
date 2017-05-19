@@ -6,15 +6,15 @@ namespace SDK.Examples
 {
     public class SignerVerificationExample : SDKSample
     {
+        public readonly string VERIFICATION_TYPE = "DIGIPASS";
+        public readonly string VERIFICATION_PAYLOAD  = "bSxW5aAFG2yTW5NaqaAF";
+
+        public SignerVerification RetrievedSignerVerification;
+
         public static void Main(string[] args)
         {
             new SignerVerificationExample().Run();
         }
-
-        public DocumentPackage createdPackage, updatedPackage;
-        public string firstVerificationType, deletedVerificationType;
-
-        public readonly string CERTIFICATE = "personalCertificateSigning";
 
         override public void Execute()
         {
@@ -22,8 +22,7 @@ namespace SDK.Examples
                 .DescribedAs("This is a package created using the eSignLive SDK")
                 .WithSigner(SignerBuilder.NewSignerWithEmail(email1)
                     .WithFirstName("John1")
-                    .WithLastName("Smith1")
-                    .WithSignerVerification(CERTIFICATE))
+                    .WithLastName("Smith1"))
                 .WithDocument(DocumentBuilder.NewDocumentNamed("First Document")
                     .FromStream(fileStream1, DocumentType.PDF)
                     .WithSignature(SignatureBuilder.SignatureFor(email1)
@@ -32,17 +31,16 @@ namespace SDK.Examples
                 .Build();
 
             packageId = eslClient.CreatePackage( superDuperPackage );
-            createdPackage = eslClient.GetPackage( packageId );
+            retrievedPackage = eslClient.GetPackage(packageId);
 
-            Signer signer = createdPackage.GetSigner(email1);
-            firstVerificationType = signer.VerificationType;
+            Signer signer = retrievedPackage.GetSigner(email1);
+            SignerVerification signerVerification = SignerVerificationBuilder.SignerVerificationFor(VERIFICATION_TYPE)
+                .WithPayload(VERIFICATION_PAYLOAD)
+                .Build();
 
-            signer.VerificationType = "";
-            eslClient.UpdatePackage(packageId, createdPackage);
-            updatedPackage = eslClient.GetPackage( packageId );
+            eslClient.CreateSignerVerification(packageId, signer.Id, signerVerification);
 
-            signer = updatedPackage.GetSigner(email1);
-            deletedVerificationType = signer.VerificationType;
+            RetrievedSignerVerification = eslClient.GetSignerVerification(packageId, signer.Id);
         }
     }
 }
