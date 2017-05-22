@@ -8,8 +8,11 @@ namespace SDK.Examples
     {
         public readonly string VERIFICATION_TYPE = "DIGIPASS";
         public readonly string VERIFICATION_PAYLOAD  = "bSxW5aAFG2yTW5NaqaAF";
+        public readonly string VERIFICATION_PAYLOAD_UPDATED  = "bSxW5aASwAWnbAl0O2Pwq5NaE";
 
-        public SignerVerification RetrievedSignerVerification;
+        public SignerVerification RetrievedSignerVerification1;
+        public SignerVerification RetrievedSignerVerification2;
+        public SignerVerification RetrievedSignerVerification3;
 
         public static void Main(string[] args)
         {
@@ -38,9 +41,21 @@ namespace SDK.Examples
                 .WithPayload(VERIFICATION_PAYLOAD)
                 .Build();
 
+            // Create signer verification
             eslClient.CreateSignerVerification(packageId, signer.Id, signerVerification);
 
-            RetrievedSignerVerification = eslClient.GetSignerVerification(packageId, signer.Id);
+            RetrievedSignerVerification1 = eslClient.GetSignerVerification(packageId, signer.Id);
+
+            // Update signer verification
+            signerVerification.Payload = VERIFICATION_PAYLOAD_UPDATED;
+            eslClient.UpdateSignerVerification(packageId, signer.Id, signerVerification);
+
+            RetrievedSignerVerification2 = eslClient.GetSignerVerification(packageId, signer.Id);
+
+            // Delete signer verification
+            eslClient.DeleteSignerVerification(packageId, signer.Id);
+
+            RetrievedSignerVerification3 = eslClient.GetSignerVerification(packageId, signer.Id);
         }
     }
 }
