@@ -1,4 +1,5 @@
 ﻿using System;
+using Silanis.ESL.SDK.Internal;
 
 namespace Silanis.ESL.SDK
 {
@@ -21,6 +22,8 @@ namespace Silanis.ESL.SDK
         }
 
         public SignerVerification Build() {
+            Asserts.NotEmptyOrNull( typeId, "No TypeId set for this signer verification!" );
+
             SignerVerification result = new SignerVerification(typeId);
             result.Payload = payload;
 
