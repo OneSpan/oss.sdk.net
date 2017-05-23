@@ -42,6 +42,7 @@ namespace Silanis.ESL.SDK
         private SystemService systemService;
         private SignatureImageService signatureImageService;
         private SigningService signingService;
+        private SignerVerificationService signerVerificationService;
         
         private JsonSerializerSettings jsonSerializerSettings;
 
@@ -129,6 +130,7 @@ namespace Silanis.ESL.SDK
             reportService = new ReportService(restClient, this.baseUrl, jsonSerializerSettings);
             systemService = new SystemService(restClient, this.baseUrl, jsonSerializerSettings);
             signingService = new SigningService(restClient, this.baseUrl, jsonSerializerSettings);
+            signerVerificationService = new SignerVerificationService(restClient, this.baseUrl, jsonSerializerSettings);
             signatureImageService = new SignatureImageService(restClient, this.baseUrl, jsonSerializerSettings);
             sessionService = new SessionService(apiKey, this.baseUrl);
             fieldSummaryService = new FieldSummaryService(new FieldSummaryApiClient(apiKey, this.baseUrl));
@@ -224,8 +226,6 @@ namespace Silanis.ESL.SDK
                 UploadDocument(document, id);
 			}
 
-            packageService.CreateSignerVerifications(id.Id, package);
-
 			return id;
 		}
 
@@ -243,7 +243,6 @@ namespace Silanis.ESL.SDK
             }
             PackageId id = packageService.CreatePackageOneStep (packageToCreate, package.Documents);
 
-            packageService.CreateSignerVerifications(id.Id, package);
             return id;
         }
 
@@ -436,34 +435,12 @@ namespace Silanis.ESL.SDK
 			Silanis.ESL.API.Package package = packageService.GetPackage (id);
 
             DocumentPackage documentPackage = new DocumentPackageConverter(package).ToSDKPackage();
-            if(!"TEMPLATE".Equals(package.Type))
-            {
-                SetSignerVerificationToSDKPackage(package, documentPackage);
-            }
-
             return documentPackage;
 		}
-                
-        private void SetSignerVerificationToSDKPackage(Package aPackage, DocumentPackage documentPackage) 
-        {
-            foreach(Role role in aPackage.Roles) 
-            {
-                if(role.Signers.Count == 0)
-                    continue;
-
-                Verification verification = packageService.GetSignerVerification(aPackage.Id, role.Id);
-                if(verification != null && verification.TypeKey != null && verification.TypeKey != "")
-                {
-                    string signerEmail = role.Signers[0].Email;
-                    documentPackage.GetSigner(signerEmail).VerificationType = verification.TypeKey;
-                }
-            }
-        }
 
         public void UpdatePackage(Silanis.ESL.SDK.PackageId packageId, DocumentPackage documentPackage)
         {
             packageService.UpdatePackage( packageId, new DocumentPackageConverter(documentPackage).ToAPIPackage() );
-            packageService.UpdateSignerVerification(packageId.Id, documentPackage);
         }
 
         public void ChangePackageStatusToDraft(PackageId packageId) 
@@ -526,7 +503,32 @@ namespace Silanis.ESL.SDK
 
             attachmentRequirementService.UploadAttachment(packageId, attachmentId, filename, fileBytes, signerSessionId);
         }
-        
+
+        public void CreateSignerVerification(Silanis.ESL.SDK.PackageId packageId, String roleId, SignerVerification signerVerification)
+        {
+            Silanis.ESL.API.Verification verification = new SignerVerificationConverter(signerVerification).ToAPISignerVerification(); 
+            signerVerificationService.CreateSignerVerification( packageId, roleId, verification);
+        }
+
+        public SignerVerification GetSignerVerification (PackageId id, string roleId)
+        {
+            Silanis.ESL.API.Verification verification = signerVerificationService.GetSignerVerification (id, roleId);
+
+            SignerVerification signerVerification = new SignerVerificationConverter(verification).ToSDKSignerVerification();
+            return signerVerification;
+        }
+
+        public void UpdateSignerVerification(Silanis.ESL.SDK.PackageId packageId, String roleId, SignerVerification signerVerification)
+        {
+            Silanis.ESL.API.Verification verification = new SignerVerificationConverter(signerVerification).ToAPISignerVerification(); 
+            signerVerificationService.UpdateSignerVerification( packageId, roleId, verification);
+        }
+
+        public void DeleteSignerVerification(Silanis.ESL.SDK.PackageId packageId, String roleId)
+        {
+            signerVerificationService.DeleteSignerVerification( packageId, roleId);
+        }
+
         /// <summary>
         /// BaseUrl property
         /// </summary>
@@ -685,6 +687,14 @@ namespace Silanis.ESL.SDK
             get
             {
                 return signingService;
+            }
+        }
+
+        public SignerVerificationService SignerVerificationService
+        {
+            get
+            {
+                return signerVerificationService;
             }
         }
 	}

@@ -104,6 +104,10 @@ namespace Silanis.ESL.SDK.Services
         {
             apiClient.ClearDelegates(senderId);
         }
+
+        public IList<VerificationType> getVerificationTypes() {
+            return apiClient.getVerificationTypes();
+        }
     }
 }
 

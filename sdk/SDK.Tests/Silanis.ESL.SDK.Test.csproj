@@ -110,6 +110,8 @@
     <Compile Include="src\Internal\RollOverTextWriterTest.cs" />
     <Compile Include="src\Internal\Conversion\DocumentVisibilityConfigurationConverterTest.cs" />
     <Compile Include="src\Internal\Conversion\DocumentVisibilityConverterTest.cs" />
+    <Compile Include="src\Builder\SignerVerificationBuilderTest.cs" />
+    <Compile Include="src\Internal\Conversion\SignerVerificationConverterTest.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

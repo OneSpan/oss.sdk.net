@@ -7,7 +7,6 @@ namespace Silanis.ESL.SDK
 	public class Signer
 	{
 		private readonly Authentication authentication;
-        private string verificationType;
 
         public Signer (string signerEmail, string firstName, string lastName, Authentication authentication)
 		{
@@ -98,11 +97,6 @@ namespace Silanis.ESL.SDK
 			get;
 			set;
 		}
-
-        public string VerificationType {
-            get;
-            set;
-        }
 
 		public bool CanChangeSigner {
 			get;

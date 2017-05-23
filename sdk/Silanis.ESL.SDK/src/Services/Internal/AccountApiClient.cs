@@ -219,6 +219,22 @@ namespace Silanis.ESL.SDK
                 throw new EslException("Failed to retrieve contacts.\t" + " Exception: " + e.Message, e);
             }
         }
+
+        public IList<VerificationType> getVerificationTypes() {
+            String path = template.UrlFor(UrlTemplate.ACCOUNT_VERIFICATION_TYPE_PATH)
+                .Replace("{accountId}", "dummyAccountId")
+                .Build();
+            
+            try {
+                string response = restClient.Get(path);
+                Result<VerificationType> result = JsonConvert.DeserializeObject<Result<VerificationType>> (response, jsonSettings);
+                return result.Results;
+            } catch (EslServerException e) {
+                throw new EslServerException("Could not get verification types.\t" + " Exception: " + e.Message, e.ServerError, e);
+            } catch (Exception e) {
+                throw new EslException("Could not get verification types.\t" + " Exception: " + e.Message, e);
+            }
+        }
     }
 }
 

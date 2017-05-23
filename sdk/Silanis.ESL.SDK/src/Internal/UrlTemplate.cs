@@ -55,9 +55,6 @@ namespace Silanis.ESL.SDK.Internal
         public static readonly string SIGNER_URL_PATH = "/packages/{packageId}/roles/{roleId}/signingUrl";
         public static readonly string SEND_SMS_TO_SIGNER_PATH = "/packages/{packageId}/roles/{roleId}/sms_notification";
 
-        // Signer Verification Service
-        public static readonly string SIGNER_VERIFICATION_PATH = "/packages/{packageId}/roles/{roleId}/verification";
-
         // Fast Track Service
         public static readonly string FAST_TRACK_URL_PATH = "/fastTrack/{packageId}/url?signing={signing}";
         public static readonly string START_FAST_TRACK_PATH = "/fastTrack?token={token}";
@@ -99,6 +96,7 @@ namespace Silanis.ESL.SDK.Internal
         public static readonly string ACCOUNT_MEMBER_INVITE_PATH = "/account/senders/{senderUid}/invite";
         public static readonly string ACCOUNT_MEMBER_LIST_PATH = "/account/senders?to={to}&from={from}&dir={dir}";
         public static readonly string ACCOUNT_CONTACTS_PATH = "/users";
+        public static readonly string ACCOUNT_VERIFICATION_TYPE_PATH = "/account/{accountId}/verificationTypes";
 
         // Approval Service
         public static readonly string APPROVAL_PATH = "/packages/{packageId}/documents/{documentId}/approvals";
@@ -116,6 +114,13 @@ namespace Silanis.ESL.SDK.Internal
         // Signing Service
         public static readonly string SIGN_DOCUMENT_PATH = "/packages/{packageId}/documents/signConfirm";
         public static readonly string SIGN_DOCUMENTS_PATH = "/packages/{packageId}/documents/signed_documents";
+
+        // Signer Verification Service
+        public static readonly string ADD_SIGNER_VERIFICATION_PATH = "/packages/{packageId}/roles/{roleId}/verification";
+        public static readonly string UPDATE_SIGNER_VERIFICATION_PATH = "/packages/{packageId}/roles/{roleId}/verification";
+        public static readonly string GET_SIGNER_VERIFICATION_PATH = "/packages/{packageId}/roles/{roleId}/verification";
+        public static readonly string DELETE_SIGNER_VERIFICATION_PATH = "/packages/{packageId}/roles/{roleId}/verification";
+
 
         // NotaryJournal Service
         public static readonly string NOTARY_JOURNAL_PATH = "/user/{userId}/journal";
