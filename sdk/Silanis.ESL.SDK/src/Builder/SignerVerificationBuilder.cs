@@ -12,7 +12,7 @@ namespace Silanis.ESL.SDK
             this.typeId = typeId;
         }
 
-        public static SignerVerificationBuilder SignerVerificationFor(string typeId) {
+        public static SignerVerificationBuilder NewSignerVerification(string typeId) {
             return new SignerVerificationBuilder(typeId);
         }
 

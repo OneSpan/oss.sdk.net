@@ -75,7 +75,7 @@ namespace SDK.Tests
 
         private SignerVerification CreateTypicalSDKSignerVerification()
 		{
-            return SignerVerificationBuilder.SignerVerificationFor("PROVIDER1")
+            return SignerVerificationBuilder.NewSignerVerification("PROVIDER1")
                 .WithPayload("dNM24duiIN3Mfa3IYs")
 				.Build();
 		}

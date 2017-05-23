@@ -6,13 +6,17 @@ namespace SDK.Examples
 {
     public class SignerVerificationExample : SDKSample
     {
-        public readonly string VERIFICATION_TYPE = "DIGIPASS";
-        public readonly string VERIFICATION_PAYLOAD  = "bSxW5aAFG2yTW5NaqaAF";
-        public readonly string VERIFICATION_PAYLOAD_UPDATED  = "bSxW5aASwAWnbAl0O2Pwq5NaE";
+        public readonly string CREATE_VERIFICATION_TYPE_ID = "DIGIPASS";
+        public readonly string CREATE_VERIFICATION_PAYLOAD  = "bSxW5aAFG2yTW5NaqaAF";
+        public readonly string UPDATE_VERIFICATION_TYPE_ID = "personalCertificateSigning";
+        public readonly string UPDATE_VERIFICATION_PAYLOAD  = "";
 
-        public SignerVerification RetrievedSignerVerification1;
-        public SignerVerification RetrievedSignerVerification2;
-        public SignerVerification RetrievedSignerVerification3;
+        public SignerVerification signerVerificationToBeCreated;
+        public SignerVerification signerVerificationToBeUpdated;
+        public SignerVerification retrievedSignerVerificationAfterCreate;
+        public SignerVerification retrievedSignerVerificationAfterUpdate;
+        public SignerVerification retrievedSignerVerificationAfterDelete;
+
 
         public static void Main(string[] args)
         {
@@ -35,27 +39,28 @@ namespace SDK.Examples
 
             packageId = eslClient.CreatePackage( superDuperPackage );
             retrievedPackage = eslClient.GetPackage(packageId);
-
             Signer signer = retrievedPackage.GetSigner(email1);
-            SignerVerification signerVerification = SignerVerificationBuilder.SignerVerificationFor(VERIFICATION_TYPE)
-                .WithPayload(VERIFICATION_PAYLOAD)
+
+            // Create
+            signerVerificationToBeCreated = SignerVerificationBuilder
+                .NewSignerVerification(CREATE_VERIFICATION_TYPE_ID)
+                .WithPayload(CREATE_VERIFICATION_PAYLOAD)
+                .Build();
+            eslClient.CreateSignerVerification(packageId, signer.Id, signerVerificationToBeCreated);
+            retrievedSignerVerificationAfterCreate = eslClient.GetSignerVerification(packageId, signer.Id);
+
+            // Update
+            signerVerificationToBeUpdated = SignerVerificationBuilder
+                .NewSignerVerification(UPDATE_VERIFICATION_TYPE_ID)
+                .WithPayload(UPDATE_VERIFICATION_PAYLOAD)
                 .Build();
 
-            // Create signer verification
-            eslClient.CreateSignerVerification(packageId, signer.Id, signerVerification);
+            eslClient.UpdateSignerVerification(packageId, signer.Id, signerVerificationToBeUpdated);
+            retrievedSignerVerificationAfterUpdate = eslClient.GetSignerVerification(packageId, signer.Id);
 
-            RetrievedSignerVerification1 = eslClient.GetSignerVerification(packageId, signer.Id);
-
-            // Update signer verification
-            signerVerification.Payload = VERIFICATION_PAYLOAD_UPDATED;
-            eslClient.UpdateSignerVerification(packageId, signer.Id, signerVerification);
-
-            RetrievedSignerVerification2 = eslClient.GetSignerVerification(packageId, signer.Id);
-
-            // Delete signer verification
+            // Delete
             eslClient.DeleteSignerVerification(packageId, signer.Id);
-
-            RetrievedSignerVerification3 = eslClient.GetSignerVerification(packageId, signer.Id);
+            retrievedSignerVerificationAfterDelete = eslClient.GetSignerVerification(packageId, signer.Id);
         }
     }
 }

@@ -12,7 +12,7 @@ namespace SDK.Tests
 		[Test]
         public void BuildsSignerVerificationWithBasicInformation()
 		{
-            Silanis.ESL.SDK.SignerVerification verification = SignerVerificationBuilder.SignerVerificationFor("PROVIDER1")
+            Silanis.ESL.SDK.SignerVerification verification = SignerVerificationBuilder.NewSignerVerification("PROVIDER1")
 				.WithPayload ("HJKs2H7UvtFDUi73GswE")
 				.Build();
 
@@ -24,7 +24,7 @@ namespace SDK.Tests
 		[ExpectedException(typeof(EslException))]
         public void SignerVerificationTypeIdCannotBeEmpty()
 		{
-            SignerVerificationBuilder.SignerVerificationFor(" ")
+            SignerVerificationBuilder.NewSignerVerification(" ")
                 .WithPayload ("HJKs2H7UvtFDUi73GswE")
                 .Build();
 		}

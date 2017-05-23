@@ -39,7 +39,7 @@ namespace Silanis.ESL.SDK
                 return sdkSignerVerification;
             }
 
-            SignerVerification result = SignerVerificationBuilder.SignerVerificationFor(apiSignerVerification.TypeId)
+            SignerVerification result = SignerVerificationBuilder.NewSignerVerification(apiSignerVerification.TypeId)
                 .WithPayload(apiSignerVerification.Payload)
                 .Build();
 
