@@ -159,6 +159,7 @@
     <Compile Include="src\notAllowed\MixingSignatureAndAcceptanceOnOnedocumentExample.cs" />
     <Compile Include="src\notAllowed\DeletePackageExample.cs" />
     <Compile Include="src\SignerVerificationExample.cs" />
+    <Compile Include="src\SignerVerificationTypesExample.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
