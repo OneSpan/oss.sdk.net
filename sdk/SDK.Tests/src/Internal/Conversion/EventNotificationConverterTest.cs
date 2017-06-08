@@ -313,6 +313,24 @@ namespace SDK.Tests
         }
 
         [Test]
+        public void ConvertSDKPACKAGE_ARCHIVEToAPIPACKAGE_ARCHIVE()
+        {
+            sdkNotificationEvent1 = Silanis.ESL.SDK.NotificationEvent.PACKAGE_ARCHIVE;
+            apiNotificationEvent1 = new EventNotificationConverter(sdkNotificationEvent1).ToAPICallbackEvent();
+
+            Assert.AreEqual("PACKAGE_ARCHIVE", apiNotificationEvent1);
+        }
+
+        [Test]
+        public void ConvertSDKTEMPLATE_CREATEToAPITEMPLATE_CREATE()
+        {
+            sdkNotificationEvent1 = Silanis.ESL.SDK.NotificationEvent.TEMPLATE_CREATE;
+            apiNotificationEvent1 = new EventNotificationConverter(sdkNotificationEvent1).ToAPICallbackEvent();
+
+            Assert.AreEqual("TEMPLATE_CREATE", apiNotificationEvent1);
+        }
+
+        [Test]
         public void ConvertSDKUnrecognizedNotificationEventToAPIUnknownValue()
         {
             apiNotificationEvent1 = "NEWLY_ADDED_REQUIREMENT_STATUS";

@@ -32,6 +32,8 @@ namespace SDK.Examples
         public readonly NotificationEvent EVENT16 = NotificationEvent.EMAIL_BOUNCE;
         public readonly NotificationEvent EVENT17 = NotificationEvent.PACKAGE_ATTACHMENT;
         public readonly NotificationEvent EVENT18 = NotificationEvent.SIGNER_LOCKED;
+        public readonly NotificationEvent EVENT19 = NotificationEvent.PACKAGE_ARCHIVE;
+        public readonly NotificationEvent EVENT20 = NotificationEvent.TEMPLATE_CREATE;
 
         public List<NotificationEvent> events = new List<NotificationEvent>();
         public List<NotificationEvent> connectorsEvents = new List<NotificationEvent>();
@@ -62,6 +64,8 @@ namespace SDK.Examples
             events.Add(EVENT16);
             events.Add(EVENT17);
             events.Add(EVENT18);
+            events.Add(EVENT19);
+            events.Add(EVENT20);
 
 			eslClient.EventNotificationService.Register(EventNotificationConfigBuilder.NewEventNotificationConfig(URL)
                 .WithKey(KEY).SetEvents(events));

@@ -27,6 +27,8 @@ namespace Silanis.ESL.SDK
         public static NotificationEvent EMAIL_BOUNCE = new NotificationEvent("EMAIL_BOUNCE", "EMAIL_BOUNCE", 15);
         public static NotificationEvent PACKAGE_ATTACHMENT = new NotificationEvent("PACKAGE_ATTACHMENT", "PACKAGE_ATTACHMENT", 16);
         public static NotificationEvent SIGNER_LOCKED = new NotificationEvent("SIGNER_LOCKED", "SIGNER_LOCKED", 17);
+        public static NotificationEvent PACKAGE_ARCHIVE = new NotificationEvent("PACKAGE_ARCHIVE", "PACKAGE_ARCHIVE", 18);
+        public static NotificationEvent TEMPLATE_CREATE = new NotificationEvent("TEMPLATE_CREATE", "TEMPLATE_CREATE", 19);
 
         private static Dictionary<string,NotificationEvent> allNotificationEvents = new Dictionary<string,NotificationEvent>();
 
@@ -50,6 +52,8 @@ namespace Silanis.ESL.SDK
             allNotificationEvents.Add(EMAIL_BOUNCE.getApiValue(), EMAIL_BOUNCE);
             allNotificationEvents.Add(PACKAGE_ATTACHMENT.getApiValue(), PACKAGE_ATTACHMENT);
             allNotificationEvents.Add(SIGNER_LOCKED.getApiValue(), SIGNER_LOCKED);
+            allNotificationEvents.Add(PACKAGE_ARCHIVE.getApiValue(), PACKAGE_ARCHIVE);
+            allNotificationEvents.Add(TEMPLATE_CREATE.getApiValue(), TEMPLATE_CREATE);
         }
 
         private NotificationEvent(string apiValue, string sdkValue, int index):base(apiValue,sdkValue,index) 

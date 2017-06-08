@@ -20,7 +20,7 @@ namespace SDK.Examples
 			Assert.IsNotNull(config);
             Assert.AreEqual(config.Url, example.URL);
             Assert.AreEqual(config.Key, example.KEY);
-			Assert.AreEqual(config.NotificationEvents.Count, 18);
+			Assert.AreEqual(config.NotificationEvents.Count, 20);
 
             AssertEvents(config, example.events);
 
