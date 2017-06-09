@@ -21,6 +21,8 @@ namespace SDK.Examples
         public const string SIGNER2_CUSTOM_ID = "signerId2";
         public const string SIGNER2_FIRST_NAME = "Patty";
         public const string SIGNER2_LAST_NAME = "Galant";
+        public const string SIGNER2_LANGUAGE = "fr";
+        public const string SIGNER2_UPDATE_LANGUAGE = "ko";
 
         public const string SIGNER3_FIRST_NAME = "John2";
         public const string SIGNER3_LAST_NAME = "Smith2";
@@ -40,6 +42,7 @@ namespace SDK.Examples
             Signer signer2 = SignerBuilder.NewSignerWithEmail(email2)
                 .WithFirstName(SIGNER2_FIRST_NAME)
                     .WithLastName(SIGNER2_LAST_NAME)
+                    .WithLanguage(SIGNER2_LANGUAGE)
                     .WithCustomId(SIGNER2_CUSTOM_ID)
                     .Build();
 
@@ -57,6 +60,7 @@ namespace SDK.Examples
                 .WithFirstName(SIGNER2_FIRST_NAME)
                     .WithLastName(SIGNER2_LAST_NAME)
                     .WithSMSSentTo(sms1)
+                    .WithLanguage(SIGNER2_UPDATE_LANGUAGE)
                     .WithCustomId(SIGNER2_CUSTOM_ID).Build();
 
             DocumentPackage superDuperPackage = PackageBuilder.NewPackageNamed(PackageName)

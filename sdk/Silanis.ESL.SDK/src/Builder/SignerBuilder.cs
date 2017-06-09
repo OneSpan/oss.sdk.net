@@ -11,6 +11,7 @@ namespace Silanis.ESL.SDK.Builder
 		private string lastName;
 		private string title;
 		private string company;
+        private string language;
 		private AuthenticationBuilder authenticationBuilder = new AuthenticationBuilder();
         private Authentication authentication;
 		private bool deliverSignedDocumentsByEmail;
@@ -88,6 +89,12 @@ namespace Silanis.ESL.SDK.Builder
 			this.company = company;
 			return this;
 		}
+
+        public SignerBuilder WithLanguage (string language)
+        {
+            this.language = language;
+            return this;
+        }
 
         [Obsolete("Please use Replacing() instead")]
         public SignerBuilder WithRoleId(string roleId)
@@ -244,6 +251,7 @@ namespace Silanis.ESL.SDK.Builder
             Signer result = new Signer (signerEmail, firstName, lastName, authentication);
             result.Title = title;
             result.Company = company;
+            result.Language = language;
             result.DeliverSignedDocumentsByEmail = deliverSignedDocumentsByEmail;
 
             result.SigningOrder = signingOrder;

@@ -140,7 +140,8 @@ namespace Silanis.ESL.SDK
 				signer.FirstName = sdkSigner.FirstName;
 				signer.LastName = sdkSigner.LastName;
 				signer.Title = sdkSigner.Title;
-				signer.Company = sdkSigner.Company;
+                signer.Company = sdkSigner.Company;
+                signer.Language = sdkSigner.Language;
 				if (sdkSigner.DeliverSignedDocumentsByEmail)
 				{
 					signer.Delivery = new Silanis.ESL.API.Delivery();
@@ -215,6 +216,7 @@ namespace Silanis.ESL.SDK
                 .WithFirstName(eslSigner.FirstName)
                 .WithLastName(eslSigner.LastName)
                 .WithCompany(eslSigner.Company)
+                .WithLanguage(eslSigner.Language)
                 .WithTitle(eslSigner.Title)
                 .ChallengedWithKnowledgeBasedAuthentication(new KnowledgeBasedAuthenticationConverter(eslSigner.KnowledgeBasedAuthentication).ToSDKKnowledgeBasedAuthentication());
                 

@@ -98,6 +98,11 @@ namespace Silanis.ESL.SDK
 			set;
 		}
 
+        public string Language {
+            get;
+            set;
+        }
+
 		public bool CanChangeSigner {
 			get;
 			set;

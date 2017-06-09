@@ -17,6 +17,7 @@ namespace SDK.Examples
             Assert.AreEqual(AuthenticationMethod.EMAIL, example.RetrievedPackage.GetSigner(example.email1).Authentication.Method);
             Assert.IsNotNull(example.RetrievedPackage.GetSigner(example.email2));
             Assert.AreEqual(AuthenticationMethod.EMAIL, example.RetrievedPackage.GetSigner(example.email2).Authentication.Method);
+            Assert.AreEqual(UpdateSignerExample.SIGNER2_LANGUAGE, example.RetrievedPackage.GetSigner(example.email2).Language);
 
             Assert.IsNull(example.updatedPackage.GetSigner(example.email1));
             Assert.IsNotNull(example.updatedPackage.GetSigner(example.email3));
@@ -29,6 +30,7 @@ namespace SDK.Examples
             Assert.IsNotNull(example.updatedPackage.GetSigner(example.email2));
             Assert.AreEqual(AuthenticationMethod.SMS, example.updatedPackage.GetSigner(example.email2).Authentication.Method);
             Assert.AreEqual(example.sms1, example.updatedPackage.GetSigner(example.email2).Authentication.PhoneNumber);
+            Assert.AreEqual(UpdateSignerExample.SIGNER2_UPDATE_LANGUAGE, example.updatedPackage.GetSigner(example.email2).Language);
         }
     }
 }

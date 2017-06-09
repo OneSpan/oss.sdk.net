@@ -51,7 +51,8 @@ namespace SDK.Tests
 			Assert.AreEqual(apiSigner1.Email, sdkSigner1.Email);
 			Assert.AreEqual(apiSigner1.FirstName, sdkSigner1.FirstName);
 			Assert.AreEqual(apiSigner1.LastName, sdkSigner1.LastName);
-			Assert.AreEqual(apiSigner1.Company, sdkSigner1.Company);
+            Assert.AreEqual(apiSigner1.Company, sdkSigner1.Company);
+            Assert.AreEqual(apiSigner1.Language, sdkSigner1.Language);
 			Assert.AreEqual(apiSigner1.Title, sdkSigner1.Title);
 		}
 
@@ -66,7 +67,8 @@ namespace SDK.Tests
 			Assert.AreEqual(apiRole.Signers[0].Email, sdkSigner1.Email);
 			Assert.AreEqual(apiRole.Signers[0].FirstName, sdkSigner1.FirstName);
 			Assert.AreEqual(apiRole.Signers[0].LastName, sdkSigner1.LastName);
-			Assert.AreEqual(apiRole.Signers[0].Company, sdkSigner1.Company);
+            Assert.AreEqual(apiRole.Signers[0].Company, sdkSigner1.Company);
+            Assert.AreEqual(apiRole.Signers[0].Language, sdkSigner1.Language);
 			Assert.AreEqual(apiRole.Signers[0].Title, sdkSigner1.Title);
 			Assert.AreEqual(apiRole.Id, sdkSigner1.Id);
 			Assert.AreEqual(apiRole.Name, sdkSigner1.Id);
@@ -86,7 +88,8 @@ namespace SDK.Tests
 				.CanChangeSigner()
 				.DeliverSignedDocumentsByEmail()
 				.SigningOrder(1)
-				.WithCompany("ABC Inc.")
+                .WithCompany("ABC Inc.")
+                .WithLanguage("fr")
 				.WithFirstName("first name")
 				.WithLastName("last name")
 				.WithTitle("Miss")
@@ -98,7 +101,8 @@ namespace SDK.Tests
 			Assert.AreEqual(apiRole.Signers[0].Email, sdkSigner1.Email);
 			Assert.AreEqual(apiRole.Signers[0].FirstName, sdkSigner1.FirstName);
 			Assert.AreEqual(apiRole.Signers[0].LastName, sdkSigner1.LastName);
-			Assert.AreEqual(apiRole.Signers[0].Company, sdkSigner1.Company);
+            Assert.AreEqual(apiRole.Signers[0].Company, sdkSigner1.Company);
+            Assert.AreEqual(apiRole.Signers[0].Language, sdkSigner1.Language);
 			Assert.AreEqual(apiRole.Signers[0].Title, sdkSigner1.Title);
 			Assert.AreEqual(apiRole.Id, roleId);
 			Assert.AreEqual(apiRole.Name, roleId);
@@ -119,6 +123,7 @@ namespace SDK.Tests
             Assert.AreEqual(apiSigner1.LastName, sdkSigner1.LastName);
             Assert.AreEqual(apiSigner1.Company, sdkSigner1.Company);
             Assert.AreEqual(apiSigner1.Title, sdkSigner1.Title);
+            Assert.AreEqual(apiSigner1.Language, sdkSigner1.Language);
             Assert.AreEqual(apiRole.Id, sdkSigner1.Id);
             Assert.AreEqual(apiRole.Index, sdkSigner1.SigningOrder);
             Assert.AreEqual(apiRole.Reassign, sdkSigner1.CanChangeSigner);
@@ -141,7 +146,8 @@ namespace SDK.Tests
 				.CanChangeSigner()
 				.DeliverSignedDocumentsByEmail()
 				.SigningOrder(1)
-				.WithCompany("ABC Inc")
+                .WithCompany("ABC Inc")
+                .WithLanguage("fr")
 				.WithCustomId("1")
 				.WithFirstName("first name")
 				.WithLastName("last name")
@@ -163,6 +169,7 @@ namespace SDK.Tests
             apiSigner.FirstName = "Signer first name";
             apiSigner.LastName = "Signer last name";
             apiSigner.Company = "ABC Inc.";
+            apiSigner.Language = "fr";
             apiSigner.Title = "Doctor";
 
             Silanis.ESL.API.Delivery delivery = new Silanis.ESL.API.Delivery();
