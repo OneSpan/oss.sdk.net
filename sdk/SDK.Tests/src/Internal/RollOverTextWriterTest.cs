@@ -33,7 +33,7 @@ namespace SDK.Tests
             {
                 logFile = new FileInfo(s);
                 Assert.GreaterOrEqual(logFile.Length, 1000);
-                Assert.LessOrEqual(logFile.Length, 1136);
+                Assert.LessOrEqual(logFile.Length, 1200);
             }
         }
     }

@@ -160,6 +160,8 @@
     <Compile Include="src\notAllowed\DeletePackageExample.cs" />
     <Compile Include="src\SignerVerificationExample.cs" />
     <Compile Include="src\SignerVerificationTypesExample.cs" />
+    <Compile Include="src\TextTagsExample.cs" />
+    <Compile Include="src\DocumentAttributesExample.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
@@ -202,6 +204,9 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="app.config" />
+    <None Include="src\document_with_text_tag_and_form_field.pdf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

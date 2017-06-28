@@ -128,6 +128,8 @@
     <Compile Include="src\DocumentVisibilityExampleTest.cs" />
     <Compile Include="src\SignerVerificationExampleTest.cs" />
     <Compile Include="src\SignerVerificationTypeExampleTest.cs" />
+    <Compile Include="src\TextTagsExampleTest.cs" />
+    <Compile Include="src\DocumentAttributesExampleTest.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

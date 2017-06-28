@@ -45,6 +45,12 @@ namespace Silanis.ESL.SDK
             set;
         }
 
+        public IDictionary<string, object> Data
+        {
+            get;
+            set;
+        }
+
         public List<Signature> Signatures
         {
             get

@@ -7,6 +7,8 @@ namespace Silanis.ESL.SDK.Builder
 {
 	public class DocumentBuilder
 	{
+        public static readonly string ESL_DOC_EXTRACT_TYPE = "esl_doc_extract_type";
+
 		private readonly string name;
 		private string id;
 		private string fileName;
@@ -18,6 +20,7 @@ namespace Silanis.ESL.SDK.Builder
         private IList<Field> qrCodes = new List<Field> ();
         private string description;
         private External external;
+        private IDictionary<string, object> data = new Dictionary<string, object>();
 
 		private DocumentBuilder(string name)
 		{
@@ -35,7 +38,7 @@ namespace Silanis.ESL.SDK.Builder
 			return this;
 		}
 
-        public DocumentBuilder WithExternal( External external)
+        public DocumentBuilder WithExternal(External external)
         {
             this.external = external;
             return this;
@@ -108,8 +111,44 @@ namespace Silanis.ESL.SDK.Builder
             return this;
         }
 
-        public DocumentBuilder WithDescription( string description ) {
+        public DocumentBuilder WithDescription(string description ) 
+        {
             this.description = description;
+            return this;
+        }
+
+        public DocumentBuilder WithData(IDictionary<string, object> data) 
+        {
+            if (data == null)
+                return this;
+            
+            foreach (var attribute in data)
+            {
+                this.data.Add(attribute.Key, attribute.Value);
+            }
+
+            return this;
+        }
+
+        public DocumentBuilder WithData(DocumentAttributesBuilder builder) 
+        {
+            foreach (var attribute in builder.Build())
+            {
+                this.data.Add(attribute.Key, attribute.Value);
+            }
+
+            return this;
+        }
+
+        public DocumentBuilder WithExtractionType(ExtractionType extractionType) 
+        {
+            if(ExtractionType.FORM_FIELDS_ONLY.Equals(extractionType)) 
+            {
+                this.data.Remove(ESL_DOC_EXTRACT_TYPE);
+            } else 
+            {
+                this.data.Add(ESL_DOC_EXTRACT_TYPE, extractionType.GetHashCode());
+            }
             return this;
         }
 
@@ -129,6 +168,7 @@ namespace Silanis.ESL.SDK.Builder
 			doc.AddFields(injectedFields);
             doc.AddQRCodes(qrCodes);
 			doc.Description = description;
+            doc.Data = data;
 
 			return doc;
 		}

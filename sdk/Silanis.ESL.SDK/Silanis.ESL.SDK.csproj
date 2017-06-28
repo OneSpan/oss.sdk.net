@@ -395,6 +395,8 @@
     <Compile Include="src\Builder\SignerVerificationBuilder.cs" />
     <Compile Include="src\Internal\Conversion\SignerVerificationConverter.cs" />
     <Compile Include="src\Models\VerificationType.cs" />
+    <Compile Include="src\ExtractionType.cs" />
+    <Compile Include="src\Builder\DocumentAttributesBuilder.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSHARP.Targets" />
   <ProjectExtensions>

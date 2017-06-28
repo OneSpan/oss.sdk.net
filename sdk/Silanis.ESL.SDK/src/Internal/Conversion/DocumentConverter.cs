@@ -35,7 +35,8 @@ namespace Silanis.ESL.SDK
             DocumentBuilder documentBuilder = DocumentBuilder.NewDocumentNamed(apiDocument.Name)
                 .WithId(apiDocument.Id)
                 .AtIndex(apiDocument.Index.Value)
-                    .WithDescription(apiDocument.Description);
+                    .WithDescription(apiDocument.Description)
+                .WithData(apiDocument.Data);
             documentBuilder.WithExternal(new ExternalConverter(apiDocument.External).ToSDKExternal());
             foreach (Approval apiApproval in apiDocument.Approvals)
             {
@@ -112,6 +113,7 @@ namespace Silanis.ESL.SDK
             doc.Index = sdkDocument.Index;
             doc.Extract = sdkDocument.Extract;
             doc.External = new ExternalConverter(sdkDocument.External).ToAPIExternal();
+            doc.Data = sdkDocument.Data;
 
             if (sdkDocument.Id != null)
             {

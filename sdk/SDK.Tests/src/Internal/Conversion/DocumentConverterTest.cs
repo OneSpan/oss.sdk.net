@@ -3,6 +3,7 @@ using NUnit.Framework;
 using Silanis.ESL.SDK;
 using System.IO;
 using Silanis.ESL.SDK.Builder;
+using System.Collections.Generic;
 
 namespace SDK.Tests
 {
@@ -81,6 +82,9 @@ namespace SDK.Tests
             Assert.AreEqual(sdkDocument1.Description, apiDocument1.Description);
             Assert.AreEqual(sdkDocument1.Index, apiDocument1.Index);
             Assert.AreEqual(sdkDocument1.Id, apiDocument1.Id);
+            Assert.IsTrue(sdkDocument1.Data.ContainsKey("name"));
+            Assert.AreEqual(sdkDocument1.Data["name"], "value");
+            Assert.AreEqual(sdkDocument1.Data["name"], apiDocument1.Data["name"]);
         }
 
         [Test()]
@@ -141,10 +145,14 @@ namespace SDK.Tests
         {
             Silanis.ESL.API.Document apiDocument = new Silanis.ESL.API.Document();
 
+            IDictionary<string, object> data = new Dictionary<string, object>();
+            data.Add("name", "value");
+
             apiDocument.Name = "apiDocument";
             apiDocument.Index = 1;
             apiDocument.Description = "apiDocument Description";
             apiDocument.Id = "apiDocumentId";
+            apiDocument.Data = data;
 
             return apiDocument;
         }
