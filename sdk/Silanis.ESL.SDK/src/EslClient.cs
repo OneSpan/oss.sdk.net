@@ -85,6 +85,20 @@ namespace Silanis.ESL.SDK
             init(restClient, apiKey);
         }
 
+        public EslClient (string apiKey, string baseUrl, string webpageUrl, Boolean allowAllSSLCertificates)
+        {
+            Asserts.NotEmptyOrNull (apiKey, "apiKey");
+            Asserts.NotEmptyOrNull (baseUrl, "baseUrl");
+            Asserts.NotEmptyOrNull (webpageUrl, "webpageUrl");
+            SetBaseUrl (baseUrl);
+            this.webpageUrl = AppendServicePath (webpageUrl);
+
+            configureJsonSerializationSettings();
+
+            RestClient restClient = new RestClient(apiKey, allowAllSSLCertificates);
+            init(restClient, apiKey);
+        }
+
         public EslClient (string apiKey, string baseUrl, Boolean allowAllSSLCertificates)
         {
             Asserts.NotEmptyOrNull (apiKey, "apiKey");

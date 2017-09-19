@@ -25,6 +25,11 @@ namespace Silanis.ESL.SDK
             this.apiToken = apiToken;
             this.allowAllSSLCertificates = allowAllSSLCertificates;
             this.proxyConfiguration = proxyConfiguration;
+
+            if (allowAllSSLCertificates)
+            {
+                System.Net.ServicePointManager.ServerCertificateValidationCallback += (sender, cert, chain, sslPolicyErrors) => true;
+            }
         }
 
         public string Post(string path, string jsonPayload) {
