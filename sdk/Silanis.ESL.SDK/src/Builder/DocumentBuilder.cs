@@ -7,8 +7,6 @@ namespace Silanis.ESL.SDK.Builder
 {
 	public class DocumentBuilder
 	{
-        public static readonly string ESL_DOC_EXTRACT_TYPE = "esl_doc_extract_type";
-
 		private readonly string name;
 		private string id;
 		private string fileName;
@@ -16,6 +14,7 @@ namespace Silanis.ESL.SDK.Builder
 		private IList<Signature> signatures = new List<Signature>();
 		private int index;
 		private bool extract;
+        private ISet<string> extractionType = new HashSet<string>();
 		private IList<Field> injectedFields = new List<Field> ();
         private IList<Field> qrCodes = new List<Field> ();
         private string description;
@@ -142,13 +141,7 @@ namespace Silanis.ESL.SDK.Builder
 
         public DocumentBuilder WithExtractionType(ExtractionType extractionType) 
         {
-            if(ExtractionType.FORM_FIELDS_ONLY.Equals(extractionType)) 
-            {
-                this.data.Remove(ESL_DOC_EXTRACT_TYPE);
-            } else 
-            {
-                this.data.Add(ESL_DOC_EXTRACT_TYPE, extractionType.GetHashCode());
-            }
+            this.extractionType.Add(extractionType.ToString());
             return this;
         }
 
@@ -164,7 +157,8 @@ namespace Silanis.ESL.SDK.Builder
 			doc.AddSignatures (signatures);
 			doc.Index = index;
             doc.External = external;
-			doc.Extract = extract;
+            doc.Extract = extract;
+            doc.ExtractionType = extractionType;
 			doc.AddFields(injectedFields);
             doc.AddQRCodes(qrCodes);
 			doc.Description = description;

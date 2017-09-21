@@ -21,12 +21,10 @@ namespace SDK.Examples
             Assert.IsTrue(documentAttributes.ContainsKey(example.ATTRIBUTE_KEY_1));
             Assert.IsTrue(documentAttributes.ContainsKey(example.ATTRIBUTE_KEY_2));
             Assert.IsTrue(documentAttributes.ContainsKey(example.ATTRIBUTE_KEY_3));
-            Assert.IsTrue(documentAttributes.ContainsKey(DocumentBuilder.ESL_DOC_EXTRACT_TYPE));
 
             Assert.AreEqual(example.ATTRIBUTE_1, documentAttributes[example.ATTRIBUTE_KEY_1]);
             Assert.AreEqual(example.ATTRIBUTE_2, documentAttributes[example.ATTRIBUTE_KEY_2]);
             Assert.AreEqual(example.ATTRIBUTE_3, documentAttributes[example.ATTRIBUTE_KEY_3]);
-            Assert.AreEqual(ExtractionType.FORM_FIELDS_WITH_TEXT_TAGS.GetHashCode().ToString(), documentAttributes[DocumentBuilder.ESL_DOC_EXTRACT_TYPE]);
         }
     }
 }
