@@ -13,7 +13,7 @@ namespace Silanis.ESL.API
 		private IList<Approval> _approvals = new List<Approval>();
 		private IList<Field> _fields = new List<Field>();
 		private IList<Page> _pages = new List<Page>();
-        private ISet<string> _extractionType = new HashSet<string>();
+        private ISet<string> _extractionTypes = new HashSet<string>();
 
 
 		// Accessors
@@ -70,16 +70,16 @@ namespace Silanis.ESL.API
         }
     
 		    
-        [JsonProperty("extractionType")]
-        public ISet<string> ExtractionType
+        [JsonProperty("extractionTypes")]
+        public ISet<string> ExtractionTypes
         {
             get
             {
-                return _extractionType;
+                return _extractionTypes;
             }
             set
             {
-                _extractionType = value;
+                _extractionTypes = value;
             }
         }
         public Document AddExtractionType(string value)
@@ -89,7 +89,7 @@ namespace Silanis.ESL.API
                 throw new ArgumentNullException("Argument cannot be null");
             }
 
-            _extractionType.Add(value);
+            _extractionTypes.Add(value);
             return this;
         }
 

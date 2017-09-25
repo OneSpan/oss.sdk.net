@@ -82,7 +82,7 @@ namespace SDK.Tests
             Assert.AreEqual(sdkDocument1.Description, apiDocument1.Description);
             Assert.AreEqual(sdkDocument1.Index, apiDocument1.Index);
             Assert.AreEqual(sdkDocument1.Id, apiDocument1.Id);
-            CollectionAssert.AreEquivalent(sdkDocument1.ExtractionType, apiDocument1.ExtractionType);
+            CollectionAssert.AreEquivalent(sdkDocument1.ExtractionTypes, apiDocument1.ExtractionTypes);
             Assert.IsTrue(sdkDocument1.Data.ContainsKey("name"));
             Assert.AreEqual(sdkDocument1.Data["name"], "value");
             Assert.AreEqual(sdkDocument1.Data["name"], apiDocument1.Data["name"]);
@@ -99,7 +99,7 @@ namespace SDK.Tests
             Assert.AreEqual(sdkDocument1.Description, apiDocument1.Description);
             Assert.AreEqual(sdkDocument1.Index, apiDocument1.Index);
             Assert.AreEqual(sdkDocument1.Id, apiDocument1.Id);
-            CollectionAssert.AreEquivalent(sdkDocument1.ExtractionType, apiDocument1.ExtractionType);
+            CollectionAssert.AreEquivalent(sdkDocument1.ExtractionTypes, apiDocument1.ExtractionTypes);
         }
 
         [Test()]

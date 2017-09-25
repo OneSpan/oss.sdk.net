@@ -14,7 +14,7 @@ namespace Silanis.ESL.SDK.Builder
 		private IList<Signature> signatures = new List<Signature>();
 		private int index;
 		private bool extract;
-        private ISet<string> extractionType = new HashSet<string>();
+        private ISet<string> extractionTypes = new HashSet<string>();
 		private IList<Field> injectedFields = new List<Field> ();
         private IList<Field> qrCodes = new List<Field> ();
         private string description;
@@ -141,7 +141,7 @@ namespace Silanis.ESL.SDK.Builder
 
         public DocumentBuilder WithExtractionType(ExtractionType extractionType) 
         {
-            this.extractionType.Add(extractionType.ToString());
+            this.extractionTypes.Add(extractionType.ToString());
             return this;
         }
 
@@ -158,7 +158,7 @@ namespace Silanis.ESL.SDK.Builder
 			doc.Index = index;
             doc.External = external;
             doc.Extract = extract;
-            doc.ExtractionType = extractionType;
+            doc.ExtractionTypes = extractionTypes;
 			doc.AddFields(injectedFields);
             doc.AddQRCodes(qrCodes);
 			doc.Description = description;
