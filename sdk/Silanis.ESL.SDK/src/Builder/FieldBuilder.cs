@@ -88,7 +88,7 @@ namespace Silanis.ESL.SDK.Builder
         public static FieldBuilder RadioButton ( string group )
         {
             return new FieldBuilder ().WithStyle(FieldStyle.UNBOUND_RADIO_BUTTON)
-                .WithValidation(FieldValidatorBuilder.Alphanumeric().WithOption(group));
+                .WithValidation(FieldValidatorBuilder.Basic().WithOption(group));
         }
 
 		public static FieldBuilder CustomField( String name )
@@ -171,6 +171,8 @@ namespace Silanis.ESL.SDK.Builder
                     this.validator.Options = validator.Options;
 
                 this.validator.Required = validator.Required;
+                if(null != validator.Message)
+                    this.validator.Message = validator.Message;
             } 
             else 
             {
