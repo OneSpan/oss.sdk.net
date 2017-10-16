@@ -39,15 +39,15 @@ namespace SDK.Examples
                     .WithLastName("Smith3"))
                 .WithDocument(DocumentBuilder.NewDocumentNamed(DOCUMENT1_NAME)
                     .FromStream(fileStream1, DocumentType.PDF)
-                    .WithExtractionType(ExtractionType.FORM_FIELDS_ONLY)
                     .EnableExtraction())
                 .WithDocument(DocumentBuilder.NewDocumentNamed(DOCUMENT2_NAME)
                     .FromStream(fileStream2, DocumentType.PDF)
-                    .WithExtractionType(ExtractionType.TEXT_TAGS_ONLY)
+                    .WithExtractionType(ExtractionType.TEXT_TAGS)
                     .EnableExtraction())
                 .WithDocument(DocumentBuilder.NewDocumentNamed(DOCUMENT3_NAME)
                     .FromStream(fileStream3, DocumentType.PDF)
-                    .WithExtractionType(ExtractionType.FORM_FIELDS_WITH_TEXT_TAGS)
+                    .WithExtractionType(ExtractionType.TEXT_TAGS)
+                    .WithExtractionType(ExtractionType.ACROFIELDS)
                     .EnableExtraction())
                 .Build();
 

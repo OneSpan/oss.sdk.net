@@ -35,9 +35,12 @@ namespace Silanis.ESL.SDK
             DocumentBuilder documentBuilder = DocumentBuilder.NewDocumentNamed(apiDocument.Name)
                 .WithId(apiDocument.Id)
                 .AtIndex(apiDocument.Index.Value)
-                    .WithDescription(apiDocument.Description)
+                .WithDescription(apiDocument.Description)
                 .WithData(apiDocument.Data);
             documentBuilder.WithExternal(new ExternalConverter(apiDocument.External).ToSDKExternal());
+            foreach(string extractionType in apiDocument.ExtractionTypes) {
+                documentBuilder.WithExtractionType((ExtractionType)Enum.Parse(typeof(ExtractionType), extractionType));
+            }
             foreach (Approval apiApproval in apiDocument.Approvals)
             {
                 documentBuilder.WithSignature(new SignatureConverter(apiApproval, apiPackage).ToSDKSignature());
@@ -112,6 +115,7 @@ namespace Silanis.ESL.SDK
             doc.Name = sdkDocument.Name;
             doc.Index = sdkDocument.Index;
             doc.Extract = sdkDocument.Extract;
+            doc.ExtractionTypes = sdkDocument.ExtractionTypes;
             doc.External = new ExternalConverter(sdkDocument.External).ToAPIExternal();
             doc.Data = sdkDocument.Data;
 

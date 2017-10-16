@@ -38,7 +38,6 @@ namespace SDK.Examples
                     .WithData(DocumentAttributesBuilder.NewDocumentAttributes()
                         .AddAttribute( ATTRIBUTE_KEY_1, ATTRIBUTE_1 )
                         .AddAttribute( ATTRIBUTE_KEY_2, ATTRIBUTE_2 ))
-                    .WithExtractionType(ExtractionType.FORM_FIELDS_WITH_TEXT_TAGS)
                     .WithData(DocumentAttributesBuilder.NewDocumentAttributes()
                         .AddAttribute( ATTRIBUTE_KEY_3, ATTRIBUTE_3 ))
                 )

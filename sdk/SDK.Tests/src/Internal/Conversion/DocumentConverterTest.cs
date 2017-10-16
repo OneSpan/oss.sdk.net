@@ -82,6 +82,7 @@ namespace SDK.Tests
             Assert.AreEqual(sdkDocument1.Description, apiDocument1.Description);
             Assert.AreEqual(sdkDocument1.Index, apiDocument1.Index);
             Assert.AreEqual(sdkDocument1.Id, apiDocument1.Id);
+            CollectionAssert.AreEquivalent(sdkDocument1.ExtractionTypes, apiDocument1.ExtractionTypes);
             Assert.IsTrue(sdkDocument1.Data.ContainsKey("name"));
             Assert.AreEqual(sdkDocument1.Data["name"], "value");
             Assert.AreEqual(sdkDocument1.Data["name"], apiDocument1.Data["name"]);
@@ -98,6 +99,7 @@ namespace SDK.Tests
             Assert.AreEqual(sdkDocument1.Description, apiDocument1.Description);
             Assert.AreEqual(sdkDocument1.Index, apiDocument1.Index);
             Assert.AreEqual(sdkDocument1.Id, apiDocument1.Id);
+            CollectionAssert.AreEquivalent(sdkDocument1.ExtractionTypes, apiDocument1.ExtractionTypes);
         }
 
         [Test()]
@@ -132,11 +134,13 @@ namespace SDK.Tests
         {
             Silanis.ESL.SDK.Document sdkDocument = DocumentBuilder.NewDocumentNamed( "sdkDocument" )
                 .WithDescription( "sdkDocument Description" )
-                    .WithId( "sdkDocumentId" )
-                    .FromFile(file.FullName)
-                    .WithSignature(SignatureBuilder.SignatureFor("john.smith@email.com")
-                                   .OnPage(0))                                
-                    .Build();
+                .WithId( "sdkDocumentId" )
+                .FromFile(file.FullName)
+                .WithExtractionType(ExtractionType.TEXT_TAGS)
+                .WithExtractionType(ExtractionType.ACROFIELDS)
+                .WithSignature(SignatureBuilder.SignatureFor("john.smith@email.com")
+                               .OnPage(0))                                
+                .Build();
 
             return sdkDocument;
         }
@@ -153,6 +157,8 @@ namespace SDK.Tests
             apiDocument.Description = "apiDocument Description";
             apiDocument.Id = "apiDocumentId";
             apiDocument.Data = data;
+            apiDocument.AddExtractionType(ExtractionType.TEXT_TAGS.ToString());
+            apiDocument.AddExtractionType(ExtractionType.ACROFIELDS.ToString());
 
             return apiDocument;
         }

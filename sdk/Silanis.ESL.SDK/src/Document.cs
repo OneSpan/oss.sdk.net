@@ -8,6 +8,7 @@ namespace Silanis.ESL.SDK
 		private List<Signature> signatures = new List<Signature>();
 		private List<Field> fields = new List<Field> ();
         private List<Field> qrCodes = new List<Field> ();
+        private ISet<string> extractionTypes = new HashSet<string>();
 
 		public string Name {
 			get;
@@ -38,6 +39,11 @@ namespace Silanis.ESL.SDK
 			get;
 			set;
 		}
+
+        public ISet<string> ExtractionTypes {
+            get;
+            set;
+        }
 
         public string Description
         {
