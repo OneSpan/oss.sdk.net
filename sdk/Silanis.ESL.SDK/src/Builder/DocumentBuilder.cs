@@ -14,7 +14,7 @@ namespace Silanis.ESL.SDK.Builder
 		private IList<Signature> signatures = new List<Signature>();
 		private int index;
 		private bool extract;
-        private ISet<string> extractionTypes = new HashSet<string>();
+        private List<string> extractionTypes = new List<string>();
 		private IList<Field> injectedFields = new List<Field> ();
         private IList<Field> qrCodes = new List<Field> ();
         private string description;

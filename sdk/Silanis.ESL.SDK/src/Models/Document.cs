@@ -13,7 +13,7 @@ namespace Silanis.ESL.API
 		private IList<Approval> _approvals = new List<Approval>();
 		private IList<Field> _fields = new List<Field>();
 		private IList<Page> _pages = new List<Page>();
-        private ISet<string> _extractionTypes = new HashSet<string>();
+        private IList<string> _extractionTypes = new List<string>();
 
 
 		// Accessors
@@ -71,7 +71,7 @@ namespace Silanis.ESL.API
     
 		    
         [JsonProperty("extractionTypes")]
-        public ISet<string> ExtractionTypes
+        public IList<string> ExtractionTypes
         {
             get
             {
