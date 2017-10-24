@@ -344,23 +344,52 @@ namespace Silanis.ESL.SDK
         private void SetNewSignersIndexIfRoleWorkflowEnabled (PackageId templateId, DocumentPackage documentPackage) 
         {
             DocumentPackage template = new DocumentPackageConverter(packageService.GetPackage(templateId)).ToSDKPackage();
-            if (CheckSignerOrdering(template)) {
-                int firstSignerIndex = template.Signers.Count;
-                foreach(Signer signer in documentPackage.Signers)
+            if (CheckSignerOrdering(template)) 
+            {
+                int firstSignerIndex = GetMaxSigningOrder(template, documentPackage) + 1;
+                foreach (Signer signer in documentPackage.Signers) 
                 {
-                    signer.SigningOrder = firstSignerIndex;
-                    firstSignerIndex++;
+                    Signer templatePlaceholder = template.GetPlaceholder(signer.Id);
+                    if (templatePlaceholder != null) 
+                    {
+                        signer.SigningOrder = templatePlaceholder.SigningOrder;
+                    }
+
+                    if (signer.SigningOrder <= 0) 
+                    {
+                        signer.SigningOrder = firstSignerIndex;
+                        firstSignerIndex++;
+                    }
                 }
             }
         }
 
-        private void ValidateSignatures(DocumentPackage documentPackage) {
-            foreach(Document document in documentPackage.Documents) {
+        private int GetMaxSigningOrder(DocumentPackage template, DocumentPackage documentPackage) 
+        {
+            List<Signer> signers = new List<Signer>();
+            signers.AddRange(documentPackage.Signers);
+            signers.AddRange(template.Signers);
+            int maxSigningOrder = 0;
+            foreach (Signer signer in signers) 
+            {
+                if (signer.SigningOrder > maxSigningOrder) 
+                {
+                    maxSigningOrder = signer.SigningOrder;
+                }
+            }
+            return maxSigningOrder;
+        }
+
+        private void ValidateSignatures(DocumentPackage documentPackage) 
+        {
+            foreach(Document document in documentPackage.Documents) 
+            {
                 ValidateMixingSignatureAndAcceptance(document);
             }
         }
 
-        private void ValidateMixingSignatureAndAcceptance(Document document) {
+        private void ValidateMixingSignatureAndAcceptance(Document document) 
+        {
             if(CheckAcceptanceSignatureStyle(document)) {
                 foreach(Signature signature in document.Signatures) {
                     if (signature.Style != SignatureStyle.ACCEPTANCE )
@@ -369,7 +398,8 @@ namespace Silanis.ESL.SDK
             }
         }
 
-        private bool CheckAcceptanceSignatureStyle(Document document) {
+        private bool CheckAcceptanceSignatureStyle(Document document) 
+        {
             foreach (Signature signature in document.Signatures) {
                 if (signature.Style == SignatureStyle.ACCEPTANCE)
                     return true;
@@ -377,8 +407,12 @@ namespace Silanis.ESL.SDK
             return false;
         }
 
-        private bool CheckSignerOrdering(DocumentPackage template) {
-            foreach(Signer signer in template.Signers)
+        private bool CheckSignerOrdering(DocumentPackage template)
+        {
+            List<Signer> signers = new List<Signer>();
+            signers.AddRange(template.Signers);
+            signers.AddRange(template.Placeholders);
+            foreach (Signer signer in signers) 
             {
                 if (signer.SigningOrder > 0) 
                 {

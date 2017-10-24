@@ -198,6 +198,10 @@ namespace Silanis.ESL.SDK
                 builder.WithEmailMessage( apiRole.EmailMessage.Content );
             }
 
+            if ( apiRole.Index != null ) {
+                builder.SigningOrder( apiRole.Index.Value );
+            }
+
             Signer signer = builder.Build();
 
             if ( apiRole.Locked.Value ) {

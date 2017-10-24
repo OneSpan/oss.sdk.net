@@ -42,6 +42,7 @@ namespace Silanis.ESL.SDK.Builder
             this.groupId = null;
             this.id = placeholder.Id;
             this.placeholderName = placeholder.Name;
+            this.signingOrder = placeholder.SigningOrder;
         }
 
         public static SignerBuilder NewSignerPlaceholder(Placeholder placeholder)

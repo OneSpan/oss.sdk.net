@@ -16,6 +16,12 @@ namespace Silanis.ESL.SDK
             set;
         }
 
+        public int SigningOrder
+        {
+            get;
+            set;
+        }
+
         public Placeholder( string id )
         {
             Id = id;
@@ -26,6 +32,13 @@ namespace Silanis.ESL.SDK
         {
             Id = id;
             Name = name;
+        }
+
+        public Placeholder( string id, string name, int? signingOrder )
+        {
+            Id = id;
+            Name = name;
+            if(signingOrder != null) SigningOrder = signingOrder.Value;
         }
     }
 }
