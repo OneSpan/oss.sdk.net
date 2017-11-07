@@ -9,7 +9,7 @@
     <OutputType>Library</OutputType>
     <RootNamespace>SDK.Tests</RootNamespace>
     <AssemblyName>Silanis.ESL.SDK.Test</AssemblyName>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
     <SignAssembly>false</SignAssembly>
     <AssemblyOriginatorKeyFile>sdk.tests.snk</AssemblyOriginatorKeyFile>
     <UseMSBuildEngine>False</UseMSBuildEngine>

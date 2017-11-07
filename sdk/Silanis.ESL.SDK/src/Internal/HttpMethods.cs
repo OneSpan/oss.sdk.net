@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Reflection;
 using Silanis.ESL.SDK;
 using System.Text;
+using System.Security.Authentication;
 
 namespace Silanis.ESL.SDK.Internal
 {
@@ -31,11 +32,11 @@ namespace Silanis.ESL.SDK.Internal
 
         public static ProxyConfiguration proxyConfiguration;
 
-        private static readonly object syncLock = new object();
-
 		public static byte[] PostHttp (string apiToken, string path, byte[] content)
 		{
             try {
+                System.Net.ServicePointManager.SecurityProtocol = (SecurityProtocolType)768 | (SecurityProtocolType)3072;
+
                 HttpWebRequest request = (HttpWebRequest)WebRequest.Create (path);
 				request.Method = "POST";
 				request.ContentType = ESL_CONTENT_TYPE_APPLICATION_JSON;
@@ -76,6 +77,8 @@ namespace Silanis.ESL.SDK.Internal
         public static byte[] PostHttp (AuthHeaderGenerator authHeaderGen, string path, byte[] content)
         {
             try {
+                System.Net.ServicePointManager.SecurityProtocol = (SecurityProtocolType)768 | (SecurityProtocolType)3072;
+
                 HttpWebRequest request = (HttpWebRequest)WebRequest.Create (path);
                 request.Method = "POST";
                 request.ContentType = ESL_CONTENT_TYPE_APPLICATION_JSON;
@@ -116,6 +119,8 @@ namespace Silanis.ESL.SDK.Internal
 		public static byte[] PutHttp (string apiToken, string path, byte[] content)
 		{
 			try {
+                System.Net.ServicePointManager.SecurityProtocol = (SecurityProtocolType)768 | (SecurityProtocolType)3072;
+
                 HttpWebRequest request = (HttpWebRequest)WebRequest.Create (path);
 				request.Method = "PUT";
 				request.ContentType = ESL_CONTENT_TYPE_APPLICATION_JSON;
@@ -163,6 +168,8 @@ namespace Silanis.ESL.SDK.Internal
             string message = "";
             UseUnsafeHeaderParsing(ref message);
             try {
+                System.Net.ServicePointManager.SecurityProtocol = (SecurityProtocolType)768 | (SecurityProtocolType)3072;
+
                 HttpWebRequest request = (HttpWebRequest)WebRequest.Create (path);
                 request.Method = "GET";
                 request.Accept = ESL_ACCEPT_TYPE_APPLICATION_JSON;
@@ -238,6 +245,8 @@ namespace Silanis.ESL.SDK.Internal
         public static DownloadedFile GetHttpJson (string apiToken, string path, string acceptType)
 		{
 			try {
+                System.Net.ServicePointManager.SecurityProtocol = (SecurityProtocolType)768 | (SecurityProtocolType)3072;
+
 				HttpWebRequest request = (HttpWebRequest)WebRequest.Create (path);
 				request.Method = "GET";
 				request.Headers.Add ("Authorization", "Basic " + apiToken);
@@ -274,6 +283,8 @@ namespace Silanis.ESL.SDK.Internal
         public static DownloadedFile GetHttp (string apiToken, string path)
 		{
 			try {
+                System.Net.ServicePointManager.SecurityProtocol = (SecurityProtocolType)768 | (SecurityProtocolType)3072;
+
                 HttpWebRequest request = (HttpWebRequest)WebRequest.Create (path);
 				request.Method = "GET";
 				request.Headers.Add ("Authorization", "Basic " + apiToken);
@@ -333,6 +344,8 @@ namespace Silanis.ESL.SDK.Internal
         public static DownloadedFile GetHttpAsOctetStream (string apiToken, string path)
         {
             try {
+                System.Net.ServicePointManager.SecurityProtocol = (SecurityProtocolType)768 | (SecurityProtocolType)3072;
+
                 HttpWebRequest request = (HttpWebRequest)WebRequest.Create (path);
                 request.Method = "GET";
                 request.Headers.Add ("Authorization", "Basic " + apiToken);
@@ -369,6 +382,8 @@ namespace Silanis.ESL.SDK.Internal
         public static byte[] DeleteHttp (string apiToken, string path)
 		{
 			try {
+                System.Net.ServicePointManager.SecurityProtocol = (SecurityProtocolType)768 | (SecurityProtocolType)3072;
+
                 HttpWebRequest request = (HttpWebRequest)WebRequest.Create (path);
 				request.Method = "DELETE";
 				request.Headers.Add ("Authorization", "Basic " + apiToken);
@@ -410,6 +425,8 @@ namespace Silanis.ESL.SDK.Internal
             WebRequest request = WebRequest.Create(path);
             try
             {
+                System.Net.ServicePointManager.SecurityProtocol = (SecurityProtocolType)768 | (SecurityProtocolType)3072;
+
                 request.Method = "POST";
                 request.ContentType = string.Format(ESL_CONTENT_TYPE_APPLICATION_MULTIPART, boundary);
                 request.ContentLength = content.Length;
