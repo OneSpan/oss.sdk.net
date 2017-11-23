@@ -4,7 +4,6 @@ using Silanis.ESL.SDK.Builder;
 using System.IO;
 using System.Collections.Generic;
 using Silanis.ESL.SDK.Builder.Internal;
-using ICSharpCode.SharpZipLib.Zip;
 
 namespace SDK.Examples
 {
@@ -50,7 +49,6 @@ namespace SDK.Examples
 
         public FileInfo downloadedAttachemnt1;
         public long attachment1ForSigner1FileSize;
-        public ZipFile downloadedAllAttachmentsForPackageZip, downloadedAllAttachmentsForSigner1InPackageZip, downloadedAllAttachmentsForSigner2InPackageZip;
 
         public AttachmentRequirementExample()
         {
@@ -154,9 +152,6 @@ namespace SDK.Examples
             System.IO.File.WriteAllBytes(DOWNLOADED_ALL_ATTACHMENTS_FOR_SIGNER2_IN_PACKAGE_ZIP, downloadedAllAttachmentsForSigner2InPackage.Contents);
 
             downloadedAttachemnt1 = new FileInfo(downloadedAttachment.Filename);
-            downloadedAllAttachmentsForPackageZip = new ZipFile(DOWNLOADED_ALL_ATTACHMENTS_FOR_PACKAGE_ZIP);
-            downloadedAllAttachmentsForSigner1InPackageZip = new ZipFile(DOWNLOADED_ALL_ATTACHMENTS_FOR_SIGNER1_IN_PACKAGE_ZIP);
-            downloadedAllAttachmentsForSigner2InPackageZip = new ZipFile(DOWNLOADED_ALL_ATTACHMENTS_FOR_SIGNER2_IN_PACKAGE_ZIP);
         }
     }
 }

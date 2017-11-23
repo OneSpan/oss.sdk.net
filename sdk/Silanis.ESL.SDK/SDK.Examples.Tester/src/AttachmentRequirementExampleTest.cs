@@ -8,7 +8,6 @@ using System.IO;
 using Silanis.ESL.SDK.Builder;
 using Silanis.ESL.SDK.Builder.Internal;
 using System.Text;
-using ICSharpCode.SharpZipLib.Zip;
 
 namespace SDK.Examples
 {
@@ -52,10 +51,6 @@ namespace SDK.Examples
 
             Assert.AreEqual(example.ATTACHMENT_FILE_NAME1, example.downloadedAttachemnt1.Name);
             Assert.AreEqual(example.attachment1ForSigner1FileSize, example.downloadedAttachemnt1.Length);
-
-            Assert.AreEqual(3, example.downloadedAllAttachmentsForPackageZip.Size);
-            Assert.AreEqual(1, example.downloadedAllAttachmentsForSigner1InPackageZip.Size);
-            Assert.AreEqual(2, example.downloadedAllAttachmentsForSigner2InPackageZip.Size);
         }
     }
 }
