@@ -14,7 +14,7 @@ namespace Silanis.ESL.SDK.Internal
 	/// </summary>
 	public class HttpMethods
 	{
-        public const string ESL_API_VERSION = "11.9";
+        public const string ESL_API_VERSION = "11.10";
         public const string ESL_API_VERSION_HEADER = "esl-api-version=" + ESL_API_VERSION;
 
         public const string CONTENT_TYPE_APPLICATION_JSON = "application/json";
