@@ -162,6 +162,7 @@
     <Compile Include="src\SignerVerificationTypesExample.cs" />
     <Compile Include="src\TextTagsExample.cs" />
     <Compile Include="src\DocumentAttributesExample.cs" />
+    <Compile Include="src\CreateAndGetLayoutExample.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

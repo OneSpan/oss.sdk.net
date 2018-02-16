@@ -130,6 +130,7 @@
     <Compile Include="src\SignerVerificationTypeExampleTest.cs" />
     <Compile Include="src\TextTagsExampleTest.cs" />
     <Compile Include="src\DocumentAttributesExampleTest.cs" />
+    <Compile Include="src\CreateAndGetLayoutExampleTest.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

@@ -44,6 +44,31 @@ namespace Silanis.ESL.SDK
             }
         }
 
+        public Package CreateAndGetLayout(Package layoutPackage, string packageId)
+        {
+            string path = template.UrlFor(UrlTemplate.LAYOUT_PATH)
+                .Build();
+
+            string packageJson = JsonConvert.SerializeObject(layoutPackage, settings);
+            Template apiTemplate = JsonConvert.DeserializeObject<Silanis.ESL.API.Template>(packageJson, settings);
+            apiTemplate.Id = packageId;
+            String templateJson = JsonConvert.SerializeObject(apiTemplate, settings);
+
+            try
+            {
+                string response = restClient.Post(path, templateJson);
+                return JsonConvert.DeserializeObject<Silanis.ESL.API.Package>(response, settings);
+            }
+            catch (EslServerException e)
+            {
+                throw new EslServerException("Could not create layout." + " Exception: " + e.Message, e.ServerError, e);
+            }
+            catch (Exception e)
+            {
+                throw new EslException("Could not create layout." + " Exception: " + e.Message, e);
+            }
+        }
+
         public Result<Package> GetLayouts(Direction direction, PageRequest request)
         {
             string path = template.UrlFor(UrlTemplate.LAYOUT_LIST_PATH)

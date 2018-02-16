@@ -34,6 +34,23 @@ namespace Silanis.ESL.SDK
         }
 
         /// <summary>
+        /// Create a document layout from an already created DocumentPackage. Will only save document fields for one document
+        /// in the package.
+        /// </summary>
+        /// <returns>DocumentPackage layout.</returns>
+        /// <param name="layout">The DocumentPackage with one document from which to create layout.</param>
+        public DocumentPackage CreateAndGetLayout(DocumentPackage layout) {
+            Package layoutToCreate = new DocumentPackageConverter(layout).ToAPIPackage();
+            foreach (Silanis.ESL.SDK.Document document in layout.Documents)
+            {
+                layoutToCreate.AddDocument(new DocumentConverter(document).ToAPIDocument(layoutToCreate));
+            }
+
+            Package createdLayout = apiClient.CreateAndGetLayout(layoutToCreate, layout.Id.Id);
+            return new DocumentPackageConverter(createdLayout).ToSDKPackage();
+        }
+
+        /// <summary>
         /// Get a list of layouts (DocumentPackages).
         /// </summary>
         /// <returns>The list of layouts.</returns>
