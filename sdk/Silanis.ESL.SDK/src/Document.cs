@@ -34,6 +34,11 @@ namespace Silanis.ESL.SDK
 			set;
 		}
 
+        public int NumberOfPages {
+            get;
+            set;
+        }
+
 		public bool Extract {
 			get;
 			set;

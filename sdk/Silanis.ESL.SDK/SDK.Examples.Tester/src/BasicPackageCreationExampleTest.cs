@@ -46,6 +46,8 @@ namespace SDK.Examples
 
             // Document 1
             Document document = documentPackage.GetDocument(example.DOCUMENT1_NAME);
+            Assert.AreEqual(1, document.NumberOfPages);
+
             List<Field> fields = document.Signatures[0].Fields;
             Field field = fields[0];
 
@@ -55,6 +57,8 @@ namespace SDK.Examples
 
             // Document 2
             document = documentPackage.GetDocument(example.DOCUMENT2_NAME);
+            Assert.AreEqual(1, document.NumberOfPages);
+
             fields = document.Signatures[0].Fields;
 
             field = findFieldByName("firstField", fields);

@@ -59,7 +59,13 @@ namespace Silanis.ESL.SDK
                 }
             }
 
-            return documentBuilder.Build();
+            Document document = documentBuilder.Build();
+            if ( apiDocument.Pages != null && apiDocument.Pages.Count > 0 ) 
+            {
+                document.NumberOfPages = apiDocument.Pages.Count;
+            }
+
+            return document;
         }
 
         internal Silanis.ESL.API.Document ToAPIDocument(Silanis.ESL.API.Package apiPackage)

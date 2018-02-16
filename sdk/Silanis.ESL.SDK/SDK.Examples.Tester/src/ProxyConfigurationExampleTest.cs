@@ -11,6 +11,7 @@ namespace SDK.Examples
     {
         [Test]
         [Category("Proxy")]
+        [Ignore("Ignore a ProxyConfigurationExampleTest because could not find current proxy server")]
         public void verifyResult()
         {
             ProxyConfigurationExample example = new ProxyConfigurationExample(Props.GetInstance());
