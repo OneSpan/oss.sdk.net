@@ -44,6 +44,11 @@ namespace Silanis.ESL.SDK
 			set;
 		}
 
+        public Nullable<Boolean> Tagged {
+            get;
+            set;
+        }
+
         public List<string> ExtractionTypes {
             get;
             set;

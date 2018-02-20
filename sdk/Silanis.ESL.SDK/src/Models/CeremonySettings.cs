@@ -87,6 +87,13 @@ namespace Silanis.ESL.API
         }
 
 
+        [JsonProperty("ada")]
+        public Nullable<bool> Ada
+        {
+            get; set;
+        }
+
+
         [JsonProperty("documentToolbarOptions")]
         public DocumentToolbarOptions DocumentToolbarOptions
         {

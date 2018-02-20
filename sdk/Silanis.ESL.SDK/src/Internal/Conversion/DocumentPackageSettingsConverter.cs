@@ -35,6 +35,7 @@ namespace Silanis.ESL.SDK
             ceremonySettings.MaxAuthFailsAllowed = sdkSettings.MaxAuthAttempts;
             ceremonySettings.DisableDeclineOther = sdkSettings.DisableDeclineOther;
             ceremonySettings.DisableOptOutOther = sdkSettings.DisableOptOutOther;
+            ceremonySettings.Ada = sdkSettings.Ada;
 
             if (sdkSettings.EnableFirstAffidavit.HasValue) {
                 ceremonySettings.DisableFirstInPersonAffidavit = !sdkSettings.EnableFirstAffidavit;
@@ -113,7 +114,7 @@ namespace Silanis.ESL.SDK
                     
                 if (apiSettings.Ceremony.DisableSecondInPersonAffidavit.HasValue)
                     builder = (apiSettings.Ceremony.DisableSecondInPersonAffidavit.Value ? builder.DisableSecondAffidavit() : builder.EnableSecondAffidavit());
-                    
+
                 if (apiSettings.Ceremony.HideLanguageDropdown.HasValue)
                     builder = (apiSettings.Ceremony.HideLanguageDropdown.Value ? builder.WithoutLanguageDropDown() : builder.WithLanguageDropDown());
                     
@@ -125,6 +126,9 @@ namespace Silanis.ESL.SDK
 
                 if (apiSettings.Ceremony.DisableOptOutOther.HasValue)
                     builder = (apiSettings.Ceremony.DisableOptOutOther.Value ? builder.WithoutOptOutOther() : builder.WithOptOutOther());
+
+                if (apiSettings.Ceremony.Ada.HasValue)
+                    builder = (apiSettings.Ceremony.Ada.Value ? builder.WithAda() : builder.WithoutAda());
             
                 foreach (string declineReason in apiSettings.Ceremony.DeclineReasons)
                 {

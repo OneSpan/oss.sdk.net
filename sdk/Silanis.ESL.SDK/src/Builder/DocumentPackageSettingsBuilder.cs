@@ -23,6 +23,7 @@ namespace Silanis.ESL.SDK
         private Nullable<bool> showOwnerInPersonDropDown = null;
         private Nullable<bool> disableDeclineOther = null;
         private Nullable<bool> disableOptOutOther = null;
+        private Nullable<bool> ada = null;
 
 		private string linkText = null;
 		private string linkTooltip = null;
@@ -151,6 +152,16 @@ namespace Silanis.ESL.SDK
 			return this;
 		}
 
+        public DocumentPackageSettingsBuilder WithAda() {
+            ada = true;
+            return this;
+        }
+
+        public DocumentPackageSettingsBuilder WithoutAda() {
+            ada = false;
+            return this;
+        }
+
         public DocumentPackageSettingsBuilder WithCaptureText() {
             hideCaptureText = false;
             return this;
@@ -268,6 +279,7 @@ namespace Silanis.ESL.SDK
             result.ShowOwnerInPersonDropDown = showOwnerInPersonDropDown;
             result.DisableDeclineOther = disableDeclineOther;
             result.DisableOptOutOther = disableOptOutOther;
+            result.Ada = ada;
 			result.LinkHref = linkHref;
 			result.LinkText = linkText;
 			result.LinkTooltip = linkTooltip;
@@ -295,6 +307,7 @@ namespace Silanis.ESL.SDK
             showLanguageDropDown = !apiPackageSettings.Ceremony.HideLanguageDropdown;
             disableDeclineOther = apiPackageSettings.Ceremony.DisableDeclineOther;
             disableOptOutOther = apiPackageSettings.Ceremony.DisableOptOutOther;
+            ada = apiPackageSettings.Ceremony.Ada;
 
             foreach (string declineReason in apiPackageSettings.Ceremony.DeclineReasons)
             {

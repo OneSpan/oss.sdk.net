@@ -163,6 +163,7 @@
     <Compile Include="src\TextTagsExample.cs" />
     <Compile Include="src\DocumentAttributesExample.cs" />
     <Compile Include="src\CreateAndGetLayoutExample.cs" />
+    <Compile Include="src\AdaPackageExample.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
@@ -206,6 +207,9 @@
     </None>
     <None Include="app.config" />
     <None Include="src\document_with_text_tag_and_form_field.pdf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="src\taggedDocument.pdf">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>

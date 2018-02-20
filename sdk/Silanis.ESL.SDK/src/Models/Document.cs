@@ -68,6 +68,12 @@ namespace Silanis.ESL.API
     {
                 get; set;
         }
+
+        [JsonProperty("tagged")]
+        public Nullable<Boolean> Tagged
+        {
+            get; set;
+        }
     
 		    
         [JsonProperty("extractionTypes")]

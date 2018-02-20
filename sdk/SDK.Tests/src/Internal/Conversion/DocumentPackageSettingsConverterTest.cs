@@ -49,6 +49,7 @@ namespace SDK.Tests
 
             Assert.IsNotNull(sdkPackageSettings1);
             Assert.AreEqual(apiPackageSettings1.Ceremony.InPerson, sdkPackageSettings1.EnableInPerson);
+            Assert.AreEqual(apiPackageSettings1.Ceremony.Ada, sdkPackageSettings1.Ada);
             Assert.AreEqual(apiPackageSettings1.Ceremony.DeclineButton, sdkPackageSettings1.EnableDecline);
             Assert.AreEqual(apiPackageSettings1.Ceremony.OptOutButton, sdkPackageSettings1.EnableOptOut);
             Assert.AreEqual(apiPackageSettings1.Ceremony.DeclineReasons[0], sdkPackageSettings1.DeclineReasons[0]);
@@ -82,6 +83,7 @@ namespace SDK.Tests
 
             Assert.IsNotNull(apiPackageSettings1);
             Assert.AreEqual(apiPackageSettings1.Ceremony.InPerson, sdkPackageSettings1.EnableInPerson);
+            Assert.AreEqual(apiPackageSettings1.Ceremony.Ada, sdkPackageSettings1.Ada);
             Assert.AreEqual(apiPackageSettings1.Ceremony.DeclineButton, sdkPackageSettings1.EnableDecline);
             Assert.AreEqual(apiPackageSettings1.Ceremony.OptOutButton, sdkPackageSettings1.EnableOptOut);
             Assert.AreEqual(apiPackageSettings1.Ceremony.DeclineReasons[0], sdkPackageSettings1.DeclineReasons[0]);
@@ -111,6 +113,7 @@ namespace SDK.Tests
         {
             Silanis.ESL.SDK.DocumentPackageSettings sdkDocumentPackageSettings = DocumentPackageSettingsBuilder.NewDocumentPackageSettings()
                     .WithInPerson()
+                    .WithAda()
                     .WithoutDecline()
                     .WithOptOut()
                     .WithoutWatermark()
@@ -146,6 +149,7 @@ namespace SDK.Tests
             Silanis.ESL.API.CeremonySettings apiCeremonySettings = new Silanis.ESL.API.CeremonySettings();
 
             apiCeremonySettings.InPerson = false;
+            apiCeremonySettings.Ada = true;
             apiCeremonySettings.DeclineButton = true;
             apiCeremonySettings.OptOutButton = true;
 

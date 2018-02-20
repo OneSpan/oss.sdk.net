@@ -111,6 +111,17 @@ namespace Silanis.ESL.SDK
 			}
 		}
 
+        private Nullable<bool> ada = null;
+
+        public Nullable<bool> Ada {
+            get {
+                return ada;
+            }
+            set {
+                ada = value;
+            }
+        }
+
         private List<string> declineReasons = new List<string>();
 
         public List<string> DeclineReasons {
@@ -246,6 +257,9 @@ namespace Silanis.ESL.SDK
                 
             if ( showLanguageDropDown != null )
                 ceremonySettings.HideLanguageDropdown = !showLanguageDropDown.Value;
+
+            if ( ada != null )
+                ceremonySettings.Ada = ada.Value;
 
             foreach ( string declineReason in declineReasons )
                 ceremonySettings.DeclineReasons.Add( declineReason );

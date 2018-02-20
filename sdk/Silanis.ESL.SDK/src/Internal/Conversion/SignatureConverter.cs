@@ -112,6 +112,11 @@ namespace Silanis.ESL.SDK
         private Silanis.ESL.API.Field ToField(Signature signature) {
             Silanis.ESL.API.Field result = new Silanis.ESL.API.Field();
 
+            if (sdkSignature.Id != null)
+            {
+                result.Id = sdkSignature.Id.Id;
+            }
+
             result.Page = signature.Page;
             result.Name = signature.Name;
             result.Extract = signature.Extract;

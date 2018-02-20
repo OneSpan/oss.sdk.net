@@ -65,6 +65,11 @@ namespace Silanis.ESL.SDK
                 document.NumberOfPages = apiDocument.Pages.Count;
             }
 
+            if ( apiDocument.Tagged != null ) 
+            {
+                document.Tagged = apiDocument.Tagged;
+            }
+
             return document;
         }
 
@@ -124,6 +129,7 @@ namespace Silanis.ESL.SDK
             doc.ExtractionTypes = sdkDocument.ExtractionTypes;
             doc.External = new ExternalConverter(sdkDocument.External).ToAPIExternal();
             doc.Data = sdkDocument.Data;
+            doc.Tagged = sdkDocument.Tagged;
 
             if (sdkDocument.Id != null)
             {
