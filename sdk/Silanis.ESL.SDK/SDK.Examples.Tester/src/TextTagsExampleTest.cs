@@ -19,9 +19,9 @@ namespace SDK.Examples
             Document document2 = documentPackage.GetDocument(example.DOCUMENT2_NAME);
             Document document3 = documentPackage.GetDocument(example.DOCUMENT3_NAME);
 
-            Assert.AreEqual(document1.Signatures.Count, 3);
-            Assert.AreEqual(document2.Signatures.Count, 4);
-            Assert.AreEqual(document3.Signatures.Count, 7);
+            Assert.AreEqual(2, document1.Signatures.Count);
+            Assert.AreEqual(4, document2.Signatures.Count);
+            Assert.AreEqual(6, document3.Signatures.Count);
         }
     }
 }

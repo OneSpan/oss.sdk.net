@@ -12,7 +12,7 @@ namespace SDK.Examples
             new TextTagsExample().Run();
         }
 
-        public Stream fileStream1, fileStream2, fileStream3;
+        public Stream fileStream3;
 
         public readonly string DOCUMENT1_NAME = "First Document";
         public readonly string DOCUMENT2_NAME = "Second Document";
@@ -20,17 +20,17 @@ namespace SDK.Examples
 
         override public void Execute()
         {
-            this.fileStream1 = File.OpenRead(new FileInfo(Directory.GetCurrentDirectory() + "/src/document_with_text_tag_and_form_field.pdf").FullName);
-            this.fileStream2 = File.OpenRead(new FileInfo(Directory.GetCurrentDirectory() + "/src/document_with_text_tag_and_form_field.pdf").FullName);
-            this.fileStream3 = File.OpenRead(new FileInfo(Directory.GetCurrentDirectory() + "/src/document_with_text_tag_and_form_field.pdf").FullName);
+            this.fileStream1 = File.OpenRead(new FileInfo(Directory.GetCurrentDirectory() + "/src/Text_Tag_And_Acrobat_Form_Fields.pdf").FullName);
+            this.fileStream2 = File.OpenRead(new FileInfo(Directory.GetCurrentDirectory() + "/src/Text_Tag_And_Acrobat_Form_Fields.pdf").FullName);
+            this.fileStream3 = File.OpenRead(new FileInfo(Directory.GetCurrentDirectory() + "/src/Text_Tag_And_Acrobat_Form_Fields.pdf").FullName);
 
             DocumentPackage superDuperPackage = PackageBuilder.NewPackageNamed(PackageName)
                 .WithSigner(SignerBuilder.NewSignerWithEmail(email1)
-                    .WithCustomId("role1")
+                    .WithCustomId("Signer1")
                     .WithFirstName("John1")
                     .WithLastName("Smith1"))
                 .WithSigner(SignerBuilder.NewSignerWithEmail(email2)
-                    .WithCustomId("role2")
+                    .WithCustomId("Signer2")
                     .WithFirstName("John2")
                     .WithLastName("Smith2"))
                 .WithSigner(SignerBuilder.NewSignerWithEmail(email3)

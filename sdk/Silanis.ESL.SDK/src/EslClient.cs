@@ -235,10 +235,7 @@ namespace Silanis.ESL.SDK
 			Silanis.ESL.API.Package packageToCreate = new DocumentPackageConverter(package).ToAPIPackage();
 			PackageId id = packageService.CreatePackage (packageToCreate);
 
-			foreach (Document document in package.Documents)
-			{
-                UploadDocument(document, id);
-			}
+            UploadDocuments(id, package.Documents);
 
 			return id;
 		}
@@ -522,12 +519,31 @@ namespace Silanis.ESL.SDK
 		}
 
         [Obsolete("Please use UploadDocument(Document document, PackageId packageId ) instead of this method.")]
-		public Document UploadDocument(Document document, DocumentPackage documentPackage ) {
+		public Document UploadDocument(Document document, DocumentPackage documentPackage ) 
+        {
 			return UploadDocument( document.FileName, document.Content, document, documentPackage.Id );
 		}
 
-        public Document UploadDocument(Document document, PackageId packageId ) {
+        public Document UploadDocument(Document document, PackageId packageId ) 
+        {
             return UploadDocument( document.FileName, document.Content, document, packageId );
+        }
+
+        public IList<Document> UploadDocuments(PackageId packageId, params Document[] documents) 
+        {
+            return UploadDocuments( packageId, new List<Document>(documents));
+        }
+
+        public IList<Document> UploadDocuments(PackageId packageId, IList<Document> documents) 
+        {
+            if (documents.Count == 0)
+            {
+                return new List<Document>();
+            }
+            else
+            {
+                return packageService.UploadDocuments( packageId, documents );
+            }
         }
 
         [Obsolete("Please use UploadDocument(string fileName, byte[] fileContent, Document document, PackageId packageId) instead of this method.")]

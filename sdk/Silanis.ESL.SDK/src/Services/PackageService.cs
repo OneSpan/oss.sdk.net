@@ -563,6 +563,60 @@ namespace Silanis.ESL.SDK.Services
             }
         }
 
+        internal IList<Document> UploadDocuments(PackageId packageId, IList<Document> documents)
+        {
+            string path = template.UrlFor(UrlTemplate.DOCUMENT_PATH)
+                .Replace("{packageId}", packageId.Id)
+                .Build();
+
+            Silanis.ESL.API.Package internalPackage = GetPackage(packageId);
+            IList<Silanis.ESL.API.Document> apiDocuments = new List<Silanis.ESL.API.Document>();
+            foreach (Document document in documents) 
+            {
+                apiDocuments.Add(new DocumentConverter(document).ToAPIDocument(internalPackage));
+            }
+
+            try
+            {
+                string json = JsonConvert.SerializeObject(apiDocuments, settings);
+                byte[] payloadBytes = Converter.ToBytes(json);
+
+                string boundary = GenerateBoundary();
+                byte[] content = CreateMultipartPackage(documents, payloadBytes, boundary);
+
+                string response = restClient.PostMultipartPackage(path, content, boundary, json); 
+
+                IList<Document> sdkDocuments = new List<Document>();
+
+                if(response.StartsWith("[")) 
+                {
+                    IList<Silanis.ESL.API.Document> uploadedDocuments = 
+                        JsonConvert.DeserializeObject<IList<Silanis.ESL.API.Document>>(response, settings);
+
+                    foreach (Silanis.ESL.API.Document uploadedDocument in uploadedDocuments) 
+                    {
+                        sdkDocuments.Add(new DocumentConverter(uploadedDocument, internalPackage).ToSDKDocument());
+                    }
+                } 
+                else 
+                {
+                    Silanis.ESL.API.Document uploadedDocument = 
+                        JsonConvert.DeserializeObject<Silanis.ESL.API.Document>(response, settings);
+                    sdkDocuments.Add(new DocumentConverter(uploadedDocument, internalPackage).ToSDKDocument());
+                }
+
+                return sdkDocuments;
+            }
+            catch (EslServerException e)
+            {
+                throw new EslServerException("Could not upload documents to package." + " Exception: " + e.Message, e.ServerError, e);
+            }
+            catch (Exception e)
+            {
+                throw new EslException("Could not upload documents to package." + " Exception: " + e.Message, e);
+            }
+        }
+
         private byte[] CreateMultipartContent (string fileName, byte[] fileBytes, byte[] payloadBytes, string boundary)
         {
 
