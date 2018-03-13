@@ -164,6 +164,7 @@
     <Compile Include="src\DocumentAttributesExample.cs" />
     <Compile Include="src\CreateAndGetLayoutExample.cs" />
     <Compile Include="src\AdaPackageExample.cs" />
+    <Compile Include="src\ApplyLayoutByNameExample.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

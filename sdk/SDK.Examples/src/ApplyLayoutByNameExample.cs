@@ -1,23 +1,17 @@
 ﻿using System;
-using System.IO;
 using Silanis.ESL.SDK;
-using System.Collections.Generic;
 using Silanis.ESL.SDK.Builder;
 
 namespace SDK.Examples
 {
-    /// <summary>
-    /// Create, get and apply document layouts.
-    /// </summary>
-    public class DocumentLayoutExample : SDKSample
+    public class ApplyLayoutByNameExample : SDKSample
     {
         public static void Main(string[] args)
         {
-            new DocumentLayoutExample().Run();
+            new ApplyLayoutByNameExample().Run();
         }
 
         public string layoutId;
-        public IList<DocumentPackage> layouts;
 
         public readonly string LAYOUT_PACKAGE_NAME = "Layout " + DateTime.Now;
         public readonly string LAYOUT_PACKAGE_DESCRIPTION = "This is a document layout.";
@@ -45,15 +39,15 @@ namespace SDK.Examples
                     .FromStream(fileStream1, DocumentType.PDF)
                     .WithSignature(SignatureBuilder.SignatureFor(email1)
                         .OnPage(0)
-                        .AtPosition(100, 100)
+                        .AtPosition(120, 100)
                         .WithField(FieldBuilder.SignerTitle()
                             .WithName(FIELD_1_NAME)
                             .OnPage(0)
-                            .AtPosition(100, 200))
+                            .AtPosition(120, 200))
                         .WithField(FieldBuilder.SignerCompany()
                             .WithName(FIELD_2_NAME)
                             .OnPage(0)
-                            .AtPosition(100, 300))))
+                            .AtPosition(120, 300))))
                 .Build();
 
             PackageId packageId1 = eslClient.CreatePackage(superDuperPackage);
@@ -61,9 +55,6 @@ namespace SDK.Examples
 
             // Create layout from package
             layoutId = eslClient.LayoutService.CreateLayout(superDuperPackage);
-
-            // Get a list of layouts
-            layouts = eslClient.LayoutService.GetLayouts(Direction.ASCENDING, new PageRequest(1, 100));
 
             // Create a new package to apply document layout to
             DocumentPackage packageFromLayout = PackageBuilder.NewPackageNamed(PackageName)
@@ -84,7 +75,7 @@ namespace SDK.Examples
             packageId = eslClient.CreatePackage(packageFromLayout);
 
             // Apply the layout to document in package
-            eslClient.LayoutService.ApplyLayout(packageId, APPLY_LAYOUT_DOCUMENT_ID, layoutId);
+            eslClient.LayoutService.ApplyLayoutByName(packageId, APPLY_LAYOUT_DOCUMENT_ID, LAYOUT_PACKAGE_NAME);
         }
     }
 }

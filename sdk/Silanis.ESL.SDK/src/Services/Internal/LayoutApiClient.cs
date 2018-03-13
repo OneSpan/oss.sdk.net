@@ -2,6 +2,7 @@
 using Silanis.ESL.SDK.Internal;
 using Newtonsoft.Json;
 using Silanis.ESL.API;
+using System.Web;
 
 namespace Silanis.ESL.SDK
 {
@@ -98,6 +99,28 @@ namespace Silanis.ESL.SDK
                 .Replace("{packageId}", packageId)
                 .Replace("{documentId}", documentId)
                 .Replace("{layoutId}", layoutId)
+                .Build();
+
+            try
+            {
+                restClient.Post(path, "");
+            }
+            catch (EslServerException e)
+            {
+                throw new EslServerException("Could not apply layout." + " Exception: " + e.Message, e.ServerError, e);
+            }
+            catch (Exception e)
+            {
+                throw new EslException("Could not apply layout." + " Exception: " + e.Message, e);
+            }
+        }
+
+        public void ApplyLayoutByName(string packageId, string documentId, string layoutName)
+        {
+            string path = template.UrlFor(UrlTemplate.APPLY_LAYOUT_BY_NAME_PATH)
+                .Replace("{packageId}", packageId)
+                .Replace("{documentId}", documentId)
+                .Replace("{layoutName}", HttpUtility.UrlEncode(layoutName))
                 .Build();
 
             try

@@ -158,6 +158,7 @@ namespace Silanis.ESL.SDK.Internal
         public static readonly string LAYOUT_PATH = "/layouts";
         public static readonly string LAYOUT_LIST_PATH = "/layouts?to={to}&from={from}&dir={dir}";
         public static readonly string APPLY_LAYOUT_PATH = "/packages/{packageId}/documents/{documentId}/layout?layoutId={layoutId}";
+        public static readonly string APPLY_LAYOUT_BY_NAME_PATH = "/packages/{packageId}/documents/{documentId}/layout?layoutName={layoutName}";
 
         // QR Code Service
         public static readonly string QRCODE_PATH = "/packages/{packageId}/documents/{documentId}/fields";

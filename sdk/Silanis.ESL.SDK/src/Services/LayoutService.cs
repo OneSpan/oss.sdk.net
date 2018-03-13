@@ -76,9 +76,21 @@ namespace Silanis.ESL.SDK
         /// <param name="packageId">The package id of the DocumentPackage to apply layout.</param>
         /// <param name="documentId">The document id of the document to apply layout.</param>
         /// <param name="layoutId">The layout id of the layout to apply.</param>
-        public void ApplyLayout(PackageId packageId, String documentId, String layoutId)
+        public void ApplyLayout(PackageId packageId, string documentId, string layoutId)
         {
             apiClient.ApplyLayout(packageId.Id, documentId, layoutId);
+        }
+
+        /// <summary>
+        /// Apply a document layout to a document in a DocumentPackage. Adds fields to signer's signature or if the signer
+        /// does not exist, will create placeholders.
+        /// </summary>
+        /// <param name="packageId">The package id of the DocumentPackage to apply layout.</param>
+        /// <param name="documentId">The document id of the document to apply layout.</param>
+        /// <param name="layoutName">The layout name of the layout to apply.</param>
+        public void ApplyLayoutByName(PackageId packageId, string documentId, string layoutName)
+        {
+            apiClient.ApplyLayoutByName(packageId.Id, documentId, layoutName);
         }
 
     }
