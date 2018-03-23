@@ -666,9 +666,11 @@ namespace Silanis.ESL.SDK.Services
                 byte[] fileBytes = document.Content;
 
                 string data = string.Format("--{0}\r\nContent-Disposition: form-data; name=\"{1}\"; filename=\"{2}\"\r\n\r\n",
-                                            boundary, "file", fileName);
+                    boundary, "file", fileName);
                 formDataStream.Write(encoding.GetBytes(data), 0, encoding.GetByteCount(data));
                 formDataStream.Write(fileBytes, 0, fileBytes.Length);
+
+                formDataStream.Write(encoding.GetBytes("\r\n"), 0, encoding.GetByteCount("\r\n"));
             }
 
             string footer = "\r\n--" + boundary + "--\r\n";
