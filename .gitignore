@@ -16,8 +16,10 @@ TestResult.xml
 */*/*/signers.properties
 */*/packages.config
 */*/*/packages.config
+.vs/
 
 #zip file
+
 *.zip
 
 #Mac

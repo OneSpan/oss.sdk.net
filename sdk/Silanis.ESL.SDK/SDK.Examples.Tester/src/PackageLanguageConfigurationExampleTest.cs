@@ -15,7 +15,7 @@ namespace SDK.Examples
 
             DocumentPackage retrievedPackage = example.RetrievedPackage;
 
-            Assert.AreEqual(retrievedPackage.Language.Name, "fr");
+            Assert.AreEqual(retrievedPackage.Language.Name, "zh-CN");
         }
     }
 }

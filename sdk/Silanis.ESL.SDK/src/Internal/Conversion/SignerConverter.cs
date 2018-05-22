@@ -141,7 +141,6 @@ namespace Silanis.ESL.SDK
 				signer.LastName = sdkSigner.LastName;
 				signer.Title = sdkSigner.Title;
                 signer.Company = sdkSigner.Company;
-                signer.Language = sdkSigner.Language;
 				if (sdkSigner.DeliverSignedDocumentsByEmail)
 				{
 					signer.Delivery = new Silanis.ESL.API.Delivery();
@@ -154,6 +153,11 @@ namespace Silanis.ESL.SDK
 				signer.Group = new Silanis.ESL.API.Group();
 				signer.Group.Id = sdkSigner.GroupId.Id;
 			}
+
+            if (!String.IsNullOrEmpty(sdkSigner.Language)) 
+            {
+                signer.Language = sdkSigner.Language;
+            }
 
 			if (!String.IsNullOrEmpty(sdkSigner.Id))
 			{

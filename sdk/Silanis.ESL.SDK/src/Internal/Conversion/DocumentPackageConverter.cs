@@ -61,10 +61,18 @@ namespace Silanis.ESL.SDK
 				package.EmailMessage = sdkPackage.EmailMessage;
 			}
 
-			if (sdkPackage.Language != null)
-			{
-				package.Language = sdkPackage.Language.TwoLetterISOLanguageName;
-			}
+            if (sdkPackage.Language != null) 
+            {
+                if (sdkPackage.Language.IsNeutralCulture) 
+                {
+                    package.Language = sdkPackage.Language.TwoLetterISOLanguageName;
+                } 
+                else 
+                {
+                    string LanguageCountry = (new RegionInfo (sdkPackage.Language.LCID)).TwoLetterISORegionName;
+                    package.Language = sdkPackage.Language.TwoLetterISOLanguageName + "-" + LanguageCountry;
+                }
+            }
 
 			if (sdkPackage.Settings != null)
 			{

@@ -92,7 +92,7 @@ namespace SDK.Tests
                 .WithStatus(DocumentPackageStatus.DRAFT)
 				.DescribedAs("typical description")
 				.WithEmailMessage("typical email message")
-				.WithLanguage(CultureInfo.GetCultureInfo("en"))
+				.WithLanguage(CultureInfo.GetCultureInfo("zh-CN"))
 				.Build();
 
 			return sdkDocumentPackage;
@@ -102,7 +102,7 @@ namespace SDK.Tests
 		{
 			Silanis.ESL.API.Package apiPackage = new Silanis.ESL.API.Package();
 			apiPackage.Id = "1";
-			apiPackage.Language = "en";
+			apiPackage.Language = "zh-CN";
 			apiPackage.Autocomplete = true;
 			apiPackage.Consent = "Consent";
 			apiPackage.Completed = new DateTime?();
