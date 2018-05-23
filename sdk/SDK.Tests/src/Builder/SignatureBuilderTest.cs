@@ -116,5 +116,13 @@ namespace SDK.Tests
 
             Assert.AreEqual (SignatureStyle.MOBILE_CAPTURE, signature.Style);
         }
+
+        [Test]
+        public void CreateOptionalSignature()
+        {
+            Signature signature = SignatureBuilder.SignatureFor ("some@dude.com").MakeOptional ().Build ();
+
+            Assert.AreEqual (true, signature.Optional);
+        }
 	}
 }

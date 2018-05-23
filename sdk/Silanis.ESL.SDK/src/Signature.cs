@@ -152,5 +152,11 @@ namespace Silanis.ESL.SDK
         {
             return RoleId != null;
         }
+
+        public bool Optional 
+        {
+            get;
+            set;
+        }
 	}
 }

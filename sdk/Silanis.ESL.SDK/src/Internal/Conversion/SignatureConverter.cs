@@ -81,6 +81,11 @@ namespace Silanis.ESL.SDK
                     signatureBuilder.WithPositionExtracted();
                 }                   
             }
+
+            if (apiApproval.Optional) 
+            {
+                signatureBuilder.MakeOptional();
+            }
             
             Signature signature = signatureBuilder.Build();
             if (null != apiApproval.Accepted)
@@ -101,6 +106,8 @@ namespace Silanis.ESL.SDK
             {
                 result.Id = sdkSignature.Id.Id;
             }
+
+            result.Optional = sdkSignature.Optional;
 
             foreach ( Field field in sdkSignature.Fields ) {
                 result.AddField( new FieldConverter( field ).ToAPIField() );

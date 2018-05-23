@@ -75,7 +75,11 @@ namespace Silanis.ESL.API
                 get; set;
         }
     
-		
+	[JsonProperty("optional")]
+    public bool Optional
+    {
+        get; set;
+    }
 	
 	}
 }

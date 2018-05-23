@@ -165,6 +165,7 @@
     <Compile Include="src\CreateAndGetLayoutExample.cs" />
     <Compile Include="src\AdaPackageExample.cs" />
     <Compile Include="src\ApplyLayoutByNameExample.cs" />
+    <Compile Include="src\SignableOptionalSignaturesExample.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
