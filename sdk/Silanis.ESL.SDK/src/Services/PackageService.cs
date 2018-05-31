@@ -1008,11 +1008,29 @@ namespace Silanis.ESL.SDK.Services
 
         public Page<DocumentPackage> GetTemplates(PageRequest request)
         {
-            string path = template.UrlFor(UrlTemplate.TEMPLATE_LIST_PATH)
-                    .Replace("{from}", request.From.ToString())
-                    .Replace("{to}", request.To.ToString())
-                    .Build();
+            string path = template.UrlFor(UrlTemplate.PACKAGE_PATH)
+                .AddParam("type", "template")
+                .AddParam("from", request.From.ToString())
+                .AddParam("to", request.To.ToString())
+                .Build();
 
+            return GetTemplates(request, path);
+        }
+
+        public Page<DocumentPackage> GetTemplates(PageRequest request, Visibility visibility)
+        {
+            string path = template.UrlFor(UrlTemplate.PACKAGE_PATH)
+                .AddParam("type", "template")
+                .AddParam("from", request.From.ToString())
+                .AddParam("to", request.To.ToString())
+                .AddParam("visibility", visibility.GetName())
+                .Build();
+
+            return GetTemplates(request, path);
+        }
+
+        private Page<DocumentPackage> GetTemplates(PageRequest request, string path) 
+        {
             try
             {
                 string response = restClient.Get(path);

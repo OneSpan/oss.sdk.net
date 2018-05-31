@@ -22,7 +22,7 @@ namespace SDK.Examples
 
         override public void Execute()
         {
-            templates = eslClient.PackageService.GetTemplates(new PageRequest(0));
+            templates = eslClient.PackageService.GetTemplates(new PageRequest(0), Visibility.SENDER);
             Console.WriteLine("Templates = " + templates.Size);
         }
     }

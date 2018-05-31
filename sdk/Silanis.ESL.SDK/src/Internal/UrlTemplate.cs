@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 
 namespace Silanis.ESL.SDK.Internal
 {
@@ -7,8 +8,10 @@ namespace Silanis.ESL.SDK.Internal
 	/// </summary>
 	public class UrlTemplate
 	{
-		private String baseUrl;
-		private String path;
+		private string baseUrl;
+		private string path;
+
+        private IDictionary<string, string> parameters = new Dictionary<string, string>();
 
 //		@QueryParam("query") final String query,
 //		@QueryParam("search") final String search,
@@ -22,7 +25,6 @@ namespace Silanis.ESL.SDK.Internal
 		public static readonly string PACKAGE_PATH = "/packages";
 		public static readonly string PACKAGE_LIST_PATH = "/packages?query={status}&from={from}&to={to}";
         public static readonly string PACKAGE_LIST_STATUS_DATE_RANGE_PATH = "/packages?query={status}&from={from}&to={to}&lastUpdatedStartDate={lastUpdatedStartDate}&lastUpdatedEndDate={lastUpdatedEndDate}";
-        public static readonly string TEMPLATE_LIST_PATH = "/packages?type=TEMPLATE&from={from}&to={to}";
 		public static readonly string PACKAGE_ID_PATH = "/packages/{packageId}";
 		public static readonly string DOCUMENT_PATH = "/packages/{packageId}/documents";
 		public static readonly string DOCUMENT_ID_PATH = "/packages/{packageId}/documents/{documentId}";
@@ -186,9 +188,35 @@ namespace Silanis.ESL.SDK.Internal
 			return this;
 		}
 
+        public UrlTemplate AddParam(string paramKey, string paramValue) 
+        {
+            parameters.Add(paramKey, paramValue);
+            return this;
+        }
+
 		public string Build ()
 		{
-			return baseUrl + path;
+            string url = baseUrl + path;
+
+            bool isFirstParam = true;
+            foreach (KeyValuePair<string, string> parameter in parameters) 
+            {
+                string paramValue = parameter.Value;
+                if (!String.IsNullOrEmpty(paramValue)) 
+                {
+                    if (isFirstParam) 
+                    {
+                        url += "?";
+                        isFirstParam = false;
+                    } else 
+                    {
+                        url += "&";
+                    }
+                    url += parameter.Key + "=" + paramValue;
+                }
+            }
+
+            return url;
 		}
 	}
 }
