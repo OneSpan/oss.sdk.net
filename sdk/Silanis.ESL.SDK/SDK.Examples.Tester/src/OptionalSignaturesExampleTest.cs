@@ -4,12 +4,12 @@ using System;
 namespace SDK.Examples
 {
     [TestFixture()]
-    public class SignableOptionalSignaturesExampleTest
+    public class OptionalSignaturesExampleTest
     {
         [Test()]
         public void VerifyResult()
         {
-            SignableOptionalSignaturesExample example = new SignableOptionalSignaturesExample();
+            OptionalSignaturesExample example = new OptionalSignaturesExample();
             example.Run();
 
             Assert.AreEqual(2, example.signer1SignableSignatures.Count);
@@ -19,7 +19,15 @@ namespace SDK.Examples
             Assert.AreEqual(2, example.signer2SignableSignatures.Count);
             Assert.AreEqual(example.email2, example.signer2SignableSignatures[0].SignerEmail);
             Assert.AreEqual(example.email2, example.signer2SignableSignatures[1].SignerEmail);
-            Assert.IsTrue(example.signer2SignableSignatures[1].Optional);
+
+            if (example.signer2SignableSignatures[0].Optional)
+            {
+                Assert.IsFalse(example.signer2SignableSignatures[1].Optional);
+            }
+            else
+            {
+                Assert.IsTrue(example.signer2SignableSignatures[1].Optional);
+            }
         }
     }
 }

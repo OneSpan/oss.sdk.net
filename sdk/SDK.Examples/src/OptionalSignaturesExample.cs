@@ -6,11 +6,11 @@ using Silanis.ESL.SDK.Builder;
 
 namespace SDK.Examples
 {
-    public class SignableOptionalSignaturesExample : SDKSample
+    public class OptionalSignaturesExample : SDKSample
     {
         public static void Main(string[] args)
         {
-            new SignableOptionalSignaturesExample().Run();
+            new OptionalSignaturesExample().Run();
         }
 
         private string signer1Id = "signer1Id";
@@ -39,13 +39,13 @@ namespace SDK.Examples
                               .AtPosition(100, 100))
                         .WithSignature(SignatureBuilder.SignatureFor(email1)
                               .OnPage(0)
-                              .AtPosition(300, 100))
+                              .AtPosition(150, 100))
                         .WithSignature(SignatureBuilder.SignatureFor(email2)
                               .OnPage(0)
-                              .AtPosition(500, 100))
+                              .AtPosition(200, 100))
                         .WithSignature(SignatureBuilder.SignatureFor(email2)
                               .OnPage(0)
-                              .AtPosition(700, 100)
+                              .AtPosition(250, 100)
                               .MakeOptional()))
                     .Build();
 
