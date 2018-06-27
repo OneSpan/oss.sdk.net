@@ -236,26 +236,37 @@ namespace Silanis.ESL.SDK
                 builder.WithAttachmentRequirement(new AttachmentRequirementConverter(attachmentRequirement).ToSDKAttachmentRequirement());
             }
 
-            if (apiRole.Id != null) {
+            if (apiRole.Id != null) 
+            {
                 builder.WithCustomId(apiRole.Id);
             }
 
-            if ( apiRole.Reassign.Value ) {
+            if ( apiRole.Reassign.Value ) 
+            {
                 builder.CanChangeSigner ();
             }
 
-            if ( apiRole.EmailMessage != null ) {
+            if ( apiRole.EmailMessage != null ) 
+            {
                 builder.WithEmailMessage( apiRole.EmailMessage.Content );
             }
 
-            if (eslSigner.Delivery != null && eslSigner.Delivery.Email.Value) {
+            if (eslSigner.Delivery != null && eslSigner.Delivery.Email.Value) 
+            {
                 builder.DeliverSignedDocumentsByEmail();
             }
 
             builder.WithAuthentication(new AuthenticationConverter(eslSigner.Auth).ToSDKAuthentication());
 
             Signer signer = builder.Build();
-            if ( apiRole.Locked.Value ) {
+
+            if ( apiSigner.SignerType != null ) 
+            {
+                signer.SignerType = apiSigner.SignerType;
+            }
+
+            if ( apiRole.Locked.Value ) 
+            {
                 signer.Locked = true;
             }
 

@@ -9,6 +9,8 @@ namespace SDK.Examples
     [TestFixture()]
     public class BasicPackageCreationExampleTest
     {
+        private readonly string THIRD_PARTY_SIGNER = "THIRD_PARTY_SIGNER";
+
         [Test()]
         public void VerifyResult()
         {
@@ -38,11 +40,13 @@ namespace SDK.Examples
             Assert.AreEqual("Smith", signer.LastName);
             Assert.AreEqual("Managing Director", signer.Title);
             Assert.AreEqual("Acme Inc.", signer.Company);
+            Assert.AreEqual(THIRD_PARTY_SIGNER, signer.SignerType);
 
             // Signer 2
             signer = documentPackage.GetSigner(example.email2);
             Assert.AreEqual("Patty", signer.FirstName);
             Assert.AreEqual("Galant", signer.LastName);
+            Assert.AreEqual(THIRD_PARTY_SIGNER, signer.SignerType);
 
             // Document 1
             Document document = documentPackage.GetDocument(example.DOCUMENT1_NAME);

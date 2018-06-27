@@ -119,6 +119,12 @@ namespace Silanis.ESL.API
     {
                 get; set;
         }
+
+        [JsonProperty("signerType")]
+        public String SignerType
+        {
+            get; set;
+        }
     
 		    
     [JsonProperty("phone")]

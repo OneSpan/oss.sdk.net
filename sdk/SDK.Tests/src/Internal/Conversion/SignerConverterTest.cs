@@ -122,6 +122,7 @@ namespace SDK.Tests
             Assert.AreEqual(apiSigner1.FirstName, sdkSigner1.FirstName);
             Assert.AreEqual(apiSigner1.LastName, sdkSigner1.LastName);
             Assert.AreEqual(apiSigner1.Company, sdkSigner1.Company);
+            Assert.AreEqual(apiSigner1.SignerType, sdkSigner1.SignerType);
             Assert.AreEqual(apiSigner1.Title, sdkSigner1.Title);
             Assert.AreEqual(apiSigner1.Language, sdkSigner1.Language);
             Assert.AreEqual(apiRole.Id, sdkSigner1.Id);
@@ -169,6 +170,7 @@ namespace SDK.Tests
             apiSigner.FirstName = "Signer first name";
             apiSigner.LastName = "Signer last name";
             apiSigner.Company = "ABC Inc.";
+            apiSigner.SignerType = "THIRD_PARTY_SIGNER";
             apiSigner.Language = "fr";
             apiSigner.Title = "Doctor";
 
