@@ -61,7 +61,11 @@ namespace Silanis.ESL.SDK
             string telephoneNumber = null;
             Silanis.ESL.SDK.Authentication sdkAuthentication = null;
 
-            if (apiAuth.Challenges.Count != 0)
+            if (apiAuth.Challenges.Count == 0) 
+            {
+                sdkAuthentication = new Authentication (new AuthenticationMethodConverter(apiAuth.Scheme).ToSDKAuthMethod());
+            } 
+            else 
             {
                 IList<Challenge> sdkChallenges = new List<Challenge>();
                 foreach (AuthChallenge apiChallenge in apiAuth.Challenges)

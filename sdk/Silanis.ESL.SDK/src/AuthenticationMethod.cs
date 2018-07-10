@@ -13,6 +13,7 @@ namespace Silanis.ESL.SDK
         public static AuthenticationMethod CHALLENGE = new AuthenticationMethod("CHALLENGE", "CHALLENGE", 1);
         public static AuthenticationMethod SMS = new AuthenticationMethod("SMS", "SMS", 2);
         public static AuthenticationMethod KBA = new AuthenticationMethod("KBA", "KBA", 3);
+        public static AuthenticationMethod SSO = new AuthenticationMethod("SSO", "SSO", 4);
         private static Dictionary<string,AuthenticationMethod> allAuthenticationMethods = new Dictionary<string,AuthenticationMethod>();
 
         static AuthenticationMethod()
@@ -21,6 +22,7 @@ namespace Silanis.ESL.SDK
             allAuthenticationMethods.Add(CHALLENGE.getApiValue(), AuthenticationMethod.CHALLENGE);
             allAuthenticationMethods.Add(SMS.getApiValue(), AuthenticationMethod.SMS);
             allAuthenticationMethods.Add(KBA.getApiValue(), AuthenticationMethod.KBA);
+            allAuthenticationMethods.Add(SSO.getApiValue(), AuthenticationMethod.SSO);
         }
 
         private AuthenticationMethod(string apiValue, string sdkValue, int index):base(apiValue,sdkValue,index) 

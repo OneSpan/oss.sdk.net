@@ -133,6 +133,12 @@ namespace Silanis.ESL.SDK.Builder
 			return this;
 		}
 
+        public SignerBuilder WithSSOAuthentication ()
+        {
+            this.authenticationBuilder = new SSOAuthenticationBuilder ();
+            return this;
+        }
+
         public SignerBuilder WithAuthentication(Authentication authentication)
         {
             this.authentication = authentication;

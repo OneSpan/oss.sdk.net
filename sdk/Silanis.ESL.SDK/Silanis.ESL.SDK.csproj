@@ -398,6 +398,7 @@
     <Compile Include="src\Models\VerificationType.cs" />
     <Compile Include="src\ExtractionType.cs" />
     <Compile Include="src\Builder\DocumentAttributesBuilder.cs" />
+    <Compile Include="src\Builder\SSOAuthenticationBuilder.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSHARP.Targets" />
   <ProjectExtensions>

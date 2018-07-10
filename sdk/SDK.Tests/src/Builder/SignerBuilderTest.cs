@@ -123,6 +123,18 @@ namespace SDK.Tests
 			Assert.AreEqual ("1112223333", signer.PhoneNumber);
 		}
 
+        [Test]
+        public void SetsUpSSOAuthentication ()
+        {
+            Silanis.ESL.SDK.Signer signer = SignerBuilder.NewSignerWithEmail ("billy@bob.com")
+                .WithFirstName ("Billy")
+                .WithLastName ("Bob")
+                .WithSSOAuthentication ()
+                .Build ();
+
+            Assert.AreEqual (AuthenticationMethod.SSO, signer.AuthenticationMethod);
+        }
+
 		[Test]
 		[ExpectedException(typeof(EslException))]
 		public void EmptyPhoneNumberNotAllowed()

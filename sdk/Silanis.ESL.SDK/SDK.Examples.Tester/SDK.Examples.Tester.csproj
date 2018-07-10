@@ -134,6 +134,7 @@
     <Compile Include="src\AdaPackageExampleTest.cs" />
     <Compile Include="src\ApplyLayoutByNameExampleTest.cs" />
     <Compile Include="src\OptionalSignaturesExampleTest.cs" />
+    <Compile Include="src\SignerSSOExampleTest.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
