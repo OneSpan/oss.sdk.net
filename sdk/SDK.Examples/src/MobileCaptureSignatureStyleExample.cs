@@ -26,6 +26,7 @@ namespace SDK.Examples
                 .WithDocument(DocumentBuilder.NewDocumentNamed(DOCUMENT_NAME)
                                 .FromStream(fileStream1, DocumentType.PDF)
                                 .WithSignature(SignatureBuilder.MobileCaptureFor(email1)
+                                    .EnableEnforceCaptureSignature()
                                     .OnPage(MOBILE_CAPTURE_SIGNATURE_PAGE)
                                     .AtPosition(MOBILE_CAPTURE_SIGNATURE_POSITION_X, MOBILE_CAPTURE_SIGNATURE_POSITION_Y)))
                 .Build();

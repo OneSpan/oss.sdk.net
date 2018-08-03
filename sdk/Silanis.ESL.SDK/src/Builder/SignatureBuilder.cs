@@ -25,6 +25,7 @@ namespace Silanis.ESL.SDK.Builder
         private GroupId groupId;
         private Placeholder roleId;
         private bool optional = false;
+        private bool enforceCaptureSignature = false;
 
 		private SignatureBuilder (string signerEmail)
 		{
@@ -205,6 +206,12 @@ namespace Silanis.ESL.SDK.Builder
             return this;
         }
 
+        public SignatureBuilder EnableEnforceCaptureSignature ()
+        {
+            this.enforceCaptureSignature = true;
+            return this;
+        }
+
 		public Signature Build()
         {
             Signature signature;
@@ -230,6 +237,7 @@ namespace Silanis.ESL.SDK.Builder
 			signature.Extract = extract;
             signature.TextAnchor = textAnchor;
             signature.Optional = optional;
+            signature.EnforceCaptureSignature = enforceCaptureSignature;
 
 			return signature;
 		}

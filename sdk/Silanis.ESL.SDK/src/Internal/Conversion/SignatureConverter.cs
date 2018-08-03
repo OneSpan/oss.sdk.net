@@ -86,6 +86,10 @@ namespace Silanis.ESL.SDK
             {
                 signatureBuilder.MakeOptional();
             }
+
+            if (apiApproval.EnforceCaptureSignature) {
+                signatureBuilder.EnableEnforceCaptureSignature ();
+            }
             
             Signature signature = signatureBuilder.Build();
             if (null != apiApproval.Accepted)
@@ -108,6 +112,7 @@ namespace Silanis.ESL.SDK
             }
 
             result.Optional = sdkSignature.Optional;
+            result.EnforceCaptureSignature = sdkSignature.EnforceCaptureSignature;
 
             foreach ( Field field in sdkSignature.Fields ) {
                 result.AddField( new FieldConverter( field ).ToAPIField() );

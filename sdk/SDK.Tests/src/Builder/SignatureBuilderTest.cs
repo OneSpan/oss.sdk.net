@@ -122,7 +122,15 @@ namespace SDK.Tests
         {
             Signature signature = SignatureBuilder.SignatureFor ("some@dude.com").MakeOptional ().Build ();
 
-            Assert.AreEqual (true, signature.Optional);
+            Assert.IsTrue (signature.Optional);
+        }
+
+        [Test]
+        public void creatingCaptureWithEnforceCaptureSignatureSetting ()
+        {
+            Signature signature = SignatureBuilder.CaptureFor ("some@dude.com").EnableEnforceCaptureSignature ().Build ();
+
+            Assert.IsTrue (signature.EnforceCaptureSignature);
         }
 	}
 }

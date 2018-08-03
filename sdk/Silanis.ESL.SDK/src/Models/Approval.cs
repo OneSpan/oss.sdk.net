@@ -14,72 +14,76 @@ namespace Silanis.ESL.API
 		
 		// Accessors
 		    
-    [JsonProperty("accepted")]
-    public Nullable<DateTime> Accepted
-    {
-                get; set;
-        }
-    
-		    
-    [JsonProperty("data")]
-    public IDictionary<string, object> Data
-    {
-                get; set;
-        }
-    
-		    
-    [JsonProperty("fields")]
-    public IList<Field> Fields
-    {
-                get
+        [JsonProperty("accepted")]
+        public Nullable<DateTime> Accepted
         {
-            return _fields;
+                get; set;
         }
-        }
-        public Approval AddField(Field value)
-    {
-        if (value == null)
+    
+		    
+        [JsonProperty("data")]
+        public IDictionary<string, object> Data
         {
-            throw new ArgumentNullException("Argument cannot be null");
-        }
-        
-        _fields.Add(value);
-        return this;
-    }
-    
-		    
-    [JsonProperty("id")]
-    public String Id
-    {
                 get; set;
         }
     
 		    
-    [JsonProperty("name")]
-    public String Name
-    {
+        [JsonProperty("fields")]
+        public IList<Field> Fields
+        {
+                    get
+            {
+                return _fields;
+            }
+            }
+            public Approval AddField(Field value)
+        {
+            if (value == null)
+            {
+                throw new ArgumentNullException("Argument cannot be null");
+            }
+            
+            _fields.Add(value);
+            return this;
+        }
+    
+		    
+        [JsonProperty("id")]
+        public String Id
+        {
                 get; set;
         }
     
 		    
-    [JsonProperty("role")]
-    public String Role
-    {
+        [JsonProperty("name")]
+        public String Name
+        {
                 get; set;
         }
     
 		    
-    [JsonProperty("signed")]
-    public Nullable<DateTime> Signed
-    {
+        [JsonProperty("role")]
+        public String Role
+        {
                 get; set;
         }
     
-	[JsonProperty("optional")]
-    public bool Optional
-    {
-        get; set;
-    }
-	
+		    
+        [JsonProperty("signed")]
+        public Nullable<DateTime> Signed
+        {
+                get; set;
+        }
+    
+    	[JsonProperty("optional")]
+        public bool Optional
+        {
+            get; set;
+        }
+    	
+        [JsonProperty ("enforceCaptureSignature")]
+        public bool EnforceCaptureSignature {
+            get; set;
+        }
 	}
 }

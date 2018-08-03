@@ -21,6 +21,7 @@ namespace SDK.Examples
                 {
 					Assert.AreEqual(signature.Style, SignatureStyle.MOBILE_CAPTURE);
 					Assert.AreEqual(signature.Page, example.MOBILE_CAPTURE_SIGNATURE_PAGE);
+                    Assert.IsTrue(signature.EnforceCaptureSignature);
                 }
             }
         }
