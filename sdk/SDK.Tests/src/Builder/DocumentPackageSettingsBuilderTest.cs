@@ -32,7 +32,6 @@ namespace SDK.Tests
             DocumentPackageSettings without = builder.DisableFirstAffidavit().Build();
             Assert.IsTrue(without.EnableFirstAffidavit.HasValue);
             Assert.IsFalse(without.EnableFirstAffidavit.Value);
-            
         }
 
         [Test]
@@ -47,7 +46,6 @@ namespace SDK.Tests
             DocumentPackageSettings without = builder.DisableSecondAffidavit().Build();
             Assert.IsTrue(without.EnableSecondAffidavit.HasValue);
             Assert.IsFalse(without.EnableSecondAffidavit.Value);
-            
         }
 
         [Test]
@@ -62,7 +60,20 @@ namespace SDK.Tests
             DocumentPackageSettings without = builder.HideOwnerInPersonDropDown().Build();
             Assert.IsTrue(without.ShowOwnerInPersonDropDown.HasValue);
             Assert.IsFalse(without.ShowOwnerInPersonDropDown.Value);
-            
+        }
+
+        [Test]
+        public void EnforceCaptureSignature ()
+        {
+            DocumentPackageSettingsBuilder builder = DocumentPackageSettingsBuilder.NewDocumentPackageSettings ();
+            DocumentPackageSettings unset = builder.Build ();
+            Assert.IsFalse (unset.EnforceCaptureSignature.HasValue);
+            DocumentPackageSettings with = builder.WithEnforceCaptureSignature ().Build ();
+            Assert.IsTrue (with.EnforceCaptureSignature.HasValue);
+            Assert.IsTrue (with.EnforceCaptureSignature.Value);
+            DocumentPackageSettings without = builder.WithoutEnforceCaptureSignature ().Build ();
+            Assert.IsTrue (without.EnforceCaptureSignature.HasValue);
+            Assert.IsFalse (without.EnforceCaptureSignature.Value);
         }
     }
 }

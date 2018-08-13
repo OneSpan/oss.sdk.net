@@ -122,6 +122,17 @@ namespace Silanis.ESL.SDK
             }
         }
 
+        private Nullable<bool> enforceCaptureSignature = null;
+
+        public Nullable<bool> EnforceCaptureSignature {
+            get {
+                return enforceCaptureSignature;
+            }
+            set {
+                enforceCaptureSignature = value;
+            }
+        }
+
         private List<string> declineReasons = new List<string>();
 
         public List<string> DeclineReasons {
@@ -257,6 +268,9 @@ namespace Silanis.ESL.SDK
                 
             if ( showLanguageDropDown != null )
                 ceremonySettings.HideLanguageDropdown = !showLanguageDropDown.Value;
+
+            if (enforceCaptureSignature != null)
+                ceremonySettings.EnforceCaptureSignature = enforceCaptureSignature.Value;
 
             if ( ada != null )
                 ceremonySettings.Ada = ada.Value;

@@ -27,6 +27,9 @@ namespace SDK.Examples
             Assert.IsTrue( result.Settings.ShowOwnerInPersonDropDown.HasValue);
             Assert.IsFalse( result.Settings.ShowOwnerInPersonDropDown.Value );
 
+            Assert.IsTrue (result.Settings.EnforceCaptureSignature.HasValue);
+            Assert.IsTrue (result.Settings.EnforceCaptureSignature.Value);
+
             Assert.AreEqual( 3, result.Settings.DeclineReasons.Count );
             Assert.AreEqual( example.DECLINE_REASON_1, result.Settings.DeclineReasons[0] );
             Assert.AreEqual( example.DECLINE_REASON_2, result.Settings.DeclineReasons[1] );

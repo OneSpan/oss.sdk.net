@@ -35,6 +35,7 @@ namespace Silanis.ESL.SDK
             ceremonySettings.MaxAuthFailsAllowed = sdkSettings.MaxAuthAttempts;
             ceremonySettings.DisableDeclineOther = sdkSettings.DisableDeclineOther;
             ceremonySettings.DisableOptOutOther = sdkSettings.DisableOptOutOther;
+            ceremonySettings.EnforceCaptureSignature = sdkSettings.EnforceCaptureSignature;
             ceremonySettings.Ada = sdkSettings.Ada;
 
             if (sdkSettings.EnableFirstAffidavit.HasValue) {
@@ -126,6 +127,9 @@ namespace Silanis.ESL.SDK
 
                 if (apiSettings.Ceremony.DisableOptOutOther.HasValue)
                     builder = (apiSettings.Ceremony.DisableOptOutOther.Value ? builder.WithoutOptOutOther() : builder.WithOptOutOther());
+
+                if (apiSettings.Ceremony.EnforceCaptureSignature.HasValue)
+                    builder = (apiSettings.Ceremony.EnforceCaptureSignature.Value ? builder.WithEnforceCaptureSignature () : builder.WithoutEnforceCaptureSignature ());
 
                 if (apiSettings.Ceremony.Ada.HasValue)
                     builder = (apiSettings.Ceremony.Ada.Value ? builder.WithAda() : builder.WithoutAda());

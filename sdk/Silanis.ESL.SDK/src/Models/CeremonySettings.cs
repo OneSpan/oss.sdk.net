@@ -94,6 +94,12 @@ namespace Silanis.ESL.API
         }
 
 
+        [JsonProperty ("enforceCaptureSignature")]
+        public Nullable<bool> EnforceCaptureSignature {
+            get; set;
+        }
+
+
         [JsonProperty("documentToolbarOptions")]
         public DocumentToolbarOptions DocumentToolbarOptions
         {
