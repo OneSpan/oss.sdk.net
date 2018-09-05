@@ -72,18 +72,7 @@ namespace Silanis.ESL.SDK
         /// <param name="apiKey">The client's api key.</param>
         /// <param name="baseUrl">The staging or production url.</param>
         public EslClient (string apiKey, string baseUrl, string webpageUrl)
-        {
-            Asserts.NotEmptyOrNull (apiKey, "apiKey");
-            Asserts.NotEmptyOrNull (baseUrl, "baseUrl");
-            Asserts.NotEmptyOrNull (webpageUrl, "webpageUrl");
-            SetBaseUrl (baseUrl);
-            this.webpageUrl = AppendServicePath (webpageUrl);
-
-            configureJsonSerializationSettings();
-
-            RestClient restClient = new RestClient(apiKey);
-            init(restClient, apiKey);
-        }
+            : this (apiKey, baseUrl, webpageUrl, false) {}
 
         public EslClient (string apiKey, string baseUrl, string webpageUrl, Boolean allowAllSSLCertificates)
         {
@@ -100,42 +89,25 @@ namespace Silanis.ESL.SDK
         }
 
         public EslClient (string apiKey, string baseUrl, Boolean allowAllSSLCertificates)
-        {
-            Asserts.NotEmptyOrNull (apiKey, "apiKey");
-            Asserts.NotEmptyOrNull (baseUrl, "baseUrl");
-            SetBaseUrl (baseUrl);
-            SetWebpageUrl (baseUrl);
-
-            configureJsonSerializationSettings();
-
-            RestClient restClient = new RestClient(apiKey, allowAllSSLCertificates);
-            init(restClient, apiKey);
-        }
+            : this (apiKey, baseUrl, allowAllSSLCertificates, null) {}
 
         public EslClient (string apiKey, string baseUrl, ProxyConfiguration proxyConfiguration)
-        {
-            Asserts.NotEmptyOrNull (apiKey, "apiKey");
-            Asserts.NotEmptyOrNull (baseUrl, "baseUrl");
-            SetBaseUrl (baseUrl);
-            SetWebpageUrl (baseUrl);
-
-            configureJsonSerializationSettings();
-
-            RestClient restClient = new RestClient(apiKey, proxyConfiguration);
-            init(restClient, apiKey);
-        }
+            : this (apiKey, baseUrl, false, proxyConfiguration) {}
 
         public EslClient (string apiKey, string baseUrl, bool allowAllSSLCertificates, ProxyConfiguration proxyConfiguration)
+            : this (apiKey, baseUrl, allowAllSSLCertificates, proxyConfiguration, new Dictionary<string, string> ()) {}
+        
+        public EslClient (string apiKey, string baseUrl, bool allowAllSSLCertificates, ProxyConfiguration proxyConfiguration, IDictionary<string, string> headers)
         {
             Asserts.NotEmptyOrNull (apiKey, "apiKey");
             Asserts.NotEmptyOrNull (baseUrl, "baseUrl");
             SetBaseUrl (baseUrl);
             SetWebpageUrl (baseUrl);
 
-            configureJsonSerializationSettings();
+            configureJsonSerializationSettings ();
 
-            RestClient restClient = new RestClient(apiKey, allowAllSSLCertificates, proxyConfiguration);
-            init(restClient, apiKey);
+            RestClient restClient = new RestClient (apiKey, allowAllSSLCertificates, proxyConfiguration, headers);
+            init (restClient, apiKey);
         }
 
         private void init(RestClient restClient, String apiKey)

@@ -12,6 +12,7 @@ namespace Silanis.ESL.SDK
 
         private ProxyConfiguration proxyConfiguration;
         private readonly Boolean allowAllSSLCertificates;
+        private IDictionary<string, string> additionalHeaders = new Dictionary<string, string>();
 
         public RestClient(string apiToken) : this(apiToken, false){}
 
@@ -19,15 +20,19 @@ namespace Silanis.ESL.SDK
             : this(apiToken, allowAllSSLCertificates, null) {}
 
         public RestClient(string apiToken, ProxyConfiguration proxyConfiguration)
-            : this(apiToken, false, proxyConfiguration){}
+            : this(apiToken, false, proxyConfiguration) {}
 
-        public RestClient(string apiToken, Boolean allowAllSSLCertificates, ProxyConfiguration proxyConfiguration) {
+        public RestClient(string apiToken, Boolean allowAllSSLCertificates, ProxyConfiguration proxyConfiguration)
+            : this (apiToken, allowAllSSLCertificates, proxyConfiguration, new Dictionary<string, string> ()) {}
+
+        public RestClient (string apiToken, Boolean allowAllSSLCertificates, ProxyConfiguration proxyConfiguration, IDictionary<string, string> headers)
+        {
             this.apiToken = apiToken;
             this.allowAllSSLCertificates = allowAllSSLCertificates;
             this.proxyConfiguration = proxyConfiguration;
+            this.additionalHeaders = headers;
 
-            if (allowAllSSLCertificates)
-            {
+            if (allowAllSSLCertificates) {
                 System.Net.ServicePointManager.ServerCertificateValidationCallback += (sender, cert, chain, sslPolicyErrors) => true;
             }
         }
@@ -48,7 +53,7 @@ namespace Silanis.ESL.SDK
             if (proxyConfiguration != null) 
                 HttpMethods.proxyConfiguration = proxyConfiguration;
 
-			byte[] responseBytes = HttpMethods.PostHttp(apiToken, path, payloadBytes);
+            byte[] responseBytes = HttpMethods.PostHttp(apiToken, path, payloadBytes, additionalHeaders);
             
             String response = Converter.ToString(responseBytes);
             support.LogResponse(response);
@@ -74,7 +79,7 @@ namespace Silanis.ESL.SDK
             if (proxyConfiguration != null) 
                 HttpMethods.proxyConfiguration = proxyConfiguration;
 
-            byte[] responseBytes = HttpMethods.PostHttp(headerGen, path, payloadBytes);
+            byte[] responseBytes = HttpMethods.PostHttp(headerGen, path, payloadBytes, additionalHeaders);
 
             String response = Converter.ToString(responseBytes);
             support.LogResponse(response);
@@ -88,7 +93,7 @@ namespace Silanis.ESL.SDK
             if (proxyConfiguration != null) 
                 HttpMethods.proxyConfiguration = proxyConfiguration;
 
-            byte[] responseBytes = HttpMethods.PutHttp(apiToken, path, Converter.ToBytes(jsonPayload));
+            byte[] responseBytes = HttpMethods.PutHttp(apiToken, path, Converter.ToBytes(jsonPayload), additionalHeaders);
             string response = Converter.ToString(responseBytes);
             support.LogResponse(response);
             return response;
@@ -102,7 +107,7 @@ namespace Silanis.ESL.SDK
             if (proxyConfiguration != null) 
                 HttpMethods.proxyConfiguration = proxyConfiguration;
 
-            string response = HttpMethods.MultipartPostHttp(apiToken, path, fileBytes, boundary, headerGen);
+            string response = HttpMethods.MultipartPostHttp(apiToken, path, fileBytes, boundary, headerGen, additionalHeaders);
             support.LogResponse(response);
 
             return response;
@@ -116,7 +121,7 @@ namespace Silanis.ESL.SDK
             if (proxyConfiguration != null) 
                 HttpMethods.proxyConfiguration = proxyConfiguration;
 
-            string response = HttpMethods.MultipartPostHttp(apiToken, path, fileBytes, boundary, headerGen);
+            string response = HttpMethods.MultipartPostHttp(apiToken, path, fileBytes, boundary, headerGen, additionalHeaders);
             support.LogResponse(response);
 
             return response;
@@ -130,7 +135,7 @@ namespace Silanis.ESL.SDK
             if (proxyConfiguration != null) 
                 HttpMethods.proxyConfiguration = proxyConfiguration;
 
-            string response = HttpMethods.MultipartPostHttp(apiToken, path, content, boundary, headerGen);
+            string response = HttpMethods.MultipartPostHttp(apiToken, path, content, boundary, headerGen, additionalHeaders);
             support.LogResponse(response);
 
             return response;
@@ -142,7 +147,7 @@ namespace Silanis.ESL.SDK
             if (proxyConfiguration != null) 
                 HttpMethods.proxyConfiguration = proxyConfiguration;
 
-            DownloadedFile responseBytes = HttpMethods.GetHttpJson(apiToken, path, HttpMethods.ESL_ACCEPT_TYPE_APPLICATION_JSON);
+            DownloadedFile responseBytes = HttpMethods.GetHttpJson(apiToken, path, HttpMethods.ESL_ACCEPT_TYPE_APPLICATION_JSON, additionalHeaders);
             string response = Converter.ToString(responseBytes);
             support.LogResponse(response);
 
@@ -156,7 +161,7 @@ namespace Silanis.ESL.SDK
             if (proxyConfiguration != null) 
                 HttpMethods.proxyConfiguration = proxyConfiguration;
 
-            DownloadedFile responseBytes = HttpMethods.GetHttpJson(apiToken, path, acceptType);
+            DownloadedFile responseBytes = HttpMethods.GetHttpJson(apiToken, path, acceptType, additionalHeaders);
             return Converter.ToString(responseBytes);
         }
 
@@ -166,7 +171,7 @@ namespace Silanis.ESL.SDK
             if (proxyConfiguration != null) 
                 HttpMethods.proxyConfiguration = proxyConfiguration;
 
-            return HttpMethods.GetHttp(apiToken, path);
+            return HttpMethods.GetHttp(apiToken, path, additionalHeaders);
         }
 
         public DownloadedFile GetBytes(string path, string acceptType) {
@@ -175,7 +180,7 @@ namespace Silanis.ESL.SDK
             if (proxyConfiguration != null) 
                 HttpMethods.proxyConfiguration = proxyConfiguration;
 
-            return HttpMethods.GetHttpJson(apiToken, path, acceptType);
+            return HttpMethods.GetHttpJson(apiToken, path, acceptType, additionalHeaders);
         }
 
         public DownloadedFile GetHttpAsOctetStream(string path) {
@@ -184,7 +189,7 @@ namespace Silanis.ESL.SDK
             if (proxyConfiguration != null) 
                 HttpMethods.proxyConfiguration = proxyConfiguration;
 
-            return HttpMethods.GetHttpAsOctetStream(apiToken, path);
+            return HttpMethods.GetHttpAsOctetStream(apiToken, path, additionalHeaders);
         }
 
         public string Delete(string path) {
@@ -193,7 +198,7 @@ namespace Silanis.ESL.SDK
             if (proxyConfiguration != null) 
                 HttpMethods.proxyConfiguration = proxyConfiguration;
 
-            byte[] responseBytes = HttpMethods.DeleteHttp(apiToken, path);
+            byte[] responseBytes = HttpMethods.DeleteHttp(apiToken, path, additionalHeaders);
             string response = Converter.ToString(responseBytes);
             support.LogResponse(response);
 

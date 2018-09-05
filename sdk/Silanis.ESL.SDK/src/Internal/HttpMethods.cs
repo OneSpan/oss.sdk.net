@@ -34,47 +34,10 @@ namespace Silanis.ESL.SDK.Internal
 
 		public static byte[] PostHttp (string apiToken, string path, byte[] content)
 		{
-            try {
-                System.Net.ServicePointManager.SecurityProtocol = (SecurityProtocolType)768 | (SecurityProtocolType)3072;
-
-                HttpWebRequest request = (HttpWebRequest)WebRequest.Create (path);
-				request.Method = "POST";
-				request.ContentType = ESL_CONTENT_TYPE_APPLICATION_JSON;
-				request.ContentLength = content.Length;
-				request.Headers.Add ("Authorization", "Basic " + apiToken);
-                request.Accept = ESL_ACCEPT_TYPE_APPLICATION_JSON;
-                SetProxy(request);
-
-				using (Stream dataStream = request.GetRequestStream ()) {
-					dataStream.Write (content, 0, content.Length);
-				}
-
-				WebResponse response = request.GetResponse ();
-
-				using (Stream responseStream = response.GetResponseStream()) {
-					var memoryStream = new MemoryStream ();
-					CopyTo (responseStream, memoryStream);
-	          
-					byte[] result = memoryStream.ToArray();
-					return result;
-				}
-            }
-            catch (WebException e){
-                using (var stream = e.Response.GetResponseStream())
-                using (var reader = new StreamReader(stream))
-                {
-                    string errorDetails = reader.ReadToEnd();
-                    throw new EslServerException(String.Format("{0} HTTP {1} on URI {2}. Optional details: {3}", e.Message, 
-                                                               ((HttpWebResponse)e.Response).Method, e.Response.ResponseUri, errorDetails),
-                                                                errorDetails, e);
-                }
-            }
-            catch (Exception e) {
-                throw new EslException("Error communicating with esl server. " + e.Message, e);
-            }
+            return PostHttp (apiToken, path, content, new Dictionary<string, string> ());
 		}
 
-        public static byte[] PostHttp (AuthHeaderGenerator authHeaderGen, string path, byte[] content)
+        public static byte [] PostHttp (string apiToken, string path, byte [] content, IDictionary<string, string> headers)
         {
             try {
                 System.Net.ServicePointManager.SecurityProtocol = (SecurityProtocolType)768 | (SecurityProtocolType)3072;
@@ -83,9 +46,10 @@ namespace Silanis.ESL.SDK.Internal
                 request.Method = "POST";
                 request.ContentType = ESL_CONTENT_TYPE_APPLICATION_JSON;
                 request.ContentLength = content.Length;
-                AddAuthorizationHeader(request, authHeaderGen);
+                AddAdditionalHeaders (request, headers);
+                request.Headers.Add ("Authorization", "Basic " + apiToken);
                 request.Accept = ESL_ACCEPT_TYPE_APPLICATION_JSON;
-                SetProxy(request);
+                SetProxy (request);
 
                 using (Stream dataStream = request.GetRequestStream ()) {
                     dataStream.Write (content, 0, content.Length);
@@ -93,71 +57,116 @@ namespace Silanis.ESL.SDK.Internal
 
                 WebResponse response = request.GetResponse ();
 
-                using (Stream responseStream = response.GetResponseStream()) {
+                using (Stream responseStream = response.GetResponseStream ()) {
                     var memoryStream = new MemoryStream ();
                     CopyTo (responseStream, memoryStream);
 
-                    byte[] result = memoryStream.ToArray();
+                    byte [] result = memoryStream.ToArray ();
                     return result;
                 }
+            } catch (WebException e) {
+                using (var stream = e.Response.GetResponseStream ())
+                using (var reader = new StreamReader (stream)) {
+                    string errorDetails = reader.ReadToEnd ();
+                    throw new EslServerException (String.Format ("{0} HTTP {1} on URI {2}. Optional details: {3}", e.Message,
+                                                               ((HttpWebResponse)e.Response).Method, e.Response.ResponseUri, errorDetails),
+                                                                errorDetails, e);
+                }
+            } catch (Exception e) {
+                throw new EslException ("Error communicating with esl server. " + e.Message, e);
             }
-            catch (WebException e){
-                using (var stream = e.Response.GetResponseStream())
-                    using (var reader = new StreamReader(stream))
-                {
-                    string errorDetails = reader.ReadToEnd();
-                    throw new EslServerException(String.Format("{0} HTTP {1} on URI {2}. Optional details: {3}", e.Message, 
+        }
+
+        public static byte[] PostHttp (AuthHeaderGenerator authHeaderGen, string path, byte[] content)
+        {
+            return PostHttp (authHeaderGen, path, content, new Dictionary<string, string> ());
+        }
+
+        public static byte [] PostHttp (AuthHeaderGenerator authHeaderGen, string path, byte [] content, IDictionary<string, string> headers)
+        {
+            try {
+                System.Net.ServicePointManager.SecurityProtocol = (SecurityProtocolType)768 | (SecurityProtocolType)3072;
+
+                HttpWebRequest request = (HttpWebRequest)WebRequest.Create (path);
+                request.Method = "POST";
+                request.ContentType = ESL_CONTENT_TYPE_APPLICATION_JSON;
+                request.ContentLength = content.Length;
+                AddAdditionalHeaders (request, headers);
+                AddAuthorizationHeader (request, authHeaderGen);
+                request.Accept = ESL_ACCEPT_TYPE_APPLICATION_JSON;
+                SetProxy (request);
+
+                using (Stream dataStream = request.GetRequestStream ()) {
+                    dataStream.Write (content, 0, content.Length);
+                }
+
+                WebResponse response = request.GetResponse ();
+
+                using (Stream responseStream = response.GetResponseStream ()) {
+                    var memoryStream = new MemoryStream ();
+                    CopyTo (responseStream, memoryStream);
+
+                    byte [] result = memoryStream.ToArray ();
+                    return result;
+                }
+            } catch (WebException e) {
+                using (var stream = e.Response.GetResponseStream ())
+                using (var reader = new StreamReader (stream)) {
+                    string errorDetails = reader.ReadToEnd ();
+                    throw new EslServerException (String.Format ("{0} HTTP {1} on URI {2}. Optional details: {3}", e.Message,
                                                                ((HttpWebResponse)e.Response).Method, e.Response.ResponseUri, errorDetails),
                                                  errorDetails, e);
                 }
-            }
-            catch (Exception e) {
-                throw new EslException("Error communicating with esl server. " + e.Message, e);
+            } catch (Exception e) {
+                throw new EslException ("Error communicating with esl server. " + e.Message, e);
             }
         }
 
 		public static byte[] PutHttp (string apiToken, string path, byte[] content)
 		{
-			try {
+            return PutHttp (apiToken, path, content, new Dictionary<string, string> ());
+		}
+
+        public static byte [] PutHttp (string apiToken, string path, byte [] content, IDictionary<string, string> headers)
+        {
+            try {
                 System.Net.ServicePointManager.SecurityProtocol = (SecurityProtocolType)768 | (SecurityProtocolType)3072;
 
                 HttpWebRequest request = (HttpWebRequest)WebRequest.Create (path);
-				request.Method = "PUT";
-				request.ContentType = ESL_CONTENT_TYPE_APPLICATION_JSON;
-				request.ContentLength = content.Length;
-				request.Headers.Add ("Authorization", "Basic " + apiToken);
+                request.Method = "PUT";
+                request.ContentType = ESL_CONTENT_TYPE_APPLICATION_JSON;
+                request.ContentLength = content.Length;
+                AddAdditionalHeaders (request, headers);
+                request.Headers.Add ("Authorization", "Basic " + apiToken);
                 request.Accept = ESL_ACCEPT_TYPE_APPLICATION_JSON;
-                SetProxy(request);
+                SetProxy (request);
 
-				using (Stream dataStream = request.GetRequestStream ()) {
-					dataStream.Write (content, 0, content.Length);
-				}
+                using (Stream dataStream = request.GetRequestStream ()) {
+                    dataStream.Write (content, 0, content.Length);
+                }
 
-				WebResponse response = request.GetResponse ();
+                WebResponse response = request.GetResponse ();
 
-				using (Stream responseStream = response.GetResponseStream()) {
-					var memoryStream = new MemoryStream ();
-					CopyTo (responseStream, memoryStream);
+                using (Stream responseStream = response.GetResponseStream ()) {
+                    var memoryStream = new MemoryStream ();
+                    CopyTo (responseStream, memoryStream);
 
-					byte[] result = memoryStream.ToArray();
+                    byte [] result = memoryStream.ToArray ();
 
-					return result;
-				}
-			}
-            catch (WebException e){
-                using (var stream = e.Response.GetResponseStream())
-                using (var reader = new StreamReader(stream))
-                {
-                    string errorDetails = reader.ReadToEnd();
-                    throw new EslServerException(String.Format("{0} HTTP {1} on URI {2}. Optional details: {3}", e.Message, 
+                    return result;
+                }
+            } catch (WebException e) {
+                using (var stream = e.Response.GetResponseStream ())
+                using (var reader = new StreamReader (stream)) {
+                    string errorDetails = reader.ReadToEnd ();
+                    throw new EslServerException (String.Format ("{0} HTTP {1} on URI {2}. Optional details: {3}", e.Message,
                                                                ((HttpWebResponse)e.Response).Method, e.Response.ResponseUri, errorDetails),
                                                                 errorDetails, e);
                 }
+            } catch (Exception e) {
+                throw new EslException ("Error communicating with esl server. " + e.Message, e);
             }
-			catch (Exception e) {
-				throw new EslException("Error communicating with esl server. " + e.Message,e);
-			}
-		}
+        }
 
         /// <summary>
         /// Can only be called for unauthenticated path such as /auth
@@ -165,38 +174,41 @@ namespace Silanis.ESL.SDK.Internal
         /// </summary>
         public static byte[] GetHttp (string path)
         {
+            return GetHttp (path, new Dictionary<string, string> ());
+        }
+
+        public static byte [] GetHttp (string path, IDictionary<string, string> headers)
+        {
             string message = "";
-            UseUnsafeHeaderParsing(ref message);
+            UseUnsafeHeaderParsing (ref message);
             try {
                 System.Net.ServicePointManager.SecurityProtocol = (SecurityProtocolType)768 | (SecurityProtocolType)3072;
 
                 HttpWebRequest request = (HttpWebRequest)WebRequest.Create (path);
                 request.Method = "GET";
+                AddAdditionalHeaders (request, headers);
                 request.Accept = ESL_ACCEPT_TYPE_APPLICATION_JSON;
-                SetProxy(request);
+                SetProxy (request);
 
                 WebResponse response = request.GetResponse ();
 
-                using (Stream responseStream = response.GetResponseStream()) {
+                using (Stream responseStream = response.GetResponseStream ()) {
                     var memoryStream = new MemoryStream ();
                     CopyTo (responseStream, memoryStream);
-                    byte[] result = memoryStream.ToArray();
+                    byte [] result = memoryStream.ToArray ();
 
                     return result;
                 }
-            }
-            catch (WebException e){
-                using (var stream = e.Response.GetResponseStream())
-                using (var reader = new StreamReader(stream))
-                {
-                    string errorDetails = reader.ReadToEnd();
-                    throw new EslServerException(String.Format("{0} HTTP {1} on URI {2}. Optional details: {3}", e.Message, 
+            } catch (WebException e) {
+                using (var stream = e.Response.GetResponseStream ())
+                using (var reader = new StreamReader (stream)) {
+                    string errorDetails = reader.ReadToEnd ();
+                    throw new EslServerException (String.Format ("{0} HTTP {1} on URI {2}. Optional details: {3}", e.Message,
                                                                ((HttpWebResponse)e.Response).Method, e.Response.ResponseUri, errorDetails),
                                                                 errorDetails, e);
                 }
-            }
-            catch (Exception e) {
-                throw new EslException("Error communicating with esl server. " + e.Message,e);
+            } catch (Exception e) {
+                throw new EslException ("Error communicating with esl server. " + e.Message, e);
             }
         }
 
@@ -244,85 +256,90 @@ namespace Silanis.ESL.SDK.Internal
 
         public static DownloadedFile GetHttpJson (string apiToken, string path, string acceptType)
 		{
-			try {
-                System.Net.ServicePointManager.SecurityProtocol = (SecurityProtocolType)768 | (SecurityProtocolType)3072;
-
-				HttpWebRequest request = (HttpWebRequest)WebRequest.Create (path);
-				request.Method = "GET";
-				request.Headers.Add ("Authorization", "Basic " + apiToken);
-				request.Accept = acceptType;
-                SetProxy(request);
-
-				WebResponse response = request.GetResponse ();
-
-				using (Stream responseStream = response.GetResponseStream()) {
-
-					var memoryStream = new MemoryStream ();
-					CopyTo (responseStream, memoryStream);
-					byte[] result = memoryStream.ToArray();
-
-                    DownloadedFile downloadedFile = new DownloadedFile("", result);
-                    return downloadedFile;
-				}
-			}
-            catch (WebException e){
-                using (var stream = e.Response.GetResponseStream())
-                using (var reader = new StreamReader(stream))
-                {
-                    string errorDetails = reader.ReadToEnd();
-                    throw new EslServerException(String.Format("{0} HTTP {1} on URI {2}. Optional details: {3}", e.Message, 
-                                                               ((HttpWebResponse)e.Response).Method, e.Response.ResponseUri, errorDetails),
-                                                                errorDetails, e);
-                }
-            }
-			catch (Exception e) {
-				throw new EslException("Error communicating with esl server. " + e.Message,e);
-			}
+            return GetHttpJson (apiToken, path, acceptType, new Dictionary<string, string> ());
 		}
 
-        public static DownloadedFile GetHttp (string apiToken, string path)
-		{
-			try {
+        public static DownloadedFile GetHttpJson (string apiToken, string path, string acceptType, IDictionary<string, string> headers)
+        {
+            try {
                 System.Net.ServicePointManager.SecurityProtocol = (SecurityProtocolType)768 | (SecurityProtocolType)3072;
 
                 HttpWebRequest request = (HttpWebRequest)WebRequest.Create (path);
-				request.Method = "GET";
-				request.Headers.Add ("Authorization", "Basic " + apiToken);
-                request.Accept = ESL_ACCEPT_TYPE_APPLICATION;
-                SetProxy(request);
+                request.Method = "GET";
+                AddAdditionalHeaders (request, headers);
+                request.Headers.Add ("Authorization", "Basic " + apiToken);
+                request.Accept = acceptType;
+                SetProxy (request);
 
-				WebResponse response = request.GetResponse ();
+                WebResponse response = request.GetResponse ();
 
-				using (Stream responseStream = response.GetResponseStream()) {
-					var memoryStream = new MemoryStream ();
-					CopyTo (responseStream, memoryStream);
-                    byte[] result = memoryStream.ToArray();
+                using (Stream responseStream = response.GetResponseStream ()) {
 
-                    string fileName = "";
-                    if(!String.IsNullOrEmpty(response.Headers["Content-Disposition"])) 
-                    {
-                        fileName = GetFilename(response.Headers["Content-Disposition"].ToString());
-                    }
+                    var memoryStream = new MemoryStream ();
+                    CopyTo (responseStream, memoryStream);
+                    byte [] result = memoryStream.ToArray ();
 
-                    DownloadedFile downloadedFile = new DownloadedFile(fileName, result);
-
+                    DownloadedFile downloadedFile = new DownloadedFile ("", result);
                     return downloadedFile;
-				}
-			}
-            catch (WebException e){
-                using (var stream = e.Response.GetResponseStream())
-                using (var reader = new StreamReader(stream))
-                {
-                    string errorDetails = reader.ReadToEnd();
-                    throw new EslServerException(String.Format("{0} HTTP {1} on URI {2}. Optional details: {3}", e.Message, 
+                }
+            } catch (WebException e) {
+                using (var stream = e.Response.GetResponseStream ())
+                using (var reader = new StreamReader (stream)) {
+                    string errorDetails = reader.ReadToEnd ();
+                    throw new EslServerException (String.Format ("{0} HTTP {1} on URI {2}. Optional details: {3}", e.Message,
                                                                ((HttpWebResponse)e.Response).Method, e.Response.ResponseUri, errorDetails),
                                                                 errorDetails, e);
                 }
+            } catch (Exception e) {
+                throw new EslException ("Error communicating with esl server. " + e.Message, e);
             }
-			catch (Exception e) {
-				throw new EslException("Error communicating with esl server. " + e.Message,e);
-			}
+        }
+
+        public static DownloadedFile GetHttp (string apiToken, string path)
+		{
+            return GetHttp (apiToken, path, new Dictionary<string, string> ());
 		}
+
+        public static DownloadedFile GetHttp (string apiToken, string path, IDictionary<string, string> headers)
+        {
+            try {
+                System.Net.ServicePointManager.SecurityProtocol = (SecurityProtocolType)768 | (SecurityProtocolType)3072;
+
+                HttpWebRequest request = (HttpWebRequest)WebRequest.Create (path);
+                request.Method = "GET";
+                AddAdditionalHeaders (request, headers);
+                request.Headers.Add ("Authorization", "Basic " + apiToken);
+                request.Accept = ESL_ACCEPT_TYPE_APPLICATION;
+                SetProxy (request);
+
+                WebResponse response = request.GetResponse ();
+
+                using (Stream responseStream = response.GetResponseStream ()) {
+                    var memoryStream = new MemoryStream ();
+                    CopyTo (responseStream, memoryStream);
+                    byte [] result = memoryStream.ToArray ();
+
+                    string fileName = "";
+                    if (!String.IsNullOrEmpty (response.Headers ["Content-Disposition"])) {
+                        fileName = GetFilename (response.Headers ["Content-Disposition"].ToString ());
+                    }
+
+                    DownloadedFile downloadedFile = new DownloadedFile (fileName, result);
+
+                    return downloadedFile;
+                }
+            } catch (WebException e) {
+                using (var stream = e.Response.GetResponseStream ())
+                using (var reader = new StreamReader (stream)) {
+                    string errorDetails = reader.ReadToEnd ();
+                    throw new EslServerException (String.Format ("{0} HTTP {1} on URI {2}. Optional details: {3}", e.Message,
+                                                               ((HttpWebResponse)e.Response).Method, e.Response.ResponseUri, errorDetails),
+                                                                errorDetails, e);
+                }
+            } catch (Exception e) {
+                throw new EslException ("Error communicating with esl server. " + e.Message, e);
+            }
+        }
 
         private static string GetFilename(string disposition) 
         {
@@ -343,77 +360,90 @@ namespace Silanis.ESL.SDK.Internal
 
         public static DownloadedFile GetHttpAsOctetStream (string apiToken, string path)
         {
+            return GetHttpAsOctetStream (apiToken, path, new Dictionary<string, string> ());
+        }
+
+        public static DownloadedFile GetHttpAsOctetStream (string apiToken, string path, IDictionary<string, string> headers)
+        {
             try {
                 System.Net.ServicePointManager.SecurityProtocol = (SecurityProtocolType)768 | (SecurityProtocolType)3072;
 
                 HttpWebRequest request = (HttpWebRequest)WebRequest.Create (path);
                 request.Method = "GET";
+                AddAdditionalHeaders (request, headers);
                 request.Headers.Add ("Authorization", "Basic " + apiToken);
                 request.Accept = ESL_ACCEPT_TYPE_APPLICATION_OCTET_STREAM;
-                SetProxy(request);
+                SetProxy (request);
 
                 WebResponse response = request.GetResponse ();
 
-                using (Stream responseStream = response.GetResponseStream()) {
+                using (Stream responseStream = response.GetResponseStream ()) {
                     var memoryStream = new MemoryStream ();
                     CopyTo (responseStream, memoryStream);
-                    byte[] result = memoryStream.ToArray();
+                    byte [] result = memoryStream.ToArray ();
 
-                    DownloadedFile downloadedFile = new DownloadedFile("", result);
+                    DownloadedFile downloadedFile = new DownloadedFile ("", result);
 
                     return downloadedFile;
                 }
-            }
-            catch (WebException e){
-                using (var stream = e.Response.GetResponseStream())
-                    using (var reader = new StreamReader(stream))
-                {
-                    string errorDetails = reader.ReadToEnd();
-                    throw new EslServerException(String.Format("{0} HTTP {1} on URI {2}. Optional details: {3}", e.Message, 
+            } catch (WebException e) {
+                using (var stream = e.Response.GetResponseStream ())
+                using (var reader = new StreamReader (stream)) {
+                    string errorDetails = reader.ReadToEnd ();
+                    throw new EslServerException (String.Format ("{0} HTTP {1} on URI {2}. Optional details: {3}", e.Message,
                                                                ((HttpWebResponse)e.Response).Method, e.Response.ResponseUri, errorDetails),
                                                  errorDetails, e);
                 }
-            }
-            catch (Exception e) {
-                throw new EslException("Error communicating with esl server. " + e.Message,e);
+            } catch (Exception e) {
+                throw new EslException ("Error communicating with esl server. " + e.Message, e);
             }
         }
 
         public static byte[] DeleteHttp (string apiToken, string path)
 		{
-			try {
+            return DeleteHttp (apiToken, path, new Dictionary<string, string> ());
+		}
+
+        public static byte [] DeleteHttp (string apiToken, string path, IDictionary<string, string> headers)
+        {
+            try {
                 System.Net.ServicePointManager.SecurityProtocol = (SecurityProtocolType)768 | (SecurityProtocolType)3072;
 
                 HttpWebRequest request = (HttpWebRequest)WebRequest.Create (path);
-				request.Method = "DELETE";
-				request.Headers.Add ("Authorization", "Basic " + apiToken);
+                request.Method = "DELETE";
+                AddAdditionalHeaders (request, headers);
+                request.Headers.Add ("Authorization", "Basic " + apiToken);
                 request.Accept = ESL_ACCEPT_TYPE_APPLICATION_JSON;
-                SetProxy(request);
+                SetProxy (request);
 
-				WebResponse response = request.GetResponse ();
+                WebResponse response = request.GetResponse ();
 
-				using (Stream responseStream = response.GetResponseStream()) {
-					var memoryStream = new MemoryStream ();
-					CopyTo (responseStream, memoryStream);
-					byte[] result = memoryStream.ToArray();
+                using (Stream responseStream = response.GetResponseStream ()) {
+                    var memoryStream = new MemoryStream ();
+                    CopyTo (responseStream, memoryStream);
+                    byte [] result = memoryStream.ToArray ();
 
-					return result;
-				}
-			}
-            catch (WebException e){
-                using (var stream = e.Response.GetResponseStream())
-                using (var reader = new StreamReader(stream))
-                {
-                    string errorDetails = reader.ReadToEnd();
-                    throw new EslServerException(String.Format("{0} HTTP {1} on URI {2}. Optional details: {3}", e.Message, 
+                    return result;
+                }
+            } catch (WebException e) {
+                using (var stream = e.Response.GetResponseStream ())
+                using (var reader = new StreamReader (stream)) {
+                    string errorDetails = reader.ReadToEnd ();
+                    throw new EslServerException (String.Format ("{0} HTTP {1} on URI {2}. Optional details: {3}", e.Message,
                                                                ((HttpWebResponse)e.Response).Method, e.Response.ResponseUri, errorDetails),
                                                                 errorDetails, e);
                 }
+            } catch (Exception e) {
+                throw new EslException ("Error communicating with esl server. " + e.Message, e);
             }
-			catch (Exception e) {
-				throw new EslException("Error communicating with esl server. " + e.Message,e);
-			}
-		}
+        }
+
+        private static void AddAdditionalHeaders (WebRequest request, IDictionary<string, string> headers)
+        {
+            foreach (KeyValuePair<string, string> entry in headers) {
+                request.Headers.Add (entry.Key, entry.Value);
+            }
+        }
 
 		public static void AddAuthorizationHeader(WebRequest request, AuthHeaderGenerator authHeaderGen)
 		{
@@ -422,44 +452,42 @@ namespace Silanis.ESL.SDK.Internal
 
         public static string MultipartPostHttp (string apiToken, string path, byte[] content, string boundary, AuthHeaderGenerator authHeaderGen)
         {
-            WebRequest request = WebRequest.Create(path);
-            try
-            {
+            return MultipartPostHttp (apiToken, path, content, boundary, authHeaderGen, new Dictionary<string, string> ());
+        }
+
+        public static string MultipartPostHttp (string apiToken, string path, byte [] content, string boundary, AuthHeaderGenerator authHeaderGen, IDictionary<string, string> headers)
+        {
+            WebRequest request = WebRequest.Create (path);
+            try {
                 System.Net.ServicePointManager.SecurityProtocol = (SecurityProtocolType)768 | (SecurityProtocolType)3072;
 
                 request.Method = "POST";
-                request.ContentType = string.Format(ESL_CONTENT_TYPE_APPLICATION_MULTIPART, boundary);
+                request.ContentType = string.Format (ESL_CONTENT_TYPE_APPLICATION_MULTIPART, boundary);
                 request.ContentLength = content.Length;
-                AddAuthorizationHeader(request, authHeaderGen);
-                SetProxy(request);
+                AddAdditionalHeaders (request, headers);
+                AddAuthorizationHeader (request, authHeaderGen);
+                SetProxy (request);
 
-                using (Stream dataStream = request.GetRequestStream ())
-                {
-                    dataStream.Write(content, 0, content.Length);
+                using (Stream dataStream = request.GetRequestStream ()) {
+                    dataStream.Write (content, 0, content.Length);
                 }
 
-                WebResponse response = request.GetResponse();
+                WebResponse response = request.GetResponse ();
 
-                using (Stream responseStream = response.GetResponseStream())
-                {
-                    StreamReader reader = new StreamReader(responseStream, Encoding.UTF8);
-                    return reader.ReadToEnd();
+                using (Stream responseStream = response.GetResponseStream ()) {
+                    StreamReader reader = new StreamReader (responseStream, Encoding.UTF8);
+                    return reader.ReadToEnd ();
                 }
-            }
-            catch (WebException e)
-            {
-                using (var stream = e.Response.GetResponseStream())
-                    using (var reader = new StreamReader(stream))
-                {
-                    string errorDetails = reader.ReadToEnd();
-                    throw new EslServerException(String.Format("{0} HTTP {1} on URI {2}. Optional details: {3}", e.Message, 
+            } catch (WebException e) {
+                using (var stream = e.Response.GetResponseStream ())
+                using (var reader = new StreamReader (stream)) {
+                    string errorDetails = reader.ReadToEnd ();
+                    throw new EslServerException (String.Format ("{0} HTTP {1} on URI {2}. Optional details: {3}", e.Message,
                                                                ((HttpWebResponse)e.Response).Method, e.Response.ResponseUri, errorDetails),
                                                  errorDetails, e);
                 }
-            }
-            catch (Exception e)
-            {
-                throw new EslException("Error communicating with esl server. " + e.Message, e);
+            } catch (Exception e) {
+                throw new EslException ("Error communicating with esl server. " + e.Message, e);
             }
         }
 
