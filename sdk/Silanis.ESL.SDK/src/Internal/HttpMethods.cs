@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Net;
 using System.IO;
 using System.Collections.Generic;
@@ -14,7 +14,7 @@ namespace Silanis.ESL.SDK.Internal
 	/// </summary>
 	public class HttpMethods
 	{
-        public const string ESL_API_VERSION = "11.17";
+        public const string ESL_API_VERSION = "11.18";
         public const string ESL_API_VERSION_HEADER = "esl-api-version=" + ESL_API_VERSION;
 
         public const string CONTENT_TYPE_APPLICATION_JSON = "application/json";
