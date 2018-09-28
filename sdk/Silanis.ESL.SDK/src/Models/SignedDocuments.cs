@@ -25,6 +25,12 @@ namespace Silanis.ESL.API
             _documents.Add(document);
             return this;
         }
+
+        [JsonProperty ("handdrawn")]
+        public string Handdrawn 
+        {
+            get; set;
+        }
     }
 }
 

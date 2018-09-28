@@ -47,12 +47,6 @@
     <Reference Include="Newtonsoft.Json">
       <HintPath>..\References\Newtonsoft.Json.dll</HintPath>
     </Reference>
-    <Reference Include="Newtonsoft.Json">
-      <HintPath>..\References\Newtonsoft.Json.dll</HintPath>
-    </Reference>
-    <Reference Include="Newtonsoft.Json">
-      <HintPath>..\References\Newtonsoft.Json.dll</HintPath>
-    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -405,6 +399,8 @@
     <Compile Include="src\ExtractionType.cs" />
     <Compile Include="src\Builder\DocumentAttributesBuilder.cs" />
     <Compile Include="src\Builder\SSOAuthenticationBuilder.cs" />
+    <Compile Include="src\CapturedSignature.cs" />
+    <Compile Include="src\Models\SignedDocument.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSHARP.Targets" />
   <ProjectExtensions>

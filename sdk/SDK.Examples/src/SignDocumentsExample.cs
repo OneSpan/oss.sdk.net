@@ -20,6 +20,8 @@ namespace SDK.Examples
 
         override public void Execute()
         {
+            CapturedSignature capturedSignature = new CapturedSignature ("AQAAAIPGDPtxqL+RsL7/w/7eEX+cAtwAAwADAFAAAAADAAAAnALcACMAAAACq5ZQg105VH9Z/1l+UM9QF3A0v3BEv2BmYYFgSGAYQBZAJkA0QDVAREBmQENAQ0BRUJFQg1CDUFKbQENASUBGQERFUA==");
+
             DocumentPackage superDuperPackage = PackageBuilder.NewPackageNamed(PackageName)
                 .WithSettings(DocumentPackageSettingsBuilder.NewDocumentPackageSettings().WithInPerson())
                     .WithSigner(SignerBuilder.NewSignerWithEmail(email1)
@@ -28,7 +30,7 @@ namespace SDK.Examples
                                 .WithLastName("Smith1"))
                     .WithDocument(DocumentBuilder.NewDocumentNamed(document1Name)
                                   .FromStream(fileStream1, DocumentType.PDF)
-                                  .WithSignature(SignatureBuilder.SignatureFor(senderEmail)
+                                  .WithSignature(SignatureBuilder.CaptureFor(senderEmail)
                                    .OnPage(0)
                                    .AtPosition(100, 100))
                                   .WithSignature(SignatureBuilder.SignatureFor(email1)
@@ -39,7 +41,7 @@ namespace SDK.Examples
                                   .WithSignature(SignatureBuilder.SignatureFor(senderEmail)
                                    .OnPage(0)
                                    .AtPosition(100, 100))
-                                  .WithSignature(SignatureBuilder.SignatureFor(email1)
+                                  .WithSignature(SignatureBuilder.CaptureFor(email1)
                                    .OnPage(0)
                                    .AtPosition(400, 100)))
                     .Build();
@@ -48,10 +50,10 @@ namespace SDK.Examples
             eslClient.SendPackage(packageId);
             retrievedPackageBeforeSigning = eslClient.GetPackage(packageId);
 
-            eslClient.SignDocuments(packageId);
+            eslClient.SignDocuments(packageId, capturedSignature);
             retrievedPackageAfterSigningApproval1 = eslClient.GetPackage(packageId);
 
-            eslClient.SignDocuments(packageId, signer1Id);
+            eslClient.SignDocuments(packageId, signer1Id, capturedSignature);
             retrievedPackageAfterSigningApproval2 = eslClient.GetPackage(packageId);
         }
     }

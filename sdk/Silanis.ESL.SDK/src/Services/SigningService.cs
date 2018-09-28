@@ -1,6 +1,7 @@
 using System;
 using Silanis.ESL.SDK.Internal;
 using Newtonsoft.Json;
+using Silanis.ESL.API;
 
 namespace Silanis.ESL.SDK
 {
@@ -17,7 +18,7 @@ namespace Silanis.ESL.SDK
             this.settings = settings;
         }
 
-        internal void SignDocument( PackageId packageId, Silanis.ESL.API.Document document ) 
+        internal void SignDocument( PackageId packageId, SignedDocument signedDocument ) 
         {
             string path = template.UrlFor( UrlTemplate.SIGN_DOCUMENT_PATH )
                 .Replace("{packageId}", packageId.Id)
@@ -25,7 +26,7 @@ namespace Silanis.ESL.SDK
 
             try 
             {
-                string json = JsonConvert.SerializeObject(document, settings);
+                string json = JsonConvert.SerializeObject(signedDocument, settings);
                 restClient.Post( path, json );
             }
             catch (EslServerException e)
@@ -78,6 +79,30 @@ namespace Silanis.ESL.SDK
             {
                 throw new EslException("Could not sign documents." + " Exception: " + e.Message, e);
             }
+        }
+
+        internal SignedDocument ConvertToSignedDocument (Silanis.ESL.API.Document document)
+        {
+            SignedDocument signedDocument = new SignedDocument ();
+
+            signedDocument.Id = document.Id;
+            signedDocument.Name = document.Name;
+            signedDocument.Description = document.Description;
+            signedDocument.Approvals = document.Approvals;
+            signedDocument.External = document.External;
+            signedDocument.Index = document.Index;
+            signedDocument.Extract = document.Extract;
+            signedDocument.ExtractionTypes = document.ExtractionTypes;
+            signedDocument.Fields = document.Fields;
+            signedDocument.Data = document.Data;
+            signedDocument.SignedHash = document.SignedHash;
+            signedDocument.Pages = document.Pages;
+            signedDocument.Size = document.Size;
+            signedDocument.Status = document.Status;
+            signedDocument.SignerVerificationToken = document.SignerVerificationToken;
+            signedDocument.Tagged = document.Tagged;
+
+            return signedDocument;
         }
     }
 }

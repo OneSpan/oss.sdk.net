@@ -231,47 +231,62 @@ namespace Silanis.ESL.SDK
 
         public void SignDocument(PackageId packageId, string documentName) 
         {
-            Silanis.ESL.API.Package package = packageService.GetPackage(packageId);
-            foreach(Silanis.ESL.API.Document document in package.Documents) 
-            {
-                if(document.Name.Equals(documentName)) 
-                {
-                    document.Approvals.Clear();
-                    signingService.SignDocument(packageId, document);
+            SignDocument (packageId, documentName, new CapturedSignature (""));
+        }
+
+        public void SignDocument (PackageId packageId, string documentName, CapturedSignature capturedSignature)
+        {
+            Silanis.ESL.API.Package package = packageService.GetPackage (packageId);
+            foreach (Silanis.ESL.API.Document document in package.Documents) {
+                if (document.Name.Equals (documentName)) {
+                    document.Approvals.Clear ();
+                    SignedDocument signedDocument = signingService.ConvertToSignedDocument (document);
+                    signedDocument.Handdrawn =capturedSignature.Handdrawn;
+                    signingService.SignDocument (packageId, signedDocument);
                 }
             }
         }
 
         public void SignDocuments(PackageId packageId) 
         {
-            SignedDocuments signedDocuments = new SignedDocuments();
-            Package package = packageService.GetPackage(packageId);
-            foreach(Silanis.ESL.API.Document document in package.Documents) 
-            {
-                document.Approvals.Clear();
-                signedDocuments.AddDocument(document);
+            SignDocuments (packageId, new CapturedSignature (""));
+        }
+
+        public void SignDocuments (PackageId packageId, CapturedSignature capturedSignature)
+        {
+            SignedDocuments signedDocuments = new SignedDocuments ();
+            signedDocuments.Handdrawn = capturedSignature.Handdrawn;
+            Package package = packageService.GetPackage (packageId);
+            foreach (Silanis.ESL.API.Document document in package.Documents) {
+                document.Approvals.Clear ();
+                signedDocuments.AddDocument (document);
             }
-            signingService.SignDocuments(packageId, signedDocuments);
+            signingService.SignDocuments (packageId, signedDocuments);
         }
 
         public void SignDocuments(PackageId packageId, string signerId) 
         {
+            SignDocuments (packageId, signerId, new CapturedSignature (""));
+        }
+
+        public void SignDocuments (PackageId packageId, string signerId, CapturedSignature capturedSignature)
+        {
             string bulkSigningKey = "Bulk Signing on behalf of";
 
-            IDictionary<string, string> signerSessionFields = new Dictionary<string, string>();
-            signerSessionFields.Add(bulkSigningKey, signerId);
-            string signerAuthenticationToken = authenticationTokenService.CreateSignerAuthenticationToken(packageId, signerId, signerSessionFields);
+            IDictionary<string, string> signerSessionFields = new Dictionary<string, string> ();
+            signerSessionFields.Add (bulkSigningKey, signerId);
+            string signerAuthenticationToken = authenticationTokenService.CreateSignerAuthenticationToken (packageId, signerId, signerSessionFields);
 
-            string signerSessionId = authenticationService.GetSessionIdForSignerAuthenticationToken(signerAuthenticationToken);
+            string signerSessionId = authenticationService.GetSessionIdForSignerAuthenticationToken (signerAuthenticationToken);
 
-            SignedDocuments signedDocuments = new SignedDocuments();
-            Package package = packageService.GetPackage(packageId);
-            foreach(Silanis.ESL.API.Document document in package.Documents) 
-            {
-                document.Approvals.Clear();
-                signedDocuments.AddDocument(document);
+            SignedDocuments signedDocuments = new SignedDocuments ();
+            signedDocuments.Handdrawn = capturedSignature.Handdrawn;
+            Package package = packageService.GetPackage (packageId);
+            foreach (Silanis.ESL.API.Document document in package.Documents) {
+                document.Approvals.Clear ();
+                signedDocuments.AddDocument (document);
             }
-            signingService.SignDocuments(packageId, signedDocuments, signerSessionId);
+            signingService.SignDocuments (packageId, signedDocuments, signerSessionId);
         }
 
 		public PackageId CreateAndSendPackage( DocumentPackage package ) 

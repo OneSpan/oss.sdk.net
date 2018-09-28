@@ -18,6 +18,13 @@ namespace Silanis.ESL.API
 
 		// Accessors
 		    
+
+        [JsonProperty ("status")]
+        public string Status {
+            get; set;
+        }
+
+
     [JsonProperty("approvals")]
     public IList<Approval> Approvals
     {
@@ -169,13 +176,21 @@ namespace Silanis.ESL.API
     }
     
 		    
-    [JsonProperty("size")]
-    public Nullable<Int32> Size
-    {
+        [JsonProperty("size")]
+        public Nullable<Int32> Size
+        {
                 get; set;
         }
     
+        [JsonProperty ("signedHash")]
+        public string SignedHash {
+            get; set;
+        }
 		
+        [JsonProperty ("signerVerificationToken")]
+        public string SignerVerificationToken {
+            get; set;
+        }
 	
 	}
 }
