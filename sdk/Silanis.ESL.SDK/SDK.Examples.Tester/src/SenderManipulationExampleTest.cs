@@ -18,6 +18,7 @@ namespace SDK.Examples
 
             // Invite three senders
             Assert.AreEqual(example.retrievedSender1.Email, example.email1);
+            Assert.AreEqual(example.retrievedSender1.TimezoneId, "GMT");
             Assert.AreEqual(example.retrievedSender2.Email, example.email2);
             Assert.AreEqual(example.retrievedSender3.Email, example.email3);
 
@@ -32,6 +33,7 @@ namespace SDK.Examples
             Assert.AreEqual(updatedInfo.LastName, sender.LastName);
             Assert.AreEqual(updatedInfo.Company, sender.Company);
             Assert.AreEqual(updatedInfo.Title, sender.Title);
+            Assert.AreEqual(updatedInfo.TimezoneId, "Canada/Mountain");
         }
 
         private bool AssertSenderWasDeleted(string senderEmail)

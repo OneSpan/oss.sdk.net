@@ -111,7 +111,12 @@ namespace Silanis.ESL.API
     {
                 get; set;
         }
-    
+
+    [JsonProperty("timezoneId")]
+    public String TimezoneId
+    {
+                get; set;
+        }
 		    
     [JsonProperty("memberships")]
     public IList<GroupMembership> Memberships

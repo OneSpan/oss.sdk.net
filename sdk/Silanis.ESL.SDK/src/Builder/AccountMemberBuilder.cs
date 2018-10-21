@@ -12,6 +12,7 @@ namespace Silanis.ESL.SDK
         private string language;
         private string phoneNumber;
         private string title;
+        private string timezoneId;
         private SenderStatus status = SenderStatus.INVITED;
 
         private AccountMemberBuilder( string email )
@@ -68,6 +69,11 @@ namespace Silanis.ESL.SDK
             return this;
         }
 
+        public AccountMemberBuilder WithTimezoneId(string timezoneId) {
+            this.timezoneId = timezoneId;
+            return this;
+        }
+
         public AccountMember Build() {
             AccountMember result = new AccountMember();
 
@@ -79,6 +85,7 @@ namespace Silanis.ESL.SDK
             result.Language = language;
             result.PhoneNumber = phoneNumber;
             result.Title = title;
+            result.TimezoneId = timezoneId;
             if ( null!=status ) result.Status = status;
 
             return result;

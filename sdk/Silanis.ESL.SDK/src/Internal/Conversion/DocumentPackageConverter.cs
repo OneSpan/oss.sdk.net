@@ -101,6 +101,10 @@ namespace Silanis.ESL.SDK
                 package.Visibility = sdkPackage.Visibility;
             }
 
+            if ( sdkPackage.TimezoneId != null ) {
+                package.TimezoneId = sdkPackage.TimezoneId;
+            }
+
 			int signerCount = 1;
 			foreach (Signer signer in sdkPackage.Signers)
 			{
@@ -178,6 +182,10 @@ namespace Silanis.ESL.SDK
 
             if (apiPackage.Visibility != null) {
                 packageBuilder.WithVisibility(new VisibilityConverter(apiPackage.Visibility).ToSDKVisibility());
+            }
+
+            if (apiPackage.TimezoneId != null) {
+                packageBuilder.WithTimezoneId(apiPackage.TimezoneId);
             }
 
             packageBuilder.WithAttributes(new DocumentPackageAttributesBuilder(apiPackage.Data).Build());

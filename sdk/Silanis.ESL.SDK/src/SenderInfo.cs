@@ -9,6 +9,7 @@ namespace Silanis.ESL.SDK
         private string lastName;
         private string company;
         private string title;
+        private string timezoneId;
 
         public SenderInfo()
         {
@@ -71,6 +72,18 @@ namespace Silanis.ESL.SDK
             set
             {
                 title = value;
+            }
+        }
+
+        public string TimezoneId
+        {
+            get
+            {
+                return timezoneId;    
+            }
+            set
+            {
+                timezoneId = value;
             }
         }
     }

@@ -25,6 +25,7 @@ namespace Silanis.ESL.SDK.Builder
         private IList<Message> messages = new List<Message>();
         private Nullable<Boolean> notarized;
         private bool trashed;
+        private string timezoneId;
         private Visibility visibility;
 
         private const string ORIGIN_KEY = "origin";
@@ -183,6 +184,10 @@ namespace Silanis.ESL.SDK.Builder
             return this;
         }
 
+        public PackageBuilder WithTimezoneId(string timezoneId) {
+            this.timezoneId = timezoneId;
+            return this;
+        }
 
 		public DocumentPackage Build()
         {
@@ -198,6 +203,7 @@ namespace Silanis.ESL.SDK.Builder
             package.Messages = messages;
             package.Notarized = notarized;
             package.Trashed = trashed;
+            package.TimezoneId = timezoneId;
 
             if ( visibility != null ) {
                 package.Visibility = visibility;

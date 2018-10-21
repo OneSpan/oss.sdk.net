@@ -18,6 +18,7 @@ namespace Silanis.ESL.SDK
 		private string id;
 		private string name;
         private External external;
+        private string timezoneId;
 
 		public Sender()
         {
@@ -190,6 +191,18 @@ namespace Silanis.ESL.SDK
             set
             {
                 external = value;
+            }
+        }
+
+        public string TimezoneId
+        {
+            get
+            {
+                return timezoneId;
+            }
+            set
+            {
+                timezoneId = value;
             }
         }
     }

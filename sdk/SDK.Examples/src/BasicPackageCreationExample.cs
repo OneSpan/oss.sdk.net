@@ -22,6 +22,7 @@ namespace SDK.Examples
                 .DescribedAs("This is a package created using the eSignLive SDK")
                 .ExpiresOn(DateTime.Now.AddMonths(100))
                 .WithEmailMessage("This message should be delivered to all signers")
+                .WithTimezoneId("Canada/Mountain")
                 .WithSigner(SignerBuilder.NewSignerWithEmail(email1)
                             .WithCustomId("Client1")
                             .WithFirstName("John")
