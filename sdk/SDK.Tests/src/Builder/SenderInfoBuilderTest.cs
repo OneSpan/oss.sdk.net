@@ -14,6 +14,7 @@ namespace SDK.Tests
                 .WithName("firstName", "lastName")
                 .WithCompany("company")
                 .WithTitle("title")
+                .WithTimezoneId("Canada/Mountain")
                 .Build();
 
             Assert.IsNotNull(senderInfo);
@@ -21,6 +22,7 @@ namespace SDK.Tests
             Assert.AreEqual("lastName", senderInfo.LastName);
             Assert.AreEqual("company", senderInfo.Company);
             Assert.AreEqual("title", senderInfo.Title);
+            Assert.AreEqual("Canada/Mountain", senderInfo.TimezoneId);
         }
     }
 }

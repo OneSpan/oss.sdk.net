@@ -29,6 +29,7 @@ namespace SDK.Examples
                 .WithTitle( "title1" )
                 .WithLanguage( "language1" )
                 .WithPhoneNumber( "phoneNumber1" )
+                .WithTimezoneId( "GMT" )
                 .WithStatus(SenderStatus.ACTIVE)
                 .Build();
 
@@ -68,6 +69,7 @@ namespace SDK.Examples
                 .WithName("updatedFirstName", "updatedLastName")
                     .WithCompany("updatedCompany")
                     .WithTitle("updatedTitle")
+                    .WithTimezoneId("Canada/Mountain")
                     .Build();
 
             eslClient.AccountService.UpdateSender(updatedSenderInfo, createdSender3.Id);

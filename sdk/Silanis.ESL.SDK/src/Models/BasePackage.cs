@@ -214,6 +214,13 @@ namespace Silanis.ESL.API
                 get; set;
         }
     
+
+    [JsonProperty ("timezoneId")]
+    public String TimezoneId
+    {
+                get; set;
+        }
+
     [JsonProperty("created")]
     public Nullable<DateTime> Created
     {

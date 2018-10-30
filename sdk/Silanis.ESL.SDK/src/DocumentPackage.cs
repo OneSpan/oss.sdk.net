@@ -174,5 +174,11 @@ namespace Silanis.ESL.SDK
             get;
             set;
         }
+
+        public string TimezoneId
+        {
+            get;
+            set;
+        }
     }
 }

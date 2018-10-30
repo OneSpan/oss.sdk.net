@@ -9,6 +9,7 @@ namespace Silanis.ESL.SDK
         private string lastName;
         private string company;
         private string title;
+        private string timezoneId;
 
 		private SenderInfoBuilder(string email) {
 			this.email = email;
@@ -35,6 +36,11 @@ namespace Silanis.ESL.SDK
             return this;
         }
 
+        public SenderInfoBuilder WithTimezoneId( string timezoneId ) {
+            this.timezoneId = timezoneId;
+            return this;
+        }
+
         public SenderInfo Build() {
             SenderInfo result = new SenderInfo();
 			result.Email = email;
@@ -42,6 +48,7 @@ namespace Silanis.ESL.SDK
             result.LastName = lastName;
             result.Company = company;
             result.Title = title;
+            result.TimezoneId = timezoneId;
 
             return result;
         }

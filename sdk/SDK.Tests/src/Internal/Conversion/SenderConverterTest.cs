@@ -16,6 +16,7 @@ namespace SDK.Tests
         private const string EXTERNAL_ID = "externalId";
         private const string EXTERNAL_PROVIDER = "provider";
         private const string EXTERNAL_PROVIDER_NAME = "providerName";
+        private const string TIMEZONE_ID = "Canada/Mountain";
 
 		[Test()]
 		public void ToSDKFromAPISender()
@@ -31,6 +32,7 @@ namespace SDK.Tests
 			Assert.AreEqual(sender.LastName, senderInfo.LastName);
 			Assert.AreEqual(sender.Company, senderInfo.Company);
 			Assert.AreEqual(sender.Title, senderInfo.Title);
+            Assert.AreEqual(sender.TimezoneId, senderInfo.TimezoneId);
 		}
 
 		[Test()]
@@ -42,6 +44,7 @@ namespace SDK.Tests
 			senderInfo.LastName = LAST_NAME;
 			senderInfo.Company = COMPANY;
 			senderInfo.Title = TITLE;
+            senderInfo.TimezoneId = TIMEZONE_ID;
 
 			Silanis.ESL.API.Sender sender = new SenderConverter(senderInfo).ToAPISender();
 
@@ -51,6 +54,7 @@ namespace SDK.Tests
 			Assert.AreEqual(senderInfo.LastName, sender.LastName);
 			Assert.AreEqual(senderInfo.Company, sender.Company);
 			Assert.AreEqual(senderInfo.Title, sender.Title);
+            Assert.AreEqual(senderInfo.TimezoneId, sender.TimezoneId);
 		}
 
 		[Test()]
@@ -88,6 +92,7 @@ namespace SDK.Tests
 			Assert.AreEqual(sdkSender.Type.ToString(), apiSender.Type.ToString());
 			Assert.AreEqual(sdkSender.Updated, apiSender.Updated);
 			Assert.AreEqual(sdkSender.Id, apiSender.Id);
+            Assert.AreEqual(sdkSender.TimezoneId, apiSender.TimezoneId);
             Assert.AreEqual(sdkSender.External.Id, apiSender.External.Id);
             Assert.AreEqual(sdkSender.External.Provider, apiSender.External.Provider);
             Assert.AreEqual(sdkSender.External.ProviderName, apiSender.External.ProviderName);
@@ -101,6 +106,7 @@ namespace SDK.Tests
 			sender.LastName = LAST_NAME;
 			sender.Company = COMPANY;
 			sender.Title = TITLE;
+            sender.TimezoneId = TIMEZONE_ID;
 
             sender.External = new Silanis.ESL.API.External();
             sender.External.Id = EXTERNAL_ID;

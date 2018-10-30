@@ -35,6 +35,7 @@ namespace Silanis.ESL.SDK
 						.WithName(apiSender.FirstName, apiSender.LastName)
 						.WithCompany(apiSender.Company)
 						.WithTitle(apiSender.Title)
+                        .WithTimezoneId(apiSender.TimezoneId)
 						.Build();
 			}
 		}
@@ -58,6 +59,8 @@ namespace Silanis.ESL.SDK
 					result.Company = sdkSenderInfo.Company;
 				if (sdkSenderInfo.Title != null)
 					result.Title = sdkSenderInfo.Title;
+                if (sdkSenderInfo.TimezoneId != null)
+                    result.TimezoneId = sdkSenderInfo.TimezoneId;
 
 				return result;
 			}
@@ -83,6 +86,7 @@ namespace Silanis.ESL.SDK
 			result.Type = new SenderTypeConverter(apiSender.Type).ToSDKSenderType();
 			result.Title = apiSender.Title;
 			result.Updated = apiSender.Updated;
+            result.TimezoneId = apiSender.TimezoneId;
             result.External = new ExternalConverter(apiSender.External).ToSDKExternal();
 			
 			return result;

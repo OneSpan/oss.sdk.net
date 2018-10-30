@@ -58,6 +58,12 @@ namespace Silanis.ESL.SDK
             set;
         }
 
+        public string TimezoneId
+        {
+            get;
+            set;
+        }
+
         public AccountMember()
         {
         }

@@ -29,6 +29,7 @@ namespace Silanis.ESL.SDK
                 result.Email = sdkAccountMember.Email;
                 result.Phone = sdkAccountMember.PhoneNumber;
                 result.Language = sdkAccountMember.Language;
+                result.TimezoneId = sdkAccountMember.TimezoneId;
                 string convertedStatus = new SenderStatusConverter(sdkAccountMember.Status).ToAPISenderStatus();
                 if ( !String.IsNullOrEmpty(convertedStatus) ) result.Status = convertedStatus;
                 return result;
@@ -52,6 +53,7 @@ namespace Silanis.ESL.SDK
                         .WithLastName(apiUser.LastName)
                         .WithTitle(apiUser.Title)
                         .WithLanguage(apiUser.Language)
+                        .WithTimezoneId(apiUser.TimezoneId)
                         .WithPhoneNumber(apiUser.Phone);                        
 
                 return builder.Build();

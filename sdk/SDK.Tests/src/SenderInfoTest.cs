@@ -35,6 +35,13 @@ namespace SDK.Tests
             senderInfo.Title = "title";
             Assert.AreEqual("title", senderInfo.Title);
         }
+        [Test ()]
+        public void TestTimezoneId ()
+        {
+            SenderInfo senderInfo = new SenderInfo ();
+            senderInfo.TimezoneId = "Canada/Mountain";
+            Assert.AreEqual ("Canada/Mountain", senderInfo.TimezoneId);
+        }
     }
 }
 
