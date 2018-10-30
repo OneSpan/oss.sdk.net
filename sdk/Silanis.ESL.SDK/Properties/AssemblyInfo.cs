@@ -5,7 +5,7 @@ using System.Runtime.CompilerServices;
 // Change them to the values specific to your project.
 
 [assembly: AssemblyTitle("Silanis.ESL.SDK")]
-[assembly: AssemblyDescription("Compatible with .Net 2.0")]
+[assembly: AssemblyDescription("Compatible with .Net 4.5")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Silanis Technology")]
 [assembly: AssemblyProduct("")]
