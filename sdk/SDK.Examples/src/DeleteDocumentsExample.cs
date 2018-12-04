@@ -21,7 +21,7 @@ namespace SDK.Examples
         {
 
             // Create a package with documents
-            DocumentPackage BuiltPackage = PackageBuilder.NewPackageNamed (PackageName)
+            DocumentPackage superDuperPackage = PackageBuilder.NewPackageNamed (PackageName)
                 .DescribedAs ("This is a package demonstrating document upload")
                 .WithSigner (SignerBuilder.NewSignerWithEmail ("john.smith@email.com")
                     .WithFirstName ("John")
@@ -40,18 +40,13 @@ namespace SDK.Examples
                     .Build ())
                 .Build ();
 
-            packageId = eslClient.CreatePackage (BuiltPackage);
-            Console.WriteLine ("package created, id = " + packageId);
+            packageId = eslClient.CreatePackage (superDuperPackage);
 
             retrievedPackage = eslClient.GetPackage (packageId);
 
             //This is how you would delete a document from a package
-            IList<String> documents = new List<String> ()
-            {
-                "id1",
-                "id2"
-            };
-            eslClient.PackageService.DeleteDocuments (packageId, documents);
+            eslClient.PackageService.DeleteDocuments (packageId, retrievedPackage.GetDocument(DOCUMENT1_NAME).Id, 
+                                                      retrievedPackage.GetDocument (DOCUMENT2_NAME).Id);
 
             RetrievedPackageWithDeletedDocuments = eslClient.GetPackage (packageId);
         }

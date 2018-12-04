@@ -184,13 +184,8 @@ namespace Silanis.ESL.SDK.Services
         /// Deletes the documents from the package.
         /// </summary>
         /// <param name="packageId">The package id.</param>
-        /// <param name="documents">The documents to delete.</param>
-        public void DeleteDocuments (PackageId packageId, IList<Document> documents)
-        {
-            DeleteDocuments (packageId, documents.Select (x => x.Id).ToList ());
-        }
-
-        public void DeleteDocuments (PackageId packageId, IList<string> documentIds)
+        /// <param name="documentIds">The documents to delete.</param>
+        public void DeleteDocuments (PackageId packageId, params string[] documentIds)
         {
             string path = template.UrlFor (UrlTemplate.DOCUMENT_PATH)
                             .Replace ("{packageId}", packageId.Id)
