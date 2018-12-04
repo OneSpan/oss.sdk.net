@@ -438,6 +438,46 @@ namespace Silanis.ESL.SDK.Internal
             }
         }
 
+        public static byte [] DeleteHttp (string apiToken, string path, byte [] content, IDictionary<string, string> headers)
+        {
+            try {
+                System.Net.ServicePointManager.SecurityProtocol = (SecurityProtocolType)768 | (SecurityProtocolType)3072;
+
+                HttpWebRequest request = (HttpWebRequest)WebRequest.Create (path);
+                request.Method = "DELETE";
+                request.ContentType = ESL_CONTENT_TYPE_APPLICATION_JSON;
+                request.ContentLength = content.Length;
+                AddAdditionalHeaders (request, headers);
+                request.Headers.Add ("Authorization", "Basic " + apiToken);
+                request.Accept = ESL_ACCEPT_TYPE_APPLICATION_JSON;
+                SetProxy (request);
+
+                using (Stream dataStream = request.GetRequestStream ()) {
+                    dataStream.Write (content, 0, content.Length);
+                }
+
+                WebResponse response = request.GetResponse ();
+
+                using (Stream responseStream = response.GetResponseStream ()) {
+                    var memoryStream = new MemoryStream ();
+                    CopyTo (responseStream, memoryStream);
+                    byte [] result = memoryStream.ToArray ();
+
+                    return result;
+                }
+            } catch (WebException e) {
+                using (var stream = e.Response.GetResponseStream ())
+                using (var reader = new StreamReader (stream)) {
+                    string errorDetails = reader.ReadToEnd ();
+                    throw new EslServerException (String.Format ("{0} HTTP {1} on URI {2}. Optional details: {3}", e.Message,
+                                                               ((HttpWebResponse)e.Response).Method, e.Response.ResponseUri, errorDetails),
+                                                                errorDetails, e);
+                }
+            } catch (Exception e) {
+                throw new EslException ("Error communicating with esl server. " + e.Message, e);
+            }
+        }
+
         private static void AddAdditionalHeaders (WebRequest request, IDictionary<string, string> headers)
         {
             foreach (KeyValuePair<string, string> entry in headers) {
