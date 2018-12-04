@@ -14,7 +14,7 @@ namespace SDK.Examples
 
         public static void Main (string [] args)
         {
-            new DocumentOperationsExample ().Run ();
+            new DeleteDocumentsExample ().Run ();
         }
 
         override public void Execute ()
@@ -23,7 +23,7 @@ namespace SDK.Examples
             // Create a package with documents
             DocumentPackage superDuperPackage = PackageBuilder.NewPackageNamed (PackageName)
                 .DescribedAs ("This is a package demonstrating document upload")
-                .WithSigner (SignerBuilder.NewSignerWithEmail ("john.smith@email.com")
+                .WithSigner (SignerBuilder.NewSignerWithEmail (email1)
                     .WithFirstName ("John")
                     .WithLastName ("Smith")
                     .WithTitle ("Managing Director")

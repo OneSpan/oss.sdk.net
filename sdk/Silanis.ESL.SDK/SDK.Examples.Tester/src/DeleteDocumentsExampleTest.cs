@@ -3,7 +3,7 @@ using NUnit.Framework;
 
 namespace SDK.Examples
 {
-    public class DocumentsDeleteExampleTests
+    public class DeleteDocumentsExampleTest
     {
         [Test]
         public void verify ()
