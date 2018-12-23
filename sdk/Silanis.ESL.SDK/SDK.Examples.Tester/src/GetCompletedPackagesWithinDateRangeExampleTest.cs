@@ -21,8 +21,9 @@ namespace SDK.Examples
 
         private void assertEqualsPackageUpdatedDate(Page<DocumentPackage> packages, DateTime startDate, DateTime endDate) {
             foreach(DocumentPackage draftPackage in packages) {
+                int offset = DateTimeOffset.Now.Offset.Hours;
                 Assert.GreaterOrEqual(draftPackage.UpdatedDate, startDate.Date);
-                Assert.Less(draftPackage.UpdatedDate, endDate.Date.AddDays(1));
+                Assert.Less(draftPackage.UpdatedDate, endDate.Date.AddHours(-offset).AddDays(1));
             }
         }
     }
