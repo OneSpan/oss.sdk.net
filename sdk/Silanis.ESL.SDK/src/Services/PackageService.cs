@@ -9,7 +9,6 @@ using Silanis.ESL.SDK.Builder;
 using Silanis.ESL.API;
 using System.Globalization;
 using Newtonsoft.Json.Serialization;
-using Newtonsoft.Json.Utilities.LinqBridge;
 using System.Collections.Specialized;
 using System.Linq;
 
@@ -25,8 +24,6 @@ namespace Silanis.ESL.SDK.Services
         private JsonSerializerSettings settings;
         private RestClient restClient;
         private ReportService reportService;
-
-        private static readonly object syncLock = new object();
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Silanis.ESL.SDK.PackageService"/> class.
