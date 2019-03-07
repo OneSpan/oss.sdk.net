@@ -205,6 +205,26 @@ namespace Silanis.ESL.SDK
             return response;
         }
 
+        public string Delete (string path, string jsonPayload)
+        {
+
+            byte [] payloadBytes = null;
+            if (jsonPayload != null) {
+                payloadBytes = Converter.ToBytes (jsonPayload);
+            } else {
+                payloadBytes = new byte [0];
+            }
+
+            if (proxyConfiguration != null)
+                HttpMethods.proxyConfiguration = proxyConfiguration;
+
+            byte [] responseBytes = HttpMethods.DeleteHttp (apiToken, path, payloadBytes, additionalHeaders);
+            string response = Converter.ToString (responseBytes);
+            support.LogResponse (response);
+
+            return response;
+        }
+
     }
 }
 

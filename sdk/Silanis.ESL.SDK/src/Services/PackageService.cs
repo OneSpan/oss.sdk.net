@@ -9,8 +9,8 @@ using Silanis.ESL.SDK.Builder;
 using Silanis.ESL.API;
 using System.Globalization;
 using Newtonsoft.Json.Serialization;
-using Newtonsoft.Json.Utilities.LinqBridge;
 using System.Collections.Specialized;
+using System.Linq;
 
 namespace Silanis.ESL.SDK.Services
 {
@@ -24,8 +24,6 @@ namespace Silanis.ESL.SDK.Services
         private JsonSerializerSettings settings;
         private RestClient restClient;
         private ReportService reportService;
-
-        private static readonly object syncLock = new object();
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Silanis.ESL.SDK.PackageService"/> class.
@@ -178,6 +176,28 @@ namespace Silanis.ESL.SDK.Services
                 throw new EslException("Could not delete document from package." + " Exception: " + e.Message, e);
             }
         }
+
+        /// <summary>
+        /// Deletes the documents from the package.
+        /// </summary>
+        /// <param name="packageId">The package id.</param>
+        /// <param name="documentIds">The documents to delete.</param>
+        public void DeleteDocuments (PackageId packageId, params string[] documentIds)
+        {
+            string path = template.UrlFor (UrlTemplate.DOCUMENT_PATH)
+                            .Replace ("{packageId}", packageId.Id)
+                            .Build ();
+
+            try {
+                string json = JsonConvert.SerializeObject (documentIds, settings);
+                restClient.Delete (path, json);
+            } catch (EslServerException e) {
+                throw new EslServerException ("Could not delete documents from package." + " Exception: " + e.Message, e.ServerError, e);
+            } catch (Exception e) {
+                throw new EslException ("Could not delete documents from package." + " Exception: " + e.Message, e);
+            }
+        }
+
 
         /// <summary>
         /// Get the document's metadata from the package.

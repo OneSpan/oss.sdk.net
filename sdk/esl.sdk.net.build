@@ -19,7 +19,7 @@
        <echo message="build" />
        <msbuild project="${source.dir}/Silanis.ESL.SDK.csproj" target="Clean;Rebuild">
             <property name="Configuration" value="Release"/>
-            <property name="TargetFrameworkVersion" value="v2.0"/>
+            <property name="TargetFrameworkVersion" value="v4.5.2"/>
        </msbuild>
     </target>
     
