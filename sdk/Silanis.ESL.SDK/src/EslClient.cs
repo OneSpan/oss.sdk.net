@@ -206,10 +206,16 @@ namespace Silanis.ESL.SDK
         
 			Silanis.ESL.API.Package packageToCreate = new DocumentPackageConverter(package).ToAPIPackage();
 			PackageId id = packageService.CreatePackage (packageToCreate);
-
-            UploadDocuments(id, package.Documents);
-
-			return id;
+            try 
+            {
+                UploadDocuments (id, package.Documents);
+            }
+            catch (Exception e) 
+            {
+                packageService.DeletePackage (id);
+                throw new EslException ("Could not create a new package." + " Exception: " + e.Message, e);
+            }
+            return id;
 		}
 
         public PackageId CreatePackageOneStep(DocumentPackage package)
