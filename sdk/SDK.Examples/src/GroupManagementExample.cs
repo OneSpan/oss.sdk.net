@@ -13,6 +13,8 @@ namespace SDK.Examples
             new GroupManagementExample().Run();
         }
 
+        public static readonly String GROUP_NAME_PREFIX = "GROUP_";
+        public static readonly String EMAIL = "bob@aol.com";
         public Group createdEmptyGroup;
         public Group createdGroup1;
         public Group retrievedGroup1;
@@ -22,6 +24,8 @@ namespace SDK.Examples
         public Group retrievedGroup3;
         public Group createdGroup3Updated;
 
+        public List<Group> retrievedGroupByName1;
+        public List<Group> retrievedByNamePrefix;
         public List<Group> allGroupsBeforeDelete;
         public List<Group> allGroupsAfterDelete;
         public List<string> groupMemberEmailsAfterUpdate;
@@ -106,13 +110,14 @@ namespace SDK.Examples
 			Console.Out.WriteLine("GroupId: " + createdEmptyGroup.Id.Id);
 			retrievedEmptyGroup = eslClient.GroupService.GetGroupMembers(createdEmptyGroup.Id);
 
-			Group group1 = GroupBuilder.NewGroup(Guid.NewGuid().ToString())
+            String groupName = Guid.NewGuid().ToString();
+            Group group1 = GroupBuilder.NewGroup(GROUP_NAME_PREFIX + groupName)
                     .WithId(new GroupId(Guid.NewGuid().ToString()))
 					.WithMember(GroupMemberBuilder.NewGroupMember(email1)
 						.AsMemberType(GroupMemberType.MANAGER))
 					.WithMember(GroupMemberBuilder.NewGroupMember(email3)
 						.AsMemberType(GroupMemberType.MANAGER))
-                    .WithEmail("bob@aol.com")
+                    .WithEmail(EMAIL)
                     .WithIndividualMemberEmailing()
                     .Build();
             createdGroup1 = eslClient.GroupService.CreateGroup(group1);
@@ -129,30 +134,34 @@ namespace SDK.Examples
                                              .Build());
 
             retrievedGroup1 = eslClient.GroupService.GetGroup(createdGroup1.Id);
+            // Retrieve by group name
+            retrievedGroupByName1 = eslClient.GroupService.GetMyGroups (createdGroup1.Name);
 
-            Group group2 = GroupBuilder.NewGroup(Guid.NewGuid().ToString())
-                .WithMember(GroupMemberBuilder.NewGroupMember(email2)
+            String groupName2 = Guid.NewGuid ().ToString ();
+            Group group2 = GroupBuilder.NewGroup (GROUP_NAME_PREFIX + groupName2)
+                .WithMember (GroupMemberBuilder.NewGroupMember(email2)
 					.AsMemberType(GroupMemberType.MANAGER) )
-                    .WithEmail("bob@aol.com")
+                    .WithEmail(EMAIL)
                     .WithIndividualMemberEmailing()
                     .Build();
             createdGroup2 = eslClient.GroupService.CreateGroup(group2);
             retrievedGroup2 = eslClient.GroupService.GetGroup(createdGroup2.Id);
 			Console.Out.WriteLine("GroupId #2: " + createdGroup2.Id.Id);
 
-            Group group3 = GroupBuilder.NewGroup(Guid.NewGuid().ToString())
+            String groupName3 = Guid.NewGuid ().ToString ();
+            Group group3 = GroupBuilder.NewGroup (GROUP_NAME_PREFIX + groupName3)
                 .WithMember(GroupMemberBuilder.NewGroupMember(email3)
                             .AsMemberType(GroupMemberType.MANAGER) )
-                    .WithEmail("bob@aol.com")
+                    .WithEmail(EMAIL)
                     .WithIndividualMemberEmailing()
                     .Build();
             createdGroup3 = eslClient.GroupService.CreateGroup(group3);
             Console.Out.WriteLine("GroupId #3: " + createdGroup3.Id.Id);
             retrievedGroup3 = eslClient.GroupService.GetGroup(createdGroup3.Id);
+            // Retrieve by group name
+            retrievedByNamePrefix = eslClient.GroupService.GetMyGroups (GROUP_NAME_PREFIX);
 
-			allGroupsBeforeDelete = eslClient.GroupService.GetMyGroups();
-
-            eslClient.GroupService.DeleteGroup(createdGroup2.Id);
+            allGroupsBeforeDelete = eslClient.GroupService.GetMyGroups();
 
             allGroupsAfterDelete = eslClient.GroupService.GetMyGroups();
 
@@ -163,7 +172,7 @@ namespace SDK.Examples
                                 .AsMemberType(GroupMemberType.REGULAR) )
                     .WithMember(GroupMemberBuilder.NewGroupMember(email4)
                                 .AsMemberType(GroupMemberType.REGULAR) )
-                    .WithEmail("bob@aol.com")
+                    .WithEmail(EMAIL)
                     .WithIndividualMemberEmailing()
                     .Build();
 
@@ -188,7 +197,10 @@ namespace SDK.Examples
 			eslClient.PackageService.NotifySigner(packageId, createdGroup1.Id);
 
 			DocumentPackage result = eslClient.GetPackage(packageId);
-			
+
+            eslClient.GroupService.DeleteGroup (createdGroup1.Id);
+            eslClient.GroupService.DeleteGroup (createdGroup2.Id);
+            eslClient.GroupService.DeleteGroup (createdGroup3.Id);
         }
     }
 }

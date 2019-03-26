@@ -17,11 +17,23 @@ namespace Silanis.ESL.SDK
             template = new UrlTemplate (baseUrl);
             this.settings = settings;
         }
-        
-        public Silanis.ESL.API.Result<Silanis.ESL.API.Group> GetMyGroups() {
+
+        public Silanis.ESL.API.Result<Silanis.ESL.API.Group> GetMyGroups ()
+        {
             string path = template.UrlFor (UrlTemplate.GROUPS_PATH)
                     .Build ();
+            return GetGroups (path);
+        }
 
+        public Silanis.ESL.API.Result<Silanis.ESL.API.Group> GetMyGroups (String groupName)
+        {
+            string path = template.UrlFor (UrlTemplate.GROUPS_PATH)
+                    .AddParam ("name", groupName)
+                    .Build ();
+            return GetGroups (path); 
+        }
+
+        private Silanis.ESL.API.Result<Silanis.ESL.API.Group> GetGroups(String path) {
             try {
                 string response = restClient.Get(path);
                 Silanis.ESL.API.Result<Silanis.ESL.API.Group> apiResponse = JsonConvert.DeserializeObject<Silanis.ESL.API.Result<Silanis.ESL.API.Group>> (response, settings );

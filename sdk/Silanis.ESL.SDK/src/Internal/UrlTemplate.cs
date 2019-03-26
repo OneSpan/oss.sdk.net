@@ -190,6 +190,9 @@ namespace Silanis.ESL.SDK.Internal
 
         public UrlTemplate AddParam(string paramKey, string paramValue) 
         {
+            if (parameters.ContainsKey (paramKey)) {
+                parameters.Remove (paramKey);
+            } 
             parameters.Add(paramKey, paramValue);
             return this;
         }

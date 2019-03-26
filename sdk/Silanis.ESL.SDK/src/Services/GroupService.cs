@@ -13,9 +13,18 @@ namespace Silanis.ESL.SDK.Services
         {
             this.apiClient = apiClient;
         }
-    
-        public List<Group> GetMyGroups() {
-            Silanis.ESL.API.Result<Silanis.ESL.API.Group> apiResponse = apiClient.GetMyGroups();
+
+        public List<Group> GetMyGroups () {
+            Silanis.ESL.API.Result<Silanis.ESL.API.Group> apiResponse = apiClient.GetMyGroups ();
+            return GetMyGroups (apiResponse); 
+        }
+
+        public List<Group> GetMyGroups (String groupName) {
+            Silanis.ESL.API.Result<Silanis.ESL.API.Group> apiResponse1 = apiClient.GetMyGroups (groupName);
+            return GetMyGroups (apiResponse1);
+        }
+
+        private List<Group> GetMyGroups(Silanis.ESL.API.Result<Silanis.ESL.API.Group> apiResponse) { 
             List<Group> result = new List<Group>();
 			foreach ( Silanis.ESL.API.Group apiGroup in apiResponse.Results ) {
                 result.Add( new GroupConverter( apiGroup ).ToSDKGroup() );

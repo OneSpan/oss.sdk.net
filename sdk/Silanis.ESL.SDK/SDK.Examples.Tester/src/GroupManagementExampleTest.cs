@@ -11,10 +11,12 @@ namespace SDK.Examples
         public void verify() {
             GroupManagementExample example = new GroupManagementExample();
             example.Run();
-            
+
             Assert.AreEqual(example.createdGroup1.Id.Id, example.retrievedGroup1.Id.Id);
             Assert.AreEqual(example.createdGroup2.Id.Id, example.retrievedGroup2.Id.Id);
             Assert.AreEqual(example.createdGroup3.Id.Id, example.retrievedGroup3.Id.Id);
+            Assert.AreEqual (example.createdGroup1.Name, example.retrievedGroupByName1[0].Name);
+            Assert.That (example.retrievedByNamePrefix[1].Name.StartsWith(GroupManagementExample.GROUP_NAME_PREFIX));
 
             Assert.Contains(example.email2, example.groupMemberEmailsAfterUpdate);
             Assert.Contains(example.email3, example.groupMemberEmailsAfterUpdate);
