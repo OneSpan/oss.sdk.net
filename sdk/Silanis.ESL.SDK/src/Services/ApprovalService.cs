@@ -122,6 +122,12 @@ namespace Silanis.ESL.SDK
             apiClient.ModifyField(packageId, documentId, signatureId, apiField);
         }
 
+        public void ModifyConditionalField (PackageId packageId, string documentId, SignatureId signatureId, ConditionalField sdkField)
+        {
+            Silanis.ESL.API.ConditionalField apiField = new ConditionalFieldConverter (sdkField).ToAPIConditionalField ();
+            apiClient.ModifyConditionalField (packageId, documentId, signatureId, apiField);
+        }
+
         public Field GetField(PackageId packageId, string documentId, SignatureId signatureId, string fieldId)
         {
             Silanis.ESL.API.Field apiField = apiClient.GetField(packageId, documentId, signatureId, fieldId);

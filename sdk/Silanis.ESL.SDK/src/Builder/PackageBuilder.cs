@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Reflection;
-using Silanis.ESL.API;
 
 namespace Silanis.ESL.SDK.Builder
 {
@@ -16,6 +15,7 @@ namespace Silanis.ESL.SDK.Builder
         private IList<Signer> signers = new List<Signer>();
         private IList<Signer> placeholders = new List<Signer> ();
         private IList<Document> documents = new List<Document>();
+        private IList<FieldCondition> conditions = new List<FieldCondition> ();
 		private PackageId id;
 		private DocumentPackageStatus status;
 		private CultureInfo language;
@@ -101,6 +101,12 @@ namespace Silanis.ESL.SDK.Builder
 			}
 			return this;
 		}
+
+        public PackageBuilder WithCondition (FieldCondition condition)
+        {
+            conditions.Add (condition);
+            return this;
+        }
 
 		public PackageBuilder WithDocument (DocumentBuilder builder)
 		{
@@ -207,6 +213,10 @@ namespace Silanis.ESL.SDK.Builder
 
             if ( visibility != null ) {
                 package.Visibility = visibility;
+            }
+            if (conditions != null) 
+            {
+                package.Conditions = conditions;
             }
 
 			return package;

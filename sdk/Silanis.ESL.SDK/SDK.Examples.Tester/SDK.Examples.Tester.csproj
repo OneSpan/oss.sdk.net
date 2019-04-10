@@ -137,6 +137,7 @@
     <Compile Include="src\SignerSSOExampleTest.cs" />
     <Compile Include="src\AdditionalRequestHeadersExampleTest.cs" />
     <Compile Include="src\DeleteDocumentsExampleTest.cs" />
+    <Compile Include="src\ConditionalFieldExampleTest.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

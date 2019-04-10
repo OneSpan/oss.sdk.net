@@ -113,6 +113,8 @@
     <Compile Include="src\Internal\Conversion\DocumentVisibilityConverterTest.cs" />
     <Compile Include="src\Builder\SignerVerificationBuilderTest.cs" />
     <Compile Include="src\Internal\Conversion\SignerVerificationConverterTest.cs" />
+    <Compile Include="src\Internal\Conversion\ConditionalFieldConverterTest.cs" />
+    <Compile Include="src\Internal\Conversion\FieldConditionConverterTest.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

@@ -13,6 +13,7 @@ namespace Silanis.ESL.API
 		private IList<Document> _documents = new List<Document>();
 		private IList<Message> _messages = new List<Message>();
 		private IList<Role> _roles = new List<Role>();
+        private IList<FieldCondition> _conditions = new List<FieldCondition> ();
 		
         internal Package(){
             Visibility = "ACCOUNT";
@@ -169,6 +170,25 @@ namespace Silanis.ESL.API
         _roles.Add(value);
         return this;
     }
+
+        [JsonProperty ("conditions")]
+        public IList<FieldCondition> Conditions 
+        {
+            get 
+            {
+                return _conditions;
+            }
+        }
+        public Package AddCondition (FieldCondition value)
+        {
+            if (value == null) 
+            {
+                throw new ArgumentNullException ("Argument cannot be null");
+            }
+
+            _conditions.Add (value);
+            return this;
+        }
     
 		    
     [JsonProperty("sender")]

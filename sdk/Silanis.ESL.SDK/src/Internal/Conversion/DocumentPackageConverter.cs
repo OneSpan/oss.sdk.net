@@ -119,8 +119,12 @@ namespace Silanis.ESL.SDK
 				package.AddRole(role);
 				signerCount++;
 			}
+            foreach (FieldCondition condition in sdkPackage.Conditions) 
+            {
+                package.AddCondition (new FieldConditionConverter(condition).ToAPIFieldCondition());
+            }
 
-			return package;
+            return package;
 		}
 
         internal Silanis.ESL.SDK.DocumentPackage ToSDKPackage()
@@ -243,6 +247,13 @@ namespace Silanis.ESL.SDK
             if (apiPackage.Created != null) {
                 documentPackage.CreatedDate = apiPackage.Created;
             }
+
+            IList<FieldCondition> conditions = new List<FieldCondition> ();
+            foreach (Silanis.ESL.API.FieldCondition apiFieldCondition in apiPackage.Conditions) 
+            {
+                conditions.Add (new FieldConditionConverter (apiFieldCondition).ToSDKFieldCondition ());
+            }
+            documentPackage.Conditions = conditions;
 
             return documentPackage;
         }

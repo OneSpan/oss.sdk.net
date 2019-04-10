@@ -401,6 +401,12 @@
     <Compile Include="src\Builder\SSOAuthenticationBuilder.cs" />
     <Compile Include="src\CapturedSignature.cs" />
     <Compile Include="src\Models\SignedDocument.cs" />
+    <Compile Include="src\Models\FieldCondition.cs" />
+    <Compile Include="src\Models\ConditionalField.cs" />
+    <Compile Include="src\FieldCondition.cs" />
+    <Compile Include="src\Internal\Conversion\FielConditionConverter.cs" />
+    <Compile Include="src\Internal\Conversion\ConditionalFieldConverter.cs" />
+    <Compile Include="src\ConditionalField.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSHARP.Targets" />
   <ProjectExtensions>

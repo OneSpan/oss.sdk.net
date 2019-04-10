@@ -61,6 +61,13 @@ namespace Silanis.ESL.SDK
             return null;
         }
 
+        private IList<FieldCondition> conditions = new List<FieldCondition> ();
+        public IList<FieldCondition> Conditions 
+        {
+            get { return conditions; }
+            set { conditions = value; }
+        }
+
         public IList<Signer> Placeholders
         {
             get;
