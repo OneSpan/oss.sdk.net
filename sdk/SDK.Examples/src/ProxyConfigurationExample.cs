@@ -48,6 +48,7 @@ namespace SDK.Examples
             package1 = PackageBuilder.NewPackageNamed("ProxyConfigurationExample1: " + DateTime.Now)
                 .DescribedAs("This is a new package1")
                     .WithSigner(SignerBuilder.NewSignerWithEmail(email1)
+                                .WithCustomId("signer1")
                                 .WithFirstName("John")
                                 .WithLastName("Smith"))
                     .WithDocument(DocumentBuilder.NewDocumentNamed("My Document1")
@@ -58,10 +59,13 @@ namespace SDK.Examples
                     .Build();
 
             packageId1 = eslClientWithHttpProxy.CreateAndSendPackage(package1);
+            eslClientWithHttpProxy.SignDocuments (packageId1);
+            eslClientWithHttpProxy.SignDocuments (packageId1, "signer1");
 
             package2 = PackageBuilder.NewPackageNamed("ProxyConfigurationExample2: " + DateTime.Now)
                 .DescribedAs("This is a new package2")
                     .WithSigner(SignerBuilder.NewSignerWithEmail(email1)
+                                .WithCustomId ("signer2")
                                 .WithFirstName("John")
                                 .WithLastName("Smith"))
                     .WithDocument(DocumentBuilder.NewDocumentNamed("My Document2")
@@ -72,6 +76,9 @@ namespace SDK.Examples
                     .Build();
 
             packageId2 = eslClientWithHttpProxyHasCredentials.CreateAndSendPackage(package2);
+            eslClientWithHttpProxyHasCredentials.SignDocuments (packageId2);
+            eslClientWithHttpProxyHasCredentials.SignDocuments (packageId2, "signer2");
+
         }
     }
 }

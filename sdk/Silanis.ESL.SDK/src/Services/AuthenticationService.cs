@@ -20,6 +20,13 @@ namespace Silanis.ESL.SDK
             webpageTemplate = new UrlTemplate(webpageUrl);
         }
 
+        public AuthenticationService (string webpageUrl, ProxyConfiguration proxyConfiguration)
+        {
+            client = new UnauthenticatedRestClient (proxyConfiguration);
+            authenticationTemplate = new UrlTemplate (webpageUrl + UrlTemplate.ESL_AUTHENTICATION_PATH);
+            webpageTemplate = new UrlTemplate (webpageUrl);
+        }
+
         public string GetSessionIdForUserAuthenticationToken(string userAuthenticationToken)
         {
             string path = authenticationTemplate.UrlFor(UrlTemplate.AUTHENTICATION_PATH_FOR_USER_AUTHENTICATION_TOKEN)
