@@ -50,6 +50,7 @@ namespace SDK.Tests
             Assert.IsNotNull(sdkPackageSettings1);
             Assert.AreEqual(apiPackageSettings1.Ceremony.InPerson, sdkPackageSettings1.EnableInPerson);
             Assert.AreEqual(apiPackageSettings1.Ceremony.Ada, sdkPackageSettings1.Ada);
+            Assert.AreEqual(apiPackageSettings1.Ceremony.FontSize, sdkPackageSettings1.FontSize);
             Assert.AreEqual(apiPackageSettings1.Ceremony.EnforceCaptureSignature, sdkPackageSettings1.EnforceCaptureSignature);
             Assert.AreEqual(apiPackageSettings1.Ceremony.DeclineButton, sdkPackageSettings1.EnableDecline);
             Assert.AreEqual(apiPackageSettings1.Ceremony.OptOutButton, sdkPackageSettings1.EnableOptOut);
@@ -85,6 +86,7 @@ namespace SDK.Tests
             Assert.IsNotNull(apiPackageSettings1);
             Assert.AreEqual(apiPackageSettings1.Ceremony.InPerson, sdkPackageSettings1.EnableInPerson);
             Assert.AreEqual(apiPackageSettings1.Ceremony.Ada, sdkPackageSettings1.Ada);
+            Assert.AreEqual(apiPackageSettings1.Ceremony.FontSize, sdkPackageSettings1.FontSize);
             Assert.AreEqual(apiPackageSettings1.Ceremony.EnforceCaptureSignature, sdkPackageSettings1.EnforceCaptureSignature);
             Assert.AreEqual(apiPackageSettings1.Ceremony.DeclineButton, sdkPackageSettings1.EnableDecline);
             Assert.AreEqual(apiPackageSettings1.Ceremony.OptOutButton, sdkPackageSettings1.EnableOptOut);
@@ -116,6 +118,7 @@ namespace SDK.Tests
             Silanis.ESL.SDK.DocumentPackageSettings sdkDocumentPackageSettings = DocumentPackageSettingsBuilder.NewDocumentPackageSettings()
                     .WithInPerson()
                     .WithAda()
+                    .WithFontSize(36)
                     .WithEnforceCaptureSignature()
                     .WithoutDecline()
                     .WithOptOut()
@@ -153,6 +156,7 @@ namespace SDK.Tests
 
             apiCeremonySettings.InPerson = false;
             apiCeremonySettings.Ada = true;
+            apiCeremonySettings.FontSize = 9;
             apiCeremonySettings.DeclineButton = true;
             apiCeremonySettings.OptOutButton = true;
 

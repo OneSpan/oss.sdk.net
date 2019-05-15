@@ -4,57 +4,53 @@ using System.Collections.Generic;
 
 namespace Silanis.ESL.SDK
 {
-	public class DocumentPackageSettings
-	{
+    public class DocumentPackageSettings
+    {
         private Nullable<bool> showLanguageDropDown = null;
-        public Nullable<bool> ShowLanguageDropDown
-        {
+        public Nullable<bool> ShowLanguageDropDown {
             get { return showLanguageDropDown; }
             set { showLanguageDropDown = value; }
         }
-        
+
         private Nullable<bool> enableFirstAffidavit = null;
-        public Nullable<bool> EnableFirstAffidavit
-        {
+        public Nullable<bool> EnableFirstAffidavit {
             get { return enableFirstAffidavit; }
             set { enableFirstAffidavit = value; }
         }
-        
+
         private Nullable<bool> enableSecondAffidavit = null;
-        public Nullable<bool> EnableSecondAffidavit
-        {
+        public Nullable<bool> EnableSecondAffidavit {
             get { return enableSecondAffidavit; }
             set { enableSecondAffidavit = value; }
         }
 
         private Nullable<bool> showOwnerInPersonDropDown = null;
-        public Nullable<bool> ShowOwnerInPersonDropDown
-        {
+        public Nullable<bool> ShowOwnerInPersonDropDown {
             get { return showOwnerInPersonDropDown; }
             set { showOwnerInPersonDropDown = value; }
         }
-        
-		private Nullable<bool> enableInPerson = null;
 
-		public Nullable<bool> EnableInPerson {
-			get {
-				return enableInPerson;
-			}
-			set {
-				enableInPerson = value;
-			}
-		}
+        private Nullable<bool> enableInPerson = null;
 
-		private Nullable<bool> enableOptOut = null;
+        public Nullable<bool> EnableInPerson {
+            get {
+                return enableInPerson;
+            }
+            set {
+                enableInPerson = value;
+            }
+        }
 
-		public Nullable<bool> EnableOptOut {
-			get {
-				return enableOptOut;
-			}
-			set {
-				enableOptOut = value;
-			}
-		}
+        private Nullable<bool> enableOptOut = null;
+
+        public Nullable<bool> EnableOptOut {
+            get {
+                return enableOptOut;
+            }
+            set {
+                enableOptOut = value;
+            }
+        }
 
         private Nullable<bool> disableOptOutOther = null;
 
@@ -67,16 +63,16 @@ namespace Silanis.ESL.SDK
             }
         }
 
-		private Nullable<bool> enableDecline = null;
+        private Nullable<bool> enableDecline = null;
 
-		public Nullable<bool> EnableDecline {
-			get {
-				return enableDecline;
-			}
-			set {
-				enableDecline = value;
-			}
-		}
+        public Nullable<bool> EnableDecline {
+            get {
+                return enableDecline;
+            }
+            set {
+                enableDecline = value;
+            }
+        }
 
         private Nullable<bool> disableDeclineOther = null;
 
@@ -89,27 +85,27 @@ namespace Silanis.ESL.SDK
             }
         }
 
-		private Nullable<bool> hideWatermark = null;
+        private Nullable<bool> hideWatermark = null;
 
-		public Nullable<bool> HideWatermark {
-			get {
-				return hideWatermark;
-			}
-			set {
-				hideWatermark = value;
-			}
-		}
+        public Nullable<bool> HideWatermark {
+            get {
+                return hideWatermark;
+            }
+            set {
+                hideWatermark = value;
+            }
+        }
 
-		private Nullable<bool> hideCaptureText = null;
+        private Nullable<bool> hideCaptureText = null;
 
-		public Nullable<bool> HideCaptureText {
-			get {
-				return hideCaptureText;
-			}
-			set {
-				hideCaptureText = value;
-			}
-		}
+        public Nullable<bool> HideCaptureText {
+            get {
+                return hideCaptureText;
+            }
+            set {
+                hideCaptureText = value;
+            }
+        }
 
         private Nullable<bool> ada = null;
 
@@ -119,6 +115,17 @@ namespace Silanis.ESL.SDK
             }
             set {
                 ada = value;
+            }
+        }
+
+        private Nullable<Int32> fontSize = null;
+
+        public Nullable<Int32> FontSize {
+            get {
+                return fontSize;
+            }
+            set {
+                fontSize = value;
             }
         }
 
@@ -133,7 +140,7 @@ namespace Silanis.ESL.SDK
             }
         }
 
-        private List<string> declineReasons = new List<string>();
+        private List<string> declineReasons = new List<string> ();
 
         public List<string> DeclineReasons {
             get {
@@ -144,180 +151,184 @@ namespace Silanis.ESL.SDK
             }
         }
 
-		private List<string> optOutReasons = new List<string>();
+        private List<string> optOutReasons = new List<string> ();
 
-		public List<string> OptOutReasons {
-			get {
-				return optOutReasons;
-			}
-			set {
-				optOutReasons = value;
-			}
-		}
+        public List<string> OptOutReasons {
+            get {
+                return optOutReasons;
+            }
+            set {
+                optOutReasons = value;
+            }
+        }
 
-		private Nullable<int> maxAuthAttempts = null;
+        private Nullable<int> maxAuthAttempts = null;
 
-		public Nullable<int> MaxAuthAttempts {
-			get {
-				return maxAuthAttempts;
-			}
-			set {
-				maxAuthAttempts = value;
-			}
-		}
+        public Nullable<int> MaxAuthAttempts {
+            get {
+                return maxAuthAttempts;
+            }
+            set {
+                maxAuthAttempts = value;
+            }
+        }
 
-		private Nullable<bool> showDownloadButton = null;
+        private Nullable<bool> showDownloadButton = null;
 
-		public Nullable<bool> ShowDownloadButton {
-			get {
-				return showDownloadButton;
-			}
-			set {
-				showDownloadButton = value;
-			}
-		}
+        public Nullable<bool> ShowDownloadButton {
+            get {
+                return showDownloadButton;
+            }
+            set {
+                showDownloadButton = value;
+            }
+        }
 
-		private Nullable<bool> showDialogOnComplete = null;
+        private Nullable<bool> showDialogOnComplete = null;
 
-		public Nullable<bool> ShowDialogOnComplete {
-			get {
-				return showDialogOnComplete;
-			}
-			set {
-				showDialogOnComplete = value;
-			}
-		}
+        public Nullable<bool> ShowDialogOnComplete {
+            get {
+                return showDialogOnComplete;
+            }
+            set {
+                showDialogOnComplete = value;
+            }
+        }
 
-		private string linkText;
+        private string linkText;
 
-		public string LinkText {
-			get {
-				return linkText;
-			}
-			set {
-				linkText = value;
-			}
-		}
+        public string LinkText {
+            get {
+                return linkText;
+            }
+            set {
+                linkText = value;
+            }
+        }
 
-		private string linkTooltip;
+        private string linkTooltip;
 
-		public string LinkTooltip {
-			get {
-				return linkTooltip;
-			}
-			set {
-				linkTooltip = value;
-			}
-		}
+        public string LinkTooltip {
+            get {
+                return linkTooltip;
+            }
+            set {
+                linkTooltip = value;
+            }
+        }
 
-		private string linkHref;
+        private string linkHref;
 
-		public string LinkHref {
-			get {
-				return linkHref;
-			}
-			set {
-				linkHref = value;
-			}
-		}
+        public string LinkHref {
+            get {
+                return linkHref;
+            }
+            set {
+                linkHref = value;
+            }
+        }
 
-		private CeremonyLayoutSettings ceremonyLayoutSettings = null;
+        private CeremonyLayoutSettings ceremonyLayoutSettings = null;
 
-		public CeremonyLayoutSettings CeremonyLayoutSettings {
-			get {
-				return ceremonyLayoutSettings;
-			}
-			set {
-				ceremonyLayoutSettings = value;
-			}
-		}
+        public CeremonyLayoutSettings CeremonyLayoutSettings {
+            get {
+                return ceremonyLayoutSettings;
+            }
+            set {
+                ceremonyLayoutSettings = value;
+            }
+        }
 
-		internal PackageSettings toAPIPackageSettings() {
+        internal PackageSettings toAPIPackageSettings ()
+        {
 
-			CeremonySettings ceremonySettings = new CeremonySettings();
+            CeremonySettings ceremonySettings = new CeremonySettings ();
 
-			if ( enableInPerson != null )
-				ceremonySettings.InPerson = enableInPerson.Value;
+            if (enableInPerson != null)
+                ceremonySettings.InPerson = enableInPerson.Value;
 
-			if ( enableOptOut != null )
-				ceremonySettings.OptOutButton = enableOptOut.Value;	
+            if (enableOptOut != null)
+                ceremonySettings.OptOutButton = enableOptOut.Value;
 
-			if ( enableDecline != null )
-			    ceremonySettings.DeclineButton = enableDecline.Value;
+            if (enableDecline != null)
+                ceremonySettings.DeclineButton = enableDecline.Value;
 
-            if ( disableOptOutOther != null )
-                ceremonySettings.DisableOptOutOther = disableOptOutOther.Value; 
+            if (disableOptOutOther != null)
+                ceremonySettings.DisableOptOutOther = disableOptOutOther.Value;
 
-            if ( disableDeclineOther != null )
+            if (disableDeclineOther != null)
                 ceremonySettings.DisableDeclineOther = disableDeclineOther.Value;
 
-            if ( hideWatermark != null )
-			    ceremonySettings.HideWatermark = hideWatermark.Value;
+            if (hideWatermark != null)
+                ceremonySettings.HideWatermark = hideWatermark.Value;
 
-            if ( hideCaptureText != null )
-			    ceremonySettings.HideCaptureText = hideCaptureText.Value;
+            if (hideCaptureText != null)
+                ceremonySettings.HideCaptureText = hideCaptureText.Value;
 
-            if ( enableFirstAffidavit != null )
+            if (enableFirstAffidavit != null)
                 ceremonySettings.DisableFirstInPersonAffidavit = !enableFirstAffidavit.Value;
-                
-            if ( enableSecondAffidavit != null )
+
+            if (enableSecondAffidavit != null)
                 ceremonySettings.DisableSecondInPersonAffidavit = !enableSecondAffidavit.Value;
-                
-            if ( showOwnerInPersonDropDown != null )
+
+            if (showOwnerInPersonDropDown != null)
                 ceremonySettings.HidePackageOwnerInPerson = !showOwnerInPersonDropDown.Value;
-                
-            if ( showLanguageDropDown != null )
+
+            if (showLanguageDropDown != null)
                 ceremonySettings.HideLanguageDropdown = !showLanguageDropDown.Value;
 
             if (enforceCaptureSignature != null)
                 ceremonySettings.EnforceCaptureSignature = enforceCaptureSignature.Value;
 
-            if ( ada != null )
+            if (ada != null)
                 ceremonySettings.Ada = ada.Value;
 
-            foreach ( string declineReason in declineReasons )
-                ceremonySettings.DeclineReasons.Add( declineReason );
+            if (fontSize != null)
+                ceremonySettings.FontSize = fontSize.Value;
 
-            foreach ( string optOutReason in optOutReasons )
-                ceremonySettings.OptOutReasons.Add( optOutReason );
+            foreach (string declineReason in declineReasons)
+                ceremonySettings.DeclineReasons.Add (declineReason);
 
-            if ( maxAuthAttempts != null )
-			    ceremonySettings.MaxAuthFailsAllowed = maxAuthAttempts.Value;
+            foreach (string optOutReason in optOutReasons)
+                ceremonySettings.OptOutReasons.Add (optOutReason);
 
-			if ( linkHref != null ) {
-				Link link = new Link();
-				link.Href = linkHref;
-				link.Text = ( linkText == null ? linkHref : linkText );
-				link.Title = ( linkTooltip == null ? linkHref : linkTooltip );
-				ceremonySettings.HandOver = link;
-			}
+            if (maxAuthAttempts != null)
+                ceremonySettings.MaxAuthFailsAllowed = maxAuthAttempts.Value;
 
-			if ( showDialogOnComplete != null ) {
-				CeremonyEvents ceremonyEvents = new CeremonyEvents();
-				CeremonyEventComplete ceremonyEventComplete = new CeremonyEventComplete();
-				if ( showDialogOnComplete != null )
-					ceremonyEventComplete.Dialog = showDialogOnComplete.Value;
+            if (linkHref != null) {
+                Link link = new Link ();
+                link.Href = linkHref;
+                link.Text = (linkText == null ? linkHref : linkText);
+                link.Title = (linkTooltip == null ? linkHref : linkTooltip);
+                ceremonySettings.HandOver = link;
+            }
 
-				ceremonyEvents.Complete = ceremonyEventComplete;
+            if (showDialogOnComplete != null) {
+                CeremonyEvents ceremonyEvents = new CeremonyEvents ();
+                CeremonyEventComplete ceremonyEventComplete = new CeremonyEventComplete ();
+                if (showDialogOnComplete != null)
+                    ceremonyEventComplete.Dialog = showDialogOnComplete.Value;
+
+                ceremonyEvents.Complete = ceremonyEventComplete;
                 ceremonySettings.Events = ceremonyEvents;
-			}
+            }
 
-			if ( showDownloadButton != null ) {
-				DocumentToolbarOptions documentToolbarOptions = new DocumentToolbarOptions();
-			    if ( showDownloadButton != null ) 
-					documentToolbarOptions.DownloadButton = showDownloadButton.Value;
-				ceremonySettings.DocumentToolbarOptions = documentToolbarOptions;
-			}
+            if (showDownloadButton != null) {
+                DocumentToolbarOptions documentToolbarOptions = new DocumentToolbarOptions ();
+                if (showDownloadButton != null)
+                    documentToolbarOptions.DownloadButton = showDownloadButton.Value;
+                ceremonySettings.DocumentToolbarOptions = documentToolbarOptions;
+            }
 
-			if ( ceremonyLayoutSettings != null ) {
-				ceremonySettings.Layout = new CeremonyLayoutSettingsConverter(ceremonyLayoutSettings).ToAPILayoutOptions();
-			}
+            if (ceremonyLayoutSettings != null) {
+                ceremonySettings.Layout = new CeremonyLayoutSettingsConverter (ceremonyLayoutSettings).ToAPILayoutOptions ();
+            }
 
-			PackageSettings result = new PackageSettings();
-			result.Ceremony = ceremonySettings;
+            PackageSettings result = new PackageSettings ();
+            result.Ceremony = ceremonySettings;
 
-			return result;
-		}
-	}
+            return result;
+        }
+    }
 }
 

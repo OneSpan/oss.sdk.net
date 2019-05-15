@@ -94,6 +94,12 @@ namespace Silanis.ESL.API
         }
 
 
+        [JsonProperty ("fontSize")]
+        public Nullable<Int32> FontSize {
+            get; set;
+        }
+
+
         [JsonProperty ("enforceCaptureSignature")]
         public Nullable<bool> EnforceCaptureSignature {
             get; set;

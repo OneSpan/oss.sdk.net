@@ -37,6 +37,7 @@ namespace Silanis.ESL.SDK
             ceremonySettings.DisableOptOutOther = sdkSettings.DisableOptOutOther;
             ceremonySettings.EnforceCaptureSignature = sdkSettings.EnforceCaptureSignature;
             ceremonySettings.Ada = sdkSettings.Ada;
+            ceremonySettings.FontSize = sdkSettings.FontSize;
 
             if (sdkSettings.EnableFirstAffidavit.HasValue) {
                 ceremonySettings.DisableFirstInPersonAffidavit = !sdkSettings.EnableFirstAffidavit;
@@ -133,6 +134,9 @@ namespace Silanis.ESL.SDK
 
                 if (apiSettings.Ceremony.Ada.HasValue)
                     builder = (apiSettings.Ceremony.Ada.Value ? builder.WithAda() : builder.WithoutAda());
+
+                if (apiSettings.Ceremony.FontSize.HasValue)
+                    builder.WithFontSize (apiSettings.Ceremony.FontSize.Value);
             
                 foreach (string declineReason in apiSettings.Ceremony.DeclineReasons)
                 {

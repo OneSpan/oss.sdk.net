@@ -20,6 +20,8 @@ namespace SDK.Examples
         public readonly string OPT_OUT_REASON_2 = "OptOut reason Two";
         public readonly string OPT_OUT_REASON_3 = "OptOut reason Three";
 
+        public readonly Nullable<Int32> FONT_SIZE = 28;
+
         override public void Execute() {
             DocumentPackage superDuperPackage = PackageBuilder.NewPackageNamed(PackageName)
 				.WithSettings(DocumentPackageSettingsBuilder.NewDocumentPackageSettings()
@@ -39,6 +41,7 @@ namespace SDK.Examples
                               .WithOptOutReason(OPT_OUT_REASON_2)
                               .WithOptOutReason(OPT_OUT_REASON_3)
                               .WithoutOptOutOther()
+                              .WithFontSize(FONT_SIZE)
 				              .WithHandOverLinkHref("http://www.google.ca")
 				              .WithHandOverLinkText("click here")
 				              .WithHandOverLinkTooltip("link tooltip")
