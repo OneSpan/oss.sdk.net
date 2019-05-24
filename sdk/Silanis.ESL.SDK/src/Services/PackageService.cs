@@ -994,6 +994,34 @@ namespace Silanis.ESL.SDK.Services
             }
         }
 
+        public Page<Dictionary<String, String>> GetPackagesFields (DocumentPackageStatus status, PageRequest request, ISet<String> fields)
+        {
+            string path = template.UrlFor (UrlTemplate.PACKAGE_FIELDS_LIST_PATH)
+                .Replace ("{status}", new PackageStatusConverter (status).ToAPIPackageStatus ())
+                .Replace ("{from}", request.From.ToString ())
+                .Replace ("{to}", request.To.ToString ())
+                .Replace ("{fields}", string.Join(",", fields))
+                .Build ();
+
+            try 
+            {
+                string response = restClient.Get (path);
+                Result<Dictionary<String, String>> results = JsonConvert.DeserializeObject<Result<Dictionary<String, String>>> (response, settings);
+
+                return new Page<Dictionary<String, String>> (results.Results, results.Count.Value, request);
+            } 
+            catch (EslServerException e) 
+            {
+                Console.WriteLine (e.StackTrace);
+                throw new EslServerException ("Could not get package list. Exception: " + e.Message, e.ServerError, e);
+            } 
+            catch (Exception e) 
+            {
+                Console.WriteLine (e.StackTrace);
+                throw new EslException ("Could not get package list. Exception: " + e.Message, e);
+            }
+        }
+
         public Page<DocumentPackage> GetUpdatedPackagesWithinDateRange(DocumentPackageStatus status, PageRequest request, DateTime from, DateTime to)
         {
             string fromDate = DateHelper.dateToIsoUtcFormat(from);

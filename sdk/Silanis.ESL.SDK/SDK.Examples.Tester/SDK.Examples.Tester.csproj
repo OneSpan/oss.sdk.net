@@ -138,6 +138,7 @@
     <Compile Include="src\AdditionalRequestHeadersExampleTest.cs" />
     <Compile Include="src\DeleteDocumentsExampleTest.cs" />
     <Compile Include="src\ConditionalFieldExampleTest.cs" />
+    <Compile Include="src\GetPackageFieldsListExampleTest.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
