@@ -153,6 +153,11 @@ namespace Silanis.ESL.SDK
             return RoleId != null;
         }
 
+        public Nullable<Int32> FontSize {
+            get;
+            set;
+        }
+
         public bool Optional 
         {
             get;

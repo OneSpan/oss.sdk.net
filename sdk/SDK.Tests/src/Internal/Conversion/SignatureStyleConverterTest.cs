@@ -42,7 +42,6 @@ namespace SDK.Tests
         }
         
         [Test]
-
         public void ToSDKFromCheckbox()
         {
             SignatureStyleConverter converter = new SignatureStyleConverter(FieldStyle.UNBOUND_CHECK_BOX.getApiValue());
@@ -52,7 +51,6 @@ namespace SDK.Tests
         }
 
         [Test]
-
         public void ToSDKFromCustomField()
         {
             SignatureStyleConverter converter = new SignatureStyleConverter(FieldStyle.UNBOUND_CUSTOM_FIELD.getApiValue());
@@ -62,7 +60,6 @@ namespace SDK.Tests
         }
 
         [Test]
-
         public void ToSDKFromDate()
         {
             SignatureStyleConverter converter = new SignatureStyleConverter("DATE");
@@ -72,7 +69,6 @@ namespace SDK.Tests
         }
 
         [Test]
-
         public void ToSDKFromLabel()
         {
             SignatureStyleConverter converter = new SignatureStyleConverter(FieldStyle.LABEL.getApiValue());
@@ -82,7 +78,6 @@ namespace SDK.Tests
         }
 
         [Test]
-
         public void ToSDKFromList()
         {
             SignatureStyleConverter converter = new SignatureStyleConverter(FieldStyle.DROP_LIST.getApiValue());
@@ -92,7 +87,6 @@ namespace SDK.Tests
         }
 
         [Test]
-
         public void ToSDKFromNotarize()
         {
             SignatureStyleConverter converter = new SignatureStyleConverter(FieldStyle.SEAL.getApiValue());
@@ -102,7 +96,6 @@ namespace SDK.Tests
         }
 
         [Test]
-
         public void ToSDKFromQRCode()
         {
             SignatureStyleConverter converter = new SignatureStyleConverter(FieldStyle.BOUND_QRCODE.getApiValue());
@@ -112,7 +105,6 @@ namespace SDK.Tests
         }
 
         [Test]
-
         public void ToSDKFromRadio()
         {
             SignatureStyleConverter converter = new SignatureStyleConverter(FieldStyle.UNBOUND_RADIO_BUTTON.getApiValue());
@@ -122,7 +114,6 @@ namespace SDK.Tests
         }
 
         [Test]
-
         public void ToSDKFromTextArea()
         {
             SignatureStyleConverter converter = new SignatureStyleConverter(FieldStyle.TEXT_AREA.getApiValue());
@@ -132,7 +123,6 @@ namespace SDK.Tests
         }
 
         [Test]
-
         public void ToSDKFromTextField()
         {
             SignatureStyleConverter converter = new SignatureStyleConverter(FieldStyle.UNBOUND_TEXT_FIELD.getApiValue());

@@ -53,12 +53,20 @@ namespace SDK.Examples
             Document document = documentPackage.GetDocument(example.DOCUMENT1_NAME);
             Assert.AreEqual(1, document.NumberOfPages);
 
-            List<Field> fields = document.Signatures[0].Fields;
-            Field field = fields[0];
+            Signature signature = document.Signatures [0];
+            Assert.AreEqual (example.email1, signature.SignerEmail);
+            Assert.AreEqual (example.SIGNATURE_FONT_SIZE, signature.FontSize);
 
-            Assert.AreEqual(FieldStyle.UNBOUND_CHECK_BOX, field.Style);
-            Assert.AreEqual(0, field.Page);
-            Assert.AreEqual(FieldBuilder.CHECKBOX_CHECKED, field.Value);
+            List<Field> fields = signature.Fields;
+            Field field1 = fields[0];
+            Assert.AreEqual (FieldStyle.BOUND_NAME, field1.Style);
+            Assert.AreEqual (0, field1.Page);
+            Assert.AreEqual (example.AUTO_FIELD_FONT_SIZE, field1.FontSize);
+
+            Field field2 = fields [1];
+            Assert.AreEqual (FieldStyle.UNBOUND_CHECK_BOX, field2.Style);
+            Assert.AreEqual (0, field2.Page);
+            Assert.AreEqual (FieldBuilder.CHECKBOX_CHECKED, field2.Value);
 
             // Document 2
             document = documentPackage.GetDocument(example.DOCUMENT2_NAME);
@@ -66,7 +74,7 @@ namespace SDK.Examples
 
             fields = document.Signatures[0].Fields;
 
-            field = findFieldByName("firstField", fields);
+            Field field = findFieldByName("firstField", fields);
             Assert.AreEqual(FieldStyle.UNBOUND_RADIO_BUTTON, field.Style);
             Assert.AreEqual(0, field.Page);
             Assert.AreEqual("", field.Value);

@@ -77,9 +77,14 @@ namespace Silanis.ESL.SDK
                         .AtPosition( apiSignatureField.Left.Value, apiSignatureField.Top.Value )
                         .WithSize( apiSignatureField.Width.Value, apiSignatureField.Height.Value );
 
-                if ( apiSignatureField.Extract.Value ) {
+                if ( apiSignatureField.Extract.Value )
+                {
                     signatureBuilder.WithPositionExtracted();
-                }                   
+                }
+                if (apiSignatureField.FontSize != null) 
+                {
+                    signatureBuilder.WithFontSize (apiSignatureField.FontSize.Value);
+                }
             }
 
             if (apiApproval.Optional) 
@@ -132,6 +137,7 @@ namespace Silanis.ESL.SDK
             result.Page = signature.Page;
             result.Name = signature.Name;
             result.Extract = signature.Extract;
+            result.FontSize = signature.FontSize;
 
             if (!signature.Extract)
             {

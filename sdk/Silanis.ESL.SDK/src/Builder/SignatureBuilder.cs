@@ -15,6 +15,7 @@ namespace Silanis.ESL.SDK.Builder
 		private string signerEmail;
 		private double width = DEFAULT_WIDTH;
 		private double height = DEFAULT_HEIGHT;
+        private Nullable<Int32> fontSize;
 		private SignatureStyle style = DEFAULT_STYLE;
 		private int page;
 		private double x;
@@ -174,6 +175,12 @@ namespace Silanis.ESL.SDK.Builder
 			return this;
 		}
 
+        public SignatureBuilder WithFontSize (Nullable<Int32> fontSize)
+        {
+            this.fontSize = fontSize;
+            return this;
+        }
+
 		public SignatureBuilder WithField (FieldBuilder builder)
 		{
 			return WithField (builder.Build());
@@ -234,8 +241,9 @@ namespace Silanis.ESL.SDK.Builder
 			signature.AddFields (fields);
             signature.Id = id;
 			signature.Name = name;
-			signature.Extract = extract;
+            signature.Extract = extract;
             signature.TextAnchor = textAnchor;
+            signature.FontSize = fontSize;
             signature.Optional = optional;
             signature.EnforceCaptureSignature = enforceCaptureSignature;
 
