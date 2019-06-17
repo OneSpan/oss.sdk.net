@@ -115,6 +115,11 @@
     <Compile Include="src\Internal\Conversion\SignerVerificationConverterTest.cs" />
     <Compile Include="src\Internal\Conversion\ConditionalFieldConverterTest.cs" />
     <Compile Include="src\Internal\Conversion\FieldConditionConverterTest.cs" />
+    <Compile Include="src\Builder\FieldConditionBuilderTest.cs" />
+    <Compile Include="src\Internal\Conversion\ReferencedConditionsConverterTest.cs" />
+    <Compile Include="src\Internal\Conversion\ReferencedDocumentConverterTest.cs" />
+    <Compile Include="src\Internal\Conversion\ReferencedFieldConditionsConverterTest.cs" />
+    <Compile Include="src\Internal\Conversion\ReferencedFieldConverterTest.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

@@ -1615,5 +1615,39 @@ namespace Silanis.ESL.SDK.Services
                 throw new EslException("Could not get support configuration." + " Exception: " + e.Message, e);
             }
         }
+
+        public ReferencedConditions GetReferencedConditions(String packageId)
+        {
+            return this.GetReferencedConditions(packageId, null, null);
+        }
+
+        public ReferencedConditions GetReferencedConditions(String packageId, String documentId)
+        {
+            return this.GetReferencedConditions(packageId, documentId, null);
+        }
+
+        public ReferencedConditions GetReferencedConditions(String packageId, String documentId, String fieldId)
+        {
+            String path = template.UrlFor(UrlTemplate.PACKAGE_REFERENCED_CONDITIONS_PATH)
+                .Replace("{packageId}", packageId)
+                .AddParam("documentId", documentId)
+                .AddParam("fieldId", fieldId)
+                .Build();
+
+            try
+            {
+                string stringResponse = restClient.Get(path);
+                API.ReferencedConditions apiReferencedConditions = JsonConvert.DeserializeObject<API.ReferencedConditions>(stringResponse, settings);
+                return ReferencedConditionsConverter.ToSDK(apiReferencedConditions);
+            }
+            catch (EslServerException e)
+            {
+                throw new EslServerException ("Could not get referenced conditions." + " Exception: " + e.Message, e.ServerError, e);
+            }
+            catch (Exception e)
+            {
+                throw new EslException ("Could not get referenced conditions." + " Exception: " + e.Message, e);
+            }
+        }
     }
 }

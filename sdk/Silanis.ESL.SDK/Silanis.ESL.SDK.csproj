@@ -53,9 +53,21 @@
     <Compile Include="src\FieldSummary.cs" />
     <Compile Include="src\EslClient.cs" />
     <Compile Include="src\EslException.cs" />
+    <Compile Include="src\Internal\Conversion\ReferencedConditionsConverter.cs" />
+    <Compile Include="src\Internal\Conversion\ReferencedDocumentConverter.cs" />
+    <Compile Include="src\Internal\Conversion\ReferencedFieldConditionsConverter.cs" />
+    <Compile Include="src\Internal\Conversion\ReferencedFieldConverter.cs" />
     <Compile Include="src\Internal\Conversion\TextAnchorConverter.cs" />
     <Compile Include="src\Internal\Conversion\TextAnchorPositionConverter.cs" />
+    <Compile Include="src\Models\ReferencedConditions.cs" />
+    <Compile Include="src\Models\ReferencedDocument.cs" />
+    <Compile Include="src\Models\ReferencedField.cs" />
+    <Compile Include="src\Models\ReferencedFieldConditions.cs" />
     <Compile Include="src\PackageId.cs" />
+    <Compile Include="src\ReferencedConditions.cs" />
+    <Compile Include="src\ReferencedDocument.cs" />
+    <Compile Include="src\ReferencedField.cs" />
+    <Compile Include="src\ReferencedFieldConditions.cs" />
     <Compile Include="src\SessionToken.cs" />
     <Compile Include="src\Internal\Converter.cs" />
     <Compile Include="src\Internal\HttpMethods.cs" />
@@ -407,6 +419,7 @@
     <Compile Include="src\Internal\Conversion\FielConditionConverter.cs" />
     <Compile Include="src\Internal\Conversion\ConditionalFieldConverter.cs" />
     <Compile Include="src\ConditionalField.cs" />
+    <Compile Include="src\Builder\FieldConditionBuilder.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSHARP.Targets" />
   <ProjectExtensions>
