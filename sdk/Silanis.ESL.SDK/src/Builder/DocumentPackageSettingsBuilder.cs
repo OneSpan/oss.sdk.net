@@ -26,6 +26,8 @@ namespace Silanis.ESL.SDK
         private Nullable<bool> enforceCaptureSignature = null;
         private Nullable<bool> ada = null;
         private Nullable<Int32> fontSize = null;
+        private Nullable<bool> defaultTimeBasedExpiry = null;
+        private Nullable<Int32> remainingDays = null;
 
         private string linkText = null;
         private string linkTooltip = null;
@@ -175,6 +177,24 @@ namespace Silanis.ESL.SDK
             return this;
         }
 
+        public DocumentPackageSettingsBuilder WithDefaultTimeBasedExpiry ()
+        {
+            defaultTimeBasedExpiry = true;
+            return this;
+        }
+
+        public DocumentPackageSettingsBuilder WithoutDefaultTimeBasedExpiry ()
+        {
+            defaultTimeBasedExpiry = false;
+            return this;
+        }
+
+        public DocumentPackageSettingsBuilder WithRemainingDays (Nullable<Int32> remainingDays)
+        {
+            this.remainingDays = remainingDays;
+            return this;
+        }
+
         public DocumentPackageSettingsBuilder WithCaptureText ()
         {
             hideCaptureText = false;
@@ -308,6 +328,8 @@ namespace Silanis.ESL.SDK
             result.EnforceCaptureSignature = enforceCaptureSignature;
             result.Ada = ada;
             result.FontSize = fontSize;
+            result.DefaultTimeBasedExpiry = defaultTimeBasedExpiry;
+            result.RemainingDays = remainingDays;
             result.LinkHref = linkHref;
             result.LinkText = linkText;
             result.LinkTooltip = linkTooltip;
@@ -337,6 +359,7 @@ namespace Silanis.ESL.SDK
             disableOptOutOther = apiPackageSettings.Ceremony.DisableOptOutOther;
             enforceCaptureSignature = apiPackageSettings.Ceremony.EnforceCaptureSignature;
             ada = apiPackageSettings.Ceremony.Ada;
+
 
             foreach (string declineReason in apiPackageSettings.Ceremony.DeclineReasons) {
                 declineReasons.Add (declineReason);

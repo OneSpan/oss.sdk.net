@@ -38,6 +38,8 @@ namespace Silanis.ESL.SDK
             ceremonySettings.EnforceCaptureSignature = sdkSettings.EnforceCaptureSignature;
             ceremonySettings.Ada = sdkSettings.Ada;
             ceremonySettings.FontSize = sdkSettings.FontSize;
+            ceremonySettings.DefaultTimeBasedExpiry = sdkSettings.DefaultTimeBasedExpiry;
+            ceremonySettings.RemainingDays = sdkSettings.RemainingDays;
 
             if (sdkSettings.EnableFirstAffidavit.HasValue) {
                 ceremonySettings.DisableFirstInPersonAffidavit = !sdkSettings.EnableFirstAffidavit;
@@ -137,7 +139,13 @@ namespace Silanis.ESL.SDK
 
                 if (apiSettings.Ceremony.FontSize.HasValue)
                     builder.WithFontSize (apiSettings.Ceremony.FontSize.Value);
-            
+
+                if (apiSettings.Ceremony.DefaultTimeBasedExpiry.HasValue)
+                    builder = (apiSettings.Ceremony.DefaultTimeBasedExpiry.Value ? builder.WithDefaultTimeBasedExpiry () : builder.WithoutDefaultTimeBasedExpiry ());
+
+                if (apiSettings.Ceremony.RemainingDays.HasValue)
+                    builder.WithRemainingDays (apiSettings.Ceremony.RemainingDays.Value);
+
                 foreach (string declineReason in apiSettings.Ceremony.DeclineReasons)
                 {
                     builder.WithDeclineReason(declineReason);

@@ -21,6 +21,7 @@ namespace SDK.Examples
         public readonly string OPT_OUT_REASON_3 = "OptOut reason Three";
 
         public readonly Nullable<Int32> FONT_SIZE = 28;
+        public readonly Nullable<Int32> EXPIRE_IN_DAYS = 12;
 
         override public void Execute() {
             DocumentPackage superDuperPackage = PackageBuilder.NewPackageNamed(PackageName)
@@ -45,6 +46,8 @@ namespace SDK.Examples
 				              .WithHandOverLinkHref("http://www.google.ca")
 				              .WithHandOverLinkText("click here")
 				              .WithHandOverLinkTooltip("link tooltip")
+                              .WithDefaultTimeBasedExpiry ()
+                              .WithRemainingDays(EXPIRE_IN_DAYS)
 				              .WithCeremonyLayoutSettings(CeremonyLayoutSettingsBuilder.NewCeremonyLayoutSettings()
                                             .WithoutGlobalConfirmButton()
                                             .WithoutGlobalDownloadButton()

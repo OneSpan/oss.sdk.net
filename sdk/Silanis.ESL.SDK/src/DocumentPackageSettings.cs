@@ -7,236 +7,199 @@ namespace Silanis.ESL.SDK
     public class DocumentPackageSettings
     {
         private Nullable<bool> showLanguageDropDown = null;
-        public Nullable<bool> ShowLanguageDropDown {
+        public Nullable<bool> ShowLanguageDropDown 
+        {
             get { return showLanguageDropDown; }
             set { showLanguageDropDown = value; }
         }
 
         private Nullable<bool> enableFirstAffidavit = null;
-        public Nullable<bool> EnableFirstAffidavit {
+        public Nullable<bool> EnableFirstAffidavit 
+        {
             get { return enableFirstAffidavit; }
             set { enableFirstAffidavit = value; }
         }
 
         private Nullable<bool> enableSecondAffidavit = null;
-        public Nullable<bool> EnableSecondAffidavit {
+        public Nullable<bool> EnableSecondAffidavit 
+        {
             get { return enableSecondAffidavit; }
             set { enableSecondAffidavit = value; }
         }
 
         private Nullable<bool> showOwnerInPersonDropDown = null;
-        public Nullable<bool> ShowOwnerInPersonDropDown {
+        public Nullable<bool> ShowOwnerInPersonDropDown 
+        {
             get { return showOwnerInPersonDropDown; }
             set { showOwnerInPersonDropDown = value; }
         }
 
         private Nullable<bool> enableInPerson = null;
 
-        public Nullable<bool> EnableInPerson {
-            get {
-                return enableInPerson;
-            }
-            set {
-                enableInPerson = value;
-            }
+        public Nullable<bool> EnableInPerson 
+        {
+            get { return enableInPerson; }
+            set { enableInPerson = value; }
         }
 
         private Nullable<bool> enableOptOut = null;
 
-        public Nullable<bool> EnableOptOut {
-            get {
-                return enableOptOut;
-            }
-            set {
-                enableOptOut = value;
-            }
+        public Nullable<bool> EnableOptOut 
+        {
+            get { return enableOptOut; }
+            set { enableOptOut = value; }
         }
 
         private Nullable<bool> disableOptOutOther = null;
 
-        public Nullable<bool> DisableOptOutOther {
-            get {
-                return disableOptOutOther;
-            }
-            set {
-                disableOptOutOther = value;
-            }
+        public Nullable<bool> DisableOptOutOther 
+        {
+            get { return disableOptOutOther; }
+            set { disableOptOutOther = value; }
         }
 
         private Nullable<bool> enableDecline = null;
 
-        public Nullable<bool> EnableDecline {
-            get {
-                return enableDecline;
-            }
-            set {
-                enableDecline = value;
-            }
+        public Nullable<bool> EnableDecline 
+        {
+            get { return enableDecline; }
+            set { enableDecline = value; }
         }
 
         private Nullable<bool> disableDeclineOther = null;
 
-        public Nullable<bool> DisableDeclineOther {
-            get {
-                return disableDeclineOther;
-            }
-            set {
-                disableDeclineOther = value;
-            }
+        public Nullable<bool> DisableDeclineOther 
+        {
+            get { return disableDeclineOther; }
+            set { disableDeclineOther = value; }
         }
 
         private Nullable<bool> hideWatermark = null;
 
-        public Nullable<bool> HideWatermark {
-            get {
-                return hideWatermark;
-            }
-            set {
-                hideWatermark = value;
-            }
+        public Nullable<bool> HideWatermark 
+        {
+            get { return hideWatermark; }
+            set { hideWatermark = value; }
         }
 
         private Nullable<bool> hideCaptureText = null;
 
-        public Nullable<bool> HideCaptureText {
-            get {
-                return hideCaptureText;
-            }
-            set {
-                hideCaptureText = value;
-            }
+        public Nullable<bool> HideCaptureText 
+        {
+            get { return hideCaptureText; }
+            set { hideCaptureText = value; }
         }
 
         private Nullable<bool> ada = null;
 
-        public Nullable<bool> Ada {
-            get {
-                return ada;
-            }
-            set {
-                ada = value;
-            }
+        public Nullable<bool> Ada 
+        {
+            get { return ada; }
+            set { ada = value; }
         }
 
         private Nullable<Int32> fontSize = null;
 
-        public Nullable<Int32> FontSize {
-            get {
-                return fontSize;
-            }
-            set {
-                fontSize = value;
-            }
+        public Nullable<Int32> FontSize 
+        {
+            get { return fontSize; }
+            set { fontSize = value; }
         }
 
         private Nullable<bool> enforceCaptureSignature = null;
 
-        public Nullable<bool> EnforceCaptureSignature {
-            get {
-                return enforceCaptureSignature;
-            }
-            set {
-                enforceCaptureSignature = value;
-            }
+        public Nullable<bool> EnforceCaptureSignature 
+        {
+            get { return enforceCaptureSignature; }
+            set { enforceCaptureSignature = value; }
+        }
+
+        private Nullable<bool> defaultTimeBasedExpiry = null;
+
+        public Nullable<bool> DefaultTimeBasedExpiry 
+        {
+            get { return defaultTimeBasedExpiry; }
+            set { defaultTimeBasedExpiry = value; }
+        }
+
+        private Nullable<Int32> remainingDays = null;
+
+        public Nullable<Int32> RemainingDays 
+        {
+            get { return remainingDays; }
+            set { remainingDays = value; }
         }
 
         private List<string> declineReasons = new List<string> ();
 
-        public List<string> DeclineReasons {
-            get {
-                return declineReasons;
-            }
-            set {
-                declineReasons = value;
-            }
+        public List<string> DeclineReasons 
+        {
+            get { return declineReasons; }
+            set { declineReasons = value; }
         }
 
         private List<string> optOutReasons = new List<string> ();
 
-        public List<string> OptOutReasons {
-            get {
-                return optOutReasons;
-            }
-            set {
-                optOutReasons = value;
-            }
+        public List<string> OptOutReasons 
+        {
+            get { return optOutReasons; }
+            set { optOutReasons = value; }
         }
 
         private Nullable<int> maxAuthAttempts = null;
 
-        public Nullable<int> MaxAuthAttempts {
-            get {
-                return maxAuthAttempts;
-            }
-            set {
-                maxAuthAttempts = value;
-            }
+        public Nullable<int> MaxAuthAttempts 
+        {
+            get { return maxAuthAttempts; }
+            set { maxAuthAttempts = value; }
         }
 
         private Nullable<bool> showDownloadButton = null;
 
-        public Nullable<bool> ShowDownloadButton {
-            get {
-                return showDownloadButton;
-            }
-            set {
-                showDownloadButton = value;
-            }
+        public Nullable<bool> ShowDownloadButton 
+        {
+            get { return showDownloadButton; }
+            set { showDownloadButton = value; }
         }
 
         private Nullable<bool> showDialogOnComplete = null;
 
-        public Nullable<bool> ShowDialogOnComplete {
-            get {
-                return showDialogOnComplete;
-            }
-            set {
-                showDialogOnComplete = value;
-            }
+        public Nullable<bool> ShowDialogOnComplete 
+        {
+            get { return showDialogOnComplete; }
+            set { showDialogOnComplete = value; }
         }
 
         private string linkText;
 
-        public string LinkText {
-            get {
-                return linkText;
-            }
-            set {
-                linkText = value;
-            }
+        public string LinkText 
+        {
+            get { return linkText; }
+            set { linkText = value; }
         }
 
         private string linkTooltip;
 
-        public string LinkTooltip {
-            get {
-                return linkTooltip;
-            }
-            set {
-                linkTooltip = value;
-            }
+        public string LinkTooltip 
+        {
+            get { return linkTooltip; }
+            set { linkTooltip = value; }
         }
 
         private string linkHref;
 
-        public string LinkHref {
-            get {
-                return linkHref;
-            }
-            set {
-                linkHref = value;
-            }
+        public string LinkHref 
+        {
+            get { return linkHref; }
+            set { linkHref = value; }
         }
 
         private CeremonyLayoutSettings ceremonyLayoutSettings = null;
 
-        public CeremonyLayoutSettings CeremonyLayoutSettings {
-            get {
-                return ceremonyLayoutSettings;
-            }
-            set {
-                ceremonyLayoutSettings = value;
-            }
+        public CeremonyLayoutSettings CeremonyLayoutSettings 
+        {
+            get { return ceremonyLayoutSettings; }
+            set { ceremonyLayoutSettings = value; }
         }
 
         internal PackageSettings toAPIPackageSettings ()
@@ -285,6 +248,12 @@ namespace Silanis.ESL.SDK
 
             if (fontSize != null)
                 ceremonySettings.FontSize = fontSize.Value;
+
+            if (defaultTimeBasedExpiry != null)
+                ceremonySettings.DefaultTimeBasedExpiry = defaultTimeBasedExpiry.Value;
+
+            if (remainingDays != null)
+                ceremonySettings.RemainingDays = remainingDays.Value;
 
             foreach (string declineReason in declineReasons)
                 ceremonySettings.DeclineReasons.Add (declineReason);

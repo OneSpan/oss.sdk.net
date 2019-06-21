@@ -43,6 +43,9 @@ namespace SDK.Examples
             Assert.AreEqual (example.OPT_OUT_REASON_2, result.Settings.OptOutReasons [1]);
             Assert.AreEqual (example.OPT_OUT_REASON_3, result.Settings.OptOutReasons [2]);
             Assert.IsTrue (result.Settings.DisableOptOutOther.Value);
+
+            Assert.IsTrue (result.Settings.DefaultTimeBasedExpiry.Value);
+            Assert.AreEqual (example.EXPIRE_IN_DAYS, result.Settings.RemainingDays.Value);
         }
     }
 }

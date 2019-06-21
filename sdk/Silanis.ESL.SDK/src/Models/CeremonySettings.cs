@@ -99,6 +99,15 @@ namespace Silanis.ESL.API
             get; set;
         }
 
+        [JsonProperty ("defaultTimeBasedExpiry")]
+        public Nullable<bool> DefaultTimeBasedExpiry {
+            get; set;
+        }
+
+        [JsonProperty ("remainingDays")]
+        public Nullable<Int32> RemainingDays {
+            get; set;
+        }
 
         [JsonProperty ("enforceCaptureSignature")]
         public Nullable<bool> EnforceCaptureSignature {

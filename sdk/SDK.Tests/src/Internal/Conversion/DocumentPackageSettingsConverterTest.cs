@@ -75,6 +75,8 @@ namespace SDK.Tests
             Assert.AreEqual(apiPackageSettings1.Ceremony.HidePackageOwnerInPerson, !sdkPackageSettings1.ShowOwnerInPersonDropDown);
             Assert.AreEqual(apiPackageSettings1.Ceremony.DisableFirstInPersonAffidavit, !sdkPackageSettings1.EnableFirstAffidavit);
             Assert.AreEqual(apiPackageSettings1.Ceremony.DisableSecondInPersonAffidavit, !sdkPackageSettings1.EnableSecondAffidavit);
+            Assert.AreEqual (apiPackageSettings1.Ceremony.DefaultTimeBasedExpiry, sdkPackageSettings1.DefaultTimeBasedExpiry);
+            Assert.AreEqual (apiPackageSettings1.Ceremony.RemainingDays, sdkPackageSettings1.RemainingDays);
         }
 
         [Test()]
@@ -111,6 +113,8 @@ namespace SDK.Tests
             Assert.AreEqual(apiPackageSettings1.Ceremony.HidePackageOwnerInPerson, !sdkPackageSettings1.ShowOwnerInPersonDropDown);
             Assert.AreEqual(apiPackageSettings1.Ceremony.DisableFirstInPersonAffidavit, !sdkPackageSettings1.EnableFirstAffidavit);
             Assert.AreEqual(apiPackageSettings1.Ceremony.DisableSecondInPersonAffidavit, !sdkPackageSettings1.EnableSecondAffidavit);
+            Assert.AreEqual (apiPackageSettings1.Ceremony.DefaultTimeBasedExpiry, sdkPackageSettings1.DefaultTimeBasedExpiry);
+            Assert.AreEqual (apiPackageSettings1.Ceremony.RemainingDays, sdkPackageSettings1.RemainingDays);
         }
 
         private Silanis.ESL.SDK.DocumentPackageSettings CreateTypicalSDKDocumentPackageSettings()
@@ -140,6 +144,8 @@ namespace SDK.Tests
                     .WithHandOverLinkText( "click here" )
                     .WithHandOverLinkTooltip( "link tooltip" )
                     .WithDialogOnComplete()
+                    .WithDefaultTimeBasedExpiry ()
+                    .WithRemainingDays(14)
                     .WithCeremonyLayoutSettings(CeremonyLayoutSettingsBuilder.NewCeremonyLayoutSettings()
                         .WithoutGlobalDownloadButton()
                         .WithoutGlobalConfirmButton()
@@ -196,6 +202,8 @@ namespace SDK.Tests
             layoutOptions.Iframe = false;
             apiCeremonySettings.Layout = layoutOptions;
 
+            apiCeremonySettings.DefaultTimeBasedExpiry = true;
+            apiCeremonySettings.RemainingDays = 9;
 
             HeaderOptions headerOptions = new HeaderOptions();
             headerOptions.Breadcrumbs = true;

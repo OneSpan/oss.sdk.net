@@ -75,6 +75,22 @@ namespace SDK.Tests
             Assert.IsTrue (without.EnforceCaptureSignature.HasValue);
             Assert.IsFalse (without.EnforceCaptureSignature.Value);
         }
+
+        [Test]
+        public void TimeBasedExpiry ()
+        {
+            DocumentPackageSettingsBuilder builder = DocumentPackageSettingsBuilder.NewDocumentPackageSettings ();
+            DocumentPackageSettings unset = builder.Build ();
+            Assert.IsFalse (unset.DefaultTimeBasedExpiry.HasValue);
+            DocumentPackageSettings with = builder.WithDefaultTimeBasedExpiry ().WithRemainingDays (14).Build ();
+            Assert.IsTrue (with.DefaultTimeBasedExpiry.HasValue);
+            Assert.IsTrue (with.DefaultTimeBasedExpiry.Value);
+            Assert.IsTrue (with.RemainingDays.Value == 14);
+            DocumentPackageSettings without = builder.WithoutDefaultTimeBasedExpiry ().Build ();
+            Assert.IsTrue (without.DefaultTimeBasedExpiry.HasValue);
+            Assert.IsFalse (without.DefaultTimeBasedExpiry.Value);
+        }
+
     }
 }
 
