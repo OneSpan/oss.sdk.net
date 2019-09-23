@@ -420,6 +420,8 @@
     <Compile Include="src\Internal\Conversion\ConditionalFieldConverter.cs" />
     <Compile Include="src\ConditionalField.cs" />
     <Compile Include="src\Builder\FieldConditionBuilder.cs" />
+    <Compile Include="src\Models\SigningTheme.cs" />
+    <Compile Include="src\Services\SigningStyleService.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSHARP.Targets" />
   <ProjectExtensions>
