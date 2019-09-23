@@ -172,6 +172,7 @@
     <Compile Include="src\DeleteDocumentsExample.cs" />
     <Compile Include="src\ConditionalFieldExample.cs" />
     <Compile Include="src\GetPackageFieldsListExample.cs" />
+    <Compile Include="src\SigningStyleExample.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
