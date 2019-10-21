@@ -8,9 +8,9 @@ namespace SDK.Examples
 	public class EventNotificationRegistrationExample : SDKSample
 	{
         public EventNotificationConfig config, connectorsConfig;
-		public readonly string URL = "http://my.url.com";
+		public readonly string URL = "http://my.url.onespan.com";
         public readonly string KEY = "abc";
-        public readonly string CONNECTORS_URL = "http://connectors.url.com";
+        public readonly string CONNECTORS_URL = "http://connectors.url.onespan.com";
         public readonly string CONNECTORS_KEY = "1234";
         public readonly string ORIGIN = "dynamics2013";
 
