@@ -141,6 +141,7 @@
     <Compile Include="src\GetPackageFieldsListExampleTest.cs" />
     <Compile Include="src\PackageReferencedConditionsExampleTest.cs" />
     <Compile Include="src\SigningStyleExampleTest.cs" />
+    <Compile Include="src\DisabledSignaturesExampleTest.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

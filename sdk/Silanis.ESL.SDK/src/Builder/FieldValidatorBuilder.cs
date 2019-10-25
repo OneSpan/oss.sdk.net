@@ -28,6 +28,7 @@ namespace Silanis.ESL.SDK.Builder
         private int errorCode;
 		private string message;
 		private bool required;
+        private bool disabled;
         private IList<string> options = new List<string>();
 
 		private FieldValidatorBuilder (String regex)
@@ -100,6 +101,12 @@ namespace Silanis.ESL.SDK.Builder
 			return this;
 		}
 
+        public FieldValidatorBuilder Disabled ()
+        {
+            disabled = true;
+            return this;
+        }
+
         public static FieldValidatorBuilder Basic() 
         {
             return new FieldValidatorBuilder( DEFAULT_REGEX );
@@ -130,8 +137,9 @@ namespace Silanis.ESL.SDK.Builder
 			validator.Regex = regex;
 			validator.MaxLength = maxLength;
 			validator.MinLength = minLength;
-			validator.Required = required;
-			validator.Message = message;
+            validator.Required = required;
+            validator.Disabled = disabled;
+            validator.Message = message;
             validator.AddOptions(options);
             validator.ErrorCode = errorCode;
 

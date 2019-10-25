@@ -164,6 +164,12 @@ namespace Silanis.ESL.SDK
             set;
         }
 
+        public bool Disabled
+        {
+            get;
+            set;
+        }
+
         public bool EnforceCaptureSignature {
             get;
             set;

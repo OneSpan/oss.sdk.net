@@ -47,6 +47,7 @@ namespace SDK.Examples
                     {
                         Assert.AreEqual(field.Validator.Regex, NUMERIC_REGEX);
                         Assert.AreEqual(field.Validator.Message, example.FIELD_NUMERIC_ERROR_MESSAGE);
+                        Assert.IsTrue(field.Validator.Disabled);
                     }
                     if (fieldId.Equals(example.FIELD_ALPHANUMERIC_ID))
                     {

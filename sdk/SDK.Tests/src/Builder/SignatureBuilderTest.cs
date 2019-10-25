@@ -128,6 +128,14 @@ namespace SDK.Tests
         }
 
         [Test]
+        public void CreateDisabledSignature ()
+        {
+            Signature signature = SignatureBuilder.SignatureFor ("some@dude.com").Disabled ().Build ();
+
+            Assert.IsTrue (signature.Disabled);
+        }
+
+        [Test]
         public void creatingCaptureWithEnforceCaptureSignatureSetting ()
         {
             Signature signature = SignatureBuilder.CaptureFor ("some@dude.com").EnableEnforceCaptureSignature ().Build ();

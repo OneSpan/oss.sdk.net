@@ -38,6 +38,11 @@ namespace Silanis.ESL.SDK
 			set;
 		}
 
+        public bool Disabled {
+            get;
+            set;
+        }
+
         public List<string> Options
         {
             get

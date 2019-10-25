@@ -80,7 +80,12 @@ namespace Silanis.ESL.API
         {
             get; set;
         }
-    	
+
+        [JsonProperty ("disabled")]
+        public bool Disabled {
+            get; set;
+        }
+
         [JsonProperty ("enforceCaptureSignature")]
         public bool EnforceCaptureSignature {
             get; set;
