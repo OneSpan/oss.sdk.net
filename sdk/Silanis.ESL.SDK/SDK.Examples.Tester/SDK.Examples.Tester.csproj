@@ -134,7 +134,6 @@
     <Compile Include="src\AdaPackageExampleTest.cs" />
     <Compile Include="src\ApplyLayoutByNameExampleTest.cs" />
     <Compile Include="src\OptionalSignaturesExampleTest.cs" />
-    <Compile Include="src\SignerSSOExampleTest.cs" />
     <Compile Include="src\AdditionalRequestHeadersExampleTest.cs" />
     <Compile Include="src\DeleteDocumentsExampleTest.cs" />
     <Compile Include="src\ConditionalFieldExampleTest.cs" />
