@@ -43,7 +43,8 @@ namespace Silanis.ESL.SDK
         private SignatureImageService signatureImageService;
         private SigningService signingService;
         private SignerVerificationService signerVerificationService;
-        
+        private SigningStyleService signingStyleService;
+
         private JsonSerializerSettings jsonSerializerSettings;
 
         /// <summary>
@@ -116,6 +117,7 @@ namespace Silanis.ESL.SDK
             reportService = new ReportService(restClient, this.baseUrl, jsonSerializerSettings);
             systemService = new SystemService(restClient, this.baseUrl, jsonSerializerSettings);
             signingService = new SigningService(restClient, this.baseUrl, jsonSerializerSettings);
+            signingStyleService = new SigningStyleService (restClient, this.baseUrl, jsonSerializerSettings);
             signerVerificationService = new SignerVerificationService(restClient, this.baseUrl, jsonSerializerSettings);
             signatureImageService = new SignatureImageService(restClient, this.baseUrl, jsonSerializerSettings);
             sessionService = new SessionService(apiKey, this.baseUrl);
@@ -185,6 +187,16 @@ namespace Silanis.ESL.SDK
                 return true;
             }            
             return false;
+        }
+
+        /**
+        * Facilitates access to the service that could be used to add signing style
+        *
+        * @return  the signing style service
+        */
+        public SigningStyleService GetSigningStyleService ()
+        {
+            return signingStyleService;
         }
 
         internal void SetSdkVersionInPackageData(DocumentPackage package)

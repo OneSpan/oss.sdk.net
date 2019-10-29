@@ -152,7 +152,7 @@ namespace Silanis.ESL.SDK.Internal
         // Webpage redirect urls
         public static readonly string DESIGNER_REDIRECT_PATH = "/designer/{packageId}";
         public static readonly string PACKAGE_VIEW_REDIRECT_PATH = "/packages/{packageId}";
-        public static readonly string SIGNING_REDIRECT_PATH = "/packages/{packageId}/sign";  
+        public static readonly string SIGNING_REDIRECT_PATH = "/transaction/{packageId}/sign";  
 
 		// AttachmentRequirement Service
 		public static readonly string ATTACHMENT_REQUIREMENT_PATH = "/packages/{packageId}/attachment/{attachmentId}";
@@ -173,8 +173,11 @@ namespace Silanis.ESL.SDK.Internal
         public static readonly string SIGNATURE_IMAGE_FOR_SENDER_PATH = "/account/senders/{senderId}/signatureImage";
         public static readonly string SIGNATURE_IMAGE_FOR_PACKAGE_ROLE_PATH = "/packages/{packageId}/roles/{roleId}/signatureImage";
 
+        // Account Signing Themes Service 
+        public static readonly string ACCOUNT_SIGNING_THEME_PATH = "/account/signingThemes";
 
-		public UrlTemplate (string baseUrl)
+
+        public UrlTemplate (string baseUrl)
 		{
 			this.baseUrl = baseUrl;
 		}
