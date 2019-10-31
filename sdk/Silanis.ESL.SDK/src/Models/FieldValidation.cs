@@ -73,9 +73,13 @@ namespace Silanis.ESL.API
     public Nullable<Boolean> Required
     {
                 get; set;
-            }
-    
-		
-	
-	}
+        }
+
+
+    [JsonProperty ("disabled")]
+    public Nullable<Boolean> Disabled
+    {
+            get; set;
+        }
+    }
 }

@@ -171,6 +171,7 @@ namespace Silanis.ESL.SDK.Builder
                     this.validator.Options = validator.Options;
 
                 this.validator.Required = validator.Required;
+                this.validator.Disabled = validator.Disabled;
                 if (null != validator.Message)
                     this.validator.Message = validator.Message;
             } else {
