@@ -95,7 +95,7 @@ namespace SDK.Tests
             FieldCondition sdkFieldCondition = new FieldCondition ();
             sdkFieldCondition.Id = "ConditionId";
             sdkFieldCondition.Condition = "document['DocumentId'].field['fieldId2'].value == 'X'";
-            sdkFieldCondition.Action = "document['DocumentId'].field['fieldId1'].enabled = false";
+            sdkFieldCondition.Action = "document['DocumentId'].field['fieldId1'].disabled = true";
 
 
             return sdkFieldCondition;
@@ -107,7 +107,7 @@ namespace SDK.Tests
 
             apiFieldCondition.Id = "ConditionId";
             apiFieldCondition.Condition = "document['DocumentId'].field['fieldId2'].value == 'X'";
-            apiFieldCondition.Action = "document['DocumentId'].field['fieldId1'].enabled = false";
+            apiFieldCondition.Action = "document['DocumentId'].field['fieldId1'].disabled = true";
 
             return apiFieldCondition;
         }

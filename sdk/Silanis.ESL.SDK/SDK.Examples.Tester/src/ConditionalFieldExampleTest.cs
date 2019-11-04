@@ -15,7 +15,7 @@ namespace SDK.Examples
             Assert.AreEqual (example.RetrievedPackage.Conditions.Count, 1);
 
             Assert.AreEqual (example.RetrievedPackageWithUpdatedConditions.Conditions.Count, 1);
-            Assert.AreEqual (example.RetrievedPackageWithUpdatedConditions.Conditions[0].Action, "document['DocumentId'].field['fieldId1'].enabled = false");
+            Assert.AreEqual (example.RetrievedPackageWithUpdatedConditions.Conditions[0].Action, "document['DocumentId'].field['fieldId1'].disabled = true");
 
             Assert.AreEqual (example.RetrievedPackageWithoutConditions.Conditions.Count, 0);
         }

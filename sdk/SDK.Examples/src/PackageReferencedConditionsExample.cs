@@ -109,7 +109,7 @@ namespace SDK.Examples
             return FieldConditionBuilder.NewFieldCondition()
             .WithId(id)
             .WithCondition(String.Format("document['{0}'].field['{1}'].empty == true", conditionDocId, conditionFieldId))
-            .WithAction(String.Format("document['{0}'].field['{1}'].enabled = true", actionDocId, actionFieldId))
+            .WithAction(String.Format("document['{0}'].field['{1}'].disabled = false", actionDocId, actionFieldId))
             .Build();
         }
     }
