@@ -9,7 +9,7 @@ namespace SDK.Tests
     {
         private static readonly String ID = "Condition1";
         private static readonly String CONDITION = "document['doc1'].field['field1'].empty == true";
-        private static readonly String ACTION = "document['doc1'].field['field2'].enabled = true";
+        private static readonly String ACTION = "document['doc1'].field['field2'].disabled = false";
 
         [Test]
         public void BuildTest()

@@ -124,7 +124,7 @@ namespace SDK.Tests
             FieldCondition condition = new FieldCondition ();
             condition.Id = "ConditionId";
             condition.Condition = "document['DocumentId'].field['fieldId2'].value == 'X'";
-            condition.Action = "document['DocumentId'].field['fieldId1'].enabled = false";
+            condition.Action = "document['DocumentId'].field['fieldId1'].disabled = true";
             List<FieldCondition> conditions = new List<FieldCondition> ();
             conditions.Add (condition);
             sdkField.Conditions = conditions;
@@ -151,7 +151,7 @@ namespace SDK.Tests
             Silanis.ESL.API.FieldCondition condition = new Silanis.ESL.API.FieldCondition ();
             condition.Id = "ConditionId";
             condition.Condition = "document['DocumentId'].field['fieldId2'].value == 'X'";
-            condition.Action = "document['DocumentId'].field['fieldId1'].enabled = false";
+            condition.Action = "document['DocumentId'].field['fieldId1'].disabled = true";
             apiField.AddCondition(condition);
 
             return apiField;
