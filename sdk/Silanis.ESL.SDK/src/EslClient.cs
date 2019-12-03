@@ -563,14 +563,22 @@ namespace Silanis.ESL.SDK
         }
 
         public void UploadAttachment(PackageId packageId, string attachmentId, string filename, byte[] fileBytes, string signerId) {
+            Dictionary<string, byte []> files = new Dictionary<string, byte []> ();
+            files.Add (filename, fileBytes);
+
+            UploadAttachment (packageId, attachmentId, files, signerId);
+        }
+
+        public void UploadAttachment (PackageId packageId, string attachmentId, IDictionary<string, byte[]> files, string signerId)
+        {
             string signerSessionFieldKey = "Upload Attachment on behalf of";
 
-            IDictionary<string, string> signerSessionFields = new Dictionary<string, string>();
-            signerSessionFields.Add(signerSessionFieldKey, signerId);
-            string signerAuthenticationToken = authenticationTokenService.CreateSignerAuthenticationToken(packageId, signerId, signerSessionFields);
-            string signerSessionId = authenticationService.GetSessionIdForSignerAuthenticationToken(signerAuthenticationToken);
+            IDictionary<string, string> signerSessionFields = new Dictionary<string, string> ();
+            signerSessionFields.Add (signerSessionFieldKey, signerId);
+            string signerAuthenticationToken = authenticationTokenService.CreateSignerAuthenticationToken (packageId, signerId, signerSessionFields);
+            string signerSessionId = authenticationService.GetSessionIdForSignerAuthenticationToken (signerAuthenticationToken);
 
-            attachmentRequirementService.UploadAttachment(packageId, attachmentId, filename, fileBytes, signerSessionId);
+            attachmentRequirementService.UploadAttachment (packageId, attachmentId, files, signerSessionId);
         }
 
         public void CreateSignerVerification(Silanis.ESL.SDK.PackageId packageId, String roleId, SignerVerification signerVerification)
