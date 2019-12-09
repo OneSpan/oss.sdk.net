@@ -4,6 +4,7 @@ using Newtonsoft.Json;
 using Silanis.ESL.API;
 using System.IO;
 using Silanis.ESL.SDK.Services;
+using System.Collections.Generic;
 
 namespace Silanis.ESL.SDK
 {
@@ -102,7 +103,14 @@ namespace Silanis.ESL.SDK
 
         public void UploadAttachment(PackageId packageId, string attachmentId, string fileName, byte[] fileBytes, string signerSessionId)
         {
-            apiClient.UploadAttachment(packageId, attachmentId, fileName, fileBytes, signerSessionId);
+            IDictionary<string, byte []> files = new Dictionary<string, byte []> ();
+            files.Add (fileName, fileBytes);
+            UploadAttachment(packageId, attachmentId, files, signerSessionId);
+        }
+
+        public void UploadAttachment (PackageId packageId, string attachmentId, IDictionary<string, byte []> files, string signerSessionId)
+        {
+            apiClient.UploadAttachment (packageId, attachmentId, files, signerSessionId);
         }
     }
 }
