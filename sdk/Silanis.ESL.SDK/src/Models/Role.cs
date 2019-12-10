@@ -39,10 +39,19 @@ namespace Silanis.ESL.API
     [JsonProperty("data")]
     public IDictionary<string, object> Data
     {
-                get; set;
+        get; set;
+    }
+
+    public Role AddData(string key, object value)
+    {
+        if (this.Data == null) 
+        {
+            this.Data = new Dictionary<string, object> ();
         }
-    
-		    
+        this.Data.Add (key, value);
+        return this;
+    }
+
     [JsonProperty("emailMessage")]
     public BaseMessage EmailMessage
     {

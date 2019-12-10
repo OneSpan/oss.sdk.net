@@ -68,6 +68,8 @@ namespace Silanis.ESL.SDK
                 role.EmailMessage = message;
             }
 
+            role.AddData ("localLanguage", sdkSigner.LocalLanguage);
+
             return role;
         }
 
@@ -212,6 +214,10 @@ namespace Silanis.ESL.SDK
                 signer.Locked = true;
             }
 
+            if (apiRole.Data != null && apiRole.Data.ContainsKey("localLanguage")) {
+                signer.LocalLanguage = apiRole.Data["localLanguage"].ToString();
+            }
+
             return builder.Build();
         }
 
@@ -268,6 +274,10 @@ namespace Silanis.ESL.SDK
             if ( apiRole.Locked.Value ) 
             {
                 signer.Locked = true;
+            }
+
+            if (apiRole.Data != null && apiRole.Data.ContainsKey("localLanguage")) {
+                signer.LocalLanguage = apiRole.Data["localLanguage"].ToString ();
             }
 
             return signer;

@@ -189,5 +189,11 @@ namespace Silanis.ESL.SDK
 		{
 			return GroupId != null;
 		}
-	}
+
+        public string LocalLanguage 
+        {
+            get;
+            set; 
+        }
+    }
 }
