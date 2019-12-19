@@ -173,6 +173,7 @@
     <Compile Include="src\GetPackageFieldsListExample.cs" />
     <Compile Include="src\SigningStyleExample.cs" />
     <Compile Include="src\DisabledSignaturesExample.cs" />
+    <Compile Include="src\LocalLanguageExample.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

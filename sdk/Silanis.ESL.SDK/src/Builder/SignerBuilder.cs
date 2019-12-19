@@ -23,6 +23,7 @@ namespace Silanis.ESL.SDK.Builder
         private GroupId groupId;
 		private IList<AttachmentRequirement> attachments = new List<AttachmentRequirement>();
         private KnowledgeBasedAuthentication knowledgeBasedAuthentication;
+        private string localLanguage;
 
         private SignerBuilder(string signerEmail)
 		{
@@ -121,7 +122,13 @@ namespace Silanis.ESL.SDK.Builder
 			return WithCustomId(id);
 		}
 
-		public SignerBuilder ChallengedWithQuestions (ChallengeBuilder challengeBuilder)
+        public SignerBuilder WithLocalLanguage ()
+        {
+            this.localLanguage = "local";
+            return this;
+        }
+
+        public SignerBuilder ChallengedWithQuestions (ChallengeBuilder challengeBuilder)
 		{
 			this.authenticationBuilder = challengeBuilder;
 			return this;
@@ -227,7 +234,8 @@ namespace Silanis.ESL.SDK.Builder
             result.Message = message;
             result.Id = id;
 			result.Attachments = attachments;
-            
+            result.LocalLanguage = localLanguage;
+
             return result;
         }
         
@@ -241,7 +249,7 @@ namespace Silanis.ESL.SDK.Builder
             result.CanChangeSigner = canChangeSigner;
             result.Message = message;
 			result.Attachments = attachments;
-			            
+            result.LocalLanguage = localLanguage;
             return result;
         }
         
@@ -267,7 +275,7 @@ namespace Silanis.ESL.SDK.Builder
             result.Id = id;
 			result.Attachments = attachments;
             result.KnowledgeBasedAuthentication = knowledgeBasedAuthentication;
-			            
+            result.LocalLanguage = localLanguage;
             return result;
         }
 
