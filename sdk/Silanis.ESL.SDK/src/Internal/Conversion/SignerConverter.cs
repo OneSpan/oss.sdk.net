@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using Silanis.ESL.SDK.Builder;
 using Silanis.ESL.SDK.Internal;
 
@@ -214,8 +215,12 @@ namespace Silanis.ESL.SDK
                 signer.Locked = true;
             }
 
-            if (apiRole.Data != null && apiRole.Data.ContainsKey("localLanguage")) {
-                signer.LocalLanguage = apiRole.Data["localLanguage"].ToString();
+            IDictionary<string, object> apiRoleData = apiRole.Data;
+            if (apiRoleData != null && apiRoleData.ContainsKey ("localLanguage")) {
+                object localLanguage = apiRoleData ["localLanguage"];
+                if (localLanguage != null) {
+                    signer.LocalLanguage = localLanguage.ToString ();
+                }
             }
 
             return builder.Build();
@@ -276,8 +281,12 @@ namespace Silanis.ESL.SDK
                 signer.Locked = true;
             }
 
-            if (apiRole.Data != null && apiRole.Data.ContainsKey("localLanguage")) {
-                signer.LocalLanguage = apiRole.Data["localLanguage"].ToString ();
+            IDictionary<string, object> apiRoleData = apiRole.Data;
+            if (apiRoleData != null && apiRoleData.ContainsKey("localLanguage")) {
+                object localLanguage = apiRoleData["localLanguage"];
+                if (localLanguage != null) {
+                    signer.LocalLanguage = localLanguage.ToString();
+                }
             }
 
             return signer;
