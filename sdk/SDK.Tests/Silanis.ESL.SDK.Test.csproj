@@ -120,6 +120,8 @@
     <Compile Include="src\Internal\Conversion\ReferencedDocumentConverterTest.cs" />
     <Compile Include="src\Internal\Conversion\ReferencedFieldConditionsConverterTest.cs" />
     <Compile Include="src\Internal\Conversion\ReferencedFieldConverterTest.cs" />
+    <Compile Include="src\Internal\Conversion\SigningLogoConverterTest.cs" />
+    <Compile Include="src\Builder\SigningLogoBuilderTest.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

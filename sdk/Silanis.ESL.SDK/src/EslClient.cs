@@ -44,7 +44,7 @@ namespace Silanis.ESL.SDK
         private SigningService signingService;
         private SignerVerificationService signerVerificationService;
         private SigningStyleService signingStyleService;
-
+       
         private JsonSerializerSettings jsonSerializerSettings;
 
         /// <summary>
@@ -189,15 +189,15 @@ namespace Silanis.ESL.SDK
             return false;
         }
 
-        /**
-        * Facilitates access to the service that could be used to add signing style
+        /** The SigningStyleService class provides methods to customize the New Signer Experience
+        *   Signing Themes and Signing Logos
         *
         * @return  the signing style service
         */
         public SigningStyleService GetSigningStyleService ()
         {
             return signingStyleService;
-        }
+        }       
 
         internal void SetSdkVersionInPackageData(DocumentPackage package)
         {
