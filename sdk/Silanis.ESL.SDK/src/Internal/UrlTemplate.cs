@@ -176,6 +176,9 @@ namespace Silanis.ESL.SDK.Internal
         // Account Signing Themes Service 
         public static readonly string ACCOUNT_SIGNING_THEME_PATH = "/account/signingThemes";
 
+        // Account Signing Logo Service
+        public static readonly string ACCOUNT_SIGNING_LOGO_PATH = "/account/admin/signingLogos";
+
 
         public UrlTemplate (string baseUrl)
 		{

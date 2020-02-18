@@ -422,6 +422,10 @@
     <Compile Include="src\Builder\FieldConditionBuilder.cs" />
     <Compile Include="src\Models\SigningTheme.cs" />
     <Compile Include="src\Services\SigningStyleService.cs" />
+    <Compile Include="src\SigningLogo.cs" />
+    <Compile Include="src\Models\SigningLogo.cs" />
+    <Compile Include="src\Internal\Conversion\SigningLogoConverter.cs" />
+    <Compile Include="src\Builder\SigningLogoBuilder.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSHARP.Targets" />
   <ProjectExtensions>
