@@ -13,7 +13,7 @@ namespace SDK.Examples
                 PackageBuilder.NewPackageNamed(PackageName)
                     .DescribedAs("This is a package created using the eSignLive SDK")
                     .WithSettings(DocumentPackageSettingsBuilder.NewDocumentPackageSettings().WithInPerson())
-                    .ExpiresOn(DateTime.Now.AddMonths(100))
+                    .ExpiresOn(DateTime.Now.AddMonths(10))
                     .WithSigner(SignerBuilder.NewSignerWithEmail(email1)
                                 .WithCustomId("signatureId1")
                                 .WithFirstName("firstName1")
