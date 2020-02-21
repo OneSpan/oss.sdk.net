@@ -14,8 +14,8 @@ namespace SDK.Examples
             example.Run ();
 
             // Verify if the ExpiryTimeConfiguration was updated correctly.
-            Assert.AreEqual (example.ExpiryTimeConfigurationAfterUpdate.MaximumRemainingDays, 60);
-            Assert.AreEqual (example.ExpiryTimeConfigurationAfterUpdate.RemainingDays, 60);
+            Assert.AreEqual (example.expiryTimeConfigurationAfterUpdate.MaximumRemainingDays, 60);
+            Assert.AreEqual (example.expiryTimeConfigurationAfterUpdate.RemainingDays, 60);
         }
     }
 }

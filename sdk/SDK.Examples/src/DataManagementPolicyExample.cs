@@ -7,7 +7,7 @@ namespace SDK.Examples
     public class DataManagementPolicyExample : SDKSample
     {
 
-        private DataManagementPolicy dataManagementPolicyAfterUpdate;
+        public DataManagementPolicy dataManagementPolicyAfterUpdate;
 
         public static void Main (string [] args)
         {
@@ -31,14 +31,6 @@ namespace SDK.Examples
 
             eslClient.DataRetentionSettingsService.SetDataManagementPolicy (dataManagementPolicy);
             dataManagementPolicyAfterUpdate = eslClient.DataRetentionSettingsService.GetDataManagementPolicy ();
-        }
-
-        public DataManagementPolicy DataManagementPolicyAfterUpdate
-        {
-            get 
-            {
-                return dataManagementPolicyAfterUpdate;
-            }
         }
     }
 }

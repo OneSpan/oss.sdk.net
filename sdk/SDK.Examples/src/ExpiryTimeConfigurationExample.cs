@@ -7,7 +7,7 @@ namespace SDK.Examples
     public class ExpiryTimeConfigurationExample : SDKSample
     {
 
-        private ExpiryTimeConfiguration expiryTimeConfigurationAfterUpdate;
+        public ExpiryTimeConfiguration expiryTimeConfigurationAfterUpdate;
 
         public static void Main (string [] args)
         {
@@ -24,14 +24,6 @@ namespace SDK.Examples
 
             eslClient.DataRetentionSettingsService.SetExpiryTimeConfiguration (expiryTimeConfiguration);
             expiryTimeConfigurationAfterUpdate = eslClient.DataRetentionSettingsService.GetExpiryTimeConfiguration ();
-        }
-
-        public ExpiryTimeConfiguration ExpiryTimeConfigurationAfterUpdate
-        {
-            get 
-            {
-                return expiryTimeConfigurationAfterUpdate;
-            }
         }
     }
 }
