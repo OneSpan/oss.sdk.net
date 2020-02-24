@@ -44,7 +44,7 @@ namespace Silanis.ESL.SDK
         private SigningService signingService;
         private SignerVerificationService signerVerificationService;
         private SigningStyleService signingStyleService;
-       
+        private DataRetentionSettingsService dataRetentionSettingsService;
         private JsonSerializerSettings jsonSerializerSettings;
 
         /// <summary>
@@ -135,6 +135,7 @@ namespace Silanis.ESL.SDK
             layoutService = new LayoutService(new LayoutApiClient(restClient, this.baseUrl, jsonSerializerSettings));
             qrCodeService = new QRCodeService(new QRCodeApiClient(restClient, this.baseUrl, jsonSerializerSettings));
             authenticationService = new AuthenticationService(this.webpageUrl);
+            dataRetentionSettingsService = new DataRetentionSettingsService (restClient, this.baseUrl);
         }
 
         private void configureJsonSerializationSettings()
@@ -772,6 +773,14 @@ namespace Silanis.ESL.SDK
             get
             {
                 return signerVerificationService;
+            }
+        }
+
+        public DataRetentionSettingsService DataRetentionSettingsService 
+        {
+            get 
+            {
+                return dataRetentionSettingsService;
             }
         }
 	}

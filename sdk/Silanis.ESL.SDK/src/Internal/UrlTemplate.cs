@@ -136,6 +136,10 @@ namespace Silanis.ESL.SDK.Internal
         public static readonly string DELEGATES_PATH = "/account/senders/{senderId}/delegates";
         public static readonly string DELEGATE_ID_PATH = "/account/senders/{senderId}/delegates/{delegateId}";
 
+        //DataRetentionSettingsService
+        public static readonly string EXPIRY_TIME_CONFIGURATION_PATH = "/dataRetentionSettings/expiryTimeConfiguration";
+        public static readonly string DATA_MANAGEMENT_POLICY_PATH = "/dataRetentionSettings/dataManagementPolicy";
+
         //Authentication Token Services
         public static readonly string ESL_AUTHENTICATION_PATH = "/auth";
         public static readonly string USER_AUTHENTICATION_TOKEN_PATH = "/authenticationTokens/user";
