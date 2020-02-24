@@ -18,11 +18,13 @@ namespace Silanis.ESL.SDK
 
         internal Silanis.ESL.API.DataManagementPolicy ToAPIDataManagementPolicy ()
         {
-            if (sdkDataManagementPolicy == null) {
+            if (sdkDataManagementPolicy == null) 
+            {
                 return apiDataManagementPolicy;
             }
             apiDataManagementPolicy = new Silanis.ESL.API.DataManagementPolicy ();
-            if(sdkDataManagementPolicy.TransactionRetention != null) {
+            if(sdkDataManagementPolicy.TransactionRetention != null) 
+            {
                 apiDataManagementPolicy.TransactionRetention = new TransactionRetentionConverter(sdkDataManagementPolicy.TransactionRetention)
                     .ToAPITransactionRetention ();
             }
@@ -32,11 +34,13 @@ namespace Silanis.ESL.SDK
 
         internal Silanis.ESL.SDK.DataManagementPolicy ToSDKDataManagementPolicy ()
         {
-            if (apiDataManagementPolicy == null) {
+            if (apiDataManagementPolicy == null) 
+            {
                 return sdkDataManagementPolicy;
             }
             sdkDataManagementPolicy = new DataManagementPolicy();
-            if (apiDataManagementPolicy.TransactionRetention != null) {
+            if (apiDataManagementPolicy.TransactionRetention != null) 
+            {
                 sdkDataManagementPolicy.TransactionRetention = new TransactionRetentionConverter (apiDataManagementPolicy.TransactionRetention)
                     .ToSDKTransactionRetention ();
             }

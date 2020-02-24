@@ -3,7 +3,8 @@ namespace Silanis.ESL.SDK
 {
     public class DataManagementPolicy
     {
-        public TransactionRetention TransactionRetention {
+        public TransactionRetention TransactionRetention 
+        {
             get; set;
         }
     }

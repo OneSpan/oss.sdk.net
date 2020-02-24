@@ -5,7 +5,8 @@ namespace Silanis.ESL.API
     internal class DataManagementPolicy
     {
         [JsonProperty ("transactionRetention")]
-        public TransactionRetention TransactionRetention {
+        public TransactionRetention TransactionRetention 
+        {
             get; set;
         }
     }

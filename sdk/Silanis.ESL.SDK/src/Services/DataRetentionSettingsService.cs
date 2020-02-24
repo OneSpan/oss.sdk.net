@@ -26,11 +26,16 @@ namespace Silanis.ESL.SDK.Services
             String path = template.UrlFor (UrlTemplate.EXPIRY_TIME_CONFIGURATION_PATH)
                                   .Build ();
             String stringResponse;
-            try {
+            try 
+            {
                 stringResponse = restClient.Get (path);
-            } catch (EslServerException e) {
+            } 
+            catch (EslServerException e) 
+            {
                 throw new EslServerException ("Could not get expiryTimeConfiguration." + " Exception: " + e.Message, e.ServerError, e);
-            } catch (Exception e) {
+            } 
+            catch (Exception e) 
+            {
                 throw new EslException ("Could not get expiryTimeConfiguration." + " Exception: " + e.Message, e);
             }
 
@@ -50,11 +55,16 @@ namespace Silanis.ESL.SDK.Services
             ExpiryTimeConfigurationConverter converter = new ExpiryTimeConfigurationConverter (expiryTimeConfiguration);
             String expiryTimeConfigurationJson = JsonConvert.SerializeObject(converter.ToAPIExpiryTimeConfiguration ());
 
-            try {
+            try 
+            {
                 restClient.Put (path, expiryTimeConfigurationJson);
-            } catch (EslServerException e) {
+            } 
+            catch (EslServerException e) 
+            {
                 throw new EslServerException ("Could not update expiryTimeConfiguration" + " Exception: " + e.Message, e.ServerError, e);
-            } catch (Exception e) {
+            } 
+            catch (Exception e) 
+            {
                 throw new EslException ("Could not update expiryTimeConfiguration" + " Exception: " + e.Message, e);
             }
         }
@@ -69,11 +79,16 @@ namespace Silanis.ESL.SDK.Services
             String path = template.UrlFor (UrlTemplate.DATA_MANAGEMENT_POLICY_PATH)
                                   .Build ();
             String stringResponse;
-            try {
+            try 
+            {
                 stringResponse = restClient.Get (path);
-            } catch (EslServerException e) {
+            } 
+            catch (EslServerException e) 
+            {
                 throw new EslServerException ("Could not get dataManagementPolicy." + " Exception: " + e.Message, e.ServerError, e);
-            } catch (Exception e) {
+            }
+            catch (Exception e) 
+            {
                 throw new EslException ("Could not get dataManagementPolicy." + " Exception: " + e.Message, e);
             }
 
@@ -93,11 +108,16 @@ namespace Silanis.ESL.SDK.Services
             DataManagementPolicyConverter converter = new DataManagementPolicyConverter (dataManagementPolicy);
             String dataManagementPolicyJson = JsonConvert.SerializeObject (converter.ToAPIDataManagementPolicy ());
 
-            try {
+            try 
+            {
                 restClient.Put (path, dataManagementPolicyJson);
-            } catch (EslServerException e) {
+            } 
+            catch (EslServerException e) 
+            {
                 throw new EslServerException ("Could not update dataManagementPolicy" + " Exception: " + e.Message, e.ServerError, e);
-            } catch (Exception e) {
+            } 
+            catch (Exception e) 
+            {
                 throw new EslException ("Could not update dataManagementPolicy" + " Exception: " + e.Message, e);
             }
         }

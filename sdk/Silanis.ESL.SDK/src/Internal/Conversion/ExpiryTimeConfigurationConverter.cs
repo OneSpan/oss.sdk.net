@@ -18,7 +18,8 @@ namespace Silanis.ESL.SDK
 
         internal Silanis.ESL.API.ExpiryTimeConfiguration ToAPIExpiryTimeConfiguration ()
         {
-            if (sdkExpiryTimeConfiguration == null) {
+            if (sdkExpiryTimeConfiguration == null) 
+            {
                 return apiExpiryTimeConfiguration;
             }
             apiExpiryTimeConfiguration = new Silanis.ESL.API.ExpiryTimeConfiguration ();
@@ -30,7 +31,8 @@ namespace Silanis.ESL.SDK
 
         internal Silanis.ESL.SDK.ExpiryTimeConfiguration ToSDKExpiryTimeConfiguration ()
         {
-            if (apiExpiryTimeConfiguration == null) {
+            if (apiExpiryTimeConfiguration == null) 
+            {
                 return sdkExpiryTimeConfiguration;
             }
             sdkExpiryTimeConfiguration = new ExpiryTimeConfiguration ();

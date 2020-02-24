@@ -776,8 +776,10 @@ namespace Silanis.ESL.SDK
             }
         }
 
-        public DataRetentionSettingsService DataRetentionSettingsService {
-            get {
+        public DataRetentionSettingsService DataRetentionSettingsService 
+        {
+            get 
+            {
                 return dataRetentionSettingsService;
             }
         }

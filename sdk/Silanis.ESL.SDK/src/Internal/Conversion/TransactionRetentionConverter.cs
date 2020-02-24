@@ -18,7 +18,8 @@ namespace Silanis.ESL.SDK
 
         internal Silanis.ESL.API.TransactionRetention ToAPITransactionRetention ()
         {
-            if (sdkTransactionRetention == null) {
+            if (sdkTransactionRetention == null) 
+            {
                 return apiTransactionRetention;
             }
             apiTransactionRetention = new Silanis.ESL.API.TransactionRetention ();
@@ -35,7 +36,8 @@ namespace Silanis.ESL.SDK
 
         internal Silanis.ESL.SDK.TransactionRetention ToSDKTransactionRetention ()
         {
-            if (apiTransactionRetention == null) {
+            if (apiTransactionRetention == null) 
+            {
                 return sdkTransactionRetention;
             }
             sdkTransactionRetention = new TransactionRetention ();
