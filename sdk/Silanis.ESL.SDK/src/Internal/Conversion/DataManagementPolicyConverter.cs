@@ -30,7 +30,7 @@ namespace Silanis.ESL.SDK
             return apiDataManagementPolicy;
         }
 
-        internal Silanis.ESL.SDK.DataManagementPolicy ToSDKExpiryTimeConfiguration ()
+        internal Silanis.ESL.SDK.DataManagementPolicy ToSDKDataManagementPolicy ()
         {
             if (apiDataManagementPolicy == null) {
                 return sdkDataManagementPolicy;

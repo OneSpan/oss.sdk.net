@@ -122,6 +122,12 @@
     <Compile Include="src\Internal\Conversion\ReferencedFieldConverterTest.cs" />
     <Compile Include="src\Internal\Conversion\SigningLogoConverterTest.cs" />
     <Compile Include="src\Builder\SigningLogoBuilderTest.cs" />
+    <Compile Include="src\Builder\DataManagementPolicyBuilderTest.cs" />
+    <Compile Include="src\Builder\ExpiryTimeConfigurationBuilderTest.cs" />
+    <Compile Include="src\Builder\TransactionRetentionBuilderTest.cs" />
+    <Compile Include="src\Internal\Conversion\TransactionRetentionConverterTest.cs" />
+    <Compile Include="src\Internal\Conversion\DataManagementPolicyConverterTest.cs" />
+    <Compile Include="src\Internal\Conversion\ExpiryTimeConfigurationConverterTest.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

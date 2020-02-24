@@ -79,7 +79,7 @@ namespace Silanis.ESL.SDK.Services
 
             Silanis.ESL.API.DataManagementPolicy dataManagementPolicy = JsonConvert.DeserializeObject<Silanis.ESL.API.DataManagementPolicy> (stringResponse);
             DataManagementPolicyConverter converter = new DataManagementPolicyConverter (dataManagementPolicy);
-            return converter.ToSDKExpiryTimeConfiguration ();
+            return converter.ToSDKDataManagementPolicy ();
         }
 
         /// <summary>
