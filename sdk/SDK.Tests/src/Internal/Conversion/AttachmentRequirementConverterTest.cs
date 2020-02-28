@@ -1,6 +1,7 @@
 using NUnit.Framework;
 using System;
 using Silanis.ESL.SDK;
+using System.Collections.Generic;
 
 namespace SDK.Tests
 {
@@ -106,10 +107,10 @@ namespace SDK.Tests
 
 		private Silanis.ESL.SDK.AttachmentRequirement CreateTypicalSDKAttachmentRequirement()
 		{
-			Silanis.ESL.SDK.AttachmentRequirement attachmentRequirement = AttachmentRequirementBuilder.NewAttachmentRequirementWithName("Driver's license")
-				.WithDescription("Please upload a scanned copy of your driver's license")
-				.IsRequiredAttachment()
-				.Build();
+            Silanis.ESL.SDK.AttachmentRequirement attachmentRequirement = AttachmentRequirementBuilder.NewAttachmentRequirementWithName ("Driver's license")
+                .WithDescription ("Please upload a scanned copy of your driver's license")
+                .IsRequiredAttachment ()
+                .Build();
 			attachmentRequirement.Id = "attachmentId";
 
 			return attachmentRequirement;
@@ -122,8 +123,10 @@ namespace SDK.Tests
 			attachmentRequirement.Id = "attachment1";
 			attachmentRequirement.Description = "Please upload a scanned copy of your driver's license";
 			attachmentRequirement.Required = true;
+            attachmentRequirement.Files = new List<Silanis.ESL.API.AttachmentFile> ();
 
-			return attachmentRequirement;
+
+            return attachmentRequirement;
 		}
     }
 }

@@ -112,6 +112,11 @@ namespace Silanis.ESL.SDK
         {
             apiClient.UploadAttachment (packageId, attachmentId, files, signerSessionId);
         }
+
+        public void DeleteAttachmentFile(PackageId packageId, string attachmentId, Int32 fileId, string signerSessionId)
+        {
+            apiClient.DeletaAttachmentFile (packageId, attachmentId, fileId, signerSessionId);
+        }
     }
 }
 

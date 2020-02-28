@@ -1,5 +1,6 @@
 using System;
 using Silanis.ESL.SDK.Internal;
+using System.Collections.Generic;
 
 namespace Silanis.ESL.SDK
 {
@@ -12,12 +13,13 @@ namespace Silanis.ESL.SDK
 		private string desciption;
 		private string name;
 		private bool isRequired;
+        private IList<Silanis.ESL.SDK.AttachmentFile> files = new List<Silanis.ESL.SDK.AttachmentFile>();
 
-		/// <summary>
-		/// Initializes a new instance of the <see cref="Silanis.ESL.SDK.AttachmentRequirementBuilder"/> class.
-		/// </summary>
-		/// <param name="name">The attachment name.</param>
-		public AttachmentRequirementBuilder(string name)
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Silanis.ESL.SDK.AttachmentRequirementBuilder"/> class.
+        /// </summary>
+        /// <param name="name">The attachment name.</param>
+        public AttachmentRequirementBuilder(string name)
         {
 			this.name = name;
         }
@@ -48,15 +50,22 @@ namespace Silanis.ESL.SDK
 			return this;
 		}
 
-		public AttachmentRequirement Build()
+        public AttachmentRequirementBuilder WithFiles(IList<AttachmentFile> files)
+        {
+            this.files = files;
+            return this;
+        }
+
+        public AttachmentRequirement Build()
 		{
 			Asserts.NotEmptyOrNull(name, "name");
 			AttachmentRequirement attachmentRequirement = new AttachmentRequirement(name);
 			attachmentRequirement.Description = desciption;
 			attachmentRequirement.Required = isRequired;
 			attachmentRequirement.Status = Silanis.ESL.SDK.RequirementStatus.INCOMPLETE;
+            attachmentRequirement.Files = files;
 
-			return attachmentRequirement;
+            return attachmentRequirement;
 		}
     }
 }
