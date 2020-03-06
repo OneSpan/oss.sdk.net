@@ -582,6 +582,18 @@ namespace Silanis.ESL.SDK
             attachmentRequirementService.UploadAttachment (packageId, attachmentId, files, signerSessionId);
         }
 
+        public void DeleteAttachmentFile (PackageId packageId, string attachmentId, Int32 fileId, string signerId)
+        {
+            string signerSessionFieldKey = "Delete Attachment file on behalf of";
+
+            IDictionary<string, string> signerSessionFields = new Dictionary<string, string> ();
+            signerSessionFields.Add (signerSessionFieldKey, signerId);
+            string signerAuthenticationToken = authenticationTokenService.CreateSignerAuthenticationToken (packageId, signerId, signerSessionFields);
+            string signerSessionId = authenticationService.GetSessionIdForSignerAuthenticationToken (signerAuthenticationToken);
+
+            attachmentRequirementService.DeleteAttachmentFile (packageId, attachmentId, fileId, signerSessionId);
+        }
+
         public void CreateSignerVerification(Silanis.ESL.SDK.PackageId packageId, String roleId, SignerVerification signerVerification)
         {
             Silanis.ESL.API.Verification verification = new SignerVerificationConverter(signerVerification).ToAPISignerVerification(); 

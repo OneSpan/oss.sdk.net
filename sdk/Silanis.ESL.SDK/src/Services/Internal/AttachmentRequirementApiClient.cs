@@ -190,11 +190,36 @@ namespace Silanis.ESL.SDK
                 System.Buffer.BlockCopy (fileName.ToCharArray (), 0, bytes, 0, bytes.Length);
 
                 byte [] content = CreateMultipartContent (fileName, fileBytes, bytes, boundary);
-                try {
+                try 
+                {
                     client.PostMultipartFile (path, content, boundary, signerSessionId, Converter.ToString (bytes));
-                } catch (Exception e) {
+                } 
+                catch (Exception e) 
+                {
                     throw new EslException ("Could not upload attachment for signer." + " Exception: " + e.Message, e);
                 }
+            }
+        }
+
+        public void DeletaAttachmentFile(PackageId packageId, string attachmentId, Int32 fileId, string signerSessionId)
+        {
+            string path = template.UrlFor (UrlTemplate.DELETE_ATTACHMENT_FILE_PATH)
+                 .Replace ("{packageId}", packageId.Id)
+                 .Replace ("{attachmentId}", attachmentId)
+                 .Replace("{fileId}", fileId.ToString())
+                 .Build ();
+
+            try 
+            {
+                restClient.Delete (path, null, signerSessionId);
+            } 
+            catch (EslServerException e) 
+            {
+                throw new EslServerException ("Could not delete attachment file for signer. Exception: " + e.Message, e.ServerError, e);
+            } 
+            catch (Exception e) 
+            {
+                throw new EslException ("Could not delete attachment file for signer. Exception: " + e.Message, e);
             }
         }
 

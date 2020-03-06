@@ -128,6 +128,7 @@
     <Compile Include="src\Internal\Conversion\TransactionRetentionConverterTest.cs" />
     <Compile Include="src\Internal\Conversion\DataManagementPolicyConverterTest.cs" />
     <Compile Include="src\Internal\Conversion\ExpiryTimeConfigurationConverterTest.cs" />
+    <Compile Include="src\Internal\Conversion\AttachmentFileConverterTest.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

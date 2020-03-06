@@ -48,8 +48,9 @@ namespace Silanis.ESL.SDK
 			result.Description = sdkAttachmentRequirement.Description;
 			result.Required = sdkAttachmentRequirement.Required;
 			result.Data = sdkAttachmentRequirement.Data;
+            result.Files = GetApiAttachmentFiles ();
 
-			if (sdkAttachmentRequirement.Status.Equals(null))
+            if (sdkAttachmentRequirement.Status.Equals(null))
 			{
                 result.Status = Silanis.ESL.SDK.RequirementStatus.INCOMPLETE.getApiValue();
 			}
@@ -81,12 +82,35 @@ namespace Silanis.ESL.SDK
 				result.Required = apiAttachmentRequirement.Required.Value;
 				result.Data = apiAttachmentRequirement.Data;
 				result.Status = new RequirementStatusConverter(apiAttachmentRequirement.Status).ToSDKRequirementStatus();
+                result.Files = GetSDKAttachmentFiles ();
 
-				return result;
+                return result;
 			}
 
 			return sdkAttachmentRequirement;
 		}
+
+        public IList<Silanis.ESL.API.AttachmentFile> GetApiAttachmentFiles()
+        {
+            IList <Silanis.ESL.API.AttachmentFile> files = new List<Silanis.ESL.API.AttachmentFile> ();
+            foreach (var file in sdkAttachmentRequirement.Files) 
+            {
+                files.Add (new AttachmentFileConverter (file).ToApiAttachmentFile ());
+            }
+            return files;
+        }
+
+        public IList<Silanis.ESL.SDK.AttachmentFile> GetSDKAttachmentFiles()
+        {
+            IList<Silanis.ESL.SDK.AttachmentFile> files = new List<Silanis.ESL.SDK.AttachmentFile> ();
+            foreach (var file in apiAttachmentRequirement.Files) 
+            {
+                files.Add (new AttachmentFileConverter (file).ToSDKAttachmentFile ());
+            }
+            return files;
+        }
+
+
     }
 }
 

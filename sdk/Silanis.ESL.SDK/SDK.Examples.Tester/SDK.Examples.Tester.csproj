@@ -143,6 +143,7 @@
     <Compile Include="src\DisabledSignaturesExampleTest.cs" />
     <Compile Include="src\ExpiryTimeConfigurationExampleTest.cs" />
     <Compile Include="src\DataManagementPolicyExampleTest.cs" />
+    <Compile Include="src\AttachmentFileExampleTests.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

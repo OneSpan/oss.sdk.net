@@ -438,7 +438,20 @@ namespace Silanis.ESL.SDK.Internal
             }
         }
 
+        public static byte [] DeleteHttp (AuthHeaderGenerator authHeader, string path, byte [] content, IDictionary<string, string> headers)
+        {
+            headers.Add (authHeader.Name, authHeader.Value);
+            return DeleteHttp (path, content, headers);
+        }
+
         public static byte [] DeleteHttp (string apiToken, string path, byte [] content, IDictionary<string, string> headers)
+        {
+        
+            headers.Add ("Authorization", "Basic " + apiToken);
+            return DeleteHttp (path, content, headers);
+        }
+
+        private static byte [] DeleteHttp (string path, byte [] content, IDictionary<string, string> headers)
         {
             try {
                 System.Net.ServicePointManager.SecurityProtocol = (SecurityProtocolType)768 | (SecurityProtocolType)3072;
@@ -448,7 +461,7 @@ namespace Silanis.ESL.SDK.Internal
                 request.ContentType = ESL_CONTENT_TYPE_APPLICATION_JSON;
                 request.ContentLength = content.Length;
                 AddAdditionalHeaders (request, headers);
-                request.Headers.Add ("Authorization", "Basic " + apiToken);
+
                 request.Accept = ESL_ACCEPT_TYPE_APPLICATION_JSON;
                 SetProxy (request);
 
