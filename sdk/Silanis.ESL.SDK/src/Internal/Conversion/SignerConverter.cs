@@ -69,7 +69,10 @@ namespace Silanis.ESL.SDK
                 role.EmailMessage = message;
             }
 
-            role.AddData ("localLanguage", sdkSigner.LocalLanguage);
+            if (!String.IsNullOrEmpty(sdkSigner.LocalLanguage))
+            {
+                role.AddData("localLanguage", sdkSigner.LocalLanguage);
+            }
 
             return role;
         }
