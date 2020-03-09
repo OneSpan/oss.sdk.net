@@ -136,6 +136,10 @@ namespace Silanis.ESL.SDK.Internal
         public static readonly string DELEGATES_PATH = "/account/senders/{senderId}/delegates";
         public static readonly string DELEGATE_ID_PATH = "/account/senders/{senderId}/delegates/{delegateId}";
 
+        //DataRetentionSettingsService
+        public static readonly string EXPIRY_TIME_CONFIGURATION_PATH = "/dataRetentionSettings/expiryTimeConfiguration";
+        public static readonly string DATA_MANAGEMENT_POLICY_PATH = "/dataRetentionSettings/dataManagementPolicy";
+
         //Authentication Token Services
         public static readonly string ESL_AUTHENTICATION_PATH = "/auth";
         public static readonly string USER_AUTHENTICATION_TOKEN_PATH = "/authenticationTokens/user";
@@ -152,12 +156,13 @@ namespace Silanis.ESL.SDK.Internal
         // Webpage redirect urls
         public static readonly string DESIGNER_REDIRECT_PATH = "/designer/{packageId}";
         public static readonly string PACKAGE_VIEW_REDIRECT_PATH = "/packages/{packageId}";
-        public static readonly string SIGNING_REDIRECT_PATH = "/packages/{packageId}/sign";  
+        public static readonly string SIGNING_REDIRECT_PATH = "/transaction/{packageId}/sign";  
 
 		// AttachmentRequirement Service
 		public static readonly string ATTACHMENT_REQUIREMENT_PATH = "/packages/{packageId}/attachment/{attachmentId}";
         public static readonly string ALL_ATTACHMENTS_PATH = "/packages/{packageId}/attachment/zip";
         public static readonly string ALL_ATTACHMENTS_FOR_ROLE_PATH = "/packages/{packageId}/attachment/zip/{roleId}";
+        public static readonly string DELETE_ATTACHMENT_FILE_PATH = "/packages/{packageId}/attachment/{attachmentId}/file/{fileId}";
 
         // Layout Service
         public static readonly string LAYOUT_PATH = "/layouts";
@@ -175,6 +180,9 @@ namespace Silanis.ESL.SDK.Internal
 
         // Account Signing Themes Service 
         public static readonly string ACCOUNT_SIGNING_THEME_PATH = "/account/signingThemes";
+
+        // Account Signing Logo Service
+        public static readonly string ACCOUNT_SIGNING_LOGO_PATH = "/account/admin/signingLogos";
 
 
         public UrlTemplate (string baseUrl)

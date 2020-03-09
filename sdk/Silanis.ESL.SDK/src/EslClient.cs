@@ -44,7 +44,7 @@ namespace Silanis.ESL.SDK
         private SigningService signingService;
         private SignerVerificationService signerVerificationService;
         private SigningStyleService signingStyleService;
-
+        private DataRetentionSettingsService dataRetentionSettingsService;
         private JsonSerializerSettings jsonSerializerSettings;
 
         /// <summary>
@@ -135,6 +135,7 @@ namespace Silanis.ESL.SDK
             layoutService = new LayoutService(new LayoutApiClient(restClient, this.baseUrl, jsonSerializerSettings));
             qrCodeService = new QRCodeService(new QRCodeApiClient(restClient, this.baseUrl, jsonSerializerSettings));
             authenticationService = new AuthenticationService(this.webpageUrl);
+            dataRetentionSettingsService = new DataRetentionSettingsService (restClient, this.baseUrl);
         }
 
         private void configureJsonSerializationSettings()
@@ -189,15 +190,15 @@ namespace Silanis.ESL.SDK
             return false;
         }
 
-        /**
-        * Facilitates access to the service that could be used to add signing style
+        /** The SigningStyleService class provides methods to customize the New Signer Experience
+        *   Signing Themes and Signing Logos
         *
         * @return  the signing style service
         */
         public SigningStyleService GetSigningStyleService ()
         {
             return signingStyleService;
-        }
+        }       
 
         internal void SetSdkVersionInPackageData(DocumentPackage package)
         {
@@ -563,14 +564,34 @@ namespace Silanis.ESL.SDK
         }
 
         public void UploadAttachment(PackageId packageId, string attachmentId, string filename, byte[] fileBytes, string signerId) {
+            Dictionary<string, byte []> files = new Dictionary<string, byte []> ();
+            files.Add (filename, fileBytes);
+
+            UploadAttachment (packageId, attachmentId, files, signerId);
+        }
+
+        public void UploadAttachment (PackageId packageId, string attachmentId, IDictionary<string, byte[]> files, string signerId)
+        {
             string signerSessionFieldKey = "Upload Attachment on behalf of";
 
-            IDictionary<string, string> signerSessionFields = new Dictionary<string, string>();
-            signerSessionFields.Add(signerSessionFieldKey, signerId);
-            string signerAuthenticationToken = authenticationTokenService.CreateSignerAuthenticationToken(packageId, signerId, signerSessionFields);
-            string signerSessionId = authenticationService.GetSessionIdForSignerAuthenticationToken(signerAuthenticationToken);
+            IDictionary<string, string> signerSessionFields = new Dictionary<string, string> ();
+            signerSessionFields.Add (signerSessionFieldKey, signerId);
+            string signerAuthenticationToken = authenticationTokenService.CreateSignerAuthenticationToken (packageId, signerId, signerSessionFields);
+            string signerSessionId = authenticationService.GetSessionIdForSignerAuthenticationToken (signerAuthenticationToken);
 
-            attachmentRequirementService.UploadAttachment(packageId, attachmentId, filename, fileBytes, signerSessionId);
+            attachmentRequirementService.UploadAttachment (packageId, attachmentId, files, signerSessionId);
+        }
+
+        public void DeleteAttachmentFile (PackageId packageId, string attachmentId, Int32 fileId, string signerId)
+        {
+            string signerSessionFieldKey = "Delete Attachment file on behalf of";
+
+            IDictionary<string, string> signerSessionFields = new Dictionary<string, string> ();
+            signerSessionFields.Add (signerSessionFieldKey, signerId);
+            string signerAuthenticationToken = authenticationTokenService.CreateSignerAuthenticationToken (packageId, signerId, signerSessionFields);
+            string signerSessionId = authenticationService.GetSessionIdForSignerAuthenticationToken (signerAuthenticationToken);
+
+            attachmentRequirementService.DeleteAttachmentFile (packageId, attachmentId, fileId, signerSessionId);
         }
 
         public void CreateSignerVerification(Silanis.ESL.SDK.PackageId packageId, String roleId, SignerVerification signerVerification)
@@ -764,6 +785,14 @@ namespace Silanis.ESL.SDK
             get
             {
                 return signerVerificationService;
+            }
+        }
+
+        public DataRetentionSettingsService DataRetentionSettingsService 
+        {
+            get 
+            {
+                return dataRetentionSettingsService;
             }
         }
 	}

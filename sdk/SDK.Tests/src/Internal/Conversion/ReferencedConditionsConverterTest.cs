@@ -17,7 +17,7 @@ namespace SDK.Tests
         protected readonly String CONDITION_1_ID = "Condition1";
         protected readonly String CONDITION_2_ID = "Condition2";
         protected readonly String CONDITION = "document['document1'].field['{0}'].empty == true";
-        protected readonly String ACTION = "document['document1'].field['{0}'].enabled = true";
+        protected readonly String ACTION = "document['document1'].field['{0}'].disabled = false";
 
         [Test()]
         public virtual void ConvertNullSDKToAPI()

@@ -110,7 +110,7 @@
     <Compile Include="src\SigningRedirectForSignerExample.cs" />
     <Compile Include="src\CustomSenderInfoInCreateNewTemplateExample.cs" />
     <Compile Include="src\CustomSenderInfoInCreatePackageFromTemplateExample.cs" />
-    <Compile Include="src\AttachmentRequirementExample.cs" />
+    <Compile Include="src\AttachmentFileExample.cs" />
     <Compile Include="src\SenderManipulationExample.cs" />
     <Compile Include="src\ExceptionHandlingExample.cs" />
     <Compile Include="src\SignatureManipulationExample.cs" />
@@ -167,13 +167,16 @@
     <Compile Include="src\AdaPackageExample.cs" />
     <Compile Include="src\ApplyLayoutByNameExample.cs" />
     <Compile Include="src\OptionalSignaturesExample.cs" />
-    <Compile Include="src\SignerSSOExample.cs" />
     <Compile Include="src\AdditionalRequestHeadersExample.cs" />
     <Compile Include="src\DeleteDocumentsExample.cs" />
     <Compile Include="src\ConditionalFieldExample.cs" />
     <Compile Include="src\GetPackageFieldsListExample.cs" />
     <Compile Include="src\SigningStyleExample.cs" />
     <Compile Include="src\DisabledSignaturesExample.cs" />
+    <Compile Include="src\LocalLanguageExample.cs" />
+    <Compile Include="src\ExpiryTimeConfigurationExample.cs" />
+    <Compile Include="src\DataManagementPolicyExample.cs" />
+    <Compile Include="src\AttachmentRequirementExample.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

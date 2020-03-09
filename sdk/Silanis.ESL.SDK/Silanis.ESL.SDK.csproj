@@ -422,6 +422,26 @@
     <Compile Include="src\Builder\FieldConditionBuilder.cs" />
     <Compile Include="src\Models\SigningTheme.cs" />
     <Compile Include="src\Services\SigningStyleService.cs" />
+    <Compile Include="src\SigningLogo.cs" />
+    <Compile Include="src\Models\SigningLogo.cs" />
+    <Compile Include="src\Internal\Conversion\SigningLogoConverter.cs" />
+    <Compile Include="src\Builder\SigningLogoBuilder.cs" />
+    <Compile Include="src\Models\TransactionRetention.cs" />
+    <Compile Include="src\TransactionRetention.cs" />
+    <Compile Include="src\Models\ExpiryTimeConfiguration.cs" />
+    <Compile Include="src\ExpiryTimeConfiguration.cs" />
+    <Compile Include="src\Models\DataManagementPolicy.cs" />
+    <Compile Include="src\DataManagementPolicy.cs" />
+    <Compile Include="src\Internal\Conversion\ExpiryTimeConfigurationConverter.cs" />
+    <Compile Include="src\Internal\Conversion\TransactionRetentionConverter.cs" />
+    <Compile Include="src\Internal\Conversion\DataManagementPolicyConverter.cs" />
+    <Compile Include="src\Builder\ExpiryTimeConfigurationBuilder.cs" />
+    <Compile Include="src\Builder\TransactionRetentionBuilder.cs" />
+    <Compile Include="src\Builder\DataManagementPolicyBuilder.cs" />
+    <Compile Include="src\Services\DataRetentionSettingsService.cs" />
+    <Compile Include="src\Models\AttachmentFile.cs" />
+    <Compile Include="src\AttachmentFile.cs" />
+    <Compile Include="src\Internal\Conversion\AttachmentFileConverter.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSHARP.Targets" />
   <ProjectExtensions>

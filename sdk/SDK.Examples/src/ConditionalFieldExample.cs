@@ -25,7 +25,7 @@ namespace SDK.Examples
             FieldCondition condition = new FieldCondition ();
             condition.Id = "ConditionId";
             condition.Condition = "document['DocumentId'].field['fieldId2'].value == 'X'";
-            condition.Action = "document['DocumentId'].field['fieldId1'].enabled = true";
+            condition.Action = "document['DocumentId'].field['fieldId1'].disabled = false";
 
             DocumentPackage superDuperPackage = PackageBuilder.NewPackageNamed (packageName)
                     .DescribedAs ("Description")
@@ -56,7 +56,7 @@ namespace SDK.Examples
             FieldCondition newCondition = new FieldCondition ();
             newCondition.Id = "ConditionId";
             newCondition.Condition = "document['DocumentId'].field['fieldId2'].value == 'X'";
-            newCondition.Action = "document['DocumentId'].field['fieldId1'].enabled = false";
+            newCondition.Action = "document['DocumentId'].field['fieldId1'].disabled = true";
             List<FieldCondition> conditions = new List<FieldCondition> ();
             conditions.Add (newCondition);
 

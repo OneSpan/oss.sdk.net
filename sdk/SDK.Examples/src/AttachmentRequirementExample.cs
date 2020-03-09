@@ -2,6 +2,7 @@ using System;
 using Silanis.ESL.SDK;
 using Silanis.ESL.SDK.Builder;
 using System.IO;
+using System.IO.Compression;
 using System.Collections.Generic;
 using Silanis.ESL.SDK.Builder.Internal;
 
@@ -14,7 +15,7 @@ namespace SDK.Examples
             new AttachmentRequirementExample().Run();
         }
 
-        private Stream attachmentInputStream1, attachmentInputStream2, attachmentInputStream3;
+        private Stream attachmentInputStream1, attachmentInputStream2, attachmentInputStream3, attachmentInputStream4;
 
         private Signer signer1;
         private string attachment1Id;
@@ -32,6 +33,7 @@ namespace SDK.Examples
         public readonly string ATTACHMENT_FILE_NAME1 = "The attachment1 for signer1.pdf";
         public readonly string ATTACHMENT_FILE_NAME2 = DocumentTypeUtility.NormalizeName (DocumentType.PDF, "The attachment2 for signer1");
         public readonly string ATTACHMENT_FILE_NAME3 = DocumentTypeUtility.NormalizeName (DocumentType.PDF, "The attachment2 for signer2");
+        public readonly string ATTACHMENT_FILE_NAME4 = DocumentTypeUtility.NormalizeName (DocumentType.PDF, "The attachment3 for signer2");
 
         public readonly string DOWNLOADED_ALL_ATTACHMENTS_FOR_PACKAGE_ZIP = "downloadedAllAttachmentsForPackage.zip";
         public readonly string DOWNLOADED_ALL_ATTACHMENTS_FOR_SIGNER1_IN_PACKAGE_ZIP = "downloadedAllAttachmentsForSigner1InPackage.zip";
@@ -55,6 +57,7 @@ namespace SDK.Examples
             this.attachmentInputStream1 = File.OpenRead(new FileInfo(Directory.GetCurrentDirectory() + "/src/document-for-anchor-extraction.pdf").FullName);
             this.attachmentInputStream2 = File.OpenRead(new FileInfo(Directory.GetCurrentDirectory() + "/src/document-with-fields.pdf").FullName);
             this.attachmentInputStream3 = File.OpenRead(new FileInfo(Directory.GetCurrentDirectory() + "/src/extract_document.pdf").FullName);
+            this.attachmentInputStream4 = File.OpenRead (new FileInfo (Directory.GetCurrentDirectory () + "/src/document.pdf").FullName);
         }
 
         override public void Execute()
@@ -119,8 +122,11 @@ namespace SDK.Examples
             eslClient.UploadAttachment(packageId, signer1Att1.Id, ATTACHMENT_FILE_NAME1, attachment1ForSigner1FileContent, SIGNER1_ID);
             eslClient.UploadAttachment(packageId, signer2Att1.Id, ATTACHMENT_FILE_NAME2, 
                                        new StreamDocumentSource(attachmentInputStream2).Content(), SIGNER2_ID);
-            eslClient.UploadAttachment(PackageId, signer2Att2.Id, ATTACHMENT_FILE_NAME3, 
-                                       new StreamDocumentSource(attachmentInputStream3).Content(), SIGNER2_ID);
+
+            IDictionary<string, byte []> signer2att2files = new Dictionary<string, byte []> ();
+            signer2att2files.Add (ATTACHMENT_FILE_NAME3, new StreamDocumentSource (attachmentInputStream3).Content ());
+            signer2att2files.Add (ATTACHMENT_FILE_NAME4, new StreamDocumentSource (attachmentInputStream4).Content ());
+            eslClient.UploadAttachment (PackageId, signer2Att2.Id, signer2att2files, SIGNER2_ID);
 
             // Sender rejects Signer1's uploaded attachment
             eslClient.AttachmentRequirementService.RejectAttachment(packageId, signer1, NAME1, REJECTION_COMMENT);

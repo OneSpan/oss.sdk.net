@@ -134,7 +134,6 @@
     <Compile Include="src\AdaPackageExampleTest.cs" />
     <Compile Include="src\ApplyLayoutByNameExampleTest.cs" />
     <Compile Include="src\OptionalSignaturesExampleTest.cs" />
-    <Compile Include="src\SignerSSOExampleTest.cs" />
     <Compile Include="src\AdditionalRequestHeadersExampleTest.cs" />
     <Compile Include="src\DeleteDocumentsExampleTest.cs" />
     <Compile Include="src\ConditionalFieldExampleTest.cs" />
@@ -142,6 +141,9 @@
     <Compile Include="src\PackageReferencedConditionsExampleTest.cs" />
     <Compile Include="src\SigningStyleExampleTest.cs" />
     <Compile Include="src\DisabledSignaturesExampleTest.cs" />
+    <Compile Include="src\ExpiryTimeConfigurationExampleTest.cs" />
+    <Compile Include="src\DataManagementPolicyExampleTest.cs" />
+    <Compile Include="src\AttachmentFileExampleTests.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

@@ -205,13 +205,36 @@ namespace Silanis.ESL.SDK
             return response;
         }
 
+        public void Delete(string path, string jsonPayload, string sessionId)
+        {
+            support.LogRequest ("DELETE", path);
+
+            byte [] payloadBytes = null;
+            if (jsonPayload != null) 
+            {
+                payloadBytes = Converter.ToBytes (jsonPayload);
+            } 
+            else 
+            {
+                payloadBytes = new byte [0];
+            }
+
+            if (proxyConfiguration != null)
+                HttpMethods.proxyConfiguration = proxyConfiguration;
+
+            headerGen = new SessionIdAuthHeaderGenerator (sessionId);
+            byte [] responseBytes = HttpMethods.DeleteHttp (headerGen, path, payloadBytes, additionalHeaders);
+        }
+
         public string Delete (string path, string jsonPayload)
         {
 
             byte [] payloadBytes = null;
             if (jsonPayload != null) {
                 payloadBytes = Converter.ToBytes (jsonPayload);
-            } else {
+            } 
+            else 
+            {
                 payloadBytes = new byte [0];
             }
 

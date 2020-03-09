@@ -1,6 +1,7 @@
 ﻿using System;
 using Silanis.ESL.SDK.Internal;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Serialization;
 using System.Collections.Generic;
 using Silanis.ESL.API;
 
@@ -24,12 +25,17 @@ namespace Silanis.ESL.SDK
             string path = template.UrlFor (UrlTemplate.ACCOUNT_SIGNING_THEME_PATH)
                           .Build ();
 
-            try {
+            try
+            {
                 string response = restClient.Post (path, signingThemesString);
                 return JsonConvert.DeserializeObject<IDictionary<string, object>> (response, settings);
-            } catch (EslServerException e) {
+            } 
+            catch (EslServerException e) 
+            {
                 throw new EslServerException ("Could not create the signing themes for account." + " Exception: " + e.Message, e.ServerError, e);
-            } catch (Exception e) {
+            }
+            catch (Exception e) 
+            {
                 throw new EslException ("Could not create the signing themes for account." + " Exception: " + e.Message, e);
             }
         }
@@ -39,12 +45,17 @@ namespace Silanis.ESL.SDK
             string path = template.UrlFor (UrlTemplate.ACCOUNT_SIGNING_THEME_PATH)
                           .Build ();
 
-            try {
+            try
+            {
                 string response = restClient.Get (path);
                 return JsonConvert.DeserializeObject<IDictionary<string, object>> (response, settings);
-            } catch (EslServerException e) {
+            }
+            catch (EslServerException e)
+            {
                 throw new EslServerException ("Could not get the signing themes from account." + " Exception: " + e.Message, e.ServerError, e);
-            } catch (Exception e) {
+            }
+            catch (Exception e)
+            {
                 throw new EslException ("Could not get the signing themes from account." + " Exception: " + e.Message, e);
             }
         }
@@ -54,12 +65,17 @@ namespace Silanis.ESL.SDK
             string path = template.UrlFor (UrlTemplate.ACCOUNT_SIGNING_THEME_PATH)
                           .Build ();
 
-            try {
+            try
+            {
                 string response = restClient.Put (path, signingThemesString);
                 return JsonConvert.DeserializeObject<IDictionary<string, object>> (response, settings);
-            } catch (EslServerException e) {
+            }
+            catch (EslServerException e )
+            {
                 throw new EslServerException ("Could not update the signing themes to account." + " Exception: " + e.Message, e.ServerError, e);
-            } catch (Exception e) {
+            }
+            catch (Exception e) 
+            {
                 throw new EslException ("Could not update the signing themes to account." + " Exception: " + e.Message, e);
             }
         }
@@ -69,12 +85,57 @@ namespace Silanis.ESL.SDK
             string path = template.UrlFor (UrlTemplate.ACCOUNT_SIGNING_THEME_PATH)
                           .Build ();
 
-            try {
+            try 
+            {
                 string response = restClient.Delete (path);
-            } catch (EslServerException e) {
+            }
+            catch (EslServerException e)
+            {
                 throw new EslServerException ("Could not delete the signing themes from account." + " Exception: " + e.Message, e.ServerError, e);
-            } catch (Exception e) {
+            }
+            catch (Exception e)
+            {
                 throw new EslException ("Could not delete the signing themes from account." + " Exception: " + e.Message, e);
+            }
+        }
+
+        public void SaveSigningLogos (List<SigningLogo> signingLogos)
+        {
+            string path = template.UrlFor (UrlTemplate.ACCOUNT_SIGNING_LOGO_PATH)
+                          .Build ();
+            string payload = JsonConvert.SerializeObject (signingLogos, new JsonSerializerSettings { ContractResolver = new CamelCasePropertyNamesContractResolver (), Formatting = Formatting.Indented });
+
+            try
+            {
+                restClient.Post (path, payload);
+            }
+            catch (EslServerException e)
+            {
+                throw new EslServerException ("Could not save the signing logos for account." + " Exception: " + e.Message, e.ServerError, e);
+            }
+            catch (Exception e)
+            {
+                throw new EslException ("Could not save the signing logos for account." + " Exception: " + e.Message, e);
+            }
+        }
+
+        public List<SigningLogo> GetSigningLogos ()
+        {
+            string path = template.UrlFor (UrlTemplate.ACCOUNT_SIGNING_LOGO_PATH)
+                          .Build ();
+
+            try
+            {
+                string response = restClient.Get (path);
+                return JsonConvert.DeserializeObject<List<SigningLogo>> (response, settings);
+            }
+            catch (EslServerException e)
+            {
+                throw new EslServerException ("Could not get the signing logos from account." + " Exception: " + e.Message, e.ServerError, e);
+            }
+            catch (Exception e )
+            {
+                throw new EslException ("Could not get the signing logos from account." + " Exception: " + e.Message, e);
             }
         }
     }

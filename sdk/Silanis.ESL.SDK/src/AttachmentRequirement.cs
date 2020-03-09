@@ -14,8 +14,9 @@ namespace Silanis.ESL.SDK
 		private string id;
 		private bool required;
 		private Silanis.ESL.SDK.RequirementStatus status;
+        private IList<AttachmentFile> files = new List<AttachmentFile> ();
 
-		public AttachmentRequirement(string name)
+        public AttachmentRequirement(string name)
         {
 			Name = name;
 		}
@@ -103,6 +104,18 @@ namespace Silanis.ESL.SDK
 				status = value;
 			}
 		}
+
+        public IList<AttachmentFile> Files 
+        {
+            get 
+            {
+                return files;
+            }
+            set 
+            {
+                files = value;
+            }
+        }
     }
 }
 
