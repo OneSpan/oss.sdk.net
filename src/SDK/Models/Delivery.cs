@@ -1,0 +1,39 @@
+//
+using System;
+using System.Collections.Generic;
+using Newtonsoft.Json;
+namespace OneSpanSign.API
+{
+	
+	
+	internal class Delivery
+	{
+		
+		// Fields
+		
+		// Accessors
+		    
+    [JsonProperty("download")]
+    public Nullable<Boolean> Download
+    {
+                get; set;
+        }
+    
+		    
+    [JsonProperty("email")]
+    public Nullable<Boolean> Email
+    {
+                get; set;
+        }
+    
+		    
+    [JsonProperty("provider")]
+    public Nullable<Boolean> Provider
+    {
+                get; set;
+        }
+    
+		
+	
+	}
+}

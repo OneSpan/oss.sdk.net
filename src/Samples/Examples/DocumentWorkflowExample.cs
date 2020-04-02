@@ -1,0 +1,49 @@
+using System;
+using System.IO;
+using OneSpanSign.Sdk;
+using OneSpanSign.Sdk.Builder;
+
+namespace SDK.Examples
+{
+	public class DocumentWorkflowExample : SDKSample
+	{
+        public static void Main (string[] args)
+        {
+            new DocumentWorkflowExample().Run();
+        }
+
+        override public void Execute() {
+            DocumentPackage package = PackageBuilder.NewPackageNamed (PackageName)
+					.DescribedAs ("This is a document workflow example")
+					.WithSigner(SignerBuilder.NewSignerWithEmail(email1)
+					            .WithFirstName("John")
+					            .WithLastName("Smith"))
+					.WithDocument(DocumentBuilder.NewDocumentNamed("Second Document")
+                                  .FromStream(fileStream1, DocumentType.PDF)
+					              .AtIndex(2)
+					              .WithSignature(SignatureBuilder.SignatureFor(email1)
+					              		.OnPage(0)
+					               		.AtPosition(100, 100)))
+					.WithDocument (DocumentBuilder.NewDocumentNamed("First Document")
+                                   .FromStream(fileStream2, DocumentType.PDF)
+					               .AtIndex (1)
+					               .WithSignature(SignatureBuilder.SignatureFor(email1)
+					               		.OnPage (0)
+					               		.AtPosition (100, 100)))
+					.Build ();
+
+			packageId = ossClient.CreatePackage (package);
+
+			Console.WriteLine("Package create, id = " + packageId);
+
+			DocumentPackage savedPackage = ossClient.GetPackage(packageId);
+
+			savedPackage.GetDocument("First Document").Index = 2;
+            savedPackage.GetDocument("Second Document").Index = 1;
+
+			ossClient.PackageService.OrderDocuments(savedPackage);
+
+			Console.WriteLine("Document order saved");
+		}
+	}
+}

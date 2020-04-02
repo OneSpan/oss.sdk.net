@@ -1,0 +1,11 @@
+////
+//using Newtonsoft.Json;
+//using Newtonsoft.Json.Converters;
+//namespace OneSpanSign.API
+//{
+//    [JsonConverter(typeof(StringEnumConverter))]
+//	internal enum CallbackEvent
+//	{
+//		PACKAGE_CREATE,PACKAGE_ACTIVATE,PACKAGE_DEACTIVATE,PACKAGE_READY_FOR_COMPLETE,PACKAGE_COMPLETE,PACKAGE_TRASH,PACKAGE_RESTORE,PACKAGE_DELETE,PACKAGE_DECLINE,PACKAGE_EXPIRE,PACKAGE_OPT_OUT,DOCUMENT_SIGNED,ROLE_REASSIGN,SIGNER_COMPLETE
+//	}
+//}

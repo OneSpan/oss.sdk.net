@@ -4,6 +4,7 @@ obj/
 Debug/
 test-results/
 TestResult.xml
+artifacts/
 
 #user-specific files
 /packages/

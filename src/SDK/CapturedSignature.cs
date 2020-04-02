@@ -1,0 +1,17 @@
+﻿using System;
+namespace OneSpanSign.Sdk
+{
+    public class CapturedSignature
+    {
+        public CapturedSignature(string handdrawn)
+        {
+            Handdrawn = handdrawn;
+        }
+
+        public string Handdrawn 
+        { 
+                get;
+                set;
+        }
+    }
+}

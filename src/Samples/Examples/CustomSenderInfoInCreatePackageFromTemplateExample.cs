@@ -1,0 +1,70 @@
+using System;
+using System.IO;
+using OneSpanSign.Sdk;
+using OneSpanSign.Sdk.Builder;
+
+namespace SDK.Examples
+{
+    public class CustomSenderInfoInCreatePackageFromTemplateExample : SDKSample
+    {
+        public const string SENDER_FIRST_NAME = "Rob";
+        public const string SENDER_SECOND_NAME = "Mason";
+        public const string SENDER_TITLE = "Chief Vizier";
+        public const string SENDER_COMPANY = "The Masons";
+
+        private PackageId templateId;
+        public PackageId TemplateId
+        {
+            get
+            {
+                return templateId;
+            }
+        }
+
+        public static void Main(string[] args)
+        {
+            new CustomSenderInfoInCreatePackageFromTemplateExample().Run();
+        }
+
+        override public void Execute()
+        {
+            senderEmail = System.Guid.NewGuid().ToString().Replace("-","") + "@e-signlive.com";
+            ossClient.AccountService.InviteUser(
+                AccountMemberBuilder.NewAccountMember(senderEmail)
+                .WithFirstName("firstName")
+                .WithLastName("lastName")
+                .WithCompany("company")
+                .WithTitle("title")
+                .WithLanguage( "language" )
+                .WithPhoneNumber( "phoneNumber" )
+                .Build()
+            );
+
+            DocumentPackage template =
+                PackageBuilder.NewPackageNamed("CustomSenderInfoInCreateNewTemplateExample: " + DateTime.Now)
+                .DescribedAs("This is a template created using the eSignLive SDK")
+                .WithEmailMessage("This message should be delivered to all signers")
+                .WithSigner(SignerBuilder.NewSignerPlaceholder(new Placeholder("PlaceholderId1")))
+                .WithDocument(DocumentBuilder.NewDocumentNamed("First Document")
+                              .FromStream(fileStream1, DocumentType.PDF)
+                              .WithSignature(SignatureBuilder.SignatureFor(new Placeholder("PlaceholderId1"))
+                                             .OnPage(0)
+                                             .AtPosition(100, 100)
+                                            )
+                             )
+                .Build();
+
+            templateId = ossClient.CreateTemplate(template);
+
+            packageId = ossClient.CreatePackageFromTemplate(templateId,
+                         PackageBuilder.NewPackageNamed(PackageName)
+                        .WithSenderInfo( SenderInfoBuilder.NewSenderInfo(senderEmail)
+                                         .WithName(SENDER_FIRST_NAME, SENDER_SECOND_NAME)
+                                         .WithTitle(SENDER_TITLE)
+                                         .WithCompany(SENDER_COMPANY) )
+                                     .Build() );
+            retrievedPackage = ossClient.GetPackage(packageId);
+        }
+    }
+}
+
