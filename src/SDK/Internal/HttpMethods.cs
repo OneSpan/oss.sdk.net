@@ -64,7 +64,7 @@ namespace OneSpanSign.Sdk.Internal
                     var httpResponse = (HttpWebResponse)apiTokenRequest.GetResponse();
 
                     if (httpResponse.StatusCode != HttpStatusCode.OK) {
-                        throw new EslException("Unable to fetch access token for "+apiTokenConfig.ToString()+", response was "+httpResponse.ToString(), null);
+                        throw new OssException("Unable to fetch access token for "+apiTokenConfig.ToString()+", response was "+httpResponse.ToString(), null);
                     }
 
                     string result;
@@ -490,7 +490,8 @@ namespace OneSpanSign.Sdk.Internal
 
         public static byte [] DeleteHttp (AuthHeaderGenerator authHeader, string path, byte [] content, IDictionary<string, string> headers)
         {
-            return DeleteHttp (path, content, headers, authHeader.Name, authHeader.Value);
+            headers[authHeader.Name]=authHeader.Value;
+            return DeleteHttp (null, path, content, headers);
         }
 
         public static byte [] DeleteHttp (string apiKey, string path, byte [] content, IDictionary<string, string> headers)
