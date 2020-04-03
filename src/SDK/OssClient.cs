@@ -111,7 +111,7 @@ namespace OneSpanSign.Sdk
             init (restClient, apiKey);
         }
 
-        public EslClient (ApiTokenConfig apiTokenConfig, string baseUrl, bool allowAllSSLCertificates, ProxyConfiguration proxyConfiguration, IDictionary<string, string> headers)
+        public OssClient (ApiTokenConfig apiTokenConfig, string baseUrl, bool allowAllSSLCertificates, ProxyConfiguration proxyConfiguration, IDictionary<string, string> headers)
         {
             Asserts.NotNull (apiTokenConfig, "apiTokenConfig");
             Asserts.NotEmptyOrNull (baseUrl, "baseUrl");
