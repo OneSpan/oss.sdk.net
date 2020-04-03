@@ -23,7 +23,17 @@ namespace SDK.Examples
 
         public SDKSample()
         {
-            ossClient = new OssClient(props.Get( "api.key" ), props.Get( "api.url" ), props.Get( "webpage.url" ), true);
+            if (props.Exists("api.clientId")) {
+                ApiTokenConfig apiTokenConfig = new ApiTokenConfig();
+                apiTokenConfig.BaseUrl = props.Get( "webpage.url" );
+                apiTokenConfig.ClientAppId = props.Get("api.clientId");
+                apiTokenConfig.ClientAppSecret = props.Get("api.secret");
+                apiTokenConfig.TokenType = ApiTokenType.OWNER;
+                ossClient = new OssClient(apiTokenConfig, props.Get( "api.url" ), true, null, new Dictionary<string,string>());
+            } else {
+                ossClient = new OssClient(props.Get( "api.key" ), props.Get( "api.url" ), props.Get( "webpage.url" ), true);
+            }
+
             SetProperties();
         }
 
