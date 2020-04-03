@@ -11,6 +11,11 @@
     <Company>OneSpan</Company>
     <Product>OneSpan Sign SDK</Product>
     <Version>11.33.0</Version>
+    <Copyright>OneSpan</Copyright>
+    <Description>.NET SDK for OneSpan Sign</Description>
+    <PackageProjectUrl>https://github.com/OneSpan/oss.sdk.net</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/OneSpan/oss.sdk.net</RepositoryUrl>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
   </PropertyGroup>
 
   <ItemGroup>
