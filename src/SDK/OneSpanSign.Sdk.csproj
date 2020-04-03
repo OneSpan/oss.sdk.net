@@ -10,7 +10,7 @@
     <Authors>Simon Levy</Authors>
     <Company>OneSpan</Company>
     <Product>OneSpan Sign SDK</Product>
-    <Version>11.32.0</Version>
+    <Version>11.33.0</Version>
   </PropertyGroup>
 
   <ItemGroup>
