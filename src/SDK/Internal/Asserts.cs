@@ -24,7 +24,7 @@ namespace OneSpanSign.Sdk.Internal
 		{
 			if (assertedValue == null)
 			{
-				throw new EslException (String.Format ("{0} cannot be null", argumentName),null);
+				throw new OssException(String.Format ("{0} cannot be null", argumentName),null);
 			}
 		}
 	}
