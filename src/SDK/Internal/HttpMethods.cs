@@ -491,7 +491,7 @@ namespace OneSpanSign.Sdk.Internal
         public static byte [] DeleteHttp (AuthHeaderGenerator authHeader, string path, byte [] content, IDictionary<string, string> headers)
         {
             headers[authHeader.Name]=authHeader.Value;
-            return DeleteHttp (null, path, content, headers);
+            return DeleteHttp (path, content, headers, (string)null);
         }
 
         public static byte [] DeleteHttp (string apiKey, string path, byte [] content, IDictionary<string, string> headers)
