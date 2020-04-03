@@ -12,9 +12,9 @@ namespace SDK.Tests
 		[Test()]
         public void TestCase()
         {
-			DateTime date = new DateTime(2010, 1, 1, 7, 30, 0);
+			DateTime date = new DateTime(2010, 1, 1, 12, 30, 0, DateTimeKind.Utc);
 
-			String result = DateHelper.dateToIsoUtcFormat(date);
+            string result = DateHelper.dateToIsoUtcFormat(date.ToLocalTime());
 
 			Assert.AreEqual(result, expectedDateInUTC);
         }
