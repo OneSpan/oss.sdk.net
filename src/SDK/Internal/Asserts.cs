@@ -19,5 +19,13 @@ namespace OneSpanSign.Sdk.Internal
 				throw new OssException(String.Format("{0} cannot be 0", fieldName),null);
 			}
 		}
+
+		public static void NotNull(object assertedValue, String argumentName)
+		{
+			if (assertedValue == null)
+			{
+				throw new OssException(String.Format ("{0} cannot be null", argumentName),null);
+			}
+		}
 	}
 }

@@ -111,6 +111,19 @@ namespace OneSpanSign.Sdk
             init (restClient, apiKey);
         }
 
+        public OssClient (ApiTokenConfig apiTokenConfig, string baseUrl, bool allowAllSSLCertificates, ProxyConfiguration proxyConfiguration, IDictionary<string, string> headers)
+        {
+            Asserts.NotNull (apiTokenConfig, "apiTokenConfig");
+            Asserts.NotEmptyOrNull (baseUrl, "baseUrl");
+            SetBaseUrl (baseUrl);
+            SetWebpageUrl (baseUrl);
+
+            configureJsonSerializationSettings ();
+
+            RestClient restClient = new RestClient (apiTokenConfig, allowAllSSLCertificates, proxyConfiguration, headers);
+            init (restClient, "");
+        }
+
         private void init(RestClient restClient, String apiKey)
         {
             packageService = new PackageService(restClient, this.baseUrl, jsonSerializerSettings);
