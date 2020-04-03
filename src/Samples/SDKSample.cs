@@ -2,6 +2,7 @@ using System;
 using OneSpanSign.Sdk;
 using System.IO;
 using OneSpanSign.Sdk.Internal;
+using System.Collections.Generic;
 
 namespace SDK.Examples
 {
