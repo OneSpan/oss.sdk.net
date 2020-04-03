@@ -1,7 +1,6 @@
 using System;
-using Silanis.ESL.SDK.Internal;
 
-namespace Silanis.ESL.SDK
+namespace OneSpanSign.Sdk
 {
     public class ApiTokenConfig
     {
