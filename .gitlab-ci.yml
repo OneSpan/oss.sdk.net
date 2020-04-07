@@ -5,7 +5,7 @@ stages:
     - test
 
 before_script:
-    - cp "$SignersProps" ./oss.sdk.net/src/Samples/signers.properties
+    - cp "$SignersProps" ./src/Samples/signers.properties
     - "dotnet restore ./src"
 
 build:
