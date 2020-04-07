@@ -13,6 +13,7 @@ namespace OneSpanSign.Sdk
 
     public enum ApiTokenType
     {
-        OWNER, SENDER
+        OWNER,
+        SENDER
     }
 }
