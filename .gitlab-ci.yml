@@ -5,9 +5,7 @@ stages:
     - test
 
 before_script:
-    - "git clone https://github.com/OneSpan/oss.sdk.net"
     - cp "$SignersProps" ./oss.sdk.net/src/Samples/signers.properties
-    - "cd oss.sdk.net"
     - "dotnet restore ./src"
 
 build:
