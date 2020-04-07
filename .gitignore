@@ -1,5 +1,6 @@
 #Build results
 bin/
+src/.idea/
 obj/
 Debug/
 test-results/

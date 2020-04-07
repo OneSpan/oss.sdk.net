@@ -31,6 +31,7 @@ namespace OneSpanSign.Sdk
         private CustomFieldService customFieldService;
         private GroupService groupService;
 		private AccountService accountService;
+        private AccountConfigService accountConfigService;
         private ApprovalService approvalService;
 		private Services.ReminderService reminderService;
         private TemplateService templateService;
@@ -140,6 +141,7 @@ namespace OneSpanSign.Sdk
             customFieldService = new CustomFieldService( new CustomFieldApiClient(restClient, this.baseUrl, jsonSerializerSettings) );
             groupService = new GroupService(new GroupApiClient(restClient, this.baseUrl, jsonSerializerSettings));
             accountService = new AccountService(new AccountApiClient(restClient, this.baseUrl, jsonSerializerSettings));
+            accountConfigService = new AccountConfigService(new AccountConfigClient(restClient, this.baseUrl, jsonSerializerSettings));
             approvalService = new ApprovalService(new ApprovalApiClient(restClient, this.baseUrl, jsonSerializerSettings));
             reminderService = new ReminderService(new ReminderApiClient(restClient, this.baseUrl, jsonSerializerSettings));
             templateService = new TemplateService(new TemplateApiClient(restClient, this.baseUrl, jsonSerializerSettings), packageService);
@@ -720,6 +722,14 @@ namespace OneSpanSign.Sdk
 				return accountService;
 			}
 		}
+        
+        public AccountConfigService AccountConfigService
+        {
+            get
+            {
+                return accountConfigService;
+            }
+        }
 
         public ApprovalService ApprovalService
         {
