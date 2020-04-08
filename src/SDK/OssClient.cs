@@ -213,7 +213,7 @@ namespace OneSpanSign.Sdk
         public SigningStyleService GetSigningStyleService ()
         {
             return signingStyleService;
-        }       
+        }
 
         internal void SetSdkVersionInPackageData(DocumentPackage package)
         {

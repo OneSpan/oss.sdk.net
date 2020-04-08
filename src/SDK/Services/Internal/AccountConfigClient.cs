@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using Newtonsoft.Json;
 using OneSpanSign.API;
 using OneSpanSign.Sdk.Internal;
@@ -101,6 +102,90 @@ namespace OneSpanSign.Sdk
             catch (Exception e)
             {
                 throw new OssException("Could not delete handover url.", e);
+            }
+        }
+        
+        public IList<string> CreateDeclineReasons(IList<string> declineReasons, string language)
+        {
+            string path = template.UrlFor(UrlTemplate.DECLINE_REASONS_PATH).Replace("{language}", language).Build();
+
+            try
+            {
+                string serializeObject = JsonConvert.SerializeObject(declineReasons);
+                string stringResponse = restClient.Post(path, serializeObject);
+                return JsonConvert.DeserializeObject<IList<string>>(stringResponse, jsonSettings);
+            }
+            catch (OssServerException e)
+            {
+                throw new OssServerException(
+                    "Could not create decline reasons for account." + " Exception: " + e.Message, e.ServerError, e);
+            }
+            catch (OssException e)
+            {
+                throw  new OssException("Could not create decline reasons for account." + " Exception: " + e.Message, e);
+            }
+        }
+        
+        public IList<string> UpdateDeclineReasons(IList<string> declineReasons, string language)
+        {
+            string path = template.UrlFor(UrlTemplate.DECLINE_REASONS_PATH).Replace("{language}", language)
+                .Build();
+
+            try
+            {
+                string serializeObject = JsonConvert.SerializeObject(declineReasons);
+                string stringResponse = restClient.Put(path, serializeObject);
+                return JsonConvert.DeserializeObject<IList<string>>(stringResponse, jsonSettings);
+            }
+            catch (OssServerException e)
+            {
+                throw new OssServerException(
+                    "Could not update decline reasons for account." + " Exception: " + e.Message, e.ServerError, e);
+            }
+            catch (OssException e)
+            {
+                throw  new OssException("Could not update decline reasons for account." + " Exception: " + e.Message, e);
+            }
+        }
+
+        public IList<string> GetDeclineReasons(string language)
+        {
+            string path = template.UrlFor(UrlTemplate.DECLINE_REASONS_PATH).Replace("{language}", language)
+                .Build();
+
+            try
+            {
+                string stringResponse = restClient.Get(path);
+                return JsonConvert.DeserializeObject<IList<string>>(stringResponse, jsonSettings);
+            }
+            catch (OssServerException e)
+           {
+               throw new OssServerException(
+                   "Could not get decline reasons for account." + " Exception: " + e.Message, e.ServerError, e);
+           }
+           catch (OssException e)
+           {
+               throw  new OssException("Could not get decline reasons for account." + " Exception: " + e.Message, e);
+           }
+        }
+        
+        public void DeleteDeclineReasons(string language)
+        {
+            string path = template.UrlFor(UrlTemplate.DECLINE_REASONS_PATH).Replace("{language}", language)
+                .Build();
+
+            try
+            {
+                string stringResponse = restClient.Delete(path);
+            }
+            catch (OssServerException e)
+            {
+                throw new OssServerException(
+                    "Could not get decline reasons for account." + " Exception: " + e.Message, e.ServerError, e);
+            }
+            catch (OssException e)
+            {
+                throw  new OssException("Could not get decline reasons for account." + " Exception: " + e.Message, e);
             }
         }
     }
