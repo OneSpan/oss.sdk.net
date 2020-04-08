@@ -188,6 +188,8 @@ namespace OneSpanSign.Sdk.Internal
         // Account Signing Logo Service
         public static readonly string ACCOUNT_SIGNING_LOGO_PATH = "/account/admin/signingLogos";
 
+        //Decline Reasons Service
+        public static readonly string DECLINE_REASONS_PATH = "/accountConfig/declineReasons/{language}";
 
         public UrlTemplate (string baseUrl)
 		{
