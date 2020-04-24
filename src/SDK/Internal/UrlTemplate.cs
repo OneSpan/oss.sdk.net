@@ -189,7 +189,12 @@ namespace OneSpanSign.Sdk.Internal
         // Account Signing Logo Service
         public static readonly string ACCOUNT_SIGNING_LOGO_PATH = "/account/admin/signingLogos";
         
+		// Account SubAccount Service
+        public static readonly string ACCOUNT_SUBACCOUNTS_PATH = "/account/subaccounts";
+        public static readonly string ACCOUNT_SUBACCOUNTS_ID_PATH = "/account/subaccounts/{accountId}";
+        public static readonly string ACCOUNT_SUBACCOUNTS_ACCESSIBLEACCOUNTS_PATH = "/account/accessibleaccounts";
 
+        
         public UrlTemplate (string baseUrl)
 		{
 			this.baseUrl = baseUrl;

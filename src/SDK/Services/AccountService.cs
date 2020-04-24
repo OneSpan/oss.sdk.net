@@ -108,6 +108,39 @@ namespace OneSpanSign.Sdk.Services
         public IList<VerificationType> getVerificationTypes() {
             return apiClient.getVerificationTypes();
         }
+        
+        public IList<Account> getSubAccounts() {
+            IList<API.Account> apiAccounts = apiClient.getSubAccounts();
+            IList<Account> accounts = new List<Account>();
+            foreach (OneSpanSign.API.Account account in apiAccounts) 
+            {
+                accounts.Add(new AccountConverter(account).ToSDKAccount());
+            }
+            return accounts;
+        }
+        
+        public IList<AccessibleAccountResponse> getAccessibleAccounts()
+        {
+            IList<API.AccessibleAccountResponse> apiAccessibleAccounts = apiClient.getAccessibleAccounts();
+            IList<AccessibleAccountResponse> accountResponses = new List<AccessibleAccountResponse>();
+            foreach (OneSpanSign.API.AccessibleAccountResponse accountResponse in apiAccessibleAccounts)
+            {
+                accountResponses.Add(new AccessibleAccountResponseConverter(accountResponse).ToSDKAccessibleAccountResponse());
+            }
+
+            return accountResponses;
+        }
+        
+        public Account createSubAccount(SubAccount subAccount) {
+            OneSpanSign.API.SubAccount apiSubAccount = new SubAccountConverter(subAccount).ToAPISubAccount();
+            OneSpanSign.API.Account account = apiClient.createSubAccount(apiSubAccount);
+            return new AccountConverter(account).ToSDKAccount();
+        }
+        
+        public void updateSubAccount(SubAccount subAccount, String accountId) {
+            OneSpanSign.API.SubAccount apiSubAccount = new SubAccountConverter(subAccount).ToAPISubAccount();
+            apiClient.updateSubAccount(apiSubAccount, accountId);
+        }
     }
 }
 
