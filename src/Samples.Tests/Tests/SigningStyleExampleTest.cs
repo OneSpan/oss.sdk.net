@@ -29,7 +29,15 @@ namespace SDK.Examples
             example.updatedSigningThemes.TryGetValue ("default", out actualTheme);
             StringAssert.Contains ("\"secondary\": \"#F31C8B\"", actualTheme.ToString ());
 
-            CollectionAssert.IsEmpty (example.removedSigningThemes); 
+            CollectionAssert.IsEmpty (example.removedSigningThemes);
+
+            Assert.IsNotNull (example.createdSigningLogos [0]);
+            Assert.AreEqual (example.createdSigningLogos [0].Language, "en");
+
+            Assert.IsNotNull (example.updatedSigningLogos [1]);
+            Assert.AreEqual (example.updatedSigningLogos [1].Language, "fr");
+
+          //  Assert.IsEmpty (example.removedSigningLogos);
         }
     }
 }
