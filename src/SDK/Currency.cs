@@ -9,19 +9,10 @@ namespace OneSpanSign.Sdk
 	{
 		
 
-    public IDictionary<string, object> Data
-    {
-                get; set;
-        }
-    
-    public String Id
-    {
-                get; set;
-        }
-    
-    public String Name
-    {
-                get; set;
-        }
+    public IDictionary<string, object> Data { get; set; }
+
+    public String Id { get; set; }
+
+    public String Name { get; set; }
 	}
 }

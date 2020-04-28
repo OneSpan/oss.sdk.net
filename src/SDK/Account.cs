@@ -15,17 +15,9 @@ namespace OneSpanSign.Sdk
 		
 		// Accessors
 		
-    public Company Company
-    {
-                get; set;
-        }
-    
-    
-    public Nullable<DateTime> Created
-    {
-                get; set;
-        }
-    
+    public Company Company {get; set;}
+
+    public Nullable<DateTime> Created {get; set;}
     
     public IList<CustomField> CustomFields
     {
@@ -46,18 +38,11 @@ namespace OneSpanSign.Sdk
     }
     
         
-    public IDictionary<string, object> Data
-    {
-                get; set;
-        }
+    public IDictionary<string, object> Data {get; set;}
     
-    
-    public String Id
-    {
-                get; set;
-        }
-    
-    
+    public String Id {get; set;}
+
+
     public IList<License> Licenses
     {
                 get
@@ -76,31 +61,17 @@ namespace OneSpanSign.Sdk
         return this;
     }
         
-    public String LogoUrl
-    {
-                get; set;
-        }
+    public String LogoUrl {get; set;}
+
     
-    public String Name
-    {
-                get; set;
-        }
-    
-    
-    public String Owner
-    {
-                get; set;
-        }
-    
-    public AccountProviders Providers
-    {
-                get; set;
-        }
-    
-    public Nullable<DateTime> Updated
-    {
-                get; set;
-        }
-    
-	}
+    public String Name {get; set;}
+
+
+    public String Owner {get; set;}
+
+    public AccountProviders Providers {get; set;}
+
+    public Nullable<DateTime> Updated {get; set;}
+
+    }
 }

@@ -12,19 +12,10 @@ namespace OneSpanSign.Sdk
 		}
 
 		
-    public String ParentAccountId
-    {
-                get; set;
-        }
+    public String ParentAccountId { get; set; }
 
-    public String Language
-    {
-                get; set;
-        }
+    public String Language { get; set; }
     
-    public String TimezoneId
-    {
-                get; set;
-        }
+    public String TimezoneId { get; set; }
 	}
 }

@@ -14,23 +14,14 @@ namespace OneSpanSign.API
 
 		    
     [JsonProperty("parentAccountId")]
-    public String ParentAccountId
-    {
-                get; set;
-        }
+    public String ParentAccountId { get; set; }
     
 		    
     [JsonProperty("language")]
-    public String Language
-    {
-                get; set;
-        }
+    public String Language { get; set; }
 
 
     [JsonProperty("timezoneId")]
-    public String TimezoneId
-    {
-                get; set;
-        }
+    public String TimezoneId { get; set; }
 	}
 }

@@ -6,15 +6,9 @@ namespace OneSpanSign.API
     internal class AccessibleAccountResponse
     {
         [JsonProperty("accountUid")]
-        public String AccountUid
-        {
-            get; set;
-        }
+        public String AccountUid { get; set; }
         
         [JsonProperty("accountName")]
-        public String AccountName
-        {
-            get; set;
-        }
+        public String AccountName { get; set; }
     }
 }

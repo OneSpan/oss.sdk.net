@@ -8,73 +8,34 @@ namespace OneSpanSign.Sdk
 	
 	public class Plan
 	{
-		
-		// Fields
-		private IList<Quota> _quotas = new List<Quota>();
-		
-		// Accessors
+        private IList<Quota> _quotas = new List<Quota>();
 
-    public string Contract
-    {
-                get; set;
-        }
-    
-
-        public string Cycle
-    {
-                get; set;
-        }
+        public string Contract { get; set; }
+        
+        public string Cycle { get; set; }
     
 		    
 
-    public IDictionary<string, object> Data
-    {
-                get; set;
-        }
+    public IDictionary<string, object> Data { get; set; }
     
     
-    public String Description
-    {
-                get; set;
-        }
+    public String Description { get; set; }
     
-    public IDictionary<string, object> Features
-    {
-                get; set;
-        }
+    public IDictionary<string, object> Features { get; set; }
     
     
-    public CycleCount FreeCycles
-    {
-                get; set;
-        }
+    public CycleCount FreeCycles { get; set; }
 
-    public String Group
-    {
-                get; set;
-        }
+    public String Group { get; set; }
     
-    public String Id
-    {
-                get; set;
-        }
+    public String Id { get; set; }
+    
+    public String Name { get; set; }
+
+    public String Original { get; set; }
     
 
-    public String Name
-    {
-                get; set;
-        }
-
-    public String Original
-    {
-                get; set;
-        }
-    
-
-    public Price Price
-    {
-                get; set;
-        }
+    public Price Price { get; set; }
     
 
     public IList<Quota> Quotas

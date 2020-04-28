@@ -14,28 +14,16 @@ namespace OneSpanSign.Sdk
 		
 		// Accessors
 
-    public Nullable<DateTime> Created
-    {
-                get; set;
-        }
+    public Nullable<DateTime> Created { get; set; }
     
     
-    public Nullable<DateTime> PaidUntil
-    {
-                get; set;
-        }
+    public Nullable<DateTime> PaidUntil { get; set; }
     
 
-    public Plan Plan
-    {
-                get; set;
-        }
+    public Plan Plan { get; set; }
     
 
-    public string Status
-    {
-                get; set;
-        }
+    public string Status { get; set; }
     
     
     public IList<Transaction> Transactions

@@ -6,6 +6,9 @@ using OneSpanSign.Sdk;
 
 namespace SDK.Examples
 {
+    /*
+     * Since a fake AccountID is used in example class, a try catch statement is used to cover the "accountNotFound" exception. once a real account ID is used, the test will skip catch statement and assert response.
+     */
     [TestFixture()]
     public class CreateAndUpdateSubAccountExampleTest 
     {
@@ -19,7 +22,7 @@ namespace SDK.Examples
         try {
             example.Run();
         } catch (OssServerException e) {
-            Assert.IsTrue(e.Message.Contains("error.notFound.accountNotFound"));
+            Assert.IsTrue(e.Message.Contains("error.notFound.accountNotFound") || e.Message.Contains("error.forbidden.noPermission"));
             return;
         } finally {
             subAccountList = example.subAccounts;
