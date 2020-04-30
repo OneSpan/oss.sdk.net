@@ -16,15 +16,9 @@ namespace OneSpanSign.Sdk
             set{ delegationEvents = value;}
         }
 
-        public Nullable<DateTime> From
-        {
-            get; set;
-        }
+        public Nullable<DateTime> From { get; set; }
 
-        public Nullable<DateTime> To
-        {
-            get; set;
-        }
+        public Nullable<DateTime> To { get; set; }
     }
 }
 

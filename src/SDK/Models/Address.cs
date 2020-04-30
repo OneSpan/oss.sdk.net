@@ -8,53 +8,29 @@ namespace OneSpanSign.API
 	
 	internal class Address
 	{
-		
-		// Fields
-		
-		// Accessors
-		    
-    [JsonProperty("address1")]
-    public String Address1
-    {
-                get; set;
-        }
+
+		[JsonProperty("address1")]
+    public String Address1 { get; set; }
     
 		    
     [JsonProperty("address2")]
-    public String Address2
-    {
-                get; set;
-        }
+    public String Address2 { get; set; }
     
 		    
     [JsonProperty("city")]
-    public String City
-    {
-                get; set;
-        }
+    public String City { get; set; }
     
 		    
     [JsonProperty("country")]
-    public String Country
-    {
-                get; set;
-        }
+    public String Country { get; set; }
     
 		    
     [JsonProperty("state")]
-    public String State
-    {
-                get; set;
-        }
+    public String State { get; set; }
     
 		    
     [JsonProperty("zipcode")]
-    public String Zipcode
-    {
-                get; set;
-        }
-    
-		
-	
+    public String Zipcode { get; set; }
+
 	}
 }

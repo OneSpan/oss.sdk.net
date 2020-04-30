@@ -308,5 +308,56 @@ namespace OneSpanSign.Sdk
                 throw new OssException("Could not get verification types.\t" + " Exception: " + e.Message, e);
             }
         }
+        
+        public IList<OneSpanSign.API.Account> getSubAccounts() {
+            string path = template.UrlFor(UrlTemplate.ACCOUNT_SUBACCOUNTS_PATH).Build();
+            try {
+                string response = restClient.Get(path);
+                return JsonConvert.DeserializeObject<IList<OneSpanSign.API.Account>> (response, jsonSettings);
+            } catch (OssServerException e) {
+                throw new OssServerException("Could not get subAccounts.\t" + " Exception: " + e.Message, e.ServerError, e);
+            } catch (Exception e) {
+                throw new OssException("Could not get subAccounts.\t" + " Exception: " + e.Message, e);
+            }
+        }
+
+        public IList<OneSpanSign.API.AccessibleAccountResponse> getAccessibleAccounts() {
+            string path = template.UrlFor(UrlTemplate.ACCOUNT_SUBACCOUNTS_ACCESSIBLEACCOUNTS_PATH).Build();
+            try {
+                string response = restClient.Get(path);
+                return JsonConvert.DeserializeObject<IList<OneSpanSign.API.AccessibleAccountResponse>> (response, jsonSettings);
+            } catch (OssServerException e) {
+                throw new OssServerException("Could not get accessibleAccounts.\t" + " Exception: " + e.Message, e.ServerError, e);
+            } catch (Exception e) {
+                throw new OssException("Could not get accessibleAccounts.\t" + " Exception: " + e.Message, e);
+            }
+        }
+
+        public OneSpanSign.API.Account createSubAccount(OneSpanSign.API.SubAccount subAccount) {
+            string path = template.UrlFor(UrlTemplate.ACCOUNT_SUBACCOUNTS_PATH).Build();
+            try {
+                string payload = JsonConvert.SerializeObject (subAccount, jsonSettings);
+                string response = restClient.Post(path, payload);
+                return JsonConvert.DeserializeObject<OneSpanSign.API.Account> (response, jsonSettings);
+            }catch (OssServerException e) {
+                throw new OssServerException("Could not create subAccount.\t" + " Exception: " + e.Message, e.ServerError, e);
+            } catch (Exception e) {
+                throw new OssException("Could not create subAccount.\t" + " Exception: " + e.Message, e);
+            }
+        }
+
+        public void updateSubAccount(OneSpanSign.API.SubAccount subAccount, string accountId) {
+            string path = template.UrlFor(UrlTemplate.ACCOUNT_SUBACCOUNTS_ID_PATH)
+                    .Replace("{accountId}", accountId)
+                    .Build();
+            try {
+                string payload = JsonConvert.SerializeObject (subAccount, jsonSettings);
+                restClient.Put(path, payload);
+            } catch (OssServerException e) {
+                throw new OssServerException("Could not update subAccount.\t" + " Exception: " + e.Message, e.ServerError, e);
+            } catch (Exception e) {
+                throw new OssException("Could not update subAccount.\t" + " Exception: " + e.Message, e);
+            }
+        }
     }
 }

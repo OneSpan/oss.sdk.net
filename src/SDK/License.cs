@@ -1,34 +1,31 @@
 //
 using System;
 using System.Collections.Generic;
-using Newtonsoft.Json;
-namespace OneSpanSign.API
+
+namespace OneSpanSign.Sdk
 {
 	
 	
-	internal class License
+	public class License
 	{
 		
 		// Fields
 		private IList<Transaction> _transactions = new List<Transaction>();
+		
+		// Accessors
 
-		[JsonProperty("created")]
     public Nullable<DateTime> Created { get; set; }
     
-		    
-    [JsonProperty("paidUntil")]
+    
     public Nullable<DateTime> PaidUntil { get; set; }
     
-		    
-    [JsonProperty("plan")]
+
     public Plan Plan { get; set; }
     
-		    
-    [JsonProperty("status")]
+
     public string Status { get; set; }
     
-		    
-    [JsonProperty("transactions")]
+    
     public IList<Transaction> Transactions
     {
                 get
@@ -46,8 +43,5 @@ namespace OneSpanSign.API
         _transactions.Add(value);
         return this;
     }
-    
-		
-	
-	}
+    }
 }
