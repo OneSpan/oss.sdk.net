@@ -1,4 +1,4 @@
-using System;
+
 using OneSpanSign.Sdk.Builder;
 
 namespace OneSpanSign.Sdk
@@ -8,17 +8,18 @@ namespace OneSpanSign.Sdk
         private Account sdkAccount;
         private OneSpanSign.API.Account apiAccount;
 
-        public AccountConverter( Account sdkAccount )
+        public AccountConverter(Account sdkAccount)
         {
             this.sdkAccount = sdkAccount;
         }
 
-        public AccountConverter( OneSpanSign.API.Account apiAccount ) 
+        public AccountConverter(OneSpanSign.API.Account apiAccount)
         {
             this.apiAccount = apiAccount;
         }
 
-        public Account ToSDKAccount() {
+        public Account ToSDKAccount()
+        {
             if (sdkAccount != null)
             {
                 return sdkAccount;
@@ -44,6 +45,7 @@ namespace OneSpanSign.Sdk
                 {
                     builder.WithLicense(new LicenseConverter(license).ToSDKLicense());
                 }
+
                 return builder.Build();
             }
             else
@@ -52,7 +54,8 @@ namespace OneSpanSign.Sdk
             }
         }
 
-        public OneSpanSign.API.Account ToAPIAccount() {
+        public OneSpanSign.API.Account ToAPIAccount()
+        {
             if (apiAccount != null)
             {
                 return apiAccount;
@@ -73,10 +76,12 @@ namespace OneSpanSign.Sdk
                 {
                     result.AddLicense(new LicenseConverter(license).ToAPILicense());
                 }
+
                 foreach (CustomField field in sdkAccount.CustomFields)
                 {
                     result.AddCustomField(new CustomFieldConverter(field).ToAPICustomField());
                 }
+
                 return result;
             }
             else
@@ -86,4 +91,3 @@ namespace OneSpanSign.Sdk
         }
     }
 }
-

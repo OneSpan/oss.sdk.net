@@ -1,5 +1,3 @@
-using System;
-using System.Xml.XPath;
 
 namespace OneSpanSign.Sdk
 {
@@ -8,17 +6,18 @@ namespace OneSpanSign.Sdk
         private Transaction sdkTransaction;
         private OneSpanSign.API.Transaction apiTransaction;
 
-        public TransactionConverter( Transaction sdkTransaction )
+        public TransactionConverter(Transaction sdkTransaction)
         {
             this.sdkTransaction = sdkTransaction;
         }
 
-        public TransactionConverter( OneSpanSign.API.Transaction apiTransaction ) 
+        public TransactionConverter(OneSpanSign.API.Transaction apiTransaction)
         {
             this.apiTransaction = apiTransaction;
         }
 
-        public Transaction ToSDKTransaction() {
+        public Transaction ToSDKTransaction()
+        {
             if (sdkTransaction != null)
             {
                 return sdkTransaction;
@@ -37,7 +36,8 @@ namespace OneSpanSign.Sdk
             }
         }
 
-        public OneSpanSign.API.Transaction ToAPITransaction() {
+        public OneSpanSign.API.Transaction ToAPITransaction()
+        {
             if (apiTransaction != null)
             {
                 return apiTransaction;
@@ -46,7 +46,7 @@ namespace OneSpanSign.Sdk
             {
                 OneSpanSign.API.Transaction result = new OneSpanSign.API.Transaction();
                 result.Created = sdkTransaction.Created;
-                result.Price =  new PriceConverter(sdkTransaction.Price).ToAPIPrice();
+                result.Price = new PriceConverter(sdkTransaction.Price).ToAPIPrice();
                 result.CreditCard = new CreditCardConverter(sdkTransaction.CreditCard).ToAPICreditCard();
                 return result;
             }
@@ -57,4 +57,3 @@ namespace OneSpanSign.Sdk
         }
     }
 }
-

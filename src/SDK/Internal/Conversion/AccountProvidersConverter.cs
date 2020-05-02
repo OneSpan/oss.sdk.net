@@ -1,4 +1,3 @@
-using System;
 
 namespace OneSpanSign.Sdk
 {
@@ -7,17 +6,18 @@ namespace OneSpanSign.Sdk
         private AccountProviders sdkAccountProviders;
         private OneSpanSign.API.AccountProviders apiAccountProviders;
 
-        public AccountProvidersConverter( AccountProviders sdkAccountProviders )
+        public AccountProvidersConverter(AccountProviders sdkAccountProviders)
         {
             this.sdkAccountProviders = sdkAccountProviders;
         }
 
-        public AccountProvidersConverter( OneSpanSign.API.AccountProviders apiAccountProviders ) 
+        public AccountProvidersConverter(OneSpanSign.API.AccountProviders apiAccountProviders)
         {
             this.apiAccountProviders = apiAccountProviders;
         }
 
-        public AccountProviders ToSDKAccountProviders() {
+        public AccountProviders ToSDKAccountProviders()
+        {
             if (sdkAccountProviders != null)
             {
                 return sdkAccountProviders;
@@ -43,7 +43,8 @@ namespace OneSpanSign.Sdk
             }
         }
 
-        public OneSpanSign.API.AccountProviders ToAPIAccountProviders() {
+        public OneSpanSign.API.AccountProviders ToAPIAccountProviders()
+        {
             if (apiAccountProviders != null)
             {
                 return apiAccountProviders;
@@ -60,6 +61,7 @@ namespace OneSpanSign.Sdk
                 {
                     result.AddUser(new ProviderConverter(provider).ToAPIProvider());
                 }
+
                 return result;
             }
             else
@@ -69,4 +71,3 @@ namespace OneSpanSign.Sdk
         }
     }
 }
-

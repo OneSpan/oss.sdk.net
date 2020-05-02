@@ -3,53 +3,45 @@ using System.Collections.Generic;
 
 namespace OneSpanSign.Sdk
 {
-	
-	
-	public class AccountProviders
-	{
-		
-		// Fields
-		private IList<Provider> _documents = new List<Provider>();
-		private IList<Provider> _users = new List<Provider>();
-		
-		// Accessors
-		
-    public IList<Provider> Documents
+    public class AccountProviders
     {
-                get
-        {
-            return _documents;
-        }
-        }
-        public AccountProviders AddDocument(Provider value)
-    {
-        if (value == null)
-        {
-            throw new ArgumentNullException("Argument cannot be null");
-        }
-        
-        _documents.Add(value);
-        return this;
-    }
-    
+        // Fields
+        private IList<Provider> _documents = new List<Provider>();
+        private IList<Provider> _users = new List<Provider>();
 
-    public IList<Provider> Users
-    {
-                get
-        {
-            return _users;
-        }
-        }
-        public AccountProviders AddUser(Provider value)
-    {
-        if (value == null)
-        {
-            throw new ArgumentNullException("Argument cannot be null");
-        }
-        
-        _users.Add(value);
-        return this;
-    }
+        // Accessors
 
+        public IList<Provider> Documents
+        {
+            get { return _documents; }
+        }
+
+        public AccountProviders AddDocument(Provider provider)
+        {
+            if (provider == null)
+            {
+                throw new ArgumentNullException("Argument cannot be null");
+            }
+
+            _documents.Add(provider);
+            return this;
+        }
+
+
+        public IList<Provider> Users
+        {
+            get { return _users; }
+        }
+
+        public AccountProviders AddUser(Provider provider)
+        {
+            if (provider == null)
+            {
+                throw new ArgumentNullException("Argument cannot be null");
+            }
+
+            _users.Add(provider);
+            return this;
+        }
     }
 }

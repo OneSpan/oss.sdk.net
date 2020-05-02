@@ -12,7 +12,7 @@ namespace OneSpanSign.Sdk.Builder
         private IDictionary<string, object> data;
         private string id;
         private IList<License> licenses;
-        private string LogoUrl;
+        private string logoUrl;
         private string name;
         private string owner;
         private AccountProviders providers;
@@ -24,61 +24,69 @@ namespace OneSpanSign.Sdk.Builder
             data = new Dictionary<string, object>();
         }
 
-        public static AccountBuilder NewAccount() {
+        public static AccountBuilder NewAccount()
+        {
             return new AccountBuilder();
         }
 
-        public AccountBuilder WithName( string value ) {
-            name = value;
-            return this;
-        }
-
-        public AccountBuilder WithOwner( string value ) {
-            owner = value;
-            return this;
-        }
-
-        public AccountBuilder WithLogoUrl( string value ) {
-            LogoUrl = value;
-            return this;
-        }
-
-        public AccountBuilder WithId( string value ) {
-            id = value;
-            return this;
-        }
-
-        public AccountBuilder WithCompany(Company value)
+        public AccountBuilder WithName(string name)
         {
-            company = value;
-            return this;
-        }
-        
-        public AccountBuilder CreatedOn( Nullable<DateTime> value ) {
-            created = value;
+            this.name = name;
             return this;
         }
 
-        public AccountBuilder UpdatedOn( Nullable<DateTime> value ) {
-            updated = value;
-            return this;
-        }
-        
-        public AccountBuilder WithCustomField( CustomField value ) {
-            customFields.Add(value);
-            return this;
-        }
-        
-
-        public AccountBuilder WithLicense(License value)
+        public AccountBuilder WithOwner(string owner)
         {
-            licenses.Add(value);
+            this.owner = owner;
             return this;
         }
 
-        public AccountBuilder WithAccountProviders(AccountProviders value)
+        public AccountBuilder WithLogoUrl(string logoUrl)
         {
-            providers = value;
+            this.logoUrl = logoUrl;
+            return this;
+        }
+
+        public AccountBuilder WithId(string id)
+        {
+            this.id = id;
+            return this;
+        }
+
+        public AccountBuilder WithCompany(Company company)
+        {
+            this.company = company;
+            return this;
+        }
+
+        public AccountBuilder CreatedOn(Nullable<DateTime> created)
+        {
+            this.created = created;
+            return this;
+        }
+
+        public AccountBuilder UpdatedOn(Nullable<DateTime> updated)
+        {
+            this.updated = updated;
+            return this;
+        }
+
+        public AccountBuilder WithCustomField(CustomField customField)
+        {
+            this.customFields.Add(customField);
+            return this;
+        }
+
+
+        public AccountBuilder WithLicense(License license)
+        {
+            licenses.Add(license);
+            return this;
+        }
+
+        public AccountBuilder WithAccountProviders(AccountProviders providers)
+        {
+            this.providers = providers;
             return this;
         }
 
@@ -89,6 +97,7 @@ namespace OneSpanSign.Sdk.Builder
             {
                 providers.Documents.Add(provider);
             }
+
             foreach (Provider provider in users)
             {
                 providers.Users.Add(provider);
@@ -97,20 +106,23 @@ namespace OneSpanSign.Sdk.Builder
             return this;
         }
 
-        public AccountBuilder WithData(IDictionary<string, object> value)
+        public AccountBuilder WithData(IDictionary<string, object> data)
         {
-            data = value;
+            this.data = data;
             return this;
         }
-        
-        public Account Build() {
+
+        public Account Build()
+        {
             Account account = new Account();
             account.Company = company;
             account.Created = created;
             account.Updated = updated;
-            foreach( CustomField field in customFields ) {
-                account.CustomFields.Add( field );
+            foreach (CustomField field in customFields)
+            {
+                account.CustomFields.Add(field);
             }
+
             account.Data = data;
             account.Id = id;
             foreach (License license in licenses)
@@ -118,7 +130,7 @@ namespace OneSpanSign.Sdk.Builder
                 account.Licenses.Add(license);
             }
 
-            account.LogoUrl = LogoUrl;
+            account.LogoUrl = logoUrl;
             account.Name = name;
             account.Owner = owner;
             account.Providers = providers;

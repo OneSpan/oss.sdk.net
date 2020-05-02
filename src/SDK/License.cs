@@ -1,47 +1,43 @@
 //
+
 using System;
 using System.Collections.Generic;
 
 namespace OneSpanSign.Sdk
 {
-	
-	
-	public class License
-	{
-		
-		// Fields
-		private IList<Transaction> _transactions = new List<Transaction>();
-		
-		// Accessors
-
-    public Nullable<DateTime> Created { get; set; }
-    
-    
-    public Nullable<DateTime> PaidUntil { get; set; }
-    
-
-    public Plan Plan { get; set; }
-    
-
-    public string Status { get; set; }
-    
-    
-    public IList<Transaction> Transactions
+    public class License
     {
-                get
+        // Fields
+        private IList<Transaction> _transactions = new List<Transaction>();
+
+        // Accessors
+
+        public Nullable<DateTime> Created { get; set; }
+
+
+        public Nullable<DateTime> PaidUntil { get; set; }
+
+
+        public Plan Plan { get; set; }
+
+
+        public string Status { get; set; }
+
+
+        public IList<Transaction> Transactions
         {
-            return _transactions;
+            get { return _transactions; }
         }
-        }
-        public License AddTransaction(Transaction value)
-    {
-        if (value == null)
+
+        public License AddTransaction(Transaction transaction)
         {
-            throw new ArgumentNullException("Argument cannot be null");
+            if (transaction == null)
+            {
+                throw new ArgumentNullException("Argument cannot be null");
+            }
+
+            _transactions.Add(transaction);
+            return this;
         }
-        
-        _transactions.Add(value);
-        return this;
-    }
     }
 }

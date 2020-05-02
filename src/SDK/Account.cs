@@ -1,77 +1,70 @@
 //
+
 using System;
 using System.Collections.Generic;
 
 namespace OneSpanSign.Sdk
 {
-	
-	
-	public class Account
-	{
-		
-		// Fields
-		private IList<CustomField> _customFields = new List<CustomField>();
-		private IList<License> _licenses = new List<License>();
-		
-		// Accessors
-		
-    public Company Company {get; set;}
-
-    public Nullable<DateTime> Created {get; set;}
-    
-    public IList<CustomField> CustomFields
+    public class Account
     {
-                get
+        // Fields
+        private IList<CustomField> _customFields = new List<CustomField>();
+        private IList<License> _licenses = new List<License>();
+
+        // Accessors
+
+        public Company Company { get; set; }
+
+        public Nullable<DateTime> Created { get; set; }
+
+        public IList<CustomField> CustomFields
         {
-            return _customFields;
+            get { return _customFields; }
         }
-        }
-        public Account AddCustomField(CustomField value)
-    {
-        if (value == null)
+
+        public Account AddCustomField(CustomField customField)
         {
-            throw new ArgumentNullException("Argument cannot be null");
+            if (customField == null)
+            {
+                throw new ArgumentNullException("Argument cannot be null");
+            }
+
+            _customFields.Add(customField);
+            return this;
         }
-        
-        _customFields.Add(value);
-        return this;
-    }
-    
-        
-    public IDictionary<string, object> Data {get; set;}
-    
-    public String Id {get; set;}
 
 
-    public IList<License> Licenses
-    {
-                get
+        public IDictionary<string, object> Data { get; set; }
+
+        public String Id { get; set; }
+
+
+        public IList<License> Licenses
         {
-            return _licenses;
+            get { return _licenses; }
         }
-        }
-        public Account AddLicense(License value)
-    {
-        if (value == null)
+
+        public Account AddLicense(License license)
         {
-            throw new ArgumentNullException("Argument cannot be null");
+            if (license == null)
+            {
+                throw new ArgumentNullException("Argument cannot be null");
+            }
+
+            _licenses.Add(license);
+            return this;
         }
-        
-        _licenses.Add(value);
-        return this;
-    }
-        
-    public String LogoUrl {get; set;}
 
-    
-    public String Name {get; set;}
+        public String LogoUrl { get; set; }
 
 
-    public String Owner {get; set;}
+        public String Name { get; set; }
 
-    public AccountProviders Providers {get; set;}
 
-    public Nullable<DateTime> Updated {get; set;}
+        public String Owner { get; set; }
 
+        public AccountProviders Providers { get; set; }
+
+        public Nullable<DateTime> Updated { get; set; }
     }
 }
