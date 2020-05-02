@@ -51,8 +51,8 @@ namespace OneSpanSign.Sdk
                 result.Number = sdkCreditCard.Number;
                 result.Cvv = sdkCreditCard.Cvv;
                 result.Expiration = new API.CcExpiration();
-                result.Expiration.Month = apiCreditCard.Expiration.Month;
-                result.Expiration.Year = apiCreditCard.Expiration.Year;
+                result.Expiration.Month = sdkCreditCard.Expiration.Month;
+                result.Expiration.Year = sdkCreditCard.Expiration.Year;
                 return result;
             }
             else

@@ -1,5 +1,3 @@
-using System;
-using System.Collections.Generic;
 
 namespace OneSpanSign.Sdk
 {
@@ -8,24 +6,24 @@ namespace OneSpanSign.Sdk
         private Plan sdkPlan;
         private OneSpanSign.API.Plan apiPlan;
 
-        public PlanConverter( Plan sdkPlan )
+        public PlanConverter(Plan sdkPlan)
         {
             this.sdkPlan = sdkPlan;
         }
 
-        public PlanConverter( OneSpanSign.API.Plan apiPlan ) 
+        public PlanConverter(OneSpanSign.API.Plan apiPlan)
         {
             this.apiPlan = apiPlan;
         }
 
-        public Plan ToSDKPlan() {
+        public Plan ToSDKPlan()
+        {
             if (sdkPlan != null)
             {
                 return sdkPlan;
             }
             else if (apiPlan != null)
             {
-                
                 PlanBuilder builder = PlanBuilder.NewPlan(apiPlan.Name)
                     .WithContract(apiPlan.Contract)
                     .WithData(apiPlan.Data)
@@ -48,6 +46,7 @@ namespace OneSpanSign.Sdk
                         builder.WithQuota(quota.Cycle, quota.Limit, quota.Scope, quota.Target);
                     }
                 }
+
                 return builder.Build();
             }
             else
@@ -56,7 +55,8 @@ namespace OneSpanSign.Sdk
             }
         }
 
-        public OneSpanSign.API.Plan ToAPIPlan() {
+        public OneSpanSign.API.Plan ToAPIPlan()
+        {
             if (apiPlan != null)
             {
                 return apiPlan;
@@ -78,14 +78,15 @@ namespace OneSpanSign.Sdk
                 result.FreeCycles.Count = sdkPlan.FreeCycles.Count;
                 result.FreeCycles.Cycle = sdkPlan.FreeCycles.Cycle;
                 foreach (Quota quota in sdkPlan.Quotas)
-                {    
-                    API.Quota  apiQuota = new API.Quota();
+                {
+                    API.Quota apiQuota = new API.Quota();
                     apiQuota.Cycle = quota.Cycle;
                     apiQuota.Limit = quota.Limit;
                     apiQuota.Scope = quota.Scope;
                     apiQuota.Target = quota.Target;
                     result.Quotas.Add(apiQuota);
                 }
+
                 return result;
             }
             else
@@ -95,4 +96,3 @@ namespace OneSpanSign.Sdk
         }
     }
 }
-

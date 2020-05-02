@@ -1,5 +1,3 @@
-using System;
-using System.Xml.XPath;
 
 namespace OneSpanSign.Sdk
 {
@@ -8,17 +6,19 @@ namespace OneSpanSign.Sdk
         private AccessibleAccountResponse sdkAccessibleAccountResponse;
         private OneSpanSign.API.AccessibleAccountResponse apiAccessibleAccountResponse;
 
-        public AccessibleAccountResponseConverter( AccessibleAccountResponse sdkAccessibleAccountResponse )
+        public AccessibleAccountResponseConverter(AccessibleAccountResponse sdkAccessibleAccountResponse)
         {
             this.sdkAccessibleAccountResponse = sdkAccessibleAccountResponse;
         }
 
-        public AccessibleAccountResponseConverter( OneSpanSign.API.AccessibleAccountResponse apiAccessibleAccountResponse ) 
+        public AccessibleAccountResponseConverter(
+            OneSpanSign.API.AccessibleAccountResponse apiAccessibleAccountResponse)
         {
             this.apiAccessibleAccountResponse = apiAccessibleAccountResponse;
         }
 
-        public AccessibleAccountResponse ToSDKAccessibleAccountResponse() {
+        public AccessibleAccountResponse ToSDKAccessibleAccountResponse()
+        {
             if (sdkAccessibleAccountResponse != null)
             {
                 return sdkAccessibleAccountResponse;
@@ -36,7 +36,8 @@ namespace OneSpanSign.Sdk
             }
         }
 
-        public OneSpanSign.API.AccessibleAccountResponse ToAPIAccessibleAccountResponse() {
+        public OneSpanSign.API.AccessibleAccountResponse ToAPIAccessibleAccountResponse()
+        {
             if (apiAccessibleAccountResponse != null)
             {
                 return apiAccessibleAccountResponse;
@@ -55,4 +56,3 @@ namespace OneSpanSign.Sdk
         }
     }
 }
-

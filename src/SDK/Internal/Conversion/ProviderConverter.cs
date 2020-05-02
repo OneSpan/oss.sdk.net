@@ -1,4 +1,3 @@
-using System;
 
 namespace OneSpanSign.Sdk
 {
@@ -7,17 +6,18 @@ namespace OneSpanSign.Sdk
         private Provider sdkProvider;
         private OneSpanSign.API.Provider apiProvider;
 
-        public ProviderConverter( Provider sdkProvider )
+        public ProviderConverter(Provider sdkProvider)
         {
             this.sdkProvider = sdkProvider;
         }
 
-        public ProviderConverter( OneSpanSign.API.Provider apiProviders ) 
+        public ProviderConverter(OneSpanSign.API.Provider apiProviders)
         {
             this.apiProvider = apiProviders;
         }
 
-        public Provider ToSDKProvider() {
+        public Provider ToSDKProvider()
+        {
             if (sdkProvider != null)
             {
                 return sdkProvider;
@@ -36,7 +36,8 @@ namespace OneSpanSign.Sdk
             }
         }
 
-        public OneSpanSign.API.Provider ToAPIProvider() {
+        public OneSpanSign.API.Provider ToAPIProvider()
+        {
             if (apiProvider != null)
             {
                 return apiProvider;
@@ -57,4 +58,3 @@ namespace OneSpanSign.Sdk
         }
     }
 }
-
