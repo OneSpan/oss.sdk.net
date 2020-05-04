@@ -1,4 +1,3 @@
-using System;
 
 namespace OneSpanSign.Sdk
 {
@@ -7,17 +6,18 @@ namespace OneSpanSign.Sdk
         private Company sdkCompany;
         private OneSpanSign.API.Company apiCompany;
 
-        public CompanyConverter( Company sdkCompany )
+        public CompanyConverter(Company sdkCompany)
         {
             this.sdkCompany = sdkCompany;
         }
 
-        public CompanyConverter( OneSpanSign.API.Company apiCompany ) 
+        public CompanyConverter(OneSpanSign.API.Company apiCompany)
         {
             this.apiCompany = apiCompany;
         }
 
-        public Company ToSDKCompany() {
+        public Company ToSDKCompany()
+        {
             if (sdkCompany != null)
             {
                 return sdkCompany;
@@ -36,7 +36,8 @@ namespace OneSpanSign.Sdk
             }
         }
 
-        public OneSpanSign.API.Company ToAPICompany() {
+        public OneSpanSign.API.Company ToAPICompany()
+        {
             if (apiCompany != null)
             {
                 return apiCompany;
@@ -57,4 +58,3 @@ namespace OneSpanSign.Sdk
         }
     }
 }
-

@@ -1,4 +1,3 @@
-using System;
 
 namespace OneSpanSign.Sdk
 {
@@ -7,17 +6,18 @@ namespace OneSpanSign.Sdk
         private License sdkLicense;
         private OneSpanSign.API.License apiLicense;
 
-        public LicenseConverter( License sdkLicense )
+        public LicenseConverter(License sdkLicense)
         {
             this.sdkLicense = sdkLicense;
         }
 
-        public LicenseConverter( OneSpanSign.API.License apiLicense ) 
+        public LicenseConverter(OneSpanSign.API.License apiLicense)
         {
             this.apiLicense = apiLicense;
         }
 
-        public License ToSDKLicense() {
+        public License ToSDKLicense()
+        {
             if (sdkLicense != null)
             {
                 return sdkLicense;
@@ -33,6 +33,7 @@ namespace OneSpanSign.Sdk
                 {
                     builder.WithTransaction(new TransactionConverter(apiTransaction).ToSDKTransaction());
                 }
+
                 return builder.Build();
             }
             else
@@ -41,7 +42,8 @@ namespace OneSpanSign.Sdk
             }
         }
 
-        public OneSpanSign.API.License ToAPILicense() {
+        public OneSpanSign.API.License ToAPILicense()
+        {
             if (apiLicense != null)
             {
                 return apiLicense;
@@ -57,6 +59,7 @@ namespace OneSpanSign.Sdk
                 {
                     result.AddTransaction(new TransactionConverter(transaction).ToAPITransaction());
                 }
+
                 return result;
             }
             else
@@ -66,4 +69,3 @@ namespace OneSpanSign.Sdk
         }
     }
 }
-

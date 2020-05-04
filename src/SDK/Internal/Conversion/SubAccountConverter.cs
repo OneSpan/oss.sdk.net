@@ -1,4 +1,3 @@
-using System;
 using OneSpanSign.Sdk.Builder;
 
 namespace OneSpanSign.Sdk
@@ -8,17 +7,18 @@ namespace OneSpanSign.Sdk
         private SubAccount sdkSubAccount;
         private OneSpanSign.API.SubAccount apiSubAccount;
 
-        public SubAccountConverter( SubAccount sdkSubAccount )
+        public SubAccountConverter(SubAccount sdkSubAccount)
         {
             this.sdkSubAccount = sdkSubAccount;
         }
 
-        public SubAccountConverter( OneSpanSign.API.SubAccount apiSubAccount ) 
+        public SubAccountConverter(OneSpanSign.API.SubAccount apiSubAccount)
         {
             this.apiSubAccount = apiSubAccount;
         }
 
-        public SubAccount ToSDKSubAccount() {
+        public SubAccount ToSDKSubAccount()
+        {
             if (sdkSubAccount != null)
             {
                 return sdkSubAccount;
@@ -38,7 +38,8 @@ namespace OneSpanSign.Sdk
             }
         }
 
-        public OneSpanSign.API.SubAccount ToAPISubAccount() {
+        public OneSpanSign.API.SubAccount ToAPISubAccount()
+        {
             if (apiSubAccount != null)
             {
                 return apiSubAccount;
@@ -59,4 +60,3 @@ namespace OneSpanSign.Sdk
         }
     }
 }
-
