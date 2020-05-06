@@ -95,6 +95,28 @@ namespace OneSpanSign.Sdk
             }
         }
 
+        public DownloadedFile DownloadAttachmentFile(string packageId, string attachmentId, Int32 fileId)
+        {
+            string path = template.UrlFor(UrlTemplate.ATTACHMENT_REQUIREMENT_PATH)
+                .Replace("{packageId}", packageId)
+                .Replace("{attachmentId}", attachmentId)
+                .Replace("{fileId}", fileId.ToString())
+                .Build();
+
+            try
+            {
+                return restClient.GetBytes(path);
+            }
+            catch (OssServerException e)
+            {
+                throw new OssServerException("Could not download the attachment file." + " Exception: " + e.Message, e.ServerError, e);
+            }
+            catch (Exception e)
+            {
+                throw new OssException("Could not download the attachment file." + " Exception: " + e.Message,e);
+            }
+        }
+
         [Obsolete("This method was replaced by DownloadAllAttachmentFilesForPackage")]
         public byte[] DownloadAllAttachmentsForPackage(string packageId)
         {
@@ -203,7 +225,7 @@ namespace OneSpanSign.Sdk
 
         public void DeletaAttachmentFile(PackageId packageId, string attachmentId, Int32 fileId, string signerSessionId)
         {
-            string path = template.UrlFor (UrlTemplate.DELETE_ATTACHMENT_FILE_PATH)
+            string path = template.UrlFor (UrlTemplate.ATTACHMENT_FILE_PATH)
                  .Replace ("{packageId}", packageId.Id)
                  .Replace ("{attachmentId}", attachmentId)
                  .Replace("{fileId}", fileId.ToString())
