@@ -38,6 +38,9 @@ namespace SDK.Examples
             Assert.IsTrue(AssertContainDelegationUser(example.delegationUserListAfterUpdating, example.delegationUser9));
 
             Assert.AreEqual(0, example.delegationUserListAfterClearing.Count);
+
+            Assert.IsTrue(AssertContainDelegationUser(example.delegationUserListAfterUpdatingWithObjects, example.delegationUser10));
+            Assert.IsTrue(AssertContainDelegationUser(example.delegationUserListAfterUpdatingWithObjects, example.delegationUser11));
         }
 
         private bool AssertContainDelegationUser(IList<DelegationUser> delegationUserList, DelegationUser delegationUser) 

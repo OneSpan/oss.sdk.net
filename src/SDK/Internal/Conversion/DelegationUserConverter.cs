@@ -31,6 +31,7 @@ namespace OneSpanSign.Sdk
             result.Id = sdkDelegationUser.Id;
             result.LastName = sdkDelegationUser.LastName;
             result.Name = sdkDelegationUser.Name;
+            result.ExpiryDate = sdkDelegationUser.ExpiryDate;
 
             return result;
         }
@@ -47,6 +48,7 @@ namespace OneSpanSign.Sdk
                     .WithId(apiDelegationUser.Id)
                     .WithLastName(apiDelegationUser.LastName)
                     .WithName(apiDelegationUser.Name)
+                    .WithExpiryDate(apiDelegationUser.ExpiryDate)
                     .Build();
         }
     }

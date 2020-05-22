@@ -139,7 +139,7 @@ namespace OneSpanSign.Sdk
 
         }
 
-        public void UpdateDelegates(string senderId, List<string> delegateIds) {
+        public void UpdateDelegates<T>(string senderId, IList<T> delegateIds) {
             string path = template.UrlFor(UrlTemplate.DELEGATES_PATH)
                 .Replace("{senderId}", senderId)
                 .Build();

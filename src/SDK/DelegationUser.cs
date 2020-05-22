@@ -28,6 +28,11 @@ namespace OneSpanSign.Sdk
             get;
             set;
         }
+
+        public Nullable<DateTime> ExpiryDate
+        {
+            get; set;
+        }
     }
 }
 
