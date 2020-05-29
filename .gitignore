@@ -18,6 +18,7 @@ artifacts/
 */*/packages.config
 */*/*/packages.config
 .vs/
+.idea/
 
 #zip file
 
