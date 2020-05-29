@@ -12,7 +12,15 @@ namespace OneSpanSign.Sdk
 
         public string LastName { get; set; }
 
-        public string Name { get; set; }
+        public string Name {
+            get;
+            set;
+        }
+
+        public Nullable<DateTime> ExpiryDate
+        {
+            get; set;
+        }
     }
 }
 

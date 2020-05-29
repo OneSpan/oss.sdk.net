@@ -68,6 +68,18 @@ namespace OneSpanSign.Sdk
             return apiClient.DownloadAttachmentFile(packageId.Id, attachmentId);
         }
 
+        /// <summary>
+        /// Sender downloads the attachment file.
+        /// </summary>
+        /// <returns>The attachment file with file name.</returns>
+        /// <param name="packageId">Package identifier.</param>
+        /// <param name="attachmentId">Attachment identifier.</param>
+        /// <param name="attachmentId">Attachment file identifier.</param>
+        public DownloadedFile DownloadAttachmentFile(PackageId packageId, String attachmentId, Int32 fileId)
+        {
+            return apiClient.DownloadAttachmentFile(packageId.Id, attachmentId, fileId);
+        }
+
         [Obsolete("This method was replaced by DownloadAllAttachmentFilesForPackage")]
         public byte[] DownloadAllAttachmentsForPackage(PackageId packageId)
         {

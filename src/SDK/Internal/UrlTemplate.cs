@@ -162,7 +162,7 @@ namespace OneSpanSign.Sdk.Internal
 		public static readonly string ATTACHMENT_REQUIREMENT_PATH = "/packages/{packageId}/attachment/{attachmentId}";
         public static readonly string ALL_ATTACHMENTS_PATH = "/packages/{packageId}/attachment/zip";
         public static readonly string ALL_ATTACHMENTS_FOR_ROLE_PATH = "/packages/{packageId}/attachment/zip/{roleId}";
-        public static readonly string DELETE_ATTACHMENT_FILE_PATH = "/packages/{packageId}/attachment/{attachmentId}/file/{fileId}";
+        public static readonly string ATTACHMENT_FILE_PATH = "/packages/{packageId}/attachment/{attachmentId}/file/{fileId}";
 
         // Layout Service
         public static readonly string LAYOUT_PATH = "/layouts";

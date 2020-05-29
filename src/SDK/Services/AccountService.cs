@@ -89,6 +89,16 @@ namespace OneSpanSign.Sdk.Services
             apiClient.UpdateDelegates(senderId, delegateIds);
         }
 
+        public void updateDelegationWithDelegationUsers(string senderId, List<DelegationUser> delegates)
+        {
+            IList<OneSpanSign.API.DelegationUser> apiDelegates = new List<OneSpanSign.API.DelegationUser>();
+            foreach(OneSpanSign.Sdk.DelegationUser delegateUser in delegates)
+            {
+                apiDelegates.Add(new DelegationUserConverter(delegateUser).ToAPIDelegationUser());
+            }
+            apiClient.UpdateDelegates(senderId, apiDelegates);
+        }
+
         public void AddDelegate(string senderId, OneSpanSign.Sdk.DelegationUser delegationUser) 
         {
             OneSpanSign.API.DelegationUser apiDelegationUser = new DelegationUserConverter(delegationUser).ToAPIDelegationUser();
