@@ -1,0 +1,865 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ContentModelStore">
+    <e p="$USER_HOME$/.Rider2019.3/system/extResources" t="IncludeRecursive" />
+    <e p="$USER_HOME$/.Rider2019.3/system/resharper-host/local/Transient/ReSharperHost/v193/SolutionCaches/_OneSpanSign.Sdk.-426892091.00" t="ExcludeRecursive" />
+    <e p="$USER_HOME$/.nuget/packages/microsoft.net.test.sdk/16.2.0/build/netcoreapp1.0" t="Include">
+      <e p="Microsoft.NET.Test.Sdk.Program.cs" t="Include" />
+    </e>
+    <e p="$USER_HOME$/.nuget/packages/microsoft.net.test.sdk/16.5.0/build/netcoreapp2.1" t="Include">
+      <e p="Microsoft.NET.Test.Sdk.Program.cs" t="Include" />
+    </e>
+    <e p="$USER_HOME$/.nuget/packages/nunit3testadapter/3.13.0/build/netcoreapp1.0/NUnit3.TestAdapter.dll" t="Include" />
+    <e p="$USER_HOME$/.nuget/packages/nunit3testadapter/3.13.0/build/netcoreapp1.0/NUnit3.TestAdapter.pdb" t="Include" />
+    <e p="$USER_HOME$/.nuget/packages/nunit3testadapter/3.13.0/build/netcoreapp1.0/nunit.engine.netstandard.dll" t="Include" />
+    <e p="$USER_HOME$/.nuget/packages/nunit3testadapter/3.16.1/build/netcoreapp2.1/NUnit3.TestAdapter.dll" t="Include" />
+    <e p="$USER_HOME$/.nuget/packages/nunit3testadapter/3.16.1/build/netcoreapp2.1/NUnit3.TestAdapter.pdb" t="Include" />
+    <e p="$USER_HOME$/.nuget/packages/nunit3testadapter/3.16.1/build/netcoreapp2.1/nunit.engine.api.dll" t="Include" />
+    <e p="$USER_HOME$/.nuget/packages/nunit3testadapter/3.16.1/build/netcoreapp2.1/nunit.engine.dll" t="Include" />
+    <e p="$PROJECT_DIR$" t="IncludeFlat">
+      <e p="OneSpanSign.Sdk.sln" t="IncludeFlat" />
+      <e p="SDK" t="IncludeRecursive">
+        <e p="AccountMember.cs" t="Include" />
+        <e p="Address.cs" t="Include" />
+        <e p="ApiToken.cs" t="Include" />
+        <e p="ApiTokenConfig.cs" t="Include" />
+        <e p="AttachmentFile.cs" t="Include" />
+        <e p="AttachmentRequirement.cs" t="Include" />
+        <e p="Audit.cs" t="Include" />
+        <e p="Authentication.cs" t="Include" />
+        <e p="AuthenticationClient.cs" t="Include" />
+        <e p="AuthenticationMethod.cs" t="Include" />
+        <e p="AuthenticationToken.cs" t="Include" />
+        <e p="Builder" t="Include">
+          <e p="AccountMemberBuilder.cs" t="Include" />
+          <e p="AddressBuilder.cs" t="Include" />
+          <e p="AttachmentRequirementBuilder.cs" t="Include" />
+          <e p="AuthenticationBuilder.cs" t="Include" />
+          <e p="CeremonyLayoutSettingsBuilder.cs" t="Include" />
+          <e p="ChallengeBuilder.cs" t="Include" />
+          <e p="CustomFieldBuilder.cs" t="Include" />
+          <e p="CustomFieldValueBuilder.cs" t="Include" />
+          <e p="DataManagementPolicyBuilder.cs" t="Include" />
+          <e p="DelegationUserBuilder.cs" t="Include" />
+          <e p="DocumentAttributesBuilder.cs" t="Include" />
+          <e p="DocumentBuilder.cs" t="Include" />
+          <e p="DocumentPackageAttributesBuilder.cs" t="Include" />
+          <e p="DocumentPackageSettingsBuilder.cs" t="Include" />
+          <e p="DocumentSource.cs" t="Include" />
+          <e p="DocumentVisibilityBasedOnSignerBuilder.cs" t="Include" />
+          <e p="DocumentVisibilityBuilder.cs" t="Include" />
+          <e p="DocumentVisibilityConfigurationBasedOnSignerBuilder.cs" t="Include" />
+          <e p="DocumentVisibilityConfigurationBuilder.cs" t="Include" />
+          <e p="EventNotificationConfigBuilder.cs" t="Include" />
+          <e p="ExpiryTimeConfigurationBuilder.cs" t="Include" />
+          <e p="FastTrackRoleBuilder.cs" t="Include" />
+          <e p="FastTrackSignerBuilder.cs" t="Include" />
+          <e p="FieldBuilder.cs" t="Include" />
+          <e p="FieldConditionBuilder.cs" t="Include" />
+          <e p="FieldValidatorBuilder.cs" t="Include" />
+          <e p="GroupBuilder.cs" t="Include" />
+          <e p="GroupMemberBuilder.cs" t="Include" />
+          <e p="GroupSummaryBuilder.cs" t="Include" />
+          <e p="Internal" t="Include">
+            <e p="FileDocumentSource.cs" t="Include" />
+            <e p="StreamDocumentSource.cs" t="Include" />
+          </e>
+          <e p="LinkBuilder.cs" t="Include" />
+          <e p="NotaryJournalEntryBuilder.cs" t="Include" />
+          <e p="PackageBuilder.cs" t="Include" />
+          <e p="ProxyConfigurationBuilder.cs" t="Include" />
+          <e p="ReminderScheduleBuilder.cs" t="Include" />
+          <e p="SMSAuthenticationBuilder.cs" t="Include" />
+          <e p="SSOAuthenticationBuilder.cs" t="Include" />
+          <e p="SenderInfoBuilder.cs" t="Include" />
+          <e p="SignatureBuilder.cs" t="Include" />
+          <e p="SignerBuilder.cs" t="Include" />
+          <e p="SignerInformationForEquifaxCanadaBuilder.cs" t="Include" />
+          <e p="SignerInformationForEquifaxUSABuilder.cs" t="Include" />
+          <e p="SignerVerificationBuilder.cs" t="Include" />
+          <e p="SigningLogoBuilder.cs" t="Include" />
+          <e p="TextAnchorBuilder.cs" t="Include" />
+          <e p="TransactionRetentionBuilder.cs" t="Include" />
+          <e p="TranslationBuilder.cs" t="Include" />
+        </e>
+        <e p="CapturedSignature.cs" t="Include" />
+        <e p="CeremonyLayoutSettings.cs" t="Include" />
+        <e p="Challenge.cs" t="Include" />
+        <e p="CompletionReport.cs" t="Include" />
+        <e p="ConditionalField.cs" t="Include" />
+        <e p="CustomField.cs" t="Include" />
+        <e p="CustomFieldValue.cs" t="Include" />
+        <e p="DataManagementPolicy.cs" t="Include" />
+        <e p="DelegationEventReport.cs" t="Include" />
+        <e p="DelegationReport.cs" t="Include" />
+        <e p="DelegationUser.cs" t="Include" />
+        <e p="Direction.cs" t="Include" />
+        <e p="DirectionUtility.cs" t="Include" />
+        <e p="Document.cs" t="Include" />
+        <e p="DocumentPackage.cs" t="Include" />
+        <e p="DocumentPackageAttributes.cs" t="Include" />
+        <e p="DocumentPackageSettings.cs" t="Include" />
+        <e p="DocumentPackageStatus.cs" t="Include" />
+        <e p="DocumentType.cs" t="Include" />
+        <e p="DocumentTypeUtility.cs" t="Include" />
+        <e p="DocumentVisibility.cs" t="Include" />
+        <e p="DocumentVisibilityConfiguration.cs" t="Include" />
+        <e p="DocumentsCompletionReport.cs" t="Include" />
+        <e p="DownloadedFile.cs" t="Include" />
+        <e p="EventNotificationConfig.cs" t="Include" />
+        <e p="ExpiryTimeConfiguration.cs" t="Include" />
+        <e p="External.cs" t="Include" />
+        <e p="ExtractionType.cs" t="Include" />
+        <e p="FastTrackRole.cs" t="Include" />
+        <e p="FastTrackSigner.cs" t="Include" />
+        <e p="Field.cs" t="Include" />
+        <e p="FieldCondition.cs" t="Include" />
+        <e p="FieldStyle.cs" t="Include" />
+        <e p="FieldStyleUtility.cs" t="Include" />
+        <e p="FieldSummary.cs" t="Include" />
+        <e p="FieldType.cs" t="Include" />
+        <e p="FieldValidator.cs" t="Include" />
+        <e p="Group.cs" t="Include" />
+        <e p="GroupId.cs" t="Include" />
+        <e p="GroupMember.cs" t="Include" />
+        <e p="GroupSummary.cs" t="Include" />
+        <e p="Internal" t="Include">
+          <e p="ApiTokenAuthHeaderGenerator.cs" t="Include" />
+          <e p="ApplicationLogger.cs" t="Include" />
+          <e p="Asserts.cs" t="Include" />
+          <e p="AuthHeaderGenerator.cs" t="Include" />
+          <e p="AuthRequestParameters.cs" t="Include" />
+          <e p="Conversion" t="Include">
+            <e p="AccountMemberConverter.cs" t="Include" />
+            <e p="AddressConverter.cs" t="Include" />
+            <e p="AttachmentFileConverter.cs" t="Include" />
+            <e p="AttachmentRequirementConverter.cs" t="Include" />
+            <e p="AuthenticationConverter.cs" t="Include" />
+            <e p="AuthenticationMethodConverter.cs" t="Include" />
+            <e p="CeremonyLayoutSettingsConverter.cs" t="Include" />
+            <e p="ChallengeConverter.cs" t="Include" />
+            <e p="CompletionReportConverter.cs" t="Include" />
+            <e p="ConditionalFieldConverter.cs" t="Include" />
+            <e p="Converter.cs" t="Include" />
+            <e p="CustomFieldConverter.cs" t="Include" />
+            <e p="CustomFieldValueConverter.cs" t="Include" />
+            <e p="DataManagementPolicyConverter.cs" t="Include" />
+            <e p="DelegationEventReportConverter.cs" t="Include" />
+            <e p="DelegationReportConverter.cs" t="Include" />
+            <e p="DelegationUserConverter.cs" t="Include" />
+            <e p="DocumentConverter.cs" t="Include" />
+            <e p="DocumentPackageConverter.cs" t="Include" />
+            <e p="DocumentPackageSettingsConverter.cs" t="Include" />
+            <e p="DocumentVisibilityConfigurationConverter.cs" t="Include" />
+            <e p="DocumentVisibilityConverter.cs" t="Include" />
+            <e p="ErrorConverter.cs" t="Include" />
+            <e p="EventNotificationConfigConverter.cs" t="Include" />
+            <e p="EventNotificationConverter.cs" t="Include" />
+            <e p="ExpiryTimeConfigurationConverter.cs" t="Include" />
+            <e p="ExternalConverter.cs" t="Include" />
+            <e p="FielConditionConverter.cs" t="Include" />
+            <e p="FieldConverter.cs" t="Include" />
+            <e p="FieldStyleAndSubTypeConverter.cs" t="Include" />
+            <e p="FieldTypeConverter.cs" t="Include" />
+            <e p="FieldValidatorConverter.cs" t="Include" />
+            <e p="GroupConverter.cs" t="Include" />
+            <e p="GroupMemberConverter.cs" t="Include" />
+            <e p="GroupMemberTypeConverter.cs" t="Include" />
+            <e p="GroupSummaryConverter.cs" t="Include" />
+            <e p="KnowledgeBasedAuthenticationConverter.cs" t="Include" />
+            <e p="KnowledgeBasedAuthenticationStatusConverter.cs" t="Include" />
+            <e p="MessageConverter.cs" t="Include" />
+            <e p="MessageStatusConverter.cs" t="Include" />
+            <e p="NotaryJournalEntryConverter.cs" t="Include" />
+            <e p="PackageStatusConverter.cs" t="Include" />
+            <e p="ReferencedConditionsConverter.cs" t="Include" />
+            <e p="ReferencedDocumentConverter.cs" t="Include" />
+            <e p="ReferencedFieldConditionsConverter.cs" t="Include" />
+            <e p="ReferencedFieldConverter.cs" t="Include" />
+            <e p="ReminderConverter.cs" t="Include" />
+            <e p="ReminderScheduleConverter.cs" t="Include" />
+            <e p="RequirementStatusConverter.cs" t="Include" />
+            <e p="SenderConverter.cs" t="Include" />
+            <e p="SenderStatusConverter.cs" t="Include" />
+            <e p="SenderTypeConverter.cs" t="Include" />
+            <e p="SignatureConverter.cs" t="Include" />
+            <e p="SignatureStyleConverter.cs" t="Include" />
+            <e p="SignerConverter.cs" t="Include" />
+            <e p="SignerInformationForEquifaxCanadaConverter.cs" t="Include" />
+            <e p="SignerInformationForEquifaxUSAConverter.cs" t="Include" />
+            <e p="SignerVerificationConverter.cs" t="Include" />
+            <e p="SigningLogoConverter.cs" t="Include" />
+            <e p="SupportConfigurationConverter.cs" t="Include" />
+            <e p="TextAnchorConverter.cs" t="Include" />
+            <e p="TextAnchorPositionConverter.cs" t="Include" />
+            <e p="TransactionRetentionConverter.cs" t="Include" />
+            <e p="UsageReportConverter.cs" t="Include" />
+            <e p="VisibilityConverter.cs" t="Include" />
+          </e>
+          <e p="Converter.cs" t="Include" />
+          <e p="DateHelper.cs" t="Include" />
+          <e p="HttpMethods.cs" t="Include" />
+          <e p="HttpRequestUtil.cs" t="Include" />
+          <e p="ILogger.cs" t="Include" />
+          <e p="LoggerFactory.cs" t="Include" />
+          <e p="MimeTypeUtil.cs" t="Include" />
+          <e p="RedirectResolver.cs" t="Include" />
+          <e p="RollOverTextWriter.cs" t="Include" />
+          <e p="SessionIdAuthHeaderGenerator.cs" t="Include" />
+          <e p="Streams.cs" t="Include" />
+          <e p="Support.cs" t="Include" />
+          <e p="UrlTemplate.cs" t="Include" />
+          <e p="VersionUtil.cs" t="Include" />
+        </e>
+        <e p="InternalsVisibleTo.cs" t="Include" />
+        <e p="KnowledgeBasedAuthentication.cs" t="Include" />
+        <e p="KnowledgeBasedAuthenticationStatus.cs" t="Include" />
+        <e p="Message.cs" t="Include" />
+        <e p="MessageStatus.cs" t="Include" />
+        <e p="Models" t="Include">
+          <e p="Account.cs" t="Include" />
+          <e p="AccountProviders.cs" t="Include" />
+          <e p="Address.cs" t="Include" />
+          <e p="Approval.cs" t="Include" />
+          <e p="AttachmentFile.cs" t="Include" />
+          <e p="AttachmentRequirement.cs" t="Include" />
+          <e p="Auth.cs" t="Include" />
+          <e p="AuthChallenge.cs" t="Include" />
+          <e p="AuthScheme.cs" t="Include" />
+          <e p="AuthenticationToken.cs" t="Include" />
+          <e p="BaseMessage.cs" t="Include" />
+          <e p="BasePackage.cs" t="Include" />
+          <e p="BasePackageType.cs" t="Include" />
+          <e p="BaseTemplate.cs" t="Include" />
+          <e p="Bill.cs" t="Include" />
+          <e p="Box.cs" t="Include" />
+          <e p="BrandingBarOptions.cs" t="Include" />
+          <e p="Callback.cs" t="Include" />
+          <e p="CallbackEvent.cs" t="Include" />
+          <e p="CcExpiration.cs" t="Include" />
+          <e p="CeremonyEventComplete.cs" t="Include" />
+          <e p="CeremonyEvents.cs" t="Include" />
+          <e p="CeremonySettings.cs" t="Include" />
+          <e p="Company.cs" t="Include" />
+          <e p="CompletionReport.cs" t="Include" />
+          <e p="ConditionalField.cs" t="Include" />
+          <e p="Credentials.cs" t="Include" />
+          <e p="CreditCard.cs" t="Include" />
+          <e p="Currency.cs" t="Include" />
+          <e p="CustomField.cs" t="Include" />
+          <e p="Cycle.cs" t="Include" />
+          <e p="CycleCount.cs" t="Include" />
+          <e p="DataManagementPolicy.cs" t="Include" />
+          <e p="DelegationEventReport.cs" t="Include" />
+          <e p="DelegationReport.cs" t="Include" />
+          <e p="DelegationUser.cs" t="Include" />
+          <e p="Delivery.cs" t="Include" />
+          <e p="Document.cs" t="Include" />
+          <e p="DocumentToolbarOptions.cs" t="Include" />
+          <e p="DocumentVisibility.cs" t="Include" />
+          <e p="DocumentVisibilityConfiguration.cs" t="Include" />
+          <e p="DocumentsCompletionReport.cs" t="Include" />
+          <e p="Entity.cs" t="Include" />
+          <e p="Error.cs" t="Include" />
+          <e p="ExpiryTimeConfiguration.cs" t="Include" />
+          <e p="External.cs" t="Include" />
+          <e p="ExtractAnchor.cs" t="Include" />
+          <e p="Features.cs" t="Include" />
+          <e p="Field.cs" t="Include" />
+          <e p="FieldCondition.cs" t="Include" />
+          <e p="FieldSubtype.cs" t="Include" />
+          <e p="FieldType.cs" t="Include" />
+          <e p="FieldValidation.cs" t="Include" />
+          <e p="FooterOptions.cs" t="Include" />
+          <e p="GlobalActionsOptions.cs" t="Include" />
+          <e p="Group.cs" t="Include" />
+          <e p="GroupMember.cs" t="Include" />
+          <e p="GroupMemberType.cs" t="Include" />
+          <e p="GroupMembership.cs" t="Include" />
+          <e p="GroupSummary.cs" t="Include" />
+          <e p="GuestAuth.cs" t="Include" />
+          <e p="HeaderOptions.cs" t="Include" />
+          <e p="Image.cs" t="Include" />
+          <e p="KnowledgeBasedAuthentication.cs" t="Include" />
+          <e p="KnowledgeBasedAuthenticationStatus.cs" t="Include" />
+          <e p="Layout.cs" t="Include" />
+          <e p="LayoutOptions.cs" t="Include" />
+          <e p="LayoutStyle.cs" t="Include" />
+          <e p="License.cs" t="Include" />
+          <e p="LicenseStatus.cs" t="Include" />
+          <e p="Link.cs" t="Include" />
+          <e p="MemberType.cs" t="Include" />
+          <e p="Message.cs" t="Include" />
+          <e p="MessageStatus.cs" t="Include" />
+          <e p="NotaryJournalEntry.cs" t="Include" />
+          <e p="Package.cs" t="Include" />
+          <e p="PackageArtifactsLimits.cs" t="Include" />
+          <e p="PackageCompletionReport.cs" t="Include" />
+          <e p="PackageReminder.cs" t="Include" />
+          <e p="PackageReminderSchedule.cs" t="Include" />
+          <e p="PackageSettings.cs" t="Include" />
+          <e p="PackageStatus.cs" t="Include" />
+          <e p="Page.cs" t="Include" />
+          <e p="Plan.cs" t="Include" />
+          <e p="Price.cs" t="Include" />
+          <e p="ProfessionalIdentityField.cs" t="Include" />
+          <e p="Provider.cs" t="Include" />
+          <e p="Quota.cs" t="Include" />
+          <e p="ReferencedConditions.cs" t="Include" />
+          <e p="ReferencedDocument.cs" t="Include" />
+          <e p="ReferencedField.cs" t="Include" />
+          <e p="ReferencedFieldConditions.cs" t="Include" />
+          <e p="Report.cs" t="Include" />
+          <e p="RequirementStatus.cs" t="Include" />
+          <e p="Result.cs" t="Include" />
+          <e p="Role.cs" t="Include" />
+          <e p="RoleType.cs" t="Include" />
+          <e p="SamlMetadata.cs" t="Include" />
+          <e p="Scope.cs" t="Include" />
+          <e p="Sender.cs" t="Include" />
+          <e p="SenderAuthenticationToken.cs" t="Include" />
+          <e p="SenderCompletionReport.cs" t="Include" />
+          <e p="SenderStatus.cs" t="Include" />
+          <e p="SenderType.cs" t="Include" />
+          <e p="SenderUsageReport.cs" t="Include" />
+          <e p="Session.cs" t="Include" />
+          <e p="Settings.cs" t="Include" />
+          <e p="SignatureStyle.cs" t="Include" />
+          <e p="SignedDocument.cs" t="Include" />
+          <e p="SignedDocumentDelivery.cs" t="Include" />
+          <e p="SignedDocuments.cs" t="Include" />
+          <e p="Signer.cs" t="Include" />
+          <e p="SignerAuthenticationToken.cs" t="Include" />
+          <e p="SignerInformationForEquifaxCanada.cs" t="Include" />
+          <e p="SignerInformationForEquifaxUSA.cs" t="Include" />
+          <e p="SignerStatus.cs" t="Include" />
+          <e p="SignersCompletionReport.cs" t="Include" />
+          <e p="SigningLogo.cs" t="Include" />
+          <e p="SigningTheme.cs" t="Include" />
+          <e p="SigningUrl.cs" t="Include" />
+          <e p="Signup.cs" t="Include" />
+          <e p="Style.cs" t="Include" />
+          <e p="SupportConfiguration.cs" t="Include" />
+          <e p="Target.cs" t="Include" />
+          <e p="Template.cs" t="Include" />
+          <e p="TextualSignatureStyle.cs" t="Include" />
+          <e p="TitleBarOptions.cs" t="Include" />
+          <e p="Transaction.cs" t="Include" />
+          <e p="TransactionRetention.cs" t="Include" />
+          <e p="Translation.cs" t="Include" />
+          <e p="UsageReport.cs" t="Include" />
+          <e p="User.cs" t="Include" />
+          <e p="UserCustomField.cs" t="Include" />
+          <e p="Verification.cs" t="Include" />
+          <e p="VerificationType.cs" t="Include" />
+          <e p="ViewSettings.cs" t="Include" />
+          <e p="Visibility.cs" t="Include" />
+        </e>
+        <e p="NotaryJournalEntry.cs" t="Include" />
+        <e p="NotificationEvent.cs" t="Include" />
+        <e p="OneSpanSign.Sdk.csproj" t="IncludeRecursive" />
+        <e p="OssClient.cs" t="Include" />
+        <e p="OssEnumeration.cs" t="Include" />
+        <e p="OssException.cs" t="Include" />
+        <e p="OssServerException.cs" t="Include" />
+        <e p="PackageCompletionReport.cs" t="Include" />
+        <e p="PackageId.cs" t="Include" />
+        <e p="Page.cs" t="Include" />
+        <e p="PageRequest.cs" t="Include" />
+        <e p="Properties" t="Include" />
+        <e p="ProxyConfiguration.cs" t="Include" />
+        <e p="ReferencedConditions.cs" t="Include" />
+        <e p="ReferencedDocument.cs" t="Include" />
+        <e p="ReferencedField.cs" t="Include" />
+        <e p="ReferencedFieldConditions.cs" t="Include" />
+        <e p="Reminder.cs" t="Include" />
+        <e p="ReminderSchedule.cs" t="Include" />
+        <e p="RequirementStatus.cs" t="Include" />
+        <e p="RestClient.cs" t="Include" />
+        <e p="RoleId.cs" t="Include" />
+        <e p="Sender.cs" t="Include" />
+        <e p="SenderCompletionReport.cs" t="Include" />
+        <e p="SenderInfo.cs" t="Include" />
+        <e p="SenderStatus.cs" t="Include" />
+        <e p="SenderType.cs" t="Include" />
+        <e p="SenderUsageReport.cs" t="Include" />
+        <e p="ServerError.cs" t="Include" />
+        <e p="Services" t="Include">
+          <e p="AccountService.cs" t="Include" />
+          <e p="ApprovalService.cs" t="Include" />
+          <e p="AttachmentRequirementService.cs" t="Include" />
+          <e p="AuditService.cs" t="Include" />
+          <e p="AuthenticationService.cs" t="Include" />
+          <e p="AuthenticationTokenService.cs" t="Include" />
+          <e p="ContractResolvers" t="Include">
+            <e p="DocumentMetadataContractResolver.cs" t="Include" />
+          </e>
+          <e p="CultureInfoJsonCreationConverter.cs" t="Include" />
+          <e p="CustomFieldService.cs" t="Include" />
+          <e p="DataRetentionSettingsService.cs" t="Include" />
+          <e p="EventNotificationService.cs" t="Include" />
+          <e p="FieldSummaryService.cs" t="Include" />
+          <e p="GroupService.cs" t="Include" />
+          <e p="Internal" t="Include">
+            <e p="AccountApiClient.cs" t="Include" />
+            <e p="ApprovalApiClient.cs" t="Include" />
+            <e p="AttachmentRequirementApiClient.cs" t="Include" />
+            <e p="CustomFieldApiClient.cs" t="Include" />
+            <e p="EventNotificationApiClient.cs" t="Include" />
+            <e p="FieldSummaryApiClient.cs" t="Include" />
+            <e p="GroupApiClient.cs" t="Include" />
+            <e p="LayoutApiClient.cs" t="Include" />
+            <e p="QRCodeApiClient.cs" t="Include" />
+            <e p="ReminderApiClient.cs" t="Include" />
+            <e p="TemplateApiClient.cs" t="Include" />
+          </e>
+          <e p="JsonCreationConverter.cs" t="Include" />
+          <e p="LayoutService.cs" t="Include" />
+          <e p="PackageService.cs" t="Include" />
+          <e p="QRCodeService.cs" t="Include" />
+          <e p="ReminderService.cs" t="Include" />
+          <e p="ReportService.cs" t="Include" />
+          <e p="SessionService.cs" t="Include" />
+          <e p="SignatureImageService.cs" t="Include" />
+          <e p="SignerVerificationService.cs" t="Include" />
+          <e p="SigningService.cs" t="Include" />
+          <e p="SigningStyleService.cs" t="Include" />
+          <e p="SystemService.cs" t="Include" />
+          <e p="TemplateService.cs" t="Include" />
+          <e p="UnknownEnumValuesHandleConverter.cs" t="Include" />
+        </e>
+        <e p="SessionToken.cs" t="Include" />
+        <e p="Signature.cs" t="Include" />
+        <e p="SignatureId.cs" t="Include" />
+        <e p="SignatureImageFormat.cs" t="Include" />
+        <e p="SignatureStyle.cs" t="Include" />
+        <e p="Signer.cs" t="Include" />
+        <e p="SignerInformationForEquifaxCanada.cs" t="Include" />
+        <e p="SignerInformationForEquifaxUSA.cs" t="Include" />
+        <e p="SignerVerification.cs" t="Include" />
+        <e p="SignersCompletionReport.cs" t="Include" />
+        <e p="SigningLogo.cs" t="Include" />
+        <e p="SigningStatus.cs" t="Include" />
+        <e p="SigningStatusUtility.cs" t="Include" />
+        <e p="SupportConfiguration.cs" t="Include" />
+        <e p="TextAnchor.cs" t="Include" />
+        <e p="TextAnchorPosition.cs" t="Include" />
+        <e p="TransactionRetention.cs" t="Include" />
+        <e p="Translation.cs" t="Include" />
+        <e p="UnauthenticatedRestClient.cs" t="Include" />
+        <e p="UsageReport.cs" t="Include" />
+        <e p="UsageReportCategory.cs" t="Include" />
+        <e p="Visibility.cs" t="Include" />
+        <e p="bin" t="ExcludeRecursive" />
+        <e p="obj" t="ExcludeRecursive">
+          <e p="Debug" t="Include">
+            <e p="net45" t="Include">
+              <e p="OneSpanSign.Sdk.AssemblyInfo.cs" t="Include" />
+            </e>
+            <e p="netstandard2.0" t="Include">
+              <e p="OneSpanSign.Sdk.AssemblyInfo.cs" t="Include" />
+            </e>
+          </e>
+        </e>
+        <e p="sdk.snk" t="Include" />
+      </e>
+      <e p="SDK.Tests" t="IncludeRecursive">
+        <e p="Builder" t="Include">
+          <e p="AttachmentRequirementBuilderTest.cs" t="Include" />
+          <e p="AuthenticationBuilder.cs" t="Include" />
+          <e p="DataManagementPolicyBuilderTest.cs" t="Include" />
+          <e p="DocumentBuilderTest.cs" t="Include" />
+          <e p="DocumentPackageAttributesBuilderTest.cs" t="Include" />
+          <e p="DocumentPackageSettingsBuilderTest.cs" t="Include" />
+          <e p="ExpiryTimeConfigurationBuilderTest.cs" t="Include" />
+          <e p="FieldBuilderTest.cs" t="Include" />
+          <e p="FieldConditionBuilderTest.cs" t="Include" />
+          <e p="Internal" t="Include">
+            <e p="FileDocumentSourceTest.cs" t="Include" />
+          </e>
+          <e p="ReminderScheduleBuilderTest.cs" t="Include" />
+          <e p="SenderInfoBuilderTest.cs" t="Include" />
+          <e p="SignatureBuilderTest.cs" t="Include" />
+          <e p="SignerBuilderTest.cs" t="Include" />
+          <e p="SignerInformationForEquifaxCanadaBuilderTest.cs" t="Include" />
+          <e p="SignerInformationForEquifaxUSABuilderTest.cs" t="Include" />
+          <e p="SignerVerificationBuilderTest.cs" t="Include" />
+          <e p="SigningLogoBuilderTest.cs" t="Include" />
+          <e p="TransactionRetentionBuilderTest.cs" t="Include" />
+          <e p="enumeration" t="Include">
+            <e p="AuthenticationMethodTest.cs" t="Include" />
+            <e p="DocumentPackageStatusTest.cs" t="Include" />
+            <e p="FieldStyleTest.cs" t="Include" />
+            <e p="FieldStyleUtilityTest.cs" t="Include" />
+            <e p="KnowledgeBasedAuthenticationStatusTest.cs" t="Include" />
+            <e p="MessageStatusTest.cs" t="Include" />
+            <e p="NotificationEventTest.cs" t="Include" />
+            <e p="RequirementStatusTest.cs" t="Include" />
+            <e p="SenderStatusTest.cs" t="Include" />
+            <e p="SenderTypeTest.cs" t="Include" />
+            <e p="SignatureStyleTest.cs" t="Include" />
+            <e p="TextAnchorPositionTest.cs" t="Include" />
+            <e p="UsageReportCategoryTest.cs" t="Include" />
+          </e>
+        </e>
+        <e p="Internal" t="Include">
+          <e p="Conversion" t="Include">
+            <e p="AttachmentFileConverterTest.cs" t="Include" />
+            <e p="AttachmentRequirementConverterTest.cs" t="Include" />
+            <e p="AuthenticationConverterTest.cs" t="Include" />
+            <e p="AuthenticationMethodConverterTest.cs" t="Include" />
+            <e p="CeremonyLayoutSettingsConverterTest.cs" t="Include" />
+            <e p="ChallengeConverterTest.cs" t="Include" />
+            <e p="CompletionReportConverterTest.cs" t="Include" />
+            <e p="ConditionalFieldConverterTest.cs" t="Include" />
+            <e p="CustomFieldConverterTest.cs" t="Include" />
+            <e p="DataManagementPolicyConverterTest.cs" t="Include" />
+            <e p="DocumentConverterTest.cs" t="Include" />
+            <e p="DocumentPackageConverterTest.cs" t="Include" />
+            <e p="DocumentPackageSettingsConverterTest.cs" t="Include" />
+            <e p="DocumentVisibilityConfigurationConverterTest.cs" t="Include" />
+            <e p="DocumentVisibilityConverterTest.cs" t="Include" />
+            <e p="EventNotificationConfigConverterTest.cs" t="Include" />
+            <e p="EventNotificationConverterTest.cs" t="Include" />
+            <e p="ExpiryTimeConfigurationConverterTest.cs" t="Include" />
+            <e p="ExternalConverterTest.cs" t="Include" />
+            <e p="FieldConditionConverterTest.cs" t="Include" />
+            <e p="FieldConverterTest.cs" t="Include" />
+            <e p="FieldStyleAndSubTypeConverterTest.cs" t="Include" />
+            <e p="FieldValidatorConverterTest.cs" t="Include" />
+            <e p="KnowledgeBasedAuthenticationStatusConverterTest.cs" t="Include" />
+            <e p="MessageConverterTest.cs" t="Include" />
+            <e p="MessageStatusConverterTest.cs" t="Include" />
+            <e p="PackageStatusConverterTest.cs" t="Include" />
+            <e p="ReferencedConditionsConverterTest.cs" t="Include" />
+            <e p="ReferencedDocumentConverterTest.cs" t="Include" />
+            <e p="ReferencedFieldConditionsConverterTest.cs" t="Include" />
+            <e p="ReferencedFieldConverterTest.cs" t="Include" />
+            <e p="ReminderConverterTest.cs" t="Include" />
+            <e p="ReminderScheduleConverterTest.cs" t="Include" />
+            <e p="RequirementStatusConverterTest.cs" t="Include" />
+            <e p="SenderConverterTest.cs" t="Include" />
+            <e p="SenderStatusConverterTest.cs" t="Include" />
+            <e p="SenderTypeConverterTest.cs" t="Include" />
+            <e p="SignatureStyleConverterTest.cs" t="Include" />
+            <e p="SignerConverterTest.cs" t="Include" />
+            <e p="SignerInformationForEquifaxCanadaConverterTest.cs" t="Include" />
+            <e p="SignerInformationForEquifaxUSAConverterTest.cs" t="Include" />
+            <e p="SignerVerificationConverterTest.cs" t="Include" />
+            <e p="SigningLogoConverterTest.cs" t="Include" />
+            <e p="TextAnchorPositionConverterTest.cs" t="Include" />
+            <e p="TransactionRetentionConverterTest.cs" t="Include" />
+            <e p="UsageReportConverterTest.cs" t="Include" />
+            <e p="VisibilityConverterTest.cs" t="Include" />
+          </e>
+          <e p="ConverterTest.cs" t="Include" />
+          <e p="DateHelperTest.cs" t="Include" />
+          <e p="RollOverTextWriterTest.cs" t="Include" />
+        </e>
+        <e p="OneSpanSign.Sdk.Test.csproj" t="IncludeRecursive" />
+        <e p="OssClientTest.cs" t="Include" />
+        <e p="OssEnumerationTest.cs" t="Include" />
+        <e p="PageRequestTest.cs" t="Include" />
+        <e p="PageTest.cs" t="Include" />
+        <e p="Properties" t="Include">
+          <e p="PublishProfiles" t="Include">
+            <e p="FolderProfile.pubxml" t="Include" />
+          </e>
+          <e p="signers.properties" t="Include" />
+        </e>
+        <e p="SenderInfoTest.cs" t="Include" />
+        <e p="bin" t="ExcludeRecursive" />
+        <e p="document.pdf" t="Include" />
+        <e p="obj" t="ExcludeRecursive">
+          <e p="Debug" t="Include">
+            <e p="netcoreapp3.0" t="Include">
+              <e p="OneSpanSign.Sdk.Test.AssemblyInfo.cs" t="Include" />
+            </e>
+          </e>
+        </e>
+        <e p="sdk.tests.snk" t="Include" />
+      </e>
+      <e p="Samples" t="IncludeRecursive">
+        <e p="Examples" t="Include">
+          <e p="AdaPackageExample.cs" t="Include" />
+          <e p="AdditionalRequestHeadersExample.cs" t="Include" />
+          <e p="ApplicationVersionExample.cs" t="Include" />
+          <e p="ApplyLayoutByNameExample.cs" t="Include" />
+          <e p="AttachmentFileExample.cs" t="Include" />
+          <e p="AttachmentRequirementExample.cs" t="Include" />
+          <e p="AuthenticationMethodsExample.cs" t="Include" />
+          <e p="BasicPackageCreationExample.cs" t="Include" />
+          <e p="BrandingBarConfigurationExample.cs" t="Include" />
+          <e p="ChangePackageStatusExample.cs" t="Include" />
+          <e p="ChangePlaceholderNameExample.cs" t="Include" />
+          <e p="ConditionalFieldExample.cs" t="Include" />
+          <e p="ConsentExample.cs" t="Include" />
+          <e p="CreateAndGetLayoutExample.cs" t="Include" />
+          <e p="CreatePackageFromStreamExample.cs" t="Include" />
+          <e p="CreatePackageFromTemplateExample.cs" t="Include" />
+          <e p="CreatePackageFromTemplateWithAttachmentExample.cs" t="Include" />
+          <e p="CreatePackageFromTemplateWithFieldsExample.cs" t="Include" />
+          <e p="CreatePackageFromTemplateWithReplacingPlaceholderExample.cs" t="Include" />
+          <e p="CreatePackageWithVariableNumberOfSignersAndDocuments.cs" t="Include" />
+          <e p="CreatePackageWithoutDocumentExample.cs" t="Include" />
+          <e p="CreateSenderTemplateExample.cs" t="Include" />
+          <e p="CreateTemplateExample.cs" t="Include" />
+          <e p="CreateTemplateFromPackageExample.cs" t="Include" />
+          <e p="CreateTemplateOnBehalfOfAnotherSenderExample.cs" t="Include" />
+          <e p="CustomFieldExample.cs" t="Include" />
+          <e p="CustomSenderInfoExample.cs" t="Include" />
+          <e p="CustomSenderInfoInCreateNewTemplateExample.cs" t="Include" />
+          <e p="CustomSenderInfoInCreatePackageFromTemplateExample.cs" t="Include" />
+          <e p="DataManagementPolicyExample.cs" t="Include" />
+          <e p="DelegationExample.cs" t="Include" />
+          <e p="DeleteDocumentsExample.cs" t="Include" />
+          <e p="DeliverSignedDocumentsByEmailExample.cs" t="Include" />
+          <e p="DesignerRedirectForApiKeyExample.cs" t="Include" />
+          <e p="DesignerRedirectForPackageSenderExample.cs" t="Include" />
+          <e p="DisabledSignaturesExample.cs" t="Include" />
+          <e p="DocumentAttributesExample.cs" t="Include" />
+          <e p="DocumentDeliveryByEmailExample.cs" t="Include" />
+          <e p="DocumentExtractionExample.cs" t="Include" />
+          <e p="DocumentLayoutExample.cs" t="Include" />
+          <e p="DocumentOperationsExample.cs" t="Include" />
+          <e p="DocumentPackageAttributesExample.cs" t="Include" />
+          <e p="DocumentPackageSettingsExample.cs" t="Include" />
+          <e p="DocumentRetrievalExample.cs" t="Include" />
+          <e p="DocumentUploadExample.cs" t="Include" />
+          <e p="DocumentVisibilityExample.cs" t="Include" />
+          <e p="DocumentWorkflowExample.cs" t="Include" />
+          <e p="DownloadDocumentsExample.cs" t="Include" />
+          <e p="DownloadReportExample.cs" t="Include" />
+          <e p="EventNotificationRegistrationExample.cs" t="Include" />
+          <e p="ExceptionHandlingExample.cs" t="Include" />
+          <e p="ExpiryTimeConfigurationExample.cs" t="Include" />
+          <e p="FieldInjectionExample.cs" t="Include" />
+          <e p="FieldManipulationExample.cs" t="Include" />
+          <e p="FieldPositionExtractionExample.cs" t="Include" />
+          <e p="FieldValidationExample.cs" t="Include" />
+          <e p="GenericFieldsExample.cs" t="Include" />
+          <e p="GetCompletedPackagesWithinDateRangeExample.cs" t="Include" />
+          <e p="GetGroupSummariesExample.cs" t="Include" />
+          <e p="GetPackageExample.cs" t="Include" />
+          <e p="GetPackageFieldsListExample.cs" t="Include" />
+          <e p="GetPackageListExample.cs" t="Include" />
+          <e p="GetPackageMessageExample.cs" t="Include" />
+          <e p="GetSigningStatusExample.cs" t="Include" />
+          <e p="GetSigningUrlExample.cs" t="Include" />
+          <e p="GettingStartedExample.cs" t="Include" />
+          <e p="GroupManagementExample.cs" t="Include" />
+          <e p="InPersonExample.cs" t="Include" />
+          <e p="ListTemplatesExample.cs" t="Include" />
+          <e p="LocalLanguageExample.cs" t="Include" />
+          <e p="MergeFieldValidationExample.cs" t="Include" />
+          <e p="MixedSignerAuthenticationExample.cs" t="Include" />
+          <e p="MobileCaptureSignatureStyleExample.cs" t="Include" />
+          <e p="NotaryJournalExample.cs" t="Include" />
+          <e p="NotifySignerExample.cs" t="Include" />
+          <e p="OptionalSignaturesExample.cs" t="Include" />
+          <e p="PackageArchiveExample.cs" t="Include" />
+          <e p="PackageEditExample.cs" t="Include" />
+          <e p="PackageInformationExample.cs" t="Include" />
+          <e p="PackageLanguageConfigurationExample.cs" t="Include" />
+          <e p="PackageReferencedConditionsExample.cs" t="Include" />
+          <e p="PackageTrashExample.cs" t="Include" />
+          <e p="PackageViewRedirectForPackageSenderExample.cs" t="Include" />
+          <e p="ProxyConfigurationExample.cs" t="Include" />
+          <e p="ReminderExample.cs" t="Include" />
+          <e p="RetrieveFieldValuesExample.cs" t="Include" />
+          <e p="SendSmsToSignerExample.cs" t="Include" />
+          <e p="SenderAuthenticationTokenExample.cs" t="Include" />
+          <e p="SenderManipulationExample.cs" t="Include" />
+          <e p="SessionCreationExample.cs" t="Include" />
+          <e p="SignDocumentsExample.cs" t="Include" />
+          <e p="SignableSignaturesExample.cs" t="Include" />
+          <e p="SignatureImageExample.cs" t="Include" />
+          <e p="SignatureManipulationExample.cs" t="Include" />
+          <e p="SignatureStylesExample.cs" t="Include" />
+          <e p="SignerAuthenticationTokenExample.cs" t="Include" />
+          <e p="SignerBoundFieldsExample.cs" t="Include" />
+          <e p="SignerInformationForEquifaxCanadaExample.cs" t="Include" />
+          <e p="SignerInformationForEquifaxUSAExample.cs" t="Include" />
+          <e p="SignerManipulationExample.cs" t="Include" />
+          <e p="SignerOrderingExample.cs" t="Include" />
+          <e p="SignerQnAChallengeExample.cs" t="Include" />
+          <e p="SignerSMSAuthenticationExample.cs" t="Include" />
+          <e p="SignerSpecificEmailMessageExample.cs" t="Include" />
+          <e p="SignerVerificationExample.cs" t="Include" />
+          <e p="SignerVerificationTypesExample.cs" t="Include" />
+          <e p="SigningRedirectForSignerExample.cs" t="Include" />
+          <e p="SigningRedirectForSignerForSingleUseExample.cs" t="Include" />
+          <e p="SigningStyleExample.cs" t="Include" />
+          <e p="StampFieldValueExample.cs" t="Include" />
+          <e p="StartFastTrackExample.cs" t="Include" />
+          <e p="TemplateExample.cs" t="Include" />
+          <e p="TextAnchorExtractionExample.cs" t="Include" />
+          <e p="TextTagsExample.cs" t="Include" />
+          <e p="ThankYouDialogExample.cs" t="Include" />
+          <e p="UpdateInjectedFieldsFromTemplateExample.cs" t="Include" />
+          <e p="UpdatePackageExample.cs" t="Include" />
+          <e p="UpdateSignerExample.cs" t="Include" />
+          <e p="UpdateTemplateWithPlaceholderExample.cs" t="Include" />
+          <e p="UserAuthenticationTokenExample.cs" t="Include" />
+        </e>
+        <e p="OneSpanSign.Sdk.Samples.csproj" t="IncludeRecursive" />
+        <e p="Props.cs" t="Include" />
+        <e p="SDKSample.cs" t="Include" />
+        <e p="SDKSampleTest.cs" t="Include" />
+        <e p="SampleDocuments" t="Include">
+          <e p="Document-4.odt" t="Include" />
+          <e p="Document-5.rtf" t="Include" />
+          <e p="Signature électronique  OACIQ - Une première firme accréditée par l’OACIQ.pdf" t="Include" />
+          <e p="Text_Tag_And_Acrobat_Form_Fields.pdf" t="Include" />
+          <e p="document-for-anchor-extraction.pdf" t="Include" />
+          <e p="document-with-fields.pdf" t="Include" />
+          <e p="document.odt" t="Include" />
+          <e p="document.pdf" t="Include" />
+          <e p="document.rtf" t="Include" />
+          <e p="extract_document.pdf" t="Include" />
+          <e p="field_groups.pdf" t="Include" />
+          <e p="prêt.pdf" t="Include" />
+          <e p="taggedDocument.pdf" t="Include" />
+        </e>
+        <e p="bin" t="ExcludeRecursive" />
+        <e p="default.signers.properties" t="Include" />
+        <e p="notAllowed" t="Include">
+          <e p="DeletePackageExample.cs" t="Include" />
+          <e p="MixingSignatureAndAcceptanceOnOnedocumentExample.cs" t="Include" />
+        </e>
+        <e p="obj" t="ExcludeRecursive">
+          <e p="Debug" t="Include">
+            <e p="netcoreapp3.0" t="Include">
+              <e p="OneSpanSign.Sdk.Samples.AssemblyInfo.cs" t="Include" />
+            </e>
+          </e>
+        </e>
+        <e p="signers.properties" t="Include" />
+      </e>
+      <e p="Samples.Tests" t="IncludeRecursive">
+        <e p="Helpers" t="Include">
+          <e p="CSVReader.cs" t="Include" />
+          <e p="DocumentTypeUtility.cs" t="Include" />
+        </e>
+        <e p="OneSpanSign.Sdk.Samples.Tests.csproj" t="IncludeRecursive" />
+        <e p="Tests" t="Include">
+          <e p="AdaPackageExampleTest.cs" t="Include" />
+          <e p="AdditionalRequestHeadersExampleTest.cs" t="Include" />
+          <e p="ApplicationVersionExampleTest.cs" t="Include" />
+          <e p="ApplyLayoutByNameExampleTest.cs" t="Include" />
+          <e p="AttachmentFileExampleTests.cs" t="Include" />
+          <e p="AttachmentRequirementExampleTest.cs" t="Include" />
+          <e p="AuthenticationMethodsExampleTest.cs" t="Include" />
+          <e p="BasicPackageCreationExampleTest.cs" t="Include" />
+          <e p="BrandingBarConfigurationExampleTest.cs" t="Include" />
+          <e p="ChangePackageStatusExampleTest.cs" t="Include" />
+          <e p="ChangePlaceholderNameExampleTest.cs" t="Include" />
+          <e p="ConditionalFieldExampleTest.cs" t="Include" />
+          <e p="ConsentExampleTest.cs" t="Include" />
+          <e p="CreateAndGetLayoutExampleTest.cs" t="Include" />
+          <e p="CreatePackageFromTemplateExampleTest.cs" t="Include" />
+          <e p="CreatePackageFromTemplateWithAttachmentExampleTest.cs" t="Include" />
+          <e p="CreatePackageFromTemplateWithFieldsExampleTest.cs" t="Include" />
+          <e p="CreatePackageFromTemplateWithReplacingPlaceholderExampleTest.cs" t="Include" />
+          <e p="CreatePackageWithoutDocumentExampleTest.cs" t="Include" />
+          <e p="CreateSenderTemplateExampleTest.cs" t="Include" />
+          <e p="CreateTemplateFromPackageExampleTest.cs" t="Include" />
+          <e p="CreateTemplateOnBehalfOfAnotherSenderExampleTest.cs" t="Include" />
+          <e p="CustomFieldExampleTest.cs" t="Include" />
+          <e p="CustomSenderInfoExampleTest.cs" t="Include" />
+          <e p="CustomSenderInfoInCreateNewTemplateExampleTest.cs" t="Include" />
+          <e p="CustomSenderInfoInCreatePackageFromTemplateExampleTest.cs" t="Include" />
+          <e p="DataManagementPolicyExampleTest.cs" t="Include" />
+          <e p="DelegationExampleTest.cs" t="Include" />
+          <e p="DeleteDocumentsExampleTest.cs" t="Include" />
+          <e p="DeletePackageExampleTest.cs" t="Include" />
+          <e p="DesignerRedirectForApiKeyExampleTest.cs" t="Include" />
+          <e p="DesignerRedirectForPackageSenderExampleTest.cs" t="Include" />
+          <e p="DisabledSignaturesExampleTest.cs" t="Include" />
+          <e p="DocumentAttributesExampleTest.cs" t="Include" />
+          <e p="DocumentExtractionExampleTest.cs" t="Include" />
+          <e p="DocumentLayoutExampleTest.cs" t="Include" />
+          <e p="DocumentOperationsExampleTest.cs" t="Include" />
+          <e p="DocumentPackageAttributesExampleTest.cs" t="Include" />
+          <e p="DocumentPackageSettingsExampleTest.cs" t="Include" />
+          <e p="DocumentRetrievalExampleTest.cs" t="Include" />
+          <e p="DocumentUploadExampleTest.cs" t="Include" />
+          <e p="DocumentVisibilityExampleTest.cs" t="Include" />
+          <e p="DocumentWorkflowExampleTest.cs" t="Include" />
+          <e p="DownloadReportExampleTest.cs" t="Include" />
+          <e p="EventNotificationRegistrationExampleTest.cs" t="Include" />
+          <e p="ExpiryTimeConfigurationExampleTest.cs" t="Include" />
+          <e p="FieldInjectionExampleTest.cs" t="Include" />
+          <e p="FieldManipulationExampleTest.cs" t="Include" />
+          <e p="FieldValidationExampleTest.cs" t="Include" />
+          <e p="GenericFieldsExampleTest.cs" t="Include" />
+          <e p="GetCompletedPackagesWithinDateRangeExampleTest.cs" t="Include" />
+          <e p="GetGroupSummariesExampleTest.cs" t="Include" />
+          <e p="GetPackageFieldsListExampleTest.cs" t="Include" />
+          <e p="GetSigningStatusExampleTest.cs" t="Include" />
+          <e p="GetSigningUrlExampleTest.cs" t="Include" />
+          <e p="GettingStartedExampleTest.cs" t="Include" />
+          <e p="GroupManagementExampleTest.cs" t="Include" />
+          <e p="ListTemplatesExampleTest.cs" t="Include" />
+          <e p="MergeFieldValidationExampleTest.cs" t="Include" />
+          <e p="MixedSignerAuthenticationExampleTest.cs" t="Include" />
+          <e p="MixingSignatureAndAcceptanceOnOnedocumentExampleTest.cs" t="Include" />
+          <e p="MobileCaptureSignatureStyleExampleTest.cs" t="Include" />
+          <e p="NotaryJournalExampleTest.cs" t="Include" />
+          <e p="OptionalSignaturesExampleTest.cs" t="Include" />
+          <e p="PackageDataContainsSDKVersionTest.cs" t="Include" />
+          <e p="PackageInformationExampleTest.cs" t="Include" />
+          <e p="PackageLanguageConfigurationExampleTest.cs" t="Include" />
+          <e p="PackageReferencedConditionsExampleTest.cs" t="Include" />
+          <e p="PackageViewRedirectForPackageSenderExampleTest.cs" t="Include" />
+          <e p="ProxyConfigurationExampleTest.cs" t="Include" />
+          <e p="ReminderExampleTest.cs" t="Include" />
+          <e p="SendSmsToSignerExampleTest.cs" t="Include" />
+          <e p="SenderAuthenticationTokenExampleTest.cs" t="Include" />
+          <e p="SenderManipulationExampleTest.cs" t="Include" />
+          <e p="SessionCreationExampleTest.cs" t="Include" />
+          <e p="SignDocumentsExampleTest.cs" t="Include" />
+          <e p="SignableSignaturesExampleTest.cs" t="Include" />
+          <e p="SignatureManipulationExampleTest.cs" t="Include" />
+          <e p="SignatureStylesExampleTest.cs" t="Include" />
+          <e p="SignerAuthenticationTokenExampleTest.cs" t="Include" />
+          <e p="SignerBoundFieldsExampleTest.cs" t="Include" />
+          <e p="SignerInformationForEquifaxCanadaExampleTest.cs" t="Include" />
+          <e p="SignerInformationForEquifaxUSAExampleTest.cs" t="Include" />
+          <e p="SignerManipulationExampleTest.cs" t="Include" />
+          <e p="SignerOrderingExampleTest.cs" t="Include" />
+          <e p="SignerQnAChallengeExampleTest.cs" t="Include" />
+          <e p="SignerSMSAuthenticationExampleTest.cs" t="Include" />
+          <e p="SignerSpecificEmailMessageExampleTest.cs" t="Include" />
+          <e p="SignerVerificationExampleTest.cs" t="Include" />
+          <e p="SignerVerificationTypeExampleTest.cs" t="Include" />
+          <e p="SigningRedirectForSignerExampleTest.cs" t="Include" />
+          <e p="SigningRedirectForSignerForSingleUseExampleTest.cs" t="Include" />
+          <e p="SigningStyleExampleTest.cs" t="Include" />
+          <e p="StampFieldValueExampleTest.cs" t="Include" />
+          <e p="StartFastTrackExampleTest.cs" t="Include" />
+          <e p="TemplateExampleTest.cs" t="Include" />
+          <e p="TextAnchorExtractionExampleTest.cs" t="Include" />
+          <e p="TextTagsExampleTest.cs" t="Include" />
+          <e p="ThankYouDialogExampleTest.cs" t="Include" />
+          <e p="UpdateInjectedFieldsFromTemplateExampleTest.cs" t="Include" />
+          <e p="UpdatePackageExampleTest.cs" t="Include" />
+          <e p="UpdateSignerExampleTest.cs" t="Include" />
+          <e p="UpdateTemplateWithPlaceholderExampleTest.cs" t="Include" />
+          <e p="UserAuthenticationTokenExampleTest.cs" t="Include" />
+        </e>
+        <e p="bin" t="ExcludeRecursive" />
+        <e p="obj" t="ExcludeRecursive">
+          <e p="Debug" t="Include">
+            <e p="netcoreapp3.0" t="Include">
+              <e p="OneSpanSign.Sdk.Samples.Tests.AssemblyInfo.cs" t="Include" />
+            </e>
+          </e>
+        </e>
+      </e>
+      <e p="packages" t="ExcludeRecursive" />
+      <e p="samples" t="Include" />
+      <e p="sdk" t="Include" />
+    </e>
+  </component>
+</project>
