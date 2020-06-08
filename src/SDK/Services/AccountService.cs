@@ -18,9 +18,9 @@ namespace OneSpanSign.Sdk.Services
 
         public Sender InviteUser(AccountMember invitee)
         {
-            OneSpanSign.API.Sender apiSender = new AccountMemberConverter( invitee ).ToAPISender();
-            OneSpanSign.API.Sender apiResponse = apiClient.InviteUser( apiSender );
-            Sender result = new SenderConverter( apiResponse ).ToSDKSender();
+            OneSpanSign.API.Sender apiSender = new AccountMemberConverter(invitee).ToAPISender();
+            OneSpanSign.API.Sender apiResponse = apiClient.InviteUser(apiSender);
+            Sender result = new SenderConverter(apiResponse).ToSDKSender();
             return result;
         }
 
@@ -32,12 +32,13 @@ namespace OneSpanSign.Sdk.Services
         public IDictionary<string, OneSpanSign.Sdk.Sender> GetSenders(Direction direction, PageRequest request)
         {
             OneSpanSign.API.Result<OneSpanSign.API.Sender> apiResponse = apiClient.GetSenders(direction, request);
-            
+
             IDictionary<string, OneSpanSign.Sdk.Sender> result = new Dictionary<string, OneSpanSign.Sdk.Sender>();
-            foreach ( OneSpanSign.API.Sender apiSender in apiResponse.Results ) {
-                result.Add(apiSender.Email, new SenderConverter( apiSender ).ToSDKSender() );
+            foreach (OneSpanSign.API.Sender apiSender in apiResponse.Results)
+            {
+                result.Add(apiSender.Email, new SenderConverter(apiSender).ToSDKSender());
             }
-            
+
             return result;
         }
 
@@ -50,7 +51,7 @@ namespace OneSpanSign.Sdk.Services
 
         public void DeleteSender(string senderId)
         {
-            apiClient.DeleteSender( senderId );
+            apiClient.DeleteSender(senderId);
         }
 
         public void UpdateSender(SenderInfo senderInfo, string senderId)
@@ -60,7 +61,7 @@ namespace OneSpanSign.Sdk.Services
             apiClient.UpdateSender(apiSender, senderId);
         }
 
-        public IDictionary<string, OneSpanSign.Sdk.Sender> GetContacts() 
+        public IDictionary<string, OneSpanSign.Sdk.Sender> GetContacts()
         {
             IList<OneSpanSign.API.Sender> contacts = apiClient.GetContacts();
 
@@ -73,74 +74,118 @@ namespace OneSpanSign.Sdk.Services
             return result;
         }
 
-        public IList<OneSpanSign.Sdk.DelegationUser> GetDelegates(string senderId) 
+        public IList<OneSpanSign.Sdk.DelegationUser> GetDelegates(string senderId)
         {
             IList<OneSpanSign.Sdk.DelegationUser> result = new List<OneSpanSign.Sdk.DelegationUser>();
             IList<OneSpanSign.API.DelegationUser> apiDelegationUsers = apiClient.GetDelegates(senderId);
-            foreach (OneSpanSign.API.DelegationUser delegationUser in apiDelegationUsers) 
+            foreach (OneSpanSign.API.DelegationUser delegationUser in apiDelegationUsers)
             {
                 result.Add(new DelegationUserConverter(delegationUser).ToSDKDelegationUser());
             }
+
             return result;
         }
 
-        public void UpdateDelegates(string senderId, List<string> delegateIds) 
+        public void UpdateDelegates(string senderId, List<string> delegateIds)
         {
             apiClient.UpdateDelegates(senderId, delegateIds);
         }
 
-        public void AddDelegate(string senderId, OneSpanSign.Sdk.DelegationUser delegationUser) 
+        public void AddDelegate(string senderId, OneSpanSign.Sdk.DelegationUser delegationUser)
         {
-            OneSpanSign.API.DelegationUser apiDelegationUser = new DelegationUserConverter(delegationUser).ToAPIDelegationUser();
+            OneSpanSign.API.DelegationUser apiDelegationUser =
+                new DelegationUserConverter(delegationUser).ToAPIDelegationUser();
             apiClient.AddDelegate(senderId, apiDelegationUser);
         }
 
-        public void RemoveDelegate(string senderId, string delegateId) 
+        public void RemoveDelegate(string senderId, string delegateId)
         {
             apiClient.RemoveDelegate(senderId, delegateId);
         }
 
-        public void ClearDelegates(string senderId) 
+        public void ClearDelegates(string senderId)
         {
             apiClient.ClearDelegates(senderId);
         }
 
-        public IList<VerificationType> getVerificationTypes() {
+        public IList<VerificationType> getVerificationTypes()
+        {
             return apiClient.getVerificationTypes();
         }
-        
-        public IList<Account> getSubAccounts() {
+
+        public IList<Account> getSubAccounts()
+        {
             IList<API.Account> apiAccounts = apiClient.getSubAccounts();
             IList<Account> accounts = new List<Account>();
-            foreach (OneSpanSign.API.Account account in apiAccounts) 
+            foreach (OneSpanSign.API.Account account in apiAccounts)
             {
                 accounts.Add(new AccountConverter(account).ToSDKAccount());
             }
+
             return accounts;
         }
-        
+
         public IList<AccessibleAccountResponse> getAccessibleAccounts()
         {
             IList<API.AccessibleAccountResponse> apiAccessibleAccounts = apiClient.getAccessibleAccounts();
             IList<AccessibleAccountResponse> accountResponses = new List<AccessibleAccountResponse>();
             foreach (OneSpanSign.API.AccessibleAccountResponse accountResponse in apiAccessibleAccounts)
             {
-                accountResponses.Add(new AccessibleAccountResponseConverter(accountResponse).ToSDKAccessibleAccountResponse());
+                accountResponses.Add(new AccessibleAccountResponseConverter(accountResponse)
+                    .ToSDKAccessibleAccountResponse());
             }
 
             return accountResponses;
         }
-        
-        public Account createSubAccount(SubAccount subAccount) {
+
+        public Account createSubAccount(SubAccount subAccount)
+        {
             OneSpanSign.API.SubAccount apiSubAccount = new SubAccountConverter(subAccount).ToAPISubAccount();
             OneSpanSign.API.Account account = apiClient.createSubAccount(apiSubAccount);
             return new AccountConverter(account).ToSDKAccount();
         }
-        
-        public void updateSubAccount(SubAccount subAccount, String accountId) {
+
+        public void updateSubAccount(SubAccount subAccount, string accountId)
+        {
             OneSpanSign.API.SubAccount apiSubAccount = new SubAccountConverter(subAccount).ToAPISubAccount();
             apiClient.updateSubAccount(apiSubAccount, accountId);
         }
+
+        public List<AccountRole> getAccountRoles()
+        {
+            OneSpanSign.API.Result<OneSpanSign.API.AccountRole> apiAccountRoles = apiClient.getAccountRoles();
+            List<AccountRole> accountRoles = new List<AccountRole>();
+            foreach (OneSpanSign.API.AccountRole accountRole in apiAccountRoles.Results)
+            {
+                accountRoles.Add(new AccountRoleConverter(accountRole).ToSDKAccountRole());
+            }
+
+            return accountRoles;
+        }
+
+        public OneSpanSign.Sdk.AccountRole getAccountRole(string accountRoleId)
+        {
+            return new AccountRoleConverter(apiClient.getAccountRole(accountRoleId)).ToSDKAccountRole();
+        }
+
+        public void addAccountRole(OneSpanSign.Sdk.AccountRole accountRole)
+        {
+            apiClient.addAccountRole(new AccountRoleConverter(accountRole).ToAPIAccountRole());
+        }
+
+        public void updateAccountRole(string accountRoleId, OneSpanSign.Sdk.AccountRole accountRole)
+        {
+            apiClient.updateAccountRole(new AccountRoleConverter(accountRole).ToAPIAccountRole(), accountRoleId);
+        }
+
+        public void deleteAccountRole(string accountRoleId)
+        {
+            apiClient.deleteAccountRole(accountRoleId);
+        }
+
+        public List<string> getAccountRoleUsers(string accountRoleId)
+        {
+            return apiClient.getAccountRoleUsers(accountRoleId) as List<string>;
+        }
     }
 }
-
