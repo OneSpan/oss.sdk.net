@@ -474,10 +474,10 @@ namespace OneSpanSign.Sdk
             }
         }
 
-        public void updateAccountRole(OneSpanSign.API.AccountRole accountRole, string accountId)
+        public void updateAccountRole(OneSpanSign.API.AccountRole accountRole, string accountRoleId)
         {
             string path = template.UrlFor(UrlTemplate.ACCOUNT_ROLES_ROLE_PATH)
-                .Replace("{accountId}", accountId)
+                .Replace("{accountRoleId}", accountRoleId)
                 .Build();
             try
             {

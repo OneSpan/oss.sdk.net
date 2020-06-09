@@ -27,7 +27,7 @@ namespace SDK.Examples
             string newAccountRoleName = Guid.NewGuid().ToString();
             OneSpanSign.Sdk.AccountRole accountRole = AccountRoleBuilder.NewAccountRole()
                 .WithName(newAccountRoleName)
-                .WithPermissions(new List<string>() {"P1"})
+                .WithPermissions(new List<string>() {"sender_admin.users"})
                 .WithDescription("DESCRIPTION")
                 .WithEnabled(true)
                 .Build();

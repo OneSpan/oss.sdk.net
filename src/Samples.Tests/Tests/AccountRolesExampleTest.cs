@@ -31,6 +31,7 @@ namespace SDK.Examples
 
             Assert.GreaterOrEqual(accountRoles1.Count, 1);
             Assert.GreaterOrEqual(accountRoles2.Count, 1);
+            Assert.GreaterOrEqual(example.newAccountUsers.Count, 0);
             Assert.AreEqual(accountRoles1.Count + 1, accountRoles2.Count);
             Assert.NotNull(newAccountRole);
             Assert.NotNull(example.newAccountRole);
@@ -45,7 +46,7 @@ namespace SDK.Examples
                 }
             }
 
-            Assert.NotNull(newAccountRole);
+            Assert.IsNull(newAccountRole);
             Assert.NotNull(example.newAccountRole);
         }
     }
