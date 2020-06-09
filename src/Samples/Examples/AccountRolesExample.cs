@@ -22,6 +22,7 @@ namespace SDK.Examples
 
         override public void Execute()
         {
+            //Create a role
             result1 = ossClient.AccountService.getAccountRoles();
 
             string newAccountRoleName = Guid.NewGuid().ToString();
@@ -42,14 +43,19 @@ namespace SDK.Examples
                     newAccountRoleId = forAccountRole.Id;
                 }
             }
-
+            
+            //Update a role
             accountRole.Description = "NEW - DESCRIPTION";
             ossClient.AccountService.updateAccountRole(newAccountRoleId, accountRole);
             result2 = ossClient.AccountService.getAccountRoles();
-
+            
+            //Get a role
             newAccountRole = ossClient.AccountService.getAccountRole(newAccountRoleId);
+            
+            //Get users who have the role
             newAccountUsers = ossClient.AccountService.getAccountRoleUsers(newAccountRoleId);
-
+            
+            //Delete a role
             ossClient.AccountService.deleteAccountRole(newAccountRoleId);
             result3 = ossClient.AccountService.getAccountRoles();
         }

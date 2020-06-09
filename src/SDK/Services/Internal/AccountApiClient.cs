@@ -435,15 +435,15 @@ namespace OneSpanSign.Sdk
 
         public API.AccountRole getAccountRole(String accountRoleId)
         {
-            string path = template.UrlFor(UrlTemplate.ACCOUNT_ROLES_PATH).Replace("{accountRoleId}", accountRoleId)
+            string path = template.UrlFor(UrlTemplate.ACCOUNT_ROLES_ROLE_PATH).Replace("{accountRoleId}", accountRoleId)
                 .Build();
 
             try
             {
-                OneSpanSign.API.Result<OneSpanSign.API.AccountRole> apiResponse =
-                    JsonConvert.DeserializeObject<OneSpanSign.API.Result<OneSpanSign.API.AccountRole>>(
+                OneSpanSign.API.AccountRole apiResponse =
+                    JsonConvert.DeserializeObject<OneSpanSign.API.AccountRole>(
                         restClient.Get(path), jsonSettings);
-                return apiResponse.Results[0];
+                return apiResponse;
             }
             catch (OssServerException e)
             {
