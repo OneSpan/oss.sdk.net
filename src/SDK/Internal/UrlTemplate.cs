@@ -194,6 +194,10 @@ namespace OneSpanSign.Sdk.Internal
         public static readonly string ACCOUNT_SUBACCOUNTS_ID_PATH = "/account/subaccounts/{accountId}";
         public static readonly string ACCOUNT_SUBACCOUNTS_ACCESSIBLEACCOUNTS_PATH = "/account/accessibleaccounts";
 
+        // Account Roles
+        public static readonly string ACCOUNT_ROLES_PATH = "/account/roles";
+        public static readonly string ACCOUNT_ROLES_ROLE_PATH = "/account/roles/{accountRoleId}";
+        public static readonly string ACCOUNT_ROLES_ROLE_USERS_PATH = "/account/roles/{accountRoleId}/users";
         
         public UrlTemplate (string baseUrl)
 		{
