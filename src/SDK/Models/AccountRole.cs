@@ -24,11 +24,8 @@ namespace OneSpanSign.API
         [JsonProperty("id")] public string Id { get; set; }
 
         [JsonProperty("name")] public string Name { get; set; }
-
-        [JsonProperty("permissions")] public List<string> Permissions { get; set; }
-
-        [JsonProperty("description")] public string Description { get; set; }
-
         [JsonProperty("enabled")] public bool Enabled { get; set; }
+        [JsonProperty("description")] public string Description { get; set; }
+        [JsonProperty("permissions")] public List<string> Permissions { get; set; }
     }
 }
