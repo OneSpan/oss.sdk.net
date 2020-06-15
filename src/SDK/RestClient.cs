@@ -114,12 +114,10 @@ namespace OneSpanSign.Sdk
         public string PostMultipartFile(string path, byte[] fileBytes, string boundary, string json) {
             support.LogRequest("POST", path, json);
 
-            headerGen = new ApiTokenAuthHeaderGenerator(apiKey);
-
             if (proxyConfiguration != null) 
                 HttpMethods.proxyConfiguration = proxyConfiguration;
 
-            string response = HttpMethods.MultipartPostHttp(apiKey, path, fileBytes, boundary, headerGen, additionalHeaders);
+            string response = HttpMethods.MultipartPostHttp(apiKey, path, fileBytes, boundary, null, additionalHeaders);
             support.LogResponse(response);
 
             return response;
@@ -141,13 +139,11 @@ namespace OneSpanSign.Sdk
 
         public string PostMultipartPackage(string path, byte[] content, string boundary, string json) {
             support.LogRequest("POST", path, json);
-
-            headerGen = new ApiTokenAuthHeaderGenerator(apiKey);
-
+            
             if (proxyConfiguration != null) 
                 HttpMethods.proxyConfiguration = proxyConfiguration;
 
-            string response = HttpMethods.MultipartPostHttp(apiKey, path, content, boundary, headerGen, additionalHeaders);
+            string response = HttpMethods.MultipartPostHttp(apiKey, path, content, boundary, null, additionalHeaders);
             support.LogResponse(response);
 
             return response;

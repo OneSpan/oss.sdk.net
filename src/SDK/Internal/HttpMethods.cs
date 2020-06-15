@@ -549,8 +549,11 @@ namespace OneSpanSign.Sdk.Internal
 
 		public static void AddAuthorizationHeader(WebRequest request, AuthHeaderGenerator authHeaderGen)
 		{
-			request.Headers.Add(authHeaderGen.Name, authHeaderGen.Value);
-		}
+            if (authHeaderGen != null)
+            {
+                request.Headers.Add(authHeaderGen.Name, authHeaderGen.Value);
+            }
+        }
 
         public static string MultipartPostHttp (string apiKey, string path, byte[] content, string boundary, AuthHeaderGenerator authHeaderGen)
         {
