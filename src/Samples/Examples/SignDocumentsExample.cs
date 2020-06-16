@@ -1,5 +1,3 @@
-using System;
-using System.IO;
 using OneSpanSign.Sdk;
 using OneSpanSign.Sdk.Builder;
 
@@ -12,7 +10,7 @@ namespace SDK.Examples
             new SignDocumentsExample().Run();
         }
 
-        public DocumentPackage retrievedPackageBeforeSigning, retrievedPackageAfterSigningApproval1, retrievedPackageAfterSigningApproval2;
+        public DocumentPackage RetrievedPackageBeforeSigning, retrievedPackageAfterSigningApproval1, retrievedPackageAfterSigningApproval2;
 
         private string document1Name = "First Document";
         private string document2Name = "Second Document";
@@ -48,7 +46,7 @@ namespace SDK.Examples
 
             packageId = ossClient.CreatePackage(superDuperPackage);
             ossClient.SendPackage(packageId);
-            retrievedPackageBeforeSigning = ossClient.GetPackage(packageId);
+            RetrievedPackageBeforeSigning = ossClient.GetPackage(packageId);
 
             ossClient.SignDocuments(packageId, capturedSignature);
             retrievedPackageAfterSigningApproval1 = ossClient.GetPackage(packageId);

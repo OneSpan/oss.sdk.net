@@ -1,4 +1,3 @@
-using System;
 using OneSpanSign.Sdk.Internal;
 
 namespace OneSpanSign.Sdk
@@ -19,7 +18,7 @@ namespace OneSpanSign.Sdk
         public string GetUnauthenticated(string path)
         {
             if (proxyConfiguration != null)
-                HttpMethods.proxyConfiguration = proxyConfiguration;
+                HttpMethods.ProxyConfiguration = proxyConfiguration;
             
             byte[] responseBytes = HttpMethods.GetHttp(path);
             return Converter.ToString(responseBytes);
