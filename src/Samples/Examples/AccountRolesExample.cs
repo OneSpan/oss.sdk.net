@@ -19,11 +19,15 @@ namespace SDK.Examples
         public string newAccountRoleId = null;
         public OneSpanSign.Sdk.AccountRole newAccountRole = null;
         public List<String> newAccountUsers = null;
-
+        protected OssClient ossClientWithRoleAndPermission;
         override public void Execute()
         {
+            //Setup ossclient for role and permission enabled user
+            ossClientWithRoleAndPermission = new OssClient(props.Get("api.key.withRolesAndPermission"), props.Get("api.url"), props.Get("webpage.url"), true);
+            base.senderEmail = props.Get("sender.email.withRolesAndPermission");
+            
             //Create a role
-            result1 = ossClient.AccountService.getAccountRoles();
+            result1 = ossClientWithRoleAndPermission.AccountService.getAccountRoles();
 
             string newAccountRoleName = Guid.NewGuid().ToString();
             OneSpanSign.Sdk.AccountRole accountRole = AccountRoleBuilder.NewAccountRole()
@@ -33,8 +37,8 @@ namespace SDK.Examples
                 .WithEnabled(true)
                 .Build();
 
-            ossClient.AccountService.addAccountRole(accountRole);
-            result2 = ossClient.AccountService.getAccountRoles();
+            ossClientWithRoleAndPermission.AccountService.addAccountRole(accountRole);
+            result2 = ossClientWithRoleAndPermission.AccountService.getAccountRoles();
 
             foreach (OneSpanSign.Sdk.AccountRole forAccountRole in result2)
             {
@@ -46,18 +50,19 @@ namespace SDK.Examples
             
             //Update a role
             accountRole.Description = "NEW - DESCRIPTION";
-            ossClient.AccountService.updateAccountRole(newAccountRoleId, accountRole);
-            result2 = ossClient.AccountService.getAccountRoles();
+            ossClientWithRoleAndPermission.AccountService.updateAccountRole(newAccountRoleId, accountRole);
+            result2 = ossClientWithRoleAndPermission.AccountService.getAccountRoles();
             
             //Get a role
-            newAccountRole = ossClient.AccountService.getAccountRole(newAccountRoleId);
+            newAccountRole = ossClientWithRoleAndPermission.AccountService.getAccountRole(newAccountRoleId);
             
             //Get users who have the role
-            newAccountUsers = ossClient.AccountService.getAccountRoleUsers(newAccountRoleId);
+            newAccountUsers = ossClientWithRoleAndPermission.AccountService.getAccountRoleUsers(newAccountRoleId);
             
             //Delete a role
-            ossClient.AccountService.deleteAccountRole(newAccountRoleId);
-            result3 = ossClient.AccountService.getAccountRoles();
+            ossClientWithRoleAndPermission.AccountService.deleteAccountRole(newAccountRoleId);
+            result3 = ossClientWithRoleAndPermission.AccountService.getAccountRoles();
         }
+        
     }
 }
