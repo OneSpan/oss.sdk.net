@@ -51,6 +51,7 @@ namespace SDK.Examples
                               .WithDefaultTimeBasedExpiry ()
 				              .WithMaxAttachmentFiles(MAX_ATTACHMENT_FILES)
                               .WithRemainingDays(EXPIRE_IN_DAYS)
+                              .WithShowNseHelp()
 				              .WithCeremonyLayoutSettings(CeremonyLayoutSettingsBuilder.NewCeremonyLayoutSettings()
                                             .WithoutGlobalConfirmButton()
                                             .WithoutGlobalDownloadButton()
