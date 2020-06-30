@@ -130,6 +130,14 @@ namespace OneSpanSign.Sdk
             set { remainingDays = value; }
         }
 
+        private Nullable<bool> showNseHelp = null;
+
+        public Nullable<bool> ShowNseHelp
+        {
+            get { return showNseHelp; }
+            set { showNseHelp = value; }
+        }
+
         private List<string> declineReasons = new List<string> ();
 
         public List<string> DeclineReasons 
@@ -254,6 +262,9 @@ namespace OneSpanSign.Sdk
 
             if (remainingDays != null)
                 ceremonySettings.RemainingDays = remainingDays.Value;
+
+            if (showNseHelp != null)
+                            ceremonySettings.ShowNseHelp = showNseHelp.Value;
 
             foreach (string declineReason in declineReasons)
                 ceremonySettings.DeclineReasons.Add (declineReason);

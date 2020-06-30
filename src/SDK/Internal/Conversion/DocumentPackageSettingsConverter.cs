@@ -40,6 +40,7 @@ namespace OneSpanSign.Sdk
             ceremonySettings.FontSize = sdkSettings.FontSize;
             ceremonySettings.DefaultTimeBasedExpiry = sdkSettings.DefaultTimeBasedExpiry;
             ceremonySettings.RemainingDays = sdkSettings.RemainingDays;
+            ceremonySettings.ShowNseHelp = sdkSettings.ShowNseHelp;
 
             if (sdkSettings.EnableFirstAffidavit.HasValue) {
                 ceremonySettings.DisableFirstInPersonAffidavit = !sdkSettings.EnableFirstAffidavit;
@@ -145,6 +146,9 @@ namespace OneSpanSign.Sdk
 
                 if (apiSettings.Ceremony.RemainingDays.HasValue)
                     builder.WithRemainingDays (apiSettings.Ceremony.RemainingDays.Value);
+
+                if (apiSettings.Ceremony.ShowNseHelp.HasValue)
+                                    builder = (apiSettings.Ceremony.ShowNseHelp.Value ? builder.WithShowNseHelp () : builder.WithoutShowNseHelp ());
 
                 foreach (string declineReason in apiSettings.Ceremony.DeclineReasons)
                 {

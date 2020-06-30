@@ -28,6 +28,7 @@ namespace OneSpanSign.Sdk
         private Nullable<Int32> fontSize = null;
         private Nullable<bool> defaultTimeBasedExpiry = null;
         private Nullable<Int32> remainingDays = null;
+        private Nullable<bool> showNseHelp = null;
 
         private string linkText = null;
         private string linkTooltip = null;
@@ -195,6 +196,18 @@ namespace OneSpanSign.Sdk
             return this;
         }
 
+        public DocumentPackageSettingsBuilder WithShowNseHelp ()
+        {
+            showNseHelp = true;
+            return this;
+        }
+
+        public DocumentPackageSettingsBuilder WithoutShowNseHelp ()
+        {
+            showNseHelp = false;
+            return this;
+        }
+
         public DocumentPackageSettingsBuilder WithCaptureText ()
         {
             hideCaptureText = false;
@@ -330,6 +343,7 @@ namespace OneSpanSign.Sdk
             result.FontSize = fontSize;
             result.DefaultTimeBasedExpiry = defaultTimeBasedExpiry;
             result.RemainingDays = remainingDays;
+            result.ShowNseHelp = showNseHelp;
             result.LinkHref = linkHref;
             result.LinkText = linkText;
             result.LinkTooltip = linkTooltip;

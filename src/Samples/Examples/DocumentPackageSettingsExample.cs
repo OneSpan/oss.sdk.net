@@ -48,6 +48,7 @@ namespace SDK.Examples
 				              .WithHandOverLinkTooltip("link tooltip")
                               .WithDefaultTimeBasedExpiry ()
                               .WithRemainingDays(EXPIRE_IN_DAYS)
+                              .WithShowNseHelp()
 				              .WithCeremonyLayoutSettings(CeremonyLayoutSettingsBuilder.NewCeremonyLayoutSettings()
                                             .WithoutGlobalConfirmButton()
                                             .WithoutGlobalDownloadButton()
