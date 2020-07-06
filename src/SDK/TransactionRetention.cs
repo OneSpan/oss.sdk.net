@@ -38,5 +38,13 @@ namespace OneSpanSign.Sdk
         {
             get; set;
         }
+        public Nullable<Int32> LifetimeTotal 
+        {
+            get; set;
+        }
+        public Nullable<Int32> LifetimeUntilCompletion 
+        {
+            get; set;
+        }
     }
 }

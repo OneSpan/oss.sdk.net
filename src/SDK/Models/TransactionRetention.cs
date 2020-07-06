@@ -46,5 +46,15 @@ namespace OneSpanSign.API
         {
             get; set;
         }
+        [JsonProperty ("lifetimeTotal")]
+        public Nullable<Int32> LifetimeTotal 
+        {
+            get; set;
+        }
+        [JsonProperty ("lifetimeUntilCompletion")]
+        public Nullable<Int32> LifetimeUntilCompletion 
+        {
+            get; set;
+        }
     }
 }

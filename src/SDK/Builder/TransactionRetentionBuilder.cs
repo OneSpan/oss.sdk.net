@@ -10,6 +10,8 @@ namespace OneSpanSign.Sdk
         private int declined;
         private int optedOut;
         private int expired;
+        private int lifetimeTotal;
+        private int lifetimeUntilCompletion;
 
         private TransactionRetentionBuilder () { }
 
@@ -54,6 +56,18 @@ namespace OneSpanSign.Sdk
             this.expired = expired;
             return this;
         }
+        
+        public TransactionRetentionBuilder WithLifetimeTotal(int lifetimeTotal)
+        {
+            this.lifetimeTotal = lifetimeTotal;
+            return this;
+        }
+    
+        public TransactionRetentionBuilder WithLifetimeUntilCompletion(int lifetimeUntilCompletion)
+        {
+            this.lifetimeUntilCompletion = lifetimeUntilCompletion;
+            return this;
+        }
 
         public TransactionRetention Build ()
         {
@@ -65,6 +79,15 @@ namespace OneSpanSign.Sdk
             result.Expired = expired;
             result.Declined = declined;
             result.Archived = archived;
+            if (lifetimeTotal != null)
+            {
+                result.LifetimeTotal = lifetimeTotal;
+            }
+            if (lifetimeUntilCompletion != null)
+            {
+                result.LifetimeUntilCompletion = lifetimeUntilCompletion;
+            }
+
             return result;
         }
     }
