@@ -2,10 +2,7 @@
 using System.Net;
 using System.IO;
 using System.Collections.Generic;
-using System.Reflection;
-using OneSpanSign.Sdk;
 using System.Text;
-using System.Security.Authentication;
 using Newtonsoft.Json;
 
 namespace OneSpanSign.Sdk.Internal
@@ -31,24 +28,35 @@ namespace OneSpanSign.Sdk.Internal
         public const string ESL_ACCEPT_TYPE_APPLICATION_OCTET_STREAM = ACCEPT_TYPE_APPLICATION_OCTET_STREAM + "; " + ESL_API_VERSION_HEADER;
         public const string ESL_ACCEPT_TYPE_APPLICATION = ACCEPT_TYPE_APPLICATION + "; " + ESL_API_VERSION_HEADER;
 
-        public static ProxyConfiguration proxyConfiguration;
-        public static ApiTokenConfig apiTokenConfig { set; get; }
-        private static ApiToken apiToken = null;
+        public static ProxyConfiguration ProxyConfiguration;
+        public static ApiTokenConfig ApiTokenConfig { set; get; }
+        private static ApiToken API_TOKEN;
 
-		private static void setupAuthorization(WebRequest request, string apiKey) {
-            if (apiTokenConfig != null) {
+        private static void SetupAuthorization(WebRequest request, AuthHeaderGenerator authHeaderGen)
+        {
+            if (typeof(ApiTokenAuthHeaderGenerator).IsInstanceOfType(authHeaderGen))
+            {
+                SetupAuthorization(request, authHeaderGen.Value);
+            } else if (typeof(SessionIdAuthHeaderGenerator).IsInstanceOfType(authHeaderGen))
+            {
+                request.Headers.Add(authHeaderGen.Name, authHeaderGen.Value);
+            }
+        }
+
+        private static void SetupAuthorization(WebRequest request, string apiKey) {
+            if (ApiTokenConfig != null) {
                 //Do we have an api token and is it still valid for at least a minute ?
                 TimeSpan timeSpan = DateTime.UtcNow - new DateTime(1970, 1, 1);
                 long milliseconds = (long)timeSpan.TotalMilliseconds;
-                if (apiToken == null || milliseconds > apiToken.ExpiresAt - 60 * 1000) {
+                if (API_TOKEN == null || milliseconds > API_TOKEN.ExpiresAt - 60 * 1000) {
                     //We need to fetch a new access token using the clientAppId/Secret
-                    string jsonPayload = String.Format("{{\"clientId\":\"{0}\",\"secret\":\"{1}\",\"type\":\"{2}\"", apiTokenConfig.ClientAppId, apiTokenConfig.ClientAppSecret, apiTokenConfig.TokenType.ToString());
-                    if (apiTokenConfig.TokenType == ApiTokenType.SENDER) {
-                        jsonPayload += String.Format("\"email\":\"{0}\"", apiTokenConfig.SenderEmail);
+                    string jsonPayload = String.Format("{{\"clientId\":\"{0}\",\"secret\":\"{1}\",\"type\":\"{2}\"", ApiTokenConfig.ClientAppId, ApiTokenConfig.ClientAppSecret, ApiTokenConfig.TokenType.ToString());
+                    if (ApiTokenConfig.TokenType == ApiTokenType.SENDER) {
+                        jsonPayload += String.Format("\"email\":\"{0}\"", ApiTokenConfig.SenderEmail);
                     }
                     jsonPayload += "}";
                     byte[] jsonPayloadBytes = Encoding.Unicode.GetBytes(jsonPayload);
-                    HttpWebRequest apiTokenRequest = (HttpWebRequest)WebRequest.Create(apiTokenConfig.BaseUrl+"/apitoken/clientApp/accessToken");
+                    HttpWebRequest apiTokenRequest = (HttpWebRequest)WebRequest.Create(ApiTokenConfig.BaseUrl+"/apitoken/clientApp/accessToken");
                     apiTokenRequest.Method = "POST";
                     apiTokenRequest.ContentType = ESL_CONTENT_TYPE_APPLICATION_JSON;
                     apiTokenRequest.ContentLength = jsonPayloadBytes.Length;
@@ -64,7 +72,9 @@ namespace OneSpanSign.Sdk.Internal
                     var httpResponse = (HttpWebResponse)apiTokenRequest.GetResponse();
 
                     if (httpResponse.StatusCode != HttpStatusCode.OK) {
-                        throw new OssException("Unable to fetch access token for "+apiTokenConfig.ToString()+", response was "+httpResponse.ToString(), null);
+                        throw new OssException(
+                            "Unable to fetch access token for " + ApiTokenConfig + ", response was " + httpResponse,
+                            null);
                     }
 
                     string result;
@@ -74,9 +84,9 @@ namespace OneSpanSign.Sdk.Internal
                     }
                     httpResponse.Close();
 
-                    apiToken = JsonConvert.DeserializeObject<ApiToken>(result);
+                    API_TOKEN = JsonConvert.DeserializeObject<ApiToken>(result);
                 }
-                request.Headers.Add ("Authorization", "Bearer " + apiToken.AccessToken);
+                request.Headers.Add ("Authorization", "Bearer " + API_TOKEN.AccessToken);
             } else {
                 request.Headers.Add ("Authorization", "Basic " + apiKey);
             }
@@ -97,7 +107,7 @@ namespace OneSpanSign.Sdk.Internal
                 request.ContentType = ESL_CONTENT_TYPE_APPLICATION_JSON;
                 request.ContentLength = content.Length;
                 AddAdditionalHeaders (request, headers);
-                setupAuthorization(request, apiKey);
+                SetupAuthorization(request, apiKey);
                 request.Accept = ESL_ACCEPT_TYPE_APPLICATION_JSON;
                 SetProxy (request);
 
@@ -142,7 +152,8 @@ namespace OneSpanSign.Sdk.Internal
                 request.ContentType = ESL_CONTENT_TYPE_APPLICATION_JSON;
                 request.ContentLength = content.Length;
                 AddAdditionalHeaders (request, headers);
-                setupAuthorization(request, authHeaderGen.Value);
+                SetupAuthorization(request, authHeaderGen);
+
                 request.Accept = ESL_ACCEPT_TYPE_APPLICATION_JSON;
                 SetProxy (request);
 
@@ -163,8 +174,8 @@ namespace OneSpanSign.Sdk.Internal
                 using (var stream = e.Response.GetResponseStream ())
                 using (var reader = new StreamReader (stream)) {
                     string errorDetails = reader.ReadToEnd ();
-                    throw new OssServerException (String.Format ("{0} HTTP {1} on URI {2}. Optional details: {3}", e.Message,
-                                                               ((HttpWebResponse)e.Response).Method, e.Response.ResponseUri, errorDetails),
+                    throw new OssServerException (
+                        $"{e.Message} HTTP {((HttpWebResponse) e.Response).Method} on URI {e.Response.ResponseUri}. Optional details: {errorDetails}",
                                                  errorDetails, e);
                 }
             } catch (Exception e) {
@@ -187,7 +198,7 @@ namespace OneSpanSign.Sdk.Internal
                 request.ContentType = ESL_CONTENT_TYPE_APPLICATION_JSON;
                 request.ContentLength = content.Length;
                 AddAdditionalHeaders (request, headers);
-                setupAuthorization(request, apiKey);
+                SetupAuthorization(request, apiKey);
                 request.Accept = ESL_ACCEPT_TYPE_APPLICATION_JSON;
                 SetProxy (request);
 
@@ -317,7 +328,7 @@ namespace OneSpanSign.Sdk.Internal
                 HttpWebRequest request = (HttpWebRequest)WebRequest.Create (path);
                 request.Method = "GET";
                 AddAdditionalHeaders (request, headers);
-                setupAuthorization(request, apiKey);
+                SetupAuthorization(request, apiKey);
                 request.Accept = acceptType;
                 SetProxy (request);
 
@@ -358,7 +369,7 @@ namespace OneSpanSign.Sdk.Internal
                 HttpWebRequest request = (HttpWebRequest)WebRequest.Create (path);
                 request.Method = "GET";
                 AddAdditionalHeaders (request, headers);
-                setupAuthorization(request, apiKey);
+                SetupAuthorization(request, apiKey);
                 request.Accept = ESL_ACCEPT_TYPE_APPLICATION;
                 SetProxy (request);
 
@@ -421,7 +432,7 @@ namespace OneSpanSign.Sdk.Internal
                 HttpWebRequest request = (HttpWebRequest)WebRequest.Create (path);
                 request.Method = "GET";
                 AddAdditionalHeaders (request, headers);
-                setupAuthorization(request, apiKey);
+                SetupAuthorization(request, apiKey);
                 request.Accept = ESL_ACCEPT_TYPE_APPLICATION_OCTET_STREAM;
                 SetProxy (request);
 
@@ -462,7 +473,7 @@ namespace OneSpanSign.Sdk.Internal
                 HttpWebRequest request = (HttpWebRequest)WebRequest.Create (path);
                 request.Method = "DELETE";
                 AddAdditionalHeaders (request, headers);
-                setupAuthorization(request, apiKey);
+                SetupAuthorization(request, apiKey);
                 request.Accept = ESL_ACCEPT_TYPE_APPLICATION_JSON;
                 SetProxy (request);
 
@@ -509,7 +520,7 @@ namespace OneSpanSign.Sdk.Internal
                 request.ContentType = ESL_CONTENT_TYPE_APPLICATION_JSON;
                 request.ContentLength = content.Length;
                 AddAdditionalHeaders (request, headers);
-                setupAuthorization(request, apiKey);
+                SetupAuthorization(request, apiKey);
 
                 request.Accept = ESL_ACCEPT_TYPE_APPLICATION_JSON;
                 SetProxy (request);
@@ -549,8 +560,11 @@ namespace OneSpanSign.Sdk.Internal
 
 		public static void AddAuthorizationHeader(WebRequest request, AuthHeaderGenerator authHeaderGen)
 		{
-			request.Headers.Add(authHeaderGen.Name, authHeaderGen.Value);
-		}
+            if (authHeaderGen != null)
+            {
+                request.Headers.Add(authHeaderGen.Name, authHeaderGen.Value);
+            }
+        }
 
         public static string MultipartPostHttp (string apiKey, string path, byte[] content, string boundary, AuthHeaderGenerator authHeaderGen)
         {
@@ -568,7 +582,7 @@ namespace OneSpanSign.Sdk.Internal
                 request.ContentLength = content.Length;
                 AddAdditionalHeaders (request, headers);
                 AddAuthorizationHeader (request, authHeaderGen);
-                setupAuthorization(request, apiKey);
+                SetupAuthorization(request, apiKey);
                 SetProxy (request);
 
                 using (Stream dataStream = request.GetRequestStream ()) {
@@ -606,17 +620,17 @@ namespace OneSpanSign.Sdk.Internal
 
         private static void SetProxy (WebRequest request)
         {
-            if (proxyConfiguration != null)
+            if (ProxyConfiguration != null)
             {
-                WebProxy webProxy = new WebProxy(new Uri(proxyConfiguration.GetScheme() 
+                WebProxy webProxy = new WebProxy(new Uri(ProxyConfiguration.GetScheme() 
                                                          + "://" 
-                                                         + proxyConfiguration.GetHost() 
+                                                         + ProxyConfiguration.GetHost() 
                                                          + ":" 
-                                                         + proxyConfiguration.GetPort()));
-                if (proxyConfiguration.HasCredentials())
+                                                         + ProxyConfiguration.GetPort()));
+                if (ProxyConfiguration.HasCredentials())
                 {
-                    webProxy.Credentials = new NetworkCredential(proxyConfiguration.GetUserName(), 
-                                                                 proxyConfiguration.GetPassword());
+                    webProxy.Credentials = new NetworkCredential(ProxyConfiguration.GetUserName(), 
+                                                                 ProxyConfiguration.GetPassword());
                 }
                 request.Proxy = webProxy;
             }

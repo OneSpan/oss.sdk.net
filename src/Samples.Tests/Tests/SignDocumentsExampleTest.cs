@@ -1,5 +1,4 @@
 using NUnit.Framework;
-using System;
 using System.Collections.Generic;
 using OneSpanSign.Sdk;
 
@@ -11,12 +10,12 @@ namespace SDK.Examples
         [Test()]
         public void VerifyResult()
         {
-            SignDocumentsExample example = new SignDocumentsExample();
+            var example = new SignDocumentsExample();
             example.Run();
 
-            AssertSignedSignatures(example.retrievedPackageBeforeSigning.Documents, example.senderEmail, false);
-            AssertSignedSignatures(example.retrievedPackageBeforeSigning.Documents, example.email1, false);
-            Assert.AreEqual(DocumentPackageStatus.SENT, example.retrievedPackageBeforeSigning.Status);
+            AssertSignedSignatures(example.RetrievedPackageBeforeSigning.Documents, example.senderEmail, false);
+            AssertSignedSignatures(example.RetrievedPackageBeforeSigning.Documents, example.email1, false);
+            Assert.AreEqual(DocumentPackageStatus.SENT, example.RetrievedPackageBeforeSigning.Status);
 
             AssertSignedSignatures(example.retrievedPackageAfterSigningApproval1.Documents, example.senderEmail, true);
             AssertSignedSignatures(example.retrievedPackageAfterSigningApproval1.Documents, example.email1, false);

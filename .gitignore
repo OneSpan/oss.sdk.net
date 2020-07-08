@@ -19,6 +19,7 @@ artifacts/
 */*/packages.config
 */*/*/packages.config
 .vs/
+.idea/
 
 *.deb
 *.zip
