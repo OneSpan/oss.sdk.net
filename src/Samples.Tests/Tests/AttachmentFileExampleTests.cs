@@ -14,6 +14,8 @@ namespace SDK.Examples
             Assert.AreEqual (example.filesAfterUpload.Count, 1);
             Assert.AreEqual (example.filesAfterDelete.Count, 0);
 
+            Assert.AreEqual(example.ATTACHMENT_FILE_NAME, example.downloadedAttachmentFile.Name);
+            Assert.AreEqual(example.signerAttachmentFileSize, example.downloadedAttachmentFile.Length);
         }
     }
 }

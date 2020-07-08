@@ -11,84 +11,47 @@ namespace OneSpanSign.API
 		
 		// Fields
 		private IList<Quota> _quotas = new List<Quota>();
-		
-		// Accessors
-		    
-    [JsonProperty("contract")]
-    public string Contract
-    {
-                get; set;
-        }
+
+		[JsonProperty("contract")]
+    public string Contract { get; set; }
     
 		    
     [JsonProperty("cycle")]
-        public string Cycle
-    {
-                get; set;
-        }
+        public string Cycle { get; set; }
     
 		    
     [JsonProperty("data")]
-    public IDictionary<string, object> Data
-    {
-                get; set;
-        }
+    public IDictionary<string, object> Data { get; set; }
     
 		    
     [JsonProperty("description")]
-    public String Description
-    {
-                get; set;
-        }
+    public String Description { get; set; }
     
 		    
     [JsonProperty("features")]
-    public IDictionary<string, object> Features
-    {
-                get; set;
-        }
+    public IDictionary<string, object> Features { get; set; }
     
 		    
     [JsonProperty("freeCycles")]
-    public CycleCount FreeCycles
-    {
-                get; set;
-        }
+    public CycleCount FreeCycles { get; set; }
     
 		    
     [JsonProperty("group")]
-    public String Group
-    {
-                get; set;
-        }
+    public String Group { get; set; }
     
 		    
     [JsonProperty("id")]
-    public String Id
-    {
-                get; set;
-        }
-    
+    public String Id { get; set; }
 		    
     [JsonProperty("name")]
-    public String Name
-    {
-                get; set;
-        }
+    public String Name { get; set; }
     
 		    
     [JsonProperty("original")]
-    public String Original
-    {
-                get; set;
-        }
-    
+    public String Original { get; set; }
 		    
     [JsonProperty("price")]
-    public Price Price
-    {
-                get; set;
-        }
+    public Price Price { get; set; }
     
 		    
     [JsonProperty("quotas")]

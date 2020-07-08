@@ -11,35 +11,21 @@ namespace OneSpanSign.API
 		
 		// Fields
 		private IList<Transaction> _transactions = new List<Transaction>();
-		
-		// Accessors
-		    
-    [JsonProperty("created")]
-    public Nullable<DateTime> Created
-    {
-                get; set;
-        }
+
+		[JsonProperty("created")]
+    public Nullable<DateTime> Created { get; set; }
     
 		    
     [JsonProperty("paidUntil")]
-    public Nullable<DateTime> PaidUntil
-    {
-                get; set;
-        }
+    public Nullable<DateTime> PaidUntil { get; set; }
     
 		    
     [JsonProperty("plan")]
-    public Plan Plan
-    {
-                get; set;
-        }
+    public Plan Plan { get; set; }
     
 		    
     [JsonProperty("status")]
-    public string Status
-    {
-                get; set;
-        }
+    public string Status { get; set; }
     
 		    
     [JsonProperty("transactions")]

@@ -1,5 +1,6 @@
 #Build results
 bin/
+src/.idea/
 obj/
 Debug/
 test-results/
@@ -20,8 +21,7 @@ artifacts/
 .vs/
 .idea/
 
-#zip file
-
+*.deb
 *.zip
 
 #Mac

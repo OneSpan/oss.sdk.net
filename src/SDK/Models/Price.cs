@@ -9,24 +9,13 @@ namespace OneSpanSign.API
 	internal class Price
 	{
 		
-		// Fields
-		
-		// Accessors
 		    
     [JsonProperty("amount")]
-    public Nullable<Int32> Amount
-    {
-                get; set;
-        }
+    public Nullable<Int32> Amount { get; set; }
     
 		    
     [JsonProperty("currency")]
-    public Currency Currency
-    {
-                get; set;
-        }
+    public Currency Currency { get; set; }
     
-		
-	
 	}
 }

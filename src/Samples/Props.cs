@@ -7,17 +7,20 @@ namespace SDK.Examples
     public class Props
     {
         private static Props instance = null;
-        public static Props GetInstance() {
+
+        public static Props GetInstance()
+        {
             if (instance == null)
             {
                 instance = new Props("signers.properties");
             }
+
             return instance;
         }
 
-        private Dictionary<string,string> dictionary;
+        private Dictionary<string, string> dictionary;
 
-        public Props( String filename )
+        public Props(String filename)
         {
             dictionary = new Dictionary<string, string>();
             foreach (string line in File.ReadAllLines(filename))
@@ -37,18 +40,20 @@ namespace SDK.Examples
                     {
                         value = value.Substring(1, value.Length - 2);
                     }
+
                     dictionary.Add(key, value);
                 }
             }
         }
 
-        public string Get( string key ) {
+        public string Get(string key)
+        {
             return dictionary[key];
         }
 
-        public bool Exists(string key) {
+        public bool Exists(string key)
+        {
             return dictionary.ContainsKey(key);
         }
     }
 }
-

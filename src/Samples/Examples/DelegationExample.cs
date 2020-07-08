@@ -13,14 +13,16 @@ namespace SDK.Examples
             new DelegationExample().Run();
         }
 
-        public string email7, email8, email9;
+        public string email7, email8, email9, email10, email11;
 
         public Sender retrievedOwner, retrievedSender1, retrievedSender2, retrievedSender3,
-        retrievedSender4, retrievedSender5, retrievedSender6, retrievedSender7, retrievedSender8, retrievedSender9;
+        retrievedSender4, retrievedSender5, retrievedSender6, retrievedSender7, retrievedSender8, retrievedSender9,
+        retrievedSender10, retrievedSender11;
         public DelegationUser delegationUser1, delegationUser2, delegationUser3,
-        delegationUser4, delegationUser5, delegationUser6, delegationUser7, delegationUser8, delegationUser9;
+        delegationUser4, delegationUser5, delegationUser6, delegationUser7, delegationUser8, delegationUser9,
+        delegationUser10, delegationUser11;
         public IList<DelegationUser> delegationUserListAfterAdding, delegationUserListAfterRemoving, delegationUserListAfterUpdating
-            ,delegationUserListAfterClearing;
+            ,delegationUserListAfterClearing, delegationUserListAfterUpdatingWithObjects;
 
         public DelegationExample()
         {
@@ -33,6 +35,8 @@ namespace SDK.Examples
             this.email7 = Guid.NewGuid().ToString().Replace("-", "") + "@e-signlive.com";
             this.email8 = Guid.NewGuid().ToString().Replace("-", "") + "@e-signlive.com";
             this.email9 = Guid.NewGuid().ToString().Replace("-", "") + "@e-signlive.com";
+            this.email10 = Guid.NewGuid().ToString().Replace("-", "") + "@e-signlive.com";
+            this.email11 = Guid.NewGuid().ToString().Replace("-", "") + "@e-signlive.com";
         }
 
         override public void Execute()
@@ -47,6 +51,8 @@ namespace SDK.Examples
             AccountMember accountMember7 = GetAccountMember(email7, "firstName7", "lastName7", "company7", "title7", "language7", "phoneNumber7");
             AccountMember accountMember8 = GetAccountMember(email8, "firstName8", "lastName8", "company8", "title8", "language8", "phoneNumber8");
             AccountMember accountMember9 = GetAccountMember(email9, "firstName9", "lastName9", "company9", "title9", "language9", "phoneNumber9");
+            AccountMember accountMember10 = GetAccountMember(email10, "firstName10", "lastName10", "company10", "title10", "language10", "phoneNumber10");
+            AccountMember accountMember11 = GetAccountMember(email11, "firstName11", "lastName11", "company11", "title11", "language11", "phoneNumber11");
 
             Sender createdOwnerMember = ossClient.AccountService.InviteUser(ownerMember);
             Sender createdSender1 = ossClient.AccountService.InviteUser(accountMember1);
@@ -58,6 +64,8 @@ namespace SDK.Examples
             Sender createdSender7 = ossClient.AccountService.InviteUser(accountMember7);
             Sender createdSender8 = ossClient.AccountService.InviteUser(accountMember8);
             Sender createdSender9 = ossClient.AccountService.InviteUser(accountMember9);
+            Sender createdSender10 = ossClient.AccountService.InviteUser(accountMember10);
+            Sender createdSender11 = ossClient.AccountService.InviteUser(accountMember11);
 
             retrievedOwner =   ossClient.AccountService.GetSender(createdOwnerMember.Id);
             retrievedSender1 = ossClient.AccountService.GetSender(createdSender1.Id);
@@ -69,6 +77,8 @@ namespace SDK.Examples
             retrievedSender7 = ossClient.AccountService.GetSender(createdSender7.Id);
             retrievedSender8 = ossClient.AccountService.GetSender(createdSender8.Id);
             retrievedSender9 = ossClient.AccountService.GetSender(createdSender9.Id);
+            retrievedSender10 = ossClient.AccountService.GetSender(createdSender10.Id);
+            retrievedSender11 = ossClient.AccountService.GetSender(createdSender11.Id);
 
             delegationUser1 = DelegationUserBuilder.NewDelegationUser(retrievedSender1).Build();
             delegationUser2 = DelegationUserBuilder.NewDelegationUser(retrievedSender2).Build();
@@ -103,6 +113,16 @@ namespace SDK.Examples
 
             ossClient.AccountService.ClearDelegates(createdOwnerMember.Id);
             delegationUserListAfterClearing = ossClient.AccountService.GetDelegates(createdOwnerMember.Id);
+
+            delegationUser10 = DelegationUserBuilder.NewDelegationUser(retrievedSender10).WithExpiryDate(DateTime.Now).Build();
+            delegationUser11 = DelegationUserBuilder.NewDelegationUser(retrievedSender11).WithExpiryDate(DateTime.Now).Build();
+
+            List<DelegationUser> delegates = new List<DelegationUser>();
+            delegates.Add(delegationUser10);
+            delegates.Add(delegationUser11);
+
+            ossClient.AccountService.updateDelegationWithDelegationUsers(createdOwnerMember.Id, delegates);
+            delegationUserListAfterUpdatingWithObjects = ossClient.AccountService.GetDelegates(createdOwnerMember.Id);
         }
 
         private AccountMember GetAccountMember(string email, string firstName, string lastName, string company, string title, string language, string phoneNumber) 

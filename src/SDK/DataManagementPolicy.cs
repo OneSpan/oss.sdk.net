@@ -3,9 +3,6 @@ namespace OneSpanSign.Sdk
 {
     public class DataManagementPolicy
     {
-        public TransactionRetention TransactionRetention 
-        {
-            get; set;
-        }
+        public TransactionRetention TransactionRetention { get; set; }
     }
 }

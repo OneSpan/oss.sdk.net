@@ -162,13 +162,18 @@ namespace OneSpanSign.Sdk.Internal
 		public static readonly string ATTACHMENT_REQUIREMENT_PATH = "/packages/{packageId}/attachment/{attachmentId}";
         public static readonly string ALL_ATTACHMENTS_PATH = "/packages/{packageId}/attachment/zip";
         public static readonly string ALL_ATTACHMENTS_FOR_ROLE_PATH = "/packages/{packageId}/attachment/zip/{roleId}";
-        public static readonly string DELETE_ATTACHMENT_FILE_PATH = "/packages/{packageId}/attachment/{attachmentId}/file/{fileId}";
+        public static readonly string ATTACHMENT_FILE_PATH = "/packages/{packageId}/attachment/{attachmentId}/file/{fileId}";
 
         // Layout Service
         public static readonly string LAYOUT_PATH = "/layouts";
         public static readonly string LAYOUT_LIST_PATH = "/layouts?to={to}&from={from}&dir={dir}";
         public static readonly string APPLY_LAYOUT_PATH = "/packages/{packageId}/documents/{documentId}/layout?layoutId={layoutId}";
         public static readonly string APPLY_LAYOUT_BY_NAME_PATH = "/packages/{packageId}/documents/{documentId}/layout?layoutName={layoutName}";
+        
+        // Account Config Service
+        public static readonly string ACCOUNT_CONFIG_PATH = "/accountConfig";
+        public static readonly string HANDOVER_URL_PATH = "/accountConfig/handoverUrl/{language}";
+        public static readonly string DECLINE_REASONS_PATH = "/accountConfig/declineReasons/{language}";
 
         // QR Code Service
         public static readonly string QRCODE_PATH = "/packages/{packageId}/documents/{documentId}/fields";
@@ -183,8 +188,13 @@ namespace OneSpanSign.Sdk.Internal
 
         // Account Signing Logo Service
         public static readonly string ACCOUNT_SIGNING_LOGO_PATH = "/account/admin/signingLogos";
+        
+		// Account SubAccount Service
+        public static readonly string ACCOUNT_SUBACCOUNTS_PATH = "/account/subaccounts";
+        public static readonly string ACCOUNT_SUBACCOUNTS_ID_PATH = "/account/subaccounts/{accountId}";
+        public static readonly string ACCOUNT_SUBACCOUNTS_ACCESSIBLEACCOUNTS_PATH = "/account/accessibleaccounts";
 
-
+        
         public UrlTemplate (string baseUrl)
 		{
 			this.baseUrl = baseUrl;

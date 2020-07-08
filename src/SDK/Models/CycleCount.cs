@@ -9,24 +9,12 @@ namespace OneSpanSign.API
 	internal class CycleCount
 	{
 		
-		// Fields
 		
-		// Accessors
-		    
-    [JsonProperty("count")]
-    public Nullable<Int32> Count
-    {
-                get; set;
-        }
+		[JsonProperty("count")]
+    public Nullable<Int32> Count { get; set; }
     
-		    
     [JsonProperty("cycle")]
-    public string Cycle
-    {
-                get; set;
-        }
-    
-		
-	
+    public string Cycle { get; set; }
+
 	}
 }

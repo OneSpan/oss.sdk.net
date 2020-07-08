@@ -9,20 +9,11 @@ namespace OneSpanSign.Sdk
         public CustomField()
         {
         }
-        public string Id { 
-                get;
-                set;
-        }
+        public string Id { get; set; }
 
-        public string Value {
-                get;
-                set;
-        }
+        public string Value { get; set; }
 
-        public bool Required {
-                get;
-                set;
-        }
+        public bool Required { get; set; }
 
 		public List<Translation> Translations
 		{

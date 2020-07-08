@@ -9,24 +9,10 @@ namespace OneSpanSign.API
 	internal class CcExpiration
 	{
 		
-		// Fields
-		
-		// Accessors
-		    
     [JsonProperty("month")]
-    public Nullable<Int32> Month
-    {
-                get; set;
-        }
+    public Nullable<Int32> Month { get; set; }
     
-		    
     [JsonProperty("year")]
-    public Nullable<Int32> Year
-    {
-                get; set;
-        }
-    
-		
-	
+    public Nullable<Int32> Year { get; set; }
 	}
 }

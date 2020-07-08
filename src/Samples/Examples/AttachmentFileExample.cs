@@ -15,43 +15,43 @@ namespace SDK.Examples
             new AttachmentFileExample ().Run();
         }
 
-        private Stream attachmentInputStream1;
+        private Stream attachmentInputStream;
 
-        private Signer signer1;
-        private string attachment1Id;
+        private Signer signer;
 
-        public readonly string NAME1 = "Driver's license";
-        public readonly string DESCRIPTION1 = "Please upload a scanned copy of your driver's license.";
-        public readonly string SIGNER1_ID = "signer1Id";
-        public IList<AttachmentRequirement> signer1Attachments;
-        private AttachmentRequirement signer1Att1;
-        public readonly string ATTACHMENT_FILE_NAME1 = "The attachment1 for signer1.pdf";
+        public readonly string NAME = "Driver's license";
+        public readonly string DESCRIPTION = "Please upload a scanned copy of your driver's license.";
+        public readonly string SIGNER_ID = "signerId";
+        public IList<AttachmentRequirement> signerAttachments;
+        private AttachmentRequirement signerAtt;
+        public readonly string ATTACHMENT_FILE_NAME = "The attachment for signer.pdf";
         public IList<AttachmentFile> filesAfterUpload;
         public IList<AttachmentFile> filesAfterDelete;
 
-
+        public FileInfo downloadedAttachmentFile;
+        public long signerAttachmentFileSize;
 
         public AttachmentFileExample ()
         {
-            this.attachmentInputStream1 = File.OpenRead(new FileInfo(Directory.GetCurrentDirectory() + "/SampleDocuments/document-for-anchor-extraction.pdf").FullName);
+            this.attachmentInputStream = File.OpenRead(new FileInfo(Directory.GetCurrentDirectory() + "/SampleDocuments/document-for-anchor-extraction.pdf").FullName);
      
         }
 
         override public void Execute()
         {
-            // Signer1 with 1 attachment requirement
-            signer1 = SignerBuilder.NewSignerWithEmail (email1)
+            // Signer with 1 attachment requirement
+            signer = SignerBuilder.NewSignerWithEmail (email1)
                 .WithFirstName ("John")
                     .WithLastName ("Smith")
-                    .WithCustomId (SIGNER1_ID)
-                    .WithAttachmentRequirement (AttachmentRequirementBuilder.NewAttachmentRequirementWithName (NAME1)
-                                               .WithDescription (DESCRIPTION1)
+                    .WithCustomId (SIGNER_ID)
+                    .WithAttachmentRequirement (AttachmentRequirementBuilder.NewAttachmentRequirementWithName (NAME)
+                                               .WithDescription (DESCRIPTION)
                                                .IsRequiredAttachment ()
                                                .Build ()).Build ();
         
             DocumentPackage superDuperPackage = PackageBuilder.NewPackageNamed(PackageName)
                 .DescribedAs("This is a package created using the eSignLive SDK")
-                    .WithSigner(signer1)
+                    .WithSigner(signer)
                     .WithDocument(DocumentBuilder.NewDocumentNamed("test document")
                                   .FromStream(fileStream1, DocumentType.PDF)
                                   .WithSignature(SignatureBuilder.SignatureFor(email1)
@@ -62,25 +62,32 @@ namespace SDK.Examples
             packageId = OssClient.CreateAndSendPackage(superDuperPackage);
 
             retrievedPackage = OssClient.GetPackage (packageId);
-            signer1Att1 = retrievedPackage.GetSigner (email1).GetAttachmentRequirement (NAME1);
+            signerAtt = retrievedPackage.GetSigner (email1).GetAttachmentRequirement (NAME);
 
-            byte [] attachment1ForSigner1FileContent = new StreamDocumentSource (attachmentInputStream1).Content ();
-            OssClient.UploadAttachment (packageId, signer1Att1.Id, ATTACHMENT_FILE_NAME1,
-                    attachment1ForSigner1FileContent, SIGNER1_ID);
+            byte [] attachmentForSignerFileContent = new StreamDocumentSource (attachmentInputStream).Content ();
+            signerAttachmentFileSize = attachmentForSignerFileContent.Length;
+            OssClient.UploadAttachment (packageId, signerAtt.Id, ATTACHMENT_FILE_NAME,
+                attachmentForSignerFileContent, SIGNER_ID);
 
             retrievedPackage = OssClient.GetPackage (packageId);
-            signer1Att1 = retrievedPackage.GetSigner (email1).GetAttachmentRequirement (NAME1);
+            signerAtt = retrievedPackage.GetSigner (email1).GetAttachmentRequirement (NAME);
 
-            filesAfterUpload = signer1Att1.Files;
+            filesAfterUpload = signerAtt.Files;
 
             AttachmentFile attachmentFile = filesAfterUpload[0];
 
-            OssClient.DeleteAttachmentFile (packageId, signer1Att1.Id, attachmentFile.Id, SIGNER1_ID);
+            // Download signer attachment
+            DownloadedFile downloadedAttachment = ossClient.AttachmentRequirementService.DownloadAttachmentFile(packageId, signerAtt.Id, attachmentFile.Id);
+            System.IO.File.WriteAllBytes(downloadedAttachment.Filename, downloadedAttachment.Contents);
+
+            OssClient.DeleteAttachmentFile (packageId, signerAtt.Id, attachmentFile.Id, SIGNER_ID);
 
             retrievedPackage = OssClient.GetPackage (packageId);
-            signer1Att1 = retrievedPackage.GetSigner (email1).GetAttachmentRequirement (NAME1);
+            signerAtt = retrievedPackage.GetSigner (email1).GetAttachmentRequirement (NAME);
 
-            filesAfterDelete = signer1Att1.Files;
+            filesAfterDelete = signerAtt.Files;
+
+            downloadedAttachmentFile = new FileInfo(downloadedAttachment.Filename);
         }
 
     }

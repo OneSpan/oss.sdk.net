@@ -89,6 +89,16 @@ namespace OneSpanSign.Sdk.Services
             apiClient.UpdateDelegates(senderId, delegateIds);
         }
 
+        public void updateDelegationWithDelegationUsers(string senderId, List<DelegationUser> delegates)
+        {
+            IList<OneSpanSign.API.DelegationUser> apiDelegates = new List<OneSpanSign.API.DelegationUser>();
+            foreach(OneSpanSign.Sdk.DelegationUser delegateUser in delegates)
+            {
+                apiDelegates.Add(new DelegationUserConverter(delegateUser).ToAPIDelegationUser());
+            }
+            apiClient.UpdateDelegates(senderId, apiDelegates);
+        }
+
         public void AddDelegate(string senderId, OneSpanSign.Sdk.DelegationUser delegationUser) 
         {
             OneSpanSign.API.DelegationUser apiDelegationUser = new DelegationUserConverter(delegationUser).ToAPIDelegationUser();
@@ -107,6 +117,39 @@ namespace OneSpanSign.Sdk.Services
 
         public IList<VerificationType> getVerificationTypes() {
             return apiClient.getVerificationTypes();
+        }
+        
+        public IList<Account> getSubAccounts() {
+            IList<API.Account> apiAccounts = apiClient.getSubAccounts();
+            IList<Account> accounts = new List<Account>();
+            foreach (OneSpanSign.API.Account account in apiAccounts) 
+            {
+                accounts.Add(new AccountConverter(account).ToSDKAccount());
+            }
+            return accounts;
+        }
+        
+        public IList<AccessibleAccountResponse> getAccessibleAccounts()
+        {
+            IList<API.AccessibleAccountResponse> apiAccessibleAccounts = apiClient.getAccessibleAccounts();
+            IList<AccessibleAccountResponse> accountResponses = new List<AccessibleAccountResponse>();
+            foreach (OneSpanSign.API.AccessibleAccountResponse accountResponse in apiAccessibleAccounts)
+            {
+                accountResponses.Add(new AccessibleAccountResponseConverter(accountResponse).ToSDKAccessibleAccountResponse());
+            }
+
+            return accountResponses;
+        }
+        
+        public Account createSubAccount(SubAccount subAccount) {
+            OneSpanSign.API.SubAccount apiSubAccount = new SubAccountConverter(subAccount).ToAPISubAccount();
+            OneSpanSign.API.Account account = apiClient.createSubAccount(apiSubAccount);
+            return new AccountConverter(account).ToSDKAccount();
+        }
+        
+        public void updateSubAccount(SubAccount subAccount, String accountId) {
+            OneSpanSign.API.SubAccount apiSubAccount = new SubAccountConverter(subAccount).ToAPISubAccount();
+            apiClient.updateSubAccount(apiSubAccount, accountId);
         }
     }
 }
