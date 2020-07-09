@@ -20,6 +20,12 @@ namespace OneSpanSign.API
         {
             get; set;
         }
+        
+        [JsonProperty("leftMenuExpand")]
+        public Nullable<bool> LeftMenuExpand
+        {
+            get; set;
+        }
 
 
         [JsonProperty("declineReasons")]

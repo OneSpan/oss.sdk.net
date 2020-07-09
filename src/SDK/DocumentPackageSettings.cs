@@ -65,6 +65,14 @@ namespace OneSpanSign.Sdk
             get { return enableDecline; }
             set { enableDecline = value; }
         }
+        
+        private Nullable<bool> expandLeftMenu = null;
+
+        public Nullable<bool> ExpandLeftMenu 
+        {
+            get { return expandLeftMenu; }
+            set { expandLeftMenu = value; }
+        }
 
         private Nullable<bool> disableDeclineOther = null;
 
@@ -215,6 +223,9 @@ namespace OneSpanSign.Sdk
 
             if (enableDecline != null)
                 ceremonySettings.DeclineButton = enableDecline.Value;
+
+            if (expandLeftMenu != null)
+                ceremonySettings.LeftMenuExpand = expandLeftMenu.Value;
 
             if (disableOptOutOther != null)
                 ceremonySettings.DisableOptOutOther = disableOptOutOther.Value;

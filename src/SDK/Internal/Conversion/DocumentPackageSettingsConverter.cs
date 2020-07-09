@@ -40,6 +40,7 @@ namespace OneSpanSign.Sdk
             ceremonySettings.FontSize = sdkSettings.FontSize;
             ceremonySettings.DefaultTimeBasedExpiry = sdkSettings.DefaultTimeBasedExpiry;
             ceremonySettings.RemainingDays = sdkSettings.RemainingDays;
+            ceremonySettings.LeftMenuExpand = sdkSettings.ExpandLeftMenu;
 
             if (sdkSettings.EnableFirstAffidavit.HasValue) {
                 ceremonySettings.DisableFirstInPersonAffidavit = !sdkSettings.EnableFirstAffidavit;
@@ -106,6 +107,9 @@ namespace OneSpanSign.Sdk
                     
                 if (apiSettings.Ceremony.DeclineButton.HasValue)
                     builder = (apiSettings.Ceremony.DeclineButton.Value ? builder.WithDecline() : builder.WithoutDecline());
+                
+                if (apiSettings.Ceremony.LeftMenuExpand.HasValue)
+                    builder = (apiSettings.Ceremony.LeftMenuExpand.Value ? builder.WithLeftMenuExpand() : builder.WithoutLeftMenuExpand());
                     
                 if (apiSettings.Ceremony.HideWatermark.HasValue)
                     builder = (apiSettings.Ceremony.HideWatermark.Value ? builder.WithoutWatermark() : builder.WithWatermark());

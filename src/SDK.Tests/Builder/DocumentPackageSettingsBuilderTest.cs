@@ -90,6 +90,20 @@ namespace SDK.Tests
             Assert.IsTrue (without.DefaultTimeBasedExpiry.HasValue);
             Assert.IsFalse (without.DefaultTimeBasedExpiry.Value);
         }
+        
+        [Test]
+        public void LeftMenuExpand ()
+        {
+            DocumentPackageSettingsBuilder builder = DocumentPackageSettingsBuilder.NewDocumentPackageSettings ();
+            DocumentPackageSettings unset = builder.Build ();
+            Assert.IsFalse (unset.ExpandLeftMenu.HasValue);
+            DocumentPackageSettings with = builder.WithLeftMenuExpand().Build ();
+            Assert.IsTrue (with.ExpandLeftMenu.HasValue);
+            Assert.IsTrue (with.ExpandLeftMenu.Value);
+            DocumentPackageSettings without = builder.WithoutLeftMenuExpand().Build ();
+            Assert.IsTrue (without.ExpandLeftMenu.HasValue);
+            Assert.IsFalse (without.ExpandLeftMenu.Value);
+        }
 
     }
 }

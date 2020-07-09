@@ -53,6 +53,7 @@ namespace SDK.Tests
             Assert.AreEqual(apiPackageSettings1.Ceremony.FontSize, sdkPackageSettings1.FontSize);
             Assert.AreEqual(apiPackageSettings1.Ceremony.EnforceCaptureSignature, sdkPackageSettings1.EnforceCaptureSignature);
             Assert.AreEqual(apiPackageSettings1.Ceremony.DeclineButton, sdkPackageSettings1.EnableDecline);
+            Assert.AreEqual(apiPackageSettings1.Ceremony.LeftMenuExpand, sdkPackageSettings1.ExpandLeftMenu);
             Assert.AreEqual(apiPackageSettings1.Ceremony.OptOutButton, sdkPackageSettings1.EnableOptOut);
             Assert.AreEqual(apiPackageSettings1.Ceremony.DeclineReasons[0], sdkPackageSettings1.DeclineReasons[0]);
             Assert.AreEqual(apiPackageSettings1.Ceremony.DeclineReasons[1], sdkPackageSettings1.DeclineReasons[1]);
@@ -91,6 +92,7 @@ namespace SDK.Tests
             Assert.AreEqual(apiPackageSettings1.Ceremony.FontSize, sdkPackageSettings1.FontSize);
             Assert.AreEqual(apiPackageSettings1.Ceremony.EnforceCaptureSignature, sdkPackageSettings1.EnforceCaptureSignature);
             Assert.AreEqual(apiPackageSettings1.Ceremony.DeclineButton, sdkPackageSettings1.EnableDecline);
+            Assert.AreEqual(apiPackageSettings1.Ceremony.LeftMenuExpand, sdkPackageSettings1.ExpandLeftMenu);
             Assert.AreEqual(apiPackageSettings1.Ceremony.OptOutButton, sdkPackageSettings1.EnableOptOut);
             Assert.AreEqual(apiPackageSettings1.Ceremony.DeclineReasons[0], sdkPackageSettings1.DeclineReasons[0]);
             Assert.AreEqual(apiPackageSettings1.Ceremony.DeclineReasons[1], sdkPackageSettings1.DeclineReasons[1]);
@@ -128,6 +130,7 @@ namespace SDK.Tests
                     .WithOptOut()
                     .WithoutWatermark()
                     .WithoutCaptureText()
+                    .WithoutLeftMenuExpand()
                     .DisableFirstAffidavit()
                     .DisableSecondAffidavit()
                     .HideOwnerInPersonDropDown()
@@ -188,6 +191,7 @@ namespace SDK.Tests
             apiCeremonySettings.HideLanguageDropdown = true;
             apiCeremonySettings.HidePackageOwnerInPerson = true;
             apiCeremonySettings.EnforceCaptureSignature = true;
+            apiCeremonySettings.LeftMenuExpand = true;
 
             Style style = new Style();
             style.BackgroundColor = "white";
