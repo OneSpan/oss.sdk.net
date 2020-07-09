@@ -10,6 +10,7 @@ namespace OneSpanSign.Sdk
         private Nullable<bool> enableInPerson = null;
         private Nullable<bool> enableOptOut = null;
         private Nullable<bool> enableDecline = null;
+        private Nullable<bool> expandLeftMenu = null;
         private Nullable<bool> hideWatermark = null;
         private Nullable<bool> hideCaptureText = null;
         private List<string> declineReasons = new List<string> ();
@@ -146,7 +147,19 @@ namespace OneSpanSign.Sdk
             enableDecline = false;
             return this;
         }
+        
+        public DocumentPackageSettingsBuilder WithLeftMenuExpand ()
+        {
+            expandLeftMenu = true;
+            return this;
+        }
 
+        public DocumentPackageSettingsBuilder WithoutLeftMenuExpand ()
+        {
+            expandLeftMenu = false;
+            return this;
+        }
+        
         public DocumentPackageSettingsBuilder WithWatermark ()
         {
             hideWatermark = false;
@@ -310,6 +323,7 @@ namespace OneSpanSign.Sdk
             result.EnableInPerson = enableInPerson;
             result.EnableOptOut = enableOptOut;
             result.EnableDecline = enableDecline;
+            result.ExpandLeftMenu = expandLeftMenu;
             result.HideWatermark = hideWatermark;
             result.HideCaptureText = hideCaptureText;
             foreach (string declineReason in declineReasons)

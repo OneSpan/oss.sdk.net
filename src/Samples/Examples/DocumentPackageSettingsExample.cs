@@ -33,6 +33,7 @@ namespace SDK.Examples
                               .HideOwnerInPersonDropDown()
 				              .WithDecline()
                               .WithOptOut()
+				              .WithLeftMenuExpand()
                               .WithEnforceCaptureSignature()
                               .WithDeclineReason(DECLINE_REASON_1)
                               .WithDeclineReason(DECLINE_REASON_2)

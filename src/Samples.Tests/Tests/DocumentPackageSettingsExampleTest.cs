@@ -29,6 +29,9 @@ namespace SDK.Examples
 
             Assert.IsTrue (result.Settings.EnforceCaptureSignature.HasValue);
             Assert.IsTrue (result.Settings.EnforceCaptureSignature.Value);
+            
+            Assert.IsTrue (result.Settings.ExpandLeftMenu.HasValue);
+            Assert.IsTrue (result.Settings.ExpandLeftMenu.Value);
 
             Assert.AreEqual (example.FONT_SIZE, result.Settings.FontSize.Value);
 
