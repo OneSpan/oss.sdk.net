@@ -11,6 +11,8 @@ namespace SDK.Examples
         [Test()]
         public void VerifyResult()
         {
+            TestContext.Out.WriteLine($"DATEPICKER_VALUE: {DateTime.Today.ToString("MM-dd-yyyy")}");
+            
             GenericFieldsExample example = new GenericFieldsExample();
             example.Run();
 
@@ -99,10 +101,8 @@ namespace SDK.Examples
                     {
                         Assert.AreEqual(GenericFieldsExample.DATEPICKER_PAGE, field.Page);
                         Assert.AreEqual(FieldStyle.DATEPICKER, field.Style);
-                        TestContext.Out.WriteLine($"DATEPICKER_VALUE: {field.Value}");
                         Assert.AreEqual(GenericFieldsExample.DATEPICKER_VALUE, field.Value);
                         Assert.IsTrue(field.Validator.Required);
-                        TestContext.Out.WriteLine($"DATEPICKER_FORMAT: {field.Validator.Regex}");
                         Assert.AreEqual(GenericFieldsExample.DATEPICKER_FORMAT, field.Validator.Regex);
                         Assert.AreEqual(field.Validator.Message, FieldValidatorBuilder.DATEPICKER_ERROR_MESSAGE);
                     }
