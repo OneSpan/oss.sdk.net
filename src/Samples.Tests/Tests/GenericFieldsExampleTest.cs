@@ -11,8 +11,6 @@ namespace SDK.Examples
         [Test()]
         public void VerifyResult()
         {
-            TestContext.Out.WriteLine($"DATEPICKER_VALUE: {DateTime.Today.ToString("MM-dd-yyyy")}");
-            
             GenericFieldsExample example = new GenericFieldsExample();
             example.Run();
 
