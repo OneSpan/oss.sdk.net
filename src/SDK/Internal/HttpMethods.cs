@@ -52,7 +52,7 @@ namespace OneSpanSign.Sdk.Internal
                     //We need to fetch a new access token using the clientAppId/Secret
                     string jsonPayload = String.Format("{{\"clientId\":\"{0}\",\"secret\":\"{1}\",\"type\":\"{2}\"", ApiTokenConfig.ClientAppId, ApiTokenConfig.ClientAppSecret, ApiTokenConfig.TokenType.ToString());
                     if (ApiTokenConfig.TokenType == ApiTokenType.SENDER) {
-                        jsonPayload += String.Format("\"email\":\"{0}\"", ApiTokenConfig.SenderEmail);
+                        jsonPayload += String.Format(",\"email\":\"{0}\"", ApiTokenConfig.SenderEmail);
                     }
                     jsonPayload += "}";
                     byte[] jsonPayloadBytes = Encoding.Unicode.GetBytes(jsonPayload);
