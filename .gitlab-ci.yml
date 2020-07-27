@@ -7,12 +7,12 @@ stages:
     - deployNuget
 
 before_script:
-    - "dotnet restore ./src"
+    - dotnet restore ./src
     
 build:
     stage: build
     script:
-        - "dotnet build ./src -c Release"
+        - dotnet build ./src -c Release
     artifacts:
         expire_in: 1 hour
         paths:
@@ -22,13 +22,13 @@ build:
 test:
     stage: test
     script: 
-        - cp "$SignersProps" ./src/Samples/signers.properties
+        - cp "$SIGNERS_PROPS" ./src/Samples/signers.properties
         - "dotnet test ./src -c Release"
 
 packNuget:
     stage: packNuget
     script:
-        - "dotnet pack ./src/SDK -c Release -o ./artifacts"
+        - dotnet pack ./src/SDK -c Release -o ./artifacts
     artifacts:
         expire_in: 1 year
         paths:
@@ -37,6 +37,6 @@ packNuget:
 deployNuget:
     stage: deployNuget
     script:
-        - "dotnet nuget push ./artifacts/*.nupkg -s https://api.nuget.org/v3/index.json -k $NugetKey"
+        - dotnet nuget push ./artifacts/*.nupkg -s https://api.nuget.org/v3/index.json -k "$NUGET_KEY"
     when: manual
     
