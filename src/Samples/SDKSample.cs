@@ -47,7 +47,15 @@ namespace SDK.Examples
                 apiTokenConfig.BaseUrl = props.Get("webpage.url");
                 apiTokenConfig.ClientAppId = props.Get("api.clientId");
                 apiTokenConfig.ClientAppSecret = props.Get("api.secret");
-                apiTokenConfig.TokenType = ApiTokenType.OWNER;
+                if (props.Exists("api.senderEmail"))
+                {
+                    apiTokenConfig.TokenType = ApiTokenType.SENDER;
+                    apiTokenConfig.SenderEmail = props.Get("api.senderEmail");
+                }
+                else
+                {
+                    apiTokenConfig.TokenType = ApiTokenType.OWNER;
+                }
                 ossClient = new OssClient(apiTokenConfig, props.Get("api.url"), true, null,
                     new Dictionary<string, string>());
             }
