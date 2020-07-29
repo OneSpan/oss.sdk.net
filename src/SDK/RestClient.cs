@@ -96,7 +96,7 @@ namespace OneSpanSign.Sdk
             if (proxyConfiguration != null)
                 HttpMethods.ProxyConfiguration = proxyConfiguration;
 
-            SetupAuthorization();
+            additionalHeaders.Remove("Authorization");
             byte[] responseBytes = HttpMethods.PostHttp(headerGen, path, payloadBytes, additionalHeaders);
 
             var response = Converter.ToString(responseBytes);
@@ -140,7 +140,7 @@ namespace OneSpanSign.Sdk
             if (proxyConfiguration != null)
                 HttpMethods.ProxyConfiguration = proxyConfiguration;
 
-            SetupAuthorization();
+            additionalHeaders.Remove("Authorization");
             string response =
                 HttpMethods.MultipartPostHttp(apiKey, path, fileBytes, boundary, headerGen, additionalHeaders);
             support.LogResponse(response);
@@ -247,7 +247,7 @@ namespace OneSpanSign.Sdk
             if (proxyConfiguration != null)
                 HttpMethods.ProxyConfiguration = proxyConfiguration;
 
-            SetupAuthorization();
+            additionalHeaders.Remove("Authorization");
             headerGen = new SessionIdAuthHeaderGenerator(sessionId);
             HttpMethods.DeleteHttp(headerGen, path, payloadBytes, additionalHeaders);
         }
