@@ -76,8 +76,7 @@ namespace OneSpanSign.Sdk
             if (proxyConfiguration != null)
                 HttpMethods.ProxyConfiguration = proxyConfiguration;
 
-            SetupAuthorization();
-            var responseBytes = HttpMethods.PostHttp(apiKey, path, payloadBytes, additionalHeaders);
+            var responseBytes = HttpMethods.PostHttp(apiKey, path, payloadBytes, SetupAuthorization(null));
 
             var response = Converter.ToString(responseBytes);
             support.LogResponse(response);
@@ -96,8 +95,7 @@ namespace OneSpanSign.Sdk
             if (proxyConfiguration != null)
                 HttpMethods.ProxyConfiguration = proxyConfiguration;
 
-            additionalHeaders.Remove("Authorization");
-            byte[] responseBytes = HttpMethods.PostHttp(headerGen, path, payloadBytes, additionalHeaders);
+            byte[] responseBytes = HttpMethods.PostHttp(headerGen, path, payloadBytes, SetupAuthorization(sessionId));
 
             var response = Converter.ToString(responseBytes);
             support.LogResponse(response);
@@ -110,8 +108,7 @@ namespace OneSpanSign.Sdk
             if (proxyConfiguration != null)
                 HttpMethods.ProxyConfiguration = proxyConfiguration;
 
-            SetupAuthorization();
-            byte[] responseBytes = HttpMethods.PutHttp(apiKey, path, Converter.ToBytes(jsonPayload), additionalHeaders);
+            byte[] responseBytes = HttpMethods.PutHttp(apiKey, path, Converter.ToBytes(jsonPayload), SetupAuthorization(null));
             string response = Converter.ToString(responseBytes);
             support.LogResponse(response);
             return response;
@@ -124,8 +121,7 @@ namespace OneSpanSign.Sdk
             if (proxyConfiguration != null)
                 HttpMethods.ProxyConfiguration = proxyConfiguration;
 
-            SetupAuthorization();
-            string response = HttpMethods.MultipartPostHttp(apiKey, path, fileBytes, boundary, null, additionalHeaders);
+            string response = HttpMethods.MultipartPostHttp(apiKey, path, fileBytes, boundary, null, SetupAuthorization(null));
             support.LogResponse(response);
 
             return response;
@@ -140,9 +136,8 @@ namespace OneSpanSign.Sdk
             if (proxyConfiguration != null)
                 HttpMethods.ProxyConfiguration = proxyConfiguration;
 
-            additionalHeaders.Remove("Authorization");
             string response =
-                HttpMethods.MultipartPostHttp(apiKey, path, fileBytes, boundary, headerGen, additionalHeaders);
+                HttpMethods.MultipartPostHttp(apiKey, path, fileBytes, boundary, headerGen, SetupAuthorization(sessionId));
             support.LogResponse(response);
 
             return response;
@@ -155,8 +150,7 @@ namespace OneSpanSign.Sdk
             if (proxyConfiguration != null)
                 HttpMethods.ProxyConfiguration = proxyConfiguration;
 
-            SetupAuthorization();
-            string response = HttpMethods.MultipartPostHttp(apiKey, path, content, boundary, null, additionalHeaders);
+            string response = HttpMethods.MultipartPostHttp(apiKey, path, content, boundary, null, SetupAuthorization(null));
             support.LogResponse(response);
 
             return response;
@@ -169,9 +163,8 @@ namespace OneSpanSign.Sdk
             if (proxyConfiguration != null)
                 HttpMethods.ProxyConfiguration = proxyConfiguration;
 
-            SetupAuthorization();
             DownloadedFile responseBytes = HttpMethods.GetHttpJson(apiKey, path,
-                HttpMethods.ESL_ACCEPT_TYPE_APPLICATION_JSON, additionalHeaders);
+                HttpMethods.ESL_ACCEPT_TYPE_APPLICATION_JSON, SetupAuthorization(null));
             string response = Converter.ToString(responseBytes);
             support.LogResponse(response);
 
@@ -185,8 +178,7 @@ namespace OneSpanSign.Sdk
             if (proxyConfiguration != null)
                 HttpMethods.ProxyConfiguration = proxyConfiguration;
 
-            SetupAuthorization();
-            DownloadedFile responseBytes = HttpMethods.GetHttpJson(apiKey, path, acceptType, additionalHeaders);
+            DownloadedFile responseBytes = HttpMethods.GetHttpJson(apiKey, path, acceptType, SetupAuthorization(null));
             return Converter.ToString(responseBytes);
         }
 
@@ -197,8 +189,7 @@ namespace OneSpanSign.Sdk
             if (proxyConfiguration != null)
                 HttpMethods.ProxyConfiguration = proxyConfiguration;
 
-            SetupAuthorization();
-            return HttpMethods.GetHttp(apiKey, path, additionalHeaders);
+            return HttpMethods.GetHttp(apiKey, path, SetupAuthorization(null));
         }
 
         public DownloadedFile GetBytes(string path, string acceptType)
@@ -208,8 +199,7 @@ namespace OneSpanSign.Sdk
             if (proxyConfiguration != null)
                 HttpMethods.ProxyConfiguration = proxyConfiguration;
 
-            SetupAuthorization();
-            return HttpMethods.GetHttpJson(apiKey, path, acceptType, additionalHeaders);
+            return HttpMethods.GetHttpJson(apiKey, path, acceptType, SetupAuthorization(null));
         }
 
         public DownloadedFile GetHttpAsOctetStream(string path)
@@ -219,8 +209,7 @@ namespace OneSpanSign.Sdk
             if (proxyConfiguration != null)
                 HttpMethods.ProxyConfiguration = proxyConfiguration;
 
-            SetupAuthorization();
-            return HttpMethods.GetHttpAsOctetStream(apiKey, path, additionalHeaders);
+            return HttpMethods.GetHttpAsOctetStream(apiKey, path, SetupAuthorization(null));
         }
 
         public string Delete(string path)
@@ -230,8 +219,7 @@ namespace OneSpanSign.Sdk
             if (proxyConfiguration != null)
                 HttpMethods.ProxyConfiguration = proxyConfiguration;
 
-            SetupAuthorization();
-            byte[] responseBytes = HttpMethods.DeleteHttp(apiKey, path, additionalHeaders);
+            byte[] responseBytes = HttpMethods.DeleteHttp(apiKey, path, SetupAuthorization(null));
             string response = Converter.ToString(responseBytes);
             support.LogResponse(response);
 
@@ -247,9 +235,8 @@ namespace OneSpanSign.Sdk
             if (proxyConfiguration != null)
                 HttpMethods.ProxyConfiguration = proxyConfiguration;
 
-            additionalHeaders.Remove("Authorization");
             headerGen = new SessionIdAuthHeaderGenerator(sessionId);
-            HttpMethods.DeleteHttp(headerGen, path, payloadBytes, additionalHeaders);
+            HttpMethods.DeleteHttp(headerGen, path, payloadBytes, SetupAuthorization(sessionId));
         }
 
         public string Delete(string path, string jsonPayload)
@@ -259,17 +246,21 @@ namespace OneSpanSign.Sdk
             if (proxyConfiguration != null)
                 HttpMethods.ProxyConfiguration = proxyConfiguration;
 
-            SetupAuthorization();
-            byte[] responseBytes = HttpMethods.DeleteHttp(apiKey, path, payloadBytes, additionalHeaders);
+            byte[] responseBytes = HttpMethods.DeleteHttp(apiKey, path, payloadBytes,SetupAuthorization(null));
             string response = Converter.ToString(responseBytes);
             support.LogResponse(response);
 
             return response;
         }
 
-        private void SetupAuthorization()
+        private IDictionary<string, string> SetupAuthorization(String sessionId)
         {
-            additionalHeaders.Remove("Authorization");
+            IDictionary<string, string> dictionary = new Dictionary<string, string>(additionalHeaders);
+            if (sessionId != null)
+            {
+                return dictionary;
+            }
+
             if (apiTokenConfig != null)
             {
                 //Do we have an api token and is it still valid for at least a minute ?
@@ -322,12 +313,14 @@ namespace OneSpanSign.Sdk
                     apiToken = JsonConvert.DeserializeObject<ApiToken>(result);
                 }
 
-                additionalHeaders.Add("Authorization", "Bearer " + apiToken.AccessToken);
+                dictionary.Add("Authorization", "Bearer " + apiToken.AccessToken);
             }
             else
             {
-                additionalHeaders.Add("Authorization", "Basic " + apiKey);
+                dictionary.Add("Authorization", "Basic " + apiKey);
             }
+
+            return dictionary;
         }
     }
 }
