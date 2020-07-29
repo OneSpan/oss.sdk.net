@@ -3,7 +3,6 @@ using System.Net;
 using System.IO;
 using System.Collections.Generic;
 using System.Text;
-using Newtonsoft.Json;
 
 namespace OneSpanSign.Sdk.Internal
 {
@@ -29,8 +28,6 @@ namespace OneSpanSign.Sdk.Internal
         public const string ESL_ACCEPT_TYPE_APPLICATION = ACCEPT_TYPE_APPLICATION + "; " + ESL_API_VERSION_HEADER;
 
         public static ProxyConfiguration ProxyConfiguration;
-        public static ApiTokenConfig ApiTokenConfig { set; get; }
-        private static ApiToken API_TOKEN;
 
         private static void SetupAuthorization(WebRequest request, AuthHeaderGenerator authHeaderGen)
         {
@@ -44,51 +41,10 @@ namespace OneSpanSign.Sdk.Internal
         }
 
         private static void SetupAuthorization(WebRequest request, string apiKey) {
-            if (ApiTokenConfig != null) {
-                //Do we have an api token and is it still valid for at least a minute ?
-                TimeSpan timeSpan = DateTime.UtcNow - new DateTime(1970, 1, 1);
-                long milliseconds = (long)timeSpan.TotalMilliseconds;
-                if (API_TOKEN == null || milliseconds > API_TOKEN.ExpiresAt - 60 * 1000) {
-                    //We need to fetch a new access token using the clientAppId/Secret
-                    string jsonPayload = String.Format("{{\"clientId\":\"{0}\",\"secret\":\"{1}\",\"type\":\"{2}\"", ApiTokenConfig.ClientAppId, ApiTokenConfig.ClientAppSecret, ApiTokenConfig.TokenType.ToString());
-                    if (ApiTokenConfig.TokenType == ApiTokenType.SENDER) {
-                        jsonPayload += String.Format(",\"email\":\"{0}\"", ApiTokenConfig.SenderEmail);
-                    }
-                    jsonPayload += "}";
-                    byte[] jsonPayloadBytes = Encoding.Unicode.GetBytes(jsonPayload);
-                    HttpWebRequest apiTokenRequest = (HttpWebRequest)WebRequest.Create(ApiTokenConfig.BaseUrl+"/apitoken/clientApp/accessToken");
-                    apiTokenRequest.Method = "POST";
-                    apiTokenRequest.ContentType = ESL_CONTENT_TYPE_APPLICATION_JSON;
-                    apiTokenRequest.ContentLength = jsonPayloadBytes.Length;
-                    apiTokenRequest.Accept = ESL_ACCEPT_TYPE_APPLICATION_JSON;
-                    apiTokenRequest.Timeout = 30000; //30 seconds
-                    SetProxy(apiTokenRequest);
-
-                    using (Stream dataStream = apiTokenRequest.GetRequestStream())
-                    {
-                        dataStream.Write(jsonPayloadBytes, 0, jsonPayloadBytes.Length);
-                    }
-
-                    var httpResponse = (HttpWebResponse)apiTokenRequest.GetResponse();
-
-                    if (httpResponse.StatusCode != HttpStatusCode.OK) {
-                        throw new OssException(
-                            "Unable to fetch access token for " + ApiTokenConfig + ", response was " + httpResponse,
-                            null);
-                    }
-
-                    string result;
-                    using (var streamReader = new StreamReader(httpResponse.GetResponseStream()))
-                    {
-                        result = streamReader.ReadToEnd();
-                    }
-                    httpResponse.Close();
-
-                    API_TOKEN = JsonConvert.DeserializeObject<ApiToken>(result);
-                }
-                request.Headers.Add ("Authorization", "Bearer " + API_TOKEN.AccessToken);
-            } else {
-                request.Headers.Add ("Authorization", "Basic " + apiKey);
+            //Only add missing apiKey if it's not present in headers
+            if (apiKey != null && request.Headers.Get("Authorization") == null)
+            {
+                request.Headers.Add("Authorization", "Basic " + apiKey);
             }
         }
 
@@ -618,7 +574,7 @@ namespace OneSpanSign.Sdk.Internal
 			}
 		}
 
-        private static void SetProxy (WebRequest request)
+        public static void SetProxy (WebRequest request)
         {
             if (ProxyConfiguration != null)
             {
