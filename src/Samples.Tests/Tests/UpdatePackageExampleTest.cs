@@ -27,7 +27,8 @@ namespace SDK.Examples
             Assert.AreEqual( expectedPackage.Name, actualPackage.Name );
             Assert.AreEqual( expectedPackage.Description, actualPackage.Description );
             Assert.AreEqual( expectedPackage.EmailMessage, actualPackage.EmailMessage );
-            Assert.AreEqual( expectedPackage.ExpiryDate.Value.Date, actualPackage.ExpiryDate.Value.Date );
+            int offset = DateTimeOffset.Now.Offset.Hours;
+            Assert.AreEqual( expectedPackage.ExpiryDate.Value.AddHours(-offset).Date, actualPackage.ExpiryDate.Value.Date );
             Assert.AreEqual( expectedPackage.Language, actualPackage.Language );
             Assert.AreEqual( expectedPackage.Autocomplete, actualPackage.Autocomplete );
             Assert.AreEqual( expectedPackage.Notarized, actualPackage.Notarized );
