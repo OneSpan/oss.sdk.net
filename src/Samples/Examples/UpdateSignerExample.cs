@@ -59,7 +59,6 @@ namespace SDK.Examples
             Signer signer4 = SignerBuilder.NewSignerWithEmail(email2)
                 .WithFirstName(SIGNER2_FIRST_NAME)
                     .WithLastName(SIGNER2_LAST_NAME)
-                    .WithSMSSentTo(sms1)
                     .WithLanguage(SIGNER2_UPDATE_LANGUAGE)
                     .WithCustomId(SIGNER2_CUSTOM_ID).Build();
 

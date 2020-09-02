@@ -1,5 +1,4 @@
-﻿using System;
-using NUnit.Framework;
+﻿using NUnit.Framework;
 using OneSpanSign.Sdk;
 
 namespace SDK.Examples
@@ -24,9 +23,8 @@ namespace SDK.Examples
             Assert.AreEqual(documentPackage.GetSigner(example.email2).ChallengeQuestion[1].Question, AuthenticationMethodsExample.QUESTION2);
             Assert.IsNull(documentPackage.GetSigner(example.email2).PhoneNumber);
           
-            Assert.AreEqual(documentPackage.GetSigner(example.email3).AuthenticationMethod, AuthenticationMethod.SMS);
+            Assert.AreEqual(documentPackage.GetSigner(example.email3).AuthenticationMethod, AuthenticationMethod.EMAIL);
             Assert.AreEqual(documentPackage.GetSigner(example.email3).ChallengeQuestion.Count, 0);
-            Assert.AreEqual(documentPackage.GetSigner(example.email3).PhoneNumber, example.sms3);
         }
     }
 }

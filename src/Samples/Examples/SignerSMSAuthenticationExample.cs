@@ -22,7 +22,7 @@ namespace SDK.Examples
                 .WithSigner(SignerBuilder.NewSignerWithEmail(email1)
                     .WithFirstName("John")
                     .WithLastName("Smith")
-                    .WithSMSSentTo(sms1))
+                    .WithSMSSentTo("+12042345678"))
                 .WithDocument(DocumentBuilder.NewDocumentNamed("First Document")
                     .FromStream(fileStream1, DocumentType.PDF)
                     .WithSignature(SignatureBuilder.SignatureFor(email1)
