@@ -32,7 +32,7 @@ namespace OneSpanSign.Sdk.Internal
 
         public static ProxyConfiguration ProxyConfiguration;
 
-        private static HttpWebRequest WithUserAgent(WebRequest request)
+        public static HttpWebRequest WithUserAgent(WebRequest request)
         {
             request.Headers.Add(HEADER_USER_AGENT, ESL_API_USER_AGENT);
             return (HttpWebRequest) request;
