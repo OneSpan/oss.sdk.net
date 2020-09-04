@@ -280,7 +280,7 @@ namespace OneSpanSign.Sdk
                     jsonPayload += "}";
                     var jsonPayloadBytes = Encoding.Unicode.GetBytes(jsonPayload);
                     var apiTokenRequest =
-                        (HttpWebRequest) WebRequest.Create(apiTokenConfig.BaseUrl + "/apitoken/clientApp/accessToken");
+                        HttpMethods.WithUserAgent(WebRequest.Create(apiTokenConfig.BaseUrl + "/apitoken/clientApp/accessToken"));
                     apiTokenRequest.Method = "POST";
                     apiTokenRequest.ContentType = HttpMethods.ESL_CONTENT_TYPE_APPLICATION_JSON;
                     apiTokenRequest.ContentLength = jsonPayloadBytes.Length;
