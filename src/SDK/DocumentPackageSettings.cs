@@ -210,6 +210,14 @@ namespace OneSpanSign.Sdk
             set { ceremonyLayoutSettings = value; }
         }
 
+        private Nullable<Int32> maxAttachmentFiles = null;
+
+        public Nullable<Int32> MaxAttachmentFiles
+        {
+            get { return maxAttachmentFiles; }
+            set { maxAttachmentFiles = value; }
+        }
+
         internal PackageSettings toAPIPackageSettings ()
         {
 
@@ -274,6 +282,9 @@ namespace OneSpanSign.Sdk
 
             if (maxAuthAttempts != null)
                 ceremonySettings.MaxAuthFailsAllowed = maxAuthAttempts.Value;
+
+            if (maxAttachmentFiles != null)
+                ceremonySettings.MaxAttachmentFiles = maxAttachmentFiles.Value;
 
             if (linkHref != null) {
                 Link link = new Link ();

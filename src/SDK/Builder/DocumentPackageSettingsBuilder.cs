@@ -29,6 +29,7 @@ namespace OneSpanSign.Sdk
         private Nullable<Int32> fontSize = null;
         private Nullable<bool> defaultTimeBasedExpiry = null;
         private Nullable<Int32> remainingDays = null;
+        private Nullable<Int32> maxAttachmentFiles = null;
 
         private string linkText = null;
         private string linkTooltip = null;
@@ -311,6 +312,12 @@ namespace OneSpanSign.Sdk
             return this;
         }
 
+        public DocumentPackageSettingsBuilder WithMaxAttachmentFiles (Nullable<Int32> maxAttachmentFiles)
+        {
+            this.maxAttachmentFiles = maxAttachmentFiles;
+            return this;
+        }
+
         public DocumentPackageSettings build ()
         {
             return Build ();
@@ -347,6 +354,7 @@ namespace OneSpanSign.Sdk
             result.LinkHref = linkHref;
             result.LinkText = linkText;
             result.LinkTooltip = linkTooltip;
+            result.MaxAttachmentFiles = maxAttachmentFiles;
 
             result.CeremonyLayoutSettings = ceremonyLayoutSettings;
 
@@ -384,6 +392,7 @@ namespace OneSpanSign.Sdk
             }
 
             maxAuthAttempts = apiPackageSettings.Ceremony.MaxAuthFailsAllowed;
+            maxAttachmentFiles = apiPackageSettings.Ceremony.MaxAttachmentFiles;
 
             if (apiPackageSettings.Ceremony.DocumentToolbarOptions != null) {
                 showDocumentToolbarDownloadButton = apiPackageSettings.Ceremony.DocumentToolbarOptions.DownloadButton;

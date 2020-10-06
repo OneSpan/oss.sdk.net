@@ -76,8 +76,9 @@ namespace SDK.Tests
             Assert.AreEqual(apiPackageSettings1.Ceremony.HidePackageOwnerInPerson, !sdkPackageSettings1.ShowOwnerInPersonDropDown);
             Assert.AreEqual(apiPackageSettings1.Ceremony.DisableFirstInPersonAffidavit, !sdkPackageSettings1.EnableFirstAffidavit);
             Assert.AreEqual(apiPackageSettings1.Ceremony.DisableSecondInPersonAffidavit, !sdkPackageSettings1.EnableSecondAffidavit);
-            Assert.AreEqual (apiPackageSettings1.Ceremony.DefaultTimeBasedExpiry, sdkPackageSettings1.DefaultTimeBasedExpiry);
-            Assert.AreEqual (apiPackageSettings1.Ceremony.RemainingDays, sdkPackageSettings1.RemainingDays);
+            Assert.AreEqual(apiPackageSettings1.Ceremony.DefaultTimeBasedExpiry, sdkPackageSettings1.DefaultTimeBasedExpiry);
+            Assert.AreEqual(apiPackageSettings1.Ceremony.RemainingDays, sdkPackageSettings1.RemainingDays);
+            Assert.AreEqual(apiPackageSettings1.Ceremony.MaxAttachmentFiles, sdkPackageSettings1.MaxAttachmentFiles);
         }
 
         [Test()]
@@ -115,8 +116,9 @@ namespace SDK.Tests
             Assert.AreEqual(apiPackageSettings1.Ceremony.HidePackageOwnerInPerson, !sdkPackageSettings1.ShowOwnerInPersonDropDown);
             Assert.AreEqual(apiPackageSettings1.Ceremony.DisableFirstInPersonAffidavit, !sdkPackageSettings1.EnableFirstAffidavit);
             Assert.AreEqual(apiPackageSettings1.Ceremony.DisableSecondInPersonAffidavit, !sdkPackageSettings1.EnableSecondAffidavit);
-            Assert.AreEqual (apiPackageSettings1.Ceremony.DefaultTimeBasedExpiry, sdkPackageSettings1.DefaultTimeBasedExpiry);
-            Assert.AreEqual (apiPackageSettings1.Ceremony.RemainingDays, sdkPackageSettings1.RemainingDays);
+            Assert.AreEqual(apiPackageSettings1.Ceremony.DefaultTimeBasedExpiry, sdkPackageSettings1.DefaultTimeBasedExpiry);
+            Assert.AreEqual(apiPackageSettings1.Ceremony.RemainingDays, sdkPackageSettings1.RemainingDays);
+            Assert.AreEqual(apiPackageSettings1.Ceremony.MaxAttachmentFiles, sdkPackageSettings1.MaxAttachmentFiles);
         }
 
         private OneSpanSign.Sdk.DocumentPackageSettings CreateTypicalSDKDocumentPackageSettings()
@@ -149,6 +151,7 @@ namespace SDK.Tests
                     .WithDialogOnComplete()
                     .WithDefaultTimeBasedExpiry ()
                     .WithRemainingDays(14)
+                    .WithMaxAttachmentFiles(2)
                     .WithCeremonyLayoutSettings(CeremonyLayoutSettingsBuilder.NewCeremonyLayoutSettings()
                         .WithoutGlobalDownloadButton()
                         .WithoutGlobalConfirmButton()
@@ -192,6 +195,7 @@ namespace SDK.Tests
             apiCeremonySettings.HidePackageOwnerInPerson = true;
             apiCeremonySettings.EnforceCaptureSignature = true;
             apiCeremonySettings.LeftMenuExpand = true;
+            apiCeremonySettings.MaxAttachmentFiles = 2;
 
             Style style = new Style();
             style.BackgroundColor = "white";

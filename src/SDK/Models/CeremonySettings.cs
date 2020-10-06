@@ -227,7 +227,10 @@ namespace OneSpanSign.API
             get; set;
         }
 
-
+        [JsonProperty ("maxAttachmentFiles")]
+        public Nullable<Int32> MaxAttachmentFiles {
+            get; set;
+        }
 
     }
 }
