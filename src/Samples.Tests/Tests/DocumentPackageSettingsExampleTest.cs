@@ -49,6 +49,8 @@ namespace SDK.Examples
 
             Assert.IsTrue (result.Settings.DefaultTimeBasedExpiry.Value);
             Assert.AreEqual (example.EXPIRE_IN_DAYS, result.Settings.RemainingDays.Value);
+
+            Assert.AreEqual (example.MAX_ATTACHMENT_FILES, result.Settings.MaxAttachmentFiles.Value);
         }
     }
 }

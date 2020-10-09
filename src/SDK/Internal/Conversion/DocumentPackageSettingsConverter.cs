@@ -41,6 +41,7 @@ namespace OneSpanSign.Sdk
             ceremonySettings.DefaultTimeBasedExpiry = sdkSettings.DefaultTimeBasedExpiry;
             ceremonySettings.RemainingDays = sdkSettings.RemainingDays;
             ceremonySettings.LeftMenuExpand = sdkSettings.ExpandLeftMenu;
+            ceremonySettings.MaxAttachmentFiles = sdkSettings.MaxAttachmentFiles;
 
             if (sdkSettings.EnableFirstAffidavit.HasValue) {
                 ceremonySettings.DisableFirstInPersonAffidavit = !sdkSettings.EnableFirstAffidavit;
@@ -149,6 +150,9 @@ namespace OneSpanSign.Sdk
 
                 if (apiSettings.Ceremony.RemainingDays.HasValue)
                     builder.WithRemainingDays (apiSettings.Ceremony.RemainingDays.Value);
+
+                if (apiSettings.Ceremony.MaxAttachmentFiles.HasValue)
+                    builder.WithMaxAttachmentFiles (apiSettings.Ceremony.MaxAttachmentFiles.Value);
 
                 foreach (string declineReason in apiSettings.Ceremony.DeclineReasons)
                 {
