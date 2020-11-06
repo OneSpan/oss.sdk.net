@@ -40,6 +40,7 @@ namespace OneSpanSign.Sdk
             ceremonySettings.FontSize = sdkSettings.FontSize;
             ceremonySettings.DefaultTimeBasedExpiry = sdkSettings.DefaultTimeBasedExpiry;
             ceremonySettings.RemainingDays = sdkSettings.RemainingDays;
+            ceremonySettings.ShowNseHelp = sdkSettings.ShowNseHelp;
             ceremonySettings.LeftMenuExpand = sdkSettings.ExpandLeftMenu;
             ceremonySettings.MaxAttachmentFiles = sdkSettings.MaxAttachmentFiles;
 
@@ -108,10 +109,10 @@ namespace OneSpanSign.Sdk
                     
                 if (apiSettings.Ceremony.DeclineButton.HasValue)
                     builder = (apiSettings.Ceremony.DeclineButton.Value ? builder.WithDecline() : builder.WithoutDecline());
-                
+
                 if (apiSettings.Ceremony.LeftMenuExpand.HasValue)
                     builder = (apiSettings.Ceremony.LeftMenuExpand.Value ? builder.WithLeftMenuExpand() : builder.WithoutLeftMenuExpand());
-                    
+
                 if (apiSettings.Ceremony.HideWatermark.HasValue)
                     builder = (apiSettings.Ceremony.HideWatermark.Value ? builder.WithoutWatermark() : builder.WithWatermark());
                     
@@ -153,6 +154,9 @@ namespace OneSpanSign.Sdk
 
                 if (apiSettings.Ceremony.MaxAttachmentFiles.HasValue)
                     builder.WithMaxAttachmentFiles (apiSettings.Ceremony.MaxAttachmentFiles.Value);
+
+                if (apiSettings.Ceremony.ShowNseHelp.HasValue)
+                                    builder = (apiSettings.Ceremony.ShowNseHelp.Value ? builder.WithShowNseHelp () : builder.WithoutShowNseHelp ());
 
                 foreach (string declineReason in apiSettings.Ceremony.DeclineReasons)
                 {

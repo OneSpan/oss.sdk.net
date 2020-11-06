@@ -30,6 +30,7 @@ namespace OneSpanSign.Sdk
         private Nullable<bool> defaultTimeBasedExpiry = null;
         private Nullable<Int32> remainingDays = null;
         private Nullable<Int32> maxAttachmentFiles = null;
+        private Nullable<bool> showNseHelp = null;
 
         private string linkText = null;
         private string linkTooltip = null;
@@ -148,7 +149,7 @@ namespace OneSpanSign.Sdk
             enableDecline = false;
             return this;
         }
-        
+
         public DocumentPackageSettingsBuilder WithLeftMenuExpand ()
         {
             expandLeftMenu = true;
@@ -160,7 +161,7 @@ namespace OneSpanSign.Sdk
             expandLeftMenu = false;
             return this;
         }
-        
+
         public DocumentPackageSettingsBuilder WithWatermark ()
         {
             hideWatermark = false;
@@ -206,6 +207,18 @@ namespace OneSpanSign.Sdk
         public DocumentPackageSettingsBuilder WithRemainingDays (Nullable<Int32> remainingDays)
         {
             this.remainingDays = remainingDays;
+            return this;
+        }
+
+        public DocumentPackageSettingsBuilder WithShowNseHelp ()
+        {
+            showNseHelp = true;
+            return this;
+        }
+
+        public DocumentPackageSettingsBuilder WithoutShowNseHelp ()
+        {
+            showNseHelp = false;
             return this;
         }
 
@@ -351,6 +364,7 @@ namespace OneSpanSign.Sdk
             result.FontSize = fontSize;
             result.DefaultTimeBasedExpiry = defaultTimeBasedExpiry;
             result.RemainingDays = remainingDays;
+            result.ShowNseHelp = showNseHelp;
             result.LinkHref = linkHref;
             result.LinkText = linkText;
             result.LinkTooltip = linkTooltip;
