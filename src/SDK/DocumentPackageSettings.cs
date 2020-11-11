@@ -65,6 +65,14 @@ namespace OneSpanSign.Sdk
             get { return enableDecline; }
             set { enableDecline = value; }
         }
+        
+        private Nullable<bool> expandLeftMenu = null;
+
+        public Nullable<bool> ExpandLeftMenu 
+        {
+            get { return expandLeftMenu; }
+            set { expandLeftMenu = value; }
+        }
 
         private Nullable<bool> disableDeclineOther = null;
 
@@ -128,6 +136,14 @@ namespace OneSpanSign.Sdk
         {
             get { return remainingDays; }
             set { remainingDays = value; }
+        }
+
+        private Nullable<bool> showNseHelp = null;
+
+        public Nullable<bool> ShowNseHelp
+        {
+            get { return showNseHelp; }
+            set { showNseHelp = value; }
         }
 
         private List<string> declineReasons = new List<string> ();
@@ -202,6 +218,14 @@ namespace OneSpanSign.Sdk
             set { ceremonyLayoutSettings = value; }
         }
 
+        private Nullable<Int32> maxAttachmentFiles = null;
+
+        public Nullable<Int32> MaxAttachmentFiles
+        {
+            get { return maxAttachmentFiles; }
+            set { maxAttachmentFiles = value; }
+        }
+
         internal PackageSettings toAPIPackageSettings ()
         {
 
@@ -215,6 +239,9 @@ namespace OneSpanSign.Sdk
 
             if (enableDecline != null)
                 ceremonySettings.DeclineButton = enableDecline.Value;
+
+            if (expandLeftMenu != null)
+                ceremonySettings.LeftMenuExpand = expandLeftMenu.Value;
 
             if (disableOptOutOther != null)
                 ceremonySettings.DisableOptOutOther = disableOptOutOther.Value;
@@ -255,6 +282,9 @@ namespace OneSpanSign.Sdk
             if (remainingDays != null)
                 ceremonySettings.RemainingDays = remainingDays.Value;
 
+            if (showNseHelp != null)
+                            ceremonySettings.ShowNseHelp = showNseHelp.Value;
+
             foreach (string declineReason in declineReasons)
                 ceremonySettings.DeclineReasons.Add (declineReason);
 
@@ -263,6 +293,9 @@ namespace OneSpanSign.Sdk
 
             if (maxAuthAttempts != null)
                 ceremonySettings.MaxAuthFailsAllowed = maxAuthAttempts.Value;
+
+            if (maxAttachmentFiles != null)
+                ceremonySettings.MaxAttachmentFiles = maxAttachmentFiles.Value;
 
             if (linkHref != null) {
                 Link link = new Link ();

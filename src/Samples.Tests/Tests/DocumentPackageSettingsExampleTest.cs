@@ -30,6 +30,9 @@ namespace SDK.Examples
             Assert.IsTrue (result.Settings.EnforceCaptureSignature.HasValue);
             Assert.IsTrue (result.Settings.EnforceCaptureSignature.Value);
 
+            Assert.IsTrue (result.Settings.ExpandLeftMenu.HasValue);
+            Assert.IsTrue (result.Settings.ExpandLeftMenu.Value);
+
             Assert.AreEqual (example.FONT_SIZE, result.Settings.FontSize.Value);
 
             Assert.AreEqual (3, result.Settings.DeclineReasons.Count);
@@ -46,6 +49,9 @@ namespace SDK.Examples
 
             Assert.IsTrue (result.Settings.DefaultTimeBasedExpiry.Value);
             Assert.AreEqual (example.EXPIRE_IN_DAYS, result.Settings.RemainingDays.Value);
+            Assert.IsTrue (result.Settings.ShowNseHelp.Value);
+
+            Assert.AreEqual (example.MAX_ATTACHMENT_FILES, result.Settings.MaxAttachmentFiles.Value);
         }
     }
 }

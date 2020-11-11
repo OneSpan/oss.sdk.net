@@ -22,6 +22,7 @@ namespace SDK.Examples
 
         public readonly Nullable<Int32> FONT_SIZE = 28;
         public readonly Nullable<Int32> EXPIRE_IN_DAYS = 12;
+        public readonly Nullable<Int32> MAX_ATTACHMENT_FILES = 2;
 
         override public void Execute() {
             DocumentPackage superDuperPackage = PackageBuilder.NewPackageNamed(PackageName)
@@ -33,6 +34,7 @@ namespace SDK.Examples
                               .HideOwnerInPersonDropDown()
 				              .WithDecline()
                               .WithOptOut()
+				              .WithLeftMenuExpand()
                               .WithEnforceCaptureSignature()
                               .WithDeclineReason(DECLINE_REASON_1)
                               .WithDeclineReason(DECLINE_REASON_2)
@@ -47,7 +49,9 @@ namespace SDK.Examples
 				              .WithHandOverLinkText("click here")
 				              .WithHandOverLinkTooltip("link tooltip")
                               .WithDefaultTimeBasedExpiry ()
+				              .WithMaxAttachmentFiles(MAX_ATTACHMENT_FILES)
                               .WithRemainingDays(EXPIRE_IN_DAYS)
+                              .WithShowNseHelp()
 				              .WithCeremonyLayoutSettings(CeremonyLayoutSettingsBuilder.NewCeremonyLayoutSettings()
                                             .WithoutGlobalConfirmButton()
                                             .WithoutGlobalDownloadButton()

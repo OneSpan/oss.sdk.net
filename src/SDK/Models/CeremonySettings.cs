@@ -20,6 +20,12 @@ namespace OneSpanSign.API
         {
             get; set;
         }
+        
+        [JsonProperty("leftMenuExpand")]
+        public Nullable<bool> LeftMenuExpand
+        {
+            get; set;
+        }
 
 
         [JsonProperty("declineReasons")]
@@ -114,6 +120,10 @@ namespace OneSpanSign.API
             get; set;
         }
 
+        [JsonProperty ("showNseHelp")]
+        public Nullable<bool> ShowNseHelp {
+            get; set;
+        }
 
         [JsonProperty("documentToolbarOptions")]
         public DocumentToolbarOptions DocumentToolbarOptions
@@ -221,7 +231,10 @@ namespace OneSpanSign.API
             get; set;
         }
 
-
+        [JsonProperty ("maxAttachmentFiles")]
+        public Nullable<Int32> MaxAttachmentFiles {
+            get; set;
+        }
 
     }
 }

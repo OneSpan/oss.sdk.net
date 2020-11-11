@@ -10,6 +10,7 @@ namespace OneSpanSign.Sdk
         private Nullable<bool> enableInPerson = null;
         private Nullable<bool> enableOptOut = null;
         private Nullable<bool> enableDecline = null;
+        private Nullable<bool> expandLeftMenu = null;
         private Nullable<bool> hideWatermark = null;
         private Nullable<bool> hideCaptureText = null;
         private List<string> declineReasons = new List<string> ();
@@ -28,6 +29,8 @@ namespace OneSpanSign.Sdk
         private Nullable<Int32> fontSize = null;
         private Nullable<bool> defaultTimeBasedExpiry = null;
         private Nullable<Int32> remainingDays = null;
+        private Nullable<Int32> maxAttachmentFiles = null;
+        private Nullable<bool> showNseHelp = null;
 
         private string linkText = null;
         private string linkTooltip = null;
@@ -147,6 +150,18 @@ namespace OneSpanSign.Sdk
             return this;
         }
 
+        public DocumentPackageSettingsBuilder WithLeftMenuExpand ()
+        {
+            expandLeftMenu = true;
+            return this;
+        }
+
+        public DocumentPackageSettingsBuilder WithoutLeftMenuExpand ()
+        {
+            expandLeftMenu = false;
+            return this;
+        }
+
         public DocumentPackageSettingsBuilder WithWatermark ()
         {
             hideWatermark = false;
@@ -192,6 +207,18 @@ namespace OneSpanSign.Sdk
         public DocumentPackageSettingsBuilder WithRemainingDays (Nullable<Int32> remainingDays)
         {
             this.remainingDays = remainingDays;
+            return this;
+        }
+
+        public DocumentPackageSettingsBuilder WithShowNseHelp ()
+        {
+            showNseHelp = true;
+            return this;
+        }
+
+        public DocumentPackageSettingsBuilder WithoutShowNseHelp ()
+        {
+            showNseHelp = false;
             return this;
         }
 
@@ -298,6 +325,12 @@ namespace OneSpanSign.Sdk
             return this;
         }
 
+        public DocumentPackageSettingsBuilder WithMaxAttachmentFiles (Nullable<Int32> maxAttachmentFiles)
+        {
+            this.maxAttachmentFiles = maxAttachmentFiles;
+            return this;
+        }
+
         public DocumentPackageSettings build ()
         {
             return Build ();
@@ -310,6 +343,7 @@ namespace OneSpanSign.Sdk
             result.EnableInPerson = enableInPerson;
             result.EnableOptOut = enableOptOut;
             result.EnableDecline = enableDecline;
+            result.ExpandLeftMenu = expandLeftMenu;
             result.HideWatermark = hideWatermark;
             result.HideCaptureText = hideCaptureText;
             foreach (string declineReason in declineReasons)
@@ -330,9 +364,11 @@ namespace OneSpanSign.Sdk
             result.FontSize = fontSize;
             result.DefaultTimeBasedExpiry = defaultTimeBasedExpiry;
             result.RemainingDays = remainingDays;
+            result.ShowNseHelp = showNseHelp;
             result.LinkHref = linkHref;
             result.LinkText = linkText;
             result.LinkTooltip = linkTooltip;
+            result.MaxAttachmentFiles = maxAttachmentFiles;
 
             result.CeremonyLayoutSettings = ceremonyLayoutSettings;
 
@@ -370,6 +406,7 @@ namespace OneSpanSign.Sdk
             }
 
             maxAuthAttempts = apiPackageSettings.Ceremony.MaxAuthFailsAllowed;
+            maxAttachmentFiles = apiPackageSettings.Ceremony.MaxAttachmentFiles;
 
             if (apiPackageSettings.Ceremony.DocumentToolbarOptions != null) {
                 showDocumentToolbarDownloadButton = apiPackageSettings.Ceremony.DocumentToolbarOptions.DownloadButton;

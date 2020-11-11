@@ -11,23 +11,32 @@ namespace OneSpanSign.Sdk.Internal
 	/// </summary>
 	public class HttpMethods
 	{
-        public const string ESL_API_VERSION = "11.32";
-        public const string ESL_API_VERSION_HEADER = "esl-api-version=" + ESL_API_VERSION;
+        private const string ESL_API_VERSION = "11.37";
+        private const string ESL_API_USER_AGENT = ".Net SDK v" + ESL_API_VERSION;
+        private const string ESL_API_VERSION_HEADER = "esl-api-version=" + ESL_API_VERSION;
 
-        public const string CONTENT_TYPE_APPLICATION_JSON = "application/json";
+        private const string CONTENT_TYPE_APPLICATION_JSON = "application/json";
         public const string ESL_CONTENT_TYPE_APPLICATION_JSON = CONTENT_TYPE_APPLICATION_JSON + "; " + ESL_API_VERSION_HEADER;
 
-        public const string CONTENT_TYPE_APPLICATION_MULTIPART = "multipart/form-data";
-        public const string ESL_CONTENT_TYPE_APPLICATION_MULTIPART = CONTENT_TYPE_APPLICATION_MULTIPART + "; " + ESL_API_VERSION_HEADER + "; boundary={0}";
+        private const string CONTENT_TYPE_APPLICATION_MULTIPART = "multipart/form-data";
+        private const string ESL_CONTENT_TYPE_APPLICATION_MULTIPART = CONTENT_TYPE_APPLICATION_MULTIPART + "; " + ESL_API_VERSION_HEADER + "; boundary={0}";
 
-        public const string ACCEPT_TYPE_APPLICATION_JSON = "application/json";
-        public const string ACCEPT_TYPE_APPLICATION_OCTET_STREAM = "application/octet-stream";
-        public const string ACCEPT_TYPE_APPLICATION = "*/*";
+        private const string ACCEPT_TYPE_APPLICATION_JSON = "application/json";
+        private const string ACCEPT_TYPE_APPLICATION_OCTET_STREAM = "application/octet-stream";
+        private const string ACCEPT_TYPE_APPLICATION = "*/*";
         public const string ESL_ACCEPT_TYPE_APPLICATION_JSON = ACCEPT_TYPE_APPLICATION_JSON + "; " + ESL_API_VERSION_HEADER;
-        public const string ESL_ACCEPT_TYPE_APPLICATION_OCTET_STREAM = ACCEPT_TYPE_APPLICATION_OCTET_STREAM + "; " + ESL_API_VERSION_HEADER;
-        public const string ESL_ACCEPT_TYPE_APPLICATION = ACCEPT_TYPE_APPLICATION + "; " + ESL_API_VERSION_HEADER;
+        private const string ESL_ACCEPT_TYPE_APPLICATION_OCTET_STREAM = ACCEPT_TYPE_APPLICATION_OCTET_STREAM + "; " + ESL_API_VERSION_HEADER;
+        private const string ESL_ACCEPT_TYPE_APPLICATION = ACCEPT_TYPE_APPLICATION + "; " + ESL_API_VERSION_HEADER;
+        
+        private const string HEADER_USER_AGENT = "User-Agent";
 
         public static ProxyConfiguration ProxyConfiguration;
+
+        public static HttpWebRequest WithUserAgent(WebRequest request)
+        {
+            request.Headers.Add(HEADER_USER_AGENT, ESL_API_USER_AGENT);
+            return (HttpWebRequest) request;
+        }
 
         private static void SetupAuthorization(WebRequest request, AuthHeaderGenerator authHeaderGen)
         {
@@ -58,7 +67,7 @@ namespace OneSpanSign.Sdk.Internal
             try {
                 System.Net.ServicePointManager.SecurityProtocol = (SecurityProtocolType)768 | (SecurityProtocolType)3072;
 
-                HttpWebRequest request = (HttpWebRequest)WebRequest.Create (path);
+                HttpWebRequest request = WithUserAgent(WebRequest.Create (path));
                 request.Method = "POST";
                 request.ContentType = ESL_CONTENT_TYPE_APPLICATION_JSON;
                 request.ContentLength = content.Length;
@@ -103,7 +112,7 @@ namespace OneSpanSign.Sdk.Internal
             try {
                 System.Net.ServicePointManager.SecurityProtocol = (SecurityProtocolType)768 | (SecurityProtocolType)3072;
 
-                HttpWebRequest request = (HttpWebRequest)WebRequest.Create (path);
+                HttpWebRequest request = WithUserAgent(WebRequest.Create (path));
                 request.Method = "POST";
                 request.ContentType = ESL_CONTENT_TYPE_APPLICATION_JSON;
                 request.ContentLength = content.Length;
@@ -149,7 +158,7 @@ namespace OneSpanSign.Sdk.Internal
             try {
                 System.Net.ServicePointManager.SecurityProtocol = (SecurityProtocolType)768 | (SecurityProtocolType)3072;
 
-                HttpWebRequest request = (HttpWebRequest)WebRequest.Create (path);
+                HttpWebRequest request = WithUserAgent(WebRequest.Create (path));
                 request.Method = "PUT";
                 request.ContentType = ESL_CONTENT_TYPE_APPLICATION_JSON;
                 request.ContentLength = content.Length;
@@ -201,7 +210,7 @@ namespace OneSpanSign.Sdk.Internal
             try {
                 System.Net.ServicePointManager.SecurityProtocol = (SecurityProtocolType)768 | (SecurityProtocolType)3072;
 
-                HttpWebRequest request = (HttpWebRequest)WebRequest.Create (path);
+                HttpWebRequest request = WithUserAgent(WebRequest.Create (path));
                 request.Method = "GET";
                 AddAdditionalHeaders (request, headers);
                 request.Accept = ESL_ACCEPT_TYPE_APPLICATION_JSON;
@@ -281,7 +290,7 @@ namespace OneSpanSign.Sdk.Internal
             try {
                 System.Net.ServicePointManager.SecurityProtocol = (SecurityProtocolType)768 | (SecurityProtocolType)3072;
 
-                HttpWebRequest request = (HttpWebRequest)WebRequest.Create (path);
+                HttpWebRequest request = WithUserAgent(WebRequest.Create (path));
                 request.Method = "GET";
                 AddAdditionalHeaders (request, headers);
                 SetupAuthorization(request, apiKey);
@@ -322,7 +331,7 @@ namespace OneSpanSign.Sdk.Internal
             try {
                 System.Net.ServicePointManager.SecurityProtocol = (SecurityProtocolType)768 | (SecurityProtocolType)3072;
 
-                HttpWebRequest request = (HttpWebRequest)WebRequest.Create (path);
+                HttpWebRequest request = WithUserAgent(WebRequest.Create (path));
                 request.Method = "GET";
                 AddAdditionalHeaders (request, headers);
                 SetupAuthorization(request, apiKey);
@@ -385,7 +394,7 @@ namespace OneSpanSign.Sdk.Internal
             try {
                 System.Net.ServicePointManager.SecurityProtocol = (SecurityProtocolType)768 | (SecurityProtocolType)3072;
 
-                HttpWebRequest request = (HttpWebRequest)WebRequest.Create (path);
+                HttpWebRequest request = WithUserAgent(WebRequest.Create (path));
                 request.Method = "GET";
                 AddAdditionalHeaders (request, headers);
                 SetupAuthorization(request, apiKey);
@@ -426,7 +435,7 @@ namespace OneSpanSign.Sdk.Internal
             try {
                 System.Net.ServicePointManager.SecurityProtocol = (SecurityProtocolType)768 | (SecurityProtocolType)3072;
 
-                HttpWebRequest request = (HttpWebRequest)WebRequest.Create (path);
+                HttpWebRequest request = WithUserAgent(WebRequest.Create (path));
                 request.Method = "DELETE";
                 AddAdditionalHeaders (request, headers);
                 SetupAuthorization(request, apiKey);
@@ -471,7 +480,7 @@ namespace OneSpanSign.Sdk.Internal
             try {
                 System.Net.ServicePointManager.SecurityProtocol = (SecurityProtocolType)768 | (SecurityProtocolType)3072;
 
-                HttpWebRequest request = (HttpWebRequest)WebRequest.Create (path);
+                HttpWebRequest request = WithUserAgent(WebRequest.Create (path));
                 request.Method = "DELETE";
                 request.ContentType = ESL_CONTENT_TYPE_APPLICATION_JSON;
                 request.ContentLength = content.Length;
@@ -529,7 +538,7 @@ namespace OneSpanSign.Sdk.Internal
 
         public static string MultipartPostHttp (string apiKey, string path, byte [] content, string boundary, AuthHeaderGenerator authHeaderGen, IDictionary<string, string> headers)
         {
-            WebRequest request = WebRequest.Create (path);
+            WebRequest request = WithUserAgent(WebRequest.Create (path));
             try {
                 System.Net.ServicePointManager.SecurityProtocol = (SecurityProtocolType)768 | (SecurityProtocolType)3072;
 
