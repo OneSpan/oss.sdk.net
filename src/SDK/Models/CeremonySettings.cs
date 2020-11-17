@@ -125,6 +125,11 @@ namespace OneSpanSign.API
             get; set;
         }
 
+        [JsonProperty ("showNseOverview")]
+        public Nullable<bool> ShowNseOverview {
+            get; set;
+        }
+
         [JsonProperty("documentToolbarOptions")]
         public DocumentToolbarOptions DocumentToolbarOptions
         {

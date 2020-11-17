@@ -146,6 +146,14 @@ namespace OneSpanSign.Sdk
             set { showNseHelp = value; }
         }
 
+        private Nullable<bool> showNseOverview = null;
+
+        public Nullable<bool> ShowNseOverview
+        {
+            get { return showNseOverview; }
+            set { showNseOverview = value; }
+        }
+
         private List<string> declineReasons = new List<string> ();
 
         public List<string> DeclineReasons 
@@ -284,6 +292,9 @@ namespace OneSpanSign.Sdk
 
             if (showNseHelp != null)
                             ceremonySettings.ShowNseHelp = showNseHelp.Value;
+
+            if (showNseOverview != null)
+                            ceremonySettings.ShowNseOverview = showNseOverview.Value;
 
             foreach (string declineReason in declineReasons)
                 ceremonySettings.DeclineReasons.Add (declineReason);
