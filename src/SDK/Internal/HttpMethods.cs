@@ -27,15 +27,14 @@ namespace OneSpanSign.Sdk.Internal
         public const string ESL_ACCEPT_TYPE_APPLICATION_JSON = ACCEPT_TYPE_APPLICATION_JSON + "; " + ESL_API_VERSION_HEADER;
         private const string ESL_ACCEPT_TYPE_APPLICATION_OCTET_STREAM = ACCEPT_TYPE_APPLICATION_OCTET_STREAM + "; " + ESL_API_VERSION_HEADER;
         private const string ESL_ACCEPT_TYPE_APPLICATION = ACCEPT_TYPE_APPLICATION + "; " + ESL_API_VERSION_HEADER;
-        
-        private const string HEADER_USER_AGENT = "User-Agent";
 
         public static ProxyConfiguration ProxyConfiguration;
 
         public static HttpWebRequest WithUserAgent(WebRequest request)
         {
-            request.Headers.Add(HEADER_USER_AGENT, ESL_API_USER_AGENT);
-            return (HttpWebRequest) request;
+            HttpWebRequest httpRequest = (HttpWebRequest)request;
+            httpRequest.UserAgent = ESL_API_USER_AGENT;
+            return httpRequest;
         }
 
         private static void SetupAuthorization(WebRequest request, AuthHeaderGenerator authHeaderGen)
