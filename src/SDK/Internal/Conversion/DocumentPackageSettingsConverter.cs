@@ -43,6 +43,7 @@ namespace OneSpanSign.Sdk
             ceremonySettings.ShowNseHelp = sdkSettings.ShowNseHelp;
             ceremonySettings.LeftMenuExpand = sdkSettings.ExpandLeftMenu;
             ceremonySettings.MaxAttachmentFiles = sdkSettings.MaxAttachmentFiles;
+            ceremonySettings.ShowNseOverview = sdkSettings.ShowNseOverview;
 
             if (sdkSettings.EnableFirstAffidavit.HasValue) {
                 ceremonySettings.DisableFirstInPersonAffidavit = !sdkSettings.EnableFirstAffidavit;
@@ -157,6 +158,9 @@ namespace OneSpanSign.Sdk
 
                 if (apiSettings.Ceremony.ShowNseHelp.HasValue)
                                     builder = (apiSettings.Ceremony.ShowNseHelp.Value ? builder.WithShowNseHelp () : builder.WithoutShowNseHelp ());
+
+                 if (apiSettings.Ceremony.ShowNseOverview.HasValue)
+                                    builder = (apiSettings.Ceremony.ShowNseOverview.Value ? builder.WithShowNseOverview () : builder.WithoutShowNseOverview ());
 
                 foreach (string declineReason in apiSettings.Ceremony.DeclineReasons)
                 {
