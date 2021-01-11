@@ -114,8 +114,8 @@ namespace SDK.Examples
             ossClient.AccountService.ClearDelegates(createdOwnerMember.Id);
             delegationUserListAfterClearing = ossClient.AccountService.GetDelegates(createdOwnerMember.Id);
 
-            delegationUser10 = DelegationUserBuilder.NewDelegationUser(retrievedSender10).WithExpiryDate(DateTime.Now).Build();
-            delegationUser11 = DelegationUserBuilder.NewDelegationUser(retrievedSender11).WithExpiryDate(DateTime.Now).Build();
+            delegationUser10 = DelegationUserBuilder.NewDelegationUser(retrievedSender10).WithExpiryDate(DateTime.Now.AddHours(1)).Build();
+            delegationUser11 = DelegationUserBuilder.NewDelegationUser(retrievedSender11).WithExpiryDate(DateTime.Now.AddHours(1)).Build();
 
             List<DelegationUser> delegates = new List<DelegationUser>();
             delegates.Add(delegationUser10);
