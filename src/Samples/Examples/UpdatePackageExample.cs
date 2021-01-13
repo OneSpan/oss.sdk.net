@@ -31,7 +31,7 @@ namespace SDK.Examples
         public readonly string OLD_PACKAGE_NAME = "Old Package Name";
         public readonly string OLD_DESCRIPTION = "Old Description";
         public readonly string OLD_EMAIL_MESSAGE = "Old Email Message";
-        public readonly DateTime OLD_EXPIRY_DATE = DateTime.Now.AddDays(10);
+        public readonly DateTime OLD_EXPIRY_DATE = DateTime.Now.AddMonths(2).AddDays(1);
         public readonly CultureInfo OLD_LANGUAGE = CultureInfo.GetCultureInfo("en");
 
         // Visibility is for only template
