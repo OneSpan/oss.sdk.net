@@ -11,19 +11,19 @@ namespace OneSpanSign.API
         private DateTime insertDate;
 
         [JsonProperty ("id")]
-        public Int32 Id 
+        public int Id 
         {
             get; set;
         }
 
         [JsonProperty ("name")]
-        public String Name 
+        public string Name 
         {
             get; set;
         }
 
         [JsonProperty ("preview")]
-        public Boolean Preview 
+        public bool Preview 
         {
             get; set;
         }
