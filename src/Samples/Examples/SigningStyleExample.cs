@@ -19,6 +19,7 @@ namespace SDK.Examples
 
         public List<SigningLogo> createdSigningLogos, updatedSigningLogos, removedSigningLogos;
 
+        public SigningUiOptions defaultSigningUiOptions, patchedSigningUiOptions, deletedSigningUiOptions;
         override public void Execute ()
         {
             // Create default signing theme
@@ -64,6 +65,34 @@ namespace SDK.Examples
             // Delete signing logos
             OssClient.GetSigningStyleService ().SaveSigningLogos (new List<SigningLogo> ());
             removedSigningLogos = OssClient.GetSigningStyleService ().GetSigningLogos ();
-        }
+            
+            //Get signing ui options
+            defaultSigningUiOptions = OssClient.GetSigningStyleService().GetSigningUiOptions();
+
+            SigningUiOptions signingUiOptions = SigningUiOptionsBuilder.NewSigningUiOptions()
+                .WithOverviewOptions(OverviewOptionsBuilder.NewOverviewOptions()
+                    .WithoutTitle()
+                    .WithoutBody()
+                    .WithoutDocumentSection()
+                    .WithoutUploadSection()
+                    .Build())
+                .WithCompleteSummaryOptions(CompleteSummaryOptionsBuilder.NewCompleteSummaryOptions()
+                    .WithoutFrom()
+                    .WithoutTitle()
+                    .WithoutMessage()
+                    .WithoutDownload()
+                    .WithoutReview()
+                    .WithoutContinue()
+                    .Build())
+                .Build();
+            //Save signing ui options
+            OssClient.GetSigningStyleService().SaveSigningUiOptions(signingUiOptions);
+            patchedSigningUiOptions = OssClient.GetSigningStyleService().GetSigningUiOptions();
+            
+            //Delete signing ui options
+            OssClient.GetSigningStyleService().DeleteSigningUiOptions();
+            deletedSigningUiOptions = OssClient.GetSigningStyleService().GetSigningUiOptions();
+
+        } 
     }
 }

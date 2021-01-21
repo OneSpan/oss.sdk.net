@@ -189,6 +189,9 @@ namespace OneSpanSign.Sdk.Internal
         // Account Signing Logo Service
         public static readonly string ACCOUNT_SIGNING_LOGO_PATH = "/account/admin/signingLogos";
         
+        // Account Signing UI Options Service
+        public static readonly string ACCOUNT_SIGNING_UI_OPTIONS_PATH = "/account/admin/signingUiOptions";
+        
 		// Account SubAccount Service
         public static readonly string ACCOUNT_SUBACCOUNTS_PATH = "/account/subaccounts";
         public static readonly string ACCOUNT_SUBACCOUNTS_ID_PATH = "/account/subaccounts/{accountId}";

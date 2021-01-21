@@ -113,6 +113,23 @@ namespace OneSpanSign.Sdk
             support.LogResponse(response);
             return response;
         }
+        
+        public string Patch(string path, string jsonPayload)
+        {
+            support.LogRequest("PATCH", path, jsonPayload);
+
+            var payloadBytes = jsonPayload != null ? Converter.ToBytes(jsonPayload) : new byte[0];
+
+            if (proxyConfiguration != null)
+                HttpMethods.ProxyConfiguration = proxyConfiguration;
+
+            var responseBytes = HttpMethods.PatchHttp(apiKey, path, payloadBytes, SetupAuthorization(null));
+
+            var response = Converter.ToString(responseBytes);
+            support.LogResponse(response);
+
+            return response;
+        }
 
         public string PostMultipartFile(string path, byte[] fileBytes, string boundary, string json)
         {

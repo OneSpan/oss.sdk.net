@@ -11,7 +11,7 @@ namespace OneSpanSign.Sdk.Internal
 	/// </summary>
 	public class HttpMethods
 	{
-        private const string ESL_API_VERSION = "11.37";
+        private const string ESL_API_VERSION = "11.38";
         private const string ESL_API_USER_AGENT = ".Net SDK v" + ESL_API_VERSION;
         private const string ESL_API_VERSION_HEADER = "esl-api-version=" + ESL_API_VERSION;
 
@@ -140,6 +140,46 @@ namespace OneSpanSign.Sdk.Internal
                     throw new OssServerException (
                         $"{e.Message} HTTP {((HttpWebResponse) e.Response).Method} on URI {e.Response.ResponseUri}. Optional details: {errorDetails}",
                                                  errorDetails, e);
+                }
+            } catch (Exception e) {
+                throw new OssException ("Error communicating with oss server. " + e.Message, e);
+            }
+        }
+        
+        public static byte [] PatchHttp (string apiKey, string path, byte [] content, IDictionary<string, string> headers)
+        {
+            try {
+                System.Net.ServicePointManager.SecurityProtocol = (SecurityProtocolType)768 | (SecurityProtocolType)3072;
+
+                HttpWebRequest request = WithUserAgent(WebRequest.Create (path));
+                request.Method = "PATCH";
+                request.ContentType = ESL_CONTENT_TYPE_APPLICATION_JSON;
+                request.ContentLength = content.Length;
+                AddAdditionalHeaders (request, headers);
+                SetupAuthorization(request, apiKey);
+                request.Accept = ESL_ACCEPT_TYPE_APPLICATION_JSON;
+                SetProxy (request);
+
+                using (Stream dataStream = request.GetRequestStream ()) {
+                    dataStream.Write (content, 0, content.Length);
+                }
+
+                WebResponse response = request.GetResponse ();
+
+                using (Stream responseStream = response.GetResponseStream ()) {
+                    var memoryStream = new MemoryStream ();
+                    CopyTo (responseStream, memoryStream);
+
+                    byte [] result = memoryStream.ToArray ();
+                    return result;
+                }
+            } catch (WebException e) {
+                using (var stream = e.Response.GetResponseStream ())
+                using (var reader = new StreamReader (stream)) {
+                    string errorDetails = reader.ReadToEnd ();
+                    throw new OssServerException (String.Format ("{0} HTTP {1} on URI {2}. Optional details: {3}", e.Message,
+                                                               ((HttpWebResponse)e.Response).Method, e.Response.ResponseUri, errorDetails),
+                                                                errorDetails, e);
                 }
             } catch (Exception e) {
                 throw new OssException ("Error communicating with oss server. " + e.Message, e);

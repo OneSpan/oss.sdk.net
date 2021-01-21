@@ -38,6 +38,24 @@ namespace SDK.Examples
             Assert.AreEqual (example.updatedSigningLogos [1].Language, "fr");
 
           //  Assert.IsEmpty (example.removedSigningLogos);
+            
+            Assert.IsNotNull (example.defaultSigningUiOptions);
+            Assert.IsTrue(example.defaultSigningUiOptions.OverviewOptions.Body);
+            Assert.IsTrue(example.defaultSigningUiOptions.OverviewOptions.Title);
+            Assert.IsTrue(example.defaultSigningUiOptions.OverviewOptions.DocumentSection);
+            Assert.IsTrue(example.defaultSigningUiOptions.OverviewOptions.UploadSection);
+            
+            Assert.IsNotNull (example.patchedSigningUiOptions);
+            Assert.IsFalse(example.patchedSigningUiOptions.OverviewOptions.Body);
+            Assert.IsFalse(example.patchedSigningUiOptions.OverviewOptions.Title);
+            Assert.IsFalse(example.patchedSigningUiOptions.OverviewOptions.DocumentSection);
+            Assert.IsFalse(example.patchedSigningUiOptions.OverviewOptions.UploadSection);
+
+            Assert.IsNotNull (example.deletedSigningUiOptions);
+            Assert.IsTrue(example.deletedSigningUiOptions.OverviewOptions.Body);
+            Assert.IsTrue(example.deletedSigningUiOptions.OverviewOptions.Title);
+            Assert.IsTrue(example.deletedSigningUiOptions.OverviewOptions.DocumentSection);
+            Assert.IsTrue(example.deletedSigningUiOptions.OverviewOptions.UploadSection);
         }
     }
 }
