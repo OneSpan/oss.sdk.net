@@ -148,6 +148,7 @@ namespace SDK.Tests
                     .WithoutRecipientRole()
                     .WithoutNotaryTag()
                     .WithoutRecipientStatus()
+                    .WithoutReviewDocumentsButton()
                     .WithoutDownloadButton()
                     .Build())
                 .WithNotaryWelcomeOptions(NotaryWelcomeOptionsBuilder.NewNotaryWelcomeOptions()
