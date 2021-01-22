@@ -1,16 +1,18 @@
+using System;
+
 namespace OneSpanSign.Sdk
 {
     public class OverviewOptions
     {
 
-        private bool title;
-        private bool body;
-        private bool documentSection;
-        private bool uploadSection;
+        private Nullable<bool> title;
+        private Nullable<bool> body;
+        private Nullable<bool> documentSection;
+        private Nullable<bool> uploadSection;
         
 
         
-        public bool Title
+        public Nullable<bool> Title
         {
             get
             {
@@ -22,7 +24,7 @@ namespace OneSpanSign.Sdk
             }
         }
         
-        public bool Body
+        public Nullable<bool> Body
         {
             get
             {
@@ -34,7 +36,7 @@ namespace OneSpanSign.Sdk
             }
         }
         
-        public bool DocumentSection
+        public Nullable<bool> DocumentSection
         {
             get
             {
@@ -46,7 +48,7 @@ namespace OneSpanSign.Sdk
             }
         }
         
-        public bool UploadSection
+        public Nullable<bool> UploadSection
         {
             get
             {
