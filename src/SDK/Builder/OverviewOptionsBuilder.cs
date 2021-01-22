@@ -1,11 +1,13 @@
+using System;
+
 namespace OneSpanSign.Sdk
 {
     public class OverviewOptionsBuilder
     {
-        private bool title;
-        private bool body;
-        private bool documentSection;
-        private bool uploadSection;
+        private Nullable<bool> title;
+        private Nullable<bool> body;
+        private Nullable<bool> documentSection;
+        private Nullable<bool> uploadSection;
         
         private OverviewOptionsBuilder()
         {

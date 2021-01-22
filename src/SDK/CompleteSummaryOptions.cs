@@ -1,16 +1,18 @@
+using System;
+
 namespace OneSpanSign.Sdk
 {
     public class CompleteSummaryOptions
     {
 
-        private bool _from;
-        private bool title;
-        private bool message;
-        private bool download;
-        private bool review;
-        private bool _continue;
+        private Nullable<bool> _from;
+        private Nullable<bool> title;
+        private Nullable<bool> message;
+        private Nullable<bool> download;
+        private Nullable<bool> review;
+        private Nullable<bool> _continue;
 
-        public bool From
+        public Nullable<bool> From
         {
             get
             {
@@ -22,7 +24,7 @@ namespace OneSpanSign.Sdk
             }
         }
         
-        public bool Title
+        public Nullable<bool> Title
         {
             get
             {
@@ -34,7 +36,7 @@ namespace OneSpanSign.Sdk
             }
         }
         
-        public bool Message
+        public Nullable<bool> Message
         {
             get
             {
@@ -46,7 +48,7 @@ namespace OneSpanSign.Sdk
             }
         }
         
-        public bool Download
+        public Nullable<bool> Download
         {
             get
             {
@@ -58,7 +60,7 @@ namespace OneSpanSign.Sdk
             }
         }
         
-        public bool Review
+        public Nullable<bool> Review
         {
             get
             {
@@ -70,7 +72,7 @@ namespace OneSpanSign.Sdk
             }
         }
         
-        public bool Continue
+        public Nullable<bool> Continue
         {
             get
             {

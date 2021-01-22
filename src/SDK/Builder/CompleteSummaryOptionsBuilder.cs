@@ -1,13 +1,15 @@
+using System;
+
 namespace OneSpanSign.Sdk
 {
     public class CompleteSummaryOptionsBuilder
     {
-        private bool from;
-        private bool title;
-        private bool message;
-        private bool download;
-        private bool review;
-        private bool _continue;
+        private Nullable<bool> from;
+        private Nullable<bool> title;
+        private Nullable<bool> message;
+        private Nullable<bool> download;
+        private Nullable<bool> review;
+        private Nullable<bool> _continue;
         
         
         private CompleteSummaryOptionsBuilder()

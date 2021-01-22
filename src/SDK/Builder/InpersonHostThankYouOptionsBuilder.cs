@@ -1,15 +1,17 @@
+using System;
+
 namespace OneSpanSign.Sdk
 {
     public class InpersonHostThankYouOptionsBuilder
     {
-        private bool title;
-        private bool body;
-        private bool recipientName;
-        private bool recipientEmail;
-        private bool recipientRole;
-        private bool recipientStatus;
-        private bool downloadButton;
-        private bool reviewDocumentsButton;
+        private Nullable<bool> title;
+        private Nullable<bool> body;
+        private Nullable<bool> recipientName;
+        private Nullable<bool> recipientEmail;
+        private Nullable<bool> recipientRole;
+        private Nullable<bool> recipientStatus;
+        private Nullable<bool> downloadButton;
+        private Nullable<bool> reviewDocumentsButton;
         
         
         private InpersonHostThankYouOptionsBuilder()

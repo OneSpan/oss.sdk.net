@@ -1,19 +1,21 @@
+using System;
+
 namespace OneSpanSign.Sdk
 {
     public class NotaryWelcomeOptions
     {
 
-        private bool title;
-        private bool body;
-        private bool recipientName;
-        private bool recipientEmail;
-        private bool recipientActionRequired;
-        private bool notaryTag;
-        private bool recipientRole;
-        private bool recipientStatus;
+        private Nullable<bool> title;
+        private Nullable<bool> body;
+        private Nullable<bool> recipientName;
+        private Nullable<bool> recipientEmail;
+        private Nullable<bool> recipientActionRequired;
+        private Nullable<bool> notaryTag;
+        private Nullable<bool> recipientRole;
+        private Nullable<bool> recipientStatus;
 
         
-        public bool Title
+        public Nullable<bool> Title
         {
             get
             {
@@ -25,7 +27,7 @@ namespace OneSpanSign.Sdk
             }
         }
         
-        public bool Body
+        public Nullable<bool> Body
         {
             get
             {
@@ -37,7 +39,7 @@ namespace OneSpanSign.Sdk
             }
         }
         
-        public bool RecipientName
+        public Nullable<bool> RecipientName
         {
             get
             {
@@ -49,7 +51,7 @@ namespace OneSpanSign.Sdk
             }
         }
         
-        public bool RecipientEmail
+        public Nullable<bool> RecipientEmail
         {
             get
             {
@@ -61,7 +63,7 @@ namespace OneSpanSign.Sdk
             }
         }
         
-        public bool RecipientActionRequired
+        public Nullable<bool> RecipientActionRequired
         {
             get
             {
@@ -73,7 +75,7 @@ namespace OneSpanSign.Sdk
             }
         }
         
-        public bool NotaryTag
+        public Nullable<bool> NotaryTag
         {
             get
             {
@@ -85,7 +87,7 @@ namespace OneSpanSign.Sdk
             }
         }
         
-        public bool RecipientRole
+        public Nullable<bool> RecipientRole
         {
             get
             {
@@ -97,7 +99,7 @@ namespace OneSpanSign.Sdk
             }
         }
         
-        public bool RecipientStatus
+        public Nullable<bool> RecipientStatus
         {
             get
             {

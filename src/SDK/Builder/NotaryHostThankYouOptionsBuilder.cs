@@ -1,16 +1,18 @@
+using System;
+
 namespace OneSpanSign.Sdk
 {
     public class NotaryHostThankYouOptionsBuilder
     {
-        private bool title;
-        private bool body;
-        private bool recipientName;
-        private bool recipientEmail;
-        private bool recipientRole;
-        private bool notaryTag;
-        private bool recipientStatus;
-        private bool downloadButton;
-        private bool reviewDocumentsButton;
+        private Nullable<bool> title;
+        private Nullable<bool> body;
+        private Nullable<bool> recipientName;
+        private Nullable<bool> recipientEmail;
+        private Nullable<bool> recipientRole;
+        private Nullable<bool> notaryTag;
+        private Nullable<bool> recipientStatus;
+        private Nullable<bool> downloadButton;
+        private Nullable<bool> reviewDocumentsButton;
         
         
         private NotaryHostThankYouOptionsBuilder()
