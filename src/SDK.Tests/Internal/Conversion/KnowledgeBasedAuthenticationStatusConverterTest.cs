@@ -1,19 +1,17 @@
 using NUnit.Framework;
-using System;
-using OneSpanSign.API;
 using OneSpanSign.Sdk;
 
 namespace SDK.Tests
 {
-    [TestFixture()]
+    [TestFixture]
     public class KnowledgeBasedAuthenticationStatusConverterTest
     {
-        private OneSpanSign.Sdk.KnowledgeBasedAuthenticationStatus sdkKnowledgeBasedAuthenticationStatus1;
+        private KnowledgeBasedAuthenticationStatus sdkKnowledgeBasedAuthenticationStatus1;
         private string apiKnowledgeBasedAuthenticationStatus1;
 
        
         [Test]
-        public void ConvertAPINotYetAttemptedDToSDKNotYetAttempted()
+        public void ConvertApiNotYetAttemptedDToSdkNotYetAttempted()
         {
             apiKnowledgeBasedAuthenticationStatus1 = "NOT_YET_ATTEMPTED";
             sdkKnowledgeBasedAuthenticationStatus1 = new KnowledgeBasedAuthenticationStatusConverter(apiKnowledgeBasedAuthenticationStatus1).ToSDKKnowledgeBasedAuthenticationStatus();
@@ -22,7 +20,7 @@ namespace SDK.Tests
         }
 
         [Test]
-        public void ConvertAPIFailedToSDKFailed()
+        public void ConvertApiFailedToSdkFailed()
         {
             apiKnowledgeBasedAuthenticationStatus1 = "FAILED";
             sdkKnowledgeBasedAuthenticationStatus1 = new KnowledgeBasedAuthenticationStatusConverter(apiKnowledgeBasedAuthenticationStatus1).ToSDKKnowledgeBasedAuthenticationStatus();
@@ -31,7 +29,7 @@ namespace SDK.Tests
         }
 
         [Test]
-        public void ConvertAPIPassedToSDKPassed()
+        public void ConvertApiPassedToSdkPassed()
         {
             apiKnowledgeBasedAuthenticationStatus1 = "PASSED";
             sdkKnowledgeBasedAuthenticationStatus1 = new KnowledgeBasedAuthenticationStatusConverter(apiKnowledgeBasedAuthenticationStatus1).ToSDKKnowledgeBasedAuthenticationStatus();
@@ -40,7 +38,34 @@ namespace SDK.Tests
         }
 
         [Test]
-        public void ConvertAPIUnknonwnValueToUnrecognizedKnowledgeBasedAuthenticationStatus()
+        public void ConvertApiPassedToSdkInvalidSigner()
+        {
+            apiKnowledgeBasedAuthenticationStatus1 = "INVALID_SIGNER";
+            sdkKnowledgeBasedAuthenticationStatus1 = new KnowledgeBasedAuthenticationStatusConverter(apiKnowledgeBasedAuthenticationStatus1).ToSDKKnowledgeBasedAuthenticationStatus();
+
+            Assert.AreEqual(sdkKnowledgeBasedAuthenticationStatus1.getApiValue(), apiKnowledgeBasedAuthenticationStatus1);
+        }
+
+        [Test]
+        public void ConvertApiPassedToSdkUpdated()
+        {
+            apiKnowledgeBasedAuthenticationStatus1 = "UPDATED";
+            sdkKnowledgeBasedAuthenticationStatus1 = new KnowledgeBasedAuthenticationStatusConverter(apiKnowledgeBasedAuthenticationStatus1).ToSDKKnowledgeBasedAuthenticationStatus();
+
+            Assert.AreEqual(sdkKnowledgeBasedAuthenticationStatus1.getApiValue(), apiKnowledgeBasedAuthenticationStatus1);
+        }
+
+        [Test]
+        public void ConvertApiPassedToSdkLocked()
+        {
+            apiKnowledgeBasedAuthenticationStatus1 = "LOCKED";
+            sdkKnowledgeBasedAuthenticationStatus1 = new KnowledgeBasedAuthenticationStatusConverter(apiKnowledgeBasedAuthenticationStatus1).ToSDKKnowledgeBasedAuthenticationStatus();
+
+            Assert.AreEqual(sdkKnowledgeBasedAuthenticationStatus1.getApiValue(), apiKnowledgeBasedAuthenticationStatus1);
+        }
+
+        [Test]
+        public void ConvertApiUnknownValueToUnrecognizedKnowledgeBasedAuthenticationStatus()
         {
             apiKnowledgeBasedAuthenticationStatus1 = "NEWLY_ADDED_KBA_STATUS";
             sdkKnowledgeBasedAuthenticationStatus1 = new KnowledgeBasedAuthenticationStatusConverter(apiKnowledgeBasedAuthenticationStatus1).ToSDKKnowledgeBasedAuthenticationStatus();
@@ -49,40 +74,67 @@ namespace SDK.Tests
         }
 
         [Test]
-        public void ConvertSDKNotYetAttemptedToAPINotYetAttempted()
+        public void ConvertSdkNotYetAttemptedToApiNotYetAttempted()
         {
-            sdkKnowledgeBasedAuthenticationStatus1 = OneSpanSign.Sdk.KnowledgeBasedAuthenticationStatus.NOT_YET_ATTEMPTED;
+            sdkKnowledgeBasedAuthenticationStatus1 = KnowledgeBasedAuthenticationStatus.NOT_YET_ATTEMPTED;
             apiKnowledgeBasedAuthenticationStatus1 = new KnowledgeBasedAuthenticationStatusConverter(sdkKnowledgeBasedAuthenticationStatus1).ToAPIKnowledgeBasedAuthenticationStatus();
 
             Assert.AreEqual("NOT_YET_ATTEMPTED", apiKnowledgeBasedAuthenticationStatus1);
         }
 
         [Test]
-        public void ConvertSDKFailedToAPIFailed()
+        public void ConvertSdkFailedToApiFailed()
         {
-            sdkKnowledgeBasedAuthenticationStatus1 = OneSpanSign.Sdk.KnowledgeBasedAuthenticationStatus.FAILED;
+            sdkKnowledgeBasedAuthenticationStatus1 = KnowledgeBasedAuthenticationStatus.FAILED;
             apiKnowledgeBasedAuthenticationStatus1 = new KnowledgeBasedAuthenticationStatusConverter(sdkKnowledgeBasedAuthenticationStatus1).ToAPIKnowledgeBasedAuthenticationStatus();
 
             Assert.AreEqual("FAILED", apiKnowledgeBasedAuthenticationStatus1);
         }
 
         [Test]
-        public void ConvertSDKChallengeToAPIChallenge()
+        public void ConvertSdkPassedToApiChallenge()
         {
-            sdkKnowledgeBasedAuthenticationStatus1 = OneSpanSign.Sdk.KnowledgeBasedAuthenticationStatus.PASSED;
+            sdkKnowledgeBasedAuthenticationStatus1 = KnowledgeBasedAuthenticationStatus.PASSED;
             apiKnowledgeBasedAuthenticationStatus1 = new KnowledgeBasedAuthenticationStatusConverter(sdkKnowledgeBasedAuthenticationStatus1).ToAPIKnowledgeBasedAuthenticationStatus();
 
             Assert.AreEqual("PASSED", apiKnowledgeBasedAuthenticationStatus1);
         }
 
         [Test]
-        public void ConvertSDKUnrecognizedKnowledgeBasedAuthenticationStatusToAPIUnknownValue()
+        public void ConvertSdkInvalidSignerToApiChallenge()
+        {
+            sdkKnowledgeBasedAuthenticationStatus1 = KnowledgeBasedAuthenticationStatus.INVALID_SIGNER;
+            apiKnowledgeBasedAuthenticationStatus1 = new KnowledgeBasedAuthenticationStatusConverter(sdkKnowledgeBasedAuthenticationStatus1).ToAPIKnowledgeBasedAuthenticationStatus();
+
+            Assert.AreEqual("INVALID_SIGNER", apiKnowledgeBasedAuthenticationStatus1);
+        }
+
+        [Test]
+        public void ConvertSdkUpdatedToApiChallenge()
+        {
+            sdkKnowledgeBasedAuthenticationStatus1 = KnowledgeBasedAuthenticationStatus.UPDATED;
+            apiKnowledgeBasedAuthenticationStatus1 = new KnowledgeBasedAuthenticationStatusConverter(sdkKnowledgeBasedAuthenticationStatus1).ToAPIKnowledgeBasedAuthenticationStatus();
+
+            Assert.AreEqual("UPDATED", apiKnowledgeBasedAuthenticationStatus1);
+        }
+
+        [Test]
+        public void ConvertSdkLockedToApiChallenge()
+        {
+            sdkKnowledgeBasedAuthenticationStatus1 = KnowledgeBasedAuthenticationStatus.LOCKED;
+            apiKnowledgeBasedAuthenticationStatus1 = new KnowledgeBasedAuthenticationStatusConverter(sdkKnowledgeBasedAuthenticationStatus1).ToAPIKnowledgeBasedAuthenticationStatus();
+
+            Assert.AreEqual("LOCKED", apiKnowledgeBasedAuthenticationStatus1);
+        }
+
+        [Test]
+        public void ConvertSdkUnrecognizedKnowledgeBasedAuthenticationStatusToApiUnknownValue()
         {
             apiKnowledgeBasedAuthenticationStatus1 = "NEWLY_ADDED_KBA_STATUS";
-            KnowledgeBasedAuthenticationStatus unrecognizedKnowledgeBasedAuthenticationStatus = KnowledgeBasedAuthenticationStatus.valueOf(apiKnowledgeBasedAuthenticationStatus1);
-            string actualAPIValue = new KnowledgeBasedAuthenticationStatusConverter(unrecognizedKnowledgeBasedAuthenticationStatus).ToAPIKnowledgeBasedAuthenticationStatus();
+            var unrecognizedKnowledgeBasedAuthenticationStatus = KnowledgeBasedAuthenticationStatus.valueOf(apiKnowledgeBasedAuthenticationStatus1);
+            var actualApiValue = new KnowledgeBasedAuthenticationStatusConverter(unrecognizedKnowledgeBasedAuthenticationStatus).ToAPIKnowledgeBasedAuthenticationStatus();
 
-            Assert.AreEqual(apiKnowledgeBasedAuthenticationStatus1, actualAPIValue);
+            Assert.AreEqual(apiKnowledgeBasedAuthenticationStatus1, actualApiValue);
         }
 
     }
