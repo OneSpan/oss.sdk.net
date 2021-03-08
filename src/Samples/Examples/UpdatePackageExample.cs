@@ -31,7 +31,7 @@ namespace SDK.Examples
         public readonly string OLD_PACKAGE_NAME = "Old Package Name";
         public readonly string OLD_DESCRIPTION = "Old Description";
         public readonly string OLD_EMAIL_MESSAGE = "Old Email Message";
-        public readonly DateTime OLD_EXPIRY_DATE = DateTime.Now.AddMonths(2).AddDays(1);
+        public readonly DateTime OLD_EXPIRY_DATE = DateTime.Now.AddMonths(1);
         public readonly CultureInfo OLD_LANGUAGE = CultureInfo.GetCultureInfo("en");
 
         // Visibility is for only template
@@ -56,7 +56,7 @@ namespace SDK.Examples
         public readonly string NEW_PACKAGE_NAME = "new package name";
         public readonly string NEW_DESCRIPTION = "new description";
         public readonly string NEW_EMAIL_MESSAGE = "new email message";
-        public readonly DateTime NEW_EXPIRY_DATE = DateTime.Now.AddMonths(2).AddDays(-1);
+        public readonly DateTime NEW_EXPIRY_DATE = DateTime.Now.AddMonths(1);
         public readonly CultureInfo NEW_LANGUAGE = CultureInfo.GetCultureInfo("fr");
 
         public readonly Visibility NEW_VISIBILITY = Visibility.SENDER;

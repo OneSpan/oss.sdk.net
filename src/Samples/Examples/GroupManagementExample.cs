@@ -3,6 +3,7 @@ using System.IO;
 using OneSpanSign.Sdk;
 using OneSpanSign.Sdk.Builder;
 using System.Collections.Generic;
+using System.Threading;
 
 namespace SDK.Examples
 {
@@ -197,7 +198,8 @@ namespace SDK.Examples
 			ossClient.PackageService.NotifySigner(packageId, createdGroup1.Id);
 
 			DocumentPackage result = ossClient.GetPackage(packageId);
-
+			ossClient.ChangePackageStatusToDraft(packageId);
+			
             ossClient.GroupService.DeleteGroup (createdGroup1.Id);
             ossClient.GroupService.DeleteGroup (createdGroup2.Id);
             ossClient.GroupService.DeleteGroup (createdGroup3.Id);
