@@ -22,7 +22,7 @@ build:
 test:
     stage: test
     variables:
-        ALLOW_INVALID_SSL_CERTS: true
+        ALLOW_INVALID_SSL_CERTS: "true"
     script: 
         - cp "$SIGNERS_PROPS" ./src/Samples/signers.properties
         - "dotnet test ./src -c Release"
