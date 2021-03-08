@@ -33,6 +33,11 @@ namespace OneSpanSign.Sdk.Internal
         public static HttpWebRequest WithUserAgent(WebRequest request)
         {
             ((HttpWebRequest)request).UserAgent = ESL_API_USER_AGENT;
+            if ("true".Equals(Environment.GetEnvironmentVariable("ALLOW_INVALID_SSL_CERTS")))
+            {
+                ((HttpWebRequest) request).ServerCertificateValidationCallback =
+                    (sender, certificate, chain, errors) => true;
+            }
             return (HttpWebRequest) request;
         }
 
