@@ -410,8 +410,7 @@ namespace OneSpanSign.Sdk
                     {
                         signer.SigningOrder = templatePlaceholder.SigningOrder;
                     }
-
-                    if (signer.SigningOrder <= 0)
+                    else if (signer.SigningOrder <= 0)
                     {
                         signer.SigningOrder = firstSignerIndex;
                         firstSignerIndex++;
