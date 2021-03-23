@@ -77,12 +77,13 @@ namespace SDK.Examples
                     .WithoutUploadSection()
                     .Build())
                 .WithCompleteSummaryOptions(CompleteSummaryOptionsBuilder.NewCompleteSummaryOptions()
-                    .WithoutFrom()
                     .WithoutTitle()
                     .WithoutMessage()
                     .WithoutDownload()
                     .WithoutReview()
                     .WithoutContinue()
+                    .WithoutDocumentSection()
+                    .WithoutUploadSection()
                     .Build())
                 .Build();
             //Save signing ui options
