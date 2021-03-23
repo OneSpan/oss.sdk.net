@@ -9,40 +9,44 @@ namespace SDK.Tests
         public void BuildsFieldWithDefaultValues()
         {
             CompleteSummaryOptions completeSummaryOptions  = CompleteSummaryOptionsBuilder.NewCompleteSummaryOptions()
-                .WithFrom()
                 .WithTitle()
                 .WithMessage()
                 .WithDownload()
                 .WithReview()
                 .WithContinue()
+                .WithDocumentSection()
+                .WithUploadSection()
                 .Build();
 
-            Assert.IsTrue(completeSummaryOptions.From);
             Assert.IsTrue(completeSummaryOptions.Title);
             Assert.IsTrue(completeSummaryOptions.Message);
             Assert.IsTrue(completeSummaryOptions.Download);
             Assert.IsTrue(completeSummaryOptions.Review);
             Assert.IsTrue(completeSummaryOptions.Continue);
+            Assert.IsTrue(completeSummaryOptions.DocumentSection);
+            Assert.IsTrue(completeSummaryOptions.UploadSection);
         }
 
         [Test]
         public void BuildsFieldWithSpecifiedValues()
         {
             CompleteSummaryOptions completeSummaryOptions  = CompleteSummaryOptionsBuilder.NewCompleteSummaryOptions()
-                .WithoutFrom()
                 .WithoutTitle()
                 .WithoutMessage()
                 .WithoutDownload()
                 .WithoutReview()
                 .WithoutContinue()
+                .WithoutDocumentSection()
+                .WithoutUploadSection()
                 .Build();
 
-            Assert.IsFalse(completeSummaryOptions.From);
             Assert.IsFalse(completeSummaryOptions.Title);
             Assert.IsFalse(completeSummaryOptions.Message);
             Assert.IsFalse(completeSummaryOptions.Download);
             Assert.IsFalse(completeSummaryOptions.Review);
             Assert.IsFalse(completeSummaryOptions.Continue);
+            Assert.IsFalse(completeSummaryOptions.DocumentSection);
+            Assert.IsFalse(completeSummaryOptions.UploadSection);
         }
         
     }
