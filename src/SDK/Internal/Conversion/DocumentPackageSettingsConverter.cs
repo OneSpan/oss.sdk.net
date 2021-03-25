@@ -62,10 +62,12 @@ namespace OneSpanSign.Sdk
             }
 
             if (sdkSettings.LinkHref != null) {
-                Link link = new Link();
+                OneSpanSign.API.Link link = new OneSpanSign.API.Link();
                 link.Href =  sdkSettings.LinkHref ;
                 link.Text =  sdkSettings.LinkText == null ? sdkSettings.LinkHref : sdkSettings.LinkText ;
                 link.Title =  sdkSettings.LinkTooltip == null ? sdkSettings.LinkHref : sdkSettings.LinkTooltip ;
+                link.AutoRedirect = sdkSettings.LinkAutoRedirect == null ? false : sdkSettings.LinkAutoRedirect;
+                link.Parameters = sdkSettings.LinkParameters;
                 ceremonySettings.HandOver = link;
             }
 
@@ -194,6 +196,10 @@ namespace OneSpanSign.Sdk
                     builder.WithHandOverLinkHref(apiSettings.Ceremony.HandOver.Href);
                     builder.WithHandOverLinkText(apiSettings.Ceremony.HandOver.Text);
                     builder.WithHandOverLinkTooltip(apiSettings.Ceremony.HandOver.Title);
+                    builder = apiSettings.Ceremony.HandOver.AutoRedirect.Value
+                        ? builder.WithHandOverAutoRedirect()
+                        : builder.WithoutHandOverAutoRedirect();
+                    builder.WithHandOverParameters(apiSettings.Ceremony.HandOver.Parameters);
                 }
             }
 

@@ -218,6 +218,21 @@ namespace OneSpanSign.Sdk
             set { linkHref = value; }
         }
 
+        private Nullable<bool> linkAutoRedirect = null;
+
+        public Nullable<bool> LinkAutoRedirect 
+        {
+            get { return linkAutoRedirect; }
+            set { linkAutoRedirect = value; }
+        }
+        
+        private HashSet<String> linkParameters;
+        public HashSet<String> LinkParameters 
+        {
+            get { return linkParameters; }
+            set { linkParameters = value; }
+        }
+
         private CeremonyLayoutSettings ceremonyLayoutSettings = null;
 
         public CeremonyLayoutSettings CeremonyLayoutSettings 
@@ -309,10 +324,12 @@ namespace OneSpanSign.Sdk
                 ceremonySettings.MaxAttachmentFiles = maxAttachmentFiles.Value;
 
             if (linkHref != null) {
-                Link link = new Link ();
+                OneSpanSign.API.Link link = new API.Link ();
                 link.Href = linkHref;
                 link.Text = (linkText == null ? linkHref : linkText);
                 link.Title = (linkTooltip == null ? linkHref : linkTooltip);
+                link.AutoRedirect = (linkAutoRedirect == null ? false : linkAutoRedirect);
+                link.Parameters = linkParameters;
                 ceremonySettings.HandOver = link;
             }
 

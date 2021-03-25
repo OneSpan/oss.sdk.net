@@ -5,27 +5,27 @@ namespace OneSpanSign.Sdk.Internal.Conversion
 {
     public class HandoverConverter
     {
-        private Link apiLink;
-        private Handover sdkHandover;
+        private OneSpanSign.API.Handover apiHandover;
+        private OneSpanSign.Sdk.Handover sdkHandover;
 
-        internal HandoverConverter(Link apiLink)
+        internal HandoverConverter(OneSpanSign.API.Handover apiHandover)
         {
-            this.apiLink = apiLink;
+            this.apiHandover = apiHandover;
         }
 
-        public HandoverConverter(Handover sdkHandover)
+        public HandoverConverter(OneSpanSign.Sdk.Handover sdkHandover)
         {
             this.sdkHandover = sdkHandover;
         }
 
-        internal Link ToAPILink()
+        internal OneSpanSign.API.Handover ToAPIHandover()
         {
             if (sdkHandover == null)
             {
-                return apiLink;
+                return apiHandover;
             }
 
-            Link result = new Link();
+            OneSpanSign.API.Handover result = new OneSpanSign.API.Handover();
             result.Href = sdkHandover.Href;
             result.Text = sdkHandover.Text;
             result.Title = sdkHandover.Title;
@@ -33,18 +33,18 @@ namespace OneSpanSign.Sdk.Internal.Conversion
             return result;
         }
 
-        public Handover ToSDKHandover(string language)
+        public OneSpanSign.Sdk.Handover ToSDKHandover(string language)
         {
-            if (apiLink == null)
+            if (apiHandover == null)
             {
                 return sdkHandover;
             }
 
             return HandoverBuilder
                 .NewHandover(language)
-                .WithHref(apiLink.Href)
-                .WithText(apiLink.Text)
-                .WithTitle(apiLink.Title)
+                .WithHref(apiHandover.Href)
+                .WithText(apiHandover.Text)
+                .WithTitle(apiHandover.Title)
                 .Build();
         }
     }

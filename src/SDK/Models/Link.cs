@@ -6,34 +6,24 @@ namespace OneSpanSign.API
 {
 	
 	
-	internal class Link
+	internal class Link : Handover
 	{
 		
 		// Fields
 		
 		// Accessors
 		    
-    [JsonProperty("href")]
-    public String Href
+    [JsonProperty("autoRedirect")]
+    public Nullable<bool> AutoRedirect
+    {
+                get; set;
+        }
+
+    [JsonProperty("parameters")]
+    public HashSet<String> Parameters
     {
                 get; set;
         }
     
-		    
-    [JsonProperty("text")]
-    public String Text
-    {
-                get; set;
-        }
-    
-		    
-    [JsonProperty("title")]
-    public String Title
-    {
-                get; set;
-        }
-    
-		
-	
 	}
 }
