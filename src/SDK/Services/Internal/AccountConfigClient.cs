@@ -19,7 +19,7 @@ namespace OneSpanSign.Sdk
             this.jsonSettings = jsonSettings;
         }
 
-        public Link GetHandoverUrl(string language)
+        public OneSpanSign.API.Handover GetHandoverUrl(string language)
         {
             string path = template.UrlFor(UrlTemplate.HANDOVER_URL_PATH)
                 .Replace("{language}", language)
@@ -27,7 +27,7 @@ namespace OneSpanSign.Sdk
             try
             {
                 string stringResponse = restClient.Get(path);
-                Link apiResponse = JsonConvert.DeserializeObject<Link>(stringResponse, jsonSettings);
+                OneSpanSign.API.Handover apiResponse = JsonConvert.DeserializeObject<OneSpanSign.API.Handover>(stringResponse, jsonSettings);
                 return apiResponse;
             }
             catch (OssServerException e)
@@ -40,17 +40,17 @@ namespace OneSpanSign.Sdk
             }
         }
 
-        public Link CreateHandoverUrl(string language, Link link)
+        public OneSpanSign.API.Handover CreateHandoverUrl(string language, OneSpanSign.API.Handover handover)
         {
             string path = template.UrlFor(UrlTemplate.HANDOVER_URL_PATH)
                 .Replace("{language}", language)
                 .Build();
             try
             {
-                string json = JsonConvert.SerializeObject(link, jsonSettings);
+                string json = JsonConvert.SerializeObject(handover, jsonSettings);
                 string stringResponse = restClient.Post(path, json);
 
-                Link apiResponse = JsonConvert.DeserializeObject<Link>(stringResponse, jsonSettings);
+                OneSpanSign.API.Handover apiResponse = JsonConvert.DeserializeObject<OneSpanSign.API.Handover>(stringResponse, jsonSettings);
                 return apiResponse;
             }
             catch (OssServerException e)
@@ -63,17 +63,17 @@ namespace OneSpanSign.Sdk
             }
         }
 
-        public Link UpdateHandoverUrl(string language, Link link)
+        public OneSpanSign.API.Handover UpdateHandoverUrl(string language, OneSpanSign.API.Handover handover)
         {
             string path = template.UrlFor(UrlTemplate.HANDOVER_URL_PATH)
                 .Replace("{language}", language)
                 .Build();
             try
             {
-                string json = JsonConvert.SerializeObject(link, jsonSettings);
+                string json = JsonConvert.SerializeObject(handover, jsonSettings);
                 string stringResponse = restClient.Put(path, json);
 
-                Link apiResponse = JsonConvert.DeserializeObject<Link>(stringResponse, jsonSettings);
+                OneSpanSign.API.Handover apiResponse = JsonConvert.DeserializeObject<OneSpanSign.API.Handover>(stringResponse, jsonSettings);
                 return apiResponse;
             }
             catch (OssServerException e)

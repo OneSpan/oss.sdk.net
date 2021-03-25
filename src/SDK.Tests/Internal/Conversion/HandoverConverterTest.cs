@@ -9,10 +9,10 @@ namespace SDK.Tests
     [TestFixture()]
     public class HandoverConverterTest
     {
-        private Link apiLink1 = null;
-        private Link apiLink2 = null;
-        private Handover sdkHandover1 = null;
-        private Handover sdkHandover2 = null;
+        private OneSpanSign.API.Handover apiHandover1 = null;
+        private OneSpanSign.API.Handover apiHandover2 = null;
+        private OneSpanSign.Sdk.Handover sdkHandover1 = null;
+        private OneSpanSign.Sdk.Handover sdkHandover2 = null;
         private HandoverConverter converter = null;
         private string lang = "en";
 
@@ -21,15 +21,15 @@ namespace SDK.Tests
         {
             sdkHandover1 = null;
             converter = new HandoverConverter(sdkHandover1);
-            Assert.IsNull(converter.ToAPILink());
+            Assert.IsNull(converter.ToAPIHandover());
         }
 
         [Test()]
         public void ConvertNullAPIToSDK()
         {
-            apiLink1 = null;
-            converter = new HandoverConverter(apiLink1);
-            Assert.IsNull(converter.ToAPILink());
+            apiHandover1 = null;
+            converter = new HandoverConverter(apiHandover1);
+            Assert.IsNull(converter.ToAPIHandover());
             Assert.IsNull(converter.ToSDKHandover("ko"));
         }
 
@@ -44,9 +44,9 @@ namespace SDK.Tests
         [Test()]
         public void ConvertNullAPIToAPI()
         {
-            apiLink1 = null;
-            converter = new HandoverConverter(apiLink1);
-            Assert.IsNull(converter.ToAPILink());
+            apiHandover1 = null;
+            converter = new HandoverConverter(apiHandover1);
+            Assert.IsNull(converter.ToAPIHandover());
         }
 
         [Test()]
@@ -64,41 +64,41 @@ namespace SDK.Tests
         [Test()]
         public void ConvertAPIToAPI()
         {
-            apiLink1 = CreateTypicalAPILink();
-            apiLink2 = new HandoverConverter(apiLink1).ToAPILink();
+            apiHandover1 = CreateTypicalAPILink();
+            apiHandover2 = new HandoverConverter(apiHandover1).ToAPIHandover();
 
-            Assert.IsNotNull(apiLink2);
-            Assert.AreEqual(apiLink2.Href, apiLink1.Href);
-            Assert.AreEqual(apiLink2.Text, apiLink1.Text);
-            Assert.AreEqual(apiLink2.Title, apiLink1.Title);
+            Assert.IsNotNull(apiHandover2);
+            Assert.AreEqual(apiHandover2.Href, apiHandover1.Href);
+            Assert.AreEqual(apiHandover2.Text, apiHandover1.Text);
+            Assert.AreEqual(apiHandover2.Title, apiHandover1.Title);
         }
 
         [Test()]
         public void ConvertAPIToSDK()
         {
-            apiLink1 = CreateTypicalAPILink();
-            sdkHandover1 = new HandoverConverter(apiLink1).ToSDKHandover(lang);
+            apiHandover1 = CreateTypicalAPILink();
+            sdkHandover1 = new HandoverConverter(apiHandover1).ToSDKHandover(lang);
 
             Assert.IsNotNull(sdkHandover1);
             Assert.AreEqual(sdkHandover1.Language, lang);
-            Assert.AreEqual(sdkHandover1.Href, apiLink1.Href);
-            Assert.AreEqual(sdkHandover1.Text, apiLink1.Text);
-            Assert.AreEqual(sdkHandover1.Title, apiLink1.Title);
+            Assert.AreEqual(sdkHandover1.Href, apiHandover1.Href);
+            Assert.AreEqual(sdkHandover1.Text, apiHandover1.Text);
+            Assert.AreEqual(sdkHandover1.Title, apiHandover1.Title);
         }
 
         [Test()]
         public void ConvertSDKToAPI()
         {
             sdkHandover1 = CreateTypicalSDKHandover();
-            apiLink1 = new HandoverConverter(sdkHandover1).ToAPILink();
+            apiHandover1 = new HandoverConverter(sdkHandover1).ToAPIHandover();
 
-            Assert.IsNotNull(apiLink1);
-            Assert.AreEqual(apiLink1.Href, sdkHandover1.Href);
-            Assert.AreEqual(apiLink1.Text, sdkHandover1.Text);
-            Assert.AreEqual(apiLink1.Title, sdkHandover1.Title);
+            Assert.IsNotNull(apiHandover1);
+            Assert.AreEqual(apiHandover1.Href, sdkHandover1.Href);
+            Assert.AreEqual(apiHandover1.Text, sdkHandover1.Text);
+            Assert.AreEqual(apiHandover1.Title, sdkHandover1.Title);
         }
 
-        private Handover CreateTypicalSDKHandover()
+        private OneSpanSign.Sdk.Handover CreateTypicalSDKHandover()
         {
             return HandoverBuilder.NewHandover(lang)
                 .WithHref("sdkHref")
@@ -107,13 +107,13 @@ namespace SDK.Tests
                 .Build();
         }
 
-        private Link CreateTypicalAPILink()
+        private OneSpanSign.API.Handover CreateTypicalAPILink()
         {
-            Link link = new Link();
-            link.Href = "apiHref";
-            link.Title = "apiTitle";
-            link.Text = "apiText";
-            return link;
+            OneSpanSign.API.Handover apiHandover = new OneSpanSign.API.Handover();
+            apiHandover.Href = "apiHref";
+            apiHandover.Title = "apiTitle";
+            apiHandover.Text = "apiText";
+            return apiHandover;
         }
     }
 }

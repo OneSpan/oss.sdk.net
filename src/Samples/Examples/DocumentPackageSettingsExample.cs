@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using OneSpanSign.Sdk;
 using OneSpanSign.Sdk.Builder;
 using System.IO;
@@ -48,6 +49,8 @@ namespace SDK.Examples
 				              .WithHandOverLinkHref("http://www.google.ca")
 				              .WithHandOverLinkText("click here")
 				              .WithHandOverLinkTooltip("link tooltip")
+				              .WithoutHandOverAutoRedirect()
+				              .WithHandOverParameters(new HashSet<string>(new string[] {PARAMETETS.PACKAGE.ToString(),PARAMETETS.SIGNER.ToString(),PARAMETETS.STATUS.ToString()}))
                               .WithDefaultTimeBasedExpiry ()
 				              .WithMaxAttachmentFiles(MAX_ATTACHMENT_FILES)
                               .WithRemainingDays(EXPIRE_IN_DAYS)
