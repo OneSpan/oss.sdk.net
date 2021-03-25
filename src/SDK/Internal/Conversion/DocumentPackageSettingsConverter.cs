@@ -196,7 +196,7 @@ namespace OneSpanSign.Sdk
                     builder.WithHandOverLinkHref(apiSettings.Ceremony.HandOver.Href);
                     builder.WithHandOverLinkText(apiSettings.Ceremony.HandOver.Text);
                     builder.WithHandOverLinkTooltip(apiSettings.Ceremony.HandOver.Title);
-                    builder = apiSettings.Ceremony.HandOver.AutoRedirect.Value
+                    builder = (apiSettings.Ceremony.HandOver.AutoRedirect != null && apiSettings.Ceremony.HandOver.AutoRedirect.Value)
                         ? builder.WithHandOverAutoRedirect()
                         : builder.WithoutHandOverAutoRedirect();
                     builder.WithHandOverParameters(apiSettings.Ceremony.HandOver.Parameters);
