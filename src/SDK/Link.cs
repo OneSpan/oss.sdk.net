@@ -19,7 +19,7 @@ namespace OneSpanSign.Sdk
 
     }
     
-    public enum PARAMETETS
+    public enum PARAMETERS
     {
         PACKAGE,
         SIGNER,
