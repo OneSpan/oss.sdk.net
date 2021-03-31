@@ -42,6 +42,10 @@ namespace OneSpanSign.Sdk
             allFieldStyles.Add(MOBILE_CAPTURE.getApiValue(), FieldStyle.MOBILE_CAPTURE);
             allFieldStyles.Add(RAW_CAPTURE.getApiValue(), FieldStyle.RAW_CAPTURE);
             allFieldStyles.Add(DATEPICKER.getApiValue(), FieldStyle.DATEPICKER);
+            allFieldStyles.Add(BOUND_DATE.getApiValue(), FieldStyle.BOUND_DATE);
+            allFieldStyles.Add(BOUND_NAME.getApiValue(), FieldStyle.BOUND_NAME);
+            allFieldStyles.Add(BOUND_TITLE.getApiValue(), FieldStyle.BOUND_TITLE);
+            allFieldStyles.Add(BOUND_COMPANY.getApiValue(), FieldStyle.BOUND_COMPANY);
         }
 
         private FieldStyle(string apiValue, string sdkValue, int index):base(apiValue, sdkValue, index) 
