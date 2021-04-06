@@ -50,7 +50,7 @@ namespace SDK.Examples
 				              .WithHandOverLinkText("click here")
 				              .WithHandOverLinkTooltip("link tooltip")
 				              .WithoutHandOverAutoRedirect()
-				              .WithHandOverParameters(new HashSet<string>(new string[] {PARAMETETS.PACKAGE.ToString(),PARAMETETS.SIGNER.ToString(),PARAMETETS.STATUS.ToString()}))
+				              .WithHandOverParameters(new HashSet<string>(new string[] {PARAMETERS.PACKAGE.ToString(),PARAMETERS.SIGNER.ToString(),PARAMETERS.STATUS.ToString()}))
                               .WithDefaultTimeBasedExpiry ()
 				              .WithMaxAttachmentFiles(MAX_ATTACHMENT_FILES)
                               .WithRemainingDays(EXPIRE_IN_DAYS)

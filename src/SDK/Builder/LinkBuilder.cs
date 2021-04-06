@@ -19,7 +19,7 @@ namespace OneSpanSign.Sdk
 			title = null;
 			autoRedirect = null;
 			parameters = new HashSet<string>(new string[] {
-				PARAMETETS.PACKAGE.ToString(),PARAMETETS.SIGNER.ToString(),PARAMETETS.STATUS.ToString()
+				PARAMETERS.PACKAGE.ToString(),PARAMETERS.SIGNER.ToString(),PARAMETERS.STATUS.ToString()
 			});
 		}
 
