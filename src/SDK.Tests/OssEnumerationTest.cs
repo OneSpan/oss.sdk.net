@@ -31,9 +31,6 @@ namespace SDK.Tests
             Assert.AreEqual(0, (int)FieldStyle.BOUND_DATE);
             Assert.AreEqual("BOUND_NAME", (string)FieldStyle.BOUND_NAME);
             Assert.AreEqual("TEXT_AREA", FieldStyle.TEXT_AREA.GetName());
-            Assert.AreEqual("BOUND_DATE", (string)FieldStyle.BOUND_DATE);
-            Assert.AreEqual("BOUND_TITLE", (string)FieldStyle.BOUND_TITLE);
-            Assert.AreEqual("BOUND_COMPANY", (string)FieldStyle.BOUND_COMPANY);
         }
 
         [Test()]
