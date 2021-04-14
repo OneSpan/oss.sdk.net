@@ -45,6 +45,7 @@ namespace OneSpanSign.Sdk
         private SignerVerificationService signerVerificationService;
         private SigningStyleService signingStyleService;
         private DataRetentionSettingsService dataRetentionSettingsService;
+        private VirtualRoomService virtualRoomService;
         private JsonSerializerSettings jsonSerializerSettings;
 
         /// <summary>
@@ -171,6 +172,7 @@ namespace OneSpanSign.Sdk
             qrCodeService = new QRCodeService(new QRCodeApiClient(restClient, this.baseUrl, jsonSerializerSettings));
             authenticationService = new AuthenticationService(this.webpageUrl);
             dataRetentionSettingsService = new DataRetentionSettingsService(restClient, this.baseUrl);
+            virtualRoomService = new VirtualRoomService(restClient, this.baseUrl);
         }
 
         private void configureJsonSerializationSettings()
@@ -822,6 +824,11 @@ namespace OneSpanSign.Sdk
         public DataRetentionSettingsService DataRetentionSettingsService
         {
             get { return dataRetentionSettingsService; }
+        }
+
+        public VirtualRoomService VirtualRoomService
+        {
+            get { return virtualRoomService; }
         }
     }
 }
