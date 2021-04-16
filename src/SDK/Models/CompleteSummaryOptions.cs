@@ -6,14 +6,8 @@ namespace OneSpanSign.API
 	
 	internal class CompleteSummaryOptions
 	{
-		    
-    [JsonProperty("from")]
-    public Nullable<Boolean> From
-    {
-                get; set;
-        }
-
-    [JsonProperty("title")]
+		
+	[JsonProperty("title")]
     public Nullable<Boolean> Title
     {
 	    get; set;
@@ -39,6 +33,18 @@ namespace OneSpanSign.API
     
     [JsonProperty("continue")]
     public Nullable<Boolean> Continue
+    {
+	    get; set;
+    }
+    
+    [JsonProperty("documentSection")]
+    public Nullable<Boolean> DocumentSection
+    {
+	    get; set;
+    }
+    
+    [JsonProperty("uploadSection")]
+    public Nullable<Boolean> UploadSection
     {
 	    get; set;
     }

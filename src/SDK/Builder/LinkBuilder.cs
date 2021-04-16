@@ -1,20 +1,26 @@
 using System;
+using System.Collections.Generic;
 using OneSpanSign.API;
 
 namespace OneSpanSign.Sdk
 {
 	public class LinkBuilder
 	{
-		private string text;
-		private string tooltip;
 		private string href;
-
+		private string text;
+		private string title;
+		private Nullable<bool> autoRedirect;
+		private HashSet<string> parameters;
 
 		private LinkBuilder ( string href )
 		{
-			this.href = href;
-			tooltip = null;
+			href = href;
 			text = null;
+			title = null;
+			autoRedirect = null;
+			parameters = new HashSet<string>(new string[] {
+				PARAMETERS.PACKAGE.ToString(),PARAMETERS.SIGNER.ToString(),PARAMETERS.STATUS.ToString()
+			});
 		}
 
 		public static LinkBuilder newLink( String href )
@@ -28,19 +34,22 @@ namespace OneSpanSign.Sdk
 			return this;
 		}
 
-		public LinkBuilder withTooltip( string tooltip )
+		public LinkBuilder withTitle( string title )
 		{
-			this.tooltip = tooltip;
+			this.title = title;
 			return this;
 		}
+		
+		
 
 		internal Link build()
 		{
 			Link link = new Link ();
 			link.Href = href;
 			link.Text = (text == null ? href : text );
-			link.Title = (tooltip == null ? href : tooltip);
-
+			link.Title = (title == null ? href : title);
+			link.AutoRedirect = (autoRedirect == null ? false : autoRedirect);
+			link.Parameters = parameters;
 			return link;
 		}
 

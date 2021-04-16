@@ -4,13 +4,13 @@ namespace OneSpanSign.Sdk
 {
     public class CompleteSummaryOptionsBuilder
     {
-        private Nullable<bool> from;
         private Nullable<bool> title;
         private Nullable<bool> message;
         private Nullable<bool> download;
         private Nullable<bool> review;
         private Nullable<bool> _continue;
-        
+        private Nullable<bool> documentSection;
+        private Nullable<bool> uploadSection;
         
         private CompleteSummaryOptionsBuilder()
         {
@@ -20,16 +20,6 @@ namespace OneSpanSign.Sdk
             return new CompleteSummaryOptionsBuilder();
         }
 
-        public CompleteSummaryOptionsBuilder WithFrom() {
-            this.from = true;
-            return this;
-        }
-
-        public CompleteSummaryOptionsBuilder WithoutFrom() {
-            this.from = false;
-            return this;
-        }
-        
         public CompleteSummaryOptionsBuilder WithTitle() {
             this.title = true;
             return this;
@@ -80,15 +70,35 @@ namespace OneSpanSign.Sdk
             return this;
         }
 
+        public CompleteSummaryOptionsBuilder WithDocumentSection() {
+            this.documentSection = true;
+            return this;
+        }
+
+        public CompleteSummaryOptionsBuilder WithoutDocumentSection() {
+            this.documentSection = false;
+            return this;
+        }
+        
+        public CompleteSummaryOptionsBuilder WithUploadSection() {
+            this.uploadSection = true;
+            return this;
+        }
+
+        public CompleteSummaryOptionsBuilder WithoutUploadSection() {
+            this.uploadSection = false;
+            return this;
+        }
         public CompleteSummaryOptions Build() {
             CompleteSummaryOptions result = new CompleteSummaryOptions();
-            result.From = from;
             result.Title = title;
             result.Message = message;
             result.Download = download;
             result.Review = review;
             result.Continue = _continue;
-
+            result.DocumentSection = documentSection;
+            result.UploadSection = uploadSection;
+                
             return result;
         }
     }

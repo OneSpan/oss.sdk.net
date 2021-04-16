@@ -5,24 +5,13 @@ namespace OneSpanSign.Sdk
     public class CompleteSummaryOptions
     {
 
-        private Nullable<bool> _from;
         private Nullable<bool> title;
         private Nullable<bool> message;
         private Nullable<bool> download;
         private Nullable<bool> review;
         private Nullable<bool> _continue;
-
-        public Nullable<bool> From
-        {
-            get
-            {
-                return _from;
-            }
-            set
-            {
-                _from = value;
-            }
-        }
+        private Nullable<bool> documentSection;
+        private Nullable<bool> uploadSection;
         
         public Nullable<bool> Title
         {
@@ -81,6 +70,30 @@ namespace OneSpanSign.Sdk
             set
             {
                 _continue = value;
+            }
+        }
+        
+        public Nullable<bool> DocumentSection
+        {
+            get
+            {
+                return documentSection;
+            }
+            set
+            {
+                documentSection = value;
+            }
+        }
+        
+        public Nullable<bool> UploadSection
+        {
+            get
+            {
+                return uploadSection;
+            }
+            set
+            {
+                uploadSection = value;
             }
         }
 

@@ -36,6 +36,8 @@ namespace OneSpanSign.Sdk
         private string linkText = null;
         private string linkTooltip = null;
         private string linkHref = null;
+        private Nullable<bool> linkAutoRedirect = null;
+        private HashSet<String> linkParameters = null;
 
         private CeremonyLayoutSettings ceremonyLayoutSettings = null;
 
@@ -272,6 +274,24 @@ namespace OneSpanSign.Sdk
             linkTooltip = tooltip;
             return this;
         }
+        
+        public DocumentPackageSettingsBuilder WithHandOverAutoRedirect()
+        {
+            this.linkAutoRedirect = true;
+            return this;
+        }
+
+        public DocumentPackageSettingsBuilder WithoutHandOverAutoRedirect ()
+        {
+            this.linkAutoRedirect = false;
+            return this;
+        }
+        
+        public DocumentPackageSettingsBuilder WithHandOverParameters (HashSet<String> parameters)
+        {
+            linkParameters = parameters;
+            return this;
+        }
 
         public DocumentPackageSettingsBuilder WithDeclineReason (String reason)
         {
@@ -381,6 +401,8 @@ namespace OneSpanSign.Sdk
             result.LinkHref = linkHref;
             result.LinkText = linkText;
             result.LinkTooltip = linkTooltip;
+            result.LinkAutoRedirect = linkAutoRedirect;
+            result.LinkParameters = linkParameters;
             result.MaxAttachmentFiles = maxAttachmentFiles;
             result.ShowNseOverview = showNseOverview;
 
@@ -434,6 +456,8 @@ namespace OneSpanSign.Sdk
                 linkHref = apiPackageSettings.Ceremony.HandOver.Href;
                 linkText = apiPackageSettings.Ceremony.HandOver.Text;
                 linkTooltip = apiPackageSettings.Ceremony.HandOver.Title;
+                linkAutoRedirect = apiPackageSettings.Ceremony.HandOver.AutoRedirect;
+                linkParameters = apiPackageSettings.Ceremony.HandOver.Parameters;
             }
         }
 

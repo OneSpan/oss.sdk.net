@@ -10,12 +10,13 @@ namespace SDK.Tests
         {
             SigningUiOptions signingUiOptions  = SigningUiOptionsBuilder.NewSigningUiOptions()
                 .WithCompleteSummaryOptions(CompleteSummaryOptionsBuilder.NewCompleteSummaryOptions()
-                    .WithFrom()
                     .WithTitle()
                     .WithMessage()
                     .WithDownload()
                     .WithReview()
                     .WithContinue()
+                    .WithDocumentSection()
+                    .WithUploadSection()
                     .Build())
                 .WithInpersonHostThankYouOptions(InpersonHostThankYouOptionsBuilder.NewInpersonHostThankYouOptions()
                     .WithTitle()
@@ -65,12 +66,13 @@ namespace SDK.Tests
                     .Build())
                 .Build();
 
-            Assert.IsTrue(signingUiOptions.CompleteSummaryOptions.From);
             Assert.IsTrue(signingUiOptions.CompleteSummaryOptions.Title);
             Assert.IsTrue(signingUiOptions.CompleteSummaryOptions.Message);
             Assert.IsTrue(signingUiOptions.CompleteSummaryOptions.Download);
             Assert.IsTrue(signingUiOptions.CompleteSummaryOptions.Review);
             Assert.IsTrue(signingUiOptions.CompleteSummaryOptions.Continue);
+            Assert.IsTrue(signingUiOptions.CompleteSummaryOptions.DocumentSection);
+            Assert.IsTrue(signingUiOptions.CompleteSummaryOptions.UploadSection);
             Assert.IsTrue(signingUiOptions.InpersonHostThankYouOptions.Title);
             Assert.IsTrue(signingUiOptions.InpersonHostThankYouOptions.Body);
             Assert.IsTrue(signingUiOptions.InpersonHostThankYouOptions.RecipientName);
@@ -114,12 +116,13 @@ namespace SDK.Tests
         {
             SigningUiOptions signingUiOptions  = SigningUiOptionsBuilder.NewSigningUiOptions()
                 .WithCompleteSummaryOptions(CompleteSummaryOptionsBuilder.NewCompleteSummaryOptions()
-                    .WithoutFrom()
                     .WithoutTitle()
                     .WithoutMessage()
                     .WithoutDownload()
                     .WithoutReview()
                     .WithoutContinue()
+                    .WithoutDocumentSection()
+                    .WithoutUploadSection()
                     .Build())
                 .WithInpersonHostThankYouOptions(InpersonHostThankYouOptionsBuilder.NewInpersonHostThankYouOptions()
                     .WithoutTitle()
@@ -169,12 +172,13 @@ namespace SDK.Tests
                     .Build())
                 .Build();
 
-            Assert.IsFalse(signingUiOptions.CompleteSummaryOptions.From);
             Assert.IsFalse(signingUiOptions.CompleteSummaryOptions.Title);
             Assert.IsFalse(signingUiOptions.CompleteSummaryOptions.Message);
             Assert.IsFalse(signingUiOptions.CompleteSummaryOptions.Download);
             Assert.IsFalse(signingUiOptions.CompleteSummaryOptions.Review);
             Assert.IsFalse(signingUiOptions.CompleteSummaryOptions.Continue);
+            Assert.IsFalse(signingUiOptions.CompleteSummaryOptions.DocumentSection);
+            Assert.IsFalse(signingUiOptions.CompleteSummaryOptions.UploadSection);
             Assert.IsFalse(signingUiOptions.InpersonHostThankYouOptions.Title);
             Assert.IsFalse(signingUiOptions.InpersonHostThankYouOptions.Body);
             Assert.IsFalse(signingUiOptions.InpersonHostThankYouOptions.RecipientName);
