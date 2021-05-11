@@ -177,6 +177,7 @@ namespace OneSpanSign.Sdk.Internal
         public static readonly string ACCOUNT_CONFIG_PATH = "/accountConfig";
         public static readonly string HANDOVER_URL_PATH = "/accountConfig/handoverUrl/{language}";
         public static readonly string DECLINE_REASONS_PATH = "/accountConfig/declineReasons/{language}";
+        public static readonly string IDV_WORKFLOW_CONFIGS_PATH = "/accountConfig/idvWorkflowConfigs";
 
         // QR Code Service
         public static readonly string QRCODE_PATH = "/packages/{packageId}/documents/{documentId}/fields";

@@ -4,39 +4,39 @@ using System.Collections.Generic;
 
 namespace OneSpanSign.Sdk.Builder
 {
-	public class SignerBuilder
-	{
-		private string signerEmail;
-		private string firstName;
-		private string lastName;
-		private string title;
-		private string company;
+    public class SignerBuilder
+    {
+        private string signerEmail;
+        private string firstName;
+        private string lastName;
+        private string title;
+        private string company;
         private string language;
-		private AuthenticationBuilder authenticationBuilder = new AuthenticationBuilder();
+        private AuthenticationBuilder authenticationBuilder = new AuthenticationBuilder();
         private Authentication authentication;
-		private bool deliverSignedDocumentsByEmail;
-		private int signingOrder;
-		private string message;
-		private string id;
+        private bool deliverSignedDocumentsByEmail;
+        private int signingOrder;
+        private string message;
+        private string id;
         private string placeholderName;
-		private bool canChangeSigner;
+        private bool canChangeSigner;
         private GroupId groupId;
-		private IList<AttachmentRequirement> attachments = new List<AttachmentRequirement>();
+        private IList<AttachmentRequirement> attachments = new List<AttachmentRequirement>();
         private KnowledgeBasedAuthentication knowledgeBasedAuthentication;
         private string localLanguage;
 
         private SignerBuilder(string signerEmail)
-		{
-			this.signerEmail = signerEmail;
+        {
+            this.signerEmail = signerEmail;
             this.groupId = null;
-		}
+        }
 
         private SignerBuilder(GroupId groupId)
         {
             this.signerEmail = null;
             this.groupId = groupId;
         }
-        
+
         private SignerBuilder(Placeholder placeholder)
         {
             this.signerEmail = null;
@@ -51,48 +51,48 @@ namespace OneSpanSign.Sdk.Builder
             return new SignerBuilder(placeholder);
         }
 
-		public static SignerBuilder NewSignerWithEmail (string signerEmail)
-		{
-			Asserts.NotEmptyOrNull (signerEmail, "signerEmail");
-			return new SignerBuilder (signerEmail);
-		}
-
-		public static SignerBuilder NewSignerFromGroup(GroupId groupId)
+        public static SignerBuilder NewSignerWithEmail(string signerEmail)
         {
-			return new SignerBuilder(groupId);
+            Asserts.NotEmptyOrNull(signerEmail, "signerEmail");
+            return new SignerBuilder(signerEmail);
         }
 
-		public SignerBuilder WithCustomId (string id)
-		{
-			this.id = id;
-			return this;
-		}
+        public static SignerBuilder NewSignerFromGroup(GroupId groupId)
+        {
+            return new SignerBuilder(groupId);
+        }
 
-		public SignerBuilder WithFirstName (string firstName)
-		{
-			this.firstName = firstName;
-			return this;
-		}
+        public SignerBuilder WithCustomId(string id)
+        {
+            this.id = id;
+            return this;
+        }
 
-		public SignerBuilder WithLastName (string lastName)
-		{
-			this.lastName = lastName;
-			return this;
-		}
+        public SignerBuilder WithFirstName(string firstName)
+        {
+            this.firstName = firstName;
+            return this;
+        }
 
-		public SignerBuilder WithTitle (string title)
-		{
-			this.title = title;
-			return this;
-		}
+        public SignerBuilder WithLastName(string lastName)
+        {
+            this.lastName = lastName;
+            return this;
+        }
 
-		public SignerBuilder WithCompany (string company)
-		{
-			this.company = company;
-			return this;
-		}
+        public SignerBuilder WithTitle(string title)
+        {
+            this.title = title;
+            return this;
+        }
 
-        public SignerBuilder WithLanguage (string language)
+        public SignerBuilder WithCompany(string company)
+        {
+            this.company = company;
+            return this;
+        }
+
+        public SignerBuilder WithLanguage(string language)
         {
             this.language = language;
             return this;
@@ -111,38 +111,50 @@ namespace OneSpanSign.Sdk.Builder
         }
 
         [Obsolete("Please use Replacing() instead")]
-        public SignerBuilder WithRoleId ( Placeholder placeholder )
+        public SignerBuilder WithRoleId(Placeholder placeholder)
         {
-            return Replacing( placeholder );
+            return Replacing(placeholder);
         }
 
-		[Obsolete("Please use WithCustomId() instead")]
-		public SignerBuilder WithId ( string id )
-		{
-			return WithCustomId(id);
-		}
+        [Obsolete("Please use WithCustomId() instead")]
+        public SignerBuilder WithId(string id)
+        {
+            return WithCustomId(id);
+        }
 
-        public SignerBuilder WithLocalLanguage ()
+        public SignerBuilder WithLocalLanguage()
         {
             this.localLanguage = "local";
             return this;
         }
 
-        public SignerBuilder ChallengedWithQuestions (ChallengeBuilder challengeBuilder)
-		{
-			this.authenticationBuilder = challengeBuilder;
-			return this;
-		}
-
-		public SignerBuilder WithSMSSentTo (string phoneNumber)
-		{
-			this.authenticationBuilder = new SMSAuthenticationBuilder (phoneNumber);
-			return this;
-		}
-
-        public SignerBuilder WithSSOAuthentication ()
+        public SignerBuilder ChallengedWithQuestions(ChallengeBuilder challengeBuilder)
         {
-            this.authenticationBuilder = new SSOAuthenticationBuilder ();
+            this.authenticationBuilder = challengeBuilder;
+            return this;
+        }
+
+        public SignerBuilder WithSMSSentTo(string phoneNumber)
+        {
+            this.authenticationBuilder = new SMSAuthenticationBuilder(phoneNumber);
+            return this;
+        }
+
+        public SignerBuilder WithSSOAuthentication()
+        {
+            this.authenticationBuilder = new SSOAuthenticationBuilder();
+            return this;
+        }
+
+        public SignerBuilder WithIDVAuthentication(IdvWorkflow idvWorkflow)
+        {
+            this.authenticationBuilder = new IDVAuthenticationBuilder(idvWorkflow);
+            return this;
+        }
+
+        public SignerBuilder WithIDVAuthentication(string phoneNumber, IdvWorkflow idvWorkflow)
+        {
+            this.authenticationBuilder = new IDVAuthenticationBuilder(phoneNumber, idvWorkflow);
             return this;
         }
 
@@ -152,118 +164,132 @@ namespace OneSpanSign.Sdk.Builder
             return this;
         }
 
-		public SignerBuilder DeliverSignedDocumentsByEmail ()
-		{
-			deliverSignedDocumentsByEmail = true;
-			return this;
-		}
-
-		public SignerBuilder SigningOrder (int signingOrder)
-		{
-			this.signingOrder = signingOrder;
-			return this;
-		}
-
-		public SignerBuilder WithEmailMessage (string message)
-		{
-			this.message = message;
-			return this;
-		}
-
-		public SignerBuilder CanChangeSigner ()
-		{
-			canChangeSigner = true;
-			return this;
-		}
-
-		public SignerBuilder WithAttachmentRequirement (AttachmentRequirementBuilder builder)
-		{
-			return WithAttachmentRequirement(builder.Build());
-		}
-
-		public SignerBuilder WithAttachmentRequirement (AttachmentRequirement attachmentRequirement)
-		{
-			AddAttachmentRequirement(attachmentRequirement);
-			return this;
-		}
-
-		private void AddAttachmentRequirement (AttachmentRequirement attachmentRequirement)
-		{
-			attachments.Add(attachmentRequirement);
-		}
-
-        public SignerBuilder ChallengedWithKnowledgeBasedAuthentication (KnowledgeBasedAuthentication knowledgeBasedAuthentication)
+        public SignerBuilder DeliverSignedDocumentsByEmail()
         {
-            if (this.knowledgeBasedAuthentication == null) {
+            deliverSignedDocumentsByEmail = true;
+            return this;
+        }
+
+        public SignerBuilder SigningOrder(int signingOrder)
+        {
+            this.signingOrder = signingOrder;
+            return this;
+        }
+
+        public SignerBuilder WithEmailMessage(string message)
+        {
+            this.message = message;
+            return this;
+        }
+
+        public SignerBuilder CanChangeSigner()
+        {
+            canChangeSigner = true;
+            return this;
+        }
+
+        public SignerBuilder WithAttachmentRequirement(AttachmentRequirementBuilder builder)
+        {
+            return WithAttachmentRequirement(builder.Build());
+        }
+
+        public SignerBuilder WithAttachmentRequirement(AttachmentRequirement attachmentRequirement)
+        {
+            AddAttachmentRequirement(attachmentRequirement);
+            return this;
+        }
+
+        private void AddAttachmentRequirement(AttachmentRequirement attachmentRequirement)
+        {
+            attachments.Add(attachmentRequirement);
+        }
+
+        public SignerBuilder ChallengedWithKnowledgeBasedAuthentication(
+            KnowledgeBasedAuthentication knowledgeBasedAuthentication)
+        {
+            if (this.knowledgeBasedAuthentication == null)
+            {
                 this.knowledgeBasedAuthentication = new KnowledgeBasedAuthentication();
             }
+
             this.knowledgeBasedAuthentication = knowledgeBasedAuthentication;
             return this;
         }
 
-        public SignerBuilder ChallengedWithKnowledgeBasedAuthentication(SignerInformationForEquifaxCanadaBuilder signerInformationForEquifaxCanadaBuilder) {
+        public SignerBuilder ChallengedWithKnowledgeBasedAuthentication(
+            SignerInformationForEquifaxCanadaBuilder signerInformationForEquifaxCanadaBuilder)
+        {
             return ChallengedWithKnowledgeBasedAuthentication(signerInformationForEquifaxCanadaBuilder.Build());
         }
 
-        public SignerBuilder ChallengedWithKnowledgeBasedAuthentication(SignerInformationForEquifaxCanada signerInformationForEquifaxCanada) {
-
-            if (this.knowledgeBasedAuthentication == null) {
+        public SignerBuilder ChallengedWithKnowledgeBasedAuthentication(
+            SignerInformationForEquifaxCanada signerInformationForEquifaxCanada)
+        {
+            if (this.knowledgeBasedAuthentication == null)
+            {
                 this.knowledgeBasedAuthentication = new KnowledgeBasedAuthentication();
             }
+
             this.knowledgeBasedAuthentication.SignerInformationForEquifaxCanada = signerInformationForEquifaxCanada;
             return this;
         }
 
-        public SignerBuilder ChallengedWithKnowledgeBasedAuthentication(SignerInformationForEquifaxUSABuilder signerInformationForEquifaxUSABuilder) {
+        public SignerBuilder ChallengedWithKnowledgeBasedAuthentication(
+            SignerInformationForEquifaxUSABuilder signerInformationForEquifaxUSABuilder)
+        {
             return ChallengedWithKnowledgeBasedAuthentication(signerInformationForEquifaxUSABuilder.Build());
         }
 
-        public SignerBuilder ChallengedWithKnowledgeBasedAuthentication(SignerInformationForEquifaxUSA signerInformationForEquifaxUSA) {
-            if (this.knowledgeBasedAuthentication == null) {
+        public SignerBuilder ChallengedWithKnowledgeBasedAuthentication(
+            SignerInformationForEquifaxUSA signerInformationForEquifaxUSA)
+        {
+            if (this.knowledgeBasedAuthentication == null)
+            {
                 this.knowledgeBasedAuthentication = new KnowledgeBasedAuthentication();
             }
+
             this.knowledgeBasedAuthentication.SignerInformationForEquifaxUSA = signerInformationForEquifaxUSA;
             return this;
         }
 
         private Signer BuildGroupSigner()
-        {            
+        {
             Signer result = new Signer(groupId);
             result.SigningOrder = signingOrder;
             result.CanChangeSigner = canChangeSigner;
             result.Message = message;
             result.Id = id;
-			result.Attachments = attachments;
+            result.Attachments = attachments;
             result.LocalLanguage = localLanguage;
 
             return result;
         }
-        
+
         private Signer BuildPlaceholderSigner()
-        {    
-            Asserts.NotEmptyOrNull( id, "No placeholder set for this signer!" );
-                    
+        {
+            Asserts.NotEmptyOrNull(id, "No placeholder set for this signer!");
+
             Signer result = new Signer(id);
             result.PlaceholderName = placeholderName;
             result.SigningOrder = signingOrder;
             result.CanChangeSigner = canChangeSigner;
             result.Message = message;
-			result.Attachments = attachments;
+            result.Attachments = attachments;
             result.LocalLanguage = localLanguage;
             return result;
         }
-        
+
         private Signer BuildRegularSigner()
-        {            
-            Asserts.NotEmptyOrNull (firstName, "firstName");
-            Asserts.NotEmptyOrNull (lastName, "lastName");
-                        
+        {
+            Asserts.NotEmptyOrNull(firstName, "firstName");
+            Asserts.NotEmptyOrNull(lastName, "lastName");
+
             if (authentication == null)
             {
                 authentication = authenticationBuilder.Build();
             }
 
-            Signer result = new Signer (signerEmail, firstName, lastName, authentication);
+            Signer result = new Signer(signerEmail, firstName, lastName, authentication);
             result.Title = title;
             result.Company = company;
             result.Language = language;
@@ -273,14 +299,14 @@ namespace OneSpanSign.Sdk.Builder
             result.CanChangeSigner = canChangeSigner;
             result.Message = message;
             result.Id = id;
-			result.Attachments = attachments;
+            result.Attachments = attachments;
             result.KnowledgeBasedAuthentication = knowledgeBasedAuthentication;
             result.LocalLanguage = localLanguage;
             return result;
         }
 
 
-		public Signer Build()
+        public Signer Build()
         {
             Signer result = null;
             if (isGroupSigner())
@@ -297,15 +323,16 @@ namespace OneSpanSign.Sdk.Builder
             }
 
             return result;
-		}
+        }
 
-        private bool isGroupSigner() {
+        private bool isGroupSigner()
+        {
             return groupId != null;
         }
-        
+
         private bool isPlaceholder()
         {
             return groupId == null && signerEmail == null;
         }
-	}
+    }
 }
