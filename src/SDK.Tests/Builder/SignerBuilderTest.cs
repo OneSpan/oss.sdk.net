@@ -1,8 +1,6 @@
-using System;
 using NUnit.Framework;
 using OneSpanSign.Sdk;
 using OneSpanSign.Sdk.Builder;
-using OneSpanSign.API;
 
 namespace SDK.Tests
 {
@@ -12,7 +10,7 @@ namespace SDK.Tests
 		[Test]
 		public void BuildsSignerWithBasicInformation()
 		{
-			OneSpanSign.Sdk.Signer signer = SignerBuilder.NewSignerWithEmail("joe@email.com")
+			Signer signer = SignerBuilder.NewSignerWithEmail("joe@email.com")
 				.WithFirstName ("Joe")
 				.WithLastName("Smith")
 				.SigningOrder (2)
@@ -45,7 +43,7 @@ namespace SDK.Tests
 		[Test]
 		public void CanSpecifyTitleAndCompany()
 		{
-			OneSpanSign.Sdk.Signer signer = SignerBuilder.NewSignerWithEmail ("billy@bob.com")
+			Signer signer = SignerBuilder.NewSignerWithEmail ("billy@bob.com")
 				.WithFirstName ("Billy")
 				.WithLastName ("Bob")
 				.WithTitle ("Managing Director")
@@ -59,7 +57,7 @@ namespace SDK.Tests
 		[Test]
 		public void AuthenticationDefaultsToEmail()
 		{
-			OneSpanSign.Sdk.Signer signer = SignerBuilder.NewSignerWithEmail ("billy@bob.com")
+			Signer signer = SignerBuilder.NewSignerWithEmail ("billy@bob.com")
 				.WithFirstName ("Billy")
 				.WithLastName ("Bob")
 				.Build ();
@@ -70,7 +68,7 @@ namespace SDK.Tests
 		[Test]
 		public void ProvidingQuestionsAndAnswersSetsAuthenticationMethodToChallenge()
 		{
-			OneSpanSign.Sdk.Signer signer = SignerBuilder.NewSignerWithEmail ("billy@bob.com")
+			Signer signer = SignerBuilder.NewSignerWithEmail ("billy@bob.com")
 				.WithFirstName ("Billy")
 				.WithLastName ("Bob")
 				.ChallengedWithQuestions (ChallengeBuilder.FirstQuestion("What's your favorite sport?")
@@ -83,7 +81,7 @@ namespace SDK.Tests
 		[Test]
 		public void SavesProvidesQuestionsAndAnswers()
 		{
-			OneSpanSign.Sdk.Signer signer = SignerBuilder.NewSignerWithEmail ("billy@bob.com")
+			Signer signer = SignerBuilder.NewSignerWithEmail ("billy@bob.com")
 				.WithFirstName ("Billy")
 					.WithLastName ("Bob")
 					.ChallengedWithQuestions (ChallengeBuilder.FirstQuestion("What's your favorite sport?")
@@ -109,7 +107,7 @@ namespace SDK.Tests
 		[Test]
 		public void ProvidingSignerCellPhoneNumberSetsUpSMSAuthentication() 
 		{
-			OneSpanSign.Sdk.Signer signer = SignerBuilder.NewSignerWithEmail ("billy@bob.com")
+			Signer signer = SignerBuilder.NewSignerWithEmail ("billy@bob.com")
 				.WithFirstName ("Billy")
 				.WithLastName ("Bob")
 				.WithSMSSentTo ("1112223333")
@@ -122,13 +120,28 @@ namespace SDK.Tests
         [Test]
         public void SetsUpSSOAuthentication ()
         {
-            OneSpanSign.Sdk.Signer signer = SignerBuilder.NewSignerWithEmail ("billy@bob.com")
+            Signer signer = SignerBuilder.NewSignerWithEmail ("billy@bob.com")
                 .WithFirstName ("Billy")
                 .WithLastName ("Bob")
                 .WithSSOAuthentication ()
                 .Build ();
 
             Assert.AreEqual (AuthenticationMethod.SSO, signer.AuthenticationMethod);
+        }
+        
+        [Test]
+        public void SetsUpIDVAuthentication ()
+        {
+	        Signer signer = SignerBuilder.NewSignerWithEmail ("billy@bob.com")
+		        .WithFirstName ("Billy")
+		        .WithLastName ("Bob")
+		        .WithIDVAuthentication(IdvWorkflowBuilder.NewIdvWorkflow("00000000-0000-0001-0000-200000000055")
+			        .WithType("DVF")
+			        .WithTenant("oss")
+			        .Build())
+		        .Build ();
+
+	        Assert.AreEqual (AuthenticationMethod.IDV, signer.AuthenticationMethod);
         }
 
 		[Test]
@@ -144,7 +157,7 @@ namespace SDK.Tests
 		[Test]
 		public void CanConfigureSignedDocumentDelivery()
 		{
-			OneSpanSign.Sdk.Signer signer = SignerBuilder.NewSignerWithEmail ("billy@bob.com")
+			Signer signer = SignerBuilder.NewSignerWithEmail ("billy@bob.com")
 				.WithFirstName ("Billy")
 					.WithLastName ("Bob")
 					.DeliverSignedDocumentsByEmail()
@@ -156,12 +169,12 @@ namespace SDK.Tests
 		[Test]
 		public void CanSetAndGetAttachmentRequirements()
 		{
-			OneSpanSign.Sdk.AttachmentRequirement attachmentRequirement = AttachmentRequirementBuilder.NewAttachmentRequirementWithName("Driver's license")
+			AttachmentRequirement attachmentRequirement = AttachmentRequirementBuilder.NewAttachmentRequirementWithName("Driver's license")
 				.WithDescription("Please upload scanned driver's license.")
 				.IsRequiredAttachment()
 				.Build();
 
-			OneSpanSign.Sdk.Signer signer = SignerBuilder.NewSignerWithEmail("billy@bob.com")
+			Signer signer = SignerBuilder.NewSignerWithEmail("billy@bob.com")
 				.WithFirstName("Billy")
 				.WithLastName("Bob")
 				.WithAttachmentRequirement(attachmentRequirement)
@@ -177,16 +190,16 @@ namespace SDK.Tests
 		[Test]
 		public void CanAddTwoAttachmentRequirement()
 		{
-			OneSpanSign.Sdk.AttachmentRequirement attachmentRequirement1 = AttachmentRequirementBuilder.NewAttachmentRequirementWithName("Driver's license")
+			AttachmentRequirement attachmentRequirement1 = AttachmentRequirementBuilder.NewAttachmentRequirementWithName("Driver's license")
 				.WithDescription("Please upload scanned driver's license.")
 				.IsRequiredAttachment()
 				.Build();
-			OneSpanSign.Sdk.AttachmentRequirement attachmentRequirement2 = AttachmentRequirementBuilder.NewAttachmentRequirementWithName("Medicare card")
+			AttachmentRequirement attachmentRequirement2 = AttachmentRequirementBuilder.NewAttachmentRequirementWithName("Medicare card")
 				.WithDescription("Please upload scanned medicare card.")
 				.IsRequiredAttachment()
 				.Build();
 
-			OneSpanSign.Sdk.Signer signer = SignerBuilder.NewSignerWithEmail("billy@bob.com")
+			Signer signer = SignerBuilder.NewSignerWithEmail("billy@bob.com")
 				.WithFirstName("Billy")
 				.WithLastName("Bob")
 				.WithAttachmentRequirement(attachmentRequirement1)

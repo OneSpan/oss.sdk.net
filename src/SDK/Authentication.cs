@@ -18,9 +18,15 @@ namespace OneSpanSign.Sdk
 			this.challenges.AddRange(challenges);
 		}
 
-		public Authentication(string phoneNumber) : this(AuthenticationMethod.SMS)
+		public Authentication(AuthenticationMethod method, string phoneNumber) : this(method)
 		{
-			PhoneNumber = phoneNumber;
+			this.PhoneNumber = phoneNumber;
+		}
+		
+		public Authentication(AuthenticationMethod method, string phoneNumber, IdvWorkflow idvWorkflow) : this(method)
+		{
+			this.PhoneNumber = phoneNumber;
+			this.IdvWorkflow = idvWorkflow;
 		}
 
 		public AuthenticationMethod Method
@@ -40,6 +46,12 @@ namespace OneSpanSign.Sdk
 		}
 
 		public string PhoneNumber
+		{
+			get;
+			private set;
+		}
+		
+		public IdvWorkflow IdvWorkflow
 		{
 			get;
 			private set;

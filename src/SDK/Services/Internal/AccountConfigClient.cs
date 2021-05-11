@@ -19,7 +19,7 @@ namespace OneSpanSign.Sdk
             this.jsonSettings = jsonSettings;
         }
 
-        public OneSpanSign.API.Handover GetHandoverUrl(string language)
+        public API.Handover GetHandoverUrl(string language)
         {
             string path = template.UrlFor(UrlTemplate.HANDOVER_URL_PATH)
                 .Replace("{language}", language)
@@ -27,7 +27,7 @@ namespace OneSpanSign.Sdk
             try
             {
                 string stringResponse = restClient.Get(path);
-                OneSpanSign.API.Handover apiResponse = JsonConvert.DeserializeObject<OneSpanSign.API.Handover>(stringResponse, jsonSettings);
+                API.Handover apiResponse = JsonConvert.DeserializeObject<API.Handover>(stringResponse, jsonSettings);
                 return apiResponse;
             }
             catch (OssServerException e)
@@ -40,7 +40,7 @@ namespace OneSpanSign.Sdk
             }
         }
 
-        public OneSpanSign.API.Handover CreateHandoverUrl(string language, OneSpanSign.API.Handover handover)
+        public API.Handover CreateHandoverUrl(string language, API.Handover handover)
         {
             string path = template.UrlFor(UrlTemplate.HANDOVER_URL_PATH)
                 .Replace("{language}", language)
@@ -50,7 +50,7 @@ namespace OneSpanSign.Sdk
                 string json = JsonConvert.SerializeObject(handover, jsonSettings);
                 string stringResponse = restClient.Post(path, json);
 
-                OneSpanSign.API.Handover apiResponse = JsonConvert.DeserializeObject<OneSpanSign.API.Handover>(stringResponse, jsonSettings);
+                API.Handover apiResponse = JsonConvert.DeserializeObject<API.Handover>(stringResponse, jsonSettings);
                 return apiResponse;
             }
             catch (OssServerException e)
@@ -63,7 +63,7 @@ namespace OneSpanSign.Sdk
             }
         }
 
-        public OneSpanSign.API.Handover UpdateHandoverUrl(string language, OneSpanSign.API.Handover handover)
+        public API.Handover UpdateHandoverUrl(string language, API.Handover handover)
         {
             string path = template.UrlFor(UrlTemplate.HANDOVER_URL_PATH)
                 .Replace("{language}", language)
@@ -73,7 +73,7 @@ namespace OneSpanSign.Sdk
                 string json = JsonConvert.SerializeObject(handover, jsonSettings);
                 string stringResponse = restClient.Put(path, json);
 
-                OneSpanSign.API.Handover apiResponse = JsonConvert.DeserializeObject<OneSpanSign.API.Handover>(stringResponse, jsonSettings);
+                API.Handover apiResponse = JsonConvert.DeserializeObject<API.Handover>(stringResponse, jsonSettings);
                 return apiResponse;
             }
             catch (OssServerException e)
@@ -104,7 +104,7 @@ namespace OneSpanSign.Sdk
                 throw new OssException("Could not delete handover url.", e);
             }
         }
-        
+
         public IList<string> CreateDeclineReasons(IList<string> declineReasons, string language)
         {
             string path = template.UrlFor(UrlTemplate.DECLINE_REASONS_PATH).Replace("{language}", language).Build();
@@ -122,10 +122,10 @@ namespace OneSpanSign.Sdk
             }
             catch (OssException e)
             {
-                throw  new OssException("Could not create decline reasons for account." + " Exception: " + e.Message, e);
+                throw new OssException("Could not create decline reasons for account." + " Exception: " + e.Message, e);
             }
         }
-        
+
         public IList<string> UpdateDeclineReasons(IList<string> declineReasons, string language)
         {
             string path = template.UrlFor(UrlTemplate.DECLINE_REASONS_PATH).Replace("{language}", language)
@@ -144,7 +144,7 @@ namespace OneSpanSign.Sdk
             }
             catch (OssException e)
             {
-                throw  new OssException("Could not update decline reasons for account." + " Exception: " + e.Message, e);
+                throw new OssException("Could not update decline reasons for account." + " Exception: " + e.Message, e);
             }
         }
 
@@ -159,16 +159,16 @@ namespace OneSpanSign.Sdk
                 return JsonConvert.DeserializeObject<IList<string>>(stringResponse, jsonSettings);
             }
             catch (OssServerException e)
-           {
-               throw new OssServerException(
-                   "Could not get decline reasons for account." + " Exception: " + e.Message, e.ServerError, e);
-           }
-           catch (OssException e)
-           {
-               throw  new OssException("Could not get decline reasons for account." + " Exception: " + e.Message, e);
-           }
+            {
+                throw new OssServerException(
+                    "Could not get decline reasons for account." + " Exception: " + e.Message, e.ServerError, e);
+            }
+            catch (OssException e)
+            {
+                throw new OssException("Could not get decline reasons for account." + " Exception: " + e.Message, e);
+            }
         }
-        
+
         public void DeleteDeclineReasons(string language)
         {
             string path = template.UrlFor(UrlTemplate.DECLINE_REASONS_PATH).Replace("{language}", language)
@@ -185,7 +185,87 @@ namespace OneSpanSign.Sdk
             }
             catch (OssException e)
             {
-                throw  new OssException("Could not get decline reasons for account." + " Exception: " + e.Message, e);
+                throw new OssException("Could not get decline reasons for account." + " Exception: " + e.Message, e);
+            }
+        }
+
+
+        public IList<IdvWorkflowConfiguration> GetIdvWorkflowConfigs()
+        {
+            string path = template.UrlFor(UrlTemplate.IDV_WORKFLOW_CONFIGS_PATH)
+                .Build();
+            try
+            {
+                string stringResponse = restClient.Get(path);
+                return JsonConvert.DeserializeObject<IList<IdvWorkflowConfiguration>>(stringResponse, jsonSettings);
+            }
+            catch (OssServerException e)
+            {
+                throw new OssServerException("Could not get IdvWorkflow Configs.", e);
+            }
+            catch (Exception e)
+            {
+                throw new OssException("Could not get IdvWorkflow Configs.", e);
+            }
+        }
+
+        public IList<IdvWorkflowConfiguration> CreateIdvWorkflowConfigs(IList<IdvWorkflowConfiguration> idvWorkflowConfigurations)
+        {
+            string path = template.UrlFor(UrlTemplate.IDV_WORKFLOW_CONFIGS_PATH)
+                .Build();
+            try
+            {
+                string json = JsonConvert.SerializeObject(idvWorkflowConfigurations);
+                string stringResponse = restClient.Post(path, json);
+
+                return JsonConvert.DeserializeObject<IList<IdvWorkflowConfiguration>>(stringResponse, jsonSettings);
+            }
+            catch (OssServerException e)
+            {
+                throw new OssServerException("Could not create IdvWorkflow Configs.", e);
+            }
+            catch (Exception e)
+            {
+                throw new OssException("Could not create IdvWorkflow Configs.", e);
+            }
+        }
+
+        public IList<IdvWorkflowConfiguration> UpdateIdvWorkflowConfigs(IList<IdvWorkflowConfiguration> idvWorkflowConfigurations)
+        {
+            string path = template.UrlFor(UrlTemplate.IDV_WORKFLOW_CONFIGS_PATH)
+                .Build();
+            try
+            {
+                string json = JsonConvert.SerializeObject(idvWorkflowConfigurations);
+                string stringResponse = restClient.Put(path, json);
+
+                return JsonConvert.DeserializeObject<IList<IdvWorkflowConfiguration>>(stringResponse, jsonSettings);
+            }
+            catch (OssServerException e)
+            {
+                throw new OssServerException("Could not update IdvWorkflow Configs.", e);
+            }
+            catch (Exception e)
+            {
+                throw new OssException("Could not update IdvWorkflow Configs.", e);
+            }
+        }
+
+        public void DeleteIdvWorkflowConfigs()
+        {
+            string path = template.UrlFor(UrlTemplate.IDV_WORKFLOW_CONFIGS_PATH)
+                .Build();
+            try
+            {
+                restClient.Delete(path);
+            }
+            catch (OssServerException e)
+            {
+                throw new OssServerException("Could not delete IdvWorkflow Configs.", e);
+            }
+            catch (Exception e)
+            {
+                throw new OssException("Could not delete IdvWorkflow Configs.", e);
             }
         }
     }

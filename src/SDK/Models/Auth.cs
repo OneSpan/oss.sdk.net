@@ -1,46 +1,39 @@
 //
+
 using System;
 using System.Collections.Generic;
 using Newtonsoft.Json;
+
 namespace OneSpanSign.API
 {
-	
-	
-	internal class Auth
-	{
-		
-		// Fields
-		private IList<AuthChallenge> _challenges = new List<AuthChallenge>();
-		
-		// Accessors
-		    
-    [JsonProperty("challenges")]
-    public IList<AuthChallenge> Challenges
+    internal class Auth
     {
-                get
+        // Fields
+        private IList<AuthChallenge> _challenges = new List<AuthChallenge>();
+
+        // Accessors
+
+        [JsonProperty("challenges")]
+        public IList<AuthChallenge> Challenges
         {
-            return _challenges;
+            get { return _challenges; }
         }
-        }
+
         public Auth AddChallenge(AuthChallenge value)
-    {
-        if (value == null)
         {
-            throw new ArgumentNullException("Argument cannot be null");
+            if (value == null)
+            {
+                throw new ArgumentNullException("Argument cannot be null");
+            }
+
+            _challenges.Add(value);
+            return this;
         }
-        
-        _challenges.Add(value);
-        return this;
+
+
+        [JsonProperty("scheme")] public string Scheme { get; set; }
+
+
+        [JsonProperty("idvWorkflow")] public IdvWorkflow IdvWorkflow { get; set; }
     }
-    
-		    
-    [JsonProperty("scheme")]
-    public string Scheme
-    {
-                get; set;
-        }
-    
-		
-	
-	}
 }
