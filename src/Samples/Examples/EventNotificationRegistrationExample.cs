@@ -34,6 +34,7 @@ namespace SDK.Examples
         public readonly NotificationEvent EVENT18 = NotificationEvent.SIGNER_LOCKED;
         public readonly NotificationEvent EVENT19 = NotificationEvent.PACKAGE_ARCHIVE;
         public readonly NotificationEvent EVENT20 = NotificationEvent.TEMPLATE_CREATE;
+        public readonly NotificationEvent EVENT21 = NotificationEvent.DOCUMENT_VIEWED;
 
         public List<NotificationEvent> events = new List<NotificationEvent>();
         public List<NotificationEvent> connectorsEvents = new List<NotificationEvent>();
@@ -66,6 +67,7 @@ namespace SDK.Examples
             events.Add(EVENT18);
             events.Add(EVENT19);
             events.Add(EVENT20);
+            events.Add(EVENT21);
 
 			ossClient.EventNotificationService.Register(EventNotificationConfigBuilder.NewEventNotificationConfig(URL)
                 .WithKey(KEY).SetEvents(events));
@@ -83,6 +85,7 @@ namespace SDK.Examples
             connectorsEvents.Add(EVENT14);
             connectorsEvents.Add(EVENT17);
             connectorsEvents.Add(EVENT18);
+            connectorsEvents.Add(EVENT21);
 
             ossClient.EventNotificationService.Register(ORIGIN, EventNotificationConfigBuilder.NewEventNotificationConfig(CONNECTORS_URL)
                 .WithKey(CONNECTORS_KEY).SetEvents(connectorsEvents));

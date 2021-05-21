@@ -111,6 +111,19 @@ namespace SDK.Tests
 
             Assert.AreEqual(expectedSDKValue, actualSDKValue);
         }
+        
+        [Test]
+        public void whenBuildingNotificationEventWithAPIValueDOCUMENT_VIEWEDThenDOCUMENT_VIEWEDNotificationEventIsReturned()
+        {
+            string expectedSDKValue = "DOCUMENT_VIEWED";
+
+
+            NotificationEvent classUnderTest = NotificationEvent.valueOf("DOCUMENT_VIEWED");
+            string actualSDKValue = classUnderTest.getSdkValue();
+
+
+            Assert.AreEqual(expectedSDKValue, actualSDKValue);
+        }
 
         [Test]
         public void whenBuildingNotificationEventWithAPIValueROLE_REASSIGNThenROLE_REASSIGNNotificationEventIsReturned()
