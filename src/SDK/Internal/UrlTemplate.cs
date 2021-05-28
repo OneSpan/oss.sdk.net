@@ -101,6 +101,7 @@ namespace OneSpanSign.Sdk.Internal
         public static readonly string ACCOUNT_MEMBER_LIST_PATH = "/account/senders?to={to}&from={from}&dir={dir}";
         public static readonly string ACCOUNT_CONTACTS_PATH = "/users";
         public static readonly string ACCOUNT_VERIFICATION_TYPE_PATH = "/account/{accountId}/verificationTypes";
+        public static readonly string ACCOUNT_MEMBER_SIGNATURE_IMAGE_PATH = "/account/senders/{senderUid}/signature/image";
 
         // Approval Service
         public static readonly string APPROVAL_PATH = "/packages/{packageId}/documents/{documentId}/approvals";
