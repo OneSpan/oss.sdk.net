@@ -33,6 +33,9 @@
     <None Update="SampleDocuments\document.pdf">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Update="SampleDocuments\exampleFile.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="SampleDocuments\document.rtf">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
