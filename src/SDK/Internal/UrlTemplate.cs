@@ -197,39 +197,13 @@ namespace OneSpanSign.Sdk.Internal
         // Account Signing UI Options Service
         public static readonly string ACCOUNT_SIGNING_UI_OPTIONS_PATH = "/account/admin/signingUiOptions";
 
-        // Account Roles
-        public static readonly string ACCOUNT_ROLES_PATH = "/account/roles";
-        public static readonly string ACCOUNT_ROLES_ROLE_PATH = "/account/roles/{accountRoleId}";
-        public static readonly string ACCOUNT_ROLES_ROLE_USERS_PATH = "/account/roles/{accountRoleId}/users";
-      
         // Account SubAccount Service
         public static readonly string ACCOUNT_SUBACCOUNTS_PATH = "/account/subaccounts";
         public static readonly string ACCOUNT_SUBACCOUNTS_ID_PATH = "/account/subaccounts/{accountId}";
         public static readonly string ACCOUNT_SUBACCOUNTS_ACCESSIBLEACCOUNTS_PATH = "/account/accessibleaccounts";
 
-        
-        public UrlTemplate (string baseUrl)
-		{
-			this.baseUrl = baseUrl;
-		}
-
-		public UrlTemplate UrlFor (string path)
-		{
-			this.path = path;
-			return this;
-		}
-
-		public UrlTemplate Replace (string pathParams, string value)
-		{
-			path = path.Replace (pathParams, value);
-			return this;
-		}
-
-        public UrlTemplate AddParam(string paramKey, string paramValue) 
-
 
         public UrlTemplate(string baseUrl)
-
         {
             this.baseUrl = baseUrl;
         }
