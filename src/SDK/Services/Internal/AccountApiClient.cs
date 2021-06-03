@@ -398,13 +398,11 @@ namespace OneSpanSign.Sdk
             try
             {
                 string response = restClient.Get(path);
-
                 return JsonConvert.DeserializeObject<IList<OneSpanSign.API.AccessibleAccountResponse>>(response, jsonSettings);
             }
             catch (OssServerException e)
             {
                 throw new OssServerException("Could not get accessibleAccounts.\t" + " Exception: " + e.Message, e.ServerError, e);
-
             }
             catch (Exception e)
             {
@@ -423,9 +421,7 @@ namespace OneSpanSign.Sdk
             }
             catch (OssServerException e)
             {
-
                 throw new OssServerException("Could not create subAccount.\t" + " Exception: " + e.Message, e.ServerError, e);
-
             }
             catch (Exception e)
             {
@@ -436,10 +432,8 @@ namespace OneSpanSign.Sdk
         public void updateSubAccount(OneSpanSign.API.SubAccount subAccount, string accountId)
         {
             string path = template.UrlFor(UrlTemplate.ACCOUNT_SUBACCOUNTS_ID_PATH)
-
                     .Replace("{accountId}", accountId)
                     .Build();
-
             try
             {
                 string payload = JsonConvert.SerializeObject(subAccount, jsonSettings);
@@ -447,9 +441,7 @@ namespace OneSpanSign.Sdk
             }
             catch (OssServerException e)
             {
-
                 throw new OssServerException("Could not update subAccount.\t" + " Exception: " + e.Message, e.ServerError, e);
-
             }
             catch (Exception e)
             {
@@ -457,131 +449,6 @@ namespace OneSpanSign.Sdk
             }
         }
 
-        public OneSpanSign.API.Result<API.AccountRole> getAccountRoles()
-        {
-            string path = template.UrlFor(UrlTemplate.ACCOUNT_ROLES_PATH).Build();
-
-            try
-            {
-                OneSpanSign.API.Result<OneSpanSign.API.AccountRole> apiResponse =
-                    JsonConvert.DeserializeObject<OneSpanSign.API.Result<OneSpanSign.API.AccountRole>>(
-                        restClient.Get(path), jsonSettings);
-                return apiResponse;
-            }
-            catch (OssServerException e)
-            {
-                throw new OssServerException("Could not get roles.\t", e);
-            }
-            catch (Exception e)
-            {
-                throw new OssException("Could not get roles.\t" + " Exception: " + e.Message, e);
-            }
-        }
-
-        public IList<String> getAccountRoleUsers(String accountRoleId)
-        {
-            string path = template.UrlFor(UrlTemplate.ACCOUNT_ROLES_ROLE_USERS_PATH)
-                .Replace("{accountRoleId}", accountRoleId)
-                .Build();
-
-            try
-            {
-                IList<String> apiResponse =
-                    JsonConvert.DeserializeObject<OneSpanSign.API.Result<String>>(
-                        restClient.Get(path), jsonSettings).Results;
-                return apiResponse;
-            }
-            catch (OssServerException e)
-            {
-                throw new OssServerException("Could not get account role users.\t", e);
-            }
-            catch (Exception e)
-            {
-                throw new OssException("Could not get account role users.\t" + " Exception: " + e.Message, e);
-            }
-        }
-
-        public API.AccountRole getAccountRole(String accountRoleId)
-        {
-            string path = template.UrlFor(UrlTemplate.ACCOUNT_ROLES_PATH).Replace("{accountRoleId}", accountRoleId)
-                .Build();
-
-            try
-            {
-                OneSpanSign.API.Result<OneSpanSign.API.AccountRole> apiResponse =
-                    JsonConvert.DeserializeObject<OneSpanSign.API.Result<OneSpanSign.API.AccountRole>>(
-                        restClient.Get(path), jsonSettings);
-                return apiResponse.Results[0];
-            }
-            catch (OssServerException e)
-            {
-                throw new OssServerException("Could not get role.\t", e);
-            }
-            catch (Exception e)
-            {
-                throw new OssException("Could not get role.\t" + " Exception: " + e.Message, e);
-            }
-        }
-
-        public void addAccountRole(OneSpanSign.API.AccountRole accountRole)
-        {
-            string path = template.UrlFor(UrlTemplate.ACCOUNT_ROLES_PATH).Build();
-            try
-            {
-                string payload = JsonConvert.SerializeObject(accountRole, jsonSettings);
-                restClient.Post(path, payload);
-            }
-            catch (OssServerException e)
-            {
-                throw new OssServerException("Could not add account role.\t" + " Exception: " + e.Message,
-                    e.ServerError, e);
-            }
-            catch (Exception e)
-            {
-                throw new OssException("Could not add account role.\t" + " Exception: " + e.Message, e);
-            }
-        }
-
-        public void updateAccountRole(OneSpanSign.API.AccountRole accountRole, string accountId)
-        {
-            string path = template.UrlFor(UrlTemplate.ACCOUNT_ROLES_ROLE_PATH)
-                .Replace("{accountId}", accountId)
-                .Build();
-            try
-            {
-                string payload = JsonConvert.SerializeObject(accountRole, jsonSettings);
-                restClient.Put(path, payload);
-            }
-            catch (OssServerException e)
-            {
-                throw new OssServerException("Could not update account role.\t" + " Exception: " + e.Message,
-                    e.ServerError, e);
-            }
-            catch (Exception e)
-            {
-                throw new OssException("Could not update account role.\t" + " Exception: " + e.Message, e);
-            }
-        }
-
-        public void deleteAccountRole(string accountRoleId)
-        {
-            string path = template.UrlFor(UrlTemplate.ACCOUNT_ROLES_ROLE_PATH)
-                .Replace("{accountRoleId}", accountRoleId)
-                .Build();
-            try
-            {
-                restClient.Delete(path);
-            }
-            catch (OssServerException e)
-            {
-                throw new OssServerException("Could not delete account role.\t" + " Exception: " + e.Message,
-                    e.ServerError,
-                    e);
-            }
-            catch (Exception e)
-            {
-                throw new OssException("Could not delete account role.\t" + " Exception: " + e.Message, e);
-            }
 
         private string GenerateBoundary()
         {
