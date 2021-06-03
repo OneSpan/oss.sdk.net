@@ -23,13 +23,6 @@ namespace SDK.Examples
             email5,
             email6,
             senderEmail,
-            sms1,
-            sms2,
-            sms3,
-            sms4,
-            sms5,
-            sms6,
-            senderSms,
             webpageUrl,
             senderUID,
             proxyHost,
@@ -47,7 +40,15 @@ namespace SDK.Examples
                 apiTokenConfig.BaseUrl = props.Get("webpage.url");
                 apiTokenConfig.ClientAppId = props.Get("api.clientId");
                 apiTokenConfig.ClientAppSecret = props.Get("api.secret");
-                apiTokenConfig.TokenType = ApiTokenType.OWNER;
+                if (props.Exists("api.senderEmail"))
+                {
+                    apiTokenConfig.TokenType = ApiTokenType.SENDER;
+                    apiTokenConfig.SenderEmail = props.Get("api.senderEmail");
+                }
+                else
+                {
+                    apiTokenConfig.TokenType = ApiTokenType.OWNER;
+                }
                 ossClient = new OssClient(apiTokenConfig, props.Get("api.url"), true, null,
                     new Dictionary<string, string>());
             }
@@ -81,13 +82,6 @@ namespace SDK.Examples
             email5 = props.Get("5.email");
             email6 = props.Get("6.email");
             senderEmail = props.Get("sender.email");
-            sms1 = props.Get("1.sms");
-            sms2 = props.Get("2.sms");
-            sms3 = props.Get("3.sms");
-            sms4 = props.Get("4.sms");
-            sms5 = props.Get("5.sms");
-            sms6 = props.Get("6.sms");
-            senderSms = props.Get("sender.sms");
             webpageUrl = props.Get("webpage.url");
             proxyHost = props.Get("proxy.host");
             proxyPort = Int32.Parse(props.Get("proxy.port"));

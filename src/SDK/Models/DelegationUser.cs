@@ -47,7 +47,13 @@ namespace OneSpanSign.API
                 get; set;
         }
     
-		
-	
+
+    [JsonProperty("expiryDate")]
+    public Nullable<DateTime> ExpiryDate
+    {
+	    get; set;
+		}
+
+
 	}
 }

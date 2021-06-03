@@ -6,7 +6,7 @@ using OneSpanSign.Sdk.Builder;
 namespace SDK.Tests
 {
 	[TestFixture]
-	public class ossClientTest
+	public class OssClientTest
 	{
 		[Test]
 		public void CannotCreateClientWithNullAPIKey()
@@ -24,7 +24,7 @@ namespace SDK.Tests
         public void GetVersionFromAbsentAttributes()
         {
             DocumentPackage package = CreateDefaultDocumentPackage();
-            OssClient ossClient = CreateDefaultossClient();
+            OssClient ossClient = CreateDefaultOssClient();
             Assert.AreEqual( false, ossClient.IsSdkVersionSetInPackageData(package) );
         }
         
@@ -33,7 +33,7 @@ namespace SDK.Tests
         {
             DocumentPackage package = CreateDefaultDocumentPackage();
             package.Attributes = new DocumentPackageAttributes();
-            OssClient ossClient = CreateDefaultossClient();
+            OssClient ossClient = CreateDefaultOssClient();
             Assert.AreEqual( false, ossClient.IsSdkVersionSetInPackageData(package) );
         }
         
@@ -43,7 +43,7 @@ namespace SDK.Tests
             DocumentPackage package = CreateDefaultDocumentPackage();
             package.Attributes = new DocumentPackageAttributes();
             package.Attributes.Append("key", "value");
-            OssClient ossClient = CreateDefaultossClient();
+            OssClient ossClient = CreateDefaultOssClient();
             Assert.AreEqual( false, ossClient.IsSdkVersionSetInPackageData(package) );
         }
         
@@ -54,7 +54,7 @@ namespace SDK.Tests
             package.Attributes = new DocumentPackageAttributes();
             package.Attributes.Append("key", "value");
             package.Attributes.Append("sdk", "v???");
-            OssClient ossClient = CreateDefaultossClient();
+            OssClient ossClient = CreateDefaultOssClient();
             Assert.AreEqual( true, ossClient.IsSdkVersionSetInPackageData(package) );
         }
         
@@ -63,7 +63,7 @@ namespace SDK.Tests
             return PackageBuilder.NewPackageNamed("Package Name").Build();
         }
         
-        private OssClient CreateDefaultossClient()
+        private OssClient CreateDefaultOssClient()
         {
             return new OssClient("key","url");
         }

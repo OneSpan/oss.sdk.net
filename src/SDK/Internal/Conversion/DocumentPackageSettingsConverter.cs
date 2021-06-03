@@ -40,6 +40,10 @@ namespace OneSpanSign.Sdk
             ceremonySettings.FontSize = sdkSettings.FontSize;
             ceremonySettings.DefaultTimeBasedExpiry = sdkSettings.DefaultTimeBasedExpiry;
             ceremonySettings.RemainingDays = sdkSettings.RemainingDays;
+            ceremonySettings.ShowNseHelp = sdkSettings.ShowNseHelp;
+            ceremonySettings.LeftMenuExpand = sdkSettings.ExpandLeftMenu;
+            ceremonySettings.MaxAttachmentFiles = sdkSettings.MaxAttachmentFiles;
+            ceremonySettings.ShowNseOverview = sdkSettings.ShowNseOverview;
 
             if (sdkSettings.EnableFirstAffidavit.HasValue) {
                 ceremonySettings.DisableFirstInPersonAffidavit = !sdkSettings.EnableFirstAffidavit;
@@ -58,10 +62,12 @@ namespace OneSpanSign.Sdk
             }
 
             if (sdkSettings.LinkHref != null) {
-                Link link = new Link();
+                OneSpanSign.API.Link link = new OneSpanSign.API.Link();
                 link.Href =  sdkSettings.LinkHref ;
                 link.Text =  sdkSettings.LinkText == null ? sdkSettings.LinkHref : sdkSettings.LinkText ;
                 link.Title =  sdkSettings.LinkTooltip == null ? sdkSettings.LinkHref : sdkSettings.LinkTooltip ;
+                link.AutoRedirect = sdkSettings.LinkAutoRedirect == null ? false : sdkSettings.LinkAutoRedirect;
+                link.Parameters = sdkSettings.LinkParameters;
                 ceremonySettings.HandOver = link;
             }
 
@@ -106,7 +112,10 @@ namespace OneSpanSign.Sdk
                     
                 if (apiSettings.Ceremony.DeclineButton.HasValue)
                     builder = (apiSettings.Ceremony.DeclineButton.Value ? builder.WithDecline() : builder.WithoutDecline());
-                    
+
+                if (apiSettings.Ceremony.LeftMenuExpand.HasValue)
+                    builder = (apiSettings.Ceremony.LeftMenuExpand.Value ? builder.WithLeftMenuExpand() : builder.WithoutLeftMenuExpand());
+
                 if (apiSettings.Ceremony.HideWatermark.HasValue)
                     builder = (apiSettings.Ceremony.HideWatermark.Value ? builder.WithoutWatermark() : builder.WithWatermark());
                     
@@ -146,6 +155,15 @@ namespace OneSpanSign.Sdk
                 if (apiSettings.Ceremony.RemainingDays.HasValue)
                     builder.WithRemainingDays (apiSettings.Ceremony.RemainingDays.Value);
 
+                if (apiSettings.Ceremony.MaxAttachmentFiles.HasValue)
+                    builder.WithMaxAttachmentFiles (apiSettings.Ceremony.MaxAttachmentFiles.Value);
+
+                if (apiSettings.Ceremony.ShowNseHelp.HasValue)
+                                    builder = (apiSettings.Ceremony.ShowNseHelp.Value ? builder.WithShowNseHelp () : builder.WithoutShowNseHelp ());
+
+                 if (apiSettings.Ceremony.ShowNseOverview.HasValue)
+                                    builder = (apiSettings.Ceremony.ShowNseOverview.Value ? builder.WithShowNseOverview () : builder.WithoutShowNseOverview ());
+
                 foreach (string declineReason in apiSettings.Ceremony.DeclineReasons)
                 {
                     builder.WithDeclineReason(declineReason);
@@ -178,6 +196,10 @@ namespace OneSpanSign.Sdk
                     builder.WithHandOverLinkHref(apiSettings.Ceremony.HandOver.Href);
                     builder.WithHandOverLinkText(apiSettings.Ceremony.HandOver.Text);
                     builder.WithHandOverLinkTooltip(apiSettings.Ceremony.HandOver.Title);
+                    builder = (apiSettings.Ceremony.HandOver.AutoRedirect != null && apiSettings.Ceremony.HandOver.AutoRedirect.Value)
+                        ? builder.WithHandOverAutoRedirect()
+                        : builder.WithoutHandOverAutoRedirect();
+                    builder.WithHandOverParameters(apiSettings.Ceremony.HandOver.Parameters);
                 }
             }
 

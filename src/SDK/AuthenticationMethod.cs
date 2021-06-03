@@ -14,6 +14,7 @@ namespace OneSpanSign.Sdk
         public static AuthenticationMethod SMS = new AuthenticationMethod("SMS", "SMS", 2);
         public static AuthenticationMethod KBA = new AuthenticationMethod("KBA", "KBA", 3);
         public static AuthenticationMethod SSO = new AuthenticationMethod("SSO", "SSO", 4);
+        public static AuthenticationMethod IDV = new AuthenticationMethod("ID_VERIFICATION", "IDV", 5);
         private static Dictionary<string,AuthenticationMethod> allAuthenticationMethods = new Dictionary<string,AuthenticationMethod>();
 
         static AuthenticationMethod()
@@ -23,6 +24,7 @@ namespace OneSpanSign.Sdk
             allAuthenticationMethods.Add(SMS.getApiValue(), AuthenticationMethod.SMS);
             allAuthenticationMethods.Add(KBA.getApiValue(), AuthenticationMethod.KBA);
             allAuthenticationMethods.Add(SSO.getApiValue(), AuthenticationMethod.SSO);
+            allAuthenticationMethods.Add(IDV.getApiValue(), AuthenticationMethod.IDV);
         }
 
         private AuthenticationMethod(string apiValue, string sdkValue, int index):base(apiValue,sdkValue,index) 

@@ -67,10 +67,11 @@ namespace SDK.Tests
 
 			Assert.IsNotNull(sdkEventNotificationConfig1);
 			Assert.AreEqual(sdkEventNotificationConfig1.Url, apiCallback1.Url);
-			Assert.AreEqual(sdkEventNotificationConfig1.NotificationEvents.Count, 3);
+			Assert.AreEqual(sdkEventNotificationConfig1.NotificationEvents.Count, 4);
             Assert.AreEqual(sdkEventNotificationConfig1.NotificationEvents[0].getApiValue(), apiCallback1.Events[0]);
             Assert.AreEqual(sdkEventNotificationConfig1.NotificationEvents[1].getApiValue(), apiCallback1.Events[1]);
             Assert.AreEqual(sdkEventNotificationConfig1.NotificationEvents[2].getApiValue(), apiCallback1.Events[2]);
+            Assert.AreEqual(sdkEventNotificationConfig1.NotificationEvents[3].getApiValue(), apiCallback1.Events[3]);
 		}
 
 		
@@ -90,6 +91,7 @@ namespace SDK.Tests
 		private OneSpanSign.API.Callback CreateTypicalAPICallback() {
 			Callback callback = new Callback();
 			callback.Url = "callback url";
+			callback.AddEvent(NotificationEvent.DOCUMENT_VIEWED.getApiValue());
             callback.AddEvent(NotificationEvent.DOCUMENT_SIGNED.getApiValue());
             callback.AddEvent(NotificationEvent.PACKAGE_CREATE.getApiValue());
             callback.AddEvent(NotificationEvent.PACKAGE_TRASH.getApiValue());

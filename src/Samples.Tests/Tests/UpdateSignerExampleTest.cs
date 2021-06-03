@@ -28,8 +28,7 @@ namespace SDK.Examples
             Assert.AreEqual(UpdateSignerExample.SIGNER3_SECOND_ANSWER, example.updatedPackage.GetSigner(example.email3).Authentication.Challenges[1].Answer);
 
             Assert.IsNotNull(example.updatedPackage.GetSigner(example.email2));
-            Assert.AreEqual(AuthenticationMethod.SMS, example.updatedPackage.GetSigner(example.email2).Authentication.Method);
-            Assert.AreEqual(example.sms1, example.updatedPackage.GetSigner(example.email2).Authentication.PhoneNumber);
+            Assert.AreEqual(AuthenticationMethod.EMAIL, example.updatedPackage.GetSigner(example.email2).Authentication.Method);
             Assert.AreEqual(UpdateSignerExample.SIGNER2_UPDATE_LANGUAGE, example.updatedPackage.GetSigner(example.email2).Language);
         }
     }

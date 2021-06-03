@@ -65,6 +65,14 @@ namespace OneSpanSign.Sdk
             get { return enableDecline; }
             set { enableDecline = value; }
         }
+        
+        private Nullable<bool> expandLeftMenu = null;
+
+        public Nullable<bool> ExpandLeftMenu 
+        {
+            get { return expandLeftMenu; }
+            set { expandLeftMenu = value; }
+        }
 
         private Nullable<bool> disableDeclineOther = null;
 
@@ -128,6 +136,22 @@ namespace OneSpanSign.Sdk
         {
             get { return remainingDays; }
             set { remainingDays = value; }
+        }
+
+        private Nullable<bool> showNseHelp = null;
+
+        public Nullable<bool> ShowNseHelp
+        {
+            get { return showNseHelp; }
+            set { showNseHelp = value; }
+        }
+
+        private Nullable<bool> showNseOverview = null;
+
+        public Nullable<bool> ShowNseOverview
+        {
+            get { return showNseOverview; }
+            set { showNseOverview = value; }
         }
 
         private List<string> declineReasons = new List<string> ();
@@ -194,12 +218,35 @@ namespace OneSpanSign.Sdk
             set { linkHref = value; }
         }
 
+        private Nullable<bool> linkAutoRedirect = null;
+
+        public Nullable<bool> LinkAutoRedirect 
+        {
+            get { return linkAutoRedirect; }
+            set { linkAutoRedirect = value; }
+        }
+        
+        private HashSet<String> linkParameters;
+        public HashSet<String> LinkParameters 
+        {
+            get { return linkParameters; }
+            set { linkParameters = value; }
+        }
+
         private CeremonyLayoutSettings ceremonyLayoutSettings = null;
 
         public CeremonyLayoutSettings CeremonyLayoutSettings 
         {
             get { return ceremonyLayoutSettings; }
             set { ceremonyLayoutSettings = value; }
+        }
+
+        private Nullable<Int32> maxAttachmentFiles = null;
+
+        public Nullable<Int32> MaxAttachmentFiles
+        {
+            get { return maxAttachmentFiles; }
+            set { maxAttachmentFiles = value; }
         }
 
         internal PackageSettings toAPIPackageSettings ()
@@ -215,6 +262,9 @@ namespace OneSpanSign.Sdk
 
             if (enableDecline != null)
                 ceremonySettings.DeclineButton = enableDecline.Value;
+
+            if (expandLeftMenu != null)
+                ceremonySettings.LeftMenuExpand = expandLeftMenu.Value;
 
             if (disableOptOutOther != null)
                 ceremonySettings.DisableOptOutOther = disableOptOutOther.Value;
@@ -255,6 +305,12 @@ namespace OneSpanSign.Sdk
             if (remainingDays != null)
                 ceremonySettings.RemainingDays = remainingDays.Value;
 
+            if (showNseHelp != null)
+                            ceremonySettings.ShowNseHelp = showNseHelp.Value;
+
+            if (showNseOverview != null)
+                            ceremonySettings.ShowNseOverview = showNseOverview.Value;
+
             foreach (string declineReason in declineReasons)
                 ceremonySettings.DeclineReasons.Add (declineReason);
 
@@ -264,11 +320,16 @@ namespace OneSpanSign.Sdk
             if (maxAuthAttempts != null)
                 ceremonySettings.MaxAuthFailsAllowed = maxAuthAttempts.Value;
 
+            if (maxAttachmentFiles != null)
+                ceremonySettings.MaxAttachmentFiles = maxAttachmentFiles.Value;
+
             if (linkHref != null) {
-                Link link = new Link ();
+                OneSpanSign.API.Link link = new API.Link ();
                 link.Href = linkHref;
                 link.Text = (linkText == null ? linkHref : linkText);
                 link.Title = (linkTooltip == null ? linkHref : linkTooltip);
+                link.AutoRedirect = (linkAutoRedirect == null ? false : linkAutoRedirect);
+                link.Parameters = linkParameters;
                 ceremonySettings.HandOver = link;
             }
 

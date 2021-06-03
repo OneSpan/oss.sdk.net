@@ -17,6 +17,9 @@ namespace SDK.Examples
         public string signingThemesStringToCreate = "{\"default\":{\"color\":{\"primary\":\"#5940C3\"}}}";
         public string signingThemesStringToUpdate = "{\"default\":{\"color\":{\"primary\":\"#5940C3\",\"secondary\": \"#F31C8B\"}}}";
 
+        public List<SigningLogo> createdSigningLogos, updatedSigningLogos, removedSigningLogos;
+
+        public SigningUiOptions defaultSigningUiOptions, patchedSigningUiOptions, deletedSigningUiOptions;
         override public void Execute ()
         {
             // Create default signing theme
@@ -32,6 +35,65 @@ namespace SDK.Examples
             ossClient.GetSigningStyleService ().DeleteSigningThemes ();
 
             removedSigningThemes = ossClient.GetSigningStyleService ().GetSigningThemes ();
-        }
+
+
+            // SigningLogo operations
+            OssClient.GetSigningStyleService ().SaveSigningLogos (new List<SigningLogo>());
+
+            // Create signing logos
+            List<SigningLogo> signingLogos = new List<SigningLogo> ();
+
+            SigningLogo signingLogoEn = SigningLogoBuilder.NewSigningLogo ()
+                    .WithLanguage ("en")
+                    .WithImage ("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEUAAABnCAYAAABW6Y8UAAAABGdBTUEAALGPC")
+                    .Build ();
+            signingLogos.Add(signingLogoEn);
+                      
+            OssClient.GetSigningStyleService ().SaveSigningLogos (signingLogos);
+            createdSigningLogos = OssClient.GetSigningStyleService ().GetSigningLogos ();
+
+            // Update signing logos
+            SigningLogo signingLogoFr = SigningLogoBuilder.NewSigningLogo ()
+                    .WithLanguage ("fr")
+                    .WithImage ("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEUAAABnCAYAAABW6Y8UAAAABGdBTUEAALGPC")
+                    .Build ();
+            signingLogos.Add (signingLogoFr);           
+             
+            OssClient.GetSigningStyleService ().SaveSigningLogos (signingLogos);
+            updatedSigningLogos = OssClient.GetSigningStyleService ().GetSigningLogos ();
+
+            // Delete signing logos
+            OssClient.GetSigningStyleService ().SaveSigningLogos (new List<SigningLogo> ());
+            removedSigningLogos = OssClient.GetSigningStyleService ().GetSigningLogos ();
+            
+            //Get signing ui options
+            defaultSigningUiOptions = OssClient.GetSigningStyleService().GetSigningUiOptions();
+
+            SigningUiOptions signingUiOptions = SigningUiOptionsBuilder.NewSigningUiOptions()
+                .WithOverviewOptions(OverviewOptionsBuilder.NewOverviewOptions()
+                    .WithoutTitle()
+                    .WithoutBody()
+                    .WithoutDocumentSection()
+                    .WithoutUploadSection()
+                    .Build())
+                .WithCompleteSummaryOptions(CompleteSummaryOptionsBuilder.NewCompleteSummaryOptions()
+                    .WithoutTitle()
+                    .WithoutMessage()
+                    .WithoutDownload()
+                    .WithoutReview()
+                    .WithoutContinue()
+                    .WithoutDocumentSection()
+                    .WithoutUploadSection()
+                    .Build())
+                .Build();
+            //Save signing ui options
+            OssClient.GetSigningStyleService().SaveSigningUiOptions(signingUiOptions);
+            patchedSigningUiOptions = OssClient.GetSigningStyleService().GetSigningUiOptions();
+            
+            //Delete signing ui options
+            OssClient.GetSigningStyleService().DeleteSigningUiOptions();
+            deletedSigningUiOptions = OssClient.GetSigningStyleService().GetSigningUiOptions();
+
+        } 
     }
 }

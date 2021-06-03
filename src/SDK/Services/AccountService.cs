@@ -61,6 +61,23 @@ namespace OneSpanSign.Sdk.Services
             apiClient.UpdateSender(apiSender, senderId);
         }
 
+        public OneSpanSign.Sdk.SenderImageSignature GetSenderImageSignature(string senderId)
+        {
+            OneSpanSign.API.SenderImageSignature apiResponse = apiClient.GetSenderImageSignature(senderId);
+            SenderImageSignature result = new SenderImageSignatureConverter(apiResponse).ToSDKSenderImageSignature();
+            return result;
+        }
+
+        public void UpdateSenderImageSignature(string fileName, byte[] fileContent, string senderId)
+        {
+            apiClient.UpdateSenderImageSignature(fileName, fileContent, senderId);
+        }
+
+        public void DeleteSenderImageSignature(string senderId)
+        {
+            apiClient.DeleteSenderImageSignature(senderId);
+        }
+
         public IDictionary<string, OneSpanSign.Sdk.Sender> GetContacts()
         {
             IList<OneSpanSign.API.Sender> contacts = apiClient.GetContacts();
@@ -90,6 +107,18 @@ namespace OneSpanSign.Sdk.Services
         {
             apiClient.UpdateDelegates(senderId, delegateIds);
         }
+
+
+        public void updateDelegationWithDelegationUsers(string senderId, List<DelegationUser> delegates)
+        {
+            IList<OneSpanSign.API.DelegationUser> apiDelegates = new List<OneSpanSign.API.DelegationUser>();
+            foreach (OneSpanSign.Sdk.DelegationUser delegateUser in delegates)
+            {
+                apiDelegates.Add(new DelegationUserConverter(delegateUser).ToAPIDelegationUser());
+            }
+            apiClient.UpdateDelegates(senderId, apiDelegates);
+        }
+
 
         public void AddDelegate(string senderId, OneSpanSign.Sdk.DelegationUser delegationUser)
         {
@@ -145,7 +174,8 @@ namespace OneSpanSign.Sdk.Services
             return new AccountConverter(account).ToSDKAccount();
         }
 
-        public void updateSubAccount(SubAccount subAccount, string accountId)
+
+        public void updateSubAccount(SubAccount subAccount, String accountId)
         {
             OneSpanSign.API.SubAccount apiSubAccount = new SubAccountConverter(subAccount).ToAPISubAccount();
             apiClient.updateSubAccount(apiSubAccount, accountId);

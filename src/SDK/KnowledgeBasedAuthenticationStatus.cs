@@ -1,25 +1,30 @@
 using System;
 using System.Collections.Generic;
-using System.Reflection;
 using OneSpanSign.Sdk.Internal;
 
 namespace OneSpanSign.Sdk
 {
     public class KnowledgeBasedAuthenticationStatus : OssEnumeration
     {
-        private static ILogger log = LoggerFactory.get(typeof(KnowledgeBasedAuthenticationStatus));
+        private static readonly ILogger Log = LoggerFactory.get(typeof(KnowledgeBasedAuthenticationStatus));
 
-        public static KnowledgeBasedAuthenticationStatus NOT_YET_ATTEMPTED = new KnowledgeBasedAuthenticationStatus("NOT_YET_ATTEMPTED", "NOT_YET_ATTEMPTED", 0);
-        public static KnowledgeBasedAuthenticationStatus PASSED = new KnowledgeBasedAuthenticationStatus("PASSED", "PASSED", 1);
-        public static KnowledgeBasedAuthenticationStatus FAILED = new KnowledgeBasedAuthenticationStatus("FAILED", "FAILED", 2);
-        private static Dictionary<string,KnowledgeBasedAuthenticationStatus> allKnowledgeBasedAuthenticationStatus = new Dictionary<string,KnowledgeBasedAuthenticationStatus>();
+        public static readonly KnowledgeBasedAuthenticationStatus NOT_YET_ATTEMPTED = new KnowledgeBasedAuthenticationStatus("NOT_YET_ATTEMPTED", "NOT_YET_ATTEMPTED", 0);
+        public static readonly KnowledgeBasedAuthenticationStatus PASSED = new KnowledgeBasedAuthenticationStatus("PASSED", "PASSED", 1);
+        public static readonly KnowledgeBasedAuthenticationStatus FAILED = new KnowledgeBasedAuthenticationStatus("FAILED", "FAILED", 2);
+        public static readonly KnowledgeBasedAuthenticationStatus INVALID_SIGNER = new KnowledgeBasedAuthenticationStatus("INVALID_SIGNER", "INVALID_SIGNER", 3);
+        public static readonly KnowledgeBasedAuthenticationStatus UPDATED = new KnowledgeBasedAuthenticationStatus("UPDATED", "UPDATED", 4);
+        public static readonly KnowledgeBasedAuthenticationStatus LOCKED = new KnowledgeBasedAuthenticationStatus("LOCKED", "LOCKED", 5);
+        private static readonly Dictionary<string,KnowledgeBasedAuthenticationStatus> AllKnowledgeBasedAuthenticationStatus = new Dictionary<string,KnowledgeBasedAuthenticationStatus>();
 
 
         static KnowledgeBasedAuthenticationStatus()
         {
-            allKnowledgeBasedAuthenticationStatus.Add(NOT_YET_ATTEMPTED.getApiValue(), KnowledgeBasedAuthenticationStatus.NOT_YET_ATTEMPTED);
-            allKnowledgeBasedAuthenticationStatus.Add(PASSED.getApiValue(), KnowledgeBasedAuthenticationStatus.PASSED);
-            allKnowledgeBasedAuthenticationStatus.Add(FAILED.getApiValue(), KnowledgeBasedAuthenticationStatus.FAILED);
+            AllKnowledgeBasedAuthenticationStatus.Add(NOT_YET_ATTEMPTED.getApiValue(), NOT_YET_ATTEMPTED);
+            AllKnowledgeBasedAuthenticationStatus.Add(PASSED.getApiValue(), PASSED);
+            AllKnowledgeBasedAuthenticationStatus.Add(FAILED.getApiValue(), FAILED);
+            AllKnowledgeBasedAuthenticationStatus.Add(INVALID_SIGNER.getApiValue(), INVALID_SIGNER);
+            AllKnowledgeBasedAuthenticationStatus.Add(UPDATED.getApiValue(), UPDATED);
+            AllKnowledgeBasedAuthenticationStatus.Add(LOCKED.getApiValue(), LOCKED);
         }
 
         private KnowledgeBasedAuthenticationStatus(string apiValue, string sdkValue, int index):base(apiValue, sdkValue,index) 
@@ -29,19 +34,19 @@ namespace OneSpanSign.Sdk
         internal static KnowledgeBasedAuthenticationStatus valueOf (string apiValue)
         {
 
-            if (!String.IsNullOrEmpty(apiValue) && allKnowledgeBasedAuthenticationStatus.ContainsKey(apiValue))
+            if (!String.IsNullOrEmpty(apiValue) && AllKnowledgeBasedAuthenticationStatus.ContainsKey(apiValue))
             {
-                return allKnowledgeBasedAuthenticationStatus[apiValue];
+                return AllKnowledgeBasedAuthenticationStatus[apiValue];
             }
-            log.Warn("Unknown API KnowledgeBasedAuthenticationStatus {0}. The upgrade is required.", apiValue);
-            return new KnowledgeBasedAuthenticationStatus(apiValue, "UNRECOGNIZED", allKnowledgeBasedAuthenticationStatus.Values.Count);
+            Log.Warn("Unknown API KnowledgeBasedAuthenticationStatus {0}. The upgrade is required.", apiValue);
+            return new KnowledgeBasedAuthenticationStatus(apiValue, "UNRECOGNIZED", AllKnowledgeBasedAuthenticationStatus.Values.Count);
         }
 
         public static string[] GetNames()
         {
-            string[] names = new string[allKnowledgeBasedAuthenticationStatus.Count];
+            string[] names = new string[AllKnowledgeBasedAuthenticationStatus.Count];
             int i = 0;
-            foreach(KnowledgeBasedAuthenticationStatus kbaStatus in allKnowledgeBasedAuthenticationStatus.Values)
+            foreach(KnowledgeBasedAuthenticationStatus kbaStatus in AllKnowledgeBasedAuthenticationStatus.Values)
             {
                 names[i] = kbaStatus.GetName();
                 i++;
@@ -56,7 +61,7 @@ namespace OneSpanSign.Sdk
 
         public static KnowledgeBasedAuthenticationStatus[] Values()
         {
-            return (new List<KnowledgeBasedAuthenticationStatus>(allKnowledgeBasedAuthenticationStatus.Values)).ToArray();
+            return (new List<KnowledgeBasedAuthenticationStatus>(AllKnowledgeBasedAuthenticationStatus.Values)).ToArray();
         }
 
         public static KnowledgeBasedAuthenticationStatus parse(string value)
@@ -71,7 +76,7 @@ namespace OneSpanSign.Sdk
             {
                 throw new ArgumentException("value is either an empty string or only contains white space");
             }
-            foreach(KnowledgeBasedAuthenticationStatus kbaStatus in allKnowledgeBasedAuthenticationStatus.Values)
+            foreach(KnowledgeBasedAuthenticationStatus kbaStatus in AllKnowledgeBasedAuthenticationStatus.Values)
             {
                 if (String.Equals(kbaStatus.GetName(), value))
                 {

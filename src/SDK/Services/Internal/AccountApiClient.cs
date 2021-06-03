@@ -1,4 +1,6 @@
 using System;
+using System.Text;
+using System.IO;
 using OneSpanSign.Sdk.Internal;
 using Newtonsoft.Json;
 using System.Collections.Generic;
@@ -58,6 +60,69 @@ namespace OneSpanSign.Sdk
             catch (Exception e)
             {
                 throw new OssException("Failed to send invite to sender.\t" + " Exception: " + e.Message, e);
+            }
+        }
+
+        public void UpdateSenderImageSignature(string fileName, byte[] fileContent, string senderId)
+        {
+            string path = template.UrlFor(UrlTemplate.ACCOUNT_MEMBER_SIGNATURE_IMAGE_PATH)
+                .Replace("{senderUid}", senderId)
+                .Build();
+            try
+            {
+                string boundary = GenerateBoundary();
+                byte[] bytes = new byte[fileName.Length * sizeof(char)];
+                System.Buffer.BlockCopy(fileName.ToCharArray(), 0, bytes, 0, bytes.Length);
+                byte[] content = CreateMultipartContent(fileName, fileContent, boundary);
+                restClient.PostMultipartFile(path, content, boundary, Converter.ToString(bytes));
+            }
+            catch (OssServerException e)
+            {
+                throw new OssServerException("Could not update sender signature image.", e);
+            }
+            catch (Exception e)
+            {
+                throw new OssException("Could not update sender signature image." + " Exception: " + e.Message, e);
+            }
+        }
+
+        public OneSpanSign.API.SenderImageSignature GetSenderImageSignature(string senderId)
+        {
+            string path = template.UrlFor(UrlTemplate.ACCOUNT_MEMBER_SIGNATURE_IMAGE_PATH)
+                    .Replace("{senderUid}", senderId)
+                    .Build();
+            try
+            {
+                string response = restClient.Get(path);
+                return JsonConvert.DeserializeObject<OneSpanSign.API.SenderImageSignature>(response,
+                            jsonSettings);
+            }
+            catch (OssServerException e)
+            {
+                throw new OssServerException("Could not get sender signature image.", e);
+            }
+            catch (Exception e)
+            {
+                throw new OssException("Could not get sender signature image." + " Exception: " + e.Message, e);
+            }
+        }
+
+        public void DeleteSenderImageSignature(string senderId)
+        {
+            string path = template.UrlFor(UrlTemplate.ACCOUNT_MEMBER_SIGNATURE_IMAGE_PATH)
+                    .Replace("{senderUid}", senderId)
+                    .Build();
+            try
+            {
+                restClient.Delete(path);
+            }
+            catch (OssServerException e)
+            {
+                throw new OssServerException("Could not delete sender signature image.", e);
+            }
+            catch (Exception e)
+            {
+                throw new OssException("Could not delete sender signature image." + " Exception: " + e.Message, e);
             }
         }
 
@@ -178,7 +243,7 @@ namespace OneSpanSign.Sdk
             }
         }
 
-        public void UpdateDelegates(string senderId, List<string> delegateIds)
+        public void UpdateDelegates<T>(string senderId, IList<T> delegateIds)
         {
             string path = template.UrlFor(UrlTemplate.DELEGATES_PATH)
                 .Replace("{senderId}", senderId)
@@ -319,8 +384,7 @@ namespace OneSpanSign.Sdk
             }
             catch (OssServerException e)
             {
-                throw new OssServerException("Could not get subAccounts.\t" + " Exception: " + e.Message, e.ServerError,
-                    e);
+                throw new OssServerException("Could not get subAccounts.\t" + " Exception: " + e.Message, e.ServerError, e);
             }
             catch (Exception e)
             {
@@ -334,13 +398,13 @@ namespace OneSpanSign.Sdk
             try
             {
                 string response = restClient.Get(path);
-                return JsonConvert.DeserializeObject<IList<OneSpanSign.API.AccessibleAccountResponse>>(response,
-                    jsonSettings);
+
+                return JsonConvert.DeserializeObject<IList<OneSpanSign.API.AccessibleAccountResponse>>(response, jsonSettings);
             }
             catch (OssServerException e)
             {
-                throw new OssServerException("Could not get accessibleAccounts.\t" + " Exception: " + e.Message,
-                    e.ServerError, e);
+                throw new OssServerException("Could not get accessibleAccounts.\t" + " Exception: " + e.Message, e.ServerError, e);
+
             }
             catch (Exception e)
             {
@@ -359,8 +423,9 @@ namespace OneSpanSign.Sdk
             }
             catch (OssServerException e)
             {
-                throw new OssServerException("Could not create subAccount.\t" + " Exception: " + e.Message,
-                    e.ServerError, e);
+
+                throw new OssServerException("Could not create subAccount.\t" + " Exception: " + e.Message, e.ServerError, e);
+
             }
             catch (Exception e)
             {
@@ -371,8 +436,10 @@ namespace OneSpanSign.Sdk
         public void updateSubAccount(OneSpanSign.API.SubAccount subAccount, string accountId)
         {
             string path = template.UrlFor(UrlTemplate.ACCOUNT_SUBACCOUNTS_ID_PATH)
-                .Replace("{accountId}", accountId)
-                .Build();
+
+                    .Replace("{accountId}", accountId)
+                    .Build();
+
             try
             {
                 string payload = JsonConvert.SerializeObject(subAccount, jsonSettings);
@@ -380,8 +447,9 @@ namespace OneSpanSign.Sdk
             }
             catch (OssServerException e)
             {
-                throw new OssServerException("Could not update subAccount.\t" + " Exception: " + e.Message,
-                    e.ServerError, e);
+
+                throw new OssServerException("Could not update subAccount.\t" + " Exception: " + e.Message, e.ServerError, e);
+
             }
             catch (Exception e)
             {
@@ -514,6 +582,41 @@ namespace OneSpanSign.Sdk
             {
                 throw new OssException("Could not delete account role.\t" + " Exception: " + e.Message, e);
             }
+
+        private string GenerateBoundary()
+        {
+            var chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+            var stringChars = new char[16];
+            var random = new Random();
+
+            for (int i = 0; i < stringChars.Length; i++)
+            {
+                stringChars[i] = chars[random.Next(chars.Length)];
+            }
+
+            return new String(stringChars);
+        }
+
+        private byte[] CreateMultipartContent(string fileName, byte[] fileBytes, string boundary)
+        {
+
+            Encoding encoding = Encoding.UTF8;
+            Stream formDataStream = new MemoryStream();
+            string data = string.Format("--{0}\r\nContent-Disposition: form-data; name=\"{1}\"; filename=\"{2}\"\r\nContent-Type: {3}\r\n\r\n",
+                                         boundary, "file", fileName, MimeTypeUtil.GetMIMEType(fileName));
+            formDataStream.Write(encoding.GetBytes(data), 0, encoding.GetByteCount(data));
+            formDataStream.Write(fileBytes, 0, fileBytes.Length);
+
+            string footer = "\r\n--" + boundary + "--\r\n";
+            formDataStream.Write(encoding.GetBytes(footer), 0, encoding.GetByteCount(footer));
+
+            //Dump the stream
+            formDataStream.Position = 0;
+            byte[] formData = new byte[formDataStream.Length];
+            formDataStream.Read(formData, 0, formData.Length);
+            formDataStream.Close();
+
+            return formData;
         }
     }
 }
