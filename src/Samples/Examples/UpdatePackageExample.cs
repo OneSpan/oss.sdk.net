@@ -12,11 +12,7 @@ namespace SDK.Examples
         {
             new UpdatePackageExample().Run();
         }
-
-        public readonly string OPT_OUT_REASON_1 = "OptOut reason One";
-        public readonly string OPT_OUT_REASON_2 = "OptOut reason Two";
-        public readonly string OPT_OUT_REASON_3 = "OptOut reason Three";
-
+        
         public readonly string OLD_LOGO_IMAGE_LINK = "old logo image link";
         public readonly string OLD_LOGO_IMAGE_SOURCE = "old logo image source";
 
@@ -60,7 +56,7 @@ namespace SDK.Examples
         public readonly string NEW_PACKAGE_NAME = "new package name";
         public readonly string NEW_DESCRIPTION = "new description";
         public readonly string NEW_EMAIL_MESSAGE = "new email message";
-        public readonly DateTime NEW_EXPIRY_DATE = DateTime.Now.AddMonths(2).AddDays(-1);
+        public readonly DateTime NEW_EXPIRY_DATE = DateTime.Now.AddMonths(2).AddDays(-2);
         public readonly CultureInfo NEW_LANGUAGE = CultureInfo.GetCultureInfo("fr");
 
         public readonly Visibility NEW_VISIBILITY = Visibility.SENDER;

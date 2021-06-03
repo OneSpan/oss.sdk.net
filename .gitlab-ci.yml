@@ -3,17 +3,42 @@ image: mcr.microsoft.com/dotnet/core/sdk:3.1
 stages:
     - build
     - test
+    - packNuget
+    - deployNuget
 
 before_script:
-    - cp "$SignersProps" ./src/Samples/signers.properties
-    - "dotnet restore ./src"
-
+    - dotnet restore ./src
+    
 build:
     stage: build
     script:
-        - "dotnet build ./src -c Release"
+        - dotnet build ./src -c Release
+    artifacts:
+        expire_in: 1 hour
+        paths:
+            - ./src/**/bin/*
+            - ./src/**/obj/*
 
 test:
     stage: test
+    variables:
+        ALLOW_INVALID_SSL_CERTS: "true"
     script: 
+        - cp "$SIGNERS_PROPS" ./src/Samples/signers.properties
         - "dotnet test ./src -c Release"
+
+packNuget:
+    stage: packNuget
+    script:
+        - dotnet pack ./src/SDK -c Release -o ./artifacts
+    artifacts:
+        expire_in: 1 year
+        paths:
+          - ./artifacts/*.nupkg
+
+deployNuget:
+    stage: deployNuget
+    script:
+        - dotnet nuget push ./artifacts/*.nupkg -s https://api.nuget.org/v3/index.json -k "$NUGET_KEY"
+    when: manual
+    

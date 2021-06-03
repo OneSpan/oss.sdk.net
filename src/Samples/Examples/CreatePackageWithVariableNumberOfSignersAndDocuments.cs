@@ -13,7 +13,7 @@ namespace SDK.Examples
 
 		public static void Main (string[] args)
 		{
-			// Create new oss client with api token and base url
+			// Create new esl client with api token and base url
 			OssClient client = new OssClient (apiToken, baseUrl);
 			//Get my hands on the list of signers somehow...
 			List<SignerInfo> signers = Signers ();
@@ -64,7 +64,10 @@ namespace SDK.Examples
 
 	class SignerInfo
 	{
-		public String FirstName { get; set; }
+		public String FirstName
+		{
+			get; set;
+		}
 
 		public String LastName
 		{

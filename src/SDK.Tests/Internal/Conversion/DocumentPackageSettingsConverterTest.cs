@@ -53,6 +53,7 @@ namespace SDK.Tests
             Assert.AreEqual(apiPackageSettings1.Ceremony.FontSize, sdkPackageSettings1.FontSize);
             Assert.AreEqual(apiPackageSettings1.Ceremony.EnforceCaptureSignature, sdkPackageSettings1.EnforceCaptureSignature);
             Assert.AreEqual(apiPackageSettings1.Ceremony.DeclineButton, sdkPackageSettings1.EnableDecline);
+            Assert.AreEqual(apiPackageSettings1.Ceremony.LeftMenuExpand, sdkPackageSettings1.ExpandLeftMenu);
             Assert.AreEqual(apiPackageSettings1.Ceremony.OptOutButton, sdkPackageSettings1.EnableOptOut);
             Assert.AreEqual(apiPackageSettings1.Ceremony.DeclineReasons[0], sdkPackageSettings1.DeclineReasons[0]);
             Assert.AreEqual(apiPackageSettings1.Ceremony.DeclineReasons[1], sdkPackageSettings1.DeclineReasons[1]);
@@ -75,8 +76,9 @@ namespace SDK.Tests
             Assert.AreEqual(apiPackageSettings1.Ceremony.HidePackageOwnerInPerson, !sdkPackageSettings1.ShowOwnerInPersonDropDown);
             Assert.AreEqual(apiPackageSettings1.Ceremony.DisableFirstInPersonAffidavit, !sdkPackageSettings1.EnableFirstAffidavit);
             Assert.AreEqual(apiPackageSettings1.Ceremony.DisableSecondInPersonAffidavit, !sdkPackageSettings1.EnableSecondAffidavit);
-            Assert.AreEqual (apiPackageSettings1.Ceremony.DefaultTimeBasedExpiry, sdkPackageSettings1.DefaultTimeBasedExpiry);
-            Assert.AreEqual (apiPackageSettings1.Ceremony.RemainingDays, sdkPackageSettings1.RemainingDays);
+            Assert.AreEqual(apiPackageSettings1.Ceremony.DefaultTimeBasedExpiry, sdkPackageSettings1.DefaultTimeBasedExpiry);
+            Assert.AreEqual(apiPackageSettings1.Ceremony.RemainingDays, sdkPackageSettings1.RemainingDays);
+            Assert.AreEqual(apiPackageSettings1.Ceremony.MaxAttachmentFiles, sdkPackageSettings1.MaxAttachmentFiles);
         }
 
         [Test()]
@@ -91,6 +93,7 @@ namespace SDK.Tests
             Assert.AreEqual(apiPackageSettings1.Ceremony.FontSize, sdkPackageSettings1.FontSize);
             Assert.AreEqual(apiPackageSettings1.Ceremony.EnforceCaptureSignature, sdkPackageSettings1.EnforceCaptureSignature);
             Assert.AreEqual(apiPackageSettings1.Ceremony.DeclineButton, sdkPackageSettings1.EnableDecline);
+            Assert.AreEqual(apiPackageSettings1.Ceremony.LeftMenuExpand, sdkPackageSettings1.ExpandLeftMenu);
             Assert.AreEqual(apiPackageSettings1.Ceremony.OptOutButton, sdkPackageSettings1.EnableOptOut);
             Assert.AreEqual(apiPackageSettings1.Ceremony.DeclineReasons[0], sdkPackageSettings1.DeclineReasons[0]);
             Assert.AreEqual(apiPackageSettings1.Ceremony.DeclineReasons[1], sdkPackageSettings1.DeclineReasons[1]);
@@ -113,8 +116,9 @@ namespace SDK.Tests
             Assert.AreEqual(apiPackageSettings1.Ceremony.HidePackageOwnerInPerson, !sdkPackageSettings1.ShowOwnerInPersonDropDown);
             Assert.AreEqual(apiPackageSettings1.Ceremony.DisableFirstInPersonAffidavit, !sdkPackageSettings1.EnableFirstAffidavit);
             Assert.AreEqual(apiPackageSettings1.Ceremony.DisableSecondInPersonAffidavit, !sdkPackageSettings1.EnableSecondAffidavit);
-            Assert.AreEqual (apiPackageSettings1.Ceremony.DefaultTimeBasedExpiry, sdkPackageSettings1.DefaultTimeBasedExpiry);
-            Assert.AreEqual (apiPackageSettings1.Ceremony.RemainingDays, sdkPackageSettings1.RemainingDays);
+            Assert.AreEqual(apiPackageSettings1.Ceremony.DefaultTimeBasedExpiry, sdkPackageSettings1.DefaultTimeBasedExpiry);
+            Assert.AreEqual(apiPackageSettings1.Ceremony.RemainingDays, sdkPackageSettings1.RemainingDays);
+            Assert.AreEqual(apiPackageSettings1.Ceremony.MaxAttachmentFiles, sdkPackageSettings1.MaxAttachmentFiles);
         }
 
         private OneSpanSign.Sdk.DocumentPackageSettings CreateTypicalSDKDocumentPackageSettings()
@@ -128,6 +132,7 @@ namespace SDK.Tests
                     .WithOptOut()
                     .WithoutWatermark()
                     .WithoutCaptureText()
+                    .WithoutLeftMenuExpand()
                     .DisableFirstAffidavit()
                     .DisableSecondAffidavit()
                     .HideOwnerInPersonDropDown()
@@ -146,6 +151,7 @@ namespace SDK.Tests
                     .WithDialogOnComplete()
                     .WithDefaultTimeBasedExpiry ()
                     .WithRemainingDays(14)
+                    .WithMaxAttachmentFiles(2)
                     .WithCeremonyLayoutSettings(CeremonyLayoutSettingsBuilder.NewCeremonyLayoutSettings()
                         .WithoutGlobalDownloadButton()
                         .WithoutGlobalConfirmButton()
@@ -188,6 +194,8 @@ namespace SDK.Tests
             apiCeremonySettings.HideLanguageDropdown = true;
             apiCeremonySettings.HidePackageOwnerInPerson = true;
             apiCeremonySettings.EnforceCaptureSignature = true;
+            apiCeremonySettings.LeftMenuExpand = true;
+            apiCeremonySettings.MaxAttachmentFiles = 2;
 
             Style style = new Style();
             style.BackgroundColor = "white";

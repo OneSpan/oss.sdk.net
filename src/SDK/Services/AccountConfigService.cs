@@ -15,22 +15,22 @@ namespace OneSpanSign.Sdk.Services
 
         public Handover GetHandoverUrl(string language)
         {
-            Link link = apiClient.GetHandoverUrl(language);
-            return new HandoverConverter(link).ToSDKHandover(language);
+            OneSpanSign.API.Handover apiHandover = apiClient.GetHandoverUrl(language);
+            return new HandoverConverter(apiHandover).ToSDKHandover(language);
         }
 
         public Handover CreateHandoverUrl(Handover handover)
         {
-            Link link = new HandoverConverter(handover).ToAPILink();
-            link = apiClient.CreateHandoverUrl(handover.Language, link);
-            return new HandoverConverter(link).ToSDKHandover(handover.Language);
+            OneSpanSign.API.Handover apiHandover = new HandoverConverter(handover).ToAPIHandover();
+            apiHandover = apiClient.CreateHandoverUrl(handover.Language, apiHandover);
+            return new HandoverConverter(apiHandover).ToSDKHandover(handover.Language);
         }
 
         public Handover UpdateHandoverUrl(Handover handover)
         {
-            Link link = new HandoverConverter(handover).ToAPILink();
-            link = apiClient.UpdateHandoverUrl(handover.Language, link);
-            return new HandoverConverter(link).ToSDKHandover(handover.Language);
+            OneSpanSign.API.Handover apiHandover = new HandoverConverter(handover).ToAPIHandover();
+            apiHandover = apiClient.UpdateHandoverUrl(handover.Language, apiHandover);
+            return new HandoverConverter(apiHandover).ToSDKHandover(handover.Language);
         }
 
         public void DeleteHandoverUrl(string language)

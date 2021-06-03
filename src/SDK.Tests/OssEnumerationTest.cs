@@ -5,7 +5,7 @@ using OneSpanSign.Sdk;
 namespace SDK.Tests
 {
     [TestFixture()]
-    public class EslEnumerationTest
+    public class OslEnumerationTest
     {
         [Test()]
         public void TestAuthenticationMethod()

@@ -9,6 +9,7 @@ namespace OneSpanSign.Sdk.Builder
         private string id;
         private string lastName;
         private string name;
+        private Nullable<DateTime> expiryDate;
 
         public DelegationUserBuilder(string email)
         {
@@ -52,6 +53,12 @@ namespace OneSpanSign.Sdk.Builder
             return this;
         }
 
+        public DelegationUserBuilder WithExpiryDate( Nullable<DateTime> expiryDate )
+        {
+            this.expiryDate = expiryDate;
+            return this;
+        }
+
         public OneSpanSign.Sdk.DelegationUser Build() 
         {
             OneSpanSign.Sdk.DelegationUser result = new OneSpanSign.Sdk.DelegationUser();
@@ -60,6 +67,7 @@ namespace OneSpanSign.Sdk.Builder
             result.Id = id;
             result.LastName = lastName;
             result.Name = name;
+            result.ExpiryDate = expiryDate;
             return result;
         }
     }

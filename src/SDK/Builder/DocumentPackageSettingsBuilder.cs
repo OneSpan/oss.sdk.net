@@ -10,6 +10,7 @@ namespace OneSpanSign.Sdk
         private Nullable<bool> enableInPerson = null;
         private Nullable<bool> enableOptOut = null;
         private Nullable<bool> enableDecline = null;
+        private Nullable<bool> expandLeftMenu = null;
         private Nullable<bool> hideWatermark = null;
         private Nullable<bool> hideCaptureText = null;
         private List<string> declineReasons = new List<string> ();
@@ -28,10 +29,15 @@ namespace OneSpanSign.Sdk
         private Nullable<Int32> fontSize = null;
         private Nullable<bool> defaultTimeBasedExpiry = null;
         private Nullable<Int32> remainingDays = null;
+        private Nullable<Int32> maxAttachmentFiles = null;
+        private Nullable<bool> showNseHelp = null;
+        private Nullable<bool> showNseOverview = null;
 
         private string linkText = null;
         private string linkTooltip = null;
         private string linkHref = null;
+        private Nullable<bool> linkAutoRedirect = null;
+        private HashSet<String> linkParameters = null;
 
         private CeremonyLayoutSettings ceremonyLayoutSettings = null;
 
@@ -147,6 +153,18 @@ namespace OneSpanSign.Sdk
             return this;
         }
 
+        public DocumentPackageSettingsBuilder WithLeftMenuExpand ()
+        {
+            expandLeftMenu = true;
+            return this;
+        }
+
+        public DocumentPackageSettingsBuilder WithoutLeftMenuExpand ()
+        {
+            expandLeftMenu = false;
+            return this;
+        }
+
         public DocumentPackageSettingsBuilder WithWatermark ()
         {
             hideWatermark = false;
@@ -195,6 +213,30 @@ namespace OneSpanSign.Sdk
             return this;
         }
 
+        public DocumentPackageSettingsBuilder WithShowNseHelp ()
+        {
+            showNseHelp = true;
+            return this;
+        }
+
+        public DocumentPackageSettingsBuilder WithoutShowNseHelp ()
+        {
+            showNseHelp = false;
+            return this;
+        }
+
+        public DocumentPackageSettingsBuilder WithShowNseOverview ()
+        {
+            showNseOverview = true;
+            return this;
+        }
+
+        public DocumentPackageSettingsBuilder WithoutShowNseOverview ()
+        {
+            showNseOverview = false;
+            return this;
+        }
+
         public DocumentPackageSettingsBuilder WithCaptureText ()
         {
             hideCaptureText = false;
@@ -230,6 +272,24 @@ namespace OneSpanSign.Sdk
         public DocumentPackageSettingsBuilder WithHandOverLinkTooltip (String tooltip)
         {
             linkTooltip = tooltip;
+            return this;
+        }
+        
+        public DocumentPackageSettingsBuilder WithHandOverAutoRedirect()
+        {
+            this.linkAutoRedirect = true;
+            return this;
+        }
+
+        public DocumentPackageSettingsBuilder WithoutHandOverAutoRedirect ()
+        {
+            this.linkAutoRedirect = false;
+            return this;
+        }
+        
+        public DocumentPackageSettingsBuilder WithHandOverParameters (HashSet<String> parameters)
+        {
+            linkParameters = parameters;
             return this;
         }
 
@@ -298,6 +358,12 @@ namespace OneSpanSign.Sdk
             return this;
         }
 
+        public DocumentPackageSettingsBuilder WithMaxAttachmentFiles (Nullable<Int32> maxAttachmentFiles)
+        {
+            this.maxAttachmentFiles = maxAttachmentFiles;
+            return this;
+        }
+
         public DocumentPackageSettings build ()
         {
             return Build ();
@@ -310,6 +376,7 @@ namespace OneSpanSign.Sdk
             result.EnableInPerson = enableInPerson;
             result.EnableOptOut = enableOptOut;
             result.EnableDecline = enableDecline;
+            result.ExpandLeftMenu = expandLeftMenu;
             result.HideWatermark = hideWatermark;
             result.HideCaptureText = hideCaptureText;
             foreach (string declineReason in declineReasons)
@@ -330,9 +397,14 @@ namespace OneSpanSign.Sdk
             result.FontSize = fontSize;
             result.DefaultTimeBasedExpiry = defaultTimeBasedExpiry;
             result.RemainingDays = remainingDays;
+            result.ShowNseHelp = showNseHelp;
             result.LinkHref = linkHref;
             result.LinkText = linkText;
             result.LinkTooltip = linkTooltip;
+            result.LinkAutoRedirect = linkAutoRedirect;
+            result.LinkParameters = linkParameters;
+            result.MaxAttachmentFiles = maxAttachmentFiles;
+            result.ShowNseOverview = showNseOverview;
 
             result.CeremonyLayoutSettings = ceremonyLayoutSettings;
 
@@ -370,6 +442,7 @@ namespace OneSpanSign.Sdk
             }
 
             maxAuthAttempts = apiPackageSettings.Ceremony.MaxAuthFailsAllowed;
+            maxAttachmentFiles = apiPackageSettings.Ceremony.MaxAttachmentFiles;
 
             if (apiPackageSettings.Ceremony.DocumentToolbarOptions != null) {
                 showDocumentToolbarDownloadButton = apiPackageSettings.Ceremony.DocumentToolbarOptions.DownloadButton;
@@ -383,6 +456,8 @@ namespace OneSpanSign.Sdk
                 linkHref = apiPackageSettings.Ceremony.HandOver.Href;
                 linkText = apiPackageSettings.Ceremony.HandOver.Text;
                 linkTooltip = apiPackageSettings.Ceremony.HandOver.Title;
+                linkAutoRedirect = apiPackageSettings.Ceremony.HandOver.AutoRedirect;
+                linkParameters = apiPackageSettings.Ceremony.HandOver.Parameters;
             }
         }
 

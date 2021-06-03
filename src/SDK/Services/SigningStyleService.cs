@@ -138,5 +138,64 @@ namespace OneSpanSign.Sdk
                 throw new OssException ("Could not get the signing logos from account." + " Exception: " + e.Message, e);
             }
         }
+
+        public SigningUiOptions GetSigningUiOptions()
+        {
+            string path = template.UrlFor (UrlTemplate.ACCOUNT_SIGNING_UI_OPTIONS_PATH)
+                .Build ();
+
+            try
+            {
+                string response = restClient.Get (path);
+                return JsonConvert.DeserializeObject<SigningUiOptions> (response, settings);
+            }
+            catch (OssServerException e)
+            {
+                throw new OssServerException ("Could not get the signing ui options from account." + " Exception: " + e.Message, e.ServerError, e);
+            }
+            catch (Exception e )
+            {
+                throw new OssException ("Could not get the signing ui options from account." + " Exception: " + e.Message, e);
+            }
+        }
+        
+        public void SaveSigningUiOptions(SigningUiOptions signingUiOptions)
+        {
+            string path = template.UrlFor (UrlTemplate.ACCOUNT_SIGNING_UI_OPTIONS_PATH)
+                .Build ();
+            string payload = JsonConvert.SerializeObject(signingUiOptions, new JsonSerializerSettings { ContractResolver = new CamelCasePropertyNamesContractResolver (), Formatting = Formatting.Indented ,NullValueHandling = NullValueHandling.Ignore});
+            try
+            {
+                restClient.Patch(path, payload);
+            }
+            catch (OssServerException e)
+            {
+                throw new OssServerException ("Could not save the signing logos for account." + " Exception: " + e.Message, e.ServerError, e);
+            }
+            catch (Exception e)
+            {
+                throw new OssException ("Could not save the signing logos for account." + " Exception: " + e.Message, e);
+            }
+        }
+        
+        public void DeleteSigningUiOptions ()
+        {
+            string path = template.UrlFor (UrlTemplate.ACCOUNT_SIGNING_UI_OPTIONS_PATH)
+                .Build ();
+
+            try 
+            {
+                string response = restClient.Delete (path);
+            }
+            catch (OssServerException e)
+            {
+                throw new OssServerException ("Could not delete the signing ui options from account." + " Exception: " + e.Message, e.ServerError, e);
+            }
+            catch (Exception e)
+            {
+                throw new OssException ("Could not delete the signing ui options from account." + " Exception: " + e.Message, e);
+            }
+        }
+        
     }
 }
