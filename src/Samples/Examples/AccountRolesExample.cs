@@ -24,7 +24,7 @@ namespace SDK.Examples
         {
             //Setup ossclient for role and permission enabled user
             ossClientWithRoleAndPermission = new OssClient(props.Get("api.key.withRolesAndPermission"), props.Get("api.url"), props.Get("webpage.url"), true);
-            base.senderEmail = props.Get("sender.email.withRolesAndPermission");
+            senderEmail = props.Get("sender.email.withRolesAndPermission");
             
             //Create a role
             result1 = ossClientWithRoleAndPermission.AccountService.getAccountRoles();
