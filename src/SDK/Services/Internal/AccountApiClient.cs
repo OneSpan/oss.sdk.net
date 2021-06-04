@@ -391,6 +391,24 @@ namespace OneSpanSign.Sdk
                 throw new OssException("Could not get subAccounts.\t" + " Exception: " + e.Message, e);
             }
         }
+        
+        public IList<OneSpanSign.API.SubAccountApiKey> getSubAccountApiKey()
+        {
+            string path = template.UrlFor(UrlTemplate.ACCOUNT_SUBACCOUNTS_SUBACCOUNTAPIKEYS_PATH).Build();
+            try
+            {
+                string response = restClient.Get(path);
+                return JsonConvert.DeserializeObject<IList<OneSpanSign.API.SubAccountApiKey>>(response, jsonSettings);
+            }
+            catch (OssServerException e)
+            {
+                throw new OssServerException("Could not get subAccountApiKey.\t" + " Exception: " + e.Message, e.ServerError, e);
+            }
+            catch (Exception e)
+            {
+                throw new OssException("Could not get subAccountApiKey.\t" + " Exception: " + e.Message, e);
+            }
+        }
 
         public IList<OneSpanSign.API.AccessibleAccountResponse> getAccessibleAccounts()
         {

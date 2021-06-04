@@ -16,7 +16,8 @@ namespace SDK.Examples
     public void VerifyResult()
     {
         IList<Account> subAccountList;
-        IList<AccessibleAccountResponse> accessibleAccountList;
+        IList<AccessibleAccountResponse> accessibleAccountList; 
+        IList<SubAccountApiKey> subAccountApiKeys;
         CreateAndUpdateSubAccountExample example = new CreateAndUpdateSubAccountExample();
 
         try {
@@ -27,10 +28,12 @@ namespace SDK.Examples
         } finally {
             subAccountList = example.subAccounts;
             accessibleAccountList = example.accessibleAccounts;
+            subAccountApiKeys = example.subAccountApiKeys;
         }
         
         Assert.GreaterOrEqual(subAccountList.Count, 1);
         Assert.GreaterOrEqual(accessibleAccountList.Count, 1);
+        Assert.GreaterOrEqual(subAccountApiKeys.Count, 1);
         Assert.IsTrue(subAccountList.Any(it => it.Name == CreateAndUpdateSubAccountExample.NAME));
     }
     }

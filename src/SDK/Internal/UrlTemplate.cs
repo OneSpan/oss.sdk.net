@@ -201,6 +201,7 @@ namespace OneSpanSign.Sdk.Internal
         public static readonly string ACCOUNT_SUBACCOUNTS_PATH = "/account/subaccounts";
         public static readonly string ACCOUNT_SUBACCOUNTS_ID_PATH = "/account/subaccounts/{accountId}";
         public static readonly string ACCOUNT_SUBACCOUNTS_ACCESSIBLEACCOUNTS_PATH = "/account/accessibleaccounts";
+        public static readonly string ACCOUNT_SUBACCOUNTS_SUBACCOUNTAPIKEYS_PATH = "/account//api/account/subaccountApiKeys";
 
 
         public UrlTemplate(string baseUrl)
