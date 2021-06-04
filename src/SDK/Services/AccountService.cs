@@ -4,6 +4,7 @@ using Newtonsoft.Json;
 using OneSpanSign.API;
 using System.Collections.Generic;
 using System.Collections;
+using OneSpanSign.Sdk.Internal.Conversion;
 
 namespace OneSpanSign.Sdk.Services
 {
@@ -159,6 +160,18 @@ namespace OneSpanSign.Sdk.Services
             }
 
             return accountResponses;
+        }
+        
+        public IList<SubAccountApiKey> getSubAccountApiKey()
+        {
+            IList<API.SubAccountApiKey> apiSubAccountApiKey = apiClient.getSubAccountApiKey();
+            IList<SubAccountApiKey> subAccountApiKeyResponses = new List<SubAccountApiKey>();
+            foreach (OneSpanSign.API.SubAccountApiKey subAccountApiKey in apiSubAccountApiKey)
+            {
+                subAccountApiKeyResponses.Add(new SubAccountApiKeyConverter(subAccountApiKey).ToSdkSubAccountApiKey());
+            }
+
+            return subAccountApiKeyResponses;
         }
 
         public Account createSubAccount(SubAccount subAccount)
