@@ -14,13 +14,14 @@ namespace SDK.Examples
         override public void Execute()
         {
             ExpiryTimeConfiguration expiryTimeConfiguration = ExpiryTimeConfigurationBuilder.NewExpiryTimeConfiguration()
-                    .WithMaximumRemainingDays(60)
+                    .WithMaximumRemainingDays(120)
                     .WithRemainingDays(60)
                     .Build();
             OssClient.DataRetentionSettingsService.SetExpiryTimeConfiguration(expiryTimeConfiguration);
             expiryTimeConfigurationAfterUpdate = OssClient.DataRetentionSettingsService.GetExpiryTimeConfiguration();
             ExpiryTimeConfiguration resetTimeConfiguration = ExpiryTimeConfigurationBuilder.NewExpiryTimeConfiguration()
                 .WithMaximumRemainingDays(0)
+                .WithRemainingDays(0)
                 .Build();
             OssClient.DataRetentionSettingsService.SetExpiryTimeConfiguration(resetTimeConfiguration);
         }
