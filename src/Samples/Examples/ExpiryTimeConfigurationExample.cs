@@ -6,24 +6,23 @@ namespace SDK.Examples
 {
     public class ExpiryTimeConfigurationExample : SDKSample
     {
-
         public ExpiryTimeConfiguration expiryTimeConfigurationAfterUpdate;
-
-        public static void Main (string [] args)
+        public static void Main(string[] args)
         {
-            new ExpiryTimeConfigurationExample ().Run ();
+            new ExpiryTimeConfigurationExample().Run();
         }
-
-        override public void Execute ()
+        override public void Execute()
         {
-
-            ExpiryTimeConfiguration expiryTimeConfiguration = ExpiryTimeConfigurationBuilder.NewExpiryTimeConfiguration ()
-                    .WithMaximumRemainingDays (60)
-                    .WithRemainingDays (60)
-                    .Build ();
-
-            OssClient.DataRetentionSettingsService.SetExpiryTimeConfiguration (expiryTimeConfiguration);
-            expiryTimeConfigurationAfterUpdate = OssClient.DataRetentionSettingsService.GetExpiryTimeConfiguration ();
+            ExpiryTimeConfiguration expiryTimeConfiguration = ExpiryTimeConfigurationBuilder.NewExpiryTimeConfiguration()
+                    .WithMaximumRemainingDays(60)
+                    .WithRemainingDays(60)
+                    .Build();
+            OssClient.DataRetentionSettingsService.SetExpiryTimeConfiguration(expiryTimeConfiguration);
+            expiryTimeConfigurationAfterUpdate = OssClient.DataRetentionSettingsService.GetExpiryTimeConfiguration();
+            ExpiryTimeConfiguration resetTimeConfiguration = ExpiryTimeConfigurationBuilder.NewExpiryTimeConfiguration()
+                .WithMaximumRemainingDays(0)
+                .Build();
+            OssClient.DataRetentionSettingsService.SetExpiryTimeConfiguration(resetTimeConfiguration);
         }
     }
 }
