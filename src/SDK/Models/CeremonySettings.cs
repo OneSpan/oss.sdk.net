@@ -130,6 +130,11 @@ namespace OneSpanSign.API
             get; set;
         }
 
+        [JsonProperty ("showNseLogoInIframe")]
+        public Nullable<bool> ShowNseLogoInIframe {
+            get; set;
+        }
+        
         [JsonProperty("documentToolbarOptions")]
         public DocumentToolbarOptions DocumentToolbarOptions
         {

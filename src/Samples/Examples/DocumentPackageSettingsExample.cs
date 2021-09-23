@@ -56,6 +56,7 @@ namespace SDK.Examples
                               .WithRemainingDays(EXPIRE_IN_DAYS)
                               .WithShowNseHelp()
                               .WithShowNseOverview()
+				              .WithShowNseLogoInIframe()
 				              .WithCeremonyLayoutSettings(CeremonyLayoutSettingsBuilder.NewCeremonyLayoutSettings()
                                             .WithoutGlobalConfirmButton()
                                             .WithoutGlobalDownloadButton()
