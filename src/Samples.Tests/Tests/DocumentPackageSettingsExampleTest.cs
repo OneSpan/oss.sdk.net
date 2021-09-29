@@ -51,6 +51,7 @@ namespace SDK.Examples
             Assert.AreEqual (example.EXPIRE_IN_DAYS, result.Settings.RemainingDays.Value);
             Assert.IsTrue (result.Settings.ShowNseHelp.Value);
             Assert.IsTrue (result.Settings.ShowNseOverview.Value);
+            Assert.IsTrue (result.Settings.ShowNseLogoInIframe.Value);
 
             Assert.AreEqual (example.MAX_ATTACHMENT_FILES, result.Settings.MaxAttachmentFiles.Value);
         }

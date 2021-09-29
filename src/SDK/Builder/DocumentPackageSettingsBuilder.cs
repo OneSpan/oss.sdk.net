@@ -32,6 +32,7 @@ namespace OneSpanSign.Sdk
         private Nullable<Int32> maxAttachmentFiles = null;
         private Nullable<bool> showNseHelp = null;
         private Nullable<bool> showNseOverview = null;
+        private Nullable<bool> showNseLogoInIframe = null;
 
         private string linkText = null;
         private string linkTooltip = null;
@@ -236,6 +237,18 @@ namespace OneSpanSign.Sdk
             showNseOverview = false;
             return this;
         }
+        
+        public DocumentPackageSettingsBuilder WithShowNseLogoInIframe ()
+        {
+            showNseLogoInIframe = true;
+            return this;
+        }
+
+        public DocumentPackageSettingsBuilder WithoutShowNseLogoInIframe ()
+        {
+            showNseLogoInIframe = false;
+            return this;
+        }
 
         public DocumentPackageSettingsBuilder WithCaptureText ()
         {
@@ -405,6 +418,7 @@ namespace OneSpanSign.Sdk
             result.LinkParameters = linkParameters;
             result.MaxAttachmentFiles = maxAttachmentFiles;
             result.ShowNseOverview = showNseOverview;
+            result.ShowNseLogoInIframe = showNseLogoInIframe;
 
             result.CeremonyLayoutSettings = ceremonyLayoutSettings;
 
