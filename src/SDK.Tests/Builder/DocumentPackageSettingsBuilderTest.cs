@@ -139,7 +139,7 @@ namespace SDK.Tests
             DocumentPackageSettingsBuilder builder = DocumentPackageSettingsBuilder.NewDocumentPackageSettings ();
             DocumentPackageSettings unset = builder.Build ();
             Assert.IsFalse (unset.ShowNseLogoInIframe.HasValue);
-            DocumentPackageSettings with = builder.WithoutShowNseLogoInIframe ().Build ();
+            DocumentPackageSettings with = builder.WithShowNseLogoInIframe ().Build ();
             Assert.IsTrue (with.ShowNseLogoInIframe.HasValue);
             Assert.IsTrue (with.ShowNseLogoInIframe.Value);
             DocumentPackageSettings without = builder.WithoutShowNseLogoInIframe ().Build ();
