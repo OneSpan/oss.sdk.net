@@ -70,5 +70,17 @@ namespace OneSpanSign.Sdk
         {
             this.options.AddRange (options);
         }
+        
+        public string Group {
+	        get;
+	        set;
+        }
+        
+        public int MinimumRequired
+        {
+	        get;
+	        set;
+        }
+        
 	}
 }
