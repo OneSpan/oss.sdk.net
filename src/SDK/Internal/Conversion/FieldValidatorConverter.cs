@@ -33,6 +33,8 @@ namespace OneSpanSign.Sdk
             fieldValidation.MinLength = fieldValidator.MinLength;
             fieldValidation.Required = fieldValidator.Required;
             fieldValidation.Disabled = fieldValidator.Disabled;
+            fieldValidation.Group = fieldValidator.Group;
+            fieldValidation.MinimumRequired = fieldValidator.MinimumRequired;
             fieldValidation.ErrorMessage = fieldValidator.Message;
             fieldValidation.ErrorCode = fieldValidator.ErrorCode;
 
@@ -71,6 +73,9 @@ namespace OneSpanSign.Sdk
                 fieldValidator.Required = fieldValidation.Required.Value;
             if (fieldValidation.Disabled.HasValue)
                 fieldValidator.Disabled = fieldValidation.Disabled.Value;
+            fieldValidator.Group = fieldValidation.Group;
+            if (fieldValidation.MinimumRequired.HasValue)
+                fieldValidator.MinimumRequired = fieldValidation.MinimumRequired.Value;
             if (fieldValidation.Enum != null)
             {
                 foreach (string option in fieldValidation.Enum)

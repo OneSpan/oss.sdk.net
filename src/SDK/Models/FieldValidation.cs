@@ -81,5 +81,21 @@ namespace OneSpanSign.API
     {
             get; set;
         }
+    
+    
+    [JsonProperty("group")]
+    public String Group
+    {
+	    get; set;
+    }
+    
+    
+    [JsonProperty ("minimumRequired")]
+    public Nullable<Int32> MinimumRequired
+    {
+	    get; set;
+    }    
+    
+    
     }
 }

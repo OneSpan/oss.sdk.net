@@ -77,6 +77,8 @@ namespace SDK.Tests
             Assert.AreEqual(sdkFieldValidator1.MinLength, apiFieldValidation1.MinLength);
             Assert.AreEqual(sdkFieldValidator1.Required, apiFieldValidation1.Required);
             Assert.AreEqual(sdkFieldValidator1.Disabled, apiFieldValidation1.Disabled);
+            Assert.AreEqual(sdkFieldValidator1.Group, apiFieldValidation1.Group);
+            Assert.AreEqual(sdkFieldValidator1.MinimumRequired, apiFieldValidation1.MinimumRequired);
             Assert.IsEmpty(sdkFieldValidator1.Options);
         }
 
@@ -92,6 +94,8 @@ namespace SDK.Tests
             Assert.AreEqual(apiFieldValidation1.MinLength, sdkFieldValidator1.MinLength);
             Assert.AreEqual(apiFieldValidation1.Required, sdkFieldValidator1.Required);
             Assert.AreEqual(apiFieldValidation1.Disabled, sdkFieldValidator1.Disabled);
+            Assert.AreEqual(apiFieldValidation1.Group, sdkFieldValidator1.Group);
+            Assert.AreEqual(apiFieldValidation1.MinimumRequired, sdkFieldValidator1.MinimumRequired);
             Assert.AreEqual(apiFieldValidation1.Pattern, sdkFieldValidator1.Regex);
         }
 
@@ -105,6 +109,8 @@ namespace SDK.Tests
             apiFieldValidation.Pattern = "*pattern*";
             apiFieldValidation.Required = true;
             apiFieldValidation.Disabled = false;
+            apiFieldValidation.Group = "group";
+            apiFieldValidation.MinimumRequired = 1;
 
             return apiFieldValidation;
         }
