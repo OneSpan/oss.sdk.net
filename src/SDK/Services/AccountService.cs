@@ -119,6 +119,43 @@ namespace OneSpanSign.Sdk.Services
             return apiClient.getVerificationTypes();
         }
         
+        public List<AccountRole> getAccountRoles()
+        {
+            OneSpanSign.API.Result<OneSpanSign.API.AccountRole> apiAccountRoles = apiClient.getAccountRoles();
+            List<AccountRole> accountRoles = new List<AccountRole>();
+            foreach (OneSpanSign.API.AccountRole accountRole in apiAccountRoles.Results)
+            {
+                accountRoles.Add(new AccountRoleConverter(accountRole).ToSDKAccountRole());
+            }
+
+            return accountRoles;
+        }
+
+        public OneSpanSign.Sdk.AccountRole getAccountRole(string accountRoleId)
+        {
+            return new AccountRoleConverter(apiClient.getAccountRole(accountRoleId)).ToSDKAccountRole();
+        }
+
+        public void addAccountRole(OneSpanSign.Sdk.AccountRole accountRole)
+        {
+            apiClient.addAccountRole(new AccountRoleConverter(accountRole).ToAPIAccountRole());
+        }
+
+        public void updateAccountRole(string accountRoleId, OneSpanSign.Sdk.AccountRole accountRole)
+        {
+            apiClient.updateAccountRole(new AccountRoleConverter(accountRole).ToAPIAccountRole(), accountRoleId);
+        }
+
+        public void deleteAccountRole(string accountRoleId)
+        {
+            apiClient.deleteAccountRole(accountRoleId);
+        }
+
+        public List<string> getAccountRoleUsers(string accountRoleId)
+        {
+            return apiClient.getAccountRoleUsers(accountRoleId) as List<string>;
+        }
+        
         public IList<Account> getSubAccounts() {
             IList<API.Account> apiAccounts = apiClient.getSubAccounts();
             IList<Account> accounts = new List<Account>();
