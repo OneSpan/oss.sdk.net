@@ -15,20 +15,20 @@ namespace OneSpanSign.Sdk.Services
 
         public Handover GetHandoverUrl(string language)
         {
-            OneSpanSign.API.Handover apiHandover = apiClient.GetHandoverUrl(language);
+            API.Handover apiHandover = apiClient.GetHandoverUrl(language);
             return new HandoverConverter(apiHandover).ToSDKHandover(language);
         }
 
         public Handover CreateHandoverUrl(Handover handover)
         {
-            OneSpanSign.API.Handover apiHandover = new HandoverConverter(handover).ToAPIHandover();
+            API.Handover apiHandover = new HandoverConverter(handover).ToAPIHandover();
             apiHandover = apiClient.CreateHandoverUrl(handover.Language, apiHandover);
             return new HandoverConverter(apiHandover).ToSDKHandover(handover.Language);
         }
 
         public Handover UpdateHandoverUrl(Handover handover)
         {
-            OneSpanSign.API.Handover apiHandover = new HandoverConverter(handover).ToAPIHandover();
+            API.Handover apiHandover = new HandoverConverter(handover).ToAPIHandover();
             apiHandover = apiClient.UpdateHandoverUrl(handover.Language, apiHandover);
             return new HandoverConverter(apiHandover).ToSDKHandover(handover.Language);
         }
@@ -57,6 +57,60 @@ namespace OneSpanSign.Sdk.Services
         public void DeleteDeclineReasons(string language)
         {
             apiClient.DeleteDeclineReasons(language);
+        }
+        
+        public IList<IdvWorkflowConfig> GetIdvWorkflowConfigs()
+        {
+            IList<IdvWorkflowConfiguration> idvWorkflowConfigurations = apiClient.GetIdvWorkflowConfigs();
+            IList<IdvWorkflowConfig> idvWorkflowConfigs = new List<IdvWorkflowConfig>();
+            foreach (IdvWorkflowConfiguration idvWorkflowConfiguration in idvWorkflowConfigurations) 
+            {
+                idvWorkflowConfigs.Add(new IdvWorkflowConfigConverter(idvWorkflowConfiguration).ToSDKIdvWorkflowConfig());
+            }
+            return idvWorkflowConfigs;
+        }
+
+        public IList<IdvWorkflowConfig> CreateIdvWorkflowConfigs(IList<IdvWorkflowConfig> input)
+        {
+            IList<IdvWorkflowConfiguration> idvWorkflowConfigurations = new List<IdvWorkflowConfiguration>();
+            foreach (IdvWorkflowConfig idvWorkflowConfig in input) 
+            {
+                idvWorkflowConfigurations.Add(new IdvWorkflowConfigConverter(idvWorkflowConfig).ToAPIIdvWorkflowConfiguration());
+            }
+            
+            idvWorkflowConfigurations = apiClient.CreateIdvWorkflowConfigs(idvWorkflowConfigurations);
+            
+            IList<IdvWorkflowConfig> result = new List<IdvWorkflowConfig>();
+            foreach (IdvWorkflowConfiguration idvWorkflowConfiguration in idvWorkflowConfigurations) 
+            {
+                result.Add(new IdvWorkflowConfigConverter(idvWorkflowConfiguration).ToSDKIdvWorkflowConfig());
+            }
+
+            return result;
+        }
+
+        public IList<IdvWorkflowConfig> UpdateIdvWorkflowConfigs(IList<IdvWorkflowConfig> input)
+        {
+            IList<IdvWorkflowConfiguration> idvWorkflowConfigurations = new List<IdvWorkflowConfiguration>();
+            foreach (IdvWorkflowConfig idvWorkflowConfig in input) 
+            {
+                idvWorkflowConfigurations.Add(new IdvWorkflowConfigConverter(idvWorkflowConfig).ToAPIIdvWorkflowConfiguration());
+            }
+            
+            idvWorkflowConfigurations = apiClient.UpdateIdvWorkflowConfigs(idvWorkflowConfigurations);
+            
+            IList<IdvWorkflowConfig> result = new List<IdvWorkflowConfig>();
+            foreach (IdvWorkflowConfiguration idvWorkflowConfiguration in idvWorkflowConfigurations) 
+            {
+                result.Add(new IdvWorkflowConfigConverter(idvWorkflowConfiguration).ToSDKIdvWorkflowConfig());
+            }
+
+            return result;
+        }
+
+        public void DeleteIdvWorkflowConfigs()
+        {
+            apiClient.DeleteIdvWorkflowConfigs();
         }
     }
 }

@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 using OneSpanSign.Sdk;
 using OneSpanSign.Sdk.Builder;
@@ -15,6 +14,7 @@ namespace SDK.Examples
 
         public IList<Account> subAccounts;
         public IList<AccessibleAccountResponse> accessibleAccounts;
+        public IList<SubAccountApiKey> subAccountApiKeys;
 
         private static readonly string PARENT_ACCOUNT_ID = "dummyAccountId";
         public static readonly string NAME = "SubAccount_" + DateTime.Now.ToString("HH:mm:ss");
@@ -46,6 +46,9 @@ namespace SDK.Examples
             
             //Lists accessibleAccounts
             accessibleAccounts = ossClient.AccountService.getAccessibleAccounts();
+            
+            //Lists subAccounts Api Key
+            subAccountApiKeys = ossClient.AccountService.getSubAccountApiKey();
             
             //Lists subAccounts
             subAccounts = ossClient.AccountService.getSubAccounts();

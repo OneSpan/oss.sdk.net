@@ -1,48 +1,54 @@
 ﻿using System;
 using System.Collections.Generic;
 using OneSpanSign.API;
+using OneSpanSign.Sdk.Internal.Conversion;
 
 namespace OneSpanSign.Sdk
 {
     internal class AuthenticationConverter
     {
-        private OneSpanSign.API.Auth apiAuth = null;
-        private OneSpanSign.Sdk.Authentication sdkAuth = null;
+        private Auth apiAuth = null;
+        private Authentication sdkAuth = null;
 
-        public AuthenticationConverter(OneSpanSign.API.Auth apiAuth)
+        public AuthenticationConverter(Auth apiAuth)
         {
             this.apiAuth = apiAuth;
         }
 
-        public AuthenticationConverter(OneSpanSign.Sdk.Authentication sdkAuth)
+        public AuthenticationConverter(Authentication sdkAuth)
         {
             this.sdkAuth = sdkAuth;
         }
 
-        internal OneSpanSign.API.Auth ToAPIAuthentication()
+        internal Auth ToAPIAuthentication()
         {
             if (sdkAuth == null)
             {
                 return apiAuth;
             }
 
-            OneSpanSign.API.Auth auth = new OneSpanSign.API.Auth();
+            Auth auth = new Auth();
 
             auth.Scheme = new AuthenticationMethodConverter(sdkAuth.Method).ToAPIAuthMethod();
 
             foreach (Challenge challenge in sdkAuth.Challenges)
             {
-                OneSpanSign.API.AuthChallenge authChallenge = new OneSpanSign.API.AuthChallenge();
+                AuthChallenge authChallenge = new AuthChallenge();
 
                 authChallenge.Question = challenge.Question;
                 authChallenge.Answer = challenge.Answer;
                 authChallenge.MaskInput = challenge.MaskOption == Challenge.MaskOptions.MaskInput;
                 auth.AddChallenge(authChallenge);
             }
+            
+            if (sdkAuth.IdvWorkflow != null) 
+            {
+                auth.IdvWorkflow = new IdvWorkflowConverter(sdkAuth.IdvWorkflow).ToAPIIdvWorkflow();
+            }
 
             if (!String.IsNullOrEmpty(sdkAuth.PhoneNumber))
             {
-                OneSpanSign.API.AuthChallenge challenge = new OneSpanSign.API.AuthChallenge();
+                AuthChallenge challenge = new AuthChallenge();
 
                 challenge.Question = sdkAuth.PhoneNumber;
                 auth.AddChallenge(challenge);
@@ -51,7 +57,7 @@ namespace OneSpanSign.Sdk
             return auth;
         }
 
-        internal OneSpanSign.Sdk.Authentication ToSDKAuthentication()
+        internal Authentication ToSDKAuthentication()
         {
             if (apiAuth == null)
             {
@@ -59,13 +65,14 @@ namespace OneSpanSign.Sdk
             }
 
             string telephoneNumber = null;
-            OneSpanSign.Sdk.Authentication sdkAuthentication = null;
+            Authentication sdkAuthentication = null;
 
-            if (apiAuth.Challenges.Count == 0) 
+            if (apiAuth.Challenges.Count == 0)
             {
-                sdkAuthentication = new Authentication (new AuthenticationMethodConverter(apiAuth.Scheme).ToSDKAuthMethod());
-            } 
-            else 
+                sdkAuthentication =
+                    new Authentication(new AuthenticationMethodConverter(apiAuth.Scheme).ToSDKAuthMethod());
+            }
+            else
             {
                 IList<Challenge> sdkChallenges = new List<Challenge>();
                 foreach (AuthChallenge apiChallenge in apiAuth.Challenges)
@@ -83,11 +90,16 @@ namespace OneSpanSign.Sdk
 
                 if (AuthenticationMethod.CHALLENGE.getApiValue().Equals(apiAuth.Scheme))
                 {
-                    sdkAuthentication = new OneSpanSign.Sdk.Authentication(sdkChallenges);
+                    sdkAuthentication = new Authentication(sdkChallenges);
                 }
-                else
+                else if(AuthenticationMethod.SMS.getApiValue().Equals(apiAuth.Scheme))
                 {
-                    sdkAuthentication = new OneSpanSign.Sdk.Authentication(telephoneNumber);
+                    sdkAuthentication = new Authentication(AuthenticationMethod.SMS, telephoneNumber);
+                }
+                else if (AuthenticationMethod.IDV.getApiValue().Equals(apiAuth.Scheme))
+                {
+                    sdkAuthentication = new Authentication(AuthenticationMethod.IDV, telephoneNumber,  
+                        new IdvWorkflowConverter(apiAuth.IdvWorkflow).ToSDKIdvWorkflow());
                 }
             }
 
@@ -95,4 +107,3 @@ namespace OneSpanSign.Sdk
         }
     }
 }
-

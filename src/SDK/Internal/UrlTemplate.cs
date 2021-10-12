@@ -101,6 +101,7 @@ namespace OneSpanSign.Sdk.Internal
         public static readonly string ACCOUNT_MEMBER_LIST_PATH = "/account/senders?to={to}&from={from}&dir={dir}";
         public static readonly string ACCOUNT_CONTACTS_PATH = "/users";
         public static readonly string ACCOUNT_VERIFICATION_TYPE_PATH = "/account/{accountId}/verificationTypes";
+        public static readonly string ACCOUNT_MEMBER_SIGNATURE_IMAGE_PATH = "/account/senders/{senderUid}/signature/image";
 
         // Approval Service
         public static readonly string APPROVAL_PATH = "/packages/{packageId}/documents/{documentId}/approvals";
@@ -177,6 +178,7 @@ namespace OneSpanSign.Sdk.Internal
         public static readonly string ACCOUNT_CONFIG_PATH = "/accountConfig";
         public static readonly string HANDOVER_URL_PATH = "/accountConfig/handoverUrl/{language}";
         public static readonly string DECLINE_REASONS_PATH = "/accountConfig/declineReasons/{language}";
+        public static readonly string IDV_WORKFLOW_CONFIGS_PATH = "/accountConfig/idvWorkflowConfigs";
 
         // QR Code Service
         public static readonly string QRCODE_PATH = "/packages/{packageId}/documents/{documentId}/fields";
@@ -204,6 +206,7 @@ namespace OneSpanSign.Sdk.Internal
         public static readonly string ACCOUNT_SUBACCOUNTS_PATH = "/account/subaccounts";
         public static readonly string ACCOUNT_SUBACCOUNTS_ID_PATH = "/account/subaccounts/{accountId}";
         public static readonly string ACCOUNT_SUBACCOUNTS_ACCESSIBLEACCOUNTS_PATH = "/account/accessibleaccounts";
+        public static readonly string ACCOUNT_SUBACCOUNTS_SUBACCOUNTAPIKEYS_PATH = "/account//api/account/subaccountApiKeys";
 
 
         public UrlTemplate(string baseUrl)

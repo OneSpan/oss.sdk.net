@@ -33,6 +33,15 @@ namespace SDK.Examples
                         Assert.AreEqual(FieldBuilder.CHECKBOX_CHECKED, field.Value);
                         Assert.AreEqual(GenericFieldsExample.CHECKBOX_PAGE, field.Page);
                     }
+                    // Grouped Checkbox
+                    if (field.Id == GenericFieldsExample.GROUPED_CHECKBOX_ID_1)
+                    {
+                        Assert.AreEqual(FieldStyle.UNBOUND_CHECK_BOX, field.Style);
+                        Assert.AreEqual(GenericFieldsExample.GROUPED_CHECKBOX_PAGE, field.Page);
+                        Assert.IsNotNull(field.Validator);
+                        Assert.AreEqual(GenericFieldsExample.GROUPED_CHECKBOX_GROUP, field.Validator.Group);
+                        Assert.AreEqual(GenericFieldsExample.GROUPED_CHECKBOX_MINIMAL_REQUIRED, field.Validator.MinimumRequired);
+                    }
                     // Radio Button 1
                     if (field.Id == GenericFieldsExample.RADIO_ID_1)
                     {

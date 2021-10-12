@@ -19,6 +19,11 @@ namespace SDK.Examples
         public static readonly string CHECKBOX_ID = "checkboxId";
         public static readonly int CHECKBOX_PAGE = 0;
         public static readonly bool CHECKBOX_VALUE = true;
+        public static readonly string GROUPED_CHECKBOX_ID_1 = "GroupedCheckboxId1";
+        public static readonly string GROUPED_CHECKBOX_ID_2 = "GroupedCheckboxId2";
+        public static readonly string GROUPED_CHECKBOX_GROUP = "checkboxGroup";
+        public static readonly int GROUPED_CHECKBOX_MINIMAL_REQUIRED = 1;
+        public static readonly int GROUPED_CHECKBOX_PAGE = 0;
         public static readonly int RADIO_PAGE = 0;
         public static readonly double RADIO_WIDTH = 20;
         public static readonly double RADIO_HEIGHT = 20;
@@ -95,6 +100,20 @@ namespace SDK.Examples
                                     .WithSize (RADIO_WIDTH, RADIO_HEIGHT)
                                     .OnPage (RADIO_PAGE)
                                     .AtPosition (500, 550))
+                               .WithField (FieldBuilder.CheckBox ()
+                                    .WithId (GROUPED_CHECKBOX_ID_1)
+                                    .WithValidation(FieldValidatorBuilder.Basic ()
+                                        .WithGroup(GROUPED_CHECKBOX_GROUP)
+                                        .WithMinimumRequired(GROUPED_CHECKBOX_MINIMAL_REQUIRED))
+                                    .OnPage (GROUPED_CHECKBOX_PAGE)
+                                    .AtPosition (500, 600))
+                               .WithField (FieldBuilder.CheckBox ()
+                                    .WithId (GROUPED_CHECKBOX_ID_2)
+                                    .WithValidation(FieldValidatorBuilder.Basic ()
+                                        .WithGroup(GROUPED_CHECKBOX_GROUP)
+                                        .WithMinimumRequired(GROUPED_CHECKBOX_MINIMAL_REQUIRED))
+                                    .OnPage (GROUPED_CHECKBOX_PAGE)
+                                    .AtPosition (550, 600))
                                .WithField (FieldBuilder.DropList ()
                                     .WithId (DROP_LIST_ID)
                                     .WithValue (DROP_LIST_OPTION2)

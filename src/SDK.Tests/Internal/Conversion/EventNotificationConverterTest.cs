@@ -74,6 +74,15 @@ namespace SDK.Tests
 
             Assert.AreEqual(apiNotificationEvent1, sdkNotificationEvent1.getApiValue());
         }
+        
+        [Test]
+        public void ConvertAPIDOCUMENT_VIEWEDToDOCUMENT_VIEWEDNotificationEvent()
+        {
+            apiNotificationEvent1 = "DOCUMENT_VIEWED";
+            sdkNotificationEvent1 = new EventNotificationConverter(apiNotificationEvent1).ToSDKNotificationEvent();
+
+            Assert.AreEqual(apiNotificationEvent1, sdkNotificationEvent1.getApiValue());
+        }
 
         [Test]
         public void ConvertAPIROLE_REASSIGNToROLE_REASSIGNNotificationEvent()
@@ -209,6 +218,16 @@ namespace SDK.Tests
 
             Assert.AreEqual("DOCUMENT_SIGNED", apiNotificationEvent1);
         }
+        
+        [Test]
+        public void ConvertSDKDOCUMENT_VIEWEDToAPIDOCUMENT_VIEWED()
+        {
+            sdkNotificationEvent1 = OneSpanSign.Sdk.NotificationEvent.DOCUMENT_VIEWED;
+            apiNotificationEvent1 = new EventNotificationConverter(sdkNotificationEvent1).ToAPICallbackEvent();
+
+            Assert.AreEqual("DOCUMENT_VIEWED", apiNotificationEvent1);
+        }
+
 
         [Test]
         public void ConvertSDKROLE_REASSIGNToAPIROLE_REASSIGN()

@@ -29,6 +29,7 @@ namespace OneSpanSign.Sdk
         public static NotificationEvent SIGNER_LOCKED = new NotificationEvent("SIGNER_LOCKED", "SIGNER_LOCKED", 17);
         public static NotificationEvent PACKAGE_ARCHIVE = new NotificationEvent("PACKAGE_ARCHIVE", "PACKAGE_ARCHIVE", 18);
         public static NotificationEvent TEMPLATE_CREATE = new NotificationEvent("TEMPLATE_CREATE", "TEMPLATE_CREATE", 19);
+        public static NotificationEvent DOCUMENT_VIEWED = new NotificationEvent("DOCUMENT_VIEWED", "DOCUMENT_VIEWED", 20);
 
         private static Dictionary<string,NotificationEvent> allNotificationEvents = new Dictionary<string,NotificationEvent>();
 
@@ -41,6 +42,7 @@ namespace OneSpanSign.Sdk
             allNotificationEvents.Add(PACKAGE_DECLINE.getApiValue(), PACKAGE_DECLINE);
             allNotificationEvents.Add(SIGNER_COMPLETE.getApiValue(), SIGNER_COMPLETE);
             allNotificationEvents.Add(DOCUMENT_SIGNED.getApiValue(), DOCUMENT_SIGNED);
+            allNotificationEvents.Add(DOCUMENT_VIEWED.getApiValue(), DOCUMENT_VIEWED);
             allNotificationEvents.Add(ROLE_REASSIGN.getApiValue(), ROLE_REASSIGN);
             allNotificationEvents.Add(PACKAGE_CREATE.getApiValue(), PACKAGE_CREATE);
             allNotificationEvents.Add(PACKAGE_DEACTIVATE.getApiValue(), PACKAGE_DEACTIVATE);

@@ -132,6 +132,20 @@ namespace SDK.Tests
             Assert.IsTrue (without.ShowNseOverview.HasValue);
             Assert.IsFalse (without.ShowNseOverview.Value);
         }
+        
+        [Test]
+        public void ShowNseLogoInIframe()
+        {
+            DocumentPackageSettingsBuilder builder = DocumentPackageSettingsBuilder.NewDocumentPackageSettings ();
+            DocumentPackageSettings unset = builder.Build ();
+            Assert.IsFalse (unset.ShowNseLogoInIframe.HasValue);
+            DocumentPackageSettings with = builder.WithShowNseLogoInIframe ().Build ();
+            Assert.IsTrue (with.ShowNseLogoInIframe.HasValue);
+            Assert.IsTrue (with.ShowNseLogoInIframe.Value);
+            DocumentPackageSettings without = builder.WithoutShowNseLogoInIframe ().Build ();
+            Assert.IsTrue (without.ShowNseLogoInIframe.HasValue);
+            Assert.IsFalse (without.ShowNseLogoInIframe.Value);
+        }
 
     }
 }
