@@ -628,5 +628,74 @@ namespace OneSpanSign.Sdk
                 throw new OssException("Could not delete account role.\t" + " Exception: " + e.Message, e);
             }
         }
+        
+        public List<OneSpanSign.API.UserAccountRole> getUserRoles(string userId)
+        {
+            string path = template.UrlFor(UrlTemplate.ACCOUNT_MEMBER_ROLES_PATH).Replace("{userId}", userId)
+                .Build();
+
+            try
+            {
+                List<OneSpanSign.API.UserAccountRole> apiResponse =
+                    JsonConvert.DeserializeObject<List<OneSpanSign.API.UserAccountRole>>(
+                        restClient.Get(path), jsonSettings);
+
+                return apiResponse;
+            }
+            catch (OssServerException e)
+            {
+                throw new OssServerException("Could not get role.\t", e);
+            }
+            catch (Exception e)
+            {
+                throw new OssException("Could not get role.\t" + " Exception: " + e.Message, e);
+            }
+        }
+        
+        public List<OneSpanSign.API.UserAccountRole> getUserRoles(string userId, string accountId)
+        {
+            string path = template.UrlFor(UrlTemplate.ACCOUNT_MEMBER_ROLE_PATH)
+                .Replace("{userId}", userId)
+                .Replace("{accountId}", accountId)
+                .Build();
+
+            try
+            {
+                List<OneSpanSign.API.UserAccountRole> apiResponse =
+                    JsonConvert.DeserializeObject<List<OneSpanSign.API.UserAccountRole>>(
+                        restClient.Get(path), jsonSettings);
+
+                return apiResponse;
+            }
+            catch (OssServerException e)
+            {
+                throw new OssServerException("Could not get role.\t", e);
+            }
+            catch (Exception e)
+            {
+                throw new OssException("Could not get role.\t" + " Exception: " + e.Message, e);
+            }
+        }
+        
+        public void assignAccountRoleToUser(string userId, OneSpanSign.API.UserAccountRole userAccountRole)
+        {
+            string path = template.UrlFor(UrlTemplate.ACCOUNT_MEMBER_ROLES_PATH)
+                .Replace("{userId}", userId)
+                .Build();
+            try
+            {
+                string payload = JsonConvert.SerializeObject(userAccountRole, jsonSettings);
+                restClient.Post(path, payload);
+            }
+            catch (OssServerException e)
+            {
+                throw new OssServerException("Could not add account role.\t" + " Exception: " + e.Message,
+                    e.ServerError, e);
+            }
+            catch (Exception e)
+            {
+                throw new OssException("Could not add account role.\t" + " Exception: " + e.Message, e);
+            }
+        }
     }
 }

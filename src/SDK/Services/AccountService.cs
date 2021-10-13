@@ -223,6 +223,35 @@ namespace OneSpanSign.Sdk.Services
         {
             return apiClient.getAccountRoleUsers(accountRoleId) as List<string>;
         }
+        
+        public List<UserAccountRole> getUserRoles(string senderUid)
+        {
+            return getSDKUserAccountRole(apiClient.getUserRoles(senderUid));
+        }
+        public List<UserAccountRole> getUserRoles(string userId, string accountId)
+        {
+            return getSDKUserAccountRole(apiClient.getUserRoles(userId,accountId));
+        }
+
+        public void assignAccountRoleToUser(string userId, OneSpanSign.Sdk.UserAccountRole userAccountRole)
+        {
+            apiClient.assignAccountRoleToUser(userId, new UserAccountRoleConverter(userAccountRole).ToAPIUserAccountRole());
+        }
+
+        private List<UserAccountRole> getSDKUserAccountRole(List<OneSpanSign.API.UserAccountRole> apiUserAccountRole)
+        {
+            List<OneSpanSign.Sdk.UserAccountRole> sdkUserAccountRole = new List<UserAccountRole>();
+            
+            if (apiUserAccountRole.Count > 0)
+            {
+                foreach (OneSpanSign.API.UserAccountRole userAccountRole in apiUserAccountRole)
+                {
+                    sdkUserAccountRole.Add(new UserAccountRoleConverter(userAccountRole).ToSDKUserAccountRole());
+                }
+            }
+
+            return sdkUserAccountRole;
+        }
     }
 }
 
