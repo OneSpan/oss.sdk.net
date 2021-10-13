@@ -186,6 +186,72 @@ namespace OneSpanSign.Sdk.Services
             OneSpanSign.API.SubAccount apiSubAccount = new SubAccountConverter(subAccount).ToAPISubAccount();
             apiClient.updateSubAccount(apiSubAccount, accountId);
         }
+        
+        public List<AccountRole> getAccountRoles()
+        {
+            OneSpanSign.API.Result<OneSpanSign.API.AccountRole> apiAccountRoles = apiClient.getAccountRoles();
+            List<AccountRole> accountRoles = new List<AccountRole>();
+            foreach (OneSpanSign.API.AccountRole accountRole in apiAccountRoles.Results)
+            {
+                accountRoles.Add(new AccountRoleConverter(accountRole).ToSDKAccountRole());
+            }
+
+            return accountRoles;
+        }
+
+        public OneSpanSign.Sdk.AccountRole getAccountRole(string accountRoleId)
+        {
+            return new AccountRoleConverter(apiClient.getAccountRole(accountRoleId)).ToSDKAccountRole();
+        }
+
+        public void addAccountRole(OneSpanSign.Sdk.AccountRole accountRole)
+        {
+            apiClient.addAccountRole(new AccountRoleConverter(accountRole).ToAPIAccountRole());
+        }
+
+        public void updateAccountRole(string accountRoleId, OneSpanSign.Sdk.AccountRole accountRole)
+        {
+            apiClient.updateAccountRole(new AccountRoleConverter(accountRole).ToAPIAccountRole(), accountRoleId);
+        }
+
+        public void deleteAccountRole(string accountRoleId)
+        {
+            apiClient.deleteAccountRole(accountRoleId);
+        }
+
+        public List<string> getAccountRoleUsers(string accountRoleId)
+        {
+            return apiClient.getAccountRoleUsers(accountRoleId) as List<string>;
+        }
+        
+        public List<UserAccountRole> getUserRoles(string senderUid)
+        {
+            return getSDKUserAccountRole(apiClient.getUserRoles(senderUid));
+        }
+        public List<UserAccountRole> getUserRoles(string userId, string accountId)
+        {
+            return getSDKUserAccountRole(apiClient.getUserRoles(userId,accountId));
+        }
+
+        public void assignAccountRoleToUser(string userId, OneSpanSign.Sdk.UserAccountRole userAccountRole)
+        {
+            apiClient.assignAccountRoleToUser(userId, new UserAccountRoleConverter(userAccountRole).ToAPIUserAccountRole());
+        }
+
+        private List<UserAccountRole> getSDKUserAccountRole(List<OneSpanSign.API.UserAccountRole> apiUserAccountRole)
+        {
+            List<OneSpanSign.Sdk.UserAccountRole> sdkUserAccountRole = new List<UserAccountRole>();
+            
+            if (apiUserAccountRole.Count > 0)
+            {
+                foreach (OneSpanSign.API.UserAccountRole userAccountRole in apiUserAccountRole)
+                {
+                    sdkUserAccountRole.Add(new UserAccountRoleConverter(userAccountRole).ToSDKUserAccountRole());
+                }
+            }
+
+            return sdkUserAccountRole;
+        }
     }
 }
 
