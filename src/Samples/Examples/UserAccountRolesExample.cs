@@ -18,8 +18,12 @@ namespace SDK.Examples
         protected OssClient ossClientWithRoleAndPermission;
         override public void Execute()
         {
+            //NEED TO REPLACE THE PROPER VALUES
             const string USER_ID = "FakeUserId";
             const string ACCOUNT_ID = "FakeAccountId";
+            const string ROLE_ID = "FakeRoleId";
+            const string DESCRIPTION = "FakeDescription";
+            const string SENDER_PERMSSION = "sender_admin.users";
             
             //Setup ossclient for role and permission enabled user
             ossClientWithRoleAndPermission = new OssClient(props.Get("api.key.withRolesAndPermission"), props.Get("api.url"), props.Get("webpage.url"), true);
@@ -35,9 +39,10 @@ namespace SDK.Examples
             string newAccountRoleName = Guid.NewGuid().ToString();
             OneSpanSign.Sdk.AccountRole accountRole = AccountRoleBuilder.NewAccountRole()
                 .WithName(newAccountRoleName)
-                .WithPermissions(new List<string>() { "sender_admin.users" })
-                .WithDescription("DESCRIPTION")
+                .WithPermissions(new List<string>() { SENDER_PERMSSION })
+                .WithDescription(DESCRIPTION)
                 .WithEnabled(true)
+                .WithId(ROLE_ID)
                 .Build();
 
             List<OneSpanSign.Sdk.AccountRole> fakeAccountRole = new List<OneSpanSign.Sdk.AccountRole>();
