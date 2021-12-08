@@ -12,12 +12,12 @@ namespace OneSpanSign.Sdk
 			set;
 		}
 
-		public int MinLength {
+		public Nullable<Int32> MinLength {
 			get;
 			set;
 		}
 
-		public int MaxLength {
+		public Nullable<Int32> MaxLength {
 			get;
 			set;
 		}
@@ -27,7 +27,7 @@ namespace OneSpanSign.Sdk
 			set;
 		}
 
-        public int ErrorCode
+        public Nullable<Int32> ErrorCode
         {
             get;
             set;
@@ -76,7 +76,7 @@ namespace OneSpanSign.Sdk
 	        set;
         }
         
-        public int MinimumRequired
+        public Nullable<Int32> MinimumRequired
         {
 	        get;
 	        set;
