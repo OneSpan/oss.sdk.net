@@ -31,6 +31,7 @@ namespace OneSpanSign.Sdk.Builder
         private bool disabled;
         private String group;
         private int minimumRequired;
+        private int maximumRequired;
         private IList<string> options = new List<string>();
 
 		private FieldValidatorBuilder (String regex)
@@ -120,7 +121,13 @@ namespace OneSpanSign.Sdk.Builder
 	        this.minimumRequired = minimumRequired;
 	        return this;
         }
-
+        
+        public FieldValidatorBuilder WithMaximumRequired (int maximumRequired)
+        {
+	        this.maximumRequired = maximumRequired;
+	        return this;
+        }
+        
         public static FieldValidatorBuilder Basic() 
         {
             return new FieldValidatorBuilder( DEFAULT_REGEX );
@@ -155,6 +162,7 @@ namespace OneSpanSign.Sdk.Builder
             validator.Disabled = disabled;
             validator.Group = group;
             validator.MinimumRequired = minimumRequired;
+            validator.MaximumRequired = maximumRequired;
             validator.Message = message;
             validator.AddOptions(options);
             validator.ErrorCode = errorCode;
