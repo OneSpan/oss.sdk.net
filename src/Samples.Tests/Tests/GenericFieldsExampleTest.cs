@@ -41,6 +41,7 @@ namespace SDK.Examples
                         Assert.IsNotNull(field.Validator);
                         Assert.AreEqual(GenericFieldsExample.GROUPED_CHECKBOX_GROUP, field.Validator.Group);
                         Assert.AreEqual(GenericFieldsExample.GROUPED_CHECKBOX_MINIMAL_REQUIRED, field.Validator.MinimumRequired);
+                        Assert.AreEqual(GenericFieldsExample.GROUPED_CHECKBOX_MAXIMAL_REQUIRED, field.Validator.MaximumRequired);
                     }
                     // Radio Button 1
                     if (field.Id == GenericFieldsExample.RADIO_ID_1)

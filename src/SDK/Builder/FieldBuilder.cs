@@ -174,6 +174,7 @@ namespace OneSpanSign.Sdk.Builder
                 this.validator.Disabled = validator.Disabled;
                 this.validator.Group = validator.Group;
                 this.validator.MinimumRequired = validator.MinimumRequired;
+                this.validator.MaximumRequired = validator.MaximumRequired;
                 if (null != validator.Message)
                     this.validator.Message = validator.Message;
             } else {

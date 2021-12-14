@@ -94,7 +94,13 @@ namespace OneSpanSign.API
     public Nullable<Int32> MinimumRequired
     {
 	    get; set;
-    }    
+    }  
+    
+    [JsonProperty ("maximumRequired")]
+    public Nullable<Int32> MaximumRequired
+    {
+	    get; set;
+    }
     
     
     }

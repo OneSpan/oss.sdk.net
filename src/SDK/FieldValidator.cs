@@ -82,5 +82,11 @@ namespace OneSpanSign.Sdk
 	        set;
         }
         
+        public Nullable<Int32> MaximumRequired
+        {
+	        get;
+	        set;
+        }
+        
 	}
 }

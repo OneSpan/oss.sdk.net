@@ -79,6 +79,7 @@ namespace SDK.Tests
             Assert.AreEqual(sdkFieldValidator1.Disabled, apiFieldValidation1.Disabled);
             Assert.AreEqual(sdkFieldValidator1.Group, apiFieldValidation1.Group);
             Assert.AreEqual(sdkFieldValidator1.MinimumRequired, apiFieldValidation1.MinimumRequired);
+            Assert.AreEqual(sdkFieldValidator1.MaximumRequired, apiFieldValidation1.MaximumRequired);
             Assert.IsEmpty(sdkFieldValidator1.Options);
         }
 
@@ -96,6 +97,7 @@ namespace SDK.Tests
             Assert.AreEqual(apiFieldValidation1.Disabled, sdkFieldValidator1.Disabled);
             Assert.AreEqual(apiFieldValidation1.Group, sdkFieldValidator1.Group);
             Assert.AreEqual(apiFieldValidation1.MinimumRequired, sdkFieldValidator1.MinimumRequired);
+            Assert.AreEqual(apiFieldValidation1.MaximumRequired, sdkFieldValidator1.MaximumRequired);
             Assert.AreEqual(apiFieldValidation1.Pattern, sdkFieldValidator1.Regex);
         }
 
@@ -111,6 +113,7 @@ namespace SDK.Tests
             apiFieldValidation.Disabled = false;
             apiFieldValidation.Group = "group";
             apiFieldValidation.MinimumRequired = 1;
+            apiFieldValidation.MaximumRequired = 2;
 
             return apiFieldValidation;
         }
