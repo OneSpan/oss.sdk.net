@@ -3,22 +3,22 @@ using System.Collections.Generic;
 
 namespace OneSpanSign.Sdk
 {
-	public class Signature
-	{
-		private List<Field> fields = new List<Field>();
+    public class Signature
+    {
+        private List<Field> fields = new List<Field>();
 
-		public Signature (string signerEmail, int page, double x, double y)
-		{
-			SignerEmail = signerEmail;
+        public Signature(string signerEmail, int page, double x, double y)
+        {
+            SignerEmail = signerEmail;
             GroupId = null;
             RoleId = null;
-			Page = page;
-			X = x;
-			Y = y;
+            Page = page;
+            X = x;
+            Y = y;
             Style = SignatureStyle.HAND_DRAWN;
-		}
+        }
 
-        public Signature( GroupId groupId, int page, double x, double y)
+        public Signature(GroupId groupId, int page, double x, double y)
         {
             SignerEmail = null;
             GroupId = groupId;
@@ -28,7 +28,7 @@ namespace OneSpanSign.Sdk
             Y = y;
             Style = SignatureStyle.HAND_DRAWN;
         }
-        
+
         public Signature(Placeholder roleId, int page, double x, double y)
         {
             SignerEmail = null;
@@ -47,21 +47,21 @@ namespace OneSpanSign.Sdk
         }
 
         private string signerEmail;
-		public string SignerEmail
+        public string SignerEmail
         {
             get { return signerEmail; }
             private set
-            { 
+            {
                 if (value != null)
                 {
-                    signerEmail = value.ToLower(); 
+                    signerEmail = value.ToLower();
                 }
                 else
                 {
                     signerEmail = null;
                 }
             }
-		}
+        }
 
         public Placeholder RoleId
         {
@@ -69,57 +69,60 @@ namespace OneSpanSign.Sdk
             private set;
         }
 
-        public Nullable<DateTime> Accepted 
+        public Nullable<DateTime> Accepted
         {
             get;
             internal set;
         }
 
-		public int Page 
-		{
-			get;
-			private set;
-		}
+        public int Page
+        {
+            get;
+            private set;
+        }
 
-		public double X 
-		{
-			get;
-			private set;
-		}
+        public double X
+        {
+            get;
+            private set;
+        }
 
-		public double Y
-		{
-			get;
-			private set;
-		}
+        public double Y
+        {
+            get;
+            private set;
+        }
 
-		public double Height {
-			get;
-			set;
-		}
+        public double Height
+        {
+            get;
+            set;
+        }
 
-		public double Width {
-			get;
-			set;
-		}
+        public double Width
+        {
+            get;
+            set;
+        }
 
-		public SignatureStyle Style {
-			get;
-			set;
-		}
+        public SignatureStyle Style
+        {
+            get;
+            set;
+        }
 
-		public void AddFields (IList<Field> fields)
-		{
-			this.fields.AddRange (fields);
-		}
+        public void AddFields(IList<Field> fields)
+        {
+            this.fields.AddRange(fields);
+        }
 
-		public List<Field> Fields
-		{
-			get
-			{
-				return fields;
-			}
-		}
+        public List<Field> Fields
+        {
+            get
+            {
+                return fields;
+            }
+        }
 
         public SignatureId Id
         {
@@ -127,15 +130,17 @@ namespace OneSpanSign.Sdk
             set;
         }
 
-		public string Name {
-			get;
-			set;
-		}
+        public string Name
+        {
+            get;
+            set;
+        }
 
-		public bool Extract {
-			get;
-			set;
-		}
+        public bool Extract
+        {
+            get;
+            set;
+        }
 
         public TextAnchor TextAnchor
         {
@@ -143,22 +148,23 @@ namespace OneSpanSign.Sdk
             set;
         }
 
-		public bool IsGroupSignature()
-		{
-			return GroupId != null;
-		}
-        
+        public bool IsGroupSignature()
+        {
+            return GroupId != null;
+        }
+
         public bool IsPlaceholderSignature()
         {
             return RoleId != null;
         }
 
-        public Nullable<Int32> FontSize {
+        public Nullable<Int32> FontSize
+        {
             get;
             set;
         }
 
-        public bool Optional 
+        public bool Optional
         {
             get;
             set;
@@ -170,9 +176,16 @@ namespace OneSpanSign.Sdk
             set;
         }
 
-        public bool EnforceCaptureSignature {
+        public bool EnforceCaptureSignature
+        {
             get;
             set;
         }
-	}
+
+        public bool FromFile
+        {
+            get;
+            set;
+        }
+    }
 }
