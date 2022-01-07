@@ -4,64 +4,65 @@ using OneSpanSign.API;
 
 namespace OneSpanSign.Sdk.Builder
 {
-	public class SignatureBuilder
-	{
-		public static double DEFAULT_HEIGHT = 50d;
-		public static double DEFAULT_WIDTH = 200d;
-		public static SignatureStyle DEFAULT_STYLE = SignatureStyle.FULL_NAME;
+    public class SignatureBuilder
+    {
+        public static double DEFAULT_HEIGHT = 50d;
+        public static double DEFAULT_WIDTH = 200d;
+        public static SignatureStyle DEFAULT_STYLE = SignatureStyle.FULL_NAME;
 
         private SignatureId id;
         private string name;
-		private string signerEmail;
-		private double width = DEFAULT_WIDTH;
-		private double height = DEFAULT_HEIGHT;
+        private string signerEmail;
+        private double width = DEFAULT_WIDTH;
+        private double height = DEFAULT_HEIGHT;
         private Nullable<Int32> fontSize;
-		private SignatureStyle style = DEFAULT_STYLE;
-		private int page;
-		private double x;
-		private double y;
-		private IList<Field> fields = new List<Field>();
-		private bool extract;
+        private SignatureStyle style = DEFAULT_STYLE;
+        private int page;
+        private double x;
+        private double y;
+        private IList<Field> fields = new List<Field>();
+        private bool extract;
         private TextAnchor textAnchor;
         private GroupId groupId;
         private Placeholder roleId;
         private bool optional = false;
         private bool disabled = false;
         private bool enforceCaptureSignature = false;
+        private bool fromFile = false;
 
-		private SignatureBuilder (string signerEmail)
-		{
-			this.signerEmail = signerEmail;
-		}
+        private SignatureBuilder(string signerEmail)
+        {
+            this.signerEmail = signerEmail;
+        }
 
-        private SignatureBuilder (GroupId groupId )
+        private SignatureBuilder(GroupId groupId)
         {
             this.groupId = groupId;
         }
-        
+
         private SignatureBuilder(Placeholder roleId)
         {
             this.roleId = roleId;
         }
 
-        public static SignatureBuilder AcceptanceFor (string signerEmail)
+        public static SignatureBuilder AcceptanceFor(string signerEmail)
         {
             return new SignatureBuilder(signerEmail)
                 .WithStyle(SignatureStyle.ACCEPTANCE)
-                    .WithSize(0,0)
-                    .AtPosition(0,0)
+                    .WithSize(0, 0)
+                    .AtPosition(0, 0)
                     .OnPage(0);
         }
 
-		public static SignatureBuilder AcceptanceFor (GroupId groupId )
-		{
-			return new SignatureBuilder(groupId)
-					.WithStyle(SignatureStyle.ACCEPTANCE)
-					.WithSize(0,0)
-					.AtPosition(0,0)
-					.OnPage(0);
-		}
-        
+        public static SignatureBuilder AcceptanceFor(GroupId groupId)
+        {
+            return new SignatureBuilder(groupId)
+                    .WithStyle(SignatureStyle.ACCEPTANCE)
+                    .WithSize(0, 0)
+                    .AtPosition(0, 0)
+                    .OnPage(0);
+        }
+
         public static SignatureBuilder AcceptanceFor(Placeholder roleId)
         {
             return new SignatureBuilder(roleId)
@@ -71,57 +72,57 @@ namespace OneSpanSign.Sdk.Builder
                     .OnPage(0);
         }
 
-        public static SignatureBuilder SignatureFor( GroupId groupId )
+        public static SignatureBuilder SignatureFor(GroupId groupId)
         {
             return new SignatureBuilder(groupId);
         }
-        
+
         public static SignatureBuilder SignatureFor(Placeholder roleId)
         {
             return new SignatureBuilder(roleId);
         }
 
-		public static SignatureBuilder SignatureFor (string signerEmail)
-		{
-			return new SignatureBuilder (signerEmail);
-		}
+        public static SignatureBuilder SignatureFor(string signerEmail)
+        {
+            return new SignatureBuilder(signerEmail);
+        }
 
-		public static SignatureBuilder InitialsFor (string signerEmail)
-		{
-			return new SignatureBuilder (signerEmail).WithStyle (SignatureStyle.INITIALS);
-		}
+        public static SignatureBuilder InitialsFor(string signerEmail)
+        {
+            return new SignatureBuilder(signerEmail).WithStyle(SignatureStyle.INITIALS);
+        }
 
-		public static SignatureBuilder InitialsFor ( GroupId groupId )
-		{
-			return  new SignatureBuilder(groupId).WithStyle(SignatureStyle.INITIALS);
-		}
-        
+        public static SignatureBuilder InitialsFor(GroupId groupId)
+        {
+            return new SignatureBuilder(groupId).WithStyle(SignatureStyle.INITIALS);
+        }
+
         public static SignatureBuilder InitialsFor(Placeholder roleId)
         {
             return new SignatureBuilder(roleId).WithStyle(SignatureStyle.INITIALS);
         }
 
-		public static SignatureBuilder CaptureFor (string signerEmail)
-		{
-			return new SignatureBuilder (signerEmail).WithStyle (SignatureStyle.HAND_DRAWN);
-		}
+        public static SignatureBuilder CaptureFor(string signerEmail)
+        {
+            return new SignatureBuilder(signerEmail).WithStyle(SignatureStyle.HAND_DRAWN);
+        }
 
-		public static SignatureBuilder CaptureFor (GroupId groupId)
-		{
-			return new SignatureBuilder(groupId).WithStyle(SignatureStyle.HAND_DRAWN);
-		}
-        
+        public static SignatureBuilder CaptureFor(GroupId groupId)
+        {
+            return new SignatureBuilder(groupId).WithStyle(SignatureStyle.HAND_DRAWN);
+        }
+
         public static SignatureBuilder CaptureFor(Placeholder roleId)
         {
             return new SignatureBuilder(roleId).WithStyle(SignatureStyle.HAND_DRAWN);
         }
 
-        public static SignatureBuilder MobileCaptureFor (string signerEmail)
+        public static SignatureBuilder MobileCaptureFor(string signerEmail)
         {
-            return new SignatureBuilder (signerEmail).WithStyle (SignatureStyle.MOBILE_CAPTURE);
+            return new SignatureBuilder(signerEmail).WithStyle(SignatureStyle.MOBILE_CAPTURE);
         }
 
-        public static SignatureBuilder MobileCaptureFor (GroupId groupId)
+        public static SignatureBuilder MobileCaptureFor(GroupId groupId)
         {
             return new SignatureBuilder(groupId).WithStyle(SignatureStyle.MOBILE_CAPTURE);
         }
@@ -131,67 +132,67 @@ namespace OneSpanSign.Sdk.Builder
             return new SignatureBuilder(roleId).WithStyle(SignatureStyle.MOBILE_CAPTURE);
         }
 
-        public SignatureBuilder WithId (SignatureId id)
+        public SignatureBuilder WithId(SignatureId id)
         {
             this.id = id;
             return this;
         }
 
-		public SignatureBuilder WithName (string name)
-		{
-			this.name = name;
-			return this;
-		}
+        public SignatureBuilder WithName(string name)
+        {
+            this.name = name;
+            return this;
+        }
 
         [Obsolete("Use WithPositionExtracted() instead")]
-		public SignatureBuilder EnableExtraction()
-		{
-			extract = true;
-			return this;
-		}
+        public SignatureBuilder EnableExtraction()
+        {
+            extract = true;
+            return this;
+        }
 
-		public SignatureBuilder OnPage (int page)
-		{
-			this.page = page;
-			return this;
-		}
+        public SignatureBuilder OnPage(int page)
+        {
+            this.page = page;
+            return this;
+        }
 
-		public SignatureBuilder AtPosition (double x, double y)
-		{
-			this.x = x;
-			this.y = y;
-			return this;
-		}
+        public SignatureBuilder AtPosition(double x, double y)
+        {
+            this.x = x;
+            this.y = y;
+            return this;
+        }
 
-		public SignatureBuilder WithStyle (SignatureStyle style)
-		{
-			this.style = style;
-			return this;
-		}
+        public SignatureBuilder WithStyle(SignatureStyle style)
+        {
+            this.style = style;
+            return this;
+        }
 
-		public SignatureBuilder WithSize (double width, double height)
-		{
-			this.width = width;
-			this.height = height;
-			return this;
-		}
+        public SignatureBuilder WithSize(double width, double height)
+        {
+            this.width = width;
+            this.height = height;
+            return this;
+        }
 
-        public SignatureBuilder WithFontSize (Nullable<Int32> fontSize)
+        public SignatureBuilder WithFontSize(Nullable<Int32> fontSize)
         {
             this.fontSize = fontSize;
             return this;
         }
 
-		public SignatureBuilder WithField (FieldBuilder builder)
-		{
-			return WithField (builder.Build());
-		}
+        public SignatureBuilder WithField(FieldBuilder builder)
+        {
+            return WithField(builder.Build());
+        }
 
-		public SignatureBuilder WithField (Field field)
-		{
-			fields.Add (field);
-			return this;
-		}
+        public SignatureBuilder WithField(Field field)
+        {
+            fields.Add(field);
+            return this;
+        }
 
         public SignatureBuilder WithPositionExtracted()
         {
@@ -199,34 +200,42 @@ namespace OneSpanSign.Sdk.Builder
             return this;
         }
 
-        public SignatureBuilder WithPositionAnchor( TextAnchorBuilder builder ) {
+        public SignatureBuilder WithPositionAnchor(TextAnchorBuilder builder)
+        {
             return WithPositionAnchor(builder.Build());
         }
 
-        public SignatureBuilder WithPositionAnchor( TextAnchor textAnchor ) {
+        public SignatureBuilder WithPositionAnchor(TextAnchor textAnchor)
+        {
             this.textAnchor = textAnchor;
             return this;
         }
 
-        public SignatureBuilder MakeOptional() 
+        public SignatureBuilder MakeOptional()
         {
             this.optional = true;
             return this;
         }
 
-        public SignatureBuilder Disabled ()
+        public SignatureBuilder Disabled()
         {
             this.disabled = true;
             return this;
         }
 
-        public SignatureBuilder EnableEnforceCaptureSignature ()
+        public SignatureBuilder EnableEnforceCaptureSignature()
         {
             this.enforceCaptureSignature = true;
             return this;
         }
 
-		public Signature Build()
+        public SignatureBuilder SetFromFile(bool fromFile)
+        {
+            this.fromFile = fromFile;
+            return this;
+        }
+
+        public Signature Build()
         {
             Signature signature;
             if (isForRegularSigner())
@@ -242,35 +251,37 @@ namespace OneSpanSign.Sdk.Builder
                 signature = new Signature(roleId, page, x, y);
             }
 
-			signature.Height = height;
-			signature.Width = width;
-			signature.Style = style;
-			signature.AddFields (fields);
+            signature.Height = height;
+            signature.Width = width;
+            signature.Style = style;
+            signature.AddFields(fields);
             signature.Id = id;
-			signature.Name = name;
+            signature.Name = name;
             signature.Extract = extract;
             signature.TextAnchor = textAnchor;
             signature.FontSize = fontSize;
             signature.Optional = optional;
             signature.Disabled = disabled;
             signature.EnforceCaptureSignature = enforceCaptureSignature;
+            signature.FromFile = fromFile;
 
-			return signature;
-		}
-        
-        private bool isForPlaceholder() {
+            return signature;
+        }
+
+        private bool isForPlaceholder()
+        {
             return roleId != null;
         }
-        
+
         private bool isForGroup()
         {
             return groupId != null;
         }
-        
+
         private bool isForRegularSigner()
         {
             return signerEmail != null;
         }
 
-	}
+    }
 }

@@ -20,32 +20,36 @@ namespace OneSpanSign.Sdk
             this.apiApproval = apiApproval;
             this.package = package;
         }
-        
-        private static bool isPlaceHolder( OneSpanSign.API.Role role ) {
+
+        private static bool isPlaceHolder(OneSpanSign.API.Role role)
+        {
             return role.Signers.Count == 0;
         }
-        
+
         private static bool isGroupRole(OneSpanSign.API.Role role)
         {
             return role.Signers.Count == 1 && role.Signers[0].Group != null;
         }
-        
-        public Signature ToSDKSignature() {
+
+        public Signature ToSDKSignature()
+        {
 
             SignatureBuilder signatureBuilder = null;
-            foreach ( OneSpanSign.API.Role role in package.Roles ) {
-                if ( role.Id.Equals( apiApproval.Role ) ) {
-                    if ( isPlaceHolder( role ) )
+            foreach (OneSpanSign.API.Role role in package.Roles)
+            {
+                if (role.Id.Equals(apiApproval.Role))
+                {
+                    if (isPlaceHolder(role))
                     {
                         signatureBuilder = SignatureBuilder.SignatureFor(new Placeholder(role.Id));
                     }
-                    else if ( isGroupRole( role ) )
+                    else if (isGroupRole(role))
                     {
-                        signatureBuilder = SignatureBuilder.SignatureFor(new GroupId(role.Signers [0].Group.Id));
+                        signatureBuilder = SignatureBuilder.SignatureFor(new GroupId(role.Signers[0].Group.Id));
                     }
                     else
                     {
-                        signatureBuilder = SignatureBuilder.SignatureFor(role.Signers [0].Email);
+                        signatureBuilder = SignatureBuilder.SignatureFor(role.Signers[0].Email);
                     }
                 }
             }
@@ -56,38 +60,43 @@ namespace OneSpanSign.Sdk
             }
 
             OneSpanSign.API.Field apiSignatureField = null;
-            foreach ( OneSpanSign.API.Field apiField in apiApproval.Fields ) {
-                if (FieldType.SIGNATURE.getApiValue().Equals(apiField.Type)) {
+            foreach (OneSpanSign.API.Field apiField in apiApproval.Fields)
+            {
+                if (FieldType.SIGNATURE.getApiValue().Equals(apiField.Type))
+                {
                     apiSignatureField = apiField;
-                } else {
-                    Field field = new FieldConverter( apiField ).ToSDKField();
-                    signatureBuilder.WithField( field );
+                }
+                else
+                {
+                    Field field = new FieldConverter(apiField).ToSDKField();
+                    signatureBuilder.WithField(field);
                 }
 
             }
 
-            if ( apiSignatureField == null ) {
-                signatureBuilder.WithStyle( SignatureStyle.ACCEPTANCE );
-                signatureBuilder.WithSize( 0, 0 );
+            if (apiSignatureField == null)
+            {
+                signatureBuilder.WithStyle(SignatureStyle.ACCEPTANCE);
+                signatureBuilder.WithSize(0, 0);
             }
             else
             {
-                signatureBuilder.WithStyle( new SignatureStyleConverter(apiSignatureField.Subtype).ToSDKSignatureStyle() )
-                    .OnPage( apiSignatureField.Page.Value )
-                        .AtPosition( apiSignatureField.Left.Value, apiSignatureField.Top.Value )
-                        .WithSize( apiSignatureField.Width.Value, apiSignatureField.Height.Value );
+                signatureBuilder.WithStyle(new SignatureStyleConverter(apiSignatureField.Subtype).ToSDKSignatureStyle())
+                    .OnPage(apiSignatureField.Page.Value)
+                        .AtPosition(apiSignatureField.Left.Value, apiSignatureField.Top.Value)
+                        .WithSize(apiSignatureField.Width.Value, apiSignatureField.Height.Value);
 
-                if ( apiSignatureField.Extract.Value )
+                if (apiSignatureField.Extract.Value)
                 {
                     signatureBuilder.WithPositionExtracted();
                 }
-                if (apiSignatureField.FontSize != null) 
+                if (apiSignatureField.FontSize != null)
                 {
-                    signatureBuilder.WithFontSize (apiSignatureField.FontSize.Value);
+                    signatureBuilder.WithFontSize(apiSignatureField.FontSize.Value);
                 }
             }
 
-            if (apiApproval.Optional) 
+            if (apiApproval.Optional)
             {
                 signatureBuilder.MakeOptional();
             }
@@ -97,10 +106,13 @@ namespace OneSpanSign.Sdk
                 signatureBuilder.Disabled();
             }
 
-            if (apiApproval.EnforceCaptureSignature) {
-                signatureBuilder.EnableEnforceCaptureSignature ();
+            if (apiApproval.EnforceCaptureSignature)
+            {
+                signatureBuilder.EnableEnforceCaptureSignature();
             }
-            
+
+            signatureBuilder.SetFromFile(apiApproval.FromFile);
+
             Signature signature = signatureBuilder.Build();
             if (null != apiApproval.Accepted)
             {
@@ -110,7 +122,7 @@ namespace OneSpanSign.Sdk
             return signature;
         }
 
-        public OneSpanSign.API.Approval ToAPIApproval ()
+        public OneSpanSign.API.Approval ToAPIApproval()
         {
             OneSpanSign.API.Approval result = new OneSpanSign.API.Approval();
 
@@ -124,15 +136,18 @@ namespace OneSpanSign.Sdk
             result.Optional = sdkSignature.Optional;
             result.Disabled = sdkSignature.Disabled;
             result.EnforceCaptureSignature = sdkSignature.EnforceCaptureSignature;
+            result.FromFile = sdkSignature.FromFile;
 
-            foreach ( Field field in sdkSignature.Fields ) {
-                result.AddField( new FieldConverter( field ).ToAPIField() );
+            foreach (Field field in sdkSignature.Fields)
+            {
+                result.AddField(new FieldConverter(field).ToAPIField());
             }
 
             return result;
         }
 
-        private OneSpanSign.API.Field ToField(Signature signature) {
+        private OneSpanSign.API.Field ToField(Signature signature)
+        {
             OneSpanSign.API.Field result = new OneSpanSign.API.Field();
 
             if (sdkSignature.Id != null)
@@ -161,7 +176,7 @@ namespace OneSpanSign.Sdk
             result.Type = FieldType.SIGNATURE.getApiValue();
             result.Subtype = signature.Style.getApiValue();
             return result;
-        }       
+        }
     }
 }
 
