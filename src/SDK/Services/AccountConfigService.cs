@@ -112,5 +112,50 @@ namespace OneSpanSign.Sdk.Services
         {
             apiClient.DeleteIdvWorkflowConfigs();
         }
+        
+        public AccountSettings GetAccountSettings()
+        {
+            return apiClient.GetAccountSettings();
+        }
+
+        public void PatchAccountSettings(AccountSettings accountSettings)
+        {
+            apiClient.PatchAccountSettings(accountSettings);
+        }
+        
+        public void DeleteAccountSettings()
+        {
+            apiClient.DeleteAccountSettings();;
+        }
+        
+        public AccountFeatureSettings GetAccountFeatureSettings()
+        {
+            return apiClient.GetAccountFeatureSettings();
+        }
+
+        public void PatchAccountFeatureSettings(AccountFeatureSettings accountFeatureSettings)
+        {
+            apiClient.PatchAccountFeatureSettings(accountFeatureSettings);
+        }
+        
+        public void DeleteAccountFeatureSettings()
+        {
+            apiClient.DeleteAccountFeatureSettings();;
+        }
+        
+        public AccountPackageSettings GetAccountPackageSettings()
+        {
+            return apiClient.GetAccountPackageSettings();
+        }
+
+        public void PatchAccountPackageSettings(AccountPackageSettings accountPackageSettings)
+        {
+            apiClient.PatchAccountPackageSettings(accountPackageSettings);
+        }
+        
+        public void DeleteAccountPackageSettings()
+        {
+            apiClient.DeleteAccountPackageSettings();;
+        }
     }
 }

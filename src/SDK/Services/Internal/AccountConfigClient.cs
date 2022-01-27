@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Serialization;
 using OneSpanSign.API;
 using OneSpanSign.Sdk.Internal;
 
@@ -268,5 +269,169 @@ namespace OneSpanSign.Sdk
                 throw new OssException("Could not delete IdvWorkflow Configs.", e);
             }
         }
+        
+        public AccountSettings GetAccountSettings()
+        {
+            string path = template.UrlFor(UrlTemplate.ACCOUNT_SETTINGS_PATH).Build();
+            try
+            {
+                string stringResponse = restClient.Get(path);
+                return JsonConvert.DeserializeObject<AccountSettings> (stringResponse, jsonSettings);
+            }
+            catch (OssServerException e)
+            {
+                throw new OssServerException("Could not get Account Settings.", e);
+            }
+            catch (Exception e)
+            {
+                throw new OssException("Could not get Account Settings.", e);
+            }
+        }
+        
+        public void PatchAccountSettings(AccountSettings accountSettings)
+        {
+            string path = template.UrlFor(UrlTemplate.ACCOUNT_SETTINGS_PATH).Build();
+            string payload = JsonConvert.SerializeObject(accountSettings, new JsonSerializerSettings { ContractResolver = new CamelCasePropertyNamesContractResolver (), Formatting = Formatting.Indented ,NullValueHandling = NullValueHandling.Ignore});
+            
+            try
+            {
+                restClient.Patch(path, payload);
+            }
+            catch (OssServerException e)
+            {
+                throw new OssServerException("Could not save Account Settings.", e);
+            }
+            catch (Exception e)
+            {
+                throw new OssException("Could not save Account Settings.", e);
+            }
+        }
+        
+        public void DeleteAccountSettings()
+        {
+            string path = template.UrlFor(UrlTemplate.ACCOUNT_SETTINGS_PATH).Build();
+
+            try
+            {
+                restClient.Delete(path);
+            }
+            catch (OssServerException e)
+            {
+                throw new OssServerException("Could not delete Account Settings.", e);
+            }
+            catch (Exception e)
+            {
+                throw new OssException("Could not delete Account Settings.", e);
+            }
+        }
+        
+        public AccountFeatureSettings GetAccountFeatureSettings()
+        {
+            string path = template.UrlFor(UrlTemplate.ACCOUNT_FEATURE_SETTINGS_PATH).Build();
+            try
+            {
+                string stringResponse = restClient.Get(path);
+                return JsonConvert.DeserializeObject<AccountFeatureSettings> (stringResponse, jsonSettings);
+            }
+            catch (OssServerException e)
+            {
+                throw new OssServerException("Could not get Account Feature Settings.", e);
+            }
+            catch (Exception e)
+            {
+                throw new OssException("Could not get Account Feature Settings.", e);
+            }
+        }
+        
+        public void PatchAccountFeatureSettings(AccountFeatureSettings accountFeatureSettings)
+        {
+            string path = template.UrlFor(UrlTemplate.ACCOUNT_FEATURE_SETTINGS_PATH).Build();
+            string payload = JsonConvert.SerializeObject(accountFeatureSettings, new JsonSerializerSettings { ContractResolver = new CamelCasePropertyNamesContractResolver (), Formatting = Formatting.Indented ,NullValueHandling = NullValueHandling.Ignore});
+            try
+            {
+                restClient.Patch(path, payload);
+            }
+            catch (OssServerException e)
+            {
+                throw new OssServerException("Could not save Account Feature Settings.", e);
+            }
+            catch (Exception e)
+            {
+                throw new OssException("Could not save Account Feature Settings.", e);
+            }
+        }
+        
+        public void DeleteAccountFeatureSettings()
+        {
+            string path = template.UrlFor(UrlTemplate.ACCOUNT_FEATURE_SETTINGS_PATH).Build();
+
+            try
+            {
+                restClient.Delete(path);
+            }
+            catch (OssServerException e)
+            {
+                throw new OssServerException("Could not delete Account Feature Settings.", e);
+            }
+            catch (Exception e)
+            {
+                throw new OssException("Could not delete Account Feature Settings.", e);
+            }
+        }
+        
+        public AccountPackageSettings GetAccountPackageSettings()
+        {
+            string path = template.UrlFor(UrlTemplate.ACCOUNT_PACKAGE_SETTINGS_PATH).Build();
+            try
+            {
+                string stringResponse = restClient.Get(path);
+                return JsonConvert.DeserializeObject<AccountPackageSettings> (stringResponse, jsonSettings);
+            }
+            catch (OssServerException e)
+            {
+                throw new OssServerException("Could not get Account Package Settings.", e);
+            }
+            catch (Exception e)
+            {
+                throw new OssException("Could not get Account Package Settings.", e);
+            }
+        }
+        
+        public void PatchAccountPackageSettings(AccountPackageSettings accountPackageSettings)
+        {
+            string path = template.UrlFor(UrlTemplate.ACCOUNT_PACKAGE_SETTINGS_PATH).Build();
+            string payload = JsonConvert.SerializeObject(accountPackageSettings, new JsonSerializerSettings { ContractResolver = new CamelCasePropertyNamesContractResolver (), Formatting = Formatting.Indented ,NullValueHandling = NullValueHandling.Ignore});
+            try
+            {
+                restClient.Patch(path, payload);
+            }
+            catch (OssServerException e)
+            {
+                throw new OssServerException("Could not save Account Package Settings.", e);
+            }
+            catch (Exception e)
+            {
+                throw new OssException("Could not save Account Package Settings.", e);
+            }
+        }
+        
+        public void DeleteAccountPackageSettings()
+        {
+            string path = template.UrlFor(UrlTemplate.ACCOUNT_PACKAGE_SETTINGS_PATH).Build();
+
+            try
+            {
+                restClient.Delete(path);
+            }
+            catch (OssServerException e)
+            {
+                throw new OssServerException("Could not delete Account Package Settings.", e);
+            }
+            catch (Exception e)
+            {
+                throw new OssException("Could not delete Account Package Settings.", e);
+            }
+        }
+        
     }
 }
