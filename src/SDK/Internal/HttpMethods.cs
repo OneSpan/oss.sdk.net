@@ -11,7 +11,7 @@ namespace OneSpanSign.Sdk.Internal
 	/// </summary>
 	public class HttpMethods
 	{
-        private const string ESL_API_VERSION = "11.45";
+        private const string ESL_API_VERSION = "11.46";
         private const string ESL_API_USER_AGENT = ".Net SDK v" + ESL_API_VERSION;
         private const string ESL_API_VERSION_HEADER = "esl-api-version=" + ESL_API_VERSION;
 
