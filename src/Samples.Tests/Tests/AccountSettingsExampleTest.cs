@@ -11,10 +11,10 @@ namespace SDK.Examples
             AccountSettingsExample example = new AccountSettingsExample();
             example.Run ();
             
-            Assert.IsTrue(example.defaultAccountSettings.AccountFeatureSettings.AllowCheckboxConsentApproval);
-            Assert.IsFalse(example.defaultAccountSettings.AccountFeatureSettings.AllowInPersonForAccountSenders);
-            Assert.IsTrue(example.defaultAccountSettings.AccountFeatureSettings.Attachments);
-            Assert.IsTrue(example.defaultAccountSettings.AccountFeatureSettings.ConditionalFields);
+            Assert.IsNotNull(example.defaultAccountSettings.AccountFeatureSettings.AllowCheckboxConsentApproval);
+            Assert.IsNotNull(example.defaultAccountSettings.AccountFeatureSettings.AllowInPersonForAccountSenders);
+            Assert.IsNotNull(example.defaultAccountSettings.AccountFeatureSettings.Attachments);
+            Assert.IsNotNull(example.defaultAccountSettings.AccountFeatureSettings.ConditionalFields);
 
             Assert.IsFalse(example.patchedAccountSettings.AccountFeatureSettings.AllowCheckboxConsentApproval);
             Assert.IsTrue(example.patchedAccountSettings.AccountFeatureSettings.AllowInPersonForAccountSenders);
@@ -26,10 +26,10 @@ namespace SDK.Examples
             Assert.IsTrue(example.deletedAccountSettings.AccountFeatureSettings.Attachments);
             Assert.IsTrue(example.deletedAccountSettings.AccountFeatureSettings.ConditionalFields);
             
-            Assert.IsFalse(example.defaultAccountSettings.AccountPackageSettings.Ada);
-            Assert.IsFalse(example.defaultAccountSettings.AccountPackageSettings.DeclineButton);
-            Assert.IsFalse(example.defaultAccountSettings.AccountPackageSettings.DefaultTimeBasedExpiry);
-            Assert.IsFalse(example.defaultAccountSettings.AccountPackageSettings.DisableDeclineOther);
+            Assert.IsNotNull(example.defaultAccountSettings.AccountPackageSettings.Ada);
+            Assert.IsNotNull(example.defaultAccountSettings.AccountPackageSettings.DeclineButton);
+            Assert.IsNotNull(example.defaultAccountSettings.AccountPackageSettings.DefaultTimeBasedExpiry);
+            Assert.IsNotNull(example.defaultAccountSettings.AccountPackageSettings.DisableDeclineOther);
 
             Assert.IsTrue(example.patchedAccountSettings.AccountPackageSettings.Ada);
             Assert.IsTrue(example.patchedAccountSettings.AccountPackageSettings.DeclineButton);
@@ -41,10 +41,10 @@ namespace SDK.Examples
             Assert.IsFalse(example.deletedAccountSettings.AccountPackageSettings.DefaultTimeBasedExpiry);
             Assert.IsFalse(example.deletedAccountSettings.AccountPackageSettings.DisableDeclineOther);
             
-            Assert.IsTrue(example.defaultAccountFeatureSettings.AllowCheckboxConsentApproval);
-            Assert.IsFalse(example.defaultAccountFeatureSettings.AllowInPersonForAccountSenders);
-            Assert.IsTrue(example.defaultAccountFeatureSettings.Attachments);
-            Assert.IsTrue(example.defaultAccountFeatureSettings.ConditionalFields);
+            Assert.IsNotNull(example.defaultAccountFeatureSettings.AllowCheckboxConsentApproval);
+            Assert.IsNotNull(example.defaultAccountFeatureSettings.AllowInPersonForAccountSenders);
+            Assert.IsNotNull(example.defaultAccountFeatureSettings.Attachments);
+            Assert.IsNotNull(example.defaultAccountFeatureSettings.ConditionalFields);
 
             Assert.IsFalse(example.patchedAccountFeatureSettings.AllowCheckboxConsentApproval);
             Assert.IsTrue(example.patchedAccountFeatureSettings.AllowInPersonForAccountSenders);
