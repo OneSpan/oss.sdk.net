@@ -31,6 +31,8 @@ namespace OneSpanSign.Sdk
         private Nullable<bool> qnaAuth;
         private Nullable<bool> sendToMobile;
         private Nullable<bool> uploadSignatureImage;
+        
+        private Nullable<bool> overrideRecipientsPreferredLanguage;
 
         public Nullable<bool> AllowCheckboxConsentApproval
         {
@@ -341,6 +343,18 @@ namespace OneSpanSign.Sdk
             set
             {
                 uploadSignatureImage = value;
+            }
+        }
+        
+        public Nullable<bool> OverrideRecipientsPreferredLanguage
+        {
+            get
+            {
+                return overrideRecipientsPreferredLanguage;
+            }
+            set
+            {
+                overrideRecipientsPreferredLanguage = value;
             }
         }
 

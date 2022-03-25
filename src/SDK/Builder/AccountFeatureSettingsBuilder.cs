@@ -30,278 +30,345 @@ namespace OneSpanSign.Sdk
         private Nullable<bool> qnaAuth;
         private Nullable<bool> sendToMobile;
         private Nullable<bool> uploadSignatureImage;
-        
+        private Nullable<bool> overrideRecipientsPreferredLanguage;
+
         private AccountFeatureSettingsBuilder()
         {
         }
 
-        public static AccountFeatureSettingsBuilder NewAccountFeatureSettings() {
+        public static AccountFeatureSettingsBuilder NewAccountFeatureSettings()
+        {
             return new AccountFeatureSettingsBuilder();
         }
 
-        
-        public AccountFeatureSettingsBuilder WithAllowCheckboxConsentApproval() {
+
+        public AccountFeatureSettingsBuilder WithAllowCheckboxConsentApproval()
+        {
             this.allowCheckboxConsentApproval = true;
             return this;
         }
 
-        public AccountFeatureSettingsBuilder WithoutAllowCheckboxConsentApproval() {
+        public AccountFeatureSettingsBuilder WithoutAllowCheckboxConsentApproval()
+        {
             this.allowCheckboxConsentApproval = false;
             return this;
         }
-        
-        public AccountFeatureSettingsBuilder WithAllowInPersonForAccountSenders() {
+
+        public AccountFeatureSettingsBuilder WithAllowInPersonForAccountSenders()
+        {
             this.allowInPersonForAccountSenders = true;
             return this;
         }
 
-        public AccountFeatureSettingsBuilder WithoutAllowInPersonForAccountSenders() {
+        public AccountFeatureSettingsBuilder WithoutAllowInPersonForAccountSenders()
+        {
             this.allowInPersonForAccountSenders = false;
             return this;
         }
-        
-        public AccountFeatureSettingsBuilder WithAttachments() {
+
+        public AccountFeatureSettingsBuilder WithAttachments()
+        {
             this.attachments = true;
             return this;
         }
 
-        public AccountFeatureSettingsBuilder WithoutAttachments() {
+        public AccountFeatureSettingsBuilder WithoutAttachments()
+        {
             this.attachments = false;
             return this;
         }
-        
-        public AccountFeatureSettingsBuilder WithConditionalFields() {
+
+        public AccountFeatureSettingsBuilder WithConditionalFields()
+        {
             this.conditionalFields = true;
             return this;
         }
 
-        public AccountFeatureSettingsBuilder WithoutConditionalFields() {
+        public AccountFeatureSettingsBuilder WithoutConditionalFields()
+        {
             this.conditionalFields = false;
             return this;
         }
-        
-        public AccountFeatureSettingsBuilder WithCustomFields() {
+
+        public AccountFeatureSettingsBuilder WithCustomFields()
+        {
             this.customFields = true;
             return this;
         }
 
-        public AccountFeatureSettingsBuilder WithoutCustomFields() {
+        public AccountFeatureSettingsBuilder WithoutCustomFields()
+        {
             this.customFields = false;
             return this;
         }
 
-        public AccountFeatureSettingsBuilder WithDelegation() {
+        public AccountFeatureSettingsBuilder WithDelegation()
+        {
             this.delegation = true;
             return this;
         }
 
-        public AccountFeatureSettingsBuilder WithoutDelegation() {
+        public AccountFeatureSettingsBuilder WithoutDelegation()
+        {
             this.delegation = false;
             return this;
         }
-        
-        public AccountFeatureSettingsBuilder WithDeliverDocumentsByEmail() {
+
+        public AccountFeatureSettingsBuilder WithDeliverDocumentsByEmail()
+        {
             this.deliverDocumentsByEmail = true;
             return this;
         }
 
-        public AccountFeatureSettingsBuilder WithoutDeliverDocumentsByEmail() {
+        public AccountFeatureSettingsBuilder WithoutDeliverDocumentsByEmail()
+        {
             this.deliverDocumentsByEmail = false;
             return this;
         }
-        
-        public AccountFeatureSettingsBuilder WithDisableFooter() {
+
+        public AccountFeatureSettingsBuilder WithDisableFooter()
+        {
             this.disableFooter = true;
             return this;
         }
 
-        public AccountFeatureSettingsBuilder WithoutDisableFooter() {
+        public AccountFeatureSettingsBuilder WithoutDisableFooter()
+        {
             this.disableFooter = false;
             return this;
         }
 
-        public AccountFeatureSettingsBuilder WithDisableInPersonActivationEmail() {
+        public AccountFeatureSettingsBuilder WithDisableInPersonActivationEmail()
+        {
             this.disableInPersonActivationEmail = true;
             return this;
         }
 
-        public AccountFeatureSettingsBuilder WithoutDisableInPersonActivationEmail() {
+        public AccountFeatureSettingsBuilder WithoutDisableInPersonActivationEmail()
+        {
             this.disableInPersonActivationEmail = false;
             return this;
         }
-        
-        public AccountFeatureSettingsBuilder WithDocumentVisibility() {
+
+        public AccountFeatureSettingsBuilder WithDocumentVisibility()
+        {
             this.documentVisibility = true;
             return this;
         }
 
-        public AccountFeatureSettingsBuilder WithoutDocumentVisibility() {
+        public AccountFeatureSettingsBuilder WithoutDocumentVisibility()
+        {
             this.documentVisibility = false;
             return this;
         }
 
-        public AccountFeatureSettingsBuilder WithEmailDocumentsAndEvidenceSummary() {
+        public AccountFeatureSettingsBuilder WithEmailDocumentsAndEvidenceSummary()
+        {
             this.emailDocumentsAndEvidenceSummary = true;
             return this;
         }
 
-        public AccountFeatureSettingsBuilder WithoutEmailDocumentsAndEvidenceSummary() {
+        public AccountFeatureSettingsBuilder WithoutEmailDocumentsAndEvidenceSummary()
+        {
             this.emailDocumentsAndEvidenceSummary = false;
             return this;
         }
 
-        public AccountFeatureSettingsBuilder WithEnforceAuth() {
+        public AccountFeatureSettingsBuilder WithEnforceAuth()
+        {
             this.enforceAuth = true;
             return this;
         }
 
-        public AccountFeatureSettingsBuilder WithoutEnforceAuth() {
+        public AccountFeatureSettingsBuilder WithoutEnforceAuth()
+        {
             this.enforceAuth = false;
             return this;
         }
 
-        public AccountFeatureSettingsBuilder WithEvidenceSummary() {
+        public AccountFeatureSettingsBuilder WithEvidenceSummary()
+        {
             this.evidenceSummary = true;
             return this;
         }
 
-        public AccountFeatureSettingsBuilder WithoutEvidenceSummary() {
+        public AccountFeatureSettingsBuilder WithoutEvidenceSummary()
+        {
             this.evidenceSummary = false;
             return this;
         }
 
-        public AccountFeatureSettingsBuilder WithFlattenSignerDocuments() {
+        public AccountFeatureSettingsBuilder WithFlattenSignerDocuments()
+        {
             this.flattenSignerDocuments = true;
             return this;
         }
 
-        public AccountFeatureSettingsBuilder WithoutFlattenSignerDocuments() {
+        public AccountFeatureSettingsBuilder WithoutFlattenSignerDocuments()
+        {
             this.flattenSignerDocuments = false;
             return this;
         }
 
-        public AccountFeatureSettingsBuilder WithForceLogin() {
+        public AccountFeatureSettingsBuilder WithForceLogin()
+        {
             this.forceLogin = true;
             return this;
         }
 
-        public AccountFeatureSettingsBuilder WithoutForceLogin() {
+        public AccountFeatureSettingsBuilder WithoutForceLogin()
+        {
             this.forceLogin = false;
             return this;
         }
 
-        public AccountFeatureSettingsBuilder WithForceTransactionOwnerLogin() {
+        public AccountFeatureSettingsBuilder WithForceTransactionOwnerLogin()
+        {
             this.forceTransactionOwnerLogin = true;
             return this;
         }
 
-        public AccountFeatureSettingsBuilder WithoutForceTransactionOwnerLogin() {
+        public AccountFeatureSettingsBuilder WithoutForceTransactionOwnerLogin()
+        {
             this.forceTransactionOwnerLogin = false;
             return this;
         }
 
-        public AccountFeatureSettingsBuilder WithGroups() {
+        public AccountFeatureSettingsBuilder WithGroups()
+        {
             this.groups = true;
             return this;
         }
 
-        public AccountFeatureSettingsBuilder WithoutGroups() {
+        public AccountFeatureSettingsBuilder WithoutGroups()
+        {
             this.groups = false;
             return this;
         }
 
-        public AccountFeatureSettingsBuilder WithInAppReports() {
+        public AccountFeatureSettingsBuilder WithInAppReports()
+        {
             this.inAppReports = true;
             return this;
         }
 
-        public AccountFeatureSettingsBuilder WithoutInAppReports() {
+        public AccountFeatureSettingsBuilder WithoutInAppReports()
+        {
             this.inAppReports = false;
             return this;
         }
 
-        public AccountFeatureSettingsBuilder WithMaskResponse() {
+        public AccountFeatureSettingsBuilder WithMaskResponse()
+        {
             this.maskResponse = true;
             return this;
         }
 
-        public AccountFeatureSettingsBuilder WithoutMaskResponse() {
+        public AccountFeatureSettingsBuilder WithoutMaskResponse()
+        {
             this.maskResponse = false;
             return this;
         }
 
-        public AccountFeatureSettingsBuilder WithMobileCapture() {
+        public AccountFeatureSettingsBuilder WithMobileCapture()
+        {
             this.mobileCapture = true;
             return this;
         }
 
-        public AccountFeatureSettingsBuilder WithoutMobileCapture() {
+        public AccountFeatureSettingsBuilder WithoutMobileCapture()
+        {
             this.mobileCapture = false;
             return this;
         }
 
-        public AccountFeatureSettingsBuilder WithOptionalSignature() {
+        public AccountFeatureSettingsBuilder WithOptionalSignature()
+        {
             this.optionalSignature = true;
             return this;
         }
 
-        public AccountFeatureSettingsBuilder WithoutOptionalSignature() {
+        public AccountFeatureSettingsBuilder WithoutOptionalSignature()
+        {
             this.optionalSignature = false;
             return this;
         }
 
-        public AccountFeatureSettingsBuilder WithPasswordManagement() {
+        public AccountFeatureSettingsBuilder WithPasswordManagement()
+        {
             this.passwordManagement = true;
             return this;
         }
 
-        public AccountFeatureSettingsBuilder WithoutPasswordManagement() {
+        public AccountFeatureSettingsBuilder WithoutPasswordManagement()
+        {
             this.passwordManagement = false;
             return this;
         }
 
-        public AccountFeatureSettingsBuilder WithPreventConsentRemoval() {
+        public AccountFeatureSettingsBuilder WithPreventConsentRemoval()
+        {
             this.preventConsentRemoval = true;
             return this;
         }
 
-        public AccountFeatureSettingsBuilder WithoutPreventConsentRemoval() {
+        public AccountFeatureSettingsBuilder WithoutPreventConsentRemoval()
+        {
             this.preventConsentRemoval = false;
             return this;
         }
 
-        public AccountFeatureSettingsBuilder WithQnaAuth() {
+        public AccountFeatureSettingsBuilder WithQnaAuth()
+        {
             this.qnaAuth = true;
             return this;
         }
 
-        public AccountFeatureSettingsBuilder WithoutQnaAuth() {
+        public AccountFeatureSettingsBuilder WithoutQnaAuth()
+        {
             this.qnaAuth = false;
             return this;
         }
 
-        public AccountFeatureSettingsBuilder WithSendToMobile() {
+        public AccountFeatureSettingsBuilder WithSendToMobile()
+        {
             this.sendToMobile = true;
             return this;
         }
 
-        public AccountFeatureSettingsBuilder WithoutSendToMobile() {
+        public AccountFeatureSettingsBuilder WithoutSendToMobile()
+        {
             this.sendToMobile = false;
             return this;
         }
 
-        public AccountFeatureSettingsBuilder WithUploadSignatureImage() {
+        public AccountFeatureSettingsBuilder WithUploadSignatureImage()
+        {
             this.uploadSignatureImage = true;
             return this;
         }
 
-        public AccountFeatureSettingsBuilder WithoutUploadSignatureImage() {
+        public AccountFeatureSettingsBuilder WithoutUploadSignatureImage()
+        {
             this.uploadSignatureImage = false;
             return this;
         }
 
+        public AccountFeatureSettingsBuilder WithOverrideRecipientsPreferredLanguage()
+        {
+            this.overrideRecipientsPreferredLanguage = true;
+            return this;
+        }
 
-        public AccountFeatureSettings Build() {
+        public AccountFeatureSettingsBuilder WithoutOverrideRecipientsPreferredLanguage()
+        {
+            this.overrideRecipientsPreferredLanguage = false;
+            return this;
+        }
+
+
+        public AccountFeatureSettings Build()
+        {
             AccountFeatureSettings result = new AccountFeatureSettings();
             result.AllowCheckboxConsentApproval = allowCheckboxConsentApproval;
             result.AllowInPersonForAccountSenders = allowInPersonForAccountSenders;
@@ -329,7 +396,8 @@ namespace OneSpanSign.Sdk
             result.QnaAuth = qnaAuth;
             result.SendToMobile = sendToMobile;
             result.UploadSignatureImage = uploadSignatureImage;
-                
+            result.OverrideRecipientsPreferredLanguage = overrideRecipientsPreferredLanguage;
+
             return result;
         }
     }

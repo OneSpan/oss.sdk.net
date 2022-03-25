@@ -24,6 +24,7 @@ namespace SDK.Examples
                     .WithAllowInPersonForAccountSenders()
                     .WithoutAttachments()
                     .WithoutConditionalFields()
+                    .WithOverrideRecipientsPreferredLanguage()
                     .Build())
                 .WithAccountPackageSettings(AccountPackageSettingsBuilder.NewAccountPackageSettings()
                     .WithAda()

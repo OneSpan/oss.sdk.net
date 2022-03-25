@@ -1,93 +1,89 @@
 namespace OneSpanSign.Sdk
 {
-	internal class AccountFeatureSettingsConverter
+	internal class AccountPackageSettingsConverter
     {
-		private OneSpanSign.Sdk.AccountFeatureSettings sdkAccountFeatureSettings;
-		private OneSpanSign.API.AccountFeatureSettings apiAccountFeatureSettings;
+		private OneSpanSign.Sdk.AccountPackageSettings sdkAccountPackageSettings;
+		private OneSpanSign.API.AccountPackageSettings apiAccountPackageSettings;
 
-		public AccountFeatureSettingsConverter(OneSpanSign.API.AccountFeatureSettings apiAccountFeatureSettings)
+		public AccountPackageSettingsConverter(OneSpanSign.API.AccountPackageSettings apiAccountPackageSettings)
         {
-			this.apiAccountFeatureSettings = apiAccountFeatureSettings;
+			this.apiAccountPackageSettings = apiAccountPackageSettings;
         }
 
-		public AccountFeatureSettingsConverter(OneSpanSign.Sdk.AccountFeatureSettings sdkAccountFeatureSettings)
+		public AccountPackageSettingsConverter(OneSpanSign.Sdk.AccountPackageSettings sdkAccountPackageSettings)
 		{
-			this.sdkAccountFeatureSettings = sdkAccountFeatureSettings;
+			this.sdkAccountPackageSettings = sdkAccountPackageSettings;
 		}
 
-		public OneSpanSign.API.AccountFeatureSettings ToAPIAccountFeatureSettings()
+		public OneSpanSign.API.AccountPackageSettings ToAPIAccountPackageSettings()
 		{
-			if (sdkAccountFeatureSettings == null)
+			if (sdkAccountPackageSettings == null)
 			{
-				return apiAccountFeatureSettings;
+				return apiAccountPackageSettings;
 			}
 
-			OneSpanSign.API.AccountFeatureSettings result = new OneSpanSign.API.AccountFeatureSettings();
+			OneSpanSign.API.AccountPackageSettings result = new OneSpanSign.API.AccountPackageSettings();
 
-			result.AllowCheckboxConsentApproval = sdkAccountFeatureSettings.AllowCheckboxConsentApproval;
-			result.AllowInPersonForAccountSenders = sdkAccountFeatureSettings.AllowInPersonForAccountSenders;
-			result.Attachments = sdkAccountFeatureSettings.Attachments;
-			result.ConditionalFields = sdkAccountFeatureSettings.ConditionalFields;
-			result.CustomFields = sdkAccountFeatureSettings.CustomFields;
-			result.Delegation = sdkAccountFeatureSettings.Delegation;
-			result.DeliverDocumentsByEmail = sdkAccountFeatureSettings.DeliverDocumentsByEmail;
-			result.DisableFooter = sdkAccountFeatureSettings.DisableFooter;
-			result.DisableInPersonActivationEmail = sdkAccountFeatureSettings.DisableInPersonActivationEmail;
-			result.DocumentVisibility = sdkAccountFeatureSettings.DocumentVisibility;
-			result.EmailDocumentsAndEvidenceSummary = sdkAccountFeatureSettings.EmailDocumentsAndEvidenceSummary;
-			result.EnforceAuth = sdkAccountFeatureSettings.EnforceAuth;
-			result.EvidenceSummary = sdkAccountFeatureSettings.EvidenceSummary;
-			result.FlattenSignerDocuments = sdkAccountFeatureSettings.FlattenSignerDocuments;
-			result.ForceLogin = sdkAccountFeatureSettings.ForceLogin;
-			result.ForceTransactionOwnerLogin = sdkAccountFeatureSettings.ForceTransactionOwnerLogin;
-			result.Groups = sdkAccountFeatureSettings.Groups;
-			result.InAppReports = sdkAccountFeatureSettings.InAppReports;
-			result.MaskResponse = sdkAccountFeatureSettings.MaskResponse;
-			result.MobileCapture = sdkAccountFeatureSettings.MobileCapture;
-			result.OptionalSignature = sdkAccountFeatureSettings.OptionalSignature;
-			result.PasswordManagement = sdkAccountFeatureSettings.PasswordManagement;
-			result.PreventConsentRemoval = sdkAccountFeatureSettings.PreventConsentRemoval;
-			result.QnaAuth = sdkAccountFeatureSettings.QnaAuth;
-			result.SendToMobile = sdkAccountFeatureSettings.SendToMobile;
-			result.UploadSignatureImage = sdkAccountFeatureSettings.UploadSignatureImage;
+			result.Ada = sdkAccountPackageSettings.Ada;
+			result.DeclineButton = sdkAccountPackageSettings.DeclineButton;
+			result.DefaultTimeBasedExpiry = sdkAccountPackageSettings.DefaultTimeBasedExpiry;
+			result.DisableDeclineOther = sdkAccountPackageSettings.DisableDeclineOther;
+			result.DisableDownloadForUncompletedPackage = sdkAccountPackageSettings.DisableDownloadForUncompletedPackage;
+			result.DisableFirstInPersonAffidavit = sdkAccountPackageSettings.DisableFirstInPersonAffidavit;
+			result.DisableInPersonAffidavit = sdkAccountPackageSettings.DisableInPersonAffidavit;
+			result.DisableSecondInPersonAffidavit = sdkAccountPackageSettings.DisableSecondInPersonAffidavit;
+			result.EnforceCaptureSignature = sdkAccountPackageSettings.EnforceCaptureSignature;
+			result.ExtractAcroFields = sdkAccountPackageSettings.ExtractAcroFields;
+			result.ExtractTextTags = sdkAccountPackageSettings.ExtractTextTags;
+			result.GlobalActionsDownload = sdkAccountPackageSettings.GlobalActionsDownload;
+			result.GlobalActionsHideEvidenceSummary = sdkAccountPackageSettings.GlobalActionsHideEvidenceSummary;
+			result.GlobalActionsSaveAsLayout = sdkAccountPackageSettings.GlobalActionsSaveAsLayout;
+			result.HideCaptureText = sdkAccountPackageSettings.HideCaptureText;
+			result.HideLanguageDropdown = sdkAccountPackageSettings.HideLanguageDropdown;
+			result.HidePackageOwnerInPerson = sdkAccountPackageSettings.HidePackageOwnerInPerson;
+			result.HideWatermark = sdkAccountPackageSettings.HideWatermark;
+			result.InPerson = sdkAccountPackageSettings.InPerson;
+			result.LeftMenuExpand = sdkAccountPackageSettings.LeftMenuExpand;
+			result.OptionalNavigation = sdkAccountPackageSettings.OptionalNavigation;
+			result.ShowNseHelp = sdkAccountPackageSettings.ShowNseHelp;
+			result.ShowNseLogoInIframe = sdkAccountPackageSettings.ShowNseLogoInIframe;
+			result.ShowNseOverview = sdkAccountPackageSettings.ShowNseOverview;
 			
             return result;
 		}
 
-		public OneSpanSign.Sdk.AccountFeatureSettings ToSDKAccountFeatureSettings()
+		public OneSpanSign.Sdk.AccountPackageSettings ToSDKAccountPackageSettings()
 		{
-			if (apiAccountFeatureSettings == null)
+			if (apiAccountPackageSettings == null)
 			{
-				return sdkAccountFeatureSettings;
+				return sdkAccountPackageSettings;
 			}
 
-			OneSpanSign.Sdk.AccountFeatureSettings result = new OneSpanSign.Sdk.AccountFeatureSettings();
-			result.AllowCheckboxConsentApproval = apiAccountFeatureSettings.AllowCheckboxConsentApproval;
-			result.AllowInPersonForAccountSenders = apiAccountFeatureSettings.AllowInPersonForAccountSenders;
-			result.Attachments = apiAccountFeatureSettings.Attachments;
-			result.ConditionalFields = apiAccountFeatureSettings.ConditionalFields;
-			result.CustomFields = apiAccountFeatureSettings.CustomFields;
-			result.Delegation = apiAccountFeatureSettings.Delegation;
-			result.DeliverDocumentsByEmail = apiAccountFeatureSettings.DeliverDocumentsByEmail;
-			result.DisableFooter = apiAccountFeatureSettings.DisableFooter;
-			result.DisableInPersonActivationEmail = apiAccountFeatureSettings.DisableInPersonActivationEmail;
-			result.DocumentVisibility = apiAccountFeatureSettings.DocumentVisibility;
-			result.EmailDocumentsAndEvidenceSummary = apiAccountFeatureSettings.EmailDocumentsAndEvidenceSummary;
-			result.EnforceAuth = apiAccountFeatureSettings.EnforceAuth;
-			result.EvidenceSummary = apiAccountFeatureSettings.EvidenceSummary;
-			result.FlattenSignerDocuments = apiAccountFeatureSettings.FlattenSignerDocuments;
-			result.ForceLogin = apiAccountFeatureSettings.ForceLogin;
-			result.ForceTransactionOwnerLogin = apiAccountFeatureSettings.ForceTransactionOwnerLogin;
-			result.Groups = apiAccountFeatureSettings.Groups;
-			result.InAppReports = apiAccountFeatureSettings.InAppReports;
-			result.MaskResponse = apiAccountFeatureSettings.MaskResponse;
-			result.MobileCapture = apiAccountFeatureSettings.MobileCapture;
-			result.OptionalSignature = apiAccountFeatureSettings.OptionalSignature;
-			result.PasswordManagement = apiAccountFeatureSettings.PasswordManagement;
-			result.PreventConsentRemoval = apiAccountFeatureSettings.PreventConsentRemoval;
-			result.QnaAuth = apiAccountFeatureSettings.QnaAuth;
-			result.SendToMobile = apiAccountFeatureSettings.SendToMobile;
-			result.UploadSignatureImage = apiAccountFeatureSettings.UploadSignatureImage;
+			OneSpanSign.Sdk.AccountPackageSettings result = new OneSpanSign.Sdk.AccountPackageSettings();
+			result.Ada = apiAccountPackageSettings.Ada;
+			result.DeclineButton = apiAccountPackageSettings.DeclineButton;
+			result.DefaultTimeBasedExpiry = apiAccountPackageSettings.DefaultTimeBasedExpiry;
+			result.DisableDeclineOther = apiAccountPackageSettings.DisableDeclineOther;
+			result.DisableDownloadForUncompletedPackage = apiAccountPackageSettings.DisableDownloadForUncompletedPackage;
+			result.DisableFirstInPersonAffidavit = apiAccountPackageSettings.DisableFirstInPersonAffidavit;
+			result.DisableInPersonAffidavit = apiAccountPackageSettings.DisableInPersonAffidavit;
+			result.DisableSecondInPersonAffidavit = apiAccountPackageSettings.DisableSecondInPersonAffidavit;
+			result.EnforceCaptureSignature = apiAccountPackageSettings.EnforceCaptureSignature;
+			result.ExtractAcroFields = apiAccountPackageSettings.ExtractAcroFields;
+			result.ExtractTextTags = apiAccountPackageSettings.ExtractTextTags;
+			result.GlobalActionsDownload = apiAccountPackageSettings.GlobalActionsDownload;
+			result.GlobalActionsHideEvidenceSummary = apiAccountPackageSettings.GlobalActionsHideEvidenceSummary;
+			result.GlobalActionsSaveAsLayout = apiAccountPackageSettings.GlobalActionsSaveAsLayout;
+			result.HideCaptureText = apiAccountPackageSettings.HideCaptureText;
+			result.HideLanguageDropdown = apiAccountPackageSettings.HideLanguageDropdown;
+			result.HidePackageOwnerInPerson = apiAccountPackageSettings.HidePackageOwnerInPerson;
+			result.HideWatermark = apiAccountPackageSettings.HideWatermark;
+			result.InPerson = apiAccountPackageSettings.InPerson;
+			result.LeftMenuExpand = apiAccountPackageSettings.LeftMenuExpand;
+			result.OptionalNavigation = apiAccountPackageSettings.OptionalNavigation;
+			result.ShowNseHelp = apiAccountPackageSettings.ShowNseHelp;
+			result.ShowNseLogoInIframe = apiAccountPackageSettings.ShowNseLogoInIframe;
+			result.ShowNseOverview = apiAccountPackageSettings.ShowNseOverview;
 
 			return result;
 		}

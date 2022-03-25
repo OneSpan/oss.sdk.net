@@ -20,6 +20,7 @@ namespace SDK.Examples
             Assert.IsTrue(example.patchedAccountSettings.AccountFeatureSettings.AllowInPersonForAccountSenders);
             Assert.IsFalse(example.patchedAccountSettings.AccountFeatureSettings.Attachments);
             Assert.IsFalse(example.patchedAccountSettings.AccountFeatureSettings.ConditionalFields);
+            Assert.IsTrue(example.patchedAccountSettings.AccountFeatureSettings.OverrideRecipientsPreferredLanguage);
             
             Assert.IsNotNull(example.defaultAccountSettings.AccountPackageSettings.Ada);
             Assert.IsNotNull(example.defaultAccountSettings.AccountPackageSettings.DeclineButton);
@@ -30,6 +31,7 @@ namespace SDK.Examples
             Assert.IsTrue(example.patchedAccountSettings.AccountPackageSettings.DeclineButton);
             Assert.IsTrue(example.patchedAccountSettings.AccountPackageSettings.DefaultTimeBasedExpiry);
             Assert.IsTrue(example.patchedAccountSettings.AccountPackageSettings.DisableDeclineOther);
+
             
             Assert.IsNotNull(example.defaultAccountFeatureSettings.AllowCheckboxConsentApproval);
             Assert.IsNotNull(example.defaultAccountFeatureSettings.AllowInPersonForAccountSenders);
