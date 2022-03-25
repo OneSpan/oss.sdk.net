@@ -26,3 +26,4 @@ artifacts/
 
 #Mac
 .DS_Store
+.vscode/launch.json

@@ -161,6 +161,12 @@ namespace OneSpanSign.API
 	    {
 		    get; set;
 	    }
+	    
+	    [JsonProperty("overrideRecipientsPreferredLanguage")]
+	    public Nullable<Boolean> OverrideRecipientsPreferredLanguage
+	    {
+		    get; set;
+	    }
 	
 	}
 }
