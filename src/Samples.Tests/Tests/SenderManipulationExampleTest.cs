@@ -34,6 +34,8 @@ namespace SDK.Examples
             Assert.AreEqual(updatedInfo.Company, sender.Company);
             Assert.AreEqual(updatedInfo.Title, sender.Title);
             Assert.AreEqual(updatedInfo.TimezoneId, "Canada/Mountain");
+            Assert.AreEqual(example.retrievedSender3.Status, example.retrievedUpdatedSender3.Status);
+            Assert.AreEqual(example.retrievedSender3.Type, example.retrievedUpdatedSender3.Type);
         }
 
         private bool AssertSenderWasDeleted(string senderEmail)
