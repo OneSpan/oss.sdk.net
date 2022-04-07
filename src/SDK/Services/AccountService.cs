@@ -59,6 +59,8 @@ namespace OneSpanSign.Sdk.Services
         {
             OneSpanSign.API.Sender apiSender = new SenderConverter(senderInfo).ToAPISender();
             apiSender.Id = senderId;
+            apiSender.Status = null;
+            apiSender.Type = null;
             apiClient.UpdateSender(apiSender, senderId);
         }
 
