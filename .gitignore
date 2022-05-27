@@ -16,6 +16,7 @@ artifacts/
 *.suo
 */*/signers.properties
 */*/*/signers.properties
+signers.properties.*
 */*/packages.config
 */*/*/packages.config
 .vs/
