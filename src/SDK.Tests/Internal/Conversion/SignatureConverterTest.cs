@@ -133,6 +133,7 @@ namespace SDK.Tests
 
             apiApproval.AddField(apiSignature);
             apiApproval.EnforceCaptureSignature = true;
+            apiApproval.Name = "apiSignature";
             apiApproval.Role = apiRoleId;
 
             return apiApproval;
