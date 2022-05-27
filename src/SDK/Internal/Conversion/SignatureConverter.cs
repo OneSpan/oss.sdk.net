@@ -64,7 +64,7 @@ namespace OneSpanSign.Sdk
                 signatureBuilder.WithId(new SignatureId(apiApproval.Id));
             }
 
-            signatureBuilder.WithName(apiApproval.Fields[0].Name);
+            signatureBuilder.WithName(apiApproval.Name);
 
             OneSpanSign.API.Field apiSignatureField = null;
             foreach (OneSpanSign.API.Field apiField in apiApproval.Fields)
