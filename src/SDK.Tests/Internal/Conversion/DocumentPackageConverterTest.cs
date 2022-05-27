@@ -100,37 +100,49 @@ namespace SDK.Tests
 
 		private OneSpanSign.API.Package CreateTypicalAPIPackage()
 		{
-			OneSpanSign.API.Package apiPackage = new OneSpanSign.API.Package();
-			apiPackage.Id = "1";
-			apiPackage.Language = "zh-CN";
-			apiPackage.Autocomplete = true;
-			apiPackage.Consent = "Consent";
-			apiPackage.Completed = new DateTime?();
-			apiPackage.Description = "API document package description";
-			apiPackage.Due = new DateTime?();
-			apiPackage.Name = "API package name";
-            apiPackage.Status = DocumentPackageStatus.DRAFT.getApiValue();
-            apiPackage.Created = DateTime.Now;
+            User fromUser = new User
+            {
+                FirstName = "John",
+                LastName = "Smith",
+                Email = "email@email.com"
+            };
 
-            OneSpanSign.API.Message apiMessage = new OneSpanSign.API.Message();
-            apiMessage.Content = "opt-out reason";
-            apiMessage.Status = OneSpanSign.Sdk.MessageStatus.NEW.getApiValue();
-            apiMessage.Created = DateTime.Now;
-            User fromUser = new User();
-            fromUser.FirstName = "John";
-            fromUser.LastName = "Smith";
-            fromUser.Email = "email@email.com";
-            apiMessage.From = fromUser;
-            apiPackage.AddMessage(apiMessage);
-            User toUser = new User();
-            toUser.FirstName = "Patty";
-            toUser.LastName = "Galant";
-            toUser.Email = "email2@email.com";
+            User toUser = new User
+            {
+                FirstName = "Patty",
+                LastName = "Galant",
+                Email = "email2@email.com"
+            };
+
+            OneSpanSign.API.Sender sender = new OneSpanSign.API.Sender
+            {
+                Email = "sender@email.com"
+            };
+
+            OneSpanSign.API.Message apiMessage = new OneSpanSign.API.Message
+            {
+                Content = "opt-out reason",
+                Status = OneSpanSign.Sdk.MessageStatus.NEW.getApiValue(),
+                Created = DateTime.Now,
+                From = fromUser
+            };
             apiMessage.AddTo(toUser);
 
-            OneSpanSign.API.Sender sender = new OneSpanSign.API.Sender();
-            sender.Email = "sender@email.com";
-            apiPackage.Sender = sender;
+            OneSpanSign.API.Package apiPackage = new OneSpanSign.API.Package
+            {
+                Id = "1",
+                Language = "zh-CN",
+                Autocomplete = true,
+                Consent = "Consent",
+                Completed = new DateTime?(),
+                Description = "API document package description",
+                Due = new DateTime?(),
+                Name = "API package name",
+                Status = DocumentPackageStatus.DRAFT.getApiValue(),
+                Created = DateTime.Now,
+                Sender = sender
+            };
+            apiPackage.AddMessage(apiMessage);
 
 			return apiPackage;
 		}

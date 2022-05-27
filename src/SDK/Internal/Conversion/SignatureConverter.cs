@@ -34,6 +34,11 @@ namespace OneSpanSign.Sdk
         public Signature ToSDKSignature()
         {
 
+            if(package == null || apiApproval == null)
+            {
+                return sdkSignature;
+            }
+
             SignatureBuilder signatureBuilder = null;
             foreach (OneSpanSign.API.Role role in package.Roles)
             {
@@ -58,6 +63,8 @@ namespace OneSpanSign.Sdk
             {
                 signatureBuilder.WithId(new SignatureId(apiApproval.Id));
             }
+
+            signatureBuilder.WithName(apiApproval.Fields[0].Name);
 
             OneSpanSign.API.Field apiSignatureField = null;
             foreach (OneSpanSign.API.Field apiField in apiApproval.Fields)
@@ -86,9 +93,10 @@ namespace OneSpanSign.Sdk
                         .AtPosition(apiSignatureField.Left.Value, apiSignatureField.Top.Value)
                         .WithSize(apiSignatureField.Width.Value, apiSignatureField.Height.Value);
 
-                if (apiSignatureField.Extract.Value)
+                if (apiSignatureField.Extract.HasValue)
                 {
-                    signatureBuilder.WithPositionExtracted();
+                    if (apiSignatureField.Extract.Value)
+                        signatureBuilder.WithPositionExtracted(); 
                 }
                 if (apiSignatureField.FontSize != null)
                 {
@@ -124,6 +132,11 @@ namespace OneSpanSign.Sdk
 
         public OneSpanSign.API.Approval ToAPIApproval()
         {
+            if (sdkSignature == null)
+            {
+                return apiApproval;
+            }
+
             OneSpanSign.API.Approval result = new OneSpanSign.API.Approval();
 
             result.AddField(ToField(sdkSignature));
