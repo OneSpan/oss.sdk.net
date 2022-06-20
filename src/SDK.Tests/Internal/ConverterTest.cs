@@ -7,7 +7,7 @@ namespace SDK.Tests
     [TestFixture()]
     public class ConverterTest
     {
-		public static readonly string jenkinsApiKey = "amVua2luc1VzZXJJZDpCc2JwMnlzSUFEZ0g=";
+		public static readonly string jenkinsApiKey = "amVua2luc1VzZXJJZDpCc2JwMnlzSUFEZ0g=";   //A fake Apikey only for test purpose
 		public static readonly string expectedJenkinsUID = "jenkinsUserId";
 
 		[Test()]
