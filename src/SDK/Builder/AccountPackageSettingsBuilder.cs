@@ -17,7 +17,6 @@ namespace OneSpanSign.Sdk
         private Nullable<bool> extractTextTags;
         private Nullable<bool> globalActionsDownload;
         private Nullable<bool> globalActionsHideEvidenceSummary;
-        private Nullable<bool> globalActionsSaveAsLayout;
         private Nullable<bool> hideCaptureText;
         private Nullable<bool> hideLanguageDropdown;
         private Nullable<bool> hidePackageOwnerInPerson;
@@ -167,16 +166,6 @@ namespace OneSpanSign.Sdk
             return this;
         }
 
-        public AccountPackageSettingsBuilder WithGlobalActionsSaveAsLayout() {
-            this.globalActionsSaveAsLayout = true;
-            return this;
-        }
-
-        public AccountPackageSettingsBuilder WithoutGlobalActionsSaveAsLayout() {
-            this.globalActionsSaveAsLayout = false;
-            return this;
-        }
-
         public AccountPackageSettingsBuilder WithHideCaptureText() {
             this.hideCaptureText = true;
             return this;
@@ -293,7 +282,6 @@ namespace OneSpanSign.Sdk
             result.ExtractTextTags = extractTextTags;
             result.GlobalActionsDownload = globalActionsDownload;
             result.GlobalActionsHideEvidenceSummary = globalActionsHideEvidenceSummary;
-            result.GlobalActionsSaveAsLayout = globalActionsSaveAsLayout;
             result.HideCaptureText = hideCaptureText;
             result.HideLanguageDropdown = hideLanguageDropdown;
             result.HidePackageOwnerInPerson = hidePackageOwnerInPerson;
