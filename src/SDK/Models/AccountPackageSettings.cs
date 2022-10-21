@@ -84,12 +84,6 @@ namespace OneSpanSign.API
 		    get; set;
 	    }
 	    
-	    [JsonProperty("globalActionsSaveAsLayout")]
-	    public Nullable<Boolean> GlobalActionsSaveAsLayout
-	    {
-		    get; set;
-	    }
-	    
 	    [JsonProperty("hideCaptureText")]
 	    public Nullable<Boolean> HideCaptureText
 	    {
