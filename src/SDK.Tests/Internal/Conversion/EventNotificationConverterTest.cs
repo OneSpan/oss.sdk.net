@@ -40,15 +40,6 @@ namespace SDK.Tests
         }
 
         [Test]
-        public void ConvertAPIPACKAGE_OPT_OUTToPACKAGE_OPT_OUTNotificationEvent()
-        {
-            apiNotificationEvent1 = "PACKAGE_OPT_OUT";
-            sdkNotificationEvent1 = new EventNotificationConverter(apiNotificationEvent1).ToSDKNotificationEvent();
-
-            Assert.AreEqual(apiNotificationEvent1, sdkNotificationEvent1.getApiValue());
-        }
-
-        [Test]
         public void ConvertAPIPACKAGE_DECLINEToPACKAGE_DECLINENotificationEvent()
         {
             apiNotificationEvent1 = "PACKAGE_DECLINE";
@@ -181,15 +172,6 @@ namespace SDK.Tests
             apiNotificationEvent1 = new EventNotificationConverter(sdkNotificationEvent1).ToAPICallbackEvent();
 
             Assert.AreEqual("PACKAGE_DELETE", apiNotificationEvent1);
-        }
-
-        [Test]
-        public void ConvertSDKPACKAGE_OPT_OUTToAPIPACKAGE_OPT_OUT()
-        {
-            sdkNotificationEvent1 = OneSpanSign.Sdk.NotificationEvent.PACKAGE_OPT_OUT;
-            apiNotificationEvent1 = new EventNotificationConverter(sdkNotificationEvent1).ToAPICallbackEvent();
-
-            Assert.AreEqual("PACKAGE_OPT_OUT", apiNotificationEvent1);
         }
 
         [Test]
