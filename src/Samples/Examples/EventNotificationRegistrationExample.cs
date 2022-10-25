@@ -24,7 +24,6 @@ namespace SDK.Examples
         public readonly NotificationEvent EVENT8 = NotificationEvent.PACKAGE_DELETE;
         public readonly NotificationEvent EVENT9 = NotificationEvent.PACKAGE_DECLINE;
         public readonly NotificationEvent EVENT10 = NotificationEvent.PACKAGE_EXPIRE;
-        public readonly NotificationEvent EVENT11 = NotificationEvent.PACKAGE_OPT_OUT;
         public readonly NotificationEvent EVENT12 = NotificationEvent.DOCUMENT_SIGNED;
         public readonly NotificationEvent EVENT13 = NotificationEvent.ROLE_REASSIGN;
         public readonly NotificationEvent EVENT14 = NotificationEvent.SIGNER_COMPLETE;
@@ -57,7 +56,6 @@ namespace SDK.Examples
             events.Add(EVENT8);
             events.Add(EVENT9);
             events.Add(EVENT10);
-            events.Add(EVENT11);
             events.Add(EVENT12);
             events.Add(EVENT13);
             events.Add(EVENT14);
@@ -80,7 +78,6 @@ namespace SDK.Examples
             connectorsEvents.Add(EVENT3);
             connectorsEvents.Add(EVENT6);
             connectorsEvents.Add(EVENT9);
-            connectorsEvents.Add(EVENT11);
             connectorsEvents.Add(EVENT12);
             connectorsEvents.Add(EVENT14);
             connectorsEvents.Add(EVENT17);
