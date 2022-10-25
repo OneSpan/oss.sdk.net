@@ -61,19 +61,6 @@ namespace SDK.Tests
         }
 
         [Test]
-        public void whenBuildingNotificationEventWithAPIValuePACKAGE_OPT_OUTThenPACKAGE_OPT_OUTNotificationEventIsReturned()
-        {
-            string expectedSDKValue = "PACKAGE_OPT_OUT";
-
-
-            NotificationEvent classUnderTest = NotificationEvent.valueOf("PACKAGE_OPT_OUT");
-            string actualSDKValue = classUnderTest.getSdkValue();
-
-
-            Assert.AreEqual(expectedSDKValue, actualSDKValue);
-        }
-
-        [Test]
         public void whenBuildingNotificationEventWithAPIValuePACKAGE_DECLINEThenPACKAGE_DECLINENotificationEventIsReturned()
         {
             string expectedSDKValue = "PACKAGE_DECLINE";
