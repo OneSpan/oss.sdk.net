@@ -18,7 +18,6 @@ namespace OneSpanSign.Sdk
         private Nullable<bool> extractTextTags;
         private Nullable<bool> globalActionsDownload;
         private Nullable<bool> globalActionsHideEvidenceSummary;
-        private Nullable<bool> globalActionsSaveAsLayout;
         private Nullable<bool> hideCaptureText;
         private Nullable<bool> hideLanguageDropdown;
         private Nullable<bool> hidePackageOwnerInPerson;
@@ -186,18 +185,6 @@ namespace OneSpanSign.Sdk
             }
         }
 
-        public Nullable<bool> GlobalActionsSaveAsLayout
-        {
-            get
-            {
-                return globalActionsSaveAsLayout;
-            }
-            set
-            {
-                globalActionsSaveAsLayout = value;
-            }
-        }
-        
         public Nullable<bool> HideCaptureText
         {
             get

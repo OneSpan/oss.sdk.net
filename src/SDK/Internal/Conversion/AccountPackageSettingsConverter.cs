@@ -37,7 +37,6 @@ namespace OneSpanSign.Sdk
 			result.ExtractTextTags = sdkAccountPackageSettings.ExtractTextTags;
 			result.GlobalActionsDownload = sdkAccountPackageSettings.GlobalActionsDownload;
 			result.GlobalActionsHideEvidenceSummary = sdkAccountPackageSettings.GlobalActionsHideEvidenceSummary;
-			result.GlobalActionsSaveAsLayout = sdkAccountPackageSettings.GlobalActionsSaveAsLayout;
 			result.HideCaptureText = sdkAccountPackageSettings.HideCaptureText;
 			result.HideLanguageDropdown = sdkAccountPackageSettings.HideLanguageDropdown;
 			result.HidePackageOwnerInPerson = sdkAccountPackageSettings.HidePackageOwnerInPerson;
@@ -73,7 +72,6 @@ namespace OneSpanSign.Sdk
 			result.ExtractTextTags = apiAccountPackageSettings.ExtractTextTags;
 			result.GlobalActionsDownload = apiAccountPackageSettings.GlobalActionsDownload;
 			result.GlobalActionsHideEvidenceSummary = apiAccountPackageSettings.GlobalActionsHideEvidenceSummary;
-			result.GlobalActionsSaveAsLayout = apiAccountPackageSettings.GlobalActionsSaveAsLayout;
 			result.HideCaptureText = apiAccountPackageSettings.HideCaptureText;
 			result.HideLanguageDropdown = apiAccountPackageSettings.HideLanguageDropdown;
 			result.HidePackageOwnerInPerson = apiAccountPackageSettings.HidePackageOwnerInPerson;
