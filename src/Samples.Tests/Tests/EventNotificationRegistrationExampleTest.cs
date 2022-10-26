@@ -20,7 +20,7 @@ namespace SDK.Examples
 			Assert.IsNotNull(config);
             Assert.AreEqual(config.Url, example.URL);
             Assert.AreEqual(config.Key, example.KEY);
-			Assert.AreEqual(config.NotificationEvents.Count, 21);
+			Assert.AreEqual(config.NotificationEvents.Count, 20);
 
             AssertEvents(config, example.events);
 
@@ -29,7 +29,7 @@ namespace SDK.Examples
             Assert.IsNotNull(connectorsConfig);
             Assert.AreEqual(connectorsConfig.Url, example.CONNECTORS_URL);
             Assert.AreEqual(connectorsConfig.Key, example.CONNECTORS_KEY);
-            Assert.AreEqual(connectorsConfig.NotificationEvents.Count, 10);
+            Assert.AreEqual(connectorsConfig.NotificationEvents.Count, 9);
 
             AssertEvents(connectorsConfig, example.connectorsEvents);
 		}
