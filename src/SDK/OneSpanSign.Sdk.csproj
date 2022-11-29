@@ -10,7 +10,7 @@
     <Authors>Simon Levy</Authors>
     <Company>OneSpan</Company>
     <Product>OneSpan Sign SDK</Product>
-    <Version>11.48</Version>
+    <Version>11.49</Version>
     <Copyright>OneSpan</Copyright>
     <Description>.NET SDK for OneSpan Sign</Description>
     <PackageProjectUrl>https://github.com/OneSpan/oss.sdk.net</PackageProjectUrl>
@@ -23,7 +23,7 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
-    <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
   </ItemGroup>
 
   <!-- .NET Standard 2.0 references, compilation flags and build options -->
