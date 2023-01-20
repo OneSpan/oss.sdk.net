@@ -70,6 +70,11 @@ namespace OneSpanSign.Sdk
                 document.Tagged = apiDocument.Tagged;
             }
 
+            if ( apiDocument.ExternalSigned != null )
+            {
+                document.ExternalSigned = apiDocument.ExternalSigned;
+            }
+
             return document;
         }
 

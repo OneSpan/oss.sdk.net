@@ -80,6 +80,11 @@ namespace OneSpanSign.Sdk
             set;
         }
 
+        public Nullable<Boolean> ExternalSigned {
+            get;
+            set;
+        }
+
         public List<Field> Fields
         {
             get
