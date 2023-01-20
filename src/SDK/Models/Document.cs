@@ -191,6 +191,12 @@ namespace OneSpanSign.API
         public string SignerVerificationToken {
             get; set;
         }
+
+        [JsonProperty("externalSigned")]
+        public Nullable<Boolean> ExternalSigned
+        {
+            get; set;
+        }
 	
 	}
 }
