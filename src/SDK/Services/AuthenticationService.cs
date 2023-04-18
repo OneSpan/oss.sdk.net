@@ -45,13 +45,21 @@ namespace OneSpanSign.Sdk
             }
         }        
 
-        public string BuildRedirectToDesignerForUserAuthenticationToken(string userAuthenticationToken, PackageId packageId)
+        public string BuildRedirectToDesignerForUserAuthenticationToken(string userAuthenticationToken, PackageId packageId, string profile)
         {
             try {
                 string redirectPath = webpageTemplate.UrlFor(UrlTemplate.DESIGNER_REDIRECT_PATH)
                         .Replace("{packageId}", packageId.Id)
                         .Build();
-                string encodedRedirectPath = HttpUtility.UrlEncode(redirectPath);
+
+				if (!string.IsNullOrWhiteSpace(profile))
+				{
+					redirectPath = redirectPath.Contains("?") ?
+						$"{redirectPath}&profile={profile}" :
+						$"{redirectPath}?profile={profile}";
+				}
+
+				string encodedRedirectPath = HttpUtility.UrlEncode(redirectPath);
                 string path = authenticationTemplate.UrlFor(UrlTemplate.AUTHENTICATION_PATH_FOR_USER_AUTHENTICATION_TOKEN_WITH_REDIRECT)
                         .Replace("{authenticationToken}", userAuthenticationToken)
                         .Replace("{redirectUrl}", encodedRedirectPath)
@@ -80,12 +88,20 @@ namespace OneSpanSign.Sdk
             }
         }        
 
-        public string BuildRedirectToDesignerForSender(string senderAuthenticationToken, PackageId packageId)
+        public string BuildRedirectToDesignerForSender(string senderAuthenticationToken, PackageId packageId, string profile)
         {
             try {
                 string redirectPath = webpageTemplate.UrlFor(UrlTemplate.DESIGNER_REDIRECT_PATH)
                         .Replace("{packageId}", packageId.Id)
                         .Build();
+
+                if (!string.IsNullOrWhiteSpace(profile))
+                {
+					redirectPath = redirectPath.Contains("?") ?
+						$"{redirectPath}&profile={profile}" :
+						$"{redirectPath}?profile={profile}";
+				}
+
                 string encodedRedirectPath = HttpUtility.UrlEncode(redirectPath);
                 string path = authenticationTemplate.UrlFor(UrlTemplate.AUTHENTICATION_PATH_FOR_SENDER_AUTHENTICATION_TOKEN_WITH_REDIRECT)
                         .Replace("{senderAuthenticationToken}", senderAuthenticationToken)
