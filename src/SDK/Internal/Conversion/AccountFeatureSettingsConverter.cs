@@ -51,6 +51,7 @@ namespace OneSpanSign.Sdk
 			result.SendToMobile = sdkAccountFeatureSettings.SendToMobile;
 			result.UploadSignatureImage = sdkAccountFeatureSettings.UploadSignatureImage;
 			result.OverrideRecipientsPreferredLanguage = sdkAccountFeatureSettings.OverrideRecipientsPreferredLanguage;
+			result.EnableRecipientHistory = sdkAccountFeatureSettings.EnableRecipientHistory;
 			
             return result;
 		}
@@ -90,6 +91,7 @@ namespace OneSpanSign.Sdk
 			result.SendToMobile = apiAccountFeatureSettings.SendToMobile;
 			result.UploadSignatureImage = apiAccountFeatureSettings.UploadSignatureImage;
 			result.OverrideRecipientsPreferredLanguage = apiAccountFeatureSettings.OverrideRecipientsPreferredLanguage;
+			result.EnableRecipientHistory = apiAccountFeatureSettings.EnableRecipientHistory;
 			return result;
 		}
 		

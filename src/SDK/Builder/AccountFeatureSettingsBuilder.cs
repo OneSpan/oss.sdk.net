@@ -31,6 +31,7 @@ namespace OneSpanSign.Sdk
         private Nullable<bool> sendToMobile;
         private Nullable<bool> uploadSignatureImage;
         private Nullable<bool> overrideRecipientsPreferredLanguage;
+        private Nullable<bool> enableRecipientHistory;
 
         private AccountFeatureSettingsBuilder()
         {
@@ -365,6 +366,18 @@ namespace OneSpanSign.Sdk
             this.overrideRecipientsPreferredLanguage = false;
             return this;
         }
+        
+        public AccountFeatureSettingsBuilder WithEnableRecipientHistory()
+        {
+            this.enableRecipientHistory = true;
+            return this;
+        }
+
+        public AccountFeatureSettingsBuilder WithoutEnableRecipientHistory()
+        {
+            this.enableRecipientHistory = false;
+            return this;
+        }
 
 
         public AccountFeatureSettings Build()
@@ -397,6 +410,7 @@ namespace OneSpanSign.Sdk
             result.SendToMobile = sendToMobile;
             result.UploadSignatureImage = uploadSignatureImage;
             result.OverrideRecipientsPreferredLanguage = overrideRecipientsPreferredLanguage;
+            result.EnableRecipientHistory = enableRecipientHistory;
 
             return result;
         }

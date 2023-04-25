@@ -28,6 +28,11 @@ namespace OneSpanSign.Sdk
         private Nullable<bool> showNseHelp;
         private Nullable<bool> showNseLogoInIframe;
         private Nullable<bool> showNseOverview;
+        private Nullable<bool> title;
+        private Nullable<bool> progressBar;
+        private Nullable<bool> navigator;
+        private Nullable<int> maxAttachmentFiles;
+        private Nullable<int> fontSize;
         
         public Nullable<bool> Ada
         {
@@ -305,5 +310,64 @@ namespace OneSpanSign.Sdk
             }
         }
         
+        public Nullable<bool> Title
+        {
+            get
+            {
+                return title;
+            }
+            set
+            {
+                title = value;
+            }
+        }
+        
+        public Nullable<bool> ProgressBar
+        {
+            get
+            {
+                return progressBar;
+            }
+            set
+            {
+                progressBar = value;
+            }
+        }
+        
+        public Nullable<bool> Navigator
+        {
+            get
+            {
+                return navigator;
+            }
+            set
+            {
+                navigator = value;
+            }
+        }
+        
+        public Nullable<int> MaxAttachmentFiles
+        {
+            get
+            {
+                return maxAttachmentFiles;
+            }
+            set
+            {
+                maxAttachmentFiles = value;
+            }
+        }
+        
+        public Nullable<int> FontSize
+        {
+            get
+            {
+                return fontSize;
+            }
+            set
+            {
+                fontSize = value;
+            }
+        }
     }
 }

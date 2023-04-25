@@ -25,12 +25,18 @@ namespace SDK.Examples
                     .WithoutAttachments()
                     .WithoutConditionalFields()
                     .WithOverrideRecipientsPreferredLanguage()
+                    .WithEnableRecipientHistory()
                     .Build())
                 .WithAccountPackageSettings(AccountPackageSettingsBuilder.NewAccountPackageSettings()
                     .WithAda()
                     .WithDeclineButton()
                     .WithDefaultTimeBasedExpiry()
                     .WithDisableDeclineOther()
+                    .WithTitle()
+                    .WithProgressBar()
+                    .WithNavigator()
+                    .WithUnlimitedMaxAttachmentFiles()
+                    .WithDefaultFontSize()
                     .Build())
                 .Build();
             //Save Account Settings
@@ -49,6 +55,7 @@ namespace SDK.Examples
                     .WithAllowInPersonForAccountSenders()
                     .WithoutAttachments()
                     .WithoutConditionalFields()
+                    .WithEnableRecipientHistory()
                     .Build();
             //Save Account Feature Settings
             OssClient.AccountConfigService.PatchAccountFeatureSettings(accountFeatureSettings);
@@ -66,6 +73,11 @@ namespace SDK.Examples
                 .WithDeclineButton()
                 .WithDefaultTimeBasedExpiry()
                 .WithDisableDeclineOther()
+                .WithTitle()
+                .WithProgressBar()
+                .WithNavigator()
+                .WithCustomFontSize(16)
+                .WithCustomMaxAttachmentFiles(100)
                 .Build();
             //Save Account Package Settings
             OssClient.AccountConfigService.PatchAccountPackageSettings(accountPackageSettings);

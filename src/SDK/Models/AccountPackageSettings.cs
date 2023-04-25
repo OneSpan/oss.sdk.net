@@ -143,6 +143,12 @@ namespace OneSpanSign.API
 	    {
 		    get; set;
 	    }
+	    
+	    [JsonProperty("title")]
+	    public Nullable<Boolean> Title
+	    {
+		    get; set;
+	    }
     
 	}
 }
