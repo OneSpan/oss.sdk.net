@@ -167,6 +167,12 @@ namespace OneSpanSign.API
 	    {
 		    get; set;
 	    }
+	    
+	    [JsonProperty("enableRecipientHistory")]
+	    public Nullable<Boolean> EnableRecipientHistory
+	    {
+		    get; set;
+	    }
 	
 	}
 }
