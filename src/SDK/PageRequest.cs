@@ -5,7 +5,7 @@ namespace OneSpanSign.Sdk
 	public class PageRequest
 	{
 		public static readonly int DefaultPageSize = 10;
-		public static readonly int MaxPageSize = 50;
+		public static readonly int MaxPageSize = 100;
 
 		public PageRequest (int from) : this (from, DefaultPageSize)
 		{
