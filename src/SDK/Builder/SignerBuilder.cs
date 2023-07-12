@@ -251,6 +251,25 @@ namespace OneSpanSign.Sdk.Builder
             this.knowledgeBasedAuthentication.SignerInformationForEquifaxUSA = signerInformationForEquifaxUSA;
             return this;
         }
+        
+        public SignerBuilder ChallengedWithKnowledgeBasedAuthentication(
+            SignerInformationForLexisNexisBuilder signerInformationForLexisNexisBuilder)
+        {
+            return ChallengedWithKnowledgeBasedAuthentication(signerInformationForLexisNexisBuilder.Build());
+        }
+
+        public SignerBuilder ChallengedWithKnowledgeBasedAuthentication(
+            SignerInformationForLexisNexis signerInformationForLexisNexis)
+        {
+            if (this.knowledgeBasedAuthentication == null)
+            {
+                this.knowledgeBasedAuthentication = new KnowledgeBasedAuthentication();
+            }
+
+            this.knowledgeBasedAuthentication.SignerInformationForLexisNexis = signerInformationForLexisNexis;
+            return this;
+        }
+
 
         private Signer BuildGroupSigner()
         {

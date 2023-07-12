@@ -19,6 +19,11 @@ namespace OneSpanSign.Sdk
             get; set;
         }
 
+        public SignerInformationForLexisNexis SignerInformationForLexisNexis
+        {
+            get; set;
+        }
+
         public KnowledgeBasedAuthenticationStatus KnowledgeBasedAuthenticationStatus
         {
             get; set;
