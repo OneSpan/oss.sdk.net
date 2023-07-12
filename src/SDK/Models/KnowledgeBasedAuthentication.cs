@@ -32,7 +32,11 @@ namespace OneSpanSign.API
                 get; set;
         }
     
-		
+    [JsonProperty("signerInformationForLexisNexis")]
+    public SignerInformationForLexisNexis SignerInformationForLexisNexis
+    {
+	    get; set;
+    }	
 	
 	}
 }
