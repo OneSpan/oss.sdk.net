@@ -88,5 +88,10 @@ namespace OneSpanSign.Sdk
 	        set;
         }
         
+        public string GroupTooltip {
+	        get;
+	        set;
+        }
+        
 	}
 }

@@ -38,10 +38,12 @@ namespace SDK.Examples
                     {
                         Assert.AreEqual(FieldStyle.UNBOUND_CHECK_BOX, field.Style);
                         Assert.AreEqual(GenericFieldsExample.GROUPED_CHECKBOX_PAGE, field.Page);
+                        Assert.AreEqual(GenericFieldsExample.INDIVIDUAL_CHECKBOX_TOOLTIP_MESSAGE, field.Tooltip);
                         Assert.IsNotNull(field.Validator);
                         Assert.AreEqual(GenericFieldsExample.GROUPED_CHECKBOX_GROUP, field.Validator.Group);
                         Assert.AreEqual(GenericFieldsExample.GROUPED_CHECKBOX_MINIMAL_REQUIRED, field.Validator.MinimumRequired);
                         Assert.AreEqual(GenericFieldsExample.GROUPED_CHECKBOX_MAXIMAL_REQUIRED, field.Validator.MaximumRequired);
+                        Assert.AreEqual(GenericFieldsExample.CHECKBOX_GROUP_TOOLTIP_MESSAGE, field.Validator.GroupTooltip);
                     }
                     // Radio Button 1
                     if (field.Id == GenericFieldsExample.RADIO_ID_1)
@@ -51,6 +53,8 @@ namespace SDK.Examples
                         Assert.IsNotNull(field.Validator);
                         Assert.AreEqual(GenericFieldsExample.RADIO_GROUP_1, field.Validator.Options[0]);
                         Assert.AreEqual("", field.Value);
+                        Assert.AreEqual(GenericFieldsExample.INDIVIDUAL_RADIOBUTTON_TOOLTIP_MESSAGE_1, field.Tooltip);
+                        Assert.AreEqual(GenericFieldsExample.RADIO_BUTTON_GROUP_TOOLTIP_MESSAGE, field.Validator.GroupTooltip);
                     }
                     // Radio Button 2
                     if (field.Id == GenericFieldsExample.RADIO_ID_2)
@@ -60,6 +64,8 @@ namespace SDK.Examples
                         Assert.IsNotNull(field.Validator);
                         Assert.AreEqual(GenericFieldsExample.RADIO_GROUP_1, field.Validator.Options[0]);
                         Assert.AreEqual(FieldBuilder.RADIO_SELECTED, field.Value);
+                        Assert.AreEqual(GenericFieldsExample.INDIVIDUAL_RADIOBUTTON_TOOLTIP_MESSAGE_2, field.Tooltip);
+                        Assert.AreEqual(GenericFieldsExample.RADIO_BUTTON_GROUP_TOOLTIP_MESSAGE, field.Validator.GroupTooltip);
                     }
                     // Radio Button 3
                     if (field.Id == GenericFieldsExample.RADIO_ID_3)

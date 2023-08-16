@@ -98,5 +98,11 @@ namespace OneSpanSign.API
         {
             get; set;
         }
+        
+        [JsonProperty("tooltip")]
+        public String Tooltip
+        {
+            get; set;
+        }
     }
 }

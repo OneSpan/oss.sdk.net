@@ -102,6 +102,11 @@ namespace OneSpanSign.API
 	    get; set;
     }
     
-    
+    [JsonProperty("groupTooltip")]
+    public String GroupTooltip
+    {
+	    get; set;
     }
+
+	}
 }

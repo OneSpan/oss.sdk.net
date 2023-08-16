@@ -112,5 +112,10 @@ namespace OneSpanSign.API
         public Nullable<Double> Width {
             get; set;
         }
+        
+        [JsonProperty ("tooltip")]
+        public String Tooltip {
+            get; set;
+        }
     }
 }

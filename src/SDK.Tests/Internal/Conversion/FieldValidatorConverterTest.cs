@@ -80,6 +80,7 @@ namespace SDK.Tests
             Assert.AreEqual(sdkFieldValidator1.Group, apiFieldValidation1.Group);
             Assert.AreEqual(sdkFieldValidator1.MinimumRequired, apiFieldValidation1.MinimumRequired);
             Assert.AreEqual(sdkFieldValidator1.MaximumRequired, apiFieldValidation1.MaximumRequired);
+            Assert.AreEqual(sdkFieldValidator1.GroupTooltip, apiFieldValidation1.GroupTooltip);
             Assert.IsEmpty(sdkFieldValidator1.Options);
         }
 
@@ -99,6 +100,7 @@ namespace SDK.Tests
             Assert.AreEqual(apiFieldValidation1.MinimumRequired, sdkFieldValidator1.MinimumRequired);
             Assert.AreEqual(apiFieldValidation1.MaximumRequired, sdkFieldValidator1.MaximumRequired);
             Assert.AreEqual(apiFieldValidation1.Pattern, sdkFieldValidator1.Regex);
+            Assert.AreEqual(apiFieldValidation1.GroupTooltip, sdkFieldValidator1.GroupTooltip);
         }
 
         private FieldValidation CreateTypicalAPIFieldValidation()
@@ -114,6 +116,7 @@ namespace SDK.Tests
             apiFieldValidation.Group = "group";
             apiFieldValidation.MinimumRequired = 1;
             apiFieldValidation.MaximumRequired = 2;
+            apiFieldValidation.GroupTooltip = "Group tooltip message";
 
             return apiFieldValidation;
         }
@@ -126,6 +129,7 @@ namespace SDK.Tests
                     .Required()
                     .WithErrorCode(150)
                     .WithErrorMessage("Error message for validation")
+                    .WithGroupTooltip("Tooltip message for group.")
                     .Build();
 
             return sdkFieldValidator;

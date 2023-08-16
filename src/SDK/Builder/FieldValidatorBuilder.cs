@@ -33,6 +33,7 @@ namespace OneSpanSign.Sdk.Builder
         private int minimumRequired;
         private int maximumRequired;
         private IList<string> options = new List<string>();
+        private String groupTooltip;
 
 		private FieldValidatorBuilder (String regex)
 		{
@@ -150,6 +151,12 @@ namespace OneSpanSign.Sdk.Builder
             this.errorCode = errorCode;
             return this;
         }
+        
+        public FieldValidatorBuilder WithGroupTooltip(string groupTooltip)
+        {
+	        this.groupTooltip = groupTooltip;
+	        return this;
+        }
 
 		public FieldValidator Build ()
 		{
@@ -166,7 +173,7 @@ namespace OneSpanSign.Sdk.Builder
             validator.Message = message;
             validator.AddOptions(options);
             validator.ErrorCode = errorCode;
-
+            validator.GroupTooltip = groupTooltip;
 			return validator;
 		}
 	}

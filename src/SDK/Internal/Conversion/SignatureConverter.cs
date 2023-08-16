@@ -120,6 +120,7 @@ namespace OneSpanSign.Sdk
             }
 
             signatureBuilder.SetFromFile(apiApproval.FromFile);
+            signatureBuilder.WithTooltip(apiApproval.Tooltip);
 
             Signature signature = signatureBuilder.Build();
             if (null != apiApproval.Accepted)
@@ -150,6 +151,7 @@ namespace OneSpanSign.Sdk
             result.Disabled = sdkSignature.Disabled;
             result.EnforceCaptureSignature = sdkSignature.EnforceCaptureSignature;
             result.FromFile = sdkSignature.FromFile;
+            result.Tooltip = sdkSignature.Tooltip;
 
             foreach (Field field in sdkSignature.Fields)
             {
@@ -172,6 +174,7 @@ namespace OneSpanSign.Sdk
             result.Name = signature.Name;
             result.Extract = signature.Extract;
             result.FontSize = signature.FontSize;
+            result.Tooltip = signature.Tooltip;
 
             if (!signature.Extract)
             {

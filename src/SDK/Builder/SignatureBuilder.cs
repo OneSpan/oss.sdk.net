@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.IO;
 using OneSpanSign.API;
 
 namespace OneSpanSign.Sdk.Builder
@@ -29,6 +30,7 @@ namespace OneSpanSign.Sdk.Builder
         private bool disabled = false;
         private bool enforceCaptureSignature = false;
         private bool fromFile = false;
+        private string tooltip;
 
         private SignatureBuilder(string signerEmail)
         {
@@ -211,6 +213,12 @@ namespace OneSpanSign.Sdk.Builder
             return this;
         }
 
+        public SignatureBuilder WithTooltip(String tooltip)
+        {
+            this.tooltip = tooltip;
+            return this;
+        }
+
         public SignatureBuilder MakeOptional()
         {
             this.optional = true;
@@ -264,6 +272,7 @@ namespace OneSpanSign.Sdk.Builder
             signature.Disabled = disabled;
             signature.EnforceCaptureSignature = enforceCaptureSignature;
             signature.FromFile = fromFile;
+            signature.Tooltip = tooltip;
 
             return signature;
         }
