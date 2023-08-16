@@ -38,6 +38,7 @@ namespace OneSpanSign.Sdk
             fieldValidation.MaximumRequired = fieldValidator.MaximumRequired;
             fieldValidation.ErrorMessage = fieldValidator.Message;
             fieldValidation.ErrorCode = fieldValidator.ErrorCode;
+            fieldValidation.GroupTooltip = fieldValidator.GroupTooltip;
 
             if (!String.IsNullOrEmpty(fieldValidator.Regex)) {
                 fieldValidation.Pattern = fieldValidator.Regex;
@@ -87,6 +88,7 @@ namespace OneSpanSign.Sdk
                 }
             }
 
+            fieldValidator.GroupTooltip = fieldValidation.GroupTooltip;
             return fieldValidator;
         }
     }
