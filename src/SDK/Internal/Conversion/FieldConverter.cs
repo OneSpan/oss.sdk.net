@@ -34,6 +34,7 @@ namespace OneSpanSign.Sdk
             result.Page = sdkField.Page;
             result.Id = sdkField.Id;
             result.FontSize = sdkField.FontSize;
+            result.Tooltip = sdkField.Tooltip;
 
             if (!sdkField.Extract) {
                 result.Left = sdkField.X;
@@ -83,6 +84,10 @@ namespace OneSpanSign.Sdk
 
             if (apiField.FontSize != null) {
                 fieldBuilder.WithFontSize (apiField.FontSize);
+            }
+            
+            if (apiField.Tooltip != null) {
+                fieldBuilder.WithTooltip(apiField.Tooltip);
             }
 
             if (apiField.Extract.Value) {

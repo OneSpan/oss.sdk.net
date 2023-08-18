@@ -87,6 +87,7 @@ namespace SDK.Tests
             Assert.AreEqual (sdkField1.Y, apiField1.Top);
             Assert.AreEqual (sdkField1.Width, apiField1.Width);
             Assert.AreEqual (sdkField1.Height, apiField1.Height);
+            Assert.AreEqual (sdkField1.Tooltip, apiField1.Tooltip);
         }
 
         [Test ()]
@@ -105,6 +106,7 @@ namespace SDK.Tests
             Assert.AreEqual (sdkField1.FontSize, apiField1.FontSize);
             Assert.AreEqual (sdkField1.Name, apiField1.Name);
             Assert.AreEqual (sdkField1.Page, apiField1.Page);
+            Assert.AreEqual (sdkField1.Tooltip, apiField1.Tooltip);
         }
 
         private OneSpanSign.Sdk.Field CreateTypicalSDKField ()
@@ -137,6 +139,7 @@ namespace SDK.Tests
                                     .WithErrorMessage ("Error message for validation.")
                                     .Build ())
                     .WithValue ("value")
+                    .WithTooltip("Tooltip message.")
                     .Build ();
 
             return sdkField;
@@ -158,6 +161,7 @@ namespace SDK.Tests
             apiField.Value = "field value";
             apiField.FontSize = 18;
             apiField.Width = 102.0;
+            apiField.Tooltip = "Tooltip message";
 
             return apiField;
         }

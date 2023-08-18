@@ -86,6 +86,7 @@ namespace SDK.Tests
             Assert.AreEqual(sdkSignature1.X, apiApproval1.Fields[0].Left, "Left position was not correctly set");
             Assert.AreEqual(sdkSignature1.Y, apiApproval1.Fields[0].Top, "Top position was not correctly set");
             Assert.AreEqual(sdkSignature1.FontSize, apiApproval1.Fields[0].FontSize, "Font size was not correctly set");
+            Assert.AreEqual(sdkSignature1.Tooltip, apiApproval1.Tooltip, "Tooltip was not correctly set");
         }
 
         [Test()]
@@ -103,6 +104,7 @@ namespace SDK.Tests
             Assert.AreEqual(apiApproval1.Fields[0].Left, sdkSignature1.X, "Left position was not correctly set");
             Assert.AreEqual(apiApproval1.Fields[0].Top, sdkSignature1.Y, "Top position was not correctly set");
             Assert.AreEqual(apiApproval1.Fields[0].FontSize, sdkSignature1.FontSize, "Font size was not correctly set");
+            Assert.AreEqual(apiApproval1.Fields[0].Tooltip, sdkSignature1.Tooltip, "Tooltip was not correctly set");
         }
 
         private Signature CreateTypicalSDKSignature()
@@ -112,6 +114,7 @@ namespace SDK.Tests
                     .WithName("signature")
                     .WithSize(100, 100)
                     .WithFontSize(10)
+                    .WithTooltip("Signature tooltip message")
                     .EnableEnforceCaptureSignature()
                     .OnPage(0)
                     .Build();
@@ -130,7 +133,7 @@ namespace SDK.Tests
                 Page = 0,
                 FontSize = 20
             };
-
+            apiSignature.Tooltip = "Signature tooltip message";
             apiApproval.AddField(apiSignature);
             apiApproval.EnforceCaptureSignature = true;
             apiApproval.Name = "apiSignature";

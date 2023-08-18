@@ -26,6 +26,7 @@ namespace OneSpanSign.Sdk.Builder
         private Nullable<Int32> fontSize;
         private string id;
         private TextAnchor textAnchor;
+        private string tooltip;
 
         private FieldBuilder ()
         {
@@ -92,6 +93,12 @@ namespace OneSpanSign.Sdk.Builder
                 .WithValidation (FieldValidatorBuilder.Basic ().WithOption (group));
         }
 
+        public static FieldBuilder RadioButtonWithGroupTooltip (string group, String groupTooltip)
+        {
+            return new FieldBuilder ().WithStyle (FieldStyle.UNBOUND_RADIO_BUTTON)
+                .WithValidation (FieldValidatorBuilder.Basic ().WithOption (group).WithGroupTooltip(groupTooltip));
+        }
+        
         public static FieldBuilder CustomField (String name)
         {
             return new FieldBuilder ().WithStyle (FieldStyle.UNBOUND_CUSTOM_FIELD).WithName (name);
@@ -213,6 +220,12 @@ namespace OneSpanSign.Sdk.Builder
             return this;
         }
 
+        public FieldBuilder WithTooltip (string tooltip)
+        {
+            this.tooltip = tooltip;
+            return this;
+        }
+        
         public Field Build ()
         {
             Field field = new Field ();
@@ -229,6 +242,7 @@ namespace OneSpanSign.Sdk.Builder
             field.FontSize = fontSize;
             field.Id = id;
             field.TextAnchor = textAnchor;
+            field.Tooltip = tooltip;
 
             return field;
         }

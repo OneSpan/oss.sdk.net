@@ -90,6 +90,16 @@ namespace SDK.Tests
 
             Assert.AreEqual(FieldStyle.UNBOUND_RADIO_BUTTON, field.Style);
         }
+        
+        [Test]
+        public void creatingRadioButtonFieldWithGroupTooltipSetsStyle()
+        {
+            String groupTooltip = "group tooltip";
+            Field field = FieldBuilder.RadioButtonWithGroupTooltip("group", groupTooltip).AtPosition(100, 100).Build();
+
+            Assert.AreEqual(FieldStyle.UNBOUND_RADIO_BUTTON, field.Style);
+            Assert.AreEqual(groupTooltip, field.Validator.GroupTooltip);
+        }
 
         [Test]
         public void creatingTextAreaFieldSetsStyle()
@@ -115,6 +125,18 @@ namespace SDK.Tests
             Assert.AreEqual(FieldStyle.BOUND_QRCODE, field.Style);
             Assert.AreEqual(77.0, field.Height);
             Assert.AreEqual(77.0, field.Width);
+        }
+        
+        [Test]
+        public void CreatingFieldSetsTooltip()
+        {
+            String tooltipMessage = "Tooltip message.";
+            Field field = FieldBuilder.NewField()
+                .WithTooltip(tooltipMessage)
+                .WithStyle(FieldStyle.UNBOUND_TEXT_FIELD)
+                .Build();
+
+            Assert.AreEqual(tooltipMessage, field.Tooltip);
         }
     }
 }

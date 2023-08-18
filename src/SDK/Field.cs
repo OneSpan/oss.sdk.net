@@ -93,5 +93,11 @@ namespace OneSpanSign.Sdk
             get;
             set;
         }
+        
+        public string Tooltip 
+        {
+            get;
+            set;
+        }
     }
 }
