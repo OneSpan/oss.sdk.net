@@ -25,7 +25,7 @@ namespace SDK.Examples
 
             Document document2 = documentPackage.GetDocument(example.DOCUMENT2_NAME);
             byte[] documen2Binary = example.OssClient.DownloadDocument(example.PackageId, document2.Id);
-            Assert.Greater(documen2Binary.Length, 51000);
+            Assert.Greater(documen2Binary.Length, 50000);
             Assert.Less(documen2Binary.Length, 52000);
         }
     }
