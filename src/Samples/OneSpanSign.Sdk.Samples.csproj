@@ -12,9 +12,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Update="signers.properties">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
     <None Update="default.signers.properties">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
