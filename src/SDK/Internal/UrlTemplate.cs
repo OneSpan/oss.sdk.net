@@ -206,7 +206,9 @@ namespace OneSpanSign.Sdk.Internal
         // Account Package Settings Service
         public static readonly string ACCOUNT_PACKAGE_SETTINGS_PATH = "/account/admin/accountSettings/packageSettings";
         //Account Designer Settings Service
-        public static readonly String ACCOUNT_DESIGNER_SETTINGS_PATH = "/account/admin/accountSettings/designerSettings";  
+        public static readonly String ACCOUNT_DESIGNER_SETTINGS_PATH = "/account/admin/accountSettings/designerSettings"; 
+        //Account Email Reminder Settings Service
+        public static readonly String ACCOUNT_EMAIL_REMINDER_SETTINGS_PATH = "/account/admin/accountSettings/emailReminderSettings";
 
         // Account Roles
         public static readonly string ACCOUNT_ROLES_PATH = "/account/roles";
