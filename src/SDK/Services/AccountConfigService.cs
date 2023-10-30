@@ -157,5 +157,17 @@ namespace OneSpanSign.Sdk.Services
         {
             apiClient.DeleteAccountPackageSettings();;
         }
+        
+        public AccountDesignerSettings GetAccountDesignerSettings() {
+            return apiClient.GetAccountDesignerSettings();
+        }
+        
+        public void PatchAccountDesignerSettings(AccountDesignerSettings accountDesignerSettings) {
+            apiClient.PatchAccountDesignerSettings(accountDesignerSettings);
+        }
+        
+        public void DeleteAccountDesignerSettings() {
+            apiClient.DeleteAccountDesignerSettings();
+        }
     }
 }
