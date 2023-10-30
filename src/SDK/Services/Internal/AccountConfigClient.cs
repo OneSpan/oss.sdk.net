@@ -540,5 +540,58 @@ namespace OneSpanSign.Sdk
             }
         }
         
+        public AccountEmailReminderSettings GetAccountEmailReminderSettings() 
+        {
+            string path = template.UrlFor(UrlTemplate.ACCOUNT_EMAIL_REMINDER_SETTINGS_PATH).Build();
+            try 
+            {
+                String stringResponse = restClient.Get(path);
+                return JsonConvert.DeserializeObject<AccountEmailReminderSettings> (stringResponse, jsonSettings);
+            } 
+            catch (OssServerException e) 
+            {
+                throw new OssServerException("Could not get the account email reminder settings.", e);
+            } 
+            catch (Exception e) 
+            {
+                throw new OssException("Could not get the account email reminder settings.", e);
+            }
+        }
+
+        public void PatchAccountEmailReminderSettings(AccountEmailReminderSettings accountEmailReminderSettings) 
+        {
+            string path = template.UrlFor(UrlTemplate.ACCOUNT_EMAIL_REMINDER_SETTINGS_PATH).Build();
+            string payload = JsonConvert.SerializeObject(accountEmailReminderSettings, new JsonSerializerSettings { ContractResolver = new CamelCasePropertyNamesContractResolver (), Formatting = Formatting.Indented ,NullValueHandling = NullValueHandling.Ignore});
+            try
+            {
+                restClient.Patch(path, payload);
+            }
+            catch (OssServerException e) 
+            {
+                throw new OssServerException("Could not save the account email reminder settings.", e);
+            } 
+            catch (Exception e)
+            {
+                throw new OssException("Could not save the account email reminder settings.", e);
+            }
+        }
+        
+        public void DeleteAccountEmailReminderSettings() 
+        {
+            string path = template.UrlFor(UrlTemplate.ACCOUNT_EMAIL_REMINDER_SETTINGS_PATH).Build();
+            try 
+            {
+                restClient.Delete(path);
+            } 
+            catch (OssServerException e) 
+            {
+                throw new OssServerException("Could not delete the account email reminder settings.", e);
+            } 
+            catch (Exception e) 
+            {
+                throw new OssException("Could not delete the account email reminder settings.", e);
+            }
+        }
+        
     }
 }

@@ -169,6 +169,18 @@ namespace OneSpanSign.Sdk.Services
         public void DeleteAccountDesignerSettings() {
             apiClient.DeleteAccountDesignerSettings();
         }
+        
+        public AccountEmailReminderSettings GetAccountEmailReminderSettings() {
+            return apiClient.GetAccountEmailReminderSettings();
+        }
+        
+        public void PatchAccountEmailReminderSettings(AccountEmailReminderSettings accountEmailReminderSettings) {
+            apiClient.PatchAccountEmailReminderSettings(accountEmailReminderSettings);
+        }
+        
+        public void DeleteAccountEmailReminderSettings() {
+            apiClient.DeleteAccountEmailReminderSettings();
+        }
         public SignatureLayout GetSignatureLayout()
         {
             return apiClient.GetSignatureLayout();
