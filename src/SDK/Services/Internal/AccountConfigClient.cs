@@ -1,9 +1,12 @@
 using System;
 using System.Collections.Generic;
+using System.Dynamic;
+using System.Linq;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 using OneSpanSign.API;
 using OneSpanSign.Sdk.Internal;
+using OneSpanSign.Sdk.Internal.Conversion;
 
 namespace OneSpanSign.Sdk
 {
@@ -590,6 +593,63 @@ namespace OneSpanSign.Sdk
             catch (Exception e) 
             {
                 throw new OssException("Could not delete the account email reminder settings.", e);
+            }
+        }
+        
+        public AccountUploadSettings GetAccountUploadSettings() 
+        {
+            string path = template.UrlFor(UrlTemplate.ACCOUNT_UPLOAD_SETTINGS_PATH).Build();
+            try 
+            {
+                string stringResponse = restClient.Get(path);
+                List<string> listFromJson = JsonConvert.DeserializeObject<List<String>> (stringResponse, jsonSettings);
+                AccountUploadSettings accountUploadSettings = new AccountUploadSettings();
+                accountUploadSettings.AllowedFileTypes = listFromJson;
+                return new AccountUploadSettingsConverter(accountUploadSettings).ToSDKAccountUploadSettings();
+            } 
+            catch (OssServerException e) 
+            {
+                throw new OssServerException("Could not get the account upload settings.", e);
+            } 
+            catch (Exception e) 
+            {
+                throw new OssException("Could not get the account upload settings.", e);
+            }
+        }
+
+        public void UpdateAccountUploadSettings(AccountUploadSettings accountUploadSettings) 
+        {
+            string path = template.UrlFor(UrlTemplate.ACCOUNT_UPLOAD_SETTINGS_PATH).Build();
+            string payload = JsonConvert.SerializeObject(accountUploadSettings.AllowedFileTypes, new JsonSerializerSettings { ContractResolver = new CamelCasePropertyNamesContractResolver (), Formatting = Formatting.Indented ,NullValueHandling = NullValueHandling.Ignore});
+            try
+            {
+                string json = JsonConvert.SerializeObject(accountUploadSettings.AllowedFileTypes);
+                restClient.Put(path, payload);
+            }
+            catch (OssServerException e) 
+            {
+                throw new OssServerException("Could not save the account upload settings.", e);
+            } 
+            catch (Exception e)
+            {
+                throw new OssException("Could not save the account upload settings.", e);
+            }
+        }
+        
+        public void DeleteAccountUploadSettings() 
+        {
+            string path = template.UrlFor(UrlTemplate.ACCOUNT_UPLOAD_SETTINGS_PATH).Build();
+            try 
+            {
+                restClient.Delete(path);
+            } 
+            catch (OssServerException e) 
+            {
+                throw new OssServerException("Could not delete the account upload settings.", e);
+            } 
+            catch (Exception e) 
+            {
+                throw new OssException("Could not delete the account upload settings.", e);
             }
         }
         

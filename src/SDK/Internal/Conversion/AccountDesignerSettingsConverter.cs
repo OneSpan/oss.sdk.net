@@ -5,12 +5,12 @@ namespace OneSpanSign.Sdk
         private OneSpanSign.Sdk.AccountDesignerSettings sdkAccountDesignerSettings;
         private OneSpanSign.API.AccountDesignerSettings apiAccountDesignerSettings;
         
-        public AccountDesignerSettingsConverter(OneSpanSign.API.AccountPackageSettings apiAccountPackageSettings)
+        public AccountDesignerSettingsConverter(OneSpanSign.API.AccountDesignerSettings apiAccountDesignerSettings)
         {
             this.apiAccountDesignerSettings = apiAccountDesignerSettings;
         }
 
-        public AccountDesignerSettingsConverter(OneSpanSign.Sdk.AccountPackageSettings sdkAccountPackageSettings)
+        public AccountDesignerSettingsConverter(OneSpanSign.Sdk.AccountDesignerSettings sdkAccountDesignerSettings)
         {
             this.sdkAccountDesignerSettings = sdkAccountDesignerSettings;
         }
