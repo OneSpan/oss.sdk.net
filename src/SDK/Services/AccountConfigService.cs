@@ -181,5 +181,17 @@ namespace OneSpanSign.Sdk.Services
         public void DeleteAccountEmailReminderSettings() {
             apiClient.DeleteAccountEmailReminderSettings();
         }
+        
+        public AccountUploadSettings GetAccountUploadSettings() {
+            return apiClient.GetAccountUploadSettings();
+        }
+        
+        public void UpdateAccountUploadSettings(AccountUploadSettings accountUploadSettings) {
+            apiClient.UpdateAccountUploadSettings(accountUploadSettings);
+        }
+        
+        public void DeleteAccountUploadSettings() {
+            apiClient.DeleteAccountUploadSettings();
+        }
     }
 }
