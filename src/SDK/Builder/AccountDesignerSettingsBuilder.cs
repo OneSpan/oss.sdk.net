@@ -6,20 +6,20 @@ namespace OneSpanSign.Sdk
     {
 
 
-        private Nullable<bool> send;
-        private Nullable<bool> done;
-        private Nullable<bool> settings;
-        private Nullable<bool> documentVisibility;
-        private Nullable<bool> addDocument;
-        private Nullable<bool> editDocument;
-        private Nullable<bool> deleteDocument;
-        private Nullable<bool> addSigner;
-        private Nullable<bool> editRecipient;
-        private Nullable<bool> rolePickerSender;
-        private Nullable<bool> saveLayout;
-        private Nullable<bool> applyLayout;
-        private Nullable<bool> showSharedLayouts;
-        private String defaultSignatureType;
+        private Nullable<bool> _send;
+        private Nullable<bool> _done;
+        private Nullable<bool> _settings;
+        private Nullable<bool> _documentVisibility;
+        private Nullable<bool> _addDocument;
+        private Nullable<bool> _editDocument;
+        private Nullable<bool> _deleteDocument;
+        private Nullable<bool> _addSigner;
+        private Nullable<bool> _editRecipient;
+        private Nullable<bool> _rolePickerSender;
+        private Nullable<bool> _saveLayout;
+        private Nullable<bool> _applyLayout;
+        private Nullable<bool> _showSharedLayouts;
+        private string _defaultSignatureType;
 
 
         private AccountDesignerSettingsBuilder()
@@ -33,183 +33,183 @@ namespace OneSpanSign.Sdk
         
         public AccountDesignerSettingsBuilder WithSend()
         {
-            this.send = true;
+            this._send = true;
             return this;
         }
 
         public AccountDesignerSettingsBuilder WithoutSend()
         {
-            this.send = false;
+            this._send = false;
             return this;
         }
 
         public AccountDesignerSettingsBuilder WithDone()
         {
-            this.done = true;
+            this._done = true;
             return this;
         }
 
         public AccountDesignerSettingsBuilder WithoutDone()
         {
-            this.done = false;
+            this._done = false;
             return this;
         }
 
         public AccountDesignerSettingsBuilder WithSettings()
         {
-            this.settings = true;
+            this._settings = true;
             return this;
         }
 
         public AccountDesignerSettingsBuilder WithoutSettings()
         {
-            this.settings = false;
+            this._settings = false;
             return this;
         }
 
         public AccountDesignerSettingsBuilder WithDocumentVisibility()
         {
-            this.documentVisibility = true;
+            this._documentVisibility = true;
             return this;
         }
 
         public AccountDesignerSettingsBuilder WithoutDocumentVisibility()
         {
-            this.documentVisibility = false;
+            this._documentVisibility = false;
             return this;
         }
 
         public AccountDesignerSettingsBuilder WithAddDocument()
         {
-            this.addDocument = true;
+            this._addDocument = true;
             return this;
         }
 
         public AccountDesignerSettingsBuilder WithoutAddDocument()
         {
-            this.addDocument = false;
+            this._addDocument = false;
             return this;
         }
 
-        public AccountDesignerSettingsBuilder WithEditDocument()
+        public AccountDesignerSettingsBuilder With_editDocument()
         {
-            this.editDocument = true;
+            this._editDocument = true;
             return this;
         }
 
-        public AccountDesignerSettingsBuilder WithoutEditDocument()
+        public AccountDesignerSettingsBuilder Without_editDocument()
         {
-            this.editDocument = false;
+            this._editDocument = false;
             return this;
         }
 
-        public AccountDesignerSettingsBuilder WithDeleteDocument()
+        public AccountDesignerSettingsBuilder With_deleteDocument()
         {
-            this.deleteDocument = true;
+            this._deleteDocument = true;
             return this;
         }
 
-        public AccountDesignerSettingsBuilder WithoutDeleteDocument()
+        public AccountDesignerSettingsBuilder Without_deleteDocument()
         {
-            this.deleteDocument = false;
+            this._deleteDocument = false;
             return this;
         }
 
         public AccountDesignerSettingsBuilder WithAddSigner()
         {
-            this.addSigner = true;
+            this._addSigner = true;
             return this;
         }
 
         public AccountDesignerSettingsBuilder WithoutAddSigner()
         {
-            this.addSigner = false;
+            this._addSigner = false;
             return this;
         }
 
         public AccountDesignerSettingsBuilder WithEditRecipient()
         {
-            this.editRecipient = true;
+            this._editRecipient = true;
             return this;
         }
 
         public AccountDesignerSettingsBuilder WithoutEditRecipient()
         {
-            this.editRecipient = false;
+            this._editRecipient = false;
             return this;
         }
 
         public AccountDesignerSettingsBuilder WithRolePickerSender()
         {
-            this.rolePickerSender = true;
+            this._rolePickerSender = true;
             return this;
         }
 
         public AccountDesignerSettingsBuilder WithoutRolePickerSender()
         {
-            this.rolePickerSender = false;
+            this._rolePickerSender = false;
             return this;
         }
 
         public AccountDesignerSettingsBuilder WithSaveLayout()
         {
-            this.saveLayout = true;
+            this._saveLayout = true;
             return this;
         }
 
         public AccountDesignerSettingsBuilder WithoutSaveLayout()
         {
-            this.saveLayout = false;
+            this._saveLayout = false;
             return this;
         }
 
         public AccountDesignerSettingsBuilder WithApplyLayout()
         {
-            this.applyLayout = true;
+            this._applyLayout = true;
             return this;
         }
 
         public AccountDesignerSettingsBuilder WithoutApplyLayout()
         {
-            this.applyLayout = false;
+            this._applyLayout = false;
             return this;
         }
 
         public AccountDesignerSettingsBuilder WithShowSharedLayouts()
         {
-            this.showSharedLayouts = true;
+            this._showSharedLayouts = true;
             return this;
         }
 
         public AccountDesignerSettingsBuilder WithoutShowSharedLayouts()
         {
-            this.showSharedLayouts = false;
+            this._showSharedLayouts = false;
             return this;
         }
 
         public AccountDesignerSettingsBuilder WithDefaultSignatureType(String signatureType)
         {
-            this.defaultSignatureType = signatureType;
+            this._defaultSignatureType = signatureType;
             return this;
         }
 
         public AccountDesignerSettings Build()
         {
             AccountDesignerSettings result = new AccountDesignerSettings();
-            result.Send = send;
-            result.Done = done;
-            result.Settings = settings;
-            result.DocumentVisibility = documentVisibility;
-            result.AddDocument = addDocument;
-            result.EditDocument = editDocument;
-            result.DeleteDocument = deleteDocument;
-            result.AddSigner = addSigner;
-            result.EditRecipient = editRecipient;
-            result.RolePickerSender = rolePickerSender;
-            result.SaveLayout = saveLayout;
-            result.ApplyLayout = applyLayout;
-            result.ShowSharedLayouts = showSharedLayouts;
-            result.DefaultSignatureType = defaultSignatureType;
+            result.Send = _send;
+            result.Done = _done;
+            result.Settings = _settings;
+            result.DocumentVisibility = _documentVisibility;
+            result.AddDocument = _addDocument;
+            result.EditDocument = _editDocument;
+            result.DeleteDocument = _deleteDocument;
+            result.AddSigner = _addSigner;
+            result.EditRecipient = _editRecipient;
+            result.RolePickerSender = _rolePickerSender;
+            result.SaveLayout = _saveLayout;
+            result.ApplyLayout = _applyLayout;
+            result.ShowSharedLayouts = _showSharedLayouts;
+            result.DefaultSignatureType = _defaultSignatureType;
 
             return result;
         }

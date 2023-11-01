@@ -26,8 +26,8 @@ namespace SDK.Examples
             patchedAccountSystemSettingProperties = OssClient.AccountConfigService.GetAccountSystemSettingProperties();
             
             //Delete Account System Settings
-            // OssClient.AccountConfigService.DeleteAccountSystemSettingProperties();
-            // deletedAccountSystemSettingProperties = OssClient.AccountConfigService.GetAccountSystemSettingProperties();
+            OssClient.AccountConfigService.DeleteAccountSystemSettingProperties();
+            deletedAccountSystemSettingProperties = OssClient.AccountConfigService.GetAccountSystemSettingProperties();
             
         } 
     }
