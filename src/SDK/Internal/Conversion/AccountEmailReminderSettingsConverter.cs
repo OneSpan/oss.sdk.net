@@ -37,9 +37,9 @@ namespace OneSpanSign.Sdk
 			}
 
 			OneSpanSign.Sdk.AccountEmailReminderSettings result = new OneSpanSign.Sdk.AccountEmailReminderSettings();
-			result.StartInDaysDelay = sdkAccountEmailReminderSettings.StartInDaysDelay;
-			result.IntervalInDays = sdkAccountEmailReminderSettings.IntervalInDays;
-			result.RepetitionsCount = sdkAccountEmailReminderSettings.RepetitionsCount;
+			result.StartInDaysDelay = apiAccountEmailReminderSettings.StartInDaysDelay;
+			result.IntervalInDays = apiAccountEmailReminderSettings.IntervalInDays;
+			result.RepetitionsCount = apiAccountEmailReminderSettings.RepetitionsCount;
 			return result;
 		}
     }
