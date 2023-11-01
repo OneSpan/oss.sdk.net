@@ -2,7 +2,7 @@ using System;
 using Newtonsoft.Json;
 namespace OneSpanSign.API
 {
-    public class AccountEmailReminderSettings
+    internal class AccountEmailReminderSettings
     {
         [JsonProperty("startInDaysDelay")]
         public Nullable<int> StartInDaysDelay

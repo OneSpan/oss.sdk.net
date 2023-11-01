@@ -5,30 +5,30 @@ namespace OneSpanSign.Sdk
     public class AccountDesignerSettings
     {
         
-        private Nullable<bool> send;
-        private Nullable<bool> done;
-        private Nullable<bool> settings;
-        private Nullable<bool> documentVisibility;
-        private Nullable<bool> addDocument;
-        private Nullable<bool> editDocument;
-        private Nullable<bool> deleteDocument;
-        private Nullable<bool> addSigner;
-        private Nullable<bool> editRecipient;
-        private Nullable<bool> rolePickerSender;
-        private Nullable<bool> saveLayout;
-        private Nullable<bool> applyLayout;
-        private Nullable<bool> showSharedLayouts;
-        private String defaultSignatureType;
+        private Nullable<bool> _send;
+        private Nullable<bool> _done;
+        private Nullable<bool> _settings;
+        private Nullable<bool> _documentVisibility;
+        private Nullable<bool> _addDocument;
+        private Nullable<bool> _editDocument;
+        private Nullable<bool> _deleteDocument;
+        private Nullable<bool> _addSigner;
+        private Nullable<bool> _editRecipient;
+        private Nullable<bool> _rolePickerSender;
+        private Nullable<bool> _saveLayout;
+        private Nullable<bool> _applyLayout;
+        private Nullable<bool> _showSharedLayouts;
+        private String _defaultSignatureType;
 
         public Nullable<bool> Send
         {
             get
             {
-                return send;
+                return _send;
             }
             set
             {
-                send = value;
+                _send = value;
             }
         }
         
@@ -36,11 +36,11 @@ namespace OneSpanSign.Sdk
         {
             get
             {
-                return done;
+                return _done;
             }
             set
             {
-                done = value;
+                _done = value;
             }
         }
         
@@ -48,11 +48,11 @@ namespace OneSpanSign.Sdk
         {
             get
             {
-                return settings;
+                return _settings;
             }
             set
             {
-                settings = value;
+                _settings = value;
             }
         }
         
@@ -60,11 +60,11 @@ namespace OneSpanSign.Sdk
         {
             get
             {
-                return addDocument;
+                return _addDocument;
             }
             set
             {
-                addDocument = value;
+                _addDocument = value;
             }
         }
         
@@ -72,11 +72,11 @@ namespace OneSpanSign.Sdk
         {
             get
             {
-                return editDocument;
+                return _editDocument;
             }
             set
             {
-                editDocument = value;
+                _editDocument = value;
             }
         }
         
@@ -84,11 +84,11 @@ namespace OneSpanSign.Sdk
         {
             get
             {
-                return deleteDocument;
+                return _deleteDocument;
             }
             set
             {
-                deleteDocument = value;
+                _deleteDocument = value;
             }
         }
         
@@ -96,11 +96,11 @@ namespace OneSpanSign.Sdk
         {
             get
             {
-                return addSigner;
+                return _addSigner;
             }
             set
             {
-                addSigner = value;
+                _addSigner = value;
             }
         }
         
@@ -108,11 +108,11 @@ namespace OneSpanSign.Sdk
         {
             get
             {
-                return editRecipient;
+                return _editRecipient;
             }
             set
             {
-                editRecipient = value;
+                _editRecipient = value;
             }
         }
 
@@ -120,11 +120,11 @@ namespace OneSpanSign.Sdk
         {
             get
             {
-                return rolePickerSender;
+                return _rolePickerSender;
             }
             set
             {
-                rolePickerSender = value;
+                _rolePickerSender = value;
             }
         }
         
@@ -132,11 +132,11 @@ namespace OneSpanSign.Sdk
         {
             get
             {
-                return documentVisibility;
+                return _documentVisibility;
             }
             set
             {
-                documentVisibility = value;
+                _documentVisibility = value;
             }
         }
         
@@ -144,11 +144,11 @@ namespace OneSpanSign.Sdk
         {
             get
             {
-                return saveLayout;
+                return _saveLayout;
             }
             set
             {
-                saveLayout = value;
+                _saveLayout = value;
             }
         }
         
@@ -156,11 +156,11 @@ namespace OneSpanSign.Sdk
         {
             get
             {
-                return applyLayout;
+                return _applyLayout;
             }
             set
             {
-                applyLayout = value;
+                _applyLayout = value;
             }
         }
 
@@ -168,11 +168,11 @@ namespace OneSpanSign.Sdk
         {
             get
             {
-                return showSharedLayouts;
+                return _showSharedLayouts;
             }
             set
             {
-                showSharedLayouts = value;
+                _showSharedLayouts = value;
             }
         }
         
@@ -180,11 +180,11 @@ namespace OneSpanSign.Sdk
         {
             get
             {
-                return defaultSignatureType;
+                return _defaultSignatureType;
             }
             set
             {
-                defaultSignatureType = value;
+                _defaultSignatureType = value;
             }
         }
     }
