@@ -212,6 +212,8 @@ namespace OneSpanSign.Sdk.Internal
         public static readonly String ACCOUNT_EMAIL_REMINDER_SETTINGS_PATH = "/account/admin/accountSettings/emailReminderSettings";
         //Account Upload Settings Service
         public static readonly String ACCOUNT_UPLOAD_SETTINGS_PATH = "/account/admin/accountSettings/attachmentsWhitelist";
+        //Account System Settings Service
+        public static readonly String ACCOUNT_SYSTEM_SETTING_PROPERTIES_PATH = "/account/admin/accountSettings/systemSettings";
 
         // Account Signature Layout settings service
         public static readonly String ACCOUNT_SIGNATURE_LAYOUT_PATH = "/account/admin/accountSettings/signatureLayout";
