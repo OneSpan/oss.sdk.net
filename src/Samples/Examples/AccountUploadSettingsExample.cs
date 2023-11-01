@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using OneSpanSign.Sdk;
-using OneSpanSign.Sdk.Builder;
 
 namespace SDK.Examples
 {

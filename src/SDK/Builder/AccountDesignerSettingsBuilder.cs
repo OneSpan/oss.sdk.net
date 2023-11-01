@@ -1,6 +1,6 @@
 using System;
 
-namespace OneSpanSign.Sdk.Builder
+namespace OneSpanSign.Sdk
 {
     public class AccountDesignerSettingsBuilder
     {

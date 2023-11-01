@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace OneSpanSign.Sdk.Builder
+namespace OneSpanSign.Sdk
 {
     public class AccountUploadSettingsBuilder
     {
