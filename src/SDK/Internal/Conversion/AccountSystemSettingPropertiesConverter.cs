@@ -12,7 +12,7 @@ namespace OneSpanSign.Sdk.Internal.Conversion
 
         public AccountSystemSettingPropertiesConverter(OneSpanSign.Sdk.AccountSystemSettingProperties sdkAccountSystemSettingProperties)
         {
-            this.sdkAccountSystemSettingProperties = this.sdkAccountSystemSettingProperties;
+            this.sdkAccountSystemSettingProperties = sdkAccountSystemSettingProperties;
         }
         
         public OneSpanSign.API.AccountSystemSettingProperties ToAPIAccountSystemSettingProperties()
