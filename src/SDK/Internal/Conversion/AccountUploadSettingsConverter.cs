@@ -1,4 +1,4 @@
-namespace OneSpanSign.Sdk.Internal.Conversion
+namespace OneSpanSign.Sdk
 {
     internal class AccountUploadSettingsConverter
     {

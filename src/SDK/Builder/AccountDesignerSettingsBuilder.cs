@@ -91,25 +91,25 @@ namespace OneSpanSign.Sdk
             return this;
         }
 
-        public AccountDesignerSettingsBuilder With_editDocument()
+        public AccountDesignerSettingsBuilder WithEditDocument()
         {
             this._editDocument = true;
             return this;
         }
 
-        public AccountDesignerSettingsBuilder Without_editDocument()
+        public AccountDesignerSettingsBuilder WithoutEditDocument()
         {
             this._editDocument = false;
             return this;
         }
 
-        public AccountDesignerSettingsBuilder With_deleteDocument()
+        public AccountDesignerSettingsBuilder WithDeleteDocument()
         {
             this._deleteDocument = true;
             return this;
         }
 
-        public AccountDesignerSettingsBuilder Without_deleteDocument()
+        public AccountDesignerSettingsBuilder WithoutDeleteDocument()
         {
             this._deleteDocument = false;
             return this;
