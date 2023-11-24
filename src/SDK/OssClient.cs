@@ -292,6 +292,25 @@ namespace OneSpanSign.Sdk
             return id;
         }
 
+        public PackageId createPackageOneStepWithBase64Content(DocumentPackage package)
+        {
+            ValidateSignatures(package);
+            if (!IsSdkVersionSetInPackageData(package))
+            {
+                SetSdkVersionInPackageData(package);
+            }
+
+            OneSpanSign.API.Package packageToCreate = new DocumentPackageConverter(package).ToAPIPackage();
+            foreach (OneSpanSign.Sdk.Document document in package.Documents)
+            {
+                packageToCreate.AddDocument(new DocumentConverter(document).ToAPIDocument(packageToCreate));
+            }
+
+            PackageId id = packageService.CreatePackage(packageToCreate);
+
+            return id;
+        }
+
         public void SignDocument(PackageId packageId, string documentName)
         {
             SignDocument(packageId, documentName, new CapturedSignature(""));

@@ -20,6 +20,7 @@ namespace OneSpanSign.Sdk.Builder
         private string description;
         private External external;
         private IDictionary<string, object> data = new Dictionary<string, object>();
+		private string base64Content;
 
 		private DocumentBuilder(string name)
 		{
@@ -54,6 +55,12 @@ namespace OneSpanSign.Sdk.Builder
 		{
 			documentSource = new StreamDocumentSource (contentStream);
 			fileName = DocumentTypeUtility.NormalizeName (type, name);
+			return this;
+		}
+
+		public DocumentBuilder FromBase64Content(string base64Content) 
+		{
+			this.base64Content = base64Content;
 			return this;
 		}
 
@@ -163,6 +170,7 @@ namespace OneSpanSign.Sdk.Builder
             doc.AddQRCodes(qrCodes);
 			doc.Description = description;
             doc.Data = data;
+			doc.Base64Content = base64Content;
 
 			return doc;
 		}

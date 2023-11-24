@@ -62,6 +62,11 @@ namespace OneSpanSign.API
                 get; set;
         }
     
+    [JsonProperty("base64Content")]
+    public String Base64Content
+    {
+                get; set;
+        }
 		    
     [JsonProperty("external")]
     public External External

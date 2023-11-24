@@ -66,6 +66,12 @@ namespace OneSpanSign.Sdk
             set;
         }
 
+        public string Base64Content
+        {
+            get;
+            set;
+        }
+
         public List<Signature> Signatures
         {
             get
