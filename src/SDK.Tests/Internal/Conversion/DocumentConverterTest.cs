@@ -80,6 +80,7 @@ namespace SDK.Tests
             Assert.IsNotNull(sdkDocument1);
             Assert.AreEqual(sdkDocument1.Name, apiDocument1.Name);
             Assert.AreEqual(sdkDocument1.Description, apiDocument1.Description);
+            Assert.AreEqual(sdkDocument1.Base64Content, apiDocument1.Base64Content);
             Assert.AreEqual(sdkDocument1.Index, apiDocument1.Index);
             Assert.AreEqual(sdkDocument1.Id, apiDocument1.Id);
             CollectionAssert.AreEquivalent(sdkDocument1.ExtractionTypes, apiDocument1.ExtractionTypes);
@@ -130,6 +131,21 @@ namespace SDK.Tests
             Assert.IsNull(converter.ToAPIDocument().Description);
         }
 
+        [Test()]
+        public void ConvertToAPIWithBase64Content()
+        {
+            sdkDocument1 = DocumentBuilder.NewDocumentNamed( "sdkDocumentNullDes" )
+                    .WithId( "sdkDocumentId" )
+                    .FromBase64Content( "apiDocument Base64Content" )
+                    .WithSignature(SignatureBuilder.SignatureFor("john.smith@email.com")
+                                   .OnPage(0))                                
+                    .Build();
+            apiDocument1 = new DocumentConverter(sdkDocument1).ToAPIDocument();
+
+            Assert.IsNotNull(apiDocument1);
+            Assert.AreEqual(sdkDocument1.Base64Content, apiDocument1.Base64Content);
+        }
+
         private OneSpanSign.Sdk.Document CreateTypicalSDKDocument()
         {
             OneSpanSign.Sdk.Document sdkDocument = DocumentBuilder.NewDocumentNamed( "sdkDocument" )
@@ -155,6 +171,7 @@ namespace SDK.Tests
             apiDocument.Name = "apiDocument";
             apiDocument.Index = 1;
             apiDocument.Description = "apiDocument Description";
+            apiDocument.Base64Content = "apiDocument Base64Content";
             apiDocument.Id = "apiDocumentId";
             apiDocument.Data = data;
             apiDocument.AddExtractionType(ExtractionType.TEXT_TAGS.ToString());
