@@ -18,19 +18,6 @@ namespace OneSpanSign.API
         {
             get; set;
         }
-
-    [JsonProperty("signerInformationForEquifaxCanada")]
-    public SignerInformationForEquifaxCanada SignerInformationForEquifaxCanada
-    {
-                get; set;
-        }
-    
-		    
-    [JsonProperty("signerInformationForEquifaxUSA")]
-    public SignerInformationForEquifaxUSA SignerInformationForEquifaxUSA
-    {
-                get; set;
-        }
     
     [JsonProperty("signerInformationForLexisNexis")]
     public SignerInformationForLexisNexis SignerInformationForLexisNexis
