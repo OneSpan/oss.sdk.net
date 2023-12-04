@@ -75,6 +75,11 @@ namespace OneSpanSign.Sdk
                 document.ExternalSigned = apiDocument.ExternalSigned;
             }
 
+            if ( apiDocument.Base64Content != null )
+            {
+                document.Base64Content = apiDocument.Base64Content;
+            }
+
             return document;
         }
 
@@ -144,6 +149,11 @@ namespace OneSpanSign.Sdk
             if (sdkDocument.Description != null)
             {
                 doc.Description = sdkDocument.Description;
+            }
+
+            if (sdkDocument.Base64Content != null)
+            {
+                doc.Base64Content = sdkDocument.Base64Content;
             }
 
             return doc;

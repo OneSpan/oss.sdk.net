@@ -38,8 +38,6 @@ namespace OneSpanSign.Sdk
             }
 
             OneSpanSign.API.KnowledgeBasedAuthentication result = new OneSpanSign.API.KnowledgeBasedAuthentication();
-            result.SignerInformationForEquifaxCanada = new SignerInformationForEquifaxCanadaConverter(sdkKnowledgeBasedAuthentication.SignerInformationForEquifaxCanada).ToAPISignerInformationForEquifaxCanada();
-            result.SignerInformationForEquifaxUSA = new SignerInformationForEquifaxUSAConverter(sdkKnowledgeBasedAuthentication.SignerInformationForEquifaxUSA).ToAPISignerInformationForEquifaxUSA();
             result.SignerInformationForLexisNexis = new SignerInformationForLexisNexisConverter(sdkKnowledgeBasedAuthentication.SignerInformationForLexisNexis).ToApiSignerInformationForLexisNexis();
             result.KnowledgeBasedAuthenticationStatus = new KnowledgeBasedAuthenticationStatusConverter(sdkKnowledgeBasedAuthentication.KnowledgeBasedAuthenticationStatus).ToAPIKnowledgeBasedAuthenticationStatus();
 
@@ -58,8 +56,6 @@ namespace OneSpanSign.Sdk
             }
 
             OneSpanSign.Sdk.KnowledgeBasedAuthentication result = new OneSpanSign.Sdk.KnowledgeBasedAuthentication();
-            result.SignerInformationForEquifaxCanada = new SignerInformationForEquifaxCanadaConverter(apiKnowledgeBasedAuthentication.SignerInformationForEquifaxCanada).ToSDKSignerInformationForEquifaxCanada();
-            result.SignerInformationForEquifaxUSA = new SignerInformationForEquifaxUSAConverter(apiKnowledgeBasedAuthentication.SignerInformationForEquifaxUSA).ToSDKSignerInformationForEquifaxUSA();
             result.SignerInformationForLexisNexis = new SignerInformationForLexisNexisConverter(apiKnowledgeBasedAuthentication.SignerInformationForLexisNexis).ToSDKSignerInformationForLexisNexis();
             result.KnowledgeBasedAuthenticationStatus = new KnowledgeBasedAuthenticationStatusConverter(apiKnowledgeBasedAuthentication.KnowledgeBasedAuthenticationStatus).ToSDKKnowledgeBasedAuthenticationStatus();
             return result;
