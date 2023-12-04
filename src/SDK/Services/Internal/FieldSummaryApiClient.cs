@@ -2,17 +2,18 @@ using System;
 using System.Collections.Generic;
 using OneSpanSign.Sdk.Internal;
 using Newtonsoft.Json;
+using System.Data.SqlTypes;
 
 namespace OneSpanSign.Sdk
 {
     internal class FieldSummaryApiClient
     {
-        private string apiToken;
+        private RestClient restClient;
         private UrlTemplate template;
 
-         public FieldSummaryApiClient (string apiToken, string baseUrl)
+        public FieldSummaryApiClient(RestClient restClient, string baseUrl)
         {
-            this.apiToken = apiToken;
+            this.restClient = restClient;
             template = new UrlTemplate (baseUrl);                                                                   
         }
         
@@ -23,7 +24,7 @@ namespace OneSpanSign.Sdk
                             .Build ();
 
             try {
-                string response = Converter.ToString (HttpMethods.GetHttp (apiToken, path));
+                string response = restClient.Get(path);
                 return JsonConvert.DeserializeObject<List<FieldSummary>> (response);
             }
             catch (OssServerException e) {

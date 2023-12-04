@@ -10,24 +10,20 @@ namespace OneSpanSign.Sdk.Services
 	/// </summary>
 	public class SessionService
 	{
-		private string apiToken;
 		private UrlTemplate template;
 		private AuthenticationTokenService authenticationService;
+		private RestClient restClient;
 
 		/// <summary>
 		/// Initializes a new instance of the <see cref="OneSpanSign.Sdk.SessionService"/> class.
 		/// </summary>
-		/// <param name="apiToken">API token.</param>
-		/// <param name="baseUrl">Base URL.</param>
-		public SessionService (string apiToken, string baseUrl)
-		{
-			this.apiToken = apiToken;
-			template = new UrlTemplate (baseUrl);
-			authenticationService = new AuthenticationTokenService(new RestClient(apiToken), baseUrl);
+        public SessionService(RestClient client, string baseUrl)
+        {
+            template = new UrlTemplate(baseUrl);
+            this.restClient = client;
+        }
 
-		}
-
-		public SessionToken CreateSessionToken (PackageId packageId, string signerId)
+        public SessionToken CreateSessionToken (PackageId packageId, string signerId)
 		{
 			return CreateSignerSessionToken(packageId, signerId);
 		}
@@ -36,7 +32,6 @@ namespace OneSpanSign.Sdk.Services
 		public SessionToken CreateSenderSessionToken()
 		{
 			AuthenticationToken token = authenticationService.CreateAuthenticationToken();
-
 			return new SessionToken(token.Token);
 		}
 
@@ -55,7 +50,8 @@ namespace OneSpanSign.Sdk.Services
                 .Build ();
 
 			try {
-				string response = Converter.ToString (HttpMethods.PostHttp (apiToken, path, new byte[0]));
+				//string response = Converter.ToString (HttpMethods.PostHttp (apiToken, path, new byte[0]));
+				string response = restClient.Post(path, "");
 				return JsonConvert.DeserializeObject<SessionToken> (response);
             }
             catch (OssServerException e) {

@@ -146,9 +146,9 @@ namespace OneSpanSign.Sdk
             signingStyleService = new SigningStyleService(restClient, this.baseUrl, jsonSerializerSettings);
             signerVerificationService = new SignerVerificationService(restClient, this.baseUrl, jsonSerializerSettings);
             signatureImageService = new SignatureImageService(restClient, this.baseUrl, jsonSerializerSettings);
-            sessionService = new SessionService(apiKey, this.baseUrl);
-            fieldSummaryService = new FieldSummaryService(new FieldSummaryApiClient(apiKey, this.baseUrl));
-            auditService = new AuditService(apiKey, this.baseUrl);
+            sessionService = new SessionService(restClient, this.baseUrl);
+            fieldSummaryService = new FieldSummaryService(new FieldSummaryApiClient(restClient, this.baseUrl));
+            auditService = new AuditService(restClient, this.baseUrl);
             eventNotificationService =
                 new EventNotificationService(new EventNotificationApiClient(restClient, this.baseUrl,
                     jsonSerializerSettings));

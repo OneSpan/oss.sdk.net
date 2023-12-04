@@ -54,7 +54,7 @@
     <None Update="SampleDocuments\Text_Tag_And_Acrobat_Form_Fields.pdf">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="signers.properties">
+    <None Update="signers.properties.ossq1">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="SampleDocuments\taggedDocument.pdf">
