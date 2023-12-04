@@ -9,20 +9,20 @@ namespace OneSpanSign.Sdk.Services
 	/// The AuditService class provides a method to get the audit trail for a package.
 	/// </summary>
 	public class AuditService
-	{
-		private string apiToken;
-		private UrlTemplate template;
+    {
+        private RestClient restClient;
+        private UrlTemplate template;
 
-		/// <summary>
-		/// Initializes a new instance of the <see cref="OneSpanSign.Sdk.AuditService"/> class.
-		/// </summary>
-		/// <param name="apiToken">API token.</param>
-		/// <param name="baseUrl">Base URL.</param>
-		public AuditService (string apiToken, string baseUrl)
+        /// <summary>
+        /// Initializes a new instance of the <see cref="OneSpanSign.Sdk.AuditService"/> class.
+        /// </summary>
+        /// <param name="apiToken">API token.</param>
+        /// <param name="baseUrl">Base URL.</param>
+        public AuditService (RestClient restClient, string baseUrl)
 		{
-			this.apiToken = apiToken;
-			template = new UrlTemplate (baseUrl);
-		}
+            this.restClient = restClient;
+            template = new UrlTemplate(baseUrl);
+        }
 
 		/// <summary>
 		/// Gets the audit trail for a package and returns a list of audits.
@@ -36,9 +36,9 @@ namespace OneSpanSign.Sdk.Services
 					.Build ();
 
 			try {
-				string response = Converter.ToString (HttpMethods.GetHttp (apiToken, path));
-				Dictionary<string,object> eventList = JsonConvert.DeserializeObject <Dictionary<string,object>> (response);
-				if (eventList.ContainsKey ("audit-events")) {
+                string response = restClient.Get(path);
+                Dictionary<string, object> eventList = JsonConvert.DeserializeObject<Dictionary<string, object>>(response);
+                if (eventList.ContainsKey ("audit-events")) {
 					return JsonConvert.DeserializeObject<List<Audit>> (eventList ["audit-events"].ToString ());
 				}
 				return null;
