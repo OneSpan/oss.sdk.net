@@ -9,6 +9,16 @@ namespace OneSpanSign.Sdk
         {
         }
 
+        public SignerInformationForEquifaxCanada SignerInformationForEquifaxCanada
+        {
+            get; set;
+        }
+
+        public SignerInformationForEquifaxUSA SignerInformationForEquifaxUSA
+        {
+            get; set;
+        }
+
         public SignerInformationForLexisNexis SignerInformationForLexisNexis
         {
             get; set;
