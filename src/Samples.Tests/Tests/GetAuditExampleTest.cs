@@ -17,7 +17,7 @@ namespace SDK.Examples
 
             List<Audit> audits = example.audits;
 
-            Assert.AreEqual(DateTime.Now.Date, Convert.ToDateTime(audits[0].dateTime).Date);
+            Assert.AreEqual(DateTime.UtcNow.Date, Convert.ToDateTime(audits[0].dateTime).Date);
             Assert.AreEqual(example.senderEmail, audits[0].email);
         }
     }
