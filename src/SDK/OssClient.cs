@@ -14,7 +14,7 @@ using OneSpanSign.Sdk.Builder.Internal;
 namespace OneSpanSign.Sdk
 {
     /// <summary>
-    /// The ossClient acts as a eSignLive client.
+    /// The ossClient acts as a OneSpan Sign client.
     /// The ossClient has access to service classes that help create packages and retrieve resources from the client's account.
     /// </summary>
     public class OssClient
@@ -252,7 +252,6 @@ namespace OneSpanSign.Sdk
 
         public PackageId CreatePackage(DocumentPackage package)
         {
-            ValidateSignatures(package);
             if (!IsSdkVersionSetInPackageData(package))
             {
                 SetSdkVersionInPackageData(package);
@@ -275,7 +274,6 @@ namespace OneSpanSign.Sdk
 
         public PackageId CreatePackageOneStep(DocumentPackage package)
         {
-            ValidateSignatures(package);
             if (!IsSdkVersionSetInPackageData(package))
             {
                 SetSdkVersionInPackageData(package);
@@ -294,7 +292,6 @@ namespace OneSpanSign.Sdk
 
         public PackageId createPackageOneStepWithBase64Content(DocumentPackage package)
         {
-            ValidateSignatures(package);
             if (!IsSdkVersionSetInPackageData(package))
             {
                 SetSdkVersionInPackageData(package);
@@ -411,7 +408,6 @@ namespace OneSpanSign.Sdk
 
         public PackageId CreatePackageFromTemplate(PackageId templateId, DocumentPackage delta)
         {
-            ValidateSignatures(delta);
             SetNewSignersIndexIfRoleWorkflowEnabled(templateId, delta);
             return templateService.CreatePackageFromTemplate(templateId,
                 new DocumentPackageConverter(delta).ToAPIPackage());
@@ -455,39 +451,6 @@ namespace OneSpanSign.Sdk
             }
 
             return maxSigningOrder;
-        }
-
-        private void ValidateSignatures(DocumentPackage documentPackage)
-        {
-            foreach (Document document in documentPackage.Documents)
-            {
-                ValidateMixingSignatureAndAcceptance(document);
-            }
-        }
-
-        private void ValidateMixingSignatureAndAcceptance(Document document)
-        {
-            if (CheckAcceptanceSignatureStyle(document))
-            {
-                foreach (Signature signature in document.Signatures)
-                {
-                    if (signature.Style != SignatureStyle.ACCEPTANCE)
-                        throw new OssException(
-                            "It is not allowed to use acceptance signature styles and other signature styles together in one document.",
-                            null);
-                }
-            }
-        }
-
-        private bool CheckAcceptanceSignatureStyle(Document document)
-        {
-            foreach (Signature signature in document.Signatures)
-            {
-                if (signature.Style == SignatureStyle.ACCEPTANCE)
-                    return true;
-            }
-
-            return false;
         }
 
         private bool CheckSignerOrdering(DocumentPackage template)

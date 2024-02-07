@@ -22,7 +22,7 @@ namespace SDK.Examples
         {
             DocumentPackage superDuperPackage =
                 PackageBuilder.NewPackageNamed(PackageName)
-                .DescribedAs("This is a package created using the eSignLive SDK")
+                .DescribedAs("This is a package created using OneSpan Sign SDK")
                 .ExpiresOn(DateTime.Now.AddMonths(100))
                 .WithEmailMessage("This message should be delivered to all signers")
                 .WithTimezoneId("Canada/Mountain")

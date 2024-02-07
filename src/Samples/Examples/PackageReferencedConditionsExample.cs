@@ -32,7 +32,7 @@ namespace SDK.Examples
         override public void Execute()
         {
             DocumentPackage superDuperPackage = PackageBuilder.NewPackageNamed(packageName)
-                .DescribedAs("This is a package created using the eSignLive SDK")
+                .DescribedAs("This is a package created using OneSpan Sign SDK")
                 .WithEmailMessage("This message should be delivered to all signers")
                 .WithSigner(SignerBuilder.NewSignerWithEmail(email1)
                     .WithCustomId("signer1")

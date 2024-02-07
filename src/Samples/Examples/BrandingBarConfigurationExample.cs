@@ -15,7 +15,7 @@ namespace SDK.Examples
         override public void Execute()
         {
             DocumentPackage superDuperPackage = PackageBuilder.NewPackageNamed(PackageName)
-                .DescribedAs( "This is a package created using the eSignLive SDK" )
+                .DescribedAs( "This is a package created using OneSpan Sign SDK" )
                     .WithSettings( DocumentPackageSettingsBuilder.NewDocumentPackageSettings()
                                   .WithoutOptOut()
                                   .WithoutDocumentToolbarDownloadButton()
