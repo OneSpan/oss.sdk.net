@@ -85,7 +85,7 @@ namespace SDK.Examples
                     .Build();
 
             DocumentPackage superDuperPackage = PackageBuilder.NewPackageNamed(PackageName)
-                .DescribedAs("This is a package created using the eSignLive SDK")
+                .DescribedAs("This is a package created using OneSpan Sign SDK")
                     .WithSigner(signer1)
                     .WithSigner(signer2)
                     .WithDocument(DocumentBuilder.NewDocumentNamed("test document")

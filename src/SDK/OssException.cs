@@ -3,7 +3,7 @@ using System;
 namespace OneSpanSign.Sdk
 {
 	/// <summary>
-	/// eSignLive exception.
+	/// OneSpan Sign exception.
 	/// </summary>
 	public class OssException : Exception
 	{

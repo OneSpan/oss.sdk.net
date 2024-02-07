@@ -42,7 +42,7 @@ namespace SDK.Examples
 
             DocumentPackage template =
                 PackageBuilder.NewPackageNamed("CustomSenderInfoInCreateNewTemplateExample: " + DateTime.Now)
-                .DescribedAs("This is a template created using the eSignLive SDK")
+                .DescribedAs("This is a template created using OneSpan Sign SDK")
                 .WithEmailMessage("This message should be delivered to all signers")
                 .WithSigner(SignerBuilder.NewSignerPlaceholder(new Placeholder("PlaceholderId1")))
                 .WithDocument(DocumentBuilder.NewDocumentNamed("First Document")

@@ -10,20 +10,17 @@ namespace SDK.Examples
     {
         [Test()]
         public void VerifyResult()
-        {
-            Assert.Throws<OssException>(() =>
-            {
-                MixingSignatureAndAcceptanceOnOnedocumentExample example = new MixingSignatureAndAcceptanceOnOnedocumentExample();
-                example.Run();
+        { 
+            MixingSignatureAndAcceptanceOnOnedocumentExample example = new MixingSignatureAndAcceptanceOnOnedocumentExample();
+            example.Run();
 
-                DocumentPackage documentPackage = example.RetrievedPackage;
+            DocumentPackage documentPackage = example.RetrievedPackage;
 
-                List<Signature> signatures = documentPackage.GetDocument("First Document").Signatures;
+            List<Signature> signatures = documentPackage.GetDocument("First Document").Signatures;
 
-                Assert.AreEqual(2, signatures.Count);
-                Assert.AreEqual(SignatureStyle.FULL_NAME, signatures[0].Style);
-                Assert.AreEqual(SignatureStyle.ACCEPTANCE, signatures[1].Style);
-            });
+            Assert.AreEqual(2, signatures.Count);
+            Assert.AreEqual(SignatureStyle.FULL_NAME, signatures[0].Style);
+            Assert.AreEqual(SignatureStyle.ACCEPTANCE, signatures[1].Style);
         }
     }
 }

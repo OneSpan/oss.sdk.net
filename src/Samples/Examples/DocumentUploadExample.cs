@@ -26,7 +26,7 @@ namespace SDK.Examples
 
             // 1. Create a package
             DocumentPackage superDuperPackage = PackageBuilder.NewPackageNamed(PackageName)
-                .DescribedAs("This is a package created using the eSignLive SDK")
+                .DescribedAs("This is a package created using OneSpan Sign SDK")
                     .ExpiresOn(DateTime.Now.AddMonths(1))
                     .WithEmailMessage("This message should be delivered to all signers")
                     .WithSigner(SignerBuilder.NewSignerWithEmail(email1)
