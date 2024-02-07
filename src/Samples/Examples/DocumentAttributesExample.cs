@@ -23,7 +23,7 @@ namespace SDK.Examples
         override public void Execute()
         {
             DocumentPackage superDuperPackage = PackageBuilder.NewPackageNamed(PackageName)
-                .DescribedAs( "This is a package created using the eSignLive SDK" )
+                .DescribedAs( "This is a package created using OneSpan Sign SDK" )
                 .WithSigner( SignerBuilder.NewSignerWithEmail( email1 )
                     .WithCustomId( "Client1" )
                     .WithFirstName( "John" )

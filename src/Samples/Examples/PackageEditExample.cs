@@ -17,7 +17,7 @@ namespace SDK.Examples
         {
 			DocumentPackage superDuperPackage =
                 PackageBuilder.NewPackageNamed(PackageName)
-					.DescribedAs("This is a package created using the eSignLive SDK")
+					.DescribedAs("This is a package created using OneSpan Sign SDK")
 					.WithSigner(SignerBuilder.NewSignerWithEmail("john.smith@acme.com")
 						.WithCustomId("Client1")
 						.WithFirstName("John")
