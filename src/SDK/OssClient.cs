@@ -597,6 +597,18 @@ namespace OneSpanSign.Sdk
             }
         }
 
+        public IList<Document> UploadDocumentsWithBase64Content(PackageId packageId, IList<Document> documents) 
+        {
+            if (documents.Count == 0) 
+            {
+                return new List<Document>();
+            } 
+            else 
+            {
+                return packageService.AddDocumentWithBase64Content(packageId, documents);
+            }
+        }
+
         [Obsolete(
             "Please use UploadDocument(string fileName, byte[] fileContent, Document document, PackageId packageId) instead of this method.")]
         public Document UploadDocument(string fileName, byte[] fileContent, Document document,
