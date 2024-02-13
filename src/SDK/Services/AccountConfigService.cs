@@ -157,5 +157,14 @@ namespace OneSpanSign.Sdk.Services
         {
             apiClient.DeleteAccountPackageSettings();;
         }
+        public SignatureLayout GetSignatureLayout()
+        {
+            return apiClient.GetSignatureLayout();
+        }
+
+        public void PatchSignatureLayout(SignatureLayout signatureLayout)
+        {
+            apiClient.PatchSignatureLayout(signatureLayout);
+        }        
     }
 }

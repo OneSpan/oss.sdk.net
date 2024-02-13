@@ -432,6 +432,42 @@ namespace OneSpanSign.Sdk
                 throw new OssException("Could not delete Account Package Settings.", e);
             }
         }
+
+        public SignatureLayout GetSignatureLayout()
+        {
+            string path = template.UrlFor(UrlTemplate.ACCOUNT_SIGNATURE_LAYOUT_PATH).Build();
+            try
+            {
+                string stringResponse = restClient.Get(path);
+                return JsonConvert.DeserializeObject<SignatureLayout> (stringResponse, jsonSettings);
+            }
+            catch (OssServerException e)
+            {
+                throw new OssServerException("Could not get Account Signature Layout.", e);
+            }
+            catch (Exception e)
+            {
+                throw new OssException("Could not get Account Signature Layout.", e);
+            }
+        }
+        
+        public void PatchSignatureLayout(SignatureLayout signatureLayout)
+        {
+            string path = template.UrlFor(UrlTemplate.ACCOUNT_SIGNATURE_LAYOUT_PATH).Build();
+            string payload = JsonConvert.SerializeObject(signatureLayout, new JsonSerializerSettings { ContractResolver = new CamelCasePropertyNamesContractResolver (), Formatting = Formatting.Indented ,NullValueHandling = NullValueHandling.Ignore});
+            try
+            {
+                restClient.Patch(path, payload);
+            }
+            catch (OssServerException e)
+            {
+                throw new OssServerException("Could not save Account Signature Layout.", e);
+            }
+            catch (Exception e)
+            {
+                throw new OssException("Could not save Account Signature Layout.", e);
+            }
+        }
         
     }
 }
