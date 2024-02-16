@@ -21,6 +21,9 @@ namespace SDK.Examples
             Assert.Contains(example.email2, example.groupMemberEmailsAfterUpdate);
             Assert.Contains(example.email3, example.groupMemberEmailsAfterUpdate);
             Assert.Contains(example.email4, example.groupMemberEmailsAfterUpdate);
+
+            Assert.AreEqual(example.createdGroup3Updated.Name, example.updatedGroupName3, "Group Name was not updated");
+            Assert.AreEqual(example.createdGroup3Updated.Email, example.UPDATED_EMAIL, "Group Email was not updated");
         }
 
         private List<string> GetGroupsId(List<Group> groups)
