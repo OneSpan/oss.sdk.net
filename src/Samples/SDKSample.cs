@@ -135,7 +135,7 @@ namespace SDK.Examples
 
         protected string GetRandomEmail()
         {
-            return System.Guid.NewGuid().ToString().Replace("-", "") + "@e-signlive.com";
+            return System.Guid.NewGuid().ToString().Replace("-", "") + "@simulator.amazonses.com";
         }
     }
 }
