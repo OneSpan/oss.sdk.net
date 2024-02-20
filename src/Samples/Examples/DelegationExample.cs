@@ -26,17 +26,17 @@ namespace SDK.Examples
 
         public DelegationExample()
         {
-            this.email1 = Guid.NewGuid().ToString().Replace("-", "") + "@e-signlive.com";
-            this.email2 = Guid.NewGuid().ToString().Replace("-", "") + "@e-signlive.com";
-            this.email3 = Guid.NewGuid().ToString().Replace("-", "") + "@e-signlive.com";
-            this.email4 = Guid.NewGuid().ToString().Replace("-", "") + "@e-signlive.com";
-            this.email5 = Guid.NewGuid().ToString().Replace("-", "") + "@e-signlive.com";
-            this.email6 = Guid.NewGuid().ToString().Replace("-", "") + "@e-signlive.com";
-            this.email7 = Guid.NewGuid().ToString().Replace("-", "") + "@e-signlive.com";
-            this.email8 = Guid.NewGuid().ToString().Replace("-", "") + "@e-signlive.com";
-            this.email9 = Guid.NewGuid().ToString().Replace("-", "") + "@e-signlive.com";
-            this.email10 = Guid.NewGuid().ToString().Replace("-", "") + "@e-signlive.com";
-            this.email11 = Guid.NewGuid().ToString().Replace("-", "") + "@e-signlive.com";
+            this.email1 = Guid.NewGuid().ToString().Replace("-", "") + "@simulator.amazonses.com";
+            this.email2 = Guid.NewGuid().ToString().Replace("-", "") + "@simulator.amazonses.com";
+            this.email3 = Guid.NewGuid().ToString().Replace("-", "") + "@simulator.amazonses.com";
+            this.email4 = Guid.NewGuid().ToString().Replace("-", "") + "@simulator.amazonses.com";
+            this.email5 = Guid.NewGuid().ToString().Replace("-", "") + "@simulator.amazonses.com";
+            this.email6 = Guid.NewGuid().ToString().Replace("-", "") + "@simulator.amazonses.com";
+            this.email7 = Guid.NewGuid().ToString().Replace("-", "") + "@simulator.amazonses.com";
+            this.email8 = Guid.NewGuid().ToString().Replace("-", "") + "@simulator.amazonses.com";
+            this.email9 = Guid.NewGuid().ToString().Replace("-", "") + "@simulator.amazonses.com";
+            this.email10 = Guid.NewGuid().ToString().Replace("-", "") + "@simulator.amazonses.com";
+            this.email11 = Guid.NewGuid().ToString().Replace("-", "") + "@simulator.amazonses.com";
         }
 
         override public void Execute()
