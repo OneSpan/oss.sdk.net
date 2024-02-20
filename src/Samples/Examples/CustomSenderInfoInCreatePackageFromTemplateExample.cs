@@ -28,7 +28,7 @@ namespace SDK.Examples
 
         override public void Execute()
         {
-            senderEmail = System.Guid.NewGuid().ToString().Replace("-","") + "@e-signlive.com";
+            senderEmail = System.Guid.NewGuid().ToString().Replace("-","") + "@simulator.amazonses.com";
             ossClient.AccountService.InviteUser(
                 AccountMemberBuilder.NewAccountMember(senderEmail)
                 .WithFirstName("firstName")
