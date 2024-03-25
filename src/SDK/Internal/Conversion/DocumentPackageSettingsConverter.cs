@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using OneSpanSign.API;
 
 namespace OneSpanSign.Sdk
@@ -90,8 +91,13 @@ namespace OneSpanSign.Sdk
                 ceremonySettings.Layout = new CeremonyLayoutSettingsConverter(sdkSettings.CeremonyLayoutSettings).ToAPILayoutOptions();
             }
 
+            IList<OneSpanSign.API.IntegrationFrameworkWorkflow> apiIntegrationFrameworkWorkflows = new List<OneSpanSign.API.IntegrationFrameworkWorkflow>();
+            foreach (IntegrationFrameworkWorkflow sdkIfWorkflow in sdkSettings.IntegrationFrameworkWorkflows)
+                apiIntegrationFrameworkWorkflows.Add (IntegrationFrameworkWorkflowConverter.ToAPI(sdkIfWorkflow));
+
             PackageSettings result = new PackageSettings();
             result.Ceremony = ceremonySettings;
+            result.IntegrationFrameworkWorkflows = apiIntegrationFrameworkWorkflows;
 
             return result;
         }
@@ -208,6 +214,8 @@ namespace OneSpanSign.Sdk
             }
 
             builder.WithCeremonyLayoutSettings(new CeremonyLayoutSettingsConverter(apiSettings.Ceremony.Layout).ToSDKCeremonyLayoutSettings());
+            foreach (OneSpanSign.API.IntegrationFrameworkWorkflow apiIfWorkflow in apiSettings.IntegrationFrameworkWorkflows)
+                builder.WithIfWorkflow(IntegrationFrameworkWorkflowConverter.ToSDK(apiIfWorkflow));
 
             return builder.Build();
         }

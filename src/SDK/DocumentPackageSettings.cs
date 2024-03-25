@@ -257,6 +257,14 @@ namespace OneSpanSign.Sdk
             set { maxAttachmentFiles = value; }
         }
 
+        private List<IntegrationFrameworkWorkflow> integrationFrameworkWorkflows = new List<IntegrationFrameworkWorkflow> ();
+
+        public List<IntegrationFrameworkWorkflow> IntegrationFrameworkWorkflows 
+        {
+            get { return integrationFrameworkWorkflows; }
+            set { integrationFrameworkWorkflows = value; }
+        }
+
         internal PackageSettings toAPIPackageSettings ()
         {
 
@@ -365,8 +373,13 @@ namespace OneSpanSign.Sdk
                 ceremonySettings.Layout = new CeremonyLayoutSettingsConverter (ceremonyLayoutSettings).ToAPILayoutOptions ();
             }
 
+            IList<OneSpanSign.API.IntegrationFrameworkWorkflow> apiIntegrationFrameworkWorkflows = new List<OneSpanSign.API.IntegrationFrameworkWorkflow>();
+            foreach (IntegrationFrameworkWorkflow sdkIfWorkflow in integrationFrameworkWorkflows)
+                apiIntegrationFrameworkWorkflows.Add (IntegrationFrameworkWorkflowConverter.ToAPI(sdkIfWorkflow));
+            
             PackageSettings result = new PackageSettings ();
             result.Ceremony = ceremonySettings;
+            result.IntegrationFrameworkWorkflows = apiIntegrationFrameworkWorkflows;
 
             return result;
         }

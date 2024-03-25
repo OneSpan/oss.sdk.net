@@ -19,6 +19,11 @@ namespace OneSpanSign.API
                 get; set;
         }
     
+    [JsonProperty("integrationFrameworkWorkflows")]
+    public IList<IntegrationFrameworkWorkflow> IntegrationFrameworkWorkflows
+    {
+                get; set;
+        }
 		
 	
 	}
