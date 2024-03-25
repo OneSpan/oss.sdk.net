@@ -165,6 +165,11 @@ namespace OneSpanSign.Sdk.Services
         public void PatchSignatureLayout(SignatureLayout signatureLayout)
         {
             apiClient.PatchSignatureLayout(signatureLayout);
-        }        
+        } 
+
+        public IList<IntegrationFrameworkWorkflow> GetAccountIfWorkflowsConfigs()
+        {
+            return apiClient.GetIfWorkflowsConfigs();
+        }       
     }
 }

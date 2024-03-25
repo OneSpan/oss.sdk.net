@@ -41,6 +41,7 @@ namespace OneSpanSign.Sdk
         private HashSet<String> linkParameters = null;
 
         private CeremonyLayoutSettings ceremonyLayoutSettings = null;
+        private List<IntegrationFrameworkWorkflow> integrationFrameworkWorkflows = new List<IntegrationFrameworkWorkflow> ();
 
         private DocumentPackageSettingsBuilder ()
         {
@@ -377,6 +378,12 @@ namespace OneSpanSign.Sdk
             return this;
         }
 
+        public DocumentPackageSettingsBuilder WithIfWorkflow (IntegrationFrameworkWorkflow ifWorkflow)
+        {
+            integrationFrameworkWorkflows.Add (ifWorkflow);
+            return this;
+        }
+
         public DocumentPackageSettings build ()
         {
             return Build ();
@@ -421,6 +428,8 @@ namespace OneSpanSign.Sdk
             result.ShowNseLogoInIframe = showNseLogoInIframe;
 
             result.CeremonyLayoutSettings = ceremonyLayoutSettings;
+            foreach (IntegrationFrameworkWorkflow ifWorkflow in integrationFrameworkWorkflows)
+                result.IntegrationFrameworkWorkflows.Add (ifWorkflow);
 
             return result;
         }
@@ -473,6 +482,9 @@ namespace OneSpanSign.Sdk
                 linkAutoRedirect = apiPackageSettings.Ceremony.HandOver.AutoRedirect;
                 linkParameters = apiPackageSettings.Ceremony.HandOver.Parameters;
             }
+
+            foreach (OneSpanSign.API.IntegrationFrameworkWorkflow apiIfWorkflow in apiPackageSettings.IntegrationFrameworkWorkflows)
+                integrationFrameworkWorkflows.Add (IntegrationFrameworkWorkflowConverter.ToSDK(apiIfWorkflow));
         }
 
     }
