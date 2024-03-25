@@ -468,6 +468,24 @@ namespace OneSpanSign.Sdk
                 throw new OssException("Could not save Account Signature Layout.", e);
             }
         }
+
+        public IList<IntegrationFrameworkWorkflow> GetIfWorkflowsConfigs()
+        {
+            string path = template.UrlFor(UrlTemplate.IF_WORKFLOW_CONFIGS_PATH).Build();
+            try
+            {
+                string stringResponse = restClient.Get(path);
+                return IntegrationFrameworkWorkflowConverter.ToSDKList(JsonConvert.DeserializeObject<IList<OneSpanSign.API.IntegrationFrameworkWorkflow>>(stringResponse, jsonSettings));
+            }
+            catch (OssServerException e)
+            {
+                throw new OssServerException("Could not get IfWorkflows Configs.", e);
+            }
+            catch (Exception e)
+            {
+                throw new OssException("Could not get IfWorkflows Configs.", e);
+            }
+        }
         
     }
 }

@@ -79,6 +79,8 @@ namespace SDK.Tests
             Assert.AreEqual(apiPackageSettings1.Ceremony.DefaultTimeBasedExpiry, sdkPackageSettings1.DefaultTimeBasedExpiry);
             Assert.AreEqual(apiPackageSettings1.Ceremony.RemainingDays, sdkPackageSettings1.RemainingDays);
             Assert.AreEqual(apiPackageSettings1.Ceremony.MaxAttachmentFiles, sdkPackageSettings1.MaxAttachmentFiles);
+            Assert.AreEqual(apiPackageSettings1.IntegrationFrameworkWorkflows[0].Name, sdkPackageSettings1.IntegrationFrameworkWorkflows[0].Name);
+            Assert.AreEqual(apiPackageSettings1.IntegrationFrameworkWorkflows[0].Connector.ToString(), sdkPackageSettings1.IntegrationFrameworkWorkflows[0].Connector.ToString());
         }
 
         [Test()]
@@ -119,6 +121,8 @@ namespace SDK.Tests
             Assert.AreEqual(apiPackageSettings1.Ceremony.DefaultTimeBasedExpiry, sdkPackageSettings1.DefaultTimeBasedExpiry);
             Assert.AreEqual(apiPackageSettings1.Ceremony.RemainingDays, sdkPackageSettings1.RemainingDays);
             Assert.AreEqual(apiPackageSettings1.Ceremony.MaxAttachmentFiles, sdkPackageSettings1.MaxAttachmentFiles);
+            Assert.AreEqual(apiPackageSettings1.IntegrationFrameworkWorkflows[0].Name, sdkPackageSettings1.IntegrationFrameworkWorkflows[0].Name);
+            Assert.AreEqual(apiPackageSettings1.IntegrationFrameworkWorkflows[0].Connector.ToString(), sdkPackageSettings1.IntegrationFrameworkWorkflows[0].Connector.ToString());
         }
 
         private OneSpanSign.Sdk.DocumentPackageSettings CreateTypicalSDKDocumentPackageSettings()
@@ -157,6 +161,10 @@ namespace SDK.Tests
                         .WithoutGlobalConfirmButton()
                         .WithoutGlobalSaveAsLayoutButton()
                         )
+                    .WithIfWorkflow(IntegrationFrameworkWorkflowBuilder.NewIntegrationFrameworkWorkflow()
+                        .WithName("SFTP")
+                        .WithConnector(OneSpanSign.Sdk.Connector.SFTP)
+                        .Build())
                     .Build();
 
             return sdkDocumentPackageSettings;
@@ -224,9 +232,15 @@ namespace SDK.Tests
 
             headerOptions.GlobalActions = globalActionsOptions;
             layoutOptions.Header = headerOptions;
+            OneSpanSign.API.IntegrationFrameworkWorkflow ifWorkflow = new OneSpanSign.API.IntegrationFrameworkWorkflow();
+            ifWorkflow.Name = "SFTP";
+            ifWorkflow.Connector = OneSpanSign.API.Connector.SFTP;
+            List<OneSpanSign.API.IntegrationFrameworkWorkflow> apiIntegrationFrameworkWorkflows = new List<OneSpanSign.API.IntegrationFrameworkWorkflow>();
+            apiIntegrationFrameworkWorkflows.Add(ifWorkflow);
 
             OneSpanSign.API.PackageSettings apiPackageSettings = new OneSpanSign.API.PackageSettings();
             apiPackageSettings.Ceremony = apiCeremonySettings;
+            apiPackageSettings.IntegrationFrameworkWorkflows = apiIntegrationFrameworkWorkflows;
 
             return apiPackageSettings;
         }
