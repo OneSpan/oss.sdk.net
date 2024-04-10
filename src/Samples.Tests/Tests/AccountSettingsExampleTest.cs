@@ -16,13 +16,17 @@ namespace SDK.Examples
             Assert.IsNotNull(example.defaultAccountSettings.AccountFeatureSettings.Attachments);
             Assert.IsNotNull(example.defaultAccountSettings.AccountFeatureSettings.ConditionalFields);
             Assert.IsNotNull(example.defaultAccountSettings.AccountFeatureSettings.EnableRecipientHistory);
+            Assert.IsNotNull(example.defaultAccountSettings.AccountFeatureSettings.AllowSignersDownloadEvidenceSummary);
 
+            
             Assert.IsFalse(example.patchedAccountSettings.AccountFeatureSettings.AllowCheckboxConsentApproval);
             Assert.IsTrue(example.patchedAccountSettings.AccountFeatureSettings.AllowInPersonForAccountSenders);
             Assert.IsFalse(example.patchedAccountSettings.AccountFeatureSettings.Attachments);
             Assert.IsFalse(example.patchedAccountSettings.AccountFeatureSettings.ConditionalFields);
             Assert.IsTrue(example.patchedAccountSettings.AccountFeatureSettings.OverrideRecipientsPreferredLanguage);
             Assert.IsTrue(example.patchedAccountSettings.AccountFeatureSettings.EnableRecipientHistory);
+            Assert.IsTrue(example.patchedAccountSettings.AccountFeatureSettings.AllowSignersDownloadEvidenceSummary);
+
             
             Assert.IsNotNull(example.defaultAccountSettings.AccountPackageSettings.Ada);
             Assert.IsNotNull(example.defaultAccountSettings.AccountPackageSettings.DeclineButton);
@@ -50,12 +54,15 @@ namespace SDK.Examples
             Assert.IsNotNull(example.defaultAccountFeatureSettings.Attachments);
             Assert.IsNotNull(example.defaultAccountFeatureSettings.ConditionalFields);
             Assert.IsNotNull(example.defaultAccountFeatureSettings.EnableRecipientHistory);
-
+            Assert.IsNotNull(example.defaultAccountFeatureSettings.AllowSignersDownloadEvidenceSummary);
+            
             Assert.IsFalse(example.patchedAccountFeatureSettings.AllowCheckboxConsentApproval);
             Assert.IsTrue(example.patchedAccountFeatureSettings.AllowInPersonForAccountSenders);
             Assert.IsFalse(example.patchedAccountFeatureSettings.Attachments);
             Assert.IsFalse(example.patchedAccountFeatureSettings.ConditionalFields);
             Assert.IsTrue(example.patchedAccountFeatureSettings.EnableRecipientHistory);
+            Assert.IsTrue(example.patchedAccountFeatureSettings.AllowSignersDownloadEvidenceSummary);
+
 
             Assert.IsNotNull(example.defaultAccountPackageSettings.Ada);
             Assert.IsNotNull(example.defaultAccountPackageSettings.DeclineButton);
