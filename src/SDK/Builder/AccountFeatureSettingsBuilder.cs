@@ -33,6 +33,9 @@ namespace OneSpanSign.Sdk
         private Nullable<bool> overrideRecipientsPreferredLanguage;
         private Nullable<bool> enableRecipientHistory;
 
+        private Nullable<bool> allowSignersDownloadEvidenceSummary;
+ 
+            
         private AccountFeatureSettingsBuilder()
         {
         }
@@ -379,6 +382,17 @@ namespace OneSpanSign.Sdk
             return this;
         }
 
+        public AccountFeatureSettingsBuilder WithAllowSignersDownloadEvidenceSummary()
+        {
+            this.allowSignersDownloadEvidenceSummary = true;
+            return this;
+        }
+
+        public AccountFeatureSettingsBuilder WithoutAllowSignersDownloadEvidenceSummary()
+        {
+            this.allowSignersDownloadEvidenceSummary = false;
+            return this;
+        }
 
         public AccountFeatureSettings Build()
         {
@@ -411,7 +425,7 @@ namespace OneSpanSign.Sdk
             result.UploadSignatureImage = uploadSignatureImage;
             result.OverrideRecipientsPreferredLanguage = overrideRecipientsPreferredLanguage;
             result.EnableRecipientHistory = enableRecipientHistory;
-
+            result.AllowSignersDownloadEvidenceSummary = allowSignersDownloadEvidenceSummary;
             return result;
         }
     }

@@ -34,6 +34,8 @@ namespace OneSpanSign.Sdk
         private Nullable<bool> overrideRecipientsPreferredLanguage;
         private Nullable<bool> enableRecipientHistory;
 
+        private Nullable<bool> allowSignersDownloadEvidenceSummary;
+
         public Nullable<bool> AllowCheckboxConsentApproval
         {
             get
@@ -366,6 +368,18 @@ namespace OneSpanSign.Sdk
             set
             {
                 enableRecipientHistory = value;
+            }
+        }
+        
+        public Nullable<bool> AllowSignersDownloadEvidenceSummary
+        {
+            get
+            {
+                return allowSignersDownloadEvidenceSummary;
+            }
+            set
+            {
+                allowSignersDownloadEvidenceSummary = value;
             }
         }
 
