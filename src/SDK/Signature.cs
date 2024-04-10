@@ -75,6 +75,12 @@ namespace OneSpanSign.Sdk
             internal set;
         }
 
+        public Nullable<DateTime> Signed
+        {
+            get;
+            internal set;
+        }
+
         public int Page
         {
             get;
