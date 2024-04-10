@@ -127,6 +127,10 @@ namespace OneSpanSign.Sdk
             {
                 signature.Accepted = apiApproval.Accepted;
             }
+            if (null != apiApproval.Signed)
+            {
+                signature.Signed = apiApproval.Signed;
+            }
 
             return signature;
         }
