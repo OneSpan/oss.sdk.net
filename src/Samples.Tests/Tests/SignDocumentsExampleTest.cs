@@ -1,6 +1,7 @@
 using NUnit.Framework;
 using System.Collections.Generic;
 using OneSpanSign.Sdk;
+using System;
 
 namespace SDK.Examples
 {
@@ -37,6 +38,7 @@ namespace SDK.Examples
                         if (signed)
                         {
                             Assert.IsNotNull(signature.Accepted);
+                            Assert.AreEqual(signature.Signed.Value.Date, DateTime.Now.Date);
                         } 
                         else
                         {

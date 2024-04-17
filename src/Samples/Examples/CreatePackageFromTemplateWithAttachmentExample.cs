@@ -14,7 +14,7 @@ namespace SDK.Examples
 
         public readonly string DOCUMENT_NAME = "First Document";
         public readonly string DOCUMENT_ID = "doc1";
-        public readonly string PACKAGE_DESCRIPTION = "This is a package created using the eSignLive SDK";
+        public readonly string PACKAGE_DESCRIPTION = "This is a package created using OneSpan Sign SDK";
         public readonly string PACKAGE_EMAIL_MESSAGE = "This message should be delivered to all signers";
         public readonly string PACKAGE_EMAIL_MESSAGE2 = "Changed the email message";
         public readonly string PACKAGE_SIGNER1_FIRST = "John";

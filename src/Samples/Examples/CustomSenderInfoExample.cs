@@ -41,7 +41,7 @@ namespace SDK.Examples
 
         override public void Execute()
         {
-			senderEmail = System.Guid.NewGuid().ToString().Replace("-","") + "@e-signlive.com";
+			senderEmail = System.Guid.NewGuid().ToString().Replace("-","") + "@simulator.amazonses.com";
             ossClient.AccountService.InviteUser(
                 AccountMemberBuilder.NewAccountMember(senderEmail)
                 .WithFirstName("firstName")
@@ -62,7 +62,7 @@ namespace SDK.Examples
 
             package = PackageBuilder.NewPackageNamed(PackageName)
                       .WithSenderInfo( senderInfo )
-                      .DescribedAs( "This is a package created using the eSignLive SDK" )
+                      .DescribedAs( "This is a package created using OneSpan Sign SDK" )
                       .ExpiresOn( DateTime.Now.AddMonths(1) )
                       .WithEmailMessage( "This message should be delivered to all signers" )
                       .WithDocument(DocumentBuilder.NewDocumentNamed("First Document")

@@ -25,7 +25,7 @@ namespace OneSpanSign.Sdk.Internal
         public static readonly string PACKAGE_PATH = "/packages";
         public static readonly string PACKAGE_LIST_PATH = "/packages?query={status}&from={from}&to={to}";
         public static readonly string PACKAGE_FIELDS_LIST_PATH = "/packages?query={status}&from={from}&to={to}&fields={fields}";
-        public static readonly string PACKAGE_LIST_STATUS_DATE_RANGE_PATH = "/packages?query={status}&from={from}&to={to}&lastUpdatedStartDate={lastUpdatedStartDate}&lastUpdatedEndDate={lastUpdatedEndDate}";
+        public static readonly string PACKAGE_LIST_STATUS_DATE_RANGE_PATH = "/packages?query={status}&from={from}&to={to}&startDate={lastUpdatedStartDate}&endDate={lastUpdatedEndDate}";
         public static readonly string PACKAGE_ID_PATH = "/packages/{packageId}";
         public static readonly string PACKAGE_REFERENCED_CONDITIONS_PATH = "/packages/{packageId}/referencedConditions";
         public static readonly string DOCUMENT_PATH = "/packages/{packageId}/documents";
@@ -181,6 +181,7 @@ namespace OneSpanSign.Sdk.Internal
         public static readonly string HANDOVER_URL_PATH = "/accountConfig/handoverUrl/{language}";
         public static readonly string DECLINE_REASONS_PATH = "/accountConfig/declineReasons/{language}";
         public static readonly string IDV_WORKFLOW_CONFIGS_PATH = "/accountConfig/idvWorkflowConfigs";
+        public static readonly string IF_WORKFLOW_CONFIGS_PATH = "/accountConfig/ifWorkflows";
 
         // QR Code Service
         public static readonly string QRCODE_PATH = "/packages/{packageId}/documents/{documentId}/fields";
@@ -205,6 +206,7 @@ namespace OneSpanSign.Sdk.Internal
         public static readonly string ACCOUNT_FEATURE_SETTINGS_PATH = "/account/admin/accountSettings/featureSettings";
         // Account Package Settings Service
         public static readonly string ACCOUNT_PACKAGE_SETTINGS_PATH = "/account/admin/accountSettings/packageSettings";
+
         //Account Designer Settings Service
         public static readonly String ACCOUNT_DESIGNER_SETTINGS_PATH = "/account/admin/accountSettings/designerSettings"; 
         //Account Email Reminder Settings Service
@@ -214,6 +216,9 @@ namespace OneSpanSign.Sdk.Internal
         //Account System Settings Service
         public static readonly String ACCOUNT_SYSTEM_SETTING_PROPERTIES_PATH = "/account/admin/accountSettings/systemSettings";
 
+        // Account Signature Layout settings service
+        public static readonly String ACCOUNT_SIGNATURE_LAYOUT_PATH = "/account/admin/accountSettings/signatureLayout";
+        
         // Account Roles
         public static readonly string ACCOUNT_ROLES_PATH = "/account/roles";
         public static readonly string ACCOUNT_ROLES_ROLE_PATH = "/account/roles/{accountRoleId}";

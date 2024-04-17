@@ -216,43 +216,7 @@ namespace OneSpanSign.Sdk.Builder
             return this;
         }
 
-        public SignerBuilder ChallengedWithKnowledgeBasedAuthentication(
-            SignerInformationForEquifaxCanadaBuilder signerInformationForEquifaxCanadaBuilder)
-        {
-            return ChallengedWithKnowledgeBasedAuthentication(signerInformationForEquifaxCanadaBuilder.Build());
-        }
-
-        public SignerBuilder ChallengedWithKnowledgeBasedAuthentication(
-            SignerInformationForEquifaxCanada signerInformationForEquifaxCanada)
-        {
-            if (this.knowledgeBasedAuthentication == null)
-            {
-                this.knowledgeBasedAuthentication = new KnowledgeBasedAuthentication();
-            }
-
-            this.knowledgeBasedAuthentication.SignerInformationForEquifaxCanada = signerInformationForEquifaxCanada;
-            return this;
-        }
-
-        public SignerBuilder ChallengedWithKnowledgeBasedAuthentication(
-            SignerInformationForEquifaxUSABuilder signerInformationForEquifaxUSABuilder)
-        {
-            return ChallengedWithKnowledgeBasedAuthentication(signerInformationForEquifaxUSABuilder.Build());
-        }
-
-        public SignerBuilder ChallengedWithKnowledgeBasedAuthentication(
-            SignerInformationForEquifaxUSA signerInformationForEquifaxUSA)
-        {
-            if (this.knowledgeBasedAuthentication == null)
-            {
-                this.knowledgeBasedAuthentication = new KnowledgeBasedAuthentication();
-            }
-
-            this.knowledgeBasedAuthentication.SignerInformationForEquifaxUSA = signerInformationForEquifaxUSA;
-            return this;
-        }
-        
-        public SignerBuilder ChallengedWithKnowledgeBasedAuthentication(
+       public SignerBuilder ChallengedWithKnowledgeBasedAuthentication(
             SignerInformationForLexisNexisBuilder signerInformationForLexisNexisBuilder)
         {
             return ChallengedWithKnowledgeBasedAuthentication(signerInformationForLexisNexisBuilder.Build());

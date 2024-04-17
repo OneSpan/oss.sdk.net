@@ -14,6 +14,8 @@ namespace SDK.Examples
 
         public static readonly String GROUP_NAME_PREFIX = "GROUP_";
         public static readonly String EMAIL = "bob@aol.com";
+		public readonly String UPDATED_EMAIL = "bob1@aol.com";
+        public String updatedGroupName3;
         public Group createdEmptyGroup;
         public Group createdGroup1;
         public Group retrievedGroup1;
@@ -151,9 +153,9 @@ namespace SDK.Examples
             Group group3 = GroupBuilder.NewGroup (GROUP_NAME_PREFIX + groupName3)
                 .WithMember(GroupMemberBuilder.NewGroupMember(email3)
                             .AsMemberType(GroupMemberType.MANAGER) )
-                    .WithEmail(EMAIL)
-                    .WithIndividualMemberEmailing()
-                    .Build();
+                .WithEmail(EMAIL)
+                .WithIndividualMemberEmailing()
+                .Build();
             createdGroup3 = ossClient.GroupService.CreateGroup(group3);
             Console.Out.WriteLine("GroupId #3: " + createdGroup3.Id.Id);
             retrievedGroup3 = ossClient.GroupService.GetGroup(createdGroup3.Id);
@@ -164,20 +166,22 @@ namespace SDK.Examples
 
             allGroupsAfterDelete = ossClient.GroupService.GetMyGroups();
 
-            Group updatedGroup = GroupBuilder.NewGroup(Guid.NewGuid().ToString())
-                .WithMember(GroupMemberBuilder.NewGroupMember(email2)
-                            .AsMemberType(GroupMemberType.MANAGER) )
-                    .WithMember(GroupMemberBuilder.NewGroupMember(email3)
-                                .AsMemberType(GroupMemberType.REGULAR) )
-                    .WithMember(GroupMemberBuilder.NewGroupMember(email4)
-                                .AsMemberType(GroupMemberType.REGULAR) )
-                    .WithEmail(EMAIL)
+			updatedGroupName3 = GROUP_NAME_PREFIX + Guid.NewGuid().ToString();
+            Group updatedGroup = GroupBuilder.NewGroup(updatedGroupName3)
+                    .WithEmail(UPDATED_EMAIL)
                     .WithIndividualMemberEmailing()
                     .Build();
 
-            createdGroup3Updated = ossClient.GroupService.UpdateGroup(updatedGroup, createdGroup3.Id);
+            createdGroup3Updated = ossClient.GroupService.UpdateGroup(updatedGroup, retrievedGroup3.Id);
 
-            groupMemberEmailsAfterUpdate = ossClient.GroupService.GetGroupMemberEmails(createdGroup3Updated.Id);
+            GroupMember groupMemberAdded2 = ossClient.GroupService.AddMember(retrievedGroup3.Id,
+				GroupMemberBuilder.NewGroupMember(email2).AsMemberType(GroupMemberType.MANAGER).Build());
+            GroupMember groupMemberAdded3 = ossClient.GroupService.AddMember(retrievedGroup3.Id, 
+				GroupMemberBuilder.NewGroupMember(email3).AsMemberType(GroupMemberType.MANAGER).Build());
+            Group groupMemberInvited = ossClient.GroupService.InviteMember(retrievedGroup3.Id, 
+				GroupMemberBuilder.NewGroupMember(email4).AsMemberType(GroupMemberType.MANAGER).Build());
+            
+			groupMemberEmailsAfterUpdate = ossClient.GroupService.GetGroupMemberEmails(createdGroup3Updated.Id);
 
             DocumentPackage superDuperPackage = PackageBuilder.NewPackageNamed(PackageName)
 			    .WithSigner(SignerBuilder.NewSignerFromGroup(createdGroup1.Id)

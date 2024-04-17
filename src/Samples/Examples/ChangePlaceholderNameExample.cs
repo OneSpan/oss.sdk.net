@@ -15,7 +15,7 @@ namespace SDK.Examples
         public readonly string DOCUMENT_NAME = "First Document";
         public readonly string DOCUMENT_ID = "doc1";
         public readonly string TEMPLATE_NAME = "ChangePlaceholderNameExample Template: " + DateTime.Now;
-        public readonly string TEMPLATE_DESCRIPTION = "This is a template created using the eSignLive SDK";
+        public readonly string TEMPLATE_DESCRIPTION = "This is a template created using OneSpan Sign SDK";
         public readonly string TEMPLATE_EMAIL_MESSAGE = "This message should be delivered to all signers";
         public readonly string TEMPLATE_SIGNER_FIRST = "John";
         public readonly string TEMPLATE_SIGNER_LAST = "Smith";

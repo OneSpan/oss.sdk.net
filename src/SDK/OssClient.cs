@@ -14,7 +14,7 @@ using OneSpanSign.Sdk.Builder.Internal;
 namespace OneSpanSign.Sdk
 {
     /// <summary>
-    /// The ossClient acts as a eSignLive client.
+    /// The ossClient acts as a OneSpan Sign client.
     /// The ossClient has access to service classes that help create packages and retrieve resources from the client's account.
     /// </summary>
     public class OssClient
@@ -146,9 +146,9 @@ namespace OneSpanSign.Sdk
             signingStyleService = new SigningStyleService(restClient, this.baseUrl, jsonSerializerSettings);
             signerVerificationService = new SignerVerificationService(restClient, this.baseUrl, jsonSerializerSettings);
             signatureImageService = new SignatureImageService(restClient, this.baseUrl, jsonSerializerSettings);
-            sessionService = new SessionService(apiKey, this.baseUrl);
-            fieldSummaryService = new FieldSummaryService(new FieldSummaryApiClient(apiKey, this.baseUrl));
-            auditService = new AuditService(apiKey, this.baseUrl);
+            sessionService = new SessionService(restClient, this.baseUrl);
+            fieldSummaryService = new FieldSummaryService(new FieldSummaryApiClient(restClient, this.baseUrl));
+            auditService = new AuditService(restClient, this.baseUrl);
             eventNotificationService =
                 new EventNotificationService(new EventNotificationApiClient(restClient, this.baseUrl,
                     jsonSerializerSettings));
@@ -252,7 +252,6 @@ namespace OneSpanSign.Sdk
 
         public PackageId CreatePackage(DocumentPackage package)
         {
-            ValidateSignatures(package);
             if (!IsSdkVersionSetInPackageData(package))
             {
                 SetSdkVersionInPackageData(package);
@@ -275,7 +274,6 @@ namespace OneSpanSign.Sdk
 
         public PackageId CreatePackageOneStep(DocumentPackage package)
         {
-            ValidateSignatures(package);
             if (!IsSdkVersionSetInPackageData(package))
             {
                 SetSdkVersionInPackageData(package);
@@ -288,6 +286,24 @@ namespace OneSpanSign.Sdk
             }
 
             PackageId id = packageService.CreatePackageOneStep(packageToCreate, package.Documents);
+
+            return id;
+        }
+
+        public PackageId createPackageOneStepWithBase64Content(DocumentPackage package)
+        {
+            if (!IsSdkVersionSetInPackageData(package))
+            {
+                SetSdkVersionInPackageData(package);
+            }
+
+            OneSpanSign.API.Package packageToCreate = new DocumentPackageConverter(package).ToAPIPackage();
+            foreach (OneSpanSign.Sdk.Document document in package.Documents)
+            {
+                packageToCreate.AddDocument(new DocumentConverter(document).ToAPIDocument(packageToCreate));
+            }
+
+            PackageId id = packageService.CreatePackage(packageToCreate);
 
             return id;
         }
@@ -392,7 +408,6 @@ namespace OneSpanSign.Sdk
 
         public PackageId CreatePackageFromTemplate(PackageId templateId, DocumentPackage delta)
         {
-            ValidateSignatures(delta);
             SetNewSignersIndexIfRoleWorkflowEnabled(templateId, delta);
             return templateService.CreatePackageFromTemplate(templateId,
                 new DocumentPackageConverter(delta).ToAPIPackage());
@@ -436,39 +451,6 @@ namespace OneSpanSign.Sdk
             }
 
             return maxSigningOrder;
-        }
-
-        private void ValidateSignatures(DocumentPackage documentPackage)
-        {
-            foreach (Document document in documentPackage.Documents)
-            {
-                ValidateMixingSignatureAndAcceptance(document);
-            }
-        }
-
-        private void ValidateMixingSignatureAndAcceptance(Document document)
-        {
-            if (CheckAcceptanceSignatureStyle(document))
-            {
-                foreach (Signature signature in document.Signatures)
-                {
-                    if (signature.Style != SignatureStyle.ACCEPTANCE)
-                        throw new OssException(
-                            "It is not allowed to use acceptance signature styles and other signature styles together in one document.",
-                            null);
-                }
-            }
-        }
-
-        private bool CheckAcceptanceSignatureStyle(Document document)
-        {
-            foreach (Signature signature in document.Signatures)
-            {
-                if (signature.Style == SignatureStyle.ACCEPTANCE)
-                    return true;
-            }
-
-            return false;
         }
 
         private bool CheckSignerOrdering(DocumentPackage template)
@@ -612,6 +594,18 @@ namespace OneSpanSign.Sdk
             else
             {
                 return packageService.UploadDocuments(packageId, documents);
+            }
+        }
+
+        public IList<Document> UploadDocumentsWithBase64Content(PackageId packageId, IList<Document> documents) 
+        {
+            if (documents.Count == 0) 
+            {
+                return new List<Document>();
+            } 
+            else 
+            {
+                return packageService.AddDocumentWithBase64Content(packageId, documents);
             }
         }
 

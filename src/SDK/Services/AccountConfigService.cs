@@ -205,5 +205,21 @@ namespace OneSpanSign.Sdk.Services
         public void DeleteAccountSystemSettingProperties() {
             apiClient.DeleteAccountSystemSettingProperties();
         }
+
+        public SignatureLayout GetSignatureLayout()
+        {
+            return apiClient.GetSignatureLayout();
+        }
+
+        public void PatchSignatureLayout(SignatureLayout signatureLayout)
+        {
+            apiClient.PatchSignatureLayout(signatureLayout);
+        } 
+
+        public IList<IntegrationFrameworkWorkflow> GetAccountIfWorkflowsConfigs()
+        {
+            return apiClient.GetIfWorkflowsConfigs();
+        }       
+
     }
 }

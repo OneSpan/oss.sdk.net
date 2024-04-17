@@ -20,7 +20,7 @@ namespace SDK.Examples
             DocumentPackage documentPackage = example.RetrievedPackage;
 
             // Verify if the package is created correctly
-            Assert.AreEqual("This is a package created using the eSignLive SDK", documentPackage.Description);
+            Assert.AreEqual("This is a package created using OneSpan Sign SDK", documentPackage.Description);
             Assert.AreEqual("This message should be delivered to all signers", documentPackage.EmailMessage);
             Assert.AreEqual("Canada/Mountain", documentPackage.TimezoneId);
 

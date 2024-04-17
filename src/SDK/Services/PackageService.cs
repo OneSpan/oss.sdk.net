@@ -637,6 +637,62 @@ namespace OneSpanSign.Sdk.Services
             }
         }
 
+        /// <summary>
+        /// Uploads the list of documents from base64 content.
+        /// </summary>
+        /// <param name="packageId">The package id.</param>
+        /// <param name="providerDocuments">The documents to be uploaded</param>
+        ///
+        internal IList<Document> AddDocumentWithBase64Content(PackageId packageId, IList<Document> documents)
+        {
+            string path = template.UrlFor(UrlTemplate.DOCUMENT_PATH)
+                .Replace("{packageId}", packageId.Id)
+                .Build();
+
+            OneSpanSign.API.Package internalPackage = GetPackage(packageId);
+            IList<OneSpanSign.API.Document> apiDocuments = new List<OneSpanSign.API.Document>();
+            foreach (Document document in documents) 
+            {
+                apiDocuments.Add(new DocumentConverter(document).ToAPIDocument(internalPackage));
+            }
+
+            try
+            {
+                string json = JsonConvert.SerializeObject(apiDocuments, settings);
+
+                string response = restClient.Post(path, json); 
+
+                IList<Document> sdkDocuments = new List<Document>();
+
+                if(response.StartsWith("[")) 
+                {
+                    IList<OneSpanSign.API.Document> uploadedDocuments = 
+                        JsonConvert.DeserializeObject<IList<OneSpanSign.API.Document>>(response, settings);
+
+                    foreach (OneSpanSign.API.Document uploadedDocument in uploadedDocuments) 
+                    {
+                        sdkDocuments.Add(new DocumentConverter(uploadedDocument, internalPackage).ToSDKDocument());
+                    }
+                } 
+                else 
+                {
+                    OneSpanSign.API.Document uploadedDocument = 
+                        JsonConvert.DeserializeObject<OneSpanSign.API.Document>(response, settings);
+                    sdkDocuments.Add(new DocumentConverter(uploadedDocument, internalPackage).ToSDKDocument());
+                }
+
+                return sdkDocuments;
+            }
+            catch (OssServerException e)
+            {
+                throw new OssServerException("Could not upload documents to package." + " Exception: " + e.Message, e.ServerError, e);
+            }
+            catch (Exception e)
+            {
+                throw new OssException("Could not upload documents to package." + " Exception: " + e.Message, e);
+            }
+        }
+
         private byte[] CreateMultipartContent (string fileName, byte[] fileBytes, byte[] payloadBytes, string boundary)
         {
 
