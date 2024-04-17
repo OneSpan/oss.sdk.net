@@ -157,6 +157,55 @@ namespace OneSpanSign.Sdk.Services
         {
             apiClient.DeleteAccountPackageSettings();;
         }
+        
+        public AccountDesignerSettings GetAccountDesignerSettings() {
+            return apiClient.GetAccountDesignerSettings();
+        }
+        
+        public void PatchAccountDesignerSettings(AccountDesignerSettings accountDesignerSettings) {
+            apiClient.PatchAccountDesignerSettings(accountDesignerSettings);
+        }
+        
+        public void DeleteAccountDesignerSettings() {
+            apiClient.DeleteAccountDesignerSettings();
+        }
+        
+        public AccountEmailReminderSettings GetAccountEmailReminderSettings() {
+            return apiClient.GetAccountEmailReminderSettings();
+        }
+        
+        public void PatchAccountEmailReminderSettings(AccountEmailReminderSettings accountEmailReminderSettings) {
+            apiClient.PatchAccountEmailReminderSettings(accountEmailReminderSettings);
+        }
+        
+        public void DeleteAccountEmailReminderSettings() {
+            apiClient.DeleteAccountEmailReminderSettings();
+        }
+        
+        public AccountUploadSettings GetAccountUploadSettings() {
+            return apiClient.GetAccountUploadSettings();
+        }
+        
+        public void UpdateAccountUploadSettings(AccountUploadSettings accountUploadSettings) {
+            apiClient.UpdateAccountUploadSettings(accountUploadSettings);
+        }
+        
+        public void DeleteAccountUploadSettings() {
+            apiClient.DeleteAccountUploadSettings();
+        }
+        
+        public AccountSystemSettingProperties GetAccountSystemSettingProperties() {
+            return apiClient.GetAccountSystemSettingProperties();
+        }
+        
+        public void PatchAccountSystemSettingProperties(AccountSystemSettingProperties accountSystemSettingProperties) {
+            apiClient.PatchAccountSystemSettingProperties(accountSystemSettingProperties);
+        }
+        
+        public void DeleteAccountSystemSettingProperties() {
+            apiClient.DeleteAccountSystemSettingProperties();
+        }
+
         public SignatureLayout GetSignatureLayout()
         {
             return apiClient.GetSignatureLayout();
@@ -171,5 +220,6 @@ namespace OneSpanSign.Sdk.Services
         {
             return apiClient.GetIfWorkflowsConfigs();
         }       
+
     }
 }

@@ -4,6 +4,7 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 using OneSpanSign.API;
 using OneSpanSign.Sdk.Internal;
+using OneSpanSign.Sdk.Internal.Conversion;
 
 namespace OneSpanSign.Sdk
 {
@@ -210,7 +211,8 @@ namespace OneSpanSign.Sdk
             }
         }
 
-        public IList<IdvWorkflowConfiguration> CreateIdvWorkflowConfigs(IList<IdvWorkflowConfiguration> idvWorkflowConfigurations)
+        public IList<IdvWorkflowConfiguration> CreateIdvWorkflowConfigs(
+            IList<IdvWorkflowConfiguration> idvWorkflowConfigurations)
         {
             string path = template.UrlFor(UrlTemplate.IDV_WORKFLOW_CONFIGS_PATH)
                 .Build();
@@ -231,7 +233,8 @@ namespace OneSpanSign.Sdk
             }
         }
 
-        public IList<IdvWorkflowConfiguration> UpdateIdvWorkflowConfigs(IList<IdvWorkflowConfiguration> idvWorkflowConfigurations)
+        public IList<IdvWorkflowConfiguration> UpdateIdvWorkflowConfigs(
+            IList<IdvWorkflowConfiguration> idvWorkflowConfigurations)
         {
             string path = template.UrlFor(UrlTemplate.IDV_WORKFLOW_CONFIGS_PATH)
                 .Build();
@@ -269,14 +272,14 @@ namespace OneSpanSign.Sdk
                 throw new OssException("Could not delete IdvWorkflow Configs.", e);
             }
         }
-        
+
         public AccountSettings GetAccountSettings()
         {
             string path = template.UrlFor(UrlTemplate.ACCOUNT_SETTINGS_PATH).Build();
             try
             {
                 string stringResponse = restClient.Get(path);
-                return JsonConvert.DeserializeObject<AccountSettings> (stringResponse, jsonSettings);
+                return JsonConvert.DeserializeObject<AccountSettings>(stringResponse, jsonSettings);
             }
             catch (OssServerException e)
             {
@@ -287,12 +290,17 @@ namespace OneSpanSign.Sdk
                 throw new OssException("Could not get Account Settings.", e);
             }
         }
-        
+
         public void PatchAccountSettings(AccountSettings accountSettings)
         {
             string path = template.UrlFor(UrlTemplate.ACCOUNT_SETTINGS_PATH).Build();
-            string payload = JsonConvert.SerializeObject(accountSettings, new JsonSerializerSettings { ContractResolver = new CamelCasePropertyNamesContractResolver (), Formatting = Formatting.Indented ,NullValueHandling = NullValueHandling.Ignore});
-            
+            string payload = JsonConvert.SerializeObject(accountSettings,
+                new JsonSerializerSettings
+                {
+                    ContractResolver = new CamelCasePropertyNamesContractResolver(), Formatting = Formatting.Indented,
+                    NullValueHandling = NullValueHandling.Ignore
+                });
+
             try
             {
                 restClient.Patch(path, payload);
@@ -306,7 +314,7 @@ namespace OneSpanSign.Sdk
                 throw new OssException("Could not save Account Settings.", e);
             }
         }
-        
+
         public void DeleteAccountSettings()
         {
             string path = template.UrlFor(UrlTemplate.ACCOUNT_SETTINGS_PATH).Build();
@@ -324,14 +332,14 @@ namespace OneSpanSign.Sdk
                 throw new OssException("Could not delete Account Settings.", e);
             }
         }
-        
+
         public AccountFeatureSettings GetAccountFeatureSettings()
         {
             string path = template.UrlFor(UrlTemplate.ACCOUNT_FEATURE_SETTINGS_PATH).Build();
             try
             {
                 string stringResponse = restClient.Get(path);
-                return JsonConvert.DeserializeObject<AccountFeatureSettings> (stringResponse, jsonSettings);
+                return JsonConvert.DeserializeObject<AccountFeatureSettings>(stringResponse, jsonSettings);
             }
             catch (OssServerException e)
             {
@@ -342,11 +350,16 @@ namespace OneSpanSign.Sdk
                 throw new OssException("Could not get Account Feature Settings.", e);
             }
         }
-        
+
         public void PatchAccountFeatureSettings(AccountFeatureSettings accountFeatureSettings)
         {
             string path = template.UrlFor(UrlTemplate.ACCOUNT_FEATURE_SETTINGS_PATH).Build();
-            string payload = JsonConvert.SerializeObject(accountFeatureSettings, new JsonSerializerSettings { ContractResolver = new CamelCasePropertyNamesContractResolver (), Formatting = Formatting.Indented ,NullValueHandling = NullValueHandling.Ignore});
+            string payload = JsonConvert.SerializeObject(accountFeatureSettings,
+                new JsonSerializerSettings
+                {
+                    ContractResolver = new CamelCasePropertyNamesContractResolver(), Formatting = Formatting.Indented,
+                    NullValueHandling = NullValueHandling.Ignore
+                });
             try
             {
                 restClient.Patch(path, payload);
@@ -360,7 +373,7 @@ namespace OneSpanSign.Sdk
                 throw new OssException("Could not save Account Feature Settings.", e);
             }
         }
-        
+
         public void DeleteAccountFeatureSettings()
         {
             string path = template.UrlFor(UrlTemplate.ACCOUNT_FEATURE_SETTINGS_PATH).Build();
@@ -378,14 +391,14 @@ namespace OneSpanSign.Sdk
                 throw new OssException("Could not delete Account Feature Settings.", e);
             }
         }
-        
+
         public AccountPackageSettings GetAccountPackageSettings()
         {
             string path = template.UrlFor(UrlTemplate.ACCOUNT_PACKAGE_SETTINGS_PATH).Build();
             try
             {
                 string stringResponse = restClient.Get(path);
-                return JsonConvert.DeserializeObject<AccountPackageSettings> (stringResponse, jsonSettings);
+                return JsonConvert.DeserializeObject<AccountPackageSettings>(stringResponse, jsonSettings);
             }
             catch (OssServerException e)
             {
@@ -396,11 +409,16 @@ namespace OneSpanSign.Sdk
                 throw new OssException("Could not get Account Package Settings.", e);
             }
         }
-        
+
         public void PatchAccountPackageSettings(AccountPackageSettings accountPackageSettings)
         {
             string path = template.UrlFor(UrlTemplate.ACCOUNT_PACKAGE_SETTINGS_PATH).Build();
-            string payload = JsonConvert.SerializeObject(accountPackageSettings, new JsonSerializerSettings { ContractResolver = new CamelCasePropertyNamesContractResolver (), Formatting = Formatting.Indented ,NullValueHandling = NullValueHandling.Ignore});
+            string payload = JsonConvert.SerializeObject(accountPackageSettings,
+                new JsonSerializerSettings
+                {
+                    ContractResolver = new CamelCasePropertyNamesContractResolver(), Formatting = Formatting.Indented,
+                    NullValueHandling = NullValueHandling.Ignore
+                });
             try
             {
                 restClient.Patch(path, payload);
@@ -414,7 +432,7 @@ namespace OneSpanSign.Sdk
                 throw new OssException("Could not save Account Package Settings.", e);
             }
         }
-        
+
         public void DeleteAccountPackageSettings()
         {
             string path = template.UrlFor(UrlTemplate.ACCOUNT_PACKAGE_SETTINGS_PATH).Build();
@@ -433,6 +451,242 @@ namespace OneSpanSign.Sdk
             }
         }
 
+        public AccountDesignerSettings GetAccountDesignerSettings()
+        {
+            string path = template.UrlFor(UrlTemplate.ACCOUNT_DESIGNER_SETTINGS_PATH).Build();
+            try
+            {
+                String stringResponse = restClient.Get(path);
+                return JsonConvert.DeserializeObject<AccountDesignerSettings>(stringResponse, jsonSettings);
+            }
+            catch (OssServerException e)
+            {
+                throw new OssServerException("Could not get the account designer settings.", e);
+            }
+            catch (Exception e)
+            {
+                throw new OssException("Could not get the account designer settings.", e);
+            }
+        }
+
+        public void PatchAccountDesignerSettings(AccountDesignerSettings accountDesignerSettings)
+        {
+            string path = template.UrlFor(UrlTemplate.ACCOUNT_DESIGNER_SETTINGS_PATH).Build();
+            string payload = JsonConvert.SerializeObject(accountDesignerSettings,
+                new JsonSerializerSettings
+                {
+                    ContractResolver = new CamelCasePropertyNamesContractResolver(), Formatting = Formatting.Indented,
+                    NullValueHandling = NullValueHandling.Ignore
+                });
+            try
+            {
+                restClient.Patch(path, payload);
+            }
+            catch (OssServerException e)
+            {
+                throw new OssServerException("Could not save the account designer settings.", e);
+            }
+            catch (Exception e)
+            {
+                throw new OssException("Could not save the account designer settings.", e);
+            }
+        }
+
+        public void DeleteAccountDesignerSettings()
+        {
+            string path = template.UrlFor(UrlTemplate.ACCOUNT_DESIGNER_SETTINGS_PATH).Build();
+            try
+            {
+                restClient.Delete(path);
+            }
+            catch (OssServerException e)
+            {
+                throw new OssServerException("Could not delete the account designer settings.", e);
+            }
+            catch (Exception e)
+            {
+                throw new OssException("Could not delete the account designer settings.", e);
+            }
+        }
+
+        public AccountEmailReminderSettings GetAccountEmailReminderSettings()
+        {
+            string path = template.UrlFor(UrlTemplate.ACCOUNT_EMAIL_REMINDER_SETTINGS_PATH).Build();
+            try
+            {
+                String stringResponse = restClient.Get(path);
+                return JsonConvert.DeserializeObject<AccountEmailReminderSettings>(stringResponse, jsonSettings);
+            }
+            catch (OssServerException e)
+            {
+                throw new OssServerException("Could not get the account email reminder settings.", e);
+            }
+            catch (Exception e)
+            {
+                throw new OssException("Could not get the account email reminder settings.", e);
+            }
+        }
+
+        public void PatchAccountEmailReminderSettings(AccountEmailReminderSettings accountEmailReminderSettings)
+        {
+            string path = template.UrlFor(UrlTemplate.ACCOUNT_EMAIL_REMINDER_SETTINGS_PATH).Build();
+            string payload = JsonConvert.SerializeObject(accountEmailReminderSettings,
+                new JsonSerializerSettings
+                {
+                    ContractResolver = new CamelCasePropertyNamesContractResolver(), Formatting = Formatting.Indented,
+                    NullValueHandling = NullValueHandling.Ignore
+                });
+            try
+            {
+                restClient.Patch(path, payload);
+            }
+            catch (OssServerException e)
+            {
+                throw new OssServerException("Could not save the account email reminder settings.", e);
+            }
+            catch (Exception e)
+            {
+                throw new OssException("Could not save the account email reminder settings.", e);
+            }
+        }
+
+        public void DeleteAccountEmailReminderSettings()
+        {
+            string path = template.UrlFor(UrlTemplate.ACCOUNT_EMAIL_REMINDER_SETTINGS_PATH).Build();
+            try
+            {
+                restClient.Delete(path);
+            }
+            catch (OssServerException e)
+            {
+                throw new OssServerException("Could not delete the account email reminder settings.", e);
+            }
+            catch (Exception e)
+            {
+                throw new OssException("Could not delete the account email reminder settings.", e);
+            }
+        }
+
+        public AccountUploadSettings GetAccountUploadSettings()
+        {
+            string path = template.UrlFor(UrlTemplate.ACCOUNT_UPLOAD_SETTINGS_PATH).Build();
+            try
+            {
+                string stringResponse = restClient.Get(path);
+                List<string> listFromJson = JsonConvert.DeserializeObject<List<String>>(stringResponse, jsonSettings);
+                AccountUploadSettings accountUploadSettings = new AccountUploadSettings();
+                accountUploadSettings.AllowedFileTypes = listFromJson;
+                return new AccountUploadSettingsConverter(accountUploadSettings).ToSDKAccountUploadSettings();
+            }
+            catch (OssServerException e)
+            {
+                throw new OssServerException("Could not get the account upload settings.", e);
+            }
+            catch (Exception e)
+            {
+                throw new OssException("Could not get the account upload settings.", e);
+            }
+        }
+
+        public void UpdateAccountUploadSettings(AccountUploadSettings accountUploadSettings)
+        {
+            string path = template.UrlFor(UrlTemplate.ACCOUNT_UPLOAD_SETTINGS_PATH).Build();
+            string payload = JsonConvert.SerializeObject(accountUploadSettings.AllowedFileTypes,
+                new JsonSerializerSettings
+                {
+                    ContractResolver = new CamelCasePropertyNamesContractResolver(), Formatting = Formatting.Indented,
+                    NullValueHandling = NullValueHandling.Ignore
+                });
+            try
+            {
+                string json = JsonConvert.SerializeObject(accountUploadSettings.AllowedFileTypes);
+                restClient.Put(path, payload);
+            }
+            catch (OssServerException e)
+            {
+                throw new OssServerException("Could not save the account upload settings.", e);
+            }
+            catch (Exception e)
+            {
+                throw new OssException("Could not save the account upload settings.", e);
+            }
+        }
+
+        public void DeleteAccountUploadSettings()
+        {
+            string path = template.UrlFor(UrlTemplate.ACCOUNT_UPLOAD_SETTINGS_PATH).Build();
+            try
+            {
+                restClient.Delete(path);
+            }
+            catch (OssServerException e)
+            {
+                throw new OssServerException("Could not delete the account upload settings.", e);
+            }
+            catch (Exception e)
+            {
+                throw new OssException("Could not delete the account upload settings.", e);
+            }
+        }
+
+        public AccountSystemSettingProperties GetAccountSystemSettingProperties()
+        {
+            string path = template.UrlFor(UrlTemplate.ACCOUNT_SYSTEM_SETTING_PROPERTIES_PATH).Build();
+            try
+            {
+                String stringResponse = restClient.Get(path);
+                return JsonConvert.DeserializeObject<AccountSystemSettingProperties>(stringResponse, jsonSettings);
+            }
+            catch (OssServerException e)
+            {
+                throw new OssServerException("Could not get the account system settings.", e);
+            }
+            catch (Exception e)
+            {
+                throw new OssException("Could not get the account system settings.", e);
+            }
+        }
+
+        public void PatchAccountSystemSettingProperties(AccountSystemSettingProperties accountSystemSettingProperties)
+        {
+            string path = template.UrlFor(UrlTemplate.ACCOUNT_SYSTEM_SETTING_PROPERTIES_PATH).Build();
+            string payload = JsonConvert.SerializeObject(accountSystemSettingProperties,
+                new JsonSerializerSettings
+                {
+                    ContractResolver = new CamelCasePropertyNamesContractResolver(), Formatting = Formatting.Indented,
+                    NullValueHandling = NullValueHandling.Ignore
+                });
+            try
+            {
+                restClient.Patch(path, payload);
+            }
+            catch (OssServerException e)
+            {
+                throw new OssServerException("Could not save the account system settings.", e);
+            }
+            catch (Exception e)
+            {
+                throw new OssException("Could not save the account system settings.", e);
+            }
+        }
+        
+        public void DeleteAccountSystemSettingProperties()
+        {
+            string path = template.UrlFor(UrlTemplate.ACCOUNT_SYSTEM_SETTING_PROPERTIES_PATH).Build();
+            try
+            {
+                restClient.Delete(path);
+            }
+            catch (OssServerException e)
+            {
+                throw new OssServerException("Could not delete the account system settings.", e);
+            }
+            catch (Exception e)
+            {
+                throw new OssException("Could not delete the account system settings.", e);
+            }
+        }
+  
         public SignatureLayout GetSignatureLayout()
         {
             string path = template.UrlFor(UrlTemplate.ACCOUNT_SIGNATURE_LAYOUT_PATH).Build();
@@ -450,7 +704,7 @@ namespace OneSpanSign.Sdk
                 throw new OssException("Could not get Account Signature Layout.", e);
             }
         }
-        
+
         public void PatchSignatureLayout(SignatureLayout signatureLayout)
         {
             string path = template.UrlFor(UrlTemplate.ACCOUNT_SIGNATURE_LAYOUT_PATH).Build();
@@ -468,7 +722,7 @@ namespace OneSpanSign.Sdk
                 throw new OssException("Could not save Account Signature Layout.", e);
             }
         }
-
+  
         public IList<IntegrationFrameworkWorkflow> GetIfWorkflowsConfigs()
         {
             string path = template.UrlFor(UrlTemplate.IF_WORKFLOW_CONFIGS_PATH).Build();
@@ -486,6 +740,5 @@ namespace OneSpanSign.Sdk
                 throw new OssException("Could not get IfWorkflows Configs.", e);
             }
         }
-        
     }
 }
