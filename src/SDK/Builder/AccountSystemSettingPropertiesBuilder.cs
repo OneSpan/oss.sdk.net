@@ -7,6 +7,7 @@ namespace OneSpanSign.Sdk
         private Nullable<int> _senderLoginMaxFailedAttempts;
         private Nullable<int> _loginSessionTimeout;
         private Nullable<int> _sessionTimeoutWarning;
+        private Nullable<bool> _orderLastNameFirstName;
         
         private AccountSystemSettingPropertiesBuilder()
         {
@@ -35,6 +36,11 @@ namespace OneSpanSign.Sdk
             return this;
         }
 
+        public AccountSystemSettingPropertiesBuilder WithOrderLastNameFirstName(Boolean orderLastNameFirstName)
+        {
+            this._orderLastNameFirstName = orderLastNameFirstName;
+            return this;
+        }
         
         public AccountSystemSettingProperties Build()
         {
@@ -42,6 +48,7 @@ namespace OneSpanSign.Sdk
             result.SenderLoginMaxFailedAttempts = _senderLoginMaxFailedAttempts;
             result.LoginSessionTimeout = _loginSessionTimeout;
             result.SessionTimeoutWarning = _sessionTimeoutWarning;
+            result.OrderLastNameFirstName = _orderLastNameFirstName;
             return result;
         }
     }

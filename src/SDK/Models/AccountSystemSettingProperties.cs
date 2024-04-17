@@ -22,6 +22,11 @@ namespace OneSpanSign.API
         {
             get; set;
         }
+        [JsonProperty("orderLastNameFirstName")]
+        public Nullable<bool> OrderLastNameFirstName
+        {
+            get; set;
+        }
 
  
     }
