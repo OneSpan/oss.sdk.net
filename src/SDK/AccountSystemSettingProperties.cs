@@ -7,6 +7,7 @@ namespace OneSpanSign.Sdk
         private Nullable<int> _senderLoginMaxFailedAttempts;
         private Nullable<int> _loginSessionTimeout;
         private Nullable<int> _sessionTimeoutWarning;
+        private Nullable<bool> _orderLastNameFirstName;
         
         public Nullable<int> SenderLoginMaxFailedAttempts
         {
@@ -41,6 +42,18 @@ namespace OneSpanSign.Sdk
             set
             {
                 _sessionTimeoutWarning = value;
+            }
+        }
+        
+        public Nullable<Boolean> OrderLastNameFirstName
+        {
+            get
+            {
+                return _orderLastNameFirstName;
+            }
+            set
+            {
+                _orderLastNameFirstName = value;
             }
         }
     }

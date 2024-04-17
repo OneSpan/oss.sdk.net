@@ -18,7 +18,8 @@ namespace SDK.Examples
             AccountSystemSettingProperties accountSystemSettingProperties = AccountSystemSettingPropertiesBuilder.NewAccountSystemSettingPropertiesBuilder()
                 .WithSenderLoginMaxFailedAttempts(2)
                 .WithSessionTimeoutWarning(200000)
-                .WithLoginSessionTimeout(60000) 
+                .WithLoginSessionTimeout(60000)
+                .WithOrderLastNameFirstName(true)
                 .Build();
             
             //Save Account System Settings
