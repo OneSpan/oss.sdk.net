@@ -173,6 +173,13 @@ namespace OneSpanSign.API
 	    {
 		    get; set;
 	    }
+	    
+	    [JsonProperty("allowSignersDownloadEvidenceSummary")]
+	    public Nullable<Boolean> AllowSignersDownloadEvidenceSummary
+	    {
+		    get; set;
+	    }
+	    
 	
 	}
 }

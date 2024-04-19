@@ -26,6 +26,7 @@ namespace SDK.Examples
                     .WithoutConditionalFields()
                     .WithOverrideRecipientsPreferredLanguage()
                     .WithEnableRecipientHistory()
+                    .WithAllowSignersDownloadEvidenceSummary()
                     .Build())
                 .WithAccountPackageSettings(AccountPackageSettingsBuilder.NewAccountPackageSettings()
                     .WithAda()
@@ -56,6 +57,7 @@ namespace SDK.Examples
                     .WithoutAttachments()
                     .WithoutConditionalFields()
                     .WithEnableRecipientHistory()
+                    .WithAllowSignersDownloadEvidenceSummary()
                     .Build();
             //Save Account Feature Settings
             OssClient.AccountConfigService.PatchAccountFeatureSettings(accountFeatureSettings);
