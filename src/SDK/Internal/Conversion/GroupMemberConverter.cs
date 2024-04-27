@@ -29,7 +29,7 @@ namespace OneSpanSign.Sdk
                 result.FirstName = apiMember.FirstName;
                 result.LastName = apiMember.LastName;
                 result.GroupMemberType = new GroupMemberTypeConverter(apiMember.MemberType).ToSDKGroupMemberType();
-
+                result.UserId = apiMember.UserId;
                 return result;
             }
         }
@@ -47,7 +47,7 @@ namespace OneSpanSign.Sdk
                 result.FirstName = sdkMember.FirstName;
                 result.LastName = sdkMember.LastName;
                 result.MemberType = new GroupMemberTypeConverter(sdkMember.GroupMemberType).ToAPIMemberType();
-
+                result.UserId = sdkMember.UserId;
                 return result;
             }
         }
