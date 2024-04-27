@@ -45,7 +45,7 @@ namespace SDK.Examples
             reminderScheduleToUpdate = ReminderScheduleBuilder.ForPackageWithId( packageId )
                 .WithDaysUntilFirstReminder( 3 )
                     .WithDaysBetweenReminders( 2 )
-                    .WithNumberOfRepetitions( 10 )
+                    .WithNumberOfRepetitions( 5 )
                     .Build();
 
             ossClient.ReminderService.UpdateReminderScheduleForPackage(reminderScheduleToUpdate);
