@@ -8,6 +8,7 @@ namespace OneSpanSign.Sdk
 		private string firstName;
 		private string lastName;
 		private GroupMemberType groupMemberType;
+		private string userId;
 
         public GroupMember()
         {
@@ -58,6 +59,18 @@ namespace OneSpanSign.Sdk
 			set
 			{
 				groupMemberType = value;
+			}
+		}
+
+		public string UserId
+		{
+			get
+			{
+				return userId;
+			}
+			set
+			{
+				userId = value;
 			}
 		}
     }

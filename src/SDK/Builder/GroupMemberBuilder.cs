@@ -8,6 +8,7 @@ namespace OneSpanSign.Sdk
         private string firstName;
         private string lastName;
         private GroupMemberType groupMemberType = GroupMemberType.REGULAR;
+        private string userId;
 
         private GroupMemberBuilder( string email )
         {
@@ -20,7 +21,7 @@ namespace OneSpanSign.Sdk
             result.FirstName = firstName;
             result.LastName = lastName;
             result.GroupMemberType = groupMemberType;
-
+            result.UserId = userId;
             return result;
         }
 
@@ -30,6 +31,11 @@ namespace OneSpanSign.Sdk
 
         public GroupMemberBuilder AsMemberType( GroupMemberType groupMemberType ) {
             this.groupMemberType = groupMemberType;
+            return this;
+        }
+
+        public GroupMemberBuilder WithUserId( string userId ) {
+            this.userId = userId;
             return this;
         }
 
