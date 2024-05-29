@@ -48,7 +48,10 @@ namespace SDK.Examples
 
         public string Get(string key)
         {
-            return dictionary[key];
+            if(dictionary.ContainsKey(key))
+                return  dictionary[key];
+
+            return null;
         }
 
         public bool Exists(string key)

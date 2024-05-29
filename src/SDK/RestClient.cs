@@ -3,8 +3,10 @@ using OneSpanSign.Sdk.Internal;
 using System.Collections.Generic;
 using System.IO;
 using System.Net;
+using System.Net.Http;
 using System.Text;
 using Newtonsoft.Json;
+using OneSpanSign.Sdk.Oauth;
 
 namespace OneSpanSign.Sdk
 {
@@ -17,8 +19,11 @@ namespace OneSpanSign.Sdk
         private readonly ProxyConfiguration proxyConfiguration;
         private readonly IDictionary<string, string> additionalHeaders;
         private readonly ApiTokenConfig apiTokenConfig;
+        private readonly OAuthTokenConfig oauthTokenConfig;
         private ApiToken apiToken;
-
+        private OAuthAccessToken oAuthAccessToken;
+        private readonly Oauth2TokenManager oauth2TokenManager = new Oauth2TokenManager();
+        
         public RestClient(string apiKey) : this(apiKey, false)
         {
         }
@@ -65,6 +70,21 @@ namespace OneSpanSign.Sdk
             }
 
             this.apiTokenConfig = apiTokenConfig;
+        }
+        
+        public RestClient(OAuthTokenConfig oauthTokenConfig, bool allowAllSSLCertificates,
+            ProxyConfiguration proxyConfiguration, IDictionary<String, String> headers)
+        {
+            this.oauthTokenConfig = oauthTokenConfig;
+            
+            if (allowAllSSLCertificates)
+            {
+                ServicePointManager.ServerCertificateValidationCallback +=
+                    (sender, cert, chain, sslPolicyErrors) => true;
+            }
+
+            this.proxyConfiguration = proxyConfiguration;
+            additionalHeaders = headers;
         }
 
         public string Post(string path, string jsonPayload)
@@ -278,7 +298,71 @@ namespace OneSpanSign.Sdk
                 return dictionary;
             }
 
-            if (apiTokenConfig != null)
+            if (oauthTokenConfig != null)
+            {
+                if (oAuthAccessToken == null || oauth2TokenManager.IsOAuth2TokenExpired(oAuthAccessToken.AccessToken))
+                {
+                    using (var client = new HttpClient())
+                    {
+                        var oauthTokenRequest =
+                            HttpMethods.WithUserAgent(WebRequest.Create(oauthTokenConfig.AuthenticationServer));
+                        var authHeader = Convert.ToBase64String(
+                            Encoding.UTF8.GetBytes($"{oauthTokenConfig.ClientId}:{oauthTokenConfig.ClientSecret}"));
+                        oauthTokenRequest.Headers.Add("Authorization", "Basic " + authHeader);
+                        oauthTokenRequest.ContentType = HttpMethods.ESL_ACCEPT_TYPE_APPLICATION_FORM_URLENCODED;
+                        oauthTokenRequest.Method = "POST";
+                        oauthTokenRequest.Accept = HttpMethods.ESL_ACCEPT_TYPE_APPLICATION_JSON;
+                        oauthTokenRequest.Timeout = HttpMethods.REQUEST_TIMEOUT;
+                        HttpMethods.SetProxy(oauthTokenRequest);
+
+                        string grantTypeEntity = HttpMethods.OAUTH_GRANT_TYPE;
+                        byte[] grantTypeEntityBytes = Encoding.UTF8.GetBytes(grantTypeEntity);
+                        oauthTokenRequest.ContentLength = grantTypeEntityBytes.Length;
+
+                        using (Stream dataStream = oauthTokenRequest.GetRequestStream())
+                        {
+                            dataStream.Write(grantTypeEntityBytes, 0, grantTypeEntityBytes.Length);
+                        }
+
+                        try
+                        {
+                            using (WebResponse response = oauthTokenRequest.GetResponse())
+                            {
+                                using (Stream responseStream = response.GetResponseStream())
+                                {
+                                    if (responseStream == null)
+                                        throw new OssServerException("Response stream is null.", null);
+                                    using (StreamReader reader = new StreamReader(responseStream))
+                                    {
+                                        string responseString = reader.ReadToEnd();
+                                        oAuthAccessToken =
+                                            JsonConvert.DeserializeObject<OAuthAccessToken>(responseString);
+                                    }
+                                }
+
+                                response.Close();
+                            }
+
+                        }
+                        catch (WebException ex)
+                        {
+                            using (WebResponse response = ex.Response)
+                            {
+                                if (response == null) throw;
+                                HttpWebResponse httpResponse = (HttpWebResponse) response;
+                                throw new OssException(
+                                    "Unable to fetch access token for " + oauthTokenConfig + ", response was " + 
+                                    httpResponse,
+                                    null);
+                            }
+                        }
+                    }
+                }
+
+                dictionary.Add("Authorization", "Bearer " + oAuthAccessToken.AccessToken);
+            }
+
+            else if (apiTokenConfig != null)
             {
                 //Do we have an api token and is it still valid for at least a minute ?
                 var timeSpan = DateTime.UtcNow - new DateTime(1970, 1, 1);
@@ -302,7 +386,7 @@ namespace OneSpanSign.Sdk
                     apiTokenRequest.ContentType = HttpMethods.ESL_CONTENT_TYPE_APPLICATION_JSON;
                     apiTokenRequest.ContentLength = jsonPayloadBytes.Length;
                     apiTokenRequest.Accept = HttpMethods.ESL_ACCEPT_TYPE_APPLICATION_JSON;
-                    apiTokenRequest.Timeout = 30000; //30 seconds
+                    apiTokenRequest.Timeout = HttpMethods.REQUEST_TIMEOUT;
                     HttpMethods.SetProxy(apiTokenRequest);
 
                     using (var dataStream = apiTokenRequest.GetRequestStream())
