@@ -10,6 +10,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Text;
 using OneSpanSign.Sdk.Builder.Internal;
+using OneSpanSign.Sdk.Oauth;
 
 namespace OneSpanSign.Sdk
 {
@@ -135,6 +136,20 @@ namespace OneSpanSign.Sdk
             RestClient restClient =
                 new RestClient(apiTokenConfig, allowAllSSLCertificates, proxyConfiguration, headers);
             init(restClient, "");
+        }
+        
+        public OssClient(OAuthTokenConfig tokenConfig, String baseURL, bool allowAllSSLCertificates,
+            ProxyConfiguration proxyConfiguration, IDictionary<String, String> headers) {
+            Asserts.NotNull(tokenConfig, "oAuthTokenConfig");
+            Asserts.NotEmptyOrNull(baseURL, "basrUrl");
+            
+            SetBaseUrl(baseURL);
+            SetWebpageUrl(baseURL);
+
+            configureJsonSerializationSettings();
+            
+            RestClient client = new RestClient(tokenConfig, allowAllSSLCertificates, proxyConfiguration, headers);
+            init(client,"");
         }
 
         private void init(RestClient restClient, String apiKey)
