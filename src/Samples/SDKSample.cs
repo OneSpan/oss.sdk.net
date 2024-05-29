@@ -34,28 +34,12 @@ namespace SDK.Examples
 
         public SDKSample()
         {
-            if (props.Exists("api.clientId"))
-            {
-                ApiTokenConfig apiTokenConfig = new ApiTokenConfig();
-                apiTokenConfig.BaseUrl = props.Get("webpage.url");
-                apiTokenConfig.ClientAppId = props.Get("api.clientId");
-                apiTokenConfig.ClientAppSecret = props.Get("api.secret");
-                if (props.Exists("api.senderEmail"))
-                {
-                    apiTokenConfig.TokenType = ApiTokenType.SENDER;
-                    apiTokenConfig.SenderEmail = props.Get("api.senderEmail");
-                }
-                else
-                {
-                    apiTokenConfig.TokenType = ApiTokenType.OWNER;
-                }
-                ossClient = new OssClient(apiTokenConfig, props.Get("api.url"), true, null,
-                    new Dictionary<string, string>());
-            }
-            else
-            {
-                ossClient = new OssClient(props.Get("api.key"), props.Get("api.url"), props.Get("webpage.url"), true);
-            }
+            ossClient = OssClientBuilder.NewOssClientBuilder()
+                .WithAdditionalHeaders(new Dictionary<String,String>())
+                .WithProxyConfiguration(null)
+                .WithProperties(props)
+                .WithAuthenticationType(props.Get("api.auth.type"))
+                .Build();
 
             SetProperties();
         }

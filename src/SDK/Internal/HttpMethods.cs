@@ -24,10 +24,15 @@ namespace OneSpanSign.Sdk.Internal
         private const string ACCEPT_TYPE_APPLICATION_JSON = "application/json";
         private const string ACCEPT_TYPE_APPLICATION_OCTET_STREAM = "application/octet-stream";
         private const string ACCEPT_TYPE_APPLICATION = "*/*";
+        private const string ACCEPT_TYPE_APPLICATION_FORM_URLENCODED = "application/x-www-form-urlencoded";
         public const string ESL_ACCEPT_TYPE_APPLICATION_JSON = ACCEPT_TYPE_APPLICATION_JSON + "; " + ESL_API_VERSION_HEADER;
         private const string ESL_ACCEPT_TYPE_APPLICATION_OCTET_STREAM = ACCEPT_TYPE_APPLICATION_OCTET_STREAM + "; " + ESL_API_VERSION_HEADER;
         private const string ESL_ACCEPT_TYPE_APPLICATION = ACCEPT_TYPE_APPLICATION + "; " + ESL_API_VERSION_HEADER;
-        
+        public const string ESL_ACCEPT_TYPE_APPLICATION_FORM_URLENCODED = ACCEPT_TYPE_APPLICATION_FORM_URLENCODED + "; " + ESL_API_VERSION_HEADER;
+
+        public const string OAUTH_GRANT_TYPE = "grant_type=client_credentials";
+        public const int REQUEST_TIMEOUT = 30000; //30 seconds
+            
         public static ProxyConfiguration ProxyConfiguration;
 
         public static HttpWebRequest WithUserAgent(WebRequest request)
