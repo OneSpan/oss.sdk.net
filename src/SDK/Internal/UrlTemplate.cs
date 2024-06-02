@@ -160,7 +160,7 @@ namespace OneSpanSign.Sdk.Internal
         public static readonly string AUTHENTICATION_PATH_FOR_SIGNER_AUTHENTICATION_TOKEN_WITH_REDIRECT = "?signerAuthenticationToken={signerAuthenticationToken}&target={redirectUrl}";
 
         // Webpage redirect urls
-        public static readonly string DESIGNER_REDIRECT_PATH = "/designer/{packageId}";
+        public static readonly string DESIGNER_REDIRECT_PATH = "/transaction/{packageId}/designer";
         public static readonly string PACKAGE_VIEW_REDIRECT_PATH = "/packages/{packageId}";
         public static readonly string SIGNING_REDIRECT_PATH = "/transaction/{packageId}/sign";
 

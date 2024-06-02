@@ -97,7 +97,7 @@ namespace OneSpanSign.Sdk
 
         public DownloadedFile DownloadAttachmentFile(string packageId, string attachmentId, Int32 fileId)
         {
-            string path = template.UrlFor(UrlTemplate.ATTACHMENT_REQUIREMENT_PATH)
+            string path = template.UrlFor(UrlTemplate.ATTACHMENT_FILE_PATH)
                 .Replace("{packageId}", packageId)
                 .Replace("{attachmentId}", attachmentId)
                 .Replace("{fileId}", fileId.ToString())

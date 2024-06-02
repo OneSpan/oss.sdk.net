@@ -15,16 +15,16 @@ namespace OneSpanSign.Sdk
             return authenticationService.GetSessionIdForUserAuthenticationToken(userAuthenticationToken);
         }
 
-        public string BuildRedirectToDesignerForUserAuthenticationToken(string userAuthenticationToken, PackageId packageId) {
-            return authenticationService.BuildRedirectToDesignerForUserAuthenticationToken(userAuthenticationToken, packageId);
+        public string BuildRedirectToDesignerForUserAuthenticationToken(string userAuthenticationToken, PackageId packageId, string profile = null) {
+            return authenticationService.BuildRedirectToDesignerForUserAuthenticationToken(userAuthenticationToken, packageId, profile);
         }
 
         public string GetSessionIdForSenderAuthenticationToken(string senderAuthenticationToken) {
             return authenticationService.GetSessionIdForSenderAuthenticationToken(senderAuthenticationToken);
         }
 
-        public string BuildRedirectToDesignerForSender(string senderAuthenticationToken, PackageId packageId) {
-            return authenticationService.BuildRedirectToDesignerForSender(senderAuthenticationToken, packageId);
+        public string BuildRedirectToDesignerForSender(string senderAuthenticationToken, PackageId packageId, string profile = null) {
+            return authenticationService.BuildRedirectToDesignerForSender(senderAuthenticationToken, packageId, profile);
         }
 
         public string BuildRedirectToPackageViewForSender(string userAuthenticationToken, PackageId packageId) {
