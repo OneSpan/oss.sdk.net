@@ -44,6 +44,8 @@ namespace OneSpanSign.Sdk.Internal
         public static readonly string CLONE_PACKAGE_PATH = "/packages/{packageId}/clone";
         public static readonly string THANK_YOU_DIALOG_PATH = "/packages/{packageId}/thank_you_dialog";
         public static readonly string PACKAGE_INFORMATION_CONFIG_PATH = "/package_information/{packageId}/support_information";
+        public static readonly string E_ORIGINAL_VAULTING_DATA_PATH = "/packages/{packageId}/eOriginalVault/vaultingData";
+        public static readonly string E_ORIGINAL_REVAULT_PATH = "/packages/{packageId}/eOriginalVault/revault";
 
         // Report Service
         public static readonly string COMPLETION_REPORT_PATH = "/reports/completion?senderId={senderId}&status={status}&from={from}&to={to}";
