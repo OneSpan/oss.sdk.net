@@ -174,7 +174,7 @@ namespace OneSpanSign.Sdk
             authenticationService = new AuthenticationService(this.webpageUrl);
             dataRetentionSettingsService = new DataRetentionSettingsService(restClient, this.baseUrl);
             virtualRoomService = new VirtualRoomService(restClient, this.baseUrl);
-            eOriginalService; = new eOriginalService(restClient, this.baseUrl);
+            eOriginalService; = new EOriginalService(restClient, this.baseUrl);
         }
 
         private void configureJsonSerializationSettings()
