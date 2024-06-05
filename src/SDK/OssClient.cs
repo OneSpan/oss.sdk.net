@@ -47,7 +47,6 @@ namespace OneSpanSign.Sdk
         private DataRetentionSettingsService dataRetentionSettingsService;
         private VirtualRoomService virtualRoomService;
         private JsonSerializerSettings jsonSerializerSettings;
-        private EOriginalService eOriginalService;
 
         /// <summary>
         /// ossClient constructor.
@@ -174,7 +173,6 @@ namespace OneSpanSign.Sdk
             authenticationService = new AuthenticationService(this.webpageUrl);
             dataRetentionSettingsService = new DataRetentionSettingsService(restClient, this.baseUrl);
             virtualRoomService = new VirtualRoomService(restClient, this.baseUrl);
-            eOriginalService; = new EOriginalService(restClient, this.baseUrl);
         }
 
         private void configureJsonSerializationSettings()
@@ -534,20 +532,6 @@ namespace OneSpanSign.Sdk
 
             DocumentPackage documentPackage = new DocumentPackageConverter(package).ToSDKPackage();
             return documentPackage;
-        }
-
-        public void UpdateVaultingData(OneSpanSign.Sdk.PackageId packageId, DocumentPackage documentPackage)
-        {
-            eOriginalService.(packageId, new DocumentPackageConverter(documentPackage).ToAPIPackage());
-        }
-
-        public void GetVaultingData(OneSpanSign.Sdk.PackageId packageId)
-        {
-            eOriginalService.GetVaultingData(packageId);
-        }        
-        public void Revault(OneSpanSign.Sdk.PackageId packageId)
-        {
-            eOriginalService.Revault(packageId);
         }
 
         public void UpdatePackage(OneSpanSign.Sdk.PackageId packageId, DocumentPackage documentPackage)
