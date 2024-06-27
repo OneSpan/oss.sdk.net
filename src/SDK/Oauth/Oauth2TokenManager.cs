@@ -7,6 +7,9 @@ namespace OneSpanSign.Sdk.Oauth
 {
     public class Oauth2TokenManager
     {
+
+        public const int AccessTokenExpirationLeeway = 2;
+
         private JsonSerializer objectMapper = new JsonSerializer();
 
         public bool IsOAuth2TokenExpired(string oAuthAccessToken)
@@ -21,7 +24,7 @@ namespace OneSpanSign.Sdk.Oauth
             DateTime tokenExpiresAt = DateTime.UtcNow.AddSeconds(unixEpochTime);
             DateTimeOffset now = DateTimeOffset.Now;
 
-            return now > tokenExpiresAt;
+            return now > tokenExpiresAt.Subtract(TimeSpan.FromSeconds(AccessTokenExpirationLeeway));
         }
     }
 }
