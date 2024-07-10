@@ -8,7 +8,7 @@ namespace OneSpanSign.Sdk.Oauth
     public class Oauth2TokenManager
     {
 
-        public const int AccessTokenExpirationLeeway = 2;
+        public const int AccessTokenExpirationLeeway = 10;
 
         private JsonSerializer objectMapper = new JsonSerializer();
 
