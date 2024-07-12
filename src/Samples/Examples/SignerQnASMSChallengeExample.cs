@@ -21,6 +21,7 @@ namespace SDK.Examples
         public readonly string SECOND_QUESTION = "What music instrument do you play? (answer: drums)";
         public readonly string SECOND_ANSWER = "drums";
         public static string CHALLENGE_CHALLENGE_TYPE = "CHALLENGE";
+        public readonly string PHONE_NUMBER = "+12042345678";
         
         override public void Execute()
         {
@@ -33,7 +34,7 @@ namespace SDK.Examples
                             .Answer(FIRST_ANSWER)
                             .SecondQuestion(CHALLENGE_CHALLENGE_TYPE, SECOND_QUESTION)
                             .AnswerWithMaskInput(SECOND_ANSWER)
-                        .smsPhoneNumber("+12042345678")))
+                        .smsPhoneNumber(PHONE_NUMBER)))
                 .WithDocument(DocumentBuilder.NewDocumentNamed("First Document")
                     .FromStream(fileStream1, DocumentType.PDF)
                     .WithSignature(SignatureBuilder.SignatureFor(email1)
@@ -48,4 +49,3 @@ namespace SDK.Examples
         }
     }
 }
-
