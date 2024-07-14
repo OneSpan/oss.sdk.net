@@ -38,6 +38,8 @@ namespace OneSpanSign.Sdk
                 authChallenge.Question = challenge.Question;
                 authChallenge.Answer = challenge.Answer;
                 authChallenge.MaskInput = challenge.MaskOption == Challenge.MaskOptions.MaskInput;
+                authChallenge.ChallengeType = challenge.ChallengeType;
+
                 auth.AddChallenge(authChallenge);
             }
             

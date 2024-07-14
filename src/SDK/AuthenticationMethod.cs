@@ -15,7 +15,7 @@ namespace OneSpanSign.Sdk
         public static AuthenticationMethod KBA = new AuthenticationMethod("KBA", "KBA", 3);
         public static AuthenticationMethod SSO = new AuthenticationMethod("SSO", "SSO", 4);
         public static AuthenticationMethod IDV = new AuthenticationMethod("ID_VERIFICATION", "IDV", 5);
-        public static AuthenticationMethod QASMS = new AuthenticationMethod("Q&A+SMS", "QASMS", 6);
+        public static AuthenticationMethod QASMS = new AuthenticationMethod("QASMS", "QASMS", 6);
 
         private static Dictionary<string,AuthenticationMethod> allAuthenticationMethods = new Dictionary<string,AuthenticationMethod>();
 

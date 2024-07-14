@@ -12,7 +12,7 @@ namespace OneSpanSign.Sdk
 		private readonly string question;
 		private readonly string answer;
 		private readonly MaskOptions maskOption;
-		private string challengeType;
+		private readonly string challengeType;
 
 
 		public Challenge (string question, string answer) : this(question, answer, MaskOptions.None)
@@ -70,6 +70,14 @@ namespace OneSpanSign.Sdk
 			get
 			{
 				return maskOption;
+			}
+		}
+
+		public string ChallengeType
+		{
+			get
+			{
+				return challengeType;
 			}
 		}
 

@@ -6,7 +6,7 @@ using OneSpanSign.Sdk.Builder;
 namespace SDK.Examples
 {
     /// <summary>
-    /// Example of how to configure the Question&Answer authentication method for a signer. The answer is given for testing 
+    /// Example of how to configure the Question&Answer plus SMS authentication method for a signer. The answer is given for testing 
     /// purposes. Never include the answer when creating packages for actual customers.
     /// </summary>
     public class SignerQnASMSChallengeExample : SDKSample
