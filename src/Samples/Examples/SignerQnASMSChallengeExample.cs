@@ -26,7 +26,7 @@ namespace SDK.Examples
         override public void Execute()
         {
             DocumentPackage superDuperPackage = PackageBuilder.NewPackageNamed(PackageName)
-                .DescribedAs("This is a Q&A authentication example")
+                .DescribedAs("This is a QASMS authentication example")
                 .WithSigner(SignerBuilder.NewSignerWithEmail(email1)
                     .WithFirstName("John")
                     .WithLastName("Smith")
