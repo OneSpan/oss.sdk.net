@@ -30,13 +30,13 @@ namespace OneSpanSign.Sdk.Builder
         [Obsolete]
 		public QASMSBuilder Answer(string answer, Challenge.MaskOptions maskOption)
 		{
-			challenges.Add (new Challenge(challengeType, question, answer, maskOption));
+			challenges.Add (new Challenge(question, answer, challengeType, maskOption));
 			return this;
 		}
 
         public QASMSBuilder AnswerWithMaskInput(string answer)
         {
-            challenges.Add (new Challenge(challengeType, question, answer, Challenge.MaskOptions.MaskInput));
+            challenges.Add (new Challenge(question, answer, challengeType, Challenge.MaskOptions.MaskInput));
             return this;
         }
 
@@ -62,7 +62,7 @@ namespace OneSpanSign.Sdk.Builder
 			{
 				throw new OssException ("Challenge type was provided with no challenge",null);
 			}
-			Authentication result = new Authentication(challenges);
+			Authentication result = new Authentication(AuthenticationMethod.QASMS, challenges);
 
 			return result;
 		}
