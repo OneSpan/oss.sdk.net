@@ -8,6 +8,7 @@ using System.Reflection;
 using OneSpanSign.Sdk;
 using System.Collections.Generic;
 using System.IO;
+using System.Runtime.CompilerServices;
 using System.Text;
 using OneSpanSign.Sdk.Builder.Internal;
 using OneSpanSign.Sdk.Oauth;
@@ -48,6 +49,7 @@ namespace OneSpanSign.Sdk
         private DataRetentionSettingsService dataRetentionSettingsService;
         private VirtualRoomService virtualRoomService;
         private JsonSerializerSettings jsonSerializerSettings;
+        public OAuthTokenConfig oauth2TokenConfig { get; private set; }
 
         /// <summary>
         /// ossClient constructor.
@@ -130,7 +132,7 @@ namespace OneSpanSign.Sdk
             Asserts.NotEmptyOrNull(baseUrl, "baseUrl");
             SetBaseUrl(baseUrl);
             SetWebpageUrl(baseUrl);
-
+            
             configureJsonSerializationSettings();
 
             RestClient restClient =
@@ -138,10 +140,13 @@ namespace OneSpanSign.Sdk
             init(restClient, "");
         }
         
+        [Obsolete("Use OSSAuthClientProvider instead")]
         public OssClient(OAuthTokenConfig tokenConfig, String baseURL, bool allowAllSSLCertificates,
             ProxyConfiguration proxyConfiguration, IDictionary<String, String> headers) {
             Asserts.NotNull(tokenConfig, "oAuthTokenConfig");
-            Asserts.NotEmptyOrNull(baseURL, "basrUrl");
+            Asserts.NotEmptyOrNull(baseURL, "baseUrl");
+
+            oauth2TokenConfig = tokenConfig;
             
             SetBaseUrl(baseURL);
             SetWebpageUrl(baseURL);
