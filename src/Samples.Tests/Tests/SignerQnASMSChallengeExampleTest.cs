@@ -23,7 +23,7 @@ namespace SDK.Examples
                 || String.Equals(challenge.Question, example.PHONE_NUMBER));
             }
             Assert.AreEqual(documentPackage.GetSigner(example.email1).AuthenticationMethod, AuthenticationMethod.QASMS);
-
+            Assert.AreEqual(documentPackage.GetSigner(example.email1).ChallengeQuestion.Count, 3);
         }
     }
 }

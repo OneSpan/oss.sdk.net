@@ -75,6 +75,27 @@ namespace OneSpanSign.Sdk
 
             return result;
         }
+
+
+        public OneSpanSign.Sdk.Challenge toSDKQASMSChallenge()
+        {
+            if (apiChallenge == null)
+            {
+                return sdkChallenge;
+            }
+
+            OneSpanSign.Sdk.Challenge result; 
+            if (apiChallenge.MaskInput.Value)
+            {
+             result = new OneSpanSign.Sdk.Challenge(apiChallenge.Question, apiChallenge.Answer, apiChallenge.ChallengeType, Challenge.MaskOptions.MaskInput);
+            }
+            else
+            {
+                result = new OneSpanSign.Sdk.Challenge(apiChallenge.Question, apiChallenge.Answer, apiChallenge.ChallengeType);
+            }
+
+            return result;
+        }
     }
 }
 
