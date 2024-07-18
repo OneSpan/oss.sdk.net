@@ -18,6 +18,7 @@ namespace SDK.Examples
 
         public OAuth2SDKSample()
         {
+            SetProperties();
             SetOAuth2Props();
         }
     }

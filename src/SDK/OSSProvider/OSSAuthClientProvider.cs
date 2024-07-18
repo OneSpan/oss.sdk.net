@@ -12,6 +12,7 @@ namespace OneSpanSign.Sdk.OSSProvider
 
         OSSAuthClientProvider()
         {
+            clients = new ConcurrentDictionary<string, OssClient>();
         }
 
         public static OSSAuthClientProvider Instance
