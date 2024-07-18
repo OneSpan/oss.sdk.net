@@ -98,7 +98,7 @@ namespace OneSpanSign.Sdk
                 }
                 else if (AuthenticationMethod.QASMS.getApiValue().Equals(apiAuth.Scheme)) 
                 {
-                    sdkAuth = new Authentication(AuthenticationMethod.QASMS, sdkChallenges);
+                    sdkAuthentication = new Authentication(AuthenticationMethod.QASMS, sdkChallenges);
                 }
                 else if(AuthenticationMethod.SMS.getApiValue().Equals(apiAuth.Scheme))
                 {
