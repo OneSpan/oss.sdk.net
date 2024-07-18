@@ -5,6 +5,11 @@ namespace SDK.Examples
 {
     public class PackageInformationOAuth2Example : OAuth2SDKSample
     {
+        public PackageInformationOAuth2Example() : base()
+        {
+            
+        }
+        
         public SupportConfiguration supportConfiguration;
 
         public readonly string DOCUMENT_NAME = "First Document";

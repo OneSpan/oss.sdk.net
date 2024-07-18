@@ -8,9 +8,6 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "sdk", "sdk", "{266842DD-EEFD-420E-BC39-D36A994D5273}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "samples", "samples", "{A5C8B57B-2E94-4D54-83AD-9A75A1B417EE}"
-	ProjectSection(SolutionItems) = preProject
-		Samples\signers.properties = Samples\signers.properties
-	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OneSpanSign.Sdk.Test", "SDK.Tests\OneSpanSign.Sdk.Test.csproj", "{50748D79-22D5-40A8-9416-25841863C5FE}"
 EndProject
