@@ -20,6 +20,9 @@ namespace SDK.Examples
             {
                 Assert.IsTrue(String.Equals(challenge.Question, example.FIRST_QUESTION) || String.Equals(challenge.Question, example.SECOND_QUESTION));
             }
+            Assert.AreEqual(documentPackage.GetSigner(example.email1).AuthenticationMethod, AuthenticationMethod.CHALLENGE);
+            Assert.AreEqual(documentPackage.GetSigner(example.email1).ChallengeQuestion.Count, 2);
+
         }
     }
 }

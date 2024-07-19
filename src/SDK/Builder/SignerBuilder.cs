@@ -133,6 +133,12 @@ namespace OneSpanSign.Sdk.Builder
             this.authenticationBuilder = challengeBuilder;
             return this;
         }
+        
+        public SignerBuilder ChallengedWithQASMS(QASMSBuilder qasmsBuilder)
+        {
+            this.authenticationBuilder = qasmsBuilder;
+            return this;
+        }
 
         public SignerBuilder WithSMSSentTo(string phoneNumber)
         {
