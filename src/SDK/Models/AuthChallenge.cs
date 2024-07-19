@@ -33,7 +33,12 @@ namespace OneSpanSign.API
                 get; set;
         }
     
-		
+    [JsonProperty("challengeType", NullValueHandling = NullValueHandling.Ignore)]
+    public String ChallengeType
+    {
+                get; set;
+        }
+    	
 	
 	}
 }

@@ -18,6 +18,12 @@ namespace OneSpanSign.Sdk
 			this.challenges.AddRange(challenges);
 		}
 
+		public Authentication(AuthenticationMethod method, IList<Challenge> challenges) {
+			this.method = method;
+			this.challenges.AddRange(challenges);
+		}
+
+
 		public Authentication(AuthenticationMethod method, string phoneNumber) : this(method)
 		{
 			this.PhoneNumber = phoneNumber;
