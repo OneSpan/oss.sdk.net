@@ -38,6 +38,8 @@ namespace OneSpanSign.Sdk
                 authChallenge.Question = challenge.Question;
                 authChallenge.Answer = challenge.Answer;
                 authChallenge.MaskInput = challenge.MaskOption == Challenge.MaskOptions.MaskInput;
+                authChallenge.ChallengeType = challenge.ChallengeType;
+
                 auth.AddChallenge(authChallenge);
             }
             
@@ -80,6 +82,8 @@ namespace OneSpanSign.Sdk
                     if (AuthenticationMethod.CHALLENGE.getApiValue().Equals(apiAuth.Scheme))
                     {
                         sdkChallenges.Add(new ChallengeConverter(apiChallenge).ToSDKChallenge());
+                    } else if (AuthenticationMethod.QASMS.getApiValue().Equals(apiAuth.Scheme)) {
+                        sdkChallenges.Add(new ChallengeConverter(apiChallenge).toSDKQASMSChallenge());
                     }
                     else
                     {
@@ -91,6 +95,10 @@ namespace OneSpanSign.Sdk
                 if (AuthenticationMethod.CHALLENGE.getApiValue().Equals(apiAuth.Scheme))
                 {
                     sdkAuthentication = new Authentication(sdkChallenges);
+                }
+                else if (AuthenticationMethod.QASMS.getApiValue().Equals(apiAuth.Scheme)) 
+                {
+                    sdkAuthentication = new Authentication(AuthenticationMethod.QASMS, sdkChallenges);
                 }
                 else if(AuthenticationMethod.SMS.getApiValue().Equals(apiAuth.Scheme))
                 {

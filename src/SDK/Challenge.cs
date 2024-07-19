@@ -12,6 +12,7 @@ namespace OneSpanSign.Sdk
 		private readonly string question;
 		private readonly string answer;
 		private readonly MaskOptions maskOption;
+		private readonly string challengeType;
 
 
 		public Challenge (string question, string answer) : this(question, answer, MaskOptions.None)
@@ -22,6 +23,29 @@ namespace OneSpanSign.Sdk
 		{
 			this.question = question;
 			this.answer = answer;
+			this.maskOption = maskOption;
+		}
+		
+		public Challenge (string question, string answer, string challengeType)
+		{
+			this.question = question;
+			this.answer = answer;
+			this.challengeType = challengeType;
+			this.maskOption = MaskOptions.None;
+		}
+		
+		public Challenge (string question, string answer, string challengeType, MaskOptions maskOption)
+		{
+			if (challengeType == null || challengeType.Trim().Length == 0) {
+				throw new OssException("challenge type parameter cannot be null or empty", null);
+			}
+			if (question == null || question.Trim().Length == 0) {
+				throw new OssException("question parameter cannot be null or empty", null);
+			}
+
+			this.question = question;
+			this.answer = answer;
+			this.challengeType = challengeType;
 			this.maskOption = maskOption;
 		}
 
@@ -46,6 +70,14 @@ namespace OneSpanSign.Sdk
 			get
 			{
 				return maskOption;
+			}
+		}
+
+		public string ChallengeType
+		{
+			get
+			{
+				return challengeType;
 			}
 		}
 
