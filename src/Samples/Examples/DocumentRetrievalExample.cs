@@ -16,7 +16,7 @@ namespace SDK.Examples
 
         override public void Execute()
         {
-            this.fileStream1 = File.OpenRead(new FileInfo(Directory.GetCurrentDirectory() + "/SampleDocuments/prêt.pdf").FullName);
+            this.fileStream1 = File.OpenRead(new FileInfo(Directory.GetCurrentDirectory() + "/SampleDocuments/document.pdf").FullName);
 
             string docId = "myDocumentId";
             var superDuperPackage = PackageBuilder.NewPackageNamed(PackageName)

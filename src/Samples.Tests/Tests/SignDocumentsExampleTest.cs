@@ -38,7 +38,7 @@ namespace SDK.Examples
                         if (signed)
                         {
                             Assert.IsNotNull(signature.Accepted);
-                            Assert.AreEqual(signature.Signed.Value.Date, DateTime.Now.Date);
+                            Assert.AreEqual(signature.Signed.Value.Date, DateTime.UtcNow.Date);
                         } 
                         else
                         {
