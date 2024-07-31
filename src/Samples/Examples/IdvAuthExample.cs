@@ -15,7 +15,7 @@ namespace SDK.Examples
         public static readonly string PHONE_NUMBER = "+15555555555";
         public static readonly string IDV_WORKFLOW_ID1 = "00000000-0000-0001-0000-200000000055";
         public static readonly string TYPE1 = "DV";
-        public static readonly string TENANT = "oss";
+        public static readonly string TENANT = "OSS";
         public static readonly string DESC1 = "This is Mitek Document verification only Mock workflow.";
 
         public static readonly string IDV_WORKFLOW_ID2 = "00000000-0001-0001-0000-200000000055";
