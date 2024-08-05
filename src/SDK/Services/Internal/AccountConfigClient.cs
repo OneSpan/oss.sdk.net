@@ -740,5 +740,63 @@ namespace OneSpanSign.Sdk
                 throw new OssException("Could not get IfWorkflows Configs.", e);
             }
         }
+        
+        public SupportedLanguages GetAccountLimitSupportedLanguagesSettings()
+        {
+            string path = template.UrlFor(UrlTemplate.ACCOUNT_LIMIT_SUPPORTED_LANGUAGES_SETTINGS_PATH).Build();
+            try
+            {
+                String stringResponse = restClient.Get(path);
+                return JsonConvert.DeserializeObject<SupportedLanguages>(stringResponse, jsonSettings);
+            }
+            catch (OssServerException e)
+            {
+                throw new OssServerException("Could not get the account limit supported languages settings.", e);
+            }
+            catch (Exception e)
+            {
+                throw new OssException("Could not get the account limit supported languages settings.", e);
+            }
+        }
+
+        public void SaveAccountLimitSupportedLanguagesSettings(SupportedLanguages supportedLanguages)
+        {
+            string path = template.UrlFor(UrlTemplate.ACCOUNT_LIMIT_SUPPORTED_LANGUAGES_SETTINGS_PATH).Build();
+            string payload = JsonConvert.SerializeObject(supportedLanguages,
+                new JsonSerializerSettings
+                {
+                    ContractResolver = new CamelCasePropertyNamesContractResolver(), Formatting = Formatting.Indented,
+                    NullValueHandling = NullValueHandling.Ignore
+                });
+            try
+            {
+                restClient.Patch(path, payload);
+            }
+            catch (OssServerException e)
+            {
+                throw new OssServerException("Could not save the account limit supported languages settings.", e);
+            }
+            catch (Exception e)
+            {
+                throw new OssException("Could not save the account limit supported languages settings.", e);
+            }
+        }
+        
+        public void DeleteAccountLimitSupportedLanguagesSettings()
+        {
+            string path = template.UrlFor(UrlTemplate.ACCOUNT_LIMIT_SUPPORTED_LANGUAGES_SETTINGS_PATH).Build();
+            try
+            {
+                restClient.Delete(path);
+            }
+            catch (OssServerException e)
+            {
+                throw new OssServerException("Could not delete the account limit supported languages settings.", e);
+            }
+            catch (Exception e)
+            {
+                throw new OssException("Could not delete the account limit supported languages settings.", e);
+            }
+        }
     }
 }

@@ -220,6 +220,21 @@ namespace OneSpanSign.Sdk.Services
         {
             return apiClient.GetIfWorkflowsConfigs();
         }       
+        
+        public SupportedLanguages GetAccountLimitSupportedLanguagesSettings()
+        {
+            return apiClient.GetAccountLimitSupportedLanguagesSettings();
+        }
+
+        public void SaveAccountLimitSupportedLanguagesSettings(SupportedLanguages supportedLanguages)
+        {
+            apiClient.SaveAccountLimitSupportedLanguagesSettings(supportedLanguages);
+        } 
+
+        public void DeleteAccountLimitSupportedLanguagesSettings()
+        {
+            apiClient.DeleteAccountLimitSupportedLanguagesSettings();
+        }  
 
     }
 }

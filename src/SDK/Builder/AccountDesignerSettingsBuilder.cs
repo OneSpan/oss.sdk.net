@@ -187,7 +187,7 @@ namespace OneSpanSign.Sdk
             return this;
         }
 
-        public AccountDesignerSettingsBuilder WithDefaultSignatureType(String signatureType)
+        public AccountDesignerSettingsBuilder WithDefaultSignatureType(string signatureType)
         {
             this._defaultSignatureType = signatureType;
             return this;
