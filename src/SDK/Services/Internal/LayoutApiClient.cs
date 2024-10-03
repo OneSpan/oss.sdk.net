@@ -8,20 +8,20 @@ namespace OneSpanSign.Sdk
 {
     internal class LayoutApiClient
     {
-        private UrlTemplate template;
         private RestClient restClient;
         private JsonSerializerSettings settings;
+        private string baseUrl;
 
         public LayoutApiClient(RestClient restClient, string baseUrl, JsonSerializerSettings settings)
         {
-            template = new UrlTemplate(baseUrl);
             this.restClient = restClient;
             this.settings = settings;
+            this.baseUrl = baseUrl;
         }
 
         public string CreateLayout(Package layoutPackage, String packageId)
         {
-            string path = template.UrlFor(UrlTemplate.LAYOUT_PATH)
+            string path = new UrlTemplate(baseUrl).UrlFor(UrlTemplate.LAYOUT_PATH)
                 .Build();
 
             string packageJson = JsonConvert.SerializeObject(layoutPackage, settings);
@@ -47,7 +47,7 @@ namespace OneSpanSign.Sdk
 
         public Package CreateAndGetLayout(Package layoutPackage, string packageId)
         {
-            string path = template.UrlFor(UrlTemplate.LAYOUT_PATH)
+            string path = new UrlTemplate(baseUrl).UrlFor(UrlTemplate.LAYOUT_PATH)
                 .Build();
 
             string packageJson = JsonConvert.SerializeObject(layoutPackage, settings);
@@ -72,7 +72,7 @@ namespace OneSpanSign.Sdk
 
         public Result<Package> GetLayouts(Direction direction, PageRequest request)
         {
-            string path = template.UrlFor(UrlTemplate.LAYOUT_LIST_PATH)
+            string path = new UrlTemplate(baseUrl).UrlFor(UrlTemplate.LAYOUT_LIST_PATH)
                 .Replace("{dir}", DirectionUtility.getDirection(direction))
                 .Replace("{from}", request.From.ToString())
                 .Replace("{to}", request.To.ToString())
@@ -95,7 +95,7 @@ namespace OneSpanSign.Sdk
 
         public void ApplyLayout(string packageId, string documentId, string layoutId)
         {
-            string path = template.UrlFor(UrlTemplate.APPLY_LAYOUT_PATH)
+            string path = new UrlTemplate(baseUrl).UrlFor(UrlTemplate.APPLY_LAYOUT_PATH)
                 .Replace("{packageId}", packageId)
                 .Replace("{documentId}", documentId)
                 .Replace("{layoutId}", layoutId)
@@ -117,7 +117,7 @@ namespace OneSpanSign.Sdk
 
         public void ApplyLayoutByName(string packageId, string documentId, string layoutName)
         {
-            string path = template.UrlFor(UrlTemplate.APPLY_LAYOUT_BY_NAME_PATH)
+            string path = new UrlTemplate(baseUrl).UrlFor(UrlTemplate.APPLY_LAYOUT_BY_NAME_PATH)
                 .Replace("{packageId}", packageId)
                 .Replace("{documentId}", documentId)
                 .Replace("{layoutName}", HttpUtility.UrlEncode(layoutName))

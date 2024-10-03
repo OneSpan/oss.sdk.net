@@ -9,20 +9,20 @@ namespace OneSpanSign.Sdk
 {
     public class SigningStyleService
     {
-        private UrlTemplate template;
         private RestClient restClient;
         private JsonSerializerSettings settings;
+        private string baseUrl;
 
         public SigningStyleService (RestClient restClient, string baseUrl, JsonSerializerSettings settings)
         {
-            this.template = new UrlTemplate (baseUrl);
             this.restClient = restClient;
             this.settings = settings;
+            this.baseUrl = baseUrl;
         }
 
         public IDictionary<string, object> CreateSigningThemes (string signingThemesString)
         {
-            string path = template.UrlFor (UrlTemplate.ACCOUNT_SIGNING_THEME_PATH)
+            string path = new UrlTemplate(baseUrl).UrlFor (UrlTemplate.ACCOUNT_SIGNING_THEME_PATH)
                           .Build ();
 
             try
@@ -42,7 +42,7 @@ namespace OneSpanSign.Sdk
 
         public IDictionary<string, object> GetSigningThemes ()
         {
-            string path = template.UrlFor (UrlTemplate.ACCOUNT_SIGNING_THEME_PATH)
+            string path = new UrlTemplate(baseUrl).UrlFor (UrlTemplate.ACCOUNT_SIGNING_THEME_PATH)
                           .Build ();
 
             try
@@ -62,7 +62,7 @@ namespace OneSpanSign.Sdk
 
         public IDictionary<string, object> UpdateSigningThemes (string signingThemesString)
         {
-            string path = template.UrlFor (UrlTemplate.ACCOUNT_SIGNING_THEME_PATH)
+            string path = new UrlTemplate(baseUrl).UrlFor (UrlTemplate.ACCOUNT_SIGNING_THEME_PATH)
                           .Build ();
 
             try
@@ -82,7 +82,7 @@ namespace OneSpanSign.Sdk
 
         public void DeleteSigningThemes ()
         {
-            string path = template.UrlFor (UrlTemplate.ACCOUNT_SIGNING_THEME_PATH)
+            string path = new UrlTemplate(baseUrl).UrlFor (UrlTemplate.ACCOUNT_SIGNING_THEME_PATH)
                           .Build ();
 
             try 
@@ -101,7 +101,7 @@ namespace OneSpanSign.Sdk
 
         public void SaveSigningLogos (List<SigningLogo> signingLogos)
         {
-            string path = template.UrlFor (UrlTemplate.ACCOUNT_SIGNING_LOGO_PATH)
+            string path = new UrlTemplate(baseUrl).UrlFor (UrlTemplate.ACCOUNT_SIGNING_LOGO_PATH)
                           .Build ();
             string payload = JsonConvert.SerializeObject (signingLogos, new JsonSerializerSettings { ContractResolver = new CamelCasePropertyNamesContractResolver (), Formatting = Formatting.Indented });
 
@@ -121,7 +121,7 @@ namespace OneSpanSign.Sdk
 
         public List<SigningLogo> GetSigningLogos ()
         {
-            string path = template.UrlFor (UrlTemplate.ACCOUNT_SIGNING_LOGO_PATH)
+            string path = new UrlTemplate(baseUrl).UrlFor (UrlTemplate.ACCOUNT_SIGNING_LOGO_PATH)
                           .Build ();
 
             try
@@ -141,7 +141,7 @@ namespace OneSpanSign.Sdk
 
         public SigningUiOptions GetSigningUiOptions()
         {
-            string path = template.UrlFor (UrlTemplate.ACCOUNT_SIGNING_UI_OPTIONS_PATH)
+            string path = new UrlTemplate(baseUrl).UrlFor (UrlTemplate.ACCOUNT_SIGNING_UI_OPTIONS_PATH)
                 .Build ();
 
             try
@@ -161,7 +161,7 @@ namespace OneSpanSign.Sdk
         
         public void SaveSigningUiOptions(SigningUiOptions signingUiOptions)
         {
-            string path = template.UrlFor (UrlTemplate.ACCOUNT_SIGNING_UI_OPTIONS_PATH)
+            string path = new UrlTemplate(baseUrl).UrlFor (UrlTemplate.ACCOUNT_SIGNING_UI_OPTIONS_PATH)
                 .Build ();
             string payload = JsonConvert.SerializeObject(signingUiOptions, new JsonSerializerSettings { ContractResolver = new CamelCasePropertyNamesContractResolver (), Formatting = Formatting.Indented ,NullValueHandling = NullValueHandling.Ignore});
             try
@@ -180,7 +180,7 @@ namespace OneSpanSign.Sdk
         
         public void DeleteSigningUiOptions ()
         {
-            string path = template.UrlFor (UrlTemplate.ACCOUNT_SIGNING_UI_OPTIONS_PATH)
+            string path = new UrlTemplate(baseUrl).UrlFor (UrlTemplate.ACCOUNT_SIGNING_UI_OPTIONS_PATH)
                 .Build ();
 
             try 

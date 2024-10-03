@@ -20,10 +20,10 @@ namespace OneSpanSign.Sdk.Services
     /// </summary>
     public class PackageService
     {
-        private UrlTemplate template;
         private JsonSerializerSettings settings;
         private RestClient restClient;
         private ReportService reportService;
+        private string baseUrl;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="OneSpanSign.Sdk.PackageService"/> class.
@@ -33,7 +33,7 @@ namespace OneSpanSign.Sdk.Services
         public PackageService(RestClient restClient, string baseUrl, JsonSerializerSettings settings)
         {
             this.restClient = restClient;
-            template = new UrlTemplate(baseUrl);
+            this.baseUrl = baseUrl;
             this.settings = settings;
             reportService = new ReportService(restClient, baseUrl, settings);
         }
@@ -45,7 +45,7 @@ namespace OneSpanSign.Sdk.Services
         /// <param name="package">The package to create.</param>
         internal PackageId CreatePackage(OneSpanSign.API.Package package)
         {
-            string path = template.UrlFor(UrlTemplate.PACKAGE_PATH)
+            string path = new UrlTemplate(baseUrl).UrlFor(UrlTemplate.PACKAGE_PATH)
 				.Build();
             try
             {
@@ -75,7 +75,7 @@ namespace OneSpanSign.Sdk.Services
         /// <param name="package">The package to create.</param>
         internal PackageId CreatePackageOneStep(OneSpanSign.API.Package package, ICollection<OneSpanSign.Sdk.Document> documents)
         {
-            string path = template.UrlFor(UrlTemplate.PACKAGE_PATH)
+            string path = new UrlTemplate(baseUrl).UrlFor(UrlTemplate.PACKAGE_PATH)
             .Build();
             try
             {
@@ -108,7 +108,7 @@ namespace OneSpanSign.Sdk.Services
         /// <param name="package">The updated package.</param>
         //		internal void UpdatePackage (PackageId packageId, OneSpanSign.API.Package package)
         //		{
-        //			string path = template.UrlFor (UrlTemplate.PACKAGE_ID_PATH)
+        //			string path = new UrlTemplate(baseUrl).UrlFor (UrlTemplate.PACKAGE_ID_PATH)
         //				.Replace ("{packageId}", packageId.Id)
         //				.Build ();
         //
@@ -127,7 +127,7 @@ namespace OneSpanSign.Sdk.Services
         /// <param name="packageId">The package id.</param>
         internal OneSpanSign.API.Package GetPackage(PackageId packageId)
         {
-            string path = template.UrlFor(UrlTemplate.PACKAGE_ID_PATH)
+            string path = new UrlTemplate(baseUrl).UrlFor(UrlTemplate.PACKAGE_ID_PATH)
 				.Replace("{packageId}", packageId.Id)
 				.Build();
 
@@ -158,7 +158,7 @@ namespace OneSpanSign.Sdk.Services
 
         public void DeleteDocument(PackageId packageId, string documentId)
         {
-            string path = template.UrlFor(UrlTemplate.DOCUMENT_ID_PATH)
+            string path = new UrlTemplate(baseUrl).UrlFor(UrlTemplate.DOCUMENT_ID_PATH)
 							.Replace("{packageId}", packageId.Id)
 							.Replace("{documentId}", documentId)
 							.Build();
@@ -184,7 +184,7 @@ namespace OneSpanSign.Sdk.Services
         /// <param name="documentIds">The documents to delete.</param>
         public void DeleteDocuments (PackageId packageId, params string[] documentIds)
         {
-            string path = template.UrlFor (UrlTemplate.DOCUMENT_PATH)
+            string path = new UrlTemplate(baseUrl).UrlFor (UrlTemplate.DOCUMENT_PATH)
                             .Replace ("{packageId}", packageId.Id)
                             .Build ();
 
@@ -207,7 +207,7 @@ namespace OneSpanSign.Sdk.Services
         /// <param name="documentId">Id of document to get.</param>
         public OneSpanSign.Sdk.Document GetDocumentMetadata(DocumentPackage package, string documentId)
         {
-            string path = template.UrlFor(UrlTemplate.DOCUMENT_ID_PATH)
+            string path = new UrlTemplate(baseUrl).UrlFor(UrlTemplate.DOCUMENT_ID_PATH)
                 .Replace("{packageId}", package.Id.Id)
                 .Replace("{documentId}", documentId)
                 .Build();
@@ -238,7 +238,7 @@ namespace OneSpanSign.Sdk.Services
         /// <param name="document">The Document to update.</param>
         public void UpdateDocumentMetadata(DocumentPackage package, Document document)
         {
-            string path = template.UrlFor(UrlTemplate.DOCUMENT_ID_PATH)
+            string path = new UrlTemplate(baseUrl).UrlFor(UrlTemplate.DOCUMENT_ID_PATH)
                 .Replace("{packageId}", package.Id.Id)
                     .Replace("{documentId}", document.Id)
                     .Build();
@@ -288,7 +288,7 @@ namespace OneSpanSign.Sdk.Services
 
         public void OrderDocuments(DocumentPackage package)
         {
-            string path = template.UrlFor(UrlTemplate.DOCUMENT_PATH)
+            string path = new UrlTemplate(baseUrl).UrlFor(UrlTemplate.DOCUMENT_PATH)
 				.Replace("{packageId}", package.Id.Id)
 				.Build();
 
@@ -323,7 +323,7 @@ namespace OneSpanSign.Sdk.Services
         /// 
         public void AddDocumentWithExternalContent(string packageId, IList<Document> providerDocuments)
         {
-            string path = template.UrlFor(UrlTemplate.DOCUMENT_PATH)
+            string path = new UrlTemplate(baseUrl).UrlFor(UrlTemplate.DOCUMENT_PATH)
                 .Replace("{packageId}", packageId)
                     .Build();
 
@@ -351,7 +351,7 @@ namespace OneSpanSign.Sdk.Services
 
         public IList<Document> GetDocuments()
         {
-            string path = template.UrlFor(UrlTemplate.PROVIDER_DOCUMENTS).Build();
+            string path = new UrlTemplate(baseUrl).UrlFor(UrlTemplate.PROVIDER_DOCUMENTS).Build();
 
             try
             {
@@ -381,7 +381,7 @@ namespace OneSpanSign.Sdk.Services
         /// <param name="packageId">The package id.</param>
         public void SendPackage(PackageId packageId)
         {
-            string path = template.UrlFor(UrlTemplate.PACKAGE_ID_PATH)
+            string path = new UrlTemplate(baseUrl).UrlFor(UrlTemplate.PACKAGE_ID_PATH)
                 .Replace("{packageId}", packageId.Id)
                 .Build();
 
@@ -407,7 +407,7 @@ namespace OneSpanSign.Sdk.Services
         /// <param name="documentId">The id of the document to download.</param>
         public byte[] DownloadDocument(PackageId packageId, String documentId)
         {
-            string path = template.UrlFor(UrlTemplate.PDF_PATH)
+            string path = new UrlTemplate(baseUrl).UrlFor(UrlTemplate.PDF_PATH)
 				.Replace("{packageId}", packageId.Id)
 					.Replace("{documentId}", documentId)
 					.Build();
@@ -434,7 +434,7 @@ namespace OneSpanSign.Sdk.Services
         /// <param name="documentId">Document identifier.</param>
         public byte[] DownloadOriginalDocument(PackageId packageId, String documentId)
         {
-            string path = template.UrlFor(UrlTemplate.ORIGINAL_PATH)
+            string path = new UrlTemplate(baseUrl).UrlFor(UrlTemplate.ORIGINAL_PATH)
                 .Replace("{packageId}", packageId.Id)
                 .Replace("{documentId}", documentId)
                 .Build();
@@ -460,7 +460,7 @@ namespace OneSpanSign.Sdk.Services
         /// <param name="packageId">.</param>
         public byte[] DownloadZippedDocuments(PackageId packageId)
         {
-            string path = template.UrlFor(UrlTemplate.ZIP_PATH)
+            string path = new UrlTemplate(baseUrl).UrlFor(UrlTemplate.ZIP_PATH)
             .Replace("{packageId}", packageId.Id)
             .Build();
 
@@ -485,7 +485,7 @@ namespace OneSpanSign.Sdk.Services
         /// <param name="packageId">The package id.</param>
         public byte[] DownloadEvidenceSummary(PackageId packageId)
         {
-            string path = template.UrlFor(UrlTemplate.EVIDENCE_SUMMARY_PATH)
+            string path = new UrlTemplate(baseUrl).UrlFor(UrlTemplate.EVIDENCE_SUMMARY_PATH)
                 .Replace("{packageId}", packageId.Id)
                 .Build();
 
@@ -505,7 +505,7 @@ namespace OneSpanSign.Sdk.Services
 
         internal void UpdatePackage(PackageId packageId, Package package)
         {
-            string path = template.UrlFor(UrlTemplate.PACKAGE_ID_PATH)
+            string path = new UrlTemplate(baseUrl).UrlFor(UrlTemplate.PACKAGE_ID_PATH)
                 .Replace("{packageId}", packageId.Id)
                 .Build();
                 
@@ -526,7 +526,7 @@ namespace OneSpanSign.Sdk.Services
 
         internal void ChangePackageStatusToDraft(PackageId packageId) 
         {
-            string path = template.UrlFor(UrlTemplate.PACKAGE_ID_PATH)
+            string path = new UrlTemplate(baseUrl).UrlFor(UrlTemplate.PACKAGE_ID_PATH)
                 .Replace("{packageId}", packageId.Id)
                 .Build();
 
@@ -553,7 +553,7 @@ namespace OneSpanSign.Sdk.Services
         /// <param name="document">The document object that has field settings.</param>
         internal Document UploadDocument(PackageId packageId, string fileName, byte[] fileBytes, Document document)
         {
-            string path = template.UrlFor(UrlTemplate.DOCUMENT_PATH)
+            string path = new UrlTemplate(baseUrl).UrlFor(UrlTemplate.DOCUMENT_PATH)
                 .Replace("{packageId}", packageId.Id)
 				.Build();
 
@@ -585,7 +585,7 @@ namespace OneSpanSign.Sdk.Services
 
         internal IList<Document> UploadDocuments(PackageId packageId, IList<Document> documents)
         {
-            string path = template.UrlFor(UrlTemplate.DOCUMENT_PATH)
+            string path = new UrlTemplate(baseUrl).UrlFor(UrlTemplate.DOCUMENT_PATH)
                 .Replace("{packageId}", packageId.Id)
                 .Build();
 
@@ -645,7 +645,7 @@ namespace OneSpanSign.Sdk.Services
         ///
         internal IList<Document> AddDocumentWithBase64Content(PackageId packageId, IList<Document> documents)
         {
-            string path = template.UrlFor(UrlTemplate.DOCUMENT_PATH)
+            string path = new UrlTemplate(baseUrl).UrlFor(UrlTemplate.DOCUMENT_PATH)
                 .Replace("{packageId}", packageId.Id)
                 .Build();
 
@@ -765,7 +765,7 @@ namespace OneSpanSign.Sdk.Services
 
         public SigningStatus GetSigningStatus(PackageId packageId, string signerId, string documentId)
         {
-            string path = template.UrlFor(UrlTemplate.SIGNING_STATUS_PATH)
+            string path = new UrlTemplate(baseUrl).UrlFor(UrlTemplate.SIGNING_STATUS_PATH)
 				.Replace("{packageId}", packageId.Id)
 				.Replace("{signerId}", !String.IsNullOrEmpty(signerId) ? signerId : "")
 				.Replace("{documentId}", !String.IsNullOrEmpty(documentId) ? documentId : "")
@@ -795,7 +795,7 @@ namespace OneSpanSign.Sdk.Services
 
         internal IList<Role> GetRoles(PackageId packageId)
         {
-            String path = template.UrlFor(UrlTemplate.ROLE_PATH)
+            String path = new UrlTemplate(baseUrl).UrlFor(UrlTemplate.ROLE_PATH)
 				.Replace("{packageId}", packageId.Id)
 				.Build();
 
@@ -818,7 +818,7 @@ namespace OneSpanSign.Sdk.Services
 
         public void DeletePackage(PackageId id)
         {
-            string path = template.UrlFor(UrlTemplate.PACKAGE_ID_PATH).Replace("{packageId}", id.Id).Build();
+            string path = new UrlTemplate(baseUrl).UrlFor(UrlTemplate.PACKAGE_ID_PATH).Replace("{packageId}", id.Id).Build();
 
             try
             {
@@ -841,7 +841,7 @@ namespace OneSpanSign.Sdk.Services
                 throw new ArgumentNullException("id");
             }
 
-            string path = template.UrlFor(UrlTemplate.PACKAGE_ID_PATH).Replace("{packageId}", id.Id).Build();
+            string path = new UrlTemplate(baseUrl).UrlFor(UrlTemplate.PACKAGE_ID_PATH).Replace("{packageId}", id.Id).Build();
 
             try
             {
@@ -864,7 +864,7 @@ namespace OneSpanSign.Sdk.Services
                 throw new ArgumentNullException("id");
             }
 
-            string path = template.UrlFor(UrlTemplate.PACKAGE_ID_PATH).Replace("{packageId}", id.Id).Build();
+            string path = new UrlTemplate(baseUrl).UrlFor(UrlTemplate.PACKAGE_ID_PATH).Replace("{packageId}", id.Id).Build();
 
             try
             {
@@ -887,7 +887,7 @@ namespace OneSpanSign.Sdk.Services
                 throw new ArgumentNullException("id");
             }
 
-            string path = template.UrlFor(UrlTemplate.PACKAGE_ID_PATH).Replace("{packageId}", id.Id).Build();
+            string path = new UrlTemplate(baseUrl).UrlFor(UrlTemplate.PACKAGE_ID_PATH).Replace("{packageId}", id.Id).Build();
 
             try
             {
@@ -910,7 +910,7 @@ namespace OneSpanSign.Sdk.Services
                 throw new ArgumentNullException("id");
             }
 
-            string path = template.UrlFor(UrlTemplate.PACKAGE_ID_PATH).Replace("{packageId}", id.Id).Build();
+            string path = new UrlTemplate(baseUrl).UrlFor(UrlTemplate.PACKAGE_ID_PATH).Replace("{packageId}", id.Id).Build();
 
             try
             {
@@ -933,7 +933,7 @@ namespace OneSpanSign.Sdk.Services
                 throw new ArgumentNullException("id");
             }
 
-            string path = template.UrlFor(UrlTemplate.PACKAGE_ID_PATH).Replace("{packageId}", id.Id).Build();
+            string path = new UrlTemplate(baseUrl).UrlFor(UrlTemplate.PACKAGE_ID_PATH).Replace("{packageId}", id.Id).Build();
 
             try
             {
@@ -976,7 +976,7 @@ namespace OneSpanSign.Sdk.Services
         public void NotifySigner(PackageId packageId, string roleId)
         {
 
-            string path = template.UrlFor(UrlTemplate.NOTIFY_ROLE_PATH)
+            string path = new UrlTemplate(baseUrl).UrlFor(UrlTemplate.NOTIFY_ROLE_PATH)
 				.Replace("{packageId}", packageId.Id)
 				.Replace("{roleId}", roleId)
 				.Build();
@@ -997,7 +997,7 @@ namespace OneSpanSign.Sdk.Services
 
         public void NotifySigner(PackageId packageId, string signerEmail, string message)
         {
-            string path = template.UrlFor(UrlTemplate.NOTIFICATIONS_PATH).Replace("{packageId}", packageId.Id).Build();
+            string path = new UrlTemplate(baseUrl).UrlFor(UrlTemplate.NOTIFICATIONS_PATH).Replace("{packageId}", packageId.Id).Build();
             StringWriter sw = new StringWriter();
 
             using (JsonWriter json = new JsonTextWriter(sw))
@@ -1027,7 +1027,7 @@ namespace OneSpanSign.Sdk.Services
 
         public Page<DocumentPackage> GetPackages(DocumentPackageStatus status, PageRequest request)
         {
-            string path = template.UrlFor(UrlTemplate.PACKAGE_LIST_PATH)
+            string path = new UrlTemplate(baseUrl).UrlFor(UrlTemplate.PACKAGE_LIST_PATH)
                 .Replace("{status}", new PackageStatusConverter(status).ToAPIPackageStatus())
 				.Replace("{from}", request.From.ToString())
 				.Replace("{to}", request.To.ToString())
@@ -1054,7 +1054,7 @@ namespace OneSpanSign.Sdk.Services
 
         public Page<Dictionary<String, String>> GetPackagesFields (DocumentPackageStatus status, PageRequest request, ISet<String> fields)
         {
-            string path = template.UrlFor (UrlTemplate.PACKAGE_FIELDS_LIST_PATH)
+            string path = new UrlTemplate(baseUrl).UrlFor (UrlTemplate.PACKAGE_FIELDS_LIST_PATH)
                 .Replace ("{status}", new PackageStatusConverter (status).ToAPIPackageStatus ())
                 .Replace ("{from}", request.From.ToString ())
                 .Replace ("{to}", request.To.ToString ())
@@ -1085,7 +1085,7 @@ namespace OneSpanSign.Sdk.Services
             string fromDate = DateHelper.dateToIsoUtcFormat(from);
             string toDate = DateHelper.dateToIsoUtcFormat(to);
 
-            string path = template.UrlFor(UrlTemplate.PACKAGE_LIST_STATUS_DATE_RANGE_PATH)
+            string path = new UrlTemplate(baseUrl).UrlFor(UrlTemplate.PACKAGE_LIST_STATUS_DATE_RANGE_PATH)
                     .Replace("{status}", new PackageStatusConverter(status).ToAPIPackageStatus())
                     .Replace("{from}", request.From.ToString())
                     .Replace("{to}", request.To.ToString())
@@ -1114,7 +1114,7 @@ namespace OneSpanSign.Sdk.Services
 
         public Page<DocumentPackage> GetTemplates(PageRequest request)
         {
-            string path = template.UrlFor(UrlTemplate.PACKAGE_PATH)
+            string path = new UrlTemplate(baseUrl).UrlFor(UrlTemplate.PACKAGE_PATH)
                 .AddParam("type", "template")
                 .AddParam("from", request.From.ToString())
                 .AddParam("to", request.To.ToString())
@@ -1125,7 +1125,7 @@ namespace OneSpanSign.Sdk.Services
 
         public Page<DocumentPackage> GetTemplates(PageRequest request, Visibility visibility)
         {
-            string path = template.UrlFor(UrlTemplate.PACKAGE_PATH)
+            string path = new UrlTemplate(baseUrl).UrlFor(UrlTemplate.PACKAGE_PATH)
                 .AddParam("type", "template")
                 .AddParam("from", request.From.ToString())
                 .AddParam("to", request.To.ToString())
@@ -1188,7 +1188,7 @@ namespace OneSpanSign.Sdk.Services
         {
             Role apiPayload = new SignerConverter(signer).ToAPIRole(System.Guid.NewGuid().ToString());
 
-            string path = template.UrlFor(UrlTemplate.ADD_SIGNER_PATH)
+            string path = new UrlTemplate(baseUrl).UrlFor(UrlTemplate.ADD_SIGNER_PATH)
 				.Replace("{packageId}", packageId.Id)
 				.Build();
             try
@@ -1211,7 +1211,7 @@ namespace OneSpanSign.Sdk.Services
 
         public Signer GetSigner(PackageId packageId, string signerId)
         {
-            string path = template.UrlFor(UrlTemplate.GET_SIGNER_PATH)
+            string path = new UrlTemplate(baseUrl).UrlFor(UrlTemplate.GET_SIGNER_PATH)
 				.Replace("{packageId}", packageId.Id)
 				.Replace("{roleId}", signerId)
 				.Build();
@@ -1236,7 +1236,7 @@ namespace OneSpanSign.Sdk.Services
         {
             Role apiPayload = new SignerConverter(signer).ToAPIRole(System.Guid.NewGuid().ToString());
 
-            string path = template.UrlFor(UrlTemplate.UPDATE_SIGNER_PATH)
+            string path = new UrlTemplate(baseUrl).UrlFor(UrlTemplate.UPDATE_SIGNER_PATH)
 				.Replace("{packageId}", packageId.Id)
 				.Replace("{roleId}", signer.Id)
 				.Build();
@@ -1257,7 +1257,7 @@ namespace OneSpanSign.Sdk.Services
 
         public void RemoveSigner(PackageId packageId, string signerId)
         {
-            string path = template.UrlFor(UrlTemplate.REMOVE_SIGNER_PATH)
+            string path = new UrlTemplate(baseUrl).UrlFor(UrlTemplate.REMOVE_SIGNER_PATH)
 				.Replace("{packageId}", packageId.Id)
 				.Replace("{roleId}", signerId)
 				.Build();
@@ -1279,7 +1279,7 @@ namespace OneSpanSign.Sdk.Services
 
         public void OrderSigners(DocumentPackage package)
         {
-            string path = template.UrlFor(UrlTemplate.ROLE_PATH)
+            string path = new UrlTemplate(baseUrl).UrlFor(UrlTemplate.ROLE_PATH)
 				.Replace("{packageId}", package.Id.Id)
 				.Build();
 
@@ -1306,7 +1306,7 @@ namespace OneSpanSign.Sdk.Services
 
         public void UnlockSigner(PackageId packageId, string senderId)
         {
-            string path = template.UrlFor(UrlTemplate.ROLE_UNLOCK_PATH)
+            string path = new UrlTemplate(baseUrl).UrlFor(UrlTemplate.ROLE_UNLOCK_PATH)
                 .Replace("{packageId}", packageId.Id)
                     .Replace("{roleId}", senderId)
                     .Build();
@@ -1327,7 +1327,7 @@ namespace OneSpanSign.Sdk.Services
 
         public void ConfigureDocumentVisibility(PackageId packageId, DocumentVisibility visibility)
         {
-            string path = template.UrlFor( UrlTemplate.DOCUMENT_VISIBILITY_PATH )
+            string path = new UrlTemplate(baseUrl).UrlFor( UrlTemplate.DOCUMENT_VISIBILITY_PATH )
                 .Replace("{packageId}", packageId.Id)
                 .Build();
 
@@ -1350,7 +1350,7 @@ namespace OneSpanSign.Sdk.Services
 
         public DocumentVisibility GetDocumentVisibility(PackageId packageId) 
         {
-            string path = template.UrlFor( UrlTemplate.DOCUMENT_VISIBILITY_PATH )
+            string path = new UrlTemplate(baseUrl).UrlFor( UrlTemplate.DOCUMENT_VISIBILITY_PATH )
                 .Replace("{packageId}", packageId.Id)
                 .Build();
 
@@ -1466,7 +1466,7 @@ namespace OneSpanSign.Sdk.Services
         private string GetSigningUrl(PackageId packageId, Role role) 
         {
 
-            string path = template.UrlFor(UrlTemplate.SIGNER_URL_PATH)
+            string path = new UrlTemplate(baseUrl).UrlFor(UrlTemplate.SIGNER_URL_PATH)
                          .Replace("{packageId}", packageId.Id)
                          .Replace("{roleId}", role.Id)
                          .Build();
@@ -1490,7 +1490,7 @@ namespace OneSpanSign.Sdk.Services
         public string StartFastTrack(PackageId packageId, List<FastTrackSigner> signers) 
         {
             string token = GetFastTrackToken(packageId, true);
-            string path = template.UrlFor(UrlTemplate.START_FAST_TRACK_PATH)
+            string path = new UrlTemplate(baseUrl).UrlFor(UrlTemplate.START_FAST_TRACK_PATH)
                          .Replace("{token}", token)
                          .Build();
 
@@ -1531,7 +1531,7 @@ namespace OneSpanSign.Sdk.Services
 
         private string GetFastTrackUrl(PackageId packageId, Boolean signing) 
         {
-            string path = template.UrlFor(UrlTemplate.FAST_TRACK_URL_PATH)
+            string path = new UrlTemplate(baseUrl).UrlFor(UrlTemplate.FAST_TRACK_URL_PATH)
                                   .Replace("{packageId}", packageId.Id)
                                   .Replace("{signing}", signing.ToString())
                                   .Build();
@@ -1560,7 +1560,7 @@ namespace OneSpanSign.Sdk.Services
 
         private void SendSmsToSigner(PackageId packageId, Role role) 
         {
-            string path = template.UrlFor(UrlTemplate.SEND_SMS_TO_SIGNER_PATH)
+            string path = new UrlTemplate(baseUrl).UrlFor(UrlTemplate.SEND_SMS_TO_SIGNER_PATH)
                                   .Replace("{packageId}", packageId.Id)
                                   .Replace("{roleId}", role.Id)
                                   .Build();
@@ -1583,7 +1583,7 @@ namespace OneSpanSign.Sdk.Services
         {
             List<OneSpanSign.Sdk.NotaryJournalEntry> result = new List<OneSpanSign.Sdk.NotaryJournalEntry>();
 
-            string path = template.UrlFor(UrlTemplate.NOTARY_JOURNAL_PATH)
+            string path = new UrlTemplate(baseUrl).UrlFor(UrlTemplate.NOTARY_JOURNAL_PATH)
                     .Replace("{userId}", userId)
                     .Build();
 
@@ -1612,7 +1612,7 @@ namespace OneSpanSign.Sdk.Services
 
         public DownloadedFile GetJournalEntriesAsCSV(string userId) 
         {
-            string path = template.UrlFor(UrlTemplate.NOTARY_JOURNAL_CSV_PATH)
+            string path = new UrlTemplate(baseUrl).UrlFor(UrlTemplate.NOTARY_JOURNAL_CSV_PATH)
                     .Replace("{userId}", userId)
                     .Build();
 
@@ -1632,7 +1632,7 @@ namespace OneSpanSign.Sdk.Services
 
         public string GetThankYouDialogContent(PackageId packageId) 
         {
-            string path = template.UrlFor(UrlTemplate.THANK_YOU_DIALOG_PATH)
+            string path = new UrlTemplate(baseUrl).UrlFor(UrlTemplate.THANK_YOU_DIALOG_PATH)
                     .Replace("{packageId}", packageId.Id)
                     .Build();
 
@@ -1654,7 +1654,7 @@ namespace OneSpanSign.Sdk.Services
 
         public SupportConfiguration GetConfig(PackageId packageId) 
         {
-            string path = template.UrlFor(UrlTemplate.PACKAGE_INFORMATION_CONFIG_PATH)
+            string path = new UrlTemplate(baseUrl).UrlFor(UrlTemplate.PACKAGE_INFORMATION_CONFIG_PATH)
                     .Replace("{packageId}", packageId.Id)
                     .Build();
 
@@ -1686,7 +1686,7 @@ namespace OneSpanSign.Sdk.Services
 
         public ReferencedConditions GetReferencedConditions(String packageId, String documentId, String fieldId)
         {
-            String path = template.UrlFor(UrlTemplate.PACKAGE_REFERENCED_CONDITIONS_PATH)
+            String path = new UrlTemplate(baseUrl).UrlFor(UrlTemplate.PACKAGE_REFERENCED_CONDITIONS_PATH)
                 .Replace("{packageId}", packageId)
                 .AddParam("documentId", documentId)
                 .AddParam("fieldId", fieldId)

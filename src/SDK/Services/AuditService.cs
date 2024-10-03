@@ -11,7 +11,7 @@ namespace OneSpanSign.Sdk.Services
 	public class AuditService
     {
         private RestClient restClient;
-        private UrlTemplate template;
+		private string baseUrl;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="OneSpanSign.Sdk.AuditService"/> class.
@@ -21,7 +21,7 @@ namespace OneSpanSign.Sdk.Services
         public AuditService (RestClient restClient, string baseUrl)
 		{
             this.restClient = restClient;
-            template = new UrlTemplate(baseUrl);
+			this.baseUrl = baseUrl;
         }
 
 		/// <summary>
@@ -31,7 +31,7 @@ namespace OneSpanSign.Sdk.Services
 		/// <param name="packageId">The package id.</param>
 		public List<Audit> GetAudit (PackageId packageId)
 		{
-			string path = template.UrlFor (UrlTemplate.AUDIT_PATH)
+			string path = new UrlTemplate(baseUrl).UrlFor (UrlTemplate.AUDIT_PATH)
 				.Replace ("{packageId}", packageId.Id)
 					.Build ();
 

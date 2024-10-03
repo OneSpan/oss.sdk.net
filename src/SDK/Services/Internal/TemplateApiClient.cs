@@ -7,21 +7,21 @@ namespace OneSpanSign.Sdk
 {
     internal class TemplateApiClient
     {
-        private UrlTemplate urls;
         private JsonSerializerSettings settings;
         private RestClient restClient;
+        private string baseUrl;
         
         internal TemplateApiClient(RestClient restClient, string baseUrl, JsonSerializerSettings settings)
         {
             this.restClient = restClient;
-            urls = new UrlTemplate (baseUrl);
             this.settings = settings;
+            this.baseUrl = baseUrl;
         }
         
         internal string CreateTemplateFromPackage(string originalPackageId, OneSpanSign.API.Package delta)
         {
             delta.Type = "TEMPLATE";
-            string path = urls.UrlFor (UrlTemplate.CLONE_PACKAGE_PATH).Replace("{packageId}", originalPackageId)
+            string path = new UrlTemplate(baseUrl).UrlFor (UrlTemplate.CLONE_PACKAGE_PATH).Replace("{packageId}", originalPackageId)
                 .Build ();
             try {
                 string deltaJson = JsonConvert.SerializeObject (delta, settings);
@@ -38,7 +38,7 @@ namespace OneSpanSign.Sdk
         
         internal string CreatePackageFromTemplate(string templateId, OneSpanSign.API.Package delta)
         {
-            string path = urls.UrlFor (UrlTemplate.CLONE_PACKAGE_PATH).Replace("{packageId}", templateId)
+            string path = new UrlTemplate(baseUrl).UrlFor (UrlTemplate.CLONE_PACKAGE_PATH).Replace("{packageId}", templateId)
                 .Build ();
             try {
                 string deltaJson = JsonConvert.SerializeObject (delta, settings);
@@ -56,7 +56,7 @@ namespace OneSpanSign.Sdk
         
         internal string CreateTemplate(OneSpanSign.API.Package template)
         {
-            string path = urls.UrlFor(UrlTemplate.PACKAGE_PATH).Build();
+            string path = new UrlTemplate(baseUrl).UrlFor(UrlTemplate.PACKAGE_PATH).Build();
 
             try
             {
@@ -77,7 +77,7 @@ namespace OneSpanSign.Sdk
 
         internal Placeholder AddPlaceholder(PackageId templateId, Placeholder placeholder)
         {
-            string path = urls.UrlFor(UrlTemplate.ROLE_PATH)
+            string path = new UrlTemplate(baseUrl).UrlFor(UrlTemplate.ROLE_PATH)
                 .Replace("{packageId}", templateId.Id)
                     .Build();
             Role apiPayload = new Role();
@@ -103,7 +103,7 @@ namespace OneSpanSign.Sdk
         
         internal Placeholder UpdatePlaceholder(PackageId templateId, Placeholder placeholder)
         {
-            string path = urls.UrlFor(UrlTemplate.ROLE_ID_PATH)
+            string path = new UrlTemplate(baseUrl).UrlFor(UrlTemplate.ROLE_ID_PATH)
                 .Replace("{packageId}", templateId.Id)
                 .Replace("{roleId}", placeholder.Id)
                 .Build();
@@ -129,7 +129,7 @@ namespace OneSpanSign.Sdk
         
         public void Update(OneSpanSign.API.Package apiTemplate)
         {
-            string path = urls.UrlFor(UrlTemplate.PACKAGE_ID_PATH)
+            string path = new UrlTemplate(baseUrl).UrlFor(UrlTemplate.PACKAGE_ID_PATH)
                 .Replace("{packageId}", apiTemplate.Id)
                 .Build();
 

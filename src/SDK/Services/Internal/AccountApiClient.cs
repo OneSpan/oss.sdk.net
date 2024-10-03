@@ -10,20 +10,20 @@ namespace OneSpanSign.Sdk
 {
     internal class AccountApiClient
     {
-        private UrlTemplate template;
         private RestClient restClient;
         private JsonSerializerSettings jsonSettings;
+        private string baseUrl;
 
         public AccountApiClient(RestClient restClient, string apiUrl, JsonSerializerSettings jsonSettings)
         {
             this.restClient = restClient;
-            template = new UrlTemplate(apiUrl);
             this.jsonSettings = jsonSettings;
+            this.baseUrl = apiUrl;
         }
 
         public OneSpanSign.API.Sender InviteUser(OneSpanSign.API.Sender invitee)
         {
-            string path = template.UrlFor(UrlTemplate.ACCOUNT_MEMBER_PATH).Build();
+            string path = new UrlTemplate(baseUrl).UrlFor(UrlTemplate.ACCOUNT_MEMBER_PATH).Build();
             try
             {
                 string json = JsonConvert.SerializeObject(invitee, jsonSettings);
@@ -45,7 +45,7 @@ namespace OneSpanSign.Sdk
 
         public void SendInvite(string senderId)
         {
-            string path = template.UrlFor(UrlTemplate.ACCOUNT_MEMBER_INVITE_PATH)
+            string path = new UrlTemplate(baseUrl).UrlFor(UrlTemplate.ACCOUNT_MEMBER_INVITE_PATH)
                 .Replace("{senderUid}", senderId)
                 .Build();
             try
@@ -65,7 +65,7 @@ namespace OneSpanSign.Sdk
 
         public void UpdateSenderImageSignature(string fileName, byte[] fileContent, string senderId)
         {
-            string path = template.UrlFor(UrlTemplate.ACCOUNT_MEMBER_SIGNATURE_IMAGE_PATH)
+            string path = new UrlTemplate(baseUrl).UrlFor(UrlTemplate.ACCOUNT_MEMBER_SIGNATURE_IMAGE_PATH)
                 .Replace("{senderUid}", senderId)
                 .Build();
             try
@@ -88,7 +88,7 @@ namespace OneSpanSign.Sdk
 
         public OneSpanSign.API.SenderImageSignature GetSenderImageSignature(string senderId)
         {
-            string path = template.UrlFor(UrlTemplate.ACCOUNT_MEMBER_SIGNATURE_IMAGE_PATH)
+            string path = new UrlTemplate(baseUrl).UrlFor(UrlTemplate.ACCOUNT_MEMBER_SIGNATURE_IMAGE_PATH)
                     .Replace("{senderUid}", senderId)
                     .Build();
             try
@@ -109,7 +109,7 @@ namespace OneSpanSign.Sdk
 
         public void DeleteSenderImageSignature(string senderId)
         {
-            string path = template.UrlFor(UrlTemplate.ACCOUNT_MEMBER_SIGNATURE_IMAGE_PATH)
+            string path = new UrlTemplate(baseUrl).UrlFor(UrlTemplate.ACCOUNT_MEMBER_SIGNATURE_IMAGE_PATH)
                     .Replace("{senderUid}", senderId)
                     .Build();
             try
@@ -128,7 +128,7 @@ namespace OneSpanSign.Sdk
 
         public void UpdateSender(OneSpanSign.API.Sender apiSender, string senderId)
         {
-            string path = template.UrlFor(UrlTemplate.ACCOUNT_MEMBER_ID_PATH)
+            string path = new UrlTemplate(baseUrl).UrlFor(UrlTemplate.ACCOUNT_MEMBER_ID_PATH)
                 .Replace("{senderUid}", senderId)
                 .Build();
             try
@@ -150,7 +150,7 @@ namespace OneSpanSign.Sdk
 
         public void DeleteSender(string senderId)
         {
-            string path = template.UrlFor(UrlTemplate.ACCOUNT_MEMBER_ID_PATH)
+            string path = new UrlTemplate(baseUrl).UrlFor(UrlTemplate.ACCOUNT_MEMBER_ID_PATH)
                 .Replace("{senderUid}", senderId)
                 .Build();
             try
@@ -170,7 +170,7 @@ namespace OneSpanSign.Sdk
 
         public OneSpanSign.API.Result<OneSpanSign.API.Sender> GetSenders(Direction direction, PageRequest request)
         {
-            string path = template.UrlFor(UrlTemplate.ACCOUNT_MEMBER_LIST_PATH)
+            string path = new UrlTemplate(baseUrl).UrlFor(UrlTemplate.ACCOUNT_MEMBER_LIST_PATH)
                 .Replace("{dir}", DirectionUtility.getDirection(direction))
                 .Replace("{from}", request.From.ToString())
                 .Replace("{to}", request.To.ToString())
@@ -197,7 +197,7 @@ namespace OneSpanSign.Sdk
 
         public OneSpanSign.API.Sender GetSender(string senderId)
         {
-            string path = template.UrlFor(UrlTemplate.ACCOUNT_MEMBER_ID_PATH)
+            string path = new UrlTemplate(baseUrl).UrlFor(UrlTemplate.ACCOUNT_MEMBER_ID_PATH)
                 .Replace("{senderUid}", senderId)
                 .Build();
             try
@@ -221,7 +221,7 @@ namespace OneSpanSign.Sdk
 
         public IList<OneSpanSign.API.DelegationUser> GetDelegates(string senderId)
         {
-            string path = template.UrlFor(UrlTemplate.DELEGATES_PATH)
+            string path = new UrlTemplate(baseUrl).UrlFor(UrlTemplate.DELEGATES_PATH)
                 .Replace("{senderId}", senderId)
                 .Build();
 
@@ -245,7 +245,7 @@ namespace OneSpanSign.Sdk
 
         public void UpdateDelegates<T>(string senderId, IList<T> delegateIds)
         {
-            string path = template.UrlFor(UrlTemplate.DELEGATES_PATH)
+            string path = new UrlTemplate(baseUrl).UrlFor(UrlTemplate.DELEGATES_PATH)
                 .Replace("{senderId}", senderId)
                 .Build();
 
@@ -268,7 +268,7 @@ namespace OneSpanSign.Sdk
 
         public void AddDelegate(string senderId, OneSpanSign.API.DelegationUser delegationUser)
         {
-            string path = template.UrlFor(UrlTemplate.DELEGATE_ID_PATH)
+            string path = new UrlTemplate(baseUrl).UrlFor(UrlTemplate.DELEGATE_ID_PATH)
                 .Replace("{senderId}", senderId)
                 .Replace("{delegateId}", delegationUser.Id)
                 .Build();
@@ -290,7 +290,7 @@ namespace OneSpanSign.Sdk
 
         public void RemoveDelegate(string senderId, string delegateId)
         {
-            string path = template.UrlFor(UrlTemplate.DELEGATE_ID_PATH)
+            string path = new UrlTemplate(baseUrl).UrlFor(UrlTemplate.DELEGATE_ID_PATH)
                 .Replace("{senderId}", senderId)
                 .Replace("{delegateId}", delegateId)
                 .Build();
@@ -311,7 +311,7 @@ namespace OneSpanSign.Sdk
 
         public void ClearDelegates(string senderId)
         {
-            string path = template.UrlFor(UrlTemplate.DELEGATES_PATH)
+            string path = new UrlTemplate(baseUrl).UrlFor(UrlTemplate.DELEGATES_PATH)
                 .Replace("{senderId}", senderId)
                 .Build();
             try
@@ -332,7 +332,7 @@ namespace OneSpanSign.Sdk
 
         public IList<OneSpanSign.API.Sender> GetContacts()
         {
-            string path = template.UrlFor(UrlTemplate.ACCOUNT_CONTACTS_PATH)
+            string path = new UrlTemplate(baseUrl).UrlFor(UrlTemplate.ACCOUNT_CONTACTS_PATH)
                 .Build();
             try
             {
@@ -352,7 +352,7 @@ namespace OneSpanSign.Sdk
 
         public IList<VerificationType> getVerificationTypes()
         {
-            String path = template.UrlFor(UrlTemplate.ACCOUNT_VERIFICATION_TYPE_PATH)
+            String path = new UrlTemplate(baseUrl).UrlFor(UrlTemplate.ACCOUNT_VERIFICATION_TYPE_PATH)
                 .Replace("{accountId}", "dummyAccountId")
                 .Build();
 
@@ -376,7 +376,7 @@ namespace OneSpanSign.Sdk
 
         public IList<OneSpanSign.API.Account> getSubAccounts()
         {
-            string path = template.UrlFor(UrlTemplate.ACCOUNT_SUBACCOUNTS_PATH).Build();
+            string path = new UrlTemplate(baseUrl).UrlFor(UrlTemplate.ACCOUNT_SUBACCOUNTS_PATH).Build();
             try
             {
                 string response = restClient.Get(path);
@@ -394,7 +394,7 @@ namespace OneSpanSign.Sdk
         
         public IList<OneSpanSign.API.SubAccountApiKey> getSubAccountApiKey()
         {
-            string path = template.UrlFor(UrlTemplate.ACCOUNT_SUBACCOUNTS_SUBACCOUNTAPIKEYS_PATH).Build();
+            string path = new UrlTemplate(baseUrl).UrlFor(UrlTemplate.ACCOUNT_SUBACCOUNTS_SUBACCOUNTAPIKEYS_PATH).Build();
             try
             {
                 string response = restClient.Get(path);
@@ -412,7 +412,7 @@ namespace OneSpanSign.Sdk
 
         public IList<OneSpanSign.API.AccessibleAccountResponse> getAccessibleAccounts()
         {
-            string path = template.UrlFor(UrlTemplate.ACCOUNT_SUBACCOUNTS_ACCESSIBLEACCOUNTS_PATH).Build();
+            string path = new UrlTemplate(baseUrl).UrlFor(UrlTemplate.ACCOUNT_SUBACCOUNTS_ACCESSIBLEACCOUNTS_PATH).Build();
             try
             {
                 string response = restClient.Get(path);
@@ -430,7 +430,7 @@ namespace OneSpanSign.Sdk
 
         public OneSpanSign.API.Account createSubAccount(OneSpanSign.API.SubAccount subAccount)
         {
-            string path = template.UrlFor(UrlTemplate.ACCOUNT_SUBACCOUNTS_PATH).Build();
+            string path = new UrlTemplate(baseUrl).UrlFor(UrlTemplate.ACCOUNT_SUBACCOUNTS_PATH).Build();
             try
             {
                 string payload = JsonConvert.SerializeObject(subAccount, jsonSettings);
@@ -449,7 +449,7 @@ namespace OneSpanSign.Sdk
 
         public void updateSubAccount(OneSpanSign.API.SubAccount subAccount, string accountId)
         {
-            string path = template.UrlFor(UrlTemplate.ACCOUNT_SUBACCOUNTS_ID_PATH)
+            string path = new UrlTemplate(baseUrl).UrlFor(UrlTemplate.ACCOUNT_SUBACCOUNTS_ID_PATH)
                     .Replace("{accountId}", accountId)
                     .Build();
             try
@@ -506,7 +506,7 @@ namespace OneSpanSign.Sdk
        
                 
         public OneSpanSign.API.Result<API.AccountRole> getAccountRoles() {
-            string path = template.UrlFor(UrlTemplate.ACCOUNT_ROLES_PATH).Build();
+            string path = new UrlTemplate(baseUrl).UrlFor(UrlTemplate.ACCOUNT_ROLES_PATH).Build();
             try
             {
                 OneSpanSign.API.Result<OneSpanSign.API.AccountRole> apiResponse =
@@ -526,7 +526,7 @@ namespace OneSpanSign.Sdk
 
         public IList<String> getAccountRoleUsers(String accountRoleId)
         {
-            string path = template.UrlFor(UrlTemplate.ACCOUNT_ROLES_ROLE_USERS_PATH)
+            string path = new UrlTemplate(baseUrl).UrlFor(UrlTemplate.ACCOUNT_ROLES_ROLE_USERS_PATH)
                 .Replace("{accountRoleId}", accountRoleId)
                 .Build();
 
@@ -549,7 +549,7 @@ namespace OneSpanSign.Sdk
 
         public API.AccountRole getAccountRole(String accountRoleId)
         {
-            string path = template.UrlFor(UrlTemplate.ACCOUNT_ROLES_ROLE_PATH).Replace("{accountRoleId}", accountRoleId)
+            string path = new UrlTemplate(baseUrl).UrlFor(UrlTemplate.ACCOUNT_ROLES_ROLE_PATH).Replace("{accountRoleId}", accountRoleId)
                 .Build();
 
             try
@@ -571,7 +571,7 @@ namespace OneSpanSign.Sdk
 
         public void addAccountRole(OneSpanSign.API.AccountRole accountRole)
         {
-            string path = template.UrlFor(UrlTemplate.ACCOUNT_ROLES_PATH).Build();
+            string path = new UrlTemplate(baseUrl).UrlFor(UrlTemplate.ACCOUNT_ROLES_PATH).Build();
             try
             {
                 string payload = JsonConvert.SerializeObject(accountRole, jsonSettings);
@@ -590,7 +590,7 @@ namespace OneSpanSign.Sdk
 
         public void updateAccountRole(OneSpanSign.API.AccountRole accountRole, string accountRoleId)
         {
-            string path = template.UrlFor(UrlTemplate.ACCOUNT_ROLES_ROLE_PATH)
+            string path = new UrlTemplate(baseUrl).UrlFor(UrlTemplate.ACCOUNT_ROLES_ROLE_PATH)
                 .Replace("{accountRoleId}", accountRoleId)
                 .Build();
             try
@@ -610,7 +610,7 @@ namespace OneSpanSign.Sdk
         }
         public void deleteAccountRole(string accountRoleId)
         {
-            string path = template.UrlFor(UrlTemplate.ACCOUNT_ROLES_ROLE_PATH)
+            string path = new UrlTemplate(baseUrl).UrlFor(UrlTemplate.ACCOUNT_ROLES_ROLE_PATH)
                 .Replace("{accountRoleId}", accountRoleId)
                 .Build();
             try
@@ -631,7 +631,7 @@ namespace OneSpanSign.Sdk
         
         public List<OneSpanSign.API.UserAccountRole> getUserRoles(string userId)
         {
-            string path = template.UrlFor(UrlTemplate.ACCOUNT_MEMBER_ROLES_PATH).Replace("{userId}", userId)
+            string path = new UrlTemplate(baseUrl).UrlFor(UrlTemplate.ACCOUNT_MEMBER_ROLES_PATH).Replace("{userId}", userId)
                 .Build();
 
             try
@@ -654,7 +654,7 @@ namespace OneSpanSign.Sdk
         
         public List<OneSpanSign.API.UserAccountRole> getUserRoles(string userId, string accountId)
         {
-            string path = template.UrlFor(UrlTemplate.ACCOUNT_MEMBER_ROLE_PATH)
+            string path = new UrlTemplate(baseUrl).UrlFor(UrlTemplate.ACCOUNT_MEMBER_ROLE_PATH)
                 .Replace("{userId}", userId)
                 .Replace("{accountId}", accountId)
                 .Build();
@@ -679,7 +679,7 @@ namespace OneSpanSign.Sdk
         
         public void assignAccountRoleToUser(string userId, OneSpanSign.API.UserAccountRole userAccountRole)
         {
-            string path = template.UrlFor(UrlTemplate.ACCOUNT_MEMBER_ROLES_PATH)
+            string path = new UrlTemplate(baseUrl).UrlFor(UrlTemplate.ACCOUNT_MEMBER_ROLES_PATH)
                 .Replace("{userId}", userId)
                 .Build();
             try

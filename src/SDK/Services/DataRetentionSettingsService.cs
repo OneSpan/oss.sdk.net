@@ -7,13 +7,13 @@ namespace OneSpanSign.Sdk.Services
 {
     public class DataRetentionSettingsService
     {
-        private UrlTemplate template;
         private RestClient restClient;
+        private string baseUrl;
 
         public DataRetentionSettingsService (RestClient restClient, string baseUrl)
         {
             this.restClient = restClient;
-            template = new UrlTemplate (baseUrl);
+            this.baseUrl = baseUrl;
         }
 
         /// <summary>
@@ -23,7 +23,7 @@ namespace OneSpanSign.Sdk.Services
         /// <returns>Expiry time configuration.</returns>
         public ExpiryTimeConfiguration GetExpiryTimeConfiguration ()
         {
-            String path = template.UrlFor (UrlTemplate.EXPIRY_TIME_CONFIGURATION_PATH)
+            String path = new UrlTemplate(baseUrl).UrlFor (UrlTemplate.EXPIRY_TIME_CONFIGURATION_PATH)
                                   .Build ();
             String stringResponse;
             try 
@@ -50,7 +50,7 @@ namespace OneSpanSign.Sdk.Services
         /// <param name="expiryTimeConfiguration">expiryTimeConfiguration.</param>
         public void SetExpiryTimeConfiguration (ExpiryTimeConfiguration expiryTimeConfiguration)
         {
-            String path = template.UrlFor (UrlTemplate.EXPIRY_TIME_CONFIGURATION_PATH)
+            String path = new UrlTemplate(baseUrl).UrlFor (UrlTemplate.EXPIRY_TIME_CONFIGURATION_PATH)
                                   .Build ();
             ExpiryTimeConfigurationConverter converter = new ExpiryTimeConfigurationConverter (expiryTimeConfiguration);
             String expiryTimeConfigurationJson = JsonConvert.SerializeObject(converter.ToAPIExpiryTimeConfiguration ());
@@ -76,7 +76,7 @@ namespace OneSpanSign.Sdk.Services
         /// <returns>Data Management Policy.</returns>
         public DataManagementPolicy GetDataManagementPolicy ()
         {
-            String path = template.UrlFor (UrlTemplate.DATA_MANAGEMENT_POLICY_PATH)
+            String path = new UrlTemplate(baseUrl).UrlFor (UrlTemplate.DATA_MANAGEMENT_POLICY_PATH)
                                   .Build ();
             String stringResponse;
             try 
@@ -103,7 +103,7 @@ namespace OneSpanSign.Sdk.Services
         /// <param name="dataManagementPolicy">dataManagementPolicy.</param>
         public void SetDataManagementPolicy (DataManagementPolicy dataManagementPolicy)
         {
-            String path = template.UrlFor (UrlTemplate.DATA_MANAGEMENT_POLICY_PATH)
+            String path = new UrlTemplate(baseUrl).UrlFor (UrlTemplate.DATA_MANAGEMENT_POLICY_PATH)
                                   .Build ();
             DataManagementPolicyConverter converter = new DataManagementPolicyConverter (dataManagementPolicy);
             String dataManagementPolicyJson = JsonConvert.SerializeObject (converter.ToAPIDataManagementPolicy ());
