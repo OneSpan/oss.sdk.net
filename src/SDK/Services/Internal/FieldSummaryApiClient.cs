@@ -9,17 +9,17 @@ namespace OneSpanSign.Sdk
     internal class FieldSummaryApiClient
     {
         private RestClient restClient;
-        private UrlTemplate template;
+        private string baseUrl;
 
         public FieldSummaryApiClient(RestClient restClient, string baseUrl)
         {
             this.restClient = restClient;
-            template = new UrlTemplate (baseUrl);                                                                   
+            this.baseUrl = baseUrl;
         }
         
         public List<FieldSummary> GetFieldSummary (string packageId)
         {
-            string path = template.UrlFor (UrlTemplate.FIELD_SUMMARY_PATH)
+            string path = new UrlTemplate(baseUrl).UrlFor (UrlTemplate.FIELD_SUMMARY_PATH)
                             .Replace ("{packageId}", packageId)
                             .Build ();
 

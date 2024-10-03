@@ -7,20 +7,20 @@ namespace OneSpanSign.Sdk
 {
     public class SystemService
     {
-        private UrlTemplate template;
         private JsonSerializerSettings settings;
         private RestClient restClient;
+        private string baseUrl;
 
         public SystemService(RestClient restClient, string baseUrl, JsonSerializerSettings settings)
         {
             this.restClient = restClient;
-            template = new UrlTemplate(baseUrl);
             this.settings = settings;
+            this.baseUrl = baseUrl;
         }
 
         public string GetApplicationVersion() 
         {
-            string path = template.UrlFor(UrlTemplate.SYSTEM_PATH)
+            string path = new UrlTemplate(baseUrl).UrlFor(UrlTemplate.SYSTEM_PATH)
                 .Build();
 
             try

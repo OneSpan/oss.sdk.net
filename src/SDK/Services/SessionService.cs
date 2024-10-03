@@ -10,17 +10,17 @@ namespace OneSpanSign.Sdk.Services
 	/// </summary>
 	public class SessionService
 	{
-		private UrlTemplate template;
 		private AuthenticationTokenService authenticationService;
 		private RestClient restClient;
+		private string baseUrl;
 
 		/// <summary>
 		/// Initializes a new instance of the <see cref="OneSpanSign.Sdk.SessionService"/> class.
 		/// </summary>
         public SessionService(RestClient client, string baseUrl)
         {
-            template = new UrlTemplate(baseUrl);
             this.restClient = client;
+			this.baseUrl = baseUrl;
         }
 
         public SessionToken CreateSessionToken (PackageId packageId, string signerId)
@@ -44,7 +44,7 @@ namespace OneSpanSign.Sdk.Services
 		public SessionToken CreateSignerSessionToken (PackageId packageId, string signerId)
 		{
 
-			string path = template.UrlFor (UrlTemplate.SESSION_PATH)
+			string path = new UrlTemplate(baseUrl).UrlFor (UrlTemplate.SESSION_PATH)
                 .Replace ("{packageId}", packageId.Id)
                 .Replace ("{signerId}", HttpUtility.UrlEncode(signerId))
                 .Build ();

@@ -8,21 +8,21 @@ namespace OneSpanSign.Sdk
     internal class EventNotificationApiClient
     {
         private RestClient restClient;
-        private UrlTemplate template;
         private JsonSerializerSettings settings;
+        private string baseUrl;
 
         public EventNotificationApiClient(RestClient restClient, string apiUrl, JsonSerializerSettings settings)
         {
             this.restClient = restClient;
-            template = new UrlTemplate(apiUrl);
             this.settings = settings;
+            this.baseUrl = apiUrl;
         }
         
         public void Register(Callback callback)
         {
             try
             {
-                string path = template.UrlFor(UrlTemplate.CALLBACK_PATH).Build();
+                string path = new UrlTemplate(baseUrl).UrlFor(UrlTemplate.CALLBACK_PATH).Build();
                 string json = JsonConvert.SerializeObject(callback, settings);
 
                 restClient.Post(path, json);
@@ -41,7 +41,7 @@ namespace OneSpanSign.Sdk
         {
             try
             {
-                string path = template.UrlFor(UrlTemplate.CONNECTORS_CALLBACK_PATH)
+                string path = new UrlTemplate(baseUrl).UrlFor(UrlTemplate.CONNECTORS_CALLBACK_PATH)
                     .Replace("{origin}", origin)
                     .Build();
                 string json = JsonConvert.SerializeObject(callback, settings);
@@ -60,7 +60,7 @@ namespace OneSpanSign.Sdk
 
         public Callback GetEventNotificationConfig()
         {
-            string path = template.UrlFor(UrlTemplate.CALLBACK_PATH).Build();
+            string path = new UrlTemplate(baseUrl).UrlFor(UrlTemplate.CALLBACK_PATH).Build();
 
             try
             {
@@ -79,7 +79,7 @@ namespace OneSpanSign.Sdk
 
         public Callback GetEventNotificationConfig(string origin)
         {
-            string path = template.UrlFor(UrlTemplate.CONNECTORS_CALLBACK_PATH)
+            string path = new UrlTemplate(baseUrl).UrlFor(UrlTemplate.CONNECTORS_CALLBACK_PATH)
                 .Replace("{origin}", origin)
                 .Build();
 

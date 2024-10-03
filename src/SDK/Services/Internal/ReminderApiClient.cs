@@ -7,20 +7,20 @@ namespace OneSpanSign.Sdk
 {
     internal class ReminderApiClient
     {
-        private UrlTemplate template;
         private JsonSerializerSettings settings;
         private RestClient restClient;
+        private string baseUrl;
 
         public ReminderApiClient(RestClient restClient, string baseUrl, JsonSerializerSettings settings)
         {
             this.restClient = restClient;
-            template = new UrlTemplate (baseUrl);
             this.settings = settings;
+            this.baseUrl = baseUrl;
         }
         
         private string Path( string packageId )
         {
-            return template.UrlFor (UrlTemplate.REMINDER_PATH)
+            return new UrlTemplate(baseUrl).UrlFor (UrlTemplate.REMINDER_PATH)
                 .Replace( "{packageId}", packageId )
                 .Build ();
         }

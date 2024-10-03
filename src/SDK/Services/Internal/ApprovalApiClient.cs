@@ -8,20 +8,20 @@ namespace OneSpanSign.Sdk
 {
     internal class ApprovalApiClient
     {
-        private UrlTemplate template;
         private RestClient restClient;
         private JsonSerializerSettings jsonSettings;
+        private string baseUrl;
 
         public ApprovalApiClient(RestClient restClient, string baseUrl, JsonSerializerSettings jsonSettings)
         {
             this.restClient = restClient;
-            template = new UrlTemplate (baseUrl);
             this.jsonSettings = jsonSettings;
+            this.baseUrl = baseUrl;
         }        
         
         public void DeleteApproval(string packageId, string documentId, string approvalId)
         {
-            string path = template.UrlFor(UrlTemplate.APPROVAL_ID_PATH)
+            string path = new UrlTemplate(baseUrl).UrlFor(UrlTemplate.APPROVAL_ID_PATH)
                 .Replace("{packageId}", packageId)
                     .Replace("{documentId}", documentId)
                     .Replace("{approvalId}", approvalId)
@@ -39,7 +39,7 @@ namespace OneSpanSign.Sdk
 
         public string AddApproval(PackageId packageId, string documentId, Approval approval)
         {
-            string path = template.UrlFor(UrlTemplate.APPROVAL_PATH)
+            string path = new UrlTemplate(baseUrl).UrlFor(UrlTemplate.APPROVAL_PATH)
                 .Replace("{packageId}", packageId.Id)
                     .Replace("{documentId}", documentId)
                     .Build();
@@ -60,7 +60,7 @@ namespace OneSpanSign.Sdk
 
         public void ModifyApproval(PackageId packageId, string documentId, Approval approval)
         {
-            string path = template.UrlFor(UrlTemplate.APPROVAL_ID_PATH)
+            string path = new UrlTemplate(baseUrl).UrlFor(UrlTemplate.APPROVAL_ID_PATH)
                 .Replace("{packageId}", packageId.Id)
                     .Replace("{documentId}", documentId)
                     .Replace("{approvalId}", approval.Id)
@@ -80,7 +80,7 @@ namespace OneSpanSign.Sdk
 
         public void UpdateApprovals(PackageId packageId, string documentId, IList<Approval> approvalList)
         {
-            string path = template.UrlFor(UrlTemplate.APPROVAL_PATH)
+            string path = new UrlTemplate(baseUrl).UrlFor(UrlTemplate.APPROVAL_PATH)
                 .Replace("{packageId}", packageId.Id)
                 .Replace("{documentId}", documentId)
                 .Build();
@@ -99,7 +99,7 @@ namespace OneSpanSign.Sdk
 
         public Approval GetApproval(PackageId packageId, string documentId, string approvalId)
         {
-            string path = template.UrlFor(UrlTemplate.APPROVAL_ID_PATH)
+            string path = new UrlTemplate(baseUrl).UrlFor(UrlTemplate.APPROVAL_ID_PATH)
                 .Replace("{packageId}", packageId.Id)
                     .Replace("{documentId}", documentId)
                     .Replace("{approvalId}", approvalId)
@@ -120,7 +120,7 @@ namespace OneSpanSign.Sdk
 
         public string AddField(PackageId packageId, string documentId, SignatureId signatureId, OneSpanSign.API.Field field)
         {
-            string path = template.UrlFor(UrlTemplate.FIELD_PATH)
+            string path = new UrlTemplate(baseUrl).UrlFor(UrlTemplate.FIELD_PATH)
                 .Replace("{packageId}", packageId.Id)
                     .Replace("{documentId}", documentId)
                     .Replace("{approvalId}", signatureId.Id)
@@ -142,7 +142,7 @@ namespace OneSpanSign.Sdk
 
         public void ModifyField(PackageId packageId, string documentId, SignatureId signatureId, OneSpanSign.API.Field field)
         {
-            string path = template.UrlFor(UrlTemplate.FIELD_ID_PATH)
+            string path = new UrlTemplate(baseUrl).UrlFor(UrlTemplate.FIELD_ID_PATH)
                 .Replace("{packageId}", packageId.Id)
                     .Replace("{documentId}", documentId)
                     .Replace("{approvalId}", signatureId.Id)
@@ -163,7 +163,7 @@ namespace OneSpanSign.Sdk
 
         public void ModifyConditionalField (PackageId packageId, string documentId, SignatureId signatureId, OneSpanSign.API.ConditionalField field)
         {
-            string path = template.UrlFor (UrlTemplate.CONDITIONAL_FIELD_PATH)
+            string path = new UrlTemplate(baseUrl).UrlFor (UrlTemplate.CONDITIONAL_FIELD_PATH)
                 .Replace ("{packageId}", packageId.Id)
                     .Replace ("{documentId}", documentId)
                     .Replace ("{approvalId}", signatureId.Id)
@@ -187,7 +187,7 @@ namespace OneSpanSign.Sdk
 
         public OneSpanSign.API.Field GetField(PackageId packageId, string documentId, SignatureId signatureId, string fieldId)
         {
-            string path = template.UrlFor(UrlTemplate.FIELD_ID_PATH)
+            string path = new UrlTemplate(baseUrl).UrlFor(UrlTemplate.FIELD_ID_PATH)
                 .Replace("{packageId}", packageId.Id)
                     .Replace("{documentId}", documentId)
                     .Replace("{approvalId}", signatureId.Id)
@@ -210,7 +210,7 @@ namespace OneSpanSign.Sdk
 
         public void DeleteField(PackageId packageId, string documentId, SignatureId signatureId, string fieldId)
         {
-            string path = template.UrlFor(UrlTemplate.FIELD_ID_PATH)
+            string path = new UrlTemplate(baseUrl).UrlFor(UrlTemplate.FIELD_ID_PATH)
                 .Replace("{packageId}", packageId.Id)
                     .Replace("{documentId}", documentId)
                     .Replace("{approvalId}", signatureId.Id)
@@ -230,7 +230,7 @@ namespace OneSpanSign.Sdk
 
         public IList<Approval> GetAllSignableApprovals(PackageId packageId, string documentId, string signerId)
         {
-            string path = template.UrlFor(UrlTemplate.SIGNABLE_APPROVAL_PATH)
+            string path = new UrlTemplate(baseUrl).UrlFor(UrlTemplate.SIGNABLE_APPROVAL_PATH)
                 .Replace("{packageId}", packageId.Id)
                     .Replace("{documentId}", documentId)
                     .Replace("{signerId}", signerId)

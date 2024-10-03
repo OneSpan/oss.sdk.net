@@ -8,20 +8,20 @@ namespace OneSpanSign.Sdk
 {
     internal class CustomFieldApiClient
     {
-        private UrlTemplate template;
         private RestClient client;
         private JsonSerializerSettings settings;
+        private string baseUrl;
 
         public CustomFieldApiClient(RestClient client, string baseUrl, JsonSerializerSettings settings)
         {
-            template = new UrlTemplate(baseUrl);
             this.client = client;
             this.settings = settings;
+            this.baseUrl = baseUrl;
         }
 
         public bool DoesCustomFieldExist(string id)
         {
-            string path = template.UrlFor(UrlTemplate.ACCOUNT_CUSTOMFIELD_ID_PATH)
+            string path = new UrlTemplate(baseUrl).UrlFor(UrlTemplate.ACCOUNT_CUSTOMFIELD_ID_PATH)
                 .Replace("{customFieldId}", id)
                 .Build();
     
@@ -47,7 +47,7 @@ namespace OneSpanSign.Sdk
 
         public bool DoesCustomFieldValueExist(string id)
         {
-            string path = template.UrlFor(UrlTemplate.USER_CUSTOMFIELD_ID_PATH)
+            string path = new UrlTemplate(baseUrl).UrlFor(UrlTemplate.USER_CUSTOMFIELD_ID_PATH)
                 .Replace("{customFieldId}", id)
                 .Build();
     
@@ -73,7 +73,7 @@ namespace OneSpanSign.Sdk
         
         public OneSpanSign.API.CustomField CreateCustomField( OneSpanSign.API.CustomField apiField )
         {
-            string path = template.UrlFor(UrlTemplate.ACCOUNT_CUSTOMFIELD_PATH).Build();
+            string path = new UrlTemplate(baseUrl).UrlFor(UrlTemplate.ACCOUNT_CUSTOMFIELD_PATH).Build();
     
             try
             {
@@ -101,7 +101,7 @@ namespace OneSpanSign.Sdk
 
         public OneSpanSign.API.CustomField GetCustomField(string id)
         {
-            string path = template.UrlFor(UrlTemplate.ACCOUNT_CUSTOMFIELD_ID_PATH)
+            string path = new UrlTemplate(baseUrl).UrlFor(UrlTemplate.ACCOUNT_CUSTOMFIELD_ID_PATH)
                 .Replace("{customFieldId}", id)
                 .Build();
 
@@ -122,7 +122,7 @@ namespace OneSpanSign.Sdk
 
         public IList<OneSpanSign.API.CustomField> GetCustomFields(Direction direction, PageRequest request)
         {
-            string path = template.UrlFor(UrlTemplate.ACCOUNT_CUSTOMFIELD_LIST_PATH)
+            string path = new UrlTemplate(baseUrl).UrlFor(UrlTemplate.ACCOUNT_CUSTOMFIELD_LIST_PATH)
                 .Replace("{dir}", DirectionUtility.getDirection(direction))
                 .Replace("{from}", request.From.ToString())
                 .Replace("{to}", request.To.ToString())
@@ -145,7 +145,7 @@ namespace OneSpanSign.Sdk
 
         public void DeleteCustomField( string id )
         {
-            string path = template.UrlFor(UrlTemplate.ACCOUNT_CUSTOMFIELD_ID_PATH)
+            string path = new UrlTemplate(baseUrl).UrlFor(UrlTemplate.ACCOUNT_CUSTOMFIELD_ID_PATH)
                 .Replace("{customFieldId}", id)
                 .Build();
 
@@ -165,7 +165,7 @@ namespace OneSpanSign.Sdk
 
         public IList<UserCustomField> GetUserCustomFields()
         {
-            string path = template.UrlFor(UrlTemplate.USER_CUSTOMFIELD_PATH).Build();
+            string path = new UrlTemplate(baseUrl).UrlFor(UrlTemplate.USER_CUSTOMFIELD_PATH).Build();
             string response;
 
             try 
@@ -185,7 +185,7 @@ namespace OneSpanSign.Sdk
 
         public UserCustomField GetUserCustomField(string customFieldId)
         {
-            string path = template.UrlFor(UrlTemplate.USER_CUSTOMFIELD_ID_PATH)
+            string path = new UrlTemplate(baseUrl).UrlFor(UrlTemplate.USER_CUSTOMFIELD_ID_PATH)
                 .Replace("{customFieldId}", customFieldId)
                 .Build();
 
@@ -207,7 +207,7 @@ namespace OneSpanSign.Sdk
         
         public UserCustomField SubmitCustomFieldValue(UserCustomField apiCustomFieldValue)
         {
-            string path = template.UrlFor(UrlTemplate.USER_CUSTOMFIELD_PATH).Build();
+            string path = new UrlTemplate(baseUrl).UrlFor(UrlTemplate.USER_CUSTOMFIELD_PATH).Build();
             string response;
     
             try
@@ -235,7 +235,7 @@ namespace OneSpanSign.Sdk
 
         public void DeleteUserCustomField(string id) 
         {
-            string path = template.UrlFor(UrlTemplate.USER_CUSTOMFIELD_ID_PATH)
+            string path = new UrlTemplate(baseUrl).UrlFor(UrlTemplate.USER_CUSTOMFIELD_ID_PATH)
                     .Replace("{customFieldId}", id)
                     .Build();
             try 
