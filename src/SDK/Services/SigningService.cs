@@ -7,20 +7,20 @@ namespace OneSpanSign.Sdk
 {
     public class SigningService
     {
-        private UrlTemplate template;
         private RestClient restClient;
         private JsonSerializerSettings settings;
+        private string baseUrl;
 
         public SigningService(RestClient restClient, string baseUrl, JsonSerializerSettings settings)
         {
-            this.template = new UrlTemplate( baseUrl );
+            this.baseUrl = baseUrl;
             this.restClient = restClient;
             this.settings = settings;
         }
 
         internal void SignDocument( PackageId packageId, SignedDocument signedDocument ) 
         {
-            string path = template.UrlFor( UrlTemplate.SIGN_DOCUMENT_PATH )
+            string path = new UrlTemplate(baseUrl).UrlFor( UrlTemplate.SIGN_DOCUMENT_PATH )
                 .Replace("{packageId}", packageId.Id)
                 .Build();
 
@@ -41,7 +41,7 @@ namespace OneSpanSign.Sdk
 
         internal void SignDocuments( PackageId packageId, OneSpanSign.API.SignedDocuments documents ) 
         {
-            string path = template.UrlFor( UrlTemplate.SIGN_DOCUMENTS_PATH )
+            string path = new UrlTemplate(baseUrl).UrlFor( UrlTemplate.SIGN_DOCUMENTS_PATH )
                 .Replace("{packageId}", packageId.Id)
                 .Build();
 
@@ -62,7 +62,7 @@ namespace OneSpanSign.Sdk
 
         internal void SignDocuments( PackageId packageId, OneSpanSign.API.SignedDocuments documents, string signerSessionId ) 
         {
-            string path = template.UrlFor( UrlTemplate.SIGN_DOCUMENTS_PATH )
+            string path = new UrlTemplate(baseUrl).UrlFor( UrlTemplate.SIGN_DOCUMENTS_PATH )
                 .Replace("{packageId}", packageId.Id)
                 .Build();
 

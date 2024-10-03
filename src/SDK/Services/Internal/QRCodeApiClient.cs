@@ -7,20 +7,20 @@ namespace OneSpanSign.Sdk
 {
     internal class QRCodeApiClient
     {
-        private UrlTemplate template;
         private RestClient restClient;
         private JsonSerializerSettings settings;
+        private string baseUrl;
 
         public QRCodeApiClient(RestClient restClient, string baseUrl, JsonSerializerSettings settings)
         {
-            template = new UrlTemplate(baseUrl);
             this.restClient = restClient;
             this.settings = settings;
+            this.baseUrl = baseUrl;
         }
             
         public string AddQRCode(string packageId, string documentId, OneSpanSign.API.Field apiField)
         {
-            string path = template.UrlFor(UrlTemplate.QRCODE_PATH)
+            string path = new UrlTemplate(baseUrl).UrlFor(UrlTemplate.QRCODE_PATH)
                 .Replace("{packageId}", packageId)
                 .Replace("{documentId}", documentId)
                 .Build();
@@ -45,7 +45,7 @@ namespace OneSpanSign.Sdk
 
         public void ModifyQRCode(string packageId, string documentId, OneSpanSign.API.Field apiField)
         {
-            string path = template.UrlFor(UrlTemplate.QRCODE_ID_PATH)
+            string path = new UrlTemplate(baseUrl).UrlFor(UrlTemplate.QRCODE_ID_PATH)
                 .Replace("{packageId}", packageId)
                 .Replace("{documentId}", documentId)
                 .Replace("{fieldId}", apiField.Id)
@@ -69,7 +69,7 @@ namespace OneSpanSign.Sdk
 
         public OneSpanSign.API.Field GetQRCode(string packageId, string documentId, string fieldId)
         {
-            string path = template.UrlFor(UrlTemplate.QRCODE_ID_PATH)
+            string path = new UrlTemplate(baseUrl).UrlFor(UrlTemplate.QRCODE_ID_PATH)
                 .Replace("{packageId}", packageId)
                 .Replace("{documentId}", documentId)
                 .Replace("{fieldId}", fieldId)
@@ -92,7 +92,7 @@ namespace OneSpanSign.Sdk
 
         public void DeleteQRCode(string packageId, string documentId, string fieldId)
         {
-            string path = template.UrlFor(UrlTemplate.QRCODE_ID_PATH)
+            string path = new UrlTemplate(baseUrl).UrlFor(UrlTemplate.QRCODE_ID_PATH)
                 .Replace("{packageId}", packageId)
                 .Replace("{documentId}", documentId)
                 .Replace("{fieldId}", fieldId)
@@ -114,7 +114,7 @@ namespace OneSpanSign.Sdk
 
         public void UpdateQRCodes(string packageId, string documentId, IList<OneSpanSign.API.Field> qrCodeList)
         {
-            string path = template.UrlFor(UrlTemplate.QRCODE_PATH)
+            string path = new UrlTemplate(baseUrl).UrlFor(UrlTemplate.QRCODE_PATH)
                 .Replace("{packageId}", packageId)
                 .Replace("{documentId}", documentId)
                 .Build();

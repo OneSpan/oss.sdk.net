@@ -9,12 +9,12 @@ namespace OneSpanSign.Sdk
     public class AuthenticationTokenService
     {
 		private RestClient restClient;
-		private UrlTemplate template;
+        private string baseUrl;
 
 		public AuthenticationTokenService (RestClient restClient, string baseUrl)
 		{
 			this.restClient = restClient;
-			template = new UrlTemplate (baseUrl);
+            this.baseUrl = baseUrl;
 		}
 
         [Obsolete("call CreateUserAuthenticationToken instead")]
@@ -27,7 +27,7 @@ namespace OneSpanSign.Sdk
 
         public string CreateUserAuthenticationToken ()
         {
-            string path = template.UrlFor (UrlTemplate.USER_AUTHENTICATION_TOKEN_PATH).Build ();
+            string path = new UrlTemplate(baseUrl).UrlFor (UrlTemplate.USER_AUTHENTICATION_TOKEN_PATH).Build ();
 
             try {
                 string response = restClient.Post(path, "");              
@@ -44,7 +44,7 @@ namespace OneSpanSign.Sdk
         public string CreateSenderAuthenticationToken (PackageId packageId)
         {
             try {
-                string path = template.UrlFor (UrlTemplate.SENDER_AUTHENTICATION_TOKEN_PATH).Build ();
+                string path = new UrlTemplate(baseUrl).UrlFor (UrlTemplate.SENDER_AUTHENTICATION_TOKEN_PATH).Build ();
                 SenderAuthenticationToken senderAuthenticationToken = new SenderAuthenticationToken();
                 senderAuthenticationToken.PackageId = packageId.Id;
                 string serializedObject = JsonConvert.SerializeObject(senderAuthenticationToken);
@@ -67,7 +67,7 @@ namespace OneSpanSign.Sdk
         public string CreateSignerAuthenticationToken (PackageId packageId, string signerId, IDictionary<string, string> fields)
         {
             try {
-                string path = template.UrlFor (UrlTemplate.SIGNER_AUTHENTICATION_TOKEN_MULTI_USE_PATH).Build ();
+                string path = new UrlTemplate(baseUrl).UrlFor (UrlTemplate.SIGNER_AUTHENTICATION_TOKEN_MULTI_USE_PATH).Build ();
                 SignerAuthenticationToken signerAuthenticationToken = new SignerAuthenticationToken();
                 signerAuthenticationToken.PackageId = packageId.Id;
                 signerAuthenticationToken.SignerId = signerId;
@@ -88,7 +88,7 @@ namespace OneSpanSign.Sdk
         public string CreateSignerAuthenticationTokenForSingleUse (PackageId packageId, string signerId, IDictionary<string, string> fields)
         {
             try {
-                string path = template.UrlFor (UrlTemplate.SIGNER_AUTHENTICATION_TOKEN_SINGLE_USE_PATH).Build ();
+                string path = new UrlTemplate(baseUrl).UrlFor (UrlTemplate.SIGNER_AUTHENTICATION_TOKEN_SINGLE_USE_PATH).Build ();
                 SignerAuthenticationToken signerAuthenticationToken = new SignerAuthenticationToken();
                 signerAuthenticationToken.PackageId = packageId.Id;
                 signerAuthenticationToken.SignerId = signerId;
