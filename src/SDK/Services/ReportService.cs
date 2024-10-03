@@ -6,14 +6,14 @@ namespace OneSpanSign.Sdk.Services
 {
     public class ReportService
     {
-        private UrlTemplate template;
         private JsonSerializerSettings settings;
         private RestClient restClient;
+        private string baseUrl;
 
         public ReportService(RestClient restClient, string baseUrl, JsonSerializerSettings settings)
         {
             this.restClient = restClient;
-            template = new UrlTemplate(baseUrl);
+            this.baseUrl = baseUrl;
             this.settings = settings;
         }
 
@@ -22,7 +22,7 @@ namespace OneSpanSign.Sdk.Services
             string toDate = DateHelper.dateToIsoUtcFormat(to);
             string fromDate = DateHelper.dateToIsoUtcFormat(from);
 
-            return template.UrlFor(UrlTemplate.COMPLETION_REPORT_PATH)
+            return new UrlTemplate(baseUrl).UrlFor(UrlTemplate.COMPLETION_REPORT_PATH)
                 .Replace("{from}", fromDate)
                     .Replace("{to}", toDate)
                     .Replace("{status}", new PackageStatusConverter(packageStatus).ToAPIPackageStatus())
@@ -35,7 +35,7 @@ namespace OneSpanSign.Sdk.Services
             string toDate = DateHelper.dateToIsoUtcFormat(to);
             string fromDate = DateHelper.dateToIsoUtcFormat(from);
 
-            return template.UrlFor(UrlTemplate.COMPLETION_REPORT_FOR_ALL_SENDERS_PATH)
+            return new UrlTemplate(baseUrl).UrlFor(UrlTemplate.COMPLETION_REPORT_FOR_ALL_SENDERS_PATH)
                 .Replace("{from}", fromDate)
                     .Replace("{to}", toDate)
                     .Replace("{status}", new PackageStatusConverter(packageStatus).ToAPIPackageStatus())
@@ -47,7 +47,7 @@ namespace OneSpanSign.Sdk.Services
             string toDate = DateHelper.dateToIsoUtcFormat(to);
             string fromDate = DateHelper.dateToIsoUtcFormat(from);
 
-            return template.UrlFor(UrlTemplate.USAGE_REPORT_PATH)
+            return new UrlTemplate(baseUrl).UrlFor(UrlTemplate.USAGE_REPORT_PATH)
                 .Replace("{from}", fromDate)
                     .Replace("{to}", toDate)
                     .Build(); 
@@ -55,7 +55,7 @@ namespace OneSpanSign.Sdk.Services
 
         private string BuildDelegationReportUrl()
         {
-            return template.UrlFor(UrlTemplate.DELEGATION_REPORT_PATH)
+            return new UrlTemplate(baseUrl).UrlFor(UrlTemplate.DELEGATION_REPORT_PATH)
                     .Build(); 
         }
 
@@ -64,7 +64,7 @@ namespace OneSpanSign.Sdk.Services
             string toDate = DateHelper.dateToIsoUtcFormat(to);
             string fromDate = DateHelper.dateToIsoUtcFormat(from);
 
-            return template.UrlFor(UrlTemplate.DELEGATION_REPORT_PATH).Build() + "?from={from}&to={to}"
+            return new UrlTemplate(baseUrl).UrlFor(UrlTemplate.DELEGATION_REPORT_PATH).Build() + "?from={from}&to={to}"
                     .Replace("{from}", fromDate)
                     .Replace("{to}", toDate); 
         }
@@ -74,7 +74,7 @@ namespace OneSpanSign.Sdk.Services
             string toDate = DateHelper.dateToIsoUtcFormat(to);
             string fromDate = DateHelper.dateToIsoUtcFormat(from);
 
-            return template.UrlFor(UrlTemplate.DELEGATION_REPORT_PATH).Build() + "?senderId={senderId}&from={from}&to={to}"
+            return new UrlTemplate(baseUrl).UrlFor(UrlTemplate.DELEGATION_REPORT_PATH).Build() + "?senderId={senderId}&from={from}&to={to}"
                 .Replace("{senderId}", senderId)
                 .Replace("{from}", fromDate)
                 .Replace("{to}", toDate); 

@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Text;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 using OneSpanSign.API;
@@ -10,20 +11,20 @@ namespace OneSpanSign.Sdk
 {
     internal class AccountConfigClient
     {
-        private UrlTemplate template;
         private RestClient restClient;
         private JsonSerializerSettings jsonSettings;
+        private string baseUrl;
 
         public AccountConfigClient(RestClient restClient, string apiUrl, JsonSerializerSettings jsonSettings)
         {
             this.restClient = restClient;
-            this.template = new UrlTemplate(apiUrl);
             this.jsonSettings = jsonSettings;
+            this.baseUrl = apiUrl;
         }
 
         public API.Handover GetHandoverUrl(string language)
         {
-            string path = template.UrlFor(UrlTemplate.HANDOVER_URL_PATH)
+            string path = new UrlTemplate(baseUrl).UrlFor(UrlTemplate.HANDOVER_URL_PATH)
                 .Replace("{language}", language)
                 .Build();
             try
@@ -44,7 +45,7 @@ namespace OneSpanSign.Sdk
 
         public API.Handover CreateHandoverUrl(string language, API.Handover handover)
         {
-            string path = template.UrlFor(UrlTemplate.HANDOVER_URL_PATH)
+            string path = new UrlTemplate(baseUrl).UrlFor(UrlTemplate.HANDOVER_URL_PATH)
                 .Replace("{language}", language)
                 .Build();
             try
@@ -67,7 +68,7 @@ namespace OneSpanSign.Sdk
 
         public API.Handover UpdateHandoverUrl(string language, API.Handover handover)
         {
-            string path = template.UrlFor(UrlTemplate.HANDOVER_URL_PATH)
+            string path = new UrlTemplate(baseUrl).UrlFor(UrlTemplate.HANDOVER_URL_PATH)
                 .Replace("{language}", language)
                 .Build();
             try
@@ -90,7 +91,7 @@ namespace OneSpanSign.Sdk
 
         public void DeleteHandoverUrl(string language)
         {
-            string path = template.UrlFor(UrlTemplate.HANDOVER_URL_PATH)
+            string path = new UrlTemplate(baseUrl).UrlFor(UrlTemplate.HANDOVER_URL_PATH)
                 .Replace("{language}", language)
                 .Build();
             try
@@ -109,7 +110,7 @@ namespace OneSpanSign.Sdk
 
         public IList<string> CreateDeclineReasons(IList<string> declineReasons, string language)
         {
-            string path = template.UrlFor(UrlTemplate.DECLINE_REASONS_PATH).Replace("{language}", language).Build();
+            string path = new UrlTemplate(baseUrl).UrlFor(UrlTemplate.DECLINE_REASONS_PATH).Replace("{language}", language).Build();
 
             try
             {
@@ -130,7 +131,7 @@ namespace OneSpanSign.Sdk
 
         public IList<string> UpdateDeclineReasons(IList<string> declineReasons, string language)
         {
-            string path = template.UrlFor(UrlTemplate.DECLINE_REASONS_PATH).Replace("{language}", language)
+            string path = new UrlTemplate(baseUrl).UrlFor(UrlTemplate.DECLINE_REASONS_PATH).Replace("{language}", language)
                 .Build();
 
             try
@@ -152,7 +153,7 @@ namespace OneSpanSign.Sdk
 
         public IList<string> GetDeclineReasons(string language)
         {
-            string path = template.UrlFor(UrlTemplate.DECLINE_REASONS_PATH).Replace("{language}", language)
+            string path = new UrlTemplate(baseUrl).UrlFor(UrlTemplate.DECLINE_REASONS_PATH).Replace("{language}", language)
                 .Build();
 
             try
@@ -173,7 +174,7 @@ namespace OneSpanSign.Sdk
 
         public void DeleteDeclineReasons(string language)
         {
-            string path = template.UrlFor(UrlTemplate.DECLINE_REASONS_PATH).Replace("{language}", language)
+            string path = new UrlTemplate(baseUrl).UrlFor(UrlTemplate.DECLINE_REASONS_PATH).Replace("{language}", language)
                 .Build();
 
             try
@@ -194,7 +195,7 @@ namespace OneSpanSign.Sdk
 
         public IList<IdvWorkflowConfiguration> GetIdvWorkflowConfigs()
         {
-            string path = template.UrlFor(UrlTemplate.IDV_WORKFLOW_CONFIGS_PATH)
+            string path = new UrlTemplate(baseUrl).UrlFor(UrlTemplate.IDV_WORKFLOW_CONFIGS_PATH)
                 .Build();
             try
             {
@@ -214,7 +215,7 @@ namespace OneSpanSign.Sdk
         public IList<IdvWorkflowConfiguration> CreateIdvWorkflowConfigs(
             IList<IdvWorkflowConfiguration> idvWorkflowConfigurations)
         {
-            string path = template.UrlFor(UrlTemplate.IDV_WORKFLOW_CONFIGS_PATH)
+            string path = new UrlTemplate(baseUrl).UrlFor(UrlTemplate.IDV_WORKFLOW_CONFIGS_PATH)
                 .Build();
             try
             {
@@ -236,7 +237,7 @@ namespace OneSpanSign.Sdk
         public IList<IdvWorkflowConfiguration> UpdateIdvWorkflowConfigs(
             IList<IdvWorkflowConfiguration> idvWorkflowConfigurations)
         {
-            string path = template.UrlFor(UrlTemplate.IDV_WORKFLOW_CONFIGS_PATH)
+            string path = new UrlTemplate(baseUrl).UrlFor(UrlTemplate.IDV_WORKFLOW_CONFIGS_PATH)
                 .Build();
             try
             {
@@ -257,7 +258,7 @@ namespace OneSpanSign.Sdk
 
         public void DeleteIdvWorkflowConfigs()
         {
-            string path = template.UrlFor(UrlTemplate.IDV_WORKFLOW_CONFIGS_PATH)
+            string path = new UrlTemplate(baseUrl).UrlFor(UrlTemplate.IDV_WORKFLOW_CONFIGS_PATH)
                 .Build();
             try
             {
@@ -275,7 +276,7 @@ namespace OneSpanSign.Sdk
 
         public AccountSettings GetAccountSettings()
         {
-            string path = template.UrlFor(UrlTemplate.ACCOUNT_SETTINGS_PATH).Build();
+            string path = new UrlTemplate(baseUrl).UrlFor(UrlTemplate.ACCOUNT_SETTINGS_PATH).Build();
             try
             {
                 string stringResponse = restClient.Get(path);
@@ -293,7 +294,7 @@ namespace OneSpanSign.Sdk
 
         public void PatchAccountSettings(AccountSettings accountSettings)
         {
-            string path = template.UrlFor(UrlTemplate.ACCOUNT_SETTINGS_PATH).Build();
+            string path = new UrlTemplate(baseUrl).UrlFor(UrlTemplate.ACCOUNT_SETTINGS_PATH).Build();
             string payload = JsonConvert.SerializeObject(accountSettings,
                 new JsonSerializerSettings
                 {
@@ -317,7 +318,7 @@ namespace OneSpanSign.Sdk
 
         public void DeleteAccountSettings()
         {
-            string path = template.UrlFor(UrlTemplate.ACCOUNT_SETTINGS_PATH).Build();
+            string path = new UrlTemplate(baseUrl).UrlFor(UrlTemplate.ACCOUNT_SETTINGS_PATH).Build();
 
             try
             {
@@ -335,7 +336,7 @@ namespace OneSpanSign.Sdk
 
         public AccountFeatureSettings GetAccountFeatureSettings()
         {
-            string path = template.UrlFor(UrlTemplate.ACCOUNT_FEATURE_SETTINGS_PATH).Build();
+            string path = new UrlTemplate(baseUrl).UrlFor(UrlTemplate.ACCOUNT_FEATURE_SETTINGS_PATH).Build();
             try
             {
                 string stringResponse = restClient.Get(path);
@@ -353,7 +354,7 @@ namespace OneSpanSign.Sdk
 
         public void PatchAccountFeatureSettings(AccountFeatureSettings accountFeatureSettings)
         {
-            string path = template.UrlFor(UrlTemplate.ACCOUNT_FEATURE_SETTINGS_PATH).Build();
+            string path = new UrlTemplate(baseUrl).UrlFor(UrlTemplate.ACCOUNT_FEATURE_SETTINGS_PATH).Build();
             string payload = JsonConvert.SerializeObject(accountFeatureSettings,
                 new JsonSerializerSettings
                 {
@@ -376,7 +377,7 @@ namespace OneSpanSign.Sdk
 
         public void DeleteAccountFeatureSettings()
         {
-            string path = template.UrlFor(UrlTemplate.ACCOUNT_FEATURE_SETTINGS_PATH).Build();
+            string path = new UrlTemplate(baseUrl).UrlFor(UrlTemplate.ACCOUNT_FEATURE_SETTINGS_PATH).Build();
 
             try
             {
@@ -394,7 +395,7 @@ namespace OneSpanSign.Sdk
 
         public AccountPackageSettings GetAccountPackageSettings()
         {
-            string path = template.UrlFor(UrlTemplate.ACCOUNT_PACKAGE_SETTINGS_PATH).Build();
+            string path = new UrlTemplate(baseUrl).UrlFor(UrlTemplate.ACCOUNT_PACKAGE_SETTINGS_PATH).Build();
             try
             {
                 string stringResponse = restClient.Get(path);
@@ -412,7 +413,7 @@ namespace OneSpanSign.Sdk
 
         public void PatchAccountPackageSettings(AccountPackageSettings accountPackageSettings)
         {
-            string path = template.UrlFor(UrlTemplate.ACCOUNT_PACKAGE_SETTINGS_PATH).Build();
+            string path = new UrlTemplate(baseUrl).UrlFor(UrlTemplate.ACCOUNT_PACKAGE_SETTINGS_PATH).Build();
             string payload = JsonConvert.SerializeObject(accountPackageSettings,
                 new JsonSerializerSettings
                 {
@@ -435,7 +436,7 @@ namespace OneSpanSign.Sdk
 
         public void DeleteAccountPackageSettings()
         {
-            string path = template.UrlFor(UrlTemplate.ACCOUNT_PACKAGE_SETTINGS_PATH).Build();
+            string path = new UrlTemplate(baseUrl).UrlFor(UrlTemplate.ACCOUNT_PACKAGE_SETTINGS_PATH).Build();
 
             try
             {
@@ -507,7 +508,7 @@ namespace OneSpanSign.Sdk
         
         public AccountDesignerSettings GetAccountDesignerSettings() 
         {
-            string path = template.UrlFor(UrlTemplate.ACCOUNT_DESIGNER_SETTINGS_PATH).Build();
+            string path = new UrlTemplate(baseUrl).UrlFor(UrlTemplate.ACCOUNT_DESIGNER_SETTINGS_PATH).Build();
             try
             {
                 String stringResponse = restClient.Get(path);
@@ -525,7 +526,7 @@ namespace OneSpanSign.Sdk
 
         public void PatchAccountDesignerSettings(AccountDesignerSettings accountDesignerSettings)
         {
-            string path = template.UrlFor(UrlTemplate.ACCOUNT_DESIGNER_SETTINGS_PATH).Build();
+            string path = new UrlTemplate(baseUrl).UrlFor(UrlTemplate.ACCOUNT_DESIGNER_SETTINGS_PATH).Build();
             string payload = JsonConvert.SerializeObject(accountDesignerSettings,
                 new JsonSerializerSettings
                 {
@@ -548,7 +549,7 @@ namespace OneSpanSign.Sdk
 
         public void DeleteAccountDesignerSettings()
         {
-            string path = template.UrlFor(UrlTemplate.ACCOUNT_DESIGNER_SETTINGS_PATH).Build();
+            string path = new UrlTemplate(baseUrl).UrlFor(UrlTemplate.ACCOUNT_DESIGNER_SETTINGS_PATH).Build();
             try
             {
                 restClient.Delete(path);
@@ -565,7 +566,7 @@ namespace OneSpanSign.Sdk
 
         public AccountEmailReminderSettings GetAccountEmailReminderSettings()
         {
-            string path = template.UrlFor(UrlTemplate.ACCOUNT_EMAIL_REMINDER_SETTINGS_PATH).Build();
+            string path = new UrlTemplate(baseUrl).UrlFor(UrlTemplate.ACCOUNT_EMAIL_REMINDER_SETTINGS_PATH).Build();
             try
             {
                 String stringResponse = restClient.Get(path);
@@ -583,7 +584,7 @@ namespace OneSpanSign.Sdk
 
         public void PatchAccountEmailReminderSettings(AccountEmailReminderSettings accountEmailReminderSettings)
         {
-            string path = template.UrlFor(UrlTemplate.ACCOUNT_EMAIL_REMINDER_SETTINGS_PATH).Build();
+            string path = new UrlTemplate(baseUrl).UrlFor(UrlTemplate.ACCOUNT_EMAIL_REMINDER_SETTINGS_PATH).Build();
             string payload = JsonConvert.SerializeObject(accountEmailReminderSettings,
                 new JsonSerializerSettings
                 {
@@ -606,7 +607,7 @@ namespace OneSpanSign.Sdk
 
         public void DeleteAccountEmailReminderSettings()
         {
-            string path = template.UrlFor(UrlTemplate.ACCOUNT_EMAIL_REMINDER_SETTINGS_PATH).Build();
+            string path = new UrlTemplate(baseUrl).UrlFor(UrlTemplate.ACCOUNT_EMAIL_REMINDER_SETTINGS_PATH).Build();
             try
             {
                 restClient.Delete(path);
@@ -623,7 +624,7 @@ namespace OneSpanSign.Sdk
 
         public AccountUploadSettings GetAccountUploadSettings()
         {
-            string path = template.UrlFor(UrlTemplate.ACCOUNT_UPLOAD_SETTINGS_PATH).Build();
+            string path = new UrlTemplate(baseUrl).UrlFor(UrlTemplate.ACCOUNT_UPLOAD_SETTINGS_PATH).Build();
             try
             {
                 string stringResponse = restClient.Get(path);
@@ -644,7 +645,7 @@ namespace OneSpanSign.Sdk
 
         public void UpdateAccountUploadSettings(AccountUploadSettings accountUploadSettings)
         {
-            string path = template.UrlFor(UrlTemplate.ACCOUNT_UPLOAD_SETTINGS_PATH).Build();
+            string path = new UrlTemplate(baseUrl).UrlFor(UrlTemplate.ACCOUNT_UPLOAD_SETTINGS_PATH).Build();
             string payload = JsonConvert.SerializeObject(accountUploadSettings.AllowedFileTypes,
                 new JsonSerializerSettings
                 {
@@ -668,7 +669,7 @@ namespace OneSpanSign.Sdk
 
         public void DeleteAccountUploadSettings()
         {
-            string path = template.UrlFor(UrlTemplate.ACCOUNT_UPLOAD_SETTINGS_PATH).Build();
+            string path = new UrlTemplate(baseUrl).UrlFor(UrlTemplate.ACCOUNT_UPLOAD_SETTINGS_PATH).Build();
             try
             {
                 restClient.Delete(path);
@@ -685,7 +686,7 @@ namespace OneSpanSign.Sdk
 
         public AccountSystemSettingProperties GetAccountSystemSettingProperties()
         {
-            string path = template.UrlFor(UrlTemplate.ACCOUNT_SYSTEM_SETTING_PROPERTIES_PATH).Build();
+            string path = new UrlTemplate(baseUrl).UrlFor(UrlTemplate.ACCOUNT_SYSTEM_SETTING_PROPERTIES_PATH).Build();
             try
             {
                 String stringResponse = restClient.Get(path);
@@ -703,7 +704,7 @@ namespace OneSpanSign.Sdk
 
         public void PatchAccountSystemSettingProperties(AccountSystemSettingProperties accountSystemSettingProperties)
         {
-            string path = template.UrlFor(UrlTemplate.ACCOUNT_SYSTEM_SETTING_PROPERTIES_PATH).Build();
+            string path = new UrlTemplate(baseUrl).UrlFor(UrlTemplate.ACCOUNT_SYSTEM_SETTING_PROPERTIES_PATH).Build();
             string payload = JsonConvert.SerializeObject(accountSystemSettingProperties,
                 new JsonSerializerSettings
                 {
@@ -726,7 +727,7 @@ namespace OneSpanSign.Sdk
 
         public void DeleteAccountSystemSettingProperties()
         {
-            string path = template.UrlFor(UrlTemplate.ACCOUNT_SYSTEM_SETTING_PROPERTIES_PATH).Build();
+            string path = new UrlTemplate(baseUrl).UrlFor(UrlTemplate.ACCOUNT_SYSTEM_SETTING_PROPERTIES_PATH).Build();
             try
             {
                 restClient.Delete(path);
@@ -743,7 +744,7 @@ namespace OneSpanSign.Sdk
   
         public SignatureLayout GetSignatureLayout()
         {
-            string path = template.UrlFor(UrlTemplate.ACCOUNT_SIGNATURE_LAYOUT_PATH).Build();
+            string path = new UrlTemplate(baseUrl).UrlFor(UrlTemplate.ACCOUNT_SIGNATURE_LAYOUT_PATH).Build();
             try
             {
                 string stringResponse = restClient.Get(path);
@@ -761,7 +762,7 @@ namespace OneSpanSign.Sdk
 
         public void PatchSignatureLayout(SignatureLayout signatureLayout)
         {
-            string path = template.UrlFor(UrlTemplate.ACCOUNT_SIGNATURE_LAYOUT_PATH).Build();
+            string path = new UrlTemplate(baseUrl).UrlFor(UrlTemplate.ACCOUNT_SIGNATURE_LAYOUT_PATH).Build();
             string payload = JsonConvert.SerializeObject(signatureLayout, new JsonSerializerSettings { ContractResolver = new CamelCasePropertyNamesContractResolver (), Formatting = Formatting.Indented ,NullValueHandling = NullValueHandling.Ignore});
             try
             {
@@ -779,7 +780,7 @@ namespace OneSpanSign.Sdk
   
         public IList<IntegrationFrameworkWorkflow> GetIfWorkflowsConfigs()
         {
-            string path = template.UrlFor(UrlTemplate.IF_WORKFLOW_CONFIGS_PATH).Build();
+            string path = new UrlTemplate(baseUrl).UrlFor(UrlTemplate.IF_WORKFLOW_CONFIGS_PATH).Build();
             try
             {
                 string stringResponse = restClient.Get(path);
@@ -797,7 +798,7 @@ namespace OneSpanSign.Sdk
         
         public SupportedLanguages GetAccountLimitSupportedLanguagesSettings()
         {
-            string path = template.UrlFor(UrlTemplate.ACCOUNT_LIMIT_SUPPORTED_LANGUAGES_SETTINGS_PATH).Build();
+            string path = new UrlTemplate(baseUrl).UrlFor(UrlTemplate.ACCOUNT_LIMIT_SUPPORTED_LANGUAGES_SETTINGS_PATH).Build();
             try
             {
                 String stringResponse = restClient.Get(path);
@@ -815,7 +816,7 @@ namespace OneSpanSign.Sdk
 
         public void SaveAccountLimitSupportedLanguagesSettings(SupportedLanguages supportedLanguages)
         {
-            string path = template.UrlFor(UrlTemplate.ACCOUNT_LIMIT_SUPPORTED_LANGUAGES_SETTINGS_PATH).Build();
+            string path = new UrlTemplate(baseUrl).UrlFor(UrlTemplate.ACCOUNT_LIMIT_SUPPORTED_LANGUAGES_SETTINGS_PATH).Build();
             string payload = JsonConvert.SerializeObject(supportedLanguages,
                 new JsonSerializerSettings
                 {
@@ -838,7 +839,7 @@ namespace OneSpanSign.Sdk
         
         public void DeleteAccountLimitSupportedLanguagesSettings()
         {
-            string path = template.UrlFor(UrlTemplate.ACCOUNT_LIMIT_SUPPORTED_LANGUAGES_SETTINGS_PATH).Build();
+            string path = new UrlTemplate(baseUrl).UrlFor(UrlTemplate.ACCOUNT_LIMIT_SUPPORTED_LANGUAGES_SETTINGS_PATH).Build();
             try
             {
                 restClient.Delete(path);

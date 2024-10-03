@@ -6,20 +6,20 @@ namespace OneSpanSign.Sdk
 {
     public class SignatureImageService
     {
-        private UrlTemplate template;
         private JsonSerializerSettings settings;
         private RestClient client;
+        private string baseUrl;
 
         public SignatureImageService(RestClient client, string baseUrl, JsonSerializerSettings settings)
         {
             this.client = client;
-            template = new UrlTemplate(baseUrl);
+            this.baseUrl = baseUrl;
             this.settings = settings;
         }
 
         public DownloadedFile GetSignatureImageForSender(string senderId, SignatureImageFormat format) 
         {
-            string path = template.UrlFor( UrlTemplate.SIGNATURE_IMAGE_FOR_SENDER_PATH)
+            string path = new UrlTemplate(baseUrl).UrlFor( UrlTemplate.SIGNATURE_IMAGE_FOR_SENDER_PATH)
                 .Replace("{senderId}", senderId)
                 .Build();
             try 
@@ -38,7 +38,7 @@ namespace OneSpanSign.Sdk
 
         public DownloadedFile GetSignatureImageForPackageRole(PackageId packageId, string signerId, SignatureImageFormat format) 
         {
-            string path = template.UrlFor(UrlTemplate.SIGNATURE_IMAGE_FOR_PACKAGE_ROLE_PATH)
+            string path = new UrlTemplate(baseUrl).UrlFor(UrlTemplate.SIGNATURE_IMAGE_FOR_PACKAGE_ROLE_PATH)
                 .Replace("{packageId}", packageId.Id)
                 .Replace("{roleId}", signerId)
                 .Build();

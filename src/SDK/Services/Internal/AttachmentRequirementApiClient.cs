@@ -11,21 +11,21 @@ namespace OneSpanSign.Sdk
 {
     internal class AttachmentRequirementApiClient
     {
-        private UrlTemplate template;
         private RestClient restClient;
         private JsonSerializerSettings jsonSettings;
+        private string baseUrl;
 
         public AttachmentRequirementApiClient(RestClient restClient, string apiUrl, JsonSerializerSettings jsonSettings)
         {
             this.restClient = restClient;
-            template = new UrlTemplate (apiUrl);            
             this.jsonSettings = jsonSettings;
+            this.baseUrl = apiUrl;
         }
 
         [Obsolete("AcceptAttachment() in AttachmentRequirementApiClient is deprecated, please use AcceptAttachment() in AttachmentRequirementService instead.")]
         public void AcceptAttachment(string packageId, Role role)
         {
-            string path = template.UrlFor(UrlTemplate.UPDATE_SIGNER_PATH)
+            string path = new UrlTemplate(baseUrl).UrlFor(UrlTemplate.UPDATE_SIGNER_PATH)
                 .Replace("{packageId}", packageId)
                 .Replace("{roleId}", role.Id)
                 .Build();
@@ -48,7 +48,7 @@ namespace OneSpanSign.Sdk
         [Obsolete("RejectAttachment() in AttachmentRequirementApiClient is deprecated, please use RejectAttachment() in AttachmentRequirementService instead.")]
         public void RejectAttachment(string packageId, Role role)
         {
-            string path = template.UrlFor(UrlTemplate.UPDATE_SIGNER_PATH)
+            string path = new UrlTemplate(baseUrl).UrlFor(UrlTemplate.UPDATE_SIGNER_PATH)
                 .Replace("{packageId}", packageId)
                 .Replace("{roleId}", role.Id)
                 .Build();
@@ -76,7 +76,7 @@ namespace OneSpanSign.Sdk
 
         public DownloadedFile DownloadAttachmentFile(string packageId, string attachmentId)
         {
-            string path = template.UrlFor(UrlTemplate.ATTACHMENT_REQUIREMENT_PATH)
+            string path = new UrlTemplate(baseUrl).UrlFor(UrlTemplate.ATTACHMENT_REQUIREMENT_PATH)
                 .Replace("{packageId}", packageId)
                     .Replace("{attachmentId}", attachmentId)
                     .Build();
@@ -97,7 +97,7 @@ namespace OneSpanSign.Sdk
 
         public DownloadedFile DownloadAttachmentFile(string packageId, string attachmentId, Int32 fileId)
         {
-            string path = template.UrlFor(UrlTemplate.ATTACHMENT_REQUIREMENT_PATH)
+            string path = new UrlTemplate(baseUrl).UrlFor(UrlTemplate.ATTACHMENT_REQUIREMENT_PATH)
                 .Replace("{packageId}", packageId)
                 .Replace("{attachmentId}", attachmentId)
                 .Replace("{fileId}", fileId.ToString())
@@ -125,7 +125,7 @@ namespace OneSpanSign.Sdk
 
         public DownloadedFile DownloadAllAttachmentFilesForPackage(string packageId)
         {
-            string path = template.UrlFor(UrlTemplate.ALL_ATTACHMENTS_PATH)
+            string path = new UrlTemplate(baseUrl).UrlFor(UrlTemplate.ALL_ATTACHMENTS_PATH)
                 .Replace("{packageId}", packageId)
                     .Build();
 
@@ -169,7 +169,7 @@ namespace OneSpanSign.Sdk
 
         private DownloadedFile DownloadAllAttachmentsForSignerInPackage(string packageId, string roleId)
         {
-            string path = template.UrlFor(UrlTemplate.ALL_ATTACHMENTS_FOR_ROLE_PATH)
+            string path = new UrlTemplate(baseUrl).UrlFor(UrlTemplate.ALL_ATTACHMENTS_FOR_ROLE_PATH)
                 .Replace("{packageId}", packageId)
                     .Replace("{roleId}", roleId)
                     .Build();
@@ -198,7 +198,7 @@ namespace OneSpanSign.Sdk
         public void UploadAttachment(PackageId packageId, string attachmentId, IDictionary<string, byte[]> files, string signerSessionId)
         {
             RestClient client = new RestClient("");
-            string path = template.UrlFor(UrlTemplate.ATTACHMENT_REQUIREMENT_PATH)
+            string path = new UrlTemplate(baseUrl).UrlFor(UrlTemplate.ATTACHMENT_REQUIREMENT_PATH)
                 .Replace("{packageId}", packageId.Id)
                     .Replace("{attachmentId}", attachmentId)
                     .Build();
@@ -225,7 +225,7 @@ namespace OneSpanSign.Sdk
 
         public void DeletaAttachmentFile(PackageId packageId, string attachmentId, Int32 fileId, string signerSessionId)
         {
-            string path = template.UrlFor (UrlTemplate.ATTACHMENT_FILE_PATH)
+            string path = new UrlTemplate(baseUrl).UrlFor (UrlTemplate.ATTACHMENT_FILE_PATH)
                  .Replace ("{packageId}", packageId.Id)
                  .Replace ("{attachmentId}", attachmentId)
                  .Replace("{fileId}", fileId.ToString())

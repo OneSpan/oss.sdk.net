@@ -7,27 +7,27 @@ namespace OneSpanSign.Sdk
 {
     internal class GroupApiClient
     {
-        private UrlTemplate template;
         private JsonSerializerSettings settings;
         private RestClient restClient;
+        private string baseUrl;
 
         public GroupApiClient(RestClient restClient, string baseUrl, JsonSerializerSettings settings)
         {
             this.restClient = restClient;
-            template = new UrlTemplate (baseUrl);
+            this.baseUrl = baseUrl;
             this.settings = settings;
         }
 
         public OneSpanSign.API.Result<OneSpanSign.API.Group> GetMyGroups ()
         {
-            string path = template.UrlFor (UrlTemplate.GROUPS_PATH)
+            string path = new UrlTemplate(baseUrl).UrlFor (UrlTemplate.GROUPS_PATH)
                     .Build ();
             return GetGroups (path);
         }
 
         public OneSpanSign.API.Result<OneSpanSign.API.Group> GetMyGroups (String groupName)
         {
-            string path = template.UrlFor (UrlTemplate.GROUPS_PATH)
+            string path = new UrlTemplate(baseUrl).UrlFor (UrlTemplate.GROUPS_PATH)
                     .AddParam ("name", groupName)
                     .Build ();
             return GetGroups (path); 
@@ -48,7 +48,7 @@ namespace OneSpanSign.Sdk
         }
         
         public OneSpanSign.API.Group GetGroup( string groupId ) {
-            string path = template.UrlFor (UrlTemplate.GROUPS_ID_PATH)
+            string path = new UrlTemplate(baseUrl).UrlFor (UrlTemplate.GROUPS_ID_PATH)
                 .Replace ("{groupId}", groupId)
                     .Build ();
 
@@ -66,7 +66,7 @@ namespace OneSpanSign.Sdk
         }
         
         public OneSpanSign.API.Group CreateGroup( OneSpanSign.API.Group apiGroup ) {
-            string path = template.UrlFor (UrlTemplate.GROUPS_PATH).Build ();
+            string path = new UrlTemplate(baseUrl).UrlFor (UrlTemplate.GROUPS_PATH).Build ();
             try {
                 string json = JsonConvert.SerializeObject (apiGroup, settings);
                 string response = restClient.Post(path, json);              
@@ -82,7 +82,7 @@ namespace OneSpanSign.Sdk
         }
 
         public OneSpanSign.API.Group UpdateGroup( OneSpanSign.API.Group apiGroup, String groupId ) {
-            string path = template.UrlFor (UrlTemplate.GROUPS_ID_PATH)
+            string path = new UrlTemplate(baseUrl).UrlFor (UrlTemplate.GROUPS_ID_PATH)
                 .Replace("{groupId}", groupId)
                 .Build ();
             try {
@@ -100,7 +100,7 @@ namespace OneSpanSign.Sdk
         }
         
         public OneSpanSign.API.GroupMember AddMember( string groupId, OneSpanSign.API.GroupMember apiGroupMember ) {
-            string path = template.UrlFor (UrlTemplate.GROUPS_MEMBER_PATH)
+            string path = new UrlTemplate(baseUrl).UrlFor (UrlTemplate.GROUPS_MEMBER_PATH)
                 .Replace("{groupId}", groupId )
                 .Build ();
             try {
@@ -118,7 +118,7 @@ namespace OneSpanSign.Sdk
         }
 
         public OneSpanSign.API.Group InviteMember( string groupId, OneSpanSign.API.GroupMember apiGroupMember ) {
-            string path = template.UrlFor (UrlTemplate.GROUPS_INVITE_PATH)
+            string path = new UrlTemplate(baseUrl).UrlFor (UrlTemplate.GROUPS_INVITE_PATH)
                 .Replace("{groupId}", groupId )
                     .Build ();
             try {
@@ -136,7 +136,7 @@ namespace OneSpanSign.Sdk
         }
         
         public void DeleteGroup( string groupId ) {
-            string path = template.UrlFor (UrlTemplate.GROUPS_ID_PATH)
+            string path = new UrlTemplate(baseUrl).UrlFor (UrlTemplate.GROUPS_ID_PATH)
                 .Replace ("{groupId}", groupId)
                 .Build ();
 
@@ -152,7 +152,7 @@ namespace OneSpanSign.Sdk
         }
 
         public OneSpanSign.API.Result<OneSpanSign.API.GroupSummary> GetGroupSummaries() {
-            string path = template.UrlFor (UrlTemplate.GROUPS_SUMMARY_PATH)
+            string path = new UrlTemplate(baseUrl).UrlFor (UrlTemplate.GROUPS_SUMMARY_PATH)
                 .Build ();
 
             try {

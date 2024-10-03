@@ -6,20 +6,20 @@ namespace OneSpanSign.Sdk
 {
     public class SignerVerificationService
     {
-        private UrlTemplate template;
         private RestClient restClient;
         private JsonSerializerSettings settings;
+        private string baseUrl;
 
         public SignerVerificationService(RestClient restClient, string baseUrl, JsonSerializerSettings settings)
         {
-            this.template = new UrlTemplate( baseUrl );
             this.restClient = restClient;
             this.settings = settings;
+            this.baseUrl = baseUrl;
         }
 
         internal void CreateSignerVerification( PackageId packageId, string roleId , OneSpanSign.API.Verification verification) 
         {
-            string path = template.UrlFor( UrlTemplate.ADD_SIGNER_VERIFICATION_PATH )
+            string path = new UrlTemplate(baseUrl).UrlFor( UrlTemplate.ADD_SIGNER_VERIFICATION_PATH )
                 .Replace("{packageId}", packageId.Id)
                 .Replace("{roleId}", roleId)
                 .Build();
@@ -41,7 +41,7 @@ namespace OneSpanSign.Sdk
 
         internal OneSpanSign.API.Verification GetSignerVerification( PackageId packageId, string roleId ) 
         {
-            string path = template.UrlFor( UrlTemplate.GET_SIGNER_VERIFICATION_PATH )
+            string path = new UrlTemplate(baseUrl).UrlFor( UrlTemplate.GET_SIGNER_VERIFICATION_PATH )
                 .Replace("{packageId}", packageId.Id)
                 .Replace("{roleId}", roleId)
                 .Build();
@@ -63,7 +63,7 @@ namespace OneSpanSign.Sdk
 
         internal void UpdateSignerVerification( PackageId packageId, string roleId , OneSpanSign.API.Verification verification) 
         {
-            string path = template.UrlFor( UrlTemplate.UPDATE_SIGNER_VERIFICATION_PATH )
+            string path = new UrlTemplate(baseUrl).UrlFor( UrlTemplate.UPDATE_SIGNER_VERIFICATION_PATH )
                 .Replace("{packageId}", packageId.Id)
                 .Replace("{roleId}", roleId)
                 .Build();
@@ -85,7 +85,7 @@ namespace OneSpanSign.Sdk
 
         internal void DeleteSignerVerification( PackageId packageId, string roleId ) 
         {
-            string path = template.UrlFor( UrlTemplate.DELETE_SIGNER_VERIFICATION_PATH )
+            string path = new UrlTemplate(baseUrl).UrlFor( UrlTemplate.DELETE_SIGNER_VERIFICATION_PATH )
                 .Replace("{packageId}", packageId.Id)
                 .Replace("{roleId}", roleId)
                 .Build();

@@ -7,13 +7,13 @@ namespace OneSpanSign.Sdk.Services
 {
     public class VirtualRoomService
     {
-        private UrlTemplate template;
         private RestClient restClient;
+        private string baseUrl;
 
         public VirtualRoomService(RestClient restClient, string baseUrl)
         {
             this.restClient = restClient;
-            template = new UrlTemplate(baseUrl);
+            this.baseUrl = baseUrl;
         }
 
         /// <summary>
@@ -23,7 +23,7 @@ namespace OneSpanSign.Sdk.Services
         /// <returns>Virtual Room.</returns>
         public VirtualRoom GetVirtualRoom(PackageId packageId)
         {
-            String path = template.UrlFor(UrlTemplate.VIRTUAL_ROOM_CONFIG_PATH)
+            String path = new UrlTemplate(baseUrl).UrlFor(UrlTemplate.VIRTUAL_ROOM_CONFIG_PATH)
                 .Replace("{packageId}", packageId.Id)
                 .Build();
 
@@ -52,7 +52,7 @@ namespace OneSpanSign.Sdk.Services
         /// <param name="VirtualRoom">VirtualRoom.</param>
         public void SetVirtualRoom(PackageId packageId, VirtualRoom VirtualRoom)
         {
-            String path = template.UrlFor(UrlTemplate.VIRTUAL_ROOM_CONFIG_PATH)
+            String path = new UrlTemplate(baseUrl).UrlFor(UrlTemplate.VIRTUAL_ROOM_CONFIG_PATH)
                 .Replace("{packageId}", packageId.Id)
                 .Build();
 
