@@ -12,11 +12,21 @@ namespace OneSpanSign.Sdk.Oauth
 
         private JsonSerializer objectMapper = new JsonSerializer();
 
+
         public bool IsOAuth2TokenExpired(string oAuthAccessToken)
         {
             String[] chunks = oAuthAccessToken.Split('.');
 
-            String payload = Encoding.UTF8.GetString(Convert.FromBase64String(chunks[1]));
+            string base64Token = chunks[1];
+
+            // Add padding if necessary
+            switch (base64Token.Length % 4)
+            {
+                case 2: base64Token += "=="; break;
+                case 3: base64Token += "="; break;
+            }
+
+            String payload = Encoding.UTF8.GetString(Convert.FromBase64String(base64Token));
 
             JObject payloadJson = JObject.Parse(payload);
 

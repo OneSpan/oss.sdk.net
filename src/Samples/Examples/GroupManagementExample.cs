@@ -89,9 +89,19 @@ namespace SDK.Examples
 				.Build());
 		}
 
+		private void cleanUpMyExistingGroups()
+		{
+			List<Group> allGroups = ossClient.GroupService.GetMyGroups();
+			foreach (Group group in allGroups)
+			{
+				ossClient.GroupService.DeleteGroup(group.Id);
+			}
+		}
+
         override public void Execute()
         {
-			inviteUsersToMyAccount();
+            cleanUpMyExistingGroups();
+            inviteUsersToMyAccount();
 			displayAccountGroupsAndMembers();
 			Group emptyGroup = GroupBuilder.NewGroup(Guid.NewGuid().ToString())
 				.WithId(new GroupId(Guid.NewGuid().ToString()))
