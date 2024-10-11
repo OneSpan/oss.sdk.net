@@ -69,6 +69,7 @@ namespace SDK.Examples
 			Signer retrievedSigner = ossClient.PackageService.GetSigner(packageId, addedSignerId);
             //ossClient.SendPackage(packageId);
             ossClient.PackageService.UnlockSigner(PackageId, addedSignerId);
+            ossClient.GroupService.DeleteGroup(avengers.Id);
         }
     }
 }
