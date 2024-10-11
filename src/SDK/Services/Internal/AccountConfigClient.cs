@@ -451,8 +451,8 @@ namespace OneSpanSign.Sdk
                 throw new OssException("Could not delete Account Package Settings.", e);
             }
         }
-
-        public AccountDesignerSettings GetAccountDesignerSettings()
+        
+        public AccountDesignerSettings GetAccountDesignerSettings() 
         {
             string path = new UrlTemplate(baseUrl).UrlFor(UrlTemplate.ACCOUNT_DESIGNER_SETTINGS_PATH).Build();
             try

@@ -19,8 +19,11 @@ namespace SDK.Examples
             List<Signature> signatures = documentPackage.GetDocument("First Document").Signatures;
 
             Assert.AreEqual(2, signatures.Count);
-            Assert.AreEqual(SignatureStyle.FULL_NAME, signatures[0].Style);
-            Assert.AreEqual(SignatureStyle.ACCEPTANCE, signatures[1].Style);
+            foreach (Signature signature in signatures)
+            {
+                if (signature.SignerEmail == example.email1) { Assert.AreEqual(SignatureStyle.FULL_NAME, signature.Style); }
+                if (signature.SignerEmail == example.email2) { Assert.AreEqual(SignatureStyle.ACCEPTANCE, signature.Style); }
+            }
         }
     }
 }
