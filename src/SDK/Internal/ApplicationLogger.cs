@@ -1,4 +1,6 @@
-﻿using System;
+﻿#define TRACE
+
+using System;
 using System.Diagnostics;
 
 namespace OneSpanSign.Sdk.Internal
