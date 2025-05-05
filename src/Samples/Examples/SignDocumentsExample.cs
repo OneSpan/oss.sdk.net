@@ -15,6 +15,7 @@ namespace SDK.Examples
         private string document1Name = "First Document";
         private string document2Name = "Second Document";
         private string signer1Id = "signer1";
+        private string signer2Id = "signer2";
 
         override public void Execute()
         {
@@ -26,6 +27,10 @@ namespace SDK.Examples
                                 .WithCustomId(signer1Id)
                                 .WithFirstName("John1")
                                 .WithLastName("Smith1"))
+                    .WithSigner(SignerBuilder.NewSignerWithEmail(email2)
+                                .WithCustomId(signer2Id)
+                                .WithFirstName("Alice")
+                                .WithLastName("Bob"))
                     .WithDocument(DocumentBuilder.NewDocumentNamed(document1Name)
                                   .FromStream(fileStream1, DocumentType.PDF)
                                   .WithSignature(SignatureBuilder.CaptureFor(senderEmail)
@@ -33,7 +38,10 @@ namespace SDK.Examples
                                    .AtPosition(100, 100))
                                   .WithSignature(SignatureBuilder.SignatureFor(email1)
                                    .OnPage(0)
-                                   .AtPosition(400, 100)))
+                                   .AtPosition(400, 100))
+                                  .WithSignature(SignatureBuilder.SignatureFor(email2)
+                                   .OnPage(0)
+                                   .AtPosition(400, 300)))
                     .WithDocument(DocumentBuilder.NewDocumentNamed(document2Name)
                                   .FromStream(fileStream2, DocumentType.PDF)
                                   .WithSignature(SignatureBuilder.SignatureFor(senderEmail)
@@ -41,7 +49,10 @@ namespace SDK.Examples
                                    .AtPosition(100, 100))
                                   .WithSignature(SignatureBuilder.CaptureFor(email1)
                                    .OnPage(0)
-                                   .AtPosition(400, 100)))
+                                   .AtPosition(400, 100))
+                                  .WithSignature(SignatureBuilder.CaptureFor(email2)
+                                   .OnPage(0)
+                                   .AtPosition(400, 300)))
                     .Build();
 
             packageId = ossClient.CreatePackage(superDuperPackage);
@@ -52,6 +63,7 @@ namespace SDK.Examples
             retrievedPackageAfterSigningApproval1 = ossClient.GetPackage(packageId);
 
             ossClient.SignDocuments(packageId, signer1Id, capturedSignature);
+            ossClient.SignDocuments(packageId, signer2Id, capturedSignature);
             retrievedPackageAfterSigningApproval2 = ossClient.GetPackage(packageId);
         }
     }
