@@ -22,8 +22,6 @@ namespace SDK.Examples
             additionalRequestHeaders.Add("customHeader3", "value3");
             additionalRequestHeaders.Add("customHeader4", "value4");
 
-            ossClient = new OssClient(props.Get("api.key"), props.Get("api.url"), true, null, additionalRequestHeaders);
-
             DocumentPackage superDuperPackage = PackageBuilder.NewPackageNamed(PackageName)
                 .WithSettings(DocumentPackageSettingsBuilder.NewDocumentPackageSettings().WithInPerson())
                     .WithSigner(SignerBuilder.NewSignerWithEmail(email1)
