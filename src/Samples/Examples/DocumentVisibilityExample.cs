@@ -36,7 +36,7 @@ namespace SDK.Examples
         {
         }
 
-        public DocumentVisibilityExample(string apiKey, string apiUrl, string email1, string email2, string email3) : base(apiKey, apiUrl)
+        public DocumentVisibilityExample(string apiKey, string apiUrl, string email1, string email2, string email3)
         {
             this.email1 = email1;
             this.email2 = email2;
