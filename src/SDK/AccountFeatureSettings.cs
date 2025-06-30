@@ -35,6 +35,7 @@ namespace OneSpanSign.Sdk
         private Nullable<bool> enableRecipientHistory;
 
         private Nullable<bool> allowSignersDownloadEvidenceSummary;
+        private Nullable<bool> documentWidget;
 
         public Nullable<bool> AllowCheckboxConsentApproval
         {
@@ -380,6 +381,18 @@ namespace OneSpanSign.Sdk
             set
             {
                 allowSignersDownloadEvidenceSummary = value;
+            }
+        }
+        
+        public Nullable<bool> DocumentWidget
+        {
+            get
+            {
+                return documentWidget;
+            }
+            set
+            {
+                documentWidget = value;
             }
         }
 
