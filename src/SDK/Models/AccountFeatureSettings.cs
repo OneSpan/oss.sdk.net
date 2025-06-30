@@ -180,6 +180,12 @@ namespace OneSpanSign.API
 		    get; set;
 	    }
 	    
+	    [JsonProperty("documentWidget")]
+	    public Nullable<Boolean> DocumentWidget
+	    {
+		    get; set;
+	    }
+	    
 	
 	}
 }

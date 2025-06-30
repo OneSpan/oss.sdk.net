@@ -53,6 +53,7 @@ namespace OneSpanSign.Sdk
 			result.OverrideRecipientsPreferredLanguage = sdkAccountFeatureSettings.OverrideRecipientsPreferredLanguage;
 			result.EnableRecipientHistory = sdkAccountFeatureSettings.EnableRecipientHistory;
 			result.AllowSignersDownloadEvidenceSummary = sdkAccountFeatureSettings.AllowSignersDownloadEvidenceSummary;
+			result.DocumentWidget = sdkAccountFeatureSettings.DocumentWidget;
             return result;
 		}
 
@@ -93,6 +94,7 @@ namespace OneSpanSign.Sdk
 			result.OverrideRecipientsPreferredLanguage = apiAccountFeatureSettings.OverrideRecipientsPreferredLanguage;
 			result.EnableRecipientHistory = apiAccountFeatureSettings.EnableRecipientHistory;
 			result.AllowSignersDownloadEvidenceSummary = apiAccountFeatureSettings.AllowSignersDownloadEvidenceSummary;
+			result.DocumentWidget = apiAccountFeatureSettings.DocumentWidget;
 
 			return result;
 		}

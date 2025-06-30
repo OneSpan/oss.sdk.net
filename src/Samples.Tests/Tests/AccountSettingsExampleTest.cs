@@ -17,6 +17,7 @@ namespace SDK.Examples
             Assert.IsNotNull(example.defaultAccountSettings.AccountFeatureSettings.ConditionalFields);
             Assert.IsNotNull(example.defaultAccountSettings.AccountFeatureSettings.EnableRecipientHistory);
             Assert.IsNotNull(example.defaultAccountSettings.AccountFeatureSettings.AllowSignersDownloadEvidenceSummary);
+            Assert.IsNotNull(example.defaultAccountSettings.AccountFeatureSettings.DocumentWidget);
 
             
             Assert.IsFalse(example.patchedAccountSettings.AccountFeatureSettings.AllowCheckboxConsentApproval);
@@ -26,6 +27,7 @@ namespace SDK.Examples
             Assert.IsTrue(example.patchedAccountSettings.AccountFeatureSettings.OverrideRecipientsPreferredLanguage);
             Assert.IsTrue(example.patchedAccountSettings.AccountFeatureSettings.EnableRecipientHistory);
             Assert.IsTrue(example.patchedAccountSettings.AccountFeatureSettings.AllowSignersDownloadEvidenceSummary);
+            Assert.IsTrue(example.patchedAccountSettings.AccountFeatureSettings.DocumentWidget);
 
             
             Assert.IsNotNull(example.defaultAccountSettings.AccountPackageSettings.Ada);
@@ -55,6 +57,7 @@ namespace SDK.Examples
             Assert.IsNotNull(example.defaultAccountFeatureSettings.ConditionalFields);
             Assert.IsNotNull(example.defaultAccountFeatureSettings.EnableRecipientHistory);
             Assert.IsNotNull(example.defaultAccountFeatureSettings.AllowSignersDownloadEvidenceSummary);
+            Assert.IsNotNull(example.defaultAccountFeatureSettings.DocumentWidget);
             
             Assert.IsFalse(example.patchedAccountFeatureSettings.AllowCheckboxConsentApproval);
             Assert.IsTrue(example.patchedAccountFeatureSettings.AllowInPersonForAccountSenders);
@@ -62,6 +65,7 @@ namespace SDK.Examples
             Assert.IsFalse(example.patchedAccountFeatureSettings.ConditionalFields);
             Assert.IsTrue(example.patchedAccountFeatureSettings.EnableRecipientHistory);
             Assert.IsTrue(example.patchedAccountFeatureSettings.AllowSignersDownloadEvidenceSummary);
+            Assert.IsTrue(example.patchedAccountFeatureSettings.DocumentWidget);
 
 
             Assert.IsNotNull(example.defaultAccountPackageSettings.Ada);
