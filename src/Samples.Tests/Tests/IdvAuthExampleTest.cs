@@ -23,7 +23,7 @@ namespace SDK.Examples
             Signer signer = retrievedPackage.GetSigner(example.email1);
             Assert.AreEqual(AuthenticationMethod.IDV, signer.AuthenticationMethod);
             Assert.AreEqual(0, signer.ChallengeQuestion.Count);
-            Assert.AreEqual(IdvAuthExample.PHONE_NUMBER, signer.PhoneNumber);
+            Assert.AreEqual(IdvAuthExample.PHONE_NUMBER, signer.AuthPhoneNumber);
 
             IdvWorkflow idvWorkflow = signer.Authentication.IdvWorkflow;
             Assert.AreEqual(IdvAuthExample.IDV_WORKFLOW_ID1, idvWorkflow.Id);

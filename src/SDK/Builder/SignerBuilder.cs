@@ -13,7 +13,9 @@ namespace OneSpanSign.Sdk.Builder
         private string company;
         private string language;
         private AuthenticationBuilder authenticationBuilder = new AuthenticationBuilder();
+        private NotificationMethodsBuilder notificationMethodsBuilder;
         private Authentication authentication;
+        private NotificationMethods notificationMethods;
         private bool deliverSignedDocumentsByEmail;
         private int signingOrder;
         private string message;
@@ -170,6 +172,12 @@ namespace OneSpanSign.Sdk.Builder
             return this;
         }
 
+        public SignerBuilder WithNotificationMethods(NotificationMethodsBuilder notificationMethodsBuilder)
+        {
+            this.notificationMethodsBuilder =  notificationMethodsBuilder;
+            return this;
+        }
+
         public SignerBuilder DeliverSignedDocumentsByEmail()
         {
             deliverSignedDocumentsByEmail = true;
@@ -277,8 +285,12 @@ namespace OneSpanSign.Sdk.Builder
             {
                 authentication = authenticationBuilder.Build();
             }
+            
+            if (notificationMethods == null && notificationMethodsBuilder != null) {
+                notificationMethods = notificationMethodsBuilder.Build();
+            }
 
-            Signer result = new Signer(signerEmail, firstName, lastName, authentication);
+            Signer result = new Signer(signerEmail, firstName, lastName, authentication, notificationMethods);
             result.Title = title;
             result.Company = company;
             result.Language = language;
