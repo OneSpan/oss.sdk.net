@@ -27,7 +27,7 @@ namespace SDK.Examples
             Assert.IsTrue(example.patchedAccountSettings.AccountFeatureSettings.OverrideRecipientsPreferredLanguage);
             Assert.IsTrue(example.patchedAccountSettings.AccountFeatureSettings.EnableRecipientHistory);
             Assert.IsTrue(example.patchedAccountSettings.AccountFeatureSettings.AllowSignersDownloadEvidenceSummary);
-            Assert.IsTrue(example.patchedAccountSettings.AccountFeatureSettings.DocumentWidget);
+            Assert.IsFalse(example.patchedAccountSettings.AccountFeatureSettings.DocumentWidget);
 
             
             Assert.IsNotNull(example.defaultAccountSettings.AccountPackageSettings.Ada);
