@@ -1,5 +1,3 @@
-using System;
-using System.IO;
 using OneSpanSign.Sdk;
 using OneSpanSign.Sdk.Builder;
 
@@ -10,7 +8,7 @@ namespace SDK.Examples
         public DocumentPackage TemplatePackage{
             get; set; 
         }
-        public DocumentPackage UpdatedPackage{
+        public DocumentPackage CreatedPackage{
             get; set; 
         }
         public DocumentPackage SignerUpdatedPackage{
@@ -47,23 +45,24 @@ namespace SDK.Examples
                 .Build();
             
             template.Id = ossClient.CreateTemplate(template);
-            TemplatePackage = ossClient.GetPackage( template.Id );
+            TemplatePackage = ossClient.GetPackage(template.Id);
             
             DocumentPackage newPackage = PackageBuilder.NewPackageNamed(PackageName)
                 .DescribedAs(PACKAGE_DESCRIPTION)
                 .Build();
 
-            // Cannot update signer's NM when create package from template
+            // Verify signer's NM when create package from template
             packageId = ossClient.CreatePackageFromTemplate(template.Id, newPackage);
-            UpdatedPackage = ossClient.GetPackage( packageId );
+            CreatedPackage = ossClient.GetPackage(packageId);
             
-            var signer = ossClient.PackageService.GetSigner(packageId, PACKAGE_SIGNER1_CUSTOM_ID);
-            signer.NotificationMethods.SetPrimaryMethods(NotificationMethod.EMAIL);
-
             // Able to update signer's NM during signer update
-            ossClient.PackageService.UpdateSigner(packageId, signer);
-            SignerUpdatedPackage = ossClient.GetPackage( packageId );
+            var signer1 = ossClient.PackageService.GetSigner(packageId, PACKAGE_SIGNER1_CUSTOM_ID);
+            signer1.NotificationMethods.SetPrimaryMethods(NotificationMethod.EMAIL);
+            signer1.NotificationMethods.Phone = "+15147623743";
             
+            // Signer's change of NM should be reflected on the new Signer updated package.
+            ossClient.PackageService.UpdateSigner(packageId, signer1);
+            SignerUpdatedPackage = ossClient.GetPackage(packageId);
         }
     }
 }

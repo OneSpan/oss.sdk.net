@@ -14,20 +14,22 @@ namespace SDK.Examples
             example.Run();
 
             DocumentPackage templatePackage = example.TemplatePackage;
-            DocumentPackage updatedPackage = example.UpdatedPackage;
+            DocumentPackage createdPackage = example.CreatedPackage;
             DocumentPackage signerUpdatedPackage = example.SignerUpdatedPackage;
 
 
-            Assert.AreEqual(PACKAGE_SIGNER1_PHONE, templatePackage.GetSigner(example.email1).NotificationMethods.Phone);
-            Assert.AreEqual(PACKAGE_SIGNER1_PHONE, updatedPackage.GetSigner(example.email1).NotificationMethods.Phone);
-            Assert.AreEqual(PACKAGE_SIGNER1_PHONE, signerUpdatedPackage.GetSigner(example.email1).NotificationMethods.Phone);
+            Assert.AreEqual(templatePackage.GetSigner(example.email1).NotificationMethods.Phone, PACKAGE_SIGNER1_PHONE);
+            Assert.AreEqual(createdPackage.GetSigner(example.email1).NotificationMethods.Phone, PACKAGE_SIGNER1_PHONE);
+            Assert.AreEqual(signerUpdatedPackage.GetSigner(example.email1).NotificationMethods.Phone, "+15147623743");
 
             CollectionAssert.Contains(templatePackage.GetSigner(example.email1).NotificationMethods.Primary, NotificationMethod.EMAIL);
             CollectionAssert.Contains(templatePackage.GetSigner(example.email1).NotificationMethods.Primary, NotificationMethod.SMS);
 
-            CollectionAssert.Contains(updatedPackage.GetSigner(example.email1).NotificationMethods.Primary, NotificationMethod.EMAIL);
-            CollectionAssert.Contains(updatedPackage.GetSigner(example.email1).NotificationMethods.Primary, NotificationMethod.SMS);
+            CollectionAssert.Contains(createdPackage.GetSigner(example.email1).NotificationMethods.Primary, NotificationMethod.EMAIL);
+            CollectionAssert.Contains(createdPackage.GetSigner(example.email1).NotificationMethods.Primary, NotificationMethod.SMS);
 
-            CollectionAssert.Contains(signerUpdatedPackage.GetSigner(example.email1).NotificationMethods.Primary, NotificationMethod.EMAIL);        }
+            CollectionAssert.Contains(signerUpdatedPackage.GetSigner(example.email1).NotificationMethods.Primary, NotificationMethod.EMAIL);
+            CollectionAssert.DoesNotContain(signerUpdatedPackage.GetSigner(example.email1).NotificationMethods.Primary, NotificationMethod.SMS);
+        }
     }
 }

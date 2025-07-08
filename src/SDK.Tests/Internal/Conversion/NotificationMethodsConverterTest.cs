@@ -1,5 +1,4 @@
 using NUnit.Framework;
-using System;
 using System.Collections.Generic;
 using OneSpanSign.Sdk;
 using NotificationMethods = OneSpanSign.API.NotificationMethods;
@@ -135,5 +134,4 @@ namespace SDK.Tests
             }
         }
     }
-
 }

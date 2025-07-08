@@ -1,6 +1,4 @@
 using NUnit.Framework;
-using System;
-using OneSpanSign.API;
 using OneSpanSign.Sdk;
 
 namespace SDK.Tests

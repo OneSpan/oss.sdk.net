@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using OneSpanSign.API;
 
 namespace OneSpanSign.Sdk
 {
@@ -130,11 +129,6 @@ namespace OneSpanSign.Sdk
 				return notificationMethods;
 			}
 		}
-		
-		// public void SetNotificationPrimaryMethods(ISet<NotificationMethod> primary)
-		// {
-		// 	this.notificationMethods.SetPrimaryMethods(primary);
-		// }
 
 		public AuthenticationMethod AuthenticationMethod {
 			get

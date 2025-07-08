@@ -13,7 +13,7 @@ namespace SDK.Examples
         }
 
 
-        public static readonly string PACKAGE_DESCRIPTION = "This example is created to demonstrate Notification methods";
+        public static readonly string PACKAGE_DESCRIPTION = "Demonstrates package with signer notification methods creation and update";
         public static readonly string PACKAGE_SIGNER1_FIRST = "John";
         public static readonly string PACKAGE_SIGNER1_LAST = "Smith";
         
@@ -25,14 +25,19 @@ namespace SDK.Examples
                     .WithFirstName(PACKAGE_SIGNER1_FIRST)
                     .WithLastName(PACKAGE_SIGNER1_LAST)
                     .WithNotificationMethods(NotificationMethodsBuilder.NewNotificationMethods()
-                        .WithPrimaryMethods(NotificationMethod.EMAIL)
-)                )
+                        .WithPrimaryMethods(NotificationMethod.EMAIL, NotificationMethod.SMS)
+                        .WithPhoneNumber("+12042345678"))                
+                )
                 .Build();
             
             packageId = ossClient.CreatePackage(packageToCreate);
             CreatedPackage = ossClient.GetPackage(packageId);
             
-            DocumentPackage packageToUpdate = PackageBuilder.NewPackageNamed(PackageName).Build();
+            DocumentPackage packageToUpdate = OssClient.GetPackage(packageId);
+
+            var signer1 = packageToUpdate.GetSigner(email1);
+            signer1.NotificationMethods.SetPrimaryMethods(NotificationMethod.EMAIL);
+            signer1.NotificationMethods.Phone = null;
             
             // Cannot update signer's NM during package update
             ossClient.UpdatePackage(PackageId, packageToUpdate);

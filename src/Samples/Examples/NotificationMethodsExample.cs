@@ -1,5 +1,3 @@
-using System;
-using System.IO;
 using OneSpanSign.Sdk;
 using OneSpanSign.Sdk.Builder;
 
