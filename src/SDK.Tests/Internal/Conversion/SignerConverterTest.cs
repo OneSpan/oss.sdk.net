@@ -1,7 +1,9 @@
 using NUnit.Framework;
 using System;
+using System.Collections.Generic;
 using OneSpanSign.Sdk;
 using OneSpanSign.Sdk.Builder;
+using NotificationMethod = OneSpanSign.API.NotificationMethod;
 
 namespace SDK.Tests
 {
@@ -54,6 +56,8 @@ namespace SDK.Tests
             Assert.AreEqual(apiSigner1.Company, sdkSigner1.Company);
             Assert.AreEqual(apiSigner1.Language, sdkSigner1.Language);
 			Assert.AreEqual(apiSigner1.Title, sdkSigner1.Title);
+			Assert.AreEqual(apiSigner1.NotificationMethods.Primary, NotificationMethodsConverter.ConvertNotificationMethodsToAPI(sdkSigner1.NotificationMethods.Primary));
+			Assert.AreEqual(apiSigner1.Phone, sdkSigner1.NotificationMethods.Phone);
 		}
 
 		[Test()]
@@ -70,6 +74,9 @@ namespace SDK.Tests
             Assert.AreEqual(apiRole.Signers[0].Company, sdkSigner1.Company);
             Assert.AreEqual(apiRole.Signers[0].Language, sdkSigner1.Language);
 			Assert.AreEqual(apiRole.Signers[0].Title, sdkSigner1.Title);
+			Assert.AreEqual(apiRole.Signers[0].NotificationMethods.Primary, NotificationMethodsConverter.ConvertNotificationMethodsToAPI(sdkSigner1.NotificationMethods.Primary));
+			Assert.AreEqual(apiRole.Signers[0].Phone, sdkSigner1.NotificationMethods.Phone);
+
 			Assert.AreEqual(apiRole.Id, sdkSigner1.Id);
 			Assert.AreEqual(apiRole.Name, sdkSigner1.Id);
 			Assert.AreEqual(apiRole.EmailMessage.Content, sdkSigner1.Message);
@@ -104,6 +111,7 @@ namespace SDK.Tests
             Assert.AreEqual(apiRole.Signers[0].Company, sdkSigner1.Company);
             Assert.AreEqual(apiRole.Signers[0].Language, sdkSigner1.Language);
 			Assert.AreEqual(apiRole.Signers[0].Title, sdkSigner1.Title);
+			Assert.IsNull(apiRole.Signers[0].NotificationMethods);
 			Assert.AreEqual(apiRole.Id, roleId);
 			Assert.AreEqual(apiRole.Name, roleId);
 			Assert.IsNull(apiRole.EmailMessage);
@@ -130,6 +138,8 @@ namespace SDK.Tests
             Assert.AreEqual(apiRole.Reassign, sdkSigner1.CanChangeSigner);
             Assert.AreEqual(apiRole.EmailMessage.Content, sdkSigner1.Message);
             Assert.AreEqual(apiSigner1.Delivery.Email, sdkSigner1.DeliverSignedDocumentsByEmail);
+            Assert.AreEqual(apiSigner1.NotificationMethods.Primary, NotificationMethodsConverter.ConvertNotificationMethodsToAPI(sdkSigner1.NotificationMethods.Primary));
+
 
             string attachmentName = apiRole.AttachmentRequirements[0].Name;
             OneSpanSign.API.AttachmentRequirement apiAttachment = apiRole.AttachmentRequirements[0];
@@ -158,6 +168,10 @@ namespace SDK.Tests
 					.WithDescription("Please upload your scanned driver's license")
 					.IsRequiredAttachment()
 					.Build())
+				.WithNotificationMethods(NotificationMethodsBuilder.NewNotificationMethods()
+					.WithPhoneNumber("+15437567483")
+					.WithPrimaryMethods(OneSpanSign.Sdk.NotificationMethod.EMAIL, OneSpanSign.Sdk.NotificationMethod.SMS)
+					)
 				.Build();
 		}
 
@@ -180,7 +194,8 @@ namespace SDK.Tests
 
             apiSigner.Delivery = delivery;
             apiSigner.Id = "1";
-
+            apiSigner.Phone = "+15437567483";
+            apiSigner.NotificationMethods = new OneSpanSign.API.NotificationMethods(new HashSet<NotificationMethod> { NotificationMethod.EMAIL, NotificationMethod.SMS });   
 			apiRole.AddSigner(apiSigner);
 			apiRole.Id = "3";
 			apiRole.Name = "Signer name";

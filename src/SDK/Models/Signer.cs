@@ -1,4 +1,3 @@
-//
 using System;
 using System.Collections.Generic;
 using Newtonsoft.Json;
@@ -28,6 +27,14 @@ namespace OneSpanSign.API
     {
                 get; set;
         }
+    
+    
+    [JsonProperty("notificationMethods")]
+    public NotificationMethods NotificationMethods
+    {
+	    get; set;
+    }
+    
     
 		    
     [JsonProperty("company")]
