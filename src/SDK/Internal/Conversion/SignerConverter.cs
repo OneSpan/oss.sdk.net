@@ -171,6 +171,12 @@ namespace OneSpanSign.Sdk
 			}
 
 			signer.Auth = new AuthenticationConverter(sdkSigner.Authentication).ToAPIAuthentication();
+            
+            if (sdkSigner.NotificationMethods != null)
+            {
+                signer.NotificationMethods = new NotificationMethodsConverter(sdkSigner.NotificationMethods).ToAPINotificationMethods();
+                signer.Phone = sdkSigner.NotificationMethods.Phone;
+            }
 
 			return signer;
 		}
@@ -272,6 +278,15 @@ namespace OneSpanSign.Sdk
 
             builder.WithAuthentication(new AuthenticationConverter(eslSigner.Auth).ToSDKAuthentication());
 
+            if (eslSigner.NotificationMethods != null)
+            {
+                builder.WithNotificationMethods(NotificationMethodsBuilder.NewNotificationMethods()
+                    .WithPhoneNumber(eslSigner.Phone)
+                    .WithPrimaryMethods(
+                        NotificationMethodsConverter.ConvertNotificationMethodsToSDK(eslSigner.NotificationMethods.Primary))
+                );
+            }
+                
             Signer signer = builder.Build();
 
             if ( apiSigner.SignerType != null ) 

@@ -53,6 +53,35 @@ namespace SDK.Tests
 			Assert.AreEqual ("Managing Director", signer.Title);
 			Assert.AreEqual ("Acme Inc", signer.Company);
 		}
+		
+		[Test]
+		public void CannotSetSMSNotificationWithoutPhone()
+		{
+			Assert.Throws<OssException>(() => SignerBuilder.NewSignerWithEmail ("billy@bob.com")
+				.WithFirstName ("Billy")
+				.WithLastName ("Bob")
+				.WithNotificationMethods(NotificationMethodsBuilder.NewNotificationMethods()
+					.WithPrimaryMethods(NotificationMethod.EMAIL, NotificationMethod.SMS)
+					)
+				.Build ());
+		}
+		
+		[Test]
+		public void CanSpecifyNotificationMethods()
+		{
+			Signer signer = SignerBuilder.NewSignerWithEmail ("billy@bob.com")
+				.WithFirstName ("Billy")
+				.WithLastName ("Bob")
+				.WithNotificationMethods(NotificationMethodsBuilder.NewNotificationMethods()
+					.WithPhoneNumber("+16356489274")
+					.WithPrimaryMethods(NotificationMethod.EMAIL, NotificationMethod.SMS)
+				)
+				.Build ();
+			
+			Assert.NotNull(signer.NotificationMethods);
+			Assert.IsTrue(signer.NotificationMethods.Primary.Contains(NotificationMethod.EMAIL) && 
+			              signer.NotificationMethods.Primary.Contains(NotificationMethod.SMS));
+		}
 
 		[Test]
 		public void AuthenticationDefaultsToEmail()
@@ -114,7 +143,7 @@ namespace SDK.Tests
 				.Build ();
 
 			Assert.AreEqual (AuthenticationMethod.SMS, signer.AuthenticationMethod);
-			Assert.AreEqual ("1112223333", signer.PhoneNumber);
+			Assert.AreEqual ("1112223333", signer.AuthPhoneNumber);
 		}
 
         [Test]

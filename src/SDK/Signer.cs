@@ -1,19 +1,20 @@
 using System;
 using System.Collections.Generic;
-using OneSpanSign.API;
 
 namespace OneSpanSign.Sdk
 {
 	public class Signer
 	{
 		private readonly Authentication authentication;
+		private readonly NotificationMethods notificationMethods;
 
-        public Signer (string signerEmail, string firstName, string lastName, Authentication authentication)
+        public Signer (string signerEmail, string firstName, string lastName, Authentication authentication, NotificationMethods notificationMethods = null)
 		{
 			Email = signerEmail;
 			FirstName = firstName;
 			LastName = lastName;
 			this.authentication = authentication;
+			this.notificationMethods = notificationMethods;
 			this.GroupId = null;
             this.KnowledgeBasedAuthentication = null;
 		}
@@ -120,6 +121,14 @@ namespace OneSpanSign.Sdk
 				return authentication;
 			}
 		}
+		
+		public NotificationMethods NotificationMethods
+		{
+			get
+			{
+				return notificationMethods;
+			}
+		}
 
 		public AuthenticationMethod AuthenticationMethod {
 			get
@@ -135,6 +144,15 @@ namespace OneSpanSign.Sdk
 			}
 		}
 
+		public string AuthPhoneNumber
+		{
+			get
+			{
+				return authentication.PhoneNumber;
+			}
+		}
+		
+		[Obsolete("This method is deprecated. Use AuthPhoneNumber() instead.")]
 		public string PhoneNumber {
 			get
 			{
