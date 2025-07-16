@@ -30,11 +30,14 @@ namespace OneSpanSign.Sdk.Oauth
 
             JObject payloadJson = JObject.Parse(payload);
 
-            long unixEpochTime = (long)payloadJson["exp"];
-            DateTime tokenExpiresAt = DateTime.UtcNow.AddSeconds(unixEpochTime);
-            DateTimeOffset now = DateTimeOffset.Now;
+            //The tokens expiration represented as the number of seconds from 1/1/1970 UTC.
+            long tokenExpireEpoch = (long)payloadJson["exp"];           
+            
+            //Convert token expiration to DateTime.
+            var tokenExpiresAt = new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc);
+            tokenExpiresAt = tokenExpiresAt.AddSeconds(tokenExpireEpoch);
 
-            return now > tokenExpiresAt.Subtract(TimeSpan.FromSeconds(AccessTokenExpirationLeeway));
+            return DateTime.UtcNow > tokenExpiresAt.Subtract(TimeSpan.FromSeconds(AccessTokenExpirationLeeway));
         }
     }
 }
