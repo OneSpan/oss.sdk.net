@@ -10,7 +10,7 @@
     <Authors>OneSpan Dev</Authors>
     <Company>OneSpan</Company>
     <Product>OneSpan Sign SDK</Product>
-    <Version>11.63.0</Version>
+    <Version>11.64.0</Version>
     <Copyright>OneSpan</Copyright>
     <Description>.NET SDK for OneSpan Sign</Description>
     <PackageProjectUrl>https://github.com/OneSpan/oss.sdk.net</PackageProjectUrl>
