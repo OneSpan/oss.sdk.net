@@ -1,5 +1,4 @@
 using System;
-using System.Reflection;
 using System.Collections.Generic;
 using OneSpanSign.Sdk.Internal;
 
@@ -11,6 +10,8 @@ namespace OneSpanSign.Sdk
 
         public static GroupMemberType REGULAR = new GroupMemberType("REGULAR", "REGULAR", 0);
         public static GroupMemberType MANAGER = new GroupMemberType("MANAGER", "MANAGER", 1);
+        public static GroupMemberType AD_HOC_GROUP_MEMBER = new GroupMemberType("AD_HOC_GROUP_MEMBER", "AD_HOC_GROUP_MEMBER", 2);
+        public static GroupMemberType SIGNER = new GroupMemberType("SIGNER", "SIGNER", 3);
 
         private static Dictionary<string,GroupMemberType> allGroupMemberTypes = new Dictionary<string,GroupMemberType>();
 
@@ -18,6 +19,8 @@ namespace OneSpanSign.Sdk
         {
             allGroupMemberTypes.Add(REGULAR.getApiValue(), GroupMemberType.REGULAR);
             allGroupMemberTypes.Add(MANAGER.getApiValue(), GroupMemberType.MANAGER);
+            allGroupMemberTypes.Add(AD_HOC_GROUP_MEMBER.getApiValue(), GroupMemberType.AD_HOC_GROUP_MEMBER);
+            allGroupMemberTypes.Add(SIGNER.getApiValue(), GroupMemberType.SIGNER);
         }
 
         private GroupMemberType(string apiValue, string sdkValue, int index):base(apiValue,sdkValue,index) 

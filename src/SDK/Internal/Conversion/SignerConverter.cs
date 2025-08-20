@@ -56,6 +56,12 @@ namespace OneSpanSign.Sdk
             {
                 role.Id = role.Name = sdkSigner.GroupId.Id;
             }
+            else if (sdkSigner.IsAdHocGroupSigner()) // ????????
+            {
+                role.Id = sdkSigner.Id;
+                role.Name = sdkSigner.Id;
+                //todo: add ad hoc group logic here
+            }
             else
             {
                 role.Id = role.Name = roleIdName;
@@ -140,25 +146,32 @@ namespace OneSpanSign.Sdk
 
 			OneSpanSign.API.Signer signer = new OneSpanSign.API.Signer ();
 
-			if (!sdkSigner.IsGroupSigner())
-			{
-				signer.Email = sdkSigner.Email;
-				signer.FirstName = sdkSigner.FirstName;
-				signer.LastName = sdkSigner.LastName;
-				signer.Title = sdkSigner.Title;
+			if (sdkSigner.IsGroupSigner())
+            {
+                signer.Group = new OneSpanSign.API.Group();
+                signer.Group.Id = sdkSigner.GroupId.Id;
+            } 
+            else if (sdkSigner.IsAdHocGroupSigner())
+            {
+                signer.Group = new GroupConverter(sdkSigner.Group).ToAPIGroup();
+                signer.FirstName = sdkSigner.FirstName;
+                signer.Email = sdkSigner.Email;
+                signer.SignerType = "AD_HOC_GROUP_SIGNER";
+            }
+            else
+            {
+                signer.Email = sdkSigner.Email;
+                signer.FirstName = sdkSigner.FirstName;
+                signer.LastName = sdkSigner.LastName;
+                signer.Title = sdkSigner.Title;
                 signer.Company = sdkSigner.Company;
-				if (sdkSigner.DeliverSignedDocumentsByEmail)
-				{
-					signer.Delivery = new OneSpanSign.API.Delivery();
-					signer.Delivery.Email = sdkSigner.DeliverSignedDocumentsByEmail;
-				}
+                if (sdkSigner.DeliverSignedDocumentsByEmail)
+                {
+                    signer.Delivery = new OneSpanSign.API.Delivery();
+                    signer.Delivery.Email = sdkSigner.DeliverSignedDocumentsByEmail;
+                }
                 signer.KnowledgeBasedAuthentication = new KnowledgeBasedAuthenticationConverter(sdkSigner.KnowledgeBasedAuthentication).ToAPIKnowledgeBasedAuthentication();
-			}
-			else
-			{
-				signer.Group = new OneSpanSign.API.Group();
-				signer.Group.Id = sdkSigner.GroupId.Id;
-			}
+            }
 
             if (!String.IsNullOrEmpty(sdkSigner.Language)) 
             {

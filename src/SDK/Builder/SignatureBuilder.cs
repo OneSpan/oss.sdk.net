@@ -1,7 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.IO;
-using OneSpanSign.API;
 
 namespace OneSpanSign.Sdk.Builder
 {

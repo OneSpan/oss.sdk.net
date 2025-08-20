@@ -26,6 +26,8 @@ namespace OneSpanSign.Sdk.Builder
         private IList<AttachmentRequirement> attachments = new List<AttachmentRequirement>();
         private KnowledgeBasedAuthentication knowledgeBasedAuthentication;
         private string localLanguage;
+        private Group group;
+        private List<GroupMember> groupMembers = new List<GroupMember>();
 
         private SignerBuilder(string signerEmail)
         {
@@ -47,6 +49,13 @@ namespace OneSpanSign.Sdk.Builder
             this.placeholderName = placeholder.Name;
             this.signingOrder = placeholder.SigningOrder;
         }
+        
+        private SignerBuilder(string adHocGroupName, string adHocGroupSignerId)
+        {
+            this.id = adHocGroupSignerId;
+            this.firstName = adHocGroupName;
+            this.signerEmail = Guid.NewGuid().ToString().Replace("-", "").ToLower()  + SignerUtil.AD_HOC_GROUP_SIGNER_EMAIL_PREFIX;
+        }
 
         public static SignerBuilder NewSignerPlaceholder(Placeholder placeholder)
         {
@@ -62,6 +71,11 @@ namespace OneSpanSign.Sdk.Builder
         public static SignerBuilder NewSignerFromGroup(GroupId groupId)
         {
             return new SignerBuilder(groupId);
+        }
+        
+        public static SignerBuilder NewAdHocGroupSigner(string groupName, string groupSignerId)
+        {
+            return new SignerBuilder(groupName, groupSignerId);
         }
 
         public SignerBuilder WithCustomId(string id)
@@ -178,6 +192,12 @@ namespace OneSpanSign.Sdk.Builder
             return this;
         }
 
+        public SignerBuilder WithGroupMember(GroupMember groupMember)
+        {
+            this.groupMembers.Add(groupMember);
+            return this;
+        }
+
         public SignerBuilder DeliverSignedDocumentsByEmail()
         {
             deliverSignedDocumentsByEmail = true;
@@ -261,6 +281,21 @@ namespace OneSpanSign.Sdk.Builder
 
             return result;
         }
+        
+        private Signer BuildAdHocGroupSigner()
+        {
+            Group adHocGroup  = new Group();
+            adHocGroup.Members = groupMembers;
+            
+            Signer result = new Signer(id, firstName, signerEmail);
+            result.Group = adHocGroup;
+            result.Message = message;
+            result.SigningOrder = signingOrder;
+            result.Attachments = attachments;
+            result.LocalLanguage = localLanguage;
+            
+            return result;
+        }
 
         private Signer BuildPlaceholderSigner()
         {
@@ -318,7 +353,10 @@ namespace OneSpanSign.Sdk.Builder
             {
                 result = BuildPlaceholderSigner();
             }
-            else
+            else if (isAdHocGroupSigner())
+            {
+                result = BuildAdHocGroupSigner();
+            } else 
             {
                 result = BuildRegularSigner();
             }
@@ -334,6 +372,11 @@ namespace OneSpanSign.Sdk.Builder
         private bool isPlaceholder()
         {
             return groupId == null && signerEmail == null;
+        }
+        
+        private bool isAdHocGroupSigner()
+        {
+            return signerEmail.EndsWith(SignerUtil.AD_HOC_GROUP_SIGNER_EMAIL_PREFIX);
         }
     }
 }
