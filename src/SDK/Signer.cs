@@ -40,6 +40,18 @@ namespace OneSpanSign.Sdk
             authentication = new Authentication(OneSpanSign.Sdk.AuthenticationMethod.EMAIL);
             this.KnowledgeBasedAuthentication = null;
         }
+        
+        public Signer(string id, string adHocGroupName, string email)
+        {
+	        GroupId = null;
+	        FirstName = adHocGroupName;
+	        LastName = null;
+	        Email = email;
+	        authentication = null;
+	        Id = id;
+	        authentication = new Authentication(OneSpanSign.Sdk.AuthenticationMethod.EMAIL);
+	        KnowledgeBasedAuthentication = null;
+        }
 
 		public string Id {
 			get;
@@ -57,13 +69,19 @@ namespace OneSpanSign.Sdk
 			private set;
 		}
 
+		public Group Group
+		{
+			get;
+			set;
+		}
+		
         public KnowledgeBasedAuthentication KnowledgeBasedAuthentication
         {
             get; set;
         }
 
         private string email;
-		public string Email
+        public string Email
         {
             get{ return email; }
             private set
@@ -208,7 +226,12 @@ namespace OneSpanSign.Sdk
 			return GroupId != null;
 		}
 
-        public string LocalLanguage 
+		public bool IsAdHocGroupSigner()
+		{
+			return email.EndsWith(SignerUtil.AD_HOC_GROUP_SIGNER_EMAIL_PREFIX);
+		}
+
+		public string LocalLanguage 
         {
             get;
             set; 
