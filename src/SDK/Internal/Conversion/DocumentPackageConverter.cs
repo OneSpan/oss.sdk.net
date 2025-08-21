@@ -205,9 +205,22 @@ namespace OneSpanSign.Sdk
                 {
                     packageBuilder.WithSigner(SignerBuilder.NewSignerPlaceholder(new Placeholder(role.Id, role.Name, role.Index)));
                 }
-                else if (role.Signers[0].Group != null)
+                else if (role.Signers[0].Group != null && role.Signers[0].SignerType == "GROUP_SIGNER")
                 {
                     packageBuilder.WithSigner(SignerBuilder.NewSignerFromGroup(new GroupId(role.Signers[0].Group.Id)));
+                }
+                else if (role.Signers[0].Group != null && role.Signers[0].SignerType == "AD_HOC_GROUP_SIGNER")
+                {
+                    OneSpanSign.API.Group apiGroup = role.Signers[0].Group;
+                    
+                    Signer adHocGroupSigner = SignerBuilder
+                        .NewAdHocGroupSigner(role.Signers[0].FirstName, role.Signers[0].Id).Build();
+                    foreach (OneSpanSign.API.GroupMember apiGroupMember in apiGroup.Members)
+                    {
+                        adHocGroupSigner.Group.Members.Add(GroupMemberBuilder.NewAdHocGroupMember(apiGroupMember.UserId, GroupMemberType.valueOf(apiGroupMember.MemberType)).Build());
+                    }
+                    
+                    packageBuilder.WithSigner(adHocGroupSigner);
                 }
                 else
                 {

@@ -1,4 +1,5 @@
 using System;
+using System.Runtime.CompilerServices;
 
 namespace OneSpanSign.Sdk
 {
@@ -14,6 +15,12 @@ namespace OneSpanSign.Sdk
         {
             this.email = email;
         }
+        
+        private GroupMemberBuilder( string memberId, GroupMemberType groupMemberType )
+        {
+            this.userId = memberId;
+            this.groupMemberType = groupMemberType;
+        }
 
         public GroupMember Build() {
             GroupMember result = new GroupMember();
@@ -27,6 +34,11 @@ namespace OneSpanSign.Sdk
 
         public static GroupMemberBuilder NewGroupMember( string email ) {
             return new GroupMemberBuilder(email);
+        }
+        
+        public static GroupMemberBuilder NewAdHocGroupMember( string memberId, GroupMemberType groupMemberType)
+        {
+            return new GroupMemberBuilder(memberId, groupMemberType);
         }
 
         public GroupMemberBuilder AsMemberType( GroupMemberType groupMemberType ) {
