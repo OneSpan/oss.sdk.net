@@ -670,7 +670,7 @@ namespace OneSpanSign.Sdk
                 throw new OssException("Could not save the account system settings.", e);
             }
         }
-        
+
         public void DeleteAccountSystemSettingProperties()
         {
             string path = new UrlTemplate(baseUrl).UrlFor(UrlTemplate.ACCOUNT_SYSTEM_SETTING_PROPERTIES_PATH).Build();
