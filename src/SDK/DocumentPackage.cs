@@ -187,5 +187,12 @@ namespace OneSpanSign.Sdk
             get;
             set;
         }
+        
+        private IList<SystemAlert> alerts = new List<SystemAlert> ();
+        public IList<SystemAlert> Alerts 
+        {
+            get { return alerts; }
+            set { alerts = value; }
+        }
     }
 }

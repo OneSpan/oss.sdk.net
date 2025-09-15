@@ -188,6 +188,19 @@ namespace SDK.Tests
             Assert.AreEqual("INPUT", (string)FieldType.INPUT);
             Assert.AreEqual("IMAGE", FieldType.IMAGE.GetName());
         }
+        
+        [Test]
+        public void TestSeverityLevel()
+        {
+            foreach(SeverityLevel severityLevel in SeverityLevel.Values()) 
+            {
+                Assert.IsNotNull(severityLevel.ToString());
+                Assert.IsNotEmpty(severityLevel.ToString());
+            }
+            Assert.AreEqual(0, (int)SeverityLevel.INFO);
+            Assert.AreEqual("WARNING", (string)SeverityLevel.WARNING);
+            Assert.AreEqual("CRITICAL", SeverityLevel.CRITICAL.GetName());
+        }
     }
 }
 

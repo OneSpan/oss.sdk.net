@@ -13,6 +13,8 @@ namespace OneSpanSign.API
 		private IList<Message> _messages = new List<Message>();
 		private IList<Role> _roles = new List<Role>();
         private IList<FieldCondition> _conditions = new List<FieldCondition> ();
+        private IList<SystemAlert> _alerts = new List<SystemAlert> ();
+
 		
         internal Package(){
             Visibility = "ACCOUNT";
@@ -234,5 +236,23 @@ namespace OneSpanSign.API
             get; set;
         }
 
+        [JsonProperty ("alerts")]
+        public IList<SystemAlert> Alerts 
+        {
+            get 
+            {
+                return _alerts;
+            }
+        }
+        public Package AddAlert (SystemAlert value)
+        {
+            if (value == null) 
+            {
+                throw new ArgumentNullException ("Argument cannot be null");
+            }
+
+            _alerts.Add (value);
+            return this;
+        }
 	}
 }
