@@ -548,12 +548,20 @@ namespace OneSpanSign.Sdk
 
         public DocumentPackage GetPackage(PackageId id)
         {
-            OneSpanSign.API.Package package = packageService.GetPackage(id);
-
-            DocumentPackage documentPackage = new DocumentPackageConverter(package).ToSDKPackage();
-            return documentPackage;
+            Package package = packageService.GetPackage(id);
+            return new DocumentPackageConverter(package).ToSDKPackage();
         }
 
+        public DocumentPackage GetPackageWithExtensions(PackageId id, ISet<DocumentPackageRequestExtension> extensions)
+        {
+            if (extensions == null || extensions.Count == 0)
+            {
+                return GetPackage(id);
+            }
+            Package package = packageService.GetPackage(id, extensions);
+            return new DocumentPackageConverter(package).ToSDKPackage();
+        }
+        
         public void UpdatePackage(OneSpanSign.Sdk.PackageId packageId, DocumentPackage documentPackage)
         {
             packageService.UpdatePackage(packageId, new DocumentPackageConverter(documentPackage).ToAPIPackage());

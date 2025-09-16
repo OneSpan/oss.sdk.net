@@ -125,16 +125,42 @@ namespace OneSpanSign.Sdk.Services
         /// </summary>
         /// <returns>The package.</returns>
         /// <param name="packageId">The package id.</param>
-        internal OneSpanSign.API.Package GetPackage(PackageId packageId)
+        internal Package GetPackage(PackageId packageId)
         {
             string path = new UrlTemplate(baseUrl).UrlFor(UrlTemplate.PACKAGE_ID_PATH)
 				.Replace("{packageId}", packageId.Id)
 				.Build();
 
+            return GetApiPackageWithPath(path);
+        }
+        
+        /// <summary>
+        /// Retrieves package with extensions.
+        /// </summary>
+        /// <returns>The package.</returns>
+        /// <param name="packageId">The package id.</param>
+        /// <param name="extensions">A collection of unique extensions.</param>
+        internal Package GetPackage(PackageId packageId, ISet<DocumentPackageRequestExtension> extensions)
+        {
+            if (extensions == null || extensions.Count == 0)
+            {
+                return GetPackage(packageId);
+            }
+            
+            string path = new UrlTemplate(baseUrl).UrlFor(UrlTemplate.PACKAGE_ID_WITH_EXTENSIONS_PATH)
+                .Replace("{packageId}", packageId.Id)
+                .Replace("{extensions}", string.Join(",", extensions.Select(extension => extension)))
+                .Build();
+            
+            return GetApiPackageWithPath(path);
+        }
+        
+        private Package GetApiPackageWithPath(String path)
+        {
             try
             {
                 string response = restClient.Get(path);
-                return JsonConvert.DeserializeObject<OneSpanSign.API.Package>(response, settings);
+                return JsonConvert.DeserializeObject<Package>(response, settings);
             }
             catch (OssServerException e)
             {

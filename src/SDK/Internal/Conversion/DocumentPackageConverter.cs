@@ -2,6 +2,7 @@ using System;
 using OneSpanSign.Sdk.Builder;
 using System.Collections.Generic;
 using System.Globalization;
+using OneSpanSign.API;
 
 namespace OneSpanSign.Sdk
 {
@@ -125,6 +126,10 @@ namespace OneSpanSign.Sdk
                 package.AddCondition(new FieldConditionConverter(condition).ToAPIFieldCondition());
             }
 
+            foreach (SystemAlert alert in sdkPackage.Alerts)
+            {
+                package.AddAlert(new SystemAlertConverter(alert).ToAPISystemAlert());
+            }
             return package;
         }
 
