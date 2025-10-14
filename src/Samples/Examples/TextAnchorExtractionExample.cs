@@ -13,7 +13,7 @@ namespace SDK.Examples
         }
 
         public readonly string DOCUMENT_NAME = "Document With Anchors";
-        public readonly int FIELD_WIDTH = 150;
+        public readonly int FIELD_WIDTH = 151;
         public readonly int FIELD_HEIGHT = 40;
 
         override public void Execute()
