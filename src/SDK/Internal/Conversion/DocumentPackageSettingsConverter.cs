@@ -92,8 +92,14 @@ namespace OneSpanSign.Sdk
             }
 
             IList<OneSpanSign.API.IntegrationFrameworkWorkflow> apiIntegrationFrameworkWorkflows = new List<OneSpanSign.API.IntegrationFrameworkWorkflow>();
-            foreach (IntegrationFrameworkWorkflow sdkIfWorkflow in sdkSettings.IntegrationFrameworkWorkflows)
-                apiIntegrationFrameworkWorkflows.Add (IntegrationFrameworkWorkflowConverter.ToAPI(sdkIfWorkflow));
+            if (sdkSettings.IntegrationFrameworkWorkflows != null)
+            {
+                foreach (IntegrationFrameworkWorkflow sdkIfWorkflow in sdkSettings.IntegrationFrameworkWorkflows)
+                if (sdkIfWorkflow != null)
+                {
+                    apiIntegrationFrameworkWorkflows.Add(IntegrationFrameworkWorkflowConverter.ToAPI(sdkIfWorkflow));
+                }
+            }
 
             PackageSettings result = new PackageSettings();
             result.Ceremony = ceremonySettings;
@@ -214,8 +220,11 @@ namespace OneSpanSign.Sdk
             }
 
             builder.WithCeremonyLayoutSettings(new CeremonyLayoutSettingsConverter(apiSettings.Ceremony.Layout).ToSDKCeremonyLayoutSettings());
-            foreach (OneSpanSign.API.IntegrationFrameworkWorkflow apiIfWorkflow in apiSettings.IntegrationFrameworkWorkflows)
-                builder.WithIfWorkflow(IntegrationFrameworkWorkflowConverter.ToSDK(apiIfWorkflow));
+            if (apiSettings.IntegrationFrameworkWorkflows != null)
+            {
+                foreach (OneSpanSign.API.IntegrationFrameworkWorkflow apiIfWorkflow in apiSettings.IntegrationFrameworkWorkflows)
+                    builder.WithIfWorkflow(IntegrationFrameworkWorkflowConverter.ToSDK(apiIfWorkflow));
+            }
 
             return builder.Build();
         }
