@@ -49,6 +49,7 @@ namespace OneSpanSign.Sdk
         private DataRetentionSettingsService dataRetentionSettingsService;
         private VirtualRoomService virtualRoomService;
         private JsonSerializerSettings jsonSerializerSettings;
+        private SupportingDocumentsService supportingDocumentsService;
         public OAuthTokenConfig oauth2TokenConfig { get; private set; }
 
         /// <summary>
@@ -193,6 +194,7 @@ namespace OneSpanSign.Sdk
             authenticationService = new AuthenticationService(this.webpageUrl);
             dataRetentionSettingsService = new DataRetentionSettingsService(restClient, this.baseUrl);
             virtualRoomService = new VirtualRoomService(restClient, this.baseUrl);
+            supportingDocumentsService = new SupportingDocumentsService(restClient, this.baseUrl);
         }
 
         private void configureJsonSerializationSettings()
@@ -851,6 +853,11 @@ namespace OneSpanSign.Sdk
         public VirtualRoomService VirtualRoomService
         {
             get { return virtualRoomService; }
+        }
+
+        public SupportingDocumentsService SupportingDocumentsService
+        {
+            get { return supportingDocumentsService; }
         }
     }
 }

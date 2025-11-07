@@ -232,6 +232,13 @@ namespace OneSpanSign.Sdk.Internal
         public static readonly string ACCOUNT_SUBACCOUNTS_ID_PATH = "/account/subaccounts/{accountId}";
         public static readonly string ACCOUNT_SUBACCOUNTS_ACCESSIBLEACCOUNTS_PATH = "/account/accessibleaccounts";
         public static readonly string ACCOUNT_SUBACCOUNTS_SUBACCOUNTAPIKEYS_PATH = "/account/subaccountApiKeys";
+        
+        // Supporting Documents
+        public static readonly string SUPPORTING_DOCUMENTS_PATH = "/supporting-documents/v1/transactions/{transactionUid}";
+        public static readonly string SUPPORTING_DOCUMENTS_DOWNLOAD = SUPPORTING_DOCUMENTS_PATH + "/documents/{documentId}/download";
+        public static readonly string SUPPORTING_DOCUMENTS_DOWNLOAD_ALL = SUPPORTING_DOCUMENTS_PATH + "/download";
+        public static readonly string SUPPORTING_DOCUMENTS_DELETE_RENAME = SUPPORTING_DOCUMENTS_PATH + "/documents/{documentId}";
+
 
 
         public UrlTemplate(string baseUrl)
