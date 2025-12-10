@@ -14,7 +14,7 @@
   <ItemGroup>
     <None Update="default.signers.properties">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>    
+    </None>
     <None Update="SampleDocuments\Document-4.odt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
