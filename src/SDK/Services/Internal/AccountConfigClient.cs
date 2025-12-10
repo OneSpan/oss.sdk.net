@@ -193,86 +193,86 @@ namespace OneSpanSign.Sdk
         }
 
 
-        public IList<IdvWorkflowConfiguration> GetIdvWorkflowConfigs()
-        {
-            string path = new UrlTemplate(baseUrl).UrlFor(UrlTemplate.IDV_WORKFLOW_CONFIGS_PATH)
-                .Build();
-            try
-            {
-                string stringResponse = restClient.Get(path);
-                return JsonConvert.DeserializeObject<IList<IdvWorkflowConfiguration>>(stringResponse, jsonSettings);
-            }
-            catch (OssServerException e)
-            {
-                throw new OssServerException("Could not get IdvWorkflow Configs.", e);
-            }
-            catch (Exception e)
-            {
-                throw new OssException("Could not get IdvWorkflow Configs.", e);
-            }
-        }
+        //public IList<IdvWorkflowConfiguration> GetIdvWorkflowConfigs()
+        //{
+        //    string path = new UrlTemplate(baseUrl).UrlFor(UrlTemplate.IDV_WORKFLOW_CONFIGS_PATH)
+        //        .Build();
+        //    try
+        //    {
+        //        string stringResponse = restClient.Get(path);
+        //        return JsonConvert.DeserializeObject<IList<IdvWorkflowConfiguration>>(stringResponse, jsonSettings);
+        //    }
+        //    catch (OssServerException e)
+        //    {
+        //        throw new OssServerException("Could not get IdvWorkflow Configs.", e);
+        //    }
+        //    catch (Exception e)
+        //    {
+        //        throw new OssException("Could not get IdvWorkflow Configs.", e);
+        //    }
+        //}
 
-        public IList<IdvWorkflowConfiguration> CreateIdvWorkflowConfigs(
-            IList<IdvWorkflowConfiguration> idvWorkflowConfigurations)
-        {
-            string path = new UrlTemplate(baseUrl).UrlFor(UrlTemplate.IDV_WORKFLOW_CONFIGS_PATH)
-                .Build();
-            try
-            {
-                string json = JsonConvert.SerializeObject(idvWorkflowConfigurations);
-                string stringResponse = restClient.Post(path, json);
+        //public IList<IdvWorkflowConfiguration> CreateIdvWorkflowConfigs(
+        //    IList<IdvWorkflowConfiguration> idvWorkflowConfigurations)
+        //{
+        //    string path = new UrlTemplate(baseUrl).UrlFor(UrlTemplate.IDV_WORKFLOW_CONFIGS_PATH)
+        //        .Build();
+        //    try
+        //    {
+        //        string json = JsonConvert.SerializeObject(idvWorkflowConfigurations);
+        //        string stringResponse = restClient.Post(path, json);
 
-                return JsonConvert.DeserializeObject<IList<IdvWorkflowConfiguration>>(stringResponse, jsonSettings);
-            }
-            catch (OssServerException e)
-            {
-                throw new OssServerException("Could not create IdvWorkflow Configs.", e);
-            }
-            catch (Exception e)
-            {
-                throw new OssException("Could not create IdvWorkflow Configs.", e);
-            }
-        }
+        //        return JsonConvert.DeserializeObject<IList<IdvWorkflowConfiguration>>(stringResponse, jsonSettings);
+        //    }
+        //    catch (OssServerException e)
+        //    {
+        //        throw new OssServerException("Could not create IdvWorkflow Configs.", e);
+        //    }
+        //    catch (Exception e)
+        //    {
+        //        throw new OssException("Could not create IdvWorkflow Configs.", e);
+        //    }
+        //}
 
-        public IList<IdvWorkflowConfiguration> UpdateIdvWorkflowConfigs(
-            IList<IdvWorkflowConfiguration> idvWorkflowConfigurations)
-        {
-            string path = new UrlTemplate(baseUrl).UrlFor(UrlTemplate.IDV_WORKFLOW_CONFIGS_PATH)
-                .Build();
-            try
-            {
-                string json = JsonConvert.SerializeObject(idvWorkflowConfigurations);
-                string stringResponse = restClient.Put(path, json);
+        //public IList<IdvWorkflowConfiguration> UpdateIdvWorkflowConfigs(
+        //    IList<IdvWorkflowConfiguration> idvWorkflowConfigurations)
+        //{
+        //    string path = new UrlTemplate(baseUrl).UrlFor(UrlTemplate.IDV_WORKFLOW_CONFIGS_PATH)
+        //        .Build();
+        //    try
+        //    {
+        //        string json = JsonConvert.SerializeObject(idvWorkflowConfigurations);
+        //        string stringResponse = restClient.Put(path, json);
 
-                return JsonConvert.DeserializeObject<IList<IdvWorkflowConfiguration>>(stringResponse, jsonSettings);
-            }
-            catch (OssServerException e)
-            {
-                throw new OssServerException("Could not update IdvWorkflow Configs.", e);
-            }
-            catch (Exception e)
-            {
-                throw new OssException("Could not update IdvWorkflow Configs.", e);
-            }
-        }
+        //        return JsonConvert.DeserializeObject<IList<IdvWorkflowConfiguration>>(stringResponse, jsonSettings);
+        //    }
+        //    catch (OssServerException e)
+        //    {
+        //        throw new OssServerException("Could not update IdvWorkflow Configs.", e);
+        //    }
+        //    catch (Exception e)
+        //    {
+        //        throw new OssException("Could not update IdvWorkflow Configs.", e);
+        //    }
+        //}
 
-        public void DeleteIdvWorkflowConfigs()
-        {
-            string path = new UrlTemplate(baseUrl).UrlFor(UrlTemplate.IDV_WORKFLOW_CONFIGS_PATH)
-                .Build();
-            try
-            {
-                restClient.Delete(path);
-            }
-            catch (OssServerException e)
-            {
-                throw new OssServerException("Could not delete IdvWorkflow Configs.", e);
-            }
-            catch (Exception e)
-            {
-                throw new OssException("Could not delete IdvWorkflow Configs.", e);
-            }
-        }
+        //public void DeleteIdvWorkflowConfigs()
+        //{
+        //    string path = new UrlTemplate(baseUrl).UrlFor(UrlTemplate.IDV_WORKFLOW_CONFIGS_PATH)
+        //        .Build();
+        //    try
+        //    {
+        //        restClient.Delete(path);
+        //    }
+        //    catch (OssServerException e)
+        //    {
+        //        throw new OssServerException("Could not delete IdvWorkflow Configs.", e);
+        //    }
+        //    catch (Exception e)
+        //    {
+        //        throw new OssException("Could not delete IdvWorkflow Configs.", e);
+        //    }
+        //}
 
         public AccountSettings GetAccountSettings()
         {

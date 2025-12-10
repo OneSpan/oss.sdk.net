@@ -59,59 +59,7 @@ namespace OneSpanSign.Sdk.Services
             apiClient.DeleteDeclineReasons(language);
         }
         
-        public IList<IdvWorkflowConfig> GetIdvWorkflowConfigs()
-        {
-            IList<IdvWorkflowConfiguration> idvWorkflowConfigurations = apiClient.GetIdvWorkflowConfigs();
-            IList<IdvWorkflowConfig> idvWorkflowConfigs = new List<IdvWorkflowConfig>();
-            foreach (IdvWorkflowConfiguration idvWorkflowConfiguration in idvWorkflowConfigurations) 
-            {
-                idvWorkflowConfigs.Add(new IdvWorkflowConfigConverter(idvWorkflowConfiguration).ToSDKIdvWorkflowConfig());
-            }
-            return idvWorkflowConfigs;
-        }
-
-        public IList<IdvWorkflowConfig> CreateIdvWorkflowConfigs(IList<IdvWorkflowConfig> input)
-        {
-            IList<IdvWorkflowConfiguration> idvWorkflowConfigurations = new List<IdvWorkflowConfiguration>();
-            foreach (IdvWorkflowConfig idvWorkflowConfig in input) 
-            {
-                idvWorkflowConfigurations.Add(new IdvWorkflowConfigConverter(idvWorkflowConfig).ToAPIIdvWorkflowConfiguration());
-            }
-            
-            idvWorkflowConfigurations = apiClient.CreateIdvWorkflowConfigs(idvWorkflowConfigurations);
-            
-            IList<IdvWorkflowConfig> result = new List<IdvWorkflowConfig>();
-            foreach (IdvWorkflowConfiguration idvWorkflowConfiguration in idvWorkflowConfigurations) 
-            {
-                result.Add(new IdvWorkflowConfigConverter(idvWorkflowConfiguration).ToSDKIdvWorkflowConfig());
-            }
-
-            return result;
-        }
-
-        public IList<IdvWorkflowConfig> UpdateIdvWorkflowConfigs(IList<IdvWorkflowConfig> input)
-        {
-            IList<IdvWorkflowConfiguration> idvWorkflowConfigurations = new List<IdvWorkflowConfiguration>();
-            foreach (IdvWorkflowConfig idvWorkflowConfig in input) 
-            {
-                idvWorkflowConfigurations.Add(new IdvWorkflowConfigConverter(idvWorkflowConfig).ToAPIIdvWorkflowConfiguration());
-            }
-            
-            idvWorkflowConfigurations = apiClient.UpdateIdvWorkflowConfigs(idvWorkflowConfigurations);
-            
-            IList<IdvWorkflowConfig> result = new List<IdvWorkflowConfig>();
-            foreach (IdvWorkflowConfiguration idvWorkflowConfiguration in idvWorkflowConfigurations) 
-            {
-                result.Add(new IdvWorkflowConfigConverter(idvWorkflowConfiguration).ToSDKIdvWorkflowConfig());
-            }
-
-            return result;
-        }
-
-        public void DeleteIdvWorkflowConfigs()
-        {
-            apiClient.DeleteIdvWorkflowConfigs();
-        }
+       
         
         public AccountSettings GetAccountSettings()
         {
