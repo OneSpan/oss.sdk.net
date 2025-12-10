@@ -192,7 +192,6 @@ namespace OneSpanSign.Sdk
             }
         }
 
-                
         public AccountSettings GetAccountSettings()
         {
             string path = new UrlTemplate(baseUrl).UrlFor(UrlTemplate.ACCOUNT_SETTINGS_PATH).Build();
