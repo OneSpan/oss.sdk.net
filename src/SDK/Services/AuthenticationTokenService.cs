@@ -61,16 +61,27 @@ namespace OneSpanSign.Sdk
 
         public string CreateSignerAuthenticationToken (PackageId packageId, string signerId)
         {
-            return CreateSignerAuthenticationToken(packageId, signerId, null);
+            return CreateSignerAuthenticationToken(packageId, signerId, null, null);
+        }
+        
+        public string CreateSignerAuthenticationToken (PackageId packageId, string signerId, string delegateeId)
+        {
+            return CreateSignerAuthenticationToken(packageId, signerId, delegateeId, null);
+        }
+        
+        public string CreateSignerAuthenticationToken (PackageId packageId, string signerId, IDictionary<string, string> fields)
+        {
+            return CreateSignerAuthenticationToken(packageId, signerId, null, fields);
         }
 
-        public string CreateSignerAuthenticationToken (PackageId packageId, string signerId, IDictionary<string, string> fields)
+        public string CreateSignerAuthenticationToken (PackageId packageId, string signerId, string delegateeId, IDictionary<string, string> fields)
         {
             try {
                 string path = new UrlTemplate(baseUrl).UrlFor (UrlTemplate.SIGNER_AUTHENTICATION_TOKEN_MULTI_USE_PATH).Build ();
                 SignerAuthenticationToken signerAuthenticationToken = new SignerAuthenticationToken();
                 signerAuthenticationToken.PackageId = packageId.Id;
                 signerAuthenticationToken.SignerId = signerId;
+                signerAuthenticationToken.DelegateeId = delegateeId;
                 signerAuthenticationToken.SessionFields = fields;
 
                 string serializedObject = JsonConvert.SerializeObject(signerAuthenticationToken);
@@ -87,11 +98,17 @@ namespace OneSpanSign.Sdk
 
         public string CreateSignerAuthenticationTokenForSingleUse (PackageId packageId, string signerId, IDictionary<string, string> fields)
         {
+            return CreateSignerAuthenticationTokenForSingleUse(packageId, signerId, null, fields);
+        }
+
+        public string CreateSignerAuthenticationTokenForSingleUse (PackageId packageId, string signerId, string delegateeId, IDictionary<string, string> fields)
+        {
             try {
                 string path = new UrlTemplate(baseUrl).UrlFor (UrlTemplate.SIGNER_AUTHENTICATION_TOKEN_SINGLE_USE_PATH).Build ();
                 SignerAuthenticationToken signerAuthenticationToken = new SignerAuthenticationToken();
                 signerAuthenticationToken.PackageId = packageId.Id;
                 signerAuthenticationToken.SignerId = signerId;
+                signerAuthenticationToken.DelegateeId = delegateeId;
                 signerAuthenticationToken.SessionFields = fields;
 
                 string serializedObject = JsonConvert.SerializeObject(signerAuthenticationToken);

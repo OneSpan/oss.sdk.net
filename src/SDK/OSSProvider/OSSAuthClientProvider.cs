@@ -41,7 +41,10 @@ namespace OneSpanSign.Sdk.OSSProvider
             clients.AddOrUpdate(config.ClientId, newClient, (key, existingClient) =>
             {
                 if (existingClient == null ||
-                    !existingClient.oauth2TokenConfig.ClientSecret.Equals(config.ClientSecret))
+                    !string.Equals(existingClient.oauth2TokenConfig.ClientSecret, config.ClientSecret) ||
+                    !string.Equals(existingClient.oauth2TokenConfig.SenderId, config.SenderId) ||
+                    !string.Equals(existingClient.oauth2TokenConfig.DelegatorId, config.DelegatorId)
+                    )
                 {
                     return newClient;
                 }
@@ -58,7 +61,9 @@ namespace OneSpanSign.Sdk.OSSProvider
             OAuthTokenConfig oAuthTokenConfig = OAuthTokenConfigBuilder.NewOAuthTokenConfig()
                 .WithClientId(config.ClientId)
                 .WithClientSecret(config.ClientSecret)
-                .WithAuthenticationServer(config.AuthenticationServer)  
+                .WithAuthenticationServer(config.AuthenticationServer)
+                .WithSenderId(config.SenderId)
+                .WithDelegatorId(config.DelegatorId)
                 .Build();
             
             return new OssClient(oAuthTokenConfig, config.ApiUrl, config.AllowAllSSLCertificatesFlag, config.ProxyConfig, config.Headers);

@@ -31,6 +31,8 @@ namespace OneSpanSign.Sdk.Internal
         public const string ESL_ACCEPT_TYPE_APPLICATION_FORM_URLENCODED = ACCEPT_TYPE_APPLICATION_FORM_URLENCODED + "; " + ESL_API_VERSION_HEADER;
 
         public const string OAUTH_GRANT_TYPE = "grant_type=client_credentials";
+        public const string OAUTH_SENDER_ID = "sender_id";
+        public const string OAUTH_DELEGATOR_ID = "delegator_id";
         public const int REQUEST_TIMEOUT = 30000; //30 seconds
             
         public static ProxyConfiguration ProxyConfiguration;
