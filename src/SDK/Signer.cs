@@ -6,7 +6,7 @@ namespace OneSpanSign.Sdk
 	public class Signer
 	{
 		private readonly Authentication authentication;
-		private readonly NotificationMethods notificationMethods;
+		private NotificationMethods notificationMethods;
 
         public Signer (string signerEmail, string firstName, string lastName, Authentication authentication, NotificationMethods notificationMethods = null)
 		{
@@ -145,6 +145,18 @@ namespace OneSpanSign.Sdk
 			get
 			{
 				return notificationMethods;
+			}
+
+			set
+			{
+				if (value?.Primary != null && value.Primary.Count != 0)
+				{
+					notificationMethods = value;
+				}
+				else
+				{
+					notificationMethods = null;
+				}
 			}
 		}
 
