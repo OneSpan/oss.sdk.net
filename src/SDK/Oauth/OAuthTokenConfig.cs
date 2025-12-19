@@ -20,5 +20,15 @@ namespace OneSpanSign.Sdk.Oauth
         {
             get; set;
         }
+
+        public string SenderId
+        {
+            get; set;
+        }
+        
+        public string DelegatorId
+        {
+            get; set;
+        }
     }
 }
