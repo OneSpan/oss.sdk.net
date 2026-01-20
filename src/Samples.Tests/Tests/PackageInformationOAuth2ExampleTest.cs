@@ -32,6 +32,10 @@ namespace SDK.Examples
 
             Assert.IsNotNull(example.supportConfiguration.Phone);
             Assert.IsNotEmpty(example.supportConfiguration.Phone);
+            
+            Assert.IsNotNull(example.aPackage);
+            Assert.IsNotNull(example.aPackage.Id);
+            Assert.IsNotNull(example.aPackage.Name);
         }
     }
 }

@@ -6,6 +6,8 @@ namespace SDK.Examples
         public string clientSecret { get; private set; }
         public string oAuthServerUrl { get; private set; }
         public string apiUrl { get; private set; }
+        public string senderId { get; private set; }
+        public string delegatorId { get; private set; }
 
 
         private void SetOAuth2Props()
@@ -14,6 +16,8 @@ namespace SDK.Examples
             clientSecret = props.Get("api.oauth.clientSecret");
             oAuthServerUrl = props.Get("api.oauth.server.url");
             apiUrl = props.Get("api.url");
+            senderId = props.Get("api.oauth.senderId");
+            delegatorId = props.Get("api.oauth.delegatorId");
         }
 
         public OAuth2SDKSample()
