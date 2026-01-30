@@ -14,6 +14,8 @@ namespace OneSpanSign.Sdk
         public static SignatureStyle INITIALS = new SignatureStyle("INITIALS", "INITIALS", 2);
         public static SignatureStyle ACCEPTANCE = new SignatureStyle("FULLNAME", "ACCEPTANCE", 3);
         public static SignatureStyle MOBILE_CAPTURE = new SignatureStyle("MOBILE_CAPTURE", "MOBILE_CAPTURE", 4);
+        public static SignatureStyle CHOOSE_SIGNATURE = new SignatureStyle("CHOOSE_SIGNATURE", "CHOOSE_SIGNATURE", 5);
+        public static SignatureStyle CHOOSE_INITIALS = new SignatureStyle("CHOOSE_INITIALS", "CHOOSE_INITIALS", 6);
         private static Dictionary<string,SignatureStyle> allSignatureStyles = new Dictionary<string,SignatureStyle>();
 
         static SignatureStyle()
@@ -22,6 +24,8 @@ namespace OneSpanSign.Sdk
             allSignatureStyles.Add(FULL_NAME.getApiValue(), SignatureStyle.FULL_NAME);
             allSignatureStyles.Add(INITIALS.getApiValue(), SignatureStyle.INITIALS);
             allSignatureStyles.Add(MOBILE_CAPTURE.getApiValue(), SignatureStyle.MOBILE_CAPTURE);
+            allSignatureStyles.Add(CHOOSE_SIGNATURE.getApiValue(), SignatureStyle.CHOOSE_SIGNATURE);
+            allSignatureStyles.Add(CHOOSE_INITIALS.getApiValue(), SignatureStyle.CHOOSE_INITIALS);
         }
 
         

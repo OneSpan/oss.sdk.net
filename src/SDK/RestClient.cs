@@ -361,9 +361,13 @@ namespace OneSpanSign.Sdk
                             {
                                 if (response == null) throw;
                                 HttpWebResponse httpResponse = (HttpWebResponse) response;
+                                var stream = httpResponse.GetResponseStream();
+                                var reader = new StreamReader(stream);
+                                string responseBody = reader.ReadToEnd();
                                 throw new OssException(
-                                    "Unable to fetch access token for " + oauthTokenConfig + ", response was " + 
-                                    httpResponse,
+                                    "Unable to fetch access token for " + oauthTokenConfig 
+                                                                        + ", status was " + httpResponse.StatusCode 
+                                                                        + ", response was " + responseBody,
                                     null);
                             }
                         }
