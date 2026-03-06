@@ -11,6 +11,7 @@ using System.IO;
 using System.Runtime.CompilerServices;
 using System.Text;
 using OneSpanSign.Sdk.Builder.Internal;
+using OneSpanSign.Sdk.Models;
 using OneSpanSign.Sdk.Oauth;
 
 namespace OneSpanSign.Sdk
@@ -567,6 +568,16 @@ namespace OneSpanSign.Sdk
         public void UpdatePackage(OneSpanSign.Sdk.PackageId packageId, DocumentPackage documentPackage)
         {
             packageService.UpdatePackage(packageId, new DocumentPackageConverter(documentPackage).ToAPIPackage());
+        }
+
+        public PackageUpdateWorkflowResult UpdatePackageAndLocalizeConsent(OneSpanSign.Sdk.PackageId packageId, DocumentPackage documentPackage)
+        {
+            return packageService.UpdatePackageAndLocalizeConsent(packageId, new DocumentPackageConverter(documentPackage).ToAPIPackage());
+        }
+
+        public ConsentLocalizationData LocalizeConsent(string language, PackageId packageId)
+        {
+            return packageService.LocalizeDefaultConsentDocument(new ConsentLocalizationPayload(language), packageId);
         }
 
         public void ChangePackageStatusToDraft(PackageId packageId)

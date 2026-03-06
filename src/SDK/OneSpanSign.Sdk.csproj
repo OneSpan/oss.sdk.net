@@ -16,6 +16,7 @@
     <PackageProjectUrl>https://github.com/OneSpan/oss.sdk.net</PackageProjectUrl>
     <RepositoryUrl>https://github.com/OneSpan/oss.sdk.net</RepositoryUrl>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <LangVersion>8.0</LangVersion>
   </PropertyGroup>
 
   <ItemGroup>
