@@ -3,7 +3,6 @@ using OneSpanSign.Sdk.Internal;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 using System.Collections.Generic;
-using OneSpanSign.API;
 
 namespace OneSpanSign.Sdk
 {
@@ -194,6 +193,64 @@ namespace OneSpanSign.Sdk
             catch (Exception e)
             {
                 throw new OssException ("Could not delete the signing ui options from account." + " Exception: " + e.Message, e);
+            }
+        }
+        
+        public ChooseSignatureSettings GetChooseSignatureSettings()
+        {
+            string path = new UrlTemplate(baseUrl).UrlFor (UrlTemplate.ACCOUNT_CHOOSE_SIGNATURE_SETTINGS_PATH)
+                .Build ();
+
+            try
+            {
+                string response = restClient.Get (path);
+                return JsonConvert.DeserializeObject<ChooseSignatureSettings> (response, settings);
+            }
+            catch (OssServerException e)
+            {
+                throw new OssServerException ("Could not get the Choose Signature Settings from account." + " Exception: " + e.Message, e.ServerError, e);
+            }
+            catch (Exception e )
+            {
+                throw new OssException ("Could not get the Choose Signature Settings from account." + " Exception: " + e.Message, e);
+            }
+        }
+        
+        public void SaveChooseSignatureSettings(ChooseSignatureSettings chooseSignatureSettings)
+        {
+            string path = new UrlTemplate(baseUrl).UrlFor (UrlTemplate.ACCOUNT_CHOOSE_SIGNATURE_SETTINGS_PATH)
+                .Build ();
+            string payload = JsonConvert.SerializeObject(chooseSignatureSettings, new JsonSerializerSettings { ContractResolver = new CamelCasePropertyNamesContractResolver (), Formatting = Formatting.Indented ,NullValueHandling = NullValueHandling.Ignore});
+            try
+            {
+                restClient.Patch(path, payload);
+            }
+            catch (OssServerException e)
+            {
+                throw new OssServerException ("Could not save the Choose Signature Settings for account." + " Exception: " + e.Message, e.ServerError, e);
+            }
+            catch (Exception e)
+            {
+                throw new OssException ("Could not save the Choose Signature Settings for account." + " Exception: " + e.Message, e);
+            }
+        }
+        
+        public void DeleteChooseSignatureSettings ()
+        {
+            string path = new UrlTemplate(baseUrl).UrlFor (UrlTemplate.ACCOUNT_CHOOSE_SIGNATURE_SETTINGS_PATH)
+                .Build ();
+
+            try 
+            {
+                string response = restClient.Delete (path);
+            }
+            catch (OssServerException e)
+            {
+                throw new OssServerException ("Could not delete the Choose Signature Settings from account." + " Exception: " + e.Message, e.ServerError, e);
+            }
+            catch (Exception e)
+            {
+                throw new OssException ("Could not delete the Choose Signature Settings from account." + " Exception: " + e.Message, e);
             }
         }
         
