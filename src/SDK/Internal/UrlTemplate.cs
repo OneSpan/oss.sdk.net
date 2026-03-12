@@ -200,6 +200,9 @@ namespace OneSpanSign.Sdk.Internal
         // Account Signing UI Options Service
         public static readonly string ACCOUNT_SIGNING_UI_OPTIONS_PATH = "/account/admin/signingUiOptions";
         
+        // Account Choose Signature Settings Service
+        public static readonly string ACCOUNT_CHOOSE_SIGNATURE_SETTINGS_PATH = "/account/admin/chooseSignature";
+        
         // Account Settings Service
         public static readonly string ACCOUNT_SETTINGS_PATH = "/account/admin/accountSettings";
         // Account Feature Settings Service
