@@ -19,7 +19,7 @@ namespace SDK.Examples
             HashSet<string> afterCloning = new HashSet<string>(example.SupportingDocumentAfterCloning
                 .Select(doc => doc.DocumentName));
 
-            Assert.AreEqual(beforeCloning, afterCloning);
+            CollectionAssert.AreEquivalent(beforeCloning, afterCloning);
         }
     }
 }
