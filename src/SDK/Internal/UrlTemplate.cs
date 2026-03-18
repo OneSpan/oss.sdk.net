@@ -181,7 +181,6 @@ namespace OneSpanSign.Sdk.Internal
         public static readonly string ACCOUNT_CONFIG_PATH = "/accountConfig";
         public static readonly string HANDOVER_URL_PATH = "/accountConfig/handoverUrl/{language}";
         public static readonly string DECLINE_REASONS_PATH = "/accountConfig/declineReasons/{language}";
-        public static readonly string IDV_WORKFLOW_CONFIGS_PATH = "/accountConfig/idvWorkflowConfigs";
         public static readonly string IF_WORKFLOW_CONFIGS_PATH = "/accountConfig/ifWorkflows";
 
         // QR Code Service
@@ -200,6 +199,9 @@ namespace OneSpanSign.Sdk.Internal
 
         // Account Signing UI Options Service
         public static readonly string ACCOUNT_SIGNING_UI_OPTIONS_PATH = "/account/admin/signingUiOptions";
+        
+        // Account Choose Signature Settings Service
+        public static readonly string ACCOUNT_CHOOSE_SIGNATURE_SETTINGS_PATH = "/account/admin/chooseSignature";
         
         // Account Settings Service
         public static readonly string ACCOUNT_SETTINGS_PATH = "/account/admin/accountSettings";
@@ -233,6 +235,13 @@ namespace OneSpanSign.Sdk.Internal
         public static readonly string ACCOUNT_SUBACCOUNTS_ID_PATH = "/account/subaccounts/{accountId}";
         public static readonly string ACCOUNT_SUBACCOUNTS_ACCESSIBLEACCOUNTS_PATH = "/account/accessibleaccounts";
         public static readonly string ACCOUNT_SUBACCOUNTS_SUBACCOUNTAPIKEYS_PATH = "/account/subaccountApiKeys";
+        
+        // Supporting Documents
+        public static readonly string SUPPORTING_DOCUMENTS_PATH = "/supporting-documents/v1/transactions/{transactionUid}";
+        public static readonly string SUPPORTING_DOCUMENTS_DOWNLOAD = SUPPORTING_DOCUMENTS_PATH + "/documents/{documentId}/download";
+        public static readonly string SUPPORTING_DOCUMENTS_DOWNLOAD_ALL = SUPPORTING_DOCUMENTS_PATH + "/download";
+        public static readonly string SUPPORTING_DOCUMENTS_DELETE_RENAME = SUPPORTING_DOCUMENTS_PATH + "/documents/{documentId}";
+
 
 
         public UrlTemplate(string baseUrl)

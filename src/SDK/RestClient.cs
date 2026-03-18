@@ -316,12 +316,23 @@ namespace OneSpanSign.Sdk
                         HttpMethods.SetProxy(oauthTokenRequest);
 
                         string grantTypeEntity = HttpMethods.OAUTH_GRANT_TYPE;
-                        byte[] grantTypeEntityBytes = Encoding.UTF8.GetBytes(grantTypeEntity);
-                        oauthTokenRequest.ContentLength = grantTypeEntityBytes.Length;
+                        string senderIdEntity = "";
+                        if (oauthTokenConfig.SenderId != null)
+                        {
+                            senderIdEntity = "&" + HttpMethods.OAUTH_SENDER_ID + "=" + oauthTokenConfig.SenderId;
+                        }
+                        string delegatorIdEntity = "";
+                        if (oauthTokenConfig.DelegatorId != null)
+                        {
+                            delegatorIdEntity = "&" + HttpMethods.OAUTH_DELEGATOR_ID + "=" + oauthTokenConfig.DelegatorId;
+                        }
+                        byte[] entitiesBytes = Encoding.UTF8.GetBytes(grantTypeEntity + senderIdEntity + delegatorIdEntity);
+                        
+                        oauthTokenRequest.ContentLength = entitiesBytes.Length;
 
                         using (Stream dataStream = oauthTokenRequest.GetRequestStream())
                         {
-                            dataStream.Write(grantTypeEntityBytes, 0, grantTypeEntityBytes.Length);
+                            dataStream.Write(entitiesBytes, 0, entitiesBytes.Length);
                         }
 
                         try
@@ -350,9 +361,13 @@ namespace OneSpanSign.Sdk
                             {
                                 if (response == null) throw;
                                 HttpWebResponse httpResponse = (HttpWebResponse) response;
+                                var stream = httpResponse.GetResponseStream();
+                                var reader = new StreamReader(stream);
+                                string responseBody = reader.ReadToEnd();
                                 throw new OssException(
-                                    "Unable to fetch access token for " + oauthTokenConfig + ", response was " + 
-                                    httpResponse,
+                                    "Unable to fetch access token for " + oauthTokenConfig 
+                                                                        + ", status was " + httpResponse.StatusCode 
+                                                                        + ", response was " + responseBody,
                                     null);
                             }
                         }

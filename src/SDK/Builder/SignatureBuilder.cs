@@ -132,6 +132,18 @@ namespace OneSpanSign.Sdk.Builder
             return new SignatureBuilder(roleId).WithStyle(SignatureStyle.MOBILE_CAPTURE);
         }
 
+        public static SignatureBuilder signature(SignatureStyle signatureStyle, String signerEmail) {
+            return new SignatureBuilder(signerEmail).WithStyle(signatureStyle);
+        }
+
+        public static SignatureBuilder signature(SignatureStyle signatureStyle, GroupId groupId) {
+            return new SignatureBuilder(groupId).WithStyle(signatureStyle);
+        }
+
+        public static SignatureBuilder signature(SignatureStyle signatureStyle, Placeholder roleId) {
+            return new SignatureBuilder(roleId).WithStyle(signatureStyle);
+        }
+        
         public SignatureBuilder WithId(SignatureId id)
         {
             this.id = id;

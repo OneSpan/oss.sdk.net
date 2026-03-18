@@ -54,6 +54,7 @@ namespace OneSpanSign.Sdk
 			result.EnableRecipientHistory = sdkAccountFeatureSettings.EnableRecipientHistory;
 			result.AllowSignersDownloadEvidenceSummary = sdkAccountFeatureSettings.AllowSignersDownloadEvidenceSummary;
 			result.DocumentWidget = sdkAccountFeatureSettings.DocumentWidget;
+			result.ChooseSignature = sdkAccountFeatureSettings.ChooseSignature;
             return result;
 		}
 
@@ -95,6 +96,7 @@ namespace OneSpanSign.Sdk
 			result.EnableRecipientHistory = apiAccountFeatureSettings.EnableRecipientHistory;
 			result.AllowSignersDownloadEvidenceSummary = apiAccountFeatureSettings.AllowSignersDownloadEvidenceSummary;
 			result.DocumentWidget = apiAccountFeatureSettings.DocumentWidget;
+			result.ChooseSignature = apiAccountFeatureSettings.ChooseSignature;
 
 			return result;
 		}

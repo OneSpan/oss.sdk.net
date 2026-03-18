@@ -13,14 +13,18 @@ namespace OneSpanSign.Sdk.OSSProvider
         public ProxyConfiguration ProxyConfig { get; private set; }
         public bool UseSystemProperties { get; private set; }
         public IDictionary<string, string> Headers { get; private set; }
+        public string SenderId { get; private set; }
+        public string DelegatorId { get; private set; }
         
-        private OSSAuthClientConfig(string clientId, string clientSecret, string authenticationServer, string apiUrl,
+        private OSSAuthClientConfig(string clientId, string clientSecret, string authenticationServer, string apiUrl, string senderId, string delegatorId,
             bool allowAllSSLCertificatesFlag, ProxyConfiguration proxyConfig, bool useSystemProperties, IDictionary<string, string> headers)
         {
             ClientId = clientId;
             ClientSecret = clientSecret;
             AuthenticationServer = authenticationServer;
             ApiUrl = apiUrl;
+            SenderId = senderId;
+            DelegatorId = delegatorId;
             AllowAllSSLCertificatesFlag = allowAllSSLCertificatesFlag;
             ProxyConfig = proxyConfig;
             UseSystemProperties = useSystemProperties;
@@ -29,7 +33,7 @@ namespace OneSpanSign.Sdk.OSSProvider
         
         public override string ToString()
         {
-            return $"OneSpanClient{{ 'authenticationServerUrl':'{AuthenticationServer}', 'clientId': '{ClientId}', 'apiUrl': '{ApiUrl}', 'allowAllSSLCertificatesFlag': '{AllowAllSSLCertificatesFlag}', 'useSystemProperties': '{UseSystemProperties}'}}";
+            return $"OneSpanClient{{ 'authenticationServerUrl':'{AuthenticationServer}', 'clientId': '{ClientId}', 'apiUrl': '{ApiUrl}', 'senderId': '{SenderId}','delegatorId': '{DelegatorId}', 'allowAllSSLCertificatesFlag': '{AllowAllSSLCertificatesFlag}', 'useSystemProperties': '{UseSystemProperties}'}}";
         }
         
         public class Builder
@@ -38,6 +42,8 @@ namespace OneSpanSign.Sdk.OSSProvider
             private string clientSecret;
             private string authenticationServer;
             private string apiUrl;
+            private string senderId;
+            private string delegatorId;
             private bool allowAllSSLCertificatesFlag;
             private ProxyConfiguration proxyConfig;
             private bool useSystemProperties;
@@ -64,6 +70,18 @@ namespace OneSpanSign.Sdk.OSSProvider
             public Builder WithApiUrl(string apiUrl)
             {
                 this.apiUrl = apiUrl;
+                return this;
+            }
+
+            public Builder WithSenderId(string senderId)
+            {
+                this.senderId = senderId;
+                return this;
+            }
+            
+            public Builder WithDelegatorId(string delegatorId)
+            {
+                this.delegatorId = delegatorId;
                 return this;
             }
 
@@ -97,7 +115,7 @@ namespace OneSpanSign.Sdk.OSSProvider
                 Asserts.NotEmptyOrNull(clientSecret, "clientSecret");
                 Asserts.NotEmptyOrNull(authenticationServer, "authenticationServer");
                 Asserts.NotEmptyOrNull(apiUrl, "apiUrl");
-                return new OSSAuthClientConfig(clientId, clientSecret, authenticationServer, apiUrl, allowAllSSLCertificatesFlag, proxyConfig, useSystemProperties, headers);
+                return new OSSAuthClientConfig(clientId, clientSecret, authenticationServer, apiUrl, senderId, delegatorId, allowAllSSLCertificatesFlag, proxyConfig, useSystemProperties, headers);
             }
         }
     }

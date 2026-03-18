@@ -32,10 +32,9 @@ namespace OneSpanSign.Sdk
         private Nullable<bool> uploadSignatureImage;
         private Nullable<bool> overrideRecipientsPreferredLanguage;
         private Nullable<bool> enableRecipientHistory;
-
         private Nullable<bool> allowSignersDownloadEvidenceSummary;
         private Nullable<bool> documentWidget;
- 
+        private Nullable<bool> chooseSignature; 
             
         private AccountFeatureSettingsBuilder()
         {
@@ -406,6 +405,18 @@ namespace OneSpanSign.Sdk
             this.documentWidget = false;
             return this;
         }
+        
+        public AccountFeatureSettingsBuilder WithChooseSignature()
+        {
+            this.chooseSignature = true;
+            return this;
+        }
+
+        public AccountFeatureSettingsBuilder WithoutChooseSignature()
+        {
+            this.chooseSignature = false;
+            return this;
+        }
 
         public AccountFeatureSettings Build()
         {
@@ -440,6 +451,7 @@ namespace OneSpanSign.Sdk
             result.EnableRecipientHistory = enableRecipientHistory;
             result.AllowSignersDownloadEvidenceSummary = allowSignersDownloadEvidenceSummary;
             result.DocumentWidget = documentWidget;
+            result.ChooseSignature = chooseSignature;
             return result;
         }
     }

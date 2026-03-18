@@ -1,3 +1,4 @@
+using System;
 using OneSpanSign.Sdk;
 using OneSpanSign.Sdk.Builder;
 
@@ -11,6 +12,7 @@ namespace SDK.Examples
         }
         
         public SupportConfiguration supportConfiguration;
+        public DocumentPackage aPackage;
 
         public readonly string DOCUMENT_NAME = "First Document";
 
@@ -32,6 +34,7 @@ namespace SDK.Examples
             ossClient.SendPackage(packageId);
 
             supportConfiguration = ossClient.PackageService.GetConfig(packageId);
+            aPackage = ossClient.GetPackage(packageId);
         }
     }
 }
