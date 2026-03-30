@@ -33,9 +33,9 @@ namespace OneSpanSign.Sdk
         private Nullable<bool> uploadSignatureImage;
         private Nullable<bool> overrideRecipientsPreferredLanguage;
         private Nullable<bool> enableRecipientHistory;
-
         private Nullable<bool> allowSignersDownloadEvidenceSummary;
         private Nullable<bool> documentWidget;
+        private Nullable<bool> chooseSignature;
 
         public Nullable<bool> AllowCheckboxConsentApproval
         {
@@ -393,6 +393,18 @@ namespace OneSpanSign.Sdk
             set
             {
                 documentWidget = value;
+            }
+        }
+        
+        public Nullable<bool> ChooseSignature
+        {
+            get
+            {
+                return chooseSignature;
+            }
+            set
+            {
+                chooseSignature = value;
             }
         }
 

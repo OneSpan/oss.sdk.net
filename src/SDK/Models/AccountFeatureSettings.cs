@@ -186,6 +186,10 @@ namespace OneSpanSign.API
 		    get; set;
 	    }
 	    
-	
+	    [JsonProperty("chooseSignature")]
+	    public Nullable<Boolean> ChooseSignature
+	    {
+		    get; set;
+	    }
 	}
 }
