@@ -25,7 +25,5 @@ namespace SDK.Examples
             Assert.AreEqual("esignlive", response.ConsentMetadata.Document.AccountId);
             Assert.AreEqual(example.NEW_LANGUAGE, response.ConsentMetadata.Document.Language);
         }
-        
-        
     }
 }

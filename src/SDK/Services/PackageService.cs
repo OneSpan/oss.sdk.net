@@ -635,7 +635,7 @@ namespace OneSpanSign.Sdk.Services
         {
             try
             {
-                var consentResponse = LocalizeDefaultConsentDocument(new ConsentLocalizationPayload(language), packageId);
+                var consentResponse = LocalizeDefaultConsentDocument(packageId, new ConsentLocalizationPayload(language));
                 var consentStep = new PackageUpdateWorkflowResult.ConsentLocalizationResult(
                     PackageUpdateWorkflowResult.Status.SUCCESS,
                     "Consent document localized successfully.",
@@ -654,16 +654,16 @@ namespace OneSpanSign.Sdk.Services
                 result.ConsentInfo = consentStep;
             }
         }
-        
+
         /// <summary>
         /// Localizes the consent document for a package.
         /// </summary>
-        /// <param name="localizationPayload">The localization details (language must not be null).</param>
         /// <param name="packageId">The package identifier (must not be null).</param>
+        /// <param name="localizationPayload">The localization details (language must not be null).</param>
         /// <returns>ConsentLocalizationData</returns>
         /// <exception cref="EslServerException">If the server returns an error.</exception>
         /// <exception cref="EslException">For other exceptions.</exception>
-        internal ConsentLocalizationData LocalizeDefaultConsentDocument(ConsentLocalizationPayload localizationPayload, PackageId packageId)
+        internal ConsentLocalizationData LocalizeDefaultConsentDocument(PackageId packageId, ConsentLocalizationPayload localizationPayload)
         {
             if (localizationPayload == null) throw new ArgumentNullException(nameof(localizationPayload));
             if (packageId == null) throw new ArgumentNullException(nameof(packageId));

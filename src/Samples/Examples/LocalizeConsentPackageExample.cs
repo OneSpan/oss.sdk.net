@@ -29,7 +29,7 @@ namespace SDK.Examples
                                           .Build();
 
             packageId = ossClient.CreatePackage(packageToCreate);
-            result = ossClient.LocalizeConsent(NEW_LANGUAGE, packageId);
+            result = ossClient.LocalizeConsent(packageId, NEW_LANGUAGE);
         }
     }
 }

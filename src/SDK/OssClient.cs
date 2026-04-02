@@ -575,9 +575,9 @@ namespace OneSpanSign.Sdk
             return packageService.UpdatePackageAndLocalizeConsent(packageId, new DocumentPackageConverter(documentPackage).ToAPIPackage());
         }
 
-        public ConsentLocalizationData LocalizeConsent(string language, PackageId packageId)
+        public ConsentLocalizationData LocalizeConsent(PackageId packageId, string language)
         {
-            return packageService.LocalizeDefaultConsentDocument(new ConsentLocalizationPayload(language), packageId);
+            return packageService.LocalizeDefaultConsentDocument(packageId, new ConsentLocalizationPayload(language));
         }
 
         public void ChangePackageStatusToDraft(PackageId packageId)
