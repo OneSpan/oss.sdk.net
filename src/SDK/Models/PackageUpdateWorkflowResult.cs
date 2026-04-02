@@ -48,8 +48,6 @@ namespace OneSpanSign.Sdk.Models
 
         public string? PackageUid { get; set; }
 
-        public Result? PackageInfo { get; set; }
-
         public ConsentLocalizationResult? ConsentInfo { get; set; }
     }
 }
