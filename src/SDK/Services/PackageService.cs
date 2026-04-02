@@ -24,6 +24,8 @@ namespace OneSpanSign.Sdk.Services
     /// </summary>
     public class PackageService
     {
+        private static ILogger log = LoggerFactory.get(typeof(PackageService));
+        
         private JsonSerializerSettings settings;
         private RestClient restClient;
         private ReportService reportService;
@@ -585,64 +587,42 @@ namespace OneSpanSign.Sdk.Services
             try
             {
                 restClient.Put(path, JsonConvert.SerializeObject(package, settings));
-                result.PackageInfo = new PackageUpdateWorkflowResult.Result(
-                    PackageUpdateWorkflowResult.Status.SUCCESS,
-                    "Package updated successfully.");
-                
-                // Retrieve updated package to compare language later
-                Package updatedPackage = TryGetPackage(packageId);
-
-                if (updatedPackage == null)
-                {
-                    result.ConsentInfo = new PackageUpdateWorkflowResult.ConsentLocalizationResult(
-                        PackageUpdateWorkflowResult.Status.SKIPPED,
-                        "Consent localization could not be determined.",
-                        null);
-
-                    return result;
-                }
-
-                if (existingPackage != null &&
-                    string.Equals(updatedPackage.Language, existingPackage.Language, StringComparison.OrdinalIgnoreCase))
-                {
-                    result.ConsentInfo = new PackageUpdateWorkflowResult.ConsentLocalizationResult(
-                        PackageUpdateWorkflowResult.Status.SKIPPED,
-                        "Consent localization not required because language did not change.",
-                        null);
-
-                    return result;
-                }
-
-                // Localize consent if language changed or was newly set
-                LocalizeConsent(packageId, updatedPackage.Language, result);
-                return result;
             }
-            catch (OssServerException ex) // map this to your actual HTTP exception type
+            catch (OssServerException e)
             {
-                result.PackageInfo = new PackageUpdateWorkflowResult.Result(
-                    PackageUpdateWorkflowResult.Status.FAILURE,
-                    "Could not update the package: " + ex.Message);
-
+                throw new OssServerException("Unable to update package settings." + " Exception: " + e.Message, e.ServerError, e);
+            }
+            catch (Exception e)
+            {
+                throw new OssException("Unable to update package settings." + " Exception: " + e.Message, e);
+            }
+            
+            // Retrieve updated package to compare language later
+            Package updatedPackage = TryGetPackage(packageId);
+            if (updatedPackage == null)
+            {
                 result.ConsentInfo = new PackageUpdateWorkflowResult.ConsentLocalizationResult(
                     PackageUpdateWorkflowResult.Status.SKIPPED,
-                    "Consent localization not attempted because package update failed.",
-                    null);
-
-                throw new OssServerException("Could not update the package.", ex);
-            }
-            catch (Exception ex)
-            {
-                result.PackageInfo = new PackageUpdateWorkflowResult.Result(
-                    PackageUpdateWorkflowResult.Status.FAILURE,
-                    "Could not update the package: " + ex.Message);
-
-                result.ConsentInfo = new PackageUpdateWorkflowResult.ConsentLocalizationResult(
-                    PackageUpdateWorkflowResult.Status.SKIPPED,
-                    "Consent localization not attempted because package update failed.",
+                    "Consent localization could not be determined.",
                     null);
 
                 return result;
             }
+
+            if (existingPackage != null &&
+                string.Equals(updatedPackage.Language, existingPackage.Language, StringComparison.OrdinalIgnoreCase))
+            {
+                result.ConsentInfo = new PackageUpdateWorkflowResult.ConsentLocalizationResult(
+                    PackageUpdateWorkflowResult.Status.SKIPPED,
+                    "Consent localization not required because language did not change.",
+                    null);
+
+                return result;
+            }
+
+            // Localize consent if language changed or was newly set
+            LocalizeConsent(packageId, updatedPackage.Language, result);
+            return result;
         }
                 
         /// <summary>
@@ -1916,8 +1896,9 @@ namespace OneSpanSign.Sdk.Services
 
                 return GetApiPackageWithPath(path);
             }
-            catch
+            catch (Exception e)
             {
+                log.Warn("Failed to get package!", e);
                 return null;
             }
         }
