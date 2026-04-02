@@ -15,6 +15,6 @@ namespace OneSpanSign.API.Models
         }
 
         [JsonProperty("language")]
-        public string? Language { get; set; }
+        public string Language { get; set; }
     }
 }

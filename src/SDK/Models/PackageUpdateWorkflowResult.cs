@@ -27,7 +27,7 @@ namespace OneSpanSign.Sdk.Models
 
             public Status Status { get; set; }
 
-            public string? Message { get; set; }
+            public string Message { get; set; }
         }
 
         [Serializable]
@@ -37,17 +37,17 @@ namespace OneSpanSign.Sdk.Models
             {
             }
 
-            public ConsentLocalizationResult(Status status, string message, ConsentLocalizationData? data)
+            public ConsentLocalizationResult(Status status, string message, ConsentLocalizationData data)
                 : base(status, message)
             {
                 Data = data;
             }
 
-            public ConsentLocalizationData? Data { get; set; }
+            public ConsentLocalizationData Data { get; set; }
         }
 
-        public string? PackageUid { get; set; }
+        public string PackageUid { get; set; }
 
-        public ConsentLocalizationResult? ConsentInfo { get; set; }
+        public ConsentLocalizationResult ConsentInfo { get; set; }
     }
 }
