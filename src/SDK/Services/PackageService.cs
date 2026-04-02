@@ -1225,7 +1225,7 @@ namespace OneSpanSign.Sdk.Services
             string path = new UrlTemplate(baseUrl).UrlFor (UrlTemplate.PACKAGE_FIELDS_LIST_PATH)
                 .Replace ("{status}", new PackageStatusConverter (status).ToAPIPackageStatus ())
                 .Replace ("{from}", request.From.ToString ())
-                .Replace ("{to}", request.ToString ())
+                .Replace ("{to}", request.To.ToString ())
                 .Replace ("{fields}", string.Join(",", fields))
                 .Build ();
 
