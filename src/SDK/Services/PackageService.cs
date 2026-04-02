@@ -1882,7 +1882,7 @@ namespace OneSpanSign.Sdk.Services
         /// </summary>
         /// <param name="packageId">The package ID.</param>
         /// <returns>The Package if successful; otherwise, null.</returns>
-        private Package? TryGetPackage(PackageId packageId)
+        private Package TryGetPackage(PackageId packageId)
         {
             if (packageId == null || string.IsNullOrWhiteSpace(packageId.Id))
                 return null;
