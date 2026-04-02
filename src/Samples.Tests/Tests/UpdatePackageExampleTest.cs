@@ -9,7 +9,6 @@ namespace SDK.Examples
     {
         [Test]
         public void verify() {
-            // Asserts that are commented out are so because updating them is not currently supported by the oss server.
         
             UpdatePackageExample example = new UpdatePackageExample();
             example.Run();
