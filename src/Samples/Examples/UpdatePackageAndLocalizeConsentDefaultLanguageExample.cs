@@ -16,7 +16,6 @@ namespace SDK.Examples
         public readonly string UPDATED_PACKAGE_NAME = "New Package Name";
         public readonly CultureInfo OLD_LANGUAGE = CultureInfo.GetCultureInfo("en");
         public readonly CultureInfo NEW_LANGUAGE = CultureInfo.GetCultureInfo("tst");
-        
 
         public DocumentPackage packageToCreate, packageToUpdate, createdPackage;
         public PackageUpdateWorkflowResult updateWorkflowResult;
