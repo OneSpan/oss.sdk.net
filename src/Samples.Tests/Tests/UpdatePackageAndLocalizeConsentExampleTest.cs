@@ -26,13 +26,13 @@ namespace SDK.Examples
             Assert.NotNull(response);
             Assert.NotNull(response.ConsentInfo);
             Assert.AreEqual(createdPackage.Id.Id, response.PackageUid);
-            Assert.AreEqual("default-consent", response.ConsentInfo.Data.ConsentId);
-            Assert.AreEqual(createdPackage.Id.Id, response.ConsentInfo.Data.ConsentMetadata.PackageInfo.Uid);
-            Assert.AreEqual("fr", response.ConsentInfo.Data.ConsentMetadata.PackageInfo.Language);
-            Assert.AreEqual("esignlive", response.ConsentInfo.Data.ConsentMetadata.Properties.AccountId);
-            Assert.AreEqual("fr", response.ConsentInfo.Data.ConsentMetadata.Properties.Language);
-            Assert.AreEqual("esignlive", response.ConsentInfo.Data.ConsentMetadata.Document.AccountId);
-            Assert.AreEqual("fr", response.ConsentInfo.Data.ConsentMetadata.Document.Language);
+            Assert.AreEqual("default-consent", response.ConsentInfo.ConsentData.ConsentId);
+            Assert.AreEqual(createdPackage.Id.Id, response.ConsentInfo.ConsentData.ConsentMetadata.PackageInfo.Uid);
+            Assert.AreEqual("fr", response.ConsentInfo.ConsentData.ConsentMetadata.PackageInfo.Language);
+            Assert.AreEqual("esignlive", response.ConsentInfo.ConsentData.ConsentMetadata.Properties.AccountId);
+            Assert.AreEqual("fr", response.ConsentInfo.ConsentData.ConsentMetadata.Properties.Language);
+            Assert.AreEqual("esignlive", response.ConsentInfo.ConsentData.ConsentMetadata.Document.AccountId);
+            Assert.AreEqual("fr", response.ConsentInfo.ConsentData.ConsentMetadata.Document.Language);
 
         }
     }

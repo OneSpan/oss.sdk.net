@@ -28,7 +28,7 @@ namespace SDK.Examples
             Assert.NotNull(response.ConsentInfo);
             Assert.AreEqual(PackageUpdateWorkflowResult.Status.SKIPPED, response.ConsentInfo.Status);
             Assert.AreEqual("Consent localization not required because language did not change.", response.ConsentInfo.Message);
-            Assert.Null(response.ConsentInfo.Data);
+            Assert.Null(response.ConsentInfo.ConsentData);
 
         }
     }
