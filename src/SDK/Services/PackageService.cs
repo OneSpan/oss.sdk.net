@@ -558,12 +558,17 @@ namespace OneSpanSign.Sdk.Services
         
         /// <summary>
         /// Updates the package's fields and automatically localizes the default consent document
-        /// if the language has changed.
+        /// if the language has changed. The method returns a workflow result describing both the
+        /// package update and the outcome of consent localization:
+        ///
+        /// - If the package is updated and the language has changed, the consent document is localized and the result contains the localization outcome.
+        /// - If the language did not change, the result indicates that consent localization was skipped.
+        /// - If the update or localization fails, the result contains error information.
         /// </summary>
-        /// <param name="packageId">The ID of the package to update.</param>
-        /// <param name="sdkPackage">The package containing updated fields and language.</param>
+        /// <param name="packageId">The ID of the package to update. Must not be null.</param>
+        /// <param name="package">The package containing updated fields and language.</param>
         /// <returns>
-        /// Workflow result describing package update and consent localization outcomes.
+        /// Workflow result describing package update and consent localization outcomes, including status and messages for each step.
         /// </returns>
         /// <exception cref="EslException">
         /// Thrown when the package update operation fails with a server‑side error.
@@ -626,11 +631,15 @@ namespace OneSpanSign.Sdk.Services
         }
                 
         /// <summary>
-        /// Attempts to localize the consent document for a package and updates the workflow result.
+        /// Attempts to localize the consent document for a package and updates the provided workflow result.
+        /// <para>
+        /// On success, updates the result with a ConsentLocalizationResult containing the localized consent data.
+        /// On failure, updates the result with a ConsentLocalizationResult indicating failure and an error message.
+        /// </para>
         /// </summary>
-        /// <param name="packageId">The package identifier.</param>
-        /// <param name="language">The language for localization.</param>
-        /// <param name="result">The workflow result to update.</param>
+        /// <param name="packageId">The package identifier. Must not be null.</param>
+        /// <param name="language">The language code for localization. Must not be null or empty.</param>
+        /// <param name="result">The workflow result object to update with the localization outcome.</param>
         private void LocalizeConsent(PackageId packageId, string language, PackageUpdateWorkflowResult result)
         {
             try

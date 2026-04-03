@@ -17,7 +17,6 @@ namespace SDK.Examples
         public readonly CultureInfo OLD_LANGUAGE = CultureInfo.GetCultureInfo("en");
         public readonly CultureInfo NEW_LANGUAGE = CultureInfo.GetCultureInfo("fr");
         
-
         public DocumentPackage packageToCreate, packageToUpdate, createdPackage;
         public PackageUpdateWorkflowResult updateWorkflowResult;
 
