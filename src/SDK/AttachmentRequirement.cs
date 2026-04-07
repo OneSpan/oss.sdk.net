@@ -15,6 +15,7 @@ namespace OneSpanSign.Sdk
 		private bool required;
 		private OneSpanSign.Sdk.RequirementStatus status;
         private IList<AttachmentFile> files = new List<AttachmentFile> ();
+		private string attachmentType;
 
         public AttachmentRequirement(string name)
         {
@@ -105,17 +106,29 @@ namespace OneSpanSign.Sdk
 			}
 		}
 
-        public IList<AttachmentFile> Files 
+        public IList<AttachmentFile> Files
         {
-            get 
+            get
             {
                 return files;
             }
-            set 
+            set
             {
                 files = value;
             }
         }
+
+		public string AttachmentType
+		{
+			get
+			{
+				return attachmentType;
+			}
+			set
+			{
+				attachmentType = value;
+			}
+		}
     }
 }
 

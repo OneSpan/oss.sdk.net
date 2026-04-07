@@ -61,6 +61,12 @@ namespace OneSpanSign.API
             get; set;
         }
 
+        [JsonProperty ("attachmentType")]
+        public string AttachmentType
+        {
+            get; set;
+        }
+
         [JsonProperty ("files")]
         public IList<AttachmentFile> Files 
         {
