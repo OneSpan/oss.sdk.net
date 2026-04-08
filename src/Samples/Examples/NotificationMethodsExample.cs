@@ -29,6 +29,13 @@ namespace SDK.Examples
                         .WithPrimaryMethods(NotificationMethod.EMAIL, NotificationMethod.SMS)
                         .WithPhoneNumber("+12042345678")
                     ))
+                .WithSigner(SignerBuilder.NewSignerWithEmail(email4)
+                    .WithFirstName("Mary")
+                    .WithLastName("Smith")
+                    .WithNotificationMethods(NotificationMethodsBuilder.NewNotificationMethods()
+                        .WithPrimaryMethods(NotificationMethod.SMS)
+                        .WithPhoneNumber("+12042345690")
+                    ))
                 .Build();
 
             packageId = ossClient.CreatePackage(package); 
