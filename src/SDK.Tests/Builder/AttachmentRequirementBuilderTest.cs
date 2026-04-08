@@ -24,6 +24,28 @@ namespace SDK.Tests
 		}
 
 		[Test]
+		public void BuildWithAttachmentTypeString()
+		{
+			string attachmentType = "DRIVERS_LICENSE";
+
+			AttachmentRequirement attachmentRequirement = AttachmentRequirementBuilder.NewAttachmentRequirementWithName("Driver's license")
+				.WithAttachmentType(attachmentType)
+				.Build();
+
+			Assert.AreEqual(attachmentType, attachmentRequirement.AttachmentType);
+		}
+
+		[Test]
+		public void BuildWithAttachmentTypeEnum()
+		{
+			AttachmentRequirement attachmentRequirement = AttachmentRequirementBuilder.NewAttachmentRequirementWithName("Passport")
+				.WithAttachmentType(AttachmentType.PASSPORT)
+				.Build();
+
+			Assert.AreEqual(AttachmentType.PASSPORT.ToString(), attachmentRequirement.AttachmentType);
+		}
+
+		[Test]
 		public void AttachmentNameCannotBeNull()
 		{
             Assert.Throws<OssException>(()=> AttachmentRequirementBuilder.NewAttachmentRequirementWithName(null).Build());

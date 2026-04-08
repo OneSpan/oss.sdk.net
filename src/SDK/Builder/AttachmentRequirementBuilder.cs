@@ -14,6 +14,7 @@ namespace OneSpanSign.Sdk
 		private string name;
 		private bool isRequired;
         private IList<OneSpanSign.Sdk.AttachmentFile> files = new List<OneSpanSign.Sdk.AttachmentFile>();
+		private string attachmentType;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="OneSpanSign.Sdk.AttachmentRequirementBuilder"/> class.
@@ -56,6 +57,18 @@ namespace OneSpanSign.Sdk
             return this;
         }
 
+		public AttachmentRequirementBuilder WithAttachmentType(string attachmentType)
+		{
+			this.attachmentType = attachmentType;
+			return this;
+		}
+
+		public AttachmentRequirementBuilder WithAttachmentType(AttachmentType attachmentType)
+		{
+			this.attachmentType = attachmentType.ToString();
+			return this;
+		}
+
         public AttachmentRequirement Build()
 		{
 			Asserts.NotEmptyOrNull(name, "name");
@@ -64,6 +77,7 @@ namespace OneSpanSign.Sdk
 			attachmentRequirement.Required = isRequired;
 			attachmentRequirement.Status = OneSpanSign.Sdk.RequirementStatus.INCOMPLETE;
             attachmentRequirement.Files = files;
+			attachmentRequirement.AttachmentType = attachmentType;
 
             return attachmentRequirement;
 		}
