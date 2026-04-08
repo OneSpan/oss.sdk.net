@@ -223,6 +223,27 @@ namespace OneSpanSign.Sdk
             }
         }
 
+        public IList<AttachmentVerificationResult> GetAttachmentVerificationResults(string packageId)
+        {
+            string path = new UrlTemplate(baseUrl).UrlFor(UrlTemplate.ATTACHMENT_VERIFICATION_RESULTS_PATH)
+                .Replace("{packageId}", packageId)
+                .Build();
+
+            try
+            {
+                string response = restClient.Get(path);
+                return JsonConvert.DeserializeObject<IList<AttachmentVerificationResult>>(response, jsonSettings);
+            }
+            catch (OssServerException e)
+            {
+                throw new OssServerException("Could not retrieve attachment verification results." + " Exception: " + e.Message, e.ServerError, e);
+            }
+            catch (Exception e)
+            {
+                throw new OssException("Could not retrieve attachment verification results." + " Exception: " + e.Message, e);
+            }
+        }
+
         public void DeletaAttachmentFile(PackageId packageId, string attachmentId, Int32 fileId, string signerSessionId)
         {
             string path = new UrlTemplate(baseUrl).UrlFor (UrlTemplate.ATTACHMENT_FILE_PATH)
