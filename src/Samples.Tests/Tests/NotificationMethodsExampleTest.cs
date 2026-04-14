@@ -22,6 +22,9 @@ namespace SDK.Examples
             Assert.IsTrue(documentPackage.GetSigner(example.email3).NotificationMethods.Primary.Contains(NotificationMethod.SMS));
           
             Assert.AreEqual(documentPackage.GetSigner(example.email3).NotificationMethods.Phone, "+12042345678");
+
+            Assert.IsTrue(documentPackage.GetSigner(example.email4).NotificationMethods.Primary.Contains(NotificationMethod.SMS));
+            Assert.AreEqual(documentPackage.GetSigner(example.email4).NotificationMethods.Phone, "+12042345690");
         }
     }
 }
