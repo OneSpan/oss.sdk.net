@@ -577,17 +577,13 @@ namespace OneSpanSign.Sdk.Services
             PackageId packageId, Package package)
         {
             if (packageId == null) throw new ArgumentNullException(nameof(packageId));
-            
+
+            var result = new PackageUpdateWorkflowResult { PackageUid = packageId.Id };
+
             string path = new UrlTemplate(baseUrl).UrlFor(UrlTemplate.PACKAGE_ID_PATH)
                 .Replace("{packageId}", packageId.Id)
                 .Build();
 
-            var result = new PackageUpdateWorkflowResult
-            {
-                PackageUid = packageId.Id
-            };
-
-            // Retrieve existing package to compare language later
             Package existingPackage = TryGetPackage(packageId);
             try
             {
@@ -601,32 +597,17 @@ namespace OneSpanSign.Sdk.Services
             {
                 throw new OssException("Unable to update package settings." + " Exception: " + e.Message, e);
             }
-            
-            // Retrieve updated package to compare language later
+
             Package updatedPackage = TryGetPackage(packageId);
-            if (updatedPackage == null)
+            string skipReason = GetLocalizeConsentSkipReason(updatedPackage, existingPackage);
+            if (skipReason == null)
             {
-                result.ConsentInfo = new PackageUpdateWorkflowResult.ConsentLocalizationResult(
-                    PackageUpdateWorkflowResult.Status.SKIPPED,
-                    "Consent localization could not be determined.",
-                    null);
-
-                return result;
+                LocalizeConsent(packageId, updatedPackage.Language, result);
             }
-
-            if (existingPackage != null &&
-                string.Equals(updatedPackage.Language, existingPackage.Language, StringComparison.OrdinalIgnoreCase))
+            else
             {
-                result.ConsentInfo = new PackageUpdateWorkflowResult.ConsentLocalizationResult(
-                    PackageUpdateWorkflowResult.Status.SKIPPED,
-                    "Consent localization not required because language did not change.",
-                    null);
-
-                return result;
+                SetConsentResult(result, PackageUpdateWorkflowResult.Status.SKIPPED, skipReason, null);
             }
-
-            // Localize consent if language changed or was newly set
-            LocalizeConsent(packageId, updatedPackage.Language, result);
             return result;
         }
                 
@@ -645,22 +626,17 @@ namespace OneSpanSign.Sdk.Services
             try
             {
                 var consentResponse = LocalizeDefaultConsentDocument(packageId, new ConsentLocalizationPayload(language));
-                var consentStep = new PackageUpdateWorkflowResult.ConsentLocalizationResult(
-                    PackageUpdateWorkflowResult.Status.SUCCESS,
-                    "Consent document localized successfully.",
-                    consentResponse
-                );
-                result.ConsentInfo = consentStep;
+                SetConsentResult(result, PackageUpdateWorkflowResult.Status.SUCCESS, "Consent document localized successfully.", consentResponse);
+            }
+            catch (OssServerException e)
+            {
+                log.Warn("Failed to localize default consent: {0}", e.Message);
+                SetFailureConsentResult(result, ConsentLocalizationMessages.FAILED_TO_LOCALIZE_DEFAULT_CONSENT_PREFIX + (e.ServerError?.Message ?? e.Message));
             }
             catch (Exception e)
             {
-                // Optionally log the error here, e.g. _logger?.LogWarning(e, "Failed to localize default consent.");
-                var consentStep = new PackageUpdateWorkflowResult.ConsentLocalizationResult(
-                    PackageUpdateWorkflowResult.Status.FAILURE,
-                    "Failed to localize default consent: " + e.Message,
-                    null
-                );
-                result.ConsentInfo = consentStep;
+                log.Warn("Failed to localize default consent: {0}", e.Message);
+                SetFailureConsentResult(result, ConsentLocalizationMessages.FAILED_TO_LOCALIZE_DEFAULT_CONSENT_PREFIX + e.Message);
             }
         }
 
@@ -1883,6 +1859,39 @@ namespace OneSpanSign.Sdk.Services
             {
                 throw new OssException ("Could not get referenced conditions." + " Exception: " + e.Message, e);
             }
+        }
+
+        private string GetLocalizeConsentSkipReason(Package updatedPackage, Package originalPackage)
+        {
+            if (updatedPackage == null) {
+                return ConsentLocalizationMessages.UPDATED_PACKAGE_NOT_AVAILABLE;
+            }
+            if (originalPackage != null && !HasLanguageChanged(originalPackage, updatedPackage)) {
+                return ConsentLocalizationMessages.LANGUAGE_NOT_CHANGED;
+            }
+            if (DocumentAcceptanceUtil.HasAcceptedDefaultConsent(updatedPackage)) {
+                return ConsentLocalizationMessages.DEFAULT_DOCUMENT_CONSENT_ACCEPTED;
+            }
+            return null;
+        }
+
+        private bool HasLanguageChanged(Package existingPackage, Package updatedPackage)
+        {
+            string currentLanguage = updatedPackage.Language;
+            if (currentLanguage == null) {
+                return false;
+            }
+            return !currentLanguage.Equals(existingPackage.Language, StringComparison.OrdinalIgnoreCase);
+        }
+
+        private void SetConsentResult(PackageUpdateWorkflowResult result, PackageUpdateWorkflowResult.Status status, string message, ConsentLocalizationData data)
+        {
+            result.ConsentInfo = new PackageUpdateWorkflowResult.ConsentLocalizationResult(status, message, data);
+        }
+
+        private void SetFailureConsentResult(PackageUpdateWorkflowResult result, string message)
+        {
+            SetConsentResult(result, PackageUpdateWorkflowResult.Status.FAILURE, message, null);
         }
 
         /// <summary>
