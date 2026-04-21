@@ -16,6 +16,7 @@ namespace OneSpanSign.Sdk
 		private OneSpanSign.Sdk.RequirementStatus status;
         private IList<AttachmentFile> files = new List<AttachmentFile> ();
 		private string attachmentType;
+		private bool extractionEnabled;
 
         public AttachmentRequirement(string name)
         {
@@ -127,6 +128,18 @@ namespace OneSpanSign.Sdk
 			set
 			{
 				attachmentType = value;
+			}
+		}
+
+		public bool ExtractionEnabled
+		{
+			get
+			{
+				return extractionEnabled;
+			}
+			set
+			{
+				extractionEnabled = value;
 			}
 		}
     }

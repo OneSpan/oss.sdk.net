@@ -15,6 +15,7 @@ namespace OneSpanSign.Sdk
 		private bool isRequired;
         private IList<OneSpanSign.Sdk.AttachmentFile> files = new List<OneSpanSign.Sdk.AttachmentFile>();
 		private string attachmentType;
+		private bool extractionEnabled;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="OneSpanSign.Sdk.AttachmentRequirementBuilder"/> class.
@@ -69,6 +70,12 @@ namespace OneSpanSign.Sdk
 			return this;
 		}
 
+		public AttachmentRequirementBuilder WithExtractionEnabled(bool extractionEnabled)
+		{
+			this.extractionEnabled = extractionEnabled;
+			return this;
+		}
+
         public AttachmentRequirement Build()
 		{
 			Asserts.NotEmptyOrNull(name, "name");
@@ -78,6 +85,7 @@ namespace OneSpanSign.Sdk
 			attachmentRequirement.Status = OneSpanSign.Sdk.RequirementStatus.INCOMPLETE;
             attachmentRequirement.Files = files;
 			attachmentRequirement.AttachmentType = attachmentType;
+			attachmentRequirement.ExtractionEnabled = extractionEnabled;
 
             return attachmentRequirement;
 		}
