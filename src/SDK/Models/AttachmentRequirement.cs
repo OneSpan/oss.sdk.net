@@ -67,6 +67,12 @@ namespace OneSpanSign.API
             get; set;
         }
 
+        [JsonProperty ("extractionEnabled")]
+        public Nullable<Boolean> ExtractionEnabled
+        {
+            get; set;
+        }
+
         [JsonProperty ("files")]
         public IList<AttachmentFile> Files 
         {

@@ -46,6 +46,16 @@ namespace SDK.Tests
 		}
 
 		[Test]
+		public void BuildWithExtractionEnabled()
+		{
+			AttachmentRequirement attachmentRequirement = AttachmentRequirementBuilder.NewAttachmentRequirementWithName("Bank Statement")
+				.WithExtractionEnabled(true)
+				.Build();
+
+			Assert.AreEqual(true, attachmentRequirement.ExtractionEnabled);
+		}
+
+		[Test]
 		public void AttachmentNameCannotBeNull()
 		{
             Assert.Throws<OssException>(()=> AttachmentRequirementBuilder.NewAttachmentRequirementWithName(null).Build());
