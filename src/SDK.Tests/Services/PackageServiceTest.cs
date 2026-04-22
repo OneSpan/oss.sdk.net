@@ -47,7 +47,17 @@ namespace SDK.Tests
             var result = packageService.UpdatePackageAndLocalizeConsent(
                 new PackageId(PackageUid), ApiPackage(PackageUid, "fr"));
 
+            Assert.AreEqual(PackageUid, result.PackageUid);
+            Assert.IsNotNull(result.ConsentInfo);
             Assert.AreEqual(PackageUpdateWorkflowResult.Status.SUCCESS, result.ConsentInfo.Status);
+            Assert.AreEqual(ConsentLocalizationMessages.CONSENT_DOCUMENT_LOCALIZED_SUCCESSFULLY, result.ConsentInfo.Message);
+            Assert.IsNotNull(result.ConsentInfo.ConsentData);
+            Assert.IsNotNull(result.ConsentInfo.ConsentData.ConsentMetadata);
+            Assert.AreEqual(PackageUid, result.ConsentInfo.ConsentData.ConsentMetadata.PackageInfo.Uid);
+            Assert.AreEqual("fr", result.ConsentInfo.ConsentData.ConsentMetadata.PackageInfo.Language);
+            Assert.AreEqual("fr", result.ConsentInfo.ConsentData.ConsentMetadata.Properties.Language);
+            Assert.AreEqual("fr", result.ConsentInfo.ConsentData.ConsentMetadata.Document.Language);
+
             clientMock.Verify(c => c.Post(postPath, It.IsAny<string>()), Times.Once);
         }
 
@@ -105,8 +115,15 @@ namespace SDK.Tests
                 new PackageId(PackageUid), ApiPackage(PackageUid, "fr"));
 
             Assert.AreEqual(PackageUid, result.PackageUid);
+            Assert.IsNotNull(result.ConsentInfo);
             Assert.AreEqual(PackageUpdateWorkflowResult.Status.SUCCESS, result.ConsentInfo.Status);
+            Assert.AreEqual(ConsentLocalizationMessages.CONSENT_DOCUMENT_LOCALIZED_SUCCESSFULLY, result.ConsentInfo.Message);
+            Assert.IsNotNull(result.ConsentInfo.ConsentData);
+            Assert.IsNotNull(result.ConsentInfo.ConsentData.ConsentMetadata);
             Assert.AreEqual(PackageUid, result.ConsentInfo.ConsentData.ConsentMetadata.PackageInfo.Uid);
+            Assert.AreEqual("fr", result.ConsentInfo.ConsentData.ConsentMetadata.PackageInfo.Language);
+            Assert.AreEqual("fr", result.ConsentInfo.ConsentData.ConsentMetadata.Properties.Language);
+            Assert.AreEqual("fr", result.ConsentInfo.ConsentData.ConsentMetadata.Document.Language);
         }
 
         [Test]
@@ -125,6 +142,13 @@ namespace SDK.Tests
                 new PackageId(PackageUid), ApiPackage(PackageUid, "fr"));
 
             Assert.AreEqual(PackageUpdateWorkflowResult.Status.SUCCESS, result.ConsentInfo.Status);
+            Assert.AreEqual(ConsentLocalizationMessages.CONSENT_DOCUMENT_LOCALIZED_SUCCESSFULLY, result.ConsentInfo.Message);
+            Assert.IsNotNull(result.ConsentInfo.ConsentData);
+            Assert.IsNotNull(result.ConsentInfo.ConsentData.ConsentMetadata);
+            Assert.AreEqual(PackageUid, result.ConsentInfo.ConsentData.ConsentMetadata.PackageInfo.Uid);
+            Assert.AreEqual("fr", result.ConsentInfo.ConsentData.ConsentMetadata.PackageInfo.Language);
+            Assert.AreEqual("fr", result.ConsentInfo.ConsentData.ConsentMetadata.Properties.Language);
+            Assert.AreEqual("fr", result.ConsentInfo.ConsentData.ConsentMetadata.Document.Language);
         }
 
         [Test]
@@ -174,9 +198,15 @@ namespace SDK.Tests
             clientMock.Verify(c => c.Post(postPath, It.IsAny<string>()), Times.Once);
 
             Assert.AreEqual(PackageUid, result.PackageUid);
+            Assert.IsNotNull(result.ConsentInfo);
             Assert.AreEqual(PackageUpdateWorkflowResult.Status.SUCCESS, result.ConsentInfo.Status);
+            Assert.AreEqual(ConsentLocalizationMessages.CONSENT_DOCUMENT_LOCALIZED_SUCCESSFULLY, result.ConsentInfo.Message);
+            Assert.IsNotNull(result.ConsentInfo.ConsentData);
+            Assert.IsNotNull(result.ConsentInfo.ConsentData.ConsentMetadata);
             Assert.AreEqual(PackageUid, result.ConsentInfo.ConsentData.ConsentMetadata.PackageInfo.Uid);
             Assert.AreEqual("fr", result.ConsentInfo.ConsentData.ConsentMetadata.PackageInfo.Language);
+            Assert.AreEqual("fr", result.ConsentInfo.ConsentData.ConsentMetadata.Properties.Language);
+            Assert.AreEqual("fr", result.ConsentInfo.ConsentData.ConsentMetadata.Document.Language);
         }
 
         [Test]
@@ -195,7 +225,9 @@ namespace SDK.Tests
             clientMock.Verify(c => c.Post(It.IsAny<string>(), It.IsAny<string>()), Times.Never);
 
             Assert.AreEqual(PackageUid, result.PackageUid);
+            Assert.IsNotNull(result.ConsentInfo);
             Assert.AreEqual(PackageUpdateWorkflowResult.Status.SKIPPED, result.ConsentInfo.Status);
+            Assert.AreEqual(ConsentLocalizationMessages.UPDATED_PACKAGE_NOT_AVAILABLE, result.ConsentInfo.Message);
             Assert.IsNull(result.ConsentInfo.ConsentData);
         }
 
@@ -215,7 +247,9 @@ namespace SDK.Tests
             clientMock.Verify(c => c.Post(It.IsAny<string>(), It.IsAny<string>()), Times.Never);
 
             Assert.AreEqual(PackageUid, result.PackageUid);
+            Assert.IsNotNull(result.ConsentInfo);
             Assert.AreEqual(PackageUpdateWorkflowResult.Status.SKIPPED, result.ConsentInfo.Status);
+            Assert.AreEqual(ConsentLocalizationMessages.LANGUAGE_NOT_CHANGED, result.ConsentInfo.Message);
             Assert.IsNull(result.ConsentInfo.ConsentData);
         }
 

@@ -626,7 +626,7 @@ namespace OneSpanSign.Sdk.Services
             try
             {
                 var consentResponse = LocalizeDefaultConsentDocument(packageId, new ConsentLocalizationPayload(language));
-                SetConsentResult(result, PackageUpdateWorkflowResult.Status.SUCCESS, "Consent document localized successfully.", consentResponse);
+                SetConsentResult(result, PackageUpdateWorkflowResult.Status.SUCCESS, ConsentLocalizationMessages.CONSENT_DOCUMENT_LOCALIZED_SUCCESSFULLY, consentResponse);
             }
             catch (OssServerException e)
             {

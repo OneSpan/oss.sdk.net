@@ -6,6 +6,7 @@ namespace OneSpanSign.Sdk.Internal
     /// </summary>
     public sealed class ConsentLocalizationMessages
     {
+        public const string CONSENT_DOCUMENT_LOCALIZED_SUCCESSFULLY = "Consent document localized successfully.";
         public const string FAILED_TO_LOCALIZE_DEFAULT_CONSENT_PREFIX = "Failed to localize default consent: ";
         public const string UPDATED_PACKAGE_NOT_AVAILABLE = "Consent localization could not be determined: updatedPackage is not available.";
         public const string LANGUAGE_NOT_CHANGED = "Consent localization not required because language did not change.";
