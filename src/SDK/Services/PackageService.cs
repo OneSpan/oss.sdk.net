@@ -27,7 +27,7 @@ namespace OneSpanSign.Sdk.Services
         private static ILogger log = LoggerFactory.get(typeof(PackageService));
         
         private JsonSerializerSettings settings;
-        private RestClient restClient;
+        private IRestClient restClient;
         private ReportService reportService;
         private string baseUrl;
 
@@ -36,7 +36,7 @@ namespace OneSpanSign.Sdk.Services
         /// </summary>
         /// <param name="apiToken">API token.</param>
         /// <param name="baseUrl">Base URL.</param>
-        public PackageService(RestClient restClient, string baseUrl, JsonSerializerSettings settings)
+        public PackageService(IRestClient restClient, string baseUrl, JsonSerializerSettings settings)
         {
             this.restClient = restClient;
             this.baseUrl = baseUrl;

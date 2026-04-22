@@ -7,10 +7,10 @@ namespace OneSpanSign.Sdk.Services
     public class ReportService
     {
         private JsonSerializerSettings settings;
-        private RestClient restClient;
+        private IRestClient restClient;
         private string baseUrl;
 
-        public ReportService(RestClient restClient, string baseUrl, JsonSerializerSettings settings)
+        public ReportService(IRestClient restClient, string baseUrl, JsonSerializerSettings settings)
         {
             this.restClient = restClient;
             this.baseUrl = baseUrl;

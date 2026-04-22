@@ -17,7 +17,7 @@ namespace SDK.Tests
         private const string BaseUrl = "http://baseurl";
         private const string PackageUid = "bw1FGkfWT7tf0X4r6bHUfvIblKQ=";
 
-        private Mock<RestClient> clientMock;
+        private Mock<IRestClient> clientMock;
         private PackageService packageService;
         private string apiPath;
         private string postPath;
@@ -25,7 +25,7 @@ namespace SDK.Tests
         [SetUp]
         public void Setup()
         {
-            clientMock = new Mock<RestClient>("test-api-key") { CallBase = false };
+            clientMock = new Mock<IRestClient>();
             packageService = new PackageService(clientMock.Object, BaseUrl, new JsonSerializerSettings());
             apiPath = BuildPackagePath(PackageUid);
             postPath = BuildLocalizeConsentPath(PackageUid);
