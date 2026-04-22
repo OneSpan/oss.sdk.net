@@ -16,6 +16,9 @@ namespace OneSpanSign.Sdk
         [JsonProperty("classificationResult")]
         public AttachmentClassificationResult ClassificationResult { get; set; }
 
+        [JsonProperty("extractionResult")]
+        public ExtractionResult ExtractionResult { get; set; }
+
         [JsonProperty("typeMatch")]
         public bool TypeMatch { get; set; }
     }
