@@ -10,7 +10,7 @@ using OneSpanSign.Sdk.Oauth;
 
 namespace OneSpanSign.Sdk
 {
-    public class RestClient
+    public class RestClient : IRestClient
     {
         private readonly string apiKey;
         private AuthHeaderGenerator headerGen;
