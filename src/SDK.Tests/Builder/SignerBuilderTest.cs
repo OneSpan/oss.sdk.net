@@ -84,6 +84,23 @@ namespace SDK.Tests
 		}
 
 		[Test]
+		public void CanAddSMSOnly()
+		{
+			Signer signer = SignerBuilder.NewSignerWithEmail ("billy@bob.com")
+				.WithFirstName ("Billy")
+				.WithLastName ("Bob")
+				.WithNotificationMethods(NotificationMethodsBuilder.NewNotificationMethods()
+					.WithPhoneNumber("+16356489274")
+					.WithPrimaryMethods(NotificationMethod.SMS)
+				)
+				.Build ();
+
+			Assert.NotNull(signer.NotificationMethods);
+			Assert.IsTrue(signer.NotificationMethods.Primary.Contains(NotificationMethod.SMS));
+			Assert.IsFalse(signer.NotificationMethods.Primary.Contains(NotificationMethod.EMAIL));
+		}
+
+		[Test]
 		public void AuthenticationDefaultsToEmail()
 		{
 			Signer signer = SignerBuilder.NewSignerWithEmail ("billy@bob.com")

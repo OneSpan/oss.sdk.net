@@ -38,6 +38,7 @@ namespace OneSpanSign.Sdk.Internal
         public static readonly string NOTIFICATIONS_PATH = "/packages/{packageId}/notifications";
         public static readonly string PDF_PATH = "/packages/{packageId}/documents/{documentId}/pdf";
         public static readonly string ORIGINAL_PATH = "/packages/{packageId}/documents/{documentId}/original";
+        public static readonly string LOCALIZE_CONSENT_PATH = "/packages/{packageId}/documents/localize-consent";
         public static readonly string ZIP_PATH = "/packages/{packageId}/documents/zip";
         public static readonly string EVIDENCE_SUMMARY_PATH = "/packages/{packageId}/evidence/summary";
         public static readonly string SIGNING_STATUS_PATH = "/packages/{packageId}/signingStatus?signer={signerId}&document={documentId}";
@@ -170,6 +171,7 @@ namespace OneSpanSign.Sdk.Internal
         public static readonly string ALL_ATTACHMENTS_PATH = "/packages/{packageId}/attachment/zip";
         public static readonly string ALL_ATTACHMENTS_FOR_ROLE_PATH = "/packages/{packageId}/attachment/zip/{roleId}";
         public static readonly string ATTACHMENT_FILE_PATH = "/packages/{packageId}/attachment/{attachmentId}/file/{fileId}";
+        public static readonly string ATTACHMENT_VERIFICATION_RESULTS_PATH = "/packages/{packageId}/attachment/verifications";
 
         // Layout Service
         public static readonly string LAYOUT_PATH = "/layouts";

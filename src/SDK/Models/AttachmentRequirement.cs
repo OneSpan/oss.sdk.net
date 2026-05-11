@@ -61,6 +61,18 @@ namespace OneSpanSign.API
             get; set;
         }
 
+        [JsonProperty ("attachmentType")]
+        public string AttachmentType
+        {
+            get; set;
+        }
+
+        [JsonProperty ("extractionEnabled")]
+        public Nullable<Boolean> ExtractionEnabled
+        {
+            get; set;
+        }
+
         [JsonProperty ("files")]
         public IList<AttachmentFile> Files 
         {

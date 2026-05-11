@@ -77,6 +77,8 @@ namespace SDK.Tests
 			Assert.AreEqual(sdkAttachmentRequirement1.Required, apiAttachmentRequirement1.Required);
 			Assert.AreEqual(sdkAttachmentRequirement1.Status.getApiValue(), apiAttachmentRequirement1.Status);
 			Assert.AreEqual(sdkAttachmentRequirement1.SenderComment, apiAttachmentRequirement1.Comment);
+			Assert.AreEqual(sdkAttachmentRequirement1.AttachmentType, apiAttachmentRequirement1.AttachmentType);
+			Assert.AreEqual(sdkAttachmentRequirement1.ExtractionEnabled, apiAttachmentRequirement1.ExtractionEnabled);
 		}
 
 		[Test]
@@ -91,6 +93,8 @@ namespace SDK.Tests
 			Assert.AreEqual(apiAttachmentRequirement1.Required, sdkAttachmentRequirement1.Required);
 			Assert.AreEqual(apiAttachmentRequirement1.Status, sdkAttachmentRequirement1.Status.ToString());
 			Assert.AreEqual(apiAttachmentRequirement1.Comment, sdkAttachmentRequirement1.SenderComment);
+			Assert.AreEqual(apiAttachmentRequirement1.AttachmentType, sdkAttachmentRequirement1.AttachmentType);
+			Assert.AreEqual(apiAttachmentRequirement1.ExtractionEnabled, sdkAttachmentRequirement1.ExtractionEnabled);
 		}
 
         [Test]
@@ -109,6 +113,8 @@ namespace SDK.Tests
 			OneSpanSign.Sdk.AttachmentRequirement attachmentRequirement = AttachmentRequirementBuilder.NewAttachmentRequirementWithName("Driver's license")
 				.WithDescription("Please upload a scanned copy of your driver's license")
 				.IsRequiredAttachment()
+				.WithAttachmentType("DRIVER_LICENSE")
+				.WithExtractionEnabled(true)
 				.Build();
 			attachmentRequirement.Id = "attachmentId";
 
@@ -122,6 +128,8 @@ namespace SDK.Tests
 			attachmentRequirement.Id = "attachment1";
 			attachmentRequirement.Description = "Please upload a scanned copy of your driver's license";
 			attachmentRequirement.Required = true;
+			attachmentRequirement.AttachmentType = "DRIVER_LICENSE";
+			attachmentRequirement.ExtractionEnabled = true;
 
 			return attachmentRequirement;
 		}

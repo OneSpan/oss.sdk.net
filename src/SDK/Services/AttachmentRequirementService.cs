@@ -129,6 +129,11 @@ namespace OneSpanSign.Sdk
         {
             apiClient.DeletaAttachmentFile (packageId, attachmentId, fileId, signerSessionId);
         }
+
+        public IList<AttachmentVerificationResult> GetAttachmentVerificationResults(PackageId packageId)
+        {
+            return apiClient.GetAttachmentVerificationResults(packageId.Id);
+        }
     }
 }
 

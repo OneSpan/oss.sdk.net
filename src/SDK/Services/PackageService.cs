@@ -11,6 +11,10 @@ using System.Globalization;
 using Newtonsoft.Json.Serialization;
 using System.Collections.Specialized;
 using System.Linq;
+using OneSpanSign.API.Models;
+using OneSpanSign.Sdk.Internal.Conversion;
+using OneSpanSign.Sdk.Models;
+using Converter = OneSpanSign.Sdk.Internal.Converter;
 
 namespace OneSpanSign.Sdk.Services
 {
@@ -20,17 +24,19 @@ namespace OneSpanSign.Sdk.Services
     /// </summary>
     public class PackageService
     {
+        private static ILogger log = LoggerFactory.get(typeof(PackageService));
+        
         private JsonSerializerSettings settings;
-        private RestClient restClient;
+        private IRestClient restClient;
         private ReportService reportService;
         private string baseUrl;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="OneSpanSign.Sdk.PackageService"/> class.
+        /// Initializes a new instance of the <see cref="PackageService"/> class.
         /// </summary>
         /// <param name="apiToken">API token.</param>
         /// <param name="baseUrl">Base URL.</param>
-        public PackageService(RestClient restClient, string baseUrl, JsonSerializerSettings settings)
+        public PackageService(IRestClient restClient, string baseUrl, JsonSerializerSettings settings)
         {
             this.restClient = restClient;
             this.baseUrl = baseUrl;
@@ -549,6 +555,127 @@ namespace OneSpanSign.Sdk.Services
                 throw new OssException("Unable to update package settings." + " Exception: " + e.Message, e);
             }
         }
+        
+        /// <summary>
+        /// Updates the package's fields and automatically localizes the default consent document
+        /// if the language has changed. The method returns a workflow result describing both the
+        /// package update and the outcome of consent localization:
+        ///
+        /// - If the package is updated and the language has changed, the consent document is localized and the result contains the localization outcome.
+        /// - If the language did not change, the result indicates that consent localization was skipped.
+        /// - If the update or localization fails, the result contains error information.
+        /// </summary>
+        /// <param name="packageId">The ID of the package to update. Must not be null.</param>
+        /// <param name="package">The package containing updated fields and language.</param>
+        /// <returns>
+        /// Workflow result describing package update and consent localization outcomes, including status and messages for each step.
+        /// </returns>
+        /// <exception cref="EslException">
+        /// Thrown when the package update operation fails with a server‑side error.
+        /// </exception>
+        internal PackageUpdateWorkflowResult UpdatePackageAndLocalizeConsent(
+            PackageId packageId, Package package)
+        {
+            if (packageId == null) throw new ArgumentNullException(nameof(packageId));
+
+            var result = new PackageUpdateWorkflowResult { PackageUid = packageId.Id };
+
+            string path = new UrlTemplate(baseUrl).UrlFor(UrlTemplate.PACKAGE_ID_PATH)
+                .Replace("{packageId}", packageId.Id)
+                .Build();
+
+            Package existingPackage = TryGetPackage(packageId);
+            try
+            {
+                restClient.Put(path, JsonConvert.SerializeObject(package, settings));
+            }
+            catch (OssServerException e)
+            {
+                throw new OssServerException("Unable to update package settings." + " Exception: " + e.Message, e.ServerError, e);
+            }
+            catch (Exception e)
+            {
+                throw new OssException("Unable to update package settings." + " Exception: " + e.Message, e);
+            }
+
+            Package updatedPackage = TryGetPackage(packageId);
+            string skipReason = GetLocalizeConsentSkipReason(updatedPackage, existingPackage);
+            if (skipReason == null)
+            {
+                LocalizeConsent(packageId, updatedPackage.Language, result);
+            }
+            else
+            {
+                SetConsentResult(result, PackageUpdateWorkflowResult.Status.SKIPPED, skipReason, null);
+            }
+            return result;
+        }
+                
+        /// <summary>
+        /// Attempts to localize the consent document for a package and updates the provided workflow result.
+        /// <para>
+        /// On success, updates the result with a ConsentLocalizationResult containing the localized consent data.
+        /// On failure, updates the result with a ConsentLocalizationResult indicating failure and an error message.
+        /// </para>
+        /// </summary>
+        /// <param name="packageId">The package identifier. Must not be null.</param>
+        /// <param name="language">The language code for localization. Must not be null or empty.</param>
+        /// <param name="result">The workflow result object to update with the localization outcome.</param>
+        private void LocalizeConsent(PackageId packageId, string language, PackageUpdateWorkflowResult result)
+        {
+            try
+            {
+                var consentResponse = LocalizeDefaultConsentDocument(packageId, new ConsentLocalizationPayload(language));
+                SetConsentResult(result, PackageUpdateWorkflowResult.Status.SUCCESS, ConsentLocalizationMessages.CONSENT_DOCUMENT_LOCALIZED_SUCCESSFULLY, consentResponse);
+            }
+            catch (OssServerException e)
+            {
+                log.Warn("Failed to localize default consent: {0}", e.Message);
+                SetFailureConsentResult(result, ConsentLocalizationMessages.FAILED_TO_LOCALIZE_DEFAULT_CONSENT_PREFIX + (e.ServerError?.Message ?? e.Message));
+            }
+            catch (Exception e)
+            {
+                log.Warn("Failed to localize default consent: {0}", e.Message);
+                SetFailureConsentResult(result, ConsentLocalizationMessages.FAILED_TO_LOCALIZE_DEFAULT_CONSENT_PREFIX + e.Message);
+            }
+        }
+
+        /// <summary>
+        /// Localizes the consent document for a package.
+        /// </summary>
+        /// <param name="packageId">The package identifier (must not be null).</param>
+        /// <param name="localizationPayload">The localization details (language must not be null).</param>
+        /// <returns>ConsentLocalizationData</returns>
+        /// <exception cref="EslServerException">If the server returns an error.</exception>
+        /// <exception cref="EslException">For other exceptions.</exception>
+        internal ConsentLocalizationData LocalizeDefaultConsentDocument(PackageId packageId, ConsentLocalizationPayload localizationPayload)
+        {
+            if (localizationPayload == null) throw new ArgumentNullException(nameof(localizationPayload));
+            if (packageId == null) throw new ArgumentNullException(nameof(packageId));
+
+            string path = new UrlTemplate(baseUrl)
+                .UrlFor(UrlTemplate.LOCALIZE_CONSENT_PATH)
+                .Replace("{packageId}", packageId.Id)
+                .Build();
+
+            try
+            {
+                ConsentLocalizationRequest localizationRequest = ConsentLocalizationConverter.ToApi(localizationPayload);
+                string json = JsonConvert.SerializeObject(localizationRequest);
+
+                string response = restClient.Post(path, json);
+                return JsonConvert.DeserializeObject<ConsentLocalizationData>(response);
+            }
+            catch (OssServerException e)
+            {
+                throw new OssServerException("Could not localize consent document.", e);
+            }
+            catch (Exception e)
+            {
+                throw new OssException("Could not localize consent document. Exception: " + e.Message, e);
+            }
+        }
+    
 
         internal void ChangePackageStatusToDraft(PackageId packageId) 
         {
@@ -1733,5 +1860,66 @@ namespace OneSpanSign.Sdk.Services
                 throw new OssException ("Could not get referenced conditions." + " Exception: " + e.Message, e);
             }
         }
+
+        private string GetLocalizeConsentSkipReason(Package updatedPackage, Package originalPackage)
+        {
+            if (updatedPackage == null) {
+                return ConsentLocalizationMessages.UPDATED_PACKAGE_NOT_AVAILABLE;
+            }
+            if (originalPackage != null && !HasLanguageChanged(originalPackage, updatedPackage)) {
+                return ConsentLocalizationMessages.LANGUAGE_NOT_CHANGED;
+            }
+            if (DocumentAcceptanceUtil.HasAcceptedDefaultConsent(updatedPackage)) {
+                return ConsentLocalizationMessages.DEFAULT_DOCUMENT_CONSENT_ACCEPTED;
+            }
+            return null;
+        }
+
+        private bool HasLanguageChanged(Package existingPackage, Package updatedPackage)
+        {
+            string currentLanguage = updatedPackage.Language;
+            if (currentLanguage == null) {
+                return false;
+            }
+            return !currentLanguage.Equals(existingPackage.Language, StringComparison.OrdinalIgnoreCase);
+        }
+
+        private void SetConsentResult(PackageUpdateWorkflowResult result, PackageUpdateWorkflowResult.Status status, string message, ConsentLocalizationData data)
+        {
+            result.ConsentInfo = new PackageUpdateWorkflowResult.ConsentLocalizationResult(status, message, data);
+        }
+
+        private void SetFailureConsentResult(PackageUpdateWorkflowResult result, string message)
+        {
+            SetConsentResult(result, PackageUpdateWorkflowResult.Status.FAILURE, message, null);
+        }
+
+        /// <summary>
+        /// Attempts to retrieve the package for the specified package ID.
+        /// Returns null if any error occurs.
+        /// </summary>
+        /// <param name="packageId">The package ID.</param>
+        /// <returns>The Package if successful; otherwise, null.</returns>
+        private Package TryGetPackage(PackageId packageId)
+        {
+            if (packageId == null || string.IsNullOrWhiteSpace(packageId.Id))
+                return null;
+
+            try
+            {
+                string path = new UrlTemplate(baseUrl)
+                    .UrlFor(UrlTemplate.PACKAGE_ID_PATH)
+                    .Replace("{packageId}", packageId.Id)
+                    .Build();
+
+                return GetApiPackageWithPath(path);
+            }
+            catch (Exception e)
+            {
+                log.Warn("Failed to get package!", e);
+                return null;
+            }
+        }
     }
 }
+

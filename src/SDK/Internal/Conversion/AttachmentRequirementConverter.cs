@@ -49,6 +49,8 @@ namespace OneSpanSign.Sdk
 			result.Required = sdkAttachmentRequirement.Required;
 			result.Data = sdkAttachmentRequirement.Data;
             result.Files = GetApiAttachmentFiles ();
+			result.AttachmentType = sdkAttachmentRequirement.AttachmentType;
+			result.ExtractionEnabled = sdkAttachmentRequirement.ExtractionEnabled;
 
             if (sdkAttachmentRequirement.Status.Equals(null))
 			{
@@ -83,6 +85,8 @@ namespace OneSpanSign.Sdk
 				result.Data = apiAttachmentRequirement.Data;
 				result.Status = new RequirementStatusConverter(apiAttachmentRequirement.Status).ToSDKRequirementStatus();
                 result.Files = GetSDKAttachmentFiles ();
+				result.AttachmentType = apiAttachmentRequirement.AttachmentType;
+				result.ExtractionEnabled = apiAttachmentRequirement.ExtractionEnabled.GetValueOrDefault();
 
                 return result;
 			}
