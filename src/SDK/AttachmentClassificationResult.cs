@@ -4,6 +4,9 @@ namespace OneSpanSign.Sdk
 {
     public class AttachmentClassificationResult
     {
+        [JsonProperty("documentUuid")]
+        public string DocumentUuid { get; set; }
+
         [JsonProperty("documentType")]
         public string DocumentType { get; set; }
 
@@ -15,5 +18,14 @@ namespace OneSpanSign.Sdk
 
         [JsonProperty("providerName")]
         public string ProviderName { get; set; }
+
+        [JsonProperty("failed")]
+        public bool? Failed { get; set; }
+
+        [JsonProperty("errorCode")]
+        public string ErrorCode { get; set; }
+
+        [JsonProperty("failureMessage")]
+        public string FailureMessage { get; set; }
     }
 }

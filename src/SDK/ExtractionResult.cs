@@ -13,5 +13,17 @@ namespace OneSpanSign.Sdk
 
         [JsonProperty("providerName")]
         public string ProviderName { get; set; }
+
+        [JsonProperty("verificationCheckResults")]
+        public IList<AttachmentVerificationCheckResult> VerificationCheckResults { get; set; }
+
+        [JsonProperty("failed")]
+        public bool? Failed { get; set; }
+
+        [JsonProperty("errorCode")]
+        public string ErrorCode { get; set; }
+
+        [JsonProperty("failureMessage")]
+        public string FailureMessage { get; set; }
     }
 }

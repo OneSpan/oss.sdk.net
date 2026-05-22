@@ -10,6 +10,9 @@ namespace OneSpanSign.Sdk
         [JsonProperty("fileName")]
         public string FileName { get; set; }
 
+        [JsonProperty("fileId")]
+        public string FileId { get; set; }
+
         [JsonProperty("extension")]
         public string Extension { get; set; }
 
@@ -18,6 +21,12 @@ namespace OneSpanSign.Sdk
 
         [JsonProperty("extractionResult")]
         public ExtractionResult ExtractionResult { get; set; }
+
+        [JsonProperty("extractionFailed")]
+        public bool ExtractionFailed { get; set; }
+
+        [JsonProperty("extractionErrorCode")]
+        public string ExtractionErrorCode { get; set; }
 
         [JsonProperty("typeMatch")]
         public bool TypeMatch { get; set; }

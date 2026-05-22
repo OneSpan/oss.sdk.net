@@ -22,6 +22,9 @@ namespace SDK.Examples
 
         public AttachmentRequirement retrievedAttachmentRequirement;
         public IList<AttachmentVerificationResult> verificationResults;
+        public AttachmentVerificationResult verificationResult;
+        public AttachmentClassificationResult classificationResult;
+        public bool typeMatch;
 
         private Stream attachmentInputStream;
 
@@ -65,6 +68,16 @@ namespace SDK.Examples
 
             verificationResults = ossClient.AttachmentRequirementService
                 .GetAttachmentVerificationResults(packageId);
+
+            if (verificationResults.Count == 0)
+            {
+                throw new InvalidOperationException(
+                    "No attachment verification results were returned for package " + packageId.Id);
+            }
+
+            verificationResult = verificationResults[0];
+            classificationResult = verificationResult.ClassificationResult;
+            typeMatch = verificationResult.TypeMatch;
         }
     }
 }
