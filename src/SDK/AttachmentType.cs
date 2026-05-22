@@ -4,7 +4,6 @@ namespace OneSpanSign.Sdk
     {
         PASSPORT,
         DRIVERS_LICENSE,
-        NATIONAL_ID,
         BANK_STATEMENT,
         UTILITY_BILL,
         TAX_RETURN,

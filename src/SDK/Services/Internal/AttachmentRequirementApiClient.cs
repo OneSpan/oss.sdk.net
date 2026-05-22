@@ -11,11 +11,11 @@ namespace OneSpanSign.Sdk
 {
     internal class AttachmentRequirementApiClient
     {
-        private RestClient restClient;
+        private IRestClient restClient;
         private JsonSerializerSettings jsonSettings;
         private string baseUrl;
 
-        public AttachmentRequirementApiClient(RestClient restClient, string apiUrl, JsonSerializerSettings jsonSettings)
+        public AttachmentRequirementApiClient(IRestClient restClient, string apiUrl, JsonSerializerSettings jsonSettings)
         {
             this.restClient = restClient;
             this.jsonSettings = jsonSettings;
@@ -232,6 +232,10 @@ namespace OneSpanSign.Sdk
             try
             {
                 string response = restClient.Get(path);
+                if (response == null)
+                {
+                    return new List<AttachmentVerificationResult>();
+                }
                 return JsonConvert.DeserializeObject<IList<AttachmentVerificationResult>>(response, jsonSettings);
             }
             catch (OssServerException e)

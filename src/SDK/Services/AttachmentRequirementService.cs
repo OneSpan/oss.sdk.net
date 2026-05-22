@@ -16,7 +16,7 @@ namespace OneSpanSign.Sdk
         private AttachmentRequirementApiClient apiClient;
         private PackageService packageService;
 
-        internal AttachmentRequirementService(RestClient restClient, string baseUrl, JsonSerializerSettings settings)
+        internal AttachmentRequirementService(IRestClient restClient, string baseUrl, JsonSerializerSettings settings)
         {
             packageService = new PackageService(restClient, baseUrl, settings);
             apiClient = new AttachmentRequirementApiClient(restClient, baseUrl, settings);

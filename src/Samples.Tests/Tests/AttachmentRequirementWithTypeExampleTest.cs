@@ -31,6 +31,12 @@ namespace SDK.Examples
 
             Assert.IsNotNull(example.verificationResults,
                 "Verification results list should not be null");
+            Assert.IsNotNull(example.verificationResult,
+                "First verification result should be exposed by the example");
+            Assert.AreEqual(example.verificationResult.TypeMatch, example.typeMatch,
+                "Verification result should expose attachment type match");
+            Assert.AreEqual(example.verificationResult.ClassificationResult, example.classificationResult,
+                "Classification result should be exposed by the example");
 
             foreach (AttachmentVerificationResult result in example.verificationResults)
             {
@@ -38,6 +44,8 @@ namespace SDK.Examples
                     "Verification result AttachmentUuid should not be null");
                 Assert.IsNotNull(result.FileName,
                     "Verification result FileName should not be null");
+                Assert.IsNotNull(result.FileId,
+                    "Verification result FileId should not be null");
             }
         }
     }

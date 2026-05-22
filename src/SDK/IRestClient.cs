@@ -10,6 +10,7 @@ namespace OneSpanSign.Sdk
         string Put(string path, string jsonPayload);
         string Delete(string path);
         string Delete(string path, string jsonPayload);
+        void Delete(string path, string jsonPayload, string sessionId);
         DownloadedFile GetBytes(string path);
         DownloadedFile GetHttpAsOctetStream(string path);
         string PostMultipartFile(string path, byte[] fileBytes, string boundary, string json);
