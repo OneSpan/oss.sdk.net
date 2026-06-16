@@ -23,7 +23,7 @@ namespace OneSpanSign.Sdk
 
         private static bool isPlaceHolder(OneSpanSign.API.Role role)
         {
-            return role.Signers.Count == 0;
+            return role.Signers.Count == 0 || OneSpanSign.API.Role.TYPE_PLACEHOLDER.Equals(role.Type);
         }
 
         private static bool isGroupRole(OneSpanSign.API.Role role)

@@ -1,6 +1,8 @@
+using System;
+
 namespace OneSpanSign.Sdk
 {
-    public class Placeholder
+    public class PlaceholderSigner
     {
         public string Id
         {
@@ -20,24 +22,26 @@ namespace OneSpanSign.Sdk
             set;
         }
 
-        public Placeholder( string id )
+        public PlaceholderSigner( string id )
         {
             Id = id;
             Name = id;
         }
 
-        public Placeholder( string id, string name )
+        public PlaceholderSigner( string id, string name )
         {
             Id = id;
             Name = name;
         }
 
-        public Placeholder( string id, string name, int? signingOrder )
+        public PlaceholderSigner( string id, string name, int? signingOrder )
         {
             Id = id;
             Name = name;
-            if(signingOrder != null) SigningOrder = signingOrder.Value;
+            if (signingOrder != null)
+            {
+                SigningOrder = signingOrder.Value;
+            }
         }
     }
 }
-
