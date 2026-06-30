@@ -126,6 +126,63 @@ namespace OneSpanSign.Sdk
                 throw new OssException ("Could not update the placeholder." + " Exception: " + e.Message, e);
             }
         }
+
+        internal PlaceholderSigner AddPlaceholder(PackageId templateId, PlaceholderSigner placeholder)
+        {
+            string path = new UrlTemplate(baseUrl).UrlFor(UrlTemplate.ROLE_PATH)
+                .Replace("{packageId}", templateId.Id)
+                .Build();
+            Role apiPayload = new Role();
+            apiPayload.Id = placeholder.Id;
+            apiPayload.Name = placeholder.Name;
+            apiPayload.Type = Role.TYPE_PLACEHOLDER;
+            apiPayload.AddSigner(new OneSpanSign.API.Signer());
+
+            try
+            {
+                string json = JsonConvert.SerializeObject(apiPayload, settings);
+                string response = restClient.Post(path, json);
+                OneSpanSign.API.Role apiRole = JsonConvert.DeserializeObject<OneSpanSign.API.Role>(response);
+                return new PlaceholderSigner(apiRole.Id, apiRole.Name);
+            }
+            catch (OssServerException e)
+            {
+                throw new OssServerException("Could not add placeholder." + " Exception: " + e.Message, e.ServerError, e);
+            }
+            catch (Exception e)
+            {
+                throw new OssException("Could not add placeholder." + " Exception: " + e.Message, e);
+            }
+        }
+
+        internal PlaceholderSigner UpdatePlaceholder(PackageId templateId, PlaceholderSigner placeholder)
+        {
+            string path = new UrlTemplate(baseUrl).UrlFor(UrlTemplate.ROLE_ID_PATH)
+                .Replace("{packageId}", templateId.Id)
+                .Replace("{roleId}", placeholder.Id)
+                .Build();
+            Role apiPayload = new Role();
+            apiPayload.Id = placeholder.Id;
+            apiPayload.Name = placeholder.Name;
+            apiPayload.Type = Role.TYPE_PLACEHOLDER;
+            apiPayload.AddSigner(new OneSpanSign.API.Signer());
+
+            try
+            {
+                string json = JsonConvert.SerializeObject(apiPayload, settings);
+                string response = restClient.Put(path, json);
+                OneSpanSign.API.Role apiRole = JsonConvert.DeserializeObject<OneSpanSign.API.Role>(response);
+                return new PlaceholderSigner(apiRole.Id, apiRole.Name);
+            }
+            catch (OssServerException e)
+            {
+                throw new OssServerException("Could not update the placeholder." + " Exception: " + e.Message, e.ServerError, e);
+            }
+            catch (Exception e)
+            {
+                throw new OssException("Could not update the placeholder." + " Exception: " + e.Message, e);
+            }
+        }
         
         public void Update(OneSpanSign.API.Package apiTemplate)
         {

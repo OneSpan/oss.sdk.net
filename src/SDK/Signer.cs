@@ -243,10 +243,27 @@ namespace OneSpanSign.Sdk
 			return email.EndsWith(SignerUtil.AD_HOC_GROUP_SIGNER_EMAIL_PREFIX);
 		}
 
-		public string LocalLanguage 
+		public string LocalLanguage
         {
             get;
-            set; 
+            set;
+        }
+
+        public bool Specifier
+        {
+            get;
+            set;
+        }
+
+        public bool NewPlaceholderSigner
+        {
+            get;
+            set;
+        }
+
+        public bool IsNewPlaceholderSigner()
+        {
+            return NewPlaceholderSigner;
         }
     }
 }
