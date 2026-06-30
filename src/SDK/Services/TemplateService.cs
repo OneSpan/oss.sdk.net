@@ -72,7 +72,17 @@ namespace OneSpanSign.Sdk.Services
             return apiClient.AddPlaceholder(templateId, placeholder);
         }
 
+        public PlaceholderSigner AddPlaceholder(PackageId templateId, PlaceholderSigner placeholder)
+        {
+            return apiClient.AddPlaceholder(templateId, placeholder);
+        }
+
         public Placeholder UpdatePlaceholder(PackageId templateId, Placeholder placeholder)
+        {
+            return apiClient.UpdatePlaceholder(templateId, placeholder);
+        }
+
+        public PlaceholderSigner UpdatePlaceholder(PackageId templateId, PlaceholderSigner placeholder)
         {
             return apiClient.UpdatePlaceholder(templateId, placeholder);
         }

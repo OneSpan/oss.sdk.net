@@ -29,6 +29,9 @@ namespace OneSpanSign.Sdk.Builder
         private Group group;
         private List<GroupMember> groupMembers = new List<GroupMember>();
 
+        private bool newPlaceholderSigner;
+        private bool specifier;
+
         private SignerBuilder(string signerEmail)
         {
             this.signerEmail = signerEmail;
@@ -49,7 +52,17 @@ namespace OneSpanSign.Sdk.Builder
             this.placeholderName = placeholder.Name;
             this.signingOrder = placeholder.SigningOrder;
         }
-        
+
+        private SignerBuilder(PlaceholderSigner placeholder)
+        {
+            this.signerEmail = null;
+            this.groupId = null;
+            this.id = placeholder.Id;
+            this.placeholderName = placeholder.Name;
+            this.signingOrder = placeholder.SigningOrder;
+            this.newPlaceholderSigner = true;
+        }
+
         private SignerBuilder(string adHocGroupName, string adHocGroupSignerId)
         {
             this.id = adHocGroupSignerId;
@@ -58,6 +71,11 @@ namespace OneSpanSign.Sdk.Builder
         }
 
         public static SignerBuilder NewSignerPlaceholder(Placeholder placeholder)
+        {
+            return new SignerBuilder(placeholder);
+        }
+
+        public static SignerBuilder NewPlaceholderSigner(PlaceholderSigner placeholder)
         {
             return new SignerBuilder(placeholder);
         }
@@ -123,6 +141,18 @@ namespace OneSpanSign.Sdk.Builder
         public SignerBuilder Replacing(Placeholder placeholder)
         {
             this.id = placeholder.Id;
+            return this;
+        }
+
+        public SignerBuilder Replacing(PlaceholderSigner placeholder)
+        {
+            this.id = placeholder.Id;
+            return this;
+        }
+
+        public SignerBuilder WithSpecifier(bool specifier)
+        {
+            this.specifier = specifier;
             return this;
         }
 
@@ -278,7 +308,7 @@ namespace OneSpanSign.Sdk.Builder
             result.Id = id;
             result.Attachments = attachments;
             result.LocalLanguage = localLanguage;
-
+            result.Specifier = specifier;
             return result;
         }
         
@@ -308,6 +338,8 @@ namespace OneSpanSign.Sdk.Builder
             result.Message = message;
             result.Attachments = attachments;
             result.LocalLanguage = localLanguage;
+            result.NewPlaceholderSigner = newPlaceholderSigner;
+            result.Specifier = specifier;
             return result;
         }
 
@@ -338,6 +370,7 @@ namespace OneSpanSign.Sdk.Builder
             result.Attachments = attachments;
             result.KnowledgeBasedAuthentication = knowledgeBasedAuthentication;
             result.LocalLanguage = localLanguage;
+            result.Specifier = specifier;
             return result;
         }
 

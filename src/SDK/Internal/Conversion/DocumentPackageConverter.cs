@@ -206,7 +206,11 @@ namespace OneSpanSign.Sdk
 
             foreach (OneSpanSign.API.Role role in apiPackage.Roles)
             {
-                if (role.Signers.Count == 0)
+                if (Role.TYPE_PLACEHOLDER.Equals(role.Type))
+                {
+                    packageBuilder.WithSigner(new SignerConverter(role).ToSDKSigner());
+                }
+                else if (role.Signers.Count == 0)
                 {
                     packageBuilder.WithSigner(SignerBuilder.NewSignerPlaceholder(new Placeholder(role.Id, role.Name, role.Index)));
                 }
