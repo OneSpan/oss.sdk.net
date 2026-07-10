@@ -1,7 +1,9 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netcoreapp3.0</TargetFramework>
+    <!-- net48 exercises the netstandard2.0 WebRequest code path (Windows only).   -->
+    <!-- net10.0 exercises the HttpClient code path (any OS).                       -->
+    <TargetFrameworks>net48;net10.0</TargetFrameworks>
 
     <IsPackable>false</IsPackable>
 
@@ -12,6 +14,7 @@
     <AssemblyOriginatorKeyFile>sdk.tests.snk</AssemblyOriginatorKeyFile>
 
     <DelaySign>false</DelaySign>
+    <LangVersion>latest</LangVersion>
   </PropertyGroup>
 
   <ItemGroup>
@@ -22,6 +25,15 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
+  </ItemGroup>
+
+  <!-- net48 needs packages that are built into the BCL in .NET 5+ -->
+  <ItemGroup Condition="'$(TargetFramework)' == 'net48'">
+    <PackageReference Include="Microsoft.NETFramework.ReferenceAssemblies" Version="1.0.0">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="System.Collections.Immutable" Version="8.0.0" />
   </ItemGroup>
 
   <ItemGroup>
