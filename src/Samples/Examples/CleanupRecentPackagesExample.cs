@@ -120,6 +120,10 @@ namespace SDK.Examples
 
         private void DeleteSendersCreatedWithinRange(DateTime from)
         {
+            // Senders whose email is configured in signers.properties must never be
+            // deleted, since they are reused across test runs.
+            HashSet<string> protectedEmails = GetProtectedSenderEmails();
+
             // First pass: collect all candidate sender IDs across every page into a Set.
             // Using a Set deduplicates IDs that re-appear on later pages because a prior
             // deletion attempt silently failed and left the sender in the account.
@@ -134,6 +138,13 @@ namespace SDK.Examples
                     if (senderUID.Equals(sender.Id))
                     {
                         continue; // never delete the account owner running the tests
+                    }
+                    if (sender.Email != null
+                        && protectedEmails.Contains(sender.Email.ToLower()))
+                    {
+                        Console.WriteLine("Skipping protected sender " + sender.Id
+                            + " (" + sender.Email + ") defined in signers.properties");
+                        continue; // never delete senders defined in signers.properties
                     }
                     if (sender.Created.HasValue && sender.Created.Value >= from)
                     {
@@ -158,6 +169,27 @@ namespace SDK.Examples
                 Console.WriteLine(deletedSendersCount + " Deleted sender " + senderId);
             }
             Console.WriteLine("Deleted " + deletedSendersCount + " senders");
+        }
+
+        /// <summary>
+        /// Collects every email address configured in signers.properties so that the
+        /// senders they refer to are protected from deletion. Any property value that
+        /// looks like an email address (contains '@') is treated as a sender email,
+        /// which covers sender.email, the numbered N.email entries, the delegator /
+        /// delegatee emails and any future email entries. Emails are lower-cased so
+        /// the comparison is case-insensitive.
+        /// </summary>
+        private HashSet<string> GetProtectedSenderEmails()
+        {
+            HashSet<string> protectedEmails = new HashSet<string>();
+            foreach (string value in props.Values)
+            {
+                if (value != null && value.Contains("@"))
+                {
+                    protectedEmails.Add(value.Trim().ToLower());
+                }
+            }
+            return protectedEmails;
         }
     }
 }

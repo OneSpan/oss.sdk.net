@@ -16,7 +16,7 @@ namespace OneSpanSign.Sdk.Internal
     {
         // ── Shared constants ───────────────────────────────────────────────────
 
-        public const string ESL_API_VERSION = "11.68.0";
+        public const string ESL_API_VERSION = "11.69.0";
         public const string ESL_API_USER_AGENT = ".Net SDK v" + ESL_API_VERSION;
         private const string ESL_API_VERSION_HEADER = "esl-api-version=" + ESL_API_VERSION;
 

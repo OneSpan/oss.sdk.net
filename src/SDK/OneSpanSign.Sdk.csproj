@@ -10,7 +10,7 @@
     <Authors>OneSpan Dev</Authors>
     <Company>OneSpan</Company>
     <Product>OneSpan Sign SDK</Product>
-    <Version>11.68.0</Version>
+    <Version>11.69.0</Version>
     <Copyright>OneSpan</Copyright>
     <Description>.NET SDK for OneSpan Sign</Description>
     <PackageProjectUrl>https://github.com/OneSpan/oss.sdk.net</PackageProjectUrl>
@@ -22,6 +22,10 @@
 
   <ItemGroup>
     <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
+  </ItemGroup>
+
+  <ItemGroup Condition="'$(TargetFramework)' == 'net452'">
+    <Reference Include="System.Net.Http" />
   </ItemGroup>
 
   <ItemGroup>

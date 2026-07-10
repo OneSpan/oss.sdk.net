@@ -58,5 +58,10 @@ namespace SDK.Examples
         {
             return dictionary.ContainsKey(key);
         }
+
+        public IEnumerable<string> Values
+        {
+            get { return dictionary.Values; }
+        }
     }
 }
