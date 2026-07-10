@@ -30,3 +30,4 @@ signers.properties.*
 .vscode/launch.json
 /src/Samples/signers.properties
 /src/Samples/signers.properties.*
+/src/SDK/nupkg/*
