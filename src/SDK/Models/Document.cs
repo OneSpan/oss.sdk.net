@@ -86,6 +86,12 @@ namespace OneSpanSign.API
         {
             get; set;
         }
+
+        [JsonProperty("designerReadOnly")]
+        public Nullable<Boolean> DesignerReadOnly
+        {
+            get; set;
+        }
     
 		    
         [JsonProperty("extractionTypes")]
