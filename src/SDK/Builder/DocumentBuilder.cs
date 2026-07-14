@@ -21,6 +21,7 @@ namespace OneSpanSign.Sdk.Builder
         private External external;
         private IDictionary<string, object> data = new Dictionary<string, object>();
 		private string base64Content;
+        private Nullable<Boolean> designerReadOnly;
 
 		private DocumentBuilder(string name)
 		{
@@ -146,9 +147,15 @@ namespace OneSpanSign.Sdk.Builder
             return this;
         }
 
-        public DocumentBuilder WithExtractionType(ExtractionType extractionType) 
+        public DocumentBuilder WithExtractionType(ExtractionType extractionType)
         {
             this.extractionTypes.Add(extractionType.ToString());
+            return this;
+        }
+
+        public DocumentBuilder WithDesignerReadOnly(bool designerReadOnly)
+        {
+            this.designerReadOnly = designerReadOnly;
             return this;
         }
 
@@ -171,6 +178,7 @@ namespace OneSpanSign.Sdk.Builder
 			doc.Description = description;
             doc.Data = data;
 			doc.Base64Content = base64Content;
+            doc.DesignerReadOnly = designerReadOnly;
 
 			return doc;
 		}
