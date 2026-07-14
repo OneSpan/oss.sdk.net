@@ -65,9 +65,14 @@ namespace OneSpanSign.Sdk
                 document.NumberOfPages = apiDocument.Pages.Count;
             }
 
-            if ( apiDocument.Tagged != null ) 
+            if ( apiDocument.Tagged != null )
             {
                 document.Tagged = apiDocument.Tagged;
+            }
+
+            if ( apiDocument.DesignerReadOnly != null )
+            {
+                document.DesignerReadOnly = apiDocument.DesignerReadOnly;
             }
 
             if ( apiDocument.ExternalSigned != null )
@@ -140,6 +145,7 @@ namespace OneSpanSign.Sdk
             doc.External = new ExternalConverter(sdkDocument.External).ToAPIExternal();
             doc.Data = sdkDocument.Data;
             doc.Tagged = sdkDocument.Tagged;
+            doc.DesignerReadOnly = sdkDocument.DesignerReadOnly;
 
             if (sdkDocument.Id != null)
             {

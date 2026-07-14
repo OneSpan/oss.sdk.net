@@ -49,6 +49,11 @@ namespace OneSpanSign.Sdk
             set;
         }
 
+        public Nullable<Boolean> DesignerReadOnly {
+            get;
+            set;
+        }
+
         public List<string> ExtractionTypes {
             get;
             set;
