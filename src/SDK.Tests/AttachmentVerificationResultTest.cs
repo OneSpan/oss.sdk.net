@@ -42,7 +42,7 @@ namespace SDK.Tests
 
             AttachmentVerificationCheckResult checkResult = extractionResult.VerificationCheckResults[0];
             Assert.AreEqual("expiry_check", checkResult.RuleName);
-            Assert.AreEqual("expiryDate", checkResult.Field);
+            CollectionAssert.AreEqual(new List<string> { "expiryDate" }, checkResult.Fields);
             Assert.AreEqual(AttachmentVerificationStatus.PASS, checkResult.Status);
             Assert.AreEqual("Document expires on 2099-01-01, still valid", checkResult.Message);
         }
@@ -88,7 +88,7 @@ namespace SDK.Tests
                     "\"extractedFields\":{\"fullName\":\"Jane Doe\",\"expiryDate\":\"2099-01-01\"}," +
                     "\"verificationCheckResults\":[{" +
                         "\"ruleName\":\"expiry_check\"," +
-                        "\"field\":\"expiryDate\"," +
+                        "\"fields\":[\"expiryDate\"]," +
                         "\"status\":\"PASS\"," +
                         "\"message\":\"Document expires on 2099-01-01, still valid\"" +
                     "}]," +
