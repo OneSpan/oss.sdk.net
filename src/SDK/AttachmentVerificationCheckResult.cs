@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using Newtonsoft.Json;
 
 namespace OneSpanSign.Sdk
@@ -7,8 +8,8 @@ namespace OneSpanSign.Sdk
         [JsonProperty("ruleName")]
         public string RuleName { get; set; }
 
-        [JsonProperty("field")]
-        public string Field { get; set; }
+        [JsonProperty("fields")]
+        public IList<string> Fields { get; set; }
 
         [JsonProperty("status")]
         [JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
