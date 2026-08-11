@@ -151,6 +151,88 @@ namespace SDK.Tests
             Assert.AreEqual(apiAttachment.Comment, sdkAttachment.SenderComment);
         }
 
+		[Test()]
+		public void ConvertCarbonCopyRecipientFromAPIToSDK()
+		{
+			apiRole = CreateTypicalAPIRole();
+			apiRole.Type = OneSpanSign.API.Role.TYPE_CARBON_COPY_RECIPIENT;
+
+			sdkSigner1 = new SignerConverter(apiRole).ToSDKSigner();
+
+			Assert.IsTrue(sdkSigner1.CarbonCopyRecipient);
+		}
+
+		[Test()]
+		public void ConvertNonCarbonCopyRecipientFromAPIToSDK()
+		{
+			apiRole = CreateTypicalAPIRole();
+
+			sdkSigner1 = new SignerConverter(apiRole).ToSDKSigner();
+
+			Assert.IsFalse(sdkSigner1.CarbonCopyRecipient);
+		}
+
+		[Test()]
+		public void ConvertCarbonCopyRecipientFromSDKToAPIRole()
+		{
+			sdkSigner1 = CreateCarbonCopyRecipient();
+			String roleId = System.Guid.NewGuid().ToString().Replace("-", "");
+
+			apiRole = new SignerConverter(sdkSigner1).ToAPIRole(roleId);
+
+			Assert.AreEqual(OneSpanSign.API.Role.TYPE_CARBON_COPY_RECIPIENT, apiRole.Type);
+			Assert.AreEqual(1, apiRole.Signers.Count);
+		}
+
+		[Test()]
+		public void ConvertCarbonCopyRecipientFromSDKToAPIRoleWithIdAndName()
+		{
+			sdkSigner1 = CreateCarbonCopyRecipient();
+			String roleId = System.Guid.NewGuid().ToString().Replace("-", "");
+
+			apiRole = new SignerConverter(sdkSigner1).ToAPIRole(roleId, "Carbon copy recipient");
+
+			Assert.AreEqual(OneSpanSign.API.Role.TYPE_CARBON_COPY_RECIPIENT, apiRole.Type);
+		}
+
+		[Test()]
+		public void ConvertNonCarbonCopyRecipientFromSDKToAPIRoleLeavesTypeUnset()
+		{
+			sdkSigner1 = SignerBuilder.NewSignerWithEmail("abc@test.com")
+				.WithFirstName("first name")
+				.WithLastName("last name")
+				.Build();
+			String roleId = System.Guid.NewGuid().ToString().Replace("-", "");
+
+			apiRole = new SignerConverter(sdkSigner1).ToAPIRole(roleId);
+
+			Assert.IsNull(apiRole.Type);
+		}
+
+		/// <summary>
+		/// A carbon copy recipient round-tripped through the API must still be a carbon copy recipient,
+		/// otherwise a get-then-update cycle silently downgrades it to a regular signer.
+		/// </summary>
+		[Test()]
+		public void CarbonCopyRecipientSurvivesRoundTrip()
+		{
+			String roleId = System.Guid.NewGuid().ToString().Replace("-", "");
+			apiRole = new SignerConverter(CreateCarbonCopyRecipient()).ToAPIRole(roleId);
+
+			sdkSigner1 = new SignerConverter(apiRole).ToSDKSigner();
+
+			Assert.IsTrue(sdkSigner1.CarbonCopyRecipient);
+		}
+
+		private OneSpanSign.Sdk.Signer CreateCarbonCopyRecipient()
+		{
+			return SignerBuilder.NewSignerWithEmail("carboncopy@test.com")
+				.WithFirstName("first name")
+				.WithLastName("last name")
+				.AsCarbonCopyRecipient()
+				.Build();
+		}
+
 		private OneSpanSign.Sdk.Signer CreateTypicalSDKSigner()
 		{
             return SignerBuilder.NewSignerWithEmail("abc@test.com")

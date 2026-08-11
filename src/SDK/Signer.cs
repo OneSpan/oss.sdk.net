@@ -255,6 +255,24 @@ namespace OneSpanSign.Sdk
             set;
         }
 
+        /// <summary>
+        /// Indicates whether this recipient is a carbon copy recipient.
+        ///
+        /// A carbon copy recipient receives a copy of the completed documents but never
+        /// participates in the signing ceremony. Carbon copy recipients are excluded from the
+        /// signing order and are only notified once the transaction is complete.
+        /// </summary>
+        public bool CarbonCopyRecipient
+        {
+            get;
+            set;
+        }
+
+        public bool IsCarbonCopyRecipient()
+        {
+            return CarbonCopyRecipient;
+        }
+
         public bool NewPlaceholderSigner
         {
             get;

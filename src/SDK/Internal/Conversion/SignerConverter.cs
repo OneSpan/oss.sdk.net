@@ -41,6 +41,10 @@ namespace OneSpanSign.Sdk
                 role.Type = OneSpanSign.API.Role.TYPE_PLACEHOLDER;
             }
             else if ( !sdkSigner.IsPlaceholderSigner() ) {
+                if (sdkSigner.IsCarbonCopyRecipient())
+                {
+                    role.Type = OneSpanSign.API.Role.TYPE_CARBON_COPY_RECIPIENT;
+                }
 				role.AddSigner(new SignerConverter(sdkSigner).ToAPISigner());
             }
             role.Index = sdkSigner.SigningOrder;
@@ -102,6 +106,10 @@ namespace OneSpanSign.Sdk
                 role.Type = OneSpanSign.API.Role.TYPE_PLACEHOLDER;
             }
             else if ( !sdkSigner.IsPlaceholderSigner() ) {
+                if (sdkSigner.IsCarbonCopyRecipient())
+                {
+                    role.Type = OneSpanSign.API.Role.TYPE_CARBON_COPY_RECIPIENT;
+                }
                 role.AddSigner(new SignerConverter(sdkSigner).ToAPISigner());
             }
             role.Index = sdkSigner.SigningOrder;
@@ -387,6 +395,8 @@ namespace OneSpanSign.Sdk
             {
                 signer.Specifier = true;
             }
+
+            signer.CarbonCopyRecipient = OneSpanSign.API.Role.TYPE_CARBON_COPY_RECIPIENT.Equals(apiRole.Type);
 
             IDictionary<string, object> apiRoleData = apiRole.Data;
             if (apiRoleData != null && apiRoleData.ContainsKey("localLanguage")) {
