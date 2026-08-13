@@ -10,6 +10,7 @@ namespace OneSpanSign.API
 	{
         // Role type values
         public const string TYPE_PLACEHOLDER = "PLACEHOLDER";
+        public const string TYPE_CARBON_COPY_RECIPIENT = "CARBON_COPY_RECIPIENT";
 
 		// Fields
 		private IList<AttachmentRequirement> _attachmentRequirements = new List<AttachmentRequirement>();
