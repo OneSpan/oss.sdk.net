@@ -318,6 +318,39 @@ namespace OneSpanSign.Sdk.Services
             }
         }
 
+        /// <summary>
+        /// Updates the document's metadata (its data map) via the dedicated metadata endpoint, which
+        /// applies regardless of the transaction's status when the account's manipulateMetadata
+        /// feature is enabled.
+        /// </summary>
+        /// <param name="package">The DocumentPackage to update.</param>
+        /// <param name="document">The Document whose data map to send.</param>
+        public void ForceUpdateDocumentMetadata(DocumentPackage package, Document document)
+        {
+            string path = new UrlTemplate(baseUrl).UrlFor(UrlTemplate.DOCUMENT_METADATA_PATH)
+                .Replace("{packageId}", package.Id.Id)
+                .Replace("{documentId}", document.Id)
+                .Build();
+
+            // The /metadata endpoint reads the whole request body as the document's data map.
+            // Send the bare data map, not a serialized Document.
+            IDictionary<string, object> metadata = document.Data ?? new Dictionary<string, object>();
+
+            try
+            {
+                string json = JsonConvert.SerializeObject(metadata, settings);
+                restClient.Put(path, json);
+            }
+            catch (OssServerException e)
+            {
+                throw new OssServerException("Could not update the document's metadata." + " Exception: " + e.Message, e.ServerError, e);
+            }
+            catch (Exception e)
+            {
+                throw new OssException("Could not update the document's metadata." + " Exception: " + e.Message, e);
+            }
+        }
+
         public void OrderDocuments(DocumentPackage package)
         {
             string path = new UrlTemplate(baseUrl).UrlFor(UrlTemplate.DOCUMENT_PATH)
