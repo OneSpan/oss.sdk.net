@@ -349,6 +349,54 @@ namespace SDK.Tests
             Assert.IsNull(result.ConsentInfo.ConsentData);
         }
 
+        [Test]
+        public void ForceUpdateDocumentMetadataPutsBareDataMapToMetadataEndpoint()
+        {
+            const string documentId = "doc1";
+            var metadataPath = BuildDocumentMetadataPath(PackageUid, documentId);
+
+            var package = OneSpanSign.Sdk.Builder.PackageBuilder.NewPackageNamed("Test Package")
+                .WithDocument(OneSpanSign.Sdk.Builder.DocumentBuilder.NewDocumentNamed("Test Document")
+                    .WithId(documentId)
+                    .WithData(new Dictionary<string, object> { { "customerId", "12345" } }))
+                .Build();
+            package.Id = new PackageId(PackageUid);
+
+            clientMock.Setup(c => c.Put(metadataPath, It.IsAny<string>())).Returns((string)null);
+
+            packageService.ForceUpdateDocumentMetadata(package, package.GetDocument("Test Document"));
+
+            // Body is the bare data map, not a serialized Document; a single PUT (no contract-resolver retry).
+            clientMock.Verify(c => c.Put(metadataPath, "{\"customerId\":\"12345\"}"), Times.Once);
+            clientMock.Verify(c => c.Put(It.IsAny<string>(), It.IsAny<string>()), Times.Once);
+        }
+
+        [Test]
+        public void ForceUpdateDocumentMetadataWhenServerErrorThrowsOssServerException()
+        {
+            const string documentId = "doc1";
+            var metadataPath = BuildDocumentMetadataPath(PackageUid, documentId);
+
+            var package = OneSpanSign.Sdk.Builder.PackageBuilder.NewPackageNamed("Test Package")
+                .WithDocument(OneSpanSign.Sdk.Builder.DocumentBuilder.NewDocumentNamed("Test Document")
+                    .WithId(documentId)
+                    .WithData(new Dictionary<string, object>()))
+                .Build();
+            package.Id = new PackageId(PackageUid);
+
+            var serverError = new ServerError { Code = 400, Message = "validation error" };
+            clientMock.Setup(c => c.Put(metadataPath, It.IsAny<string>()))
+                .Throws(new OssServerException("server error", serverError, null));
+
+            Assert.Throws<OssServerException>(() =>
+                packageService.ForceUpdateDocumentMetadata(package, package.GetDocument("Test Document")));
+        }
+
+        private static string BuildDocumentMetadataPath(string packageUid, string documentId) =>
+            new UrlTemplate(BaseUrl).UrlFor(UrlTemplate.DOCUMENT_METADATA_PATH)
+                .Replace("{packageId}", packageUid)
+                .Replace("{documentId}", documentId).Build();
+
         private static string BuildPackagePath(string uid) =>
             new UrlTemplate(BaseUrl).UrlFor(UrlTemplate.PACKAGE_ID_PATH)
                 .Replace("{packageId}", uid).Build();
