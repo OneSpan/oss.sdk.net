@@ -5,10 +5,6 @@ using OneSpanSign.Sdk;
 
 namespace SDK.Tests
 {
-    /// <summary>
-    /// Covers every extraction status / reason code combination the server reports, on both the
-    /// verification result and the nested extraction result.
-    /// </summary>
     [TestFixture]
     public class ExtractionOutcomeTest
     {
@@ -53,11 +49,6 @@ namespace SDK.Tests
                 ExtractionStatus.FAILED, ExtractionReasonCode.EXTRACTION_ERROR);
         }
 
-        /// <summary>
-        /// A status or reason code introduced by a newer server release reads as null rather than
-        /// throwing or falling back to the first declared value, so an older SDK keeps working
-        /// against a newer server.
-        /// </summary>
         [Test]
         public void UnknownEnumValuesAreReadAsNull()
         {

@@ -60,10 +60,6 @@ namespace SDK.Tests
             StringAssert.Contains("\"status\":\"PASS\"", sdkResultJson);
         }
 
-        /// <summary>
-        /// The server no longer sends the preflight object modelled by newer verification work,
-        /// and never sent someFutureField; neither may break an existing consumer.
-        /// </summary>
         [Test]
         public void UnmodelledFieldsAreIgnored()
         {
@@ -86,10 +82,6 @@ namespace SDK.Tests
             Assert.AreEqual(ExtractionStatus.COMPLETED, result.ExtractionResult.ExtractionStatus);
         }
 
-        /// <summary>
-        /// extractionFailed and extractionErrorCode were replaced by the structured outcome, but a
-        /// payload from an older server must still deserialize without error.
-        /// </summary>
         [Test]
 #pragma warning disable 618
         public void LegacyExtractionFailureFieldsStillDeserialize()

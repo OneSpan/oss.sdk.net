@@ -43,10 +43,6 @@ namespace SDK.Tests.Services
             Assert.AreEqual("passport", results[0].FileName);
         }
 
-        /// <summary>
-        /// Exercises the real service parse path using the same serializer configuration
-        /// OssClient builds in production, rather than a bare JsonConvert call.
-        /// </summary>
         [Test]
         public void GetAttachmentVerificationResultsParsesStructuredExtractionOutcome()
         {

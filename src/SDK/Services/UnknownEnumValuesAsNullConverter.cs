@@ -3,16 +3,6 @@ using Newtonsoft.Json;
 
 namespace OneSpanSign.API
 {
-    /// <summary>
-    /// Reads an unrecognized enum name as <c>null</c>, so that a value added by a newer server
-    /// release does not break deserialization in an older SDK.
-    /// <para>
-    /// This differs from <see cref="UnknownEnumValuesHandleConverter"/>, which falls back to the
-    /// first declared value of the enum. That fallback is unsafe for a status whose first value
-    /// means success, because an unrecognized status would be reported as a successful outcome.
-    /// </para>
-    /// <para>Intended for nullable enum properties only.</para>
-    /// </summary>
     public class UnknownEnumValuesAsNullConverter : JsonConverter
     {
         public override bool CanConvert(Type objectType)
