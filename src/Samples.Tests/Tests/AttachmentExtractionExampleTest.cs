@@ -42,10 +42,10 @@ namespace SDK.Examples
                     "Verification result FileName should not be null");
                 Assert.IsNotNull(result.ExtractionStatus,
                     "Extraction status should always be reported by the server");
-                if (result.ExtractionStatus != ExtractionStatus.COMPLETED)
+                if (result.ExtractionStatus == ExtractionStatus.COMPLETED)
                 {
-                    Assert.IsNotNull(result.ReasonCode,
-                        "A non-completed extraction should carry a reason code");
+                    Assert.IsNull(result.ReasonCode,
+                        "A completed extraction should not carry a reason code");
                 }
                 if (result.ExtractionResult != null)
                 {

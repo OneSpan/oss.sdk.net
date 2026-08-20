@@ -86,6 +86,18 @@ namespace SDK.Tests.Services
         }
 
         [Test]
+        public void GetAttachmentVerificationResultsReturnsEmptyListWhenResponseIsEmpty()
+        {
+            clientMock.Setup(c => c.Get(verificationResultsPath)).Returns("");
+
+            var results = service.GetAttachmentVerificationResults(new PackageId(PackageUidValue));
+
+            clientMock.Verify(c => c.Get(verificationResultsPath), Times.Once);
+            Assert.IsNotNull(results);
+            Assert.AreEqual(0, results.Count);
+        }
+
+        [Test]
         public void GetAttachmentVerificationResultsPreservesServerErrorWhenServerExceptionIsThrown()
         {
             ServerError serverError = new ServerError { MessageKey = "error.key", Message = "Something failed" };
