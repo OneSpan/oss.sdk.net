@@ -232,7 +232,7 @@ namespace OneSpanSign.Sdk
             try
             {
                 string response = restClient.Get(path);
-                if (response == null)
+                if (string.IsNullOrEmpty(response))
                 {
                     return new List<AttachmentVerificationResult>();
                 }

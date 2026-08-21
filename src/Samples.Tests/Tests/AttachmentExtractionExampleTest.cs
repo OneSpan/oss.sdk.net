@@ -40,6 +40,13 @@ namespace SDK.Examples
                     "Verification result AttachmentUuid should not be null");
                 Assert.IsNotNull(result.FileName,
                     "Verification result FileName should not be null");
+                Assert.IsNotNull(result.ExtractionStatus,
+                    "Extraction status should always be reported by the server");
+                if (result.ExtractionStatus == ExtractionStatus.COMPLETED)
+                {
+                    Assert.IsNull(result.ReasonCode,
+                        "A completed extraction should not carry a reason code");
+                }
                 if (result.ExtractionResult != null)
                 {
                     Assert.IsNotNull(result.ExtractionResult.ProviderName,

@@ -44,9 +44,51 @@ namespace SDK.Tests.Services
         }
 
         [Test]
+        public void GetAttachmentVerificationResultsParsesStructuredExtractionOutcome()
+        {
+            JsonSerializerSettings productionSettings = new JsonSerializerSettings
+            {
+                NullValueHandling = NullValueHandling.Ignore,
+                DateTimeZoneHandling = DateTimeZoneHandling.Utc
+            };
+            productionSettings.Converters.Add(new CultureInfoJsonCreationConverter());
+            AttachmentRequirementService serviceWithProductionSettings =
+                new AttachmentRequirementService(clientMock.Object, BaseUrl, productionSettings);
+
+            clientMock.Setup(c => c.Get(verificationResultsPath)).Returns("[{" +
+                "\"attachmentUuid\":\"attachment-uid\"," +
+                "\"extractionStatus\":\"NOT_PERFORMED\"," +
+                "\"reasonCode\":\"CLASSIFICATION_UNKNOWN\"," +
+                "\"extractionResult\":{" +
+                    "\"extractionStatus\":\"NOT_PERFORMED\"," +
+                    "\"reasonCode\":\"CLASSIFICATION_UNKNOWN\"" +
+                "}}]");
+
+            var results = serviceWithProductionSettings
+                .GetAttachmentVerificationResults(new PackageId(PackageUidValue));
+
+            Assert.AreEqual(ExtractionStatus.NOT_PERFORMED, results[0].ExtractionStatus);
+            Assert.AreEqual(ExtractionReasonCode.CLASSIFICATION_UNKNOWN, results[0].ReasonCode);
+            Assert.AreEqual(ExtractionStatus.NOT_PERFORMED, results[0].ExtractionResult.ExtractionStatus);
+            Assert.AreEqual(ExtractionReasonCode.CLASSIFICATION_UNKNOWN, results[0].ExtractionResult.ReasonCode);
+        }
+
+        [Test]
         public void GetAttachmentVerificationResultsReturnsEmptyListWhenResponseIsNull()
         {
             clientMock.Setup(c => c.Get(verificationResultsPath)).Returns((string)null);
+
+            var results = service.GetAttachmentVerificationResults(new PackageId(PackageUidValue));
+
+            clientMock.Verify(c => c.Get(verificationResultsPath), Times.Once);
+            Assert.IsNotNull(results);
+            Assert.AreEqual(0, results.Count);
+        }
+
+        [Test]
+        public void GetAttachmentVerificationResultsReturnsEmptyListWhenResponseIsEmpty()
+        {
+            clientMock.Setup(c => c.Get(verificationResultsPath)).Returns("");
 
             var results = service.GetAttachmentVerificationResults(new PackageId(PackageUidValue));
 
