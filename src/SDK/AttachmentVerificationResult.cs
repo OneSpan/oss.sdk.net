@@ -1,4 +1,6 @@
+using System;
 using Newtonsoft.Json;
+using OneSpanSign.API;
 
 namespace OneSpanSign.Sdk
 {
@@ -22,9 +24,19 @@ namespace OneSpanSign.Sdk
         [JsonProperty("extractionResult")]
         public ExtractionResult ExtractionResult { get; set; }
 
+        [JsonProperty("extractionStatus")]
+        [JsonConverter(typeof(UnknownEnumValuesAsNullConverter))]
+        public ExtractionStatus? ExtractionStatus { get; set; }
+
+        [JsonProperty("reasonCode")]
+        [JsonConverter(typeof(UnknownEnumValuesAsNullConverter))]
+        public ExtractionReasonCode? ReasonCode { get; set; }
+
+        [Obsolete("No longer returned by the server; use ExtractionStatus instead. Always false against a server that reports the structured outcome.")]
         [JsonProperty("extractionFailed")]
         public bool ExtractionFailed { get; set; }
 
+        [Obsolete("No longer returned by the server; use ReasonCode instead. Always null against a server that reports the structured outcome.")]
         [JsonProperty("extractionErrorCode")]
         public string ExtractionErrorCode { get; set; }
 
