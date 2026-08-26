@@ -72,6 +72,11 @@ namespace OneSpanSign.Sdk.Builder
                     .OnPage(0);
         }
 
+        public static SignatureBuilder AcceptanceFor(PlaceholderSigner placeholderSigner)
+        {
+            return AcceptanceFor(new Placeholder(placeholderSigner.Id));
+        }
+
         public static SignatureBuilder SignatureFor(GroupId groupId)
         {
             return new SignatureBuilder(groupId);
@@ -80,6 +85,11 @@ namespace OneSpanSign.Sdk.Builder
         public static SignatureBuilder SignatureFor(Placeholder roleId)
         {
             return new SignatureBuilder(roleId);
+        }
+
+        public static SignatureBuilder SignatureFor(PlaceholderSigner placeholderSigner)
+        {
+            return SignatureFor(new Placeholder(placeholderSigner.Id));
         }
 
         public static SignatureBuilder SignatureFor(string signerEmail)
@@ -102,6 +112,11 @@ namespace OneSpanSign.Sdk.Builder
             return new SignatureBuilder(roleId).WithStyle(SignatureStyle.INITIALS);
         }
 
+        public static SignatureBuilder InitialsFor(PlaceholderSigner placeholderSigner)
+        {
+            return InitialsFor(new Placeholder(placeholderSigner.Id));
+        }
+
         public static SignatureBuilder CaptureFor(string signerEmail)
         {
             return new SignatureBuilder(signerEmail).WithStyle(SignatureStyle.HAND_DRAWN);
@@ -115,6 +130,11 @@ namespace OneSpanSign.Sdk.Builder
         public static SignatureBuilder CaptureFor(Placeholder roleId)
         {
             return new SignatureBuilder(roleId).WithStyle(SignatureStyle.HAND_DRAWN);
+        }
+
+        public static SignatureBuilder CaptureFor(PlaceholderSigner placeholderSigner)
+        {
+            return CaptureFor(new Placeholder(placeholderSigner.Id));
         }
 
         public static SignatureBuilder MobileCaptureFor(string signerEmail)
@@ -132,6 +152,11 @@ namespace OneSpanSign.Sdk.Builder
             return new SignatureBuilder(roleId).WithStyle(SignatureStyle.MOBILE_CAPTURE);
         }
 
+        public static SignatureBuilder MobileCaptureFor(PlaceholderSigner placeholderSigner)
+        {
+            return MobileCaptureFor(new Placeholder(placeholderSigner.Id));
+        }
+
         public static SignatureBuilder signature(SignatureStyle signatureStyle, String signerEmail) {
             return new SignatureBuilder(signerEmail).WithStyle(signatureStyle);
         }
@@ -142,6 +167,10 @@ namespace OneSpanSign.Sdk.Builder
 
         public static SignatureBuilder signature(SignatureStyle signatureStyle, Placeholder roleId) {
             return new SignatureBuilder(roleId).WithStyle(signatureStyle);
+        }
+
+        public static SignatureBuilder signature(SignatureStyle signatureStyle, PlaceholderSigner placeholderSigner) {
+            return signature(signatureStyle, new Placeholder(placeholderSigner.Id));
         }
         
         public SignatureBuilder WithId(SignatureId id)

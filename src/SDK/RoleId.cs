@@ -1,5 +1,3 @@
-using System;
-
 namespace OneSpanSign.Sdk
 {
     public class Placeholder

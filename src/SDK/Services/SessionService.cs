@@ -1,5 +1,5 @@
 using System;
-using System.Web;
+using System.Net;
 using Newtonsoft.Json;
 using OneSpanSign.Sdk.Internal;
 
@@ -43,24 +43,21 @@ namespace OneSpanSign.Sdk.Services
 		/// <param name="signer">The signer to create a session token for.</param>
 		public SessionToken CreateSignerSessionToken (PackageId packageId, string signerId)
 		{
-
 			string path = new UrlTemplate(baseUrl).UrlFor (UrlTemplate.SESSION_PATH)
                 .Replace ("{packageId}", packageId.Id)
-                .Replace ("{signerId}", HttpUtility.UrlEncode(signerId))
+                .Replace ("{signerId}", WebUtility.UrlEncode(signerId))
                 .Build ();
 
 			try {
-				//string response = Converter.ToString (HttpMethods.PostHttp (apiToken, path, new byte[0]));
 				string response = restClient.Post(path, "");
 				return JsonConvert.DeserializeObject<SessionToken> (response);
             }
             catch (OssServerException e) {
                 throw new OssServerException ("Could not create a session token for signer." + " Exception: " + e.Message, e.ServerError, e);
-            } 
+            }
             catch (Exception e) {
 				throw new OssException ("Could not create a session token for signer." + " Exception: " + e.Message, e);
 			}
 		}
 	}
 }
-

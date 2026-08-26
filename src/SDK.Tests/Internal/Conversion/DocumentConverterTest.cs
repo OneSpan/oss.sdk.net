@@ -132,6 +132,31 @@ namespace SDK.Tests
         }
 
         [Test()]
+        public void ConvertToAPIWithDesignerReadOnly()
+        {
+            sdkDocument1 = DocumentBuilder.NewDocumentNamed( "sdkDocument" )
+                    .WithId( "sdkDocumentId" )
+                    .FromFile(file.FullName)
+                    .WithDesignerReadOnly(true)
+                    .Build();
+
+            apiDocument1 = new DocumentConverter(sdkDocument1).ToAPIDocument();
+
+            Assert.AreEqual(true, apiDocument1.DesignerReadOnly);
+        }
+
+        [Test()]
+        public void ConvertToSDKWithDesignerReadOnly()
+        {
+            apiDocument1 = CreateTypicalAPIDocument();
+            apiDocument1.DesignerReadOnly = true;
+
+            sdkDocument1 = new DocumentConverter(apiDocument1, apiPackage).ToSDKDocument();
+
+            Assert.AreEqual(true, sdkDocument1.DesignerReadOnly);
+        }
+
+        [Test()]
         public void ConvertToAPIWithBase64Content()
         {
             sdkDocument1 = DocumentBuilder.NewDocumentNamed( "sdkDocumentNullDes" )

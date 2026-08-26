@@ -11,11 +11,11 @@ namespace OneSpanSign.Sdk
 {
     internal class AttachmentRequirementApiClient
     {
-        private RestClient restClient;
+        private IRestClient restClient;
         private JsonSerializerSettings jsonSettings;
         private string baseUrl;
 
-        public AttachmentRequirementApiClient(RestClient restClient, string apiUrl, JsonSerializerSettings jsonSettings)
+        public AttachmentRequirementApiClient(IRestClient restClient, string apiUrl, JsonSerializerSettings jsonSettings)
         {
             this.restClient = restClient;
             this.jsonSettings = jsonSettings;
@@ -220,6 +220,31 @@ namespace OneSpanSign.Sdk
                 {
                     throw new OssException ("Could not upload attachment for signer." + " Exception: " + e.Message, e);
                 }
+            }
+        }
+
+        public IList<AttachmentVerificationResult> GetAttachmentVerificationResults(string packageId)
+        {
+            string path = new UrlTemplate(baseUrl).UrlFor(UrlTemplate.ATTACHMENT_VERIFICATION_RESULTS_PATH)
+                .Replace("{packageId}", packageId)
+                .Build();
+
+            try
+            {
+                string response = restClient.Get(path);
+                if (string.IsNullOrEmpty(response))
+                {
+                    return new List<AttachmentVerificationResult>();
+                }
+                return JsonConvert.DeserializeObject<IList<AttachmentVerificationResult>>(response, jsonSettings);
+            }
+            catch (OssServerException e)
+            {
+                throw new OssServerException("Could not retrieve attachment verification results." + " Exception: " + e.Message, e.ServerError, e);
+            }
+            catch (Exception e)
+            {
+                throw new OssException("Could not retrieve attachment verification results." + " Exception: " + e.Message, e);
             }
         }
 

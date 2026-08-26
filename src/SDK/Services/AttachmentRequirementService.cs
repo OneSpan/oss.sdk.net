@@ -16,7 +16,7 @@ namespace OneSpanSign.Sdk
         private AttachmentRequirementApiClient apiClient;
         private PackageService packageService;
 
-        internal AttachmentRequirementService(RestClient restClient, string baseUrl, JsonSerializerSettings settings)
+        internal AttachmentRequirementService(IRestClient restClient, string baseUrl, JsonSerializerSettings settings)
         {
             packageService = new PackageService(restClient, baseUrl, settings);
             apiClient = new AttachmentRequirementApiClient(restClient, baseUrl, settings);
@@ -128,6 +128,11 @@ namespace OneSpanSign.Sdk
         public void DeleteAttachmentFile(PackageId packageId, string attachmentId, Int32 fileId, string signerSessionId)
         {
             apiClient.DeletaAttachmentFile (packageId, attachmentId, fileId, signerSessionId);
+        }
+
+        public IList<AttachmentVerificationResult> GetAttachmentVerificationResults(PackageId packageId)
+        {
+            return apiClient.GetAttachmentVerificationResults(packageId.Id);
         }
     }
 }

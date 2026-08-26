@@ -1,4 +1,4 @@
-image: mcr.microsoft.com/dotnet/core/sdk:3.1
+image: mcr.microsoft.com/dotnet/sdk:10.0
 
 stages:
     - build
@@ -8,10 +8,11 @@ stages:
 
 before_script:
     - dotnet restore ./src
-    
+
 build:
     stage: build
     script:
+        # Builds all three SDK target frameworks: netstandard2.0, net8.0, net10.0
         - dotnet build ./src -c Release
     artifacts:
         expire_in: 1 hour
@@ -23,14 +24,18 @@ test:
     stage: test
     variables:
         ALLOW_INVALID_SSL_CERTS: "true"
-    script: 
+    script:
         - cp "$SIGNERS_PROPS" ./src/Samples/signers.properties
-        - "dotnet test ./src -c Release"
+        # Run tests against the net10.0 (HttpClient) code path.
+        # net48 (WebRequest / netstandard2.0 path) requires Windows and is
+        # covered by Build.ps1 on developer machines.
+        - dotnet test ./src/SDK.Tests -c Release --framework net10.0 --no-build
 
 packNuget:
     stage: packNuget
     script:
-        - dotnet pack ./src/SDK -c Release -o ./artifacts
+        # The produced .nupkg contains lib/netstandard2.0, lib/net8.0, lib/net10.0
+        - dotnet pack ./src/SDK -c Release --no-build -o ./artifacts
     artifacts:
         expire_in: 1 year
         paths:
@@ -41,4 +46,3 @@ deployNuget:
     script:
         - dotnet nuget push ./artifacts/*.nupkg -s https://api.nuget.org/v3/index.json -k "$NUGET_KEY"
     when: manual
-    

@@ -8,6 +8,14 @@ namespace OneSpanSign.Sdk.Internal
         {
         }
 
+        public static void GenericAssert(bool condition, String message)
+        {
+            if (!condition)
+            {
+                throw new OssException(message, null);
+            }
+        }
+
         public static void NotEmptyOrNull(String assertedValue, String argumentName)
         {
             if (assertedValue == null || assertedValue.Trim().Length == 0)

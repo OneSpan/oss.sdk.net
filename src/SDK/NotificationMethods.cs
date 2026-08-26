@@ -37,7 +37,10 @@ namespace OneSpanSign.Sdk
 		public void SetPrimaryMethods(params NotificationMethod[] methods)
 		{
 			this.primary.Clear();
-			this.primary.Add(NotificationMethod.EMAIL);
+			if (methods == null || methods.Length == 0)
+			{
+				this.primary.Add(NotificationMethod.EMAIL);
+			}
 			this.AddPrimaryMethods(methods);
 		}
 

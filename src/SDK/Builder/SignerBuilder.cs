@@ -29,6 +29,10 @@ namespace OneSpanSign.Sdk.Builder
         private Group group;
         private List<GroupMember> groupMembers = new List<GroupMember>();
 
+        private bool newPlaceholderSigner;
+        private bool specifier;
+        private bool carbonCopyRecipient;
+
         private SignerBuilder(string signerEmail)
         {
             this.signerEmail = signerEmail;
@@ -49,7 +53,17 @@ namespace OneSpanSign.Sdk.Builder
             this.placeholderName = placeholder.Name;
             this.signingOrder = placeholder.SigningOrder;
         }
-        
+
+        private SignerBuilder(PlaceholderSigner placeholder)
+        {
+            this.signerEmail = null;
+            this.groupId = null;
+            this.id = placeholder.Id;
+            this.placeholderName = placeholder.Name;
+            this.signingOrder = placeholder.SigningOrder;
+            this.newPlaceholderSigner = true;
+        }
+
         private SignerBuilder(string adHocGroupName, string adHocGroupSignerId)
         {
             this.id = adHocGroupSignerId;
@@ -58,6 +72,11 @@ namespace OneSpanSign.Sdk.Builder
         }
 
         public static SignerBuilder NewSignerPlaceholder(Placeholder placeholder)
+        {
+            return new SignerBuilder(placeholder);
+        }
+
+        public static SignerBuilder NewPlaceholderSigner(PlaceholderSigner placeholder)
         {
             return new SignerBuilder(placeholder);
         }
@@ -123,6 +142,38 @@ namespace OneSpanSign.Sdk.Builder
         public SignerBuilder Replacing(Placeholder placeholder)
         {
             this.id = placeholder.Id;
+            return this;
+        }
+
+        public SignerBuilder Replacing(PlaceholderSigner placeholder)
+        {
+            this.id = placeholder.Id;
+            return this;
+        }
+
+        public SignerBuilder WithSpecifier(bool specifier)
+        {
+            this.specifier = specifier;
+            return this;
+        }
+
+        /// <summary>
+        /// Marks this recipient as a carbon copy recipient.
+        ///
+        /// A carbon copy recipient receives a copy of the completed documents but never
+        /// participates in the signing ceremony. They are excluded from the signing order and are
+        /// only notified once the transaction is complete, so no signatures or fields may be
+        /// assigned to them.
+        ///
+        /// A carbon copy recipient must be a regular recipient with an email address. It cannot
+        /// be a placeholder, a group or ad hoc group recipient, a notary, a recipient specifier,
+        /// or a reassignable recipient, and it cannot be given attachment requirements. Carbon copy
+        /// recipients are also not supported in in-person transactions.
+        /// </summary>
+        /// <returns>the signer builder itself</returns>
+        public SignerBuilder AsCarbonCopyRecipient()
+        {
+            this.carbonCopyRecipient = true;
             return this;
         }
 
@@ -278,7 +329,7 @@ namespace OneSpanSign.Sdk.Builder
             result.Id = id;
             result.Attachments = attachments;
             result.LocalLanguage = localLanguage;
-
+            result.Specifier = specifier;
             return result;
         }
         
@@ -308,6 +359,8 @@ namespace OneSpanSign.Sdk.Builder
             result.Message = message;
             result.Attachments = attachments;
             result.LocalLanguage = localLanguage;
+            result.NewPlaceholderSigner = newPlaceholderSigner;
+            result.Specifier = specifier;
             return result;
         }
 
@@ -338,12 +391,19 @@ namespace OneSpanSign.Sdk.Builder
             result.Attachments = attachments;
             result.KnowledgeBasedAuthentication = knowledgeBasedAuthentication;
             result.LocalLanguage = localLanguage;
+            result.Specifier = specifier;
+            result.CarbonCopyRecipient = carbonCopyRecipient;
             return result;
         }
 
 
         public Signer Build()
         {
+            if (carbonCopyRecipient)
+            {
+                AssertCarbonCopyRecipientIsValid();
+            }
+
             Signer result = null;
             if (isGroupSigner())
             {
@@ -362,6 +422,22 @@ namespace OneSpanSign.Sdk.Builder
             }
 
             return result;
+        }
+
+        /// <summary>
+        /// Mirrors the constraints the server enforces on carbon copy recipients so that conflicting
+        /// settings are reported at build time rather than as a validation error on the API call.
+        /// </summary>
+        private void AssertCarbonCopyRecipientIsValid()
+        {
+            Asserts.GenericAssert(!isGroupSigner(), "a carbon copy recipient cannot be a group signer");
+            Asserts.GenericAssert(!newPlaceholderSigner && !isPlaceholder(), "a carbon copy recipient cannot be a placeholder");
+            // Safe to evaluate only once the group and placeholder cases are ruled out, since
+            // isAdHocGroupSigner() dereferences signerEmail.
+            Asserts.GenericAssert(!isAdHocGroupSigner(), "a carbon copy recipient cannot be an adhoc group signer");
+            Asserts.GenericAssert(!canChangeSigner, "a carbon copy recipient cannot be reassignable");
+            Asserts.GenericAssert(!specifier, "a carbon copy recipient cannot be a recipient specifier");
+            Asserts.GenericAssert(attachments.Count == 0, "a carbon copy recipient cannot have attachment requirements");
         }
 
         private bool isGroupSigner()

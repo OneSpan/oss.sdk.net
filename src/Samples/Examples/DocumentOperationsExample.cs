@@ -74,6 +74,12 @@ namespace SDK.Examples
             RetrievedUpdatedDocument = ossClient.PackageService.GetDocumentMetadata(RetrievedPackage, document.Id);
             RetrievedPackageWithUpdatedDocument = ossClient.GetPackage(packageId);
 
+            //This is how you would force-update a document's custom metadata (its data map) regardless of
+            //the transaction's status. Requires the account's manipulateMetadata feature to be enabled.
+            document.Data = new Dictionary<string, object> { { "customerId", "12345" } };
+            ossClient.PackageService.ForceUpdateDocumentMetadata(RetrievedPackage, document);
+            Console.WriteLine("Document metadata was force-updated");
+
 			//This is how you would delete a document from a package
 			ossClient.PackageService.DeleteDocument(packageId, document.Id);
 

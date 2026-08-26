@@ -243,10 +243,45 @@ namespace OneSpanSign.Sdk
 			return email.EndsWith(SignerUtil.AD_HOC_GROUP_SIGNER_EMAIL_PREFIX);
 		}
 
-		public string LocalLanguage 
+		public string LocalLanguage
         {
             get;
-            set; 
+            set;
+        }
+
+        public bool Specifier
+        {
+            get;
+            set;
+        }
+
+        /// <summary>
+        /// Indicates whether this recipient is a carbon copy recipient.
+        ///
+        /// A carbon copy recipient receives a copy of the completed documents but never
+        /// participates in the signing ceremony. Carbon copy recipients are excluded from the
+        /// signing order and are only notified once the transaction is complete.
+        /// </summary>
+        public bool CarbonCopyRecipient
+        {
+            get;
+            set;
+        }
+
+        public bool IsCarbonCopyRecipient()
+        {
+            return CarbonCopyRecipient;
+        }
+
+        public bool NewPlaceholderSigner
+        {
+            get;
+            set;
+        }
+
+        public bool IsNewPlaceholderSigner()
+        {
+            return NewPlaceholderSigner;
         }
     }
 }

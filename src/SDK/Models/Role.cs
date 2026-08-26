@@ -8,7 +8,10 @@ namespace OneSpanSign.API
 	
 	internal class Role
 	{
-		
+        // Role type values
+        public const string TYPE_PLACEHOLDER = "PLACEHOLDER";
+        public const string TYPE_CARBON_COPY_RECIPIENT = "CARBON_COPY_RECIPIENT";
+
 		// Fields
 		private IList<AttachmentRequirement> _attachmentRequirements = new List<AttachmentRequirement>();
 		private IList<Signer> _signers = new List<Signer>();
@@ -139,8 +142,13 @@ namespace OneSpanSign.API
     {
                 get; set;
         }
-    
-		
-	
+
+    [JsonProperty("specifier")]
+    public Nullable<Boolean> Specifier
+    {
+                get; set;
+        }
+
+
 	}
 }

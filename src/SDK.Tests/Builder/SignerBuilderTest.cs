@@ -84,6 +84,23 @@ namespace SDK.Tests
 		}
 
 		[Test]
+		public void CanAddSMSOnly()
+		{
+			Signer signer = SignerBuilder.NewSignerWithEmail ("billy@bob.com")
+				.WithFirstName ("Billy")
+				.WithLastName ("Bob")
+				.WithNotificationMethods(NotificationMethodsBuilder.NewNotificationMethods()
+					.WithPhoneNumber("+16356489274")
+					.WithPrimaryMethods(NotificationMethod.SMS)
+				)
+				.Build ();
+
+			Assert.NotNull(signer.NotificationMethods);
+			Assert.IsTrue(signer.NotificationMethods.Primary.Contains(NotificationMethod.SMS));
+			Assert.IsFalse(signer.NotificationMethods.Primary.Contains(NotificationMethod.EMAIL));
+		}
+
+		[Test]
 		public void AuthenticationDefaultsToEmail()
 		{
 			Signer signer = SignerBuilder.NewSignerWithEmail ("billy@bob.com")
@@ -244,6 +261,97 @@ namespace SDK.Tests
 			Assert.AreEqual(signer.GetAttachmentRequirement("Medicare card").Description, attachmentRequirement2.Description);
 			Assert.AreEqual(signer.GetAttachmentRequirement("Medicare card").Required, attachmentRequirement2.Required);
 			Assert.AreEqual(signer.GetAttachmentRequirement("Medicare card").Status.ToString(), attachmentRequirement2.Status.ToString());
+		}
+
+		[Test]
+		public void CanBuildCarbonCopyRecipient()
+		{
+			Signer signer = SignerBuilder.NewSignerWithEmail("carboncopy@blow.com")
+				.WithFirstName("Joe")
+				.WithLastName("Blow")
+				.AsCarbonCopyRecipient()
+				.Build();
+
+			Assert.IsTrue(signer.CarbonCopyRecipient);
+		}
+
+		[Test]
+		public void SignerIsNotACarbonCopyRecipientByDefault()
+		{
+			Signer signer = SignerBuilder.NewSignerWithEmail("carboncopy@blow.com")
+				.WithFirstName("Joe")
+				.WithLastName("Blow")
+				.Build();
+
+			Assert.IsFalse(signer.CarbonCopyRecipient);
+		}
+
+		[Test]
+		public void CarbonCopyRecipientCannotBeAPlaceholder()
+		{
+			Assert.Throws<OssException>(() => SignerBuilder.NewSignerPlaceholder(new Placeholder("placeholderId"))
+				.AsCarbonCopyRecipient()
+				.Build());
+		}
+
+		[Test]
+		public void CarbonCopyRecipientCannotBeANewPlaceholderSigner()
+		{
+			Assert.Throws<OssException>(() => SignerBuilder.NewPlaceholderSigner(new PlaceholderSigner("placeholderId"))
+				.AsCarbonCopyRecipient()
+				.Build());
+		}
+
+		[Test]
+		public void CarbonCopyRecipientCannotBeAGroupSigner()
+		{
+			Assert.Throws<OssException>(() => SignerBuilder.NewSignerFromGroup(new GroupId("groupId"))
+				.AsCarbonCopyRecipient()
+				.Build());
+		}
+
+		[Test]
+		public void CarbonCopyRecipientCannotBeAnAdHocGroupSigner()
+		{
+			Assert.Throws<OssException>(() => SignerBuilder.NewAdHocGroupSigner("adHocGroupName", "adHocGroupSignerId")
+				.AsCarbonCopyRecipient()
+				.Build());
+		}
+
+		[Test]
+		public void CarbonCopyRecipientCannotBeReassignable()
+		{
+			Assert.Throws<OssException>(() => SignerBuilder.NewSignerWithEmail("carboncopy@blow.com")
+				.WithFirstName("Joe")
+				.WithLastName("Blow")
+				.CanChangeSigner()
+				.AsCarbonCopyRecipient()
+				.Build());
+		}
+
+		[Test]
+		public void CarbonCopyRecipientCannotBeASpecifier()
+		{
+			Assert.Throws<OssException>(() => SignerBuilder.NewSignerWithEmail("carboncopy@blow.com")
+				.WithFirstName("Joe")
+				.WithLastName("Blow")
+				.WithSpecifier(true)
+				.AsCarbonCopyRecipient()
+				.Build());
+		}
+
+		[Test]
+		public void CarbonCopyRecipientCannotHaveAttachmentRequirements()
+		{
+			Assert.Throws<OssException>(() => SignerBuilder.NewSignerWithEmail("carboncopy@blow.com")
+				.WithFirstName("Joe")
+				.WithLastName("Blow")
+				.AsCarbonCopyRecipient()
+				.WithAttachmentRequirement(AttachmentRequirementBuilder.NewAttachmentRequirementWithName("driver license")
+					.WithDescription("Please upload your scanned driver license.")
+					.IsRequiredAttachment()
+					.Build())
+				.Build());
 		}
 	}
 } 	

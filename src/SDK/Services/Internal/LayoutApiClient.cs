@@ -1,8 +1,8 @@
-﻿using System;
+using System;
+using System.Net;
 using OneSpanSign.Sdk.Internal;
 using Newtonsoft.Json;
 using OneSpanSign.API;
-using System.Web;
 
 namespace OneSpanSign.Sdk
 {
@@ -120,7 +120,7 @@ namespace OneSpanSign.Sdk
             string path = new UrlTemplate(baseUrl).UrlFor(UrlTemplate.APPLY_LAYOUT_BY_NAME_PATH)
                 .Replace("{packageId}", packageId)
                 .Replace("{documentId}", documentId)
-                .Replace("{layoutName}", HttpUtility.UrlEncode(layoutName))
+                .Replace("{layoutName}", WebUtility.UrlEncode(layoutName))
                 .Build();
 
             try
@@ -136,7 +136,5 @@ namespace OneSpanSign.Sdk
                 throw new OssException("Could not apply layout." + " Exception: " + e.Message, e);
             }
         }
-
     }
 }
-
