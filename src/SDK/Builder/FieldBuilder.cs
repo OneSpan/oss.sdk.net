@@ -27,6 +27,7 @@ namespace OneSpanSign.Sdk.Builder
         private string id;
         private TextAnchor textAnchor;
         private string tooltip;
+        private ClickableArea clickableArea;
 
         private FieldBuilder ()
         {
@@ -225,7 +226,32 @@ namespace OneSpanSign.Sdk.Builder
             this.tooltip = tooltip;
             return this;
         }
-        
+
+        /// <summary>
+        /// Sets the field's clickable area, in pixels. This is opt-in: if never called,
+        /// no clickable area is sent and none is applied by default.
+        /// </summary>
+        /// <param name="width">the width of the clickable area min="0"</param>
+        /// <param name="height">the height of the clickable area min="0"</param>
+        /// <returns>the field builder itself</returns>
+        public FieldBuilder WithClickableArea (double width, double height)
+        {
+            return WithClickableArea (ClickableAreaBuilder.NewClickableArea ().WithSize (width, height));
+        }
+
+        /// <summary>
+        /// Sets the field's clickable area, allowing the mark's alignment within it to be
+        /// specified. This is opt-in: if never called, no clickable area is sent and none
+        /// is applied by default.
+        /// </summary>
+        /// <param name="builder">the clickable area builder</param>
+        /// <returns>the field builder itself</returns>
+        public FieldBuilder WithClickableArea (ClickableAreaBuilder builder)
+        {
+            this.clickableArea = builder.Build ();
+            return this;
+        }
+
         public Field Build ()
         {
             Field field = new Field ();
@@ -243,6 +269,7 @@ namespace OneSpanSign.Sdk.Builder
             field.Id = id;
             field.TextAnchor = textAnchor;
             field.Tooltip = tooltip;
+            field.ClickableArea = clickableArea;
 
             return field;
         }

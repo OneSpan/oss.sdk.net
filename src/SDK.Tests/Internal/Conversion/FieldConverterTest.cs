@@ -88,6 +88,9 @@ namespace SDK.Tests
             Assert.AreEqual (sdkField1.Width, apiField1.Width);
             Assert.AreEqual (sdkField1.Height, apiField1.Height);
             Assert.AreEqual (sdkField1.Tooltip, apiField1.Tooltip);
+            Assert.AreEqual (sdkField1.ClickableArea.Width, apiField1.ExpandedClickableArea.Width);
+            Assert.AreEqual (sdkField1.ClickableArea.Height, apiField1.ExpandedClickableArea.Height);
+            Assert.AreEqual (sdkField1.ClickableArea.Alignment.Value.ToString (), apiField1.ExpandedClickableArea.Alignment);
         }
 
         [Test ()]
@@ -107,6 +110,9 @@ namespace SDK.Tests
             Assert.AreEqual (sdkField1.Name, apiField1.Name);
             Assert.AreEqual (sdkField1.Page, apiField1.Page);
             Assert.AreEqual (sdkField1.Tooltip, apiField1.Tooltip);
+            Assert.AreEqual (sdkField1.ClickableArea.Width, apiField1.ExpandedClickableArea.Width);
+            Assert.AreEqual (sdkField1.ClickableArea.Height, apiField1.ExpandedClickableArea.Height);
+            Assert.AreEqual (sdkField1.ClickableArea.Alignment.Value.ToString (), apiField1.ExpandedClickableArea.Alignment);
         }
 
         private OneSpanSign.Sdk.Field CreateTypicalSDKField ()
@@ -140,6 +146,9 @@ namespace SDK.Tests
                                     .Build ())
                     .WithValue ("value")
                     .WithTooltip("Tooltip message.")
+                    .WithClickableArea (ClickableAreaBuilder.NewClickableArea ()
+                                        .WithSize (15, 25)
+                                        .WithAlignment (ClickableAreaAlignment.TOP_LEFT))
                     .Build ();
 
             return sdkField;
@@ -162,6 +171,12 @@ namespace SDK.Tests
             apiField.FontSize = 18;
             apiField.Width = 102.0;
             apiField.Tooltip = "Tooltip message";
+            apiField.ExpandedClickableArea = new OneSpanSign.API.FieldClickableArea
+            {
+                Width = 30.0,
+                Height = 35.0,
+                Alignment = "TOP_LEFT"
+            };
 
             return apiField;
         }
