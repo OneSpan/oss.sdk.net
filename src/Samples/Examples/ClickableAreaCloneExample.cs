@@ -7,6 +7,8 @@ namespace SDK.Examples
     /// <summary>
     /// Example demonstrating that a field's clickable area survives being cloned
     /// from a template into a new package via CreatePackageFromTemplate.
+    ///
+    /// The expandedClickableArea feature must be enabled on the account for this example to run.
     /// </summary>
     public class ClickableAreaCloneExample : SDKSample
     {

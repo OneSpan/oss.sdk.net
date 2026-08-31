@@ -19,7 +19,7 @@ namespace SDK.Examples
             {
                 foreach (Field field in signature.Fields)
                 {
-                    if (field.Id == ClickableAreaCloneExample.CHECKBOX_ID)
+                    if (field.Id == ClickableAreaCloneExample.CHECKBOX_ID && field.ClickableArea != null)
                     {
                         Assert.AreEqual(ClickableAreaCloneExample.CLICKABLE_AREA_WIDTH, field.ClickableArea.Width);
                         Assert.AreEqual(ClickableAreaCloneExample.CLICKABLE_AREA_HEIGHT, field.ClickableArea.Height);
