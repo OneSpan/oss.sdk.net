@@ -62,8 +62,9 @@ namespace SDK.Examples
             // Create layout from package
             layoutId = ossClient.LayoutService.CreateLayout(superDuperPackage);
 
-            // Get a list of layouts
-            layouts = ossClient.LayoutService.GetLayouts(Direction.ASCENDING, new PageRequest(1, 100));
+            // Get a list of layouts. Newest first, so the layout created above is on the first
+            // page regardless of how many layouts the account already holds.
+            layouts = ossClient.LayoutService.GetLayouts(Direction.DESCENDING, new PageRequest(1, 10));
 
             // Create a new package to apply document layout to
             DocumentPackage packageFromLayout = PackageBuilder.NewPackageNamed(PackageName)

@@ -433,7 +433,7 @@ namespace OneSpanSign.Sdk
                         proxyConfiguration.GetUserName(), proxyConfiguration.GetPassword());
                 handler.Proxy = proxy;
             }
-            return new HttpClient(handler) { Timeout = TimeSpan.FromMilliseconds(HttpMethods.REQUEST_TIMEOUT) };
+            return new HttpClient(handler) { Timeout = TimeSpan.FromMilliseconds(HttpMethods.RequestTimeout) };
         }
 
 #else
@@ -449,7 +449,7 @@ namespace OneSpanSign.Sdk
             oauthTokenRequest.ContentType = HttpMethods.ESL_ACCEPT_TYPE_APPLICATION_FORM_URLENCODED;
             oauthTokenRequest.Method = "POST";
             oauthTokenRequest.Accept = HttpMethods.ESL_ACCEPT_TYPE_APPLICATION_JSON;
-            oauthTokenRequest.Timeout = HttpMethods.REQUEST_TIMEOUT;
+            oauthTokenRequest.Timeout = HttpMethods.RequestTimeout;
             HttpMethods.SetProxy(oauthTokenRequest);
 
             string grantTypeEntity = HttpMethods.OAUTH_GRANT_TYPE;
@@ -511,7 +511,7 @@ namespace OneSpanSign.Sdk
             apiTokenRequest.ContentType = HttpMethods.ESL_CONTENT_TYPE_APPLICATION_JSON;
             apiTokenRequest.ContentLength = jsonPayloadBytes.Length;
             apiTokenRequest.Accept = HttpMethods.ESL_ACCEPT_TYPE_APPLICATION_JSON;
-            apiTokenRequest.Timeout = HttpMethods.REQUEST_TIMEOUT;
+            apiTokenRequest.Timeout = HttpMethods.RequestTimeout;
             HttpMethods.SetProxy(apiTokenRequest);
 
             using (var dataStream = apiTokenRequest.GetRequestStream())
