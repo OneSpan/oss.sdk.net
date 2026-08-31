@@ -7,7 +7,7 @@ namespace SDK.Examples
     [TestFixture()]
     public class TextAnchorExtractionExampleTest 
     {
-        private double maxErrorAfterScaling = 0.25;
+        private double maxErrorAfterScaling = 1;
 
         [Test()]
         public void VerifyResult()

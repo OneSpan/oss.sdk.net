@@ -16,7 +16,7 @@ namespace OneSpanSign.Sdk.Internal
     {
         // ── Shared constants ───────────────────────────────────────────────────
 
-        public const string ESL_API_VERSION = "11.69.0";
+        public const string ESL_API_VERSION = "11.70.0";
         public const string ESL_API_USER_AGENT = ".Net SDK v" + ESL_API_VERSION;
         private const string ESL_API_VERSION_HEADER = "esl-api-version=" + ESL_API_VERSION;
 
@@ -39,6 +39,36 @@ namespace OneSpanSign.Sdk.Internal
         public const string OAUTH_SENDER_ID = "sender_id";
         public const string OAUTH_DELEGATOR_ID = "delegator_id";
         public const int REQUEST_TIMEOUT = 30000; // 30 seconds
+
+        private static int _requestTimeout = REQUEST_TIMEOUT;
+
+        /// <summary>
+        /// Per-request timeout in milliseconds. Defaults to <see cref="REQUEST_TIMEOUT"/> (30 seconds).
+        /// Raise it for callers that hit slow endpoints — large report queries or wide list pages can
+        /// exceed the default on busy accounts.
+        /// Assigning a new value discards the cached HttpClient so the change takes effect on the next
+        /// request; set it during start-up rather than while requests are in flight.
+        /// </summary>
+        public static int RequestTimeout
+        {
+            get { return _requestTimeout; }
+            set
+            {
+                if (value <= 0)
+                {
+                    throw new ArgumentOutOfRangeException(nameof(value), value,
+                        "RequestTimeout must be a positive number of milliseconds.");
+                }
+
+                if (value == _requestTimeout)
+                {
+                    return;
+                }
+
+                _requestTimeout = value;
+                ResetHttpClients();
+            }
+        }
 
         public static ProxyConfiguration ProxyConfiguration;
 
@@ -80,6 +110,22 @@ namespace OneSpanSign.Sdk.Internal
         private static HttpClient _sslBypassHttpClient;
         private static readonly object _clientLock = new object();
         private static ProxyConfiguration _cachedProxy;
+
+        /// <summary>
+        /// Drops the cached clients so the next request picks up new settings.
+        /// HttpClient.Timeout cannot be changed once a request has been issued, so the instance
+        /// has to be rebuilt rather than mutated.
+        /// </summary>
+        private static void ResetHttpClients()
+        {
+            lock (_clientLock)
+            {
+                _httpClient?.Dispose();
+                _httpClient = null;
+                _sslBypassHttpClient?.Dispose();
+                _sslBypassHttpClient = null;
+            }
+        }
 
         private static HttpClient GetHttpClient()
         {
@@ -143,7 +189,7 @@ namespace OneSpanSign.Sdk.Internal
 
             return new HttpClient(handler)
             {
-                Timeout = TimeSpan.FromMilliseconds(REQUEST_TIMEOUT)
+                Timeout = TimeSpan.FromMilliseconds(RequestTimeout)
             };
         }
 
@@ -399,6 +445,12 @@ namespace OneSpanSign.Sdk.Internal
         // ══════════════════════════════════════════════════════════════════════
         // netstandard2.0  —  HttpWebRequest / WebRequest implementation
         // ══════════════════════════════════════════════════════════════════════
+
+        /// <summary>
+        /// No cached client to reset on this target — each HttpWebRequest reads
+        /// <see cref="RequestTimeout"/> when it is created.
+        /// </summary>
+        private static void ResetHttpClients() { }
 
         /// <summary>
         /// Applies User-Agent and optional SSL bypass to a WebRequest.

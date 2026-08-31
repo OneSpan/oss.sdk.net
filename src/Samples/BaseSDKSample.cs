@@ -7,6 +7,19 @@ namespace SDK.Examples
 {
     public abstract class BaseSDKSample
     {
+        /// <summary>
+        /// Timeout used by the sample suite, in milliseconds. These samples run against a shared
+        /// sandbox where some endpoints (usage reports, wide list pages) routinely take longer than
+        /// the SDK's 30s default, which surfaced as HttpClient timeouts rather than real failures.
+        /// This only affects the samples — the SDK default is unchanged.
+        /// </summary>
+        private const int SAMPLE_REQUEST_TIMEOUT = 120000; // 2 minutes
+
+        static BaseSDKSample()
+        {
+            HttpMethods.RequestTimeout = SAMPLE_REQUEST_TIMEOUT;
+        }
+
         protected OssClient ossClient;
         protected PackageId packageId;
         protected string packageName;
