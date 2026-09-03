@@ -382,6 +382,40 @@ namespace OneSpanSign.Sdk.Services
             }
         }
 
+        /// <summary>
+        /// Updates the role's (signer's) metadata — its data map — via the dedicated role metadata
+        /// endpoint, which applies regardless of the transaction's status when the account's
+        /// manipulateMetadata feature is enabled. The endpoint replaces the role's data map with the
+        /// one supplied on the signer.
+        /// </summary>
+        /// <param name="package">The DocumentPackage (transaction) containing the role.</param>
+        /// <param name="signer">The role (signer) whose data map to send.</param>
+        public void ForceUpdateRoleMetadata(DocumentPackage package, Signer signer)
+        {
+            string path = new UrlTemplate(baseUrl).UrlFor(UrlTemplate.ROLE_METADATA_PATH)
+                .Replace("{packageId}", package.Id.Id)
+                .Replace("{roleId}", signer.Id)
+                .Build();
+
+            // The /metadata endpoint reads the whole request body as the role's data map.
+            // Send the bare data map, not a serialized Role.
+            IDictionary<string, object> metadata = signer.Data ?? new Dictionary<string, object>();
+
+            try
+            {
+                string json = JsonConvert.SerializeObject(metadata, settings);
+                restClient.Put(path, json);
+            }
+            catch (OssServerException e)
+            {
+                throw new OssServerException("Could not update the role's metadata." + " Exception: " + e.Message, e.ServerError, e);
+            }
+            catch (Exception e)
+            {
+                throw new OssException("Could not update the role's metadata." + " Exception: " + e.Message, e);
+            }
+        }
+
         public void OrderDocuments(DocumentPackage package)
         {
             string path = new UrlTemplate(baseUrl).UrlFor(UrlTemplate.DOCUMENT_PATH)

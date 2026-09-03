@@ -429,9 +429,63 @@ namespace SDK.Tests
                 packageService.ForceUpdatePackageMetadata(package));
         }
 
+        [Test]
+        public void ForceUpdateRoleMetadataPutsBareDataMapToMetadataEndpoint()
+        {
+            const string roleId = "role1";
+            var metadataPath = BuildRoleMetadataPath(PackageUid, roleId);
+
+            var signer = OneSpanSign.Sdk.Builder.SignerBuilder.NewSignerWithEmail("john@example.com")
+                .WithFirstName("John")
+                .WithLastName("Smith")
+                .Build();
+            signer.Id = roleId;
+            signer.Data = new Dictionary<string, object> { { "customerId", "12345" } };
+
+            var package = OneSpanSign.Sdk.Builder.PackageBuilder.NewPackageNamed("Test Package").Build();
+            package.Id = new PackageId(PackageUid);
+
+            clientMock.Setup(c => c.Put(metadataPath, It.IsAny<string>())).Returns((string)null);
+
+            packageService.ForceUpdateRoleMetadata(package, signer);
+
+            // Body is the bare data map, not a serialized Role; a single PUT.
+            clientMock.Verify(c => c.Put(metadataPath, "{\"customerId\":\"12345\"}"), Times.Once);
+            clientMock.Verify(c => c.Put(It.IsAny<string>(), It.IsAny<string>()), Times.Once);
+        }
+
+        [Test]
+        public void ForceUpdateRoleMetadataWhenServerErrorThrowsOssServerException()
+        {
+            const string roleId = "role1";
+            var metadataPath = BuildRoleMetadataPath(PackageUid, roleId);
+
+            var signer = OneSpanSign.Sdk.Builder.SignerBuilder.NewSignerWithEmail("john@example.com")
+                .WithFirstName("John")
+                .WithLastName("Smith")
+                .Build();
+            signer.Id = roleId;
+            signer.Data = new Dictionary<string, object>();
+
+            var package = OneSpanSign.Sdk.Builder.PackageBuilder.NewPackageNamed("Test Package").Build();
+            package.Id = new PackageId(PackageUid);
+
+            var serverError = new ServerError { Code = 400, Message = "validation error" };
+            clientMock.Setup(c => c.Put(metadataPath, It.IsAny<string>()))
+                .Throws(new OssServerException("server error", serverError, null));
+
+            Assert.Throws<OssServerException>(() =>
+                packageService.ForceUpdateRoleMetadata(package, signer));
+        }
+
         private static string BuildPackageMetadataPath(string packageUid) =>
             new UrlTemplate(BaseUrl).UrlFor(UrlTemplate.PACKAGE_METADATA_PATH)
                 .Replace("{packageId}", packageUid).Build();
+
+        private static string BuildRoleMetadataPath(string packageUid, string roleId) =>
+            new UrlTemplate(BaseUrl).UrlFor(UrlTemplate.ROLE_METADATA_PATH)
+                .Replace("{packageId}", packageUid)
+                .Replace("{roleId}", roleId).Build();
 
         private static string BuildDocumentMetadataPath(string packageUid, string documentId) =>
             new UrlTemplate(BaseUrl).UrlFor(UrlTemplate.DOCUMENT_METADATA_PATH)

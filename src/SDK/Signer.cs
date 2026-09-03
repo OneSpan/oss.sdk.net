@@ -58,6 +58,16 @@ namespace OneSpanSign.Sdk
 			set;
 		}
 
+		/// <summary>
+		/// The role's (signer's) custom metadata map. Used with
+		/// <c>PackageService.ForceUpdateRoleMetadata</c> to update role metadata via the dedicated
+		/// metadata endpoint regardless of the transaction's status.
+		/// </summary>
+		public IDictionary<string, object> Data {
+			get;
+			set;
+		}
+
         public string PlaceholderName {
             get;
             set;
