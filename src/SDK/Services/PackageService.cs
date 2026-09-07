@@ -351,6 +351,37 @@ namespace OneSpanSign.Sdk.Services
             }
         }
 
+        /// <summary>
+        /// Updates the transaction's (package's) custom metadata — its attributes/data map — via the
+        /// dedicated package metadata endpoint, which applies regardless of the transaction's status
+        /// when the account's manipulateMetadata feature is enabled.
+        /// </summary>
+        /// <param name="package">The DocumentPackage (transaction) whose attributes map to send.</param>
+        public void ForceUpdatePackageMetadata(DocumentPackage package)
+        {
+            string path = new UrlTemplate(baseUrl).UrlFor(UrlTemplate.PACKAGE_METADATA_PATH)
+                .Replace("{packageId}", package.Id.Id)
+                .Build();
+
+            // The /metadata endpoint reads the whole request body as the transaction's data map.
+            // Send the bare data map, not a serialized Package.
+            IDictionary<string, object> metadata = package.Attributes?.Contents ?? new Dictionary<string, object>();
+
+            try
+            {
+                string json = JsonConvert.SerializeObject(metadata, settings);
+                restClient.Put(path, json);
+            }
+            catch (OssServerException e)
+            {
+                throw new OssServerException("Could not update the package's metadata." + " Exception: " + e.Message, e.ServerError, e);
+            }
+            catch (Exception e)
+            {
+                throw new OssException("Could not update the package's metadata." + " Exception: " + e.Message, e);
+            }
+        }
+
         public void OrderDocuments(DocumentPackage package)
         {
             string path = new UrlTemplate(baseUrl).UrlFor(UrlTemplate.DOCUMENT_PATH)
