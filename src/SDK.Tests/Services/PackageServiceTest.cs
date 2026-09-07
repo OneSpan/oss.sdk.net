@@ -392,6 +392,47 @@ namespace SDK.Tests
                 packageService.ForceUpdateDocumentMetadata(package, package.GetDocument("Test Document")));
         }
 
+        [Test]
+        public void ForceUpdatePackageMetadataPutsBareDataMapToMetadataEndpoint()
+        {
+            var metadataPath = BuildPackageMetadataPath(PackageUid);
+
+            var package = OneSpanSign.Sdk.Builder.PackageBuilder.NewPackageNamed("Test Package")
+                .WithAttributes(new DocumentPackageAttributes(new Dictionary<string, object> { { "customerId", "12345" } }))
+                .Build();
+            package.Id = new PackageId(PackageUid);
+
+            clientMock.Setup(c => c.Put(metadataPath, It.IsAny<string>())).Returns((string)null);
+
+            packageService.ForceUpdatePackageMetadata(package);
+
+            // Body is the bare attributes map, not a serialized Package; a single PUT.
+            clientMock.Verify(c => c.Put(metadataPath, "{\"customerId\":\"12345\"}"), Times.Once);
+            clientMock.Verify(c => c.Put(It.IsAny<string>(), It.IsAny<string>()), Times.Once);
+        }
+
+        [Test]
+        public void ForceUpdatePackageMetadataWhenServerErrorThrowsOssServerException()
+        {
+            var metadataPath = BuildPackageMetadataPath(PackageUid);
+
+            var package = OneSpanSign.Sdk.Builder.PackageBuilder.NewPackageNamed("Test Package")
+                .WithAttributes(new DocumentPackageAttributes())
+                .Build();
+            package.Id = new PackageId(PackageUid);
+
+            var serverError = new ServerError { Code = 400, Message = "validation error" };
+            clientMock.Setup(c => c.Put(metadataPath, It.IsAny<string>()))
+                .Throws(new OssServerException("server error", serverError, null));
+
+            Assert.Throws<OssServerException>(() =>
+                packageService.ForceUpdatePackageMetadata(package));
+        }
+
+        private static string BuildPackageMetadataPath(string packageUid) =>
+            new UrlTemplate(BaseUrl).UrlFor(UrlTemplate.PACKAGE_METADATA_PATH)
+                .Replace("{packageId}", packageUid).Build();
+
         private static string BuildDocumentMetadataPath(string packageUid, string documentId) =>
             new UrlTemplate(BaseUrl).UrlFor(UrlTemplate.DOCUMENT_METADATA_PATH)
                 .Replace("{packageId}", packageUid)
