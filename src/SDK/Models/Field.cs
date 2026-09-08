@@ -117,5 +117,10 @@ namespace OneSpanSign.API
         public String Tooltip {
             get; set;
         }
+
+        [JsonProperty ("expandedClickableArea")]
+        public FieldClickableArea ExpandedClickableArea {
+            get; set;
+        }
     }
 }

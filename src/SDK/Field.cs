@@ -94,7 +94,13 @@ namespace OneSpanSign.Sdk
             set;
         }
         
-        public string Tooltip 
+        public string Tooltip
+        {
+            get;
+            set;
+        }
+
+        public ClickableArea ClickableArea
         {
             get;
             set;
