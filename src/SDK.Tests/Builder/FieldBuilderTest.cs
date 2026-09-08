@@ -138,5 +138,54 @@ namespace SDK.Tests
 
             Assert.AreEqual(tooltipMessage, field.Tooltip);
         }
+
+        [Test]
+        public void ClickableAreaIsNullByDefault()
+        {
+            Field field = FieldBuilder.CheckBox().AtPosition(100, 100).Build();
+
+            Assert.IsNull(field.ClickableArea);
+        }
+
+        [Test]
+        public void TestCheckboxWithClickableArea()
+        {
+            double clickableAreaWidth = 20;
+            double clickableAreaHeight = 10;
+
+            Field field = FieldBuilder.CheckBox().WithClickableArea(clickableAreaWidth, clickableAreaHeight).Build();
+
+            Assert.AreEqual(clickableAreaWidth, field.ClickableArea.Width);
+            Assert.AreEqual(clickableAreaHeight, field.ClickableArea.Height);
+            Assert.IsNull(field.ClickableArea.Alignment);
+        }
+
+        [Test]
+        public void TestCheckboxWithClickableAreaAndAlignment()
+        {
+            double clickableAreaWidth = 20;
+            double clickableAreaHeight = 10;
+            ClickableAreaAlignment alignment = ClickableAreaAlignment.TOP_LEFT;
+
+            Field field = FieldBuilder.CheckBox()
+                .WithClickableArea(ClickableAreaBuilder.NewClickableArea().WithSize(clickableAreaWidth, clickableAreaHeight).WithAlignment(alignment))
+                .Build();
+
+            Assert.AreEqual(clickableAreaWidth, field.ClickableArea.Width);
+            Assert.AreEqual(clickableAreaHeight, field.ClickableArea.Height);
+            Assert.AreEqual(alignment, field.ClickableArea.Alignment);
+        }
+
+        [Test]
+        public void WithClickableAreaRejectsNegativeWidth()
+        {
+            Assert.Throws<BuilderException>(() => FieldBuilder.CheckBox().WithClickableArea(-1, 10));
+        }
+
+        [Test]
+        public void WithClickableAreaRejectsNegativeHeight()
+        {
+            Assert.Throws<BuilderException>(() => FieldBuilder.CheckBox().WithClickableArea(10, -1));
+        }
     }
 }

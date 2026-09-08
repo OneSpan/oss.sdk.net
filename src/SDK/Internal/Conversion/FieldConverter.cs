@@ -36,6 +36,10 @@ namespace OneSpanSign.Sdk
             result.FontSize = sdkField.FontSize;
             result.Tooltip = sdkField.Tooltip;
 
+            if (sdkField.ClickableArea != null) {
+                result.ExpandedClickableArea = new ClickableAreaConverter (sdkField.ClickableArea).ToAPIFieldClickableArea ();
+            }
+
             if (!sdkField.Extract) {
                 result.Left = sdkField.X;
                 result.Top = sdkField.Y;
@@ -99,7 +103,13 @@ namespace OneSpanSign.Sdk
             }
 
             fieldBuilder.WithValue (apiField.Value);
-            return fieldBuilder.Build ();
+            OneSpanSign.Sdk.Field result = fieldBuilder.Build ();
+
+            if (apiField.ExpandedClickableArea != null) {
+                result.ClickableArea = new ClickableAreaConverter (apiField.ExpandedClickableArea).ToSDKClickableArea ();
+            }
+
+            return result;
 
         }
     }
