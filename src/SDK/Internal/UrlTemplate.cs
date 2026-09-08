@@ -36,6 +36,7 @@ namespace OneSpanSign.Sdk.Internal
         public static readonly string DOCUMENT_VISIBILITY_PATH = "/packages/{packageId}/documents/visibility";
         public static readonly string ROLE_PATH = "/packages/{packageId}/roles";
         public static readonly string ROLE_ID_PATH = "/packages/{packageId}/roles/{roleId}";
+        public static readonly string ROLE_METADATA_PATH = "/packages/{packageId}/roles/{roleId}/metadata";
         public static readonly string ROLE_UNLOCK_PATH = "/packages/{packageId}/roles/{roleId}/unlock";
         public static readonly string NOTIFICATIONS_PATH = "/packages/{packageId}/notifications";
         public static readonly string PDF_PATH = "/packages/{packageId}/documents/{documentId}/pdf";
