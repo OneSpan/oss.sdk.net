@@ -405,6 +405,10 @@ namespace OneSpanSign.Sdk
                     signer.LocalLanguage = localLanguage.ToString();
                 }
             }
+            if (apiRoleData != null)
+            {
+                signer.Data = new Dictionary<string, object>(apiRoleData);
+            }
 
             return signer;
         }
