@@ -37,7 +37,7 @@ namespace OneSpanSign.Sdk
 
             if (sdkSigner.IsNewPlaceholderSigner())
             {
-                role.AddSigner(new OneSpanSign.API.Signer());
+                role.AddSigner(NewPlaceholderAPISigner());
                 role.Type = OneSpanSign.API.Role.TYPE_PLACEHOLDER;
             }
             else if ( !sdkSigner.IsPlaceholderSigner() ) {
@@ -102,7 +102,7 @@ namespace OneSpanSign.Sdk
 
             if (sdkSigner.IsNewPlaceholderSigner())
             {
-                role.AddSigner(new OneSpanSign.API.Signer());
+                role.AddSigner(NewPlaceholderAPISigner());
                 role.Type = OneSpanSign.API.Role.TYPE_PLACEHOLDER;
             }
             else if ( !sdkSigner.IsPlaceholderSigner() ) {
@@ -225,6 +225,20 @@ namespace OneSpanSign.Sdk
 			return signer;
 		}
 
+        /// <summary>
+        /// Builds the API model Signer nested in a PLACEHOLDER role, carrying over any
+        /// authentication (e.g. SMS, SSO) and knowledge-based authentication configured on the
+        /// placeholder. Other signer fields (email, name, id, ...) are intentionally left unset
+        /// since the role itself, not this nested signer, identifies the placeholder.
+        /// </summary>
+        private OneSpanSign.API.Signer NewPlaceholderAPISigner()
+        {
+            OneSpanSign.API.Signer placeholderSigner = new OneSpanSign.API.Signer();
+            placeholderSigner.Auth = new AuthenticationConverter(sdkSigner.Authentication).ToAPIAuthentication();
+            placeholderSigner.KnowledgeBasedAuthentication = new KnowledgeBasedAuthenticationConverter(sdkSigner.KnowledgeBasedAuthentication).ToAPIKnowledgeBasedAuthentication();
+            return placeholderSigner;
+        }
+
         public OneSpanSign.Sdk.Signer ToSDKSigner()
         {
             if (apiRole == null)
@@ -264,6 +278,12 @@ namespace OneSpanSign.Sdk
             if (apiRole.Index.HasValue)
             {
                 builder.SigningOrder(apiRole.Index.Value);
+            }
+
+            if (apiSigner != null)
+            {
+                builder.WithAuthentication(new AuthenticationConverter(apiSigner.Auth).ToSDKAuthentication())
+                    .ChallengedWithKnowledgeBasedAuthentication(new KnowledgeBasedAuthenticationConverter(apiSigner.KnowledgeBasedAuthentication).ToSDKKnowledgeBasedAuthentication());
             }
 
             Signer signer = builder.Build();
