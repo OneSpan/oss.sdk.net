@@ -352,6 +352,11 @@ namespace OneSpanSign.Sdk.Builder
         {
             Asserts.NotEmptyOrNull(id, "No placeholder set for this signer!");
 
+            if (authentication == null)
+            {
+                authentication = authenticationBuilder.Build();
+            }
+
             Signer result = new Signer(id);
             result.PlaceholderName = placeholderName;
             result.SigningOrder = signingOrder;
@@ -361,6 +366,8 @@ namespace OneSpanSign.Sdk.Builder
             result.LocalLanguage = localLanguage;
             result.NewPlaceholderSigner = newPlaceholderSigner;
             result.Specifier = specifier;
+            result.SetAuthentication(authentication);
+            result.KnowledgeBasedAuthentication = knowledgeBasedAuthentication;
             return result;
         }
 

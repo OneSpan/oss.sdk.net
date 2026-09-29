@@ -5,7 +5,7 @@ namespace OneSpanSign.Sdk
 {
 	public class Signer
 	{
-		private readonly Authentication authentication;
+		private Authentication authentication;
 		private NotificationMethods notificationMethods;
 
         public Signer (string signerEmail, string firstName, string lastName, Authentication authentication, NotificationMethods notificationMethods = null)
@@ -149,7 +149,12 @@ namespace OneSpanSign.Sdk
 				return authentication;
 			}
 		}
-		
+
+		public void SetAuthentication(Authentication authentication)
+		{
+			this.authentication = authentication;
+		}
+
 		public NotificationMethods NotificationMethods
 		{
 			get
