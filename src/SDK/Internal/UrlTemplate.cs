@@ -34,6 +34,7 @@ namespace OneSpanSign.Sdk.Internal
         public static readonly string DOCUMENT_ID_PATH = "/packages/{packageId}/documents/{documentId}";
         public static readonly string DOCUMENT_METADATA_PATH = "/packages/{packageId}/documents/{documentId}/metadata";
         public static readonly string DOCUMENT_VISIBILITY_PATH = "/packages/{packageId}/documents/visibility";
+        public static readonly string FIELD_OVERLAPS_PATH = "/packages/{packageId}/validate/field-overlaps";
         public static readonly string ROLE_PATH = "/packages/{packageId}/roles";
         public static readonly string ROLE_ID_PATH = "/packages/{packageId}/roles/{roleId}";
         public static readonly string ROLE_METADATA_PATH = "/packages/{packageId}/roles/{roleId}/metadata";
