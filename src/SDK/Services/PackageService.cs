@@ -1621,7 +1621,28 @@ namespace OneSpanSign.Sdk.Services
             }
         }
 
-        public IList<OneSpanSign.Sdk.Document> GetDocuments(PackageId packageId, string signerId) 
+        public FieldOverlapValidationResult GetFieldOverlaps(PackageId packageId)
+        {
+            string path = new UrlTemplate(baseUrl).UrlFor(UrlTemplate.FIELD_OVERLAPS_PATH)
+                .Replace("{packageId}", packageId.Id)
+                .Build();
+
+            try
+            {
+                string response = restClient.Get(path);
+                return JsonConvert.DeserializeObject<FieldOverlapValidationResult>(response, settings);
+            }
+            catch (OssServerException e)
+            {
+                throw new OssServerException("Could not get field overlaps." + " Exception: " + e.Message, e.ServerError, e);
+            }
+            catch (Exception e)
+            {
+                throw new OssException("Could not get field overlaps." + " Exception: " + e.Message, e);
+            }
+        }
+
+        public IList<OneSpanSign.Sdk.Document> GetDocuments(PackageId packageId, string signerId)
         {
             Package aPackage = GetPackage(packageId);
             DocumentPackageConverter converter = new DocumentPackageConverter(aPackage);
