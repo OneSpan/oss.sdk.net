@@ -416,6 +416,73 @@ namespace OneSpanSign.Sdk.Services
             }
         }
 
+        /// <summary>
+        /// Gets the transaction's (package's) custom metadata from the dedicated package metadata endpoint.
+        /// The account must have the manipulateMetadata feature, and the caller must be able to manage the transaction.
+        /// </summary>
+        /// <param name="packageId">The id of the package (transaction).</param>
+        /// <returns>The metadata map, or an empty map if the transaction has no metadata.</returns>
+        public IDictionary<string, object> GetPackageMetadata(PackageId packageId)
+        {
+            string path = new UrlTemplate(baseUrl).UrlFor(UrlTemplate.PACKAGE_METADATA_PATH)
+                .Replace("{packageId}", packageId.Id)
+                .Build();
+
+            return GetMetadata(path, "package");
+        }
+
+        /// <summary>
+        /// Gets the document's metadata (its data map) from the dedicated document metadata endpoint.
+        /// The account must have the manipulateMetadata feature, and the caller must be able to manage the transaction.
+        /// </summary>
+        /// <param name="packageId">The id of the package containing the document.</param>
+        /// <param name="documentId">The id of the document.</param>
+        /// <returns>The metadata map, or an empty map if the document has no metadata.</returns>
+        public IDictionary<string, object> GetDocumentMetadata(PackageId packageId, string documentId)
+        {
+            string path = new UrlTemplate(baseUrl).UrlFor(UrlTemplate.DOCUMENT_METADATA_PATH)
+                .Replace("{packageId}", packageId.Id)
+                .Replace("{documentId}", documentId)
+                .Build();
+
+            return GetMetadata(path, "document");
+        }
+
+        /// <summary>
+        /// Gets the role's (signer's) metadata (its data map) from the dedicated role metadata endpoint.
+        /// The account must have the manipulateMetadata feature, and the caller must be able to manage the transaction.
+        /// </summary>
+        /// <param name="packageId">The id of the package containing the role.</param>
+        /// <param name="roleId">The id of the role.</param>
+        /// <returns>The metadata map, or an empty map if the role has no metadata.</returns>
+        public IDictionary<string, object> GetRoleMetadata(PackageId packageId, string roleId)
+        {
+            string path = new UrlTemplate(baseUrl).UrlFor(UrlTemplate.ROLE_METADATA_PATH)
+                .Replace("{packageId}", packageId.Id)
+                .Replace("{roleId}", roleId)
+                .Build();
+
+            return GetMetadata(path, "role");
+        }
+
+        private IDictionary<string, object> GetMetadata(string path, string owner)
+        {
+            try
+            {
+                string response = restClient.Get(path);
+                IDictionary<string, object> metadata = JsonConvert.DeserializeObject<Dictionary<string, object>>(response, settings);
+                return metadata ?? new Dictionary<string, object>();
+            }
+            catch (OssServerException e)
+            {
+                throw new OssServerException("Could not get the " + owner + "'s metadata." + " Exception: " + e.Message, e.ServerError, e);
+            }
+            catch (Exception e)
+            {
+                throw new OssException("Could not get the " + owner + "'s metadata." + " Exception: " + e.Message, e);
+            }
+        }
+
         public void OrderDocuments(DocumentPackage package)
         {
             string path = new UrlTemplate(baseUrl).UrlFor(UrlTemplate.DOCUMENT_PATH)

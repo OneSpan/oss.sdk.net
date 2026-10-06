@@ -61,9 +61,9 @@ namespace SDK.Examples
             Console.WriteLine("ForceUpdatePackageMetadata succeeded on a SENT transaction.");
 
             // 3. Read the metadata back and confirm the force-update was applied.
-            DocumentPackage reloaded = ossClient.GetPackage(packageId);
+            IDictionary<string, object> metadata = ossClient.PackageService.GetPackageMetadata(packageId);
             Console.WriteLine("Transaction metadata after force-update:");
-            foreach (KeyValuePair<string, object> entry in reloaded.Attributes.Contents)
+            foreach (KeyValuePair<string, object> entry in metadata)
             {
                 Console.WriteLine("  " + entry.Key + " = " + entry.Value);
             }
