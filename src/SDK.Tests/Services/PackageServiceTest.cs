@@ -482,6 +482,51 @@ namespace SDK.Tests
             new UrlTemplate(BaseUrl).UrlFor(UrlTemplate.PACKAGE_METADATA_PATH)
                 .Replace("{packageId}", packageUid).Build();
 
+        [Test]
+        public void GetFieldOverlapsParsesOverlapsFromValidateEndpoint()
+        {
+            var overlapsPath = new UrlTemplate(BaseUrl).UrlFor(UrlTemplate.FIELD_OVERLAPS_PATH)
+                .Replace("{packageId}", PackageUid).Build();
+            const string response = "{\"overlaps\":[{"
+                + "\"field\":{\"id\":\"checkbox1\",\"name\":\"Agree\",\"documentId\":\"doc1\",\"page\":0,\"signerId\":\"signer1\"},"
+                + "\"conflictsWith\":["
+                + "{\"field\":{\"id\":\"checkbox2\",\"name\":\"Disagree\"},\"overlapType\":\"CLICKABLE_AREA_VS_CLICKABLE_AREA\"},"
+                + "{\"field\":{\"id\":\"signature1\",\"name\":\"\"},\"overlapType\":\"CLICKABLE_AREA_VS_FIELD\"}"
+                + "]}]}";
+            clientMock.Setup(c => c.Get(overlapsPath)).Returns(response);
+
+            var result = packageService.GetFieldOverlaps(new PackageId(PackageUid));
+
+            Assert.IsTrue(result.HasOverlaps);
+            Assert.AreEqual(1, result.Overlaps.Count);
+
+            var overlap = result.Overlaps[0];
+            Assert.AreEqual("checkbox1", overlap.Field.Id);
+            Assert.AreEqual("Agree", overlap.Field.Name);
+            Assert.AreEqual("doc1", overlap.Field.DocumentId);
+            Assert.AreEqual(0, overlap.Field.Page);
+            Assert.AreEqual("signer1", overlap.Field.SignerId);
+
+            Assert.AreEqual(2, overlap.ConflictsWith.Count);
+            Assert.AreEqual("checkbox2", overlap.ConflictsWith[0].Field.Id);
+            Assert.AreEqual("Disagree", overlap.ConflictsWith[0].Field.Name);
+            Assert.AreEqual(OverlapType.CLICKABLE_AREA_VS_CLICKABLE_AREA, overlap.ConflictsWith[0].OverlapType);
+            Assert.AreEqual("signature1", overlap.ConflictsWith[1].Field.Id);
+            Assert.AreEqual("", overlap.ConflictsWith[1].Field.Name);
+            Assert.AreEqual(OverlapType.CLICKABLE_AREA_VS_FIELD, overlap.ConflictsWith[1].OverlapType);
+        }
+
+        [Test]
+        public void GetFieldOverlapsReturnsEmptyResultWhenNoOverlaps()
+        {
+            clientMock.Setup(c => c.Get(It.IsAny<string>())).Returns("{\"overlaps\":[]}");
+
+            var result = packageService.GetFieldOverlaps(new PackageId(PackageUid));
+
+            Assert.IsFalse(result.HasOverlaps);
+            Assert.AreEqual(0, result.Overlaps.Count);
+        }
+
         private static string BuildRoleMetadataPath(string packageUid, string roleId) =>
             new UrlTemplate(BaseUrl).UrlFor(UrlTemplate.ROLE_METADATA_PATH)
                 .Replace("{packageId}", packageUid)
