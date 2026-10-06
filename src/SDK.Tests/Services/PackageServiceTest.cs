@@ -478,6 +478,49 @@ namespace SDK.Tests
                 packageService.ForceUpdateRoleMetadata(package, signer));
         }
 
+        [Test]
+        public void GetPackageMetadataReadsDataMapFromMetadataEndpoint()
+        {
+            clientMock.Setup(c => c.Get(BuildPackageMetadataPath(PackageUid))).Returns("{\"customerId\":\"12345\"}");
+
+            var metadata = packageService.GetPackageMetadata(new PackageId(PackageUid));
+
+            Assert.AreEqual(1, metadata.Count);
+            Assert.AreEqual("12345", metadata["customerId"]);
+        }
+
+        [Test]
+        public void GetDocumentMetadataReadsDataMapFromMetadataEndpoint()
+        {
+            clientMock.Setup(c => c.Get(BuildDocumentMetadataPath(PackageUid, "doc1"))).Returns("{\"region\":\"EMEA\"}");
+
+            var metadata = packageService.GetDocumentMetadata(new PackageId(PackageUid), "doc1");
+
+            Assert.AreEqual(1, metadata.Count);
+            Assert.AreEqual("EMEA", metadata["region"]);
+        }
+
+        [Test]
+        public void GetRoleMetadataReadsDataMapFromMetadataEndpoint()
+        {
+            clientMock.Setup(c => c.Get(BuildRoleMetadataPath(PackageUid, "role1"))).Returns("{}");
+
+            var metadata = packageService.GetRoleMetadata(new PackageId(PackageUid), "role1");
+
+            Assert.IsEmpty(metadata);
+        }
+
+        [Test]
+        public void GetRoleMetadataWhenServerErrorThrowsOssServerException()
+        {
+            var serverError = new ServerError { Code = 404, Message = "not found" };
+            clientMock.Setup(c => c.Get(BuildRoleMetadataPath(PackageUid, "role1")))
+                .Throws(new OssServerException("server error", serverError, null));
+
+            Assert.Throws<OssServerException>(() =>
+                packageService.GetRoleMetadata(new PackageId(PackageUid), "role1"));
+        }
+
         private static string BuildPackageMetadataPath(string packageUid) =>
             new UrlTemplate(BaseUrl).UrlFor(UrlTemplate.PACKAGE_METADATA_PATH)
                 .Replace("{packageId}", packageUid).Build();
