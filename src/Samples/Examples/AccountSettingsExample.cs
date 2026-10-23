@@ -9,10 +9,14 @@ namespace SDK.Examples
             new AccountSettingsExample().Run ();
         }
 
-        public AccountSettings defaultAccountSettings, patchedAccountSettings, deletedAccountSettings;
-        public AccountFeatureSettings defaultAccountFeatureSettings, patchedAccountFeatureSettings, deletedAccountFeatureSettings;
-        public AccountPackageSettings defaultAccountPackageSettings, patchedAccountPackageSettings, deletedAccountPackageSettings;
-        
+        public AccountSettings defaultAccountSettings, patchedAccountSettings, restoredAccountSettings;
+        public AccountFeatureSettings defaultAccountFeatureSettings, patchedAccountFeatureSettings, restoredAccountFeatureSettings;
+        public AccountPackageSettings defaultAccountPackageSettings, patchedAccountPackageSettings, restoredAccountPackageSettings;
+
+        // The patched settings are reverted by patching back the original values instead of calling
+        // DeleteAccountSettings / DeleteAccountFeatureSettings / DeleteAccountPackageSettings. A delete
+        // wipes every account-level override, including features enabled from backoffice that the SDK
+        // does not model (e.g. expandedClickableArea), which breaks later examples relying on them.
         override public void Execute ()
         {
             //Get Account Settings
@@ -45,9 +49,9 @@ namespace SDK.Examples
             OssClient.AccountConfigService.PatchAccountSettings(accountSettings);
             patchedAccountSettings = OssClient.AccountConfigService.GetAccountSettings();
             
-            //Delete Account Settings
-            OssClient.AccountConfigService.DeleteAccountSettings();
-            deletedAccountSettings = OssClient.AccountConfigService.GetAccountSettings();
+            //Restore Account Settings
+            OssClient.AccountConfigService.PatchAccountSettings(defaultAccountSettings);
+            restoredAccountSettings = OssClient.AccountConfigService.GetAccountSettings();
             
             //Get Account Feature Settings
             defaultAccountFeatureSettings = OssClient.AccountConfigService.GetAccountFeatureSettings();
@@ -65,9 +69,9 @@ namespace SDK.Examples
             OssClient.AccountConfigService.PatchAccountFeatureSettings(accountFeatureSettings);
             patchedAccountFeatureSettings = OssClient.AccountConfigService.GetAccountFeatureSettings();
             
-            //Delete Account Feature Settings
-            OssClient.AccountConfigService.DeleteAccountFeatureSettings();
-            deletedAccountFeatureSettings = OssClient.AccountConfigService.GetAccountFeatureSettings();
+            //Restore Account Feature Settings
+            OssClient.AccountConfigService.PatchAccountFeatureSettings(defaultAccountFeatureSettings);
+            restoredAccountFeatureSettings = OssClient.AccountConfigService.GetAccountFeatureSettings();
             
             //Get Account Package Settings
             defaultAccountPackageSettings = OssClient.AccountConfigService.GetAccountPackageSettings();
@@ -87,9 +91,9 @@ namespace SDK.Examples
             OssClient.AccountConfigService.PatchAccountPackageSettings(accountPackageSettings);
             patchedAccountPackageSettings = OssClient.AccountConfigService.GetAccountPackageSettings();
             
-            //Delete Account Package Settings
-            OssClient.AccountConfigService.DeleteAccountPackageSettings();
-            deletedAccountPackageSettings = OssClient.AccountConfigService.GetAccountPackageSettings();
+            //Restore Account Package Settings
+            OssClient.AccountConfigService.PatchAccountPackageSettings(defaultAccountPackageSettings);
+            restoredAccountPackageSettings = OssClient.AccountConfigService.GetAccountPackageSettings();
 
         } 
     }
