@@ -63,9 +63,9 @@ namespace SDK.Examples
             Console.WriteLine("ForceUpdateRoleMetadata succeeded on a SENT transaction.");
 
             // 3. Read the metadata back and confirm the force-update was applied.
-            DocumentPackage reloaded = ossClient.GetPackage(packageId);
+            IDictionary<string, object> roleMetadata = ossClient.PackageService.GetRoleMetadata(packageId, signer.Id);
             Console.WriteLine("Role metadata after force-update:");
-            foreach (KeyValuePair<string, object> entry in reloaded.GetSigner(email1).Data)
+            foreach (KeyValuePair<string, object> entry in roleMetadata)
             {
                 Console.WriteLine("  " + entry.Key + " = " + entry.Value);
             }

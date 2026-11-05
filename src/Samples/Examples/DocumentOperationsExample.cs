@@ -12,6 +12,7 @@ namespace SDK.Examples
         public DocumentPackage BuiltPackage{ get; set; }
         public DocumentPackage RetrievedPackageWithNewDocument{ get; set; }
         public Document RetrievedUpdatedDocument{ get; set; }
+        public IDictionary<string, object> RetrievedDocumentMetadata{ get; set; }
         public DocumentPackage RetrievedPackageWithUpdatedDocument{ get; set; }
         public DocumentPackage RetrievedPackageWithDeletedDocument{ get; set; }
         
@@ -79,6 +80,9 @@ namespace SDK.Examples
             document.Data = new Dictionary<string, object> { { "customerId", "12345" } };
             ossClient.PackageService.ForceUpdateDocumentMetadata(RetrievedPackage, document);
             Console.WriteLine("Document metadata was force-updated");
+
+            //This is how you would get a document's custom metadata (its data map)
+            RetrievedDocumentMetadata = ossClient.PackageService.GetDocumentMetadata(packageId, document.Id);
 
 			//This is how you would delete a document from a package
 			ossClient.PackageService.DeleteDocument(packageId, document.Id);
