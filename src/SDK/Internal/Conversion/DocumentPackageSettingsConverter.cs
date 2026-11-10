@@ -209,7 +209,12 @@ namespace OneSpanSign.Sdk
 
                 if (apiSettings.Ceremony.HandOver != null)
                 {
-                    builder.WithHandOverLinkHref(apiSettings.Ceremony.HandOver.Href);
+                    // The server may return a handOver without an href (e.g. "handOver": { "parameters": [] }),
+                    // so only apply the href when present; WithHandOverLinkHref rejects null/empty values.
+                    if (!String.IsNullOrEmpty(apiSettings.Ceremony.HandOver.Href))
+                    {
+                        builder.WithHandOverLinkHref(apiSettings.Ceremony.HandOver.Href);
+                    }
                     builder.WithHandOverLinkText(apiSettings.Ceremony.HandOver.Text);
                     builder.WithHandOverLinkTooltip(apiSettings.Ceremony.HandOver.Title);
                     builder = (apiSettings.Ceremony.HandOver.AutoRedirect != null && apiSettings.Ceremony.HandOver.AutoRedirect.Value)
