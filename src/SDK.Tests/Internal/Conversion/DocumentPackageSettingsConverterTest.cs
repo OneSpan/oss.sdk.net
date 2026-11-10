@@ -84,6 +84,39 @@ namespace SDK.Tests
         }
 
         [Test()]
+        public void ConvertAPIToSDKWithEmptyHandOverHref()
+        {
+            apiPackageSettings1 = CreateTypicalAPIPackageSettings();
+            OneSpanSign.API.Link link = new OneSpanSign.API.Link();
+            link.Href = "";
+            link.Parameters = new HashSet<String>();
+            apiPackageSettings1.Ceremony.HandOver = link;
+
+            Assert.DoesNotThrow(() =>
+                sdkPackageSettings1 = new DocumentPackageSettingsConverter(apiPackageSettings1).toSDKDocumentPackageSettings());
+
+            Assert.IsNotNull(sdkPackageSettings1);
+            Assert.IsNull(sdkPackageSettings1.LinkHref);
+            Assert.IsNotNull(sdkPackageSettings1.LinkParameters);
+            Assert.AreEqual(0, sdkPackageSettings1.LinkParameters.Count);
+        }
+
+        [Test()]
+        public void ConvertAPIToSDKWithNullHandOverHref()
+        {
+            apiPackageSettings1 = CreateTypicalAPIPackageSettings();
+            OneSpanSign.API.Link link = new OneSpanSign.API.Link();
+            link.Href = null;
+            apiPackageSettings1.Ceremony.HandOver = link;
+
+            Assert.DoesNotThrow(() =>
+                sdkPackageSettings1 = new DocumentPackageSettingsConverter(apiPackageSettings1).toSDKDocumentPackageSettings());
+
+            Assert.IsNotNull(sdkPackageSettings1);
+            Assert.IsNull(sdkPackageSettings1.LinkHref);
+        }
+
+        [Test()]
         public void ConvertSDKToAPI()
         {
             sdkPackageSettings1 = CreateTypicalSDKDocumentPackageSettings();
