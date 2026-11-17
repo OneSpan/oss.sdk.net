@@ -16,6 +16,7 @@ namespace SDK.Examples
         public readonly int SIGNATURE_DATE_PAGE = 0;
         public readonly int SIGNATURE_DATE_POSITION_X = 500;
         public readonly int SIGNATURE_DATE_POSITION_Y = 200;
+        public readonly string SIGNATURE_DATE_FORMAT = "MMMM d, yyyy";
         public readonly int SIGNER_NAME_PAGE = 0;
         public readonly int SIGNER_NAME_POSITION_X = 500;
         public readonly int SIGNER_NAME_POSITION_Y = 300;
@@ -42,7 +43,8 @@ namespace SDK.Examples
 					               		.AtPosition(500, 100)
 					               		.WithField(FieldBuilder.SignatureDate()
                                             .OnPage(SIGNATURE_DATE_PAGE)
-                                            .AtPosition(SIGNATURE_DATE_POSITION_X, SIGNATURE_DATE_POSITION_Y))
+                                            .AtPosition(SIGNATURE_DATE_POSITION_X, SIGNATURE_DATE_POSITION_Y)
+                                            .WithDateFormat(SIGNATURE_DATE_FORMAT))
 					               		.WithField(FieldBuilder.SignerName()
                                             .OnPage(SIGNER_NAME_PAGE)
                                             .AtPosition(SIGNER_NAME_POSITION_X, SIGNER_NAME_POSITION_Y))

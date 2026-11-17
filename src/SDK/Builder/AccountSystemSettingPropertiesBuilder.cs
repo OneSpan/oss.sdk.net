@@ -8,7 +8,10 @@ namespace OneSpanSign.Sdk
         private Nullable<int> _loginSessionTimeout;
         private Nullable<int> _sessionTimeoutWarning;
         private Nullable<bool> _orderLastNameFirstName;
-        
+        private string _signingDateDefaultFormat;
+        private Nullable<bool> _signingDateAllowSenderChange;
+        private Nullable<bool> _signingDateAllowCustomPattern;
+
         private AccountSystemSettingPropertiesBuilder()
         {
         }
@@ -41,7 +44,25 @@ namespace OneSpanSign.Sdk
             this._orderLastNameFirstName = orderLastNameFirstName;
             return this;
         }
-        
+
+        public AccountSystemSettingPropertiesBuilder WithSigningDateDefaultFormat(string signingDateDefaultFormat)
+        {
+            this._signingDateDefaultFormat = signingDateDefaultFormat;
+            return this;
+        }
+
+        public AccountSystemSettingPropertiesBuilder WithSigningDateAllowSenderChange(Boolean signingDateAllowSenderChange)
+        {
+            this._signingDateAllowSenderChange = signingDateAllowSenderChange;
+            return this;
+        }
+
+        public AccountSystemSettingPropertiesBuilder WithSigningDateAllowCustomPattern(Boolean signingDateAllowCustomPattern)
+        {
+            this._signingDateAllowCustomPattern = signingDateAllowCustomPattern;
+            return this;
+        }
+
         public AccountSystemSettingProperties Build()
         {
             AccountSystemSettingProperties result = new AccountSystemSettingProperties();
@@ -49,6 +70,9 @@ namespace OneSpanSign.Sdk
             result.LoginSessionTimeout = _loginSessionTimeout;
             result.SessionTimeoutWarning = _sessionTimeoutWarning;
             result.OrderLastNameFirstName = _orderLastNameFirstName;
+            result.SigningDateDefaultFormat = _signingDateDefaultFormat;
+            result.SigningDateAllowSenderChange = _signingDateAllowSenderChange;
+            result.SigningDateAllowCustomPattern = _signingDateAllowCustomPattern;
             return result;
         }
     }

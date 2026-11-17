@@ -50,6 +50,9 @@ namespace SDK.Tests
              Assert.IsTrue(accountSystemSettingProperties.SenderLoginMaxFailedAttempts.Equals(4));
              Assert.IsTrue(accountSystemSettingProperties.LoginSessionTimeout == 40000);
              Assert.IsTrue(accountSystemSettingProperties.SessionTimeoutWarning == 120000);
+             Assert.AreEqual("dd/MM/yyyy", accountSystemSettingProperties.SigningDateDefaultFormat);
+             Assert.IsTrue(accountSystemSettingProperties.SigningDateAllowSenderChange == true);
+             Assert.IsTrue(accountSystemSettingProperties.SigningDateAllowCustomPattern == true);
          }
 
          [Test()]
@@ -83,8 +86,11 @@ namespace SDK.Tests
              Assert.IsTrue(accountSystemSettingProperties.SenderLoginMaxFailedAttempts.Equals(4));
              Assert.IsTrue(accountSystemSettingProperties.LoginSessionTimeout == 40000);
              Assert.IsTrue(accountSystemSettingProperties.SessionTimeoutWarning == 120000);
+             Assert.AreEqual("dd/MM/yyyy", accountSystemSettingProperties.SigningDateDefaultFormat);
+             Assert.IsTrue(accountSystemSettingProperties.SigningDateAllowSenderChange == true);
+             Assert.IsTrue(accountSystemSettingProperties.SigningDateAllowCustomPattern == true);
          }
- 
+
          [Test()]
          public void ConvertSDKToAPI()
          {
@@ -97,6 +103,9 @@ namespace SDK.Tests
              Assert.IsTrue(accountSystemSettingProperties.SenderLoginMaxFailedAttempts.Equals(2));
              Assert.IsTrue(accountSystemSettingProperties.LoginSessionTimeout == 20000);
              Assert.IsTrue(accountSystemSettingProperties.SessionTimeoutWarning == 60000);
+             Assert.AreEqual("MMMM d, yyyy", accountSystemSettingProperties.SigningDateDefaultFormat);
+             Assert.IsTrue(accountSystemSettingProperties.SigningDateAllowSenderChange == true);
+             Assert.IsTrue(accountSystemSettingProperties.SigningDateAllowCustomPattern == false);
          }
  
          private AccountSystemSettingProperties CreateTypicalSDKSystemSettingProperties()
@@ -106,6 +115,9 @@ namespace SDK.Tests
              accountSystemSettingProperties.SessionTimeoutWarning = 60000;
              accountSystemSettingProperties.LoginSessionTimeout = 20000;
              accountSystemSettingProperties.SenderLoginMaxFailedAttempts = 2;
+             accountSystemSettingProperties.SigningDateDefaultFormat = "MMMM d, yyyy";
+             accountSystemSettingProperties.SigningDateAllowSenderChange = true;
+             accountSystemSettingProperties.SigningDateAllowCustomPattern = false;
              
              return accountSystemSettingProperties;
          }
@@ -117,6 +129,9 @@ namespace SDK.Tests
              accountSystemSettingProperties.SessionTimeoutWarning = 120000;
              accountSystemSettingProperties.LoginSessionTimeout = 40000;
              accountSystemSettingProperties.SenderLoginMaxFailedAttempts = 4;
+             accountSystemSettingProperties.SigningDateDefaultFormat = "dd/MM/yyyy";
+             accountSystemSettingProperties.SigningDateAllowSenderChange = true;
+             accountSystemSettingProperties.SigningDateAllowCustomPattern = true;
              
              return accountSystemSettingProperties;
          }

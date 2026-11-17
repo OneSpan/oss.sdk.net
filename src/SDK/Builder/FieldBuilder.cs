@@ -204,6 +204,32 @@ namespace OneSpanSign.Sdk.Builder
             return this;
         }
 
+        /// <summary>
+        /// Sets the date format of a signing date field (<see cref="SignatureDate"/>). The format is a
+        /// Java date pattern, for example "MMMM d, yyyy", and the SDK sends it as the field's value.
+        /// The account settings decide whether the format is used:
+        /// <list type="bullet">
+        /// <item><description>If the account does not allow senders to change the format, the field gets
+        /// the account default format, with no error.</description></item>
+        /// <item><description>If the account allows senders to change the format, the format must be a
+        /// valid pattern. Else the server refuses the request with
+        /// error.validation.field.signingDateFormat.invalid. The format must also be in the product list
+        /// or equal the account default. Else the server refuses the request with
+        /// error.validation.field.signingDateFormat.notAllowed.</description></item>
+        /// <item><description>If the account also allows senders to enter their own pattern, the format
+        /// must be a valid pattern of 1 to 50 characters. Else the server refuses the request with
+        /// error.validation.field.signingDateFormat.invalid.</description></item>
+        /// </list>
+        /// A new field without a format gets the account default format.
+        /// </summary>
+        /// <param name="dateFormat">the date pattern of the signing date field</param>
+        /// <returns>the field builder itself</returns>
+        public FieldBuilder WithDateFormat (string dateFormat)
+        {
+            this.value = dateFormat;
+            return this;
+        }
+
         public FieldBuilder WithFontSize (Nullable<Int32> fontSize)
         {
             this.fontSize = fontSize;

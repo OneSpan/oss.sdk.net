@@ -27,6 +27,9 @@ namespace OneSpanSign.Sdk.Internal.Conversion
             result.SenderLoginMaxFailedAttempts = sdkAccountSystemSettingProperties.SenderLoginMaxFailedAttempts;
             result.SessionTimeoutWarning = sdkAccountSystemSettingProperties.SessionTimeoutWarning;
             result.OrderLastNameFirstName = sdkAccountSystemSettingProperties.OrderLastNameFirstName;
+            result.SigningDateDefaultFormat = sdkAccountSystemSettingProperties.SigningDateDefaultFormat;
+            result.SigningDateAllowSenderChange = sdkAccountSystemSettingProperties.SigningDateAllowSenderChange;
+            result.SigningDateAllowCustomPattern = sdkAccountSystemSettingProperties.SigningDateAllowCustomPattern;
             return result;
         }
 
@@ -42,6 +45,9 @@ namespace OneSpanSign.Sdk.Internal.Conversion
             result.SessionTimeoutWarning = apiAccountSystemSettingProperties.SessionTimeoutWarning;
             result.SenderLoginMaxFailedAttempts = apiAccountSystemSettingProperties.SenderLoginMaxFailedAttempts;
             result.OrderLastNameFirstName = apiAccountSystemSettingProperties.OrderLastNameFirstName;
+            result.SigningDateDefaultFormat = apiAccountSystemSettingProperties.SigningDateDefaultFormat;
+            result.SigningDateAllowSenderChange = apiAccountSystemSettingProperties.SigningDateAllowSenderChange;
+            result.SigningDateAllowCustomPattern = apiAccountSystemSettingProperties.SigningDateAllowCustomPattern;
             return result;
         }
     }

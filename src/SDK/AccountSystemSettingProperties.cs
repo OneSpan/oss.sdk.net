@@ -8,7 +8,10 @@ namespace OneSpanSign.Sdk
         private Nullable<int> _loginSessionTimeout;
         private Nullable<int> _sessionTimeoutWarning;
         private Nullable<bool> _orderLastNameFirstName;
-        
+        private string _signingDateDefaultFormat;
+        private Nullable<bool> _signingDateAllowSenderChange;
+        private Nullable<bool> _signingDateAllowCustomPattern;
+
         public Nullable<int> SenderLoginMaxFailedAttempts
         {
             get
@@ -54,6 +57,42 @@ namespace OneSpanSign.Sdk
             set
             {
                 _orderLastNameFirstName = value;
+            }
+        }
+
+        public string SigningDateDefaultFormat
+        {
+            get
+            {
+                return _signingDateDefaultFormat;
+            }
+            set
+            {
+                _signingDateDefaultFormat = value;
+            }
+        }
+
+        public Nullable<Boolean> SigningDateAllowSenderChange
+        {
+            get
+            {
+                return _signingDateAllowSenderChange;
+            }
+            set
+            {
+                _signingDateAllowSenderChange = value;
+            }
+        }
+
+        public Nullable<Boolean> SigningDateAllowCustomPattern
+        {
+            get
+            {
+                return _signingDateAllowCustomPattern;
+            }
+            set
+            {
+                _signingDateAllowCustomPattern = value;
             }
         }
     }
