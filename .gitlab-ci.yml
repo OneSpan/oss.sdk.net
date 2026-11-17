@@ -45,4 +45,28 @@ deployNuget:
     stage: deployNuget
     script:
         - dotnet nuget push ./artifacts/*.nupkg -s https://api.nuget.org/v3/index.json -k "$NUGET_KEY"
+        # Tag the released commit on GitHub (the source of truth; this project is a pull mirror).
+        # Runs only after the push above succeeded. GITHUB_DEPLOY_KEY is a File variable holding
+        # the private key of a write-enabled deploy key on OneSpan/oss.sdk.net.
+        - |
+          TAG="v$(sed -n 's|.*<Version>\(.*\)</Version>.*|\1|p' src/SDK/OneSpanSign.Sdk.csproj)"
+          # The repo is public, so the lookup needs no key. Peeled (^{}) line wins for
+          # annotated tags; plain line for lightweight ones.
+          EXISTING=$(git ls-remote --tags https://github.com/OneSpan/oss.sdk.net.git "$TAG" "$TAG^{}" | sort -k2 | tail -n1 | cut -f1)
+          if [ "$EXISTING" = "$CI_COMMIT_SHA" ]; then
+            echo "$TAG already points at $CI_COMMIT_SHA, nothing to do"
+          elif [ -n "$EXISTING" ]; then
+            echo "$TAG already exists on GitHub at $EXISTING, not $CI_COMMIT_SHA - bump <Version>?" >&2
+            exit 1
+          elif [ ! -f "$GITHUB_DEPLOY_KEY" ]; then
+            echo "Package pushed, but GITHUB_DEPLOY_KEY is not available to this pipeline - push $TAG manually" >&2
+            exit 1
+          else
+            apt-get update -qq && apt-get install -y -qq openssh-client > /dev/null
+            chmod 600 "$GITHUB_DEPLOY_KEY"
+            echo "github.com ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOMqqnkVzrm0SdG6UOoqKLsabgH5C9okWi0dh2l9GKJl" > /tmp/known_hosts
+            export GIT_SSH_COMMAND="ssh -i $GITHUB_DEPLOY_KEY -o IdentitiesOnly=yes -o UserKnownHostsFile=/tmp/known_hosts"
+            git -c user.name="$GITLAB_USER_NAME" -c user.email="$GITLAB_USER_EMAIL" tag -a "$TAG" "$CI_COMMIT_SHA" -m "Release $TAG"
+            git push git@github.com:OneSpan/oss.sdk.net.git "refs/tags/$TAG"
+          fi
     when: manual
