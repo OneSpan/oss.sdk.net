@@ -28,6 +28,24 @@ namespace OneSpanSign.API
             get; set;
         }
 
+        [JsonProperty("signingDateDefaultFormat")]
+        public string SigningDateDefaultFormat
+        {
+            get; set;
+        }
+
+        [JsonProperty("signingDateAllowSenderChange")]
+        public Nullable<bool> SigningDateAllowSenderChange
+        {
+            get; set;
+        }
+
+        [JsonProperty("signingDateAllowCustomPattern")]
+        public Nullable<bool> SigningDateAllowCustomPattern
+        {
+            get; set;
+        }
+
  
     }
 }

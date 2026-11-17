@@ -44,6 +44,27 @@ namespace SDK.Tests
         }
 
         [Test]
+        public void CreatingSignatureDateFieldWithDateFormatSetsValue()
+        {
+            String dateFormat = "MMMM d, yyyy";
+            Field field = FieldBuilder.SignatureDate()
+                .AtPosition(100, 100)
+                .WithDateFormat(dateFormat)
+                .Build();
+
+            Assert.AreEqual(FieldStyle.BOUND_DATE, field.Style);
+            Assert.AreEqual(dateFormat, field.Value);
+        }
+
+        [Test]
+        public void CreatingSignatureDateFieldWithoutDateFormatLeavesValueNull()
+        {
+            Field field = FieldBuilder.SignatureDate().AtPosition(100, 100).Build();
+
+            Assert.IsNull(field.Value);
+        }
+
+        [Test]
         public void creatingNewSignerNameFieldSetsStyle()
         {
             Field field = FieldBuilder.SignerName().AtPosition(100, 100).Build();
