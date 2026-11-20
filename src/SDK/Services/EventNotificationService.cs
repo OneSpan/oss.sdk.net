@@ -21,6 +21,7 @@ namespace OneSpanSign.Sdk.Services
 		/// Registers to receive notifications sent by e-SL that are described by the config parameter passed to this method.
 		/// </summary>
 		/// <param name="config">Describes the event notification of interest.</param>
+		[Obsolete("Use CallbackConfigurationService.ReplaceCallbackConfiguration with the id of the ACCOUNT entry from GetCallbackConfigurations, or CreateCallbackConfiguration when there is none.")]
 		public void Register(EventNotificationConfig config)
 		{
             apiClient.Register( new EventNotificationConfigConverter(config).ToAPICallback() );
@@ -41,6 +42,7 @@ namespace OneSpanSign.Sdk.Services
 		/// <p>The builder parameter of this method is convenient to use when you want to easily add more notification events.</p>
 		/// </summary>
 		/// <param name="builder">The event notification config builder.</param>
+		[Obsolete("Use CallbackConfigurationService.ReplaceCallbackConfiguration with the id of the ACCOUNT entry from GetCallbackConfigurations, or CreateCallbackConfiguration when there is none.")]
 		public void Register(EventNotificationConfigBuilder builder)
 		{
 			Register(builder.build());
@@ -60,7 +62,12 @@ namespace OneSpanSign.Sdk.Services
 		/// <summary>
 		/// Gets the registered event notifications.
 		/// </summary>
+		/// <remarks>
+		/// Do not rely on <c>Key</c>: the server will stop returning the key. Keep your own copy; callbacks still use
+		/// the saved key.
+		/// </remarks>
 		/// <returns>Description of registered event notifications.</returns>
+		[Obsolete("Use CallbackConfigurationService.GetCallbackConfigurations, whose entry of type ACCOUNT is the account callback.")]
 		public EventNotificationConfig GetEventNotificationConfig()
 		{
             Callback apiResponse = apiClient.GetEventNotificationConfig();

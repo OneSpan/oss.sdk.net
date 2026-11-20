@@ -76,6 +76,12 @@ namespace OneSpanSign.Sdk.Internal
         public static readonly string CALLBACK_PATH = "/callback";
         public static readonly string CONNECTORS_CALLBACK_PATH = "/callback/connectors/{origin}";
 
+        // Callback Configuration Service
+        public static readonly string CALLBACK_CONFIGURATIONS_PATH = "/notifications/v1/callback-configurations";
+        public static readonly string CALLBACK_CONFIGURATION_PATH = CALLBACK_CONFIGURATIONS_PATH + "/{callbackId}";
+        public static readonly string CALLBACK_CONFIGURATION_TEST_PATH = CALLBACK_CONFIGURATIONS_PATH + "/test";
+        public static readonly string CLIENT_CERTIFICATE_INTERMEDIATE_PATH = "/notifications/v1/client-certificate/intermediate";
+
         // Audit Service
         public static readonly string AUDIT_PATH = "/packages/{packageId}/audit";
 

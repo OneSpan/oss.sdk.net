@@ -234,7 +234,7 @@ namespace OneSpanSign.Sdk.Internal
                     string errorDetails = errReader.ReadToEnd();
                     throw new OssServerException(
                         $"{(int)response.StatusCode} {response.ReasonPhrase} HTTP {request.Method.Method} on URI {request.RequestUri}. Optional details: {errorDetails}",
-                        errorDetails, (Exception)null);
+                        errorDetails, (int)response.StatusCode, response.ReasonPhrase, null);
                 }
                 using var stream = response.Content.ReadAsStream();
                 using var mem = new MemoryStream();
@@ -260,7 +260,7 @@ namespace OneSpanSign.Sdk.Internal
                     string errorDetails = errReader.ReadToEnd();
                     throw new OssServerException(
                         $"{(int)response.StatusCode} {response.ReasonPhrase} HTTP {request.Method.Method} on URI {request.RequestUri}. Optional details: {errorDetails}",
-                        errorDetails, (Exception)null);
+                        errorDetails, (int)response.StatusCode, response.ReasonPhrase, null);
                 }
                 string contentDisp = response.Content.Headers.ContentDisposition?.ToString() ?? "";
                 using var stream = response.Content.ReadAsStream();
@@ -428,7 +428,7 @@ namespace OneSpanSign.Sdk.Internal
                     string errorDetails = errReader.ReadToEnd();
                     throw new OssServerException(
                         $"{(int)response.StatusCode} {response.ReasonPhrase} HTTP {request.Method.Method} on URI {request.RequestUri}. Optional details: {errorDetails}",
-                        errorDetails, (Exception)null);
+                        errorDetails, (int)response.StatusCode, response.ReasonPhrase, null);
                 }
                 using var stream = response.Content.ReadAsStream();
                 using var reader = new StreamReader(stream, Encoding.UTF8);
