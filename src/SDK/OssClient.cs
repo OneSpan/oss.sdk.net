@@ -30,6 +30,7 @@ namespace OneSpanSign.Sdk
         private FieldSummaryService fieldSummaryService;
         private AuditService auditService;
         private EventNotificationService eventNotificationService;
+        private CallbackConfigurationService callbackConfigurationService;
         private CustomFieldService customFieldService;
         private GroupService groupService;
         private AccountService accountService;
@@ -174,6 +175,8 @@ namespace OneSpanSign.Sdk
             eventNotificationService =
                 new EventNotificationService(new EventNotificationApiClient(restClient, this.baseUrl,
                     jsonSerializerSettings));
+            callbackConfigurationService =
+                new CallbackConfigurationService(restClient, this.baseUrl, jsonSerializerSettings);
             customFieldService =
                 new CustomFieldService(new CustomFieldApiClient(restClient, this.baseUrl, jsonSerializerSettings));
             groupService = new GroupService(new GroupApiClient(restClient, this.baseUrl, jsonSerializerSettings));
@@ -789,6 +792,14 @@ namespace OneSpanSign.Sdk
         public EventNotificationService EventNotificationService
         {
             get { return eventNotificationService; }
+        }
+
+        /// <summary>
+        /// Gets the service that creates, replaces, tests and deletes the account's callbacks.
+        /// </summary>
+        public CallbackConfigurationService CallbackConfigurationService
+        {
+            get { return callbackConfigurationService; }
         }
 
         public GroupService GroupService

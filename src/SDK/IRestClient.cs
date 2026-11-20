@@ -8,6 +8,7 @@ namespace OneSpanSign.Sdk
         string Get(string path, string acceptType);
         string Post(string path, string jsonPayload);
         string Put(string path, string jsonPayload);
+        string Patch(string path, string jsonPayload);
         string Delete(string path);
         string Delete(string path, string jsonPayload);
         void Delete(string path, string jsonPayload, string sessionId);
